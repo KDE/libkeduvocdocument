@@ -273,7 +273,7 @@ void	ExtDate::JDToGregorian( long int jd, int &year, int &month, int &day )
 
 bool ExtDate::isValid() const
 {
-	return ( jd() != INVALID_DAY );
+	return ( isValid( year(), month(), day() ) && jd() != INVALID_DAY );
 }
 
 int ExtDate::dayOfWeek() const
@@ -308,10 +308,10 @@ int ExtDate::weekNumber( int *yearNum ) const
 }
 
 #ifndef QT_NO_TEXTDATE
-QString ExtDate::shortMonthName( int month ) {return m_shortMonthNames[month-1];};
-QString ExtDate::shortDayName( int weekday ) {return m_shortDayNames[weekday-1];};
-QString ExtDate::longMonthName( int month ) {return m_longMonthNames[month-1];};
-QString ExtDate::longDayName( int weekday ) {return m_longDayNames[weekday-1];};
+QString ExtDate::shortMonthName( int month ) {return m_shortMonthNames[month-1];}
+QString ExtDate::shortDayName( int weekday ) {return m_shortDayNames[weekday-1];}
+QString ExtDate::longMonthName( int month ) {return m_longMonthNames[month-1];}
+QString ExtDate::longDayName( int weekday ) {return m_longDayNames[weekday-1];}
 #endif //QT_NO_TEXTDATE
 #ifndef QT_NO_TEXTSTRING
 #if !defined(QT_NO_SPRINTF)
