@@ -241,7 +241,7 @@ ExtDatePicker::dateChangedSlot(const ExtDate &date)
 //    const ExtCalendarSystem * calendar = KGlobal::locale()->calendar();
 
 //    line->setText(KGlobal::locale()->formatDate(date, true));
-    line->setText( date.toString("MM/dd/yyyy") );
+		line->setText( date.toString( KGlobal::locale()->dateFormatShort() ) );
     selectMonth->setText(d->calendar->monthName(date, false));
     fillWeeksCombo(date);
 
