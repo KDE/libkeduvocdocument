@@ -22,7 +22,6 @@
 #ifndef __EXTDATEWIDGET_H__
 #define __EXTDATEWIDGET_H__
 
-#include <qwidget.h>
 #include "extdatetime.h"
 
 /**

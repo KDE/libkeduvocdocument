@@ -22,8 +22,6 @@
 #ifndef EXTDATEPICKER_H
 #define EXTDATEPICKER_H
 
-#include <qframe.h>
-#include <kdemacros.h>
 
 #include "extdatetime.h"
 

@@ -26,8 +26,6 @@
 #ifndef EXTCALENDARSYSTEMGREGORIAN_H
 #define EXTCALENDARSYSTEMGREGORIAN_H
 
-#include <extdatetime.h>
-#include <qstring.h>
 
 #include "extcalendarsystem.h"
 

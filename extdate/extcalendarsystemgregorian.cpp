@@ -26,8 +26,6 @@
 // Derived gregorian kde calendar class
 // Just a schema.
 
-#include <qdatetime.h>
-#include <qstring.h>
 
 #include <klocale.h>
 #include <kdebug.h>

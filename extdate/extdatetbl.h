@@ -29,8 +29,6 @@
 #include <qvalidator.h>
 #include <qgridview.h>
 #include <klineedit.h>
-#include <qcolor.h>
-#include "extdatetime.h"
 #include "extcalendarsystemgregorian.h"
 
 class KPopupMenu;

@@ -1,11 +1,9 @@
 #include <kdatepicker.h>
 #include <klineedit.h>
-#include <qdatetime.h>
 #include <qlayout.h>
 #include <qlabel.h>
 
 #include "extdatepicker.h"
-#include "extdatetime.h"
 #include "testwidget.h"
 
 TestWidget::TestWidget( QWidget *p=0, const char *name=0 ) : KMainWindow( p, name ) {

@@ -1,7 +1,4 @@
 #include <iostream>
-#include <qstring.h>
-#include <qnamespace.h>
-#include <qdatetime.h>
 #include "extdatetime.h"
 
 

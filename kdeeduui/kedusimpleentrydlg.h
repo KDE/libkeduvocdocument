@@ -1,7 +1,6 @@
 #ifndef kedusimpleentrydlg_included
 #define kedusimpleentrydlg_included
 
-#include <qobject.h>
 
 #include "kedusimpleentrydlgForm.h"
 

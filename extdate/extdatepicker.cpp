@@ -21,30 +21,20 @@
 */
 
 #include <qlayout.h>
-#include <qframe.h>
-#include <qpainter.h>
-#include <qdialog.h>
 #include <qstyle.h>
 #include <qtoolbutton.h>
-#include <qcombobox.h>
 #include <qtooltip.h>
-#include <qfont.h>
-#include <qvalidator.h>
 #include <qpopupmenu.h>
 
-#include <kglobal.h>
-#include <kapplication.h>
 #include <kdialog.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <ktoolbar.h>
-#include <klineedit.h>
 #include <kdebug.h>
 #include <knotifyclient.h>
 
 #include "extdatepicker.h"
 #include "extdatetbl.h"
-#include "extcalendarsystem.h"
 #include "extdatepicker.moc"
 
 // Week numbers are defined by ISO 8601

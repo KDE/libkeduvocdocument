@@ -27,7 +27,6 @@
 #define EXTCALENDARSYSTEM_H
 
 #include "extdatetime.h"
-#include <qstring.h>
 
 class KLocale;
 

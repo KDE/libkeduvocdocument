@@ -20,18 +20,14 @@
 */
 
 
-#include <qpopupmenu.h>
 #include <qcombobox.h>
 #include <qlayout.h>
 #include <qlineedit.h>
 
 #include <knuminput.h>
-#include <kglobal.h>
-#include <klocale.h>
 #include <kdialog.h>
 
 #include "extdatewidget.h"
-#include "extcalendarsystem.h"
 #include "extcalendarsystemgregorian.h"
 
 class ExtDateWidgetSpinBox : public QSpinBox

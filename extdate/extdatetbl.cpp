@@ -40,25 +40,14 @@
 // When a date is selected by the user, it emits a signal:
 //      dateSelected(ExtDate)
 
-#include "extcalendarsystem.h"
-#include "extcalendarsystemgregorian.h"
 //#include "extdatepicker.h"
 #include "extdatetbl.h"
-#include "extdatetime.h"
 
-#include <kconfig.h>
-#include <kglobal.h>
-#include <kglobalsettings.h>
 #include <kapplication.h>
-#include <klocale.h>
 #include <kdebug.h>
 #include <knotifyclient.h>
 #include "kpopupmenu.h"
-#include <qdatetime.h>
-#include <qstring.h>
-#include <qpen.h>
 #include <qpainter.h>
-#include <qdialog.h>
 #include <qdict.h>
 #include <assert.h>
 
