@@ -14,8 +14,9 @@
 **********************************************************************/
 
 #include "extdatetime.h"
-#include "qregexp.h"
+#include <qregexp.h>
 
+#include <kglobal.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <assert.h>
@@ -60,135 +61,6 @@ QString ExtDate::m_longDayNames[7] = {
 	i18n("Monday"), i18n("Tuesday"), i18n("Wednesday"), i18n("Thursday"),
 	i18n("Friday"), i18n("Saturday"), i18n("Sunday")
 };
-
-
-#ifndef QT_NO_DATESTRING
-/*****************************************************************************
-  Some static function used by ExtDate and ExtDateTime
- *****************************************************************************/
-
-// Replaces tokens by their value. See ExtDateTime::toString() for a list of valid tokens
-static QString getFmtString( const QString& f, const QTime* dt = 0, const ExtDate* dd = 0, bool am_pm = FALSE )
-{
-    if ( f.isEmpty() )
-	return QString::null;
-
-    QString buf = f;
-
-    if ( dt ) {
-	if ( f == "h" ) {
-	    if ( ( am_pm ) && ( dt->hour() > 12 ) )
-		buf = QString::number( dt->hour() - 12 );
-	    else if ( ( am_pm ) && ( dt->hour() == 0 ) )
-		buf = "12";
-	    else
-		buf = QString::number( dt->hour() );
-	} else if ( f == "hh" ) {
-	    if ( ( am_pm ) && ( dt->hour() > 12 ) )
-		buf = QString::number( dt->hour() - 12 ).rightJustify( 2, '0', TRUE );
-	    else if ( ( am_pm ) && ( dt->hour() == 0 ) )
-		buf = "12";
-	    else
-		buf = QString::number( dt->hour() ).rightJustify( 2, '0', TRUE );
-	} else if ( f == "m" ) {
-	    buf = QString::number( dt->minute() );
-	} else if ( f == "mm" ) {
-	    buf = QString::number( dt->minute() ).rightJustify( 2, '0', TRUE );
-	} else if ( f == "s" ) {
-	    buf = QString::number( dt->second() );
-	} else if ( f == "ss" ) {
-	    buf = QString::number( dt->second() ).rightJustify( 2, '0', TRUE );
-	} else if ( f == "z" ) {
-	    buf = QString::number( dt->msec() );
-	} else if ( f == "zzz" ) {
-	    buf = QString::number( dt->msec() ).rightJustify( 3, '0', TRUE );
-	} else if ( f == "ap" ) {
-	    buf = dt->hour() < 12 ? "am" : "pm";
-	} else if ( f == "AP" ) {
-	    buf = dt->hour() < 12 ? "AM" : "PM";
-	}
-    }
-
-    if ( dd ) {
-	if ( f == "d" ) {
-	    buf = QString::number( dd->day() );
-	} else if ( f == "dd" ) {
-	    buf = QString::number( dd->day() ).rightJustify( 2, '0', TRUE );
-	} else if ( f == "M" ) {
-	    buf = QString::number( dd->month() );
-	} else if ( f == "MM" ) {
-	    buf = QString::number( dd->month() ).rightJustify( 2, '0', TRUE );
-#ifndef QT_NO_TEXTDATE
-	} else if ( f == "ddd" ) {
-	    buf = dd->shortDayName( dd->dayOfWeek() );
-	} else if ( f == "dddd" ) {
-	    buf = dd->longDayName( dd->dayOfWeek() );
-	} else if ( f == "MMM" ) {
-	    buf = dd->shortMonthName( dd->month() );
-	} else if ( f == "MMMM" ) {
-	    buf = dd->longMonthName( dd->month() );
-#endif
-	} else if ( f == "yy" ) {
-	    buf = QString::number( dd->year() ).right( 2 );
-	} else if ( f == "yyyy" ) {
-	    buf = QString::number( dd->year() );
-	}
-    }
-
-    return buf;
-}
-
-// Parses the format string and uses getFmtString to get the values for the tokens. Ret
-static QString fmtDateTime( const QString& f, const QTime* dt = 0, const ExtDate* dd = 0 )
-{
-    if ( f.isEmpty() ) {
-	return QString::null;
-    }
-
-    if ( dt && !dt->isValid() )
-	return QString::null;
-    if ( dd && !dd->isValid() )
-	return QString::null;
-
-    bool ap = ( f.contains( "AP" ) || f.contains( "ap" ) );
-
-    QString buf;
-    QString frm;
-    QChar status = '0';
-
-    for ( int i = 0; i < (int)f.length(); ++i ) {
-
-	if ( f[ i ] == status ) {
-	    if ( ( ap ) && ( ( f[ i ] == 'P' ) || ( f[ i ] == 'p' ) ) )
-		status = '0';
-	    frm += f[ i ];
-	} else {
-	    buf += getFmtString( frm, dt, dd, ap );
-	    frm = QString::null;
-	    if ( ( f[ i ] == 'h' ) || ( f[ i ] == 'm' ) || ( f[ i ] == 's' ) || ( f[ i ] == 'z' ) ) {
-		status = f[ i ];
-		frm += f[ i ];
-	    } else if ( ( f[ i ] == 'd' ) || ( f[ i ] == 'M' ) || ( f[ i ] == 'y' ) ) {
-		status = f[ i ];
-		frm += f[ i ];
-	    } else if ( ( ap ) && ( f[ i ] == 'A' ) ) {
-		status = 'P';
-		frm += f[ i ];
-	    } else  if( ( ap ) && ( f[ i ] == 'a' ) ) {
-		status = 'p';
-		frm += f[ i ];
-	    } else {
-		buf += f[ i ];
-		status = '0';
-	    }
-	}
-    }
-
-    buf += getFmtString( frm, dt, dd, ap );
-
-    return buf;
-}
-#endif // QT_NO_DATESTRING
 
 ExtDate::ExtDate( int y, int m, int d)
 {
@@ -321,84 +193,9 @@ QString ExtDate::shortDayName( int weekday ) {return m_shortDayNames[weekday-1];
 QString ExtDate::longMonthName( int month ) {return m_longMonthNames[month-1];}
 QString ExtDate::longDayName( int weekday ) {return m_longDayNames[weekday-1];}
 #endif //QT_NO_TEXTDATE
+
 #ifndef QT_NO_TEXTSTRING
 #if !defined(QT_NO_SPRINTF)
-QString ExtDate::toStringSimpleArg( char code, int nb ) const
-{
-	QString	result;
-	switch (code)
-	{
-		case 'd' :
-			{
-				switch (nb)
-				{
-					case 1 :
-						result = result.sprintf("%d", day());
-						break;
-					case 2 :
-						result = result.sprintf("%02d", day());
-						break;
-					case 3 :
-						result = shortDayName(dayOfWeek());
-						break;
-					case 4 :
-						result = longDayName(dayOfWeek());
-						break;
-					default :
-						result = "?d?";
-						break;
-				}
-			}
-			break;
-
-		case 'M' :
-			{
-				int	m = month();
-				switch (nb)
-				{
-					case 1 :
-						result = result.sprintf("%d", m);
-						break;
-					case 2 :
-						result = result.sprintf("%02d", m);
-						break;
-					case 3 :
-						result = shortMonthName(m);
-						break;
-					case 4 :
-						result = longMonthName(m);
-						break;
-					default :
-						result = "?M?";
-						break;
-				}
-			}
-			break;
-
-		case 'y' :
-			{
-				int	y = year();
-				switch (nb)
-				{
-					case 2 :
-						result = result.sprintf("%02d", y%100);
-						break;
-					case 4 :
-						result = result.sprintf("%04d", y);
-						break;
-					default :
-						result = "?y?";
-						break;
-				}
-			}
-			break;
-
-		default :
-			break;
-	}
-	return result;
-}
-
 QString ExtDate::toString( Qt::DateFormat f) const
 {
 	QString	a_format;
@@ -408,15 +205,15 @@ QString ExtDate::toString( Qt::DateFormat f) const
 	switch (f)
 	{
 		case Qt::TextDate :	// Sat May 20 1995
-			a_format = "ddd MMM d yyyy";
+			a_format = "%a %b %e %Y";
 			break;
 
 		case Qt::ISODate :	// YYYY-MM-DD
-			a_format = "yyyy-MM-dd";
+			a_format = "%Y-%m-%d";
 			break;
 
 		case Qt::LocalDate :	// local settings
-			a_format = "toString : Qt::LocalDate not implemented yet";
+			a_format = KGlobal::locale()->dateFormat();
 			break;
 
 		default :
@@ -427,53 +224,43 @@ QString ExtDate::toString( Qt::DateFormat f) const
 	return toString(a_format);
 }
 #endif
+
 QString ExtDate::toString( const QString& format ) const
 {
-	// d{1-4}, M{1-4}, yy|yyyy
-	uint	i, a_nb = 0;
-	QString	result;
-	char	a_code = '\0';
-	char	a_char;
+	//We use the KDE Date format specs.
+	//Replace occurences of the following tokens with their
+	//corresponding values:
+	//
+	// %Y The year, including centuries prefix (e.g., "1984")
+	// %y The year, excluding centuries prefix (e.g., "84")
+	// %n Numerical month value (e.g., "3" for March)
+	// %m Numerical month value, two digits (e.g., "03" for March)
+	// %e Numerical day value (e.g., "3" on March 3rd)
+	// %d Numerical day value, two digits (e.g., "03" on March 3rd)
+	// %b Month name, short form (e.g., "Mar" for March)
+	// %B Month name, long form (e.g., "March")
+	// %a Weekday name, short form (e.g., "Wed" for Wednesday)
+	// %A Weekday name, long form (e.g., "Wednesday")
 
-	if ( ! isValid() ) return QString::null;
+	//All other characters are left as-is.
 
-	for (i = 0 ; i <= format.length() ; i++)
-	{
-		if (i < format.length())
-		{
-			a_char = format[i];
-		}
-		else
-		{
-			a_char = '\0';
-		}
-		if (a_code == a_char)
-		{
-			a_nb++;
-		}
-		else
-		{
-			if ((a_code == 'd' || a_code == 'M' || a_code == 'y') && a_nb != 0)
-			{
-				result += toStringSimpleArg(a_code, a_nb);
-			}
-			if (a_char == 'd' || a_char == 'M' || a_char == 'y')
-			{
-				a_code = a_char;
-				a_nb = 1;
-			}
-			else
-			{
-				a_code = '\0';
-				a_nb = 0;
-				if (a_char != '\0')
-					result += a_char;
-			}
-		}
-	}
+	QString result( format );
+
+	result.replace( "%Y", QString().sprintf( "%d", year() ) );
+	result.replace( "%y", QString().sprintf( "%02d", (year() % 100) ) );
+	result.replace( "%n", QString().sprintf( "%d", month() ) );
+	result.replace( "%m", QString().sprintf( "%02d", month() ) );
+	result.replace( "%e", QString().sprintf( "%d", day() ) );
+	result.replace( "%d", QString().sprintf( "%02d", day() ) );
+	result.replace( "%b", shortMonthName( month() ) );
+	result.replace( "%B", longMonthName( month() ) );
+	result.replace( "%a", shortDayName( dayOfWeek() ) );
+	result.replace( "%A", longDayName( dayOfWeek() ) );
+
 	return result;
 }
 #endif
+
 bool ExtDate::setYMD( int y, int m, int d )
 {
 	if ( ! isValid(y,m,d) ) {
@@ -939,123 +726,57 @@ void ExtDateTime::setTime_t( uint secsSince1Jan1970UTC, Qt::TimeSpec ts )
 
 QString ExtDateTime::toString( Qt::DateFormat f ) const
 {
-    if ( !isValid() )
-	return QString::null;
+	if ( !isValid() )
+		return QString::null;
 
-    if ( f == Qt::ISODate ) {
-	return d.toString( Qt::ISODate ) + "T" + t.toString( Qt::ISODate );
-    }
+	if ( f == Qt::ISODate ) {
+		return d.toString( Qt::ISODate ) + "T" + t.toString( Qt::ISODate );
+	}
 #ifndef QT_NO_TEXTDATE
-    else if ( f == Qt::TextDate ) {
-#ifndef Q_WS_WIN
-	QString buf = d.shortDayName( d.dayOfWeek() );
-	buf += ' ';
-	buf += d.shortMonthName( d.month() );
-	buf += ' ';
-	buf += QString().setNum( d.day() );
-	buf += ' ';
-#else
-	QString buf;
-	QString winstr;
-	QT_WA( {
-	    TCHAR out[255];
-	    GetLocaleInfo( LOCALE_USER_DEFAULT, LOCALE_ILDATE, out, 255 );
-	    winstr = QString::fromUcs2( (ushort*)out );
-	} , {
-	    char out[255];
-	    GetLocaleInfoA( LOCALE_USER_DEFAULT, LOCALE_ILDATE, (char*)&out, 255 );
-	    winstr = QString::fromLocal8Bit( out );
-	} );
-	switch ( winstr.toInt() ) {
-	case 1:
-	    buf = d.shortDayName( d.dayOfWeek() ) + " " + QString().setNum( d.day() ) + ". " + d.shortMonthName( d.month() ) + " ";
-	    break;
-	default:
-	    buf = d.shortDayName( d.dayOfWeek() ) + " " + d.shortMonthName( d.month() ) + " " + QString().setNum( d.day() ) + " ";
-	    break;
+	else if ( f == Qt::TextDate ) {
+		return toString( "%a %b %e %Y %H:%M:%S" );
 	}
 #endif
-	buf += t.toString();
-	buf += ' ';
-	buf += QString().setNum( d.year() );
-	return buf;
-    }
-#endif
-    else if ( f == Qt::LocalDate ) {
-	return d.toString( Qt::LocalDate ) + " " + t.toString( Qt::LocalDate );
-    }
-    return QString::null;
+	else if ( f == Qt::LocalDate ) {
+		return toString( KGlobal::locale()->dateFormat()
+						+ " " + KGlobal::locale()->timeFormat() );
+	}
+
+	return QString::null;
 }
 #endif
 
-/*!
-    Returns the datetime as a string. The \a format parameter
-    determines the format of the result string.
-
-    These expressions may be used for the date:
-
-    \table
-    \header \i Expression \i Output
-    \row \i d \i the day as number without a leading zero (1-31)
-    \row \i dd \i the day as number with a leading zero (01-31)
-    \row \i ddd
-	    \i the abbreviated localized day name (e.g. 'Mon'..'Sun').
-	    Uses ExtDate::shortDayName().
-    \row \i dddd
-	    \i the long localized day name (e.g. 'Monday'..'Sunday').
-	    Uses ExtDate::longDayName().
-    \row \i M \i the month as number without a leading zero (1-12)
-    \row \i MM \i the month as number with a leading zero (01-12)
-    \row \i MMM
-	    \i the abbreviated localized month name (e.g. 'Jan'..'Dec').
-	    Uses ExtDate::shortMonthName().
-    \row \i MMMM
-	    \i the long localized month name (e.g. 'January'..'December').
-	    Uses ExtDate::longMonthName().
-    \row \i yy \i the year as two digit number (00-99)
-    \row \i yyyy \i the year as four digit number (1752-8000)
-    \endtable
-
-    These expressions may be used for the time:
-
-    \table
-    \header \i Expression \i Output
-    \row \i h
-	    \i the hour without a leading zero (0..23 or 1..12 if AM/PM display)
-    \row \i hh
-	    \i the hour with a leading zero (00..23 or 01..12 if AM/PM display)
-    \row \i m \i the minute without a leading zero (0..59)
-    \row \i mm \i the minute with a leading zero (00..59)
-    \row \i s \i the second whithout a leading zero (0..59)
-    \row \i ss \i the second whith a leading zero (00..59)
-    \row \i z \i the milliseconds without leading zeroes (0..999)
-    \row \i zzz \i the milliseconds with leading zeroes (000..999)
-    \row \i AP
-	    \i use AM/PM display. \e AP will be replaced by either "AM" or "PM".
-    \row \i ap
-	    \i use am/pm display. \e ap will be replaced by either "am" or "pm".
-    \endtable
-
-    All other input characters will be ignored.
-
-    Example format strings (assumed that the ExtDateTime is
-    21<small><sup>st</sup></small> May 2001 14:13:09)
-
-    \table
-    \header \i Format \i Result
-    \row \i dd.MM.yyyy	    \i11 21.05.2001
-    \row \i ddd MMMM d yy   \i11 Tue May 21 01
-    \row \i hh:mm:ss.zzz    \i11 14:13:09.042
-    \row \i h:m:s ap	    \i11 2:13:9 pm
-    \endtable
-
-    If the datetime is an invalid datetime, then QString::null will be returned.
-
-    \sa ExtDate::toString() QTime::toString()
-*/
 QString ExtDateTime::toString( const QString& format ) const
 {
-    return fmtDateTime( format, &t, &d );
+	if ( !isValid() )
+		return QString::null;
+
+	//Parse the date portion of the format string
+	QString result = date().toString( format );
+
+	//For the time format, use the following KDE format specs:
+	//Replace occurences of the following tokens with their
+	//corresponding values:
+	//
+	// %H Hour in 24h format, 2 digits
+	// %k Hour in 24h format, 1-2 digits
+	// %I Hour in 12h format, 2 digits
+	// %l Hour in 12h format, 1-2 digits
+	// %M Minute, 2 digits
+	// %S Seconds, 2 digits
+	// %p pm/am
+
+	int h = time().hour();
+
+	result.replace( "%H", QString().sprintf( "%02d", h ) );
+	result.replace( "%k", QString().sprintf( "%d", h ) );
+	result.replace( "%I", QString().sprintf( "%02d", ( h > 12 ) ? h-12 : h ) );
+	result.replace( "%l", QString().sprintf( "%d", ( h > 12 ) ? h-12 : h ) );
+	result.replace( "%M", QString().sprintf( "%02d", time().minute() ) );
+	result.replace( "%S", QString().sprintf( "%02d", time().second() ) );
+	result.replace( "%p", QString().sprintf( "%s", ( h > 12 ) ? "pm" : "am" ) );
+
+	return result;
 }
 #endif //QT_NO_DATESTRING
 
@@ -1117,7 +838,7 @@ ExtDateTime ExtDateTime::addSecs( int nsecs ) const
 		--dd;
 	}
 
-	while ( tt > MSECS_PER_DAY ) {
+	while ( tt > int(MSECS_PER_DAY) ) {
 		tt -= MSECS_PER_DAY;
 		++dd;
 	}

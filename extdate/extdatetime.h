@@ -95,7 +95,6 @@ public:
 	static void JDToGregorian( long int jd, int &y, int &m, int &d );
 
 private:
-	QString toStringSimpleArg( char code, int nb ) const;
 	static int dayOfYear(int y, int m, int d);
 
 	long int m_jd;
