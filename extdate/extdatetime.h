@@ -33,7 +33,7 @@ extern	void test2_unit(int y, int m, int d);
 class KDE_EXPORT ExtDate
 {
 public:
-	ExtDate() { m_jd = INVALID_DAY; }
+	ExtDate() : m_jd(INVALID_DAY), m_year(0), m_month(0), m_day(0) {}
 	ExtDate( int y, int m, int d );
 	ExtDate( const QDate &q ) { ExtDate( q.year(), q.month(), q.day() ); }
 	ExtDate( long int jd );

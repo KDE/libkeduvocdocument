@@ -145,7 +145,7 @@ void	ExtDate::JDToGregorian( long int jd, int &year, int &month, int &day )
 
 bool ExtDate::isValid() const
 {
-	return ( isValid( year(), month(), day() ) && jd() != INVALID_DAY );
+	return ( jd() != INVALID_DAY && isValid( year(), month(), day() ) );
 }
 
 int ExtDate::dayOfWeek() const
