@@ -21,11 +21,11 @@
 #include <assert.h>
 #include <time.h>
 
-static const uint SECS_PER_DAY	= 86400;
+static const uint SECS_PER_DAY  = 86400;
 static const uint MSECS_PER_DAY = 86400000;
 static const uint SECS_PER_HOUR = 3600;
 static const uint MSECS_PER_HOUR= 3600000;
-static const uint SECS_PER_MIN	= 60;
+static const uint SECS_PER_MIN  = 60;
 static const uint MSECS_PER_MIN = 60000;
 
 /*****************************************************************************

@@ -878,8 +878,8 @@ void ExtDateEdit::init()
     d->adv = FALSE;
     d->timerId = 0;
     d->typing = FALSE;
-    d->min = ExtDate( 1752, 9, 14 );
-    d->max = ExtDate( 8000, 12, 31 );
+    d->min = ExtDate( -50000, 1, 1 );
+    d->max = ExtDate( 50000, 12, 31 );
     d->changed = FALSE;
 
     setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
