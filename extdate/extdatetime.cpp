@@ -280,6 +280,7 @@ int ExtDate::dayOfWeek() const
 {
 	//JD 2451545 (01 Jan 2000) was a Saturday, which is dayOfWeek=6.
 	int a_day = (( jd() - 2451545 + 6 ) % 7);
+	if ( a_day < 0 ) a_day += 7;
 	return (a_day == 0) ? 7 : a_day;
 }
 
@@ -516,9 +517,14 @@ ExtDate ExtDate::addDays( int days ) const
 
 ExtDate  ExtDate::addMonths( int months ) const
 {
-	int	a_month = month() + months;
-	int	a_year = year() + (a_month - 1)/12;	// month : [1..12]
-	a_month  = 1 + (a_month -1) % 12;
+	int a_month = month() + months%12;
+	int a_year  = year()  + int(months/12);
+
+	while ( a_month < 1 ) {
+		a_month += 12;
+		a_year--;
+	}
+
 	return ExtDate(a_year, a_month, day());
 }
 
