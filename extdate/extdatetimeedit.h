@@ -61,7 +61,7 @@ private:
 
 class ExtDateEditPrivate;
 
-class Q_EXPORT ExtDateEdit : public ExtDateTimeEditBase
+class KDE_EXPORT ExtDateEdit : public ExtDateTimeEditBase
 {
     Q_OBJECT
     Q_ENUMS( Order )
@@ -225,7 +225,7 @@ private:
 
 class ExtDateTimeEditPrivate;
 
-class Q_EXPORT ExtDateTimeEdit : public QWidget
+class KDE_EXPORT ExtDateTimeEdit : public QWidget
 {
     Q_OBJECT
 //    Q_PROPERTY( ExtDateTime dateTime READ dateTime WRITE setDateTime )

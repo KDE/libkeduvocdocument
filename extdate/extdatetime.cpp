@@ -1047,12 +1047,12 @@ ExtDateTime ExtDateTime::fromString( const QString& s, Qt::DateFormat f )
 
 
 #ifndef QT_NO_DATASTREAM
-Q_EXPORT QDataStream &operator<<( QDataStream & ostream, const ExtDate & date)
+KDE_EXPORT QDataStream &operator<<( QDataStream & ostream, const ExtDate & date)
 {
 	return ostream << (Q_UINT32)(date.jd());
 }
 
-Q_EXPORT QDataStream &operator>>( QDataStream & ostream, ExtDate & date)
+KDE_EXPORT QDataStream &operator>>( QDataStream & ostream, ExtDate & date)
 {
 	Q_UINT32 julday;
 	ostream >> julday;
@@ -1060,12 +1060,12 @@ Q_EXPORT QDataStream &operator>>( QDataStream & ostream, ExtDate & date)
 	return ostream;
 }
 
-Q_EXPORT QDataStream &operator<<( QDataStream & ostream, const ExtDateTime & dt)
+KDE_EXPORT QDataStream &operator<<( QDataStream & ostream, const ExtDateTime & dt)
 {
 	return ostream << dt.d << dt.t;
 }
 
-Q_EXPORT QDataStream &operator>>( QDataStream & ostream, ExtDateTime & dt)
+KDE_EXPORT QDataStream &operator>>( QDataStream & ostream, ExtDateTime & dt)
 {
 	ostream >> dt.d >> dt.t;
 	return ostream;
