@@ -1,1 +1,1 @@
-SUBDIRS = kdeeducore kdeeduui
+SUBDIRS = kdeeducore kdeeduui kdeeduplot
