@@ -1,1 +1,1 @@
-SUBDIRS = kdeeducore kdeeduui kdeeduplot
+SUBDIRS = kdeeducore kdeeduui kdeeduplot extdate
