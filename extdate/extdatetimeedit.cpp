@@ -20,6 +20,9 @@
 **
 **********************************************************************/
 
+//DEBUG
+#include <kdebug.h>
+
 #include "extdatetimeedit.h"
 
 #ifndef QT_NO_DATETIMEEDIT
@@ -851,40 +854,42 @@ ExtDateEdit::ExtDateEdit( const ExtDate& date, QWidget * parent, const char * na
 */
 void ExtDateEdit::init()
 {
-    d = new ExtDateEditPrivate();
-    d->controls = new ExtDateTimeSpinWidget( this, qstrcmp( name(), "qt_datetime_dateedit" ) == 0 ? "qt_spin_widget" : "date edit controls" );
-    d->ed = new ExtDateTimeEditor( this, "date editor" );
-    d->controls->setEditWidget( d->ed );
-    setFocusProxy( d->ed );
-    connect( d->controls, SIGNAL( stepUpPressed() ), SLOT( stepUp() ) );
-    connect( d->controls, SIGNAL( stepDownPressed() ), SLOT( stepDown() ) );
-    connect( this, SIGNAL( valueChanged(const ExtDate&) ),
-	     SLOT( updateButtons() ) );
-    d->ed->appendSection( QNumberSection( 0,4 ) );
-    d->ed->appendSection( QNumberSection( 5,7 ) );
-    d->ed->appendSection( QNumberSection( 8,10 ) );
+  d = new ExtDateEditPrivate();
+  d->controls = new ExtDateTimeSpinWidget( this, 
+      qstrcmp( name(), "qt_datetime_dateedit" ) == 0 ? 
+      "qt_spin_widget" : "date edit controls" );
+  d->ed = new ExtDateTimeEditor( this, "date editor" );
+  d->controls->setEditWidget( d->ed );
+  setFocusProxy( d->ed );
+  connect( d->controls, SIGNAL( stepUpPressed() ), SLOT( stepUp() ) );
+  connect( d->controls, SIGNAL( stepDownPressed() ), SLOT( stepDown() ) );
+  connect( this, SIGNAL( valueChanged(const ExtDate&) ),
+      SLOT( updateButtons() ) );
+  d->ed->appendSection( QNumberSection( 0,4 ) );
+  d->ed->appendSection( QNumberSection( 5,7 ) );
+  d->ed->appendSection( QNumberSection( 8,10 ) );
 
-    d->yearSection = -1;
-    d->monthSection = -1;
-    d->daySection = -1;
+  d->yearSection = -1;
+  d->monthSection = -1;
+  d->daySection = -1;
 
-    d->y = 0;
-    d->m = 0;
-    d->d = 0;
-    d->dayCache = 0;
-    setOrder( localOrder() );
-    setFocusSection( 0 );
-    d->overwrite = TRUE;
-    d->adv = FALSE;
-    d->timerId = 0;
-    d->typing = FALSE;
-    d->min = ExtDate( -50000, 1, 1 );
-    d->max = ExtDate( 50000, 12, 31 );
-    d->changed = FALSE;
+  d->y = 0;
+  d->m = 0;
+  d->d = 0;
+  d->dayCache = 0;
+  setOrder( localOrder() );
+  setFocusSection( 0 );
+  d->overwrite = TRUE;
+  d->adv = FALSE;
+  d->timerId = 0;
+  d->typing = FALSE;
+  d->min = ExtDate( -50000, 1, 1 );
+  d->max = ExtDate( 50000, 12, 31 );
+  d->changed = FALSE;
 
-    setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
+  setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
 
-    refcount++;
+  refcount++;
 }
 
 /*!
@@ -893,9 +898,9 @@ void ExtDateEdit::init()
 
 ExtDateEdit::~ExtDateEdit()
 {
-    delete d;
-    if ( !--refcount )
-	cleanup();
+  delete d;
+  if ( !--refcount )
+    cleanup();
 }
 
 /*!
@@ -912,7 +917,7 @@ ExtDateEdit::~ExtDateEdit()
 
 ExtDate ExtDateEdit::minValue() const
 {
-    return d->min;
+  return d->min;
 }
 
 /*!
@@ -929,7 +934,7 @@ ExtDate ExtDateEdit::minValue() const
 
 ExtDate ExtDateEdit::maxValue() const
 {
-    return d->max;
+  return d->max;
 }
 
 
@@ -941,10 +946,10 @@ ExtDate ExtDateEdit::maxValue() const
 
 void ExtDateEdit::setRange( const ExtDate& min, const ExtDate& max )
 {
-    if ( min.isValid() )
-	d->min = min;
-    if ( max.isValid() )
-	d->max = max;
+  if ( min.isValid() )
+    d->min = min;
+  if ( max.isValid() )
+    d->max = max;
 }
 
 /*!
@@ -954,7 +959,7 @@ void ExtDateEdit::setRange( const ExtDate& min, const ExtDate& max )
 
 void ExtDateEdit::setSeparator( const QString& s )
 {
-    d->ed->setSeparator( s );
+  d->ed->setSeparator( s );
 }
 
 /*!
@@ -963,7 +968,7 @@ void ExtDateEdit::setSeparator( const QString& s )
 
 QString ExtDateEdit::separator() const
 {
-    return d->ed->separator();
+  return d->ed->separator();
 }
 
 
@@ -974,21 +979,23 @@ QString ExtDateEdit::separator() const
 
 void ExtDateEdit::updateButtons()
 {
-    if ( !isEnabled() )
-	return;
+  if ( !isEnabled() )
+    return;
 
-    bool upEnabled = date() < maxValue();
-    bool downEnabled = date() > minValue();
+  fix();
+  
+  bool upEnabled = date() < maxValue();
+  bool downEnabled = date() > minValue();
 
-    d->controls->setUpEnabled( upEnabled );
-    d->controls->setDownEnabled( downEnabled );
+  d->controls->setUpEnabled( upEnabled );
+  d->controls->setDownEnabled( downEnabled );
 }
 
 /*! \reimp
  */
 void ExtDateEdit::resizeEvent( QResizeEvent * )
 {
-    d->controls->resize( width(), height() );
+  d->controls->resize( width(), height() );
 }
 
 /*! \reimp
@@ -996,13 +1003,14 @@ void ExtDateEdit::resizeEvent( QResizeEvent * )
 */
 QSize ExtDateEdit::sizeHint() const
 {
-    constPolish();
-    QFontMetrics fm( font() );
-    int fw = style().pixelMetric( QStyle::PM_DefaultFrameWidth, this );
-    int h = QMAX( fm.lineSpacing(), 14 ) + 2;
-    int w = 2 + fm.width( '9' ) * 8 + fm.width( d->ed->separator() ) * 2 + d->controls->upRect().width() + fw * 4;
+  constPolish();
+  QFontMetrics fm( font() );
+  int fw = style().pixelMetric( QStyle::PM_DefaultFrameWidth, this );
+  int h = QMAX( fm.lineSpacing(), 14 ) + 2;
+  int w = 2 + fm.width( '9' ) * 8 + fm.width( d->ed->separator() ) * 2 
+            + d->controls->upRect().width() + fw * 4;
 
-    return QSize( w, QMAX(h + fw * 2,20) ).expandedTo( QApplication::globalStrut() );
+  return QSize( w, QMAX(h + fw * 2,20) ).expandedTo( QApplication::globalStrut() );
 }
 
 /*! \reimp
@@ -1010,7 +1018,7 @@ QSize ExtDateEdit::sizeHint() const
 */
 QSize ExtDateEdit::minimumSizeHint() const
 {
-    return sizeHint();
+  return sizeHint();
 }
 
 
@@ -1024,16 +1032,17 @@ QSize ExtDateEdit::minimumSizeHint() const
 
 QString ExtDateEdit::sectionFormattedText( int sec )
 {
-    QString txt;
-    txt = sectionText( sec );
-    if ( d->typing && sec == d->ed->focusSection() )
-	d->ed->setSectionSelection( sec, sectionOffsetEnd( sec ) - txt.length(),
-			     sectionOffsetEnd( sec ) );
-    else
-	d->ed->setSectionSelection( sec, sectionOffsetEnd( sec ) - sectionLength( sec ),
-			     sectionOffsetEnd( sec ) );
-    txt = txt.rightJustify( sectionLength( sec ), EXTDATETIMEEDIT_HIDDEN_CHAR );
-    return txt;
+  QString txt;
+  txt = sectionText( sec );
+  if ( d->typing && sec == d->ed->focusSection() )
+    d->ed->setSectionSelection( sec, sectionOffsetEnd( sec ) - txt.length(),
+        sectionOffsetEnd( sec ) );
+  else
+    d->ed->setSectionSelection( sec, sectionOffsetEnd( sec ) - sectionLength( sec ),
+        sectionOffsetEnd( sec ) );
+  
+  txt = txt.rightJustify( sectionLength( sec ), EXTDATETIMEEDIT_HIDDEN_CHAR );
+  return txt;
 }
 
 
@@ -1047,15 +1056,15 @@ QString ExtDateEdit::sectionFormattedText( int sec )
 
 int ExtDateEdit::sectionLength( int sec ) const
 {
-    int val = 0;
-    if ( sec == d->yearSection ) {
-	val = 4;
-    } else if ( sec == d->monthSection ) {
-	val = 2;
-    } else if ( sec == d->daySection ) {
-	val = 2;
-    }
-    return val;
+  int val = 0;
+  if ( sec == d->yearSection ) 
+    val = 4;
+  else if ( sec == d->monthSection ) 
+    val = 2;
+  else if ( sec == d->daySection ) 
+    val = 2;
+  
+  return val;
 }
 
 /*!
@@ -1068,15 +1077,15 @@ int ExtDateEdit::sectionLength( int sec ) const
 
 QString ExtDateEdit::sectionText( int sec ) const
 {
-    int val = 0;
-    if ( sec == d->yearSection ) {
-	val = d->y;
-    } else if ( sec == d->monthSection ) {
-	val = d->m;
-    } else if ( sec == d->daySection ) {
-	val = d->d;
-    }
-    return QString::number( val );
+  int val = 0;
+  if ( sec == d->yearSection ) 
+    val = d->y;
+  else if ( sec == d->monthSection ) 
+    val = d->m;
+  else if ( sec == d->daySection ) 
+    val = d->d;
+    
+  return QString::number( val );
 }
 
 /*! \internal
@@ -1087,35 +1096,35 @@ QString ExtDateEdit::sectionText( int sec ) const
 
 int ExtDateEdit::sectionOffsetEnd( int sec ) const
 {
-    if ( sec == d->yearSection ) {
-	switch( d->ord ) {
-	case DMY:
-	case MDY:
-	    return sectionOffsetEnd( sec-1) + separator().length() + sectionLength( sec );
-	case YMD:
-	case YDM:
-	    return sectionLength( sec );
-	}
-    } else if ( sec == d->monthSection ) {
-	switch( d->ord ) {
-	case DMY:
-	case YDM:
-	case YMD:
-	    return sectionOffsetEnd( sec-1) + separator().length() + sectionLength( sec );
-	case MDY:
-	    return sectionLength( sec );
-	}
-    } else if ( sec == d->daySection ) {
-	switch( d->ord ) {
-	case DMY:
-	    return sectionLength( sec );
-	case YMD:
-	case MDY:
-	case YDM:
-	    return sectionOffsetEnd( sec-1 ) + separator().length() + sectionLength( sec );
-	}
+  if ( sec == d->yearSection ) {
+    switch( d->ord ) {
+      case DMY:
+      case MDY:
+        return sectionOffsetEnd( sec-1) + separator().length() + sectionLength( sec );
+      case YMD:
+      case YDM:
+        return sectionLength( sec );
     }
-    return 0;
+  } else if ( sec == d->monthSection ) {
+    switch( d->ord ) {
+      case DMY:
+      case YDM:
+      case YMD:
+        return sectionOffsetEnd( sec-1) + separator().length() + sectionLength( sec );
+      case MDY:
+        return sectionLength( sec );
+    }
+  } else if ( sec == d->daySection ) {
+    switch( d->ord ) {
+      case DMY:
+        return sectionLength( sec );
+      case YMD:
+      case MDY:
+      case YDM:
+        return sectionOffsetEnd( sec-1 ) + separator().length() + sectionLength( sec );
+    }
+  }
+  return 0;
 }
 
 
@@ -1130,37 +1139,38 @@ int ExtDateEdit::sectionOffsetEnd( int sec ) const
 
 void ExtDateEdit::setOrder( ExtDateEdit::Order order )
 {
-    d->ord = order;
-    switch( d->ord ) {
+  d->ord = order;
+  switch( d->ord ) {
     case DMY:
-	d->yearSection = 2;
-	d->monthSection = 1;
-	d->daySection = 0;
-	break;
+      d->yearSection = 2;
+      d->monthSection = 1;
+      d->daySection = 0;
+      break;
     case MDY:
-	d->yearSection = 2;
-	d->monthSection = 0;
-	d->daySection = 1;
-	break;
+      d->yearSection = 2;
+      d->monthSection = 0;
+      d->daySection = 1;
+      break;
     case YMD:
-	d->yearSection = 0;
-	d->monthSection = 1;
-	d->daySection = 2;
-	break;
+      d->yearSection = 0;
+      d->monthSection = 1;
+      d->daySection = 2;
+      break;
     case YDM:
-	d->yearSection = 0;
-	d->monthSection = 2;
-	d->daySection = 1;
-	break;
-    }
-    if ( isVisible() )
-	d->ed->repaint( d->ed->rect(), FALSE );
+      d->yearSection = 0;
+      d->monthSection = 2;
+      d->daySection = 1;
+      break;
+  }
+  
+  if ( isVisible() )
+    d->ed->repaint( d->ed->rect(), FALSE );
 }
 
 
 ExtDateEdit::Order ExtDateEdit::order() const
 {
-    return d->ord;
+  return d->ord;
 }
 
 
@@ -1169,29 +1179,30 @@ ExtDateEdit::Order ExtDateEdit::order() const
 */
 void ExtDateEdit::stepUp()
 {
-    int sec = d->ed->focusSection();
-    bool accepted = FALSE;
-    if ( sec == d->yearSection ) {
-	if ( !outOfRange( d->y+1, d->m, d->d ) ) {
-	    accepted = TRUE;
-	    setYear( d->y+1 );
-	}
-    } else if ( sec == d->monthSection ) {
-	if ( !outOfRange( d->y, d->m+1, d->d ) ) {
-	    accepted = TRUE;
-	    setMonth( d->m+1 );
-	}
-    } else if ( sec == d->daySection ) {
-	if ( !outOfRange( d->y, d->m, d->d+1 ) ) {
-	    accepted = TRUE;
-	    setDay( d->d+1 );
-	}
+  int sec = d->ed->focusSection();
+  bool accepted = FALSE;
+  if ( sec == d->yearSection ) {
+    if ( !outOfRange( d->y+1, d->m, d->d ) ) {
+      accepted = TRUE;
+      setYear( d->y+1 );
     }
-    if ( accepted ) {
-	d->changed = TRUE;
-	emit valueChanged( date() );
+  } else if ( sec == d->monthSection ) {
+  	if ( !outOfRange( d->y, d->m+1, d->d ) ) {
+      accepted = TRUE;
+      setMonth( d->m+1 );
+  	}
+  } else if ( sec == d->daySection ) {
+    if ( !outOfRange( d->y, d->m, d->d+1 ) ) {
+      accepted = TRUE;
+      setDay( d->d+1 );
     }
-    d->ed->repaint( d->ed->rect(), FALSE );
+  }
+  if ( accepted ) {
+    d->changed = TRUE;
+    emit valueChanged( date() );
+  }
+  
+  d->ed->repaint( d->ed->rect(), FALSE );
 }
 
 
@@ -1202,29 +1213,30 @@ void ExtDateEdit::stepUp()
 
 void ExtDateEdit::stepDown()
 {
-    int sec = d->ed->focusSection();
-    bool accepted = FALSE;
-    if ( sec == d->yearSection ) {
-	if ( !outOfRange( d->y-1, d->m, d->d ) ) {
-	    accepted = TRUE;
-	    setYear( d->y-1 );
-	}
-    } else if ( sec == d->monthSection ) {
-	if ( !outOfRange( d->y, d->m-1, d->d ) ) {
-	    accepted = TRUE;
-	    setMonth( d->m-1 );
-	}
-    } else if ( sec == d->daySection ) {
-	if ( !outOfRange( d->y, d->m, d->d-1 ) ) {
-	    accepted = TRUE;
-	    setDay( d->d-1 );
-	}
+  int sec = d->ed->focusSection();
+  bool accepted = FALSE;
+  if ( sec == d->yearSection ) {
+    if ( !outOfRange( d->y-1, d->m, d->d ) ) {
+      accepted = TRUE;
+      setYear( d->y-1 );
     }
-    if ( accepted ) {
-	d->changed = TRUE;
-	emit valueChanged( date() );
+  } else if ( sec == d->monthSection ) {
+    if ( !outOfRange( d->y, d->m-1, d->d ) ) {
+      accepted = TRUE;
+      setMonth( d->m-1 );
     }
-    d->ed->repaint( d->ed->rect(), FALSE );
+  } else if ( sec == d->daySection ) {
+    if ( !outOfRange( d->y, d->m, d->d-1 ) ) {
+      accepted = TRUE;
+      setDay( d->d-1 );
+    }
+  }
+  if ( accepted ) {
+    d->changed = TRUE;
+    emit valueChanged( date() );
+  }
+  
+  d->ed->repaint( d->ed->rect(), FALSE );
 }
 
 /*!
@@ -1236,17 +1248,10 @@ void ExtDateEdit::stepDown()
 
 void ExtDateEdit::setYear( int year )
 {
-    if ( year < 1752 )
-	year = 1752;
-    if ( year > 8000 )
-	year = 8000;
-    if ( !outOfRange( year, d->m, d->d ) ) {
-	d->y = year;
-	setMonth( d->m );
-	int tmp = d->dayCache;
-	setDay( d->dayCache );
-	d->dayCache = tmp;
-    }
+  if ( !outOfRange( year, d->m, d->d ) ) {
+    d->y = year;
+    setMonth( d->m );
+  }
 }
 
 
@@ -1257,16 +1262,14 @@ void ExtDateEdit::setYear( int year )
 
 void ExtDateEdit::setMonth( int month )
 {
-    if ( month < 1 )
-	month = 1;
-    if ( month > 12 )
-	month = 12;
-    if ( !outOfRange( d->y, month, d->d ) ) {
-	d->m = month;
-	int tmp = d->dayCache;
-	setDay( d->dayCache );
-	d->dayCache = tmp;
-    }
+  if ( month < 1 )
+    month = 1;
+  if ( month > 12 )
+    month = 12;
+  if ( !outOfRange( d->y, month, d->d ) ) {
+    d->m = month;
+    setDay( d->d );
+  }
 }
 
 
@@ -1277,22 +1280,15 @@ void ExtDateEdit::setMonth( int month )
 
 void ExtDateEdit::setDay( int day )
 {
-    if ( day < 1 )
-	day = 1;
-    if ( day > 31 )
-	day = 31;
-    if ( d->m > 0 && d->y > 1752 ) {
-	while ( !ExtDate::isValid( d->y, d->m, day ) )
-	    --day;
-	if ( !outOfRange( d->y, d->m, day ) )
-	    d->d = day;
-    } else if ( d->m > 0 ) {
-	if ( day > 0 && day < 32 ) {
-	    if ( !outOfRange( d->y, d->m, day ) )
-		d->d = day;
-	}
-    }
-    d->dayCache = d->d;
+  ExtDate test = ExtDate( d->y, d->m, 1 );
+  
+  if ( day < 1 )
+    day = 1;
+  if ( day > test.daysInMonth() )
+    day = test.daysInMonth();
+  
+  d->dayCache = d->d;
+  d->d = day;
 }
 
 
@@ -1312,22 +1308,22 @@ void ExtDateEdit::setDay( int day )
 
 void ExtDateEdit::setDate( const ExtDate& date )
 {
-    if ( !date.isValid() ) {
-	d->y = 0;
-	d->m = 0;
-	d->d = 0;
-	d->dayCache = 0;
-    } else {
-	if ( date > maxValue() || date < minValue() )
-	    return;
-	d->y = date.year();
-	d->m = date.month();
-	d->d = date.day();
-	d->dayCache = d->d;
-	emit valueChanged( date );
-    }
-    d->changed = FALSE;
-    d->ed->repaint( d->ed->rect(), FALSE );
+  if ( !date.isValid() ) {
+    d->y = 0;
+    d->m = 0;
+    d->d = 0;
+    d->dayCache = 0;
+  } else {
+    if ( date > maxValue() || date < minValue() )
+      return;
+    d->y = date.year();
+    d->m = date.month();
+    d->d = date.day();
+    d->dayCache = d->d;
+    emit valueChanged( date );
+  }
+  d->changed = FALSE;
+  d->ed->repaint( d->ed->rect(), FALSE );
 }
 
 ExtDate ExtDateEdit::date() const
@@ -1348,16 +1344,15 @@ ExtDate ExtDateEdit::date() const
 
 bool ExtDateEdit::outOfRange( int y, int m, int d ) const
 {
-    if ( ExtDate::isValid( y, m, d ) ) {
-	ExtDate currentDate( y, m, d );
-	if ( currentDate > maxValue() ||
-	     currentDate < minValue() ) {
+  if ( ExtDate::isValid( y, m, d ) ) {
+    ExtDate currentDate( y, m, d );
+    if ( currentDate > maxValue() || currentDate < minValue() ) {
 	    //## outOfRange should set overwrite?
 	    return TRUE;
-	}
-	return FALSE;
     }
-    return FALSE; /* assume ok */
+    return FALSE;
+  }
+  return FALSE; /* assume ok */
 }
 
 /*!  \reimp
@@ -1462,13 +1457,13 @@ void ExtDateEdit::addNumber( int sec, int num )
 
 bool ExtDateEdit::setFocusSection( int s )
 {
-    if ( s != d->ed->focusSection() ) {
-	killTimer( d->timerId );
-	d->overwrite = TRUE;
-	d->typing = FALSE;
-	fix(); // will emit valueChanged if necessary
-    }
-    return d->ed->setFocusSection( s );
+  if ( s != d->ed->focusSection() ) {
+    killTimer( d->timerId );
+    d->overwrite = TRUE;
+    d->typing = FALSE;
+    fix(); // will emit valueChanged if necessary
+  }
+  return d->ed->setFocusSection( s );
 }
 
 
@@ -1478,6 +1473,8 @@ bool ExtDateEdit::setFocusSection( int s )
     The rules applied are as follows:
 
     \list
+    \i if the day is larger than the number of days in the month, 
+    \i it is reset to that number
     \i If the year has four digits it is left unchanged.
     \i If the year has two digits, the year will be changed to four
     digits in the range current year - 70 to current year + 29.
@@ -1490,44 +1487,53 @@ bool ExtDateEdit::setFocusSection( int s )
 
 void ExtDateEdit::fix()
 {
-    bool changed = FALSE;
-    int currentYear = ExtDate::currentDate().year();
-    int year = d->y;
-    if ( year < 100 ) {
-	int currentCentury = currentYear / 100;
-	year += currentCentury * 100;
-	if ( currentYear > year ) {
-	    if ( currentYear > year + 70 )
-		year += 100;
-	} else {
-	    if ( year >= currentYear + 30 )
-		year -= 100;
-	}
-	changed = TRUE;
-    } else if ( year < 1000 ) {
-	int currentMillennium = currentYear / 10;
-	year += currentMillennium * 10;
-	changed = TRUE;
+  bool changed = FALSE;
+  
+  ExtDate test = ExtDate( d->y, d->m, 1 );
+  if ( d->d > test.daysInMonth() ) {
+    
+    d->d = test.daysInMonth();
+    changed = TRUE;
+  }
+  
+  int currentYear = ExtDate::currentDate().year();
+  int year = d->y;
+  if ( year < 100 ) {
+    int currentCentury = currentYear / 100;
+    year += currentCentury * 100;
+    if ( currentYear > year ) {
+        if ( currentYear > year + 70 )
+      year += 100;
+    } else {
+        if ( year >= currentYear + 30 )
+      year -= 100;
     }
-    if ( changed && outOfRange( year, d->m, d->d ) ) {
-	if ( minValue().isValid() && date() < minValue() ) {
+    changed = TRUE;
+      } else if ( year < 1000 ) {
+    int currentMillennium = currentYear / 10;
+    year += currentMillennium * 10;
+    changed = TRUE;
+  }
+  if ( changed && outOfRange( year, d->m, d->d ) ) {
+  	if ( minValue().isValid() && date() < minValue() ) {
 	    d->d =  minValue().day();
 	    d->dayCache = d->d;
 	    d->m = minValue().month();
 	    d->y = minValue().year();
-	}
-	if ( date() > maxValue() ) {
+    }
+    if ( date() > maxValue() ) {
 	    d->d =  maxValue().day();
 	    d->dayCache = d->d;
 	    d->m = maxValue().month();
 	    d->y = maxValue().year();
-	}
-    } else if ( changed )
-	setYear( year );
-    if ( changed ) {
-	emit valueChanged( date() );
-	d->changed = FALSE;
     }
+  } else if ( changed )
+    setYear( year );
+    
+  if ( changed ) {
+//    emit valueChanged( date() );
+//    d->changed = FALSE;
+  }
 }
 
 
@@ -1537,31 +1543,34 @@ void ExtDateEdit::fix()
 
 bool ExtDateEdit::event( QEvent *e )
 {
-    if( e->type() == QEvent::FocusOut ) {
-	d->typing = FALSE;
-	fix();
-	// the following can't be done in fix() because fix() called
-	// from all over the place and it will break the old behaviour
-	if ( !ExtDate::isValid( d->y, d->m, d->d ) ) {
-	    d->dayCache = d->d;
-	    int i = d->d;
-	    for ( ; i > 0; i-- ) {
-		d->d = i;
-		if ( ExtDate::isValid( d->y, d->m, d->d ) )
-		    break;
-	    }
-	    d->changed = TRUE;
-	}
-	if ( d->changed ) {
-	    emit valueChanged( date() );
-	    d->changed = FALSE;
-	}
-    } else if ( e->type() == QEvent::LocaleChange ) {
-	readLocaleSettings();
-	d->ed->setSeparator( localDateSep() );
-	setOrder( localOrder() );
+  if( e->type() == QEvent::FocusOut ) {
+    d->typing = FALSE;
+    // the following can't be done in fix() because fix() called
+    // from all over the place and it will break the old behaviour
+    if ( !ExtDate::isValid( d->y, d->m, d->d ) ) {
+      d->dayCache = d->d;
+      int i = d->d;
+      for ( ; i > 0; i-- ) {
+        d->d = i;
+        if ( ExtDate::isValid( d->y, d->m, d->d ) )
+          break;
+      }
+      d->changed = TRUE;
     }
-    return ExtDateTimeEditBase::event( e );
+    if ( d->changed ) {
+      fix();
+      emit valueChanged( date() );
+      d->changed = FALSE;
+    }
+  } else if ( e->type() == QEvent::LocaleChange ) {
+    readLocaleSettings();
+    d->ed->setSeparator( localDateSep() );
+    setOrder( localOrder() );
+  }
+
+  bool result = ExtDateTimeEditBase::event( e ); 
+  
+  return result;
 }
 
 /*!
