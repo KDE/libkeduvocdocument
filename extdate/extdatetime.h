@@ -1,8 +1,7 @@
 /*************************************************************************
-**
 ** Definition of extended range date class
-**
-** Created : 031102
+** (c) 2004 by Michel Guitel <michel.guitel@sap.ap-hop-paris.fr>
+** modifications by Jason Harris <kstars@30doradus.org>
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
