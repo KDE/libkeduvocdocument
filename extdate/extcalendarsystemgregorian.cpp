@@ -77,12 +77,12 @@ int ExtCalendarSystemGregorian::weekNumber(const ExtDate& date,
 QString ExtCalendarSystemGregorian::monthName(const ExtDate& date,
                                             bool shortName) const
 {
-  return monthName(month(date), shortName);
+  return monthName(month(date), year(date), shortName);
 }
 
 QString ExtCalendarSystemGregorian::monthNamePossessive(const ExtDate& date, bool shortName) const
 {
-  return monthNamePossessive(month(date), shortName);
+  return monthNamePossessive(month(date), year(date), shortName);
 }
 
 QString ExtCalendarSystemGregorian::monthName(int month, int year, bool shortName) const

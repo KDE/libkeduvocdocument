@@ -35,32 +35,31 @@ static const uint MSECS_PER_MIN = 60000;
 /*****************************************************************************
  *
  * Concepts :
- * a day is given by its rank after (or before if negative) the origin-day.
- * The origin-day is 01/01/0000. Its rank is 1.
+ * a date is represented internally by its Julian Day number, a simple count
+ * of the number of days since a remote, arbitrary date (01 January, 4713 BC).
+ * This date has Julian Day number zero.
  *
  * ***************************************************************************/
 
-int	ExtDate::month_length[] = {31, 28, 31, 30,  31,  30,  31,  31,  30,  31,  30,  31};
-int	ExtDate::month_origin[] = { 0, 30, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+uint ExtDate::m_monthLength[] = {31, 28, 31, 30,  31,  30,  31,  31,  30,  31,  30,  31};
+uint ExtDate::m_monthOrigin[] = { 0, 30, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
 
-QString ExtDate::my_shortMonthNames[12] = {
+QString ExtDate::m_shortMonthNames[12] = {
 	i18n("Jan"), i18n("Feb"), i18n("Mar"), i18n("Apr"), i18n("May"), i18n("Jun"),
 	i18n("Jul"), i18n("Aug"), i18n("Sep"), i18n("Oct"), i18n("Nov"), i18n("Dec")
 };
-QString ExtDate::my_shortDayNames[7] = {
+QString ExtDate::m_shortDayNames[7] = {
 	i18n("Mon"), i18n("Tue"), i18n("Wed"), i18n("Thu"), i18n("Fri"), i18n("Sat"), i18n("Sun")
 };
-QString ExtDate::my_longMonthNames[12] = {
+QString ExtDate::m_longMonthNames[12] = {
 	i18n("January"), i18n("February"), i18n("March"), i18n("April"), i18n("May"),
 	i18n("June"), i18n("July"), i18n("August"), i18n("September"), i18n("October"),
 	i18n("November"), i18n("December")
 };
-QString ExtDate::my_longDayNames[7] = {
+QString ExtDate::m_longDayNames[7] = {
 	i18n("Monday"), i18n("Tuesday"), i18n("Wednesday"), i18n("Thursday"),
 	i18n("Friday"), i18n("Saturday"), i18n("Sunday")
 };
-
-int	ExtDate::my_invalid_day = 0;	// RAF : mettre une valeur vraiment invalide
 
 
 #ifndef QT_NO_DATESTRING
@@ -191,84 +190,108 @@ static QString fmtDateTime( const QString& f, const QTime* dt = 0, const ExtDate
 }
 #endif // QT_NO_DATESTRING
 
-
-/*
- * y = year
- * m = month (Jan : 1, Feb : 2 ...
- * d = day in [1...31]
- */
-int ExtDate::dayRank(int y, int m, int d)
-{
-	int	a_day_number;
-	a_day_number = y*365 + (y+3)/4 - (y-1)/100 + (y-1)/400;
-	a_day_number += dayOfYear(y, m, d);
-	return a_day_number;
-}
-
 ExtDate::ExtDate( int y, int m, int d)
 {
 	if ( !isValid(y,m,d) ) {
 #if defined(QT_CHECK_RANGE)
 		qWarning( "ExtDate: Invalid date %04d-%02d-%02d", y, m, d );
 #endif
-		jd = my_invalid_day;
+		m_year = 0;
+		m_month = 0;
+		m_day = 0;
+		m_jd = INVALID_DAY;
 	} else {
-		jd = dayRank(y, m, d);
+		m_year = y;
+		m_month = m;
+		m_day = d;
+		m_jd = GregorianToJD(y, m, d);
 	}
+}
+
+ExtDate::ExtDate( long int jd ) {
+	m_jd = jd;
+	JDToGregorian( jd, m_year, m_month, m_day );
+}
+
+long int ExtDate::GregorianToJD( int year, int month, int day )
+{
+	int m, y, A, B, C, D;
+
+	if (month > 2) {
+		m = month;
+		y = year;
+	} else {
+		y = year - 1;
+		m = month + 12;
+	}
+
+/*  If the date is after 10/15/1582, then take Pope Gregory's modification
+	to the Julian calendar into account */
+
+	if ( ( year  >1582 ) ||
+		( year ==1582 && month  >9 ) ||
+		( year ==1582 && month ==9 && day >15 ))
+	{
+		A = int(y/100);
+		B = 2 - A + int(A/4);
+	} else {
+		B = 0;
+	}
+
+	if (y < 0) {
+		C = int((365.25*y) - 0.75);
+	} else {
+		C = int(365.25*y);
+	}
+
+	D = int(30.6001*(m+1));
+
+	long int jd = B + C + D + day + 1720995;
+
+	return jd;
+}
+
+void	ExtDate::JDToGregorian( long int jd, int &year, int &month, int &day )
+{
+	int a, b, c, d, e, alpha;
+
+	if (jd<2299161) {
+		a = jd;
+	} else {
+		alpha = int ((jd-1867216.25)/ 36524.25);
+		a = jd + 1 + alpha - int(alpha / 4.0);
+	}
+	b = a + 1524;
+	c = int ((b-122.1)/ 365.25);
+	d = int (365.25*c);
+	e = int ((b-d)/ 30.6001);
+
+	day = b-d-int(30.6001*e);
+	month = (e<14) ? e-1 : e-13;
+	year  = (month>2)  ? c-4716 : c-4715;
 }
 
 bool ExtDate::isValid() const
 {
-	return (jd != my_invalid_day);
-}
-
-int ExtDate::year() const
-{
-	int	a_year = (int)(jd/365.25);	// first approximation
-	if (dayRank(a_year, 1, 1) > jd)
-	{
-		for (a_year-- ; dayRank(a_year, 1, 1) > jd ; a_year--);
-	}
-
-	if (dayRank(a_year+1, 1, 1) <= jd)
-	{
-		for ( ; dayRank(a_year+1, 1, 1) <= jd ; a_year++);
-	}
-	return a_year;
-}
-
-int ExtDate::month() const
-{
-	int	a_year = year();
-	int	a_res = jd - dayRank(a_year, 1, 0);
-	int	a_month;
-	int	a_leap_year = leapYear(a_year) ? 1 : 0;
-	if (month_origin[1] >= a_res) return 1;
-//	if (month_origin[2] > a_res) return 2;
-	for (a_month = 12 ; (month_origin[a_month-1]+a_leap_year) >= a_res ; a_month--);
-	return a_month;
-}
-
-int ExtDate::day() const
-{
-	return jd - dayRank(year(), month(), 0);
+	return ( jd() != INVALID_DAY );
 }
 
 int ExtDate::dayOfWeek() const
 {
-	int a_day = ((jd + 5) % 7);
+	//JD 2451545 (01 Jan 2000) was a Saturday, which is dayOfWeek=6.
+	int a_day = (( jd() - 2451545 + 6 ) % 7);
 	return (a_day == 0) ? 7 : a_day;
 }
 
 int ExtDate::dayOfYear() const
 {
-	return jd - dayRank(year(), 1, 0);
+	return jd() - GregorianToJD( year(), 1, 1) + 1;
 }
 
 int ExtDate::daysInMonth() const
 {
 	int	a_month = month();
-	return (a_month == 2) ? (leapYear(year()) ? 29 : 28) : month_length[a_month-1] ;
+	return (a_month == 2) ? (leapYear(year()) ? 29 : 28) : m_monthLength[a_month-1] ;
 }
 
 int ExtDate::daysInYear() const
@@ -276,21 +299,19 @@ int ExtDate::daysInYear() const
 	return (leapYear(year()) ? 366 : 365);
 }
 
-int ExtDate::weekNumber( int *yearNum) const
+int ExtDate::weekNumber( int *yearNum ) const
 {
 	// the year and week number are those of the next Sunday.
-	ExtDate	a_date;
-	a_date.set_jd(jd - dayOfWeek() + 7);
-	int	a_year = a_date.year();
-	*yearNum = a_year;
-	return 1 + a_date.dayOfYear()/7;
+	ExtDate a_date( jd() - dayOfWeek() + 7);
+	*yearNum = a_date.year();
+	return 1 + int( a_date.dayOfYear()/7 );
 }
 
 #ifndef QT_NO_TEXTDATE
-QString ExtDate::shortMonthName( int month ) {return my_shortMonthNames[month-1];};
-QString ExtDate::shortDayName( int weekday ) {return my_shortDayNames[weekday-1];};
-QString ExtDate::longMonthName( int month ) {return my_longMonthNames[month-1];};
-QString ExtDate::longDayName( int weekday ) {return my_longDayNames[weekday-1];};
+QString ExtDate::shortMonthName( int month ) {return m_shortMonthNames[month-1];};
+QString ExtDate::shortDayName( int weekday ) {return m_shortDayNames[weekday-1];};
+QString ExtDate::longMonthName( int month ) {return m_longMonthNames[month-1];};
+QString ExtDate::longDayName( int weekday ) {return m_longDayNames[weekday-1];};
 #endif //QT_NO_TEXTDATE
 #ifndef QT_NO_TEXTSTRING
 #if !defined(QT_NO_SPRINTF)
@@ -445,16 +466,30 @@ QString ExtDate::toString( const QString& format ) const
 	return result;
 }
 #endif
-bool   ExtDate::setYMD( int y, int m, int d )
+bool ExtDate::setYMD( int y, int m, int d )
 {
-	jd = dayRank(y, m, d);
-	return true;
+	if ( ! isValid(y,m,d) ) {
+#if defined(QT_CHECK_RANGE)
+		qWarning( "ExtDate: Invalid date %04d-%02d-%02d", y, m, d );
+#endif
+		m_year = 0;
+		m_month = 0;
+		m_day = 0;
+		m_jd = INVALID_DAY;
+		return false;
+	} else {
+		m_year = y;
+		m_month = m;
+		m_day = d;
+		m_jd = GregorianToJD( y, m, d );
+		return true;
+	}
 }
 
-ExtDate  ExtDate::addDays( int days ) const
+ExtDate ExtDate::addDays( int days ) const
 {
 	ExtDate	a_date;
-	a_date.set_jd(jd + days);
+	a_date.setJD( jd() + days );
 	return a_date;
 }
 
@@ -473,13 +508,13 @@ ExtDate  ExtDate::addYears( int years ) const
 
 int   ExtDate::daysTo( const ExtDate & a_date) const
 {
-	return a_date.jd - jd;	// RAF
+	return a_date.jd() - jd();
 }
 
 ExtDate ExtDate::currentDate(Qt::TimeSpec ts)
 {
-	time_t		a_current_time;
-	struct	tm	a_current_time_tm;
+	time_t a_current_time;
+	struct tm a_current_time_tm;
 
 	time(&a_current_time);
 	switch (ts)
@@ -538,7 +573,7 @@ ExtDate ExtDate::fromString( const QString& s, Qt::DateFormat f )
 
 			// try English names first
 			for ( int i = 0; i < 12; i++ ) {
-				if ( monthName == my_shortMonthNames[i] ) {
+				if ( monthName == m_shortMonthNames[i] ) {
 						month = i + 1;
 						break;
 				}
@@ -578,8 +613,8 @@ bool ExtDate::isValid( int y, int m, int d )
 {
 	if (m < 1 || m > 12) return false;
 	if (d < 1) return false;
-	if (m != 2 && d > month_length[m-1]) return false;
-	if (m == 2 && d > (month_length[1] + (leapYear(y) ? 1 : 0))) return false;
+	if (m != 2 && d > m_monthLength[m-1]) return false;
+	if (m == 2 && d > (m_monthLength[1] + (leapYear(y) ? 1 : 0))) return false;
 	return true;
 }
 
@@ -604,18 +639,9 @@ bool	ExtDate::leapYear( int year )
 	return true;
 }
 
-uint	ExtDate::gregorianToJulian( int y, int m, int d )
-{
-	return 0;	// RAF
-}
-
-void	ExtDate::julianToGregorian( uint jd, int &y, int &m, int &d )
-{
-}
-
 int ExtDate::dayOfYear(int y, int m, int d)
 {
-	return month_origin[m-1] + d + ((m > 1) ? (leapYear(y) ? 1 : 0) : 0);
+	return m_monthOrigin[m-1] + d + ((m > 1) ? (leapYear(y) ? 1 : 0) : 0);
 }
 
 /*****************************************************************************
@@ -812,7 +838,7 @@ void ExtDateTime::setTime_t( uint secsSince1Jan1970UTC, Qt::TimeSpec ts )
     if ( !brokenDown ) {
 	brokenDown = gmtime_r( &tmp, &res );
 	if ( !brokenDown ) {
-	    d.jd = ExtDate::gregorianToJulian( 1970, 1, 1 );
+	    d.setJD( ExtDate::GregorianToJD( 1970, 1, 1 ) );
 	    t.setHMS(0,0,0);
 			//	    t.ds = 0;
 	    return;
@@ -824,7 +850,7 @@ void ExtDateTime::setTime_t( uint secsSince1Jan1970UTC, Qt::TimeSpec ts )
     if ( !brokenDown ) {
 	brokenDown = gmtime( &tmp );
 	if ( !brokenDown ) {
-	    d.jd = ExtDate::gregorianToJulian( 1970, 1, 1 );
+	    d.setJD( ExtDate::GregorianToJD( 1970, 1, 1 ) );
 //	    t.ds = 0;
 	    t.setHMS(0,0,0);
 			return;
@@ -832,9 +858,9 @@ void ExtDateTime::setTime_t( uint secsSince1Jan1970UTC, Qt::TimeSpec ts )
     }
 #endif
 
-    d.jd = ExtDate::gregorianToJulian( brokenDown->tm_year + 1900,
+    d.setJD( ExtDate::GregorianToJD( brokenDown->tm_year + 1900,
 				     brokenDown->tm_mon + 1,
-				     brokenDown->tm_mday );
+				     brokenDown->tm_mday ) );
     t.setHMS( brokenDown->tm_hour, brokenDown->tm_min, brokenDown->tm_sec );
 //		t.ds = MSECS_PER_HOUR * brokenDown->tm_hour +
 //	   MSECS_PER_MIN * brokenDown->tm_min +
@@ -1037,7 +1063,7 @@ ExtDateTime ExtDateTime::addYears( int nyears ) const
 
 ExtDateTime ExtDateTime::addSecs( int nsecs ) const
 {
-	uint dd = d.jd;
+	uint dd = d.jd();
 	int tt = MSECS_PER_HOUR*t.hour() + MSECS_PER_MIN*t.minute() + 1000*t.second() + t.msec();
 	int  sign = 1;
 
@@ -1064,7 +1090,7 @@ ExtDateTime ExtDateTime::addSecs( int nsecs ) const
 
 	ExtDateTime ret;
 	ret.setTime( ret.t.addMSecs( tt ) );
-	ret.d.jd = dd;
+	ret.d.setJD( dd );
 
 	return ret;
 }
@@ -1221,7 +1247,7 @@ ExtDateTime ExtDateTime::fromString( const QString& s, Qt::DateFormat f )
 	qWarning( "ExtDateTime::fromString: Parameter out of range" );
 #endif
 	ExtDateTime dt;
-	dt.d.jd = 0;
+	dt.d.setJD( INVALID_DAY );
 	return dt;
     }
     if ( f == Qt::ISODate ) {
@@ -1234,7 +1260,7 @@ ExtDateTime ExtDateTime::fromString( const QString& s, Qt::DateFormat f )
 	int month = -1;
 	// Assume that English monthnames are the default
 	for ( int i = 0; i < 12; ++i ) {
-	    if ( monthName == ExtDate::my_shortMonthNames[i] ) {
+	    if ( monthName == ExtDate::m_shortMonthNames[i] ) {
 		month = i + 1;
 		break;
 	    }
@@ -1252,7 +1278,7 @@ ExtDateTime ExtDateTime::fromString( const QString& s, Qt::DateFormat f )
 	if ( month < 1 || month > 12 ) {
 	    qWarning( "ExtDateTime::fromString: Parameter out of range" );
 	    ExtDateTime dt;
-	    dt.d.jd = 0;
+	    dt.d.setJD( INVALID_DAY );
 	    return dt;
 	}
 #endif
@@ -1283,14 +1309,14 @@ ExtDateTime ExtDateTime::fromString( const QString& s, Qt::DateFormat f )
 #ifndef QT_NO_DATASTREAM
 Q_EXPORT QDataStream &operator<<( QDataStream & ostream, const ExtDate & date)
 {
-	return ostream << (Q_UINT32)(date.jd);
+	return ostream << (Q_UINT32)(date.jd());
 }
 
 Q_EXPORT QDataStream &operator>>( QDataStream & ostream, ExtDate & date)
 {
 	Q_UINT32 julday;
 	ostream >> julday;
-	date.jd = julday;
+	date.setJD( julday );
 	return ostream;
 }
 

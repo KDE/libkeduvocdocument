@@ -1,6 +1,6 @@
 /*************************************************************************
 **
-** Definition of extended range date classe
+** Definition of extended range date class
 **
 ** Created : 031102
 **
@@ -17,12 +17,12 @@
 #ifndef EXTDATETIME_H
 #define EXTDATETIME_H
 
-#ifndef QT_H
+#include <limits.h>
 #include "qstring.h"
 #include "qnamespace.h"
 #include "qdatetime.h"
-#endif // QT_H
 
+#define INVALID_DAY LONG_MIN
 
 /*****************************************************************************
   ExtDate class
@@ -30,85 +30,90 @@
 
 extern	void test2_unit(int y, int m, int d);
 
-class Q_EXPORT ExtDate
+class ExtDate
 {
 public:
-    ExtDate() { jd = my_invalid_day; }
-    ExtDate( int y, int m, int d );
-    ExtDate( const QDate &q ) { ExtDate( q.year(), q.month(), q.day() ); }
-    bool isNull() const { return jd == 0; }
-    bool isValid() const;
+	ExtDate() { m_jd = INVALID_DAY; }
+	ExtDate( int y, int m, int d );
+	ExtDate( const QDate &q ) { ExtDate( q.year(), q.month(), q.day() ); }
+	ExtDate( long int jd );
 
-    QDate qdate() const;
+	bool isNull() const { return m_jd == INVALID_DAY; }
+	bool isValid() const;
 
-    int year() const;
-    int month() const;
-    int day() const;
-    int dayOfWeek() const;
-    int dayOfYear() const;
-    int daysInMonth() const;
-    int daysInYear() const;
-    int weekNumber( int *yearNum = 0 ) const;
+	QDate qdate() const;
+
+	int year() const { return m_year; }
+	int month() const { return m_month; }
+	int day() const { return m_day; }
+	int dayOfWeek() const;
+	int dayOfYear() const;
+	int daysInMonth() const;
+	int daysInYear() const;
+	int weekNumber( int *yearNum = 0 ) const;
+	long int jd() const { return m_jd; }
 
 #ifndef QT_NO_TEXTDATE
 #ifndef QT_NO_COMPAT
-    static QString monthName( int month ) { return shortMonthName( month ); }
-    static QString dayName( int weekday ) { return shortDayName( weekday ); }
+	static QString monthName( int month ) { return shortMonthName( month ); }
+	static QString dayName( int weekday ) { return shortDayName( weekday ); }
 #endif
-    static QString shortMonthName( int month );
-    static QString shortDayName( int weekday );
-    static QString longMonthName( int month );
-    static QString longDayName( int weekday );
+	static QString shortMonthName( int month );
+	static QString shortDayName( int weekday );
+	static QString longMonthName( int month );
+	static QString longDayName( int weekday );
 #endif //QT_NO_TEXTDATE
 #ifndef QT_NO_TEXTSTRING
 #if !defined(QT_NO_SPRINTF)
-    QString toString( Qt::DateFormat f = Qt::TextDate ) const;
+	QString toString( Qt::DateFormat f = Qt::TextDate ) const;
 #endif
-    QString toString( const QString& format ) const;
+	QString toString( const QString& format ) const;
 #endif
-    bool   setYMD( int y, int m, int d );
+	bool setYMD( int y, int m, int d );
+	void setJD( long int _jd ) { m_jd = _jd; }
 
-    ExtDate  addDays( int days )		const;
-    ExtDate  addMonths( int months )      const;
-    ExtDate  addYears( int years )        const;
-    int	   daysTo( const ExtDate & )	const;
+	ExtDate addDays( int days ) const;
+	ExtDate addMonths( int months ) const;
+	ExtDate addYears( int years ) const;
+	int daysTo( const ExtDate & ) const;
 
-    bool   operator==( const ExtDate &d ) const { return jd == d.jd; };
-    bool   operator!=( const ExtDate &d ) const { return jd != d.jd; };
-    bool   operator<( const ExtDate &d )	const { return jd < d.jd; };
-    bool   operator<=( const ExtDate &d ) const { return jd <= d.jd; };
-    bool   operator>( const ExtDate &d )	const { return jd > d.jd; };
-    bool   operator>=( const ExtDate &d ) const { return jd >= d.jd; };
+	bool operator==( const ExtDate &d ) const { return m_jd == d.jd(); };
+	bool operator!=( const ExtDate &d ) const { return m_jd != d.jd(); };
+	bool operator<( const ExtDate &d )  const { return m_jd  < d.jd(); };
+	bool operator<=( const ExtDate &d ) const { return m_jd <= d.jd(); };
+	bool operator>( const ExtDate &d )  const { return m_jd  > d.jd(); };
+	bool operator>=( const ExtDate &d ) const { return m_jd >= d.jd(); };
 
-    static ExtDate currentDate( Qt::TimeSpec ts = Qt::LocalTime );
+	static ExtDate currentDate( Qt::TimeSpec ts = Qt::LocalTime );
 #ifndef QT_NO_DATESTRING
-    static ExtDate fromString( const QString& s, Qt::DateFormat f = Qt::TextDate );
+	static ExtDate fromString( const QString& s, Qt::DateFormat f = Qt::TextDate );
 #endif
-    static bool	 isValid( int y, int m, int d );
-    static bool	 leapYear( int year );
+	static bool isValid( int y, int m, int d );
+	static bool leapYear( int year );
 
-    static uint	 gregorianToJulian( int y, int m, int d );
-    static void	 julianToGregorian( uint jd, int &y, int &m, int &d );
+	static long int GregorianToJD( int y, int m, int d );
+	static void JDToGregorian( long int jd, int &y, int &m, int &d );
+
 private:
-    int	 jd;
-    void   set_jd(int the_jd) {jd = the_jd;};
-    static int	month_length[12];
-    static int	month_origin[12];
-    static QString my_shortMonthNames[12];
-    static QString my_shortDayNames[7];
-    static QString my_longMonthNames[12];
-    static QString my_longDayNames[7];
-    QString toStringSimpleArg( char code, int nb ) const;
+	QString toStringSimpleArg( char code, int nb ) const;
+	static int dayOfYear(int y, int m, int d);
 
-    static int my_invalid_day;
-    friend class ExtDateTime;
-    static int dayOfYear(int y, int m, int d);
-    static int dayRank(int y, int m, int d);
-#ifndef QT_NO_DATASTREAM
-    friend Q_EXPORT QDataStream &operator<<( QDataStream &, const ExtDate & );
-    friend Q_EXPORT QDataStream &operator>>( QDataStream &, ExtDate & );
-    friend Q_EXPORT QDataStream &operator<<( QDataStream &, const ExtDateTime & );
-    friend Q_EXPORT QDataStream &operator>>( QDataStream &, ExtDateTime & );
+	long int m_jd;
+	int m_year, m_month, m_day;
+	static uint m_monthLength[12];
+	static uint m_monthOrigin[12];
+	static QString m_shortMonthNames[12];
+	static QString m_shortDayNames[7];
+	static QString m_longMonthNames[12];
+	static QString m_longDayNames[7];
+
+	friend class ExtDateTime;
+
+	#ifndef QT_NO_DATASTREAM
+	friend Q_EXPORT QDataStream &operator<<( QDataStream &, const ExtDate & );
+	friend Q_EXPORT QDataStream &operator>>( QDataStream &, ExtDate & );
+	friend Q_EXPORT QDataStream &operator<<( QDataStream &, const ExtDateTime & );
+	friend Q_EXPORT QDataStream &operator>>( QDataStream &, ExtDateTime & );
 #endif
 };
 
@@ -116,7 +121,7 @@ private:
   ExtDateTime class
  *****************************************************************************/
 
-class Q_EXPORT ExtDateTime
+class ExtDateTime
 {
 public:
     ExtDateTime() {}				// set null date and null time
