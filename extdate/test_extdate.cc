@@ -52,12 +52,11 @@ void test2_unit(int y, int m, int d)
 	int e_week_number = e.dayOfWeek();
 	int q_day_of_year = q.dayOfYear();
 	int e_day_of_year = e.dayOfYear();
-	std::cout << "(" << y << ", " << m << ", " << d << ") :  "
-		<< q.toString("dd.MMM.yyyy").local8Bit() << "  :  "
-		<< e.toString("dd.MMM.yyyy").local8Bit() << "  :: "
-		<< q.dayOfWeek() << " : " << e.dayOfWeek() << " :: "
-		<< q_week_number << " : " << e_week_number << " :: "
-		<< q_day_of_year << " : " << e_day_of_year << std::endl;
+	std::cout << "(" << y << ", " << m << ", " << d << ") ::  "
+			<< q.toString("dd.MMM.yyyy").local8Bit() << "  :  "
+			<< q.dayOfWeek() << " : " << q_week_number << " : " << q_day_of_year << " :: "
+			<< e.toString("%d.%b.%Y").local8Bit() << " : "
+			<< e.dayOfWeek() << " : " << e_week_number << " : " << e_day_of_year << std::endl;
 }
 
 void test2()
@@ -118,7 +117,7 @@ void test2()
 		{2003, 11, 2}
 	};
 	uint i;
-	std::cout << "(y, m, d) : QDate : ExtDate :: Q.dayOfWeek() : E.dayOfWeek() :: Q.dayOfYear() : E.dayOfYear()\n" << std::endl;
+	std::cout << "(y, m, d) :: QDate : Q.dayOfWeek() : Q.weekNumber() : Q.dayOfYear() :: ExtDate : E.dayOfWeek() : E.weekNumber() : E.dayOfYear()\n" << std::endl;
 
 	for (i = 0 ; i < sizeof(a_set_of_dates)/sizeof(a_set_of_dates[0]) ; i++)
 	{
@@ -133,8 +132,8 @@ void test3_unit(int y, int m, int d, int dm)
 	ExtDate	e(y, m, d);
 	QDate q2 = q.addMonths(dm);
 	ExtDate e2 = e.addMonths(dm);
-	std::cout << e.toString("dd.MMM.yyyy").local8Bit() << " + " << dm
-		<< " months :: ExtDate : " << e2.toString("dd.MMM.yyyy").local8Bit()
+	std::cout << e.toString("%d.%b.%Y").local8Bit() << " + " << dm
+		<< " months :: ExtDate : " << e2.toString("%d.%b.%Y").local8Bit()
 		<< "   QDate : " << q2.toString("dd.MMM.yyyy").local8Bit() << std::endl;
 }
 
@@ -162,7 +161,7 @@ void test4_unit(int y, int m, int d, int dy)
 	ExtDate	e(y, m, d);
 	QDate	q2 = q.addYears(dy);
 	ExtDate	e2 = e.addYears(dy);
-	std::cout << e.toString("dd.MMM.yyyy").local8Bit() << " + " << dy << " years :: ExtDate : "
+	std::cout << e.toString("%d.%m.%Y").local8Bit() << " + " << dy << " years :: ExtDate : "
 		<< e2.toString().local8Bit() << "   QDate : "
 		<< q2.toString().local8Bit() << std::endl;
 }
@@ -188,24 +187,22 @@ void test4()
 	std::cout << "--------------------" << std::endl;
 }
 
-void test5_unit(int y, int m, int d, const char *format)
+void test5_unit(int y, int m, int d, const char *qformat, const char *eformat)
 {
 	QDate q(y, m, d);
 	ExtDate e(y, m, d);
 
-	if ( QString(format) == "<default>" )
-		std::cout <<  format << " :: "
-			<< e.toString().local8Bit() << " : "
-			<< q.toString().local8Bit() << std::endl;
+	if ( QString(qformat) == "<default>" )
+		std::cout << eformat << " : " << e.toString().local8Bit() << " :: "
+				<< qformat << " : " << q.toString().local8Bit() << std::endl;
 	else
-		std::cout << format << " :: "
-			<< e.toString(format).local8Bit() << " : "
-			<< q.toString(format).local8Bit() << std::endl;
+		std::cout << eformat << " : " << e.toString(eformat).local8Bit() << " :: "
+				<< qformat << " : " << q.toString(qformat).local8Bit() << std::endl;
 }
 
 void test5()
 {
-	const char *a_set_of_formats[] =
+	const char *q_set_of_formats[7] =
 	{
 		"d.M.yy",
 		"dd.MM.yy",
@@ -215,13 +212,24 @@ void test5()
 		">dd.M.yyyy<",
 		"<default>"
 	};
+	const char *e_set_of_formats[7] =
+	{
+		"%e.%n.%y",
+		"%d.%m.%y",
+		"%d.%b.%y",
+		"%a %d.%b.%y",
+		"%A.%B.%y",
+		">%d.%n.%Y<",
+		"<default>"
+	};
+
 	uint i;
 	std::cout << "Date.toString(\"...\")" << std::endl;
-	std::cout << "Format :: ExtDate : QDate\n" << std::endl;
+	std::cout << "Ext Format : ExtDate :: Q Format : QDate\n" << std::endl;
 
-	for (i = 0 ; i < sizeof(a_set_of_formats)/sizeof(a_set_of_formats[0]) ; i++)
+	for (i = 0 ; i < sizeof(q_set_of_formats)/sizeof(q_set_of_formats[0]) ; i++)
 	{
-		test5_unit(2003, 11, 5, a_set_of_formats[i]);
+		test5_unit(2003, 11, 5, q_set_of_formats[i], e_set_of_formats[i]);
 	}
 	std::cout << "--------------------" << std::endl;
 }
@@ -294,7 +302,7 @@ void test8() {
 			QDate   test1( 2004, m, d );
 			ExtDate test2( 2004, m, d );
 			std::cout << test1.toString( "ddd dd.MMM.yy" ).local8Bit() << "  :  "
-		<< test2.toString( "ddd dd.MMM.yy" ).local8Bit() << std::endl;
+		<< test2.toString( "%a %d.%b.%y" ).local8Bit() << std::endl;
 		}
 	}
 

@@ -227,6 +227,8 @@ QString ExtDate::toString( Qt::DateFormat f) const
 
 QString ExtDate::toString( const QString& format ) const
 {
+	if ( ! isValid() ) return QString::null;
+
 	//We use the KDE Date format specs.
 	//Replace occurences of the following tokens with their
 	//corresponding values:
@@ -310,6 +312,11 @@ ExtDate  ExtDate::addMonths( int months ) const
 	while ( a_month < 1 ) {
 		a_month += 12;
 		a_year--;
+	}
+
+	while ( a_month > 12 ) {
+		a_month -= 12;
+		a_year++;
 	}
 
 	return ExtDate(a_year, a_month, day());
