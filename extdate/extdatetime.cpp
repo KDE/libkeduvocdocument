@@ -486,9 +486,23 @@ bool ExtDate::setYMD( int y, int m, int d )
 	}
 }
 
+bool ExtDate::setJD( long int _jd ) {
+	if ( _jd == INVALID_DAY ) {
+		m_jd = _jd;
+		m_year = 0;
+		m_month = 0;
+		m_day = 0;
+		return false;
+	} else {
+		m_jd = _jd;
+		JDToGregorian( _jd, m_year, m_month, m_day );
+		return true;
+	}
+}
+
 ExtDate ExtDate::addDays( int days ) const
 {
-	ExtDate	a_date;
+	ExtDate a_date;
 	a_date.setJD( jd() + days );
 	return a_date;
 }
@@ -1063,34 +1077,23 @@ ExtDateTime ExtDateTime::addYears( int nyears ) const
 
 ExtDateTime ExtDateTime::addSecs( int nsecs ) const
 {
-	uint dd = d.jd();
+	long int dd = d.jd();
 	int tt = MSECS_PER_HOUR*t.hour() + MSECS_PER_MIN*t.minute() + 1000*t.second() + t.msec();
-	int  sign = 1;
+	tt += nsecs*1000;
 
-	if ( nsecs < 0 ) {
-		nsecs = -nsecs;
-		sign = -1;
+	while ( tt < 0 ) {
+		tt += MSECS_PER_DAY;
+		--dd;
 	}
 
-	if ( nsecs >= (int)SECS_PER_DAY ) {
-		dd += sign*(nsecs/SECS_PER_DAY);
-		nsecs %= SECS_PER_DAY;
-	}
-	tt += sign*nsecs*1000;
-
-	if ( tt < 0 ) {
-		tt = MSECS_PER_DAY - tt - 1;
-		dd -= tt / MSECS_PER_DAY;
-		tt = tt % MSECS_PER_DAY;
-		tt = MSECS_PER_DAY - tt - 1;
-	} else if ( tt >= (int)MSECS_PER_DAY ) {
-		dd += ( tt / MSECS_PER_DAY );
-		tt = tt % MSECS_PER_DAY;
+	while ( tt > MSECS_PER_DAY ) {
+		tt -= MSECS_PER_DAY;
+		++dd;
 	}
 
 	ExtDateTime ret;
-	ret.setTime( ret.t.addMSecs( tt ) );
-	ret.d.setJD( dd );
+	ret.setTime( QTime().addMSecs( tt ) );
+	ret.setDate( ExtDate( dd ) );
 
 	return ret;
 }

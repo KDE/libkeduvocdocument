@@ -31,6 +31,8 @@
 // Written using Qt (http://www.troll.no) for the
 // KDE project (http://www.kde.org)
 //
+// Modified to use ExtDate by Jason Harris, 2004
+//
 // This is a support class for the ExtDatePicker class.  It just
 // draws the calender table without titles, but could theoretically
 // be used as a standalone.
@@ -181,6 +183,7 @@ ExtDate ExtDateTable::dateFromPos( int pos )
   // adjust this <1 if more days should be forced visible:
   if ( offset < 1 ) offset += 7;
   pCellDate = d->calendar->addDays( pCellDate, pos - offset );
+
   return pCellDate;
 }
 

@@ -70,7 +70,7 @@ public:
 	QString toString( const QString& format ) const;
 #endif
 	bool setYMD( int y, int m, int d );
-	void setJD( long int _jd ) { m_jd = _jd; }
+	bool setJD( long int _jd );
 
 	ExtDate addDays( int days ) const;
 	ExtDate addMonths( int months ) const;
