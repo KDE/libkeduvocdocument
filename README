@@ -10,7 +10,7 @@ Currently used by:  kstars.
 kdeeducore:
 Contains classes KEduVocData and KEduVocDataItem, for storing and parsing
 vocabulary data in a QDom object.  
-Currently used by:  flashkard, khangman, kwordquiz
+Currently used by:  flashkard, khangman, klatin, kwordquiz
 
 kdeeduplot:
 Constains classes KPlotObject and KPlotWidget for easy plotting of 
