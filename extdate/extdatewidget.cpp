@@ -101,7 +101,7 @@ ExtDateWidget::ExtDateWidget( const ExtDate &date, QWidget *parent,
 void ExtDateWidget::init(const ExtDate& date)
 {
   d = new ExtDateWidgetPrivate;
-  KLocale *locale = KGlobal::locale();
+  //KLocale *locale = KGlobal::locale();
   QHBoxLayout *layout = new QHBoxLayout(this, 0, KDialog::spacingHint());
   layout->setAutoAdd(true);
   d->m_day = new ExtDateWidgetSpinBox(1, 1, this);

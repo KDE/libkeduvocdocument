@@ -613,8 +613,8 @@ bool ExtDate::isValid( int y, int m, int d )
 {
 	if (m < 1 || m > 12) return false;
 	if (d < 1) return false;
-	if (m != 2 && d > m_monthLength[m-1]) return false;
-	if (m == 2 && d > (m_monthLength[1] + (leapYear(y) ? 1 : 0))) return false;
+	if (m != 2 && d > (int) m_monthLength[m-1]) return false;
+	if (m == 2 && d > ( (int) m_monthLength[1] + (leapYear(y) ? 1 : 0))) return false;
 	return true;
 }
 
