@@ -290,12 +290,19 @@ int ExtDate::dayOfYear() const
 
 int ExtDate::daysInMonth() const
 {
-	int	a_month = month();
-	return (a_month == 2) ? (leapYear(year()) ? 29 : 28) : m_monthLength[a_month-1] ;
+	if ( isValid() ) {
+	  int m = month();
+	  int d = m_monthLength[m-1];
+	  if (m==2 && leapYear(year())) d++;
+	  return d;
+	} else {
+	  return 31;
+	}
 }
 
 int ExtDate::daysInYear() const
 {
+	if ( ! isValid() ) return 365;
 	return (leapYear(year()) ? 366 : 365);
 }
 

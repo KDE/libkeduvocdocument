@@ -56,7 +56,7 @@ public:
 ExtDateWidget::ExtDateWidget( QWidget *parent, const char *name )
   : QWidget( parent, name )
 {
-  init(ExtDate());
+  init(ExtDate::currentDate());
   setDate(ExtDate());
 }
 

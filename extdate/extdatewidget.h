@@ -39,7 +39,7 @@ class ExtDateWidget : public QWidget
 
 public:
   /**
-   * Constructs a date selection widget.
+   * Constructs a date selection widget, initialized to the current CPU date.
    */
   ExtDateWidget( QWidget *parent=0, const char *name=0 );
 

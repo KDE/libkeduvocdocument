@@ -1,9 +1,11 @@
 #include <kdatepicker.h>
+#include <kdatewidget.h>
 #include <klineedit.h>
 #include <qlayout.h>
 #include <qlabel.h>
 
 #include "extdatepicker.h"
+#include "extdatewidget.h"
 #include "testwidget.h"
 
 TestWidget::TestWidget( QWidget *p=0, const char *name=0 ) : KMainWindow( p, name ) {
@@ -20,12 +22,17 @@ TestWidget::TestWidget( QWidget *p=0, const char *name=0 ) : KMainWindow( p, nam
 	edpEdit = new KLineEdit(w);
 	edpEdit->setReadOnly( TRUE );
 
+	kdw = new KDateWidget( QDate::currentDate(), w );
+	edw = new ExtDateWidget( ExtDate::currentDate(), w );
+
 	glay->addWidget( kdpLabel, 0, 0 );
 	glay->addWidget( edpLabel, 0, 1 );
 	glay->addWidget( kdp, 1, 0 );
 	glay->addWidget( edp, 1, 1 );
 	glay->addWidget( kdpEdit, 2, 0 );
 	glay->addWidget( edpEdit, 2, 1 );
+	glay->addWidget( kdw, 3, 0 );
+	glay->addWidget( edw, 3, 1 );
 
 	setCentralWidget(w);
 
