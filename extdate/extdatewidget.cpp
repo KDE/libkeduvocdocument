@@ -120,6 +120,7 @@ void ExtDateWidget::init(const ExtDate& date)
 
 ExtDateWidget::~ExtDateWidget()
 {
+		delete d;
 }
 
 void ExtDateWidget::setDate( const ExtDate &date )
