@@ -16,6 +16,9 @@
    Boston, MA 02111-1307, USA.
 */
 
+#ifndef KEDUVOCDATA_H
+#define KEDUVOCDATA_H
+
 #include <qdom.h>
 #include <qvaluelist.h>
 
@@ -43,3 +46,5 @@ class KEduVocData
 public:
     static KEduVocDataItemList parse(const QString &fileName);
 };
+
+#endif // KEDUVOCDATA_H
