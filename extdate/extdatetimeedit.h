@@ -31,7 +31,6 @@
 #endif // QT_H
 
 #include "extdatetime.h"
-#include "extdatetimeeditor.h"
 
 #ifndef QT_NO_DATETIMEEDIT
 
