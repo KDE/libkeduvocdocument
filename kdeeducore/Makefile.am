@@ -11,7 +11,7 @@ libkdeeducore_la_LDFLAGS = $(all_libraries) -no-undefined -version-info 3:0:2
 # include_HEADERS = keduvocdata.h
 noinst_HEADERS = keduvocdata.h
 
-libkdeeducore_la_LIBADD = $(LIB_KDECORE) $(LIB_QT)
+libkdeeducore_la_LIBADD = $(LIB_KDECORE)
 
 METASOURCES = AUTO
 
