@@ -12,9 +12,13 @@ libextdate_la_LIBADD = $(LIB_KDECORE) $(LIB_QT) $(LIB_KDEUI)
 
 test_extdate_SOURCES = test_extdate.cc
 test_extdate_LDADD = libextdate.la
+test_extdate_LDFLAGS = $(all_libraries) $(KDE_RPATH)
 
 test_extdatepicker_SOURCES = testwidget.cpp main.cpp
 test_extdatepicker_LDADD = libextdate.la
+test_extdatepicker_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+
+AM_CPPFLAGS = $(all_includes)
 
 METASOURCES = AUTO
 
