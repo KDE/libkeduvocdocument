@@ -1,5 +1,5 @@
 INCLUDES= $(all_includes)
-SUBDIRS = . 
+SUBDIRS = kdeeduui kdeeducore
 
 lib_LTLIBRARIES = libkdeedu.la
 
@@ -14,7 +14,7 @@ libkdeedu_la_LIBADD = $(LIB_KDECORE)
 
 METASOURCES = AUTO
 
-# updatedir = 
+# updatedir =
 # update_DATA = 
 
 # messages: 

@@ -1,0 +1,84 @@
+[./Makefile.am]
+files=./kdeeducore.kdevprj,
+sub_dirs=
+type=normal
+
+[./kdeeducore.kdevprj]
+dist=true
+install=false
+install_location=
+type=DATA
+
+[Config for BinMakefileAm]
+addcxxflags=
+bin_program=kdeeducore
+cflags=
+cppflags=
+cxxflags=\s-O0
+ldadd=
+ldflags=\s
+libtool_dir=
+path_to_bin_program=.
+
+[General]
+author=earnold
+configure_args=\s--build=i386-linux --host=i386-linux --target=i386-linux\s
+dir_where_make_will_be_called=
+email=earnold@venus
+kdevprj_version=1.3
+lfv_open_groups=
+make_options=\s-j1 all\s
+makefiles=./Makefile.am,Makefile.am,tests/Makefile.am
+modifyMakefiles=false
+project_name=kdeeducore
+project_type=normal_empty
+short_info=
+sub_dir=
+version=1.0
+version_control=CVS
+workspace=1
+
+[LFV Groups]
+GNU=AUTHORS,COPYING,ChangeLog,INSTALL,README,TODO,NEWS,
+Headers=*.h,*.hxx,*.hpp,*.H,
+Others=*,
+Sources=*.cpp,*.c,*.cc,*.C,*.cxx,*.ec,*.ecpp,*.lxx,*.l++,*.ll,*.l,
+Translations=*.ts,*.po,
+User Interface=*.ui,*.kdevdlg,*.rc,
+groups=Headers,Sources,GNU,Translations,User Interface,Others
+
+[Makefile.am]
+dist=true
+files=Makefile.am,kedudata.cpp,kedudata.h
+install=false
+install_location=
+sub_dirs=tests
+type=static_library
+
+[kedudata.cpp]
+dist=true
+install=false
+install_location=
+type=SOURCE
+
+[kedudata.h]
+dist=true
+install=false
+install_location=
+type=HEADER
+
+[tests/Makefile.am]
+dist=true
+files=tests/loader.cpp,tests/Makefile.am
+install=false
+install_location=
+sharedlib_LDFLAGS=-version-info 0:0:0
+sharedlib_rootname=tests
+sub_dirs=
+type=DATA
+
+[tests/loader.cpp]
+dist=true
+install=false
+install_location=
+type=SOURCE
