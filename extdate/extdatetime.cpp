@@ -877,7 +877,7 @@ int ExtDateTime::daysTo( const ExtDateTime &dt ) const
     \code
     ExtDateTime dt = ExtDateTime::currentDateTime();
     ExtDateTime xmas( ExtDate(dt.date().year(),12,24), QTime(17,00) );
-    qDebug( "There are %d seconds to Christmas", dt.secsTo(xmas) );
+    kdDebug( "There are %d seconds to Christmas", dt.secsTo(xmas) );
     \endcode
 
     \sa addSecs(), daysTo(), QTime::secsTo()
