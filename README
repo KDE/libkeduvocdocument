@@ -11,7 +11,7 @@ begin using it.  Rather than having her copy and paste my poor implementation
 First, I made a lib based on my bad implementation of kvtml, but then my 
 conscience got the better of me and I started tinkering with QDom.  What you'll
 find in libkdeedu is a QDom based, very basic, parser for kvtml.  Right now it 
-just parses "e" (entry), "o" (original) and "t" (tranlation) tags, but it's done 
+just parses "e" (entry), "o" (original) and "t" (translation) tags, but it's done 
 in such a way that it should be easy to extend (unlike my previous 
 implementation).  I've also made changes to FlashKard to do it's input using 
 this.
