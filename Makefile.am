@@ -1,2 +1,2 @@
 COMPILE_FIRST = kdeeducore
-SUBDIRS = $(COMPILE_FIRST)
+SUBDIRS = kdeeducore kdeeduui kdeeduplot
