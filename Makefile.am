@@ -1,2 +1,2 @@
 COMPILE_FIRST = kdeeducore
-SUBDIRS = $(COMPILE_FIRST) kdeeduui
+SUBDIRS = $(COMPILE_FIRST)
