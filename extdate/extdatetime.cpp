@@ -565,7 +565,7 @@ ExtDate ExtDate::fromString( const QString& s, Qt::DateFormat f )
 		qWarning( "QDate::fromString: Parameter out of range" );
 #endif
 		return dt;
-}
+	}
 
 	switch( f ) {
 		case Qt::ISODate :
@@ -582,44 +582,62 @@ ExtDate ExtDate::fromString( const QString& s, Qt::DateFormat f )
 #ifndef QT_NO_TEXTDATE
 		case Qt::TextDate :
 		{
-			/*
-				This will fail gracefully if the input string doesn't
-				contain any space.
-			*/
-			int monthPos = s.find( ' ' ) + 1;
-			int dayPos = s.find( ' ', monthPos ) + 1;
-
-			QString monthName( s.mid(monthPos, dayPos - monthPos - 1) );
+			//Three possible date formats:
+			//dd mth yyyy; mth dd yyyy; wkd mth dd yyyy
+			QStringList ss = QStringList::split( " ", s );
+			bool ok = false;
 			int month = -1;
+			uint imonth = 0;
+			uint iyear = 0;
 
-			// try English names first
-			for ( int i = 0; i < 12; i++ ) {
-				if ( monthName == m_shortMonthNames[i] ) {
+			//If neither of the first two words is a number, then we'll assume
+			//the first word is a superfluous "weekday" string
+			int day = ss[0].toInt( &ok );
+			if ( ! ok ) {
+				day = ss[1].toInt( &ok );
+				if ( ! ok ) {
+						day = ss[2].toInt( &ok );
+						if ( !ok ) return dt;  //could not find a valid day number in first three words
+						imonth = 1;  //the month must be the second word
+						iyear = 3;  //the year must be the fourth word
+				} else {
+					//the month is either the first word, or the third.
+					imonth = 0;
+					iyear = 2;
+				}
+			} else {
+				//month is the second word
+				imonth = 1;
+				iyear = 2;
+			}
+
+			for ( uint i = 0; i < 12; i++ ) {
+				if ( ss[imonth] == m_shortMonthNames[i] || ss[imonth] == shortMonthName( i + 1 ) ) {
 						month = i + 1;
 						break;
 				}
 			}
 
-			// try the localized names
-			if ( month == -1 ) {
-				for ( int i = 0; i < 12; i++ ) {
-					if ( monthName == shortMonthName( i + 1 ) ) {
-						month = i + 1;
-						break;
+			if ( month == -1 && imonth == 0 ) { //try the third word
+				imonth = 2;
+				iyear = 3;
+				for ( uint i = 0; i < 12; i++ ) {
+					if ( ss[imonth] == m_shortMonthNames[i] || ss[imonth] == shortMonthName( i + 1 ) ) {
+							month = i + 1;
+							break;
 					}
 				}
 			}
 
-#if defined(QT_CHECK_RANGE)
-			if ( month < 1 || month > 12 ) {
-				qWarning( "QDate::fromString: Parameter out of range" );
-				return dt;
-			}
-#endif  //if defined(QT_CHECK_RANGE)
+			if ( month > -1 ) ok = true;
+			if ( ! ok ) return dt; //could not parse month; return invalid
 
-			int day = s.mid( dayPos, 2 ).stripWhiteSpace().toInt();
-			int year = s.right( 4 ).toInt();
+			int year = ss[iyear].toInt( &ok );
+			if ( ! ok ) return dt; //could not parse year; return invalid
+
 			return ExtDate( year, month, day );
+
+			break;
 		}
 #else
 		break;
@@ -1252,68 +1270,46 @@ ExtDateTime ExtDateTime::currentDateTime( Qt::TimeSpec ts )
 */
 ExtDateTime ExtDateTime::fromString( const QString& s, Qt::DateFormat f )
 {
-    if ( ( s.isEmpty() ) || ( f == Qt::LocalDate ) ) {
-#if defined(QT_CHECK_RANGE)
-	qWarning( "ExtDateTime::fromString: Parameter out of range" );
-#endif
 	ExtDateTime dt;
-	dt.d.setJD( INVALID_DAY );
-	return dt;
-    }
-    if ( f == Qt::ISODate ) {
-	return ExtDateTime( ExtDate::fromString( s.mid(0,10), Qt::ISODate ),
-			  QTime::fromString( s.mid(11), Qt::ISODate ) );
-    }
-#if !defined(QT_NO_REGEXP) && !defined(QT_NO_TEXTDATE)
-    else if ( f == Qt::TextDate ) {
-	QString monthName( s.mid( 4, 3 ) );
-	int month = -1;
-	// Assume that English monthnames are the default
-	for ( int i = 0; i < 12; ++i ) {
-	    if ( monthName == ExtDate::m_shortMonthNames[i] ) {
-		month = i + 1;
-		break;
-	    }
-	}
-	// If English names can't be found, search the localized ones
-	if ( month == -1 ) {
-	    for ( int i = 1; i <= 12; ++i ) {
-		if ( monthName == ExtDate::shortMonthName( i ) ) {
-		    month = i;
-		    break;
-		}
-	    }
-	}
+
+	if ( ( s.isEmpty() ) || ( f == Qt::LocalDate ) ) {
 #if defined(QT_CHECK_RANGE)
-	if ( month < 1 || month > 12 ) {
-	    qWarning( "ExtDateTime::fromString: Parameter out of range" );
-	    ExtDateTime dt;
-	    dt.d.setJD( INVALID_DAY );
-	    return dt;
-	}
+		qWarning( "ExtDateTime::fromString: Parameter out of range" );
 #endif
-	int day = s.mid( 8, 2 ).simplifyWhiteSpace().toInt();
-	int year = s.right( 4 ).toInt();
-	ExtDate date( year, month, day );
-	QTime time;
-	int hour, minute, second;
-	int pivot = s.find( QRegExp(QString::fromLatin1("[0-9][0-9]:[0-9][0-9]:[0-9][0-9]")) );
-	if ( pivot != -1 ) {
-	    hour = s.mid( pivot, 2 ).toInt();
-	    minute = s.mid( pivot+3, 2 ).toInt();
-	    second = s.mid( pivot+6, 2 ).toInt();
-	    time.setHMS( hour, minute, second );
+		dt.d.setJD( INVALID_DAY );
+		return dt;
 	}
-	return ExtDateTime( date, time );
-    }
+
+	if ( f == Qt::ISODate ) {
+		return ExtDateTime( ExtDate::fromString( s.mid(0,10), Qt::ISODate ),
+					QTime::fromString( s.mid(11), Qt::ISODate ) );
+	}
+#if !defined(QT_NO_REGEXP) && !defined(QT_NO_TEXTDATE)
+	else if ( f == Qt::TextDate ) {
+
+		//parse the time, if it exists.
+		QTime time;
+		QString sd = s;
+		int hour, minute, second;
+		int pivot = s.find( QRegExp(QString::fromLatin1("[0-9][0-9]:[0-9][0-9]:[0-9][0-9]")) );
+		if ( pivot != -1 ) {
+			hour = s.mid( pivot, 2 ).toInt();
+			minute = s.mid( pivot+3, 2 ).toInt();
+			second = s.mid( pivot+6, 2 ).toInt();
+			time.setHMS( hour, minute, second );
+
+			sd = s.left( pivot - 1 );
+		}
+
+		//sd is now just the date string.
+		ExtDate date = ExtDate::fromString( s, Qt::TextDate );
+		return ExtDateTime( date, time );
+	}
+
 #endif //QT_NO_REGEXP
-    return ExtDateTime();
+	return ExtDateTime();
 }
 #endif //QT_NO_DATESTRING
-
-
-
-
 
 
 #ifndef QT_NO_DATASTREAM
