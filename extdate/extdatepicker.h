@@ -49,7 +49,7 @@ class ExtDateTable;
  *
  * @short A date selection widget.
  **/
-class ExtDatePicker: public QFrame
+class KDE_EXPORT ExtDatePicker: public QFrame
 {
   Q_OBJECT
 //  Q_PROPERTY( ExtDate date READ date WRITE setDate)

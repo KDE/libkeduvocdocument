@@ -21,8 +21,9 @@
 
 #include <qdom.h>
 #include <qvaluelist.h>
+#include <kdemacros.h>
 
-class KEduVocDataItem
+class KDE_EXPORT KEduVocDataItem
 {
 public:
     KEduVocDataItem();
@@ -41,7 +42,7 @@ private:
 
 typedef QValueList<KEduVocDataItem> KEduVocDataItemList;
 
-class KEduVocData
+class KDE_EXPORT KEduVocData
 {
 public:
     static KEduVocDataItemList parse(const QString &fileName);

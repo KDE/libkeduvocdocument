@@ -32,7 +32,7 @@
 * @short A pushbutton to display or allow user selection of a date.
 * @version $Id$
 */
-class ExtDateWidget : public QWidget
+class KDE_EXPORT ExtDateWidget : public QWidget
 {
   Q_OBJECT
 //  Q_PROPERTY( ExtDate date READ date WRITE setDate )

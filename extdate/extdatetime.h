@@ -20,6 +20,7 @@
 #include "qstring.h"
 #include "qnamespace.h"
 #include "qdatetime.h"
+#include <kdemacros.h>
 
 #define INVALID_DAY LONG_MIN
 
@@ -29,7 +30,7 @@
 
 extern	void test2_unit(int y, int m, int d);
 
-class ExtDate
+class KDE_EXPORT ExtDate
 {
 public:
 	ExtDate() { m_jd = INVALID_DAY; }
@@ -119,7 +120,7 @@ private:
   ExtDateTime class
  *****************************************************************************/
 
-class ExtDateTime
+class KDE_EXPORT ExtDateTime
 {
 public:
     ExtDateTime() {}				// set null date and null time
