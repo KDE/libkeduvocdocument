@@ -1,70 +1,27 @@
--- Email sent to kde-edu-devel@kde.org by Scott Wheeler (wheeler@kde.org)
--- on May 30, 2002.  Please see the "disclaimers" part of this before
--- you make use of this lib.
+Contents of libkdeedu as of May 2004, and brief description of each module:
 
-Per public and private discussion with Annma today, I've committed the first 
-part of libkdeedu.  With all of the hype around the use of Ewald's kvtml, 
-Anma has been the first besides Ewald and myself to take the initiative to 
-begin using it.  Rather than having her copy and paste my poor implementation
- it seemed to be a good time to start to Do Things The Right Way (tm).
+extdate:  
+Contains a reimplementation of QDate named ExtDate which eliminates the 
+limitation on the year (1752-8000) imposed by QDate.  Also contains 
+related reimplemented classes such as ExtDateTime, ExtDatePicker, 
+ExtDateTimeEdit, and ExtCalendarSystem.  
+Currently used by:  kstars.
 
-First, I made a lib based on my bad implementation of kvtml, but then my 
-conscience got the better of me and I started tinkering with QDom.  What you'll
-find in libkdeedu is a QDom based, very basic, parser for kvtml.  Right now it 
-just parses "e" (entry), "o" (original) and "t" (translation) tags, but it's done 
-in such a way that it should be easy to extend (unlike my previous 
-implementation).  I've also made changes to FlashKard to do it's input using 
-this.
+kdeeducore:
+Contains classes KEduVocData and KEduVocDataItem, for storing and parsing
+vocabulary data in a QDom object.  
+Currently used by:  flashkard, khangman, kwordquiz
 
-So now, if you include "kedudata.h", you'll have access to two classes and a 
-typedef.  They are as follows:
+kdeeduplot:
+Constains classes KPlotObject and KPlotWidget for easy plotting of 
+data points, including automatic generation of labeled axes with 
+"smart" tickmarks.
+Currently used by:  kalzium, kstars
 
-KEduDataItem -- a class to store vocabulary items
-KEduDataItemList -- a "typedef QValueList<KEduDataItem>"
-KEduData -- a class that will later be used for kvtml documents but at the 
-moment just has one static member "parse(const QString fileName)".
+kdeeduui:
+Contains class KEduSimpleEntryDlg, a simple dialog for entering 
+vocabulary data.
+Currently used by:  nothing
 
-The use is basically what I laid out in my earlier email:
+ideas: stub directory, contains generic README and TODO files.
 
-KEduDataItemList list = KEduData::parse("foo.kvtml");
-QString original = list[0].originalText();
-QString translated = list[0].translatedText();
-
-Also you'll need something like:
-
-#include "../../libkdeedu/kedudata.h"
-
-and in your Makefile.am:
-
-flashkard_LDADD = $(LIB_KFILE) ../../libkdeedu/libkdeedu.la
-
-So now some disclaimers:
-
-This is very basic.  There isn't much there, but that will change.  Right now 
-this is to suit Annma's needs (and FlashKard while I'm at it).  Many gaps need 
-to be filled in.
-
-This is all *very* subject to change.  In fact I guarantee it.  If you're lucky, 
-I'll only break your app a few times.  Things will be moved, renamed, rewritten 
-and the API will change.
-
-This also means that it's open for suggestions.  For the name of the lib, I 
-followed the libkdenetwork pattern, but that can change.  I arbitrarily picked 
-the prefix "KEdu" for all of the classes and decided on the name "KEduData" for 
-the vocabulary data.  Ewald had suggested some other things but mainly based on 
-having several KDE-Edu libs, which of course begs the question, should there be 
-several?  Looking around at other KDE things it seems pretty common to pack a lot
-of logically connected material into one lib.
-
-Also propper documentation will follow, but I want to get a little better idea 
-of what the API will be before I spend the time to document it.
-
-I'm really not trying to comandere this thing, I was just feeling productive, so 
-I started coding.
-
-I may start looking into writing something to write kvtml, but that will probably
- happen after a brainstorming session at LinuxTag.
-
-Cheers and good luck!
-
--Scott
