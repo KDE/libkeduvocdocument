@@ -6,8 +6,7 @@ SUBDIRS = .
 lib_LTLIBRARIES = libkdeeducore.la
 
 libkdeeducore_la_SOURCES = keduvocdata.cpp
-
-libkdeeducore_la_LDFLAGS = $(all_libraries) -no-undefined -version-info 1:0
+libkdeeducore_la_LDFLAGS = $(all_libraries) -no-undefined -version-info 3:0:2
 
 # include_HEADERS = keduvocdata.h
 noinst_HEADERS = keduvocdata.h
