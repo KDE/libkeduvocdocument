@@ -19,27 +19,27 @@
 #include <qdom.h>
 #include <qvaluelist.h>
 
-class KEduDataItem
+class KEduVocDataItem
 {
 public:
-    KEduDataItem();
-    KEduDataItem(QDomElement &entry);
-    virtual ~KEduDataItem();
+    KEduVocDataItem();
+    KEduVocDataItem(QDomElement &entry);
+    virtual ~KEduVocDataItem();
 
-    QString originalText();
-    QString translatedText();
+    QString originalText() const;
+    QString translatedText() const;
 
 protected:
-    QString getText(const QString tagName);
+    QString getText(const QString &tagName) const;
 
 private:
     QDomElement domElement;
 };
 
-typedef QValueList<KEduDataItem> KEduDataItemList;
+typedef QValueList<KEduVocDataItem> KEduVocDataItemList;
 
-class KEduData
+class KEduVocData
 {
 public:
-    static KEduDataItemList parse(const QString fileName);
+    static KEduVocDataItemList parse(const QString &fileName);
 };

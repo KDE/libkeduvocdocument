@@ -16,46 +16,46 @@
    Boston, MA 02111-1307, USA.
 */
 
-#include "kedudata.h"
+#include "keduvocdata.h"
 
 #include <qfile.h>
 
 #include <kdebug.h>
 
 ////////////////////////////////////////////////////////////////////////////////
-// class KEduDataItem
+// class KEduVocDataItem
 ////////////////////////////////////////////////////////////////////////////////
 
 // public methods
 
-KEduDataItem::KEduDataItem()
+KEduVocDataItem::KEduVocDataItem()
 {
 
 }
 
-KEduDataItem::KEduDataItem(QDomElement &entry)
+KEduVocDataItem::KEduVocDataItem(QDomElement &entry)
 {
     domElement = entry;
 }
 
-KEduDataItem::~KEduDataItem()
+KEduVocDataItem::~KEduVocDataItem()
 {
 
 }
 
-QString KEduDataItem::originalText()
+QString KEduVocDataItem::originalText() const
 {
     return getText("o");
 }
 
-QString KEduDataItem::translatedText()
+QString KEduVocDataItem::translatedText() const
 {
     return getText("t");
 }
 
 // protected methods
 
-QString KEduDataItem::getText(const QString tagName)
+QString KEduVocDataItem::getText(const QString &tagName) const
 {
     if(!domElement.isNull()) {
 
@@ -79,14 +79,14 @@ QString KEduDataItem::getText(const QString tagName)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// class KEduData
+// class KEduVocData
 ////////////////////////////////////////////////////////////////////////////////
 
 // public static methods
 
-KEduDataItemList KEduData::parse(const QString fileName)
+KEduVocDataItemList KEduVocData::parse(const QString &fileName)
 {
-    KEduDataItemList list;
+    KEduVocDataItemList list;
 
     QDomDocument document;
     QFile file(fileName);
@@ -102,7 +102,7 @@ KEduDataItemList KEduData::parse(const QString fileName)
 
         // if the "node" is in fact an element -- i.e. not null
         if(!entry.isNull()) {
-            KEduDataItem item(entry);
+            KEduVocDataItem item(entry);
             list.append(item);
         }
     }
