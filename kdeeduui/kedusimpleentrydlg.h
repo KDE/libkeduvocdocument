@@ -18,7 +18,3 @@ class KEduSimpleEntryDlg : public KEduSimpleEntryDlgForm
 };
 
 #endif // kedusimpleentrydlg_included
-
-/*
-   $Log: $
-*/
