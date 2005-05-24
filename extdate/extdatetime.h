@@ -32,6 +32,8 @@ class ExtDateTime;
 
 extern	void test2_unit(int y, int m, int d);
 
+class ExtDateTime;
+
 class KDE_EXPORT ExtDate
 {
 public:
