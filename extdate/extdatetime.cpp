@@ -489,11 +489,9 @@ int ExtDate::dayOfYear(int y, int m, int d)
 
 /*!
     \class ExtDateTime extdatetime.h
-    \reentrant
     \brief The ExtDateTime class provides date and time functions.
 
     \ingroup time
-    \mainclass
 
     A ExtDateTime object contains a calendar date and a clock time (a
     "datetime"). It is a combination of the ExtDate and QTime classes.
@@ -527,6 +525,8 @@ int ExtDate::dayOfYear(int y, int m, int d)
 
     The range of a datetime object is constrained to the ranges of the
     ExtDate and QTime objects which it embodies.
+
+    Methods in this class are reentrant.
 
     \sa ExtDate QTime ExtDateTimeEdit
 */

@@ -757,7 +757,6 @@ public:
 
     \ingroup advanced
     \ingroup time
-    \mainclass
 
     ExtDateEdit allows the user to edit dates by using the keyboard or
     the arrow keys to increase/decrease date values. The arrow keys
@@ -792,7 +791,7 @@ public:
     separator will be taken from the systems settings. If that is
     not possible, it defaults to "-".
 
-    \img datetimewidgets.png Date Time Widgets
+    \image html datetimewidgets.png "Date Time Widgets"
 
     \sa ExtDate QTimeEdit ExtDateTimeEdit
 */
@@ -1472,16 +1471,14 @@ bool ExtDateEdit::setFocusSection( int s )
 
     The rules applied are as follows:
 
-    \list
-    \i if the day is larger than the number of days in the month, 
-    \i it is reset to that number
-    \i If the year has four digits it is left unchanged.
-    \i If the year has two digits, the year will be changed to four
-    digits in the range current year - 70 to current year + 29.
-    \i If the year has three digits in the range 100..999, the
-    current millennium, i.e. 2000, will be added giving a year
-    in the range 2100..2999.
-    \endlist
+    - if the day is larger than the number of days in the month, 
+    - it is reset to that number
+    - If the year has four digits it is left unchanged.
+    - If the year has two digits, the year will be changed to four
+      digits in the range current year - 70 to current year + 29.
+    - If the year has three digits in the range 100..999, the
+      current millennium, i.e. 2000, will be added giving a year
+      in the range 2100..2999.
 
 */
 
@@ -2507,7 +2504,6 @@ public:
 
     \ingroup advanced
     \ingroup time
-    \mainclass
 
     ExtDateTimeEdit consists of a ExtDateEdit and QTimeEdit widget placed
     side by side and offers the functionality of both. The user can
@@ -2541,7 +2537,7 @@ public:
     setDateSeparator(); similarly setTimeSeparator() is used for the
     time sections.
 
-    \img datetimewidgets.png Date Time Widgets
+    \image html datetimewidgets.png "Date Time Widgets"
 
     \sa ExtDateEdit QTimeEdit
 */
