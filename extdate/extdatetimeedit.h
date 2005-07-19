@@ -76,7 +76,10 @@ public:
     ExtDateEdit( const ExtDate& date, QWidget* parent=0,  const char* name=0 );
     ~ExtDateEdit();
 
-    enum Order { DMY, MDY, YMD, YDM };
+    enum Order { DMY /**< Day-Month-Year */, 
+      MDY /**< Month-Day-Year */, 
+      YMD /**< Year-Month-Day, also the default */, 
+      YDM /**< Year-Day-Month @deprecated Included for completeness. */ };
 
     QSize sizeHint() const;
     QSize minimumSizeHint() const;
