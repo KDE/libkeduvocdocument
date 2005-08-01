@@ -48,7 +48,15 @@
 #include <knotifyclient.h>
 #include "kpopupmenu.h"
 #include <qpainter.h>
-#include <qdict.h>
+#include <q3dict.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QFocusEvent>
+#include <QKeyEvent>
+#include <QEvent>
+#include <Q3Frame>
+#include <QResizeEvent>
+#include <QMouseEvent>
 #include <assert.h>
 
 
@@ -77,7 +85,7 @@ public:
      QColor bgColor;
      BackgroundMode bgMode;
    };
-   QDict <DatePaintingMode> customPaintingModes;
+   Q3Dict <DatePaintingMode> customPaintingModes;
    ExtCalendarSystem *calendar;
 };
 
@@ -107,7 +115,7 @@ ExtDateValidator::date(const QString& text, ExtDate& ed) const
       ed = tmp;
       return Acceptable;
     } else
-      return Valid;
+      return QValidator::Intermediate;
 }
 
 void
@@ -116,8 +124,8 @@ ExtDateValidator::fixup( QString& ) const
 
 }
 
-ExtDateTable::ExtDateTable(QWidget *parent, ExtDate date_, const char* name, WFlags f)
-  : QGridView(parent, name, f)
+ExtDateTable::ExtDateTable(QWidget *parent, ExtDate date_, const char* name, Qt::WFlags f)
+  : Q3GridView(parent, name, f)
 {
   d = new ExtDateTablePrivate;
   setFontSize(10);
@@ -126,7 +134,7 @@ ExtDateTable::ExtDateTable(QWidget *parent, ExtDate date_, const char* name, WFl
       kdDebug() << "ExtDateTable ctor: WARNING: Given date is invalid, using current date." << endl;
       date_=ExtDate::currentDate();
     }
-  setFocusPolicy( QWidget::StrongFocus );
+  setFocusPolicy( Qt::StrongFocus );
   setNumRows(7); // 6 weeks max + headline
   setNumCols(7); // 7 days a week
   setHScrollBarMode(AlwaysOff);
@@ -219,7 +227,7 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
           painter->drawRect(0, 0, w, h);
           painter->setPen(textColor);
         }
-      painter->drawText(0, 0, w, h-1, AlignCenter,
+      painter->drawText(0, 0, w, h-1, Qt::AlignCenter,
                         d->calendar->weekDayName(daynum, true), -1, &rect);
       painter->setPen(colorGroup().text());
       painter->moveTo(0, h-1);
@@ -293,7 +301,7 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
 
       if ( paintRect ) painter->drawRect(0, 0, w, h);
       painter->setPen(pen);
-      painter->drawText(0, 0, w, h, AlignCenter, text, -1, &rect);
+      painter->drawText(0, 0, w, h, Qt::AlignCenter, text, -1, &rect);
     }
   if(rect.width()>maxCell.width()) maxCell.setWidth(rect.width());
   if(rect.height()>maxCell.height()) maxCell.setHeight(rect.height());
@@ -349,8 +357,8 @@ ExtDateTable::keyPressEvent( QKeyEvent *e )
     case Key_N:
         setDate(ExtDate::currentDate());
         return;
-    case Key_Return:
-    case Key_Enter:
+    case Qt::Key_Return:
+    case Qt::Key_Enter:
         emit tableClicked();
         return;
     default:
@@ -363,7 +371,7 @@ ExtDateTable::keyPressEvent( QKeyEvent *e )
 void
 ExtDateTable::viewportResizeEvent(QResizeEvent * e)
 {
-  QGridView::viewportResizeEvent(e);
+  Q3GridView::viewportResizeEvent(e);
 
   setCellWidth(viewport()->width()/7);
   setCellHeight(viewport()->height()/7);
@@ -509,13 +517,13 @@ ExtDateTable::getDate() const
 void ExtDateTable::focusInEvent( QFocusEvent *e )
 {
 //    repaintContents(false);
-    QGridView::focusInEvent( e );
+    Q3GridView::focusInEvent( e );
 }
 
 void ExtDateTable::focusOutEvent( QFocusEvent *e )
 {
 //    repaintContents(false);
-    QGridView::focusOutEvent( e );
+    Q3GridView::focusOutEvent( e );
 }
 
 QSize
@@ -541,7 +549,7 @@ bool ExtDateTable::popupMenuEnabled() const
    return d->popupMenuEnabled;
 }
 
-void ExtDateTable::setCustomDatePainting(const ExtDate &date, const QColor &fgColor, BackgroundMode bgMode, const QColor &bgColor)
+void ExtDateTable::setCustomDatePainting(const ExtDate &date, const QColor &fgColor, Qt::BackgroundMode bgMode, const QColor &bgColor)
 {
     if (!fgColor.isValid())
     {
@@ -574,7 +582,7 @@ ExtDateInternalWeekSelector::ExtDateInternalWeekSelector
   // -----
   font=KGlobalSettings::generalFont();
   setFont(font);
-  setFrameStyle(QFrame::NoFrame);
+  setFrameStyle(Q3Frame::NoFrame);
   setValidator(val);
   connect(this, SIGNAL(returnPressed()), SLOT(weekEnteredSlot()));
 }
@@ -639,7 +647,7 @@ ExtDateInternalMonthPicker::~ExtDateInternalMonthPicker() {
 
 ExtDateInternalMonthPicker::ExtDateInternalMonthPicker
 (const ExtDate & date, QWidget* parent, const char* name)
-  : QGridView(parent, name),
+  : Q3GridView(parent, name),
     result(0) // invalid
 {
 //FIXME: Can't uncomment the following unless ExtDate is moved to kdelibs
@@ -654,7 +662,7 @@ ExtDateInternalMonthPicker::ExtDateInternalMonthPicker
   setFont(font);
   setHScrollBarMode(AlwaysOff);
   setVScrollBarMode(AlwaysOff);
-  setFrameStyle(QFrame::NoFrame);
+  setFrameStyle(Q3Frame::NoFrame);
   setNumCols(3);
   d = new ExtDateInternalMonthPrivate(date.year(), date.month(), date.day());
   // For monthsInYear != 12
@@ -821,7 +829,7 @@ ExtDateInternalYearSelector::ExtDateInternalYearSelector
   // -----
   font=KGlobalSettings::generalFont();
   setFont(font);
-  setFrameStyle(QFrame::NoFrame);
+  setFrameStyle(Q3Frame::NoFrame);
   // set year limits (perhaps we should get rid of limits altogether)
   //there si also a year limit in ExtCalendarSystemGregorian...
   val->setRange(-50000, 50000);
@@ -874,11 +882,11 @@ ExtDateInternalYearSelector::setYear(int year)
 }
 
 KPopupFrame::KPopupFrame(QWidget* parent, const char*  name)
-  : QFrame(parent, name, WType_Popup),
+  : Q3Frame(parent, name, Qt::WType_Popup),
     result(0), // rejected
     main(0)
 {
-  setFrameStyle(QFrame::Box|QFrame::Raised);
+  setFrameStyle(Q3Frame::Box|Q3Frame::Raised);
   setMidLineWidth(2);
 }
 

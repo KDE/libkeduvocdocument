@@ -24,7 +24,15 @@
 #include <qstyle.h>
 #include <qtoolbutton.h>
 #include <qtooltip.h>
-#include <qpopupmenu.h>
+#include <q3popupmenu.h>
+//Added by qt3to4:
+#include <QKeyEvent>
+#include <QEvent>
+#include <Q3Frame>
+#include <QHBoxLayout>
+#include <QBoxLayout>
+#include <QVBoxLayout>
+#include <QResizeEvent>
 
 #include <kdialog.h>
 #include <klocale.h>
@@ -84,19 +92,19 @@ void ExtDatePicker::fillWeeksCombo(const ExtDate &date)
 }
 
 ExtDatePicker::ExtDatePicker(QWidget *parent, ExtDate dt, const char *name)
-  : QFrame(parent,name)
+  : Q3Frame(parent,name)
 {
   init( dt );
 }
 
-ExtDatePicker::ExtDatePicker(QWidget *parent, ExtDate dt, const char *name, WFlags f)
-  : QFrame(parent,name, f)
+ExtDatePicker::ExtDatePicker(QWidget *parent, ExtDate dt, const char *name, Qt::WFlags f)
+  : Q3Frame(parent,name, f)
 {
   init( dt );
 }
 
 ExtDatePicker::ExtDatePicker( QWidget *parent, const char *name )
-  : QFrame(parent,name)
+  : Q3Frame(parent,name)
 {
   init( ExtDate::currentDate() );
 }
@@ -212,8 +220,8 @@ ExtDatePicker::eventFilter(QObject *o, QEvent *e )
    if ( e->type() == QEvent::KeyPress ) {
       QKeyEvent *k = (QKeyEvent *)e;
 
-      if ( (k->key() == Qt::Key_Prior) ||
-           (k->key() == Qt::Key_Next)  ||
+      if ( (k->key() == Qt::Key_PageUp) ||
+           (k->key() == Qt::Key_PageDown)  ||
            (k->key() == Qt::Key_Up)    ||
            (k->key() == Qt::Key_Down) )
        {
@@ -222,7 +230,7 @@ ExtDatePicker::eventFilter(QObject *o, QEvent *e )
           return true; // eat event
        }
    }
-   return QFrame::eventFilter( o, e );
+   return Q3Frame::eventFilter( o, e );
 }
 
 void
@@ -351,7 +359,7 @@ ExtDatePicker::selectMonthClicked()
   ExtDate date = table->getDate();
   int i, month, months = d->calendar->monthsInYear(date);
 
-  QPopupMenu popup(selectMonth);
+  Q3PopupMenu popup(selectMonth);
 
   for (i = 1; i <= months; i++)
     popup.insertItem(d->calendar->monthName(i, d->calendar->year(date)), i);
@@ -375,7 +383,7 @@ ExtDatePicker::selectYearClicked()
 {
 //  const ExtCalendarSystem * calendar = KGlobal::locale()->calendar();
 
-  if (selectYear->state() == QButton::Off)
+  if (selectYear->state() == QCheckBox::Off)
   {
     return;
   }

@@ -31,14 +31,22 @@
 //#include "../kernel/qrichtext_p.h"
 #include <private/qinternal_p.h>
 #include <private/qrichtext_p.h>
-#include <qrangecontrol.h>
+#include <q3rangecontrol.h>
 #include <qapplication.h>
 #include <qpixmap.h>
 #include <qapplication.h>
-#include <qvaluelist.h>
+#include <q3valuelist.h>
 #include <qstring.h>
 #include <qstyle.h>
-#include <qdatetimeedit.h> //need for QTimeEdit
+#include <q3datetimeedit.h> //need for QTimeEdit
+//Added by qt3to4:
+#include <QPaintEvent>
+#include <QResizeEvent>
+#include <QMouseEvent>
+#include <QTimerEvent>
+#include <QKeyEvent>
+#include <QEvent>
+#include <QWheelEvent>
 
 #define EXTDATETIMEEDIT_HIDDEN_CHAR '0'
 
@@ -336,16 +344,16 @@ private:
     QTextCursor *cursor;
     QSize sz;
     int focusSec;
-    QValueList< QNumberSection > sections;
+    Q3ValueList< QNumberSection > sections;
     QString sep;
     int offset;
 };
 
-class ExtDateTimeSpinWidget : public QSpinWidget
+class ExtDateTimeSpinWidget : public Q3SpinWidget
 {
 public:
     ExtDateTimeSpinWidget( QWidget *parent, const char *name )
-	: QSpinWidget( parent, name )
+	: Q3SpinWidget( parent, name )
     {
     }
 
@@ -363,7 +371,7 @@ protected:
 
 	if ( section == -1 )
 	    return;
-	QSpinWidget::wheelEvent( e );
+	Q3SpinWidget::wheelEvent( e );
     }
 #endif
 };
@@ -374,7 +382,7 @@ protected:
 */
 ExtDateTimeEditor::ExtDateTimeEditor( ExtDateTimeEditBase * parent,
 				  const char * name )
-    : QWidget( parent, name, WNoAutoErase )
+    : QWidget( parent, name, Qt::WNoAutoErase )
 {
     d = new ExtDateTimeEditorPrivate();
     cw = parent;
@@ -526,8 +534,8 @@ bool ExtDateTimeEditor::eventFilter( QObject *o, QEvent *e )
 	    case Key_Backspace:
 		if ( ::qt_cast<ExtDateEdit*>(cw) )
 		    ((ExtDateEdit*)cw)->removeFirstNumber( d->focusSection() );
-		else if ( ::qt_cast<QTimeEdit*>(cw) )
-		    ((QTimeEdit*)cw)->removeFirstNumber( d->focusSection() );
+		else if ( ::qt_cast<Q3TimeEdit*>(cw) )
+		    ((Q3TimeEdit*)cw)->removeFirstNumber( d->focusSection() );
 		return TRUE;
 	    case Key_Delete:
 		cw->removeLastNumber( d->focusSection() );
@@ -577,11 +585,11 @@ bool ExtDateTimeEditor::eventFilter( QObject *o, QEvent *e )
 			    repaint( rect(), FALSE );
 		    }
 		    return TRUE;
-		} else if ( !txt.isEmpty() && ::qt_cast<QTimeEdit*>(cw) && focusSection() == (int) d->sectionCount()-1 ) {
+		} else if ( !txt.isEmpty() && ::qt_cast<Q3TimeEdit*>(cw) && focusSection() == (int) d->sectionCount()-1 ) {
 		    // the first character of the AM/PM indicator toggles if the section has focus
-		    QTimeEdit *te = (QTimeEdit*)cw;
+		    Q3TimeEdit *te = (Q3TimeEdit*)cw;
 		    QTime time = te->time();
-		    if ( lAMPM && lAM && lPM && (te->display()&QTimeEdit::AMPM) ) {
+		    if ( lAMPM && lAM && lPM && (te->display()&Q3TimeEdit::AMPM) ) {
 			if ( txt[0] == (*lAM).lower()[0] && time.hour() >= 12 ) {
 			    time.setHMS( time.hour()-12, time.minute(), time.second(), time.msec() );
 			    te->setTime( time );
@@ -747,7 +755,7 @@ public:
     ExtDate max;
     bool changed;
     ExtDateTimeEditor *ed;
-    QSpinWidget *controls;
+    Q3SpinWidget *controls;
 };
 
 
@@ -1675,7 +1683,7 @@ public:
     QTime max;
     bool changed;
     ExtDateTimeEditor *ed;
-    QSpinWidget *controls;
+    Q3SpinWidget *controls;
 };
 
 /*!
@@ -2620,7 +2628,7 @@ void ExtDateTimeEdit::init()
 {
     d = new ExtDateTimeEditPrivate();
     de = new ExtDateEdit( this, "qt_datetime_dateedit" );
-    te = new QTimeEdit( this, "qt_datetime_timeedit" );
+    te = new Q3TimeEdit( this, "qt_datetime_timeedit" );
     d->adv = FALSE;
     connect( de, SIGNAL( valueChanged( const ExtDate& ) ),
 	     this, SLOT( newValue( const ExtDate& ) ) );

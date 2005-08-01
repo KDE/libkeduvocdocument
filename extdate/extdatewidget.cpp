@@ -23,6 +23,8 @@
 #include <qcombobox.h>
 #include <qlayout.h>
 #include <qlineedit.h>
+//Added by qt3to4:
+#include <QHBoxLayout>
 
 #include <knuminput.h>
 #include <kdialog.h>

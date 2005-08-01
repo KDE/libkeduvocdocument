@@ -24,6 +24,10 @@
 
 
 #include "extdatetime.h"
+//Added by qt3to4:
+#include <Q3Frame>
+#include <QResizeEvent>
+#include <QEvent>
 
 class QLineEdit;
 class QToolButton;
@@ -49,7 +53,7 @@ class ExtDateTable;
  *
  * @short A date selection widget.
  **/
-class KDE_EXPORT ExtDatePicker: public QFrame
+class KDE_EXPORT ExtDatePicker: public Q3Frame
 {
   Q_OBJECT
 //  Q_PROPERTY( ExtDate date READ date WRITE setDate)
@@ -71,7 +75,7 @@ public:
   ExtDatePicker(QWidget *parent,
 	      ExtDate,
 	      const char *name,
-	      WFlags f); // ### KDE 4.0: Merge
+	      Qt::WFlags f); // ### KDE 4.0: Merge
 
   /**
    * Standard qt widget constructor. The initial date will be the

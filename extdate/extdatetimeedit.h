@@ -31,10 +31,16 @@
 #endif // QT_H
 
 #include "extdatetime.h"
+//Added by qt3to4:
+#include <QMouseEvent>
+#include <QTimerEvent>
+#include <QResizeEvent>
+#include <QEvent>
+#include <QPaintEvent>
 
 #ifndef QT_NO_DATETIMEEDIT
 
-class QTimeEdit;
+class Q3TimeEdit;
 
 class ExtDateTimeEditBase : public QWidget
 {
@@ -249,7 +255,7 @@ public:
     ExtDateTime dateTime() const;
 
     ExtDateEdit* dateEdit() { return de; }
-    QTimeEdit* timeEdit() { return te; }
+    Q3TimeEdit* timeEdit() { return te; }
 
     virtual void setAutoAdvance( bool advance );
     bool autoAdvance() const;
@@ -270,7 +276,7 @@ protected slots:
 
 private:
     ExtDateEdit* de;
-    QTimeEdit* te;
+    Q3TimeEdit* te;
     ExtDateTimeEditPrivate* d;
 
 #if defined(Q_DISABLE_COPY)

@@ -27,7 +27,14 @@
 #define EXTDATETBL_H
 
 #include <qvalidator.h>
-#include <qgridview.h>
+#include <q3gridview.h>
+//Added by qt3to4:
+#include <QWheelEvent>
+#include <QFocusEvent>
+#include <QKeyEvent>
+#include <Q3Frame>
+#include <QResizeEvent>
+#include <QMouseEvent>
 #include <klineedit.h>
 #include "extcalendarsystemgregorian.h"
 
@@ -65,7 +72,7 @@ private:
 * @version $Id$
 * @author Tim Gilman, Mirko Boehm
 */
-class ExtDateInternalMonthPicker : public QGridView
+class ExtDateInternalMonthPicker : public Q3GridView
 {
   Q_OBJECT
 protected:
@@ -174,7 +181,7 @@ private:
  * @author Tim Gilman, Mirko Boehm
  * @version $Id$
  */
-class KPopupFrame : public QFrame
+class KPopupFrame : public Q3Frame
 {
   Q_OBJECT
 protected:
@@ -229,7 +236,7 @@ public:
 
 private:
 
-  virtual bool close(bool alsoDelete) { return QFrame::close(alsoDelete); }
+  virtual bool close(bool alsoDelete) { return Q3Frame::close(alsoDelete); }
 protected:
   virtual void virtual_hook( int id, void* data );
 private:
@@ -262,7 +269,7 @@ public:
  * @version $Id$
  * @author Tim Gilman, Mirko Boehm
  */
-class ExtDateTable : public QGridView
+class ExtDateTable : public Q3GridView
 {
     Q_OBJECT
     //Q_PROPERTY( ExtDate date READ getDate WRITE setDate )
@@ -274,7 +281,7 @@ public:
      */
     ExtDateTable(QWidget *parent=0,
 	       ExtDate date=ExtDate::currentDate(),
-	       const char* name=0, WFlags f=0);
+	       const char* name=0, Qt::WFlags f=0);
 
     /**
      * The destructor.
@@ -323,7 +330,7 @@ public:
      *
      * @since 3.2
      */
-    void setCustomDatePainting( const ExtDate &date, const QColor &fgColor, BackgroundMode bgMode=NoBgMode, const QColor &bgColor=QColor());
+    void setCustomDatePainting( const ExtDate &date, const QColor &fgColor, Qt::BackgroundMode bgMode=NoBgMode, const QColor &bgColor=QColor());
 
     /**
      * Unsets the custom painting of a date so that the date is painted as usual.
