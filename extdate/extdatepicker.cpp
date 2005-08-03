@@ -20,10 +20,11 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qlayout.h>
-#include <qstyle.h>
-#include <qtoolbutton.h>
-#include <qtooltip.h>
+#include <QApplication>
+#include <QLayout>
+#include <QStyle>
+#include <QToolButton>
+#include <QToolTip>
 #include <q3popupmenu.h>
 //Added by qt3to4:
 #include <QKeyEvent>
@@ -361,10 +362,13 @@ ExtDatePicker::selectMonthClicked()
 
   Q3PopupMenu popup(selectMonth);
 
-  for (i = 1; i <= months; i++)
-    popup.insertItem(d->calendar->monthName(i, d->calendar->year(date)), i);
-
-  popup.setActiveItem(d->calendar->month(date) - 1);
+  for (i = 1; i <= months; i++) {
+    //    popup.insertItem(d->calendar->monthName(i, d->calendar->year(date)), i);
+    QAction *a = popup.addAction( d->calendar->monthName(i, d->calendar->year(date)) );
+    
+    if ( i == d->calendar->month(date) )
+      popup.setActiveAction( a );
+  }
 
   if ( (month = popup.exec(selectMonth->mapToGlobal(QPoint(0, 0)), d->calendar->month(date) - 1)) == -1 ) return;  // canceled
 
@@ -383,7 +387,7 @@ ExtDatePicker::selectYearClicked()
 {
 //  const ExtCalendarSystem * calendar = KGlobal::locale()->calendar();
 
-  if (selectYear->state() == QCheckBox::Off)
+  if (selectYear->isChecked())
   {
     return;
   }
@@ -496,8 +500,9 @@ ExtDatePicker::setFontSize(int s)
       maxMonthRect.setHeight(QMAX(r.height(),  maxMonthRect.height()));
     }
 
-  QSize metricBound = style().sizeFromContents(QStyle::CT_ToolButton,
-                                               selectMonth,
+  QStyleOptionToolButton qsotb;
+  QSize metricBound = style()->sizeFromContents(QStyle::CT_ToolButton,
+                                               &qsotb,
                                                maxMonthRect);
   selectMonth->setMinimumSize(metricBound);
 

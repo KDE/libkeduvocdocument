@@ -19,6 +19,7 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kdebug.h>
+#include <qstringlist.h>
 #include <assert.h>
 #include <time.h>
 

@@ -17,9 +17,9 @@
 #define EXTDATETIME_H
 
 #include <limits.h>
-#include "qstring.h"
-#include "qnamespace.h"
-#include "qdatetime.h"
+#include <qstring.h>
+#include <qnamespace.h>
+#include <qdatetime.h>
 #include <kdemacros.h>
 
 #define INVALID_DAY LONG_MIN
@@ -113,10 +113,10 @@ private:
 	friend class ExtDateTime;
 
 	#ifndef QT_NO_DATASTREAM
-	friend Q_EXPORT QDataStream &operator<<( QDataStream &, const ExtDate & );
-	friend Q_EXPORT QDataStream &operator>>( QDataStream &, ExtDate & );
-	friend Q_EXPORT QDataStream &operator<<( QDataStream &, const ExtDateTime & );
-	friend Q_EXPORT QDataStream &operator>>( QDataStream &, ExtDateTime & );
+	friend KDE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDate & );
+	friend KDE_EXPORT QDataStream &operator>>( QDataStream &, ExtDate & );
+	friend KDE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDateTime & );
+	friend KDE_EXPORT QDataStream &operator>>( QDataStream &, ExtDateTime & );
 #endif
 };
 
@@ -170,8 +170,8 @@ private:
     ExtDate  d;
     QTime  t;
 #ifndef QT_NO_DATASTREAM
-    friend Q_EXPORT QDataStream &operator<<( QDataStream &, const ExtDateTime &);
-    friend Q_EXPORT QDataStream &operator>>( QDataStream &, ExtDateTime & );
+    friend KDE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDateTime &);
+    friend KDE_EXPORT QDataStream &operator>>( QDataStream &, ExtDateTime & );
 #endif
 };
 
@@ -180,8 +180,8 @@ private:
  *****************************************************************************/
 
 #ifndef QT_NO_DATASTREAM
-Q_EXPORT QDataStream &operator<<( QDataStream &, const ExtDate & );
-Q_EXPORT QDataStream &operator>>( QDataStream &, ExtDate & );
+KDE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDate & );
+KDE_EXPORT QDataStream &operator>>( QDataStream &, ExtDate & );
 #endif // QT_NO_DATASTREAM
 
 #endif // EXTDATE_H

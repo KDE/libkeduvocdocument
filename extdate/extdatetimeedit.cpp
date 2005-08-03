@@ -29,8 +29,6 @@
 
 //#include "../kernel/qinternal_p.h"
 //#include "../kernel/qrichtext_p.h"
-#include <private/qinternal_p.h>
-#include <private/qrichtext_p.h>
 #include <q3rangecontrol.h>
 #include <qapplication.h>
 #include <qpixmap.h>

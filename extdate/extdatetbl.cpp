@@ -47,14 +47,14 @@
 #include <kdebug.h>
 #include <knotifyclient.h>
 #include "kpopupmenu.h"
-#include <qpainter.h>
-#include <q3dict.h>
+#include <QPainter>
+#include <Q3Dict>
 //Added by qt3to4:
 #include <QWheelEvent>
 #include <QFocusEvent>
 #include <QKeyEvent>
 #include <QEvent>
-#include <Q3Frame>
+#include <QFrame>
 #include <QResizeEvent>
 #include <QMouseEvent>
 #include <assert.h>
@@ -230,8 +230,9 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
       painter->drawText(0, 0, w, h-1, Qt::AlignCenter,
                         d->calendar->weekDayName(daynum, true), -1, &rect);
       painter->setPen(colorGroup().text());
-      painter->moveTo(0, h-1);
-      painter->lineTo(w-1, h-1);
+      //      painter->moveTo(0, h-1);
+      //      painter->lineTo(w-1, h-1);
+      painter->drawLine( 0, h-1, w-1, h-1);
       // ----- draw the weekday:
     } else {
       bool paintRect=true;
@@ -316,45 +317,45 @@ ExtDateTable::keyPressEvent( QKeyEvent *e )
     ExtDate temp = date;
 
     switch( e->key() ) {
-    case Key_Prior:
+    case Qt::Key_Prior:
         temp = d->calendar->addMonths( date, -1 );
         setDate(temp);
         return;
-    case Key_Next:
+    case Qt::Key_Next:
         temp = d->calendar->addMonths( date, 1 );
         setDate(temp);
         return;
-    case Key_Up:
+    case Qt::Key_Up:
         if ( d->calendar->day(date) > 7 ) {
             setDate(date.addDays(-7));
             return;
         }
         break;
-    case Key_Down:
+    case Qt::Key_Down:
         if ( d->calendar->day(date) <= d->calendar->daysInMonth(date)-7 ) {
             setDate(date.addDays(7));
             return;
         }
         break;
-    case Key_Left:
+    case Qt::Key_Left:
         if ( d->calendar->day(date) > 1 ) {
             setDate(date.addDays(-1));
             return;
         }
         break;
-    case Key_Right:
+    case Qt::Key_Right:
         if ( d->calendar->day(date) < d->calendar->daysInMonth(date) ) {
             setDate(date.addDays(1));
             return;
         }
         break;
-    case Key_Minus:
+    case Qt::Key_Minus:
         setDate(date.addDays(-1));
         return;
-    case Key_Plus:
+    case Qt::Key_Plus:
         setDate(date.addDays(1));
         return;
-    case Key_N:
+    case Qt::Key_N:
         setDate(ExtDate::currentDate());
         return;
     case Qt::Key_Return:
@@ -549,7 +550,7 @@ bool ExtDateTable::popupMenuEnabled() const
    return d->popupMenuEnabled;
 }
 
-void ExtDateTable::setCustomDatePainting(const ExtDate &date, const QColor &fgColor, Qt::BackgroundMode bgMode, const QColor &bgColor)
+void ExtDateTable::setCustomDatePainting(const ExtDate &date, const QColor &fgColor, BackgroundMode bgMode, const QColor &bgColor)
 {
     if (!fgColor.isValid())
     {
@@ -582,7 +583,7 @@ ExtDateInternalWeekSelector::ExtDateInternalWeekSelector
   // -----
   font=KGlobalSettings::generalFont();
   setFont(font);
-  setFrameStyle(Q3Frame::NoFrame);
+  setFrame(false);
   setValidator(val);
   connect(this, SIGNAL(returnPressed()), SLOT(weekEnteredSlot()));
 }
@@ -662,7 +663,7 @@ ExtDateInternalMonthPicker::ExtDateInternalMonthPicker
   setFont(font);
   setHScrollBarMode(AlwaysOff);
   setVScrollBarMode(AlwaysOff);
-  setFrameStyle(Q3Frame::NoFrame);
+  setFrameShape(QFrame::NoFrame);
   setNumCols(3);
   d = new ExtDateInternalMonthPrivate(date.year(), date.month(), date.day());
   // For monthsInYear != 12
@@ -720,7 +721,7 @@ ExtDateInternalMonthPicker::paintCell(QPainter* painter, int row, int col)
   text=d->calendar->monthName(index,
     d->calendar->year(ExtDate(d->year, d->month,
     d->day)), false);
-  painter->drawText(0, 0, cellWidth(), cellHeight(), AlignCenter, text);
+  painter->drawText(0, 0, cellWidth(), cellHeight(), Qt::AlignCenter, text);
   if ( activeCol == col && activeRow == row )
       painter->drawRect( 0, 0, cellWidth(), cellHeight() );
 }
@@ -728,7 +729,7 @@ ExtDateInternalMonthPicker::paintCell(QPainter* painter, int row, int col)
 void
 ExtDateInternalMonthPicker::contentsMousePressEvent(QMouseEvent *e)
 {
-  if(!isEnabled() || e->button() != LeftButton)
+  if(!isEnabled() || e->button() != Qt::LeftButton)
     {
       KNotifyClient::beep();
       return;
@@ -755,7 +756,7 @@ ExtDateInternalMonthPicker::contentsMousePressEvent(QMouseEvent *e)
 void
 ExtDateInternalMonthPicker::contentsMouseMoveEvent(QMouseEvent *e)
 {
-  if (e->state() & LeftButton)
+  if (e->state() & Qt::LeftButton)
     {
       int row, col;
       QPoint mouseCoord;
@@ -829,7 +830,7 @@ ExtDateInternalYearSelector::ExtDateInternalYearSelector
   // -----
   font=KGlobalSettings::generalFont();
   setFont(font);
-  setFrameStyle(Q3Frame::NoFrame);
+  setFrame(false);
   // set year limits (perhaps we should get rid of limits altogether)
   //there si also a year limit in ExtCalendarSystemGregorian...
   val->setRange(-50000, 50000);
@@ -882,18 +883,18 @@ ExtDateInternalYearSelector::setYear(int year)
 }
 
 KPopupFrame::KPopupFrame(QWidget* parent, const char*  name)
-  : Q3Frame(parent, name, Qt::WType_Popup),
+  : QFrame(parent, name, Qt::WType_Popup),
     result(0), // rejected
     main(0)
 {
-  setFrameStyle(Q3Frame::Box|Q3Frame::Raised);
+  setFrameShape(QFrame::NoFrame);
   setMidLineWidth(2);
 }
 
 void
 KPopupFrame::keyPressEvent(QKeyEvent* e)
 {
-  if(e->key()==Key_Escape)
+  if(e->key()==Qt::Key_Escape)
     {
       result=0; // rejected
       qApp->exit_loop();

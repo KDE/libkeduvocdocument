@@ -39,6 +39,7 @@
 #include "extcalendarsystemgregorian.h"
 
 class KPopupMenu;
+class QPainter;
 
 /** Week selection widget.
 * @internal
@@ -181,7 +182,7 @@ private:
  * @author Tim Gilman, Mirko Boehm
  * @version $Id$
  */
-class KPopupFrame : public Q3Frame
+class KPopupFrame : public QFrame
 {
   Q_OBJECT
 protected:
@@ -236,7 +237,7 @@ public:
 
 private:
 
-  virtual bool close(bool alsoDelete) { return Q3Frame::close(alsoDelete); }
+  virtual bool close(bool alsoDelete) { return QFrame::close(alsoDelete); }
 protected:
   virtual void virtual_hook( int id, void* data );
 private:
@@ -330,7 +331,7 @@ public:
      *
      * @since 3.2
      */
-    void setCustomDatePainting( const ExtDate &date, const QColor &fgColor, Qt::BackgroundMode bgMode=NoBgMode, const QColor &bgColor=QColor());
+    void setCustomDatePainting( const ExtDate &date, const QColor &fgColor, BackgroundMode bgMode=NoBgMode, const QColor &bgColor=QColor());
 
     /**
      * Unsets the custom painting of a date so that the date is painted as usual.
