@@ -20,11 +20,11 @@
 */
 
 
-#include <qcombobox.h>
-#include <qlayout.h>
-#include <qlineedit.h>
+#include <QComboBox>
+//#include <QLineEdit>
 //Added by qt3to4:
 #include <QHBoxLayout>
+#include <QSpinBox>
 
 #include <knuminput.h>
 #include <kdialog.h>
@@ -38,7 +38,7 @@ public:
   ExtDateWidgetSpinBox(int min, int max, QWidget *parent)
     : QSpinBox(min, max, 1, parent)
   {
-     editor()->setAlignment(AlignRight);
+     setAlignment(Qt::AlignRight);
   }
 };
 

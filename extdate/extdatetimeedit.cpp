@@ -1,2742 +1,2945 @@
+/*****  --==>> JH: Commenting entire file, for now.
+ *****  This class is derived from QDateTimeEdit, which makes use of 
+ *****  QVariant(QDateTime).  It is not possible to translate this to 
+ *****  ExtDateTime easily.  I will have to write a custom widget eventually.
+ *****  However, we need this directory to compile so that the kde4 port 
+ *****  can proceed.  So I am commenting out the class.
+ */
+
+#if 0
+  --- ENTIRE CLASS COMMENTED OUT ---
+
 /****************************************************************************
 **
+** Copyright (C) 1992-2005 Trolltech AS. All rights reserved.
 **
-** Implementation of date and time edit classes
+** This file is part of the QtGui module of the Qt Toolkit.
 **
-** Created : 001103
+** This file may be used under the terms of the GNU General Public
+** License version 2.0 as published by the Free Software Foundation
+** and appearing in the file LICENSE.GPL included in the packaging of
+** this file.  Please review the following information to ensure GNU
+** General Public Licensing requirements will be met:
+** http://www.trolltech.com/products/qt/opensource.html
 **
-** Original qatetimeedit.cpp Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
-**>> ExtDate modifications (C) 2004 Jason Harris <jharris@30doradus.org>
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
+** If you are unsure which license is appropriate for your use, please
+** review the following information:
+** http://www.trolltech.com/products/qt/licensing.html or contact the
+** sales department at sales@trolltech.com.
 **
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-**********************************************************************/
+****************************************************************************/
 
-//DEBUG
-#include <kdebug.h>
+#include <private/qabstractspinbox_p.h>
+#include <qabstractspinbox.h>
+#include <qapplication.h>
+#include <qlineedit.h>
+#include <qevent.h>
+#include <math.h>
 
 #include "extdatetimeedit.h"
 
 #ifndef QT_NO_DATETIMEEDIT
 
-//#include "../kernel/qinternal_p.h"
-//#include "../kernel/qrichtext_p.h"
-#include <q3rangecontrol.h>
-#include <qapplication.h>
-#include <qpixmap.h>
-#include <qapplication.h>
-#include <q3valuelist.h>
-#include <qstring.h>
-#include <qstyle.h>
-#include <q3datetimeedit.h> //need for QTimeEdit
-//Added by qt3to4:
-#include <QPaintEvent>
-#include <QResizeEvent>
-#include <QMouseEvent>
-#include <QTimerEvent>
-#include <QKeyEvent>
-#include <QEvent>
-#include <QWheelEvent>
+enum {
+    Neither = -1,
+    AM = 0,
+    PM = 1,
+    PossibleAM = 2,
+    PossiblePM = 3,
+    PossibleBoth = 4
+};
 
-#define EXTDATETIMEEDIT_HIDDEN_CHAR '0'
+#ifdef Q_WS_MAC
+#include <private/qt_mac_p.h>
+extern QString qt_mac_from_pascal_string(const Str255); //qglobal.cpp
+#endif
 
-static QString	*lDateSep = 0;
-static QString	*lTimeSep = 0;
-static bool	lAMPM	  = FALSE;
-static QString	*lAM	  = 0;
-static QString	*lPM	  = 0;
-static ExtDateEdit::Order	lOrder = ExtDateEdit::YMD;
-static int refcount = 0;
-
-static void cleanup()
-{
-    delete lDateSep;
-    lDateSep = 0;
-    delete lTimeSep;
-    lTimeSep = 0;
-    delete lAM;
-    lAM = 0;
-    delete lPM;
-    lPM = 0;
-}
-
-/*!
-\internal
-try to get the order of DMY and the date/time separator from the locale settings
-*/
-static void readLocaleSettings()
-{
-    int dpos, mpos, ypos;
-    cleanup();
-
-    lDateSep = new QString();
-    lTimeSep = new QString();
-
-#if defined(Q_WS_WIN)
-    QT_WA( {
-	TCHAR data[10];
-	GetLocaleInfo( LOCALE_USER_DEFAULT, LOCALE_SDATE, data, 10 );
-	*lDateSep = QString::fromUcs2( (ushort*)data );
-	GetLocaleInfo( LOCALE_USER_DEFAULT, LOCALE_STIME, data, 10 );
-	*lTimeSep = QString::fromUcs2( (ushort*)data );
-	GetLocaleInfo( LOCALE_USER_DEFAULT, LOCALE_ITIME, data, 10 );
-	lAMPM = QString::fromUcs2( (ushort*)data ).toInt()==0;
-	GetLocaleInfo( LOCALE_USER_DEFAULT, LOCALE_S1159, data, 10 );
-	QString am = QString::fromUcs2( (ushort*)data );
-	if ( !am.isEmpty() )
-	    lAM = new QString( am );
-	GetLocaleInfo( LOCALE_USER_DEFAULT, LOCALE_S2359, data, 10 );
-	QString pm = QString::fromUcs2( (ushort*)data );
-	if ( !pm.isEmpty()  )
-	    lPM = new QString( pm );
-    } , {
-	char data[10];
-	GetLocaleInfoA( LOCALE_USER_DEFAULT, LOCALE_SDATE, (char*)&data, 10 );
-	*lDateSep = QString::fromLocal8Bit( data );
-	GetLocaleInfoA( LOCALE_USER_DEFAULT, LOCALE_STIME, (char*)&data, 10 );
-	*lTimeSep = QString::fromLocal8Bit( data );
-	GetLocaleInfoA( LOCALE_USER_DEFAULT, LOCALE_ITIME, (char*)&data, 10 );
-	lAMPM = QString::fromLocal8Bit( data ).toInt()==0;
-	GetLocaleInfoA( LOCALE_USER_DEFAULT, LOCALE_S1159, (char*)&data, 10 );
-	QString am = QString::fromLocal8Bit( data );
-	if ( !am.isEmpty() )
-	    lAM = new QString( am );
-	GetLocaleInfoA( LOCALE_USER_DEFAULT, LOCALE_S2359, (char*)&data, 10 );
-	QString pm = QString::fromLocal8Bit( data );
-	if ( !pm.isEmpty() )
-	    lPM = new QString( pm );
-    } );
+//#define EXTDATETIMEEDIT_EDTEDEBUG
+#ifdef EXTDATETIMEEDIT_EDTEDEBUG
+#  define EDTEDEBUG qDebug() << QString("%1:%2").arg(__FILE__).arg(__LINE__)
+#  define EDTEDEBUGN qDebug
 #else
-    *lDateSep = "-";
-    *lTimeSep = ":";
+#  define EDTEDEBUG if (false) qDebug()
+#  define EDTEDEBUGN if (false) qDebug
 #endif
-    QString d = ExtDate( 1999, 11, 22 ).toString( Qt::LocalDate );
-    dpos = d.find( "22" );
-    mpos = d.find( "11" );
-    ypos = d.find( "99" );
-    if ( dpos > -1 && mpos > -1 && ypos > -1 ) {
-	// test for DMY, MDY, YMD, YDM
-	if ( dpos < mpos && mpos < ypos ) {
-	    lOrder = ExtDateEdit::DMY;
-	} else if ( mpos < dpos && dpos < ypos ) {
-	    lOrder = ExtDateEdit::MDY;
-	} else if ( ypos < mpos && mpos < dpos ) {
-	    lOrder = ExtDateEdit::YMD;
-	} else if ( ypos < dpos && dpos < mpos ) {
-	    lOrder = ExtDateEdit::YDM;
-	} else {
-	    // cannot determine the dateformat - use the default
-	    return;
-	}
+#include <qdebug.h>
 
-	// this code needs to change if new formats are added
-
-#ifndef Q_WS_WIN
-	QString sep = d.mid( QMIN( dpos, mpos ) + 2, QABS( dpos - mpos ) - 2 );
-	if ( d.contains( sep ) == 2 ) {
-	    *lDateSep = sep;
-	}
-#endif
-    }
-
-#ifndef Q_WS_WIN
-    QString t = QTime( 11, 22, 33 ).toString( Qt::LocalDate );
-    dpos = t.find( "11" );
-    mpos = t.find( "22" );
-    ypos = t.find( "33" );
-    // We only allow hhmmss
-    if ( dpos > -1 && dpos < mpos && mpos < ypos ) {
-	QString sep = t.mid( dpos + 2, mpos - dpos - 2 );
-	if ( sep == t.mid( mpos + 2, ypos - mpos - 2 ) ) {
-	    *lTimeSep = sep;
-	}
-    }
-#endif
-}
-
-static ExtDateEdit::Order localOrder() {
-    if ( !lDateSep ) {
-	readLocaleSettings();
-    }
-    return lOrder;
-}
-
-static QString localDateSep() {
-    if ( !lDateSep ) {
-	readLocaleSettings();
-    }
-    return *lDateSep;
-}
-
-static QString localTimeSep() {
-    if ( !lTimeSep ) {
-	readLocaleSettings();
-    }
-    return *lTimeSep;
-}
-
-class ExtDateTimeEditorPrivate
+class ExtDateTimeEditPrivate : public QAbstractSpinBoxPrivate
 {
+    Q_DECLARE_PUBLIC(ExtDateTimeEdit)
 public:
-    ExtDateTimeEditorPrivate()
-	: frm( TRUE ),
-	  parag( new QTextParagraph( 0, 0, 0, FALSE ) ),
-	  focusSec(0)
-    {
-	parag->formatter()->setWrapEnabled( FALSE );
-	cursor = new QTextCursor( 0 );
-	cursor->setParagraph( parag );
-	offset = 0;
-	sep = localDateSep();
-	refcount++;
-    }
-    ~ExtDateTimeEditorPrivate()
-    {
-	delete parag;
-	delete cursor;
-	if ( !--refcount )
-	    cleanup();
-    }
+    enum Section {
+        NoSection = 0x0000,
+        AmPmSection = 0x0001,
+        MSecSection = 0x0002,
+        SecondSection = 0x0004,
+        MinuteSection = 0x0008,
+        HourSection = 0x0010,
+        TimeSectionMask = (AmPmSection|MSecSection|SecondSection|MinuteSection|HourSection),
+        Internal = 0x8000,
+        AmPmLowerCaseSection = AmPmSection|Internal,
+        DaySection = 0x0100,
+        MonthSection = 0x0200,
+        YearSection = 0x0400,
+        MonthShortNameSection = MonthSection|Internal,
+        YearTwoDigitsSection = YearSection|Internal,
+        DateSectionMask = (DaySection|MonthSection|YearSection),
+        FirstSection = 0x1000|Internal,
+        LastSection = 0x2000|Internal
+    }; // duplicated from qdatetimeedit.h
 
-    void appendSection( const QNumberSection& sec )
-    {
-	sections.append( sec );
+    struct SectionNode {
+        Section section;
+        int pos;
+    };
 
-    }
-    void clearSections()
-    {
-	sections.clear();
-    }
-    void setSectionSelection( int sec, int selstart, int selend )
-    {
-	if ( sec < 0 || sec > (int)sections.count() )
-	    return;
-	sections[sec].setSelectionStart( selstart );
-	sections[sec].setSelectionEnd( selend );
-    }
-    uint sectionCount() const { return (uint)sections.count(); }
-    void setSeparator( const QString& s ) { sep = s; }
-    QString separator() const { return sep; }
+    ExtDateTimeEditPrivate();
 
-    void setFrame( bool f ) { frm = f; }
-    bool frame() const { return frm; }
+    void readLocaleSettings();
 
-    int focusSection() const { return focusSec; }
-    int section( const QPoint& p )
-    {
-	cursor->place( p + QPoint( offset, 0 ), parag );
-	int idx = cursor->index();
-	for ( uint i = 0; i < sections.count(); ++i ) {
-	    if ( idx >= sections[i].selectionStart() &&
-		 idx <= sections[i].selectionEnd() )
-		return i;
-	}
-	return -1;
-    }
-    QNumberSection section( int idx ) const
-    {
-	return sections[idx];
-    }
-    bool setFocusSection( int idx )
-    {
-	if ( idx > (int)sections.count()-1 || idx < 0 )
-	    return FALSE;
-	if ( idx != focusSec ) {
-	    focusSec = idx;
-	    applyFocusSelection();
-	    return TRUE;
-	}
-	return FALSE;
-    }
+    void emitSignals(EmitPolicy ep, const QVariant &old);
+    QString textFromValue(const QVariant &f) const;
+    QVariant valueFromText(const QString &f) const;
+    QVariant validateAndInterpret(QString &input, int &, QValidator::State &state) const;
+    void editorCursorPositionChanged(int lastpos, int newpos);
 
-    bool inSectionSelection( int idx )
-    {
-	for ( uint i = 0; i < sections.count(); ++i ) {
-	    if ( idx >= sections[i].selectionStart() &&
-		 idx <= sections[i].selectionEnd() )
-		return TRUE;
-	}
-	return FALSE;
-    }
+    QVariant valueForPosition(int pos) const;
 
-    void paint( const QString& txt, bool focus, QPainter& p,
-		const QColorGroup& cg, const QRect& rect, QStyle& style )
-    {
-	int fw = 0;
-	if ( frm )
-	    fw = style.pixelMetric(QStyle::PM_DefaultFrameWidth);
+    void clearSection(Section s);
 
-	parag->truncate( 0 );
-	parag->append( txt );
-	if ( !focus )
-	    parag->removeSelection( QTextDocument::Standard );
-	else {
-	    applyFocusSelection();
-	}
+    int sectionSize(Section s) const;
+    int sectionPos(Section s) const;
 
-	/* color all EXTDATETIMEEDIT_HIDDEN_CHAR chars to background color */
-	QTextFormat *fb = parag->formatCollection()->format( p.font(),
-							     cg.base() );
-	QTextFormat *nf = parag->formatCollection()->format( p.font(),
-							     cg.text() );
-	for ( uint i = 0; i < txt.length(); ++i ) {
-	    parag->setFormat( i, 1, nf );
-	    if ( inSectionSelection( i ) )
-		continue;
-	    if ( txt.at(i) == EXTDATETIMEEDIT_HIDDEN_CHAR )
-		parag->setFormat( i, 1, fb );
-	    else
-		parag->setFormat( i, 1, nf );
-	}
-	fb->removeRef();
-	nf->removeRef();
+    SectionNode sectionNode(Section t) const;
+    QVariant stepBy(Section s, int steps, bool test = false) const;
+    QString sectionText(const QString &text, Section s) const;
+    int getDigit(const QVariant &dt, Section s) const;
+    void setDigit(QVariant &t, Section s, int newval) const;
+    int sectionValue(Section s, QString &txt, QValidator::State &state) const;
+    int absoluteMax(Section s) const;
+    int absoluteMin(Section s) const;
+    Section sectionAt(int index) const;
+    Section closestSection(int index, bool forward) const;
+    SectionNode nextPrevSection(Section current, bool forward) const;
+    bool parseFormat(const QString &format);
+    void setSelected(Section s, bool forward = false);
+    QValidator::State checkIntermediate(const ExtDateTime &dt, const QString &str) const;
 
-	QRect r( rect.x(), rect.y(), rect.width() - 2 * ( 2 + fw ), rect.height() );
-	parag->pseudoDocument()->docRect = r;
-	parag->invalidate(0);
-	parag->format();
+    bool addSection(QList<SectionNode> &list, Section ds, int pos) const;
+    int findMonth(const QString &str1, int index = 1) const;
+    int findAmPm(QString &str1, Section s) const;
+    int maxChange(ExtDateTimeEditPrivate::Section s) const;
+    int potentialValue(const QString &str, int min, int max, Section s) const;
+    int potentialValueHelper(const QString &str, int min, int max, int size) const;
+    int multiplier(Section s) const;
+    QString sectionName(int s) const;
+    QString stateName(int s) const;
+    QString sectionFormat(int s) const;
 
-	int xoff = 2 + fw - offset;
-	int yoff = ( rect.height() - parag->rect().height() + 1 ) / 2;
-	if ( yoff < 0 )
-	    yoff = 0;
-
-	p.translate( xoff, yoff );
-	parag->paint( p, cg, 0, TRUE );
-	if ( frm )
-	    p.translate( -xoff, -yoff );
-    }
-
-    void resize( const QSize& size ) { sz = size; }
-
-    int mapSection( int sec )
-    {
-	return sections[sec].index();
-    }
-
-protected:
-    void applyFocusSelection()
-    {
-	if ( focusSec > -1 ) {
-	    int selstart = sections[ focusSec ].selectionStart();
-	    int selend = sections[ focusSec ].selectionEnd();
-	    parag->setSelection( QTextDocument::Standard, selstart, selend );
-	    parag->format();
-	    if ( parag->at( selstart )->x < offset ||
-		 parag->at( selend )->x + parag->string()->width( selend ) > offset + sz.width() ) {
-		offset = parag->at( selstart )->x;
-	    }
-	}
-    }
-private:
-    bool frm;
-    QTextParagraph *parag;
-    QTextCursor *cursor;
-    QSize sz;
-    int focusSec;
-    Q3ValueList< QNumberSection > sections;
-    QString sep;
-    int offset;
+    QString displayFormat;
+    QString defaultDateFormat, defaultTimeFormat, defaultDateTimeFormat;
+    QString escapedFormat;
+    // this format is the same amount of letters as the resulting string
+    // e.g. if the format is hh:ap and am/pm is translated to foobar/barfoo escapedFormat
+    // will be "hh:ap    "
+    QList<SectionNode> sectionNodes;
+    SectionNode first, last;
+    QStringList separators;
+    ExtDateTimeEdit::Sections display;
+    mutable int cachedDay;
+    mutable Section currentSection;
+    Qt::LayoutDirection layoutDirection;
 };
 
-class ExtDateTimeSpinWidget : public Q3SpinWidget
-{
-public:
-    ExtDateTimeSpinWidget( QWidget *parent, const char *name )
-	: Q3SpinWidget( parent, name )
-    {
-    }
-
-protected:
-#ifndef QT_NO_WHEELEVENT
-    void wheelEvent( QWheelEvent *e )
-    {
-	ExtDateTimeEditor *editor = (ExtDateTimeEditor*)editWidget()->qt_cast( "ExtDateTimeEditor" );
-	Q_ASSERT( editor );
-	if ( !editor )
-	    return;
-
-	int section = editor->sectionAt( e->pos() );
-	editor->setFocusSection( section );
-
-	if ( section == -1 )
-	    return;
-	Q3SpinWidget::wheelEvent( e );
-    }
-#endif
-};
+// --- ExtDateTimeEdit ---
 
 /*!
-    Constructs an empty datetime editor with parent \a parent and
-    called \a name.
+  \class ExtDateTimeEdit qdatetimeedit.h
+  \brief The ExtDateTimeEdit class provides a widget for editing dates and times.
+
+  \ingroup basic
+  \mainclass
+
+  ExtDateTimeEdit allows the user to edit dates by using the keyboard or
+  the arrow keys to increase and decrease date and time values. The
+  arrow keys can be used to move from section to section within the
+  ExtDateTimeEdit box. Dates and times appear in accordance with the
+  format set; see setDisplayFormat().
+
+  \code
+  ExtDateTimeEdit *dateEdit = new ExtDateTimeEdit(ExtDate::currentDate());
+  dateEdit->setMinimumDate(ExtDate::currentDate().addDays(-365));
+  dateEdit->setMaximumDate(ExtDate::currentDate().addDays(365));
+  dateEdit->setDisplayFormat("yyyy.MM.dd");
+  \endcode
+
+  Here we've created a new ExtDateTimeEdit object initialized with
+  today's date, and restricted the valid date range to today plus or
+  minus 365 days. We've set the order to month, day, year.
+
+  The maximum and minimum values for a date value in the date editor
+  default to the maximum and minimum values for a ExtDate. You can
+  change this by calling setMinimumDate(), setMaximumDate(),
+  setMinimumTime(), and setMaximumTime().
 */
-ExtDateTimeEditor::ExtDateTimeEditor( ExtDateTimeEditBase * parent,
-				  const char * name )
-    : QWidget( parent, name, Qt::WNoAutoErase )
-{
-    d = new ExtDateTimeEditorPrivate();
-    cw = parent;
-    init();
-}
 
 /*!
-    Destroys the object and frees any allocated resources.
+  \enum ExtDateTimeEdit::Section
+
+  \value NoSection
+  \value AmPmSection
+  \value MSecSection
+  \value SecondSection
+  \value MinuteSection
+  \value HourSection
+  \value DaySection
+  \value MonthSection
+  \value YearSection
+  \omitvalue DateSections_Mask
+  \omitvalue TimeSections_Mask
 */
 
-ExtDateTimeEditor::~ExtDateTimeEditor()
-{
-    delete d;
-}
+/*!
+  \fn void ExtDateTimeEdit::dateTimeChanged(const ExtDateTime &datetime)
 
-/*! \internal
-
+  This signal is emitted whenever the date or time is changed. The
+  new date and time is passed in \a datetime.
 */
 
-void ExtDateTimeEditor::init()
-{
-    setBackgroundMode( PaletteBase );
-    setFocusSection( -1 );
-    installEventFilter( this );
-    setFocusPolicy( WheelFocus );
-}
+/*!
+  \fn void ExtDateTimeEdit::timeChanged(const QTime &time)
 
-
-/*! \reimp
-
+  This signal is emitted whenever the time is changed. The new time
+  is passed in \a time.
 */
 
-bool ExtDateTimeEditor::event( QEvent *e )
-{
-    if ( e->type() == QEvent::FocusIn || e->type() == QEvent::FocusOut ) {
- 	if ( e->type() == QEvent::FocusOut )
-  	    qApp->sendEvent( cw, e );
-	update( rect() );
-    } else if ( e->type() == QEvent::AccelOverride ) {
-	QKeyEvent* ke = (QKeyEvent*) e;
-	switch ( ke->key() ) {
-	case Key_Delete:
-	case Key_Backspace:
-	case Key_Up:
-	case Key_Down:
-	case Key_Left:
-	case Key_Right:
-	    ke->accept();
-	default:
-	    break;
-	}
-    }
-    return QWidget::event( e );
-}
+/*!
+  \fn void ExtDateTimeEdit::dateChanged(const ExtDate &date)
 
-/*! \reimp
-
+  This signal is emitted whenever the date is changed. The new date
+  is passed in \a date.
 */
-
-void ExtDateTimeEditor::resizeEvent( QResizeEvent *e )
-{
-    d->resize( e->size() );
-    QWidget::resizeEvent( e );
-}
-
-
-/*! \reimp
-
-*/
-
-void ExtDateTimeEditor::paintEvent( QPaintEvent * )
-{
-    QString txt;
-    for ( uint i = 0; i < d->sectionCount(); ++i ) {
-	txt += cw->sectionFormattedText( i );
-	if ( i < d->sectionCount()-1 ) {
-	    if ( d->section( i+1 ).separator() )
-		txt += d->separator();
-	    else
-		txt += " ";
-	}
-    }
-
-    QSharedDoubleBuffer buffer( this );
-    const QBrush &bg =
-	colorGroup().brush( isEnabled() ? QColorGroup::Base : QColorGroup::Background );
-    buffer.painter()->fillRect( 0, 0, width(), height(), bg );
-    d->paint( txt, hasFocus(), *buffer.painter(), colorGroup(), rect(),
-	      style() );
-    buffer.end();
-}
 
 
 /*!
-    Returns the section index at point \a p.
-*/
-int ExtDateTimeEditor::sectionAt( const QPoint &p )
-{
-    return d->section( p );
-}
-
-int ExtDateTimeEditor::mapSection( int sec )
-{
-    return d->mapSection( sec );
-}
-
-
-/*! \reimp
-
+  Constructs an empty date time editor with a \a parent.
 */
 
-void ExtDateTimeEditor::mousePressEvent( QMouseEvent *e )
+ExtDateTimeEdit::ExtDateTimeEdit(QWidget *parent)
+    : QAbstractSpinBox(*new ExtDateTimeEditPrivate, parent)
 {
-    QPoint p( e->pos().x(), 0 );
-    int sec = sectionAt( p );
-    if ( sec != -1 ) {
-	cw->setFocusSection( sec );
-	repaint( rect(), FALSE );
+    Q_D(ExtDateTimeEdit);
+
+    d->minimum = QVariant(DATETIME_MIN);
+    d->maximum = QVariant(DATETIME_MAX);
+    d->value = QVariant(ExtDateTime(DATE_INITIAL, TIME_MIN));
+    setDisplayFormat(d->defaultDateTimeFormat);
+    if (d->displayFormat.isEmpty()) {
+        d->defaultDateTimeFormat = QLatin1String("MM/dd/yy hh:mm:ss");
+        setDisplayFormat(d->defaultDateTimeFormat);
     }
 }
 
-/*! \reimp
-
+/*!
+  Constructs an empty date time editor with a \a parent. The value
+  is set to \a datetime.
 */
-bool ExtDateTimeEditor::eventFilter( QObject *o, QEvent *e )
+
+ExtDateTimeEdit::ExtDateTimeEdit(const ExtDateTime &datetime, QWidget *parent)
+    : QAbstractSpinBox(*new ExtDateTimeEditPrivate, parent)
 {
-    if ( o == this ) {
-	if ( e->type() == QEvent::KeyPress ) {
-	    QKeyEvent *ke = (QKeyEvent*)e;
-	    switch ( ke->key() ) {
-	    case Key_Right:
-		if ( d->focusSection() < (int)d->sectionCount()-1 ) {
-		    if ( cw->setFocusSection( focusSection()+1 ) )
-			repaint( rect(), FALSE );
-		}
-		return TRUE;
-	    case Key_Left:
-		if ( d->focusSection() > 0 ) {
-		    if ( cw->setFocusSection( focusSection()-1 ) )
-			repaint( rect(), FALSE );
-		}
-		return TRUE;
-	    case Key_Up:
-		cw->stepUp();
-		return TRUE;
-	    case Key_Down:
-		cw->stepDown();
-		return TRUE;
-	    case Key_Backspace:
-		if ( ::qt_cast<ExtDateEdit*>(cw) )
-		    ((ExtDateEdit*)cw)->removeFirstNumber( d->focusSection() );
-		else if ( ::qt_cast<Q3TimeEdit*>(cw) )
-		    ((Q3TimeEdit*)cw)->removeFirstNumber( d->focusSection() );
-		return TRUE;
-	    case Key_Delete:
-		cw->removeLastNumber( d->focusSection() );
-		return TRUE;
-	    case Key_Tab:
-	    case Key_BackTab: {
-		if ( ke->state() == Qt::ControlButton )
-		    return FALSE;
-
-		QWidget *w = this;
-		bool hadDateEdit = FALSE;
-		while ( w ) {
-		    if ( ::qt_cast<ExtDateTimeSpinWidget*>(w) && qstrcmp( w->name(), "qt_spin_widget" ) != 0 ||
-			 ::qt_cast<ExtDateTimeEdit*>(w) )
-			break;
-		    hadDateEdit = hadDateEdit || ::qt_cast<ExtDateEdit*>(w);
-		    w = w->parentWidget();
-		}
-
-		if ( w ) {
-		    if ( !::qt_cast<ExtDateTimeEdit*>(w) ) {
-			w = w->parentWidget();
-		    } else {
-			ExtDateTimeEdit *ed = (ExtDateTimeEdit*)w;
-			if ( hadDateEdit && ke->key() == Key_Tab ) {
-			    ed->timeEdit()->setFocus();
-			    return TRUE;
-			} else if ( !hadDateEdit && ke->key() == Key_BackTab ) {
-			    ed->dateEdit()->setFocus();
-			    return TRUE;
-			} else {
-			    while ( w && !::qt_cast<ExtDateTimeEdit*>(w) )
-				w = w->parentWidget();
-			}
-		    }
-
-		    qApp->sendEvent( w, e );
-		    return TRUE;
-		}
-	    } break;
-	    default:
-		QString txt = ke->text().lower();
-		if ( !txt.isEmpty() && !separator().isEmpty() && txt[0] == separator()[0] ) {
-		    // do the same thing as KEY_RIGHT when the user presses the separator key
-		    if ( d->focusSection() < 2 ) {
-			if ( cw->setFocusSection( focusSection()+1 ) )
-			    repaint( rect(), FALSE );
-		    }
-		    return TRUE;
-		} else if ( !txt.isEmpty() && ::qt_cast<Q3TimeEdit*>(cw) && focusSection() == (int) d->sectionCount()-1 ) {
-		    // the first character of the AM/PM indicator toggles if the section has focus
-		    Q3TimeEdit *te = (Q3TimeEdit*)cw;
-		    QTime time = te->time();
-		    if ( lAMPM && lAM && lPM && (te->display()&Q3TimeEdit::AMPM) ) {
-			if ( txt[0] == (*lAM).lower()[0] && time.hour() >= 12 ) {
-			    time.setHMS( time.hour()-12, time.minute(), time.second(), time.msec() );
-			    te->setTime( time );
-			} else if ( txt[0] == (*lPM).lower()[0] && time.hour() < 12 ) {
-			    time.setHMS( time.hour()+12, time.minute(), time.second(), time.msec() );
-			    te->setTime( time );
-			}
-		    }
-		}
-
-		int num = txt[0].digitValue();
-		if ( num != -1 ) {
-		    cw->addNumber( d->focusSection(), num );
-		    return TRUE;
-		}
-	    }
-	}
+    Q_D(ExtDateTimeEdit);
+    d->minimum = QVariant(DATETIME_MIN);
+    d->maximum = QVariant(DATETIME_MAX);
+    d->value = datetime.isValid() ? QVariant(datetime) : QVariant(ExtDateTime(DATE_INITIAL, TIME_MIN));
+    setDisplayFormat(d->defaultDateTimeFormat);
+    if (d->displayFormat.isEmpty()) {
+        d->defaultDateTimeFormat = QLatin1String("MM/dd/yy hh:mm:ss");
+        setDisplayFormat(d->defaultDateTimeFormat);
     }
-    return FALSE;
-}
-
-
-/*!
-    Appends the number section \a sec to the editor.
-*/
-
-void ExtDateTimeEditor::appendSection( const QNumberSection& sec )
-{
-    d->appendSection( sec );
 }
 
 /*!
-    Removes all sections from the editor.
+  \fn ExtDateTimeEdit::ExtDateTimeEdit(const ExtDate &date, QWidget *parent)
+
+  Constructs an empty date time editor with a \a parent.
+  The value is set to \a date.
 */
 
-void ExtDateTimeEditor::clearSections()
+ExtDateTimeEdit::ExtDateTimeEdit(const ExtDate &date, QWidget *parent)
+    : QAbstractSpinBox(*new ExtDateTimeEditPrivate, parent)
 {
-    d->clearSections();
-}
-
-/*!
-    Sets the selection of \a sec to start at \a selstart and end at \a
-    selend.
-*/
-
-void ExtDateTimeEditor::setSectionSelection( int sec, int selstart, int selend )
-{
-    d->setSectionSelection( sec, selstart, selend );
-}
-
-/*!
-    Sets the separator for all numbered sections to \a s. Note that
-    currently, only the first character of \a s is used.
-*/
-
-void ExtDateTimeEditor::setSeparator( const QString& s )
-{
-    d->setSeparator( s );
-    update();
-}
-
-
-/*!
-    Returns the editor's separator.
-*/
-
-QString ExtDateTimeEditor::separator() const
-{
-    return d->separator();
-}
-
-/*!
-    Returns the number of the section that has focus.
-*/
-
-int ExtDateTimeEditor::focusSection() const
-{
-    return d->focusSection();
-}
-
-
-/*!
-    Sets the focus to section \a sec. If \a sec does not exist,
-    nothing happens.
-*/
-
-bool ExtDateTimeEditor::setFocusSection( int sec )
-{
-    return d->setFocusSection( sec );
-}
-
-/*! \class ExtDateTimeEditBase ExtDatetimeedit.h
-    \brief The ExtDateTimeEditBase class provides an abstraction for date and edit editors.
-    \internal
-
-    Small abstract class that provides some functions that are common
-    for both ExtDateEdit and QTimeEdit. Its used internally by
-    ExtDateTimeEditor.
-*/
-
-/*! \fn QString ExtDateTimeEditBase::sectionFormattedText( int sec )
-    \internal
-
-  Pure virtual function which returns the formatted text of section \a
-  sec.
-
-*/
-
-/*! \fn void ExtDateTimeEditBase::stepUp()
-    \internal
-
-  Pure virtual slot which is called whenever the user increases the
-  number in a section by pressing the widget's arrow buttons or the
-  keyboard's arrow keys.
-*/
-
-/*! \fn void ExtDateTimeEditBase::stepDown()
-    \internal
-
-  Pure virtual slot which is called whenever the user decreases the
-  number in a section by pressing the widget's arrow buttons or the
-  keyboard's arrow keys.
-
-*/
-
-/*! \fn void ExtDateTimeEditBase::addNumber( int sec, int num )
-    \internal
-
-  Pure virtual function which is called whenever the user types a number.
-  \a sec indicates the section where the number should be added. \a
-  num is the number that was pressed.
-*/
-
-/*! \fn void ExtDateTimeEditBase::removeLastNumber( int sec )
-    \internal
-
-  Pure virtual function which is called whenever the user tries to
-  remove the last number from \a sec by pressing the delete key.
-*/
-
-////////////////
-
-class ExtDateEditPrivate
-{
-public:
-    int y;
-    int m;
-    int d;
-    // remebers the last entry for the day.
-    // if the day is 31 and you cycle through the months,
-    // the day will be 31 again if you reach a month with 31 days
-    // otherwise it will be the highest day in the month
-    int dayCache;
-    int yearSection;
-    int monthSection;
-    int daySection;
-    ExtDateEdit::Order ord;
-    bool overwrite;
-    bool adv;
-    int timerId;
-    bool typing;
-    ExtDate min;
-    ExtDate max;
-    bool changed;
-    ExtDateTimeEditor *ed;
-    Q3SpinWidget *controls;
-};
-
-
-/*!
-    \class ExtDateEdit ExtDatetimeedit.h
-    \brief The ExtDateEdit class provides a date editor.
-
-    \ingroup advanced
-    \ingroup time
-
-    ExtDateEdit allows the user to edit dates by using the keyboard or
-    the arrow keys to increase/decrease date values. The arrow keys
-    can be used to move from section to section within the ExtDateEdit
-    box. Dates appear in accordance with the local date/time settings
-    or in year, month, day order if the system doesn't provide this
-    information. It is recommended that the ExtDateEdit be initialised
-    with a date, e.g.
-
-    \code
-    ExtDateEdit *dateEdit = new ExtDateEdit( ExtDate::currentDate(), this );
-    dateEdit->setRange( ExtDate::currentDate().addDays( -365 ),
-			ExtDate::currentDate().addDays(  365 ) );
-    dateEdit->setOrder( ExtDateEdit::MDY );
-    dateEdit->setAutoAdvance( TRUE );
-    \endcode
-
-    Here we've created a new ExtDateEdit object initialised with today's
-    date and restricted the valid date range to today plus or minus
-    365 days. We've set the order to month, day, year. If the auto
-    advance property is TRUE (as we've set it here) when the user
-    completes a section of the date, e.g. enters two digits for the
-    month, they are automatically taken to the next section.
-
-    The maximum and minimum values for a date value in the date editor
-    default to the maximum and minimum values for a ExtDate. You can
-    change this by calling setMinValue(), setMaxValue() or setRange().
-
-    Terminology: A ExtDateEdit widget comprises three 'sections', one
-    each for the year, month and day. You can change the separator
-    character using ExtDateTimeEditor::setSeparator(), by default the
-    separator will be taken from the systems settings. If that is
-    not possible, it defaults to "-".
-
-    \image html datetimewidgets.png "Date Time Widgets"
-
-    \sa ExtDate QTimeEdit ExtDateTimeEdit
-*/
-
-/*!
-    \enum ExtDateEdit::Order
-
-    This enum defines the order in which the sections that comprise a
-    date appear.
-
-*/
-
-
-/*!
-    \enum QTimeEdit::Display
-
-    This enum defines the sections that comprise a time
-
-    \value Hours The hours section
-    \value Minutes The minutes section
-    \value Seconds The seconds section
-    \value AMPM The AM/PM section
-
-    The values can be or'ed together to show any combination.
-*/
-
-/*!
-    Constructs an empty date editor which is a child of \a parent and
-    called name \a name.
-*/
-
-ExtDateEdit::ExtDateEdit( QWidget * parent, const char * name )
-    : ExtDateTimeEditBase( parent, name )
-{
-    init();
-    updateButtons();
-}
-
-/*!
-    \overload
-
-    Constructs a date editor with the initial value \a date, parent \a
-    parent and called \a name.
-
-    The date editor is initialized with \a date.
-*/
-
-ExtDateEdit::ExtDateEdit( const ExtDate& date, QWidget * parent, const char * name )
-    : ExtDateTimeEditBase( parent, name )
-{
-    init();
-    setDate( date );
-}
-
-/*! \internal
-*/
-void ExtDateEdit::init()
-{
-  d = new ExtDateEditPrivate();
-  d->controls = new ExtDateTimeSpinWidget( this, 
-      qstrcmp( name(), "qt_datetime_dateedit" ) == 0 ? 
-      "qt_spin_widget" : "date edit controls" );
-  d->ed = new ExtDateTimeEditor( this, "date editor" );
-  d->controls->setEditWidget( d->ed );
-  setFocusProxy( d->ed );
-  connect( d->controls, SIGNAL( stepUpPressed() ), SLOT( stepUp() ) );
-  connect( d->controls, SIGNAL( stepDownPressed() ), SLOT( stepDown() ) );
-  connect( this, SIGNAL( valueChanged(const ExtDate&) ),
-      SLOT( updateButtons() ) );
-  d->ed->appendSection( QNumberSection( 0,4 ) );
-  d->ed->appendSection( QNumberSection( 5,7 ) );
-  d->ed->appendSection( QNumberSection( 8,10 ) );
-
-  d->yearSection = -1;
-  d->monthSection = -1;
-  d->daySection = -1;
-
-  d->y = 0;
-  d->m = 0;
-  d->d = 0;
-  d->dayCache = 0;
-  setOrder( localOrder() );
-  setFocusSection( 0 );
-  d->overwrite = TRUE;
-  d->adv = FALSE;
-  d->timerId = 0;
-  d->typing = FALSE;
-  d->min = ExtDate( -50000, 1, 1 );
-  d->max = ExtDate( 50000, 12, 31 );
-  d->changed = FALSE;
-
-  setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
-
-  refcount++;
-}
-
-/*!
-    Destroys the object and frees any allocated resources.
-*/
-
-ExtDateEdit::~ExtDateEdit()
-{
-  delete d;
-  if ( !--refcount )
-    cleanup();
-}
-
-/*!
-    \property ExtDateEdit::minValue
-
-    \brief the editor's minimum value
-
-    Setting the minimum date value is equivalent to calling
-    ExtDateEdit::setRange( \e d, maxValue() ), where \e d is the minimum
-    date. The default minimum date is 1752-09-14.
-
-    \sa maxValue setRange()
-*/
-
-ExtDate ExtDateEdit::minValue() const
-{
-  return d->min;
-}
-
-/*!
-    \property ExtDateEdit::maxValue
-
-    \brief the editor's maximum value
-
-    Setting the maximum date value for the editor is equivalent to
-    calling ExtDateEdit::setRange( minValue(), \e d ), where \e d is the
-    maximum date. The default maximum date is 8000-12-31.
-
-    \sa minValue setRange()
-*/
-
-ExtDate ExtDateEdit::maxValue() const
-{
-  return d->max;
-}
-
-
-/*!
-    Sets the valid input range for the editor to be from \a min to \a
-    max inclusive. If \a min is invalid no minimum date will be set.
-    Similarly, if \a max is invalid no maximum date will be set.
-*/
-
-void ExtDateEdit::setRange( const ExtDate& min, const ExtDate& max )
-{
-  if ( min.isValid() )
-    d->min = min;
-  if ( max.isValid() )
-    d->max = max;
-}
-
-/*!
-    Sets the separator to \a s. Note that currently only the first
-    character of \a s is used.
-*/
-
-void ExtDateEdit::setSeparator( const QString& s )
-{
-  d->ed->setSeparator( s );
-}
-
-/*!
-    Returns the editor's separator.
-*/
-
-QString ExtDateEdit::separator() const
-{
-  return d->ed->separator();
-}
-
-
-/*!
-    Enables/disables the push buttons according to the min/max date
-    for this widget.
-*/
-
-void ExtDateEdit::updateButtons()
-{
-  if ( !isEnabled() )
-    return;
-
-  fix();
-  
-  bool upEnabled = date() < maxValue();
-  bool downEnabled = date() > minValue();
-
-  d->controls->setUpEnabled( upEnabled );
-  d->controls->setDownEnabled( downEnabled );
-}
-
-/*! \reimp
- */
-void ExtDateEdit::resizeEvent( QResizeEvent * )
-{
-  d->controls->resize( width(), height() );
-}
-
-/*! \reimp
-
-*/
-QSize ExtDateEdit::sizeHint() const
-{
-  constPolish();
-  QFontMetrics fm( font() );
-  int fw = style().pixelMetric( QStyle::PM_DefaultFrameWidth, this );
-  int h = QMAX( fm.lineSpacing(), 14 ) + 2;
-  int w = 2 + fm.width( '9' ) * 8 + fm.width( d->ed->separator() ) * 2 
-            + d->controls->upRect().width() + fw * 4;
-
-  return QSize( w, QMAX(h + fw * 2,20) ).expandedTo( QApplication::globalStrut() );
-}
-
-/*! \reimp
-
-*/
-QSize ExtDateEdit::minimumSizeHint() const
-{
-  return sizeHint();
-}
-
-
-/*!
-    Returns the formatted number for section \a sec. This will
-    correspond to either the year, month or day section, depending on
-    the current display order.
-
-    \sa setOrder()
-*/
-
-QString ExtDateEdit::sectionFormattedText( int sec )
-{
-  QString txt;
-  txt = sectionText( sec );
-  if ( d->typing && sec == d->ed->focusSection() )
-    d->ed->setSectionSelection( sec, sectionOffsetEnd( sec ) - txt.length(),
-        sectionOffsetEnd( sec ) );
-  else
-    d->ed->setSectionSelection( sec, sectionOffsetEnd( sec ) - sectionLength( sec ),
-        sectionOffsetEnd( sec ) );
-  
-  txt = txt.rightJustify( sectionLength( sec ), EXTDATETIMEEDIT_HIDDEN_CHAR );
-  return txt;
-}
-
-
-/*!
-    Returns the desired length (number of digits) of section \a sec.
-    This will correspond to either the year, month or day section,
-    depending on the current display order.
-
-    \sa setOrder()
-*/
-
-int ExtDateEdit::sectionLength( int sec ) const
-{
-  int val = 0;
-  if ( sec == d->yearSection ) 
-    val = 4;
-  else if ( sec == d->monthSection ) 
-    val = 2;
-  else if ( sec == d->daySection ) 
-    val = 2;
-  
-  return val;
-}
-
-/*!
-    Returns the text of section \a sec. This will correspond to either
-    the year, month or day section, depending on the current display
-    order.
-
-    \sa setOrder()
-*/
-
-QString ExtDateEdit::sectionText( int sec ) const
-{
-  int val = 0;
-  if ( sec == d->yearSection ) 
-    val = d->y;
-  else if ( sec == d->monthSection ) 
-    val = d->m;
-  else if ( sec == d->daySection ) 
-    val = d->d;
-    
-  return QString::number( val );
-}
-
-/*! \internal
-
-  Returns the end of the section offset \a sec.
-
-*/
-
-int ExtDateEdit::sectionOffsetEnd( int sec ) const
-{
-  if ( sec == d->yearSection ) {
-    switch( d->ord ) {
-      case DMY:
-      case MDY:
-        return sectionOffsetEnd( sec-1) + separator().length() + sectionLength( sec );
-      case YMD:
-      case YDM:
-        return sectionLength( sec );
+    Q_D(ExtDateTimeEdit);
+    d->minimum = QVariant(DATETIME_MIN);
+    d->maximum = QVariant(DATETIME_MAX);
+    d->value = QVariant(ExtDateTime(date.isValid() ? date : DATE_INITIAL, TIME_MIN));
+    setDisplayFormat(d->defaultDateFormat);
+    if (d->displayFormat.isEmpty()) {
+        d->defaultDateFormat = QLatin1String("MM/dd/yy");
+        setDisplayFormat(d->defaultDateFormat);
     }
-  } else if ( sec == d->monthSection ) {
-    switch( d->ord ) {
-      case DMY:
-      case YDM:
-      case YMD:
-        return sectionOffsetEnd( sec-1) + separator().length() + sectionLength( sec );
-      case MDY:
-        return sectionLength( sec );
-    }
-  } else if ( sec == d->daySection ) {
-    switch( d->ord ) {
-      case DMY:
-        return sectionLength( sec );
-      case YMD:
-      case MDY:
-      case YDM:
-        return sectionOffsetEnd( sec-1 ) + separator().length() + sectionLength( sec );
-    }
-  }
-  return 0;
-}
-
-
-/*!
-    \property ExtDateEdit::order
-    \brief the order in which the year, month and day appear
-
-    The default order is locale dependent.
-
-    \sa Order
-*/
-
-void ExtDateEdit::setOrder( ExtDateEdit::Order order )
-{
-  d->ord = order;
-  switch( d->ord ) {
-    case DMY:
-      d->yearSection = 2;
-      d->monthSection = 1;
-      d->daySection = 0;
-      break;
-    case MDY:
-      d->yearSection = 2;
-      d->monthSection = 0;
-      d->daySection = 1;
-      break;
-    case YMD:
-      d->yearSection = 0;
-      d->monthSection = 1;
-      d->daySection = 2;
-      break;
-    case YDM:
-      d->yearSection = 0;
-      d->monthSection = 2;
-      d->daySection = 1;
-      break;
-  }
-  
-  if ( isVisible() )
-    d->ed->repaint( d->ed->rect(), FALSE );
-}
-
-
-ExtDateEdit::Order ExtDateEdit::order() const
-{
-  return d->ord;
-}
-
-
-/*! \reimp
-
-*/
-void ExtDateEdit::stepUp()
-{
-  int sec = d->ed->focusSection();
-  bool accepted = FALSE;
-  if ( sec == d->yearSection ) {
-    if ( !outOfRange( d->y+1, d->m, d->d ) ) {
-      accepted = TRUE;
-      setYear( d->y+1 );
-    }
-  } else if ( sec == d->monthSection ) {
-  	if ( !outOfRange( d->y, d->m+1, d->d ) ) {
-      accepted = TRUE;
-      setMonth( d->m+1 );
-  	}
-  } else if ( sec == d->daySection ) {
-    if ( !outOfRange( d->y, d->m, d->d+1 ) ) {
-      accepted = TRUE;
-      setDay( d->d+1 );
-    }
-  }
-  if ( accepted ) {
-    d->changed = TRUE;
-    emit valueChanged( date() );
-  }
-  
-  d->ed->repaint( d->ed->rect(), FALSE );
-}
-
-
-
-/*! \reimp
-
-*/
-
-void ExtDateEdit::stepDown()
-{
-  int sec = d->ed->focusSection();
-  bool accepted = FALSE;
-  if ( sec == d->yearSection ) {
-    if ( !outOfRange( d->y-1, d->m, d->d ) ) {
-      accepted = TRUE;
-      setYear( d->y-1 );
-    }
-  } else if ( sec == d->monthSection ) {
-    if ( !outOfRange( d->y, d->m-1, d->d ) ) {
-      accepted = TRUE;
-      setMonth( d->m-1 );
-    }
-  } else if ( sec == d->daySection ) {
-    if ( !outOfRange( d->y, d->m, d->d-1 ) ) {
-      accepted = TRUE;
-      setDay( d->d-1 );
-    }
-  }
-  if ( accepted ) {
-    d->changed = TRUE;
-    emit valueChanged( date() );
-  }
-  
-  d->ed->repaint( d->ed->rect(), FALSE );
 }
 
 /*!
-    Sets the year to \a year, which must be a valid year. The range
-    currently supported is from 1752 to 8000.
+  \fn ExtDateTimeEdit::ExtDateTimeEdit(const QTime &time, QWidget *parent)
 
-    \sa ExtDate
+  Constructs an empty date time editor with a \a parent.
+  The value is set to \a time.
 */
 
-void ExtDateEdit::setYear( int year )
+ExtDateTimeEdit::ExtDateTimeEdit(const QTime &time, QWidget *parent)
+    : QAbstractSpinBox(*new ExtDateTimeEditPrivate, parent)
 {
-  if ( !outOfRange( year, d->m, d->d ) ) {
-    d->y = year;
-    setMonth( d->m );
-  }
-}
-
-
-/*!
-    Sets the month to \a month, which must be a valid month, i.e.
-    between 1 and 12.
-*/
-
-void ExtDateEdit::setMonth( int month )
-{
-  if ( month < 1 )
-    month = 1;
-  if ( month > 12 )
-    month = 12;
-  if ( !outOfRange( d->y, month, d->d ) ) {
-    d->m = month;
-    setDay( d->d );
-  }
-}
-
-
-/*!
-    Sets the day to \a day, which must be a valid day. The function
-    will ensure that the \a day set is valid for the month and year.
-*/
-
-void ExtDateEdit::setDay( int day )
-{
-  ExtDate test = ExtDate( d->y, d->m, 1 );
-  
-  if ( day < 1 )
-    day = 1;
-  if ( day > test.daysInMonth() )
-    day = test.daysInMonth();
-  
-  d->dayCache = d->d;
-  d->d = day;
-}
-
-
-/*!
-    \property ExtDateEdit::date
-    \brief the editor's date value.
-
-    If the date property is not valid, the editor displays all zeroes
-    and ExtDateEdit::date() will return an invalid date. It is strongly
-    recommended that the editor is given a default date value (e.g.
-    currentDate()). That way, attempts to set the date property to an
-    invalid date will fail.
-
-    When changing the date property, if the date is less than
-    minValue(), or is greater than maxValue(), nothing happens.
-*/
-
-void ExtDateEdit::setDate( const ExtDate& date )
-{
-  if ( !date.isValid() ) {
-    d->y = 0;
-    d->m = 0;
-    d->d = 0;
-    d->dayCache = 0;
-  } else {
-    if ( date > maxValue() || date < minValue() )
-      return;
-    d->y = date.year();
-    d->m = date.month();
-    d->d = date.day();
-    d->dayCache = d->d;
-    emit valueChanged( date );
-  }
-  d->changed = FALSE;
-  d->ed->repaint( d->ed->rect(), FALSE );
-}
-
-ExtDate ExtDateEdit::date() const
-{
-    if ( ExtDate::isValid( d->y, d->m, d->d ) )
-	return ExtDate( d->y, d->m, d->d );
-    return ExtDate();
-}
-
-/*!  \internal
-
-  Returns TRUE if \a y, \a m, \a d is out of range, otherwise returns
-  FALSE.
-
-  \sa setRange()
-
-*/
-
-bool ExtDateEdit::outOfRange( int y, int m, int d ) const
-{
-  if ( ExtDate::isValid( y, m, d ) ) {
-    ExtDate currentDate( y, m, d );
-    if ( currentDate > maxValue() || currentDate < minValue() ) {
-	    //## outOfRange should set overwrite?
-	    return TRUE;
-    }
-    return FALSE;
-  }
-  return FALSE; /* assume ok */
-}
-
-/*!  \reimp
-
-*/
-
-void ExtDateEdit::addNumber( int sec, int num )
-{
-    if ( sec == -1 )
-	return;
-    killTimer( d->timerId );
-    bool overwrite = FALSE;
-    bool accepted = FALSE;
-    d->typing = TRUE;
-    QString txt;
-    if ( sec == d->yearSection ) {
-	txt = QString::number( d->y );
-	if ( d->overwrite || txt.length() == 4 ) {
-	    accepted = TRUE;
-	    d->y = num;
-	} else {
-	    txt += QString::number( num );
-	    if ( txt.length() == 4  ) {
-		int val = txt.toInt();
-		if ( val < 1792 )
-		    d->y = 1792;
-		else if ( val > 8000 )
-		    d->y = 8000;
-		else if ( outOfRange( val, d->m, d->d ) )
-		    txt = QString::number( d->y );
-		else {
-		    accepted = TRUE;
-		    d->y = val;
-		}
-	    } else {
-		accepted = TRUE;
-		d->y = txt.toInt();
-	    }
-	    if ( d->adv && txt.length() == 4 ) {
-		d->ed->setFocusSection( d->ed->focusSection()+1 );
-		overwrite = TRUE;
-	    }
-	}
-    } else if ( sec == d->monthSection ) {
-	txt = QString::number( d->m );
-	if ( d->overwrite || txt.length() == 2 ) {
-	    accepted = TRUE;
-	    d->m = num;
-	} else {
-	    txt += QString::number( num );
-	    int temp = txt.toInt();
-	    if ( temp > 12 )
-		temp = num;
-	    if ( outOfRange( d->y, temp, d->d ) )
-		txt = QString::number( d->m );
-	    else {
-		accepted = TRUE;
-		d->m = temp;
-	    }
-	    if ( d->adv && txt.length() == 2 ) {
-		d->ed->setFocusSection( d->ed->focusSection()+1 );
-		overwrite = TRUE;
-	    }
-	}
-    } else if ( sec == d->daySection ) {
-	txt = QString::number( d->d );
-	if ( d->overwrite || txt.length() == 2 ) {
-	    accepted = TRUE;
-	    d->d = num;
-	    d->dayCache = d->d;
-	} else {
-	    txt += QString::number( num );
-	    int temp = txt.toInt();
-	    if ( temp > 31 )
-		temp = num;
-	    if ( outOfRange( d->y, d->m, temp ) )
-		txt = QString::number( d->d );
-	    else {
-		accepted = TRUE;
-		d->d = temp;
-		d->dayCache = d->d;
-	    }
-	    if ( d->adv && txt.length() == 2 ) {
-		d->ed->setFocusSection( d->ed->focusSection()+1 );
-		overwrite = TRUE;
-	    }
-	}
-    }
-    if ( accepted ) {
-	d->changed = TRUE;
-	emit valueChanged( date() );
-    }
-    d->overwrite = overwrite;
-    d->timerId = startTimer( qApp->doubleClickInterval()*4 );
-    d->ed->repaint( d->ed->rect(), FALSE );
-}
-
-
-/*! \reimp
-
-*/
-
-bool ExtDateEdit::setFocusSection( int s )
-{
-  if ( s != d->ed->focusSection() ) {
-    killTimer( d->timerId );
-    d->overwrite = TRUE;
-    d->typing = FALSE;
-    fix(); // will emit valueChanged if necessary
-  }
-  return d->ed->setFocusSection( s );
-}
-
-
-/*!
-    Attempts to fix any invalid date entries.
-
-    The rules applied are as follows:
-
-    - if the day is larger than the number of days in the month, 
-    - it is reset to that number
-    - If the year has four digits it is left unchanged.
-    - If the year has two digits, the year will be changed to four
-      digits in the range current year - 70 to current year + 29.
-    - If the year has three digits in the range 100..999, the
-      current millennium, i.e. 2000, will be added giving a year
-      in the range 2100..2999.
-
-*/
-
-void ExtDateEdit::fix()
-{
-  bool changed = FALSE;
-  
-  ExtDate test = ExtDate( d->y, d->m, 1 );
-  if ( d->d > test.daysInMonth() ) {
-    
-    d->d = test.daysInMonth();
-    changed = TRUE;
-  }
-  
-  int currentYear = ExtDate::currentDate().year();
-  int year = d->y;
-  if ( year < 100 ) {
-    int currentCentury = currentYear / 100;
-    year += currentCentury * 100;
-    if ( currentYear > year ) {
-        if ( currentYear > year + 70 )
-      year += 100;
-    } else {
-        if ( year >= currentYear + 30 )
-      year -= 100;
-    }
-    changed = TRUE;
-      } else if ( year < 1000 ) {
-    int currentMillennium = currentYear / 10;
-    year += currentMillennium * 10;
-    changed = TRUE;
-  }
-  if ( changed && outOfRange( year, d->m, d->d ) ) {
-  	if ( minValue().isValid() && date() < minValue() ) {
-	    d->d =  minValue().day();
-	    d->dayCache = d->d;
-	    d->m = minValue().month();
-	    d->y = minValue().year();
-    }
-    if ( date() > maxValue() ) {
-	    d->d =  maxValue().day();
-	    d->dayCache = d->d;
-	    d->m = maxValue().month();
-	    d->y = maxValue().year();
-    }
-  } else if ( changed )
-    setYear( year );
-    
-  if ( changed ) {
-//    emit valueChanged( date() );
-//    d->changed = FALSE;
-  }
-}
-
-
-/*! \reimp
-
-*/
-
-bool ExtDateEdit::event( QEvent *e )
-{
-  if( e->type() == QEvent::FocusOut ) {
-    d->typing = FALSE;
-    // the following can't be done in fix() because fix() called
-    // from all over the place and it will break the old behaviour
-    if ( !ExtDate::isValid( d->y, d->m, d->d ) ) {
-      d->dayCache = d->d;
-      int i = d->d;
-      for ( ; i > 0; i-- ) {
-        d->d = i;
-        if ( ExtDate::isValid( d->y, d->m, d->d ) )
-          break;
-      }
-      d->changed = TRUE;
-    }
-    if ( d->changed ) {
-      fix();
-      emit valueChanged( date() );
-      d->changed = FALSE;
-    }
-  } else if ( e->type() == QEvent::LocaleChange ) {
-    readLocaleSettings();
-    d->ed->setSeparator( localDateSep() );
-    setOrder( localOrder() );
-  }
-
-  bool result = ExtDateTimeEditBase::event( e ); 
-  
-  return result;
-}
-
-/*!
-  \internal
-
-  Function which is called whenever the user tries to
-  remove the first number from \a sec by pressing the backspace key.
-*/
-
-void ExtDateEdit::removeFirstNumber( int sec )
-{
-    if ( sec == -1 )
-	return;
-    QString txt;
-    if ( sec == d->yearSection ) {
-	txt = QString::number( d->y );
-	txt = txt.mid( 1, txt.length() ) + "0";
-	d->y = txt.toInt();
-    } else if ( sec == d->monthSection ) {
-	txt = QString::number( d->m );
-	txt = txt.mid( 1, txt.length() ) + "0";
-	d->m = txt.toInt();
-    } else if ( sec == d->daySection ) {
-	txt = QString::number( d->d );
-	txt = txt.mid( 1, txt.length() ) + "0";
-	d->d = txt.toInt();
-	d->dayCache = d->d;
-    }
-    d->ed->repaint( d->ed->rect(), FALSE );
-}
-
-/*! \reimp
-
-*/
-
-void ExtDateEdit::removeLastNumber( int sec )
-{
-    if ( sec == -1 )
-	return;
-    QString txt;
-    if ( sec == d->yearSection ) {
-	txt = QString::number( d->y );
-	txt = txt.mid( 0, txt.length()-1 );
-	d->y = txt.toInt();
-    } else if ( sec == d->monthSection ) {
-	txt = QString::number( d->m );
-	txt = txt.mid( 0, txt.length()-1 );
-	d->m = txt.toInt();
-    } else if ( sec == d->daySection ) {
-	txt = QString::number( d->d );
-	txt = txt.mid( 0, txt.length()-1 );
-	d->d = txt.toInt();
-	d->dayCache = d->d;
-    }
-    d->ed->repaint( d->ed->rect(), FALSE );
-}
-
-/*!
-    \property ExtDateEdit::autoAdvance
-    \brief whether the editor automatically advances to the next
-    section
-
-    If autoAdvance is TRUE, the editor will automatically advance
-    focus to the next date section if a user has completed a section.
-    The default is FALSE.
-*/
-
-void ExtDateEdit::setAutoAdvance( bool advance )
-{
-    d->adv = advance;
-}
-
-
-bool ExtDateEdit::autoAdvance() const
-{
-    return d->adv;
-}
-
-/*! \reimp
-*/
-
-void ExtDateEdit::timerEvent( QTimerEvent * )
-{
-    d->overwrite = TRUE;
-}
-
-/*!
-    \fn void ExtDateEdit::valueChanged( const ExtDate& date )
-
-    This signal is emitted whenever the editor's value changes. The \a
-    date parameter is the new value.
-*/
-
-///////////
-
-class QTimeEditPrivate
-{
-public:
-    int h;
-    int m;
-    int s;
-    uint display;
-    bool adv;
-    bool overwrite;
-    int timerId;
-    bool typing;
-    QTime min;
-    QTime max;
-    bool changed;
-    ExtDateTimeEditor *ed;
-    Q3SpinWidget *controls;
-};
-
-/*!
-    \class QTimeEdit ExtDatetimeedit.h
-    \brief The QTimeEdit class provides a time editor.
-
-    \ingroup advanced
-    \ingroup time
-    \mainclass
-
-    QTimeEdit allows the user to edit times by using the keyboard or
-    the arrow keys to increase/decrease time values. The arrow keys
-    can be used to move from section to section within the QTimeEdit
-    box. The user can automatically be moved to the next section once
-    they complete a section using setAutoAdvance(). Times appear in
-    hour, minute, second order. It is recommended that the QTimeEdit
-    is initialised with a time, e.g.
-    \code
-    QTime timeNow = QTime::currentTime();
-    QTimeEdit *timeEdit = new QTimeEdit( timeNow, this );
-    timeEdit->setRange( timeNow, timeNow.addSecs( 60 * 60 ) );
-    \endcode
-    Here we've created a QTimeEdit widget set to the current time.
-    We've also set the minimum value to the current time and the
-    maximum time to one hour from now.
-
-    The maximum and minimum values for a time value in the time editor
-    default to the maximum and minimum values for a QTime. You can
-    change this by calling setMinValue(), setMaxValue() or setRange().
-
-    Terminology: A QTimeWidget consists of three sections, one each
-    for the hour, minute and second. You can change the separator
-    character using setSeparator(), by default the separator is read
-    from the system's settings.
-
-    \img datetimewidgets.png Date Time Widgets
-
-    \sa QTime ExtDateEdit ExtDateTimeEdit
-*/
-
-
-// /*!
-//     Constructs an empty time edit with parent \a parent and called \a
-//     name.
-// */
-//
-// QTimeEdit::QTimeEdit( QWidget * parent, const char * name )
-//     : ExtDateTimeEditBase( parent, name )
-// {
-//     init();
-// }
-//
-// /*!
-//     \overload
-//
-//     Constructs a time edit with the initial time value, \a time,
-//     parent \a parent and called \a name.
-// */
-//
-// QTimeEdit::QTimeEdit( const QTime& time, QWidget * parent, const char * name )
-//     : ExtDateTimeEditBase( parent, name )
-// {
-//     init();
-//     setTime( time );
-// }
-//
-// /*! \internal
-//  */
-//
-// void QTimeEdit::init()
-// {
-//     d = new QTimeEditPrivate();
-//     d->ed = new ExtDateTimeEditor( this, "time edit base" );
-//     d->controls = new ExtDateTimeSpinWidget( this, qstrcmp( name(), "qt_datetime_timeedit" ) == 0 ? "qt_spin_widget" : "time edit controls" );
-//     d->controls->setEditWidget( d->ed );
-//     setFocusProxy( d->ed );
-//     connect( d->controls, SIGNAL( stepUpPressed() ), SLOT( stepUp() ) );
-//     connect( d->controls, SIGNAL( stepDownPressed() ), SLOT( stepDown() ) );
-//
-//     d->ed->appendSection( QNumberSection( 0,0, TRUE, 0 ) );
-//     d->ed->appendSection( QNumberSection( 0,0, TRUE, 1 ) );
-//     d->ed->appendSection( QNumberSection( 0,0, TRUE, 2 ) );
-//     d->ed->setSeparator( localTimeSep() );
-//
-//     d->h = 0;
-//     d->m = 0;
-//     d->s = 0;
-//     d->display = Hours | Minutes | Seconds;
-//     if ( lAMPM ) {
-// 	d->display |= AMPM;
-// 	d->ed->appendSection( QNumberSection( 0,0, FALSE, 3 ) );
-//     }
-//     d->adv = FALSE;
-//     d->overwrite = TRUE;
-//     d->timerId = 0;
-//     d->typing = FALSE;
-//     d->min = QTime( 0, 0, 0 );
-//     d->max = QTime( 23, 59, 59 );
-//     d->changed = FALSE;
-//
-//     setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
-//
-//     refcount++;
-// }
-//
-// /*!
-//     Destroys the object and frees any allocated resources.
-// */
-//
-// QTimeEdit::~QTimeEdit()
-// {
-//     delete d;
-//     if ( !--refcount )
-// 	cleanup();
-// }
-//
-// /*!
-//     \property QTimeEdit::minValue
-//     \brief the minimum time value
-//
-//     Setting the minimum time value is equivalent to calling
-//     QTimeEdit::setRange( \e t, maxValue() ), where \e t is the minimum
-//     time. The default minimum time is 00:00:00.
-//
-//     \sa maxValue setRange()
-// */
-//
-// QTime QTimeEdit::minValue() const
-// {
-//     return d->min;
-// }
-//
-// /*!
-//     \property QTimeEdit::maxValue
-//     \brief the maximum time value
-//
-//     Setting the maximum time value is equivalent to calling
-//     QTimeEdit::setRange( minValue(), \e t ), where \e t is the maximum
-//     time. The default maximum time is 23:59:59.
-//
-//     \sa minValue setRange()
-// */
-//
-// QTime QTimeEdit::maxValue() const
-// {
-//     return d->max;
-// }
-//
-//
-// /*!
-//     Sets the valid input range for the editor to be from \a min to \a
-//     max inclusive. If \a min is invalid no minimum time is set.
-//     Similarly, if \a max is invalid no maximum time is set.
-// */
-//
-// void QTimeEdit::setRange( const QTime& min, const QTime& max )
-// {
-//     if ( min.isValid() )
-// 	d->min = min;
-//     if ( max.isValid() )
-// 	d->max = max;
-// }
-//
-// /*!
-//   \property QTimeEdit::display
-//   \brief the sections that are displayed in the time edit
-//
-//   The value can be any combination of the values in the Display enum.
-//   By default, the widget displays hours, minutes and seconds.
-// */
-// void QTimeEdit::setDisplay( uint display )
-// {
-//     if ( d->display == display )
-// 	return;
-//
-//     d->ed->clearSections();
-//     d->display = display;
-//     if ( d->display & Hours )
-// 	d->ed->appendSection( QNumberSection( 0,0, TRUE, 0 ) );
-//     if ( d->display & Minutes )
-// 	d->ed->appendSection( QNumberSection( 0,0, TRUE, 1 ) );
-//     if ( d->display & Seconds )
-// 	d->ed->appendSection( QNumberSection( 0,0, TRUE, 2 ) );
-//     if ( d->display & AMPM )
-// 	d->ed->appendSection( QNumberSection( 0,0, FALSE, 3 ) );
-//
-//     d->ed->setFocusSection( 0 );
-//     d->ed->update();
-// }
-//
-// uint QTimeEdit::display() const
-// {
-//     return d->display;
-// }
-//
-// /*!
-//     \property QTimeEdit::time
-//     \brief the editor's time value.
-//
-//     When changing the time property, if the time is less than
-//     minValue(), or is greater than maxValue(), nothing happens.
-// */
-//
-// void QTimeEdit::setTime( const QTime& time )
-// {
-//     if ( !time.isValid() ) {
-// 	d->h = 0;
-// 	d->m = 0;
-// 	d->s = 0;
-//     } else {
-// 	if ( time > maxValue() || time < minValue() )
-// 	    return;
-// 	d->h = time.hour();
-// 	d->m = time.minute();
-// 	d->s = time.second();
-// 	emit valueChanged( time );
-//     }
-//     d->changed = FALSE;
-//     d->ed->repaint( d->ed->rect(), FALSE );
-// }
-//
-// QTime QTimeEdit::time() const
-// {
-//     if ( QTime::isValid( d->h, d->m, d->s ) )
-// 	return QTime( d->h, d->m, d->s );
-//     return QTime();
-// }
-//
-// /*!
-//     \property QTimeEdit::autoAdvance
-//     \brief whether the editor automatically advances to the next
-//     section
-//
-//     If autoAdvance is TRUE, the editor will automatically advance
-//     focus to the next time section if a user has completed a section.
-//     The default is FALSE.
-// */
-//
-// void QTimeEdit::setAutoAdvance( bool advance )
-// {
-//     d->adv = advance;
-// }
-//
-// bool QTimeEdit::autoAdvance() const
-// {
-//     return d->adv;
-// }
-//
-// /*!
-//     Sets the separator to \a s. Note that currently only the first
-//     character of \a s is used.
-// */
-//
-// void QTimeEdit::setSeparator( const QString& s )
-// {
-//     d->ed->setSeparator( s );
-// }
-//
-// /*!
-//     Returns the editor's separator.
-// */
-//
-// QString QTimeEdit::separator() const
-// {
-//     return d->ed->separator();
-// }
-//
-//
-// /*!
-//     \fn void QTimeEdit::valueChanged( const QTime& time )
-//
-//     This signal is emitted whenever the editor's value changes. The \a
-//     time parameter is the new value.
-// */
-//
-// /*! \reimp
-//
-// */
-//
-// bool QTimeEdit::event( QEvent *e )
-// {
-//     if ( e->type() == QEvent::FocusOut ) {
-// 	d->typing = FALSE;
-// 	if ( d->changed ) {
-// 	    emit valueChanged( time() );
-// 	    d->changed = FALSE;
-// 	}
-//     } else if ( e->type() == QEvent::LocaleChange ) {
-// 	readLocaleSettings();
-// 	d->ed->setSeparator( localTimeSep() );
-//     }
-//     return ExtDateTimeEditBase::event( e );
-// }
-//
-// /*! \reimp
-//
-// */
-//
-// void QTimeEdit::timerEvent( QTimerEvent * )
-// {
-//     d->overwrite = TRUE;
-// }
-//
-//
-// /*! \reimp
-//
-// */
-//
-// void QTimeEdit::stepUp()
-// {
-//     int sec = d->ed->mapSection( d->ed->focusSection() );
-//     bool accepted = TRUE;
-//     switch( sec ) {
-//     case 0:
-// 	if ( !outOfRange( d->h+1, d->m, d->s ) )
-// 	    setHour( d->h+1 );
-// 	else
-// 	    setHour( d->min.hour() );
-// 	break;
-//     case 1:
-// 	if ( !outOfRange( d->h, d->m+1, d->s ) )
-// 	    setMinute( d->m+1 );
-// 	else
-// 	    setMinute( d->min.minute() );
-// 	break;
-//     case 2:
-// 	if ( !outOfRange( d->h, d->m, d->s+1 ) )
-// 	    setSecond( d->s+1 );
-// 	else
-// 	    setSecond( d->min.second() );
-// 	break;
-//     case 3:
-// 	if ( d->h < 12 )
-// 	    setHour( d->h+12 );
-// 	else
-// 	    setHour( d->h-12 );
-// 	break;
-//     default:
-// 	accepted = FALSE;
-// #ifdef QT_CHECK_RANGE
-// 	qWarning( "QTimeEdit::stepUp: Focus section out of range!" );
-// #endif
-// 	break;
-//     }
-//     if ( accepted ) {
-// 	d->changed = TRUE;
-// 	emit valueChanged( time() );
-//     }
-//     d->ed->repaint( d->ed->rect(), FALSE );
-// }
-//
-//
-// /*! \reimp
-//
-// */
-//
-// void QTimeEdit::stepDown()
-// {
-//     int sec = d->ed->mapSection( d->ed->focusSection() );
-//
-//     bool accepted = TRUE;
-//     switch( sec ) {
-//     case 0:
-// 	if ( !outOfRange( d->h-1, d->m, d->s ) )
-// 	    setHour( d->h-1 );
-// 	else
-// 	    setHour( d->max.hour() );
-// 	break;
-//     case 1:
-// 	if ( !outOfRange( d->h, d->m-1, d->s ) )
-// 	    setMinute( d->m-1 );
-// 	else
-// 	    setMinute( d->max.minute() );
-// 	break;
-//     case 2:
-// 	if ( !outOfRange( d->h, d->m, d->s-1 ) )
-// 	    setSecond( d->s-1 );
-// 	else
-// 	    setSecond( d->max.second() );
-// 	break;
-//     case 3:
-// 	if ( d->h > 11 )
-// 	    setHour( d->h-12 );
-// 	else
-// 	    setHour( d->h+12 );
-// 	break;
-//     default:
-// 	accepted = FALSE;
-// #ifdef QT_CHECK_RANGE
-// 	qWarning( "QTimeEdit::stepDown: Focus section out of range!" );
-// #endif
-// 	break;
-//     }
-//     if ( accepted ) {
-// 	d->changed = TRUE;
-// 	emit valueChanged( time() );
-//     }
-//     d->ed->repaint( d->ed->rect(), FALSE );
-// }
-//
-//
-// /*!
-//     Returns the formatted number for section \a sec. This will
-//     correspond to either the hour, minute or second section, depending
-//     on \a sec.
-// */
-//
-// QString QTimeEdit::sectionFormattedText( int sec )
-// {
-//     QString txt;
-//     txt = sectionText( sec );
-//     txt = txt.rightJustify( 2, EXTDATETIMEEDIT_HIDDEN_CHAR );
-//     int offset = sec*2+sec*separator().length() + txt.length();
-//     if ( d->typing && sec == d->ed->focusSection() )
-// 	d->ed->setSectionSelection( sec, offset - txt.length(), offset );
-//     else
-// 	d->ed->setSectionSelection( sec, offset - txt.length(), offset );
-//
-//     return txt;
-// }
-//
-//
-// /*! \reimp
-//
-// */
-//
-// bool QTimeEdit::setFocusSection( int sec )
-// {
-//     if ( sec != d->ed->focusSection() ) {
-// 	killTimer( d->timerId );
-// 	d->overwrite = TRUE;
-// 	d->typing = FALSE;
-// 	QString txt = sectionText( sec );
-// 	txt = txt.rightJustify( 2, EXTDATETIMEEDIT_HIDDEN_CHAR );
-// 	int offset = sec*2+sec*separator().length() + txt.length();
-// 	d->ed->setSectionSelection( sec, offset - txt.length(), offset );
-// 	if ( d->changed ) {
-// 	    emit valueChanged( time() );
-// 	    d->changed = FALSE;
-// 	}
-//     }
-//     return d->ed->setFocusSection( sec );
-// }
-//
-//
-// /*!
-//     Sets the hour to \a h, which must be a valid hour, i.e. in the
-//     range 0..24.
-// */
-//
-// void QTimeEdit::setHour( int h )
-// {
-//     if ( h < 0 )
-// 	h = 0;
-//     if ( h > 23 )
-// 	h = 23;
-//     d->h = h;
-// }
-//
-//
-// /*!
-//     Sets the minute to \a m, which must be a valid minute, i.e. in the
-//     range 0..59.
-// */
-//
-// void QTimeEdit::setMinute( int m )
-// {
-//     if ( m < 0 )
-// 	m = 0;
-//     if ( m > 59 )
-// 	m = 59;
-//     d->m = m;
-// }
-//
-//
-// /*!
-//     Sets the second to \a s, which must be a valid second, i.e. in the
-//     range 0..59.
-// */
-//
-// void QTimeEdit::setSecond( int s )
-// {
-//     if ( s < 0 )
-// 	s = 0;
-//     if ( s > 59 )
-// 	s = 59;
-//     d->s = s;
-// }
-//
-//
-// /*! \internal
-//
-//   Returns the text of section \a sec.
-//
-// */
-//
-// QString QTimeEdit::sectionText( int sec )
-// {
-//     sec = d->ed->mapSection( sec );
-//
-//     QString txt;
-//     switch( sec ) {
-//     case 0:
-// 	if ( !(d->display & AMPM) || ( d->h < 13 && d->h ) ) {    // I wished the day stared at 0:00 for everybody
-// 	    txt = QString::number( d->h );
-// 	} else {
-// 	    if ( d->h )
-// 		txt = QString::number( d->h - 12 );
-// 	    else
-// 		txt = "12";
-// 	}
-// 	break;
-//     case 1:
-// 	txt = QString::number( d->m );
-// 	break;
-//     case 2:
-// 	txt = QString::number( d->s );
-// 	break;
-//     case 3:
-// 	if ( d->h < 12 ) {
-// 	    if ( lAM )
-// 		txt = *lAM;
-// 	    else
-// 		txt = QString::fromLatin1( "AM" );
-// 	} else {
-// 	    if ( lPM )
-// 		txt = *lPM;
-// 	    else
-// 		txt = QString::fromLatin1( "PM" );
-// 	}
-// 	break;
-//     default:
-// 	break;
-//     }
-//     return txt;
-// }
-//
-//
-// /*! \internal
-//  Returns TRUE if \a h, \a m, and \a s are out of range.
-//  */
-//
-// bool QTimeEdit::outOfRange( int h, int m, int s ) const
-// {
-//     if ( QTime::isValid( h, m, s ) ) {
-// 	QTime currentTime( h, m, s );
-// 	if ( currentTime > maxValue() ||
-// 	     currentTime < minValue() )
-// 	    return TRUE;
-// 	else
-// 	    return FALSE;
-//     }
-//     return TRUE;
-// }
-//
-// /*! \reimp
-//
-// */
-//
-// void QTimeEdit::addNumber( int sec, int num )
-// {
-//     if ( sec == -1 )
-// 	return;
-//     sec = d->ed->mapSection( sec );
-//     killTimer( d->timerId );
-//     bool overwrite = FALSE;
-//     bool accepted = FALSE;
-//     d->typing = TRUE;
-//     QString txt;
-//
-//     switch( sec ) {
-//     case 0:
-// 	txt = ( d->display & AMPM && d->h > 12 ) ?
-// 	    QString::number( d->h - 12 ) : QString::number( d->h );
-//
-// 	if ( d->overwrite || txt.length() == 2 ) {
-// 	    if ( d->display & AMPM && num == 0 )
-// 		break; // Don't process 0 in 12 hour clock mode
-// 	    if ( d->display & AMPM && d->h > 11 )
-// 		num += 12;
-// 	    if ( !outOfRange( num, d->m, d->s ) ) {
-// 		accepted = TRUE;
-// 		d->h = num;
-// 	    }
-// 	} else {
-// 	    txt += QString::number( num );
-// 	    int temp = txt.toInt();
-//
-// 	    if ( d->display & AMPM ) {
-// 		if ( temp == 12 ) {
-// 		    if ( d->h < 12 ) {
-// 			temp = 0;
-// 		    }
-// 		    accepted = TRUE;
-// 		} else if ( outOfRange( temp + 12, d->m, d->s ) ) {
-// 		    txt = QString::number( d->h );
-// 		} else {
-// 		    if ( d->h > 11 ) {
-// 			temp += 12;
-// 		    }
-// 		    accepted = TRUE;
-// 		}
-// 	    } else if ( !(d->display & AMPM) && outOfRange( temp, d->m, d->s ) ) {
-// 		txt = QString::number( d->h );
-// 	    } else {
-// 		accepted = TRUE;
-// 	    }
-//
-// 	    if ( accepted )
-// 		d->h = temp;
-//
-// 	    if ( d->adv && txt.length() == 2 ) {
-// 		setFocusSection( d->ed->focusSection()+1 );
-// 		overwrite = TRUE;
-// 	    }
-// 	}
-// 	break;
-//
-//     case 1:
-// 	txt = QString::number( d->m );
-// 	if ( d->overwrite || txt.length() == 2 ) {
-// 	    if ( !outOfRange( d->h, num, d->s ) ) {
-// 		accepted = TRUE;
-// 		d->m = num;
-// 	    }
-// 	} else {
-// 	    txt += QString::number( num );
-// 	    int temp = txt.toInt();
-// 	    if ( temp > 59 )
-// 		temp = num;
-// 	    if ( outOfRange( d->h, temp, d->s ) )
-// 		txt = QString::number( d->m );
-// 	    else {
-// 		accepted = TRUE;
-// 		d->m = temp;
-// 	    }
-// 	    if ( d->adv && txt.length() == 2 ) {
-// 		setFocusSection( d->ed->focusSection()+1 );
-// 		overwrite = TRUE;
-// 	    }
-// 	}
-// 	break;
-//
-//     case 2:
-// 	txt = QString::number( d->s );
-// 	if ( d->overwrite || txt.length() == 2 ) {
-// 	    if ( !outOfRange( d->h, d->m, num ) ) {
-// 		accepted = TRUE;
-// 		d->s = num;
-// 	    }
-// 	} else {
-// 	    txt += QString::number( num );
-// 	    int temp = txt.toInt();
-// 	    if ( temp > 59 )
-// 		temp = num;
-// 	    if ( outOfRange( d->h, d->m, temp ) )
-// 		txt = QString::number( d->s );
-// 	    else {
-// 		accepted = TRUE;
-// 		d->s = temp;
-// 	    }
-// 	    if ( d->adv && txt.length() == 2 ) {
-// 		setFocusSection( d->ed->focusSection()+1 );
-// 		overwrite = TRUE;
-// 	    }
-// 	}
-// 	break;
-//
-//     case 3:
-// 	break;
-//
-//     default:
-// 	break;
-//     }
-//     d->changed = accepted;
-//     if ( accepted )
-// 	emit valueChanged( time() );
-//     d->overwrite = overwrite;
-//     d->timerId = startTimer( qApp->doubleClickInterval()*4 );
-//     d->ed->repaint( d->ed->rect(), FALSE );
-// }
-//
-//
-// /*!
-//   \internal
-//
-//   Function which is called whenever the user tries to
-//   remove the first number from \a sec by pressing the backspace key.
-// */
-//
-// void QTimeEdit::removeFirstNumber( int sec )
-// {
-//     if ( sec == -1 )
-// 	return;
-//     sec = d->ed->mapSection( sec );
-//     QString txt;
-//     switch( sec ) {
-//     case 0:
-// 	txt = QString::number( d->h );
-// 	break;
-//     case 1:
-// 	txt = QString::number( d->m );
-// 	break;
-//     case 2:
-// 	txt = QString::number( d->s );
-// 	break;
-//     }
-//     txt = txt.mid( 1, txt.length() ) + "0";
-//     switch( sec ) {
-//     case 0:
-// 	d->h = txt.toInt();
-// 	break;
-//     case 1:
-// 	d->m = txt.toInt();
-// 	break;
-//     case 2:
-// 	d->s = txt.toInt();
-// 	break;
-//     }
-//     d->ed->repaint( d->ed->rect(), FALSE );
-// }
-//
-// /*! \reimp
-//
-// */
-// void QTimeEdit::removeLastNumber( int sec )
-// {
-//     if ( sec == -1 )
-// 	return;
-//     sec = d->ed->mapSection( sec );
-//     QString txt;
-//     switch( sec ) {
-//     case 0:
-// 	txt = QString::number( d->h );
-// 	break;
-//     case 1:
-// 	txt = QString::number( d->m );
-// 	break;
-//     case 2:
-// 	txt = QString::number( d->s );
-// 	break;
-//     }
-//     txt = txt.mid( 0, txt.length()-1 );
-//     switch( sec ) {
-//     case 0:
-// 	d->h = txt.toInt();
-// 	break;
-//     case 1:
-// 	d->m = txt.toInt();
-// 	break;
-//     case 2:
-// 	d->s = txt.toInt();
-// 	break;
-//     }
-//     d->ed->repaint( d->ed->rect(), FALSE );
-// }
-//
-// /*! \reimp
-//  */
-// void QTimeEdit::resizeEvent( QResizeEvent * )
-// {
-//     d->controls->resize( width(), height() );
-// }
-//
-// /*! \reimp
-// */
-// QSize QTimeEdit::sizeHint() const
-// {
-//     constPolish();
-//     QFontMetrics fm( font() );
-//     int fw = style().pixelMetric( QStyle::PM_DefaultFrameWidth, this );
-//     int h = fm.lineSpacing() + 2;
-//     int w = 2 + fm.width( '9' ) * 6 + fm.width( d->ed->separator() ) * 2 +
-// 	d->controls->upRect().width() + fw * 4;
-//     if ( d->display & AMPM ) {
-// 	if ( lAM )
-// 	    w += fm.width( *lAM ) + 4;
-// 	else
-// 	    w += fm.width( QString::fromLatin1( "AM" ) ) + 4;
-//     }
-//
-//     return QSize( w, QMAX(h + fw * 2,20) ).expandedTo( QApplication::globalStrut() );
-// }
-//
-// /*! \reimp
-// */
-// QSize QTimeEdit::minimumSizeHint() const
-// {
-//     return sizeHint();
-// }
-//
-// /*!
-//     \internal
-//     Enables/disables the push buttons according to the min/max time
-//     for this widget.
-// */
-//
-// // ### Remove in 4.0?
-//
-// void QTimeEdit::updateButtons()
-// {
-//     if ( !isEnabled() )
-// 	return;
-//
-//     bool upEnabled = time() < maxValue();
-//     bool downEnabled = time() > minValue();
-//
-//     d->controls->setUpEnabled( upEnabled );
-//     d->controls->setDownEnabled( downEnabled );
-// }
-
-
-class ExtDateTimeEditPrivate
-{
-public:
-    bool adv;
-};
-
-/*!
-    \class ExtDateTimeEdit ExtDatetimeedit.h
-    \brief The ExtDateTimeEdit class combines a ExtDateEdit and QTimeEdit
-    widget into a single widget for editing datetimes.
-
-    \ingroup advanced
-    \ingroup time
-
-    ExtDateTimeEdit consists of a ExtDateEdit and QTimeEdit widget placed
-    side by side and offers the functionality of both. The user can
-    edit the date and time by using the keyboard or the arrow keys to
-    increase/decrease date or time values. The Tab key can be used to
-    move from section to section within the ExtDateTimeEdit widget, and
-    the user can be moved automatically when they complete a section
-    using setAutoAdvance(). The datetime can be set with
-    setDateTime().
-
-    The date format is read from the system's locale settings. It is
-    set to year, month, day order if that is not possible. See
-    ExtDateEdit::setOrder() to change this. Times appear in the order
-    hours, minutes, seconds using the 24 hour clock.
-
-    It is recommended that the ExtDateTimeEdit is initialised with a
-    datetime, e.g.
-    \code
-    ExtDateTimeEdit *dateTimeEdit = new ExtDateTimeEdit( ExtDateTime::currentDateTime(), this );
-    dateTimeEdit->dateEdit()->setRange( ExtDateTime::currentDate(),
-					ExtDateTime::currentDate().addDays( 7 ) );
-    \endcode
-    Here we've created a new ExtDateTimeEdit set to the current date and
-    time, and set the date to have a minimum date of now and a maximum
-    date of a week from now.
-
-    Terminology: A ExtDateEdit widget consists of three 'sections', one
-    each for the year, month and day. Similarly a QTimeEdit consists
-    of three sections, one each for the hour, minute and second. The
-    character that separates each date section is specified with
-    setDateSeparator(); similarly setTimeSeparator() is used for the
-    time sections.
-
-    \image html datetimewidgets.png "Date Time Widgets"
-
-    \sa ExtDateEdit QTimeEdit
-*/
-
-/*!
-    Constructs an empty datetime edit with parent \a parent and called
-    \a name.
-*/
-ExtDateTimeEdit::ExtDateTimeEdit( QWidget * parent, const char * name )
-    : QWidget( parent, name )
-{
-    init();
-}
-
-
-/*!
-    \overload
-
-    Constructs a datetime edit with the initial value \a datetime,
-    parent \a parent and called \a name.
-*/
-ExtDateTimeEdit::ExtDateTimeEdit( const ExtDateTime& datetime,
-			      QWidget * parent, const char * name )
-    : QWidget( parent, name )
-{
-    init();
-    setDateTime( datetime );
-}
-
-
-
-/*!
-    Destroys the object and frees any allocated resources.
-*/
-
-ExtDateTimeEdit::~ExtDateTimeEdit()
-{
-    delete d;
-}
-
-
-/*!
-    \reimp
-
-    Intercepts and handles resize events which have special meaning
-    for the ExtDateTimeEdit.
-*/
-
-void ExtDateTimeEdit::resizeEvent( QResizeEvent * )
-{
-    int dw = de->sizeHint().width();
-    int tw = te->sizeHint().width();
-    int w = width();
-    int h = height();
-    int extra = w - ( dw + tw );
-
-    if ( tw + extra < 0 ) {
-	dw = w;
-    } else {
-	dw += 9 * extra / 16;
-    }
-    tw = w - dw;
-
-    de->setGeometry( 0, 0, dw, h );
-    te->setGeometry( dw, 0, tw, h );
-}
-
-/*! \reimp
-*/
-
-QSize ExtDateTimeEdit::minimumSizeHint() const
-{
-    QSize dsh = de->minimumSizeHint();
-    QSize tsh = te->minimumSizeHint();
-    return QSize( dsh.width() + tsh.width(),
-		  QMAX( dsh.height(), tsh.height() ) );
-}
-
-/*!  \internal
- */
-
-void ExtDateTimeEdit::init()
-{
-    d = new ExtDateTimeEditPrivate();
-    de = new ExtDateEdit( this, "qt_datetime_dateedit" );
-    te = new Q3TimeEdit( this, "qt_datetime_timeedit" );
-    d->adv = FALSE;
-    connect( de, SIGNAL( valueChanged( const ExtDate& ) ),
-	     this, SLOT( newValue( const ExtDate& ) ) );
-    connect( te, SIGNAL( valueChanged( const QTime& ) ),
-	     this, SLOT( newValue( const QTime& ) ) );
-    setFocusProxy( de );
-    setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
-}
-
-/*! \reimp
- */
-
-QSize ExtDateTimeEdit::sizeHint() const
-{
-    constPolish();
-    QSize dsh = de->sizeHint();
-    QSize tsh = te->sizeHint();
-    return QSize( dsh.width() + tsh.width(),
-		  QMAX( dsh.height(), tsh.height() ) );
-}
-
-/*!
-    \property ExtDateTimeEdit::dateTime
-    \brief the editor's datetime value
-
-    The datetime edit's datetime which may be an invalid datetime.
-*/
-
-void ExtDateTimeEdit::setDateTime( const ExtDateTime & dt )
-{
-    if ( dt.isValid() ) {
-	de->setDate( dt.date() );
-	te->setTime( dt.time() );
-	emit valueChanged( dt );
+    Q_D(ExtDateTimeEdit);
+    d->minimum = QVariant(DATETIME_MIN);
+    d->maximum = QVariant(DATETIME_MAX);
+    d->value = QVariant(ExtDateTime(DATE_INITIAL, time.isValid() ? time : TIME_MIN));
+    setDisplayFormat(d->defaultTimeFormat);
+    if (d->displayFormat.isEmpty()) {
+        d->defaultDateFormat = QLatin1String("hh:mm:ss");
+        setDisplayFormat(d->defaultTimeFormat);
     }
 }
 
 ExtDateTime ExtDateTimeEdit::dateTime() const
 {
-    return ExtDateTime( de->date(), te->time() );
+    Q_D(const ExtDateTimeEdit);
+    return d->value.toDateTime();
 }
 
-/*!
-    \fn void ExtDateTimeEdit::valueChanged( const ExtDateTime& datetime )
-
-    This signal is emitted every time the date or time changes. The \a
-    datetime argument is the new datetime.
-*/
-
-
-/*! \internal
-
-  Re-emits the value \a d.
- */
-
-void ExtDateTimeEdit::newValue( const ExtDate& )
+void ExtDateTimeEdit::setDateTime(const ExtDateTime &datetime)
 {
-    ExtDateTime dt = dateTime();
-    emit valueChanged( dt );
+    Q_D(ExtDateTimeEdit);
+    if (datetime.isValid()) {
+        d->cachedDay = -1;
+        d->setValue(QVariant(datetime), EmitIfChanged);
+    }
 }
 
-/*! \internal
-  \overload
-  Re-emits the value \a t.
- */
+/*!
+  \property ExtDateTimeEdit::date
+  \brief the ExtDate that is set in the ExtDateTimeEdit
 
-void ExtDateTimeEdit::newValue( const QTime& )
+  \sa time
+*/
+
+ExtDate ExtDateTimeEdit::date() const
 {
-    ExtDateTime dt = dateTime();
-    emit valueChanged( dt );
+    Q_D(const ExtDateTimeEdit);
+    return d->value.toDate();
 }
 
-
-/*!
-    Sets the auto advance property of the editor to \a advance. If set
-    to TRUE, the editor will automatically advance focus to the next
-    date or time section if the user has completed a section.
-*/
-
-void ExtDateTimeEdit::setAutoAdvance( bool advance )
+void ExtDateTimeEdit::setDate(const ExtDate &date)
 {
-    de->setAutoAdvance( advance );
-    te->setAutoAdvance( advance );
+    Q_D(ExtDateTimeEdit);
+    if (date.isValid()) {
+        d->cachedDay = -1;
+        d->setValue(QVariant(ExtDateTime(date, d->value.toTime())), EmitIfChanged);
+    }
 }
 
 /*!
-    Returns TRUE if auto-advance is enabled, otherwise returns FALSE.
+  \property ExtDateTimeEdit::time
+  \brief the QTime that is set in the ExtDateTimeEdit
 
-    \sa setAutoAdvance()
+  \sa date
 */
 
-bool ExtDateTimeEdit::autoAdvance() const
+QTime ExtDateTimeEdit::time() const
 {
-    return de->autoAdvance();
+    Q_D(const ExtDateTimeEdit);
+    return d->value.toTime();
+}
+
+void ExtDateTimeEdit::setTime(const QTime &time)
+{
+    Q_D(ExtDateTimeEdit);
+    if (time.isValid()) {
+        d->cachedDay = -1;
+        d->setValue(QVariant(ExtDateTime(d->value.toDate(), time)), EmitIfChanged);
+    }
 }
 
 /*!
-    \fn ExtDateEdit* ExtDateTimeEdit::dateEdit()
+  \property ExtDateTimeEdit::dateTime
+  \brief the ExtDateTime that is set in the ExtDateTimeEdit
 
-    Returns the internal widget used for editing the date part of the
-    datetime.
+  \sa minimumDate, minimumTime, maximumDate, maximumTime
 */
 
 /*!
-    \fn QTimeEdit* ExtDateTimeEdit::timeEdit()
+  \property ExtDateTimeEdit::minimumDate
 
-    Returns the internal widget used for editing the time part of the
-    datetime.
+  \brief the minimum date of the date time edit
+
+  When setting this property the \l maximumDate is adjusted if
+  necessary, to ensure that the range remains valid. If the date is
+  not a valid ExtDate object, this function does nothing.
+
+  \sa minimumTime, maximumTime, setDateRange()
 */
+
+ExtDate ExtDateTimeEdit::minimumDate() const
+{
+    Q_D(const ExtDateTimeEdit);
+    return d->minimum.toDate();
+}
+
+void ExtDateTimeEdit::setMinimumDate(const ExtDate &min)
+{
+    Q_D(ExtDateTimeEdit);
+    if (min.isValid()) {
+        const QVariant m(ExtDateTime(min, d->minimum.toTime()));
+        d->setRange(m, qMax(d->maximum, m));
+    }
+}
+
+void ExtDateTimeEdit::clearMinimumDate()
+{
+    setMinimumDate(DATE_MIN);
+}
+
+/*!
+  \property ExtDateTimeEdit::maximumDate
+
+  \brief the maximum date of the date time edit
+
+  When setting this property the \l minimumDate is adjusted if
+  necessary to ensure that the range remains valid. If the date is
+  not a valid ExtDate object, this function does nothing.
+
+  \sa minimumDate, minimumTime, maximumTime, setDateRange()
+*/
+
+ExtDate ExtDateTimeEdit::maximumDate() const
+{
+    Q_D(const ExtDateTimeEdit);
+    return d->maximum.toDate();
+}
+
+void ExtDateTimeEdit::setMaximumDate(const ExtDate &max)
+{
+    Q_D(ExtDateTimeEdit);
+    if (max.isValid()) {
+        const QVariant m(ExtDateTime(max, d->maximum.toTime()));
+        d->setRange(qMin(d->minimum, m), m);
+    }
+}
+
+void ExtDateTimeEdit::clearMaximumDate()
+{
+    setMaximumDate(DATE_MAX);
+}
+
+/*!
+  \property ExtDateTimeEdit::minimumTime
+
+  \brief the minimum time of the date time edit
+
+  When setting this property the \l maximumTime is adjusted if
+  necessary, to ensure that the range remains valid. If the time is
+  not a valid QTime object, this function does nothing.
+
+  \sa maximumTime, minimumDate, maximumDate, setTimeRange()
+*/
+
+QTime ExtDateTimeEdit::minimumTime() const
+{
+    Q_D(const ExtDateTimeEdit);
+    return d->minimum.toTime();
+}
+
+void ExtDateTimeEdit::setMinimumTime(const QTime &min)
+{
+    Q_D(ExtDateTimeEdit);
+    if (min.isValid()) {
+        const QVariant m(ExtDateTime(d->minimum.toDate(), min));
+        d->setRange(m, qMax(d->maximum, m));
+    }
+}
+
+void ExtDateTimeEdit::clearMinimumTime()
+{
+    setMinimumTime(TIME_MIN);
+}
+
+/*!
+  \property ExtDateTimeEdit::maximumTime
+
+  \brief the maximum time of the date time edit
+
+  When setting this property, the \l minimumTime is adjusted if
+  necessary to ensure that the range remains valid. If the time is
+  not a valid QTime object, this function does nothing.
+
+  \sa minimumTime, minimumDate, maximumDate, setTimeRange()
+*/
+QTime ExtDateTimeEdit::maximumTime() const
+{
+    Q_D(const ExtDateTimeEdit);
+    return d->maximum.toTime();
+}
+
+void ExtDateTimeEdit::setMaximumTime(const QTime &max)
+{
+    Q_D(ExtDateTimeEdit);
+    if (max.isValid()) {
+        const QVariant m(ExtDateTime(d->maximum.toDate(), max));
+        d->setRange(qMin(d->minimum, m), m);
+    }
+}
+
+void ExtDateTimeEdit::clearMaximumTime()
+{
+    setMaximumTime(TIME_MAX);
+}
+
+/*!
+  Convenience function to set minimum and maximum date with one
+  function call.
+
+  \code
+  setDateRange(min, max);
+  \endcode
+
+  is analogous to:
+
+  \code
+  setMinimumDate(min);
+  setMaximumDate(max);
+  \endcode
+
+  If either \a min or \a max are not valid, this function does
+  nothing.
+
+  \sa setMinimumDate(), maximumDate(), setMaximumDate(),
+  clearMinimumDate(), setMinimumTime(), maximumTime(),
+  setMaximumTime(), clearMinimumTime(), ExtDate::isValid()
+*/
+
+void ExtDateTimeEdit::setDateRange(const ExtDate &min, const ExtDate &max)
+{
+    Q_D(ExtDateTimeEdit);
+    if (min.isValid() && max.isValid()) {
+        d->setRange(QVariant(ExtDateTime(min, d->minimum.toTime())),
+                    QVariant(ExtDateTime(max, d->maximum.toTime())));
+    }
+}
+
+/*!
+  Convenience function to set minimum and maximum time with one
+  function call.
+
+  \code
+  setTimeRange(min, max);
+  \endcode
+
+  is analogous to:
+
+  \code
+  setMinimumTime(min);
+  setMaximumTime(max);
+  \endcode
+
+  If either \a min or \a max are not valid, this function does
+  nothing.
+
+  \sa setMinimumDate(), maximumDate(), setMaximumDate(),
+  clearMinimumDate(), setMinimumTime(), maximumTime(),
+  setMaximumTime(), clearMinimumTime(), QTime::isValid()
+*/
+
+void ExtDateTimeEdit::setTimeRange(const QTime &min, const QTime &max)
+{
+    Q_D(ExtDateTimeEdit);
+    if (min.isValid() && max.isValid()) {
+        d->setRange(QVariant(ExtDateTime(d->minimum.toDate(), min)),
+                    QVariant(ExtDateTime(d->maximum.toDate(), max)));
+    }
+}
+
+/*!
+  \property ExtDateTimeEdit::displayedSections
+
+  \brief the currently displayed fields of the date time edit
+
+  Returns a bit set of the displayed sections for this format.
+  \a setDisplayFormat(), displayFormat()
+*/
+
+ExtDateTimeEdit::Sections ExtDateTimeEdit::displayedSections() const
+{
+    Q_D(const ExtDateTimeEdit);
+    return d->display;
+}
+
+/*!
+  \property ExtDateTimeEdit::currentSection
+
+  \brief the current section of the spinbox
+  \a setCurrentSection()
+*/
+
+ExtDateTimeEdit::Section ExtDateTimeEdit::currentSection() const
+{
+    Q_D(const ExtDateTimeEdit);
+    switch (d->currentSection) {
+    case ExtDateTimeEditPrivate::NoSection:
+    case ExtDateTimeEditPrivate::FirstSection:
+    case ExtDateTimeEditPrivate::LastSection:
+        return ExtDateTimeEdit::NoSection;
+    default:
+        return (ExtDateTimeEdit::Section)(d->currentSection & (~ExtDateTimeEditPrivate::Internal));
+    }
+}
+
+void ExtDateTimeEdit::setCurrentSection(Section section)
+{
+    Q_D(ExtDateTimeEdit);
+    const ExtDateTimeEditPrivate::Section s = (ExtDateTimeEditPrivate::Section)section;
+    if (s != ExtDateTimeEditPrivate::NoSection)
+        d->edit->setCursorPosition(d->sectionNode(s).pos);
+}
+
+/*!
+  \fn QString ExtDateTimeEdit::sectionText(Section section) const
+
+  Returns the text from the given \a section.
+
+  \sa currentSection()
+*/
+
+QString ExtDateTimeEdit::sectionText(Section s) const
+{
+    Q_D(const ExtDateTimeEdit);
+    return d->sectionText(d->edit->displayText(), (ExtDateTimeEditPrivate::Section)s);
+}
+
+/*!
+  \property ExtDateTimeEdit::displayFormat
+
+  \brief the format used to display the time/date of the date time edit
+
+  This format is a subset of the format described in ExtDateTime::toString()
+
+  These expressions may be used:
+
+  \table
+  \header \i Expression \i Output
+  \row \i hh
+  \i the hour with a leading zero (00 to 23 or 01 to 12 if AM/PM display)
+  \row \i mm \i the minute with a leading zero (00 to 59)
+  \row \i ss \i the second whith a leading zero (00 to 59)
+  \row \i zzz \i the milliseconds with leading zeroes (000 to 999)
+  \row \i AP
+  \i use AM/PM display. \e AP will be replaced by either "AM" or "PM".
+  \row \i ap
+  \i use am/pm display. \e ap will be replaced by either "am" or "pm".
+  \row \i dd \i the day as number with a leading zero (01 to 31)
+  \row \i MM \i the month as number with a leading zero (01 to 12)
+  \row \i MMM
+  \i the abbreviated localized month name (e.g. 'Jan' to 'Dec').
+  Uses ExtDate::shortMonthName().
+  \row \i yy \i the year as two digit number (00 to 99)
+  \row \i yyyy \i the year as four digit number (1752 to 8000)
+  \endtable
+
+  All other input characters or sequence of characters that are
+  enclosed in singlequotes will be treated as text and can be used
+  as delimiters.
+
+  Example format strings (assuming that the date is 20 July 1969):
+
+  \table
+  \header \i Format \i Result
+  \row \i dd.MM.yyyy    \i 20.07.1969
+  \row \i MMM d yy \i Jul 20 69
+  \endtable
+
+  If you specify an invalid format the format will not be set.
+
+  Multiple instances of the same field is not allowed.A format with
+  no valid fields is not allowed either.
+
+  \warning Since ExtDateTimeEdit internally always operates on a
+  ExtDateTime, changing the format can change the minimum time or
+  date and the current time or date. For example:
+
+  \code
+  ExtDateTimeEdit edit;     // default format is "yyyy.MM.dd hh:mm:ss"
+  edit.setMinimumDate(ExtDate(2000, 1, 1));
+  edit.setMaximumDate(ExtDate(2003, 1, 1));
+  edit.setDateTime(ExtDateTime(ExtDate(2002, 5, 5), QTime(10, 10, 10)));
+  edit.setDisplayFormat("hh:mm:ss");
+
+  // edit can no longer display dates. This means that the
+  // minimum and maximum date will be set to the current date,
+  // e.g. 2002, 5, 5.
+  \endcode
+
+  \sa ExtDateTime::toString(), displayedSections()
+*/
+
+QString ExtDateTimeEdit::displayFormat() const
+{
+    Q_D(const ExtDateTimeEdit);
+    return d->displayFormat;
+}
+
+void ExtDateTimeEdit::setDisplayFormat(const QString &format)
+{
+    Q_D(ExtDateTimeEdit);
+    if (d->parseFormat(format)) {
+        d->cachedValue.clear();
+        d->cachedText.clear();
+        const bool timeShown = (d->display & ExtDateTimeEditPrivate::TimeSectionMask);
+        const bool dateShown = (d->display & ExtDateTimeEditPrivate::DateSectionMask);
+        Q_ASSERT(dateShown || timeShown);
+        if (timeShown && !dateShown) {
+            setDateRange(d->value.toDate(), d->value.toDate());
+        } else if (dateShown && !timeShown) {
+            setTimeRange(TIME_MIN, TIME_MAX);
+            d->value = QVariant(ExtDateTime(d->value.toDate(), QTime()));
+        }
+        d->update();
+        d->edit->setCursorPosition(0);
+        d->editorCursorPositionChanged(-1, 0);
+    }
+}
+
+/*!
+  \reimp
+*/
+
+QSize ExtDateTimeEdit::sizeHint() const
+{
+    Q_D(const QAbstractSpinBox);
+    ensurePolished();
+
+    const QFontMetrics fm(fontMetrics());
+    int h = d->edit->sizeHint().height();
+    int w = 0;
+    QString s;
+    s = d->textFromValue(d->minimum) + QLatin1String("   ");
+    w = qMax<int>(w, fm.width(s));
+    s = d->textFromValue(d->maximum) + QLatin1String("   ");
+    w = qMax<int>(w, fm.width(s));
+    if (d->specialValueText.size()) {
+        s = d->specialValueText;
+        w = qMax<int>(w, fm.width(s));
+    }
+    w += 2; // cursor blinking space
+
+    QStyleOptionSpinBox opt = d->getStyleOption();
+    QSize hint(w, h);
+    QSize extra(35, 6);
+    opt.rect.setSize(hint + extra);
+    extra += hint - style()->subControlRect(QStyle::CC_SpinBox, &opt,
+                                            QStyle::SC_SpinBoxEditField, this).size();
+    // get closer to final result by repeating the calculation
+    opt.rect.setSize(hint + extra);
+    extra += hint - style()->subControlRect(QStyle::CC_SpinBox, &opt,
+                                            QStyle::SC_SpinBoxEditField, this).size();
+    hint += extra;
+
+    opt.rect = rect();
+    return style()->sizeFromContents(QStyle::CT_SpinBox, &opt, hint, this)
+        .expandedTo(QApplication::globalStrut());
+}
+
+/*!
+  \reimp
+*/
+
+bool ExtDateTimeEdit::event(QEvent *e)
+{
+    Q_D(ExtDateTimeEdit);
+    switch (e->type()) {
+    case QEvent::ApplicationLayoutDirectionChange:
+        setDisplayFormat(d->displayFormat);
+        break;
+    default:
+        break;
+    }
+    return QAbstractSpinBox::event(e);
+}
+
+/*!
+  \reimp
+*/
+
+void ExtDateTimeEdit::clear()
+{
+    Q_D(ExtDateTimeEdit);
+    d->clearSection(d->currentSection);
+}
+/*!
+  \reimp
+*/
+
+void ExtDateTimeEdit::keyPressEvent(QKeyEvent *e)
+{
+    Q_D(ExtDateTimeEdit);
+    const ExtDateTimeEditPrivate::Section oldCurrent = d->currentSection;
+    bool select = true;
+
+    if ((e->key() == Qt::Key_Backspace || (e->key() == Qt::Key_H && e->key() & Qt::ControlModifier))
+        && !d->edit->hasSelectedText()) {
+        const int pos = d->edit->cursorPosition();
+        if (pos <= d->separators.first().size()) {
+            e->accept();
+            return;
+        }
+        select = false;
+        const ExtDateTimeEditPrivate::Section s = d->sectionAt(pos);
+        const ExtDateTimeEditPrivate::Section closest = d->closestSection(pos - 1, false);
+        EDTEDEBUG << "found those two" << d->sectionName(s)<< d->sectionName(closest);
+        if ((s == ExtDateTimeEditPrivate::LastSection && d->separators.last().size() > 0)
+            || (s != ExtDateTimeEditPrivate::NoSection && pos == d->sectionPos(s))) {
+            QString copy = d->edit->displayText();
+            int cursorCopy = pos;
+            if (validate(copy, cursorCopy) != QValidator::Acceptable) {
+                d->interpret(EmitIfChanged);
+            }
+            d->ignoreCursorPositionChanged = true;
+            d->edit->setCursorPosition(d->sectionPos(closest) + d->sectionSize(closest));
+            d->currentSection = closest;
+            d->ignoreCursorPositionChanged = false;
+        }
+    }
+
+    bool forward = true;
+    switch ((Qt::Key)e->key()) {
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
+        d->interpret(AlwaysEmit);
+        d->setSelected(d->currentSection);
+        e->ignore();
+        emit editingFinished();
+        return;
+
+    case Qt::Key_Left:
+        forward = false;
+    case Qt::Key_Right:
+        if (!(e->modifiers() & Qt::ControlModifier)) {
+            select = false;
+            break;
+        }
+#ifdef Q_WS_MAC
+        else {
+            select = (e->modifiers() & Qt::ShiftModifier);
+            break;
+        }
+#endif
+
+        // fallthroughs intended
+    case Qt::Key_Backtab:
+    case Qt::Key_Tab: {
+        e->accept();
+        if (d->specialValue()) {
+            d->edit->setSelection(d->edit->cursorPosition(), 0);
+            return;
+        }
+        if (e->key() == Qt::Key_Backtab || (e->key() == Qt::Key_Tab && e->modifiers() & Qt::ShiftModifier)) {
+            forward = false;
+        }
+
+        const ExtDateTimeEditPrivate::SectionNode newSection = d->nextPrevSection(d->currentSection, forward);
+        if (select) {
+            d->setSelected(newSection.section);
+        } else {
+            d->edit->setCursorPosition(forward ? newSection.pos : d->sectionPos(d->currentSection));
+        }
+        if (!select)
+            d->edit->deselect();
+        return; }
+    default:
+        select = !e->text().isEmpty() && e->text().at(0).isPrint();
+        break;
+    }
+
+    QAbstractSpinBox::keyPressEvent(e);
+    if (select && d->currentSection != oldCurrent && !(e->modifiers() & Qt::ShiftModifier) && !d->edit->hasSelectedText()) {
+        d->setSelected(d->currentSection);
+    }
+    if (d->specialValue()) {
+        d->edit->setSelection(d->edit->cursorPosition(), 0);
+    }
+}
+
+/*!
+  \reimp
+*/
+
+#ifndef QT_NO_WHEELEVENT
+void ExtDateTimeEdit::wheelEvent(QWheelEvent *e)
+{
+    Q_D(ExtDateTimeEdit);
+    int fw = d->frame ? style()->pixelMetric(QStyle::PM_SpinBoxFrameWidth) : 0;
+    QPoint pnt(e->pos() - QPoint(fw, fw));
+    pnt.rx() -= d->edit->x();
+    int index = d->edit->cursorPositionAt(pnt);
+    const ExtDateTimeEditPrivate::Section s = d->closestSection(index, d->edit->cursorPosition() > index); // should it be > pos?
+    if (s != d->currentSection)
+        d->edit->setCursorPosition(d->sectionNode(s).pos);
+    switch (s) {
+    case ExtDateTimeEditPrivate::NoSection:
+    case ExtDateTimeEditPrivate::FirstSection:
+    case ExtDateTimeEditPrivate::LastSection:
+        break;
+    default:
+        QAbstractSpinBox::wheelEvent(e);
+        break;
+    }
+}
+#endif
+
+/*!
+  \reimp
+*/
+
+void ExtDateTimeEdit::focusInEvent(QFocusEvent *e)
+{
+    Q_D(ExtDateTimeEdit);
+    QAbstractSpinBox::focusInEvent(e);
+    QString *frm = 0;
+    if (d->displayFormat == d->defaultTimeFormat) {
+        frm = &d->defaultTimeFormat;
+    } else if (d->displayFormat == d->defaultDateFormat) {
+        frm = &d->defaultDateFormat;
+    } else if (d->displayFormat == d->defaultDateTimeFormat) {
+        frm = &d->defaultDateTimeFormat;
+    }
+
+    if (frm) {
+        d->readLocaleSettings();
+        setDisplayFormat(*frm);
+    }
+    bool first;
+    switch (e->reason()) {
+    case Qt::ShortcutFocusReason:
+    case Qt::TabFocusReason: first = true; break;
+    case Qt::BacktabFocusReason: first = false; break;
+    default: return;
+    }
+    if (QApplication::isRightToLeft())
+        first = !first;
+    d->setSelected(first ? d->sectionNodes.first().section : d->sectionNodes.at(d->sectionNodes.size() - 1).section);
+}
+
+/*!
+  \reimp
+*/
+
+bool ExtDateTimeEdit::focusNextPrevChild(bool next)
+{
+    Q_D(ExtDateTimeEdit);
+    if (!focusWidget())
+        return false;
+
+    const ExtDateTimeEditPrivate::Section newSection =
+        d->nextPrevSection(d->currentSection, next).section;
+    switch (newSection) {
+    case ExtDateTimeEditPrivate::NoSection:
+    case ExtDateTimeEditPrivate::FirstSection:
+    case ExtDateTimeEditPrivate::LastSection:
+        break;
+    default:
+        d->setSelected(newSection);
+        return true;
+    }
+    return QAbstractSpinBox::focusNextPrevChild(next);
+}
+
+/*!
+  \reimp
+*/
+
+void ExtDateTimeEdit::stepBy(int steps)
+{
+    Q_D(ExtDateTimeEdit);
+    const ExtDateTimeEditPrivate::Section s = d->currentSection;
+    d->setValue(d->stepBy(s, steps, false), EmitIfChanged);
+    d->setSelected(s);
+}
+
+/*!
+  This virtual function is used by the date time edit whenever it
+  needs to display \a dateTime.
+
+  If you reimplement this, you may also need to reimplement
+  valueFromText() and validate().
+
+  \sa dateTimeFromText(), validate()
+*/
+QString ExtDateTimeEdit::textFromDateTime(const ExtDateTime &dateTime) const
+{
+    const char zero = '0';
+
+    Q_D(const ExtDateTimeEdit);
+    QVariant var(dateTime);
+    if (var == d->cachedValue) {
+        EDTEDEBUG << "cached and var is the same so returning cachedText" << dateTime << d->cachedText;
+        return d->cachedText;
+    }
+    QString ret = d->escapedFormat;
+    for (int i=0; i<d->sectionNodes.size(); ++i) {
+        int l = d->sectionSize(d->sectionNodes.at(i).section);
+        int pos = d->sectionNodes.at(i).pos;
+        const ExtDateTimeEditPrivate::Section s = d->sectionNodes.at(i).section;
+        switch (s) {
+        case ExtDateTimeEditPrivate::AmPmSection:
+        case ExtDateTimeEditPrivate::AmPmLowerCaseSection: {
+            QString input;
+            if (s == ExtDateTimeEditPrivate::AmPmSection) {
+                input = var.toTime().hour() > 11
+                        ? ExtDateTimeEdit::tr("PM")
+                        : ExtDateTimeEdit::tr("AM");
+            } else {
+                input = var.toTime().hour() > 11 ?
+                        ExtDateTimeEdit::tr("pm") :
+                        ExtDateTimeEdit::tr("am");
+            }
+            input.truncate(l);
+
+            ret.replace(pos, l, input);
+            break; }
+        case ExtDateTimeEditPrivate::MonthShortNameSection:
+            ret.replace(pos, l, ExtDate::shortMonthName(var.toDate().month()));
+            break;
+        case ExtDateTimeEditPrivate::YearTwoDigitsSection:
+            ret.replace(pos, l,
+                        QString::number(d->getDigit(var, ExtDateTimeEditPrivate::YearTwoDigitsSection) - 2000)
+                        .rightJustified(l, zero, true));
+            break;
+        case ExtDateTimeEditPrivate::HourSection:
+            if (d->display & ExtDateTimeEditPrivate::AmPmSection) {
+                int h = var.toTime().hour();
+                h = h % 12;
+                if (h == 0)
+                    h = 12;
+                ret.replace(pos, l,
+                            QString::number(h).rightJustified(l, zero, true));
+                break;
+            }
+        default:
+            ret.replace(pos, l,
+                        QString::number(d->getDigit(var, d->sectionNodes.at(i).section)).
+                        rightJustified(l, zero));
+            break;
+        }
+    }
+
+    d->cachedValue = var;
+    d->cachedText = ret;
+//    qDebug() << "setting cached to" << d->cachedValue << " and cachedText to" << d->cachedText;
+    return ret;
+}
+
+
+/*!
+  Returns an appropriate datetime for the given \a text.
+
+  This virtual function is used by the datetime edit whenever it
+  needs to interpret text entered by the user as a value.
+
+  \sa textFromDateTime(), validate()
+*/
+ExtDateTime ExtDateTimeEdit::dateTimeFromText(const QString &text) const
+{
+    Q_D(const ExtDateTimeEdit);
+    QString copy = text;
+    int pos = d->edit->cursorPosition();
+    QValidator::State state = QValidator::Acceptable;
+    return d->validateAndInterpret(copy, pos, state).toDateTime();
+}
+
+/*!
+  \reimp
+*/
+
+QValidator::State ExtDateTimeEdit::validate(QString &text, int &pos) const
+{
+    Q_D(const ExtDateTimeEdit);
+    QValidator::State state;
+    d->validateAndInterpret(text, pos, state);
+    return state;
+}\
+
+/*!
+  \reimp
+*/
+
+ExtDateTimeEdit::StepEnabled ExtDateTimeEdit::stepEnabled() const
+{
+    Q_D(const ExtDateTimeEdit);
+    if (d->readOnly)
+        return StepEnabled(0);
+    if (d->specialValue()) {
+        if (d->minimum == d->maximum)
+            return StepEnabled(0);
+        return d->wrapping
+            ? StepEnabled(StepDownEnabled|StepUpEnabled)
+            : StepEnabled(StepUpEnabled);
+    }
+    switch (d->currentSection) {
+    case ExtDateTimeEditPrivate::NoSection:
+    case ExtDateTimeEditPrivate::FirstSection:
+    case ExtDateTimeEditPrivate::LastSection: return 0;
+    default: break;
+    }
+    if (!style()->styleHint(QStyle::SH_SpinControls_DisableOnBounds)
+        || d->wrapping)
+        return StepEnabled(StepUpEnabled | StepDownEnabled);
+
+    QAbstractSpinBox::StepEnabled ret = 0;
+
+    QVariant v = d->stepBy(d->currentSection, 1, true);
+    if (v != d->value) {
+        ret |= QAbstractSpinBox::StepUpEnabled;
+    }
+    v = d->stepBy(d->currentSection, -1, true);
+    if (v != d->value) {
+        ret |= QAbstractSpinBox::StepDownEnabled;
+    }
+
+    return ret;
+}
+
+
+/*!
+    \class QTimeEdit
+    \brief The QTimeEdit class provides a widget for editing times based on
+    the ExtDateTimeEdit widget.
+
+    \ingroup basic
+    \mainclass
+
+    \sa ExtDateEdit ExtDateTimeEdit
+*/
+
+/*!
+  Constructs an empty time editor with a \a parent.
+*/
+
+
+QTimeEdit::QTimeEdit(QWidget *parent)
+    : ExtDateTimeEdit(TIME_MIN, parent)
+{
+}
+
+/*!
+  Constructs an empty time editor with a \a parent. The time is set
+  to \a time.
+*/
+
+QTimeEdit::QTimeEdit(const QTime &time, QWidget *parent)
+    : ExtDateTimeEdit(time, parent)
+{
+}
+
+/*!
+    \class ExtDateEdit
+    \brief The ExtDateEdit class provides a widget for editing dates based on
+    the ExtDateTimeEdit widget.
+
+    \ingroup basic
+    \mainclass
+
+    \sa QTimeEdit ExtDateTimeEdit
+*/
+
+/*!
+  Constructs an empty date editor with a \a parent.
+*/
+
+ExtDateEdit::ExtDateEdit(QWidget *parent)
+    : ExtDateTimeEdit(DATE_INITIAL, parent)
+{
+}
+
+/*!
+  Constructs an empty date editor with a \a parent. The date is set
+  to \a date.
+*/
+
+ExtDateEdit::ExtDateEdit(const ExtDate &date, QWidget *parent)
+    : ExtDateTimeEdit(date, parent)
+{
+}
+
+
+// --- ExtDateTimeEditPrivate ---
+
+/*!
+  \internal
+  Constructs a ExtDateTimeEditPrivate object
+*/
+
+
+ExtDateTimeEditPrivate::ExtDateTimeEditPrivate()
+{
+    type = QVariant::DateTime;
+    display = (ExtDateTimeEdit::Sections)0;
+    cachedDay = -1;
+    currentSection = NoSection;
+    layoutDirection = QApplication::layoutDirection();
+    first.section = FirstSection;
+    last.section = LastSection;
+    first.pos = 0;
+    last.pos = -1;
+    readLocaleSettings();
+}
+
+/*!
+  \internal
+  \reimp
+*/
+
+void ExtDateTimeEditPrivate::emitSignals(EmitPolicy ep, const QVariant &old)
+{
+    Q_Q(ExtDateTimeEdit);
+    if (ep == NeverEmit) {
+        return;
+    }
+    pendingEmit = false;
+
+    const bool dodate = value.toDate().isValid() && (display & DateSectionMask);
+    const bool datechanged = (ep == AlwaysEmit || old.toDate() != value.toDate());
+    const bool dotime = value.toTime().isValid() && (display & TimeSectionMask);
+    const bool timechanged = (ep == AlwaysEmit || old.toTime() != value.toTime());
+
+    if (dodate && dotime && (datechanged || timechanged))
+        emit q->dateTimeChanged(value.toDateTime());
+    if (dodate && datechanged)
+        emit q->dateChanged(value.toDate());
+    if (dotime && timechanged)
+        emit q->timeChanged(value.toTime());
+}
+
+/*!
+  \internal
+  \reimp
+*/
+
+void ExtDateTimeEditPrivate::editorCursorPositionChanged(int oldpos, int newpos)
+{
+    Q_Q(ExtDateTimeEdit);
+    if (ignoreCursorPositionChanged || specialValue())
+        return;
+    const bool allowChange = !edit->hasSelectedText();
+    ignoreCursorPositionChanged = true;
+    Section s = sectionAt(newpos);
+    int c = newpos;
+
+    const int selstart = edit->selectionStart();
+    const Section selSection = sectionAt(selstart);
+    const int l = sectionSize(selSection);
+
+    if (s == NoSection) {
+        if (l > 0 && selstart == sectionPos(selSection) && edit->selectedText().size() == l) {
+            s = selSection;
+            if (allowChange)
+                setSelected(selSection, true);
+            c = -1;
+        } else {
+            const SectionNode &sn = sectionNode(closestSection(newpos, oldpos < newpos));
+            c = sn.pos + (oldpos < newpos ? 0 : qMax<int>(0, sectionSize(sn.section) - 1));
+            if (allowChange)
+                edit->setCursorPosition(c);
+            s = sn.section;
+        }
+    }
+
+    if (allowChange && currentSection != s) {
+        QString tmp = edit->displayText();
+        int pos = edit->cursorPosition();
+        if (q->validate(tmp, pos) != QValidator::Acceptable) {
+            interpret(EmitIfChanged);
+            if (c == -1) {
+                setSelected(s, true);
+            } else {
+                edit->setCursorPosition(pos);
+            }
+        }
+        updateSpinBox();
+    }
+    currentSection = s;
+    ignoreCursorPositionChanged = false;
+
+}
+
+#ifdef Q_WS_MAC
+static QString macParseDateLocale(QVariant::Type type)
+{
+    CFGregorianDate macGDate;
+    macGDate.year = 2999;
+    macGDate.month = 11;
+    macGDate.day = 22;
+    macGDate.hour = 10;
+    macGDate.minute = 34;
+    macGDate.second = 56.0;
+    QCFType<CFDateRef> myDate = CFDateCreate(0, CFGregorianDateGetAbsoluteTime(macGDate, QCFType<CFTimeZoneRef>
+                                                                               (CFTimeZoneCopySystem())));
+    switch (type) {
+    case QVariant::Date: {
+#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3)
+        if (QSysInfo::MacintoshVersion >= QSysInfo::MV_10_3) {
+            QCFType<CFLocaleRef> mylocale = CFLocaleCopyCurrent();
+            QCFType<CFDateFormatterRef> myFormatter = CFDateFormatterCreate(kCFAllocatorDefault,
+                                                                            mylocale, kCFDateFormatterShortStyle,
+                                                                            kCFDateFormatterNoStyle);
+            return QCFString(CFDateFormatterCreateStringWithDate(0, myFormatter, myDate));
+
+        } else
+#endif
+        {
+            Handle intlHandle = GetIntlResource(0);
+            LongDateTime oldDate;
+            UCConvertCFAbsoluteTimeToLongDateTime(CFGregorianDateGetAbsoluteTime(macGDate, 0),
+                                                  &oldDate);
+            Str255 pString;
+            LongDateString(&oldDate, shortDate, pString, intlHandle);
+            return qt_mac_from_pascal_string(pString);
+        }
+    }
+    case QVariant::DateTime: {
+#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_3)
+        if (QSysInfo::MacintoshVersion >= QSysInfo::MV_10_3) {
+            QCFType<CFLocaleRef> mylocale = CFLocaleCopyCurrent();
+            QCFType<CFDateFormatterRef> myFormatter = CFDateFormatterCreate(kCFAllocatorDefault,
+                                                                            mylocale, kCFDateFormatterShortStyle,
+                                                                            kCFDateFormatterMediumStyle);
+            return QCFString(CFDateFormatterCreateStringWithDate(0, myFormatter, myDate));
+
+        } else
+#endif
+        {
+            Handle intlHandle = GetIntlResource(0);
+            LongDateTime oldDate;
+            UCConvertCFAbsoluteTimeToLongDateTime(CFGregorianDateGetAbsoluteTime(macGDate, 0),
+                                                  &oldDate);
+            Str255 pString;
+            LongDateString(&oldDate, shortDate, pString, intlHandle);
+            QString final = qt_mac_from_pascal_string(pString);
+            LongTimeString(&oldDate, true, pString, intlHandle);
+            return final + QLatin1Char(' ') + qt_mac_from_pascal_string(pString);
+        }
+    }
+    default: return QString();
+    }
+}
+#endif
+
+/*!
+  \internal
+
+  Try to get the format from the local settings
+*/
+void ExtDateTimeEditPrivate::readLocaleSettings()
+{
+    EDTEDEBUG << ExtDateTimeEdit::tr("PM")
+              << ExtDateTimeEdit::tr("AM")
+              << ExtDateTimeEdit::tr("pm")
+              << ExtDateTimeEdit::tr("am");
+
+    // Time
+    QString str = QTime(10, 34, 56).toString(Qt::LocalDate);
+    int index = str.indexOf(QLatin1String("10"));
+    if (index != -1)
+        str.replace(index, 2, QLatin1String("hh"));
+
+    index = str.indexOf(QLatin1String("34"));
+    if (index != -1)
+        str.replace(index, 2, QLatin1String("mm"));
+
+    index = str.indexOf(QLatin1String("56"));
+    if (index != -1)
+        str.replace(index, 2, QLatin1String("ss"));
+
+    QString am = QLatin1String("am");
+    index = str.indexOf(am);
+    if (index != -1) {
+        str.replace(index, am.size(), QLatin1String("ap"));
+    } else {
+        am = QLatin1String("AM");
+
+        index = str.indexOf(am);
+        if (index != -1)
+            str.replace(index, am.size(), QLatin1String("AP"));
+    }
+
+    defaultTimeFormat = str;
+
+    // Date
+
+    const ExtDate date(2999, 11, 22);
+    const QString shortMonthName = ExtDate::shortMonthName(date.month());
+    const QString longMonthName = ExtDate::longMonthName(date.month());
+    const QString shortDayName = ExtDate::shortDayName(date.dayOfWeek());
+    const QString longDayName = ExtDate::longDayName(date.dayOfWeek());
+
+#ifdef Q_WS_MAC
+    str = macParseDateLocale(QVariant::Date);
+#else 
+    str = date.toString(Qt::LocalDate);
+#endif
+    
+    index = str.indexOf(QLatin1String("22"));
+    if (index != -1)
+        str.replace(index, 2, QLatin1String("dd"));
+
+    index = str.indexOf(shortDayName);
+    if (index != -1)
+        str.remove(index, shortDayName.size());
+
+    index = str.indexOf(longDayName);
+    if (index != -1)
+        str.remove(index, longDayName.size());
+
+    index = str.indexOf(QLatin1String("11"));
+    if (index != -1) {
+        str.replace(index, 2, QLatin1String("MM"));
+    } else if ((index = str.indexOf(longMonthName)) != -1) {
+        str.replace(index, longMonthName.size(), QLatin1String("MMM"));
+    } else if ((index = str.indexOf(shortMonthName)) != -1) {
+        str.replace(index, shortMonthName.size(), QLatin1String("MMM"));
+    }
+
+    index = str.indexOf(QLatin1String("2999"));
+    if (index != -1) {
+        str.replace(index, 4, QLatin1String("yyyy"));
+    } else {
+        index = str.indexOf(QLatin1String("99"));
+        if (index != -1)
+            str.replace(index, 2, QLatin1String("yy"));
+    }
+
+    defaultDateFormat = str;
+
+    // DateTime
+#ifdef Q_WS_MAC
+    str = macParseDateLocale(QVariant::DateTime);
+#else
+    str = ExtDateTime(ExtDate(2999, 11, 22), QTime(10, 34, 56)).toString(Qt::LocalDate);
+#endif
+    index = str.indexOf(QLatin1String("10"));
+    if (index != -1)
+        str.replace(index, 2, QLatin1String("hh"));
+
+    index = str.indexOf(QLatin1String("34"));
+    if (index != -1)
+        str.replace(index, 2, QLatin1String("mm"));
+
+    index = str.indexOf(QLatin1String("56"));
+    if (index != -1)
+        str.replace(index, 2, QLatin1String("ss"));
+
+    am = QLatin1String("am");
+
+    index = str.indexOf(am);
+    if (index != -1) {
+        str.replace(index, am.size(), QLatin1String("ap"));
+    } else {
+        am = QLatin1String("AM");
+
+        index = str.indexOf(am);
+        if (index != -1)
+            str.replace(index, am.size(), QLatin1String("AP"));
+    }
+
+    index = str.indexOf(QLatin1String("22"));
+    if (index != -1)
+        str.replace(index, 2, QLatin1String("dd"));
+
+    index = str.indexOf(shortDayName);
+    if (index != -1)
+        str.remove(index, shortDayName.size());
+
+    index = str.indexOf(longDayName);
+    if (index != -1)
+        str.remove(index, longDayName.size());
+
+    index = str.indexOf(QLatin1String("11"));
+    if (index != -1) {
+        str.replace(index, 2, QLatin1String("MM"));
+    } else if ((index = str.indexOf(longMonthName)) != -1) {
+        str.replace(index, longMonthName.size(), QLatin1String("MMM"));
+    } else if ((index = str.indexOf(shortMonthName)) != -1) {
+        str.replace(index, shortMonthName.size(), QLatin1String("MMM"));
+    }
+
+    index = str.indexOf(QLatin1String("2999"));
+    if (index != -1) {
+        str.replace(index, 4, QLatin1String("yyyy"));
+    } else {
+        index = str.indexOf(QLatin1String("99"));
+        if (index != -1)
+            str.replace(index, 2, QLatin1String("yy"));
+    }
+
+    defaultDateTimeFormat = str;
+
+    EDTEDEBUG << "default Time:" << defaultTimeFormat << "default date:" << defaultDateFormat << "default date/time" << defaultDateTimeFormat;
+}
+
+/*!
+  \internal
+  Gets the digit from a corevariant. E.g.
+
+  QVariant var(ExtDate(2004, 02, 02));
+  int digit = getDigit(var, Year);
+  // digit = 2004
+  */
+
+int ExtDateTimeEditPrivate::getDigit(const QVariant &t, Section s) const
+{
+    switch (s) {
+    case HourSection: return t.toTime().hour();
+    case MinuteSection: return t.toTime().minute();
+    case SecondSection: return t.toTime().second();
+    case MSecSection: return t.toTime().msec();
+    case YearTwoDigitsSection:
+    case YearSection: return t.toDate().year();
+    case MonthShortNameSection:
+    case MonthSection: return t.toDate().month();
+    case DaySection: return t.toDate().day();
+    case AmPmSection:
+    case AmPmLowerCaseSection:
+        return t.toTime().hour() > 11 ? 1 : 0;
+
+    default: break;
+    }
+    qFatal("%s passed to getDigit. This should never happen", sectionName(s).toLatin1().constData());
+    return -1;
+}
+
+/*!
+  \internal
+  Sets a digit in a variant. E.g.
+
+  QVariant var(ExtDate(2004, 02, 02));
+  int digit = getDigit(var, Year);
+  // digit = 2004
+  setDigit(&var, Year, 2005);
+  digit = getDigit(var, Year);
+  // digit = 2005
+
+  returns true if the newVal was changed to make it work. E.g. If you set 31st when you're in february
+*/
+
+void ExtDateTimeEditPrivate::setDigit(QVariant &v, Section section, int newVal) const
+{
+    int year, month, day, hour, minute, second, msec;
+    const ExtDateTime &dt = v.toDateTime();
+    year = dt.date().year();
+    month = dt.date().month();
+    day = dt.date().day();
+    hour = dt.time().hour();
+    minute = dt.time().minute();
+    second = dt.time().second();
+    msec = dt.time().msec();
+
+    switch (section) {
+    case HourSection: hour = newVal; break;
+    case MinuteSection: minute = newVal; break;
+    case SecondSection: second = newVal; break;
+    case MSecSection: msec = newVal; break;
+    case YearTwoDigitsSection:
+    case YearSection: year = newVal; break;
+    case MonthSection:
+    case MonthShortNameSection: month = newVal; break;
+    case DaySection: day = newVal; break;
+    case AmPmSection:
+    case AmPmLowerCaseSection: hour = (newVal == 0 ? hour % 12 : (hour % 12) + 12); break;
+    default:
+        qFatal("%s passed to setDigit. This should never happen", sectionName(section).toLatin1().constData());
+        break;
+    }
+
+    if (section != DaySection) {
+        day = qMax<int>(cachedDay, day);
+    }
+
+    if (!ExtDate::isValid(year, month, day)) {
+        if (year <= DATE_MIN.year() && (month < DATE_MIN.month() || (month == DATE_MIN.month() && day < DATE_MIN.day()))) {
+            month = DATE_MIN.month();
+            day = DATE_MIN.day();
+        } else {
+            day = qMin<int>(day, ExtDate(year, month, 1).daysInMonth());
+        }
+    }
+    v = QVariant(ExtDateTime(ExtDate(year, month, day), QTime(hour, minute, second, msec)));
+}
+
+
+/*!
+  \internal
+
+  Internal function called by ExtDateTimeEdit::stepBy(). Also takes a
+  Section for which section to step on and a bool \a test for
+  whether or not to modify the internal cachedDay variable. This is
+  necessary because the function is called from the const function
+  ExtDateTimeEdit::stepEnabled() as well as ExtDateTimeEdit::stepBy().
+*/
+
+QVariant ExtDateTimeEditPrivate::stepBy(Section s, int steps, bool test) const
+{
+    Q_Q(const ExtDateTimeEdit);
+    QVariant v = value;
+    QString str = edit->displayText();
+    int pos = edit->cursorPosition();
+    bool specVal = specialValue();
+
+    int val;
+    // to make sure it behaves reasonably when typing something and then stepping in non-tracking mode
+    if (!test && pendingEmit) {
+        if (q->validate(str, pos) != QValidator::Acceptable) {
+            v = value;
+        } else {
+            v = valueFromText(str);
+        }
+        val = getDigit(v, s);
+    } else {
+        QValidator::State state;
+        if (!specVal) {
+        val = sectionValue(s, str, state);
+        if (state == QValidator::Invalid) {
+            return value;
+        }
+        } else {
+            val = getDigit(v, s);
+        }
+    }
+
+    val += steps;
+
+    const int min = absoluteMin(s);
+    const int max = absoluteMax(s);
+
+    if (val < min) {
+        val = (wrapping ? max - (min - val) + 1 : min);
+    } else if (val > max) {
+        val = (wrapping ? min + val - max - 1 : max);
+    }
+
+    const int tmp = v.toDate().day();
+    setDigit(v, s, val); // if this sets year or month it will make
+    // sure that days are lowered if needed.
+
+    // changing one section should only modify that section, if possible
+    if (s != AmPmSection && (v < minimum || v > maximum)) {
+
+        const int localmin = getDigit(minimum, s);
+        const int localmax = getDigit(maximum, s);
+
+        if (wrapping) {
+            // just because we hit the roof in one direction, it
+            // doesn't mean that we hit the floor in the other
+            if (steps > 0) {
+                setDigit(v, s, min);
+                if (s != DaySection) {
+                    int daysInMonth = v.toDate().daysInMonth();
+                    if (v.toDate().day() < tmp && v.toDate().day() < daysInMonth)
+                        setDigit(v, DaySection, qMin(tmp, daysInMonth));
+                }
+
+                if (v < minimum) {
+                    setDigit(v, s, localmin);
+                    if (v < minimum)
+                        setDigit(v, s, localmin + 1);
+                }
+            } else {
+                setDigit(v, s, max);
+                if (s != DaySection) {
+                    int daysInMonth = v.toDate().daysInMonth();
+                    if (v.toDate().day() < tmp && v.toDate().day() < daysInMonth)
+                        setDigit(v, DaySection, qMin(tmp, daysInMonth));
+                }
+
+                if (v > maximum) {
+                    setDigit(v, s, localmax);
+                    if (v > maximum)
+                        setDigit(v, s, localmax - 1);
+                }
+            }
+        } else {
+            setDigit(v, s, (steps > 0 ? localmax : localmin));
+        }
+    }
+    if (!test && tmp != v.toDate().day() && s != DaySection) {
+        // this should not happen when called from stepEnabled
+        cachedDay = qMax<int>(tmp, cachedDay);
+    }
+
+    if (v < minimum) {
+        if (wrapping) {
+            QVariant t = v;
+            setDigit(t, s, steps < 0 ? max : min);
+            if (t >= minimum && t <= maximum) {
+                v = t;
+            } else {
+                setDigit(t, s, getDigit(steps < 0 ? maximum : minimum, s));
+                if (t >= minimum && t <= maximum) {
+                    v = t;
+                }
+            }
+        } else {
+            v = value;
+        }
+    } else if (v > maximum) {
+        if (wrapping) {
+            QVariant t = v;
+            setDigit(t, s, steps > 0 ? min : max);
+            if (t >= minimum && t <= maximum) {
+                v = t;
+            } else {
+                setDigit(t, s, getDigit(steps > 0 ? minimum : maximum, s));
+                if (t >= minimum && t <= maximum) {
+                    v = t;
+                }
+            }
+        } else {
+            v = value;
+        }
+    }
+
+    return bound(v, value, steps);
+}
+
+/*!
+  \internal
+
+  Returns the absolute maximum for a section
+*/
+
+int ExtDateTimeEditPrivate::absoluteMax(Section s) const
+{
+    switch (s) {
+    case HourSection: return 23;
+    case MinuteSection:
+    case SecondSection: return 59;
+    case MSecSection: return 999;
+    case YearTwoDigitsSection: return 2099;
+    case YearSection: return 7999;
+    case MonthSection:
+    case MonthShortNameSection: return 12;
+    case DaySection: return 31;
+    case AmPmSection:
+    case AmPmLowerCaseSection: return 1;
+    default: break;
+    }
+    qFatal("%s passed to max. This should never happen", sectionName(s).toLatin1().constData());
+    return -1;
+
+}
+
+/*!
+  \internal
+
+  Returns the absolute minimum for a section
+*/
+
+int ExtDateTimeEditPrivate::absoluteMin(Section s) const
+{
+    switch (s) {
+    case HourSection:
+    case MinuteSection:
+    case SecondSection:
+    case MSecSection: return 0;
+    case YearTwoDigitsSection: return 2000;
+    case YearSection: return 1753;
+    case MonthSection:
+    case MonthShortNameSection:
+    case DaySection: return 1;
+    case AmPmSection:
+    case AmPmLowerCaseSection: return 0;
+    default: break;
+    }
+    qFatal("%s passed to min. This should never happen", sectionName(s).toLatin1().constData());
+    return -1;
+}
+
+/*!
+  \internal
+
+  Returns a copy of the sectionNode for the Section \a s.
+*/
+
+ExtDateTimeEditPrivate::SectionNode ExtDateTimeEditPrivate::sectionNode(Section s) const
+{
+    if (s == FirstSection) {
+        return first;
+    } else if (s == LastSection) {
+        return last;
+    }
+
+    for (int i=0; i<sectionNodes.size(); ++i)
+        if ((sectionNodes.at(i).section & ~Internal) == (s & ~Internal))
+            return sectionNodes.at(i);
+    SectionNode sn;
+    sn.section = NoSection;
+    sn.pos = -1;
+    return sn;
+}
+
+/*!
+  \internal
+
+  Returns the starting position for section \a s.
+*/
+
+int ExtDateTimeEditPrivate::sectionPos(Section s) const
+{
+    if (s == FirstSection) {
+        return first.pos;
+    } else if (s == LastSection) {
+        return last.pos;
+    }
+
+    for (int i=0; i<sectionNodes.size(); ++i)
+        if (sectionNodes.at(i).section == s)
+            return sectionNodes.at(i).pos;
+    return -1;
+}
+
+/*!
+  \internal
+
+  Adds a section to \a list. If this section already exists returns false.
+*/
+
+bool ExtDateTimeEditPrivate::addSection(QList<SectionNode> &list, Section ds, int pos) const
+{
+    for (int i=0; i<list.size(); ++i) {
+        if ((list.at(i).section & ~Internal) == (ds & ~Internal)) {
+            EDTEDEBUGN("Could not add section %s to pos %d because it is already in the list", sectionName(ds).toLatin1().constData(), pos);
+            return false;
+        }
+    }
+    SectionNode s;
+    s.section = ds;
+    s.pos = pos;
+    list << s;
+
+    return true;
+}
+
+
+/*!
+  \internal
+
+  Selects the section \a s. If \a forward is false selects backwards.
+*/
+
+void ExtDateTimeEditPrivate::setSelected(Section s, bool forward)
+{
+    if (s == NoSection)
+        return;
+    if (specialValue())
+        edit->selectAll();
+    if (forward) {
+        edit->setSelection(sectionPos(s), sectionSize(s));
+    } else {
+        edit->setSelection(sectionPos(s) + sectionSize(s), -sectionSize(s));
+    }
+}
+
+/*!
+  \internal helper function for parseFormat. removes quotes that are
+  not escaped and removes the escaping on those that are escaped
+
+*/
+
+static QString unquote(const QString &str)
+{
+    const char quote = '\'';
+    const char slash = '\\';
+    const char zero = '0';
+    QString ret;
+    QChar status = zero;
+    for (int i=0; i<str.size(); ++i) {
+        if (str.at(i) == quote) {
+            if (status != quote) {
+                status = quote;
+            } else if (!ret.isEmpty() && str.at(i - 1) == slash) {
+                ret[ret.size() - 1] = quote;
+            } else {
+                status = zero;
+            }
+        } else {
+            ret += str.at(i);
+        }
+    }
+    return ret;
+}
+/*!
+  \internal
+
+  Parses the format \a newFormat. If successful, returns true and
+  sets up the format. Else keeps the old format and returns false.
+
+*/
+
+bool ExtDateTimeEditPrivate::parseFormat(const QString &newFormat)
+{
+    const char space = ' ';
+    const char quote = '\'';
+    const char slash = '\\';
+    const char zero = '0';
+    if (newFormat == displayFormat && !newFormat.isEmpty() && layoutDirection == QApplication::layoutDirection())
+        return true;
+    layoutDirection = QApplication::layoutDirection();
+
+    QList<SectionNode> newSectionNodes;
+    ExtDateTimeEdit::Sections newDisplay = 0;
+    QStringList newSeparators;
+    int i, index = 0;
+    int add = 0;
+    QChar status = zero;
+    for (i = 0; i<newFormat.size(); ++i) {
+        if (newFormat.at(i) == quote) {
+            ++add;
+            if (status != quote) {
+                status = quote;
+            } else if (newFormat.at(i - 1) != slash) {
+                status = zero;
+            }
+        } else if (i + 1 < newFormat.size() && status != quote) {
+            switch (newFormat.at(i).cell()) {
+            case 'h':
+                if (newFormat.at(i+1) == QLatin1Char('h')) {
+                    if (!addSection(newSectionNodes, HourSection, i - add))
+                        return false;
+                    newSeparators << unquote(newFormat.mid(index, i - index));
+                    index = ++i + 1;
+                    newDisplay |= ExtDateTimeEdit::HourSection;
+                }
+                break;
+            case 'm':
+                if (newFormat.at(i+1) == QLatin1Char('m')) {
+                    if (!addSection(newSectionNodes, MinuteSection, i - add))
+                        return false;
+                    newSeparators << unquote(newFormat.mid(index, i - index));
+                    index = ++i + 1;
+                    newDisplay |= ExtDateTimeEdit::MinuteSection;
+                }
+                break;
+            case 's':
+                if (newFormat.at(i+1) == QLatin1Char('s')) {
+                    if (!addSection(newSectionNodes, SecondSection, i - add))
+                        return false;
+                    newSeparators << unquote(newFormat.mid(index, i - index));
+                    index = ++i + 1;
+                    newDisplay |= ExtDateTimeEdit::SecondSection;
+                }
+                break;
+            case 'z':
+                if (i + 2 <newFormat.size()
+                    && newFormat.at(i+1) == QLatin1Char('z')
+                    && newFormat.at(i+2) == QLatin1Char('z')) {
+                    if (!addSection(newSectionNodes, MSecSection, i - add))
+                        return false;
+                    newSeparators << unquote(newFormat.mid(index, i - index));
+                    index = (i += 2) + 1;
+                    newDisplay |= ExtDateTimeEdit::MSecSection;
+                }
+                break;
+            case 'A':
+            case 'a': {
+                const bool cap = newFormat.at(i) == QLatin1Char('A');
+                if (newFormat.at(i+1) == (cap ? QLatin1Char('P') : QLatin1Char('p'))) {
+                    if (!addSection(newSectionNodes, cap ? AmPmSection : AmPmLowerCaseSection, i - add))
+                        return false;
+                    newSeparators << unquote(newFormat.mid(index, i - index));
+                    index = ++i + 1;
+                    newDisplay |= ExtDateTimeEdit::AmPmSection;
+                }
+                break; }
+            case 'y':
+                if (newFormat.at(i+1) == QLatin1Char('y')) {
+                    const ExtDate YY_MIN(2000, 1, 1);
+                    const ExtDate YY_MAX(2099, 12, 31);
+                    const bool four = (i + 3 <newFormat.size()
+                                       && newFormat.at(i+2) == QLatin1Char('y') && newFormat.at(i+3) == QLatin1Char('y'));
+                    if (!addSection(newSectionNodes, four ? YearSection : YearTwoDigitsSection, i - add)
+                        || (!four && (maximum.toDate() < YY_MIN || minimum.toDate() > YY_MAX))) {
+                        return false;
+                    }
+
+                    newSeparators << unquote(newFormat.mid(index, i - index));
+                    index = (i += (four ? 3 : 1)) + 1;
+                    newDisplay |= ExtDateTimeEdit::YearSection;
+                }
+                break;
+            case 'M':
+                if (newFormat.at(i+1) == QLatin1Char('M')) {
+                    const bool three = (i + 2 <newFormat.size() && newFormat.at(i+2) == QLatin1Char('M'));
+                    if (!addSection(newSectionNodes, three ? MonthShortNameSection : MonthSection, i - add))
+                        return false;
+                    newSeparators << unquote(newFormat.mid(index, i - index));
+                    index = (i += (three ? 2 : 1)) + 1;
+                    newDisplay |= ExtDateTimeEdit::MonthSection;
+                }
+                break;
+
+            case 'd':
+                if (newFormat.at(i+1) == QLatin1Char('d')) {
+                    if (!addSection(newSectionNodes, DaySection, i - add))
+                        return false;
+                    newSeparators << unquote(newFormat.mid(index, i - index));
+                    index = ++i + 1;
+                    newDisplay |= ExtDateTimeEdit::DaySection;
+                }
+                break;
+
+            default: break;
+            }
+        }
+    }
+    if (newSectionNodes.isEmpty()) {
+        EDTEDEBUGN("Could not parse format. No sections in format '%s'.", newFormat.toLatin1().constData());
+        return false;
+    }
+
+    newSeparators << (index < newFormat.size() ? unquote(newFormat.mid(index)) : QString());
+
+    display = newDisplay;
+    last.pos = newFormat.size();
+
+    if (!QApplication::isRightToLeft()) {
+        displayFormat = newFormat;
+        separators = newSeparators;
+        sectionNodes = newSectionNodes;
+    } else {
+        displayFormat.clear();;
+        int total = newFormat.size();
+        int i;
+        sectionNodes.clear();
+        separators.clear();
+
+        for (i=newSectionNodes.size() - 1; i>=0; --i) {
+            displayFormat += newSeparators.at(i + 1);
+            displayFormat += sectionFormat(newSectionNodes.at(i).section);
+            SectionNode sn = newSectionNodes.at(i);
+            sn.pos = total - sn.pos - sectionSize(sn.section);
+
+            sectionNodes.append(sn);
+            separators.append(newSeparators.at(i + 1));
+        }
+        displayFormat += newSeparators.at(0);
+        separators.append(newSeparators.at(0));
+    }
+    escapedFormat.clear();
+    status = zero;
+    int ampmsize = sectionSize(AmPmSection);
+    for (int i = 0; i < displayFormat.size(); ++i) {
+        if (displayFormat.at(i) == quote){
+            if (status == quote) {
+                if (!escapedFormat.isEmpty() && displayFormat.at(i - 1) == slash) {
+                    escapedFormat[escapedFormat.size() - 1] = quote;
+                } else {
+                    status = zero;
+                }
+            } else {
+                status = quote;
+            }
+        } else {
+            escapedFormat += displayFormat.at(i);
+            if (i > 1 && ampmsize != 2
+                && ((displayFormat.at(i - 1) == QLatin1Char('a') && displayFormat.at(i) == 'p')
+                    || (displayFormat.at(i - 1) == QLatin1Char('A') && displayFormat.at(i) == 'P'))) {
+                if (ampmsize > 2) {
+                    escapedFormat.append(QString().leftJustified(ampmsize - 2, space));
+                } else if (ampmsize == 1) {
+                    escapedFormat.remove(i, 1);
+                } else {
+                    qWarning("Translating am/pm to an empty string will "
+                             "cause problems for ExtDateTimeEdit");
+                }
+            }
+        }
+    }
+
+    if (QApplication::isRightToLeft()) {
+        // we want displayFormat to return what you set with
+        // setDisplayFormat() in rtol mode as well. I needed to
+        // reverse it to calculate the escapedFormat correctly. Set it
+        // back here.
+        displayFormat = newFormat;
+    }
+
+
+//     qDebug() << newFormat << displayFormat;
+//     qDebug("escapedFormat = [%s]", escapedFormat.toLatin1().constData());
+//     qDebug("separators:\n'%s'", separators.join("|").toLatin1().constData());
+
+//     qDebug("display is [%0x]", (uint)display);
+
+    return true;
+}
+
+/*!
+  \internal
+
+  Returns the section at index \a index or NoSection if there are no sections there.
+*/
+
+ExtDateTimeEditPrivate::Section ExtDateTimeEditPrivate::sectionAt(int index) const
+{
+    if (index < separators.first().size()) {
+        return (index == 0 ? FirstSection : NoSection);
+    } else if (escapedFormat.size() - index < separators.last().size() + 1) {
+        if (separators.last().size() == 0) {
+            return sectionNodes.last().section;
+        }
+        return (index == last.pos ? LastSection : NoSection);
+    }
+
+//    QString deb;
+    for (int i=0; i<sectionNodes.size(); ++i) {
+        const int tmp = sectionNodes.at(i).pos;
+//         deb += QString("%1 %2 %3 %4 %5 %6\n").arg(sectionName(sectionNodes.at(i).section)).arg(tmp).
+//                arg(index).arg(i).arg(sectionSize(sectionNodes.at(i).section)).arg(layoutDirection == Qt::RightToLeft);
+
+        if (index < tmp + sectionSize(sectionNodes.at(i).section)) {
+            return (index < tmp ? NoSection : sectionNodes.at(i).section);
+        }
+    }
+//    qDebug() << deb;
+    return NoSection;
+}
+
+/*!
+  \internal
+
+  Returns the closest section of index \a index. Searches forward
+  for a section if \a forward is true. Otherwise searches backwards.
+*/
+
+ExtDateTimeEditPrivate::Section ExtDateTimeEditPrivate::closestSection(int index, bool forward) const
+{
+    Q_ASSERT(index >= 0);
+    if (index < separators.first().size()) {
+        return forward ? sectionNodes.first().section : FirstSection;
+    } else if (last.pos - index < separators.last().size() + 1) {
+        return forward ? LastSection : sectionNodes.last().section;
+    }
+    for (int i=0; i<sectionNodes.size(); ++i) {
+        int tmp = sectionNodes.at(i).pos;
+        if (index < tmp + sectionSize(sectionNodes.at(i).section)) {
+            if (index < tmp && !forward)
+                return sectionNodes.at(i-1).section;
+            return sectionNodes.at(i).section;
+        } else if (i == sectionNodes.size() - 1 && index > tmp) {
+            return sectionNodes.at(i).section;
+        }
+    }
+    qWarning("2index return NoSection. This should not happen");
+    return NoSection;
+}
+
+/*!
+  \internal
+
+  Returns a copy of the section that is before or after \a current, depending on \a forward.
+*/
+
+ExtDateTimeEditPrivate::SectionNode ExtDateTimeEditPrivate::nextPrevSection(Section current, bool forward) const
+{
+    if (QApplication::isRightToLeft())
+        forward = !forward;
+    if (current == FirstSection) {
+        return (forward ? sectionNodes.first() : first);
+    } else if (current == LastSection) {
+        return (forward ? last : sectionNodes.last());
+    }
+    for (int i=0; i<sectionNodes.size(); ++i) {
+        if (sectionNodes.at(i).section == current) {
+            int index = i + (forward ? 1 : -1);
+            if (index >= 0 && index < sectionNodes.size()) {
+                return sectionNodes.at(index);
+            } else {
+                break;
+            }
+        }
+    }
+    return (forward ? last : first);
+}
+
+/*!
+  \internal
+
+  Clears the text of section \a s.
+*/
+
+void ExtDateTimeEditPrivate::clearSection(Section s)
+{
+    const char space = ' ';
+    int cursorPos = edit->cursorPosition();
+    bool blocked = edit->blockSignals(true);
+    QString t = edit->text();
+    t.replace(sectionPos(s), sectionSize(s), QString().fill(space, sectionSize(s)));
+    edit->setText(t);
+    edit->setCursorPosition(cursorPos);
+    edit->blockSignals(blocked);
+}
+
+/*!
+  \internal
+
+  Returns the size of section \a s.
+*/
+
+int ExtDateTimeEditPrivate::sectionSize(Section s) const
+{
+    switch (s) {
+    case FirstSection:
+    case NoSection:
+    case LastSection: return 0;
+
+    case AmPmSection:
+    case AmPmLowerCaseSection: {
+        int lower = qMin(ExtDateTimeEdit::tr("pm").size(), ExtDateTimeEdit::tr("am").size());
+        int upper = qMin(ExtDateTimeEdit::tr("PM").size(), ExtDateTimeEdit::tr("AM").size());
+        return qMin(4, qMin(lower, upper));
+    }
+
+    case HourSection:
+    case MinuteSection:
+    case SecondSection:
+    case DaySection:
+    case MonthSection:
+    case YearTwoDigitsSection: return 2;
+
+    case MonthShortNameSection:
+    case MSecSection: return 3;
+
+    case YearSection: return 4;
+
+    case Internal:
+    case TimeSectionMask:
+    case DateSectionMask: qWarning("Invalid section %s", sectionName(s).toLatin1().constData());
+    }
+    return -1;
+}
+
+/*!
+  \internal
+
+  Returns the text of section \a s. This function operates on the
+  arg text rather than edit->text().
+*/
+
+
+QString ExtDateTimeEditPrivate::sectionText(const QString &text, Section s) const
+{
+    const SectionNode sn = sectionNode(s);
+    return sn.section == NoSection ? QString() : text.mid(sn.pos, sectionSize(s));
+}
+
+/*!
+  \internal
+
+  Parses the part of \a text that corresponds to \a s and returns
+  the value of that field. Sets *stateptr to the right state if
+  stateptr != 0.
+*/
+
+int ExtDateTimeEditPrivate::sectionValue(Section s, QString &text, QValidator::State &state) const
+{
+    const char space = ' ';
+    state = QValidator::Invalid;
+    int num = 0;
+    QString st = sectionText(text, s);
+    EDTEDEBUG << "sectionValue for" << sectionName(s)
+              << "with text" << text << "and st" << st;
+
+    if (st.trimmed().isEmpty()) {
+        state = QValidator::Intermediate;
+    } else {
+        const int index = sectionNode(s).pos;
+        const int size = sectionSize(s);
+        const bool done = !st.contains(space);
+        switch (s) {
+        case AmPmSection:
+        case AmPmLowerCaseSection: {
+            int ampm = findAmPm(st, s);
+            switch (ampm) {
+            case AM: // st == AM
+            case PM: // st == PM
+                num = ampm;
+                state = QValidator::Acceptable;
+                break;
+            case PossibleAM: // st => AM
+            case PossiblePM: // st => PM
+                num = ampm - 2;
+                state = QValidator::Intermediate;
+                break;
+            case PossibleBoth: // st => AM|PM
+                num = 0;
+                state = QValidator::Intermediate;
+                break;
+            case Neither:
+                state = QValidator::Invalid;
+                EDTEDEBUG << "invalid because findAmPm(" << st << ") returned -1";
+                break;
+            default:
+                EDTEDEBUGN("This should never happen (findAmPm returned %d", ampm);
+                break;
+            }
+            if (state != QValidator::Invalid) {
+                text.replace(index, size, st);
+            }
+            break;
+        }
+        case MonthShortNameSection: {
+            st = st.toLower();
+            int tmp = findMonth(st);
+            if (tmp != -1) {
+                num = tmp;
+                if (done) {
+                    state = QValidator::Acceptable;
+                    st = ExtDate::shortMonthName(num);
+                    text.replace(index, size, st);
+                } else {
+                    state = QValidator::Intermediate;
+                }
+            } else {
+                state = QValidator::Invalid;
+                EDTEDEBUG << "invalid because" << st << "doesn't match any month name";
+            }
+            break;
+        }
+        case YearTwoDigitsSection: num = 2000;
+        case YearSection:
+        case MonthSection:
+        case HourSection:
+        case MinuteSection:
+        case SecondSection:
+        case MSecSection:
+        case DaySection: {
+            bool ok;
+            num += (int)(st.toUInt(&ok));
+            if (!ok) {
+                state = QValidator::Invalid;
+                EDTEDEBUG << "invalid because" << st << "can't become a uint";
+            } else {
+                if (s == HourSection && display & AmPmSection) {
+                    bool pm = (sectionText(text, AmPmSection).toLower() == "pm");
+                    if (pm && num < 12) {
+                        num += 12;
+                    } else if (!pm && num == 12) {
+                        num = 0;
+                    } else if (num > 12) {
+                        state = QValidator::Invalid;
+                        EDTEDEBUG << "invalid because" << st << "num is" << num;
+
+                        break;
+                    }
+                }
+                if (num < absoluteMin(s) || num > absoluteMax(s)) {
+                    state = done ? QValidator::Invalid : QValidator::Intermediate;
+                    if (done)
+                        EDTEDEBUG << "invalid because" << st << "num is" << num
+                                  << "outside absoluteMin and absoluteMax" << absoluteMin(s) << absoluteMax(s);
+
+                } else {
+                    state = QValidator::Acceptable;
+                }
+            }
+            break;
+        }
+        default: qFatal("NoSection or Internal. This should never happen"); break; }
+    }
+
+    return (state != QValidator::Invalid ? num : -1);
+}
+
+/*!
+  \internal
+  \reimp
+*/
+
+QVariant ExtDateTimeEditPrivate::validateAndInterpret(QString &input,
+                                                    int &pos, QValidator::State &state) const
+{
+    const char space = ' ';
+    if (cachedText == input) {
+        state = cachedState;
+        EDTEDEBUG << "state" << state << "cachedText" << cachedText << "cachedValue" << cachedValue;
+        return cachedValue;
+    }
+    QVariant tmp;
+    SectionNode sn = {NoSection, 0};
+    int index = 0;
+
+    EDTEDEBUG << "validateAndInterpret" << input;
+    int diff = input.size() - escapedFormat.size();
+    bool specval = false;
+    if (!specialValueText.isEmpty() && input == specialValueText) {
+        specval = true;
+        state = QValidator::Acceptable;
+        tmp = minimum;
+        goto end;
+    }
+    if (diff > 0) {
+        const Section s = closestSection(pos - 1, false);
+        if (s == FirstSection && s == LastSection) {
+            EDTEDEBUG << "invalid because s ==" << sectionName(s);
+            return QValidator::Invalid;
+        }
+        sn = sectionNode(s);
+        const int sectionstart = sn.pos;
+        const int sectionsize = sectionSize(s);
+
+        QString sub = input.mid(sectionstart, sectionsize + diff);
+        if (sub.count(space) < diff) {
+            EDTEDEBUGN("sub is '%s' diff is %d sub.count is %d", sub.toLatin1().constData(), diff, sub.count(space));
+            state = QValidator::Invalid;
+            goto end;
+        }
+
+        sub.remove(space);
+        input.replace(sectionstart, sectionsize + diff, sub.leftJustified(sectionsize, space));
+    } else if (diff < 0) {
+        const Section s = closestSection(pos, false);
+        if (s == FirstSection && s == LastSection) {
+            EDTEDEBUG << "invalid because s == " << sectionName(s);
+            state = QValidator::Invalid;
+            goto end;
+        }
+        sn = sectionNode(s);
+        const int sectionstart = sn.pos;
+        const int sectionsize = sectionSize(s);
+
+        QString sub = input.mid(sectionstart, sectionsize + diff);
+        sub.remove(space);
+        input.replace(sectionstart, sectionsize + diff, sub.leftJustified(sectionsize, space));
+
+        sn = sectionNode(currentSection);
+    }
+
+    for (int i=0; i<sectionNodes.size(); ++i) {
+        sn = sectionNodes.at(i);
+        if (input.mid(index, sn.pos - index) != separators.at(i)) {
+            EDTEDEBUG << "invalid because" << input.mid(index, sn.pos - index) << "!=" << separators.at(i);
+            state = QValidator::Invalid;
+            goto end;
+        }
+        index = sn.pos + sectionSize(sn.section);
+    }
+
+    if (sn.pos + sectionSize(sn.section) < input.size()
+        && input.mid(sn.pos + sectionSize(sn.section)) != separators.last()) {
+        EDTEDEBUG << "invalid because" << input.mid(sn.pos + sectionSize(sn.section))
+                  << "!=" << separators.last();
+        state = QValidator::Invalid;
+        goto end;
+    }
+
+    {
+        int year, month, day, hour, minute, second, msec;
+        const ExtDateTime &dt = value.toDateTime();
+        year = dt.date().year();
+        month = dt.date().month();
+        day = dt.date().day();
+        hour = dt.time().hour();
+        minute = dt.time().minute();
+        second = dt.time().second();
+        msec = dt.time().msec();
+
+        state = QValidator::Acceptable;
+        for (int i=0; state != QValidator::Invalid && i<sectionNodes.size(); ++i) {
+            const Section s = sectionNodes.at(i).section;
+            QValidator::State tmpstate;
+            int num = sectionValue(s, input, tmpstate);
+            // Apple's GCC 3.3 and GCC 4.0 CVS flags a warning on qMin,
+            // so code by hand to remove the warning.
+            state = state < tmpstate ? state : tmpstate;
+
+            if (state != QValidator::Invalid) {
+                switch (s) {
+                case HourSection: hour = num; break;
+                case MinuteSection: minute = num; break;
+                case SecondSection: second = num; break;
+                case MSecSection: msec = num; break;
+                case YearTwoDigitsSection:
+                case YearSection: year = (num == 0 ? DATE_INITIAL.year() : num); break;
+                case MonthSection:
+                case MonthShortNameSection: month = qMax<int>(1, num); break;
+                case DaySection: day = qMax<int>(1, num); break;
+                case AmPmSection:
+                case AmPmLowerCaseSection: hour = (num == 0 ? hour % 12 : (hour % 12) + 12); break;
+                default:
+                    qFatal("%s found in sections validateAndInterpret. This should never happen",
+                           sectionName(s).toLatin1().constData());
+                    break;
+                }
+            }
+        }
+
+        if (state == QValidator::Invalid) {
+            tmp = getZeroVariant();
+        } else {
+            bool fixday = false;
+            if (currentSection == DaySection) {
+                cachedDay = day;
+            } else if (cachedDay > day) {
+                day = cachedDay;
+                fixday = true;
+            }
+
+            if (!ExtDate::isValid(year, month, day)) {
+                if (day < 32) {
+                    cachedDay = day;
+                } else if (day > 28 && ExtDate::isValid(year, month, 1)) {
+                    fixday = true;
+                }
+            }
+            if (fixday) {
+                day = qMin<int>(day, ExtDate(year, month, 1).daysInMonth());
+                const SectionNode &sn = sectionNode(DaySection);
+                input.replace(sn.pos, sectionSize(DaySection), QString::number(day));
+            }
+
+            EDTEDEBUG << year << month << day << hour << minute << second << msec;
+            tmp = QVariant(ExtDateTime(ExtDate(year, month, day), QTime(hour, minute, second, msec)));
+        }
+        EDTEDEBUGN("'%s' => '%s' (%s)", input.toLatin1().constData(),
+                   tmp.toString().toLatin1().constData(), stateName(state).toLatin1().constData());
+    }
+end:
+    if (tmp.toDateTime().isValid()) {
+        if (!specval && state != QValidator::Invalid && tmp < minimum) {
+            state = checkIntermediate(tmp.toDateTime(), input);
+        } else {
+            if (tmp > maximum)
+                state = QValidator::Invalid;
+            EDTEDEBUG << "not checking intermediate because tmp is" << tmp << minimum << maximum;
+        }
+    }
+    cachedText = input;
+    cachedState = state;
+    cachedValue = tmp;
+    return tmp;
+}
+
+/*!
+  \internal
+  finds the first possible monthname that \a str1 can match. Starting from \a index;
+*/
+
+int ExtDateTimeEditPrivate::findMonth(const QString &str1, int index) const
+{
+    Q_ASSERT(str1.size() == 3);
+
+    for (int month=index; month<=12; ++month) {
+        QString str2 = ExtDate::shortMonthName(month).toLower();
+        bool found = true;
+        for (int i=0; i<str1.size(); ++i) {
+            if (str1.at(i) != str2.at(i) && !str1.at(i).isSpace()) {
+                found = false;
+                break;
+            }
+        }
+        if (found)
+            return month;
+    }
+    return -1;
+}
+
+/*!
+  \internal
+
+  returns
+  0 if str == ExtDateTimeEdit::tr("AM")
+  1 if str == ExtDateTimeEdit::tr("PM")
+  2 if str can become ExtDateTimeEdit::tr("AM")
+  3 if str can become ExtDateTimeEdit::tr("PM")
+  4 if str can become ExtDateTimeEdit::tr("PM") and can become ExtDateTimeEdit::tr("AM")
+  -1 can't become anything sensible
+
+*/
+
+int ExtDateTimeEditPrivate::findAmPm(QString &str, ExtDateTimeEditPrivate::Section s) const
+{
+    const char space = ' ';
+    const int size = sectionSize(AmPmSection);
+    Q_ASSERT(str.size() == size);
+
+    enum {
+        amindex = 0,
+        pmindex = 1
+    };
+    QString ampm[2];
+    if (s == AmPmSection) {
+        ampm[amindex] = ExtDateTimeEdit::tr("AM");
+        ampm[pmindex] = ExtDateTimeEdit::tr("PM");
+    } else {
+        ampm[amindex] = ExtDateTimeEdit::tr("am");
+        ampm[pmindex] = ExtDateTimeEdit::tr("pm");
+    }
+    for (int i=0; i<2; ++i)
+        ampm[i].truncate(size);
+
+    EDTEDEBUG << "findAmPm" << str << ampm[0] << ampm[1];
+
+    if (str.indexOf(ampm[amindex], 0, Qt::CaseInsensitive) == 0) {
+        str = ampm[amindex];
+        return AM;
+    } else if (str.indexOf(ampm[pmindex], 0, Qt::CaseInsensitive) == 0) {
+        str = ampm[pmindex];
+        return PM;
+    } else if (str.count(space) == 0) {
+        return Neither;
+    }
+
+    bool broken[2] = {false, false};
+    for (int i=0; i<size; ++i) {
+        if (str.at(i) != space) {
+            for (int j=0; j<2; ++j) {
+                if (!broken[j]) {
+                    int index = ampm[j].indexOf(str.at(i));
+                    EDTEDEBUG << "looking for" << str.at(i)
+                              << "in" << ampm[j] << "and got" << index;
+                    if (index == -1) {
+                        if (str.at(i).category() == QChar::Letter_Uppercase) {
+                            index = ampm[j].indexOf(str.at(i).toLower());
+                            EDTEDEBUG << "trying with" << str.at(i).toLower()
+                                      << "in" << ampm[j] << "and got" << index;
+                        } else if (str.at(i).category() == QChar::Letter_Lowercase) {
+                            index = ampm[j].indexOf(str.at(i).toUpper());
+                            EDTEDEBUG << "trying with" << str.at(i).toUpper()
+                                      << "in" << ampm[j] << "and got" << index;
+                        }
+                        if (index == -1) {
+                            broken[j] = true;
+                            if (broken[amindex] && broken[pmindex]) {
+                                EDTEDEBUG << str << "didn't make it";
+                                return Neither;
+                            }
+                            continue;
+                        } else {
+                            str[i] = ampm[j].at(index); // fix case
+                        }
+                    }
+                    ampm[j].remove(index, 1);
+                }
+            }
+        }
+    }
+    if (!broken[pmindex] && !broken[amindex])
+        return PossibleBoth;
+    return (!broken[amindex] ? PossibleAM : PossiblePM);
+}
+
+/*!
+  \internal
+  Max number of units that can be changed by this section.
+*/
+
+int ExtDateTimeEditPrivate::maxChange(ExtDateTimeEditPrivate::Section s) const
+{
+    switch (s) {
+        // Time. unit is msec
+    case MSecSection: return 999;
+    case SecondSection: return 59 * 1000;
+    case MinuteSection: return 59 * 60 * 1000;
+    case HourSection: return 59 * 60 * 60 * 1000;
+
+        // Date. unit is day
+    case DaySection: return 30;
+    case MonthShortNameSection:
+    case MonthSection: return 365 - 31;
+    case YearSection: return (7999 - 1753) * 365;
+    case YearTwoDigitsSection: return 100 * 365;
+
+    default: break;
+    }
+    qFatal("%s passed to maxChange. This should never happen", sectionName(s).toLatin1().constData());
+    return -1;
+}
+
+
+int ExtDateTimeEditPrivate::multiplier(ExtDateTimeEditPrivate::Section s) const
+{
+    switch (s) {
+        // Time. unit is msec
+    case MSecSection: return 1;
+    case SecondSection: return 1000;
+    case MinuteSection: return 60 * 1000;
+    case HourSection: return 60 * 60 * 1000;
+
+        // Date. unit is day
+    case DaySection: return 1;
+    case MonthShortNameSection:
+    case MonthSection: return 30;
+    case YearSection: return 365;
+    case YearTwoDigitsSection: return 365;
+
+    default: break;
+    }
+    qFatal("%s passed to multiplier. This should never happen", sectionName(s).toLatin1().constData());
+    return -1;
+}
+
+/*!
+  \internal Get a number that str can become which is between min
+  and max or -1 if this is not possible.
+*/
+
+QString ExtDateTimeEditPrivate::sectionFormat(int s) const
+{
+    switch (s) {
+    case AmPmSection: return QLatin1String("AP");
+    case MSecSection: return QLatin1String("zzz");
+    case SecondSection: return QLatin1String("ss");
+    case MinuteSection: return QLatin1String("mm");
+    case HourSection: return QLatin1String("hh");
+    case AmPmLowerCaseSection: return QLatin1String("ap");
+    case DaySection: return QLatin1String("dd");
+    case MonthSection: return QLatin1String("MM");
+    case YearSection: return QLatin1String("yyyy");
+    case MonthShortNameSection: return QLatin1String("MMM");
+    case YearTwoDigitsSection: return QLatin1String("yy");
+    default: break;
+    }
+    qFatal("%s passed to sectionFormat. This should never happen", sectionName(s).toLatin1().constData());
+    return QString();
+}
+
+/*!
+  \internal Get a number that str can become which is between min
+  and max or -1 if this is not possible.
+*/
+
+int ExtDateTimeEditPrivate::potentialValue(const QString &str, int min, int max, Section s) const
+{
+    int size = sectionSize(s);
+    if (s == YearTwoDigitsSection) {
+        min -= 2000;
+        max -= 2000; // doesn't matter if max is -1 checking for < 0
+    }
+    QString simplified = str.simplified();
+    Q_ASSERT(str != simplified);
+    if (simplified.isEmpty()) {
+        return min + (s == YearTwoDigitsSection ? 2000 : 0);
+    } else if (simplified.toInt() > max && max >= 0) {
+        return -1;
+    } else {
+        QString temp = simplified;
+        while (temp.size() < size)
+            temp.prepend(QLatin1Char('9'));
+        int t = temp.toInt();
+        if (t < min) {
+            return -1;
+        } else if (t <= max || max < 0) {
+            return t + (s == YearTwoDigitsSection ? 2000 : 0);
+        }
+    }
+
+    int ret = potentialValueHelper(simplified, min, max, size);
+    if (ret == -1)
+        return -1;
+    return ret + (s == YearTwoDigitsSection ? 2000 : 0);
+}
+
+/*!
+  \internal internal helper function called by potentialValue
+*/
+
+int ExtDateTimeEditPrivate::potentialValueHelper(const QString &str, int min, int max, int size) const
+{
+    if (str.size() == size) {
+        const int val = str.toInt();
+        if (val < min || val > max)
+            return -1;
+        EDTEDEBUG << "SUCCESS" << val << "is >=" << min << "and <=" << max;
+        return val;
+    }
+
+    for (int i=0; i<=str.size(); ++i) {
+        for (int j=0; j<10; ++j) {
+            QString tmp = str;
+            if (i == str.size()) {
+                tmp.append(QChar('0' + j));
+            } else {
+                tmp.insert(i, QChar('0' + j));
+            }
+            int ret = potentialValueHelper(tmp, min, max, size);
+            if (ret != -1)
+                return ret;
+        }
+    }
+    return -1;
+}
+
+/*!
+  \internal
+  \reimp
+*/
+
+QString ExtDateTimeEditPrivate::textFromValue(const QVariant &f) const
+{
+    Q_Q(const ExtDateTimeEdit);
+    return q->textFromDateTime(f.toDateTime());
+}
+
+/*!
+  \internal
+  \reimp
+*/
+
+QVariant ExtDateTimeEditPrivate::valueFromText(const QString &f) const
+{
+    Q_Q(const ExtDateTimeEdit);
+    return QVariant(q->dateTimeFromText(f));
+}
+
+/*!
+  \internal Returns whether \a str is a string which value cannot be
+  parsed but still might turn into something valid.
+*/
+
+QValidator::State ExtDateTimeEditPrivate::checkIntermediate(const ExtDateTime &dt,
+                                                          const QString &s) const
+{
+    const char space = ' ';
+
+    Q_ASSERT(dt < minimum);
+
+    bool found = false;
+    for (int i=0; i<sectionNodes.size(); ++i) {
+        const SectionNode sn = sectionNodes.at(i);
+        QString t = sectionText(s, sn.section).toLower();
+        if (t.contains(space)) {
+            if (found) {
+                EDTEDEBUG << "Invalid because no spaces";
+                return QValidator::Invalid;
+            }
+            found = true;
+            switch (sn.section) {
+            case MonthShortNameSection: {
+                int tmp = dt.date().month();
+                // I know the first possible month makes the date too early
+                while ((tmp = findMonth(t, tmp + 1)) != -1) {
+                    const QVariant copy(dt.addMonths(tmp - dt.date().month()));
+                    if (copy >= minimum && copy <= maximum)
+                        break;
+                }
+                if (tmp == -1)
+                    return QValidator::Invalid;
+            }
+            case AmPmSection:
+            case AmPmLowerCaseSection:
+                if (t.count(space) == 2 || t.contains('m')) {
+                    const QVariant copy(dt.addSecs(12 * 60 * 60));
+                    if (copy >= minimum && copy <= maximum)
+                        break;
+                }
+                return QValidator::Invalid;
+            default: {
+                int toMin;
+                int toMax;
+                int multi = multiplier(sn.section);
+
+                if (sn.section & TimeSectionMask) {
+                    if (dt.daysTo(minimum.toDateTime()) != 0) {
+                        EDTEDEBUG << "if (dt.daysTo(minimum.toDateTime()) != 0)" << dt.daysTo(minimum.toDateTime());
+                        return QValidator::Invalid;
+                    }
+                    toMin = dt.time().msecsTo(minimum.toDateTime().time());
+                    if (dt.daysTo(maximum.toDateTime()) > 0) {
+                        toMax = -1; // can't get to max
+                    } else {
+                        toMax = dt.time().msecsTo(maximum.toDateTime().time());
+                    }
+                } else {
+                    toMin = dt.daysTo(minimum.toDateTime());
+                    toMax = dt.daysTo(maximum.toDateTime());
+                }
+                int maxChange = ExtDateTimeEditPrivate::maxChange(sn.section);
+                int maxChangeUnits = maxChange * multi;
+                if (toMin > maxChangeUnits) {
+                    EDTEDEBUG << "invalid because toMin > maxChangeUnits" << toMin
+                              << maxChangeUnits << t << dt << minimum.toDateTime()
+                              << multi;
+
+                    return QValidator::Invalid;
+                } else if (toMax > maxChangeUnits) {
+                    toMax = -1; // can't get to max
+                }
+
+                int min = getDigit(minimum, sn.section);
+                int max = toMax != -1 ? getDigit(maximum, sn.section) : -1;
+                int tmp = potentialValue(t, min, max, sn.section);
+                EDTEDEBUG << tmp << t << min << max << sectionName(sn.section)  << minimum.toDate() << maximum.toDate();
+                if (tmp == -1) {
+                    EDTEDEBUG << "invalid because potentialValue(" << t << min << max
+                              << sectionName(sn.section) << "returned" << tmp;
+                    return QValidator::Invalid;
+                }
+
+                QVariant var(dt);
+                setDigit(var, sn.section, tmp);
+                if (var > maximum) {
+                    EDTEDEBUG << "invalid because" << var.toString() << ">" << maximum.toString();
+                    return QValidator::Invalid;
+                }
+                break; }
+            }
+        }
+    }
+    return found ? QValidator::Intermediate : QValidator::Invalid;
+}
+
+/*!
+  \internal
+  For debugging. Returns the name of the section \a s.
+*/
+
+QString ExtDateTimeEditPrivate::sectionName(int s) const
+{
+    switch (s) {
+    case ExtDateTimeEditPrivate::AmPmSection: return "AmPmSection";
+    case ExtDateTimeEditPrivate::AmPmLowerCaseSection: return "AmPmLowerCaseSection";
+    case ExtDateTimeEditPrivate::DaySection: return "DaySection";
+    case ExtDateTimeEditPrivate::HourSection: return "HourSection";
+    case ExtDateTimeEditPrivate::MSecSection: return "MSecSection";
+    case ExtDateTimeEditPrivate::MinuteSection: return "MinuteSection";
+    case ExtDateTimeEditPrivate::MonthSection: return "MonthSection";
+    case ExtDateTimeEditPrivate::MonthShortNameSection: return "MonthShortNameSection";
+    case ExtDateTimeEditPrivate::SecondSection: return "SecondSection";
+    case ExtDateTimeEditPrivate::YearSection: return "YearSection";
+    case ExtDateTimeEditPrivate::YearTwoDigitsSection: return "YearTwoDigitsSection";
+    case ExtDateTimeEditPrivate::NoSection: return "NoSection";
+    case ExtDateTimeEditPrivate::FirstSection: return "FirstSection";
+    case ExtDateTimeEditPrivate::LastSection: return "LastSection";
+    default: return "Unknown section " + QString::number(s);
+    }
+}
+
+/*!
+  \internal
+  For debugging. Returns the name of the state \a s.
+*/
+
+QString ExtDateTimeEditPrivate::stateName(int s) const
+{
+    switch (s) {
+    case QValidator::Invalid: return "Invalid";
+    case QValidator::Intermediate: return "Intermediate";
+    case QValidator::Acceptable: return "Acceptable";
+    default: return "Unknown state " + QString::number(s);
+    }
+}
 
 #include "extdatetimeedit.moc"
 
-#endif
+#endif // QT_NO_DATETIMEEDIT
+
+#endif //0
