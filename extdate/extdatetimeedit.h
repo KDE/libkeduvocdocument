@@ -59,7 +59,9 @@ class ExtDateEdit : public QSpinBox {
 
 	public:
 		ExtDateEdit( const ExtDate &d = ExtDate::currentDate(), QWidget *parent = 0 );
+#if 0
 		ExtDateEdit( int jd, QWidget *parent = 0 );
+#endif
 		~ExtDateEdit();
 
 		void stepBy( int steps );
@@ -90,7 +92,9 @@ class ExtDateTimeEdit : public QWidget {
 
 	public:
 		ExtDateTimeEdit( const ExtDateTime &dt = ExtDateTime::currentDateTime(), QWidget *p=0 );
+#if 0
 		ExtDateTimeEdit( const ExtDate &d, const QTime &t, QWidget *p=0 );
+#endif
 		~ExtDateTimeEdit();
 
 	private:

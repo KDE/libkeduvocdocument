@@ -34,9 +34,11 @@ ExtDateEdit::ExtDateEdit( const ExtDate &d, QWidget *parent )
 	m_DateFormat.replace( "y", "Y" );
 }
 
+#if 0
 ExtDateEdit::ExtDateEdit( int jd, QWidget *parent ) {
 	ExtDateEdit( ExtDate(jd), parent );
 }
+#endif
 
 ExtDateEdit::~ExtDateEdit() {
 }
@@ -100,9 +102,11 @@ ExtDateTimeEdit::ExtDateTimeEdit( const ExtDateTime &dt, QWidget *parent )
 	hlay->addWidget( m_TimeEdit );
 }
 
+#if 0
 ExtDateTimeEdit::ExtDateTimeEdit( const ExtDate &d, const QTime &t, QWidget *parent ) {
 	ExtDateTimeEdit( ExtDateTime( d, t ), parent );
 }
+#endif
 
 ExtDateTimeEdit::~ExtDateTimeEdit() {
 }
