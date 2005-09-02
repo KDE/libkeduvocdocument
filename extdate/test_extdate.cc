@@ -318,6 +318,23 @@ void test9() {
 	std::cout << "--------------------" << std::endl;
 }
 
+void test10() {
+	ExtDate d1 = ExtDate::fromString("20050829", Qt::ISODate);
+	ExtDate d2 = ExtDate::fromString("30 Aug 2005", Qt::TextDate);
+	ExtDate d3 = ExtDate::fromString("Aug 31, 2005", "%b %d, %Y");
+	ExtDate d4 = ExtDate::fromString("2005foo09bar01", "%Yfoo%mbar%d");
+	std::cout << "ExtDate::fromString(\"20050829\", Qt::ISODate): " 
+		<< d1.toString().toLocal8Bit().data() << std::endl;
+	std::cout << "ExtDate::fromString(\"30 Aug 2005\", Qt::TextDate): " 
+		<< d2.toString().toLocal8Bit().data() << std::endl;
+	std::cout << "ExtDate::fromString(\"Aug 31, 2005\", \"%b %d, %Y\"): " 
+		<< d3.toString().toLocal8Bit().data() << std::endl;
+	std::cout << "ExtDate::fromString(\"2005foo09bar01\", \"%Yfoo%mbar%d\"): " 
+		<< d4.toString().toLocal8Bit().data() << std::endl;
+
+	std::cout << "--------------------" << std::endl;
+}
+
 int main(int argc, char *argv[])
 {
 	test1();
@@ -329,6 +346,7 @@ int main(int argc, char *argv[])
 	test7();
 	test8();
 	test9();
+	test10();
 	exit(0);
 }
 

@@ -91,6 +91,7 @@ public:
 	static ExtDate currentDate( Qt::TimeSpec ts = Qt::LocalTime );
 #ifndef QT_NO_DATESTRING
 	static ExtDate fromString( const QString& s, Qt::DateFormat f = Qt::TextDate );
+	static ExtDate fromString( const QString& s, const QString &format );
 #endif
 	static bool isValid( int y, int m, int d );
 	static bool leapYear( int year );

@@ -357,6 +357,80 @@ ExtDate ExtDate::currentDate(Qt::TimeSpec ts)
 }
 
 #ifndef QT_NO_DATESTRING
+ExtDate ExtDate::fromString( const QString &sDate, const QString &format ) {
+	// %Y The year, including centuries prefix (e.g., "1984")
+	// %y The year, excluding centuries prefix (e.g., "84")
+	// %n Numerical month value (e.g., "3" for March)
+	// %m Numerical month value, two digits (e.g., "03" for March)
+	// %e Numerical day value (e.g., "3" on March 3rd)
+	// %d Numerical day value, two digits (e.g., "03" on March 3rd)
+	// %b Month name, short form (e.g., "Mar" for March)
+	// %B Month name, long form (e.g., "March")
+	// %a Weekday name, short form (e.g., "Wed" for Wednesday)
+	// %A Weekday name, long form (e.g., "Wednesday")
+
+	//All other characters are left as-is.
+
+	//Parse the format string a piece at a time.  Look for the tokens 
+	//(a "%" followed by a letter).  Skip over non-tokens.
+	QString s = sDate;
+	QString f = format;
+
+	int y(0), m(0), d(0);
+	int j = 0;
+	int jold = j;
+	int js = 1; //index marker for date string
+	for ( int i=0; i<f.count("%"); i++ ) {
+		j = f.indexOf( "%", jold ) + 1;
+		js += (j-jold - 2);  //-2 accounts for the '%X'
+		jold = j;
+		
+		QChar cf = f[j];
+		QChar cend = f[j+1]; //the character following the token
+		int jend = s.indexOf( cend, js );
+		if (jend==-1) jend = s.length();
+		QString chunk = s.mid( js, jend-js );
+		js += chunk.length(); //move marker past the data we just read
+
+		switch ( cf.toAscii() ) {
+			case 'Y':
+				y = chunk.toInt();
+				break;
+			case 'y':
+				y = chunk.toInt();
+				if ( y<40 ) y += 2000;
+				else y += 1900;
+				break;
+			case 'n': //fall through
+			case 'm':
+				m = chunk.toInt();
+				break;
+			case 'e': //fall through
+			case 'd': 
+				d = chunk.toInt();
+				break;
+			case 'b':
+			{
+				for ( int imn=1; imn<=12; imn++ ) 
+					if ( chunk == shortMonthName(imn) ) m = imn;
+				break;
+			}
+			case 'B':
+			{
+				for ( int imn=1; imn<=12; imn++ ) 
+					if ( chunk == longMonthName(imn) ) m = imn;
+				break;
+			}
+		}
+	}
+
+	if ( y == 0 || m == 0 || d == 0 ) { //date was not assigned.
+		return ExtDate(); //invalid date
+	} else {
+		return ExtDate( y, m, d );
+	}
+}
+
 ExtDate ExtDate::fromString( const QString& s, Qt::DateFormat f )
 {
 	ExtDate dt = ExtDate();  //initialize invalid date
@@ -372,8 +446,8 @@ ExtDate ExtDate::fromString( const QString& s, Qt::DateFormat f )
 		case Qt::ISODate :
 		{
 			int year( s.mid( 0, 4 ).toInt() );
-			int month( s.mid( 5, 2 ).toInt() );
-			int day( s.mid( 8, 2 ).toInt() );
+			int month( s.mid( 4, 2 ).toInt() );
+			int day( s.mid( 6, 2 ).toInt() );
 			if ( year && month && day )
 				return ExtDate( year, month, day );
 		}
