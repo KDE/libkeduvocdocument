@@ -1,4 +1,4 @@
-#include "testwidget.h"
+#include "edpicker_widget.h"
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
@@ -16,15 +16,15 @@ int main( int argc, char *argv[] )
 	KAboutData aboutData( "test_extdatepicker", I18N_NOOP("Test ExtDatePicker"),
 				"0.1", description, KAboutData::License_GPL,
 				I18N_NOOP("(c) 2004, Jason Harris"), notice,
-				"http://30doradus.org");
+				"http://edu.kde.org/kstars");
 	aboutData.addAuthor("Jason Harris", 0,
-				"jharris@30doradus.org", "http://www.30doradus.org");
+				"kstars@30doradus.org", "http://edu.kde.org/kstars");
 
 	KCmdLineArgs::init( argc, argv, &aboutData );
 
 	KApplication a;
-	TestWidget *t = new TestWidget(0,0);
-	t->show();
+	EDPicker *edp = new EDPicker(0,0);
+	edp->show();
 	QObject::connect(kapp, SIGNAL(lastWindowClosed()), kapp, SLOT(quit()));
 	return a.exec();
 }

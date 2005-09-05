@@ -1,8 +1,8 @@
 /***************************************************************************
-                          testwidget.cpp  -  description
+                          edtedit_widget.cpp  -  description
                              -------------------
-    begin                : Sun Apr 11 2004
-    copyright            : (C) 2004 by Jason Harris
+    begin                : Sun Sept 4 2005
+    copyright            : (C) 2005 by Jason Harris
     email                : kstars@30doradus.org
  ***************************************************************************/
 
@@ -15,39 +15,28 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TESTWIDGET_H
-#define TESTWIDGET_H
+#ifndef EDTEDIT_WIDGET_H
+#define EDTEDIT_WIDGET_H
 
 #include <kmainwindow.h>
-//Added by qt3to4:
-#include <QGridLayout>
 
-class KDatePicker;
-class KLineEdit;
-class KDateWidget;
-class ExtDatePicker;
-class ExtDateWidget;
-class QGridLayout;
-class QDate;
+class QVBoxLayout;
 class ExtDate;
+class ExtDateEdit;
+class ExtDateTimeEdit;
 
-class TestWidget : public KMainWindow {
+class EDTEdit : public KMainWindow {
 	Q_OBJECT
 	public:
-		TestWidget( QWidget *parent, const char *name );
-		~TestWidget() {}
+		EDTEdit( QWidget *parent, const char *name );
+		~EDTEdit();
 
-	public slots:
-		void slotKDateChanged(QDate);
-		void slotExtDateChanged(const ExtDate&);
+//	public slots:
 
 	private:
-		QGridLayout *glay;
-		KDatePicker *kdp;
-		ExtDatePicker *edp;
-		ExtDateWidget *edw;
-		KDateWidget *kdw;
-		KLineEdit *kdpEdit, *edpEdit;
+		QVBoxLayout *vlay;
+		ExtDateEdit *ed;
+		ExtDateTimeEdit *edt;
 };
 
-#endif //ifndef TESTWIDGET_H
+#endif //ifndef EDTEDIT_WIDGET_H

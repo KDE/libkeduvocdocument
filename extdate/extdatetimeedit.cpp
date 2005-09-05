@@ -16,10 +16,14 @@
 
 #include <QTime>
 #include <QDateTimeEdit>
+#include <QLineEdit>
 #include <QHBoxLayout>
+#include <QMouseEvent>
 #include <QKeyEvent>
 #include <kglobal.h>
 #include <klocale.h>
+#include <kdebug.h>
+
 #include "extdatetime.h"
 
 #include "extdatetimeedit.h"
@@ -28,19 +32,79 @@ ExtDateEdit::ExtDateEdit( const ExtDate &d, QWidget *parent )
 : QSpinBox( parent ), ActiveField(0), m_Date(d) {
 	setRange( -20000000, 20000000 ); //range of Julian Days
 
-	//Set the date format to be the Locale's short date format, except 
-	//always use full years instead of two-digit years
+	//Set the date format to be the Locale's short date format, except:
+	//always use full years instead of trimming ti two digits
+	//and always use two-digit days and months
 	m_DateFormat = KGlobal::locale()->dateFormatShort();
 	m_DateFormat.replace( "y", "Y" );
+	m_DateFormat.replace( "n", "m" );
+	m_DateFormat.replace( "e", "d" );
+
+	//Make sure highlight is persistent when value is changed
+	connect( this, SIGNAL( valueChanged( int ) ), this, SLOT( slotRefreshHighlight() ) );
+
+	edLineEdit *edle = new edLineEdit( this );
+	setLineEdit(edle);
+
+	setValue( m_Date.jd() );
+	highlightActiveField();
 }
 
-#if 0
 ExtDateEdit::ExtDateEdit( int jd, QWidget *parent ) {
 	ExtDateEdit( ExtDate(jd), parent );
 }
-#endif
 
 ExtDateEdit::~ExtDateEdit() {
+}
+
+QString ExtDateEdit::simpleDateFormat() {
+	//Convert the KDE date format string (e.g., "%Y-%m-%d") to one 
+	//that accurately represents the number of digits in each date 
+	//field (e.g., "YYYY-MM-DD").  Note that while the Months and 
+	//Days fields will always have two digits, the number of digits 
+	//in the Years field depends on the displayed year.
+	QString result = m_DateFormat;
+	result.replace( "%Y", "YYYY" );
+	result.replace( "%m", "MM" );
+	result.replace( "%d", "DD" );
+
+	int i=result.indexOf( "Y" );
+	int dLength = result.length() - cleanText().length();
+	if ( dLength > 0 ) { //the years field must have more than 4 digits
+		for ( uint j=0; j<dLength; j++ ) result.insert( i, "Y" );
+	} else if ( dLength < 0 ) { //the years field has less than 4 digits
+		result.remove( i, -1*dLength );
+	}
+
+	return result;
+}
+
+void ExtDateEdit::highlightActiveField() {
+	int iStart(0), iLength(0);
+	QString sdf = simpleDateFormat();
+
+	//Pick out the position and length of the currently-active field
+	if ( ActiveField == 0 ) { //Days field
+		iStart = sdf.indexOf( "D" );
+		iLength = 2; //The Days field should always be two digits
+	} else if ( ActiveField == 1 ) { //Months field
+		iStart = sdf.indexOf( "M" );
+		iLength = 2; //The Months field should always be two digits
+	} else { //Years field
+		iStart = sdf.indexOf( "Y" );
+		iLength = sdf.lastIndexOf( "Y" ) - iStart + 1;
+	}
+
+	lineEdit()->setCursorPosition( iStart + iLength );
+	lineEdit()->setSelection( iStart, iLength );
+
+// 	//DEBUG
+// 	kdDebug() << "selected text: " << lineEdit()->selectedText() << endl;
+
+}
+
+void ExtDateEdit::slotRefreshHighlight() {
+	highlightActiveField();
 }
 
 void ExtDateEdit::stepBy( int steps ) {
@@ -84,31 +148,117 @@ int ExtDateEdit::valueFromText( const QString &text ) const {
 		return INVALID_DAY;
 }
 
-void ExtDateEdit::paintEvent( QPaintEvent *e ) {
-	QSpinBox::paintEvent( e );
+//Warning: this function assumes that the lineEdit() contains 
+//no prefix or suffix.  I believe this assumption is always valid, 
+//but want to be explicit about this.
+bool ExtDateEdit::focusNextPrevChild( bool next ) {
+	if ( !focusWidget() ) return false;
+
+	int NewField = ActiveField;
+	int pos = lineEdit()->cursorPosition(); //assumes no prefix/suffix!
+	int step = ( next ? 1 : -1 );
+	
+	QString sdf = simpleDateFormat();
+	while ( NewField == ActiveField ) {
+		pos += step;
+
+		if ( pos >= sdf.length() || pos < 0 )
+			return QSpinBox::focusNextPrevChild( next );
+
+		QChar c = sdf.at(pos);
+
+		if ( c == 'D' ) NewField = 0;
+		if ( c == 'M' ) NewField = 1;
+		if ( c == 'Y' ) NewField = 2;
+
+// 		//DEBUG
+// 		kdDebug() << pos << "  " << c << "  " << NewField << endl;
+
+	}
+
+	ActiveField = NewField;
+	highlightActiveField();
+	return true;
 }
 
-void ExtDateEdit::keyPressEvent( QKeyEvent *e ) {
-	e->ignore();
+void ExtDateEdit::invokeKey( Qt::Key k ) {
+	QKeyEvent *e = new QKeyEvent( QEvent::KeyPress, k, 0, 0 );
+	keyPressEvent( e );
+	delete e;
+}
+
+void ExtDateEdit::focusInEvent( QFocusEvent *e ) {
+// 	//DEBUG
+// 	kdDebug() << "focusInEvent()" << endl;
+
+	QSpinBox::focusInEvent(e);
+	highlightActiveField();
 }
 
 ExtDateTimeEdit::ExtDateTimeEdit( const ExtDateTime &dt, QWidget *parent )
 : QWidget( parent ) {
 	QHBoxLayout *hlay = new QHBoxLayout( this );
-	m_DateEdit = new ExtDateEdit( dt.date(), parent );
-	m_TimeEdit = new QTimeEdit( dt.time(), parent );
+	m_DateEdit = new ExtDateEdit( dt.date(), this );
+	m_TimeEdit = new QTimeEdit( dt.time(), this );
 
 	hlay->addWidget( m_DateEdit );
 	hlay->addWidget( m_TimeEdit );
 }
 
-#if 0
 ExtDateTimeEdit::ExtDateTimeEdit( const ExtDate &d, const QTime &t, QWidget *parent ) {
 	ExtDateTimeEdit( ExtDateTime( d, t ), parent );
 }
-#endif
 
 ExtDateTimeEdit::~ExtDateTimeEdit() {
+}
+
+edLineEdit::edLineEdit( QWidget *parent ) : QLineEdit( parent ) {
+	edParent = (ExtDateEdit*)parent;
+}
+
+void edLineEdit::mouseReleaseEvent( QMouseEvent * ) {
+// 	//DEBUG
+// 	kdDebug() << "mousePressEvent()" << endl;
+
+	//assumes no prefix/suffix!
+	QString sdf = edParent->simpleDateFormat();
+	int p = cursorPosition();
+	if ( p >= sdf.length() ) p = sdf.length() - 1;
+	QChar c = sdf.at( p );
+	while ( c != 0 && c != 'D' && c != 'M' && c != 'Y' )
+		c = edParent->simpleDateFormat().at( --p );
+
+	if ( c == 'D' ) edParent->setActiveField( 0 );
+	else if ( c == 'M' ) edParent->setActiveField( 1 );
+	else if ( c == 'Y' ) edParent->setActiveField( 2 );
+
+// 	//DEBUG
+// 	kdDebug() << "ActiveField = " << edParent->activeField() << endl;
+
+	edParent->highlightActiveField();
+}
+
+void edLineEdit::keyPressEvent( QKeyEvent *e ) {
+// 	//DEBUG
+// 	kdDebug() << "keyPressEvent()" << endl;
+
+	switch ( e->key() ) {
+		case Qt::Key_Up:
+			edParent->stepBy( 1 );
+			break;
+		case Qt::Key_Down:
+			edParent->stepBy( -1 );
+			break;
+		case Qt::Key_Left:
+			edParent->invokeKey( Qt::Key_BackTab );
+			break;
+		case Qt::Key_Right:
+			edParent->invokeKey( Qt::Key_Tab );
+			break;
+		default:
+			e->ignore();
+			break;
+	}
 }
 
 #include "extdatetimeedit.moc"

@@ -1,5 +1,5 @@
 /***************************************************************************
-                          testwidget.h  -  description
+                          edpicker_widget.cpp  -  description
                              -------------------
     begin                : Sun Apr 11 2004
     copyright            : (C) 2004 by Jason Harris
@@ -15,19 +15,18 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <QLabel>
+#include <QGridLayout>
+
 #include <kdatepicker.h>
 #include <kdatewidget.h>
 #include <klineedit.h>
-#include <qlayout.h>
-#include <qlabel.h>
-//Added by qt3to4:
-#include <QGridLayout>
 
-#include "extdatepicker.h"
-#include "extdatewidget.h"
-#include "testwidget.h"
+#include "../extdatepicker.h"
+#include "../extdatewidget.h"
+#include "edpicker_widget.h"
 
-TestWidget::TestWidget( QWidget *p=0, const char *name=0 ) : KMainWindow( p, name ) {
+EDPicker::EDPicker( QWidget *p=0, const char *name=0 ) : KMainWindow( p, name ) {
 	QWidget *w = new QWidget(this);
 
 	glay = new QGridLayout(w, 3, 2);
@@ -59,12 +58,12 @@ TestWidget::TestWidget( QWidget *p=0, const char *name=0 ) : KMainWindow( p, nam
 	connect( edp, SIGNAL( dateChanged(const ExtDate&) ), this, SLOT( slotExtDateChanged(const ExtDate&) ) );
 }
 
-void TestWidget::slotKDateChanged(QDate d) {
+void EDPicker::slotKDateChanged(QDate d) {
 	kdpEdit->setText( d.toString() );
 }
 
-void TestWidget::slotExtDateChanged(const ExtDate &d) {
+void EDPicker::slotExtDateChanged(const ExtDate &d) {
 	edpEdit->setText( d.toString() );
 }
 
-#include "testwidget.moc"
+#include "edpicker_widget.moc"
