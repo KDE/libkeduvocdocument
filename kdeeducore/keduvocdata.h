@@ -20,7 +20,7 @@
 #define KEDUVOCDATA_H
 
 #include <qdom.h>
-#include <q3valuelist.h>
+#include <qlist.h>
 #include <kdemacros.h>
 
 class KDE_EXPORT KEduVocDataItem
@@ -40,7 +40,7 @@ private:
     QDomElement domElement;
 };
 
-typedef Q3ValueList<KEduVocDataItem> KEduVocDataItemList;
+typedef QList<KEduVocDataItem> KEduVocDataItemList;
 
 class KDE_EXPORT KEduVocData
 {
