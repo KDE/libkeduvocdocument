@@ -4,7 +4,7 @@ SUBDIRS = .  tests
 lib_LTLIBRARIES = libkdeeduui.la
 
 libkdeeduui_la_SOURCES = \
-            kedusimpleentrydlg.cpp  kedusimpleentrydlgForm.ui kdeeduglossary.cpp
+            kdeeduglossary.cpp
 
 libkdeeduuiincludedir = $(includedir)/libkdeedu
 libkdeeduuiinclude_HEADERS = kdeeduglossary.h
