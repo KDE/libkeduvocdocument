@@ -338,6 +338,10 @@ void test10() {
 
 int main(int argc, char *argv[])
 {
+	// shut up gcc
+	(void)argc;
+	(void)argv;
+
 	test1();
 	test2();
 	test3();
