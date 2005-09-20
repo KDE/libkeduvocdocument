@@ -71,7 +71,7 @@ QString ExtDateEdit::simpleDateFormat() {
 	int i=result.indexOf( "Y" );
 	int dLength = result.length() - cleanText().length();
 	if ( dLength > 0 ) { //the years field must have more than 4 digits
-		for ( uint j=0; j<dLength; j++ ) result.insert( i, "Y" );
+		for ( int j=0; j<dLength; j++ ) result.insert( i, "Y" );
 	} else if ( dLength < 0 ) { //the years field has less than 4 digits
 		result.remove( i, -1*dLength );
 	}
