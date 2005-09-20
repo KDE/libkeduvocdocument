@@ -24,7 +24,6 @@
 #include <QLayout>
 #include <QStyle>
 #include <QToolButton>
-#include <QToolTip>
 #include <q3popupmenu.h>
 //Added by qt3to4:
 #include <QKeyEvent>
@@ -158,14 +157,14 @@ void ExtDatePicker::init( const ExtDate &dt )
   d->todayButton = new QToolButton(this);
   d->todayButton->setIconSet(SmallIconSet("today"));
 
-  QToolTip::add(yearForward, i18n("Next year"));
-  QToolTip::add(yearBackward, i18n("Previous year"));
-  QToolTip::add(monthForward, i18n("Next month"));
-  QToolTip::add(monthBackward, i18n("Previous month"));
-  QToolTip::add(d->selectWeek, i18n("Select a week"));
-  QToolTip::add(selectMonth, i18n("Select a month"));
-  QToolTip::add(selectYear, i18n("Select a year"));
-  QToolTip::add(d->todayButton, i18n("Select the current day"));
+  yearForward->setToolTip(i18n("Next year"));
+  yearBackward->setToolTip(i18n("Previous year"));
+  monthForward->setToolTip(i18n("Next month"));
+  monthBackward->setToolTip(i18n("Previous month"));
+  d->selectWeek->setToolTip(i18n("Select a week"));
+  selectMonth->setToolTip(i18n("Select a month"));
+  selectYear->setToolTip(i18n("Select a year"));
+  d->todayButton->setToolTip(i18n("Select the current day"));
 
   // -----
   setFontSize(fontsize);
@@ -173,17 +172,17 @@ void ExtDatePicker::init( const ExtDate &dt )
   line->installEventFilter( this );
   if (  QApplication::reverseLayout() )
   {
-      yearForward->setIconSet(BarIconSet(QString::fromLatin1("2leftarrow")));
-      yearBackward->setIconSet(BarIconSet(QString::fromLatin1("2rightarrow")));
-      monthForward->setIconSet(BarIconSet(QString::fromLatin1("1leftarrow")));
-      monthBackward->setIconSet(BarIconSet(QString::fromLatin1("1rightarrow")));
+      yearForward->setIconSet(BarIconSet(QLatin1String("2leftarrow")));
+      yearBackward->setIconSet(BarIconSet(QLatin1String("2rightarrow")));
+      monthForward->setIconSet(BarIconSet(QLatin1String("1leftarrow")));
+      monthBackward->setIconSet(BarIconSet(QLatin1String("1rightarrow")));
   }
   else
   {
-      yearForward->setIconSet(BarIconSet(QString::fromLatin1("2rightarrow")));
-      yearBackward->setIconSet(BarIconSet(QString::fromLatin1("2leftarrow")));
-      monthForward->setIconSet(BarIconSet(QString::fromLatin1("1rightarrow")));
-      monthBackward->setIconSet(BarIconSet(QString::fromLatin1("1leftarrow")));
+      yearForward->setIconSet(BarIconSet(QLatin1String("2rightarrow")));
+      yearBackward->setIconSet(BarIconSet(QLatin1String("2leftarrow")));
+      monthForward->setIconSet(BarIconSet(QLatin1String("1rightarrow")));
+      monthBackward->setIconSet(BarIconSet(QLatin1String("1leftarrow")));
   }
   connect(table, SIGNAL(dateChanged(const ExtDate&)), SLOT(dateChangedSlot(const ExtDate&)));
   connect(table, SIGNAL(tableClicked()), SLOT(tableClickedSlot()));
@@ -520,7 +519,7 @@ ExtDatePicker::setCloseButton( bool enable )
         d->closeButton->setAutoRaise(true);
         d->navigationLayout->addSpacing(KDialog::spacingHint());
         d->navigationLayout->addWidget(d->closeButton);
-        QToolTip::add(d->closeButton, i18n("Close"));
+        d->closeButton->setToolTip(i18n("Close"));
         d->closeButton->setPixmap( SmallIcon("remove") );
         connect( d->closeButton, SIGNAL( clicked() ),
                  topLevelWidget(), SLOT( close() ) );
