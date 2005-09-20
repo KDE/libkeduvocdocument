@@ -640,8 +640,8 @@ ExtDateTime::ExtDateTime( const ExtDate &date, const QTime &time )
 /*!
     \fn bool ExtDateTime::isNull() const
 
-    Returns TRUE if both the date and the time are null; otherwise
-    returns FALSE. A null datetime is invalid.
+    Returns true if both the date and the time are null; otherwise
+    returns false. A null datetime is invalid.
 
     \sa ExtDate::isNull(), QTime::isNull()
 */
@@ -649,8 +649,8 @@ ExtDateTime::ExtDateTime( const ExtDate &date, const QTime &time )
 /*!
     \fn bool ExtDateTime::isValid() const
 
-    Returns TRUE if both the date and the time are valid; otherwise
-    returns FALSE.
+    Returns true if both the date and the time are valid; otherwise
+    returns false.
 
     \sa ExtDate::isValid(), QTime::isValid()
 */
@@ -965,7 +965,7 @@ int ExtDateTime::secsTo( const ExtDateTime &dt ) const
 
 
 /*!
-    Returns TRUE if this datetime is equal to \a dt; otherwise returns FALSE.
+    Returns true if this datetime is equal to \a dt; otherwise returns false.
 
     \sa operator!=()
 */
@@ -976,8 +976,8 @@ bool ExtDateTime::operator==( const ExtDateTime &dt ) const
 }
 
 /*!
-    Returns TRUE if this datetime is different from \a dt; otherwise
-    returns FALSE.
+    Returns true if this datetime is different from \a dt; otherwise
+    returns false.
 
     \sa operator==()
 */
@@ -988,51 +988,51 @@ bool ExtDateTime::operator!=( const ExtDateTime &dt ) const
 }
 
 /*!
-    Returns TRUE if this datetime is earlier than \a dt; otherwise
-    returns FALSE.
+    Returns true if this datetime is earlier than \a dt; otherwise
+    returns false.
 */
 
 bool ExtDateTime::operator<( const ExtDateTime &dt ) const
 {
     if ( d < dt.d )
-	return TRUE;
-    return d == dt.d ? t < dt.t : FALSE;
+	return true;
+    return d == dt.d ? t < dt.t : false;
 }
 
 /*!
-    Returns TRUE if this datetime is earlier than or equal to \a dt;
-    otherwise returns FALSE.
+    Returns true if this datetime is earlier than or equal to \a dt;
+    otherwise returns false.
 */
 
 bool ExtDateTime::operator<=( const ExtDateTime &dt ) const
 {
     if ( d < dt.d )
-	return TRUE;
-    return d == dt.d ? t <= dt.t : FALSE;
+	return true;
+    return d == dt.d ? t <= dt.t : false;
 }
 
 /*!
-    Returns TRUE if this datetime is later than \a dt; otherwise
-    returns FALSE.
+    Returns true if this datetime is later than \a dt; otherwise
+    returns false.
 */
 
 bool ExtDateTime::operator>( const ExtDateTime &dt ) const
 {
     if ( d > dt.d )
-	return TRUE;
-    return d == dt.d ? t > dt.t : FALSE;
+	return true;
+    return d == dt.d ? t > dt.t : false;
 }
 
 /*!
-    Returns TRUE if this datetime is later than or equal to \a dt;
-    otherwise returns FALSE.
+    Returns true if this datetime is later than or equal to \a dt;
+    otherwise returns false.
 */
 
 bool ExtDateTime::operator>=( const ExtDateTime &dt ) const
 {
     if ( d > dt.d )
-	return TRUE;
-    return d == dt.d ? t >= dt.t : FALSE;
+	return true;
+    return d == dt.d ? t >= dt.t : false;
 }
 
 /*!
