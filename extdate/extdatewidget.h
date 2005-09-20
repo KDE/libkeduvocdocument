@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef __EXTDATEWIDGET_H__
-#define __EXTDATEWIDGET_H__
+#ifndef EXTDATEWIDGET_H
+#define EXTDATEWIDGET_H
 
 #include "extdatetime.h"
 
