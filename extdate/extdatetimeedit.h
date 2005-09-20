@@ -196,7 +196,7 @@ class ExtDateEdit : public QSpinBox {
 	*/
 		void slotRefreshHighlight();
 
-	private:
+	public:
 /**
 	*@short Convert the KDE date format for internal use.
 	*
@@ -213,6 +213,7 @@ class ExtDateEdit : public QSpinBox {
 	*/
 		QString simpleDateFormat();
 
+	private:
 		uchar ActiveField;  // 0==day; 1==month; 2==year
 		ExtDate m_Date;
 		QString m_DateFormat;
