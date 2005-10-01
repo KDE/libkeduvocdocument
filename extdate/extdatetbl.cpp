@@ -90,8 +90,8 @@ public:
 };
 
 
-ExtDateValidator::ExtDateValidator(QWidget* parent, const char* name)
-    : QValidator(parent, name)
+ExtDateValidator::ExtDateValidator(QWidget* parent)
+    : QValidator(parent)
 {
 }
 
@@ -574,8 +574,8 @@ void ExtDateTable::unsetCustomDatePainting( const ExtDate &date )
 }
 
 ExtDateInternalWeekSelector::ExtDateInternalWeekSelector
-(QWidget* parent, const char* name)
-  : KLineEdit(parent, name),
+(QWidget* parent)
+  : KLineEdit(parent),
     val(new QIntValidator(this)),
     result(0)
 {
@@ -647,8 +647,8 @@ ExtDateInternalMonthPicker::~ExtDateInternalMonthPicker() {
 }
 
 ExtDateInternalMonthPicker::ExtDateInternalMonthPicker
-(const ExtDate & date, QWidget* parent, const char* name)
-  : Q3GridView(parent, name),
+(const ExtDate & date, QWidget* parent)
+  : Q3GridView(parent),
     result(0) // invalid
 {
 //FIXME: Can't uncomment the following unless ExtDate is moved to kdelibs
@@ -820,8 +820,8 @@ ExtDateInternalMonthPicker::contentsMouseReleaseEvent(QMouseEvent *e)
 
 
 ExtDateInternalYearSelector::ExtDateInternalYearSelector
-(QWidget* parent, const char* name)
-  : QLineEdit(parent, name),
+(QWidget* parent)
+  : QLineEdit(parent),
     val(new QIntValidator(this)),
     result(0),
     d(new ExtDateInternalYearPrivate())
@@ -882,8 +882,8 @@ ExtDateInternalYearSelector::setYear(int year)
   setText(temp);
 }
 
-KPopupFrame::KPopupFrame(QWidget* parent, const char*  name)
-  : QFrame(parent, name, Qt::WType_Popup),
+KPopupFrame::KPopupFrame(QWidget* parent)
+  : QFrame(parent, Qt::WType_Popup),
     result(0), // rejected
     main(0)
 {

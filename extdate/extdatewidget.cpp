@@ -55,16 +55,15 @@ public:
 };
 
 
-ExtDateWidget::ExtDateWidget( QWidget *parent, const char *name )
-  : QWidget( parent, name )
+ExtDateWidget::ExtDateWidget( QWidget *parent )
+  : QWidget( parent )
 {
   init(ExtDate::currentDate());
   setDate(ExtDate());
 }
 
-ExtDateWidget::ExtDateWidget( const ExtDate &date, QWidget *parent,
-			    const char *name )
-  : QWidget( parent, name )
+ExtDateWidget::ExtDateWidget( const ExtDate &date, QWidget *parent )
+  : QWidget( parent )
 {
   init(date);
   setDate(date);

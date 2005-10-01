@@ -28,7 +28,7 @@
 //Added by qt3to4:
 #include <QKeyEvent>
 #include <QEvent>
-#include <Q3Frame>
+#include <QFrame>
 #include <QHBoxLayout>
 #include <QBoxLayout>
 #include <QVBoxLayout>
@@ -91,22 +91,16 @@ void ExtDatePicker::fillWeeksCombo(const ExtDate &date)
   }
 }
 
-ExtDatePicker::ExtDatePicker(QWidget *parent, ExtDate dt, const char *name)
-  : Q3Frame(parent,name)
+ExtDatePicker::ExtDatePicker(QWidget *parent, ExtDate dt)
+  : QFrame(parent)
 {
   init( dt );
 }
 
-ExtDatePicker::ExtDatePicker(QWidget *parent, ExtDate dt, const char *name, Qt::WFlags f)
-  : Q3Frame(parent,name, f)
+ExtDatePicker::ExtDatePicker(QWidget *parent, ExtDate dt, Qt::WFlags f)
+  : QFrame(parent, f)
 {
   init( dt );
-}
-
-ExtDatePicker::ExtDatePicker( QWidget *parent, const char *name )
-  : Q3Frame(parent,name)
-{
-  init( ExtDate::currentDate() );
 }
 
 void ExtDatePicker::init( const ExtDate &dt )
@@ -230,7 +224,7 @@ ExtDatePicker::eventFilter(QObject *o, QEvent *e )
           return true; // eat event
        }
    }
-   return Q3Frame::eventFilter( o, e );
+   return QFrame::eventFilter( o, e );
 }
 
 void

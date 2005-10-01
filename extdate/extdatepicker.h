@@ -24,8 +24,7 @@
 
 
 #include "extdatetime.h"
-//Added by qt3to4:
-#include <Q3Frame>
+#include <QFrame>
 #include <QResizeEvent>
 #include <QEvent>
 
@@ -53,7 +52,7 @@ class ExtDateTable;
  *
  * @short A date selection widget.
  **/
-class KDE_EXPORT ExtDatePicker: public Q3Frame
+class KDE_EXPORT ExtDatePicker: public QFrame
 {
   Q_OBJECT
 //  Q_PROPERTY( ExtDate date READ date WRITE setDate)
@@ -65,8 +64,7 @@ public:
    * initially.
    **/
   ExtDatePicker(QWidget *parent=0,
-	      ExtDate=ExtDate::currentDate(),
-	      const char *name=0);
+	      ExtDate=ExtDate::currentDate());
 
   /** The usual constructor.  The given date will be displayed
    * initially.
@@ -74,15 +72,7 @@ public:
    **/
   ExtDatePicker(QWidget *parent,
 	      ExtDate,
-	      const char *name,
 	      Qt::WFlags f); // ### KDE 4.0: Merge
-
-  /**
-   * Standard qt widget constructor. The initial date will be the
-   * current date.
-   * @since 3.1
-   */
-  ExtDatePicker( QWidget *parent, const char *name );
 
   /**
    * The destructor.
@@ -95,7 +85,7 @@ public:
    *  size hint, try adding 28 to each of the reported numbers of
    *  pixels.
    **/
-  QSize sizeHint() const;
+  virtual QSize sizeHint() const;
 
   /**
    * Sets the date.

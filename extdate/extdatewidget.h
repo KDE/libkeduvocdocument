@@ -41,12 +41,12 @@ public:
   /**
    * Constructs a date selection widget, initialized to the current CPU date.
    */
-  ExtDateWidget( QWidget *parent=0, const char *name=0 );
+  ExtDateWidget( QWidget *parent=0 );
 
   /**
    * Constructs a date selection widget with the initial date set to @p date.
    */
-  ExtDateWidget( const ExtDate &date, QWidget *parent=0, const char *name=0 );
+  ExtDateWidget( const ExtDate &date, QWidget *parent=0 );
 
   /**
    * Destructs the date selection widget.

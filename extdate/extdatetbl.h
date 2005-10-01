@@ -58,7 +58,7 @@ public slots:
 signals:
   void closeMe(int);
 public:
-  ExtDateInternalWeekSelector( QWidget* parent=0, const char* name=0);
+  ExtDateInternalWeekSelector( QWidget* parent=0);
   int getWeek();
   void setWeek(int week);
 
@@ -99,7 +99,7 @@ public:
   /**
    * The constructor.
    */
-  ExtDateInternalMonthPicker(const ExtDate& date, QWidget* parent, const char* name=0);
+  ExtDateInternalMonthPicker(const ExtDate& date, QWidget* parent);
   /**
    * The destructor.
    */
@@ -107,7 +107,7 @@ public:
   /**
    * The size hint.
    */
-  QSize sizeHint() const;
+  virtual QSize sizeHint() const;
   /**
    * Return the result. 0 means no selection (reject()), 1..12 are the
    * months.
@@ -157,7 +157,7 @@ public slots:
 signals:
   void closeMe(int);
 public:
-  ExtDateInternalYearSelector( QWidget* parent=0, const char* name=0);
+  ExtDateInternalYearSelector( QWidget* parent=0 );
   ~ExtDateInternalYearSelector();
 	int getYear();
   void setYear(int year);
@@ -208,7 +208,7 @@ public:
   /**
    * The contructor. Creates a dialog without buttons.
    */
-  KPopupFrame(QWidget* parent=0, const char*  name=0);
+  KPopupFrame(QWidget* parent=0);
   /**
    * Set the main widget. You cannot set the main widget from the constructor,
    * since it must be a child of the frame itselfes.
@@ -251,7 +251,7 @@ private:
 class ExtDateValidator : public QValidator
 {
 public:
-    ExtDateValidator(QWidget* parent=0, const char* name=0);
+    ExtDateValidator(QWidget* parent=0);
     virtual State validate(QString&, int&) const;
     virtual void fixup ( QString & input ) const;
     State date(const QString&, ExtDate&) const;
