@@ -46,7 +46,7 @@
 #include <kapplication.h>
 #include <kdebug.h>
 #include <knotifyclient.h>
-#include "kpopupmenu.h"
+#include "k3popupmenu.h"
 #include <QPainter>
 #include <Q3Dict>
 //Added by qt3to4:
@@ -459,7 +459,7 @@ ExtDateTable::contentsMousePressEvent(QMouseEvent *e)
 
   if (  e->button() == Qt::RightButton && d->popupMenuEnabled )
   {
-        KPopupMenu *menu = new KPopupMenu();
+        K3PopupMenu *menu = new K3PopupMenu();
 
 //FIXME: Uncomment the following line (and remove the one after it)
 //       if ExtDate is added to kdelibs
