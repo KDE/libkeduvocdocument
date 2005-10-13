@@ -1,4 +1,4 @@
-SUBDIRS = kdeeducore kdeeduui kdeeduplot extdate
+SUBDIRS = kdeeducore kdeeduui kdeeduplot extdate libscience
 
 messages:
 	$(XGETTEXT) `find . -name \*.h -o -name \*.cpp -o -name \*.cc` -o $(podir)/libkdeedu.pot 
