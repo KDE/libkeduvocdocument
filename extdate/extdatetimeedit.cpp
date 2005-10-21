@@ -51,7 +51,8 @@ ExtDateEdit::ExtDateEdit( const ExtDate &d, QWidget *parent )
 }
 
 ExtDateEdit::ExtDateEdit( int jd, QWidget *parent ) {
-	ExtDateEdit( ExtDate(jd), parent );
+	ExtDate ed(jd);
+	ExtDateEdit( ed, parent );
 }
 
 ExtDateEdit::~ExtDateEdit() {
@@ -205,8 +206,9 @@ ExtDateTimeEdit::ExtDateTimeEdit( const ExtDateTime &dt, QWidget *parent )
 	hlay->addWidget( m_TimeEdit );
 }
 
-ExtDateTimeEdit::ExtDateTimeEdit( const ExtDate &d, const QTime &t, QWidget *parent ) {
-	ExtDateTimeEdit( ExtDateTime( d, t ), parent );
+ExtDateTimeEdit::ExtDateTimeEdit( const ExtDate &date, const QTime &time, QWidget *parent ) {
+	ExtDateTime dt( date, time );
+	ExtDateTimeEdit( dt, parent );
 }
 
 ExtDateTimeEdit::~ExtDateTimeEdit() {

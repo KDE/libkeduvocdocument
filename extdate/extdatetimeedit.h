@@ -65,7 +65,7 @@ class ExtDateEdit : public QSpinBox {
 	*@p d the date to display (default is current system time)
 	*@p parent pointer to the parent widget (default: 0)
 	*/
-		ExtDateEdit( const ExtDate &d = ExtDate::currentDate(), QWidget *parent = 0 );
+		ExtDateEdit( const ExtDate &date = ExtDate::currentDate(), QWidget *parent = 0 );
 /**
 	*@short Constructor.  Creates an ExtDateEdit displaying the 
 	*given date.
@@ -117,7 +117,7 @@ class ExtDateEdit : public QSpinBox {
 	*@p d reference to the new ExtDate
 	*@see date()
 	*/
-		void setDate( const ExtDate &d ) { m_Date = d; setValue( m_Date.jd() ); }
+		void setDate( const ExtDate &date ) { m_Date = date; setValue( m_Date.jd() ); }
 
 /**
 	*@return the currently-active Date field (Day=0; Month=1; Year=2)
@@ -248,7 +248,7 @@ QWidget *p=0 );
 	*@p t reference to a QTime which is to be displayed in the time box
 	*@p p pointer to the parent widget (default: 0)
 	*/
-		ExtDateTimeEdit( const ExtDate &d, const QTime &t, QWidget *p=0 );
+		ExtDateTimeEdit( const ExtDate &date, const QTime &time, QWidget *p=0 );
 
 /**
 	*@short Default Destructor. Empty.
@@ -267,7 +267,7 @@ QWidget *p=0 );
 	*@p d reference to the new ExtDate
 	*@see date()
 	*/
-		void setDate( const ExtDate &d ) { m_DateEdit->setDate( d ); }
+		void setDate( const ExtDate &date ) { m_DateEdit->setDate( date ); }
 
 /**
 	*@return the internal QTime value
