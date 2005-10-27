@@ -252,7 +252,7 @@ void edLineEdit::keyPressEvent( QKeyEvent *e ) {
 			edParent->stepBy( -1 );
 			break;
 		case Qt::Key_Left:
-			edParent->invokeKey( Qt::Key_BackTab );
+			edParent->invokeKey( Qt::Key_Backtab );
 			break;
 		case Qt::Key_Right:
 			edParent->invokeKey( Qt::Key_Tab );

@@ -317,11 +317,11 @@ ExtDateTable::keyPressEvent( QKeyEvent *e )
     ExtDate temp = date;
 
     switch( e->key() ) {
-    case Qt::Key_Prior:
+    case Qt::Key_PageUp:
         temp = d->calendar->addMonths( date, -1 );
         setDate(temp);
         return;
-    case Qt::Key_Next:
+    case Qt::Key_PageDown:
         temp = d->calendar->addMonths( date, 1 );
         setDate(temp);
         return;
