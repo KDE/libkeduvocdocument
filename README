@@ -1,4 +1,4 @@
-Contents of libkdeedu as of Jul 2005, and brief description of each module:
+Contents of libkdeedu as of Oct 2005, and brief description of each module:
 
 extdate:
 Contains a reimplementation of QDate named ExtDate which eliminates the 
@@ -8,14 +8,15 @@ ExtDateTimeEdit, and ExtCalendarSystem.
 Currently used by:  kstars.
 
 kdeeducore:
-Contains classes KEduVocData and KEduVocDataItem, for storing and parsing
-vocabulary data in a QDom object.
-Currently used by:  khangman, klatin
+Contains the old classes KEduVocData and KEduVocDataItem, for storing and
+parsing vocabulary data in a QDom object, and KEduVocDocument and its related
+class for reading from/writing to the KVTML format (and others too)
+Currently used by:  khangman, klatin, kwordquiz
 
 kdeeduplot:
 Constains classes KPlotObject and KPlotWidget for easy plotting of 
-data points, including automatic generation of labeled axes with 
-"smart" tickmarks.
+data points, including automatic generation of labeled axes (the KPlotAxis
+class) with "smart" tickmarks.
 Currently used by:  kalzium, kstars, ktouch
 
 kdeeduui:
@@ -24,6 +25,11 @@ Contains:
 - Glossary, GlossaryItem and GLossaryDialog, which can be useful to embed a
   small glossary in an application
 Currently used by:  kalzium, kstars
+
+libscience:
+Contains some classes related to scientific data, like chemical Element's,
+spectra, temperature units and Isotope's.
+Currently used by:  kalzium.
 
 ideas: stub directory, contains generic README and TODO files.
 
