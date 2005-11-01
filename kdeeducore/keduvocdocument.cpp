@@ -696,6 +696,7 @@ bool KEduVocDocument::sortByLessonAlpha ()
   std::sort (vocabulary.begin(), vocabulary.end(), sortByLessonAndOrg_alpha(sort_lesson, *this ));
   sort_lesson = !sort_lesson;
   return sort_lesson;*/
+  return false;
 }
 
 
@@ -712,6 +713,7 @@ bool KEduVocDocument::sortByLessonIndex ()
   sort_lesson = !sort_lesson;
   sort_lang[0] = sort_lesson;
   return sort_lesson;*/
+  return false;
 }
 
 bool KEduVocDocument::leitnerSystemActive()
@@ -897,7 +899,7 @@ QString KEduVocDocument::lessonDescription(int idx) const
 QList<int> KEduVocDocument::lessonsInQuery() const
 {
   QList<int> iqvec;
-  for (unsigned i = 0; i < m_lessonsInQuery.size(); i++)
+  for (int i = 0; i < m_lessonsInQuery.size(); i++)
     if (m_lessonsInQuery[i]) {
       iqvec.push_back(i+1);   // Offset <no lesson>
 //      cout << "getliq: " << i+1 << endl;
@@ -909,7 +911,7 @@ QList<int> KEduVocDocument::lessonsInQuery() const
 void KEduVocDocument::setLessonsInQuery(QList<int> lesson_iq)
 {
   m_lessonsInQuery.clear();
-  for (unsigned i = 0; i < m_lessonDescriptions.size(); i++)
+  for (int i = 0; i < m_lessonDescriptions.size(); i++)
     m_lessonsInQuery.push_back(false);
 
   foreach( int i, lesson_iq )
@@ -1172,3 +1174,5 @@ int KEduVocDocument::cleanUp()
 
   return count;
 }
+
+#include "keduvocdocument.moc"

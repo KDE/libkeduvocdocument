@@ -942,4 +942,5 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
   ts << domDoc.toString();
 
 // TODO setModified (false);
+  return true;
 }
