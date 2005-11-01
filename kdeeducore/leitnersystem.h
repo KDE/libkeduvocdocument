@@ -53,7 +53,7 @@ public:
 	QString& systemName();
 
 	/**Sets the LeitnerSystem's name
-	 * @param the new name as QString
+	 * @param name the new name as QString
 	 */
 	void setSystemName( const QString& name );
 

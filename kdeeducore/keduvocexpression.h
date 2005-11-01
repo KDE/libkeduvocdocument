@@ -133,7 +133,7 @@ class KEduVocExpression
   /** returns translation of this expression
    *
    * @param index            number of translation
-   * @result                 expression or "" if no translation available
+   * @return                 expression or "" if no translation available
    */
   QString translation(int index) const;
 
@@ -154,14 +154,14 @@ class KEduVocExpression
   /** returns pronounciation of this expression
    *
    * @param index            index of expression
-   * @result                 pronunciation or "" if none available
+   * @return                 pronunciation or "" if none available
    */
   QString pronounciation(int index) const;
 
   /** returns remarks of this expression
    *
    * @param index            index of expression
-   * @result                 remark or "" if no remark available
+   * @return                 remark or "" if no remark available
    */
   QString remark(int index) const;
 
@@ -176,7 +176,7 @@ class KEduVocExpression
   /** sets false friend of this expression
    *
    * @param index            index of expression
-   * @param expr             false friend of this index
+   * @param expression       false friend of this index
    * @param rev_grade        dito, in opposite direction
    */
   void setFauxAmi(int index, const QString & expression, bool reverse = false);
@@ -186,7 +186,7 @@ class KEduVocExpression
    *
    * @param index            index of expression
    * @param rev_grade        dito, in opposite direction
-   * @result                 false friend or "" if no string available
+   * @return                 false friend or "" if no string available
    */
   QString fauxAmi(int index, bool reverse = false) const;
 
@@ -201,14 +201,14 @@ class KEduVocExpression
   /** returns synonym of this expression
    *
    * @param index            index of expression
-   * @result                 synonym or "" if no string available
+   * @return                 synonym or "" if no string available
    */
   QString synonym(int index) const;
 
   /** sets example this expression
    *
    * @param index            index of expression
-   * @param expr             example of this index
+   * @param expression       example of this index
    */
   void setExample(int index, const QString & expression);
 
@@ -216,7 +216,7 @@ class KEduVocExpression
   /** returns example of this expression
    *
    * @param index            index of expression
-   * @result                 example or "" if no string available
+   * @return                 example or "" if no string available
    */
   QString example(int index) const;
 
@@ -231,7 +231,7 @@ class KEduVocExpression
   /** returns usage label of this expression
    *
    * @param index            index of expression
-   * @result                 usage or "" if no string available
+   * @return                 usage or "" if no string available
    */
   QString usageLabel(int index) const;
 
@@ -246,14 +246,14 @@ class KEduVocExpression
   /** returns paraphrase of this expression
    *
    * @param index            index of expression
-   * @result                 paraphrase or "" if no string available
+   * @return                 paraphrase or "" if no string available
    */
   QString paraphrase(int index) const;
 
   /** sets antonym this expression
    *
    * @param index            index of expression
-   * @param expr             antonym of this index
+   * @param expression       antonym of this index
    */
   void setAntonym(int index, const QString & expression);
 
@@ -261,19 +261,19 @@ class KEduVocExpression
   /** returns antonym of this expression
    *
    * @param index            index of expression
-   * @result                 antonym or "" if no string available
+   * @return                 antonym or "" if no string available
    */
   QString antonym(int index) const;
 
   /** returns type of this expression
    *
-   * @result                 type or "" if no type available
+   * @return                 type or "" if no type available
    */
   QString type(int index) const;
 
   /** all langs have same type ?
    *
-   * @result                 true if all have same type
+   * @return                 true if all have same type
    */
   bool uniqueType () const;
 
@@ -288,7 +288,7 @@ class KEduVocExpression
    *
    * @param index            index of expression
    * @param rev_grade        dito, in opposite direction
-   * @result                 number of knowlegde: 0=known, x=numbers not knows
+   * @return                 number of knowlegde: 0=known, x=numbers not knows
    */
   QString gradeStr(int index, bool reverse = false) const;
 
@@ -303,7 +303,7 @@ class KEduVocExpression
    *
    * @param index            index of translation
    * @param rev_grade        dito, in opposite direction
-   * @result                 number of knowlegde: 0=known, x=numbers not knows
+   * @return                 number of knowlegde: 0=known, x=numbers not knows
    */
   grade_t grade(int index, bool reverse = false) const;
 
@@ -357,7 +357,7 @@ class KEduVocExpression
   /** sets comparison
    *
    * @param index            index of translation
-   * @param con              comparison block
+   * @param comparison       comparison block
    */
   void setComparison(int index, const KEduVocComparison & comparison);
 
@@ -370,7 +370,7 @@ class KEduVocExpression
   /** sets multiple choice
    *
    * @param index            index of translation
-   * @param con              multiple choice block
+   * @param mc               multiple choice block
    */
   void setMultipleChoice(int index, const KEduVocMultipleChoice & mc);
 
@@ -424,7 +424,7 @@ class KEduVocExpression
 
   /** returns the name of the Leitner system's box actually containing the expression
    *
-   * @result		     the box's name
+   * @return                 the box's name
    */
   QString& leitnerBox();
 
