@@ -431,6 +431,17 @@ ExtDate ExtDate::fromString( const QString &sDate, const QString &format ) {
 	}
 }
 
+ExtDate ExtDate::fromString( const QString& s )
+{
+	ExtDate dResult = ExtDate::fromString( s, Qt::TextDate );
+	if ( dResult.isValid() ) return dResult;
+
+	dResult = ExtDate::fromString( s, Qt::ISODate );
+	if ( dResult.isValid() ) return dResult;
+	else return ExtDate(); //invalid	
+
+}
+
 ExtDate ExtDate::fromString( const QString& s, Qt::DateFormat f )
 {
 	ExtDate dt = ExtDate();  //initialize invalid date
@@ -1077,6 +1088,17 @@ ExtDateTime ExtDateTime::currentDateTime( Qt::TimeSpec ts )
 
     \warning Note that \c Qt::LocalDate cannot be used here.
 */
+ExtDateTime ExtDateTime::fromString( const QString& s )
+{
+	ExtDateTime dtResult = ExtDateTime::fromString( s, Qt::TextDate );
+	if ( dtResult.isValid() ) return dtResult;
+
+	dtResult = ExtDateTime::fromString( s, Qt::ISODate );
+
+	if ( dtResult.isValid() ) return dtResult;
+	else return ExtDateTime(); //invalid
+}
+
 ExtDateTime ExtDateTime::fromString( const QString& s, Qt::DateFormat f )
 {
 	ExtDateTime dt;
