@@ -346,7 +346,7 @@ class KEduVocExpression
   /** sets conjugations
    *
    * @param index            index of translation
-   * @param conjugaton       conjugation block
+   * @param conjugation      conjugation block
    */
   void setConjugation(int index, const KEduVocConjugation & conjugation);
 
