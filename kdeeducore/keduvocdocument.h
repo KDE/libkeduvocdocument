@@ -446,8 +446,11 @@ class KEduVocDocument : public QObject
 
   /** saves the data under the given name
    *
-   * @param url     if url is empty (or NULL) actual name is preserved
-   * @result         true if successful
+   * @param parent     the object that owns the document
+   * @param url        if url is empty (or NULL) actual name is preserved
+   * @param ft         the filetype to be used when saving the document
+   * @param generator  the name of the application saving the document
+   * @result           true if successful
    */
   bool saveAs(QObject *parent, const KURL & url, FileType ft, const QString & generator);
 

@@ -177,7 +177,7 @@ class KEduVocExpression
    *
    * @param index            index of expression
    * @param expression       false friend of this index
-   * @param rev_grade        dito, in opposite direction
+   * @param reverse          if true, represents the direction translation to original
    */
   void setFauxAmi(int index, const QString & expression, bool reverse = false);
 
@@ -185,7 +185,7 @@ class KEduVocExpression
   /** returns false friend of this expression
    *
    * @param index            index of expression
-   * @param rev_grade        dito, in opposite direction
+   * @param reverse          if true, represents the direction translation to original
    * @return                 false friend or "" if no string available
    */
   QString fauxAmi(int index, bool reverse = false) const;
@@ -287,7 +287,7 @@ class KEduVocExpression
   /** returns grade of given translation as string
    *
    * @param index            index of expression
-   * @param rev_grade        dito, in opposite direction
+   * @param reverse          if true, represents the direction translation to original
    * @return                 number of knowlegde: 0=known, x=numbers not knows
    */
   QString gradeStr(int index, bool reverse = false) const;
@@ -296,13 +296,14 @@ class KEduVocExpression
    *
    * @param index            index of translation
    * @param grade            number of knowlegde: 0=known, x=numbers not knows
+   * @param reverse          if true, represents the direction translation to original
    */
   void setGrade(int index, grade_t grade, bool reverse = false);
 
   /** returns grade of given translation as int
    *
    * @param index            index of translation
-   * @param rev_grade        dito, in opposite direction
+   * @param reverse          if true, represents the direction translation to original
    * @return                 number of knowlegde: 0=known, x=numbers not knows
    */
   grade_t grade(int index, bool reverse = false) const;
@@ -310,28 +311,29 @@ class KEduVocExpression
   /** increments grade of given translation
    *
    * @param index            index of translation
-   * @param rev_grade        dito, in opposite direction
+   * @param reverse          if true, represents the direction translation to original
    */
   void incGrade(int index, bool reverse = false);
 
   /** decrements grade of given translation
    *
    * @param index            index of translation
-   * @param rev_grade        dito, in opposite direction
+   * @param reverse          if true, represents the direction translation to original
    */
   void decGrade(int index, bool reverse = false);
 
   /** returns last query date of given translation as int
    *
    * @param index            index of translation
-   * @param rev_date         dito, in opposite direction
+   * @param reverse          if true, represents the direction translation to original
    */
   QDateTime queryDate(int index, bool reverse = false) const;
 
   /** set last query date of given translation as int
    *
    * @param index            index of translation
-   * @param rev_date         dito, in opposite direction
+   * @param date             the new date
+   * @param reverse          if true, represents the direction translation to original
    */
   void setQueryDate(int index, const QDateTime & date, bool reverse = false);
 
@@ -344,7 +346,7 @@ class KEduVocExpression
   /** sets conjugations
    *
    * @param index            index of translation
-   * @param conjugator       conjugation block
+   * @param conjugaton       conjugation block
    */
   void setConjugation(int index, const KEduVocConjugation & conjugation);
 
@@ -377,14 +379,15 @@ class KEduVocExpression
   /** returns query count of given translation as int
    *
    * @param index            index of translation
-   * @param rev_count        dito, in opposite direction
+   * @param reverse          if true, represents the direction translation to original
    */
   count_t queryCount(int index, bool reverse = false) const;
 
   /** set query count of given translation as int
    *
    * @param index            index of translation
-   * @param reverse          dito, in opposite direction
+   * @param count            the new count
+   * @param reverse          if true, represents the direction translation to original
    */
   void setQueryCount(int index, count_t count, bool reverse = false);
 
@@ -398,21 +401,22 @@ class KEduVocExpression
   /** set bad query count of given translation as int
    *
    * @param index            index of translation
-   * @param reverse          dito, in opposite direction
+   * @param count            the new count
+   * @param reverse          if true, represents the direction translation to original
    */
   void setBadCount(int index, count_t count, bool reverse = false);
 
   /** increment bad query count of given translation by 1
    *
    * @param index            index of translation
-   * @param rev_count        dito, in opposite direction
+   * @param reverse          if true, represents the direction translation to original
    */
   void incBadCount(int index, bool reverse = false);
 
   /** increment query count of given translation by 1
    *
    * @param index            index of translation
-   * @param rev_count        dito, in opposite direction
+   * @param reverse          if true, represents the direction translation to original
    */
   void incQueryCount(int index, bool reverse = false);
 
