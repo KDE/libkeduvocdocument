@@ -16,14 +16,13 @@
 
 #include <stdlib.h>
 #include <kiconloader.h>
-#include <qpainter.h>
+#include <QPainter>
 //Added by qt3to4:
 #include <QMouseEvent>
 
 #include <kdebug.h>
 
-LeitnerSystemView::LeitnerSystemView(QWidget * parent, const char* name, Qt::WFlags f)
- : Q3ScrollView(parent, name, f)
+LeitnerSystemView::LeitnerSystemView( QWidget* parent ) : QWidget( parent )
 {
 	m_highlightedBox = -1;
 }
@@ -33,7 +32,7 @@ LeitnerSystemView::~LeitnerSystemView()
 {
 }
 
-void LeitnerSystemView::drawSystem(QPainter* p)
+void LeitnerSystemView::drawSystem( QPainter* p )
 {
 	m_imageY = height() / 2 - 32;
 
@@ -110,28 +109,29 @@ void LeitnerSystemView::drawConnections(QPainter* p)
 	}
 }
 
-void LeitnerSystemView::setSystem(LeitnerSystem* leitnersystem)
+void LeitnerSystemView::setSystem( LeitnerSystem* leitnersystem )
 {
 	m_leitnerSystem = leitnersystem;
 
 	//calculate the new sizes
 	calculateSize();
-	updateContents();
+	update();
 }
 
 void LeitnerSystemView::highlightBox(int box)
 {
 	m_highlightedBox = box;
-	updateContents();
+	update();
 }
 
-void LeitnerSystemView::drawContents(QPainter* p, int clipx, int clipy, int clipw, int cliph)
+void LeitnerSystemView::paintEvent( QPaintEvent* )
 {
-	p->eraseRect(0,0,width(),height());
+	QPainter p( this );
+	p.eraseRect( 0, 0, width(), height() );
 
-	drawSystem( p );
+	drawSystem( &p );
 
-	drawConnections( p );
+	drawConnections( &p );
 }
 
 void LeitnerSystemView::calculateSize()
@@ -178,7 +178,7 @@ void LeitnerSystemView::calculateSize()
 
 	height += 24+64;
 
-	resizeContents( numberOfBoxes * 64 + (numberOfBoxes - 1)*10 + 2 * 12, height );
+//	resizeContents( numberOfBoxes * 64 + (numberOfBoxes - 1)*10 + 2 * 12, height );
 	setMinimumSize( numberOfBoxes * 64 + (numberOfBoxes - 1)*10 + 2 * 12, height );
 }
 
@@ -186,7 +186,7 @@ void LeitnerSystemView::mousePressEvent(QMouseEvent* e)
 {
 	kdDebug() << "mouseClick" << endl;
 	//if the user has clicked into a box
-	if( e->y() > m_imageY && e->y() < m_imageY + 64 && e->x() < contentsWidth() )
+	if( e->y() > m_imageY && e->y() < m_imageY + 64 && e->x() < width() )
 	{
 		int d = (e->x()-12)/74;
 
@@ -196,7 +196,7 @@ void LeitnerSystemView::mousePressEvent(QMouseEvent* e)
 			emit boxClicked( d );
 			m_highlightedBox = d;
 
-			updateContents();
+			update();
 		}
 	}
 }

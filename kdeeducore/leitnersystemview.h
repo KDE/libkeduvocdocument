@@ -12,42 +12,58 @@
 #ifndef LEITNERSYSTEMVIEW_H
 #define LEITNERSYSTEMVIEW_H
 
-#include <q3scrollview.h>
-#include <qpixmap.h>
-//Added by qt3to4:
+#include <QWidget>
+#include <QPixmap>
 #include <QMouseEvent>
 
 class LeitnerSystem;
 
 
 /**
-@author Martin Pfeiffer
-*/
+ * This class displays a given LeitnerSystem on a QWidget
+ * It is used to configurate a LeitnerSystem and easily remove
+ * and add boxes within a GUI.
+ * @author Martin Pfeiffer
+ */
 
-class LeitnerSystemView : public Q3ScrollView
+class LeitnerSystemView : public QWidget
 {
 	Q_OBJECT
 		
 public:
-    LeitnerSystemView(QWidget* parent = 0, const char* name = 0, Qt::WFlags f = 0);
+	/**
+	 * The public constructor
+	 * @param parent the QWidget that is the parent widget
+	 */
+    	LeitnerSystemView( QWidget* parent = 0 );
 
-    ~LeitnerSystemView();
+    	~LeitnerSystemView();
 
-    void setSystem(LeitnerSystem* system);	//set a new system to view on
-    void highlightBox(int box);			//highlight a box
+	/**
+	 * Sets the LeitnerSystem to be displayed in the LeitnerSystemView
+	 * @param system the LeitnerSystem to be displayed
+	 */
+    	void setSystem( LeitnerSystem* system );
 
+	/**
+	 * Highlight a special box to indicate that this one is selected
+	 * @param box the number of the box to be highlighted
+	 */
+	void highlightBox( int box );
+	
 signals:
 	void boxClicked(int box);		//is emited if the user clicks on a box 
 
 protected:
-    virtual void drawContents(QPainter* p, int clipx, int clipy, int clipw, int cliph);
-    virtual void mousePressEvent(QMouseEvent* e);
+	virtual void paintEvent( QPaintEvent* );
+//    	virtual void drawContents(QPainter* p, int clipx, int clipy, int clipw, int cliph);
+    	virtual void mousePressEvent(QMouseEvent* e);
 
 private:
 	LeitnerSystem* m_leitnerSystem;		//the system which is shown
 
 	void drawSystem(QPainter*);		//paints the boxes
-	void drawConnections(QPainter*);		//paints the arrows between the boxes
+	void drawConnections(QPainter*);	//paints the arrows between the boxes
 	void calculateSize();
 
 	int m_imageY; 				//high border of the images

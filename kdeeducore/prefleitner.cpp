@@ -14,26 +14,48 @@
 #include "leitnersystemview.h"
 #include "leitnersystem.h"
 
-#include <qlayout.h>
-#include <qcombobox.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
+#include <QLayout>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QScrollArea>
 
 #include <kdebug.h>
 
-PrefLeitner::PrefLeitner(QWidget * parent, LeitnerSystem* system) : QDialog(parent)
+PrefLeitner::PrefLeitner( QWidget* parent ) : QDialog( parent )
 {
-  setupUi(this);
-  m_selectedSystem = system;
+	setupUi( this );
+	
+	m_selectedSystem = 0;
 	m_selectedBox = 0;
 
-	//create new leitnersystemview, show and connect it
-	m_leitnerSystemView = new LeitnerSystemView( this, 0 );
-  ///@todo port PrefLeitnerBaseLayout->addWidget( m_leitnerSystemView, 1, 0 );
-	///@todo port PrefLeitnerBaseLayout->setOrigin( Qt::BottomLeftCorner );
+	QScrollArea *helperSV = new QScrollArea( this );
+
+	m_leitnerSystemView = new LeitnerSystemView( helperSV->viewport() );
+        m_leitnerSystemView->setObjectName( "LeitnerSystemView" );
+	
+        helperSV->setWidget( m_leitnerSystemView );
 
 	connect( m_leitnerSystemView, SIGNAL( boxClicked( int ) ), this, SLOT( slotBoxClicked( int ) ) );
+}
 
+PrefLeitner::PrefLeitner( QWidget* parent, LeitnerSystem* system ) : QDialog( parent )
+{
+	setupUi( this );
+	
+	m_selectedBox = 0;
+
+	QScrollArea *helperSV = new QScrollArea( this );
+
+	m_leitnerSystemView = new LeitnerSystemView( helperSV->viewport() );
+        m_leitnerSystemView->setObjectName( "LeitnerSystemView" );
+	
+        helperSV->setWidget( m_leitnerSystemView );
+
+	connect( m_leitnerSystemView, SIGNAL( boxClicked( int ) ), this, SLOT( slotBoxClicked( int ) ) );
+	
+  	m_selectedSystem = system;
+	
 	//insert the list of box' names in the comboboxes
 	cmbWrong->insertStringList( m_selectedSystem->getBoxNameList() );
 	cmbCorrect->insertStringList( m_selectedSystem->getBoxNameList() );
@@ -119,7 +141,7 @@ void PrefLeitner::slotDiscard()
 	close();
 }
 
-LeitnerSystem* PrefLeitner::getSystem()
+LeitnerSystem* PrefLeitner::system()
 {
 	return m_selectedSystem;
 }
