@@ -640,16 +640,18 @@ bool sortAscending;
 
 bool operator< (const KEduVocExpression &e1, const KEduVocExpression &e2)
 {
+  int i;
   if (sortAscending)
     if (sortIndex == 0)
-      return ! (e1.original() > e2.original());
+      i = QString::localeAwareCompare(e1.original(), e2.original());
     else
-      return ! (e1.translation(sortIndex) > e2.translation(sortIndex));
+      i = QString::localeAwareCompare(e1.translation(sortIndex), e2.translation(sortIndex));
   else
     if (sortIndex == 0)
-      return ! (e1.original() < e2.original());
+      i = QString::localeAwareCompare(e2.original(), e1.original());
     else
-      return ! (e1.translation(sortIndex) < e2.translation(sortIndex));
+      i = QString::localeAwareCompare(e2.translation(sortIndex), e2.translation(sortIndex));
+  return (i >= 0);
 }
 
 bool KEduVocDocument::sort(int index)
@@ -663,7 +665,7 @@ bool KEduVocDocument::sort(int index)
 
     sortAscending = m_sortIdentifier[index];
     sortIndex = index;
-    ///@todo port qStableSort(m_vocabulary);
+    qStableSort(m_vocabulary);
     m_sortIdentifier[index] = !m_sortIdentifier[index];
     result = m_sortIdentifier[index];
   }
@@ -1114,7 +1116,7 @@ int KEduVocDocument::cleanUp()
 
   for (int i = 0; i < (int) m_vocabulary.size(); i++)
     shadow.push_back (ExpRef (entry(i), i));
-  ///@todo port qStableSort(shadow.begin(), shadow.end());
+  qStableSort(shadow.begin(), shadow.end());
 
 #ifdef CLEAN_BUG
   ofstream sso ("shadow.out");
@@ -1159,7 +1161,7 @@ int KEduVocDocument::cleanUp()
   f_ent_percent = to_delete.size () / 100.0;
   emit progressChanged(this, 0);
 
-  ///@todo port qStableSort(to_delete.begin(), to_delete.end());
+  qStableSort(to_delete.begin(), to_delete.end());
   //std::sort (to_delete.begin(), to_delete.end() );
   for (int i = (int) to_delete.size()-1; i >= 0; i--) {
     ent_no++;
