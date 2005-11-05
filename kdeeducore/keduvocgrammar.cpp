@@ -61,9 +61,9 @@ KEduVocComparison::KEduVocComparison (
 
 bool KEduVocComparison::isEmpty() const
 {
-  return   ls1.stripWhiteSpace().isEmpty()
-        && ls2.stripWhiteSpace().isEmpty()
-        && ls3.stripWhiteSpace().isEmpty();
+  return   ls1.simplified().isEmpty()
+        && ls2.simplified().isEmpty()
+        && ls3.simplified().isEmpty();
 }
 
 
@@ -294,16 +294,16 @@ void KEduVocConjugation::cleanUp ()
 {
   for (int i = (int)conjugations.size()-1; i >= 0; i--) {
     const conjug_t *ctp = &conjugations[i];
-    if (   ctp->pers1_sing.stripWhiteSpace().isEmpty()
-        && ctp->pers2_sing.stripWhiteSpace().isEmpty()
-        && ctp->pers3_m_sing.stripWhiteSpace().isEmpty()
-        && ctp->pers3_f_sing.stripWhiteSpace().isEmpty()
-        && ctp->pers3_n_sing.stripWhiteSpace().isEmpty()
-        && ctp->pers1_plur.stripWhiteSpace().isEmpty()
-        && ctp->pers2_plur.stripWhiteSpace().isEmpty()
-        && ctp->pers3_m_plur.stripWhiteSpace().isEmpty()
-        && ctp->pers3_f_plur.stripWhiteSpace().isEmpty()
-        && ctp->pers3_n_plur.stripWhiteSpace().isEmpty()
+    if (   ctp->pers1_sing.simplified().isEmpty()
+        && ctp->pers2_sing.simplified().isEmpty()
+        && ctp->pers3_m_sing.simplified().isEmpty()
+        && ctp->pers3_f_sing.simplified().isEmpty()
+        && ctp->pers3_n_sing.simplified().isEmpty()
+        && ctp->pers1_plur.simplified().isEmpty()
+        && ctp->pers2_plur.simplified().isEmpty()
+        && ctp->pers3_m_plur.simplified().isEmpty()
+        && ctp->pers3_f_plur.simplified().isEmpty()
+        && ctp->pers3_n_plur.simplified().isEmpty()
        )
      conjugations.removeAt( i );
   }
@@ -314,16 +314,16 @@ bool KEduVocConjugation::isEmpty (int idx)
 {
   if (idx < (int) conjugations.size()) {
     const conjug_t *ctp = &conjugations[idx];
-    return ctp->pers1_sing.stripWhiteSpace().isEmpty()
-        && ctp->pers2_sing.stripWhiteSpace().isEmpty()
-        && ctp->pers3_m_sing.stripWhiteSpace().isEmpty()
-        && ctp->pers3_f_sing.stripWhiteSpace().isEmpty()
-        && ctp->pers3_n_sing.stripWhiteSpace().isEmpty()
-        && ctp->pers1_plur.stripWhiteSpace().isEmpty()
-        && ctp->pers2_plur.stripWhiteSpace().isEmpty()
-        && ctp->pers3_m_plur.stripWhiteSpace().isEmpty()
-        && ctp->pers3_f_plur.stripWhiteSpace().isEmpty()
-        && ctp->pers3_n_plur.stripWhiteSpace().isEmpty();
+    return ctp->pers1_sing.simplified().isEmpty()
+        && ctp->pers2_sing.simplified().isEmpty()
+        && ctp->pers3_m_sing.simplified().isEmpty()
+        && ctp->pers3_f_sing.simplified().isEmpty()
+        && ctp->pers3_n_sing.simplified().isEmpty()
+        && ctp->pers1_plur.simplified().isEmpty()
+        && ctp->pers2_plur.simplified().isEmpty()
+        && ctp->pers3_m_plur.simplified().isEmpty()
+        && ctp->pers3_f_plur.simplified().isEmpty()
+        && ctp->pers3_n_plur.simplified().isEmpty();
   }
   return true;
 }

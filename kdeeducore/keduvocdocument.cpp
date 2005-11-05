@@ -960,25 +960,25 @@ QFont* KEduVocDocument::font() const
 
 void KEduVocDocument::setTitle(const QString & title)
 {
-  m_title = title.stripWhiteSpace();
+  m_title = title.simplified();
 }
 
 
 void KEduVocDocument::setAuthor(const QString & s)
 {
-  m_author = s.stripWhiteSpace();
+  m_author = s.simplified();
 }
 
 
 void KEduVocDocument::setLicense(const QString & s)
 {
-  m_license = s.stripWhiteSpace();
+  m_license = s.simplified();
 }
 
 
 void KEduVocDocument::setDocRemark(const QString & s)
 {
-  m_remark = s.stripWhiteSpace();
+  m_remark = s.simplified();
 }
 
 

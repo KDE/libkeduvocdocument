@@ -137,7 +137,7 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   s = inputStream.readLine();
   p = s.find("   [", 0);
   s = s.left(p);
-  s = s.stripWhiteSpace();
+  s = s.simplified();
   m_doc->m_identifiers.push_back(s);
   m_doc->m_identifiers.push_back(inputStream.readLine());
 
@@ -148,7 +148,7 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
     QString r = s.mid(p + 1, 10);
     int h = r.toInt();
     s = s.left(p);
-    s = s.stripWhiteSpace();
+    s = s.simplified();
 
     QString b;
     b = inputStream.readLine();
