@@ -15,10 +15,11 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <QDom>
+#include <QTextStream>
+#include <QFont>
+
 #include <kdebug.h>
-#include <qdom.h>
-#include <qtextstream.h>
-#include <qfont.h>
 
 #include "keduvocwqlwriter.h"
 #include "keduvocdocument.h"

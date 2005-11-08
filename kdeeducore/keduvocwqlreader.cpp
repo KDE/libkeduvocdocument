@@ -15,13 +15,13 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <QDom>
+#include <QTextStream>
+
 #include <kapplication.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-
-#include <qdom.h>
-#include <qtextstream.h>
 
 #include "keduvocwqlreader.h"
 #include "keduvocdocument.h"

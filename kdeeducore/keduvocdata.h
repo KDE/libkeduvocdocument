@@ -19,8 +19,9 @@
 #ifndef KEDUVOCDATA_H
 #define KEDUVOCDATA_H
 
-#include <qdom.h>
-#include <qlist.h>
+#include <QtXml>
+#include <QList>
+
 #include <kdemacros.h>
 
 class KDE_EXPORT KEduVocDataItem

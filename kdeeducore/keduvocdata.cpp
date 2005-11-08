@@ -16,11 +16,11 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "keduvocdata.h"
-
-#include <qfile.h>
+#include <QFile>
 
 #include <kdebug.h>
+
+#include "keduvocdata.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // class KEduVocDataItem
