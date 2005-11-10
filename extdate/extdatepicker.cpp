@@ -164,7 +164,7 @@ void ExtDatePicker::init( const ExtDate &dt )
   setFontSize(fontsize);
   line->setValidator(val);
   line->installEventFilter( this );
-  if (  QApplication::reverseLayout() )
+  if (  QApplication::isRightToLeft() )
   {
       yearForward->setIconSet(BarIconSet(QLatin1String("2leftarrow")));
       yearBackward->setIconSet(BarIconSet(QLatin1String("2rightarrow")));
