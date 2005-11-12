@@ -207,6 +207,8 @@ public slots:
 public:
   /**
    * The contructor. Creates a dialog without buttons.
+   * @param parent The parent widget for this dialog. If @p parent is 0,
+   *        the dialog uses the whole desktop.
    */
   KPopupFrame(QWidget* parent=0);
   /**
@@ -223,15 +225,22 @@ public:
    */
   virtual void resizeEvent(QResizeEvent*);
   /**
-   * Open the popup window at position pos.
+   * Open the popup window at position @p pos.
+   * @param pos The position (relative to the parent window) where the
+   *            popup menu should appear.
    */
   void popup(const QPoint &pos);
   /**
    * Execute the popup window.
+   * @param p The position where the window should be shown.
+   * @return Result code of the popup.
+   * @see popup()
+   * @todo Why isn't @p p a reference?
    */
   int exec(QPoint p);
   /**
-   * Dito.
+   * Execute the popup window.
+   * Equivalent to exec(const QPoint &) for the given @p x and @p y.
    */
   int exec(int x, int y);
 
