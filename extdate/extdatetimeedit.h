@@ -50,10 +50,9 @@
 #include <QSpinBox>
 #include <QWidget>
 #include <QLineEdit>
-class QTime;
-class QTimeEdit;
-class ExtDate;
-class ExtDateTime;
+#include <QTime>
+#include <QTimeEdit>
+#include "extdatetime.h"
 
 class ExtDateEdit : public QSpinBox {
 	Q_OBJECT
@@ -66,6 +65,7 @@ class ExtDateEdit : public QSpinBox {
 	*@p parent pointer to the parent widget (default: 0)
 	*/
 		ExtDateEdit( const ExtDate &date = ExtDate::currentDate(), QWidget *parent = 0 );
+
 /**
 	*@short Constructor.  Creates an ExtDateEdit displaying the 
 	*given date.
@@ -75,6 +75,12 @@ class ExtDateEdit : public QSpinBox {
 	*@p parent pointer to the parent widget (default: 0)
 	*/
 		ExtDateEdit( int jd, QWidget *parent = 0 );
+
+/**
+	*@short Constructor for UI files (contains only a parent widget argument)
+	*/
+	ExtDateEdit( QWidget *parent );
+
 /**
 	*@short Default destructor.  Empty.
 	*/
@@ -236,11 +242,10 @@ class ExtDateTimeEdit : public QWidget {
 	*to be displayed (defaults to the system's current date and time)
 	*@p p pointer to the parent widget (default: 0)
 	*/
-		ExtDateTimeEdit( const ExtDateTime &dt = ExtDateTime::currentDateTime(),
-QWidget *p=0 );
+	ExtDateTimeEdit( const ExtDateTime &dt = ExtDateTime::currentDateTime(), QWidget *p=0 );
 
 /**
-	*@short Default Constructor. Displays the given Date and Time.
+	*@short Constructor. Displays the given Date and Time.
 	*
 	*This is essentially identical to the above function, differing only in 
 	*the type of its arguments.
@@ -248,7 +253,12 @@ QWidget *p=0 );
 	*@p t reference to a QTime which is to be displayed in the time box
 	*@p p pointer to the parent widget (default: 0)
 	*/
-		ExtDateTimeEdit( const ExtDate &date, const QTime &time, QWidget *p=0 );
+	ExtDateTimeEdit( const ExtDate &date, const QTime &time, QWidget *p=0 );
+
+/**
+	*@short Constructor for UI files (contains only a parent widget argument)
+	*/
+	ExtDateTimeEdit( QWidget *p );
 
 /**
 	*@short Default Destructor. Empty.

@@ -55,6 +55,11 @@ ExtDateEdit::ExtDateEdit( int jd, QWidget *parent ) {
 	ExtDateEdit( ed, parent );
 }
 
+ExtDateEdit::ExtDateEdit( QWidget *p ) {
+	ExtDate ed = ExtDate::currentDate();
+	ExtDateEdit( ed, p );
+}
+
 ExtDateEdit::~ExtDateEdit() {
 }
 
@@ -129,7 +134,7 @@ void ExtDateEdit::stepBy( int steps ) {
 	else    setValue( v );
 }
 
-QValidator::State ExtDateEdit::validate( QString &input, int &pos ) {
+QValidator::State ExtDateEdit::validate( QString &input, int & ) {
 	if ( ExtDate::fromString( input, m_DateFormat ).isValid() )
 		return QValidator::Acceptable;
 	else
@@ -209,6 +214,11 @@ ExtDateTimeEdit::ExtDateTimeEdit( const ExtDateTime &dt, QWidget *parent )
 ExtDateTimeEdit::ExtDateTimeEdit( const ExtDate &date, const QTime &time, QWidget *parent ) {
 	ExtDateTime dt( date, time );
 	ExtDateTimeEdit( dt, parent );
+}
+
+ExtDateTimeEdit::ExtDateTimeEdit( QWidget *p ) {
+	ExtDateTime edt = ExtDateTime::currentDateTime();
+	ExtDateTimeEdit( edt, p );
 }
 
 ExtDateTimeEdit::~ExtDateTimeEdit() {
