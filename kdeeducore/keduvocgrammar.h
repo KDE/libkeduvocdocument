@@ -48,6 +48,7 @@
 
 /**
  * Class representing the articles of a language
+ *
  * It contains all available articles of the language as QString
  */
 
@@ -183,7 +184,7 @@ public:
   /**
    * @param names
    */
-  static void setTenseNames (QStringList names);
+  static void setTenseNames (const QStringList& names);
 
   static QString getName (const QString &abbrev);
   static QString getName (int index);

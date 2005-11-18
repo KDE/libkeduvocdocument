@@ -16,6 +16,7 @@
 
 /**
  * A box in a LeitnerSystem - a LeitnerBox
+ *
  * This box has a name and a certain number of vocabulars in it. This number changes continuosly
  * as the vocab cards increase or decrease in box position. There is a determined order of LeitnerBoxes
  * in a LeitnerSystem, therefore each LeitnerBox helds pointers to the LeitnerBox for wrong and correct
@@ -43,7 +44,11 @@ public:
 	 * @param wrongWordBox a pointer to the LeitnerBox to be set
 	 */
 	void setWrongWordBox( LeitnerBox* wrongWordBox );
-	void setBoxName( const QString& );	//sets the boxes name
+	/**
+	 * Sets the boxes name
+	 * @param name the new name
+	 */
+	void setBoxName( const QString& name );
 
 	void setVocabCount( int count );
 	int vocabCount();

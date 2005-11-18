@@ -244,10 +244,9 @@ class KEduVocMultipleChoice;
 class LeitnerSystem;
 
 /**
-  This class contains the expressions of your vocabulary
-  as well as other information about the vocabulary
-  */
-
+ * This class contains the expressions of your vocabulary
+ * as well as other information about the vocabulary
+ */
 class KEduVocDocument : public QObject
 {
   Q_OBJECT
@@ -263,202 +262,248 @@ class KEduVocDocument : public QObject
                   kvtbin,
                   vt_lex, vt_vcb, csv /*, kvoclearn, qvocab*/ };
 
-  /** Constructor for a KdeEdu vocabulary document
+  /**
+   * Constructor for a KdeEdu vocabulary document
    *
    * @param parent calling object
    */
   KEduVocDocument(QObject* parent);
 
-  /** Destructor for the document class */
+  /**
+   * Destructor for the document class
+   */
   ~KEduVocDocument();
 
-  /** indicates if the document is modified
+  /**
+   * Indicates if the document is modified
    *
    * @param dirty   new state
    */
   inline void setModified (bool dirty = true) { emit docModified(m_dirty = dirty); }
 
-  /** appends a new expression to the end of the vocabulary
+  /**
+   * Sppends a new expression to the end of the vocabulary
    *
-   * @param expression            expression to append
+   * @param expression      expression to append
    */
   inline void appendEntry (KEduVocExpression *expression)
     { m_vocabulary.append(*expression); m_dirty = true; }
 
-  /** inserts a new expression
+  /**
+   * Inserts a new expression
    *
-   * @param expression            expression to insert
+   * @param expression      expression to insert
    * @param index           index of entry
    */
   inline void insertEntry(KEduVocExpression *expression, int index)
     { m_vocabulary.insert(index, *expression); m_dirty = true; }
 
-  /** removes an expression from the document
+  /**
+   * Removes an expression from the document
    *
    * @param index           index of expression
    */
   void removeEntry(int index);
 
-  /** removes all expressions from the document (clears vocabulary)
+  /**
+   * Removes all expressions from the document (clears vocabulary)
    */
   inline void removeAllEntries()
     { m_vocabulary.clear(); m_dirty = true; }
 
-  /** sorts vocabulary alphabetically
+  /**
+   * Sorts vocabulary alphabetically
    *
    * @param  index            index expression
-   * @result direction of sorting: true = ascending
+   * @returns                 the direction of sorting: true = ascending
    */
   bool sort(int index);
 
-  /** removes equal entries (orig + all translations)
+  /**
+   * Removes equal entries (original plus all translations)
    *
-   * @result                 number of removed entries
+   * @returns                 number of removed entries
    */
   int cleanUp();
 
-  /** sorts vocabulary by lesson indices
-   * @result direction of sorting: true = ascending
+  /**
+   * Sorts vocabulary by lesson indices
+   * @returns direction of sorting: true = ascending
    */
   bool sortByLessonIndex();
 
-  /** sorts vocabulary by lesson name
-   * @result direction of sorting: true = ascending
+  /**
+   * Sorts vocabulary by lesson name
+   * @returns direction of sorting: true = ascending
    */
   bool sortByLessonAlpha();
 
-  /** enables sorting
+  /**
+   * Enables sorting
    */
   inline void enableSorting(bool enable) { m_enableSorting = enable; }
 
-  /** returns whether sorting is enabled
+  /**
+   * @returns whether sorting is enabled
    */
   inline bool isSortingEnabled() { return m_enableSorting; }
 
-  /** returns the modification state of the doc */
+  /**
+   * @returns the modification state of the doc
+   */
   inline bool isModified() const { return m_dirty; }
 
-  /** returns originals identifier
+  /**
+   * @returns the original identifier
    */
   QString originalIdentifier() const;
 
-  /** set originals identifier
+  /**
+   * Sets the original identifier
+   *
+   * @param id              the new identifier
    */
   void setOriginalIdentifier(const QString &id);
 
-  /** returns identifier of translation x
+  /**
+   * Returns the identifier of translation @p index
    *
    * @param index            number of translation 1..x
-   * @result                 ident string: de=german, en=englisch, ..
+   * @returns                the language identifier: en=english, de=german, ...
    */
   QString identifier(int index) const;
 
-  /** sets identifier of translation
+  /**
+   * Sets the identifier of translation
    *
    * @param index            number of translation 1..x
-   * @param lang             ident string: de=german, en=englisch, ..
+   * @param lang             thr language identifier: en=english, de=german, ...
    */
   void setIdentifier(int index, const QString &lang);
 
-  /** removes identifier an the according translation in all entries
+  /**
+   * Removes identifier an the according translation in all entries
    *
    * @param index            number of translation 1..x
    */
   void removeIdentifier(int index);
 
-  /** determines if given translation is available and where
+  /**
+   * Determines if given translation is available and where
    *
    * @param lang             identifier of language
-   * @result                 index of translation, 0=original, -1=none
+   * @returns                index of translation, 0=original, -1=none
    */
   int findIdentifier(const QString &lang) const;
 
-  /** returns attribute string
+  /**
+   * Returns the attribute string
    *
    * @param index            number of attribute
-   * @result                 string
+   * @returns                string
    */
   QString typeName(int index) const;
 
-  /** sets attribute string
+  /**
+   * Sets attribute string
    *
    * @param index            number of attribute
    * @param str              name of attribute
    */
   void setTypeName(int index, QString &str);
 
-  /** gets descr of types  */
+  /**
+   * Gets the descriptions of the types
+   */
   inline QStringList typeDescriptions() const { return m_typeDescriptions; }
 
-  /** sets descr of types  */
+  /**
+   * Sets the descriptions of the types
+   */
   inline void setTypeDescriptions(QStringList names) { m_typeDescriptions = names; }
 
-  /** returns tense string
+  /**
+   * Returns the tense string
    *
    * @param index            number of tense
-   * @result                 string
+   * @returns                string
    */
   QString tenseName(int index) const;
 
-  /** sets tense string
+  /**
+   * Sets the tense string
    *
    * @param index            number of tense
    * @param str              name of tense
    */
   void setTenseName(int index, QString &str);
 
-  /** gets descr of tenses  */
+  /**
+   * Gets the descriptions of the tenses
+   */
   inline QStringList tenseDescriptions() const { return m_tenseDescriptions; }
 
-  /** sets descr of tenses  */
+  /**
+   * Sets the description of the tenses
+   */
   inline void setTenseDescriptions(QStringList names) { m_tenseDescriptions = names; }
 
-  /** returns usage string
+  /**
+   * Returns usage string
    *
    * @param index            number of usage
-   * @result                 string
+   * @returns                string
    */
   QString usageName(int index) const;
 
-  /** sets usage string
+  /**
+   * Sets usage string
    *
    * @param index            number of usage
    * @param str              name of usage
    */
   void setUsageName(int index, QString &str);
 
-  /** gets descr of usages  */
+  /**
+   * Gets the descriptions of the usages
+   */
   inline QStringList usageDescriptions() const { return m_usageDescriptions; }
 
-  /** sets descr of usages  */
+  /**
+   * Sets the descriptions of the usages
+   */
   inline void setUsageDescriptions(QStringList names) { m_usageDescriptions = names; }
 
-  /** open a document file
+  /**
+   * Open a document file
    *
    * @param url      url to file to open
    * @param append   if @c true, the words from @p url are appended to the
    *                 existing collection; if @c false, the collection is
    *                 emptied first so that only the words from @p url
    *                 are in the result.
-   * @result         true if successful
+   * @returns        true if successful
    */
   bool open(const KURL& url, bool append);
 
-  /** saves the data under the given name
+  /**
+   * Saves the data under the given name
    *
    * @param parent     the object that owns the document
    * @param url        if url is empty (or NULL) actual name is preserved
    * @param ft         the filetype to be used when saving the document
    * @param generator  the name of the application saving the document
-   * @result           true if successful
+   * @returns          true if successful
    */
   bool saveAs(QObject *parent, const KURL & url, FileType ft, const QString & generator);
 
-  /** returns count of entries
+  /**
+   * @returns the number of entries
    */
   inline int numEntries() const { return m_vocabulary.count(); }
 
-  /** sets grades to KV_NORM_GRADE, counts to 0 ...
+  /**
+   * Sets grades to KV_NORM_GRADE, counts to 0 ...
    *
    * @param index    index of language 0..x, -1 = all
    * @param lesson   lesson id, if this is 0 all lesson are affected,
@@ -466,24 +511,28 @@ class KEduVocDocument : public QObject
    */
   void resetEntry(int index = -1, int lesson = 0);
 
-  /** returns the number of different identifiers (usually languages)
+  /**
+   * @returns the number of different identifiers (usually languages)
    */
   inline int numIdentifiers() const { return m_identifiers.count(); } // org + translations
 
-  /** appends a new identifier (usually a language)
+  /**
+   * Appends a new identifier (usually a language)
    *
    * @param id         the identifier to append
    */
   inline void appendIdentifier(const QString & id) { m_identifiers.append(id); }
 
-  /** returns pointer to expression object x
+  /**
+   * Returns pointer to expression object @p index
    *
-   * @param index     index of desired entry
-   * @result          pointer to object or NULL if index out of range
+   * @param index     index of desidered entry
+   * @returns         pointer to object or NULL if index out of range
    */
   KEduVocExpression *entry(int index);
 
-  /** search substring in vocabulary (case insensitive always)
+  /**
+   * Search substring in vocabulary (case insensitive always)
    *
    * @param substr     partial string to search
    * @param id         which language to search: 0=org, 1..x=translation
@@ -491,29 +540,43 @@ class KEduVocDocument : public QObject
    * @param last       index of last entry, -1 goes till end
    * @param word_start false: search partial string,
    *                   true:always from beginning of word
-   * @result          index of found entry, -1 if none
+   * @returns          the index of found entry, -1 if none
    */
   int search(QString substr, int id, int first=0, int last=-1, bool word_start = false);
 
-  /** returns url of xml file  */
+  /**
+   * @returns the URL of the XML file
+   */
   inline KURL URL() const {return m_url; }
 
-  /** sets url of xml file  */
+  /**
+   * Sets the URL of the XML file
+   */
   inline void setURL(const KURL& url) {m_url = url;}
 
-  /** returns title of xml file  */
+  /**
+   * @returns the title of the XML file
+   */
   QString title() const;
 
-  /** returns author of file  */
+  /**
+   * @returns the author of the file
+   */
   QString author() const;
 
-  /** returns license of file  */
+  /**
+   * @returns the license of the file
+   */
   QString license() const;
 
-  /** returns remark of file  */
+  /**
+   * @return the remark of the file
+   */
   QString docRemark() const;
 
-  /** returns font  */
+  /**
+   * @returns the font
+   */
   QFont* font() const;
 
   inline void queryLang(QString &org, QString &trans) const
@@ -522,82 +585,109 @@ class KEduVocDocument : public QObject
   inline void setQueryLang(const QString &org, const QString &trans)
     { m_queryorg = org; m_querytrans = trans; }
 
-  /** sets title of xml file  */
+  /**
+   * Sets the title of the XML file
+   */
   void setTitle(const QString & title);
 
-  /** sets author of file  */
+  /**
+   * Sets the author of the file
+   */
   void setAuthor(const QString & author);
 
-  /** sets license of file  */
+  /**
+   * Sets the license of the file
+   */
   void setLicense(const QString & license);
 
-  /** sets remark of file  */
+  /**
+   * Sets the remark of the file
+   */
   void setDocRemark(const QString & rem);
 
-  /** sets font  */
+  /**
+   * Sets the font
+   */
   void setFont(QFont *font);
 
-  /** gets version of loaded file  */
+  /**
+   * Gets the version of the loaded file
+   */
   void version(int &major, int &minor, int &patch);
 
-  /** returns current lesson index  */
+  /**
+   * @returns the current lesson index
+   */
   inline int currentLesson() const { return m_currentLesson; }
 
-  /** sets current lesson index
+  /**
+   * Sets current lesson index
    * @param lesson    index of lesson
    */
   inline void setCurrentLesson(int lesson) { m_currentLesson = lesson; }
 
-  /** returns descr of lesson  */
+  /**
+   * @returns the description of the lesson
+   */
   QString lessonDescription(int index) const;
 
-  /** returns lessons in current query  */
+  /**
+   * @returns a list with the lessons in the current query
+   */
   QList<int> lessonsInQuery() const;
 
-  /** sets lessons in current query  */
+  /**
+   * Sets the lessons in the current query
+   */
   void setLessonsInQuery(QList<int>);
 
   inline QStringList lessonDescriptions() const { return m_lessonDescriptions; }
 
   inline int numLessons () const {return (int) m_lessonDescriptions.count(); }
 
-  /** sets descr of lesson  */
+  /**
+   * Sets the description of the lesson
+   */
   inline void setLessonDescriptions(QStringList names) { m_lessonDescriptions = names; }
 
-  /** returns pointer to conjugations if available
-   *
+  /**
    * @param index            index of translation
+   * @returns                a pointer to conjugations if available
    */
   KEduVocConjugation conjugation(int index) const;
 
-  /** sets conjugations
+  /**
+   * Sets conjugations
    *
    * @param index            index of translation
    * @param con              conjugation block
    */
   void setConjugation(int index, const KEduVocConjugation &con);
 
-  /** returns pointer to articles if available
-   *
+  /**
    * @param index            index of translation
+   * @returns                a pointer to articles if available
    */
   KEduVocArticle article(int index) const;
 
-  /** sets articles
+  /**
+   * Sets the articles
    *
    * @param index            index of translation
    * @param art              article block
    */
   void setArticle(int index, const KEduVocArticle &art);
 
-  /** returns recommended size
+  /**
+   * Returns the recommended size
    *
    * @param index            number of expr, -1 = lesson
-   * @result                 width of column
+   * @returns                width of column
    */
   int sizeHint(int index) const;
 
-  /** sets recommended size
+  /**
+   * Sets the recommended size
    *
    * @param index            number of expr, -1 = lesson
    * @param width            width of column
@@ -629,7 +719,10 @@ protected:
 
   void Init();
 
-  /** sets version of loaded file  */
+  /**
+   * Sets version of the loaded file
+   * @param ver the new version
+   */
   void setVersion(const QString & ver);
 
   /* TODO

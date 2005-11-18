@@ -146,10 +146,7 @@ void KEduVocArticle::natural(QString &def, QString &indef) const
 
 bool KEduVocConjugation::operator ==( const KEduVocConjugation& a ) const
 {
-	if ( verbName == a.getVerbName() )
-		return true;
-	else
-		return false;
+	return verbName == a.getVerbName();
 }
 
 
@@ -172,7 +169,7 @@ QList<KEduVocTenseRelation> KEduVocConjugation::getRelation ()
     vec.append(KEduVocTenseRelation(names[i].abbrev, i18n(names[i].name)));
   }
 
-  for (int i = 0; i < (int) userTenses.size(); i++) {
+  for (int i = 0; i < userTenses.size(); i++) {
     QString s;
     s.setNum(i+1);
     s.insert(0, UL_USER_TENSE);
@@ -183,7 +180,7 @@ QList<KEduVocTenseRelation> KEduVocConjugation::getRelation ()
 }
 
 
-void KEduVocConjugation::setTenseNames (QStringList names)
+void KEduVocConjugation::setTenseNames (const QStringList& names)
 {
   userTenses = names;
 }
