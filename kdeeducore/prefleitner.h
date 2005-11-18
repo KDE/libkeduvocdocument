@@ -38,11 +38,13 @@ class PrefLeitner : public QDialog, public Ui::PrefLeitnerBase
 public:
 	/**
 	 * The public contructor
+	 * @param parent is the parent widget
 	 */
 	PrefLeitner( QWidget* parent = 0 );
 
 	/**
 	 * The public contructur which sets also the LeitnerSystem
+	 * @param parent is the parent widget
 	 * @param system a pointer to the LeitnerSystem to configure
 	 */
 	PrefLeitner( QWidget* parent = 0 , LeitnerSystem* system = 0 );
