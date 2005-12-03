@@ -57,11 +57,6 @@ public:
 	 */
 	void setWrongWordBox( LeitnerBox* wrongWordBox );
 	
-	/**
-	 * Sets the boxes name
-	 * @param name the new name
-	 */
-	void setBoxName( const QString& name );
 
 	/**
 	 * Sets the LeitnerBox's name to name. The name is the unique identifier of a LeitnerBox.
