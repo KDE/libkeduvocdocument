@@ -244,8 +244,8 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
       text = d->calendar->dayString(pCellDate, true);
       if( d->calendar->month(pCellDate) != d->calendar->month(date) )
         { // we are either
-          // ° painting a day of the previous month or
-          // ° painting a day of the following month
+          // Â° painting a day of the previous month or
+          // Â° painting a day of the following month
           // TODO: don't hardcode gray here! Use a color with less contrast to the background than normal text.
           painter->setPen( colorGroup().mid() );
 //          painter->setPen(gray);

@@ -72,7 +72,7 @@ public:
 
 	/**
 	 * Sets the LeitnerBox's vocabCount to count
-	 * @p¾aramcount the new vocabCount to be set
+	 * @param count the new vocabCount to be set
 	 */
 	void setVocabCount( int count );
 
