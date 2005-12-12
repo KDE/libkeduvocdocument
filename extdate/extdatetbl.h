@@ -32,7 +32,6 @@
 #include <QWheelEvent>
 #include <QFocusEvent>
 #include <QKeyEvent>
-#include <Q3Frame>
 #include <QResizeEvent>
 #include <QMouseEvent>
 #include <klineedit.h>
