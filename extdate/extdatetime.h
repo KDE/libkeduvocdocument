@@ -167,7 +167,7 @@ public:
     static ExtDateTime currentDateTime( Qt::TimeSpec );
 #ifndef QT_NO_DATESTRING
     static ExtDateTime fromString( const QString& s );
-    static ExtDateTime fromString( const QString& s, Qt::DateFormat f = Qt::TextDate );
+    static ExtDateTime fromString( const QString& s, Qt::DateFormat f );
 #endif
 private:
     ExtDate  d;
