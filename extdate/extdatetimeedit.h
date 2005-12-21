@@ -48,7 +48,7 @@
 	*/
 
 #include <QSpinBox>
-#include <QWidget>
+#include <QFrame>
 #include <QLineEdit>
 #include <QTime>
 #include <QTimeEdit>
@@ -232,7 +232,7 @@ class ExtDateEdit : public QSpinBox {
 	*@author Jason Harris
 	*@version 1.0
 	*/
-class ExtDateTimeEdit : public QWidget {
+class ExtDateTimeEdit : public QFrame {
 	Q_OBJECT
 
 	public:

@@ -202,7 +202,7 @@ void ExtDateEdit::focusInEvent( QFocusEvent *e ) {
 }
 
 ExtDateTimeEdit::ExtDateTimeEdit( const ExtDateTime &dt, QWidget *parent )
-: QWidget( parent ) {
+: QFrame( parent ) {
 	QHBoxLayout *hlay = new QHBoxLayout( this );
 	m_DateEdit = new ExtDateEdit( dt.date(), this );
 	m_TimeEdit = new QTimeEdit( dt.time(), this );
