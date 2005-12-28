@@ -57,7 +57,7 @@ KEduVocExpression::KEduVocExpression(const QString &s, const QString & separator
   m_lesson = lesson;
 
   if (separator.length() ) {
-    int pos = expr.find(separator);
+    int pos = expr.indexOf(separator);
 
     if (pos == -1) {
       setOriginal(expr.simplified());
@@ -69,7 +69,7 @@ KEduVocExpression::KEduVocExpression(const QString &s, const QString & separator
 //      s.simplified();
 
       // gather all translations
-      while ((pos = expr.find(separator)) != -1) {
+      while ((pos = expr.indexOf(separator)) != -1) {
         se = expr.left(pos).simplified();
         addTranslation(se, KV_NORM_GRADE, KV_NORM_GRADE);
         expr.remove (0, pos + separator.length() );

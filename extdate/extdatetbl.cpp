@@ -395,13 +395,13 @@ ExtDateTable::setFontSize(int size)
   for(count=0; count<7; ++count)
     {
       rect=metrics.boundingRect(d->calendar->weekDayName(count+1, true));
-      maxCell.setWidth(QMAX(maxCell.width(), rect.width()));
-      maxCell.setHeight(QMAX(maxCell.height(), rect.height()));
+      maxCell.setWidth(qMax(maxCell.width(), rect.width()));
+      maxCell.setHeight(qMax(maxCell.height(), rect.height()));
     }
   // ----- compare with a real wide number and add some space:
   rect=metrics.boundingRect(QString::fromLatin1("88"));
-  maxCell.setWidth(QMAX(maxCell.width()+2, rect.width()));
-  maxCell.setHeight(QMAX(maxCell.height()+4, rect.height()));
+  maxCell.setWidth(qMax(maxCell.width()+2, rect.width()));
+  maxCell.setHeight(qMax(maxCell.height()+4, rect.height()));
 }
 
 void

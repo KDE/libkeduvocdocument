@@ -150,7 +150,7 @@ int LeitnerSystem::number( LeitnerBox* box ) const
 	if( box == 0 )
 		return -1;
 
-	return m_boxes.findIndex( *box );
+	return m_boxes.indexOf( *box );
 }
 
 bool LeitnerSystem::setBoxName( int box, const QString& name )

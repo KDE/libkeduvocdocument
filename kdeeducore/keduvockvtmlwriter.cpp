@@ -268,7 +268,7 @@ bool KEduVocKvtmlWriter::saveConjugHeader(QDomDocument &domDoc, QDomElement &dom
   QDomElement domElementConjug = domDoc.createElement(KV_CONJUG_GRP);
   QString s;
 
-  for (int ent = 0; ent < QMIN((int) curr_conjug.size(), m_doc->numIdentifiers()); ent++)
+  for (int ent = 0; ent < qMin((int) curr_conjug.size(), m_doc->numIdentifiers()); ent++)
   {
     QDomElement domElementEntry = domDoc.createElement(KV_CON_ENTRY);
 
@@ -477,7 +477,7 @@ bool KEduVocKvtmlWriter::saveArticleKvtMl(QDomDocument &domDoc, QDomElement &dom
   QDomElement domElementArticle = domDoc.createElement(KV_ARTICLE_GRP);
   QString def, indef, s;
 
-  for (int lfn = 0; lfn < QMIN((int) m_doc->m_articles.size(), m_doc->numIdentifiers()); lfn++)
+  for (int lfn = 0; lfn < qMin((int) m_doc->m_articles.size(), m_doc->numIdentifiers()); lfn++)
   {
     QDomElement domElementEntry = domDoc.createElement(KV_ART_ENTRY);
     if (lfn == 0)
@@ -781,7 +781,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
 
     QString s;
     QString entype = s = (*first).type(0);
-    int pos = s.find (QM_TYPE_DIV);
+    int pos = s.indexOf(QM_TYPE_DIV);
     if (pos >= 0)
       entype = s.left (pos);
     else
@@ -901,7 +901,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
 
       QString s;
       QString entype = s = (*first).type(0);
-      int pos = s.find (QM_TYPE_DIV);
+      int pos = s.indexOf(QM_TYPE_DIV);
       if (pos >= 0)
         entype = s.left (pos);
       else

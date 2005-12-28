@@ -327,7 +327,7 @@ bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVoc
 
       if (type.length() != 0 && type.left(1) == UL_USER_TENSE)
       {
-        int num = QMIN(type.mid (1, 40).toInt(), 1000); // paranoia check
+        int num = qMin(type.mid (1, 40).toInt(), 1000); // paranoia check
         if( num > (int) m_doc->m_tenseDescriptions.size() )
         {
           // description missing ?
@@ -777,7 +777,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
   if (!domAttrGrade.isNull())
   {
     QString s = domAttrGrade.value();
-    if ((pos = s.find(';')) >= 1)
+    if ((pos = s.indexOf(';')) >= 1)
     {
       grade = s.left(pos).toInt();
       rev_grade = s.mid(pos+1, s.length()).toInt();
@@ -792,7 +792,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
   if (!domAttrCount.isNull())
   {
     QString s = domAttrCount.value();
-    if ((pos = s.find(';')) >= 1)
+    if ((pos = s.indexOf(';')) >= 1)
     {
       count = s.left(pos).toInt();
       rev_count = s.mid(pos+1, s.length()).toInt();
@@ -807,7 +807,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
   if (!domAttrBad.isNull())
   {
     QString s = domAttrBad.value();
-    if ((pos = s.find(';')) >= 1)
+    if ((pos = s.indexOf(';')) >= 1)
     {
       bcount = s.left(pos).toInt();
       rev_bcount = s.mid(pos+1, s.length()).toInt();
@@ -822,7 +822,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
   if (!domAttrDate.isNull())
   {
     QString s = domAttrDate.value();
-    if ((pos = s.find(';')) >= 1)
+    if ((pos = s.indexOf(';')) >= 1)
     {
       date.setTime_t(s.left(pos).toInt());
       rev_date.setTime_t(s.mid(pos+1, s.length()).toInt());
@@ -869,7 +869,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
     usage = domAttrUsage.value();
     if (usage.length() != 0 && usage.left(1) == UL_USER_USAGE)
     {
-      int num = QMIN(usage.mid (1, 40).toInt(), 1000); // paranioa check
+      int num = qMin(usage.mid (1, 40).toInt(), 1000); // paranioa check
       if( num > (int) m_doc->m_usageDescriptions.size() )
       {
         // description missing ?
@@ -907,7 +907,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
 
     if (type.length() != 0 && type.left(1) == QM_USER_TYPE)
     {
-      int num = QMIN(type.mid (1, 40).toInt(), 1000); // paranoia check
+      int num = qMin(type.mid (1, 40).toInt(), 1000); // paranoia check
       if( num > (int) m_doc->m_typeDescriptions.size() )
       {
         // description missing ?
@@ -1003,7 +1003,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
     if (exprtype.length() != 0 && exprtype.left(1) == QM_USER_TYPE)
     {
-      int num = QMIN(exprtype.mid (1, 40).toInt(), 1000); // paranoia check
+      int num = qMin(exprtype.mid (1, 40).toInt(), 1000); // paranoia check
       if( num > (int) m_doc->m_typeDescriptions.size() )
       {
         // description missing ?
@@ -1621,7 +1621,7 @@ bool KEduVocKvtmlReader::readDoc(KEduVocDocument *doc)
   if (!domAttrGenerator.isNull())
   {
     m_doc->m_generator = domAttrGenerator.value();
-    int pos = m_doc->m_generator.findRev (KVD_VERS_PREFIX);
+    int pos = m_doc->m_generator.lastIndexOf(KVD_VERS_PREFIX);
     if (pos >= 0)
     {
       m_doc->m_version = m_doc->m_generator;
@@ -1665,7 +1665,7 @@ void KEduVocKvtmlReader::domErrorUnknownElement(const QString &elem)
       "read documents with unknown elements.\n"
      );
   QString msg = format.arg(elem);
-  QApplication::setOverrideCursor(Qt::ArrowCursor, true);
+  QApplication::changeOverrideCursor(Qt::ArrowCursor);
   QString s = kapp->makeStdCaption(i18n("Unknown element"));
   KMessageBox::sorry(0, ln+msg, s);
   QApplication::restoreOverrideCursor();
@@ -1673,7 +1673,7 @@ void KEduVocKvtmlReader::domErrorUnknownElement(const QString &elem)
 
 void KEduVocKvtmlReader::domError(const QString &text )
 {
-  QApplication::setOverrideCursor(Qt::ArrowCursor, true);
+  QApplication::changeOverrideCursor(Qt::ArrowCursor);
   QString s = kapp->makeStdCaption(i18n("Error"));
   QString ln = i18n("File:\t%1\n").arg(m_doc->URL().path());
   QString msg = text;

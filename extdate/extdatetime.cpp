@@ -470,7 +470,7 @@ ExtDate ExtDate::fromString( const QString& s, Qt::DateFormat f )
 		{
 			//Three possible date formats:
 			//dd mth yyyy; mth dd yyyy; wkd mth dd yyyy
-			QStringList ss = QStringList::split( " ", s );
+			QStringList ss = s.split( " " );
 			bool ok = false;
 			int month = -1;
 			uint imonth = 0;
@@ -1122,7 +1122,7 @@ ExtDateTime ExtDateTime::fromString( const QString& s, Qt::DateFormat f )
 		QTime time;
 		QString sd = s;
 		int hour, minute, second;
-		int pivot = s.find( QRegExp(QString::fromLatin1("[0-9][0-9]:[0-9][0-9]:[0-9][0-9]")) );
+		int pivot = s.indexOf( QRegExp(QString::fromLatin1("[0-9][0-9]:[0-9][0-9]:[0-9][0-9]")) );
 		if ( pivot != -1 ) {
 			hour = s.mid( pivot, 2 ).toInt();
 			minute = s.mid( pivot+3, 2 ).toInt();

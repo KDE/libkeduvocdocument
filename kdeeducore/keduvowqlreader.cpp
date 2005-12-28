@@ -61,18 +61,18 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   // TODO these loops cause crashes if the input file is invalid !
   while (inputStream.readLine() != "[Font Info]");
   s = inputStream.readLine();
-  int p = s.find("=", 0);
+  int p = s.indexOf("=", 0);
   QString fam = s.right(s.length() - (p + 1));
   fam = fam.mid(1, fam.length() - 2);
   //g->font().setFamily(s);
 
   s = inputStream.readLine();
-  p = s.find("=", 0);
+  p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
   int ps = s.toInt(0);
 
   s = inputStream.readLine();
-  p = s.find("=", 0);
+  p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
   int b = 0;
   if (s == "1")
@@ -81,7 +81,7 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   }
 
   s = inputStream.readLine();
-  p = s.find("=", 0);
+  p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
   bool it = (s == "1");
 
@@ -97,12 +97,12 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   inputStream.readLine(); //skip value for width of row headers
 
   s = inputStream.readLine();
-  p = s.find("=", 0);
+  p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
   m_doc->setSizeHint(0, s.toInt());
 
   s = inputStream.readLine();
-  p = s.find("=", 0);
+  p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
   m_doc->setSizeHint(1, s.toInt());
 
@@ -135,7 +135,7 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   while ((inputStream.readLine() != "[Vocabulary]"));
 
   s = inputStream.readLine();
-  p = s.find("   [", 0);
+  p = s.indexOf("   [", 0);
   s = s.left(p);
   s = s.simplified();
   m_doc->m_identifiers.push_back(s);
@@ -144,7 +144,7 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   while (!s.isNull())
   {
     s = inputStream.readLine();
-    p = s.find("[", 0);
+    p = s.indexOf("[", 0);
     QString r = s.mid(p + 1, 10);
     int h = r.toInt();
     s = s.left(p);

@@ -370,7 +370,7 @@ ExtDatePicker::selectMonthClicked()
   //date.setYMD(date.year(), month, 1);
   //date.setYMD(date.year(), month, QMIN(day, date.daysInMonth()));
   d->calendar->setYMD(date, d->calendar->year(date), month,
-                   QMIN(day, d->calendar->daysInMonth(date)));
+                   qMin(day, d->calendar->daysInMonth(date)));
   // ----- set this month
   setDate(date);
 }
@@ -405,7 +405,7 @@ ExtDatePicker::selectYearClicked()
       //date.setYMD(year, date.month(), 1);
       //date.setYMD(year, date.month(), QMIN(day, date.daysInMonth()));
       d->calendar->setYMD(date, year, d->calendar->month(date),
-                       QMIN(day, d->calendar->daysInMonth(date)));
+                       qMin(day, d->calendar->daysInMonth(date)));
       // ----- set this month
       setDate(date);
     } else {
@@ -489,8 +489,8 @@ ExtDatePicker::setFontSize(int s)
          d->calendar->year(table->getDate()), false);
       if (str.isNull()) break;
       r=metrics.boundingRect(str);
-      maxMonthRect.setWidth(QMAX(r.width(), maxMonthRect.width()));
-      maxMonthRect.setHeight(QMAX(r.height(),  maxMonthRect.height()));
+      maxMonthRect.setWidth(qMax(r.width(), maxMonthRect.width()));
+      maxMonthRect.setHeight(qMax(r.height(),  maxMonthRect.height()));
     }
 
   QStyleOptionToolButton qsotb;

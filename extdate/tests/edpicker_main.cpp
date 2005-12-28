@@ -2,6 +2,7 @@
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
+#include <klocale.h>
 
 static const char description[] = I18N_NOOP("ExtDatePicker test program");
 static const char notice[] = I18N_NOOP("Compares KDatePicker and ExtDatePicker");

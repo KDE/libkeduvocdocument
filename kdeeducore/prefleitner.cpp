@@ -64,8 +64,8 @@ PrefLeitner::PrefLeitner( QWidget* parent, LeitnerSystem* system ) : QDialog( pa
   	m_selectedSystem = system;
 	
 	//insert the list of box' names in the comboboxes
-	cmbWrong->insertStringList( m_selectedSystem->getBoxNameList() );
-	cmbCorrect->insertStringList( m_selectedSystem->getBoxNameList() );
+	cmbWrong->addItems( m_selectedSystem->getBoxNameList() );
+	cmbCorrect->addItems( m_selectedSystem->getBoxNameList() );
 
 	//show leitnersystem
 	m_leitnerSystemView->setSystem( m_selectedSystem );
@@ -102,8 +102,8 @@ void PrefLeitner::slotBoxName( const QString& newName )
 
 void PrefLeitner::newSystem()
 {
-	cmbCorrect->insertStringList( m_selectedSystem->getBoxNameList() );
-	cmbWrong->insertStringList( m_selectedSystem->getBoxNameList() );
+	cmbCorrect->addItems( m_selectedSystem->getBoxNameList() );
+	cmbWrong->addItems( m_selectedSystem->getBoxNameList() );
 
 	refreshSystemView();
 }
@@ -117,8 +117,8 @@ void PrefLeitner::slotBoxClicked( int box )
 {
 	m_selectedBox = m_selectedSystem->boxWithNumber( box );
 
-	cmbCorrect->setCurrentItem( m_selectedSystem->correctBoxNumber( box ) );
-	cmbWrong->setCurrentItem( m_selectedSystem->wrongBoxNumber( box ) );
+	cmbCorrect->setCurrentIndex( m_selectedSystem->correctBoxNumber( box ) );
+	cmbWrong->setCurrentIndex( m_selectedSystem->wrongBoxNumber( box ) );
 	lndBoxName->setText( m_selectedBox->boxName() );
 }
 

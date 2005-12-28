@@ -108,7 +108,7 @@ void ExtDateWidget::init(const ExtDate& date)
     QString str = d->calendar->monthName(i,
        d->calendar->year(date));
     if (str.isNull()) break;
-    d->m_month->insertItem(str);
+    d->m_month->addItem(str);
   }
 
   d->m_year = new ExtDateWidgetSpinBox(d->calendar->minValidYear(),
@@ -158,15 +158,15 @@ void ExtDateWidget::slotDateChanged( )
   int y,m,day;
 
   y = d->m_year->value();
-  y = QMIN(QMAX(y, d->calendar->minValidYear()), d->calendar->maxValidYear());
+  y = qMin(qMax(y, d->calendar->minValidYear()), d->calendar->maxValidYear());
 
   d->calendar->setYMD(date, y, 1, 1);
   m = d->m_month->currentItem()+1;
-  m = QMIN(QMAX(m,1), d->calendar->monthsInYear(date));
+  m = qMin(qMax(m,1), d->calendar->monthsInYear(date));
 
   d->calendar->setYMD(date, y, m, 1);
   day = d->m_day->value();
-  day = QMIN(QMAX(day,1), d->calendar->daysInMonth(date));
+  day = qMin(qMax(day,1), d->calendar->daysInMonth(date));
 
   d->calendar->setYMD(date, y, m, day);
   setDate(date);

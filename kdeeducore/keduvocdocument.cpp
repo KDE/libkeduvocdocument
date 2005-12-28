@@ -1003,11 +1003,11 @@ int KEduVocDocument::search(QString substr, int id, int first, int last, bool wo
   if (id == 0) {
     for (int i = first; i < last; i++) {
       if (word_start) {
-        if (entry(i)->original().find(substr, 0, false) == 0)  // case insensitive
+        if (entry(i)->original().indexOf(substr, 0, Qt::CaseInsensitive) == 0)  // case insensitive
           return i;
       }
       else {
-        if (entry(i)->original().find(substr, 0, false) > -1)  // case insensitive
+        if (entry(i)->original().indexOf(substr, 0, Qt::CaseInsensitive) > -1)  // case insensitive
           return i;
       }
     }
@@ -1015,11 +1015,11 @@ int KEduVocDocument::search(QString substr, int id, int first, int last, bool wo
   else {
     for (int i = first; i < last; i++) {
       if (word_start) {
-        if (entry(i)->translation(id).find(substr, 0, false) == 0) // case insensitive
+        if (entry(i)->translation(id).indexOf(substr, 0, Qt::CaseInsensitive) == 0) // case insensitive
           return i;
       }
       else {
-        if (entry(i)->translation(id).find(substr, 0, false) > -1) // case insensitive
+        if (entry(i)->translation(id).indexOf(substr, 0, Qt::CaseInsensitive) > -1) // case insensitive
           return i;
       }
     }
@@ -1036,7 +1036,7 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &filenam
 
    QDataStream is( &f );
 
-   Q_INT8 c1, c2, c3, c4, c5;
+   qint8 c1, c2, c3, c4, c5;
    is >> c1
       >> c2
       >> c3
@@ -1062,7 +1062,7 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &filenam
    if (line == WQL_IDENT)
      return wql;
 
-   if (line.find (VCB_SEPARATOR) >= 0)
+   if (line.indexOf(VCB_SEPARATOR) >= 0)
      return vt_vcb;
 
    if (line == LEX_IDENT_50)
@@ -1086,7 +1086,7 @@ public:
   {
     QString s1 = exp->original();
     QString s2 = y.exp->original();
-    int cmp = QString::compare(s1.upper(), s2.upper());
+    int cmp = QString::compare(s1.toUpper(), s2.toUpper());
     if (cmp != 0)
       return cmp < 0;
 
@@ -1094,7 +1094,7 @@ public:
 
       s1 = exp->translation(i);
       s2 = y.exp->translation(i);
-      cmp = QString::compare(s1.upper(), s2.upper() );
+      cmp = QString::compare(s1.toUpper(), s2.toUpper() );
       if (cmp != 0)
         return cmp < 0;
     }
