@@ -1,0 +1,10 @@
+[Global]
+PluginName=KDEEduWidgets
+Includes=kinstance.h
+#Init=new KInstance("kdeeduwidgets");
+
+[KPlotWidget]
+ToolTip=A plot widget (KDE-Edu)
+WhatsThis=A widget that allows you to plot simple stuff
+Group=Plot (KDE-Edu)
+ConstructorArgs=(0.0, 1.0, 0.0, 1.0, parent)
