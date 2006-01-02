@@ -1,4 +1,4 @@
-INCLUDES = -I../kdeeduplot $(all_includes)
+INCLUDES = -I$(srcdir)/../kdeeduplot $(all_includes)
 
 AM_CXXFLAGS = -DQT_PLUGIN
 #KDE_CXXFLAGS = -UQT3_SUPPORT
