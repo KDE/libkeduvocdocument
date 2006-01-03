@@ -74,7 +74,7 @@ const QString& LeitnerSystem::nextBox( QString& previousBox )
 			return box( i );
 	}
 
-	return QString::null;
+	return QString();
 }
 
 const QString& LeitnerSystem::correctBox( int box )

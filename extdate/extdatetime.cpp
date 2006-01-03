@@ -201,7 +201,7 @@ QString ExtDate::toString( Qt::DateFormat f) const
 {
 	QString	a_format;
 
-	if ( ! isValid() ) return QString::null;
+	if ( ! isValid() ) return QString();
 
 	switch (f)
 	{
@@ -228,7 +228,7 @@ QString ExtDate::toString( Qt::DateFormat f) const
 
 QString ExtDate::toString( const QString& format ) const
 {
-	if ( ! isValid() ) return QString::null;
+	if ( ! isValid() ) return QString();
 
 	//We use the KDE Date format specs.
 	//Replace occurences of the following tokens with their
@@ -820,7 +820,7 @@ void ExtDateTime::setTime_t( uint secsSince1Jan1970UTC, Qt::TimeSpec ts )
 QString ExtDateTime::toString( Qt::DateFormat f ) const
 {
 	if ( !isValid() )
-		return QString::null;
+		return QString();
 
 	if ( f == Qt::ISODate ) {
 		return d.toString( Qt::ISODate ) + "T" + t.toString( Qt::ISODate );
@@ -835,14 +835,14 @@ QString ExtDateTime::toString( Qt::DateFormat f ) const
 						+ " " + KGlobal::locale()->timeFormat() );
 	}
 
-	return QString::null;
+	return QString();
 }
 #endif
 
 QString ExtDateTime::toString( const QString& format ) const
 {
 	if ( !isValid() )
-		return QString::null;
+		return QString();
 
 	//Parse the date portion of the format string
 	QString result = date().toString( format );

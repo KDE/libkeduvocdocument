@@ -146,6 +146,6 @@ QString ExtCalendarSystem::weekDayName (int weekDay, bool shortName) const
       case 7:  return locale()->translate("Sunday");
       }
 
-  return QString::null;
+  return QString();
 }
 

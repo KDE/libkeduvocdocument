@@ -69,13 +69,13 @@ QString KEduVocDataItem::getText(const QString &tagName) const
                 return element.text();
             }
             else
-                return QString::null;
+                return QString();
         }
         else
-            return QString::null;
+            return QString();
     }
     else
-        return QString::null;
+        return QString();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
