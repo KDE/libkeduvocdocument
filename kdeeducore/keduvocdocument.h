@@ -484,7 +484,7 @@ class KEduVocDocument : public QObject
    *                 are in the result.
    * @returns        true if successful
    */
-  bool open(const KURL& url, bool append);
+  bool open(const KUrl& url, bool append);
 
   /**
    * Saves the data under the given name
@@ -495,7 +495,7 @@ class KEduVocDocument : public QObject
    * @param generator  the name of the application saving the document
    * @returns          true if successful
    */
-  bool saveAs(QObject *parent, const KURL & url, FileType ft, const QString & generator);
+  bool saveAs(QObject *parent, const KUrl & url, FileType ft, const QString & generator);
 
   /**
    * @returns the number of entries
@@ -547,12 +547,12 @@ class KEduVocDocument : public QObject
   /**
    * @returns the URL of the XML file
    */
-  inline KURL URL() const {return m_url; }
+  inline KUrl URL() const {return m_url; }
 
   /**
    * Sets the URL of the XML file
    */
-  inline void setURL(const KURL& url) {m_url = url;}
+  inline void setURL(const KUrl& url) {m_url = url;}
 
   /**
    * @returns the title of the XML file
@@ -751,7 +751,7 @@ protected:
 
  private:
   bool                  m_dirty;
-  KURL                  m_url;
+  KUrl                  m_url;
   QList<bool>      m_sortIdentifier;
   bool                  m_sortLesson;
   bool                  m_unknownAttribute;

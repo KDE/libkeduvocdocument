@@ -91,7 +91,7 @@ void KEduVocDocument::Init ()
 }
 
 
-bool KEduVocDocument::open(const KURL& url, bool /*append*/)
+bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
 {
   Init();
   if (!url.isEmpty())
@@ -185,11 +185,11 @@ bool KEduVocDocument::open(const KURL& url, bool /*append*/)
 }
 
 
-bool KEduVocDocument::saveAs(QObject *parent, const KURL & url, FileType ft, const QString & generator)
+bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, const QString & generator)
 {
   connect( this, SIGNAL(progressChanged(KEduVocDocument*,int)), parent, SLOT(slotProgress(KEduVocDocument*,int)) );
 
-  KURL tmp (url);
+  KUrl tmp (url);
 
   if (ft == automatic)
   {
