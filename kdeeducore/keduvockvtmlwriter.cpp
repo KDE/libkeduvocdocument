@@ -709,7 +709,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
       if (lm > (int) m_doc->m_lessonDescriptions.size() )
       {
         // should not be
-        kdError() << "index of lesson member too high: " << lm << endl;
+        kError() << "index of lesson member too high: " << lm << endl;
         lm = 0;
       }
       ls.setNum (lm);

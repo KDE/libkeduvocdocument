@@ -40,8 +40,8 @@ EDTEdit::EDTEdit( QWidget *p=0, const char *name=0 ) : KMainWindow( p, name ) {
 
 EDTEdit::~EDTEdit() {
 	//Output current date setting on exit
-	kdDebug() << "ExDateEdit:     " << ed->date().toString() << endl;
-	kdDebug() << "ExDateTimeEdit: " << edt->date().toString() << endl;
+	kDebug() << "ExDateEdit:     " << ed->date().toString() << endl;
+	kDebug() << "ExDateTimeEdit: " << edt->date().toString() << endl;
 }
 
 #include "edtedit_widget.moc"

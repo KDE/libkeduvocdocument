@@ -255,7 +255,7 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
       break;
 
       default: {
-        kdError() << "kvcotrainDoc::saveAs(): unknown filetype" << endl;
+        kError() << "kvcotrainDoc::saveAs(): unknown filetype" << endl;
       }
       break;
     }

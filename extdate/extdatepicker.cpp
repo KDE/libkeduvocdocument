@@ -236,7 +236,7 @@ ExtDatePicker::resizeEvent(QResizeEvent* e)
 void
 ExtDatePicker::dateChangedSlot(const ExtDate &date)
 {
-    kdDebug(298) << "ExtDatePicker::dateChangedSlot: date changed (" << date.year() << "/" << date.month() << "/" << date.day() << ")." << endl;
+    kDebug(298) << "ExtDatePicker::dateChangedSlot: date changed (" << date.year() << "/" << date.month() << "/" << date.day() << ")." << endl;
 
 
 //must remain commented unless ExtDate gets added to kdelibs
@@ -259,7 +259,7 @@ ExtDatePicker::dateChangedSlot(const ExtDate &date)
 void
 ExtDatePicker::tableClickedSlot()
 {
-  kdDebug(298) << "ExtDatePicker::tableClickedSlot: table clicked." << endl;
+  kDebug(298) << "ExtDatePicker::tableClickedSlot: table clicked." << endl;
   emit(dateSelected(table->getDate()));
   emit(tableClicked());
 }
@@ -286,7 +286,7 @@ ExtDatePicker::setDate(const ExtDate& date)
     }
     else
     {
-        kdDebug(298) << "ExtDatePicker::setDate: refusing to set invalid date." << endl;
+        kDebug(298) << "ExtDatePicker::setDate: refusing to set invalid date." << endl;
         return false;
     }
 }
@@ -437,12 +437,12 @@ ExtDatePicker::lineEnterPressed()
   // -----
   if(val->date(line->text(), temp)==QValidator::Acceptable)
     {
-        kdDebug(298) << "ExtDatePicker::lineEnterPressed: valid date entered." << endl;
+        kDebug(298) << "ExtDatePicker::lineEnterPressed: valid date entered." << endl;
         emit(dateEntered(temp));
         setDate(temp);
     } else {
       KNotifyClient::beep();
-      kdDebug(298) << "ExtDatePicker::lineEnterPressed: invalid date entered." << endl;
+      kDebug(298) << "ExtDatePicker::lineEnterPressed: invalid date entered." << endl;
     }
 }
 

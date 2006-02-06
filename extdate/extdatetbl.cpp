@@ -131,7 +131,7 @@ ExtDateTable::ExtDateTable(QWidget *parent, ExtDate date_, const char* name, Qt:
   setFontSize(10);
   if(!date_.isValid())
     {
-      kdDebug() << "ExtDateTable ctor: WARNING: Given date is invalid, using current date." << endl;
+      kDebug() << "ExtDateTable ctor: WARNING: Given date is invalid, using current date." << endl;
       date_=ExtDate::currentDate();
     }
   setFocusPolicy( Qt::StrongFocus );
@@ -479,7 +479,7 @@ ExtDateTable::setDate(const ExtDate& date_)
   // -----
   if(!date_.isValid())
     {
-      kdDebug() << "ExtDateTable::setDate: refusing to set invalid date." << endl;
+      kDebug() << "ExtDateTable::setDate: refusing to set invalid date." << endl;
       return false;
     }
   if(date!=date_)
@@ -495,7 +495,7 @@ ExtDateTable::setDate(const ExtDate& date_)
 
   d->calendar->setYMD(temp, d->calendar->year(date), d->calendar->month(date), 1);
   //temp.setYMD(date.year(), date.month(), 1);
-  //kdDebug() << "firstDayInWeek: " << temp.toString() << endl;
+  //kDebug() << "firstDayInWeek: " << temp.toString() << endl;
   firstday=temp.dayOfWeek();
   numdays=d->calendar->daysInMonth(date);
 
@@ -535,7 +535,7 @@ ExtDateTable::sizeHint() const
       return QSize(maxCell.width()*numCols()+2*frameWidth(),
              (maxCell.height()+2)*numRows()+2*frameWidth());
     } else {
-      kdDebug() << "ExtDateTable::sizeHint: obscure failure - " << endl;
+      kDebug() << "ExtDateTable::sizeHint: obscure failure - " << endl;
       return QSize(-1, -1);
     }
 }
