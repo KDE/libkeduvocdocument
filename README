@@ -1,4 +1,4 @@
-Contents of libkdeedu as of Oct 2005, and brief description of each module:
+Contents of libkdeedu as of Feb 2006, and brief description of each module:
 
 extdate:
 Contains a reimplementation of QDate named ExtDate which eliminates the
@@ -8,10 +8,9 @@ ExtDateTimeEdit, and ExtCalendarSystem.
 Currently used by:  kstars
 
 kdeeducore:
-Contains the old classes KEduVocData and KEduVocDataItem, for storing and
-parsing vocabulary data in a QDom object, and KEduVocDocument and its related
-class for reading from/writing to the KVTML format (and others too)
-Currently used by:  kanagram, khangman, klatin, kwordquiz
+Contains KEduVocDocument and its related class for reading from/writing to the
+KVTML format (and others too).
+Currently used by:  kanagram, khangman, klatin, kvoctrain, kwordquiz
 
 kdeeduplot:
 Constains classes KPlotObject and KPlotWidget for easy plotting of
@@ -21,7 +20,7 @@ Currently used by:  kalzium, kstars, ktouch
 
 kdeeduui:
 Contains:
-- Glossary, GlossaryItem and GLossaryDialog, which can be useful to embed a
+- Glossary, GlossaryItem and GlossaryDialog, which can be useful to embed a
   small glossary in an application
 Currently used by:  kalzium, kstars
 
