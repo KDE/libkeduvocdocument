@@ -579,10 +579,22 @@ class KEduVocDocument : public QObject
    */
   QFont* font() const;
 
-  inline void queryLang(QString &org, QString &trans) const
+  /**
+   * Retrieves the identifiers for the current query
+   *
+   * @param org        identifier for original
+   * @param trans      identifier for translation
+   */
+  inline void queryIdentifier(QString &org, QString &trans) const
     { org = m_queryorg; trans = m_querytrans; }
 
-  inline void setQueryLang(const QString &org, const QString &trans)
+  /**
+   * Sets the identifiers for the current query
+   *
+   * @param org        identifier for original
+   * @param trans      identifier for translation
+   */
+  inline void setQueryIdentifier(const QString &org, const QString &trans)
     { m_queryorg = org; m_querytrans = trans; }
 
   /**

@@ -1411,7 +1411,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     domElementExpressionChild = domElementExpressionChild.nextSibling().toElement();
   }
   if (m_doc->numEntries() == 0)
-    m_doc->setQueryLang(q_org, q_trans);
+    m_doc->setQueryIdentifier(q_org, q_trans);
   m_doc->m_vocabulary.push_back(expr);
 
   return true;

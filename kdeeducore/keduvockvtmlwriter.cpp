@@ -685,7 +685,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
 
   QString q_org, q_trans;
   QList<KEduVocExpression>::const_iterator first =  m_doc->m_vocabulary.begin ();
-  m_doc->queryLang(q_org, q_trans);
+  m_doc->queryIdentifier(q_org, q_trans);
 
   int ent_no = 0;
   int ent_percent = (int) m_doc->m_vocabulary.size () / 100;
