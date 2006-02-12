@@ -674,7 +674,7 @@ bool KEduVocDocument::sort(int index)
   /*if (!sort_allowed)
     return false;
 
-  if (index >= numLangs())
+  if (index >= numIdentifiers())
     return false;
 
   if (sort_lang.size() < langs.size())
@@ -1123,7 +1123,7 @@ int KEduVocDocument::cleanUp()
   for (int i = shadow.size()-1; i > 0; i--) {
     kve1 = shadow[i].exp;
     sso << kve1->original() << "  ";
-    for (int l = 1; l < (int) numLangs(); l++ )
+    for (int l = 1; l < (int) numIdentifiers(); l++ )
       sso << kve1->translation(l)  << "  ";
     sso << endl;
   }
@@ -1168,7 +1168,7 @@ int KEduVocDocument::cleanUp()
     if (ent_percent != 0 && (ent_no % ent_percent) == 0 )
       emit progressChanged(this, (int)(50 + ent_no / f_ent_percent / 2.0));
 #ifdef CLEAN_BUG
-    sso << getEntry(to_delete[i])->getOriginal() << endl;
+    sso << entry(to_delete[i])->getOriginal() << endl;
 #endif
     removeEntry (to_delete[i]);
     setModified();
