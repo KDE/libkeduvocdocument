@@ -984,8 +984,8 @@ void KEduVocDocument::setDocRemark(const QString & s)
 
 void KEduVocDocument::setFont(QFont* font)
 {
-  delete this->m_font;
-  this->m_font = font;
+  delete m_font;
+  m_font = font;
 }
 
 
