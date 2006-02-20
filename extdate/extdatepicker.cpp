@@ -39,7 +39,7 @@
 #include <kiconloader.h>
 #include <ktoolbar.h>
 #include <kdebug.h>
-#include <knotifyclient.h>
+#include <knotification.h>
 
 #include "extdatepicker.h"
 #include "extdatetbl.h"
@@ -409,7 +409,7 @@ ExtDatePicker::selectYearClicked()
       // ----- set this month
       setDate(date);
     } else {
-      KNotifyClient::beep();
+      KNotification::beep();
     }
   delete popup;
 }
@@ -441,7 +441,7 @@ ExtDatePicker::lineEnterPressed()
         emit(dateEntered(temp));
         setDate(temp);
     } else {
-      KNotifyClient::beep();
+      KNotification::beep();
       kDebug(298) << "ExtDatePicker::lineEnterPressed: invalid date entered." << endl;
     }
 }

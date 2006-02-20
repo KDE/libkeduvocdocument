@@ -45,7 +45,7 @@
 
 #include <kapplication.h>
 #include <kdebug.h>
-#include <knotifyclient.h>
+#include <knotification.h>
 #include "k3popupmenu.h"
 #include <QPainter>
 #include <Q3Dict>
@@ -366,7 +366,7 @@ ExtDateTable::keyPressEvent( QKeyEvent *e )
         break;
     }
 
-    KNotifyClient::beep();
+    KNotification::beep();
 }
 
 void
@@ -421,7 +421,7 @@ ExtDateTable::contentsMousePressEvent(QMouseEvent *e)
     }
   if(!isEnabled())
     {
-      KNotifyClient::beep();
+      KNotification::beep();
       return;
     }
 
@@ -597,7 +597,7 @@ ExtDateInternalWeekSelector::weekEnteredSlot()
   week=text().toInt(&ok);
   if(!ok)
     {
-      KNotifyClient::beep();
+      KNotification::beep();
       return;
     }
   result=week;
@@ -731,7 +731,7 @@ ExtDateInternalMonthPicker::contentsMousePressEvent(QMouseEvent *e)
 {
   if(!isEnabled() || e->button() != Qt::LeftButton)
     {
-      KNotifyClient::beep();
+      KNotification::beep();
       return;
     }
   // -----
@@ -853,14 +853,14 @@ ExtDateInternalYearSelector::yearEnteredSlot()
   year=text().toInt(&ok);
   if(!ok)
     {
-      KNotifyClient::beep();
+      KNotification::beep();
       return;
     }
   //date.setYMD(year, 1, 1);
   d->calendar->setYMD(date, year, 1, 1);
   if(!date.isValid())
     {
-      KNotifyClient::beep();
+      KNotification::beep();
       return;
     }
   result=year;
