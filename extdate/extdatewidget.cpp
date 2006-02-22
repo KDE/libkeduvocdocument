@@ -161,7 +161,7 @@ void ExtDateWidget::slotDateChanged( )
   y = qMin(qMax(y, d->calendar->minValidYear()), d->calendar->maxValidYear());
 
   d->calendar->setYMD(date, y, 1, 1);
-  m = d->m_month->currentItem()+1;
+  m = d->m_month->currentIndex()+1;
   m = qMin(qMax(m,1), d->calendar->monthsInYear(date));
 
   d->calendar->setYMD(date, y, m, 1);
