@@ -132,7 +132,7 @@ void ExtDateWidget::setDate( const ExtDate &date )
   d->m_month->blockSignals(true);
   d->m_year->blockSignals(true);
 
-  d->m_day->setMaxValue(d->calendar->daysInMonth(date));
+  d->m_day->setMaximum(d->calendar->daysInMonth(date));
   d->m_day->setValue(d->calendar->day(date));
   d->m_month->setCurrentItem(d->calendar->month(date)-1);
   d->m_year->setValue(d->calendar->year(date));
