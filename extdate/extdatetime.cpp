@@ -22,6 +22,7 @@
 #include <qstringlist.h>
 #include <assert.h>
 #include <time.h>
+#include <math.h>
 
 static const uint SECS_PER_DAY  = 86400;
 static const uint MSECS_PER_DAY = 86400000;
@@ -124,24 +125,30 @@ long int ExtDate::GregorianToJD( int year, int month, int day )
 	return jd;
 }
 
+//JD to Gregorian code is based on an algorithm by Peter Baum, 
+//published here:  http://vsg.cape.com/~pbaum/date/injdimp.htm
 void	ExtDate::JDToGregorian( long int jd, int &year, int &month, int &day )
 {
-	int a, b, c, d, e, alpha;
+	float g;
+	int z, a, b, c;
+	
+	z = jd - 1721118;
+	g = z - 0.25;
 
-	if (jd<2299161) {
-		a = jd;
-	} else {
-		alpha = int ((jd-1867216.25)/ 36524.25);
-		a = jd + 1 + alpha - int(alpha / 4.0);
+	a = int(floor( g / 36524.25 ));
+	b = a - int(floor(a/4));
+
+	year = int(floor((b+g)/365.25));
+
+	c = b + z - int(floor(365.25*year));
+
+	month = int( ( 5*c + 456) / 153 );
+	day = c - int( ( 153*month - 457)/5);
+
+	if ( month > 12 ) {
+		year++;
+		month -= 12;
 	}
-	b = a + 1524;
-	c = int ((b-122.1)/ 365.25);
-	d = int (365.25*c);
-	e = int ((b-d)/ 30.6001);
-
-	day = b-d-int(30.6001*e);
-	month = (e<14) ? e-1 : e-13;
-	year  = (month>2)  ? c-4716 : c-4715;
 }
 
 bool ExtDate::isValid() const
