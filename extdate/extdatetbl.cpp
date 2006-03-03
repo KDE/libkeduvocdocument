@@ -282,7 +282,8 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
       if(offset<1)
         offset+=7;
       int dy = d->calendar->day(date);
-      if( ((offset+dy) == (pos+1)) && hasFocus())
+      //      if( ((offset+dy) == (pos+1)) && hasFocus())
+      if( ((offset+dy) == (pos+2)) && hasFocus())
         {
            // draw the currently selected date
            painter->setPen(colorGroup().highlight());
