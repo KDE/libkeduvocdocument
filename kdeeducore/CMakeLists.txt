@@ -1,0 +1,66 @@
+kde4_header()
+
+include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
+
+
+########### next target ###############
+
+set(kdeeducore_LIB_SRCS 
+   keduvocdocument.cpp 
+   keduvocexpression.cpp 
+   keduvocgrammar.cpp 
+   keduvockvtmlreader.cpp 
+   keduvockvtmlwriter.cpp 
+   keduvocmultiplechoice.cpp 
+   keduvowqlreader.cpp 
+   keduvowqlwriter.cpp 
+   leitnerbox.cpp 
+   leitnersystem.cpp 
+   leitnersystemview.cpp 
+   prefleitner.cpp )
+
+kde4_automoc(${kdeeducore_LIB_SRCS})
+
+kde4_add_ui_files(kdeeducore_LIB_SRCS prefleitnerbase.ui )
+
+kde4_add_library(kdeeducore SHARED ${kdeeducore_LIB_SRCS})
+
+target_link_libraries(kdeeducore  ${QT_AND_KDECORE_LIBS} )
+
+set_target_properties(kdeeducore PROPERTIES VERSION 1.2.0 SOVERSION 1 )
+install_targets(${LIB_INSTALL_DIR} kdeeducore )
+
+
+########### install files ###############
+
+install_files( /include/libkdeedu FILES keduvocdocument.h keduvocexpression.h  	keduvocgrammar.h keduvockvtmlreader.h keduvockvtmlwriter.h keduvocmultiplechoice.h  	keduvowqlreader.h keduvowqlwriter.h leitnerbox.h leitnersystem.h leitnersystemview.h  	prefleitner.h )
+
+kde4_footer()
+
+
+
+#original Makefile.am contents follow:
+
+#INCLUDES = $(all_includes)
+## there's nothing in tests for the moment, so I'm removing it from the compilation
+##SUBDIRS = . tests
+#SUBDIRS = .
+#
+#lib_LTLIBRARIES = libkdeeducore.la
+#
+#libkdeeducore_la_SOURCES = keduvocdocument.cpp keduvocexpression.cpp \
+#	keduvocgrammar.cpp keduvockvtmlreader.cpp keduvockvtmlwriter.cpp keduvocmultiplechoice.cpp \
+#	keduvowqlreader.cpp keduvowqlwriter.cpp leitnerbox.cpp leitnersystem.cpp \
+#	leitnersystemview.cpp prefleitner.cpp prefleitnerbase.ui
+#libkdeeducore_la_LDFLAGS = -no-undefined $(all_libraries) -version-info 3:0:2
+#
+#libkdeeducore_includedir = $(includedir)/libkdeedu
+#libkdeeducore_include_HEADERS = keduvocdocument.h keduvocexpression.h \
+#	keduvocgrammar.h keduvockvtmlreader.h keduvockvtmlwriter.h keduvocmultiplechoice.h \
+#	keduvowqlreader.h keduvowqlwriter.h leitnerbox.h leitnersystem.h leitnersystemview.h \
+#	prefleitner.h
+#
+#libkdeeducore_la_LIBADD = $(LIB_KDECORE) $(LIB_KFILE)
+#
+#METASOURCES = AUTO
+#
