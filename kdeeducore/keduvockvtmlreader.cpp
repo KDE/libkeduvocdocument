@@ -1681,4 +1681,4 @@ void KEduVocKvtmlReader::domError(const QString &text )
   QApplication::restoreOverrideCursor();
 }
 
-//#include "KEduVocKvtmlReader.moc"
+#include "keduvockvtmlreader.moc"

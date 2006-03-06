@@ -25,7 +25,7 @@ kde4_add_ui_files(kdeeducore_LIB_SRCS prefleitnerbase.ui )
 
 kde4_add_library(kdeeducore SHARED ${kdeeducore_LIB_SRCS})
 
-target_link_libraries(kdeeducore  ${QT_AND_KDECORE_LIBS} )
+target_link_libraries(kdeeducore  ${LIB_KIO} ${QT_QTXML_LIBRARY})
 
 set_target_properties(kdeeducore PROPERTIES VERSION 1.2.0 SOVERSION 1 )
 install_targets(${LIB_INSTALL_DIR} kdeeducore )
