@@ -191,7 +191,8 @@ int ExtDate::weekNumber( int *yearNum ) const
 {
 	// the year and week number are those of the next Sunday.
 	ExtDate a_date( jd() - dayOfWeek() + 7);
-	*yearNum = a_date.year();
+	if ( yearNum )
+		*yearNum = a_date.year();
 	return 1 + int( a_date.dayOfYear()/7 );
 }
 
@@ -586,62 +587,16 @@ int ExtDate::dayOfYear(int y, int m, int d)
 
     \ingroup time
 
-    A ExtDateTime object contains a calendar date and a clock time (a
-    "datetime"). It is a combination of the ExtDate and QTime classes.
-    It can read the current datetime from the system clock. It
-    provides functions for comparing datetimes and for manipulating a
-    datetime by adding a number of seconds, days, months or years.
-
-    A ExtDateTime object is typically created either by giving a date
-    and time explicitly in the constructor, or by using the static
-    function currentDateTime(), which returns a ExtDateTime object set
-    to the system clock's time. The date and time can be changed with
-    setDate() and setTime(). A datetime can also be set using the
-    setTime_t() function, which takes a POSIX-standard "number of
-    seconds since 00:00:00 on January 1, 1970" value. The fromString()
-    function returns a ExtDateTime given a string and a date format
-    which is used to interpret the date within the string.
-
-    The date() and time() functions provide access to the date and
-    time parts of the datetime. The same information is provided in
-    textual format by the toString() function.
-
-    ExtDateTime provides a full set of operators to compare two
-    ExtDateTime objects where smaller means earlier and larger means
-    later.
-
-    You can increment (or decrement) a datetime by a given number of
-    seconds using addSecs() or days using addDays(). Similarly you can
-    use addMonths() and addYears(). The daysTo() function returns the
-    number of days between two datetimes, and secsTo() returns the
-    number of seconds between two datetimes.
-
-    The range of a datetime object is constrained to the ranges of the
-    ExtDate and QTime objects which it embodies.
-
-    Methods in this class are reentrant.
 
     \sa ExtDate QTime ExtDateTimeEdit
 */
 
-
-/*!
-    \fn ExtDateTime::ExtDateTime()
-
-    Constructs a null datetime (i.e. null date and null time). A null
-    datetime is invalid, since the date is invalid.
-
-    \sa isValid()
-*/
-
-
-/*!
-    Constructs a datetime with date \a date and null (but valid) time
-    (00:00:00.000).
-*/
+ExtDateTime::ExtDateTime() {
+	ExtDateTime( ExtDate(), QTime() );
+}
 
 ExtDateTime::ExtDateTime( const ExtDate &date )
-    : d(date)
+	: d(date), t(QTime(0,0,0)
 {
 }
 
