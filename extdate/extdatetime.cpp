@@ -596,7 +596,7 @@ ExtDateTime::ExtDateTime() {
 }
 
 ExtDateTime::ExtDateTime( const ExtDate &date )
-	: d(date), t(QTime(0,0,0)
+	: d(date), t(QTime(0,0,0))
 {
 }
 
