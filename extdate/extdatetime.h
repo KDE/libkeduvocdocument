@@ -64,7 +64,7 @@ class KDE_EXPORT ExtDate
    *@short Default constructor
    *Create an invalid date
    */
-  ExtDate() : m_jd(INVALID_DAY), m_year(0), m_month(0), m_day(0) {}
+  ExtDate();
   /**
    *@short Constructor
    *Create an ExtDate for the specified calendar date

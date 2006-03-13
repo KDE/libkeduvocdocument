@@ -5,6 +5,25 @@ Includes=kinstance.h
 
 [KPlotWidget]
 ToolTip=A plot widget (KDE-Edu)
-WhatsThis=A widget that allows you to plot simple stuff
+WhatsThis=A widget for easily making 2-dimensional plots
 Group=Plot (KDE-Edu)
 ConstructorArgs=(0.0, 1.0, 0.0, 1.0, parent)
+
+[ExtDateEdit]
+ToolTip=spinbox-based extended date editor (KDE-Edu)
+WhatsThis=Allows the user to specify an extended date
+Group=Date and Time (KDE-Edu)
+ConstructorArgs=(parent)
+IncludeFile=extdatetimeedit.h
+
+[ExtDateTimeEdit]
+ToolTip=spinbox-based extended date/time editor (KDE-Edu)
+WhatsThis=Allows the user to specify an extended date and a time
+Group=Date and Time (KDE-Edu)
+ConstructorArgs=(parent)
+
+[ExtDatePicker]
+ToolTip=calendar-based extended date selector (KDE-Edu)
+WhatsThis=Allows the user to specify an extended date using a calendar
+Group=Date and Time (KDE-Edu)
+ConstructorArgs=(parent)

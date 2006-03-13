@@ -220,6 +220,8 @@ class ExtDateEdit : public QSpinBox {
 		QString simpleDateFormat();
 
 	private:
+		void init( const ExtDate &d );
+
 		uchar ActiveField;  // 0==day; 1==month; 2==year
 		ExtDate m_Date;
 		QString m_DateFormat;
@@ -309,6 +311,8 @@ class ExtDateTimeEdit : public QFrame {
 dt.time() ); }
 
 	private:
+		void init( const ExtDateTime &dt );
+		
 		QTimeEdit *m_TimeEdit;
 		ExtDateEdit *m_DateEdit;
 };

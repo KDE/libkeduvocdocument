@@ -28,8 +28,28 @@
 
 #include "extdatetimeedit.h"
 
-ExtDateEdit::ExtDateEdit( const ExtDate &d, QWidget *parent ) 
-: QSpinBox( parent ), ActiveField(0), m_Date(d) {
+ExtDateEdit::ExtDateEdit( const ExtDate &d, QWidget *parent )
+: QSpinBox( parent ) {
+	init (d);
+}
+
+ExtDateEdit::ExtDateEdit( int jd, QWidget *parent )
+ : QSpinBox( parent ) {
+	ExtDate ed(jd);
+	init( ed );
+}
+
+ExtDateEdit::ExtDateEdit( QWidget *p )
+ : QSpinBox( p ) {
+	init( ExtDate::currentDate() );
+}
+
+ExtDateEdit::~ExtDateEdit() {
+}
+
+void ExtDateEdit::init( const ExtDate &d ) {
+	ActiveField = 0;
+	m_Date = d;
 	setRange( -20000000, 20000000 ); //range of Julian Days
 
 	//Set the date format to be the Locale's short date format, except:
@@ -48,19 +68,6 @@ ExtDateEdit::ExtDateEdit( const ExtDate &d, QWidget *parent )
 
 	setValue( m_Date.jd() );
 	highlightActiveField();
-}
-
-ExtDateEdit::ExtDateEdit( int jd, QWidget *parent ) {
-	ExtDate ed(jd);
-	ExtDateEdit( ed, parent );
-}
-
-ExtDateEdit::ExtDateEdit( QWidget *p ) {
-	ExtDate ed = ExtDate::currentDate();
-	ExtDateEdit( ed, p );
-}
-
-ExtDateEdit::~ExtDateEdit() {
 }
 
 QString ExtDateEdit::simpleDateFormat() {
@@ -203,25 +210,29 @@ void ExtDateEdit::focusInEvent( QFocusEvent *e ) {
 
 ExtDateTimeEdit::ExtDateTimeEdit( const ExtDateTime &dt, QWidget *parent )
 : QFrame( parent ) {
+	init( dt );
+}
+
+ExtDateTimeEdit::ExtDateTimeEdit( const ExtDate &date, const QTime &time, QWidget *parent )
+: QFrame( parent ) {
+	init( ExtDateTime( date, time ) );
+}
+
+ExtDateTimeEdit::ExtDateTimeEdit( QWidget *p )
+: QFrame( p ) {
+	init( ExtDateTime::currentDateTime() );
+}
+
+ExtDateTimeEdit::~ExtDateTimeEdit() {
+}
+
+void ExtDateTimeEdit::init( const ExtDateTime &dt ) {
 	QHBoxLayout *hlay = new QHBoxLayout( this );
 	m_DateEdit = new ExtDateEdit( dt.date(), this );
 	m_TimeEdit = new QTimeEdit( dt.time(), this );
 
 	hlay->addWidget( m_DateEdit );
 	hlay->addWidget( m_TimeEdit );
-}
-
-ExtDateTimeEdit::ExtDateTimeEdit( const ExtDate &date, const QTime &time, QWidget *parent ) {
-	ExtDateTime dt( date, time );
-	ExtDateTimeEdit( dt, parent );
-}
-
-ExtDateTimeEdit::ExtDateTimeEdit( QWidget *p ) {
-	ExtDateTime edt = ExtDateTime::currentDateTime();
-	ExtDateTimeEdit( edt, p );
-}
-
-ExtDateTimeEdit::~ExtDateTimeEdit() {
 }
 
 edLineEdit::edLineEdit( QWidget *parent ) : QLineEdit( parent ) {

@@ -64,6 +64,9 @@ QString ExtDate::m_longDayNames[7] = {
 	i18n("Friday"), i18n("Saturday"), i18n("Sunday")
 };
 
+ExtDate::ExtDate() : m_jd(INVALID_DAY), m_year(0), m_month(0), m_day(0) 
+{}
+
 ExtDate::ExtDate( int y, int m, int d)
 {
 	if ( !isValid(y,m,d) ) {
@@ -591,8 +594,9 @@ int ExtDate::dayOfYear(int y, int m, int d)
     \sa ExtDate QTime ExtDateTimeEdit
 */
 
-ExtDateTime::ExtDateTime() {
-	ExtDateTime( ExtDate(), QTime() );
+ExtDateTime::ExtDateTime() 
+	: d( ExtDate() ), t( QTime() )
+{
 }
 
 ExtDateTime::ExtDateTime( const ExtDate &date )
