@@ -228,6 +228,7 @@ ExtDateTimeEdit::~ExtDateTimeEdit() {
 
 void ExtDateTimeEdit::init( const ExtDateTime &dt ) {
 	QHBoxLayout *hlay = new QHBoxLayout( this );
+	hlay->setMargin( 0 );
 	m_DateEdit = new ExtDateEdit( dt.date(), this );
 	m_TimeEdit = new QTimeEdit( dt.time(), this );
 
