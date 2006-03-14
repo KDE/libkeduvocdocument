@@ -11,13 +11,13 @@ add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.cpp
 
 set(kdeeduwidgets_PART_SRCS kdeeduwidgets.cpp )
 
-kde4_automoc(${kdeeduwidgets_PART_SRCS})
+qt4_generate_moc(${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.cpp ${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.moc)
 
 kde4_add_plugin(kdeeduwidgets ${kdeeduwidgets_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kdeeduwidgets )
 
-target_link_libraries(kdeeduwidgets  ${QT_AND_KDECORE_LIBS} kio kdeeduplot )
+target_link_libraries(kdeeduwidgets  ${LIB_KIO} kdeeduplot )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kdeeduwidgets )
 
