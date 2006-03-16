@@ -5,8 +5,8 @@
      Copyright (c) 2004 by Michel Guitel <michel.guitel@sap.ap-hop-paris.fr>
      Copyright (c) 2004-2006 by Jason Harris <kstars@30doradus.org>
     
-     This code was adapted from the Qt classes QDate and QDateTime,
-     copyright Trolltech, Inc. andlicensed under the GNU GPL.
+     Note: This code was adapted from the Qt classes QDate and QDateTime,
+     copyright Trolltech, Inc. and licensed under the GNU GPL.
 
      If there is ever a need for an LGPL version of these classes, they
      will need to be reimplemented from scratch to avoid violating 
@@ -52,8 +52,18 @@ extern	void test2_unit(int y, int m, int d);
  *ExtDate encapsulates the calendar date.  It is functionally identical 
  *to the Qt class QDate, except that it allows for dates far outside the 
  *range of valid QDates (years 1752-8000).  In fact, there is no limit 
- *to the range of dates posiible, but for practical reasons we limit 
+ *to the range of dates possible, but for practical reasons we limit 
  *the range of allowable years to -50000 to 50000.
+ *
+ *The date is represented internally as the Julian Day number (stored
+ *as a long int).  We also store the year, month and day values as 
+ *integers.
+ *
+ *The class provides functions for converting ExtDates to and from 
+ *QDates, Julian Days, and string expressions.  It also provides 
+ *operators for comparing ExtDate objects.  ExtDates can be manipulated 
+ *by setting the Julian Day, or the year, month or day values.  Years, 
+ *months and days may also be incremented.
  *
  *@author Michael Guitel, Jason Harris
  */
@@ -78,16 +88,16 @@ class KDE_EXPORT ExtDate
    *@short Constructor
    *Create an ExtDate from the specified QDate
    *@p q The QDate representing the date to be created
-   *@note Of course, this will not work if you need a date outside the
-   *valid Qt range (years 1752-8000).
+   *@note Of course, this constructor cannot be used if you 
+   *need a date outside the valid Qt range (years 1752-8000).
    */
 	ExtDate( const QDate &q ) { ExtDate( q.year(), q.month(), q.day() ); }
   /**
    *@short Constructor
    *Create an ExtDate for the specified Julian Day.  
    *@p jd the Julian Day of the date to be created
-   *@note The Julian Day is a simple count of the number of days 
-   *elapsed since January 1st, in the year -4713.
+   *@note The Julian Day is a simple count of the number 
+   *of days elapsed since January 1st, in the year -4713.
    */
 	ExtDate( long int jd );
 
@@ -102,16 +112,16 @@ class KDE_EXPORT ExtDate
   /**
    *@return true if the ExtDate is a valid date.
    *@note A date may be invalid if it is a Null date, if 
-   *its year value exceeds the valid range (-50000 to 50000), or
-   *if its month or day values are out of bounds.
+   *its year value exceeds the valid range (-50000 to 50000), 
+   *or if its month or day values are out of bounds.
    */
 	bool isValid() const;
 
   /**
    *@return the ExtDate, converted to a QDate.
 	 *@note If the ExtDate is invalid or falls outside the range 
-	 *of valid QDates (years 1752 to 8000), the QDate returned will 
-	 *be invalid.
+	 *of valid QDates (years 1752 to 8000), the returned QDate 
+	 *will be invalid.
 	 */
 	QDate qdate() const;
 	 
@@ -427,6 +437,9 @@ private:
  *is no limit to the range of dates posiible, but for practical reasons we 
  *limit the range of allowable years to -50000 to 50000.
  *
+ *Internally, an ExtDateTime is simply an ExtDate paired with a QTime, with 
+ *very little interaction between these two pieces.
+ *
  *@author Michael Guitel, Jason Harris
  */
 class KDE_EXPORT ExtDateTime
@@ -437,13 +450,13 @@ public:
 	 */
 	ExtDateTime();
 	/**
-	 *@short Constructor.  Sets date according to the argument; 
+	 *@short Constructor.  Sets the date according to the argument; 
 	 *the time is set to midnight.
 	 *@p d The date to be set
 	 */
 	ExtDateTime( const ExtDate &d );
 	/**
-	 *@short Constructor.  Sets date and time according to the argument; 
+	 *@short Constructor.  Sets date and time according to the arguments 
 	 *@p d The date to be set
 	 *@p t The time to be set
 	 */
@@ -585,11 +598,33 @@ public:
 	 */
 	int	   secsTo( const ExtDateTime &dt )	const;
 	
+	/**
+		*@return true if the two ExtDateTime objects are equal
+		*/
 	bool   operator==( const ExtDateTime &dt ) const;
+	/**
+		*@return true if the two ExtDateTime objects are not equal
+		*/
 	bool   operator!=( const ExtDateTime &dt ) const;
+	/**
+		*@return true if the left-hand ExtDateTime object is less than 
+		*the right-hand ExtDateTime object.
+		*/
 	bool   operator<( const ExtDateTime &dt )  const;
+	/**
+		*@return true if the left-hand ExtDateTime object is less than 
+		*or equal to the right-hand ExtDateTime object.
+		*/
 	bool   operator<=( const ExtDateTime &dt ) const;
+	/**
+		*@return true if the left-hand ExtDateTime object is greater than 
+		*the right-hand ExtDateTime object.
+		*/
 	bool   operator>( const ExtDateTime &dt )  const;
+	/**
+		*@return true if the left-hand ExtDateTime object is greater than 
+		*or equal to the right-hand ExtDateTime object.
+		*/
 	bool   operator>=( const ExtDateTime &dt ) const;
 	
 	/**

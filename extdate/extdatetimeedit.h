@@ -22,12 +22,12 @@
 	*@short provides a spinbox widget for entering an extended date.
 	*
 	*The date is shown using a slight modification of the user's 
-	*localized dateFormatShort, with day, month and year fields shown 
-	*with some kind of delimiter ("/", "-", etc).  The modification is 
-	*that two-digit years are disallowed, so if the user's 
-	*dateFormatShort uses a two-digit year, this will be changed to 
-	*show all year digits (but only for the purposes of this widget, 
-	*of course).
+	*localized dateFormatShort, in which the day, month and year fields 
+	*are shown with some kind of delimiter ("/", "-", etc).  The 
+	*modification is that two-digit years are disallowed, so if the 
+	*user's dateFormatShort uses a two-digit year, this will be changed 
+	*to show all the year's digits (but only for the purposes of this 
+	*widget, of course).
 	*
 	*The user can choose which field will be modified with the up/down 
 	*buttons or arrow keys by clicking on the desired field.  The 
@@ -93,8 +93,7 @@ class ExtDateEdit : public QSpinBox {
 	*and modifies the highlighted value by the given number of steps.
 	*@note Overloaded from QAbstractSpinBox.
 	*@see activeField()
-	*@p d the date to display (default is current system time)
-	*@p parent pointer to the parent widget (default: 0)
+	*@p steps the number to add to the current day/month/year
 	*/
 		void stepBy( int steps );
 
@@ -120,7 +119,7 @@ class ExtDateEdit : public QSpinBox {
 	*@short set the internal ExtDate value, and display the new 
 	*date in the spinbox.
 	*
-	*@p d reference to the new ExtDate
+	*@p date reference to the new ExtDate
 	*@see date()
 	*/
 		void setDate( const ExtDate &date ) { m_Date = date; setValue( m_Date.jd() ); }
