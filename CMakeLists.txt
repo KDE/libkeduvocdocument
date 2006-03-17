@@ -1,4 +1,5 @@
 kde4_header()
+project(libkdeedu)
 
 add_subdirectory( kdeeducore ) 
 add_subdirectory( kdeeduui ) 
