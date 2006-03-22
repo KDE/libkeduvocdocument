@@ -13,7 +13,7 @@ if(KDE4_BUILD_TESTS)
 
 kde4_add_executable(test_extdate ${test_extdate_SRCS})
 
-target_link_libraries(test_extdate  ${QT_AND_KDECORE_LIBS} extdate )
+target_link_libraries(test_extdate  ${KDE4_KDECORE_LIBS} extdate )
 
 endif(KDE4_BUILD_TESTS)
 
@@ -27,7 +27,7 @@ if(KDE4_BUILD_TESTS)
 
 kde4_add_executable(test_extdatepicker ${test_extdatepicker_SRCS})
 
-target_link_libraries(test_extdatepicker  ${QT_AND_KDECORE_LIBS} extdate )
+target_link_libraries(test_extdatepicker  ${KDE4_KDECORE_LIBS} extdate )
 
 endif(KDE4_BUILD_TESTS)
 
@@ -41,7 +41,7 @@ if(KDE4_BUILD_TESTS)
 
 kde4_add_executable(test_extdatetimeedit ${test_extdatetimeedit_SRCS})
 
-target_link_libraries(test_extdatetimeedit  ${QT_AND_KDECORE_LIBS} extdate )
+target_link_libraries(test_extdatetimeedit  ${KDE4_KDECORE_LIBS} extdate )
 
 endif(KDE4_BUILD_TESTS)
 

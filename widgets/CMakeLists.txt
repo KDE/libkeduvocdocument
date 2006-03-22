@@ -17,7 +17,7 @@ kde4_add_plugin(kdeeduwidgets ${kdeeduwidgets_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kdeeduwidgets )
 
-target_link_libraries(kdeeduwidgets  ${LIB_KIO} kdeeduplot )
+target_link_libraries(kdeeduwidgets  ${KDE4_KIO_LIBS} kdeeduplot )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kdeeduwidgets )
 

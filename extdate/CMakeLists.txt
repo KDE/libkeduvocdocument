@@ -20,7 +20,7 @@ kde4_automoc(${extdate_LIB_SRCS})
 
 kde4_add_library(extdate SHARED ${extdate_LIB_SRCS})
 
-target_link_libraries(extdate  ${LIB_KDE3SUPPORT} )
+target_link_libraries(extdate  ${KDE4_KDE3SUPPORT_LIBS} )
 
 set_target_properties(extdate PROPERTIES VERSION 1.2.0 SOVERSION 1 )
 install_targets(${LIB_INSTALL_DIR} extdate )

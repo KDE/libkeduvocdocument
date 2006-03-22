@@ -13,7 +13,7 @@ kde4_automoc(${kdeeduui_LIB_SRCS})
 
 kde4_add_library(kdeeduui SHARED ${kdeeduui_LIB_SRCS})
 
-target_link_libraries(kdeeduui  ${LIB_KDE3SUPPORT} khtml ${QT_QTXML_LIBRARY})
+target_link_libraries(kdeeduui  ${KDE4_KDE3SUPPORT_LIBS} khtml ${QT_QTXML_LIBRARY})
 
 set_target_properties(kdeeduui PROPERTIES VERSION 3.0.5 SOVERSION 3 )
 install_targets(${LIB_INSTALL_DIR} kdeeduui )

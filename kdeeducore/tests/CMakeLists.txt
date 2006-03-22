@@ -13,7 +13,7 @@ if(KDE4_BUILD_TESTS)
 
 kde4_add_executable(loader ${loader_SRCS})
 
-target_link_libraries(loader  ${QT_AND_KDECORE_LIBS} kdeeducore )
+target_link_libraries(loader  ${KDE4_KDECORE_LIBS} kdeeducore )
 
 endif(KDE4_BUILD_TESTS)
 
