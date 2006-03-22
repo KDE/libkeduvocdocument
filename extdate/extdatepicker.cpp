@@ -33,7 +33,7 @@
 #include <QBoxLayout>
 #include <QVBoxLayout>
 #include <QResizeEvent>
-
+#include <QComboBox>
 #include <kdialog.h>
 #include <klocale.h>
 #include <kiconloader.h>
