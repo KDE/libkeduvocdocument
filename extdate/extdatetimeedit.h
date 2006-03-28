@@ -130,10 +130,12 @@ class ExtDateEdit : public QSpinBox {
 	*/
 		int activeField() const { return ActiveField; }
 /**
-	*@short set the currently-active Date field (Day=0; Month=1; Year=2)
+	*@short set the currently-active Date field 
+	*@p i The field to be activated (Day=0; Month=1; Year=2)
 	*@note This function does not change highlighting in the GUI; 
 	*to sync the highlighting with the value of ActiveField, use
 	*highlightActiveField().
+	*@see highlightActiveField()
 	*/
 		void setActiveField( int i ) { ActiveField = i; }
 
@@ -219,6 +221,11 @@ class ExtDateEdit : public QSpinBox {
 		QString simpleDateFormat();
 
 	private:
+	/**
+	 *@short Initialize the ExtDate edit.
+	 *@internal
+	 *@note This function is called in each constructor.
+	 */
 		void init( const ExtDate &d );
 
 		uchar ActiveField;  // 0==day; 1==month; 2==year
@@ -228,7 +235,8 @@ class ExtDateEdit : public QSpinBox {
 
 /**
 	*@class ExtDateTimeEdit
-	*@short provides a pair of spinbox widgets, one to set the date, one to set the time.
+	*@short provides a pair of spinbox widgets, one to set the date, 
+	*one to set the time.
 	*
 	*@author Jason Harris
 	*@version 1.0
@@ -310,6 +318,11 @@ class ExtDateTimeEdit : public QFrame {
 dt.time() ); }
 
 	private:
+	/**
+	 *@short Initialize the ExtDate edit.
+	 *@internal
+	 *@note This function is called in each constructor.
+	 */
 		void init( const ExtDateTime &dt );
 		
 		QTimeEdit *m_TimeEdit;
