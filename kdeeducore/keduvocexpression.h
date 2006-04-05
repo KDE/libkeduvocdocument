@@ -58,28 +58,32 @@ typedef signed char grade_t;
 typedef unsigned short count_t;
 
 /**
-  This class contains one expression either as an original or as a
-  translation
+  This class contains one vocabulary expression as an original with one or more
+  translations
   */
 
 class KEduVocExpression
 {
- public:
+public:
 
-  /** default constructor for an expression in different languages
+  /** default constructor for an empty vocabulary expression
    */
-  ~KEduVocExpression ();
-
   KEduVocExpression ();
 
-  KEduVocExpression(const QString & s, const QString & separator, int lesson = 0);
-
-  /** Constructor for an expression in different languages
+  /** Constructor for a vocabulary expression with an original
    *
-   * @param expression       expression
+   * @param expression       original
    * @param lesson           lesson number, 0 for none
    */
   KEduVocExpression(const QString & expression, int lesson = 0);
+
+  /** Constructor for a vocabulary expression with an original and one or more translations
+   *
+   * @param expression       expression
+   * @param separator        expression will be split into an original and one or more translations using separator
+   * @param lesson           lesson number, 0 for none
+   */
+  KEduVocExpression(const QString & expression, const QString & separator, int lesson = 0);
 
   /** adds a new translation of this entry
    * @param expression       translation

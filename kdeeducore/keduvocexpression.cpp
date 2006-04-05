@@ -34,6 +34,10 @@ void KEduVocExpression::Init()
   m_lesson = 0;
 }
 
+KEduVocExpression::KEduVocExpression ()
+{
+  Init();
+}
 
 KEduVocExpression::KEduVocExpression(const QString & expression, int lesson)
 {
@@ -42,18 +46,11 @@ KEduVocExpression::KEduVocExpression(const QString & expression, int lesson)
   m_lesson = lesson;
 }
 
-
-KEduVocExpression::KEduVocExpression ()
-{
-  Init();
-}
-
-
-KEduVocExpression::KEduVocExpression(const QString &s, const QString & separator, int lesson)
+KEduVocExpression::KEduVocExpression(const QString & expression, const QString & separator, int lesson)
 {
   Init();
   QString se;
-  QString expr = s;
+  QString expr = expression;
   m_lesson = lesson;
 
   if (separator.length() ) {
@@ -79,12 +76,6 @@ KEduVocExpression::KEduVocExpression(const QString &s, const QString & separator
     }
   }
 }
-
-
-KEduVocExpression::~KEduVocExpression()
-{
-}
-
 
 int KEduVocExpression::numTranslations() const
 {
