@@ -36,8 +36,11 @@ class ExtDateWidgetSpinBox : public QSpinBox
 {
 public:
   ExtDateWidgetSpinBox(int min, int max, QWidget *parent)
-    : QSpinBox(min, max, 1, parent)
+    : QSpinBox(parent)
   {
+     setMinimum(min);
+     setMaximum(max);
+     setSingleStep(1);
      setAlignment(Qt::AlignRight);
   }
 };
@@ -99,10 +102,13 @@ void ExtDateWidget::init(const ExtDate& date)
 {
   d = new ExtDateWidgetPrivate;
   //KLocale *locale = KGlobal::locale();
-  QHBoxLayout *layout = new QHBoxLayout(this, 0, KDialog::spacingHint());
+  QHBoxLayout *layout = new QHBoxLayout(this);
+  layout->setMargin(0);
+  layout->setSpacing(KDialog::spacingHint());
   layout->setAutoAdd(true);
   d->m_day = new ExtDateWidgetSpinBox(1, 1, this);
-  d->m_month = new QComboBox(false, this);
+  d->m_month = new QComboBox(this);
+  d->m_month->setEditable(false);
   for (int i = 1; ; ++i)
   {
     QString str = d->calendar->monthName(i,
@@ -134,7 +140,7 @@ void ExtDateWidget::setDate( const ExtDate &date )
 
   d->m_day->setMaximum(d->calendar->daysInMonth(date));
   d->m_day->setValue(d->calendar->day(date));
-  d->m_month->setCurrentItem(d->calendar->month(date)-1);
+  d->m_month->setCurrentIndex(d->calendar->month(date)-1);
   d->m_year->setValue(d->calendar->year(date));
 
   d->m_day->blockSignals(false);

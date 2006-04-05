@@ -125,7 +125,7 @@ void ExtDatePicker::init( const ExtDate &dt )
   selectMonth ->setAutoRaise(true);
   d->navigationLayout->addWidget(selectMonth);
   selectYear = new QToolButton(this);
-  selectYear->setToggleButton(true);
+  selectYear->setCheckable(true);
   selectYear->setAutoRaise(true);
   d->navigationLayout->addWidget(selectYear);
   d->navigationLayout->addSpacing(KDialog::spacingHint());
@@ -147,9 +147,10 @@ void ExtDatePicker::init( const ExtDate &dt )
 
   fontsize++; // Make a little bigger
 
-  d->selectWeek = new QComboBox(false, this);  // read only week selection
+  d->selectWeek = new QComboBox(this);
+  d->selectWeek->setEditable(false);  // read only week selection
   d->todayButton = new QToolButton(this);
-  d->todayButton->setIconSet(SmallIconSet("today"));
+  d->todayButton->setIcon(SmallIconSet("today"));
 
   yearForward->setToolTip(i18n("Next year"));
   yearBackward->setToolTip(i18n("Previous year"));
@@ -166,17 +167,17 @@ void ExtDatePicker::init( const ExtDate &dt )
   line->installEventFilter( this );
   if (  QApplication::isRightToLeft() )
   {
-      yearForward->setIconSet(BarIconSet(QLatin1String("2leftarrow")));
-      yearBackward->setIconSet(BarIconSet(QLatin1String("2rightarrow")));
-      monthForward->setIconSet(BarIconSet(QLatin1String("1leftarrow")));
-      monthBackward->setIconSet(BarIconSet(QLatin1String("1rightarrow")));
+      yearForward->setIcon(BarIconSet(QLatin1String("2leftarrow")));
+      yearBackward->setIcon(BarIconSet(QLatin1String("2rightarrow")));
+      monthForward->setIcon(BarIconSet(QLatin1String("1leftarrow")));
+      monthBackward->setIcon(BarIconSet(QLatin1String("1rightarrow")));
   }
   else
   {
-      yearForward->setIconSet(BarIconSet(QLatin1String("2rightarrow")));
-      yearBackward->setIconSet(BarIconSet(QLatin1String("2leftarrow")));
-      monthForward->setIconSet(BarIconSet(QLatin1String("1rightarrow")));
-      monthBackward->setIconSet(BarIconSet(QLatin1String("1leftarrow")));
+      yearForward->setIcon(BarIconSet(QLatin1String("2rightarrow")));
+      yearBackward->setIcon(BarIconSet(QLatin1String("2leftarrow")));
+      monthForward->setIcon(BarIconSet(QLatin1String("1rightarrow")));
+      monthBackward->setIcon(BarIconSet(QLatin1String("1leftarrow")));
   }
   connect(table, SIGNAL(dateChanged(const ExtDate&)), SLOT(dateChangedSlot(const ExtDate&)));
   connect(table, SIGNAL(tableClicked()), SLOT(tableClickedSlot()));
@@ -249,7 +250,7 @@ ExtDatePicker::dateChangedSlot(const ExtDate &date)
 
     // calculate the item num in the week combo box; normalize selected day so as if 1.1. is the first day of the week
     ExtDate firstDay(date.year(), 1, 1);
-    d->selectWeek->setCurrentItem((d->calendar->dayOfYear(date) + d->calendar->dayOfWeek(firstDay) - 2) / 7/*calendar->daysInWeek()*/);
+    d->selectWeek->setCurrentIndex((d->calendar->dayOfYear(date) + d->calendar->dayOfWeek(firstDay) - 2) / 7/*calendar->daysInWeek()*/);
 
     selectYear->setText(d->calendar->yearString(date, false));
 
