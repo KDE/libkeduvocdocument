@@ -314,10 +314,19 @@ class KEduVocDocument : public QObject
   /**
    * Sorts vocabulary alphabetically
    *
-   * @param  index            index expression
+   * @param index             index identifier (0 = original, 1..n = translations
    * @returns                 the direction of sorting: true = ascending
    */
   bool sort(int index);
+
+  /**
+   * Sorts vocabulary alphabetically
+   *
+   * @param index             index identifier (0 = original, 1..n = translations
+   * @param order             the order used when sorting
+   * @returns                 the direction of sorting: true = ascending
+   */
+  bool sort(int index, Qt::SortOrder order);
 
   /**
    * Removes equal entries (original plus all translations)

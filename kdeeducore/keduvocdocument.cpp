@@ -640,18 +640,31 @@ bool sortAscending;
 
 bool operator< (const KEduVocExpression &e1, const KEduVocExpression &e2)
 {
-  int i;
   if (sortAscending)
     if (sortIndex == 0)
-      i = QString::localeAwareCompare(e1.original(), e2.original());
+      return e1.original() < e2.original();
     else
-      i = QString::localeAwareCompare(e1.translation(sortIndex), e2.translation(sortIndex));
+      return e1.translation(sortIndex) < e2.translation(sortIndex);
   else
     if (sortIndex == 0)
-      i = QString::localeAwareCompare(e2.original(), e1.original());
+      return !(e1.original() < e2.original());
     else
-      i = QString::localeAwareCompare(e2.translation(sortIndex), e2.translation(sortIndex));
-  return (i >= 0);
+      return !(e1.translation(sortIndex) < e2.translation(sortIndex));
+}
+
+bool KEduVocDocument::sort(int index, Qt::SortOrder order)
+{
+  bool result = false;
+  if (m_enableSorting && index < numIdentifiers())
+  {
+    if (m_sortIdentifier.count() < m_identifiers.count())
+      for (int i = m_sortIdentifier.count(); i < (int) m_identifiers.count(); i++)
+          m_sortIdentifier.append(false);
+
+    m_sortIdentifier[index] = (order == Qt::AscendingOrder);
+    result = sort(index);
+  }
+  return result;
 }
 
 bool KEduVocDocument::sort(int index)
@@ -665,7 +678,7 @@ bool KEduVocDocument::sort(int index)
 
     sortAscending = m_sortIdentifier[index];
     sortIndex = index;
-    qStableSort(m_vocabulary);
+    qSort(m_vocabulary);
     m_sortIdentifier[index] = !m_sortIdentifier[index];
     result = m_sortIdentifier[index];
   }

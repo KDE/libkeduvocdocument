@@ -3,7 +3,7 @@
     -----------------------------------------------------------------------
     copyright            : (C) 1999-2001 Ewald Arnold
                            (C) 2001 The KDE-EDU team
-                           (C) 2005 Peter Hedlund
+                           (C) 2005-2006 Peter Hedlund
     email                : peter.hedlund@kdemail.net
  ***************************************************************************/
 
@@ -32,6 +32,7 @@ void KEduVocExpression::Init()
   m_queryDates.append(dt);
   m_reverseQueryDates.append(dt);
   m_lesson = 0;
+  m_sortIndex = 0;
 }
 
 KEduVocExpression::KEduVocExpression ()
@@ -796,11 +797,11 @@ void KEduVocExpression::setType (int idx, const QString &type)
 
 void KEduVocExpression::setLeitnerBox( const QString& box )
 {
-	m_leitnerBox = box;
+  m_leitnerBox = box;
 }
 
 QString& KEduVocExpression::leitnerBox()
 {
-	return m_leitnerBox;
+  return m_leitnerBox;
 }
 

@@ -3,7 +3,7 @@
     -----------------------------------------------------------------------
     copyright            : (C) 1999-2001 Ewald Arnold
                            (C) 2001 The KDE-EDU team
-                           (C) 2005 Peter Hedlund
+                           (C) 2005-2006 Peter Hedlund
     email                : peter.hedlund@kdemail.net
  ***************************************************************************/
 
@@ -436,11 +436,11 @@ public:
    */
   QString& leitnerBox();
 
- protected:
+protected:
 
   void Init();
 
- private:
+private:
   QString m_original;
 
   // all these vectors must be deleted in removeTranslation()
@@ -468,6 +468,7 @@ public:
   QList<KEduVocMultipleChoice> m_multipleChoices;
 
   QString m_leitnerBox;
+  int m_sortIndex;
   int m_lesson;
   bool m_inQuery;
   bool m_active;
