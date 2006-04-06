@@ -329,6 +329,11 @@ class KEduVocDocument : public QObject
   bool sort(int index, Qt::SortOrder order);
 
   /**
+   * Shuffles vocabulary in a random order
+   */
+  void shuffle();
+
+  /**
    * Removes equal entries (original plus all translations)
    *
    * @returns                 number of removed entries

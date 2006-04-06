@@ -27,6 +27,7 @@
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <kio/netaccess.h>
+#include <krandomsequence.h>
 
 #include "keduvockvtmlwriter.h"
 #include "keduvockvtmlreader.h"
@@ -1188,6 +1189,14 @@ int KEduVocDocument::cleanUp()
   }
 
   return count;
+}
+
+void KEduVocDocument::shuffle()
+{
+  KRandomSequence* rs;
+  rs = new KRandomSequence();
+  rs->randomize(m_vocabulary);
+  m_dirty = true;
 }
 
 #include "keduvocdocument.moc"
