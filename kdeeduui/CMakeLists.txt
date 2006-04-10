@@ -1,13 +1,20 @@
 kde4_header()
 
-add_subdirectory( tests ) 
+#add_subdirectory(tests)
 
-include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
+include_directories(
+   ${KDE4_INCLUDE_DIR}
+   ${QT_INCLUDES}
+   ${CMAKE_CURRENT_SOURCE_DIR}
+   ${CMAKE_CURRENT_BINARY_DIR}
+)
 
 
 ########### next target ###############
 
-set(kdeeduui_LIB_SRCS kdeeduglossary.cpp )
+set(kdeeduui_LIB_SRCS
+   kdeeduglossary.cpp
+)
 
 kde4_automoc(${kdeeduui_LIB_SRCS})
 
@@ -21,11 +28,11 @@ install_targets(${LIB_INSTALL_DIR} kdeeduui )
 
 ########### install files ###############
 
-install_files( /include/libkdeedu FILES kdeeduglossary.h )
+install_files(/include/libkdeedu FILES
+   kdeeduglossary.h
+)
 
 kde4_footer()
-
-
 
 #original Makefile.am contents follow:
 

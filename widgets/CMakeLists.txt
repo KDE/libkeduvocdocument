@@ -1,6 +1,13 @@
 kde4_header()
 
-include_directories(${CMAKE_SOURCE_DIR}/libkdeedu/kdeeduplot/ ${CMAKE_SOURCE_DIR}/libkdeedu/extdate/  ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
+include_directories(
+  ${KDE4_INCLUDE_DIR}
+  ${QT_INCLUDES}
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_CURRENT_BINARY_DIR}
+  ${CMAKE_SOURCE_DIR}/libkdeedu/kdeeduplot/
+  ${CMAKE_SOURCE_DIR}/libkdeedu/extdate/
+)
 
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.cpp
   COMMAND ${CMAKE_INSTALL_PREFIX}/bin/makekdewidgets
@@ -9,7 +16,9 @@ add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.cpp
 
 ########### next target ###############
 
-set(kdeeduwidgets_PART_SRCS kdeeduwidgets.cpp )
+set(kdeeduwidgets_PART_SRCS
+  kdeeduwidgets.cpp
+)
 
 qt4_generate_moc(${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.cpp ${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.moc)
 
@@ -26,8 +35,6 @@ install_targets(${LIB_INSTALL_DIR}/kde4 kdeeduwidgets )
 
 
 kde4_footer()
-
-
 
 #original Makefile.am contents follow:
 
