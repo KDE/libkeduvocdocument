@@ -106,7 +106,7 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
     QFile f(tmpfile);
     if (!f.open(QIODevice::ReadOnly))
     {
-      KMessageBox::error(0, i18n("<qt>Cannot open file<br><b>%1</b></qt>").arg(url.path()));
+      KMessageBox::error(0, i18n("<qt>Cannot open file<br><b>%1</b></qt>", url.path()));
       return false;
     }
 
@@ -168,8 +168,7 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
         }
         // TODO new readers provide an explicite error message
         // the two messages should be merged
-        QString format = i18n("Could not load \"%1\"\nDo you want to try again?");
-        QString msg = format.arg(url.path());
+        QString msg = i18n("Could not load \"%1\"\nDo you want to try again?", url.path());
         int result = KMessageBox::warningContinueCancel(0, msg,
                                                         kapp->makeStdCaption(i18n("I/O Failure")),
                                                         i18n("&Retry"));
@@ -219,7 +218,7 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
 
     if (!f.open(QIODevice::WriteOnly))
     {
-      KMessageBox::error(0, i18n("<qt>Cannot write to file<br><b>%1</b></qt>").arg(tmp.path()));
+      KMessageBox::error(0, i18n("<qt>Cannot write to file<br><b>%1</b></qt>", tmp.path()));
       return false;
     }
 
@@ -266,8 +265,7 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
     if (!saved) {
       // TODO new writers provide an explicite error message
       // the two messages should be merged
-      QString format = i18n("Could not save \"%1\"\nDo you want to try again?");
-      QString msg = format.arg(tmp.path());
+      QString msg = i18n("Could not save \"%1\"\nDo you want to try again?", tmp.path());
       int result = KMessageBox::warningContinueCancel(0, msg,
                                                       kapp->makeStdCaption(i18n("I/O Failure")),
                                                       i18n("&Retry"));

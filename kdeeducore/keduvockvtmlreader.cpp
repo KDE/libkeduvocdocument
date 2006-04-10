@@ -131,7 +131,7 @@ bool KEduVocKvtmlReader::readArticle(QDomElement &domElementParent)
   {
     if (domElementEntry.tagName() != KV_ART_ENTRY)
     {
-      domError(i18n("expected tag <%1>").arg(KV_ART_ENTRY));
+      domError(i18n("expected tag <%1>", KV_ART_ENTRY));
       return false;
     }
 
@@ -1044,7 +1044,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   if (domElementExpressionChild.tagName() != KV_ORG)
   {
     // must be preceded by "original"
-    domError(i18n("starting tag <%1> is missing").arg(KV_ORG));
+    domError(i18n("starting tag <%1> is missing", KV_ORG));
     return false;
   }
 
@@ -1124,7 +1124,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     {
       if (bConjug)
       {
-        domError(i18n("repeated occurrence of tag <%1>").arg(domElementOriginalChild.tagName()));
+        domError(i18n("repeated occurrence of tag <%1>", domElementOriginalChild.tagName()));
         return false;
       }
       bConjug = true;
@@ -1137,7 +1137,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     {
       if (bComparison)
       {
-        domError(i18n("repeated occurrence of tag <%1>").arg(domElementOriginalChild.tagName()));
+        domError(i18n("repeated occurrence of tag <%1>", domElementOriginalChild.tagName()));
         return false;
       }
       bComparison = true;
@@ -1150,7 +1150,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     {
       if (bMultipleChoice)
       {
-        domError(i18n("repeated occurrence of tag <%1>").arg(domElementOriginalChild.tagName()));
+        domError(i18n("repeated occurrence of tag <%1>", domElementOriginalChild.tagName()));
         return false;
       }
       bMultipleChoice = true;
@@ -1221,7 +1221,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     if (domElementExpressionChild.tagName() != KV_TRANS)
     {
       // "original" must be followed by "translations"
-      domError(i18n("starting tag <%1> is missing").arg(KV_TRANS));
+      domError(i18n("starting tag <%1> is missing", KV_TRANS));
       return false;
     }
 
@@ -1302,7 +1302,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
       {
         if (bConjug)
         {
-          domError(i18n("repeated occurrence of tag <%1>").arg(domElementOriginalChild.tagName()));
+          domError(i18n("repeated occurrence of tag <%1>", domElementOriginalChild.tagName()));
           return false;
         }
         bConjug = true;
@@ -1315,7 +1315,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
       {
         if (bComparison)
         {
-          domError(i18n("repeated occurrence of tag <%1>").arg(domElementOriginalChild.tagName()));
+          domError(i18n("repeated occurrence of tag <%1>", domElementOriginalChild.tagName()));
           return false;
         }
         bComparison = true;
@@ -1328,7 +1328,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
       {
         if (bMultipleChoice)
         {
-          domError(i18n("repeated occurrence of tag <%1>").arg(domElementOriginalChild.tagName()));
+          domError(i18n("repeated occurrence of tag <%1>", domElementOriginalChild.tagName()));
           return false;
         }
         bMultipleChoice = true;
@@ -1444,7 +1444,7 @@ if (lines != 0)
     {
       if (lessgroup)
       {
-        domError(i18n("repeated occurrence of tag <%1>").arg(domElementChild.tagName()));
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
         return false;
       }
       lessgroup = true;
@@ -1456,7 +1456,7 @@ if (lines != 0)
     {
       if (articlegroup)
       {
-        domError(i18n("repeated occurrence of tag <%1>").arg(domElementChild.tagName()));
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
         return false;
       }
       articlegroup = true;
@@ -1468,7 +1468,7 @@ if (lines != 0)
     {
       if (conjuggroup)
       {
-        domError(i18n("repeated occurrence of tag <%1>").arg(domElementChild.tagName()));
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
         return false;
       }
       conjuggroup = true;
@@ -1480,7 +1480,7 @@ if (lines != 0)
     {
       if (optgroup)
       {
-        domError(i18n("repeated occurrence of tag <%1>").arg(domElementChild.tagName()));
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
         return false;
       }
       optgroup = true;
@@ -1492,7 +1492,7 @@ if (lines != 0)
     {
       if (attrgroup)
       {
-        domError(i18n("repeated occurrence of tag <%1>").arg(domElementChild.tagName()));
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
         return false;
       }
       attrgroup = true;
@@ -1504,7 +1504,7 @@ if (lines != 0)
     {
       if (tensegroup)
       {
-        domError(i18n("repeated occurrence of tag <%1>").arg(domElementChild.tagName()));
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
         return false;
       }
       tensegroup = true;
@@ -1516,7 +1516,7 @@ if (lines != 0)
     {
       if (usagegroup)
       {
-        domError(i18n("repeated occurrence of tag <%1>").arg(domElementChild.tagName()));
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
         return false;
       }
       usagegroup = true;
@@ -1578,7 +1578,7 @@ bool KEduVocKvtmlReader::readDoc(KEduVocDocument *doc)
   if( domElementKvtml.tagName() != KV_DOCTYPE )
   {
     domError(i18n("Tag <%1> was expected "
-            "but tag <%2> was read." ).arg(KV_DOCTYPE).arg(domElementKvtml.tagName()));
+            "but tag <%2> was read." , KV_DOCTYPE, domElementKvtml.tagName()));
     return false;
   }
 
@@ -1655,16 +1655,15 @@ bool KEduVocKvtmlReader::readDoc(KEduVocDocument *doc)
 
 void KEduVocKvtmlReader::domErrorUnknownElement(const QString &elem)
 {
-  QString ln = i18n("File:\t%1\n").arg(m_doc->URL().path());
+  QString ln = i18n("File:\t%1\n", m_doc->URL().path());
 
-  QString format = i18n(
+  QString msg = i18n(
       "Your document contains an unknown tag <%1>.  "  // keep trailing space
       "Maybe your version of KVocTrain is too old, "
       "or the document is damaged.\n"
       "Loading is aborted because KVocTrain cannot "
-      "read documents with unknown elements.\n"
+      "read documents with unknown elements.\n", elem
      );
-  QString msg = format.arg(elem);
   QApplication::changeOverrideCursor(Qt::ArrowCursor);
   QString s = kapp->makeStdCaption(i18n("Unknown element"));
   KMessageBox::sorry(0, ln+msg, s);
@@ -1675,7 +1674,7 @@ void KEduVocKvtmlReader::domError(const QString &text )
 {
   QApplication::changeOverrideCursor(Qt::ArrowCursor);
   QString s = kapp->makeStdCaption(i18n("Error"));
-  QString ln = i18n("File:\t%1\n").arg(m_doc->URL().path());
+  QString ln = i18n("File:\t%1\n", m_doc->URL().path());
   QString msg = text;
   KMessageBox::error(0, ln+msg, s);
   QApplication::restoreOverrideCursor();

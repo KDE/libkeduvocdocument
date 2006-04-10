@@ -85,7 +85,7 @@ void ExtDatePicker::fillWeeksCombo(const ExtDate &date)
   for (; day <= lastDay; day = d->calendar->addDays(day, 7 /*calendar->daysOfWeek()*/) )
   {
     int year = 0;
-    QString week = i18n("Week %1").arg(d->calendar->weekNumber(day, &year));
+    QString week = i18n("Week %1", d->calendar->weekNumber(day, &year));
     if ( year != date.year() ) week += "*";  // show that this is a week from a different year
     d->selectWeek->insertItem(week);
   }
