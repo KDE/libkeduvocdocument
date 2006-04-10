@@ -131,7 +131,7 @@ bool KEduVocKvtmlReader::readArticle(QDomElement &domElementParent)
   {
     if (domElementEntry.tagName() != KV_ART_ENTRY)
     {
-      domError(i18n("expected tag <%1>", KV_ART_ENTRY));
+      domError(i18n("expected tag <%1>", QString(KV_ART_ENTRY)));
       return false;
     }
 
@@ -1044,7 +1044,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   if (domElementExpressionChild.tagName() != KV_ORG)
   {
     // must be preceded by "original"
-    domError(i18n("starting tag <%1> is missing", KV_ORG));
+    domError(i18n("starting tag <%1> is missing", QString(KV_ORG)));
     return false;
   }
 
@@ -1221,7 +1221,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     if (domElementExpressionChild.tagName() != KV_TRANS)
     {
       // "original" must be followed by "translations"
-      domError(i18n("starting tag <%1> is missing", KV_TRANS));
+      domError(i18n("starting tag <%1> is missing", QString(KV_TRANS)));
       return false;
     }
 
@@ -1578,7 +1578,7 @@ bool KEduVocKvtmlReader::readDoc(KEduVocDocument *doc)
   if( domElementKvtml.tagName() != KV_DOCTYPE )
   {
     domError(i18n("Tag <%1> was expected "
-            "but tag <%2> was read." , KV_DOCTYPE, domElementKvtml.tagName()));
+            "but tag <%2> was read." , QString(KV_DOCTYPE), domElementKvtml.tagName()));
     return false;
   }
 
