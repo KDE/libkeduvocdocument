@@ -36,9 +36,9 @@ EDPicker::EDPicker( QWidget *p=0, const char *name=0 ) : KMainWindow( p, name ) 
 	kdp = new KDatePicker(w);
 	edp = new ExtDatePicker(w);
 	kdpEdit = new KLineEdit(w);
-	kdpEdit->setReadOnly( TRUE );
+	kdpEdit->setReadOnly( true );
 	edpEdit = new KLineEdit(w);
-	edpEdit->setReadOnly( TRUE );
+	edpEdit->setReadOnly( true );
 
 	kdw = new KDateWidget( QDate::currentDate(), w );
 	edw = new ExtDateWidget( ExtDate::currentDate(), w );

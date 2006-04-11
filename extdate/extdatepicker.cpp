@@ -369,7 +369,7 @@ ExtDatePicker::selectMonthClicked()
   int day = d->calendar->day(date);
   // ----- construct a valid date in this month:
   //date.setYMD(date.year(), month, 1);
-  //date.setYMD(date.year(), month, QMIN(day, date.daysInMonth()));
+  //date.setYMD(date.year(), month, qMin(day, date.daysInMonth()));
   d->calendar->setYMD(date, d->calendar->year(date), month,
                    qMin(day, d->calendar->daysInMonth(date)));
   // ----- set this month
@@ -404,7 +404,7 @@ ExtDatePicker::selectYearClicked()
       day=d->calendar->day(date);
       // ----- construct a valid date in this month:
       //date.setYMD(year, date.month(), 1);
-      //date.setYMD(year, date.month(), QMIN(day, date.daysInMonth()));
+      //date.setYMD(year, date.month(), qMin(day, date.daysInMonth()));
       d->calendar->setYMD(date, year, d->calendar->month(date),
                        qMin(day, d->calendar->daysInMonth(date)));
       // ----- set this month
