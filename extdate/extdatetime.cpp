@@ -48,14 +48,14 @@ uint ExtDate::m_monthLength[] = {31, 28, 31, 30,  31,  30,  31,  31,  30,  31,  
 uint ExtDate::m_monthOrigin[] = { 0, 30, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
 
 QString ExtDate::m_shortMonthNames[12] = {
-	i18n("Jan"), i18n("Feb"), i18n("Mar"), i18n("Apr"), i18n("Short name", "May"), i18n("Jun"),
+	i18n("Jan"), i18n("Feb"), i18n("Mar"), i18n("Apr"), i18nc("Short name", "May"), i18n("Jun"),
 	i18n("Jul"), i18n("Aug"), i18n("Sep"), i18n("Oct"), i18n("Nov"), i18n("Dec")
 };
 QString ExtDate::m_shortDayNames[7] = {
 	i18n("Mon"), i18n("Tue"), i18n("Wed"), i18n("Thu"), i18n("Fri"), i18n("Sat"), i18n("Sun")
 };
 QString ExtDate::m_longMonthNames[12] = {
-	i18n("January"), i18n("February"), i18n("March"), i18n("April"), i18n("Long name", "May"),
+	i18n("January"), i18n("February"), i18n("March"), i18n("April"), i18nc("Long name", "May"),
 	i18n("June"), i18n("July"), i18n("August"), i18n("September"), i18n("October"),
 	i18n("November"), i18n("December")
 };
