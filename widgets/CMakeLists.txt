@@ -9,10 +9,6 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/libkdeedu/extdate/
 )
 
-add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.cpp
-  COMMAND ${CMAKE_INSTALL_PREFIX}/bin/makekdewidgets
-  ARGS -o ${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.cpp ${CMAKE_CURRENT_SOURCE_DIR}/kdeedu.widgets
-  DEPENDS kdeedu.widgets)
 
 ########### next target ###############
 
@@ -20,7 +16,7 @@ set(kdeeduwidgets_PART_SRCS
   kdeeduwidgets.cpp
 )
 
-qt4_generate_moc(${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.cpp ${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.moc)
+KDE4_ADD_WIDGET_FILES(${kdeeduwidgets_PART_SRCS} kdeedu.widgets)
 
 kde4_add_plugin(kdeeduwidgets ${kdeeduwidgets_PART_SRCS})
 
