@@ -36,6 +36,7 @@
 #include <QComboBox>
 #include <kdialog.h>
 #include <klocale.h>
+#include <kicon.h>
 #include <kiconloader.h>
 #include <ktoolbar.h>
 #include <kdebug.h>
@@ -87,7 +88,7 @@ void ExtDatePicker::fillWeeksCombo(const ExtDate &date)
     int year = 0;
     QString week = i18n("Week %1", d->calendar->weekNumber(day, &year));
     if ( year != date.year() ) week += "*";  // show that this is a week from a different year
-    d->selectWeek->insertItem(week);
+    d->selectWeek->addItem(week);
   }
 }
 
@@ -111,7 +112,8 @@ void ExtDatePicker::init( const ExtDate &dt )
 
   QBoxLayout * topLayout = new QVBoxLayout(this);
 
-  d->navigationLayout = new QHBoxLayout(topLayout);
+  d->navigationLayout = new QHBoxLayout();
+  topLayout->addLayout(d->navigationLayout);
   d->navigationLayout->addStretch();
   yearBackward = new QToolButton(this);
   yearBackward->setAutoRaise(true);
@@ -195,7 +197,8 @@ void ExtDatePicker::init( const ExtDate &dt )
 
   topLayout->addWidget(table);
 
-  QBoxLayout * bottomLayout = new QHBoxLayout(topLayout);
+  QBoxLayout * bottomLayout = new QHBoxLayout();
+  topLayout->addLayout(bottomLayout);
   bottomLayout->addWidget(d->todayButton);
   bottomLayout->addWidget(line);
   bottomLayout->addWidget(d->selectWeek);
@@ -515,7 +518,7 @@ ExtDatePicker::setCloseButton( bool enable )
         d->navigationLayout->addSpacing(KDialog::spacingHint());
         d->navigationLayout->addWidget(d->closeButton);
         d->closeButton->setToolTip(i18n("Close"));
-        d->closeButton->setPixmap( SmallIcon("remove") );
+        d->closeButton->setIcon( SmallIconSet("remove") );
         connect( d->closeButton, SIGNAL( clicked() ),
                  topLevelWidget(), SLOT( close() ) );
     }

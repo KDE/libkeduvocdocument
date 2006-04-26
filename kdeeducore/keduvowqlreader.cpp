@@ -41,7 +41,8 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   m_doc = doc;
 
   QTextStream inputStream(m_inputFile);
-  inputStream.setEncoding(QTextStream::Latin1);
+  inputStream.setCodec("ISO-8851-1");
+  inputStream.setAutoDetectUnicode(false);
 
   QString s = "";
   s=inputStream.readLine();
