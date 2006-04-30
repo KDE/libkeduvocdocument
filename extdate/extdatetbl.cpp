@@ -212,7 +212,7 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
           normalday=false;
 
 			QBrush brushTitle();
- 			QBrush brushInvertTitle(colorGroup().base());
+ 			QBrush brushInvertTitle(palette().brush( QPalette::Base ) );
 			QColor titleColor(isEnabled()?( KGlobalSettings::activeTitleColor() ):( KGlobalSettings::inactiveTitleColor() ) );
 			QColor textColor(isEnabled()?( KGlobalSettings::activeTextColor() ):( KGlobalSettings::inactiveTextColor() ) );
       if (!normalday)
@@ -229,7 +229,7 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
         }
       painter->drawText(0, 0, w, h-1, Qt::AlignCenter,
                         d->calendar->weekDayName(daynum, true), -1, &rect);
-      painter->setPen(colorGroup().text());
+      painter->setPen(palette().color(QPalette::Text));
       //      painter->moveTo(0, h-1);
       //      painter->lineTo(w-1, h-1);
       painter->drawLine( 0, h-1, w-1, h-1);
@@ -247,7 +247,7 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
           // ° painting a day of the previous month or
           // ° painting a day of the following month
           // TODO: don't hardcode gray here! Use a color with less contrast to the background than normal text.
-          painter->setPen( colorGroup().mid() );
+            painter->setPen( palette().color( QPalette::Mid ) );
 //          painter->setPen(gray);
         } else { // paint a day of the current month
           if ( d->useCustomColors )
@@ -272,9 +272,9 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
               }
               painter->setPen( mode->fgColor );
             } else
-              painter->setPen(colorGroup().text());
+                painter->setPen( palette().color( QPalette::Text ) );
           } else //if ( firstWeekDay < 4 ) // <- this doesn' make sense at all!
-          painter->setPen(colorGroup().text());
+              painter->setPen( palette().color( QPalette::Text ) );
         }
 
       pen=painter->pen();
@@ -286,9 +286,9 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
       if( ((offset+dy) == (pos+2)) && hasFocus())
         {
            // draw the currently selected date
-           painter->setPen(colorGroup().highlight());
-           painter->setBrush(colorGroup().highlight());
-           pen=colorGroup().highlightedText();
+           painter->setPen(palette().color(QPalette::Highlight));
+           painter->setBrush(palette().color(QPalette::Highlight));
+           pen=palette().color(QPalette::HighlightedText);
         } else {
           painter->setBrush(paletteBackgroundColor());
           painter->setPen(paletteBackgroundColor());
@@ -298,7 +298,7 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
 
       if ( pCellDate == ExtDate::currentDate() )
       {
-         painter->setPen(colorGroup().text());
+          painter->setPen(palette().color( QPalette::Text ) );
       }
 
       if ( paintRect ) painter->drawRect(0, 0, w, h);
