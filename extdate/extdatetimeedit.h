@@ -152,6 +152,9 @@ class ExtDateEdit : public QSpinBox {
 	*/
 		void invokeKey( Qt::Key k );
 
+	signals:
+		void valueChanged( ExtDate d );
+
 	protected:
 /**
 	*@short convert the spinbox internal value (a Julian Day integer) 
@@ -316,6 +319,9 @@ class ExtDateTimeEdit : public QFrame {
 	*/
 		void setDateTime( const ExtDateTime &dt ) { setDate( dt.date() ); setTime(
 dt.time() ); }
+
+	signals:
+		void valueChanged( ExtDateTime dt );
 
 	private:
 	/**
