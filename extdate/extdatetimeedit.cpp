@@ -62,13 +62,17 @@ void ExtDateEdit::init( const ExtDate &d ) {
 
 	//Make sure highlight is persistent when value is changed
 	connect( this, SIGNAL( valueChanged( int ) ), this, SLOT( slotRefreshHighlight() ) );
-	connect( this, SIGNAL( valueChanged( int ) ), this, SIGNAL( valueChanged( date() ) ) );
+	connect( this, SIGNAL( valueChanged( int ) ), this, SLOT( slotEmitValueChanged() ) );
 
 	edLineEdit *edle = new edLineEdit( this );
 	setLineEdit(edle);
 
 	setValue( m_Date.jd() );
 	highlightActiveField();
+}
+
+void ExtDateEdit::slotEmitValueChanged() {
+	emit valueChanged( date() );
 }
 
 QString ExtDateEdit::simpleDateFormat() {
@@ -236,8 +240,12 @@ void ExtDateTimeEdit::init( const ExtDateTime &dt ) {
 	hlay->addWidget( m_DateEdit );
 	hlay->addWidget( m_TimeEdit );
 
-	connect( m_DateEdit, SIGNAL( valueChanged( int ) ), this, SIGNAL( valueChanged( ExtDateTime( dateTime() ) ) ) );
-	connect( m_TimeEdit, SIGNAL( valueChanged( int ) ), this, SIGNAL( valueChanged( ExtDateTime( dateTime() ) ) ) );
+	connect( m_DateEdit, SIGNAL( valueChanged( int ) ), this, SLOT( slotEmitValueChanged() ) );
+	connect( m_TimeEdit, SIGNAL( valueChanged( int ) ), this, SLOT( slotEmitValueChanged() ) );
+}
+
+void ExtDateTimeEdit::slotEmitValueChanged() {
+	emit valueChanged( dateTime() );
 }
 
 edLineEdit::edLineEdit( QWidget *parent ) : QLineEdit( parent ) {

@@ -206,6 +206,8 @@ class ExtDateEdit : public QSpinBox {
 	*/
 		void slotRefreshHighlight();
 
+		void slotEmitValueChanged();
+
 	public:
 /**
 	*@short Convert the KDE date format for internal use.
@@ -322,6 +324,9 @@ dt.time() ); }
 
 	signals:
 		void valueChanged( ExtDateTime dt );
+
+	private slots:
+		void slotEmitValueChanged();
 
 	private:
 	/**
