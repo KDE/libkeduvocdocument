@@ -146,7 +146,7 @@ void ExtDateEdit::stepBy( int steps ) {
 	else    setValue( v );
 }
 
-QValidator::State ExtDateEdit::validate( QString &input, int & ) {
+QValidator::State ExtDateEdit::validate( QString &input, int & ) const {
 	if ( ExtDate::fromString( input, m_DateFormat ).isValid() )
 		return QValidator::Acceptable;
 	else

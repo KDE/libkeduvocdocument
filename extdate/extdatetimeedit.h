@@ -108,7 +108,7 @@ class ExtDateEdit : public QSpinBox {
 	*@return QValidator::Acceptable if the string is a valid ExtDate; 
 	*otherwise return QValidator::Invalid
 	*/
-		QValidator::State validate( QString &input, int &pos );
+		QValidator::State validate( QString &input, int &pos ) const;
 
 /**
 	*@return the internal ExtDate value
