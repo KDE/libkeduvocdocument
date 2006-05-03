@@ -29,7 +29,7 @@
 EDPicker::EDPicker( QWidget *p=0, const char *name=0 ) : KMainWindow( p, name ) {
 	QWidget *w = new QWidget(this);
 
-	glay = new QGridLayout(w, 3, 2);
+	glay = new QGridLayout(w);
 
 	QLabel *kdpLabel = new QLabel( QString("KDatePicker"), w );
 	QLabel *edpLabel = new QLabel( QString("ExtDatePicker"), w );
