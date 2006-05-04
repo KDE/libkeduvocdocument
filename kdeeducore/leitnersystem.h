@@ -69,7 +69,7 @@ public:
 	 * @return a pointer to the LeitnerBox with the name,
 	 *         or 0 if no such box exists.
 	 */
-	LeitnerBox* boxWithName( const QString& name ) const;
+	LeitnerBox* boxWithName( const QString& name );
 
 	/**Returns the number of the given LeitnerBox
 	 * @param box a pointer to the LeitnerBox
@@ -87,7 +87,7 @@ public:
 	 * @param previousBox the name of the LeitnerBox
 	 * @return the name of the LeitnerBox following previousBox
 	 */
-	const QString& nextBox( QString& previousBox );
+	QString nextBox( QString& previousBox );
 
 	const QString& correctBox( int box );	//returns the correct word box of "int box"
 	const QString& wrongBox( int box );		//returns the wrong word box of "int box"

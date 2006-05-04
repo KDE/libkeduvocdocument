@@ -34,7 +34,7 @@ QStringList LeitnerSystem::getBoxNameList()
 {
 	QStringList boxNameList;
 
-	foreach( LeitnerBox box, m_boxes )
+	foreach( const LeitnerBox &box, m_boxes )
 		boxNameList.append( box.boxName() );
 	
 	return boxNameList;
@@ -50,12 +50,15 @@ LeitnerBox* LeitnerSystem::boxWithNumber( int number )
 	return &m_boxes[ number ];
 }
 
-LeitnerBox* LeitnerSystem::boxWithName( const QString& name ) const
+LeitnerBox* LeitnerSystem::boxWithName( const QString& name )
 {
-	foreach( LeitnerBox box, m_boxes )
+	QList<LeitnerBox>::iterator it, it2;
+	it = m_boxes.begin();
+	it2 = m_boxes.end();
+	for ( ; it != it2; ++it)
 	{
-		if ( box.boxName() == name )
-			return &box;
+		if ( (*it).boxName() == name )
+			return &(*it);
 	}
 
 	return 0;
@@ -66,7 +69,7 @@ QString& LeitnerSystem::systemName()
 	return m_systemName;
 }
 
-const QString& LeitnerSystem::nextBox( QString& previousBox )
+QString LeitnerSystem::nextBox( QString& previousBox )
 {
 	for( int i = 0; i < m_boxes.count(); i++ )
 	{
