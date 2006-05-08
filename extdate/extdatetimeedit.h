@@ -53,8 +53,9 @@
 #include <QTime>
 #include <QTimeEdit>
 #include "extdatetime.h"
+#include <kdemacros.h>
 
-class ExtDateEdit : public QSpinBox {
+class KDE_EXPORT ExtDateEdit : public QSpinBox {
 	Q_OBJECT
 
 	public:
@@ -246,7 +247,7 @@ class ExtDateEdit : public QSpinBox {
 	*@author Jason Harris
 	*@version 1.0
 	*/
-class ExtDateTimeEdit : public QFrame {
+class KDE_EXPORT ExtDateTimeEdit : public QFrame {
 	Q_OBJECT
 
 	public:
