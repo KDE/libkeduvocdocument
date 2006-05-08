@@ -51,6 +51,7 @@
 #include <QStringList>
 #include <QDateTime>
 
+#include <kdemacros.h>
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
 
@@ -62,7 +63,7 @@ typedef unsigned short count_t;
   translations
   */
 
-class KEduVocExpression
+class KDE_EXPORT KEduVocExpression
 {
 public:
 
