@@ -19,6 +19,8 @@
 #ifndef KEDUVOCKVTMLWRITER_H
 #define KEDUVOCKVTMLWRITER_H
 
+#include <kdeedu_core_export.h>
+
 #include <QFile>
 #include <QtXml/QDomDocument>
 #include <QList>
@@ -65,7 +67,7 @@ class KEduVocDocument;
 /**
 @author Eric Pignet
 */
-class KEduVocKvtmlWriter
+class EDUCORE_EXPORT KEduVocKvtmlWriter
 {
 public:
   KEduVocKvtmlWriter(QFile *file);

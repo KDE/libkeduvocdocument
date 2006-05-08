@@ -17,6 +17,8 @@
 #ifndef EXTDATETIMEEDIT_H
 #define EXTDATETIMEEDIT_H
 
+#include <kdeedu_extdate_export.h>
+
 /**
 	*@class ExtDateEdit
 	*@short provides a spinbox widget for entering an extended date.
@@ -55,7 +57,7 @@
 #include "extdatetime.h"
 #include <kdemacros.h>
 
-class KDE_EXPORT ExtDateEdit : public QSpinBox {
+class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 	Q_OBJECT
 
 	public:
@@ -247,7 +249,7 @@ class KDE_EXPORT ExtDateEdit : public QSpinBox {
 	*@author Jason Harris
 	*@version 1.0
 	*/
-class KDE_EXPORT ExtDateTimeEdit : public QFrame {
+class EXTDATE_EXPORT ExtDateTimeEdit : public QFrame {
 	Q_OBJECT
 
 	public:

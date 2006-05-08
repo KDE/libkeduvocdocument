@@ -19,6 +19,8 @@
 #ifndef KEDUVOCKVTMLREADER_H
 #define KEDUVOCKVTMLREADER_H
 
+#include <kdeedu_core_export.h>
+
 #include <QFile>
 #include <QtXml/QDomDocument>
 #include <QList>
@@ -69,7 +71,7 @@ class KEduVocDocument;
 /**
 @author Eric Pignet
 */
-class KEduVocKvtmlReader : public QObject
+class EDUCORE_EXPORT  KEduVocKvtmlReader : public QObject
 {
 public:
 	KEduVocKvtmlReader(QFile *file);

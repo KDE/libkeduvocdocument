@@ -18,8 +18,9 @@
 #ifndef KEDUVOCDOCUMENT_H
 #define KEDUVOCDOCUMENT_H
 
+#include <kdeedu_core_export.h>
+
 #include <QString>
-#include <kdemacros.h>
 
 #define KVD_ZERO_TIME  934329599   // 1999-08-10 23:59:59, never change
 #define KVD_VERS_PREFIX " v"       // kvoctrain v0.1.0
@@ -251,7 +252,7 @@ class LeitnerSystem;
  * This class contains the expressions of your vocabulary
  * as well as other information about the vocabulary
  */
-class KDE_EXPORT KEduVocDocument : public QObject
+class EDUCORE_EXPORT KEduVocDocument : public QObject
 {
   Q_OBJECT
   friend class KEduVocKvtmlWriter;

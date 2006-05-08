@@ -27,6 +27,8 @@
 #ifndef grammarmanager_included
 #define grammarmanager_included
 
+#include <kdeedu_core_export.h>
+
 #include <QString>
 #include <QList>
 #include <QStringList>
@@ -52,7 +54,7 @@
  * It contains all available articles of the language as QString
  */
 
-class KEduVocArticle
+class EDUCORE_EXPORT KEduVocArticle
 {
 
 public:
@@ -107,7 +109,7 @@ protected:
 };
 
 
-class KEduVocComparison
+class EDUCORE_EXPORT KEduVocComparison
 {
 
 public:
@@ -161,7 +163,7 @@ protected:
 /**
  * The conjugation of a verb
  */
-class KEduVocConjugation
+class EDUCORE_EXPORT KEduVocConjugation
 {
 
 public:

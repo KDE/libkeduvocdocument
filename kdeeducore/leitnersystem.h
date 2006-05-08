@@ -13,6 +13,8 @@
 //
 //
 
+#include <kdeedu_core_export.h>
+
 #include <QString>
 #include <QStringList>
 
@@ -22,7 +24,7 @@
 @author Martin Pfeiffer
 */
 
-class LeitnerSystem
+class EDUCORE_EXPORT LeitnerSystem
 {
 public:
 	/**Constructor without arguments*/

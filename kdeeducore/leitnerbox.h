@@ -20,6 +20,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
+#include <kdeedu_core_export.h>
 
 #include <QString>
 
@@ -32,7 +33,7 @@
  * cards of this LeitnerBox
  * @author Martin Pfeiffer <hubipete@gmx.net>
  */
-class LeitnerBox
+class EDUCORE_EXPORT LeitnerBox
 {
 public:
 	/**

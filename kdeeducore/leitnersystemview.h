@@ -12,6 +12,8 @@
 #ifndef LEITNERSYSTEMVIEW_H
 #define LEITNERSYSTEMVIEW_H
 
+#include <kdeedu_core_export.h>
+
 #include <QWidget>
 #include <QPixmap>
 #include <QMouseEvent>
@@ -26,7 +28,7 @@ class LeitnerSystem;
  * @author Martin Pfeiffer
  */
 
-class LeitnerSystemView : public QWidget
+class EDUCORE_EXPORT LeitnerSystemView : public QWidget
 {
 	Q_OBJECT
 		

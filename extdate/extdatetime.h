@@ -25,11 +25,12 @@
 #ifndef EXTDATETIME_H
 #define EXTDATETIME_H
 
+#include <kdeedu_extdate_export.h>
+
 #include <limits.h>
 #include <qstring.h>
 #include <qnamespace.h>
 #include <qdatetime.h>
-#include <kdemacros.h>
 
 #define INVALID_DAY LONG_MIN
 
@@ -67,7 +68,7 @@ extern	void test2_unit(int y, int m, int d);
  *
  *@author Michael Guitel, Jason Harris
  */
-class KDE_EXPORT ExtDate
+class EXTDATE_EXPORT ExtDate
 {
 	public:
 	/**
@@ -420,10 +421,10 @@ private:
 	friend class ExtDateTime;
 
 #ifndef QT_NO_DATASTREAM
-	friend KDE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDate & );
-	friend KDE_EXPORT QDataStream &operator>>( QDataStream &, ExtDate & );
-	friend KDE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDateTime & );
-	friend KDE_EXPORT QDataStream &operator>>( QDataStream &, ExtDateTime & );
+	friend EXTDATE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDate & );
+	friend EXTDATE_EXPORT QDataStream &operator>>( QDataStream &, ExtDate & );
+	friend EXTDATE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDateTime & );
+	friend EXTDATE_EXPORT QDataStream &operator>>( QDataStream &, ExtDateTime & );
 #endif
 };
 
@@ -442,7 +443,7 @@ private:
 	*
 	*@author Michael Guitel, Jason Harris
 	*/
-class KDE_EXPORT ExtDateTime
+class EXTDATE_EXPORT ExtDateTime
 {
 public:
 	/**
@@ -656,8 +657,8 @@ public:
 		ExtDate  d;
 		QTime  t;
 #ifndef QT_NO_DATASTREAM
-	friend KDE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDateTime &);
-	friend KDE_EXPORT QDataStream &operator>>( QDataStream &, ExtDateTime & );
+	friend EXTDATE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDateTime &);
+	friend EXTDATE_EXPORT QDataStream &operator>>( QDataStream &, ExtDateTime & );
 #endif
 };
 
@@ -666,8 +667,8 @@ public:
  *****************************************************************************/
 
 #ifndef QT_NO_DATASTREAM
-KDE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDate & );
-KDE_EXPORT QDataStream &operator>>( QDataStream &, ExtDate & );
+EXTDATE_EXPORT QDataStream &operator<<( QDataStream &, const ExtDate & );
+EXTDATE_EXPORT QDataStream &operator>>( QDataStream &, ExtDate & );
 #endif // QT_NO_DATASTREAM
 
 #endif // EXTDATE_H

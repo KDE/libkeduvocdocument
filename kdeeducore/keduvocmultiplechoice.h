@@ -27,11 +27,13 @@
 #ifndef MultipleChoice_included
 #define MultipleChoice_included
 
+#include <kdeedu_core_export.h>
+
 #include <QString>
 
 #define MAX_MULTIPLE_CHOICE  5  // select one out of x
 
-class KEduVocMultipleChoice
+class EDUCORE_EXPORT KEduVocMultipleChoice
 {
 
 public:

@@ -22,6 +22,8 @@
 #ifndef EXTDATEWIDGET_H
 #define EXTDATEWIDGET_H
 
+#include <kdeedu_extdate_export.h>
+
 #include "extdatetime.h"
 
 /**
@@ -32,7 +34,7 @@
 * @short A pushbutton to display or allow user selection of a date.
 * @version $Id$
 */
-class KDE_EXPORT ExtDateWidget : public QWidget
+class EXTDATE_EXPORT ExtDateWidget : public QWidget
 {
   Q_OBJECT
 //  Q_PROPERTY( ExtDate date READ date WRITE setDate )

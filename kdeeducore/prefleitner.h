@@ -21,6 +21,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  **************************************************************************/
 
+#include <kdeedu_core_export.h>
+
 #include "ui_prefleitnerbase.h"
 
 class LeitnerSystemView;
@@ -31,7 +33,7 @@ class LeitnerBox;
  * This class is a dialogue for configuring a LeitnerSystem
  * @author Martin Pfeiffer <hubipete@gmx.net>
  */
-class PrefLeitner : public QDialog, public Ui::PrefLeitnerBase
+class EDUCORE_EXPORT PrefLeitner : public QDialog, public Ui::PrefLeitnerBase
 {
 	Q_OBJECT
 

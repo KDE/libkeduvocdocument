@@ -18,13 +18,15 @@
 #ifndef KEDUVOCWQLWRITER_H
 #define KEDUVOCWQLWRITER_H
 
+#include <kdeedu_core_export.h>
+
 #include <QFile>
 #include <QFont>
 #include <QTextStream>
 
 class KEduVocDocument;
 
-class KEduVocWqlWriter
+class EDUCORE_EXPORT KEduVocWqlWriter
 {
 public:
   KEduVocWqlWriter(QFile *file);

@@ -19,6 +19,8 @@
 #ifndef KEDUVOCEXPRESSION_H
 #define KEDUVOCEXPRESSION_H
 
+#include <kdeedu_core_export.h>
+
 #define KV_MAX_GRADE       7
 #define KV_MIN_GRADE       0
 
@@ -51,7 +53,6 @@
 #include <QStringList>
 #include <QDateTime>
 
-#include <kdemacros.h>
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
 
@@ -63,7 +64,7 @@ typedef unsigned short count_t;
   translations
   */
 
-class KDE_EXPORT KEduVocExpression
+class EDUCORE_EXPORT KEduVocExpression
 {
 public:
 

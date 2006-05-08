@@ -22,6 +22,7 @@
 #ifndef EXTDATEPICKER_H
 #define EXTDATEPICKER_H
 
+#include <kdeedu_extdate_export.h>
 
 #include "extdatetime.h"
 #include <QFrame>
@@ -52,7 +53,7 @@ class ExtDateTable;
  *
  * @short A date selection widget.
  **/
-class KDE_EXPORT ExtDatePicker: public QFrame
+class EXTDATE_EXPORT ExtDatePicker: public QFrame
 {
   Q_OBJECT
 //  Q_PROPERTY( ExtDate date READ date WRITE setDate)
