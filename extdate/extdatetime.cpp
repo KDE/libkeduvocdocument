@@ -789,7 +789,7 @@ QString ExtDateTime::toString( Qt::DateFormat f ) const
 		return QString();
 
 	if ( f == Qt::ISODate ) {
-		return d.toString( Qt::ISODate ) + "T" + t.toString( Qt::ISODate );
+		return d.toString( Qt::ISODate ) + 'T' + t.toString( Qt::ISODate );
 	}
 #ifndef QT_NO_TEXTDATE
 	else if ( f == Qt::TextDate ) {
@@ -798,7 +798,7 @@ QString ExtDateTime::toString( Qt::DateFormat f ) const
 #endif
 	else if ( f == Qt::LocalDate ) {
 		return toString( KGlobal::locale()->dateFormat()
-						+ " " + KGlobal::locale()->timeFormat() );
+						+ ' ' + KGlobal::locale()->timeFormat() );
 	}
 
 	return QString();
