@@ -58,7 +58,7 @@ static const QLatin1String KV_TRANS("t");       // translated expression in spec
 #define KV_FAUX_AMI_T  "tf"        // false friend of this entry to org
 #define KV_SYNONYM     "y"         // synonym (same meaning) of expr
 #define KV_ANTONYM     "a"         // antonym (oppositite) of expr
-#define KV_PRONUNCE    "p"         // how to pronunce this expression
+#define KV_PRONUNCE    "p"         // how to pronounce this expression
 #define KV_SELECTED    "s"         // entry selected for queries
 #define KV_INACTIVE    "i"         // entry inactive (for queries)
 #define KV_EXPRTYPE    "t"         // type of expression
@@ -545,7 +545,7 @@ class EDUCORE_EXPORT KEduVocDocument : public QObject
   /**
    * Returns pointer to expression object @p index
    *
-   * @param index     index of desidered entry
+   * @param index     index of desired entry
    * @returns         pointer to object or NULL if index out of range
    */
   KEduVocExpression *entry(int index);

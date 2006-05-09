@@ -30,7 +30,7 @@ class LeitnerSystem;
 class LeitnerBox;
 
 /**
- * This class is a dialogue for configuring a LeitnerSystem
+ * This class is a dialog for configuring a LeitnerSystem
  * @author Martin Pfeiffer <hubipete@gmx.net>
  */
 class EDUCORE_EXPORT PrefLeitner : public QDialog, public Ui::PrefLeitnerBase
@@ -52,13 +52,13 @@ public:
 	PrefLeitner( QWidget* parent = 0 , LeitnerSystem* system = 0 );
 
 	/**
-	 * Sets the LeitnerSystem for the dialogue
+	 * Sets the LeitnerSystem for the dialog
 	 * @param system a pointer to the LeitnerSystem to configure
 	 */
 	void setLeitnerSystem( LeitnerSystem* system );
 
 	/**
-	 * Get the LeitnerSystem that is set to the dialogue
+	 * Get the LeitnerSystem that is set to the dialog
 	 * @return a pointer to the actual set LeitnerSystem
 	 */
 	LeitnerSystem* system();
