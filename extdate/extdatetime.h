@@ -234,7 +234,7 @@ class EXTDATE_EXPORT ExtDate
 	*@p format a QString describing the date format according to 
 	*a subset of the KDE date string specification:
 	*
-	*Any occurence of the following tokens in the format string 
+	*Any occurrence of the following tokens in the format string 
 	*are replaced with the corresponding value:
 	*
 	*@li %Y The year, including centuries prefix (e.g., "1984")
@@ -261,7 +261,7 @@ class EXTDATE_EXPORT ExtDate
 		*/
 	bool setYMD( int y, int m, int d );
 	/**
-		*@short Set the ExtDate acording to the given Julian Day.
+		*@short Set the ExtDate according to the given Julian Day.
 		*@p _jd the Julian Day of the date to be set
 		*@return true if the ExtDate is valid
 		*@note The Julian Day is a simple count of the number of days 
@@ -364,7 +364,7 @@ class EXTDATE_EXPORT ExtDate
 		*@return an ExtDate constructed from the string representation 
 		*given as an argument.
 		*@p s The string representation of the date
-		*@p format A string representing the date format, acording to 
+		*@p format A string representing the date format, according to 
 		*the KDE date string specification.
 		*@see ExtDate::toString( const QString &format )
 		*/
@@ -531,7 +531,7 @@ public:
 		*@p format string representation of the date/time format, using 
 		*the KDE date/time string specification:
 		*
-		*Any occurence of the following tokens in the format string 
+		*Any occurrence of the following tokens in the format string 
 		*are replaced with the corresponding value:
 		*
 		*@li %Y The year, including centuries prefix (e.g., "1984")

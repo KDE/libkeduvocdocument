@@ -242,7 +242,7 @@ QString ExtDate::toString( const QString& format ) const
 	if ( ! isValid() ) return QString();
 
 	//We use the KDE Date format specs.
-	//Replace occurences of the following tokens with their
+	//Replace occurrences of the following tokens with their
 	//corresponding values:
 	//
 	// %Y The year, including centuries prefix (e.g., "1984")
@@ -814,7 +814,7 @@ QString ExtDateTime::toString( const QString& format ) const
 	QString result = date().toString( format );
 
 	//For the time format, use the following KDE format specs:
-	//Replace occurences of the following tokens with their
+	//Replace occurrences of the following tokens with their
 	//corresponding values:
 	//
 	// %H Hour in 24h format, 2 digits
