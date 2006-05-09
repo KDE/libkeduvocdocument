@@ -69,7 +69,6 @@ public:
 
   /** The usual constructor.  The given date will be displayed
    * initially.
-   * @since 3.1
    **/
   ExtDatePicker(QWidget *parent,
 	      ExtDate,
@@ -115,7 +114,6 @@ public:
   /**
    * @returns the ExtDateTable widget child of this ExtDatePicker
    * widget.
-   * @since 3.2
    */
   ExtDateTable *dateTable() const { return table; };
 
@@ -136,14 +134,12 @@ public:
    * method being called. This is mostly useful for toplevel datepickers
    * without a window manager decoration.
    * @see hasCloseButton
-   * @since 3.1
    */
   void setCloseButton( bool enable );
 
   /**
    * @returns true if a ExtDatePicker shows a close-button.
    * @see setCloseButton
-   * @since 3.1
    */
   bool hasCloseButton() const;
 
@@ -181,30 +177,11 @@ protected slots:
   void monthBackwardClicked();
   void yearForwardClicked();
   void yearBackwardClicked();
-  /**
-   * @since 3.1
-   * @deprecated in 3.2
-   */
   void selectWeekClicked();
-  /**
-   * @since 3.1
-   */
   void selectMonthClicked();
-  /**
-   * @since 3.1
-   */
   void selectYearClicked();
-  /**
-   * @since 3.1
-   */
   void lineEnterPressed();
-  /**
-   * @since 3.2
-   */
   void todayButtonClicked();
-  /**
-   * @since 3.2
-   */
   void weekSelected(int);
 
 signals:

@@ -321,8 +321,6 @@ public:
      *
      * When it's enabled, this object emits a aboutToShowContextMenu signal
      * where you can fill in the menu items.
-     *
-     * @since 3.2
      */
     void setPopupMenuEnabled( bool enable );
 
@@ -336,15 +334,11 @@ public:
     /**
      * Makes a given date be painted with a given foregroundColor, and background
      * (a rectangle, or a circle/ellipse) in a given color.
-     *
-     * @since 3.2
      */
     void setCustomDatePainting( const ExtDate &date, const QColor &fgColor, BackgroundMode bgMode=NoBgMode, const QColor &bgColor=QColor());
 
     /**
      * Unsets the custom painting of a date so that the date is painted as usual.
-     *
-     * @since 3.2
      */
     void unsetCustomDatePainting( const ExtDate &date );
 
@@ -428,8 +422,6 @@ signals:
      * A popup menu for a given date is about to be shown (as when the user
      * right clicks on that date and the popup menu is enabled). Connect
      * the slot where you fill the menu to this signal.
-     *
-     * @since 3.2
      */
     void aboutToShowContextMenu( K3PopupMenu * menu, const ExtDate &date);
 

@@ -41,9 +41,6 @@ class ExtCalendarSystemGregorianPrivate;
  * @see KLocale,ExtCalendarSystem,ExtCalendarSystemFactory
  *
  * @author Carlos Moro <cfmoro@correo.uniovi.es>
- * @license GNU-GPL v.2
- * @version $Id$
- * @since 3.2
  */
 class ExtCalendarSystemGregorian: public ExtCalendarSystem
 {

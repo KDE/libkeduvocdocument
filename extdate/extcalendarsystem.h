@@ -40,8 +40,6 @@ class ExtCalendarSystemPrivate;
  * Derived classes must be created through ExtCalendarFactory class
  *
  * @author Carlos Moro <cfmoro@correo.uniovi.es>
- * @version $Id$
- * @since 3.2
  */
 class ExtCalendarSystem
 {
