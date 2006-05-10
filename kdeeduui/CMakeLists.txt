@@ -29,6 +29,7 @@ install_targets(${LIB_INSTALL_DIR} kdeeduui )
 ########### install files ###############
 
 install_files(/include/libkdeedu FILES
+   libkdeedu_ui_export.h
    kdeeduglossary.h
 )
 

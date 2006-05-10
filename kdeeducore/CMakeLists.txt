@@ -41,6 +41,7 @@ install_targets(${LIB_INSTALL_DIR} kdeeducore )
 ########### install files ###############
 
 install_files(/include/libkdeedu FILES
+   libkdeedu_core_export.h
    keduvocdocument.h
    keduvocexpression.h
    keduvocgrammar.h
