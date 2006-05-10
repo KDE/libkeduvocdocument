@@ -12,7 +12,7 @@
 #ifndef LEITNERSYSTEMVIEW_H
 #define LEITNERSYSTEMVIEW_H
 
-#include <kdeedu_core_export.h>
+#include <libkdeedu_core_export.h>
 
 #include <QWidget>
 #include <QPixmap>

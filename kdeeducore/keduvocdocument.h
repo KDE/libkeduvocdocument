@@ -18,7 +18,7 @@
 #ifndef KEDUVOCDOCUMENT_H
 #define KEDUVOCDOCUMENT_H
 
-#include <kdeedu_core_export.h>
+#include <libkdeedu_core_export.h>
 
 #include <QString>
 

@@ -19,7 +19,7 @@
 #ifndef KEDUVOCEXPRESSION_H
 #define KEDUVOCEXPRESSION_H
 
-#include <kdeedu_core_export.h>
+#include <libkdeedu_core_export.h>
 
 #define KV_MAX_GRADE       7
 #define KV_MIN_GRADE       0

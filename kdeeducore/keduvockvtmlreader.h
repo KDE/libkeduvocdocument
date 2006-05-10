@@ -19,7 +19,7 @@
 #ifndef KEDUVOCKVTMLREADER_H
 #define KEDUVOCKVTMLREADER_H
 
-#include <kdeedu_core_export.h>
+#include <libkdeedu_core_export.h>
 
 #include <QFile>
 #include <QtXml/QDomDocument>

@@ -27,7 +27,7 @@
 #ifndef grammarmanager_included
 #define grammarmanager_included
 
-#include <kdeedu_core_export.h>
+#include <libkdeedu_core_export.h>
 
 #include <QString>
 #include <QList>

@@ -17,7 +17,7 @@
 #ifndef EXTDATETIMEEDIT_H
 #define EXTDATETIMEEDIT_H
 
-#include <kdeedu_extdate_export.h>
+#include <libkdeedu_extdate_export.h>
 
 /**
 	*@class ExtDateEdit

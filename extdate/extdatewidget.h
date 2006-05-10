@@ -22,7 +22,7 @@
 #ifndef EXTDATEWIDGET_H
 #define EXTDATEWIDGET_H
 
-#include <kdeedu_extdate_export.h>
+#include <libkdeedu_extdate_export.h>
 
 #include "extdatetime.h"
 

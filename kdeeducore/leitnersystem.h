@@ -13,7 +13,7 @@
 //
 //
 
-#include <kdeedu_core_export.h>
+#include <libkdeedu_core_export.h>
 
 #include <QString>
 #include <QStringList>

@@ -18,7 +18,7 @@
 #ifndef KEDUVOCWQLREADER_H
 #define KEDUVOCWQLREADER_H
 
-#include <kdeedu_core_export.h>
+#include <libkdeedu_core_export.h>
 
 #include <QFile>
 

@@ -25,7 +25,7 @@
 #ifndef EXTDATETIME_H
 #define EXTDATETIME_H
 
-#include <kdeedu_extdate_export.h>
+#include <libkdeedu_extdate_export.h>
 
 #include <limits.h>
 #include <qstring.h>
