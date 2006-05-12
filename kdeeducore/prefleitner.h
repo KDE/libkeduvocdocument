@@ -23,17 +23,21 @@
 
 #include <libkdeedu_core_export.h>
 
-#include "ui_prefleitnerbase.h"
+#include <QDialog>
 
 class LeitnerSystemView;
 class LeitnerSystem;
 class LeitnerBox;
+namespace Ui
+{
+	class PrefLeitnerBase;
+}
 
 /**
  * This class is a dialog for configuring a LeitnerSystem
  * @author Martin Pfeiffer <hubipete@gmx.net>
  */
-class EDUCORE_EXPORT PrefLeitner : public QDialog, public Ui::PrefLeitnerBase
+class EDUCORE_EXPORT PrefLeitner : public QDialog
 {
 	Q_OBJECT
 
@@ -50,6 +54,11 @@ public:
 	 * @param system a pointer to the LeitnerSystem to configure
 	 */
 	PrefLeitner( QWidget* parent = 0 , LeitnerSystem* system = 0 );
+
+	/**
+	 * The public destructor
+	 */
+	~PrefLeitner();
 
 	/**
 	 * Sets the LeitnerSystem for the dialog
@@ -81,6 +90,10 @@ private:
 	LeitnerSystemView* m_leitnerSystemView;	//the LeitnerSystemView which shows the selected system
 	LeitnerSystem* m_selectedSystem;	//the currently selected system to be changed
 	LeitnerBox* m_selectedBox;		//the currently selected box
+
+	Ui::PrefLeitnerBase* m_base;
+
+	void init( LeitnerSystem* system );
 
 	void refreshSystemView();		//refresh the LeitnerSystemView
 	void newSystem();

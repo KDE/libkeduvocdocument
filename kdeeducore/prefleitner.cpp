@@ -20,6 +20,7 @@
 
 #include "leitnersystemview.h"
 #include "leitnersystem.h"
+#include "ui_prefleitnerbase.h"
 
 #include <QLayout>
 #include <QComboBox>
@@ -31,24 +32,23 @@
 
 PrefLeitner::PrefLeitner( QWidget* parent ) : QDialog( parent )
 {
-	setupUi( this );
-	
-	m_selectedSystem = 0;
-	m_selectedBox = 0;
-
-	QScrollArea *helperSV = new QScrollArea( this );
-
-	m_leitnerSystemView = new LeitnerSystemView( helperSV->viewport() );
-        m_leitnerSystemView->setObjectName( "LeitnerSystemView" );
-	
-        helperSV->setWidget( m_leitnerSystemView );
-
-	connect( m_leitnerSystemView, SIGNAL( boxClicked( int ) ), this, SLOT( slotBoxClicked( int ) ) );
+	init( 0L );
 }
 
 PrefLeitner::PrefLeitner( QWidget* parent, LeitnerSystem* system ) : QDialog( parent )
 {
-	setupUi( this );
+	init( system );
+}
+
+PrefLeitner::~PrefLeitner()
+{
+	delete m_base;
+}
+
+void PrefLeitner::init( LeitnerSystem* system )
+{
+	m_base = new Ui::PrefLeitnerBase();
+	m_base->setupUi( this );
 	
 	m_selectedBox = 0;
 
@@ -61,14 +61,17 @@ PrefLeitner::PrefLeitner( QWidget* parent, LeitnerSystem* system ) : QDialog( pa
 
 	connect( m_leitnerSystemView, SIGNAL( boxClicked( int ) ), this, SLOT( slotBoxClicked( int ) ) );
 	
-  	m_selectedSystem = system;
-	
-	//insert the list of box' names in the comboboxes
-	cmbWrong->addItems( m_selectedSystem->getBoxNameList() );
-	cmbCorrect->addItems( m_selectedSystem->getBoxNameList() );
+	m_selectedSystem = system;
 
-	//show leitnersystem
-	m_leitnerSystemView->setSystem( m_selectedSystem );
+	if ( m_selectedSystem )
+	{
+		//insert the list of box' names in the comboboxes
+		m_base->cmbWrong->addItems( m_selectedSystem->getBoxNameList() );
+		m_base->cmbCorrect->addItems( m_selectedSystem->getBoxNameList() );
+
+		//show leitnersystem
+		m_leitnerSystemView->setSystem( m_selectedSystem );
+	}
 }
 
 void PrefLeitner::slotCorrectWord( const QString& newBox )
@@ -102,8 +105,8 @@ void PrefLeitner::slotBoxName( const QString& newName )
 
 void PrefLeitner::newSystem()
 {
-	cmbCorrect->addItems( m_selectedSystem->getBoxNameList() );
-	cmbWrong->addItems( m_selectedSystem->getBoxNameList() );
+	m_base->cmbCorrect->addItems( m_selectedSystem->getBoxNameList() );
+	m_base->cmbWrong->addItems( m_selectedSystem->getBoxNameList() );
 
 	refreshSystemView();
 }
@@ -117,9 +120,9 @@ void PrefLeitner::slotBoxClicked( int box )
 {
 	m_selectedBox = m_selectedSystem->boxWithNumber( box );
 
-	cmbCorrect->setCurrentIndex( m_selectedSystem->correctBoxNumber( box ) );
-	cmbWrong->setCurrentIndex( m_selectedSystem->wrongBoxNumber( box ) );
-	lndBoxName->setText( m_selectedBox->boxName() );
+	m_base->cmbCorrect->setCurrentIndex( m_selectedSystem->correctBoxNumber( box ) );
+	m_base->cmbWrong->setCurrentIndex( m_selectedSystem->wrongBoxNumber( box ) );
+	m_base->lndBoxName->setText( m_selectedBox->boxName() );
 }
 
 void PrefLeitner::slotAddBox()
