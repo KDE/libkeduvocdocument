@@ -1,4 +1,3 @@
-kde4_header()
 
 #add_subdirectory(tests)
 
@@ -26,7 +25,6 @@ install_files(/include/libkdeedu FILES
    kdeeduglossary.h
 )
 
-kde4_footer()
 
 #original Makefile.am contents follow:
 

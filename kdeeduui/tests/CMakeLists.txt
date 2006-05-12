@@ -1,4 +1,3 @@
-kde4_header()
 
 include_directories( ${CMAKE_SOURCE_DIR}/kdeeduui  )
 
@@ -6,7 +5,6 @@ include_directories( ${CMAKE_SOURCE_DIR}/kdeeduui  )
 ########### install files ###############
 
 
-kde4_footer()
 
 
 

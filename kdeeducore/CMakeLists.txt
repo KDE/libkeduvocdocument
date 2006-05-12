@@ -1,4 +1,3 @@
-kde4_header()
 
 
 ########### next target ###############
@@ -49,7 +48,6 @@ install_files(/include/libkdeedu FILES
    prefleitner.h
 )
 
-kde4_footer()
 
 #original Makefile.am contents follow:
 

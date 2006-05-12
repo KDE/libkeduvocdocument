@@ -1,4 +1,3 @@
-kde4_header()
 
 add_subdirectory( tests ) 
 
@@ -29,7 +28,6 @@ install_targets(${LIB_INSTALL_DIR} extdate )
 ########### install files ###############
 
 
-kde4_footer()
 
 
 

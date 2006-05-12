@@ -1,4 +1,3 @@
-kde4_header()
 project(libkdeedu)
 
 add_subdirectory(kdeeducore)
@@ -8,7 +7,6 @@ add_subdirectory(extdate)
 add_subdirectory(libscience)
 add_subdirectory(widgets)
 
-kde4_footer()
 
 #original Makefile.am contents follow:
 

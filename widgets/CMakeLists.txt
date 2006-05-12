@@ -1,4 +1,3 @@
-kde4_header()
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/libkdeedu/kdeeduplot/
@@ -26,7 +25,6 @@ install_targets(${PLUGIN_INSTALL_DIR}/plugins/designer kdeeduwidgets)
 ########### install files ###############
 
 
-kde4_footer()
 
 #original Makefile.am contents follow:
 
