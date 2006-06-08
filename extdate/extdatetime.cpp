@@ -48,20 +48,32 @@ uint ExtDate::m_monthLength[] = {31, 28, 31, 30,  31,  30,  31,  31,  30,  31,  
 uint ExtDate::m_monthOrigin[] = { 0, 30, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
 
 QString ExtDate::m_shortMonthNames[12] = {
-	i18n("Jan"), i18n("Feb"), i18n("Mar"), i18n("Apr"), i18nc("Short name", "May"), i18n("Jun"),
-	i18n("Jul"), i18n("Aug"), i18n("Sep"), i18n("Oct"), i18n("Nov"), i18n("Dec")
+	i18nc("Short month name", "Jan"), i18nc("Short month name", "Feb"), 
+	i18nc("Short month name", "Mar"), i18nc("Short month name", "Apr"), 
+	i18nc("Short month name", "May"), i18nc("Short month name", "Jun"),
+	i18nc("Short month name", "Jul"), i18nc("Short month name", "Aug"), 
+	i18nc("Short month name", "Sep"), i18nc("Short month name", "Oct"), 
+	i18nc("Short month name", "Nov"), i18nc("Short month name", "Dec")
 };
 QString ExtDate::m_shortDayNames[7] = {
-	i18n("Mon"), i18n("Tue"), i18n("Wed"), i18n("Thu"), i18n("Fri"), i18n("Sat"), i18n("Sun")
+	i18nc("Short day name", "Mon"), i18nc("Short day name", "Tue"), 
+	i18nc("Short day name", "Wed"), i18nc("Short day name", "Thu"), 
+	i18nc("Short day name", "Fri"), i18nc("Short day name", "Sat"), 
+	i18nc("Short day name", "Sun")
 };
 QString ExtDate::m_longMonthNames[12] = {
-	i18n("January"), i18n("February"), i18n("March"), i18n("April"), i18nc("Long name", "May"),
-	i18n("June"), i18n("July"), i18n("August"), i18n("September"), i18n("October"),
-	i18n("November"), i18n("December")
+	i18nc("Long month name", "January"), i18nc("Long month name", "February"), 
+	i18nc("Long month name", "March"), i18nc("Long month name", "April"), 
+	i18nc("Long month name", "May"), i18nc("Long month name", "June"), 
+	i18nc("Long month name", "July"), i18nc("Long month name", "August"), 
+	i18nc("Long month name", "September"), i18nc("Long month name", "October"),
+	i18nc("Long month name", "November"), i18nc("Long month name", "December")
 };
 QString ExtDate::m_longDayNames[7] = {
-	i18n("Monday"), i18n("Tuesday"), i18n("Wednesday"), i18n("Thursday"),
-	i18n("Friday"), i18n("Saturday"), i18n("Sunday")
+	i18nc("Long day name", "Monday"), i18nc("Long day name", "Tuesday"), 
+	i18nc("Long day name", "Wednesday"), i18nc("Long day name", "Thursday"),
+	i18nc("Long day name", "Friday"), i18nc("Long day name", "Saturday"), 
+	i18nc("Long day name", "Sunday")
 };
 
 ExtDate::ExtDate() : m_jd(INVALID_DAY), m_year(0), m_month(0), m_day(0) 
