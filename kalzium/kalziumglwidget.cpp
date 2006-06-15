@@ -20,7 +20,6 @@
 #include <QMouseEvent>
 #include <QListWidget>
 
-#include "openbabel2wrapper.h"
 #include <openbabel/mol.h>
 #include <openbabel/obiter.h>
 
