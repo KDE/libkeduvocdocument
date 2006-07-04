@@ -19,7 +19,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kdeeduwidgets )
 
 target_link_libraries(kdeeduwidgets ${KDE4_KIO_LIBS} kdeeduplot extdate)
 
-install_targets(${PLUGIN_INSTALL_DIR}/plugins/designer kdeeduwidgets)
+install(TARGETS kdeeduwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 
 
 ########### install files ###############
