@@ -20,9 +20,9 @@ install(TARGETS kdeeduui  DESTINATION ${LIB_INSTALL_DIR} )
 
 ########### install files ###############
 
-install_files(${INCLUDE_INSTALL_DIR}/libkdeedu FILES
+install(FILES
    libkdeedu_ui_export.h
-   kdeeduglossary.h
+   kdeeduglossary.h DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu
 )
 
 

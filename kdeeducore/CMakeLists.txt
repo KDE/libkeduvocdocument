@@ -32,7 +32,7 @@ install(TARGETS kdeeducore  DESTINATION ${LIB_INSTALL_DIR} )
 
 ########### install files ###############
 
-install_files(${INCLUDE_INSTALL_DIR}/libkdeedu FILES
+install(FILES
    libkdeedu_core_export.h
    keduvocdocument.h
    keduvocexpression.h
@@ -45,7 +45,7 @@ install_files(${INCLUDE_INSTALL_DIR}/libkdeedu FILES
    leitnerbox.h
    leitnersystem.h
    leitnersystemview.h
-   prefleitner.h
+   prefleitner.h DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu
 )
 
 
