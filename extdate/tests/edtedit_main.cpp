@@ -24,7 +24,7 @@ int main( int argc, char *argv[] )
 	KCmdLineArgs::init( argc, argv, &aboutData );
 
 	KApplication a;
-	EDTEdit *edte = new EDTEdit(0,0);
+	EDTEdit *edte = new EDTEdit(0);
 	edte->show();
 	QObject::connect(kapp, SIGNAL(lastWindowClosed()), kapp, SLOT(quit()));
 	return a.exec();

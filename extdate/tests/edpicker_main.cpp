@@ -24,7 +24,7 @@ int main( int argc, char *argv[] )
 	KCmdLineArgs::init( argc, argv, &aboutData );
 
 	KApplication a;
-	EDPicker *edp = new EDPicker(0,0);
+	EDPicker *edp = new EDPicker(0);
 	edp->show();
 	QObject::connect(kapp, SIGNAL(lastWindowClosed()), kapp, SLOT(quit()));
 	return a.exec();

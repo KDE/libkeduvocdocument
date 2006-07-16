@@ -105,9 +105,10 @@ void ExtDateWidget::init(const ExtDate& date)
   QHBoxLayout *layout = new QHBoxLayout(this);
   layout->setMargin(0);
   layout->setSpacing(KDialog::spacingHint());
-  layout->setAutoAdd(true);
   d->m_day = new ExtDateWidgetSpinBox(1, 1, this);
+  layout->addWidget(d->m_day);
   d->m_month = new QComboBox(this);
+  layout->addWidget(d->m_month);
   d->m_month->setEditable(false);
   for (int i = 1; ; ++i)
   {
@@ -119,6 +120,7 @@ void ExtDateWidget::init(const ExtDate& date)
 
   d->m_year = new ExtDateWidgetSpinBox(d->calendar->minValidYear(),
 				     d->calendar->maxValidYear(), this);
+  layout->addWidget(d->m_year);
 
   connect(d->m_day, SIGNAL(valueChanged(int)), this, SLOT(slotDateChanged()));
   connect(d->m_month, SIGNAL(activated(int)), this, SLOT(slotDateChanged()));

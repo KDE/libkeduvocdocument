@@ -32,7 +32,7 @@ class ExtDateWidget;
 class EDPicker : public KMainWindow {
 	Q_OBJECT
 	public:
-		EDPicker( QWidget *parent, const char *name );
+		EDPicker( QWidget *parent );
 		~EDPicker() {}
 
 	public slots:

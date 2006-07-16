@@ -6,7 +6,7 @@
 
 void test1_unit(int a_year)
 {
-	std::cout << a_year << "  (QDate|ExtDate): " << ((QDate::leapYear(a_year)) ? "yes" : "no")
+	std::cout << a_year << "  (QDate|ExtDate): " << ((QDate::isLeapYear(a_year)) ? "yes" : "no")
 			<<"|"<< ((ExtDate::leapYear(a_year)) ? "yes" : "no") << std::endl;
 }
 
@@ -278,11 +278,11 @@ void test6()
 void test7()
 {
 	std::cout << "Express the current date:\n" << std::endl;
-	QDate q = QDate::currentDate(Qt::LocalTime);
+	QDate q = QDate::currentDate();
 	ExtDate e = ExtDate::currentDate(Qt::TimeSpec(Qt::LocalTime));
 	std::cout << "Qt::LocalTime :: ExtDate : " << e.toString().toLocal8Bit().data() << "   QDate : "
 		<< q.toString().toLocal8Bit().data() << std::endl;
-	q = QDate::currentDate(Qt::UTC);
+	q = QDateTime::currentDateTime().toUTC().date();
 	e = ExtDate::currentDate(Qt::UTC);
 	std::cout << "Qt::UTC       :: ExtDate : " << e.toString().toLocal8Bit().data() << "   QDate : "
 		<< q.toString().toLocal8Bit().data() << std::endl;

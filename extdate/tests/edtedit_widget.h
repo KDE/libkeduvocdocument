@@ -28,7 +28,7 @@ class ExtDateTimeEdit;
 class EDTEdit : public KMainWindow {
 	Q_OBJECT
 	public:
-		EDTEdit( QWidget *parent, const char *name );
+		EDTEdit( QWidget *parent );
 		~EDTEdit();
 
 //	public slots:
