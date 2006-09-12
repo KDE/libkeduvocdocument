@@ -171,7 +171,7 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
         QString msg = i18n("Could not load \"%1\"\nDo you want to try again?", url.path());
         int result = KMessageBox::warningContinueCancel(0, msg,
                                                         kapp->makeStdCaption(i18n("I/O Failure")),
-                                                        i18n("&Retry"));
+                                                        KGuiItem(i18n("&Retry")));
         if ( result == KMessageBox::Cancel ) {
           Init();
           return false;
@@ -268,7 +268,7 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
       QString msg = i18n("Could not save \"%1\"\nDo you want to try again?", tmp.path());
       int result = KMessageBox::warningContinueCancel(0, msg,
                                                       kapp->makeStdCaption(i18n("I/O Failure")),
-                                                      i18n("&Retry"));
+                                                      KGuiItem(i18n("&Retry")));
       if ( result == KMessageBox::Cancel ) return false;
     }
   }
