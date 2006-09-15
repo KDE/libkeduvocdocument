@@ -494,6 +494,10 @@ ExtDate ExtDate::fromString( const QString& s, Qt::DateFormat f )
 			//Three possible date formats:
 			//dd mth yyyy; mth dd yyyy; wkd mth dd yyyy
 			QStringList ss = s.split( " " );
+
+			//Return invalid if we don't have at least 3 fields
+			if ( ss.size() < 3 ) return dt;
+
 			bool ok = false;
 			int month = -1;
 			uint imonth = 0;
