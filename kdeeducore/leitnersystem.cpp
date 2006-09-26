@@ -13,7 +13,7 @@
 
 #include <kdebug.h>
 
-LeitnerSystem::LeitnerSystem(QList<LeitnerBox>& boxes, QString name)
+LeitnerSystem::LeitnerSystem(const QList<LeitnerBox> &boxes, const QString &name)
 {
 	if( !boxes.empty() )
 		m_boxes = boxes;

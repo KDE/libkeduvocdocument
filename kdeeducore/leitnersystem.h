@@ -34,7 +34,7 @@ public:
 	 * @param boxes reference to a QList of LeitnerBox
 	 * @param name the new LeitnerSystems name
 	 */
-	LeitnerSystem( QList<LeitnerBox>& boxes, QString name );
+	LeitnerSystem( const QList<LeitnerBox> &boxes, const QString &name );
 
 	/**Destructor*/
 	~LeitnerSystem();

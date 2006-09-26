@@ -561,7 +561,7 @@ class EDUCORE_EXPORT KEduVocDocument : public QObject
    *                   true:always from beginning of word
    * @returns          the index of found entry, -1 if none
    */
-  int search(QString substr, int id, int first=0, int last=-1, bool word_start = false);
+  int search(const QString &substr, int id, int first=0, int last=-1, bool word_start = false);
 
   /**
    * @returns the URL of the XML file

@@ -139,7 +139,7 @@ bool KEduVocKvtmlWriter::saveLessonKvtMl (QDomDocument &domDoc, QDomElement &dom
 
 
 bool KEduVocKvtmlWriter::saveConjug(QDomDocument &domDoc, QDomElement &domElementParent,
-                                    const KEduVocConjugation &curr_conjug, QString type)
+                                    const KEduVocConjugation &curr_conjug, const QString &type)
 {
   if (!curr_conjug.pers1Singular(type).isEmpty() )
   {

@@ -84,7 +84,7 @@ public:
   bool saveConjugHeader  (QDomDocument &domDoc, QDomElement &domElementParent,
                           QList<KEduVocConjugation> &curr_conjug);
   bool saveConjug        (QDomDocument &domDoc, QDomElement &domElementParent,
-                          const KEduVocConjugation &curr_conjug, QString type);
+                          const KEduVocConjugation &curr_conjug, const QString &type);
   bool saveConjugEntry   (QDomDocument &domDoc, QDomElement &domElementParent,
                           KEduVocConjugation &curr_conjug);
 

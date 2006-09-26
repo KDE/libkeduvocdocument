@@ -21,19 +21,12 @@
 */
 
 #include <QApplication>
+#include <QComboBox>
 #include <QLayout>
 #include <QStyle>
 #include <QToolButton>
-#include <q3popupmenu.h>
-//Added by qt3to4:
-#include <QKeyEvent>
-#include <QEvent>
-#include <QFrame>
-#include <QHBoxLayout>
-#include <QBoxLayout>
-#include <QVBoxLayout>
-#include <QResizeEvent>
-#include <QComboBox>
+#include <Q3PopupMenu>
+
 #include <kdialog.h>
 #include <klocale.h>
 #include <kicon.h>
@@ -87,7 +80,7 @@ void ExtDatePicker::fillWeeksCombo(const ExtDate &date)
   {
     int year = 0;
     QString week = i18n("Week %1", d->calendar->weekNumber(day, &year));
-    if ( year != date.year() ) week += "*";  // show that this is a week from a different year
+    if ( year != date.year() ) week += '*';  // show that this is a week from a different year
     d->selectWeek->addItem(week);
   }
 }
