@@ -205,7 +205,7 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
       ft = csv;
     else
     {
-      tmp.setFileName(tmp.path() + '.' + KVTML_EXT);
+      tmp.setFileName(tmp.path() + "." KVTML_EXT);
       ft = kvtml;
     }
   }
