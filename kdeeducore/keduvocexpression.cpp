@@ -342,27 +342,27 @@ KEduVocMultipleChoice KEduVocExpression::multipleChoice (int idx) const
 }
 
 
-QString KEduVocExpression::pronounciation(int idx) const
+QString KEduVocExpression::pronunciation(int idx) const
 {
-  if (idx >= (int)m_pronounciations.size() || idx < 0) {
+  if (idx >= (int)m_pronunciations.size() || idx < 0) {
     return "";
   }
   else {
-    return m_pronounciations[idx];
+    return m_pronunciations[idx];
   }
 }
 
 
-void KEduVocExpression::setPronounciation(int idx, const QString & expr)
+void KEduVocExpression::setPronunciation(int idx, const QString & expr)
 {
   if ( idx < 0) return;
 
   // extend with empty strings if necessary
-  if ((int)m_pronounciations.size() <= idx )
-    for (int i = m_pronounciations.size(); i < idx+1; i++)
-      m_pronounciations.push_back ("");
+  if ((int)m_pronunciations.size() <= idx )
+    for (int i = m_pronunciations.size(); i < idx+1; i++)
+      m_pronunciations.push_back ("");
 
-  m_pronounciations[idx] = expr.simplified();
+  m_pronunciations[idx] = expr.simplified();
 }
 
 
@@ -430,8 +430,8 @@ void KEduVocExpression::removeTranslation (int idx)
    if (idx < (int)m_expressionTypes.size() )
      m_expressionTypes.removeAll(m_expressionTypes.at(idx - 1));
 
-   if (idx < (int)m_pronounciations.size() )
-     m_pronounciations.removeAll(m_pronounciations.at(idx - 1));
+   if (idx < (int)m_pronunciations.size() )
+     m_pronunciations.removeAll(m_pronunciations.at(idx - 1));
 
    if (idx < (int)m_grades.size() )
      m_grades.removeAll(m_grades.at(idx - 1));

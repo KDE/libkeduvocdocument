@@ -770,8 +770,8 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
     if (!(*first).antonym(0).isEmpty() )
       domElementOriginal.setAttribute(KV_ANTONYM, (*first).antonym(0));
 
-    if (!(*first).pronounciation(0).isEmpty() )
-      domElementOriginal.setAttribute(KV_PRONUNCE, (*first).pronounciation(0));
+    if (!(*first).pronunciation(0).isEmpty() )
+      domElementOriginal.setAttribute(KV_PRONUNCE, (*first).pronunciation(0));
 
     if (!(*first).uniqueType() && !(*first).type(0).isEmpty())
       domElementOriginal.setAttribute(KV_EXPRTYPE, (*first).type(0));
@@ -888,8 +888,8 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
       if (!(*first).antonym(trans).isEmpty() )
         domElementTranslation.setAttribute(KV_ANTONYM, (*first).antonym(trans));
 
-      if (!(*first).pronounciation(trans).isEmpty() )
-        domElementTranslation.setAttribute(KV_PRONUNCE, (*first).pronounciation(trans));
+      if (!(*first).pronunciation(trans).isEmpty() )
+        domElementTranslation.setAttribute(KV_PRONUNCE, (*first).pronunciation(trans));
 
       if (!(*first).uniqueType() && !(*first).type(trans).isEmpty())
         domElementTranslation.setAttribute(KV_EXPRTYPE, (*first).type(trans));

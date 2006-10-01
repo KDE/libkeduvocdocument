@@ -1195,7 +1195,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   if (!remark.isEmpty() )
     expr.setRemark (0, remark);
   if (!pronunce.isEmpty() )
-    expr.setPronounciation(0, pronunce);
+    expr.setPronunciation(0, pronunce);
   if (!type.isEmpty() )
     expr.setType(0, type);
   if (!synonym.isEmpty() )
@@ -1392,7 +1392,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     if (!remark.isEmpty() )
       expr.setRemark (count, remark);
     if (!pronunce.isEmpty() )
-      expr.setPronounciation(count, pronunce);
+      expr.setPronunciation(count, pronunce);
     if (!faux_ami_f.isEmpty() )
       expr.setFauxAmi (count, faux_ami_f, false);
     if (!faux_ami_t.isEmpty() )

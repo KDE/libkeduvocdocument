@@ -150,19 +150,19 @@ public:
    */
   void setTranslation(int index, const QString & expression);
 
-  /** sets pronounciation of this expression
+  /** sets pronunciation of this expression
    *
    * @param index            index of expression
-   * @param expression       pronounciation of this index
+   * @param expression       pronunciation of this index
    */
-  void setPronounciation(int index, const QString & expression);
+  void setPronunciation(int index, const QString & expression);
 
-  /** returns pronounciation of this expression
+  /** returns pronunciation of this expression
    *
    * @param index            index of expression
    * @return                 pronunciation or "" if none available
    */
-  QString pronounciation(int index) const;
+  QString pronunciation(int index) const;
 
   /** returns remarks of this expression
    *
@@ -456,7 +456,7 @@ private:
   QStringList m_synonym;
   QStringList m_example;
   QStringList m_antonym;
-  QStringList m_pronounciations;
+  QStringList m_pronunciations;
   QList<grade_t> m_grades;
   QList<grade_t> m_reverseGrades;
   QList<count_t> m_queryCounts;
