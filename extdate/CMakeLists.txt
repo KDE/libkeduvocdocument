@@ -15,7 +15,7 @@ set(extdate_LIB_SRCS
    extdatetimeedit.cpp 
    extdatewidget.cpp )
 
-kde4_automoc(${extdate_LIB_SRCS})
+kde4_automoc(extdate ${extdate_LIB_SRCS})
 
 kde4_add_library(extdate SHARED ${extdate_LIB_SRCS})
 
