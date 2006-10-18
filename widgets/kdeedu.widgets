@@ -7,7 +7,7 @@ Includes=kinstance.h
 ToolTip=A plot widget (KDE-Edu)
 WhatsThis=A widget for easily making 2-dimensional plots
 Group=Plot (KDE-Edu)
-ConstructorArgs=(0.0, 1.0, 0.0, 1.0, parent)
+ConstructorArgs=(parent, 0.0, 1.0, 0.0, 1.0)
 
 [ExtDateEdit]
 ToolTip=spinbox-based extended date editor (KDE-Edu)
