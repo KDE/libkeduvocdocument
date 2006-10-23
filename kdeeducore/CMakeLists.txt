@@ -16,7 +16,7 @@ set(kdeeducore_LIB_SRCS
    leitnersystemview.cpp
    prefleitner.cpp )
 
-kde4_automoc(kdeeducore ${kdeeducore_LIB_SRCS})
+kde4_automoc(${kdeeducore_LIB_SRCS})
 
 kde4_add_ui_files(kdeeducore_LIB_SRCS
    prefleitnerbase.ui
