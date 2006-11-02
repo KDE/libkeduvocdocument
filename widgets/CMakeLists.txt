@@ -8,7 +8,7 @@ include_directories(
 ########### next target ###############
 
 set(kdeeduwidgets_PART_SRCS
-  kdeeduwidgets.cpp
+  ${CMAKE_CURRENT_BINARY_DIR}/kdeeduwidgets.cpp
 )
 
 KDE4_ADD_WIDGET_FILES(${kdeeduwidgets_PART_SRCS} kdeedu.widgets)
