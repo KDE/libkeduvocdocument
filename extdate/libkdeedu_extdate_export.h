@@ -24,7 +24,19 @@
 /* needed for KDE_EXPORT macros */
 #include <kdemacros.h>
 
+#if defined Q_OS_WIN
+
+#ifndef EXTDATE_EXPORT
+# ifdef MAKE_EXTDATE_LIB
+#  define EXTDATE_EXPORT KDE_EXPORT
+# else
+#  define EXTDATE_EXPORT KDE_IMPORT
+# endif
+#endif
+
+#else
 /* export statements for unix */
 #define EXTDATE_EXPORT KDE_EXPORT
+#endif
 
 #endif

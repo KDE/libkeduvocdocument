@@ -24,7 +24,19 @@
 /* needed for KDE_EXPORT macros */
 #include <kdemacros.h>
 
+#if defined Q_OS_WIN
+
+#ifndef EDUUI_EXPORT
+# ifdef MAKE_EDUUI_LIB
+#  define EDUUI_EXPORT KDE_EXPORT
+# else
+#  define EDUUI_EXPORT KDE_IMPORT
+# endif
+#endif
+
+#else /* UNIX */
 /* export statements for unix */
 #define EDUUI_EXPORT KDE_EXPORT
+#endif
 
 #endif
