@@ -67,7 +67,7 @@ class KEduVocDocument;
 /**
 @author Eric Pignet
 */
-class EDUCORE_EXPORT KEduVocKvtmlWriter
+class KDEEDUCORE_EXPORT KEduVocKvtmlWriter
 {
 public:
   KEduVocKvtmlWriter(QFile *file);

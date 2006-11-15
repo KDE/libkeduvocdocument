@@ -71,7 +71,7 @@ class KEduVocDocument;
 /**
 @author Eric Pignet
 */
-class EDUCORE_EXPORT  KEduVocKvtmlReader : public QObject
+class KDEEDUCORE_EXPORT  KEduVocKvtmlReader : public QObject
 {
 public:
 	KEduVocKvtmlReader(QFile *file);

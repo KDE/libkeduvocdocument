@@ -24,7 +24,7 @@
 @author Martin Pfeiffer
 */
 
-class EDUCORE_EXPORT LeitnerSystem
+class KDEEDUCORE_EXPORT LeitnerSystem
 {
 public:
 	/**Constructor without arguments*/

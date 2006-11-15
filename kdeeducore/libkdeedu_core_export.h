@@ -25,16 +25,16 @@
 #include <kdemacros.h>
 
 #if defined Q_OS_WIN
-#ifndef EDUCORE_EXPORT
-# ifdef MAKE_EDUCORE_LIB
-#  define EDUCORE_EXPORT KDE_EXPORT
+#ifndef KDEEDUCORE_EXPORT
+# ifdef MAKE_KDEEDUCORE_LIB
+#  define KDEEDUCORE_EXPORT KDE_EXPORT
 # else
-#  define EDUCORE_EXPORT KDE_IMPORT
+#  define KDEEDUCORE_EXPORT KDE_IMPORT
 # endif
 #endif
 
 #else /* UNIX */
-#define EDUCORE_EXPORT KDE_EXPORT
+#define KDEEDUCORE_EXPORT KDE_EXPORT
 #endif
 
 #endif

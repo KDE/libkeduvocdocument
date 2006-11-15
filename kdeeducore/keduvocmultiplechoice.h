@@ -33,7 +33,7 @@
 
 #define MAX_MULTIPLE_CHOICE  5  // select one out of x
 
-class EDUCORE_EXPORT KEduVocMultipleChoice
+class KDEEDUCORE_EXPORT KEduVocMultipleChoice
 {
 
 public:

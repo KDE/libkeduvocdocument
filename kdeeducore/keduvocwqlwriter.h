@@ -26,7 +26,7 @@
 
 class KEduVocDocument;
 
-class EDUCORE_EXPORT KEduVocWqlWriter
+class KDEEDUCORE_EXPORT KEduVocWqlWriter
 {
 public:
   KEduVocWqlWriter(QFile *file);

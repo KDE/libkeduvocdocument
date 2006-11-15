@@ -26,7 +26,7 @@
 
 class KEduVocDocument;
 
-class EDUCORE_EXPORT KEduVocWqlReader : public QObject
+class KDEEDUCORE_EXPORT KEduVocWqlReader : public QObject
 {
 public:
 	KEduVocWqlReader(QFile *file);

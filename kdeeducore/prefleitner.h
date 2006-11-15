@@ -37,7 +37,7 @@ namespace Ui
  * This class is a dialog for configuring a LeitnerSystem
  * @author Martin Pfeiffer <hubipete@gmx.net>
  */
-class EDUCORE_EXPORT PrefLeitner : public QDialog
+class KDEEDUCORE_EXPORT PrefLeitner : public QDialog
 {
 	Q_OBJECT
 

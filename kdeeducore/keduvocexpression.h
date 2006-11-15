@@ -64,7 +64,7 @@ typedef unsigned short count_t;
   translations
   */
 
-class EDUCORE_EXPORT KEduVocExpression
+class KDEEDUCORE_EXPORT KEduVocExpression
 {
 public:
 

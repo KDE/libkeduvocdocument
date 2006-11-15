@@ -54,7 +54,7 @@
  * It contains all available articles of the language as QString
  */
 
-class EDUCORE_EXPORT KEduVocArticle
+class KDEEDUCORE_EXPORT KEduVocArticle
 {
 
 public:
@@ -109,7 +109,7 @@ protected:
 };
 
 
-class EDUCORE_EXPORT KEduVocComparison
+class KDEEDUCORE_EXPORT KEduVocComparison
 {
 
 public:
@@ -163,7 +163,7 @@ protected:
 /**
  * The conjugation of a verb
  */
-class EDUCORE_EXPORT KEduVocConjugation
+class KDEEDUCORE_EXPORT KEduVocConjugation
 {
 
 public:

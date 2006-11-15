@@ -252,7 +252,7 @@ class LeitnerSystem;
  * This class contains the expressions of your vocabulary
  * as well as other information about the vocabulary
  */
-class EDUCORE_EXPORT KEduVocDocument : public QObject
+class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
 {
   Q_OBJECT
   friend class KEduVocKvtmlWriter;

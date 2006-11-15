@@ -28,7 +28,7 @@ class LeitnerSystem;
  * @author Martin Pfeiffer
  */
 
-class EDUCORE_EXPORT LeitnerSystemView : public QWidget
+class KDEEDUCORE_EXPORT LeitnerSystemView : public QWidget
 {
 	Q_OBJECT
 		
