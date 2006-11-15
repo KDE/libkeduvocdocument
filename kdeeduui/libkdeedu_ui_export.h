@@ -26,17 +26,17 @@
 
 #if defined Q_OS_WIN
 
-#ifndef EDUUI_EXPORT
-# ifdef MAKE_EDUUI_LIB
-#  define EDUUI_EXPORT KDE_EXPORT
+#ifndef KDEEDUUI_EXPORT
+# ifdef MAKE_KDEEDUUI_LIB
+#  define KDEEDUUI_EXPORT KDE_EXPORT
 # else
-#  define EDUUI_EXPORT KDE_IMPORT
+#  define KDEEDUUI_EXPORT KDE_IMPORT
 # endif
 #endif
 
 #else /* UNIX */
 /* export statements for unix */
-#define EDUUI_EXPORT KDE_EXPORT
+#define KDEEDUUI_EXPORT KDE_EXPORT
 #endif
 
 #endif
