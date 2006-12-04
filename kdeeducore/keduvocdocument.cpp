@@ -17,12 +17,12 @@
 
 #include "keduvocdocument.h"
 
+#include <QApplication>
 #include <QFileInfo>
 #include <QList>
 #include <QTextStream>
 #include <QtAlgorithms>
 
-#include <kapplication.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
@@ -170,7 +170,7 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
         // the two messages should be merged
         QString msg = i18n("Could not load \"%1\"\nDo you want to try again?", url.path());
         int result = KMessageBox::warningContinueCancel(0, msg,
-                                                        kapp->makeStdCaption(i18n("I/O Failure")),
+                                                        i18n("I/O Failure"),
                                                         KGuiItem(i18n("&Retry")));
         if ( result == KMessageBox::Cancel ) {
           Init();
@@ -267,7 +267,7 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
       // the two messages should be merged
       QString msg = i18n("Could not save \"%1\"\nDo you want to try again?", tmp.path());
       int result = KMessageBox::warningContinueCancel(0, msg,
-                                                      kapp->makeStdCaption(i18n("I/O Failure")),
+                                                      i18n("I/O Failure"),
                                                       KGuiItem(i18n("&Retry")));
       if ( result == KMessageBox::Cancel ) return false;
     }

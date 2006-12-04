@@ -16,11 +16,11 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <kapplication.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 
+#include <QApplication>
 #include <QTextStream>
 #include <QList>
 
@@ -1665,7 +1665,7 @@ void KEduVocKvtmlReader::domErrorUnknownElement(const QString &elem)
       "read documents with unknown elements.\n", elem
      );
   QApplication::changeOverrideCursor(Qt::ArrowCursor);
-  QString s = kapp->makeStdCaption(i18n("Unknown element"));
+  QString s = i18n("Unknown element");
   KMessageBox::sorry(0, ln+msg, s);
   QApplication::restoreOverrideCursor();
 }
@@ -1673,7 +1673,7 @@ void KEduVocKvtmlReader::domErrorUnknownElement(const QString &elem)
 void KEduVocKvtmlReader::domError(const QString &text )
 {
   QApplication::changeOverrideCursor(Qt::ArrowCursor);
-  QString s = kapp->makeStandardCaption(i18n("Error"), this);
+  QString s = i18n("Error");
   QString ln = i18n("File:\t%1\n", m_doc->URL().path());
   QString msg = text;
   KMessageBox::error(0, ln+msg, s);
