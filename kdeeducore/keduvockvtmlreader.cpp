@@ -1673,7 +1673,7 @@ void KEduVocKvtmlReader::domErrorUnknownElement(const QString &elem)
 void KEduVocKvtmlReader::domError(const QString &text )
 {
   QApplication::changeOverrideCursor(Qt::ArrowCursor);
-  QString s = kapp->makeStdCaption(i18n("Error"));
+  QString s = kapp->makeStandardCaption(i18n("Error"), this);
   QString ln = i18n("File:\t%1\n", m_doc->URL().path());
   QString msg = text;
   KMessageBox::error(0, ln+msg, s);
