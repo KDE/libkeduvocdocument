@@ -773,7 +773,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
 
   grade = KV_NORM_GRADE;
   rev_grade = KV_NORM_GRADE;
-  QDomAttr domAttrGrade = domElementExpressionChild.attributeNode(KV_LANG);
+  QDomAttr domAttrGrade = domElementExpressionChild.attributeNode(KV_GRADE);
   if (!domAttrGrade.isNull())
   {
     QString s = domAttrGrade.value();
