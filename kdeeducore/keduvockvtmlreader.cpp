@@ -988,7 +988,9 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
   QDomAttr domAttrInactive = domElementParent.attributeNode(KV_INACTIVE);
   if (!domAttrInactive.isNull())
-    active = !domAttrInactive.value().toInt();
+    active = domAttrInactive.value() == "1" ? false : true;
+  else
+    active = true;
 
   QDomAttr domAttrType = domElementParent.attributeNode(KV_EXPRTYPE);
   if (!domAttrType.isNull())
@@ -1178,7 +1180,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   expr.setLesson (lesson);
   expr.setInQuery(inquery);
   expr.setActive(active);
-  kDebug() << "active = " << inquery << " " << expr.isInQuery() << endl;
+
   if (conjug.size() > 0)
   {
     expr.setConjugation(0, conjug[0]);
