@@ -292,7 +292,7 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
    * @param expression      expression to append
    */
   inline void appendEntry (KEduVocExpression *expression)
-    { m_vocabulary.append(*expression); m_dirty = true; }
+    { m_vocabulary.append(*expression); setModified(); }
 
   /**
    * Inserts a new expression
@@ -301,7 +301,7 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
    * @param index           index of entry
    */
   inline void insertEntry(KEduVocExpression *expression, int index)
-    { m_vocabulary.insert(index, *expression); m_dirty = true; }
+    { m_vocabulary.insert(index, *expression); setModified(); }
 
   /**
    * Removes an expression from the document
@@ -314,7 +314,7 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
    * Removes all expressions from the document (clears vocabulary)
    */
   inline void removeAllEntries()
-    { m_vocabulary.clear(); m_dirty = true; }
+    { m_vocabulary.clear(); setModified(); }
 
   /**
    * Sorts vocabulary alphabetically

@@ -273,8 +273,7 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
     }
   }
   m_url = tmp;
-  m_dirty = false;
-  emit docModified(false);
+  setModified(false);
   return true;
 }
 
@@ -1194,7 +1193,7 @@ void KEduVocDocument::shuffle()
   KRandomSequence* rs;
   rs = new KRandomSequence();
   rs->randomize(m_vocabulary);
-  m_dirty = true;
+  setModified();
 }
 
 #include "keduvocdocument.moc"
