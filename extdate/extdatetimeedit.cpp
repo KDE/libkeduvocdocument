@@ -61,8 +61,8 @@ void ExtDateEdit::init( const ExtDate &d ) {
 	m_DateFormat.replace( "e", "d" );
 
 	//Make sure highlight is persistent when value is changed
+	connect( this, SIGNAL( valueChanged( int ) ), this, SLOT( slotEmitDateChanged() ) );
 	connect( this, SIGNAL( dateChanged( const ExtDate & ) ), this, SLOT( slotRefreshHighlight() ) );
-	connect( this, SIGNAL( dateChanged( const ExtDate & ) ), this, SLOT( slotEmitDateChanged() ) );
 
 	edLineEdit *edle = new edLineEdit( this );
 	setLineEdit(edle);
