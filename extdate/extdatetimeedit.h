@@ -156,7 +156,7 @@ class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 		void invokeKey( Qt::Key k );
 
 	signals:
-		void valueChanged( ExtDate d );
+		void dateChanged( ExtDate d );
 
 	protected:
 /**
@@ -209,7 +209,7 @@ class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 	*/
 		void slotRefreshHighlight();
 
-		void slotEmitValueChanged();
+		void slotEmitDateChanged();
 
 	public:
 /**
@@ -326,10 +326,10 @@ class EXTDATE_EXPORT ExtDateTimeEdit : public QFrame {
 dt.time() ); }
 
 	signals:
-		void valueChanged( ExtDateTime dt );
+		void dateTimeChanged( ExtDateTime dt );
 
 	private slots:
-		void slotEmitValueChanged();
+		void slotEmitDateTimeChanged();
 
 	private:
 	/**
