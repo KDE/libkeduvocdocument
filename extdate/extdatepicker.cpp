@@ -145,7 +145,7 @@ void ExtDatePicker::init( const ExtDate &dt )
   d->selectWeek = new QComboBox(this);
   d->selectWeek->setEditable(false);  // read only week selection
   d->todayButton = new QToolButton(this);
-  d->todayButton->setIcon(SmallIconSet("today"));
+  d->todayButton->setIcon(KIcon("today"));
 
   yearForward->setToolTip(i18n("Next year"));
   yearBackward->setToolTip(i18n("Previous year"));
@@ -162,17 +162,17 @@ void ExtDatePicker::init( const ExtDate &dt )
   line->installEventFilter( this );
   if (  QApplication::isRightToLeft() )
   {
-      yearForward->setIcon(BarIconSet(QLatin1String("2leftarrow")));
-      yearBackward->setIcon(BarIconSet(QLatin1String("2rightarrow")));
-      monthForward->setIcon(BarIconSet(QLatin1String("1leftarrow")));
-      monthBackward->setIcon(BarIconSet(QLatin1String("1rightarrow")));
+      yearForward->setIcon(KIcon(QLatin1String("2leftarrow")));
+      yearBackward->setIcon(KIcon(QLatin1String("2rightarrow")));
+      monthForward->setIcon(KIcon(QLatin1String("1leftarrow")));
+      monthBackward->setIcon(KIcon(QLatin1String("1rightarrow")));
   }
   else
   {
-      yearForward->setIcon(BarIconSet(QLatin1String("2rightarrow")));
-      yearBackward->setIcon(BarIconSet(QLatin1String("2leftarrow")));
-      monthForward->setIcon(BarIconSet(QLatin1String("1rightarrow")));
-      monthBackward->setIcon(BarIconSet(QLatin1String("1leftarrow")));
+      yearForward->setIcon(KIcon(QLatin1String("2rightarrow")));
+      yearBackward->setIcon(KIcon(QLatin1String("2leftarrow")));
+      monthForward->setIcon(KIcon(QLatin1String("1rightarrow")));
+      monthBackward->setIcon(KIcon(QLatin1String("1leftarrow")));
   }
   connect(table, SIGNAL(dateChanged(const ExtDate&)), SLOT(dateChangedSlot(const ExtDate&)));
   connect(table, SIGNAL(tableClicked()), SLOT(tableClickedSlot()));
@@ -511,7 +511,7 @@ ExtDatePicker::setCloseButton( bool enable )
         d->navigationLayout->addSpacing(KDialog::spacingHint());
         d->navigationLayout->addWidget(d->closeButton);
         d->closeButton->setToolTip(i18n("Close"));
-        d->closeButton->setIcon( SmallIconSet("remove") );
+        d->closeButton->setIcon( KIcon("remove") );
         connect( d->closeButton, SIGNAL( clicked() ),
                  topLevelWidget(), SLOT( close() ) );
     }
