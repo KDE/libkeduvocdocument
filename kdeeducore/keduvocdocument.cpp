@@ -1,9 +1,9 @@
 /***************************************************************************
                         Vocabulary Document for KDE Edu
     -----------------------------------------------------------------------
-    copyright           : (C) 1999-2001 Ewald Arnold
-                          (C) 2001 The KDE-EDU team
-                          (C) 2005 Peter Hedlund <peter.hedlund@kdemail.net>
+    copyright      : (C) 1999-2001 Ewald Arnold
+                     (C) 2001 The KDE-EDU team
+                     (C) 2005-2007 Peter Hedlund <peter.hedlund@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -1125,29 +1125,18 @@ int KEduVocDocument::cleanUp()
   ExpRefList shadow;
   QList<int> to_delete;
 
-  for (int i = 0; i < (int) m_vocabulary.size(); i++)
-    shadow.push_back (ExpRef (entry(i), i));
+  for (int i = 0; i < (int) m_vocabulary.count(); i++)
+    shadow.append(ExpRef (entry(i), i));
   qStableSort(shadow.begin(), shadow.end());
-
-#ifdef CLEAN_BUG
-  ofstream sso ("shadow.out");
-  for (int i = shadow.size()-1; i > 0; i--) {
-    kve1 = shadow[i].exp;
-    sso << kve1->original() << "  ";
-    for (int l = 1; l < (int) numIdentifiers(); l++ )
-      sso << kve1->translation(l)  << "  ";
-    sso << endl;
-  }
-#endif
 
   int ent_no = 0;
   int ent_percent = m_vocabulary.size () / 100;
   float f_ent_percent = m_vocabulary.size () / 100.0;
   emit progressChanged(this, 0);
 
-  for (int i = shadow.size()-1; i > 0; i--) {
+  for (int i = shadow.size() - 1; i > 0; i--) {
     kve1 = shadow[i].exp;
-    kve2 = shadow[i-1].exp;
+    kve2 = shadow[i - 1].exp;
 
     ent_no++;
     if (ent_percent != 0 && (ent_no % ent_percent) == 0 )
@@ -1160,7 +1149,7 @@ int KEduVocDocument::cleanUp()
           equal = false;
 
       if (equal) {
-        to_delete.push_back(shadow[i-1].idx);
+        to_delete.append(shadow[i - 1].idx);
         count++;
       }
     }
@@ -1173,15 +1162,12 @@ int KEduVocDocument::cleanUp()
   emit progressChanged(this, 0);
 
   qStableSort(to_delete.begin(), to_delete.end());
-  //std::sort (to_delete.begin(), to_delete.end() );
-  for (int i = (int) to_delete.size()-1; i >= 0; i--) {
+
+  for (int i = (int) to_delete.count() - 1; i >= 0; i--) {
     ent_no++;
     if (ent_percent != 0 && (ent_no % ent_percent) == 0 )
       emit progressChanged(this, (int)(50 + ent_no / f_ent_percent / 2.0));
-#ifdef CLEAN_BUG
-    sso << entry(to_delete[i])->getOriginal() << endl;
-#endif
-    removeEntry (to_delete[i]);
+    removeEntry(to_delete[i]);
     setModified();
   }
 
@@ -1190,9 +1176,8 @@ int KEduVocDocument::cleanUp()
 
 void KEduVocDocument::shuffle()
 {
-  KRandomSequence* rs;
-  rs = new KRandomSequence();
-  rs->randomize(m_vocabulary);
+  KRandomSequence rs;
+  rs.randomize(m_vocabulary);
   setModified();
 }
 

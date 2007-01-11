@@ -339,7 +339,7 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
   void shuffle();
 
   /**
-   * Removes equal entries (original plus all translations)
+   * Removes duplicate entries (original plus all translations)
    *
    * @returns                 number of removed entries
    */
