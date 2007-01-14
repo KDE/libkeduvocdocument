@@ -496,7 +496,7 @@ void KEduVocDocument::removeIdentifier(int index)
 {
   if (index < (int)m_identifiers.size() && index >= 1 )
   {
-    m_identifiers.takeAt(index);
+    m_identifiers.removeAt(index);
     foreach( KEduVocExpression exp, m_vocabulary )
       exp.removeTranslation(index);
   }

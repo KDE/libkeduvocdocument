@@ -391,71 +391,71 @@ QString KEduVocExpression::translation (int idx) const
 
 void KEduVocExpression::removeTranslation (int idx)
 {
-   if (idx <= 0)
-     return;
+  if (idx <= 0)
+    return;
 
-   if (idx <= numTranslations())
-     m_translations.removeAll(m_translations.at(idx - 1));
+  if (idx <= numTranslations())
+    m_translations.removeAt(idx - 1);
 
-   if (idx < (int)m_remarks.size() )
-     m_remarks.removeAll(m_remarks.at(idx - 1));
+  if (idx < (int)m_remarks.size())
+    m_remarks.removeAt(idx - 1);
 
-   if (idx < (int)m_conjugations.size() )
-     m_conjugations.removeAll(m_conjugations.at(idx -1));
+  if (idx < (int)m_conjugations.size())
+    m_conjugations.removeAt(idx -1);
 
-   if (idx < (int)m_comparisons.size() )
-     m_comparisons.removeAll(m_comparisons.at(idx - 1));
+  if (idx < (int)m_comparisons.size())
+    m_comparisons.removeAt(idx - 1);
 
-   if (idx < (int)m_fauxAmi.size() )
-     m_fauxAmi.removeAll(m_fauxAmi.at(idx -  1));
+  if (idx < (int)m_fauxAmi.size())
+    m_fauxAmi.removeAt(idx -  1);
 
-   if (idx < (int)m_reverseFauxAmi.size() )
-     m_reverseFauxAmi.removeAll(m_reverseFauxAmi.at(idx - 1));
+  if (idx < (int)m_reverseFauxAmi.size())
+    m_reverseFauxAmi.removeAt(idx - 1);
 
-   if (idx < (int)m_synonym.size() )
-     m_synonym.removeAll(m_synonym.at(idx - 1));
+  if (idx < (int)m_synonym.size())
+    m_synonym.removeAt(idx - 1);
 
-   if (idx < (int)m_example.size() )
-     m_example.removeAll(m_example.at(idx - 1));
+  if (idx < (int)m_example.size())
+    m_example.removeAt(idx - 1);
 
-   if (idx < (int)m_usageLabels.size() )
-     m_usageLabels.removeAll(m_usageLabels.at(idx - 1));
+  if (idx < (int)m_usageLabels.size())
+    m_usageLabels.removeAt(idx - 1);
 
-   if (idx < (int)m_paraphrases.size() )
-     m_paraphrases.removeAll(m_paraphrases.at(idx - 1));
+  if (idx < (int)m_paraphrases.size())
+    m_paraphrases.removeAt(idx - 1);
 
-   if (idx < (int)m_antonym.size() )
-     m_antonym.removeAll(m_antonym.at(idx - 1));
+  if (idx < (int)m_antonym.size() )
+    m_antonym.removeAt(idx - 1);
 
-   if (idx < (int)m_expressionTypes.size() )
-     m_expressionTypes.removeAll(m_expressionTypes.at(idx - 1));
+  if (idx < (int)m_expressionTypes.size())
+    m_expressionTypes.removeAt(idx - 1);
 
-   if (idx < (int)m_pronunciations.size() )
-     m_pronunciations.removeAll(m_pronunciations.at(idx - 1));
+  if (idx < (int)m_pronunciations.size())
+    m_pronunciations.removeAt(idx - 1);
 
-   if (idx < (int)m_grades.size() )
-     m_grades.removeAll(m_grades.at(idx - 1));
+  if (idx < (int)m_grades.size())
+    m_grades.removeAt(idx - 1);
 
-   if (idx < (int)m_reverseGrades.size() )
-     m_reverseGrades.removeAll(m_reverseGrades.at(idx - 1));
+  if (idx < (int)m_reverseGrades.size())
+    m_reverseGrades.removeAt(idx - 1);
 
-   if (idx < (int)m_queryCounts.size() )
-     m_queryCounts.removeAll(m_queryCounts.at(idx - 1));
+  if (idx < (int)m_queryCounts.size())
+    m_queryCounts.removeAt(idx - 1);
 
-   if (idx < (int)m_reverseQueryCounts.size() )
-     m_reverseQueryCounts.removeAll(m_reverseQueryCounts.at(idx - 1));
+  if (idx < (int)m_reverseQueryCounts.size())
+    m_reverseQueryCounts.removeAt(idx - 1);
 
-   if (idx < (int)m_badCounts.size() )
-     m_badCounts.removeAll(m_badCounts.at(idx - 1));
+  if (idx < (int)m_badCounts.size())
+    m_badCounts.removeAt(idx - 1);
 
-   if (idx < (int)m_reverseBadCounts.size() )
-     m_reverseBadCounts.removeAll(m_reverseBadCounts.at(idx - 1));
+  if (idx < (int)m_reverseBadCounts.size())
+    m_reverseBadCounts.removeAt(idx - 1);
 
-   if (idx < (int)m_queryDates.size() )
-     m_queryDates.removeAll(m_queryDates.at(idx - 1));
+  if (idx < (int)m_queryDates.size())
+    m_queryDates.removeAt(idx - 1);
 
-   if (idx < (int)m_reverseQueryDates.size() )
-     m_reverseQueryDates.removeAll(m_reverseQueryDates.at(idx - 1));
+  if (idx < (int)m_reverseQueryDates.size())
+    m_reverseQueryDates.removeAt(idx - 1);
 }
 
 
