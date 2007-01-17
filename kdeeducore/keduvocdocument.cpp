@@ -39,8 +39,9 @@
 //  KEduVocDocument
 //********************************************************
 
-KEduVocDocument::KEduVocDocument(QObject */*parent*/)
+KEduVocDocument::KEduVocDocument(QObject *parent)
 {
+  Q_UNUSED(parent);
   Init();
 }
 
@@ -473,32 +474,14 @@ void KEduVocDocument::setSizeHint (int idx, const int width)
   }
 }
 
-/*
-class eraseTrans : public unary_function<KEduVocExpression, void>
-{
-
-public:
-
-  eraseTrans (int idx)
-    : index (idx) {}
-
-  void operator() (KEduVocExpression& x) const
-    {
-      x.removeTranslation(index);
-    }
-
- private:
-    int index;
-};
-*/
 
 void KEduVocDocument::removeIdentifier(int index)
 {
   if (index < (int)m_identifiers.size() && index >= 1 )
   {
     m_identifiers.removeAt(index);
-    foreach( KEduVocExpression exp, m_vocabulary )
-      exp.removeTranslation(index);
+    for (int i = 0; i < m_vocabulary.count(); i++)
+      m_vocabulary[i].removeTranslation(index);
   }
 }
 
