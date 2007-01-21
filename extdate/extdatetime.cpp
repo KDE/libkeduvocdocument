@@ -1052,7 +1052,7 @@ ExtDateTime ExtDateTime::currentDateTime( Qt::TimeSpec ts )
 {
     ExtDateTime dt;
     dt.setDate( ExtDate::currentDate(ts) );
-    QTime t = t.currentTime(ts);
+    QTime t = ts == Qt::LocalTime ? QTime::currentTime() : QDateTime::currentDateTime().toUTC().time();
     if ( t.hour()==0 && t.minute()==0 )         // midnight or right after?
         dt.setDate( ExtDate::currentDate(ts) ); // fetch date again
     dt.setTime( t );
