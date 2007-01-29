@@ -1,7 +1,7 @@
 [Global]
 PluginName=KDEEduWidgets
 Includes=kinstance.h
-#Init=new KInstance("kdeeduwidgets");
+#Init("kdeeduwidgets");
 
 [KPlotWidget]
 ToolTip=A plot widget (KDE-Edu)
