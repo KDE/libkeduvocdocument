@@ -770,113 +770,26 @@ void KEduVocDocument::setLeitnerSystem( LeitnerSystem* system )
 
 LeitnerSystem* KEduVocDocument::leitnerSystem()
 {
-	return m_leitnerSystem;
+  return m_leitnerSystem;
 }
 
-/*
-class resetAll : public unary_function<KEduVocExpression, void>
-{
-
-public:
-
-  resetAll (int less)
-    : lesson(less) {}
-
-  void operator() (KEduVocExpression& x)
-    {
-       for (int i = 0; i <= x.numTranslations(); i++) {
-         if (lesson == 0 || lesson == x.lesson())
-         {
-            x.setGrade(i, KV_NORM_GRADE, false);
-            x.setGrade(i, KV_NORM_GRADE, true);
-            x.setQueryCount (i, 0, true);
-            x.setQueryCount (i, 0, false);
-            x.setBadCount (i, 0, true);
-            x.setBadCount (i, 0, false);
-            QDateTime dt;
-            dt.setTime_t(0);
-            x.setQueryDate (i, dt, true);
-            x.setQueryDate (i, dt, false);
-         }
-       }
-    }
- private:
-  int lesson;
-};
-
-
-class resetOne : public unary_function<KEduVocExpression, void>
-{
-
-public:
-
-  resetOne (int idx, int less)
-    : index (idx), lesson(less) {}
-
-  void operator() (KEduVocExpression& x)
-    {
-       if (lesson == 0 || lesson == x.lesson())
-       {
-         x.setGrade(index, KV_NORM_GRADE, false);
-         x.setGrade(index, KV_NORM_GRADE, true);
-         x.setQueryCount (index, 0, true);
-         x.setQueryCount (index, 0, false);
-         x.setBadCount (index, 0, true);
-         x.setBadCount (index, 0, false);
-         QDateTime dt;
-         dt.setTime_t(0);
-         x.setQueryDate (index, dt, true);
-         x.setQueryDate (index, dt, false);
-       }
-    }
-
- private:
-  int index;
-  int lesson;
-};
-*/
 
 void KEduVocDocument::resetEntry(int index, int lesson)
 {
-  if (index < 0)
-  {
-    foreach( KEduVocExpression exp, m_vocabulary )
+  for (int i = 0; i < m_vocabulary.count(); i++)
+    if (/*lesson == 0 ||*/ lesson == m_vocabulary[i].lesson())
     {
-      for (int i = 0; i <= exp.numTranslations(); i++)
-      {
-        if (lesson == 0 || lesson == exp.lesson())
-        {
-          exp.setGrade(i, KV_NORM_GRADE, false);
-          exp.setGrade(i, KV_NORM_GRADE, true);
-          exp.setQueryCount(i, 0, true);
-          exp.setQueryCount(i, 0, false);
-          exp.setBadCount(i, 0, true);
-          exp.setBadCount(i, 0, false);
-          QDateTime dt;
-          dt.setTime_t(0);
-          exp.setQueryDate(i, dt, true);
-          exp.setQueryDate(i, dt, false);
-         }
-       }
+      m_vocabulary[i].setGrade(index, KV_NORM_GRADE, false);
+      m_vocabulary[i].setGrade(index, KV_NORM_GRADE, true);
+      m_vocabulary[i].setQueryCount(index, 0, true);
+      m_vocabulary[i].setQueryCount(index, 0, false);
+      m_vocabulary[i].setBadCount(index, 0, true);
+      m_vocabulary[i].setBadCount(index, 0, false);
+      QDateTime dt;
+      dt.setTime_t(0);
+      m_vocabulary[i].setQueryDate(index, dt, true);
+      m_vocabulary[i].setQueryDate(index, dt, false);
     }
-  }
-  else
-  {
-    foreach( KEduVocExpression exp, m_vocabulary )
-      if (lesson == 0 || lesson == exp.lesson())
-      {
-        exp.setGrade(index, KV_NORM_GRADE, false);
-        exp.setGrade(index, KV_NORM_GRADE, true);
-        exp.setQueryCount(index, 0, true);
-        exp.setQueryCount(index, 0, false);
-        exp.setBadCount(index, 0, true);
-        exp.setBadCount(index, 0, false);
-        QDateTime dt;
-        dt.setTime_t(0);
-        exp.setQueryDate(index, dt, true);
-        exp.setQueryDate(index, dt, false);
-      }
-  }
 }
 
 
