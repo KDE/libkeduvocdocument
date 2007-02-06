@@ -360,12 +360,12 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
   /**
    * Enables sorting
    */
-  inline void enableSorting(bool enable) { m_enableSorting = enable; }
+  inline void setSortingEnabled(bool enable) { m_sortingEnabled = enable; }
 
   /**
    * @returns whether sorting is enabled
    */
-  inline bool isSortingEnabled() { return m_enableSorting; }
+  inline bool isSortingEnabled() { return m_sortingEnabled; }
 
   /**
    * @returns the modification state of the doc
@@ -787,7 +787,7 @@ protected:
   bool                  m_sortLesson;
   bool                  m_unknownAttribute;
   bool                  m_unknownElement;
-  bool                  m_enableSorting;
+  bool                  m_sortingEnabled;
 
   // save these to document
   QStringList           m_identifiers;      //0= origin, 1,.. translations

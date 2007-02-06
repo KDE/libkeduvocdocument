@@ -564,7 +564,7 @@ bool KEduVocKvtmlWriter::saveOptionsKvtMl(QDomDocument &domDoc, QDomElement &dom
   QDomElement domElementOption = domDoc.createElement(KV_OPTION_GRP);
   QDomElement domElementSort = domDoc.createElement(KV_OPT_SORT);
 
-  domElementSort.setAttribute(KV_BOOL_FLAG, (m_doc->m_enableSorting?1:0));
+  domElementSort.setAttribute(KV_BOOL_FLAG, (m_doc->isSortingEnabled()?1:0));
   domElementOption.appendChild(domElementSort);
 
   domElementParent.appendChild(domElementOption);

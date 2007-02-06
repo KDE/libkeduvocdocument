@@ -74,7 +74,7 @@ void KEduVocDocument::Init ()
   m_sizeHints.clear();
   m_vocabulary.clear();
   m_dirty = false;
-  m_enableSorting = true;
+  m_sortingEnabled = true;
   m_unknownAttribute = false;
   m_unknownElement = false;
   m_sortLesson = false;
@@ -636,7 +636,7 @@ bool operator< (const KEduVocExpression &e1, const KEduVocExpression &e2)
 bool KEduVocDocument::sort(int index, Qt::SortOrder order)
 {
   bool result = false;
-  if (m_enableSorting && index < numIdentifiers())
+  if (m_sortingEnabled && index < numIdentifiers())
   {
     if (m_sortIdentifier.count() < m_identifiers.count())
       for (int i = m_sortIdentifier.count(); i < (int) m_identifiers.count(); i++)
@@ -651,7 +651,7 @@ bool KEduVocDocument::sort(int index, Qt::SortOrder order)
 bool KEduVocDocument::sort(int index)
 {
   bool result = false;
-  if (m_enableSorting && index < numIdentifiers())
+  if (m_sortingEnabled && index < numIdentifiers())
   {
     if (m_sortIdentifier.count() < m_identifiers.count())
       for (int i = m_sortIdentifier.count(); i < (int) m_identifiers.count(); i++)

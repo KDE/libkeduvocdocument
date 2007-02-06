@@ -469,15 +469,15 @@ bool KEduVocKvtmlReader::readOptions(QDomElement &domElementParent)
   {
     if (domElementSort.tagName() == KV_OPT_SORT)
     {
-      m_doc->m_enableSorting = true;
+      m_doc->setSortingEnabled(true);
       QDomAttr domAttrOn = domElementSort.attributeNode(KV_BOOL_FLAG);
       if (!domAttrOn.isNull())
-            {
-                bool ok = true;
-        m_doc->m_enableSorting = domAttrOn.value().toInt(&ok);  // returns 0 if the conversion fails
-          if (!ok)
-              m_doc->m_enableSorting = true;
-            }
+      {
+        bool ok = true;
+        m_doc->setSortingEnabled(domAttrOn.value().toInt(&ok));  // returns 0 if the conversion fails
+        if (!ok)
+          m_doc->setSortingEnabled(true);
+      }
     }
 
     domElementSort = domElementSort.nextSibling().toElement();
