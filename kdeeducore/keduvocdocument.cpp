@@ -623,14 +623,14 @@ bool operator< (const KEduVocExpression &e1, const KEduVocExpression &e2)
 {
   if (sortAscending)
     if (sortIndex == 0)
-      return e1.original() < e2.original();
+      return e1.original().toLower() < e2.original().toLower();
     else
-      return e1.translation(sortIndex) < e2.translation(sortIndex);
+      return e1.translation(sortIndex).toLower() < e2.translation(sortIndex).toLower();
   else
     if (sortIndex == 0)
-      return !(e1.original() < e2.original());
+      return !(e1.original().toLower() < e2.original().toLower());
     else
-      return !(e1.translation(sortIndex) < e2.translation(sortIndex));
+      return !(e1.translation(sortIndex).toLower() < e2.translation(sortIndex).toLower());
 }
 
 bool KEduVocDocument::sort(int index, Qt::SortOrder order)
