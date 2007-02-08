@@ -960,8 +960,7 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &filenam
    line.insert (0, c1);
    f.close();
 
-   bool stat = is.device()->status();
-   if (stat != IO_Ok)
+   if (!is.device()->isOpen())
      return kvd_none;
    if (c1 == '<' && c2 == '?' && c3 == 'x' && c4 == 'm' && c5 == 'l')
      return kvtml;
