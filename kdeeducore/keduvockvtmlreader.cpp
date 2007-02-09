@@ -1042,7 +1042,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
   QDomElement domElementExpressionChild = domElementParent.firstChild().toElement();
 
-  unsigned int count = 0;
+  int count = 0;
   org_found = false;
 
   if (domElementExpressionChild.tagName() != KV_ORG)
@@ -1095,7 +1095,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
       q_trans = lang;
   }
 
-  if (m_doc->m_identifiers.size() == 0)
+  if (m_doc->m_identifiers.count() == 0)
   {
     // first entry
     if (lang.isEmpty())                 // no definition in first entry
@@ -1257,7 +1257,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
                                         paraphrase))
       return false;
 
-    if (m_doc->m_vocabulary.size() == 0)
+    if (m_doc->m_vocabulary.count() == 0)
     {
       // only accept in first entry
       if (width >= 0)
@@ -1271,13 +1271,13 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
     }
 
-    if (m_doc->m_identifiers.size() <= count)
+    if (m_doc->m_identifiers.count() <= count)
     {
       // new translation
       if (lang.isEmpty())
       {
         // no definition in first entry ?
-        lang.setNum (m_doc->m_identifiers.size() );
+        lang.setNum (m_doc->m_identifiers.count() );
         lang.insert (0, "translation ");
       }
       m_doc->m_identifiers.push_back(lang);
