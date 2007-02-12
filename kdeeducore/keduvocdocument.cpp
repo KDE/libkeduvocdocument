@@ -35,9 +35,35 @@
 #include "keduvocwqlreader.h"
 #include "leitnersystem.h"
 
-//********************************************************
-//  KEduVocDocument
-//********************************************************
+/**@todo possibly implement
+  1. sorting based on lesson name
+  2. sorting based on lesson index and original.
+*/
+
+class KEduVocDocumentSortHelper
+{
+public:
+  inline KEduVocDocumentSortHelper(int column, Qt::SortOrder order) : sort_column(column), sort_order(order) {}
+
+  inline bool operator()(const KEduVocExpression &e1, const KEduVocExpression &e2) const
+    {
+    if (sort_order == Qt::AscendingOrder)
+      if (sort_column == 0)
+        return e1.original().toLower() < e2.original().toLower();
+      else
+        return e1.translation(sort_column).toLower() < e2.translation(sort_column).toLower();
+    else
+      if (sort_column == 0)
+        return !(e1.original().toLower() < e2.original().toLower());
+      else
+        return !(e1.translation(sort_column).toLower() < e2.translation(sort_column).toLower());
+    }
+
+private:
+  int sort_column;
+  Qt::SortOrder sort_order;
+};
+
 
 KEduVocDocument::KEduVocDocument(QObject *parent)
 {
@@ -502,136 +528,6 @@ void KEduVocDocument::setOriginalIdentifier(const QString &id)
   }
 }
 
-/*
-class sortByOrg : public binary_function<KEduVocExpression, KEduVocExpression, bool>
-{
-
-public:
-
-  sortByOrg (bool _dir)
-    : dir (_dir) {}
-
-  bool operator() (const KEduVocExpression& x, const KEduVocExpression& y) const
-    {
-      return
-        !dir
-        ? (QString::compare(x.original().upper(),
-                            y.original().upper() ) < 0)
-        : (QString::compare(x.original().upper(),
-                            y.original().upper() ) > 0);
-    }
-
- private:
-  bool          dir;
-};
-
-
-class sortByLessonAndOrg_alpha
-  : public binary_function<KEduVocExpression, KEduVocExpression, bool>
-{
-
-public:
-
-  sortByLessonAndOrg_alpha (bool _dir, KEduVocDocument &_doc)
-    : dir (_dir), doc(_doc) {}
-
-  bool operator() (const KEduVocExpression& x, const KEduVocExpression& y) const
-    {
-      if (x.lesson() != y.lesson() )
-        return
-          !dir
-          ? (QString::compare(doc.lessonDescription(x.lesson()).upper(),
-                              doc.lessonDescription(y.lesson()).upper() ) < 0)
-          : (QString::compare(doc.lessonDescription(x.lesson()).upper(),
-                              doc.lessonDescription(y.lesson()).upper() ) > 0);
-      else
-        return
-          !dir
-          ? (QString::compare(x.original().upper(),
-                              y.original().upper() ) < 0)
-          : (QString::compare(x.original().upper(),
-                              y.original().upper() ) > 0);
-    }
-
- private:
-  bool          dir;
-  KEduVocDocument &doc;
-};
-
-
-class sortByLessonAndOrg_index
-  : public binary_function<KEduVocExpression, KEduVocExpression, bool>
-{
-
-public:
-
-  sortByLessonAndOrg_index (bool _dir, KEduVocDocument &_doc)
-    : dir (_dir), doc(_doc) {}
-
-  bool operator() (const KEduVocExpression& x, const KEduVocExpression& y) const
-    {
-      if (x.lesson() != y.lesson() )
-        return
-          !dir
-          ? x.lesson() < y.lesson()
-          : y.lesson() < x.lesson();
-      else
-        return
-          !dir
-          ? (QString::compare(x.original().upper(),
-                              y.original().upper() ) < 0)
-          : (QString::compare(x.original().upper(),
-                              y.original().upper() ) > 0);
-    }
-
- private:
-  bool          dir;
-  KEduVocDocument &doc;
-};
-
-
-class sortByTrans : public binary_function<KEduVocExpression, KEduVocExpression, bool>
-{
-
-public:
-
-  sortByTrans (int i, bool _dir)
-    : index(i), dir (_dir) {}
-
-  bool operator() (const KEduVocExpression& x, const KEduVocExpression& y) const
-    {
-      return
-        !dir
-        ? (QString::compare(x.translation(index).upper(),
-                            y.translation(index).upper() ) < 0)
-        : (QString::compare(x.translation(index).upper(),
-                            y.translation(index).upper() ) > 0);
-    }
-
- private:
-  int  index;
-  bool dir;
-};
-*/
-/**@todo implement sorting based on lesson index and name.
-  * Will be done when KVocTrain is ported to this class
-*/
-int sortIndex;
-bool sortAscending;
-
-bool operator< (const KEduVocExpression &e1, const KEduVocExpression &e2)
-{
-  if (sortAscending)
-    if (sortIndex == 0)
-      return e1.original().toLower() < e2.original().toLower();
-    else
-      return e1.translation(sortIndex).toLower() < e2.translation(sortIndex).toLower();
-  else
-    if (sortIndex == 0)
-      return !(e1.original().toLower() < e2.original().toLower());
-    else
-      return !(e1.translation(sortIndex).toLower() < e2.translation(sortIndex).toLower());
-}
 
 bool KEduVocDocument::sort(int index, Qt::SortOrder order)
 {
@@ -657,58 +553,25 @@ bool KEduVocDocument::sort(int index)
       for (int i = m_sortIdentifier.count(); i < (int) m_identifiers.count(); i++)
           m_sortIdentifier.append(false);
 
-    sortAscending = m_sortIdentifier[index];
-    sortIndex = index;
-    qSort(m_vocabulary);
+    KEduVocDocumentSortHelper sh(index, m_sortIdentifier[index] ? Qt::AscendingOrder : Qt::DescendingOrder);
+    qSort(m_vocabulary.begin(), m_vocabulary.end(), sh);
     m_sortIdentifier[index] = !m_sortIdentifier[index];
     result = m_sortIdentifier[index];
   }
   return result;
-
-  /*if (!sort_allowed)
-    return false;
-
-  if (index >= numIdentifiers())
-    return false;
-
-  if (sort_lang.size() < langs.size())
-    for (int i = sort_lang.size(); i < (int) langs.size(); i++)
-      sort_lang.push_back(false);
-
-  if (index == 0)
-    std::sort (vocabulary.begin(), vocabulary.end(), sortByOrg(sort_lang[0]));
-  else
-    std::sort (vocabulary.begin(), vocabulary.end(), sortByTrans(index, sort_lang[index]));
-  sort_lang[index] = !sort_lang[index];
-  return sort_lang[index];*/
 }
 
 
 bool KEduVocDocument::sortByLessonAlpha ()
 {
- /* if (!sort_allowed)
-    return false;
-
-  std::sort (vocabulary.begin(), vocabulary.end(), sortByLessonAndOrg_alpha(sort_lesson, *this ));
-  sort_lesson = !sort_lesson;
-  return sort_lesson;*/
+  ///@todo remove?
   return false;
 }
 
 
 bool KEduVocDocument::sortByLessonIndex ()
 {
- /* if (!sort_allowed)
-    return false;
-
-  if (sort_lang.size() < langs.size())
-    for (int i = sort_lang.size(); i < (int) langs.size(); i++)
-      sort_lang.push_back(false);
-
-  std::sort (vocabulary.begin(), vocabulary.end(), sortByLessonAndOrg_index(sort_lesson, *this ));
-  sort_lesson = !sort_lesson;
-  sort_lang[0] = sort_lesson;
-  return sort_lesson;*/
+  ///@todo remove?
   return false;
 }
 
