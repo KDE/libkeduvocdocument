@@ -311,12 +311,6 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
   void removeEntry(int index);
 
   /**
-   * Removes all expressions from the document (clears vocabulary)
-   */
-  inline void removeAllEntries()
-    { m_vocabulary.clear(); setModified(); }
-
-  /**
    * Sorts vocabulary alphabetically
    *
    * @param index             index identifier (0 = original, 1..n = translations
@@ -781,43 +775,43 @@ protected:
   */
 
  private:
-  bool                  m_dirty;
-  KUrl                  m_url;
-  QList<bool>      m_sortIdentifier;
-  bool                  m_sortLesson;
-  bool                  m_unknownAttribute;
-  bool                  m_unknownElement;
-  bool                  m_sortingEnabled;
+  bool                      m_dirty;
+  KUrl                      m_url;
+  QList<bool>               m_sortIdentifier;
+  bool                      m_sortLesson;
+  bool                      m_unknownAttribute;
+  bool                      m_unknownElement;
+  bool                      m_sortingEnabled;
 
   // save these to document
-  QStringList           m_identifiers;      //0= origin, 1,.. translations
-  int                   m_cols;
-  int                   m_lines;
-  int                   m_currentLesson;
-  QList<int>       m_extraSizeHints;
-  QList<int>       m_sizeHints;
-  QFont*                m_font;
+  QStringList               m_identifiers;      //0= origin, 1,.. translations
+  int                       m_cols;
+  int                       m_lines;
+  int                       m_currentLesson;
+  QList<int>                m_extraSizeHints;
+  QList<int>                m_sizeHints;
+  QFont*                    m_font;
 
-  QString               m_generator;
-  QString               m_queryorg;
-  QString               m_querytrans;
+  QString                   m_generator;
+  QString                   m_queryorg;
+  QString                   m_querytrans;
   QList<KEduVocExpression>  m_vocabulary;
-  QList<bool>      m_lessonsInQuery;
-  QStringList           m_lessonDescriptions;
-  QStringList           m_typeDescriptions;
-  QStringList           m_tenseDescriptions;
-  QStringList           m_usageDescriptions;
-  QString               m_title;
-  QString               m_author;
-  QString               m_license;
-  QString               m_remark;
-  QString               m_version;
+  QList<bool>               m_lessonsInQuery;
+  QStringList               m_lessonDescriptions;
+  QStringList               m_typeDescriptions;
+  QStringList               m_tenseDescriptions;
+  QStringList               m_usageDescriptions;
+  QString                   m_title;
+  QString                   m_author;
+  QString                   m_license;
+  QString                   m_remark;
+  QString                   m_version;
 
-  QList<KEduVocArticle>   m_articles;
+  QList<KEduVocArticle>     m_articles;
   QList<KEduVocConjugation> m_conjugations;
 
-  LeitnerSystem* 	       m_leitnerSystem;
-  bool			       m_activeLeitnerSystem;
+  LeitnerSystem*            m_leitnerSystem;
+  bool                      m_activeLeitnerSystem;
 };
 
 
