@@ -7,11 +7,6 @@
 static const char description[] = I18N_NOOP("ExtDatePicker test program");
 static const char notice[] = I18N_NOOP("Compares KDatePicker and ExtDatePicker");
 
-static KCmdLineOptions options[] =
-{
-	KCmdLineLastOption
-};
-
 int main( int argc, char *argv[] )
 {
 	KAboutData aboutData( "test_extdatepicker", I18N_NOOP("Test ExtDatePicker"),
