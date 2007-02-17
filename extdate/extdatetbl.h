@@ -37,7 +37,7 @@
 #include <klineedit.h>
 #include "extcalendarsystemgregorian.h"
 
-class K3PopupMenu;
+class QMenu;
 class QPainter;
 
 /** Week selection widget.
@@ -423,7 +423,7 @@ signals:
      * right clicks on that date and the popup menu is enabled). Connect
      * the slot where you fill the menu to this signal.
      */
-    void aboutToShowContextMenu( K3PopupMenu * menu, const ExtDate &date);
+    void aboutToShowContextMenu( QMenu * menu, const ExtDate &date);
 
 protected:
   virtual void virtual_hook( int id, void* data );

@@ -200,9 +200,8 @@ bool ExtDateEdit::focusNextPrevChild( bool next ) {
 }
 
 void ExtDateEdit::invokeKey( Qt::Key k ) {
-	QKeyEvent *e = new QKeyEvent( QEvent::KeyPress, k, 0, 0 );
-	keyPressEvent( e );
-	delete e;
+	QKeyEvent e( QEvent::KeyPress, k, Qt::NoModifier );
+	keyPressEvent( &e );
 }
 
 void ExtDateEdit::focusInEvent( QFocusEvent *e ) {

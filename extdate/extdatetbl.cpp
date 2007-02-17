@@ -45,11 +45,10 @@
 
 #include <kapplication.h>
 #include <kdebug.h>
+#include <kmenu.h>
 #include <knotification.h>
-#include "k3popupmenu.h"
 #include <QPainter>
 #include <Q3Dict>
-//Added by qt3to4:
 #include <QWheelEvent>
 #include <QFocusEvent>
 #include <QKeyEvent>
@@ -139,7 +138,9 @@ ExtDateTable::ExtDateTable(QWidget *parent, ExtDate date_, const char* name, Qt:
   setNumCols(7); // 7 days a week
   setHScrollBarMode(AlwaysOff);
   setVScrollBarMode(AlwaysOff);
-  viewport()->setEraseColor(KGlobalSettings::baseColor());
+  QPalette pal = viewport()->palette();
+  pal.setColor(viewport()->backgroundRole(), KGlobalSettings::baseColor());
+  viewport()->setPalette(pal);
   setDate(date_); // this initializes firstday, numdays, numDaysPrevMonth
 }
 
@@ -227,8 +228,8 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
           painter->drawRect(0, 0, w, h);
           painter->setPen(textColor);
         }
-      painter->drawText(0, 0, w, h-1, Qt::AlignCenter,
-                        d->calendar->weekDayName(daynum, true), -1, &rect);
+      painter->drawText(QRect(0, 0, w, h-1), Qt::AlignCenter,
+                        d->calendar->weekDayName(daynum, true), &rect);
       painter->setPen(palette().color(QPalette::Text));
       //      painter->moveTo(0, h-1);
       //      painter->lineTo(w-1, h-1);
@@ -303,7 +304,7 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
 
       if ( paintRect ) painter->drawRect(0, 0, w, h);
       painter->setPen(pen);
-      painter->drawText(0, 0, w, h, Qt::AlignCenter, text, -1, &rect);
+      painter->drawText(QRect(0, 0, w, h), Qt::AlignCenter, text, &rect);
     }
   if(rect.width()>maxCell.width()) maxCell.setWidth(rect.width());
   if(rect.height()>maxCell.height()) maxCell.setHeight(rect.height());
@@ -460,12 +461,12 @@ ExtDateTable::contentsMousePressEvent(QMouseEvent *e)
 
   if (  e->button() == Qt::RightButton && d->popupMenuEnabled )
   {
-        K3PopupMenu *menu = new K3PopupMenu();
+        KMenu *menu = new KMenu();
 
 //FIXME: Uncomment the following line (and remove the one after it)
 //       if ExtDate is added to kdelibs
-//        menu->insertTitle( KGlobal::locale()->formatDate(clickedDate) );
-        menu->insertTitle( clickedDate.toString() );
+//        menu->addTitle( KGlobal::locale()->formatDate(clickedDate) );
+        menu->addTitle( clickedDate.toString() );
 
         emit aboutToShowContextMenu( menu, clickedDate );
         menu->popup(e->globalPos());
@@ -671,7 +672,9 @@ ExtDateInternalMonthPicker::ExtDateInternalMonthPicker
   setNumRows( (d->calendar->monthsInYear(date) + 2) / 3);
   // enable to find drawing failures:
   // setTableFlags(Tbl_clipCellPainting);
-  viewport()->setEraseColor(KGlobalSettings::baseColor()); // for consistency with the datepicker
+  QPalette pal = viewport()->palette();
+  pal.setColor(viewport()->backgroundRole(), KGlobalSettings::baseColor());  // for consistency with the datepicker
+  viewport()->setPalette(pal);
   // ----- find the preferred size
   //       (this is slow, possibly, but unfortunately it is needed here):
   QFontMetrics metrics(font);
@@ -757,7 +760,7 @@ ExtDateInternalMonthPicker::contentsMousePressEvent(QMouseEvent *e)
 void
 ExtDateInternalMonthPicker::contentsMouseMoveEvent(QMouseEvent *e)
 {
-  if (e->state() & Qt::LeftButton)
+  if (e->buttons() & Qt::LeftButton)
     {
       int row, col;
       QPoint mouseCoord;
