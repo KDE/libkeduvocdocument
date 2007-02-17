@@ -147,7 +147,7 @@ void	ExtDate::JDToGregorian( long int jd, int &year, int &month, int &day )
 	float g;
 	int z, a, b, c;
 	
-	z = jd - 1721118;
+	z = int(jd - 1721118.5);
 	g = z - 0.25;
 
 	a = int(floor( g / 36524.25 ));
