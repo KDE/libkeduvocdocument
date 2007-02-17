@@ -683,15 +683,12 @@ QList<int> KEduVocDocument::lessonsInQuery() const
 void KEduVocDocument::setLessonsInQuery(QList<int> lesson_iq)
 {
   m_lessonsInQuery.clear();
-  for (int i = 0; i < m_lessonDescriptions.size(); i++)
-    m_lessonsInQuery.push_back(false);
+  for (int i = 0; i < m_lessonDescriptions.count(); i++)
+    m_lessonsInQuery.append(false);
 
-  foreach( int i, lesson_iq )
-    if (lesson_iq[i] <= (int) m_lessonsInQuery.size() )
-    {
-      m_lessonsInQuery[lesson_iq[i]-1] = true;    // Offset <no lesson>
-//      cout << "setliq: " << lesson_iq[i] << " " << i << endl;
-    }
+  foreach(int i, lesson_iq)
+    if (i <= m_lessonsInQuery.count())
+      m_lessonsInQuery[i - 1] = true;
 }
 
 
