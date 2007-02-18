@@ -291,8 +291,8 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
            painter->setBrush(palette().color(QPalette::Highlight));
            pen=palette().color(QPalette::HighlightedText);
         } else {
-          painter->setBrush(paletteBackgroundColor());
-          painter->setPen(paletteBackgroundColor());
+          painter->setBrush(palette().color(backgroundRole()));
+          painter->setPen(palette().color(backgroundRole()));
 //          painter->setBrush(colorGroup().base());
 //          painter->setPen(colorGroup().base());
         }
