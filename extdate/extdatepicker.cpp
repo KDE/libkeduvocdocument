@@ -45,19 +45,22 @@
 class ExtDatePicker::ExtDatePickerPrivate
 {
 public:
-    ExtDatePickerPrivate() : closeButton(0L), selectWeek(0L), todayButton(0),
+    ExtDatePickerPrivate(ExtDatePicker *qq) : q(qq), closeButton(0L), selectWeek(0L), todayButton(0),
       navigationLayout(0), calendar(0) {}
 
     void fillWeeksCombo(const ExtDate &date);
+
+    ExtDatePicker *q;
 
     QToolButton *closeButton;
     QComboBox *selectWeek;
     QToolButton *todayButton;
     QBoxLayout *navigationLayout;
     ExtCalendarSystem *calendar;
+    int fontsize;
 };
 
-void ExtDatePicker::fillWeeksCombo(const ExtDate &date)
+void ExtDatePicker::ExtDatePickerPrivate::fillWeeksCombo(const ExtDate &date)
 {
   // every year can have a different number of weeks
 
@@ -67,40 +70,38 @@ void ExtDatePicker::fillWeeksCombo(const ExtDate &date)
   // it could be that we had 53,1..52 and now 1..53 which is the same number but different
   // so always fill with new values
 
-  d->selectWeek->clear();
+  selectWeek->clear();
 
   // We show all week numbers for all weeks between first day of year to last day of year
   // This of course can be a list like 53,1,2..52
 
   ExtDate day(date.year(), 1, 1);
-  int lastMonth = d->calendar->monthsInYear(day);
-  ExtDate lastDay(date.year(), lastMonth, d->calendar->daysInMonth(ExtDate(date.year(), lastMonth, 1)));
+  int lastMonth = calendar->monthsInYear(day);
+  ExtDate lastDay(date.year(), lastMonth, calendar->daysInMonth(ExtDate(date.year(), lastMonth, 1)));
 
-  for (; day <= lastDay; day = d->calendar->addDays(day, 7 /*calendar->daysOfWeek()*/) )
+  for (; day <= lastDay; day = calendar->addDays(day, 7 /*calendar->daysOfWeek()*/) )
   {
     int year = 0;
-    QString week = i18n("Week %1", d->calendar->weekNumber(day, &year));
+    QString week = i18n("Week %1", calendar->weekNumber(day, &year));
     if ( year != date.year() ) week += '*';  // show that this is a week from a different year
-    d->selectWeek->addItem(week);
+    selectWeek->addItem(week);
   }
 }
 
 ExtDatePicker::ExtDatePicker(ExtDate dt, QWidget *parent, Qt::WindowFlags f)
-  : QFrame(parent, f)
+  : QFrame(parent, f), d(new ExtDatePickerPrivate(this))
 {
   init( dt );
 }
 
 ExtDatePicker::ExtDatePicker(QWidget *parent, Qt::WindowFlags f)
-  : QFrame(parent, f)
+  : QFrame(parent, f), d(new ExtDatePickerPrivate(this))
 {
   init( ExtDate::currentDate() );
 }
 
 void ExtDatePicker::init( const ExtDate &dt )
 {
-  d = new ExtDatePickerPrivate();
-
   d->calendar = new ExtCalendarSystemGregorian();
 
   QBoxLayout * topLayout = new QVBoxLayout(this);
@@ -136,11 +137,11 @@ void ExtDatePicker::init( const ExtDate &dt )
   line = new KLineEdit(this);
   val = new ExtDateValidator(this);
   table = new ExtDateTable(this);
-  fontsize = KGlobalSettings::generalFont().pointSize();
-  if (fontsize == -1)
-     fontsize = QFontInfo(KGlobalSettings::generalFont()).pointSize();
+  d->fontsize = KGlobalSettings::generalFont().pointSize();
+  if (d->fontsize == -1)
+     d->fontsize = QFontInfo(KGlobalSettings::generalFont()).pointSize();
 
-  fontsize++; // Make a little bigger
+  ++d->fontsize; // Make a little bigger
 
   d->selectWeek = new QComboBox(this);
   d->selectWeek->setEditable(false);  // read only week selection
@@ -157,7 +158,7 @@ void ExtDatePicker::init( const ExtDate &dt )
   d->todayButton->setToolTip(i18n("Select the current day"));
 
   // -----
-  setFontSize(fontsize);
+  setFontSize(d->fontsize);
   line->setValidator(val);
   line->installEventFilter( this );
   if (  QApplication::isRightToLeft() )
@@ -242,7 +243,7 @@ ExtDatePicker::dateChangedSlot(const ExtDate &date)
 //    line->setText(KGlobal::locale()->formatDate(date, true));
 		line->setText( date.toString( KGlobal::locale()->dateFormatShort() ) );
     selectMonth->setText(d->calendar->monthName(date, false));
-    fillWeeksCombo(date);
+    d->fillWeeksCombo(date);
 
     // calculate the item num in the week combo box; normalize selected day so as if 1.1. is the first day of the week
     ExtDate firstDay(date.year(), 1, 1);
@@ -468,7 +469,7 @@ ExtDatePicker::setFontSize(int s)
   QFont font;
   QRect r;
   // -----
-  fontsize=s;
+  d->fontsize=s;
   for(count=0; count<NoOfButtons; ++count)
     {
       font=buttons[count]->font();
@@ -494,6 +495,12 @@ ExtDatePicker::setFontSize(int s)
   selectMonth->setMinimumSize(metricBound);
 
   table->setFontSize(s);
+}
+
+int
+ExtDatePicker::fontSize() const
+{
+    return d->fontsize;
 }
 
 void
@@ -524,7 +531,4 @@ bool ExtDatePicker::hasCloseButton() const
 {
     return (d->closeButton != 0L);
 }
-
-void ExtDatePicker::virtual_hook( int /*id*/, void* /*data*/ )
-{ /*BASE::virtual_hook( id, data );*/ }
 

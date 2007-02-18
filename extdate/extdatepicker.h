@@ -115,8 +115,7 @@ public:
   /**
    * Returns the font size of the widget elements.
    */
-  int fontSize() const
-    { return fontsize; }
+  int fontSize() const;
 
   /**
    * By calling this method with @p enable = true, ExtDatePicker will show
@@ -201,16 +200,9 @@ signals:
   void tableClicked();
 
 private:
-  /// the font size for the widget
-  int fontsize;
-
-protected:
-  virtual void virtual_hook( int id, void* data );
-private:
   void init( const ExtDate &dt );
-  void fillWeeksCombo(const ExtDate &date);
   class ExtDatePickerPrivate;
-  ExtDatePickerPrivate *d;
+  ExtDatePickerPrivate *const d;
 };
 
 #endif //  EXTDATEPICKER_H
