@@ -43,12 +43,12 @@ public:
   /**
    * Constructs a date selection widget, initialized to the current CPU date.
    */
-  ExtDateWidget( QWidget *parent=0 );
+  explicit ExtDateWidget( QWidget *parent=0 );
 
   /**
    * Constructs a date selection widget with the initial date set to @p date.
    */
-  ExtDateWidget( const ExtDate &date, QWidget *parent=0 );
+  explicit ExtDateWidget( const ExtDate &date, QWidget *parent=0 );
 
   /**
    * Destructs the date selection widget.
@@ -66,25 +66,21 @@ public:
   void setDate(const ExtDate &date);
 
 
-signals:
+Q_SIGNALS:
   /**
    * Emitted whenever the date of the widget
    * is changed, either with setDate() or via user selection.
    */
-   void changed(ExtDate);
+   void changed(const ExtDate&);
 
 protected:
-   void init();
    void init(const ExtDate&);
 
-protected slots:
-  void slotDateChanged();
-
-protected:
-  virtual void virtual_hook( int id, void* data );
 private:
    class ExtDateWidgetPrivate;
-   ExtDateWidgetPrivate *d;
+   ExtDateWidgetPrivate * const d;
+
+   Q_PRIVATE_SLOT(d, void dateChanged())
 };
 
 #endif

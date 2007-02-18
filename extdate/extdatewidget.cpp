@@ -48,8 +48,20 @@ public:
 class ExtDateWidget::ExtDateWidgetPrivate
 {
 public:
-   ExtDateWidgetPrivate() { calendar = new ExtCalendarSystemGregorian(); }
-   ~ExtDateWidgetPrivate() { delete calendar; }
+   ExtDateWidgetPrivate(ExtDateWidget *qq)
+     : q( qq ), calendar( new ExtCalendarSystemGregorian() )
+   {
+   }
+
+   ~ExtDateWidgetPrivate()
+   {
+     delete calendar;
+   }
+
+   // slots
+   void dateChanged();
+
+   ExtDateWidget *q;
    ExtDateWidgetSpinBox *m_day;
    QComboBox *m_month;
    ExtDateWidgetSpinBox *m_year;
@@ -59,48 +71,21 @@ public:
 
 
 ExtDateWidget::ExtDateWidget( QWidget *parent )
-  : QWidget( parent )
+  : QWidget( parent ), d(new ExtDateWidgetPrivate(this))
 {
   init(ExtDate::currentDate());
   setDate(ExtDate());
 }
 
 ExtDateWidget::ExtDateWidget( const ExtDate &date, QWidget *parent )
-  : QWidget( parent )
+  : QWidget( parent ), d(new ExtDateWidgetPrivate(this))
 {
   init(date);
   setDate(date);
 }
 
-// // ### CFM Repaced by init(const ExtDate&). Can be safely removed
-// //     when no risk of BIC
-// void ExtDateWidget::init()
-// {
-//   d = new ExtDateWidgetPrivate;
-//   KLocale *locale = KGlobal::locale();
-//   QHBoxLayout *layout = new QHBoxLayout(this, 0, KDialog::spacingHint());
-//   layout->setAutoAdd(true);
-//   d->m_day = new ExtDateWidgetSpinBox(1, 1, this);
-//   d->m_month = new QComboBox(false, this);
-//   for (int i = 1; ; ++i)
-//   {
-//     QString str = d->calendar->monthName(i,
-//        d->calendar->year(ExtDate()));
-//     if (str.isNull()) break;
-//     d->m_month->insertItem(str);
-//   }
-//
-//   d->m_year = new ExtDateWidgetSpinBox(d->calendar->minValidYear(),
-// 				     d->calendar->maxValidYear(), this);
-//
-//   connect(d->m_day, SIGNAL(valueChanged(int)), this, SLOT(slotDateChanged()));
-//   connect(d->m_month, SIGNAL(activated(int)), this, SLOT(slotDateChanged()));
-//   connect(d->m_year, SIGNAL(valueChanged(int)), this, SLOT(slotDateChanged()));
-// }
-
 void ExtDateWidget::init(const ExtDate& date)
 {
-  d = new ExtDateWidgetPrivate;
   //KLocale *locale = KGlobal::locale();
   QHBoxLayout *layout = new QHBoxLayout(this);
   layout->setMargin(0);
@@ -122,14 +107,14 @@ void ExtDateWidget::init(const ExtDate& date)
 				     d->calendar->maxValidYear(), this);
   layout->addWidget(d->m_year);
 
-  connect(d->m_day, SIGNAL(valueChanged(int)), this, SLOT(slotDateChanged()));
-  connect(d->m_month, SIGNAL(activated(int)), this, SLOT(slotDateChanged()));
-  connect(d->m_year, SIGNAL(valueChanged(int)), this, SLOT(slotDateChanged()));
+  connect(d->m_day, SIGNAL(valueChanged(int)), this, SLOT(dateChanged()));
+  connect(d->m_month, SIGNAL(activated(int)), this, SLOT(dateChanged()));
+  connect(d->m_year, SIGNAL(valueChanged(int)), this, SLOT(dateChanged()));
 }
 
 ExtDateWidget::~ExtDateWidget()
 {
-		delete d;
+  delete d;
 }
 
 void ExtDateWidget::setDate( const ExtDate &date )
@@ -158,29 +143,26 @@ ExtDate ExtDateWidget::date() const
   return d->m_dat;
 }
 
-void ExtDateWidget::slotDateChanged( )
+void ExtDateWidget::ExtDateWidgetPrivate::dateChanged()
 {
 //  const KCalendarSystem * calendar = KGlobal::locale()->calendar();
 
   ExtDate date;
   int y,m,day;
 
-  y = d->m_year->value();
-  y = qMin(qMax(y, d->calendar->minValidYear()), d->calendar->maxValidYear());
+  y = m_year->value();
+  y = qMin(qMax(y, calendar->minValidYear()), calendar->maxValidYear());
 
-  d->calendar->setYMD(date, y, 1, 1);
-  m = d->m_month->currentIndex()+1;
-  m = qMin(qMax(m,1), d->calendar->monthsInYear(date));
+  calendar->setYMD(date, y, 1, 1);
+  m = m_month->currentIndex()+1;
+  m = qMin(qMax(m,1), calendar->monthsInYear(date));
 
-  d->calendar->setYMD(date, y, m, 1);
-  day = d->m_day->value();
-  day = qMin(qMax(day,1), d->calendar->daysInMonth(date));
+  calendar->setYMD(date, y, m, 1);
+  day = m_day->value();
+  day = qMin(qMax(day,1), calendar->daysInMonth(date));
 
-  d->calendar->setYMD(date, y, m, day);
-  setDate(date);
+  calendar->setYMD(date, y, m, day);
+  q->setDate(date);
 }
-
-void ExtDateWidget::virtual_hook( int, void* )
-{ /*BASE::virtual_hook( id, data );*/ }
 
 #include "extdatewidget.moc"
