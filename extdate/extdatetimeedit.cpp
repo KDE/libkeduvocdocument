@@ -27,6 +27,7 @@
 #include "extdatetime.h"
 
 #include "extdatetimeedit.h"
+#include "extdatetimeedit_p.h"
 
 class ExtDateEdit::Private
 {
@@ -287,8 +288,8 @@ void ExtDateTimeEdit::slotEmitDateTimeChanged() {
 	emit dateTimeChanged( dateTime() );
 }
 
-edLineEdit::edLineEdit( QWidget *parent ) : QLineEdit( parent ) {
-	edParent = (ExtDateEdit*)parent;
+edLineEdit::edLineEdit( ExtDateEdit *parent ) : QLineEdit( parent ) {
+	edParent = parent;
 }
 
 void edLineEdit::mouseReleaseEvent( QMouseEvent * ) {
