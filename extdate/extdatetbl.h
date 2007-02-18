@@ -236,8 +236,6 @@ public:
    */
   int exec(int x, int y);
 
-protected:
-  virtual void virtual_hook( int id, void* data );
 private:
   class KPopupFramePrivate;
   KPopupFramePrivate *d;
@@ -410,8 +408,6 @@ signals:
      */
     void aboutToShowContextMenu( QMenu * menu, const ExtDate &date);
 
-protected:
-  virtual void virtual_hook( int id, void* data );
 private:
     class ExtDateTablePrivate;
     ExtDateTablePrivate *d;
