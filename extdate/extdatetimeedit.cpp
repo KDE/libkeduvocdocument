@@ -28,29 +28,52 @@
 
 #include "extdatetimeedit.h"
 
-ExtDateEdit::ExtDateEdit( const ExtDate &d, QWidget *parent )
-: QSpinBox( parent ) {
-	init (d);
+class ExtDateEdit::Private
+{
+public:
+    Private(ExtDateEdit* qq)
+        : q( qq )
+    {
+    }
+
+    // Initialize the ExtDate edit.
+    void init( const ExtDate &d );
+
+    // slots
+    void slotRefreshHighlight();
+    void slotEmitDateChanged();
+
+    ExtDateEdit *q;
+
+    uchar ActiveField;  // 0==day; 1==month; 2==year
+    ExtDate m_Date;
+    QString m_DateFormat;
+};
+
+ExtDateEdit::ExtDateEdit( const ExtDate &date, QWidget *parent )
+: QSpinBox( parent ), d(new Private(this)) {
+	d->init(date);
 }
 
 ExtDateEdit::ExtDateEdit( int jd, QWidget *parent )
- : QSpinBox( parent ) {
+ : QSpinBox( parent ), d(new Private(this)) {
 	ExtDate ed(jd);
-	init( ed );
+	d->init( ed );
 }
 
 ExtDateEdit::ExtDateEdit( QWidget *p )
- : QSpinBox( p ) {
-	init( ExtDate::currentDate() );
+ : QSpinBox( p ), d(new Private(this)) {
+	d->init( ExtDate::currentDate() );
 }
 
 ExtDateEdit::~ExtDateEdit() {
+	delete d;
 }
 
-void ExtDateEdit::init( const ExtDate &d ) {
+void ExtDateEdit::Private::init( const ExtDate &d ) {
 	ActiveField = 0;
 	m_Date = d;
-	setRange( -20000000, 20000000 ); //range of Julian Days
+	q->setRange( -20000000, 20000000 ); //range of Julian Days
 
 	//Set the date format to be the Locale's short date format, except:
 	//always use full years instead of trimming ti two digits
@@ -61,27 +84,27 @@ void ExtDateEdit::init( const ExtDate &d ) {
 	m_DateFormat.replace( "e", "d" );
 
 	//Make sure highlight is persistent when value is changed
-	connect( this, SIGNAL( valueChanged( int ) ), this, SLOT( slotEmitDateChanged() ) );
-	connect( this, SIGNAL( dateChanged( const ExtDate & ) ), this, SLOT( slotRefreshHighlight() ) );
+	connect( q, SIGNAL( valueChanged( int ) ), q, SLOT( slotEmitDateChanged() ) );
+	connect( q, SIGNAL( dateChanged( const ExtDate & ) ), q, SLOT( slotRefreshHighlight() ) );
 
-	edLineEdit *edle = new edLineEdit( this );
-	setLineEdit(edle);
+	edLineEdit *edle = new edLineEdit( q );
+	q->setLineEdit(edle);
 
-	setValue( m_Date.jd() );
-	highlightActiveField();
+	q->setValue( m_Date.jd() );
+	q->highlightActiveField();
 }
 
-void ExtDateEdit::slotEmitDateChanged() {
-	emit dateChanged( date() );
+void ExtDateEdit::Private::slotEmitDateChanged() {
+	emit q->dateChanged( q->date() );
 }
 
-QString ExtDateEdit::simpleDateFormat() {
+QString ExtDateEdit::simpleDateFormat() const {
 	//Convert the KDE date format string (e.g., "%Y-%m-%d") to one 
 	//that accurately represents the number of digits in each date 
 	//field (e.g., "YYYY-MM-DD").  Note that while the Months and 
 	//Days fields will always have two digits, the number of digits 
 	//in the Years field depends on the displayed year.
-	QString result = m_DateFormat;
+	QString result = d->m_DateFormat;
 	result.replace( "%Y", "YYYY" );
 	result.replace( "%m", "MM" );
 	result.replace( "%d", "DD" );
@@ -102,10 +125,10 @@ void ExtDateEdit::highlightActiveField() {
 	QString sdf = simpleDateFormat();
 
 	//Pick out the position and length of the currently-active field
-	if ( ActiveField == 0 ) { //Days field
+	if ( d->ActiveField == 0 ) { //Days field
 		iStart = sdf.indexOf( "D" );
 		iLength = 2; //The Days field should always be two digits
-	} else if ( ActiveField == 1 ) { //Months field
+	} else if ( d->ActiveField == 1 ) { //Months field
 		iStart = sdf.indexOf( "M" );
 		iLength = 2; //The Months field should always be two digits
 	} else { //Years field
@@ -121,47 +144,64 @@ void ExtDateEdit::highlightActiveField() {
 
 }
 
-void ExtDateEdit::slotRefreshHighlight() {
-	highlightActiveField();
+void ExtDateEdit::Private::slotRefreshHighlight() {
+	q->highlightActiveField();
 }
 
 void ExtDateEdit::stepBy( int steps ) {
-	switch ( ActiveField ) {
+	switch ( d->ActiveField ) {
 		case 0: //days field
-			m_Date = m_Date.addDays( steps );
+			d->m_Date = d->m_Date.addDays( steps );
 			break;
 		
 		case 1: //months field
-			m_Date = m_Date.addMonths( steps );
+			d->m_Date = d->m_Date.addMonths( steps );
 			break;
 		
 		case 2: //years field
-			m_Date = m_Date.addYears( steps );
+			d->m_Date = d->m_Date.addYears( steps );
 			break;
 	}
 
-	int v = m_Date.jd();
+	int v = d->m_Date.jd();
 	if      ( v > maximum() ) setValue( maximum() );
 	else if ( v < minimum() ) setValue( minimum() );
 	else    setValue( v );
 }
 
 QValidator::State ExtDateEdit::validate( QString &input, int & ) const {
-	if ( ExtDate::fromString( input, m_DateFormat ).isValid() )
+	if ( ExtDate::fromString( input, d->m_DateFormat ).isValid() )
 		return QValidator::Acceptable;
 	else
 		return QValidator::Invalid;
 }
 
+ExtDate ExtDateEdit::date() const {
+	return d->m_Date;
+}
+
+void ExtDateEdit::setDate( const ExtDate &date ) {
+	d->m_Date = date;
+	setValue( d->m_Date.jd() );
+}
+
+int ExtDateEdit::activeField() const {
+	return d->ActiveField;
+}
+
+void ExtDateEdit::setActiveField( int i ) {
+	d->ActiveField = i;
+}
+
 QString ExtDateEdit::textFromValue( int v ) const {
-	return ExtDate( v ).toString( m_DateFormat );
+	return ExtDate( v ).toString( d->m_DateFormat );
 }
 
 int ExtDateEdit::valueFromText( const QString &text ) const {
-	ExtDate d = ExtDate::fromString( text, m_DateFormat );
+	ExtDate date = ExtDate::fromString( text, d->m_DateFormat );
 	
-	if ( d.isValid() ) 
-		return d.jd();
+	if ( date.isValid() ) 
+		return date.jd();
 	else 
 		return INVALID_DAY;
 }
@@ -172,12 +212,12 @@ int ExtDateEdit::valueFromText( const QString &text ) const {
 bool ExtDateEdit::focusNextPrevChild( bool next ) {
 	if ( !focusWidget() ) return false;
 
-	int NewField = ActiveField;
+	int NewField = d->ActiveField;
 	int pos = lineEdit()->cursorPosition(); //assumes no prefix/suffix!
 	int step = ( next ? 1 : -1 );
 	
 	QString sdf = simpleDateFormat();
-	while ( NewField == ActiveField ) {
+	while ( NewField == d->ActiveField ) {
 		pos += step;
 
 		if ( pos >= sdf.length() || pos < 0 )
@@ -194,7 +234,7 @@ bool ExtDateEdit::focusNextPrevChild( bool next ) {
 
 	}
 
-	ActiveField = NewField;
+	d->ActiveField = NewField;
 	highlightActiveField();
 	return true;
 }

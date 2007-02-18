@@ -67,7 +67,7 @@ class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 	*@p d the date to display (default is current system time)
 	*@p parent pointer to the parent widget (default: 0)
 	*/
-		ExtDateEdit( const ExtDate &date = ExtDate::currentDate(), QWidget *parent = 0 );
+		explicit ExtDateEdit( const ExtDate &date = ExtDate::currentDate(), QWidget *parent = 0 );
 
 /**
 	*@short Constructor.  Creates an ExtDateEdit displaying the 
@@ -77,12 +77,12 @@ class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 	*@p jd the date to display (given as an integer representing the Julian Day)
 	*@p parent pointer to the parent widget (default: 0)
 	*/
-		ExtDateEdit( int jd, QWidget *parent = 0 );
+		explicit ExtDateEdit( int jd, QWidget *parent = 0 );
 
 /**
 	*@short Constructor for UI files (contains only a parent widget argument)
 	*/
-	ExtDateEdit( QWidget *parent );
+		explicit ExtDateEdit( QWidget *parent = 0 );
 
 /**
 	*@short Default destructor.  Empty.
@@ -117,7 +117,7 @@ class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 	*@return the internal ExtDate value
 	*@see setDate()
 	*/
-		ExtDate date() const { return m_Date; }
+		ExtDate date() const;
 /**
 	*@short set the internal ExtDate value, and display the new 
 	*date in the spinbox.
@@ -125,13 +125,13 @@ class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 	*@p date reference to the new ExtDate
 	*@see date()
 	*/
-		void setDate( const ExtDate &date ) { m_Date = date; setValue( m_Date.jd() ); }
+		void setDate( const ExtDate &date );
 
 /**
 	*@return the currently-active Date field (Day=0; Month=1; Year=2)
 	*@see setActiveField()
 	*/
-		int activeField() const { return ActiveField; }
+		int activeField() const;
 /**
 	*@short set the currently-active Date field 
 	*@p i The field to be activated (Day=0; Month=1; Year=2)
@@ -140,7 +140,7 @@ class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 	*highlightActiveField().
 	*@see highlightActiveField()
 	*/
-		void setActiveField( int i ) { ActiveField = i; }
+		void setActiveField( int i );
 
 /**
 	*@short highlight the currently-active Date field in the spinbox
@@ -155,7 +155,7 @@ class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 	*/
 		void invokeKey( Qt::Key k );
 
-	signals:
+	Q_SIGNALS:
 		void dateChanged( const ExtDate &d );
 
 	protected:
@@ -201,16 +201,6 @@ class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 	*/
 		bool focusNextPrevChild(bool next);
 
-	private slots:
-/**
-	*@short Simply calls highlightActiveField()
-	*@note connected to the valueChanged() Signal, to make sure 
-	*that highlighting is persistent.
-	*/
-		void slotRefreshHighlight();
-
-		void slotEmitDateChanged();
-
 	public:
 /**
 	*@short Convert the KDE date format for internal use.
@@ -226,19 +216,14 @@ class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 	*This function is used internally to properly highlight the active 
 	*field, and to process mouse and key events correctly.
 	*/
-		QString simpleDateFormat();
+		QString simpleDateFormat() const;
 
 	private:
-	/**
-	 *@short Initialize the ExtDate edit.
-	 *@internal
-	 *@note This function is called in each constructor.
-	 */
-		void init( const ExtDate &d );
+		class Private;
+		Private *const d;
 
-		uchar ActiveField;  // 0==day; 1==month; 2==year
-		ExtDate m_Date;
-		QString m_DateFormat;
+		Q_PRIVATE_SLOT(d, void slotRefreshHighlight())
+		Q_PRIVATE_SLOT(d, void slotEmitDateChanged())
 };
 
 /**
