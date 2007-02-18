@@ -25,7 +25,7 @@
 #include <QLayout>
 #include <QStyle>
 #include <QToolButton>
-#include <Q3PopupMenu>
+#include <QMenu>
 
 #include <kdialog.h>
 #include <klocale.h>
@@ -350,17 +350,20 @@ ExtDatePicker::selectMonthClicked()
   ExtDate date = table->getDate();
   int i, month, months = d->calendar->monthsInYear(date);
 
-  Q3PopupMenu popup(selectMonth);
+  QMenu popup(selectMonth);
 
+  QList<QAction*> monthactions;
   for (i = 1; i <= months; i++) {
     //    popup.insertItem(d->calendar->monthName(i, d->calendar->year(date)), i);
     QAction *a = popup.addAction( d->calendar->monthName(i, d->calendar->year(date)) );
-    
-    if ( i == d->calendar->month(date) )
-      popup.setActiveAction( a );
+    monthactions.append(a);
   }
+  QAction *active = monthactions.at(d->calendar->month(date) - 1);
+  popup.setActiveAction(active);
 
-  if ( (month = popup.exec(selectMonth->mapToGlobal(QPoint(0, 0)), d->calendar->month(date) - 1)) == -1 ) return;  // canceled
+  QAction *act = popup.exec(selectMonth->mapToGlobal(QPoint(0, 0)), active);
+  if (!act) return;  // canceled
+  month = monthactions.indexOf(act)+1;
 
   int day = d->calendar->day(date);
   // ----- construct a valid date in this month:
