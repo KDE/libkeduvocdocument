@@ -85,16 +85,16 @@ void ExtDatePicker::fillWeeksCombo(const ExtDate &date)
   }
 }
 
-ExtDatePicker::ExtDatePicker(QWidget *parent, ExtDate dt)
-  : QFrame(parent)
+ExtDatePicker::ExtDatePicker(ExtDate dt, QWidget *parent, Qt::WindowFlags f)
+  : QFrame(parent, f)
 {
   init( dt );
 }
 
-ExtDatePicker::ExtDatePicker(QWidget *parent, ExtDate dt, Qt::WFlags f)
+ExtDatePicker::ExtDatePicker(QWidget *parent, Qt::WindowFlags f)
   : QFrame(parent, f)
 {
-  init( dt );
+  init( ExtDate::currentDate() );
 }
 
 void ExtDatePicker::init( const ExtDate &dt )
@@ -259,12 +259,6 @@ ExtDatePicker::tableClickedSlot()
   kDebug(298) << "ExtDatePicker::tableClickedSlot: table clicked." << endl;
   emit(dateSelected(table->getDate()));
   emit(tableClicked());
-}
-
-const ExtDate&
-ExtDatePicker::getDate() const
-{
-  return table->getDate();
 }
 
 const ExtDate &

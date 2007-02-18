@@ -957,7 +957,7 @@ KPopupFrame::popup(const QPoint &pos)
 }
 
 int
-KPopupFrame::exec(QPoint pos)
+KPopupFrame::exec(const QPoint& pos)
 {
   popup(pos);
   repaint();

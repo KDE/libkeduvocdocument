@@ -64,15 +64,12 @@ public:
   /** The usual constructor.  The given date will be displayed
    * initially.
    **/
-  ExtDatePicker(QWidget *parent=0,
-	      ExtDate=ExtDate::currentDate());
+  explicit ExtDatePicker(ExtDate, QWidget *parent=0, Qt::WindowFlags f=0);
 
   /** The usual constructor.  The given date will be displayed
    * initially.
    **/
-  ExtDatePicker(QWidget *parent,
-	      ExtDate,
-	      Qt::WFlags f); // ### KDE 4.0: Merge
+  explicit ExtDatePicker(QWidget *parent=0, Qt::WindowFlags f=0);
 
   /**
    * The destructor.
@@ -94,12 +91,6 @@ public:
    *      if the date given is invalid.
    **/
   bool setDate(const ExtDate&);
-
-  /**
-   * Returns the selected date.
-   * @deprecated
-   **/
-  const ExtDate& getDate() const KDE_DEPRECATED;
 
   /**
    * @returns the selected date.

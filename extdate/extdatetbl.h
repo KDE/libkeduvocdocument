@@ -234,9 +234,8 @@ public:
    * @param p The position where the window should be shown.
    * @return Result code of the popup.
    * @see popup()
-   * @todo Why isn't @p p a reference?
    */
-  int exec(QPoint p);
+  int exec(const QPoint& p);
   /**
    * Execute the popup window.
    * Equivalent to exec(const QPoint &) for the given @p x and @p y.
@@ -389,11 +388,6 @@ protected:
      * The number of days in the previous month.
      */
     int numDaysPrevMonth;
-    /**
-     * unused
-     * ### remove in KDE 4.0
-     */
-    bool unused_hasSelection;
     /**
      * Save the size of the largest used cell content.
      */
