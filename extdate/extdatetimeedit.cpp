@@ -253,39 +253,87 @@ void ExtDateEdit::focusInEvent( QFocusEvent *e ) {
 	highlightActiveField();
 }
 
+class ExtDateTimeEdit::Private
+{
+public:
+    Private(ExtDateTimeEdit *qq, const ExtDateTime& dt);
+
+    // slots
+    void emitDateTimeChanged();
+
+    ExtDateTimeEdit *q;
+    QTimeEdit *m_TimeEdit;
+    ExtDateEdit *m_DateEdit;
+};
+
 ExtDateTimeEdit::ExtDateTimeEdit( const ExtDateTime &dt, QWidget *parent )
-: QFrame( parent ) {
-	init( dt );
+   : QFrame( parent ), d( new Private( this, dt ) )
+{
 }
 
 ExtDateTimeEdit::ExtDateTimeEdit( const ExtDate &date, const QTime &time, QWidget *parent )
-: QFrame( parent ) {
-	init( ExtDateTime( date, time ) );
+   : QFrame( parent ), d( new Private( this, ExtDateTime( date, time ) ) )
+{
 }
 
-ExtDateTimeEdit::ExtDateTimeEdit( QWidget *p )
-: QFrame( p ) {
-	init( ExtDateTime::currentDateTime() );
+ExtDateTimeEdit::ExtDateTimeEdit( QWidget *parent )
+   : QFrame( parent ), d( new Private( this, ExtDateTime::currentDateTime() ) )
+{
 }
 
 ExtDateTimeEdit::~ExtDateTimeEdit() {
+	delete d;
 }
 
-void ExtDateTimeEdit::init( const ExtDateTime &dt ) {
-	QHBoxLayout *hlay = new QHBoxLayout( this );
+ExtDateTimeEdit::Private::Private( ExtDateTimeEdit *qq, const ExtDateTime &dt )
+   : q( qq )
+{
+	QHBoxLayout *hlay = new QHBoxLayout( q );
 	hlay->setMargin( 0 );
-	m_DateEdit = new ExtDateEdit( dt.date(), this );
-	m_TimeEdit = new QTimeEdit( dt.time(), this );
+	m_DateEdit = new ExtDateEdit( dt.date(), q );
+	m_TimeEdit = new QTimeEdit( dt.time(), q );
 
 	hlay->addWidget( m_DateEdit );
 	hlay->addWidget( m_TimeEdit );
 
-	connect( m_DateEdit, SIGNAL( dateChanged( const ExtDate & ) ), this, SLOT( slotEmitDateTimeChanged() ) );
-	connect( m_TimeEdit, SIGNAL( timeChanged( const QTime & ) ), this, SLOT( slotEmitDateTimeChanged() ) );
+	connect( m_DateEdit, SIGNAL( dateChanged( const ExtDate & ) ), q, SLOT( emitDateTimeChanged() ) );
+	connect( m_TimeEdit, SIGNAL( timeChanged( const QTime & ) ), q, SLOT( emitDateTimeChanged() ) );
 }
 
-void ExtDateTimeEdit::slotEmitDateTimeChanged() {
-	emit dateTimeChanged( dateTime() );
+ExtDate ExtDateTimeEdit::date() const
+{
+	return d->m_DateEdit->date();
+}
+
+void ExtDateTimeEdit::setDate( const ExtDate &date )
+{
+	d->m_DateEdit->setDate( date );
+}
+
+QTime ExtDateTimeEdit::time() const
+{
+	return d->m_TimeEdit->time();
+}
+
+void ExtDateTimeEdit::setTime( const QTime &t )
+{
+	d->m_TimeEdit->setTime( t );
+}
+
+ExtDateTime ExtDateTimeEdit::dateTime() const
+{
+	return ExtDateTime( date(), time() );
+}
+
+void ExtDateTimeEdit::setDateTime( const ExtDateTime &dt )
+{
+	setDate( dt.date() );
+	setTime( dt.time() );
+}
+
+void ExtDateTimeEdit::Private::emitDateTimeChanged()
+{
+	emit q->dateTimeChanged( q->dateTime() );
 }
 
 edLineEdit::edLineEdit( ExtDateEdit *parent ) : QLineEdit( parent ) {

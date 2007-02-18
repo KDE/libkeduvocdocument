@@ -244,7 +244,7 @@ class EXTDATE_EXPORT ExtDateTimeEdit : public QFrame {
 	*to be displayed (defaults to the system's current date and time)
 	*@p p pointer to the parent widget (default: 0)
 	*/
-	ExtDateTimeEdit( const ExtDateTime &dt = ExtDateTime::currentDateTime(), QWidget *p=0 );
+	explicit ExtDateTimeEdit( const ExtDateTime &dt = ExtDateTime::currentDateTime(), QWidget *parent = 0 );
 
 /**
 	*@short Constructor. Displays the given Date and Time.
@@ -260,7 +260,7 @@ class EXTDATE_EXPORT ExtDateTimeEdit : public QFrame {
 /**
 	*@short Constructor for UI files (contains only a parent widget argument)
 	*/
-	ExtDateTimeEdit( QWidget *p );
+	explicit ExtDateTimeEdit( QWidget *parent );
 
 /**
 	*@short Default Destructor. Empty.
@@ -271,7 +271,7 @@ class EXTDATE_EXPORT ExtDateTimeEdit : public QFrame {
 	*@return the internal ExtDate value
 	*@see setDate()
 	*/
-		ExtDate date() const { return m_DateEdit->date(); }
+		ExtDate date() const;
 /**
 	*@short set the internal ExtDate value, and display the new 
 	*date in the date spinbox.
@@ -279,13 +279,13 @@ class EXTDATE_EXPORT ExtDateTimeEdit : public QFrame {
 	*@p d reference to the new ExtDate
 	*@see date()
 	*/
-		void setDate( const ExtDate &date ) { m_DateEdit->setDate( date ); }
+		void setDate( const ExtDate &date );
 
 /**
 	*@return the internal QTime value
 	*@see setTime()
 	*/
-		QTime time() const { return m_TimeEdit->time(); }
+		QTime time() const;
 /**
 	*@short set the internal QTime value, and display the new 
 	*time in the time spinbox.
@@ -293,13 +293,13 @@ class EXTDATE_EXPORT ExtDateTimeEdit : public QFrame {
 	*@p t reference to the new QTime
 	*@see time()
 	*/
-		void setTime( const QTime &t ) { m_TimeEdit->setTime( t ); }
+		void setTime( const QTime &t );
 
 /**
 	*@return the ExtDateTime value displayed in the date and time boxes
 	*@see setDateTime()
 	*/
-		ExtDateTime dateTime() const { return ExtDateTime( date(), time() ); }
+		ExtDateTime dateTime() const;
 /**
 	*@short set the internal ExtDate and QTime values, and display the new 
 	*values in their respective spinboxes.
@@ -307,25 +307,18 @@ class EXTDATE_EXPORT ExtDateTimeEdit : public QFrame {
 	*@p dt reference to the new ExtDateTime
 	*@see dateTime()
 	*/
-		void setDateTime( const ExtDateTime &dt ) { setDate( dt.date() ); setTime(
-dt.time() ); }
+		void setDateTime( const ExtDateTime &dt );
 
-	signals:
+	Q_SIGNALS:
 		void dateTimeChanged( const ExtDateTime &dt );
 
-	private slots:
-		void slotEmitDateTimeChanged();
-
 	private:
-	/**
-	 *@short Initialize the ExtDate edit.
-	 *@internal
-	 *@note This function is called in each constructor.
-	 */
-		void init( const ExtDateTime &dt );
-		
-		QTimeEdit *m_TimeEdit;
-		ExtDateEdit *m_DateEdit;
+		class Private;
+		Private *const d;
+
+		Q_DISABLE_COPY( ExtDateTimeEdit )
+
+		Q_PRIVATE_SLOT( d, void emitDateTimeChanged() )
 };
 
 #endif  //EXTDATETIMEEDIT_H
