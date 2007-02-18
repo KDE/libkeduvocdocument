@@ -891,7 +891,7 @@ KPopupFrame::KPopupFrame(QWidget* parent)
     result(0), // rejected
     main(0)
 {
-  setFrameShape(QFrame::NoFrame);
+  setFrameStyle(QFrame::Box | QFrame::Raised);
   setMidLineWidth(2);
 }
 
@@ -951,6 +951,9 @@ KPopupFrame::popup(const QPoint &pos)
   if (y < d.y())
     y = 0;
 
+  if (QLineEdit *edit = qobject_cast<QLineEdit*>(main))
+    edit->selectAll();
+
   // Pop the thingy up.
   move(x, y);
   show();
@@ -960,7 +963,7 @@ int
 KPopupFrame::exec(const QPoint& pos)
 {
   popup(pos);
-  repaint();
+  update();
   qApp->enter_loop();
   hide();
   return result;

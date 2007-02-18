@@ -374,7 +374,7 @@ ExtDatePicker::selectYearClicked()
 {
 //  const ExtCalendarSystem * calendar = KGlobal::locale()->calendar();
 
-  if (selectYear->isChecked())
+  if (!selectYear->isChecked())
   {
     return;
   }
@@ -382,6 +382,7 @@ ExtDatePicker::selectYearClicked()
   int year;
   KPopupFrame* popup = new KPopupFrame(this);
   ExtDateInternalYearSelector* picker = new ExtDateInternalYearSelector(popup);
+  picker->setYear(d->calendar->year(table->getDate()));
   // -----
   picker->resize(picker->sizeHint());
   popup->setMainWidget(picker);
@@ -406,6 +407,7 @@ ExtDatePicker::selectYearClicked()
       KNotification::beep();
     }
   delete popup;
+  selectYear->setChecked(false);
 }
 
 void
