@@ -43,10 +43,10 @@
 //#include "extdatepicker.h"
 #include "extdatetbl.h"
 
-#include <kapplication.h>
 #include <kdebug.h>
 #include <kmenu.h>
 #include <knotification.h>
+#include <QApplication>
 #include <QPainter>
 #include <Q3Dict>
 #include <QWheelEvent>

@@ -28,12 +28,6 @@
 
 #include <qvalidator.h>
 #include <q3gridview.h>
-//Added by qt3to4:
-#include <QWheelEvent>
-#include <QFocusEvent>
-#include <QKeyEvent>
-#include <QResizeEvent>
-#include <QMouseEvent>
 #include <klineedit.h>
 #include "extcalendarsystemgregorian.h"
 

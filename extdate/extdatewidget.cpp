@@ -21,12 +21,9 @@
 
 
 #include <QComboBox>
-//#include <QLineEdit>
-//Added by qt3to4:
 #include <QHBoxLayout>
 #include <QSpinBox>
 
-#include <knuminput.h>
 #include <kdialog.h>
 
 #include "extdatewidget.h"

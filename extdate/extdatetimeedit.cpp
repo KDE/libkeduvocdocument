@@ -14,9 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QTime>
 #include <QDateTimeEdit>
 #include <QLineEdit>
+#include <QTimeEdit>
 #include <QHBoxLayout>
 #include <QMouseEvent>
 #include <QKeyEvent>

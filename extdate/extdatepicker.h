@@ -26,8 +26,6 @@
 
 #include "extdatetime.h"
 #include <QFrame>
-#include <QResizeEvent>
-#include <QEvent>
 
 class QLineEdit;
 class QToolButton;

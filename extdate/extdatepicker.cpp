@@ -22,6 +22,7 @@
 
 #include <QApplication>
 #include <QComboBox>
+#include <QKeyEvent>
 #include <QLayout>
 #include <QStyle>
 #include <QToolButton>
@@ -30,8 +31,6 @@
 #include <kdialog.h>
 #include <klocale.h>
 #include <kicon.h>
-#include <kiconloader.h>
-#include <ktoolbar.h>
 #include <kdebug.h>
 #include <knotification.h>
 

@@ -29,7 +29,6 @@
 
 #include <limits.h>
 #include <qstring.h>
-#include <qnamespace.h>
 #include <qdatetime.h>
 
 #define INVALID_DAY LONG_MIN

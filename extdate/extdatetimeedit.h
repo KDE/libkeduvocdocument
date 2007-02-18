@@ -51,11 +51,8 @@
 
 #include <QSpinBox>
 #include <QFrame>
-#include <QLineEdit>
 #include <QTime>
-#include <QTimeEdit>
 #include "extdatetime.h"
-#include <kdemacros.h>
 
 class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 	Q_OBJECT

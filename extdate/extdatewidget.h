@@ -24,6 +24,8 @@
 
 #include <libkdeedu_extdate_export.h>
 
+#include <QWidget>
+
 #include "extdatetime.h"
 
 /**
