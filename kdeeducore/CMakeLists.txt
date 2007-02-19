@@ -25,7 +25,7 @@ kde4_add_library(kdeeducore SHARED ${kdeeducore_LIB_SRCS})
 
 target_link_libraries(kdeeducore  ${KDE4_KIO_LIBS} ${QT_QTXML_LIBRARY})
 
-set_target_properties(kdeeducore PROPERTIES VERSION 1.2.0 SOVERSION 1 )
+set_target_properties(kdeeducore PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 install(TARGETS kdeeducore  DESTINATION ${LIB_INSTALL_DIR} )
 
 
