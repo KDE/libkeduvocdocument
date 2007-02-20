@@ -36,6 +36,7 @@
 #include "keduvocwqlwriter.h"
 #include "keduvocwqlreader.h"
 #include "keduvocpaukerreader.h"
+#include "keduvocvokabelnreader.h"
 #include "leitnersystem.h"
 
 /**@todo possibly implement
@@ -164,6 +165,9 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileNam
   if (line == WQL_IDENT)
     return wql;
 
+  if (c1 == '"' && (line.contains('"') == 1 || line.contains(QRegExp("\",[0-9]"))))
+    return vokabeln;
+
   if (line.indexOf(VCB_SEPARATOR) >= 0)
     return vt_vcb;
 
@@ -224,6 +228,16 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
           if (!read)
             errorMessage = paukerReader.errorMessage();
         }
+        break;
+
+        case vokabeln:
+        {
+          KEduVocVokabelnReader vokabelnReader(f);
+          read = vokabelnReader.readDoc(this);
+          if (!read)
+            errorMessage = vokabelnReader.errorMessage();
+        }
+        break;
 
         case vt_lex:
         {

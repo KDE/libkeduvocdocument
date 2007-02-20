@@ -9,6 +9,7 @@ set(kdeeducore_LIB_SRCS
    keduvockvtmlwriter.cpp
    keduvocmultiplechoice.cpp
    keduvocpaukerreader.cpp
+   keduvocvokabelnreader.cpp
    keduvocwqlreader.cpp
    keduvocwqlwriter.cpp
    leitnerbox.cpp
@@ -41,6 +42,7 @@ install(FILES
    keduvockvtmlwriter.h
    keduvocmultiplechoice.h
    keduvocpaukerreader.h
+   keduvocvokabelnreader.h
    keduvocwqlreader.h
    keduvocwqlwriter.h
    leitnerbox.h
