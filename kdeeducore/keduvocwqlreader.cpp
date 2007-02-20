@@ -22,7 +22,7 @@
 #include "keduvocwqlreader.h"
 #include "keduvocdocument.h"
 
-KEduVocWqlReader::KEduVocWqlReader(QFile *file)
+KEduVocWqlReader::KEduVocWqlReader(QIODevice *file)
 {
   // the file must be already open
   m_inputFile = file;
@@ -140,8 +140,8 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   p = s.indexOf("   [", 0);
   s = s.left(p);
   s = s.simplified();
-  m_doc->m_identifiers.append(s);
-  m_doc->m_identifiers.append(inputStream.readLine());
+  m_doc->appendIdentifier(s);
+  m_doc->appendIdentifier(inputStream.readLine());
 
   while (!s.isNull())
   {

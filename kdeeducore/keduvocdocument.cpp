@@ -187,9 +187,9 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
   if (KIO::NetAccess::download(url, temporaryFile, 0))
   {
     ///@todo We need to work with the QIODevice directly for the compressed Pauker files
-    //QIODevice * fDev = KFilterDev::deviceForFile(temporaryFile);
-    QFile f(temporaryFile);
-    if (!f.open(QIODevice::ReadOnly))
+    QIODevice * f = KFilterDev::deviceForFile(temporaryFile);
+    //QFile f(temporaryFile);
+    if (!f->open(QIODevice::ReadOnly))
     {
       KMessageBox::error(0, errorMessage);
       return false;
@@ -203,14 +203,14 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
       switch (ft) {
         case kvtml:
         {
-          KEduVocKvtmlReader kvtmlReader(&f);
+          KEduVocKvtmlReader kvtmlReader(f);
           read = kvtmlReader.readDoc(this);
         }
         break;
 
         case wql:
         {
-          KEduVocWqlReader wqlReader(&f);
+          KEduVocWqlReader wqlReader(f);
           read = wqlReader.readDoc(this);
           if (!read)
             errorMessage = wqlReader.errorMessage();
@@ -219,7 +219,7 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
 
         case pauker:
         {
-          KEduVocPaukerReader paukerReader(&f);
+          KEduVocPaukerReader paukerReader(f);
           read = paukerReader.readDoc(this);
           if (!read)
             errorMessage = paukerReader.errorMessage();
@@ -227,28 +227,28 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
 
         case vt_lex:
         {
-          QTextStream is (&f);
+          //QTextStream is (&f);
           //TODO read = loadFromLex (is);
         }
         break;
 
         case vt_vcb:
         {
-          QTextStream is (&f);
+          //QTextStream is (&f);
           //TODO read = loadFromVcb (is);
         }
         break;
 
         case csv:
         {
-          QTextStream is(&f);
+          //QTextStream is(&f);
           //TODO read = loadFromCsv(is);
         }
         break;
 
         default:
         {
-          KEduVocKvtmlReader kvtmlReader(&f);
+          KEduVocKvtmlReader kvtmlReader(f);
           read = kvtmlReader.readDoc(this);
         }
       }
@@ -268,7 +268,7 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
         }
       }
     }
-    f.close();
+    f->close();
     KIO::NetAccess::removeTempFile(temporaryFile);
   }
   return true;

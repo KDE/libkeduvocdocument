@@ -20,56 +20,25 @@
 #include <libkdeedu_core_export.h>
 
 #include <QtXml>
-#include <QFile>
+#include <QIODevice>
 
 class KEduVocDocument;
 
 class KDEEDUCORE_EXPORT KEduVocPaukerReader : public QObject
 {
 public:
-  KEduVocPaukerReader(QFile *file);
+  KEduVocPaukerReader(QIODevice *file);
 
   bool readDoc(KEduVocDocument *doc);
 
   QString errorMessage() const {return m_errorMessage;};
-private:
-  QString cardText(const QDomElement &entry, const QString &tagName) const;
 
-  QFile *m_inputFile;
+private:
+  QString cardText(const QDomNode &entry, const QString &tagName) const;
+
+  QIODevice *m_inputFile;
   KEduVocDocument *m_doc;
   QString m_errorMessage;
 };
-/*
-class PaukerDataItem
-{
-public:
-  PaukerDataItem();
-  PaukerDataItem(QDomElement &entry);
-  virtual ~PaukerDataItem();
 
-  QString frontSide() const;
-  QString backSide() const;
-
-protected:
-  QString getText(const QString &tagName) const;
-
-private:
-  QDomElement domElement;
-};
-
-typedef QValueList<PaukerDataItem> PaukerDataItemList;
-
-class PaukerData
-{
-public:
-  PaukerData();
-  PaukerDataItemList parse(const QString &fileName);
-  int colWidth(int col);
-  int numRows();
-  QString language(int col);
-
-private:
-  QDomDocument* document;
-};
-*/
 #endif

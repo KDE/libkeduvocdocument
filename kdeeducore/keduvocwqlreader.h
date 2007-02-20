@@ -20,20 +20,21 @@
 
 #include <libkdeedu_core_export.h>
 
-#include <QFile>
+#include <QIODevice>
 
 class KEduVocDocument;
 
 class KDEEDUCORE_EXPORT KEduVocWqlReader : public QObject
 {
 public:
-  KEduVocWqlReader(QFile *file);
+  KEduVocWqlReader(QIODevice *file);
 
   bool readDoc(KEduVocDocument *doc);
 
   QString errorMessage() const {return m_errorMessage;};
+
 private:
-  QFile *m_inputFile;
+  QIODevice *m_inputFile;
   KEduVocDocument *m_doc;
   QString m_errorMessage;
 };

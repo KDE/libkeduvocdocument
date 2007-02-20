@@ -20,84 +20,7 @@
 #include "keduvocexpression.h"
 #include "keduvocdocument.h"
 
-/*
-PaukerDataItem::PaukerDataItem()
-{
-}
-
-PaukerDataItem::PaukerDataItem(QDomElement &entry)
-{
-  domElement = entry;
-}
-
-PaukerDataItem::~PaukerDataItem()
-{
-}
-
-QString PaukerDataItem::frontSide() const
-{
-  return getText("FrontSide");
-}
-
-QString PaukerDataItem::backSide() const
-{
-  return getText("BackSide");
-}
-
-QString PaukerDataItem::getText(const QString &tagName) const
-{
-  if(!domElement.isNull()) {
-
-    QDomNodeList list = domElement.elementsByTagName(tagName);
-
-    if(list.count() > 0) {
-
-      QDomElement element = list.item(0).toElement();
-
-      if(!element.isNull()) {
-        return element.text();
-      }
-      else
-        return QString::null;
-    }
-    else
-      return QString::null;
-  }
-  else
-    return QString::null;
-}
-
-PaukerData::PaukerData()
-{
-  document = new QDomDocument();
-}
-
-PaukerDataItemList PaukerData::parse(const QString &fileName)
-{
-  PaukerDataItemList list;
-
-  QIODevice * file = KFilterDev::deviceForFile(fileName);
-  document->setContent(file);
-
-  QDomNodeList entries = document->elementsByTagName("Card");
-
-  // loop through the "Card" tags looking for data
-  for(uint i = 0 ; i < entries.count() ; i++) {
-
-    // get an entry to operate on
-    QDomElement entry = entries.item(i).toElement();
-
-    // if the "node" is in fact an element -- i.e. not null
-    if(!entry.isNull()) {
-      PaukerDataItem item(entry);
-      list.append(item);
-    }
-  }
-  delete file;
-  return list;
-}
-*/
-KEduVocPaukerReader::KEduVocPaukerReader(QFile * file)
+KEduVocPaukerReader::KEduVocPaukerReader(QIODevice * file)
 {
   // the file must be already open
   m_inputFile = file;
@@ -115,6 +38,10 @@ bool KEduVocPaukerReader::readDoc(KEduVocDocument * doc)
   if (!domDoc.setContent(m_inputFile, &m_errorMessage))
     return false;
 
+  QDomElement description = domDoc.documentElement().firstChildElement("Description");
+  if(!description.isNull())
+    m_doc->setDocRemark(description.text());
+
   QDomNodeList entries = domDoc.elementsByTagName("Card");
 
   if (entries.count() <= 0) {
@@ -122,11 +49,15 @@ bool KEduVocPaukerReader::readDoc(KEduVocDocument * doc)
     return false;
   }
 
-  for (int i = 0; entries.count() - 1; i++) {
-    QDomElement entry = entries.at(i).toElement();
+  ///Pauker does not provide any column titles
+  m_doc->appendIdentifier(i18n("Front Side"));
+  m_doc->appendIdentifier(i18n("Reverse Side"));
+
+  for (int i = 0; i < entries.count(); i++) {
+    QDomNode entry = entries.at(i);
     if(!entry.isNull()) {
       front = cardText(entry, "FrontSide");
-      back = cardText(entry, "BackSide");
+      back = cardText(entry, "ReverseSide");
       KEduVocExpression expr = KEduVocExpression(front);
       expr.setTranslation(1, back);
       m_doc->appendEntry(&expr);
@@ -136,22 +67,13 @@ bool KEduVocPaukerReader::readDoc(KEduVocDocument * doc)
 }
 
 
-QString KEduVocPaukerReader::cardText(const QDomElement & entry, const QString & tagName) const
+QString KEduVocPaukerReader::cardText(const QDomNode & entry, const QString & tagName) const
 {
-  QDomNodeList list = entry.elementsByTagName(tagName);
+  QDomElement element = entry.firstChildElement(tagName);
 
-  if(list.count() > 0) {
-    QDomElement element = list.item(0).toElement();
-
-    if(!element.isNull()) {
-      return element.text();
-    }
-    else
-      return QString::null;
-  }
+  if(!element.isNull())
+    return element.text();
   else
     return QString::null;
-
 }
-
 

@@ -3,7 +3,7 @@
     -----------------------------------------------------------------------
     copyright            : (C) 1999-2001 Ewald Arnold
                            (C) 2001 The KDE-EDU team
-						               (C) 2005 Eric Pignet
+                           (C) 2005 Eric Pignet
     email                : eric at erixpage.com
  ***************************************************************************/
 
@@ -21,7 +21,7 @@
 
 #include <libkdeedu_core_export.h>
 
-#include <QFile>
+#include <QIODevice>
 #include <QtXml/QDomDocument>
 #include <QList>
 
@@ -74,46 +74,45 @@ class KEduVocDocument;
 class KDEEDUCORE_EXPORT  KEduVocKvtmlReader : public QObject
 {
 public:
-	KEduVocKvtmlReader(QFile *file);
-	~KEduVocKvtmlReader();
+  KEduVocKvtmlReader(QIODevice *file);
 
-	bool readDoc(KEduVocDocument *doc);
+  bool readDoc(KEduVocDocument *doc);
 
-	bool readLesson(QDomElement &domElementParent);
-	bool readArticle(QDomElement &domElementParent);
-	bool readConjug(QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug, const QString &entry_tag);
-	bool readOptions(QDomElement &domElementParent);
-	bool readType(QDomElement &domElementParent);
-	bool readTense(QDomElement &domElementParent);
-	bool readUsage(QDomElement &domElementParent);
-	bool readComparison(QDomElement &domElementParent, KEduVocComparison &comp);
-	bool readMultipleChoice(QDomElement &domElementParent, KEduVocMultipleChoice &mc);
-	bool readExpressionChildAttributes(	QDomElement &domElementExpressionChild,
-														          QString &lang,
-														          grade_t &grade, grade_t &rev_grade,
-														          int &count, int &rev_count,
-														          QDateTime &date, QDateTime &rev_date,
-														          QString &remark,
-														          int &bcount, int &rev_bcount,
-														          QString &query_id,
-														          QString &pronunce,
-														          int &width,
-														          QString &type,
-														          QString &faux_ami_f,
-														          QString &faux_ami_t,
-														          QString &synonym,
-														          QString &example,
-														          QString &antonym,
-														          QString &usage,
-														          QString &paraphrase);
-	bool readExpression(QDomElement &domElementParent);
-	bool readBody(QDomElement &domElementParent);
+  bool readLesson(QDomElement &domElementParent);
+  bool readArticle(QDomElement &domElementParent);
+  bool readConjug(QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug, const QString &entry_tag);
+  bool readOptions(QDomElement &domElementParent);
+  bool readType(QDomElement &domElementParent);
+  bool readTense(QDomElement &domElementParent);
+  bool readUsage(QDomElement &domElementParent);
+  bool readComparison(QDomElement &domElementParent, KEduVocComparison &comp);
+  bool readMultipleChoice(QDomElement &domElementParent, KEduVocMultipleChoice &mc);
+  bool readExpressionChildAttributes(QDomElement &domElementExpressionChild,
+                                     QString &lang,
+                                     grade_t &grade, grade_t &rev_grade,
+                                     int &count, int &rev_count,
+                                     QDateTime &date, QDateTime &rev_date,
+                                     QString &remark,
+                                     int &bcount, int &rev_bcount,
+                                     QString &query_id,
+                                     QString &pronunce,
+                                     int &width,
+                                     QString &type,
+                                     QString &faux_ami_f,
+                                     QString &faux_ami_t,
+                                     QString &synonym,
+                                     QString &example,
+                                     QString &antonym,
+                                     QString &usage,
+                                     QString &paraphrase);
+  bool readExpression(QDomElement &domElementParent);
+  bool readBody(QDomElement &domElementParent);
 
-	void domErrorUnknownElement(const QString &elem);
-	void domError(const QString &text );
+  void domErrorUnknownElement(const QString &elem);
+  void domError(const QString &text );
 
 private:
-  QFile *m_inputFile;
+  QIODevice *m_inputFile;
   KEduVocDocument *m_doc;
 };
 

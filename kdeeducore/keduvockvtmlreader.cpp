@@ -27,14 +27,10 @@
 #include "keduvockvtmlreader.h"
 #include "keduvocdocument.h"
 
-KEduVocKvtmlReader::KEduVocKvtmlReader(QFile *file)
+KEduVocKvtmlReader::KEduVocKvtmlReader(QIODevice *file)
 {
   // the file must be already open
   m_inputFile = file;
-}
-
-KEduVocKvtmlReader::~KEduVocKvtmlReader()
-{
 }
 
 
