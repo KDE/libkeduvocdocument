@@ -132,6 +132,7 @@ bool KEduVocPaukerReader::readDoc(KEduVocDocument * doc)
       m_doc->appendEntry(&expr);
     }
   }
+  return true;
 }
 
 

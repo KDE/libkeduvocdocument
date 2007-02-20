@@ -68,6 +68,7 @@ bool KEduVocWqlWriter::writeDoc(KEduVocDocument *doc)
     // TODO Find the row height (g->rowHeight(w))
     writeItem(m_doc->entry(w)->original(), m_doc->entry(w)->translation(1), 30);
   }
+  return true;
 }
 
 void KEduVocWqlWriter::writeFont( const QFont & font )
