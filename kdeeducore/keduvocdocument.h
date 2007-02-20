@@ -734,7 +734,7 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
 
   void errorCsv(int line, const QString &text );
 
-  FileType detectFileType(const QString &filename);
+  FileType detectFileType(const QString &fileName);
 
 signals:
   void progressChanged (KEduVocDocument *, int curr_percent);

@@ -119,6 +119,50 @@ void KEduVocDocument::Init ()
 }
 
 
+KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileName)
+{
+  QFile f(fileName);
+  if (!f.open(QIODevice::ReadOnly))
+    return csv;
+
+  QDataStream is(&f);
+
+  qint8 c1, c2, c3, c4, c5;
+  is >> c1
+    >> c2
+    >> c3
+    >> c4
+    >> c5;  // guess filetype by first x bytes
+
+  QTextStream ts(&f);
+  QString line;
+  line = ts.readLine();
+  line.prepend(c5);
+  line.prepend(c4);
+  line.prepend(c3);
+  line.prepend(c2);
+  line.prepend(c1);
+
+  if (!is.device()->isOpen())
+    return kvd_none;
+
+  f.close();
+  if (c1 == '<' && c2 == '?' && c3 == 'x' && c4 == 'm' && c5 == 'l')
+    return kvtml;
+
+  if (line == WQL_IDENT)
+    return wql;
+
+  if (line.indexOf(VCB_SEPARATOR) >= 0)
+    return vt_vcb;
+
+  if (line == LEX_IDENT_50)
+    return vt_lex;
+
+  return csv;
+}
+
+
 bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
 {
   Init();
@@ -127,13 +171,14 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
 
   // TODO EPT  connect( this, SIGNAL(progressChanged(KEduVocDocument*,int)), parent, SLOT(slotProgress(KEduVocDocument*,int)) );
 
-  QString tmpfile;
-  if (KIO::NetAccess::download( url, tmpfile, 0 ))
+  QString errorMessage = i18n("<qt>Cannot open file<br><b>%1</b></qt>", url.path());
+  QString temporaryFile;
+  if (KIO::NetAccess::download(url, temporaryFile, 0))
   {
-    QFile f(tmpfile);
+    QFile f(temporaryFile);
     if (!f.open(QIODevice::ReadOnly))
     {
-      KMessageBox::error(0, i18n("<qt>Cannot open file<br><b>%1</b></qt>", url.path()));
+      KMessageBox::error(0, errorMessage);
       return false;
     }
 
@@ -141,8 +186,7 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
 
     bool read = false;
     while (!read) {
-
-      QApplication::setOverrideCursor( Qt::WaitCursor );
+      QApplication::setOverrideCursor(Qt::WaitCursor);
       switch (ft) {
         case kvtml:
         {
@@ -155,6 +199,8 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
         {
           KEduVocWqlReader wqlReader(&f);
           read = wqlReader.readDoc(this);
+          if (!read)
+            errorMessage = wqlReader.errorMessage();
         }
         break;
 
@@ -193,20 +239,16 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
           Init();
           return false;
         }
-        // TODO new readers provide an explicite error message
-        // the two messages should be merged
-        QString msg = i18n("Could not load \"%1\"\nDo you want to try again?", url.path());
-        int result = KMessageBox::warningContinueCancel(0, msg,
-                                                        i18n("I/O Failure"),
-                                                        KGuiItem(i18n("&Retry")));
-        if ( result == KMessageBox::Cancel ) {
+        QString msg = i18n("Could not open \"%1\"\nDo you want to try again?\n(Error reported: %2)", url.path(), errorMessage);
+        int result = KMessageBox::warningContinueCancel(0, msg, i18n("Error Opening File"), KGuiItem(i18n("&Retry")));
+        if (result == KMessageBox::Cancel) {
           Init();
           return false;
         }
       }
     }
     f.close();
-    KIO::NetAccess::removeTempFile( tmpfile );
+    KIO::NetAccess::removeTempFile(temporaryFile);
   }
   return true;
 }
@@ -792,49 +834,6 @@ int KEduVocDocument::search(const QString &substr, int id, int first, int last, 
     }
   }
   return -1;
-}
-
-
-KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &filename)
-{
-   QFile f( filename );
-   if (!f.open( QIODevice::ReadOnly ))
-     return csv;
-
-   QDataStream is( &f );
-
-   qint8 c1, c2, c3, c4, c5;
-   is >> c1
-      >> c2
-      >> c3
-      >> c4
-      >> c5;  // guess filetype by first x bytes
-
-   QTextStream ts (&f);
-   QString line;
-   line = ts.readLine();
-   line.insert (0, c5);
-   line.insert (0, c4);
-   line.insert (0, c3);
-   line.insert (0, c2);
-   line.insert (0, c1);
-   f.close();
-
-   if (!is.device()->isOpen())
-     return kvd_none;
-   if (c1 == '<' && c2 == '?' && c3 == 'x' && c4 == 'm' && c5 == 'l')
-     return kvtml;
-
-   if (line == WQL_IDENT)
-     return wql;
-
-   if (line.indexOf(VCB_SEPARATOR) >= 0)
-     return vt_vcb;
-
-   if (line == LEX_IDENT_50)
-     return vt_lex;
-
-   return csv;
 }
 
 

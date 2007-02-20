@@ -1,9 +1,9 @@
 /***************************************************************************
                      read a KEduVocDocument from a WQL file
     -----------------------------------------------------------------------
-    copyright            : (C) 2004 Peter Hedlund
-                         : (c) 2005 Eric Pignet
-    email                : peter.hedlund@kdemail.net
+    copyright     : (C) 2004, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
+                  : (c) 2005 Eric Pignet
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,21 +22,20 @@
 
 #include <QFile>
 
-#include "keduvocdocument.h"
-
 class KEduVocDocument;
 
 class KDEEDUCORE_EXPORT KEduVocWqlReader : public QObject
 {
 public:
-	KEduVocWqlReader(QFile *file);
-	~KEduVocWqlReader();
+  KEduVocWqlReader(QFile *file);
 
-	bool readDoc(KEduVocDocument *doc);
+  bool readDoc(KEduVocDocument *doc);
 
+  QString errorMessage() const {return m_errorMessage;};
 private:
   QFile *m_inputFile;
   KEduVocDocument *m_doc;
+  QString m_errorMessage;
 };
 
 #endif

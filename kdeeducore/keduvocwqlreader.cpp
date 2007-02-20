@@ -1,9 +1,9 @@
 /***************************************************************************
                      read a KEduVocDocument from a WQL file
     -----------------------------------------------------------------------
-    copyright            : (C) 2004 Peter Hedlund
-                           (C) 2005 Eric Pignet
-    email                : peter.hedlund@kdemail.net
+    copyright     : (C) 2004, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
+                    (C) 2005 Eric Pignet
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -15,13 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QDom>
 #include <QTextStream>
 
-#include <kapplication.h>
-#include <kdebug.h>
 #include <klocale.h>
-#include <kmessagebox.h>
 
 #include "keduvocwqlreader.h"
 #include "keduvocdocument.h"
@@ -30,24 +26,24 @@ KEduVocWqlReader::KEduVocWqlReader(QFile *file)
 {
   // the file must be already open
   m_inputFile = file;
+  m_errorMessage = "";
 }
 
-KEduVocWqlReader::~KEduVocWqlReader()
-{
-}
 
 bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
 {
   m_doc = doc;
 
   QTextStream inputStream(m_inputFile);
-  inputStream.setEncoding(QTextStream::Latin1);
+  inputStream.setCodec("ISO-8851-1");
+  inputStream.setAutoDetectUnicode(false);
+  inputStream.seek(0);
 
   QString s = "";
   s=inputStream.readLine();
   if (s != "WordQuiz")
   {
-    KMessageBox::error(0, i18n("This does not appear to be a (K)WordQuiz file") + s);
+    m_errorMessage = i18n("This does not appear to be a (K)WordQuiz file");
     return false;
   }
   s = inputStream.readLine();
@@ -55,24 +51,27 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   int iFV = s.toInt(0);
   if (iFV != 5)
   {
-    KMessageBox::error(0, i18n("KWordQuiz can only open files created by WordQuiz 5.x"));
+    m_errorMessage = i18n("Only files created by WordQuiz 5.x or later can be opened");
     return false;
   }
-  // TODO these loops cause crashes if the input file is invalid !
-  while (inputStream.readLine() != "[Font Info]");
+
+  m_errorMessage = i18n("Error while reading file");
+
+  while (!inputStream.atEnd() && inputStream.readLine() != "[Font Info]");
+  if (inputStream.atEnd())
+    return false;
   s = inputStream.readLine();
-  int p = s.find("=", 0);
+  int p = s.indexOf("=", 0);
   QString fam = s.right(s.length() - (p + 1));
   fam = fam.mid(1, fam.length() - 2);
-  //g->font().setFamily(s);
 
   s = inputStream.readLine();
-  p = s.find("=", 0);
+  p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
   int ps = s.toInt(0);
 
   s = inputStream.readLine();
-  p = s.find("=", 0);
+  p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
   int b = 0;
   if (s == "1")
@@ -81,7 +80,7 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   }
 
   s = inputStream.readLine();
-  p = s.find("=", 0);
+  p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
   bool it = (s == "1");
 
@@ -93,16 +92,18 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   p = s.find("=", 0);
   m_specialCharacters = s.right(s.length() - (p + 1));
 */
-  while (inputStream.readLine() != "[Grid Info]");
+  while (!inputStream.atEnd() && inputStream.readLine() != "[Grid Info]");
+  if (inputStream.atEnd())
+    return false;
   inputStream.readLine(); //skip value for width of row headers
 
   s = inputStream.readLine();
-  p = s.find("=", 0);
+  p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
   m_doc->setSizeHint(0, s.toInt());
 
   s = inputStream.readLine();
-  p = s.find("=", 0);
+  p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
   m_doc->setSizeHint(1, s.toInt());
 
@@ -132,23 +133,24 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   s = s.right(s.length() - (p + 1));
   m_bottomRight =s.toInt(0, 10) - 1 ;
 */
-  while ((inputStream.readLine() != "[Vocabulary]"));
-
+  while (!inputStream.atEnd() && inputStream.readLine() != "[Vocabulary]");
+  if (inputStream.atEnd())
+    return false;
   s = inputStream.readLine();
-  p = s.find("   [", 0);
+  p = s.indexOf("   [", 0);
   s = s.left(p);
-  s = s.trimmed();
-  m_doc->m_identifiers.push_back(s);
-  m_doc->m_identifiers.push_back(inputStream.readLine());
+  s = s.simplified();
+  m_doc->m_identifiers.append(s);
+  m_doc->m_identifiers.append(inputStream.readLine());
 
   while (!s.isNull())
   {
     s = inputStream.readLine();
-    p = s.find("[", 0);
+    p = s.indexOf("[", 0);
     QString r = s.mid(p + 1, 10);
     int h = r.toInt();
     s = s.left(p);
-    s = s.trimmed();
+    s = s.simplified();
 
     QString b;
     b = inputStream.readLine();

@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QDom>
+#include <QtXml>
 #include <QTextStream>
 #include <QFont>
 
@@ -41,7 +41,7 @@ bool KEduVocWqlWriter::writeDoc(KEduVocDocument *doc)
   m_doc = doc;
 
   m_outputStream.setDevice(m_outputFile);
-  m_outputStream.setEncoding(QTextStream::Latin1);
+  m_outputStream.setCodec("ISO-8851-1");
 
   m_outputStream << "WordQuiz" << winendl;
   m_outputStream << "5.9.0" << winendl << winendl;
