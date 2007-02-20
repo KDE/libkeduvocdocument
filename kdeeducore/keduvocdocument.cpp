@@ -22,17 +22,20 @@
 #include <QList>
 #include <QTextStream>
 #include <QtAlgorithms>
+#include <QIODevice>
 
 #include <klocale.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
 #include <kio/netaccess.h>
 #include <krandomsequence.h>
+#include <kfilterdev.h>
 
 #include "keduvockvtmlwriter.h"
 #include "keduvockvtmlreader.h"
 #include "keduvocwqlwriter.h"
 #include "keduvocwqlreader.h"
+#include "keduvocpaukerreader.h"
 #include "leitnersystem.h"
 
 /**@todo possibly implement
@@ -121,11 +124,12 @@ void KEduVocDocument::Init ()
 
 KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileName)
 {
-  QFile f(fileName);
-  if (!f.open(QIODevice::ReadOnly))
+  QIODevice * f = KFilterDev::deviceForFile(fileName);
+  //QFile f(fileName);
+  if (!f->open(QIODevice::ReadOnly))
     return csv;
 
-  QDataStream is(&f);
+  QDataStream is(f);
 
   qint8 c1, c2, c3, c4, c5;
   is >> c1
@@ -134,9 +138,13 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileNam
     >> c4
     >> c5;  // guess filetype by first x bytes
 
-  QTextStream ts(&f);
+  QTextStream ts(f);
   QString line;
+  QString line2;
+
   line = ts.readLine();
+  if (!ts.atEnd())
+    line2 = ts.readLine();
   line.prepend(c5);
   line.prepend(c4);
   line.prepend(c3);
@@ -146,10 +154,13 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileNam
   if (!is.device()->isOpen())
     return kvd_none;
 
-  f.close();
-  if (c1 == '<' && c2 == '?' && c3 == 'x' && c4 == 'm' && c5 == 'l')
-    return kvtml;
-
+  f->close();
+  if (c1 == '<' && c2 == '?' && c3 == 'x' && c4 == 'm' && c5 == 'l') {
+    if (line2.indexOf("pauker", 0) >  0)
+      return pauker;
+    else
+      return kvtml;
+  }
   if (line == WQL_IDENT)
     return wql;
 
@@ -175,6 +186,8 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
   QString temporaryFile;
   if (KIO::NetAccess::download(url, temporaryFile, 0))
   {
+    ///@todo We need to work with the QIODevice directly for the compressed Pauker files
+    //QIODevice * fDev = KFilterDev::deviceForFile(temporaryFile);
     QFile f(temporaryFile);
     if (!f.open(QIODevice::ReadOnly))
     {
@@ -203,6 +216,14 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
             errorMessage = wqlReader.errorMessage();
         }
         break;
+
+        case pauker:
+        {
+          KEduVocPaukerReader paukerReader(&f);
+          read = paukerReader.readDoc(this);
+          if (!read)
+            errorMessage = paukerReader.errorMessage();
+        }
 
         case vt_lex:
         {

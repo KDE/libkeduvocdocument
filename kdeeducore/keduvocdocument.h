@@ -261,9 +261,11 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
 
  public:
 
-  enum FileType { kvd_none, automatic,
+  enum FileType { kvd_none, 
+                  automatic,
                   kvtml,
                   wql,
+                  pauker,
                   kvtbin,
                   vt_lex, vt_vcb, csv /*, kvoclearn, qvocab*/ };
 
