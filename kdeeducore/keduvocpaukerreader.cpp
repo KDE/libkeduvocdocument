@@ -49,6 +49,7 @@ bool KEduVocPaukerReader::readDoc(KEduVocDocument * doc)
     return false;
   }
 
+  m_doc->setAuthor("http://pauker.sf.net");
   ///Pauker does not provide any column titles
   m_doc->appendIdentifier(i18n("Front Side"));
   m_doc->appendIdentifier(i18n("Reverse Side"));

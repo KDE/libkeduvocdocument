@@ -2,6 +2,7 @@
 ########### next target ###############
 
 set(kdeeducore_LIB_SRCS
+   keduvoccsvreader.cpp
    keduvocdocument.cpp
    keduvocexpression.cpp
    keduvocgrammar.cpp
@@ -35,6 +36,7 @@ install(TARGETS kdeeducore  DESTINATION ${LIB_INSTALL_DIR} )
 
 install(FILES
    libkdeedu_core_export.h
+   keduvoccsvreader.h
    keduvocdocument.h
    keduvocexpression.h
    keduvocgrammar.h

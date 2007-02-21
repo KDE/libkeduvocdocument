@@ -32,6 +32,7 @@
 #include <kfilterdev.h>
 
 #include "keduvockvtmlwriter.h"
+#include "keduvoccsvreader.h"
 #include "keduvockvtmlreader.h"
 #include "keduvocwqlwriter.h"
 #include "keduvocwqlreader.h"
@@ -126,7 +127,6 @@ void KEduVocDocument::Init ()
 KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileName)
 {
   QIODevice * f = KFilterDev::deviceForFile(fileName);
-  //QFile f(fileName);
   if (!f->open(QIODevice::ReadOnly))
     return csv;
 
@@ -185,9 +185,8 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
   QString temporaryFile;
   if (KIO::NetAccess::download(url, temporaryFile, 0))
   {
-    ///@todo We need to work with the QIODevice directly for the compressed Pauker files
     QIODevice * f = KFilterDev::deviceForFile(temporaryFile);
-    //QFile f(temporaryFile);
+
     if (!f->open(QIODevice::ReadOnly))
     {
       KMessageBox::error(0, errorMessage);
@@ -236,8 +235,10 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
 
         case csv:
         {
-          //QTextStream is(&f);
-          //TODO read = loadFromCsv(is);
+          KEduVocCsvReader csvReader(f);
+          read = csvReader.readDoc(this);
+          if (!read)
+            errorMessage = csvReader.errorMessage();
         }
         break;
 
