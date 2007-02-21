@@ -35,7 +35,7 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   m_doc = doc;
 
   QTextStream inputStream(m_inputFile);
-  inputStream.setCodec("ISO-8851-1");
+  inputStream.setCodec("Windows-1252"); //("ISO-8851-1");
   inputStream.setAutoDetectUnicode(false);
   inputStream.seek(0);
 
