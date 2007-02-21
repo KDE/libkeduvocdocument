@@ -111,9 +111,12 @@ public:
   void domErrorUnknownElement(const QString &elem);
   void domError(const QString &text );
 
+  QString errorMessage() const {return m_errorMessage;};
+
 private:
   QIODevice *m_inputFile;
   KEduVocDocument *m_doc;
+  QString m_errorMessage;
 };
 
 #endif

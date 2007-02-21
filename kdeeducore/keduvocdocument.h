@@ -250,7 +250,6 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
   Q_OBJECT
   friend class KEduVocKvtmlWriter;
   friend class KEduVocKvtmlReader;
-  friend class KEduVocWqlReader;
 
 public:
 
@@ -745,37 +744,11 @@ protected:
    */
   void setVersion(const QString & ver);
 
-  /* TODO
-  bool saveToLex     (QTextStream& os, QString &title);
-  bool loadFromLex   (QTextStream& is);
-  bool loadLessonLex (QTextStream& is);
-  bool saveLessonLex (QTextStream& os);
-  bool saveTypeNameLex   (QTextStream& os);
-  bool loadTypeNameLex   (QTextStream& is);
-
-  bool saveToCsv     (QTextStream& os, QString &title);
-  bool loadFromCsv   (QTextStream& is);
-  bool loadLessonCsv (QTextStream& is);
-  bool saveLessonCsv (QTextStream& os);
-  bool saveTypeNameCsv   (QTextStream& os);
-  bool loadTypeNameCsv   (QTextStream& is);
-
-  bool saveTypeNameVcb (QTextStream &os);
-  bool loadTypeNameVcb (QTextStream &is);
-  bool saveLessonVcb (QTextStream &os);
-  bool loadLessonVcb (QTextStream &is);
-  bool saveToVcb (QTextStream& os, QString &title);
-  bool loadFromVcb (QTextStream& is);
-  void errorVcb (int line, const QString &text );
-  */
-
- private:
+private:
   bool                      m_dirty;
   KUrl                      m_url;
   QList<bool>               m_sortIdentifier;
   bool                      m_sortLesson;
-  bool                      m_unknownAttribute;
-  bool                      m_unknownElement;
   bool                      m_sortingEnabled;
 
   // save these to document

@@ -106,8 +106,6 @@ void KEduVocDocument::Init ()
   m_vocabulary.clear();
   m_dirty = false;
   m_sortingEnabled = true;
-  m_unknownAttribute = false;
-  m_unknownElement = false;
   m_sortLesson = false;
   setCurrentLesson (0);
   m_queryorg = "";
@@ -117,6 +115,7 @@ void KEduVocDocument::Init ()
   m_author = "";
   m_remark = "";
   m_version = "";
+  m_generator = "";
   m_font = NULL;
 
   m_activeLeitnerSystem = false;
@@ -203,6 +202,8 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
         {
           KEduVocKvtmlReader kvtmlReader(f);
           read = kvtmlReader.readDoc(this);
+          if (!read)
+            errorMessage = kvtmlReader.errorMessage();
         }
         break;
 
@@ -246,16 +247,14 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
         {
           KEduVocKvtmlReader kvtmlReader(f);
           read = kvtmlReader.readDoc(this);
+          if (!read)
+            errorMessage = kvtmlReader.errorMessage();
         }
       }
 
       QApplication::restoreOverrideCursor();
 
       if (!read) {
-        if (m_unknownAttribute || m_unknownElement ) {
-          Init();
-          return false;
-        }
         QString msg = i18n("Could not open \"%1\"\nDo you want to try again?\n(Error reported: %2)", url.path(), errorMessage);
         int result = KMessageBox::warningContinueCancel(0, msg, i18n("Error Opening File"), KGuiItem(i18n("&Retry")));
         if (result == KMessageBox::Cancel) {

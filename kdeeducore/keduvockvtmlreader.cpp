@@ -31,6 +31,97 @@ KEduVocKvtmlReader::KEduVocKvtmlReader(QIODevice *file)
 {
   // the file must be already open
   m_inputFile = file;
+  m_errorMessage = "";
+}
+
+
+bool KEduVocKvtmlReader::readDoc(KEduVocDocument *doc)
+{
+  m_doc = doc;
+  m_doc->m_cols = 0;
+  m_doc->m_lines = 0;
+
+  QDomDocument domDoc("Kvtml");
+
+  if (!domDoc.setContent(m_inputFile, &m_errorMessage))
+    return false;
+
+  QDomElement domElementKvtml = domDoc.documentElement();
+  if( domElementKvtml.tagName() != KV_DOCTYPE )
+  {
+    domError(i18n("Tag <%1> was expected "
+            "but tag <%2> was read." , QString(KV_DOCTYPE), domElementKvtml.tagName()));
+    return false;
+  }
+
+  //-------------------------------------------------------------------------
+  // Attributes
+  //-------------------------------------------------------------------------
+
+  QDomAttr domAttrEncoding = domElementKvtml.attributeNode(KV_ENCODING);
+  if (!domAttrEncoding.isNull())
+  {
+    // TODO handle old encodings
+    // Qt DOM API autodetects encoding, so is there anything to do ?
+  }
+
+  QDomAttr domAttrTitle = domElementKvtml.attributeNode(KV_TITLE);
+  if (!domAttrTitle.isNull())
+  {
+    m_doc->m_title = domAttrTitle.value();
+  }
+
+  QDomAttr domAttrAuthor = domElementKvtml.attributeNode(KV_AUTHOR);
+  if (!domAttrAuthor.isNull())
+  {
+    m_doc->m_author = domAttrAuthor.value();
+  }
+
+  QDomAttr domAttrLicence = domElementKvtml.attributeNode(KV_LICENSE);
+  if (!domAttrLicence.isNull())
+  {
+    m_doc->m_license = domAttrLicence.value();
+  }
+
+  QDomAttr domAttrRemark = domElementKvtml.attributeNode(KV_DOC_REM);
+  if (!domAttrRemark.isNull())
+  {
+    m_doc->m_remark = domAttrRemark.value();
+  }
+
+  QDomAttr domAttrGenerator = domElementKvtml.attributeNode(KV_GENERATOR);
+  if (!domAttrGenerator.isNull())
+  {
+    m_doc->m_generator = domAttrGenerator.value();
+    int pos = m_doc->m_generator.lastIndexOf(KVD_VERS_PREFIX);
+    if (pos >= 0)
+    {
+      m_doc->m_version = m_doc->m_generator;
+      m_doc->m_version.remove (0, pos+2);
+    }
+  }
+
+  QDomAttr domAttrCols = domElementKvtml.attributeNode(KV_COLS);
+  if (!domAttrCols.isNull())
+  {
+    m_doc->m_cols = domAttrCols.value().toInt();
+  }
+
+  QDomAttr domAttrLines = domElementKvtml.attributeNode(KV_LINES);
+  if (!domAttrLines.isNull())
+  {
+    m_doc->m_lines = domAttrLines.value().toInt();
+  }
+
+
+  //-------------------------------------------------------------------------
+  // Children
+  //-------------------------------------------------------------------------
+
+  bool result = readBody(domElementKvtml);  // read vocabulary
+
+  // TODO EPT setModified (false);
+  return result;
 }
 
 
@@ -1547,109 +1638,6 @@ if (lines != 0)
   }
 
   return true;
-}
-
-
-bool KEduVocKvtmlReader::readDoc(KEduVocDocument *doc)
-{
-  m_doc = doc;
-
-  QDomDocument domDoc("Kvtml" );
-  QString errorMsg;
-  if( !domDoc.setContent( m_inputFile, &errorMsg ) )
-  {
-    domError(errorMsg);
-    return false;
-  }
-
-  m_doc->m_identifiers.clear();
-  m_doc->m_vocabulary.clear();
-
-  m_doc->m_generator = "";
-  m_doc->m_cols = 0;
-  m_doc->m_lines = 0;
-  m_doc->m_title = "";
-  m_doc->m_author = "";
-  m_doc->m_license = "";
-  m_doc->m_remark = "";
-
-
-  QDomElement domElementKvtml = domDoc.documentElement();
-  if( domElementKvtml.tagName() != KV_DOCTYPE )
-  {
-    domError(i18n("Tag <%1> was expected "
-            "but tag <%2> was read." , QString(KV_DOCTYPE), domElementKvtml.tagName()));
-    return false;
-  }
-
-  //-------------------------------------------------------------------------
-  // Attributes
-  //-------------------------------------------------------------------------
-
-  QDomAttr domAttrEncoding = domElementKvtml.attributeNode(KV_ENCODING);
-  if (!domAttrEncoding.isNull())
-  {
-    // TODO handle old encodings
-    // Qt DOM API autodetects encoding, so is there anything to do ?
-  }
-
-  QDomAttr domAttrTitle = domElementKvtml.attributeNode(KV_TITLE);
-  if (!domAttrTitle.isNull())
-  {
-    m_doc->m_title = domAttrTitle.value();
-  }
-
-  QDomAttr domAttrAuthor = domElementKvtml.attributeNode(KV_AUTHOR);
-  if (!domAttrAuthor.isNull())
-  {
-    m_doc->m_author = domAttrAuthor.value();
-  }
-
-  QDomAttr domAttrLicence = domElementKvtml.attributeNode(KV_LICENSE);
-  if (!domAttrLicence.isNull())
-  {
-    m_doc->m_license = domAttrLicence.value();
-  }
-
-  QDomAttr domAttrRemark = domElementKvtml.attributeNode(KV_DOC_REM);
-  if (!domAttrRemark.isNull())
-  {
-    m_doc->m_remark = domAttrRemark.value();
-  }
-
-  QDomAttr domAttrGenerator = domElementKvtml.attributeNode(KV_GENERATOR);
-  if (!domAttrGenerator.isNull())
-  {
-    m_doc->m_generator = domAttrGenerator.value();
-    int pos = m_doc->m_generator.lastIndexOf(KVD_VERS_PREFIX);
-    if (pos >= 0)
-    {
-      m_doc->m_version = m_doc->m_generator;
-      m_doc->m_version.remove (0, pos+2);
-    }
-  }
-
-  QDomAttr domAttrCols = domElementKvtml.attributeNode(KV_COLS);
-  if (!domAttrCols.isNull())
-  {
-    m_doc->m_cols = domAttrCols.value().toInt();
-  }
-
-  QDomAttr domAttrLines = domElementKvtml.attributeNode(KV_LINES);
-  if (!domAttrLines.isNull())
-  {
-    m_doc->m_lines = domAttrLines.value().toInt();
-  }
-
-
-  //-------------------------------------------------------------------------
-  // Children
-  //-------------------------------------------------------------------------
-
-  bool result = readBody(domElementKvtml);  // read vocabulary
-
-  // TODO EPT setModified (false);
-  return result;
 }
 
 
