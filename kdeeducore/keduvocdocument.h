@@ -222,19 +222,12 @@ static const QLatin1String KV_ART_ENTRY("e");  // article entry
 #define KV_CON_P3PN    "p3n"         // 3. person plural natural
 #define KV_CONJ_COMMON "common"      // female contains common for all three
 
-#define LEX_IDENT_50   "Vocabulary Trainer V5.0"
 #define WQL_IDENT      "WordQuiz"
 
 #define KVTML_EXT        "kvtml"
-#define VT5_LEX_EXT      "lex"
-#define QVOCAB_EXT       "qvo"
-#define VCB_EXT          "vocab"
-#define KVL_EXT          "vl"
 #define CSV_EXT          "csv"
 #define TXT_EXT          "txt"
 #define WQL_EXT          "wql"
-
-#define VCB_SEPARATOR    "__"
 
 #include <QObject>
 #include <QFont>
@@ -259,7 +252,7 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
   friend class KEduVocKvtmlReader;
   friend class KEduVocWqlReader;
 
- public:
+public:
 
   enum FileType { kvd_none,
                   automatic,
@@ -267,9 +260,6 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
                   wql,
                   pauker,
                   vokabeln,
-                  kvtbin,
-                  vt_lex,
-                  vt_vcb,
                   csv };
 
   /**

@@ -162,17 +162,12 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileNam
     else
       return kvtml;
   }
+
   if (line == WQL_IDENT)
     return wql;
 
   if (c1 == '"' && (line.contains('"') == 1 || line.contains(QRegExp("\",[0-9]"))))
     return vokabeln;
-
-  if (line.indexOf(VCB_SEPARATOR) >= 0)
-    return vt_vcb;
-
-  if (line == LEX_IDENT_50)
-    return vt_lex;
 
   return csv;
 }
@@ -239,20 +234,6 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
         }
         break;
 
-        case vt_lex:
-        {
-          //QTextStream is (&f);
-          //TODO read = loadFromLex (is);
-        }
-        break;
-
-        case vt_vcb:
-        {
-          //QTextStream is (&f);
-          //TODO read = loadFromVcb (is);
-        }
-        break;
-
         case csv:
         {
           //QTextStream is(&f);
@@ -301,10 +282,6 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
       ft = kvtml;
     else if (tmp.path().right(strlen("." WQL_EXT)) == "." WQL_EXT)
       ft = wql;
-    else if (tmp.path().right(strlen("." VT5_LEX_EXT)) == "." VT5_LEX_EXT)
-      ft = vt_lex;
-    else if (tmp.path().right(strlen("." VCB_EXT)) == "." VCB_EXT)
-      ft = vt_vcb;
     else if (tmp.path().right(strlen("." CSV_EXT)) == "." CSV_EXT)
       ft = csv;
     else
@@ -337,18 +314,6 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
       case wql: {
         KEduVocWqlWriter wqlWriter(&f);
         saved = wqlWriter.writeDoc(this);
-      }
-      break;
-
-      case vt_lex: {
-        QTextStream os( &f );                       // serialize using f
-        //TODO saved = saveToLex(os, title);
-      }
-      break;
-
-      case vt_vcb: {
-        QTextStream os( &f );                       // serialize using f
-        //TODO saved = saveToVcb(os, title);
       }
       break;
 
