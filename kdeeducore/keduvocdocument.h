@@ -630,9 +630,19 @@ public:
   void setFont(QFont *font);
 
   /**
+   * Sets the generator of the file
+   */
+  inline void setGenerator(const QString & generator) { m_generator = generator; }
+
+  /**
+   * Gets the generator of the file
+   */
+  inline QString generator() const { return m_generator; }
+
+  /**
    * Gets the version of the loaded file
    */
-  void version(int &major, int &minor, int &patch);
+  inline QString version() const { return m_version; }
 
   /**
    * @returns the current lesson index
@@ -719,15 +729,6 @@ public:
   void setLeitnerSystem( LeitnerSystem* system );
   LeitnerSystem* leitnerSystem();
 
-  bool unknownAttribute(int line, const QString &name, const QString &attr);
-  void unknownElement(int line, const QString &elem );
-  void errorKvtMl(int line, const QString &text );
-  void warningKvtMl(int line, const QString &text );
-
-  void errorLex(int line, const QString &text );
-
-  void errorCsv(int line, const QString &text );
-
   FileType detectFileType(const QString &fileName);
 
 signals:
@@ -753,8 +754,6 @@ private:
 
   // save these to document
   QStringList               m_identifiers;      //0= origin, 1,.. translations
-  int                       m_cols;
-  int                       m_lines;
   int                       m_currentLesson;
   QList<int>                m_extraSizeHints;
   QList<int>                m_sizeHints;

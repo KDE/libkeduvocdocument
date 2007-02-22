@@ -89,11 +89,6 @@ void KEduVocDocument::setVersion (const QString & vers)
 }
 
 
-void KEduVocDocument::version(int &, int &, int &)
-{
-}
-
-
 void KEduVocDocument::Init ()
 {
   m_lessonDescriptions.clear();
@@ -260,6 +255,10 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
         if (result == KMessageBox::Cancel) {
           Init();
           return false;
+        } else {
+          Init();
+          if (!url.isEmpty())
+            m_url = url;
         }
       }
     }

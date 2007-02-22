@@ -1,10 +1,10 @@
 /***************************************************************************
                      read a KEduVocDocument from a KVTML file
     -----------------------------------------------------------------------
-    copyright            : (C) 1999-2001 Ewald Arnold
-                           (C) 2001 The KDE-EDU team
-                           (C) 2005 Eric Pignet
-    email                : eric at erixpage.com
+    copyright           : (C) 1999-2001 Ewald Arnold
+                          (C) 2001 The KDE-EDU team
+                          (C) 2005 Eric Pignet <eric at erixpage.com>
+                          (C) 2007 Peter Hedlund <peter.hedlund@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -38,19 +38,18 @@ KEduVocKvtmlReader::KEduVocKvtmlReader(QIODevice *file)
 bool KEduVocKvtmlReader::readDoc(KEduVocDocument *doc)
 {
   m_doc = doc;
-  m_doc->m_cols = 0;
-  m_doc->m_lines = 0;
+  m_cols = 0;
+  m_lines = 0;
 
-  QDomDocument domDoc("Kvtml");
+  QDomDocument domDoc("KEduVocDocument");
 
   if (!domDoc.setContent(m_inputFile, &m_errorMessage))
     return false;
 
   QDomElement domElementKvtml = domDoc.documentElement();
-  if( domElementKvtml.tagName() != KV_DOCTYPE )
+  if (domElementKvtml.tagName() != KV_DOCTYPE)
   {
-    domError(i18n("Tag <%1> was expected "
-            "but tag <%2> was read." , QString(KV_DOCTYPE), domElementKvtml.tagName()));
+    m_errorMessage = i18n("Tag <%1> was expected but tag <%2> was found.", QString(KV_DOCTYPE), domElementKvtml.tagName());
     return false;
   }
 
@@ -58,61 +57,46 @@ bool KEduVocKvtmlReader::readDoc(KEduVocDocument *doc)
   // Attributes
   //-------------------------------------------------------------------------
 
-  QDomAttr domAttrEncoding = domElementKvtml.attributeNode(KV_ENCODING);
-  if (!domAttrEncoding.isNull())
+  QDomAttr documentAttribute;
+  documentAttribute = domElementKvtml.attributeNode(KV_ENCODING);
+  if (!documentAttribute.isNull())
   {
     // TODO handle old encodings
     // Qt DOM API autodetects encoding, so is there anything to do ?
   }
 
-  QDomAttr domAttrTitle = domElementKvtml.attributeNode(KV_TITLE);
-  if (!domAttrTitle.isNull())
-  {
-    m_doc->m_title = domAttrTitle.value();
-  }
+  documentAttribute = domElementKvtml.attributeNode(KV_TITLE);
+  if (!documentAttribute.isNull())
+    m_doc->setTitle(documentAttribute.value());
 
-  QDomAttr domAttrAuthor = domElementKvtml.attributeNode(KV_AUTHOR);
-  if (!domAttrAuthor.isNull())
-  {
-    m_doc->m_author = domAttrAuthor.value();
-  }
+  documentAttribute = domElementKvtml.attributeNode(KV_AUTHOR);
+  if (!documentAttribute.isNull())
+    m_doc->setAuthor(documentAttribute.value());
 
-  QDomAttr domAttrLicence = domElementKvtml.attributeNode(KV_LICENSE);
-  if (!domAttrLicence.isNull())
-  {
-    m_doc->m_license = domAttrLicence.value();
-  }
+  documentAttribute = domElementKvtml.attributeNode(KV_LICENSE);
+  if (!documentAttribute.isNull())
+    m_doc->setLicense(documentAttribute.value());
 
-  QDomAttr domAttrRemark = domElementKvtml.attributeNode(KV_DOC_REM);
-  if (!domAttrRemark.isNull())
-  {
-    m_doc->m_remark = domAttrRemark.value();
-  }
+  documentAttribute = domElementKvtml.attributeNode(KV_DOC_REM);
+  if (!documentAttribute.isNull())
+    m_doc->setDocRemark(documentAttribute.value());
 
-  QDomAttr domAttrGenerator = domElementKvtml.attributeNode(KV_GENERATOR);
-  if (!domAttrGenerator.isNull())
+  documentAttribute = domElementKvtml.attributeNode(KV_GENERATOR);
+  if (!documentAttribute.isNull())
   {
-    m_doc->m_generator = domAttrGenerator.value();
-    int pos = m_doc->m_generator.lastIndexOf(KVD_VERS_PREFIX);
+    m_doc->setGenerator(documentAttribute.value());
+    int pos = m_doc->generator().lastIndexOf(KVD_VERS_PREFIX);
     if (pos >= 0)
-    {
-      m_doc->m_version = m_doc->m_generator;
-      m_doc->m_version.remove (0, pos+2);
-    }
+      m_doc->setVersion(m_doc->generator().remove(0, pos + 2));
   }
 
-  QDomAttr domAttrCols = domElementKvtml.attributeNode(KV_COLS);
-  if (!domAttrCols.isNull())
-  {
-    m_doc->m_cols = domAttrCols.value().toInt();
-  }
+  documentAttribute = domElementKvtml.attributeNode(KV_COLS);
+  if (!documentAttribute.isNull())
+    m_cols = documentAttribute.value().toInt(); ///currently not used anywhere
 
-  QDomAttr domAttrLines = domElementKvtml.attributeNode(KV_LINES);
-  if (!domAttrLines.isNull())
-  {
-    m_doc->m_lines = domAttrLines.value().toInt();
-  }
-
+  documentAttribute = domElementKvtml.attributeNode(KV_LINES);
+  if (!documentAttribute.isNull())
+    m_lines = documentAttribute.value().toInt();
 
   //-------------------------------------------------------------------------
   // Children
@@ -120,8 +104,147 @@ bool KEduVocKvtmlReader::readDoc(KEduVocDocument *doc)
 
   bool result = readBody(domElementKvtml);  // read vocabulary
 
-  // TODO EPT setModified (false);
   return result;
+}
+
+
+bool KEduVocKvtmlReader::readBody(QDomElement &domElementParent)
+{
+  bool lessgroup = false;
+  bool optgroup = false;
+  bool attrgroup = false;
+  bool tensegroup = false;
+  bool usagegroup = false;
+  bool articlegroup = false;
+  bool conjuggroup = false;
+
+  int ent_no = 0;
+  int ent_percent = (int) m_lines / 100;
+  float f_ent_percent = (int) m_lines / 100.0;
+/* TODO EPT
+if (lines != 0)
+    emit progressChanged(this, 0);
+*/
+  QDomElement currentElement;
+
+  currentElement = domElementParent.firstChildElement(KV_LESS_GRP);
+  if (!currentElement.isNull()) {
+    lessgroup = readLesson(currentElement);
+    if (!lessgroup)
+      return false;
+  }
+
+  QDomElement domElementChild = domElementParent.firstChild().toElement();
+
+  while (!domElementChild.isNull())
+  {
+    if (domElementChild.tagName() == KV_LESS_GRP)
+    {
+      /*if (lessgroup)
+      {
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
+        return false;
+      }
+      lessgroup = true;
+      if (!readLesson(domElementChild))
+        return false;*/
+    }
+
+    else if (domElementChild.tagName() == KV_ARTICLE_GRP)
+    {
+      if (articlegroup)
+      {
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
+        return false;
+      }
+      articlegroup = true;
+      if (!readArticle(domElementChild))
+        return false;
+    }
+
+    else if (domElementChild.tagName() == KV_CONJUG_GRP)
+    {
+      if (conjuggroup)
+      {
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
+        return false;
+      }
+      conjuggroup = true;
+      if (!readConjug(domElementChild, m_doc->m_conjugations, KV_CON_ENTRY))
+        return false;
+    }
+
+    else if (domElementChild.tagName() == KV_OPTION_GRP)
+    {
+      if (optgroup)
+      {
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
+        return false;
+      }
+      optgroup = true;
+      if (!readOptions(domElementChild))
+        return false;
+    }
+
+    else if (domElementChild.tagName() == KV_TYPE_GRP)
+    {
+      if (attrgroup)
+      {
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
+        return false;
+      }
+      attrgroup = true;
+      if (!readType(domElementChild))
+        return false;
+    }
+
+    else if (domElementChild.tagName() == KV_TENSE_GRP)
+    {
+      if (tensegroup)
+      {
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
+        return false;
+      }
+      tensegroup = true;
+      if (!readTense(domElementChild))
+        return false;
+    }
+
+    else if (domElementChild.tagName() == KV_USAGE_GRP)
+    {
+      if (usagegroup)
+      {
+        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
+        return false;
+      }
+      usagegroup = true;
+      if (!readUsage(domElementChild))
+        return false;
+    }
+
+    else if (domElementChild.tagName() == KV_EXPR)
+    {
+      /* TODO EPT
+      if (lines != 0)
+      {
+        ent_no++;
+        if (ent_percent != 0 && (ent_no % ent_percent) == 0 )
+          emit progressChanged(this, int(ent_no / f_ent_percent));
+      }*/
+      if (!readExpression(domElementChild))
+        return false;
+    }
+
+    else
+    {
+      domErrorUnknownElement(domElementChild.tagName());
+      return false;
+    }
+
+    domElementChild = domElementChild.nextSibling().toElement();
+  }
+
+  return true;
 }
 
 
@@ -1507,139 +1630,6 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
   return true;
 }
-
-
-bool KEduVocKvtmlReader::readBody(QDomElement &domElementParent)
-{
-  bool lessgroup = false;
-  bool optgroup = false;
-  bool attrgroup = false;
-  bool tensegroup = false;
-  bool usagegroup = false;
-  bool articlegroup = false;
-  bool conjuggroup = false;
-
-  int ent_no = 0;
-  int ent_percent = (int) m_doc->m_lines / 100;
-  float f_ent_percent = (int) m_doc->m_lines / 100.0;
-/* TODO EPT
-if (lines != 0)
-    emit progressChanged(this, 0);
-*/
-
-  QDomElement domElementChild = domElementParent.firstChild().toElement();
-
-  while (!domElementChild.isNull())
-  {
-    if (domElementChild.tagName() == KV_LESS_GRP)
-    {
-      if (lessgroup)
-      {
-        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
-        return false;
-      }
-      lessgroup = true;
-      if (!readLesson(domElementChild))
-        return false;
-    }
-
-    else if (domElementChild.tagName() == KV_ARTICLE_GRP)
-    {
-      if (articlegroup)
-      {
-        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
-        return false;
-      }
-      articlegroup = true;
-      if (!readArticle(domElementChild))
-        return false;
-    }
-
-    else if (domElementChild.tagName() == KV_CONJUG_GRP)
-    {
-      if (conjuggroup)
-      {
-        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
-        return false;
-      }
-      conjuggroup = true;
-      if (!readConjug(domElementChild, m_doc->m_conjugations, KV_CON_ENTRY))
-        return false;
-    }
-
-    else if (domElementChild.tagName() == KV_OPTION_GRP)
-    {
-      if (optgroup)
-      {
-        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
-        return false;
-      }
-      optgroup = true;
-      if (!readOptions(domElementChild))
-        return false;
-    }
-
-    else if (domElementChild.tagName() == KV_TYPE_GRP)
-    {
-      if (attrgroup)
-      {
-        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
-        return false;
-      }
-      attrgroup = true;
-      if (!readType(domElementChild))
-        return false;
-    }
-
-    else if (domElementChild.tagName() == KV_TENSE_GRP)
-    {
-      if (tensegroup)
-      {
-        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
-        return false;
-      }
-      tensegroup = true;
-      if (!readTense(domElementChild))
-        return false;
-    }
-
-    else if (domElementChild.tagName() == KV_USAGE_GRP)
-    {
-      if (usagegroup)
-      {
-        domError(i18n("repeated occurrence of tag <%1>", domElementChild.tagName()));
-        return false;
-      }
-      usagegroup = true;
-      if (!readUsage(domElementChild))
-        return false;
-    }
-
-    else if (domElementChild.tagName() == KV_EXPR)
-    {
-      /* TODO EPT
-      if (lines != 0)
-      {
-        ent_no++;
-        if (ent_percent != 0 && (ent_no % ent_percent) == 0 )
-          emit progressChanged(this, int(ent_no / f_ent_percent));
-      }*/
-      if (!readExpression(domElementChild))
-        return false;
-    }
-
-    else
-    {
-      domErrorUnknownElement(domElementChild.tagName());
-      return false;
-    }
-
-    domElementChild = domElementChild.nextSibling().toElement();
-  }
-
-  return true;
-}
-
 
 void KEduVocKvtmlReader::domErrorUnknownElement(const QString &elem)
 {

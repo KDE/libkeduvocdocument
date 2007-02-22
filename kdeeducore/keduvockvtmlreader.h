@@ -1,10 +1,10 @@
 /***************************************************************************
                      read a KEduVocDocument from a KVTML file
     -----------------------------------------------------------------------
-    copyright            : (C) 1999-2001 Ewald Arnold
-                           (C) 2001 The KDE-EDU team
-                           (C) 2005 Eric Pignet
-    email                : eric at erixpage.com
+    copyright           : (C) 1999-2001 Ewald Arnold
+                          (C) 2001 The KDE-EDU team
+                          (C) 2005 Eric Pignet <eric at erixpage.com>
+                          (C) 2007 Peter Hedlund <peter.hedlund@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -117,6 +117,8 @@ private:
   QIODevice *m_inputFile;
   KEduVocDocument *m_doc;
   QString m_errorMessage;
+  int m_cols;
+  int m_lines;
 };
 
 #endif
