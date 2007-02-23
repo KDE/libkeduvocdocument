@@ -92,6 +92,7 @@ void KEduVocDocument::setVersion (const QString & vers)
 void KEduVocDocument::Init ()
 {
   m_lessonDescriptions.clear();
+  m_articles.clear();
   m_typeDescriptions.clear();
   m_tenseDescriptions.clear();
   m_identifiers.clear();

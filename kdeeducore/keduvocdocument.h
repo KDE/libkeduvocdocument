@@ -249,7 +249,6 @@ class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
 {
   Q_OBJECT
   friend class KEduVocKvtmlWriter;
-  friend class KEduVocKvtmlReader;
 
 public:
 
@@ -645,6 +644,12 @@ public:
   inline QString version() const { return m_version; }
 
   /**
+   * Sets version of the loaded file
+   * @param ver the new version
+   */
+  void setVersion(const QString & ver);
+
+  /**
    * @returns the current lesson index
    */
   inline int currentLesson() const { return m_currentLesson; }
@@ -736,14 +741,7 @@ signals:
   void docModified (bool mod);
 
 protected:
-
   void Init();
-
-  /**
-   * Sets version of the loaded file
-   * @param ver the new version
-   */
-  void setVersion(const QString & ver);
 
 private:
   bool                      m_dirty;

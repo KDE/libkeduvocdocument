@@ -24,6 +24,7 @@
 #include <QIODevice>
 #include <QtXml/QDomDocument>
 #include <QList>
+#include <QString>
 
 #include "keduvocdocument.h"
 #include "keduvocgrammar.h"
@@ -73,6 +74,7 @@ class KEduVocDocument;
 */
 class KDEEDUCORE_EXPORT  KEduVocKvtmlReader : public QObject
 {
+  Q_OBJECT
 public:
   KEduVocKvtmlReader(QIODevice *file);
 
@@ -107,9 +109,6 @@ public:
                                      QString &paraphrase);
   bool readExpression(QDomElement &domElementParent);
   bool readBody(QDomElement &domElementParent);
-
-  void domErrorUnknownElement(const QString &elem);
-  void domError(const QString &text );
 
   QString errorMessage() const {return m_errorMessage;};
 
