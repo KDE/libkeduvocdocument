@@ -1,10 +1,10 @@
 /***************************************************************************
                      export a KEduVocDocument to a KVTML file
     -----------------------------------------------------------------------
-    copyright            : (C) 1999-2001 Ewald Arnold
-                           (C) 2001 The KDE-EDU team
-                           (C) 2005 Eric Pignet
-    email                : eric at erixpage.com
+    copyright           : (C) 1999-2001 Ewald Arnold
+                          (C) 2001 The KDE-EDU team
+                          (C) 2005 Eric Pignet <eric at erixpage.com>
+                          (C) 2007 Peter Hedlund <peter.hedlund@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -71,32 +71,27 @@ class KDEEDUCORE_EXPORT KEduVocKvtmlWriter
 {
 public:
   KEduVocKvtmlWriter(QFile *file);
-  ~KEduVocKvtmlWriter();
 
   bool writeDoc(KEduVocDocument *doc, const QString &generator);
 
-  bool saveLessonKvtMl (QDomDocument &domDoc, QDomElement &domElementParent);
-  bool saveTypeNameKvtMl (QDomDocument &domDoc, QDomElement &domElementParent);
-  bool saveTenseNameKvtMl (QDomDocument &domDoc, QDomElement &domElementParent);
-  bool saveUsageNameKvtMl (QDomDocument &domDoc, QDomElement &domElementParent);
-  bool saveOptionsKvtMl  (QDomDocument &domDoc, QDomElement &domElementParent);
-  bool saveArticleKvtMl  (QDomDocument &domDoc, QDomElement &domElementParent);
-  bool saveConjugHeader  (QDomDocument &domDoc, QDomElement &domElementParent,
-                          QList<KEduVocConjugation> &curr_conjug);
-  bool saveConjug        (QDomDocument &domDoc, QDomElement &domElementParent,
-                          const KEduVocConjugation &curr_conjug, const QString &type);
-  bool saveConjugEntry   (QDomDocument &domDoc, QDomElement &domElementParent,
-                          KEduVocConjugation &curr_conjug);
+  bool writeLesson(QDomDocument &domDoc, QDomElement &domElementParent);
+  bool writeType(QDomDocument &domDoc, QDomElement &domElementParent);
+  bool writeTense(QDomDocument &domDoc, QDomElement &domElementParent);
+  bool writeUsage(QDomDocument &domDoc, QDomElement &domElementParent);
+  bool writeOption(QDomDocument &domDoc, QDomElement &domElementParent);
+  bool writeArticle (QDomDocument &domDoc, QDomElement &domElementParent);
+  bool writeConjugHeader(QDomDocument &domDoc, QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug);
+  bool writeConjug(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocConjugation &curr_conjug, const QString &type);
+  bool writeConjugEntry(QDomDocument &domDoc, QDomElement &domElementParent, KEduVocConjugation &curr_conjug);
+  bool writeComparison(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp);
+  bool writeMultipleChoice(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocMultipleChoice &mc);
 
-  bool saveComparison    (QDomDocument &domDoc, QDomElement &domElementParent,
-                          const KEduVocComparison &comp);
-
-  bool saveMultipleChoice(QDomDocument &domDoc, QDomElement &domElementParent,
-                          const KEduVocMultipleChoice &mc);
+  QString errorMessage() const { return m_errorMessage; };
 
 private:
   QFile *m_outputFile;
   KEduVocDocument *m_doc;
+  QString m_errorMessage;
 };
 
 #endif
