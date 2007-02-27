@@ -4,11 +4,11 @@
 
     -----------------------------------------------------------------------
 
-    begin         : Sat Nov 27 09:50:53 MET 1999
+    begin     : Sat Nov 27 09:50:53 MET 1999
 
-    copyright     : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
-                    (C) 2001 The KDE-EDU team
-                    (C) 2004-2005 Peter Hedlund <peter.hedlund@kdemail.net>
+    copyright : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
+                (C) 2001 The KDE-EDU team
+                (C) 2004, 2005, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
 
     -----------------------------------------------------------------------
 
@@ -47,23 +47,17 @@ QStringList KEduVocConjugation::userTenses;
 
 //================================================================
 
-KEduVocComparison::KEduVocComparison (
-           const QString &l1,
-           const QString &l2,
-           const QString &l3
-          )
+KEduVocComparison::KEduVocComparison(const QString &l1, const QString &l2, const QString &l3)
 {
-  setL1 (l1);
-  setL2 (l2);
-  setL3 (l3);
+  setL1(l1);
+  setL2(l2);
+  setL3(l3);
 }
 
 
 bool KEduVocComparison::isEmpty() const
 {
-  return   ls1.simplified().isEmpty()
-        && ls2.simplified().isEmpty()
-        && ls3.simplified().isEmpty();
+  return   ls1.simplified().isEmpty() && ls2.simplified().isEmpty() && ls3.simplified().isEmpty();
 }
 
 
@@ -74,23 +68,19 @@ void KEduVocComparison::clear()
   ls3 = "";
 }
 
-bool KEduVocComparison::operator ==( const KEduVocComparison& a ) const
+bool KEduVocComparison::operator ==(const KEduVocComparison& a) const
 {
-	if ( ls1 == a.l1() && ls2 == a.l2() && ls3 == a.l3() )
-		return true;
-	else
-		return false;
+  if (ls1 == a.l1() && ls2 == a.l2() && ls3 == a.l3())
+    return true;
+  else
+  return false;
 }
 
 
 //=================================================================
 
 
-KEduVocArticle::KEduVocArticle
-          (const QString &fem_def, const QString &fem_indef,
-           const QString &mal_def, const QString &mal_indef,
-           const QString &nat_def, const QString &nat_indef
-          )
+KEduVocArticle::KEduVocArticle(const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &nat_def, const QString &nat_indef)
 {
   setFemale  (fem_def, fem_indef);
   setMale    (mal_def, mal_indef);
@@ -144,20 +134,20 @@ void KEduVocArticle::natural(QString &def, QString &indef) const
 //==============================================================
 
 
-bool KEduVocConjugation::operator ==( const KEduVocConjugation& a ) const
+bool KEduVocConjugation::operator ==(const KEduVocConjugation& a) const
 {
-	return verbName == a.getVerbName();
+  return verbName == a.getVerbName();
 }
 
 
 const QString& KEduVocConjugation::getVerbName() const
 {
-	return verbName;
+  return verbName;
 }
 
 int KEduVocConjugation::numEntries() const
 {
-  return conjugations.size();
+  return conjugations.count();
 }
 
 
@@ -169,10 +159,10 @@ QList<KEduVocTenseRelation> KEduVocConjugation::getRelation ()
     vec.append(KEduVocTenseRelation(names[i].abbrev, i18n(names[i].name)));
   }
 
-  for (int i = 0; i < userTenses.size(); i++) {
+  for (int i = 0; i < userTenses.count(); i++) {
     QString s;
-    s.setNum(i+1);
-    s.insert(0, UL_USER_TENSE);
+    s.setNum(i + 1);
+    s.prepend(UL_USER_TENSE);
     vec.append(KEduVocTenseRelation(s, userTenses[i]));
   }
 
@@ -180,26 +170,26 @@ QList<KEduVocTenseRelation> KEduVocConjugation::getRelation ()
 }
 
 
-void KEduVocConjugation::setTenseNames (const QStringList& names)
+void KEduVocConjugation::setTenseNames(const QStringList& names)
 {
   userTenses = names;
 }
 
 
-QString KEduVocConjugation::getName (const QString &abbrev)
+QString KEduVocConjugation::getName(const QString &abbrev)
 {
   if (abbrev.length() >= 2 && QString(abbrev[0]) == QString(UL_USER_TENSE)) {
     QString s = abbrev;
     s.remove(0, 1);
     int i = s.toInt() - 1;
 
-    if (i < (int) userTenses.size() )
+    if (i < userTenses.count() )
       return userTenses[i];
     else
       return "";
   }
   else {
-    for (int i = 0; i < (int) numInternalNames(); i++)
+    for (int i = 0; i < numInternalNames(); i++)
       if (names[i].abbrev == abbrev) {
         return i18n(names[i].name);
       }
@@ -209,30 +199,28 @@ QString KEduVocConjugation::getName (const QString &abbrev)
 }
 
 
-QString KEduVocConjugation::getName (int idx)
+QString KEduVocConjugation::getName(int idx)
 {
-  if (idx < numInternalNames() )
+  if (idx < numInternalNames())
     return i18n(names[idx].name);
-
   else if (idx < numTenses() )
     return userTenses[idx-numInternalNames()];
-
   else
     return "";
 }
 
 
-QString KEduVocConjugation::getAbbrev (const QString &name)
+QString KEduVocConjugation::getAbbrev(const QString &name)
 {
-  for (int i = 0; i < (int) userTenses.size(); i++)
+  for (int i = 0; i < userTenses.count(); i++)
     if (userTenses[i] == name) {
       QString s;
-      s.setNum(i+1);
-      s.insert(0, UL_USER_TENSE);
+      s.setNum(i + 1);
+      s.prepend(UL_USER_TENSE);
       return s;
     }
 
-  for (int i = 0; i < (int) numInternalNames(); i++)
+  for (int i = 0; i < numInternalNames(); i++)
     if (names[i].name == name)
       return names[i].abbrev;
 
@@ -240,15 +228,15 @@ QString KEduVocConjugation::getAbbrev (const QString &name)
 }
 
 
-QString KEduVocConjugation::getAbbrev (int idx)
+QString KEduVocConjugation::getAbbrev(int idx)
 {
   if (idx < numInternalNames() )
     return names[idx].abbrev;
 
   else if (idx < numTenses() ) {
     QString s;
-    s.setNum(idx-numInternalNames()+1);
-    s.insert(0, UL_USER_TENSE);
+    s.setNum(idx - numInternalNames() + 1);
+    s.prepend(UL_USER_TENSE);
     return s;
   }
 
@@ -265,31 +253,31 @@ int KEduVocConjugation::numInternalNames()
 
 int KEduVocConjugation::numTenses()
 {
-  return numInternalNames()+userTenses.size();
+  return numInternalNames() + userTenses.size();
 }
 
 
-QString KEduVocConjugation::getType (int idx)
+QString KEduVocConjugation::getType(int idx)
 {
-  if (idx >= (int) conjugations.size() )
+  if (idx >= conjugations.count())
     return "";
 
   return conjugations[idx].type;
 }
 
 
-void KEduVocConjugation::setType (int idx, const QString & type)
+void KEduVocConjugation::setType(int idx, const QString & type)
 {
-  if (idx >= (int) conjugations.size() )
+  if (idx >= (int) conjugations.size())
     return;
 
   conjugations[idx].type = type;
 }
 
 
-void KEduVocConjugation::cleanUp ()
+void KEduVocConjugation::cleanUp()
 {
-  for (int i = (int)conjugations.size()-1; i >= 0; i--) {
+  for (int i = conjugations.count() - 1; i >= 0; i--) {
     const conjug_t *ctp = &conjugations[i];
     if (   ctp->pers1_sing.simplified().isEmpty()
         && ctp->pers2_sing.simplified().isEmpty()
@@ -302,14 +290,14 @@ void KEduVocConjugation::cleanUp ()
         && ctp->pers3_f_plur.simplified().isEmpty()
         && ctp->pers3_n_plur.simplified().isEmpty()
        )
-     conjugations.removeAt( i );
+     conjugations.removeAt(i);
   }
 }
 
 
-bool KEduVocConjugation::isEmpty (int idx)
+bool KEduVocConjugation::isEmpty(int idx)
 {
-  if (idx < (int) conjugations.size()) {
+  if (idx < conjugations.count()) {
     const conjug_t *ctp = &conjugations[idx];
     return ctp->pers1_sing.simplified().isEmpty()
         && ctp->pers2_sing.simplified().isEmpty()
@@ -345,71 +333,61 @@ bool KEduVocConjugation::pers3PluralCommon(const QString &type) const
 }
 
 
-QString KEduVocConjugation::pers1Singular
-  (const QString &type) const
+QString KEduVocConjugation::pers1Singular(const QString &type) const
 {
   _GET_CON_(pers1_sing, type, "");
 }
 
 
-QString KEduVocConjugation::pers2Singular
-  (const QString &type) const
+QString KEduVocConjugation::pers2Singular(const QString &type) const
 {
   _GET_CON_(pers2_sing, type, "");
 }
 
 
-QString KEduVocConjugation::pers3FemaleSingular
-  (const QString &type) const
+QString KEduVocConjugation::pers3FemaleSingular(const QString &type) const
 {
   _GET_CON_(pers3_f_sing, type, "");
 }
 
 
-QString KEduVocConjugation::pers3MaleSingular
-  (const QString &type) const
+QString KEduVocConjugation::pers3MaleSingular(const QString &type) const
 {
   _GET_CON_(pers3_m_sing, type, "");
 }
 
 
-QString KEduVocConjugation::pers3NaturalSingular
-  (const QString &type) const
+QString KEduVocConjugation::pers3NaturalSingular(const QString &type) const
 {
   _GET_CON_(pers3_n_sing, type, "");
 }
 
 
-QString KEduVocConjugation::pers1Plural
-  (const QString &type) const
+QString KEduVocConjugation::pers1Plural(const QString &type) const
 {
   _GET_CON_(pers1_plur, type, "");
 }
 
 
-QString KEduVocConjugation::pers2Plural
-  (const QString &type) const
+QString KEduVocConjugation::pers2Plural(const QString &type) const
 {
   _GET_CON_(pers2_plur, type, "");
 }
 
 
-QString KEduVocConjugation::pers3FemalePlural
-  (const QString &type) const
+QString KEduVocConjugation::pers3FemalePlural(const QString &type) const
 {
   _GET_CON_(pers3_f_plur, type, "");
 }
 
 
-QString KEduVocConjugation::pers3MalePlural
-  (const QString &type) const
+QString KEduVocConjugation::pers3MalePlural(const QString &type) const
 {
   _GET_CON_(pers3_m_plur, type, "");
 }
 
 
-QString KEduVocConjugation::pers3NaturalPlural
-  (const QString &type) const
+QString KEduVocConjugation::pers3NaturalPlural(const QString &type) const
 {
   _GET_CON_(pers3_n_plur, type, "");
 }
@@ -442,74 +420,63 @@ void KEduVocConjugation::setPers3SingularCommon(const QString &type, bool f)
 }
 
 
-void KEduVocConjugation::setPers1Singular
-  (const QString &type, const QString &str)
+void KEduVocConjugation::setPers1Singular(const QString &type, const QString &str)
 {
   _SET_CON_(pers1_sing, type, str);
 }
 
 
-void KEduVocConjugation::setPers2Singular
-  (const QString &type, const QString &str)
+void KEduVocConjugation::setPers2Singular(const QString &type, const QString &str)
 {
   _SET_CON_(pers2_sing, type, str);
 }
 
 
-void KEduVocConjugation::setPers3FemaleSingular
-  (const QString &type, const QString &str)
+void KEduVocConjugation::setPers3FemaleSingular(const QString &type, const QString &str)
 {
   _SET_CON_(pers3_f_sing, type, str);
 }
 
 
-void KEduVocConjugation::setPers3MaleSingular
-  (const QString &type, const QString &str)
+void KEduVocConjugation::setPers3MaleSingular(const QString &type, const QString &str)
 {
   _SET_CON_(pers3_m_sing, type, str);
 }
 
 
-void KEduVocConjugation::setPers3NaturalSingular
-  (const QString &type, const QString &str)
+void KEduVocConjugation::setPers3NaturalSingular(const QString &type, const QString &str)
 {
   _SET_CON_(pers3_n_sing, type, str);
 }
 
 
-void KEduVocConjugation::setPers1Plural
-  (const QString &type, const QString &str)
+void KEduVocConjugation::setPers1Plural(const QString &type, const QString &str)
 {
   _SET_CON_(pers1_plur, type, str);
 }
 
 
-void KEduVocConjugation::setPers2Plural
-  (const QString &type, const QString &str)
+void KEduVocConjugation::setPers2Plural(const QString &type, const QString &str)
 {
   _SET_CON_(pers2_plur, type, str);
 }
 
 
-void KEduVocConjugation::setPers3FemalePlural
-  (const QString &type, const QString &str)
+void KEduVocConjugation::setPers3FemalePlural(const QString &type, const QString &str)
 {
   _SET_CON_(pers3_f_plur, type, str);
 }
 
 
-void KEduVocConjugation::setPers3MalePlural
-  (const QString &type, const QString &str)
+void KEduVocConjugation::setPers3MalePlural(const QString &type, const QString &str)
 {
   _SET_CON_(pers3_m_plur, type, str);
 }
 
 
-void KEduVocConjugation::setPers3NaturalPlural
-  (const QString &type, const QString &str)
+void KEduVocConjugation::setPers3NaturalPlural(const QString &type, const QString &str)
 {
   _SET_CON_(pers3_n_plur, type, str);
 }
 
 #undef _SET_CON_
-

@@ -4,11 +4,11 @@
 
     -----------------------------------------------------------------------
 
-    begin          : Sat Nov 27 09:50:53 MET 1999
+    begin        : Sat Nov 27 09:50:53 MET 1999
 
-    copyright      : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
-                     (C) 2001 The KDE-EDU team
-                     (C) 2005 Peter Hedlund <peter.hedlund@kdemail.net>
+    copyright    : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
+                   (C) 2001 The KDE-EDU team
+                   (C) 2005, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
 
     -----------------------------------------------------------------------
 
@@ -22,7 +22,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-
 
 #ifndef grammarmanager_included
 #define grammarmanager_included
@@ -56,7 +55,6 @@
 
 class KDEEDUCORE_EXPORT KEduVocArticle
 {
-
 public:
 
   /**
@@ -73,45 +71,45 @@ public:
    * @param nat_def reference to a QString with the definite neutral article
    * @param nat_indef reference to a QString with the indefinite neutral article
    */
-  KEduVocArticle ( const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef,
-   		const QString &nat_def, const QString &nat_indef );
+  KEduVocArticle( const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &nat_def, const QString &nat_indef );
 
   /**
    * Sets the female articles
    * @param def const reference to a QString with the definite female article
    * @param indef const reference to a QString with the indefinite female article
    */
-  void setFemale  (const QString &def, const QString &indef);
+  void setFemale(const QString &def, const QString &indef);
 
   /**
    * Sets the male articles
    * @param def const reference to a QString with the definite male article
    * @param indef const reference to a QString with the indefinite male article
    */
-  void setMale    (const QString &def, const QString &indef);
+  void setMale(const QString &def, const QString &indef);
 
   /**
    * Sets the neutral articles
    * @param def const reference to a QString with the definite neutral article
    * @param indef const reference to a QString with the indefinite neutral article
    */
-  void setNatural (const QString &def, const QString &indef);
+  void setNatural(const QString &def, const QString &indef);
 
   void female  (QString &def, QString &indef) const;
   void male    (QString &def, QString &indef) const;
   void natural (QString &def, QString &indef) const;
 
-protected:
-
-  QString fem_def, fem_indef,
-          mal_def, mal_indef,
-          nat_def, nat_indef;
+private:
+  QString fem_def;
+  QString fem_indef;
+  QString mal_def;
+  QString mal_indef;
+  QString nat_def;
+  QString nat_indef;
 };
 
 
 class KDEEDUCORE_EXPORT KEduVocComparison
 {
-
 public:
 
   /**
@@ -125,24 +123,25 @@ public:
    * @param l2
    * @param l3
    */
-  KEduVocComparison ( const QString &l1, const QString &l2, const QString &l3 );
+  KEduVocComparison(const QString &l1, const QString &l2, const QString &l3);
 
-  void setL1 (const QString &s) { ls1 = s; }
-  void setL2 (const QString &s) { ls2 = s; }
-  void setL3 (const QString &s) { ls3 = s; }
+  void setL1(const QString &s) { ls1 = s; }
+  void setL2(const QString &s) { ls2 = s; }
+  void setL3(const QString &s) { ls3 = s; }
 
-  QString l1 () const { return ls1; }
-  QString l2 () const { return ls2; }
-  QString l3 () const { return ls3; }
+  QString l1() const { return ls1; }
+  QString l2() const { return ls2; }
+  QString l3() const { return ls3; }
 
   bool isEmpty() const;
   void clear();
 
-  bool operator == ( const KEduVocComparison& a ) const;
+  bool operator == (const KEduVocComparison& a) const;
 
-protected:
-
-  QString  ls1, ls2, ls3;
+private:
+  QString ls1;
+  QString ls2;
+  QString ls3;
 };
 
 
@@ -155,9 +154,9 @@ public:
   inline QString shortStr() const { return shortId; }
   inline QString longStr()  const { return longId;  }
 
-protected:
-
-  QString  shortId, longId;
+private:
+  QString shortId;
+  QString longId;
 };
 
 /**
@@ -165,13 +164,12 @@ protected:
  */
 class KDEEDUCORE_EXPORT KEduVocConjugation
 {
-
 public:
 
   /**
    * The constructor
    */
-  KEduVocConjugation () {}
+  KEduVocConjugation() {}
 
   /**
    * @return
@@ -181,26 +179,26 @@ public:
   /**
    * @return 
    */
-  static QList<KEduVocTenseRelation> getRelation ();
+  static QList<KEduVocTenseRelation> getRelation();
 
   /**
    * @param names
    */
-  static void setTenseNames (const QStringList& names);
+  static void setTenseNames(const QStringList& names);
 
-  static QString getName (const QString &abbrev);
-  static QString getName (int index);
-  static QString getAbbrev (const QString &name);
-  static QString getAbbrev (int index);
+  static QString getName(const QString &abbrev);
+  static QString getName(int index);
+  static QString getAbbrev(const QString &name);
+  static QString getAbbrev(int index);
   static int numInternalNames();
   static int numTenses();
 
   const QString& getVerbName() const;
-  
-  QString getType (int index);
-  void setType (int index, const QString & type);
+
+  QString getType(int index);
+  void setType(int index, const QString & type);
   void cleanUp();
-  bool isEmpty (int idx);
+  bool isEmpty(int idx);
 
   QString pers1Singular(const QString &type) const;
   QString pers2Singular(const QString &type) const;
@@ -230,18 +228,18 @@ public:
   void setPers3MalePlural(const QString &type, const QString &str);
   void setPers3NaturalPlural(const QString &type, const QString &str);
 
-  bool operator == ( const KEduVocConjugation& a ) const;
+  bool operator == (const KEduVocConjugation& a) const;
 
 private:
-  QString verbName;	// added to have something to compare in operator ==, assumes that there is always only one
-  			// KEduVocConjugation per verb
+  QString verbName; // added to have something to compare in operator ==, assumes that there is always only one
+                    // KEduVocConjugation per verb
 
   struct conjug_name_t
   {
     const char *abbrev;
     const char *name;
   };
-  
+
   struct conjug_t
   {
      conjug_t() {
@@ -250,28 +248,25 @@ private:
      }
 
      QString type;
-     bool    p3common,
-             s3common;
-     QString pers1_sing,
-             pers2_sing,
-             pers3_m_sing,
-             pers3_f_sing,
-             pers3_n_sing,
-             pers1_plur,
-             pers2_plur,
-             pers3_m_plur,
-             pers3_f_plur,
-             pers3_n_plur;
+     bool    p3common;
+     bool    s3common;
+     QString pers1_sing;
+     QString pers2_sing;
+     QString pers3_m_sing;
+     QString pers3_f_sing;
+     QString pers3_n_sing;
+     QString pers1_plur;
+     QString pers2_plur;
+     QString pers3_m_plur;
+     QString pers3_f_plur;
+     QString pers3_n_plur;
   };
 
-protected:
   typedef QList<conjug_t> conjug_tList;
   conjug_tList conjugations;
 
-  static conjug_name_t names [];
+  static conjug_name_t names[];
   static QStringList userTenses;
 };
 
-
 #endif // grammarmanager_included
-
