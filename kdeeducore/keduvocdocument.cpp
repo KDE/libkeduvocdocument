@@ -335,10 +335,9 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
       // TODO new writers provide an explicite error message
       // the two messages should be merged
       QString msg = i18n("Could not save \"%1\"\nDo you want to try again?", tmp.path());
-      int result = KMessageBox::warningContinueCancel(0, msg,
-                                                      i18n("I/O Failure"),
-                                                      KGuiItem(i18n("&Retry")));
-      if ( result == KMessageBox::Cancel ) return false;
+      int result = KMessageBox::warningContinueCancel(0, msg, i18n("Error Saving File"), KGuiItem(i18n("&Retry")));
+      if (result == KMessageBox::Cancel) 
+        return false;
     }
   }
   m_url = tmp;

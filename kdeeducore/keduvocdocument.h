@@ -248,8 +248,6 @@ class LeitnerSystem;
 class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
 {
   Q_OBJECT
-  friend class KEduVocKvtmlWriter;
-
 public:
 
   enum FileType { kvd_none,
@@ -699,6 +697,11 @@ public:
   void setConjugation(int index, const KEduVocConjugation &con);
 
   /**
+   * @returns                the number of conjugations
+  */
+  inline int conjugationCount() const { return m_conjugations.count(); }
+
+  /**
    * @param index            index of translation
    * @returns                a pointer to articles if available
    */
@@ -711,6 +714,11 @@ public:
    * @param art              article block
    */
   void setArticle(int index, const KEduVocArticle &art);
+
+  /**
+   * @returns                the number of articles
+  */
+  inline int articleCount() const { return m_articles.count(); }
 
   /**
    * Returns the recommended size

@@ -25,7 +25,6 @@
 #include <QtXml/QDomDocument>
 #include <QList>
 
-//#include "keduvocdocument.h"
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
 
@@ -86,12 +85,9 @@ public:
   bool writeComparison(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp);
   bool writeMultipleChoice(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocMultipleChoice &mc);
 
-  QString errorMessage() const { return m_errorMessage; };
-
 private:
   QFile *m_outputFile;
   KEduVocDocument *m_doc;
-  QString m_errorMessage;
 };
 
 #endif
