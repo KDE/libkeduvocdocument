@@ -34,7 +34,6 @@
 #include "keduvockvtmlwriter.h"
 #include "keduvoccsvreader.h"
 #include "keduvockvtmlreader.h"
-#include "keduvocwqlwriter.h"
 #include "keduvocwqlreader.h"
 #include "keduvocpaukerreader.h"
 #include "keduvocvokabelnreader.h"
@@ -280,8 +279,6 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
   {
     if (tmp.path().right(strlen("." KVTML_EXT)) == "." KVTML_EXT)
       ft = kvtml;
-    else if (tmp.path().right(strlen("." WQL_EXT)) == "." WQL_EXT)
-      ft = wql;
     else if (tmp.path().right(strlen("." CSV_EXT)) == "." CSV_EXT)
       ft = csv;
     else
@@ -308,12 +305,6 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
       case kvtml: {
         KEduVocKvtmlWriter kvtmlWriter(&f);
         saved = kvtmlWriter.writeDoc(this, generator);
-      }
-      break;
-
-      case wql: {
-        KEduVocWqlWriter wqlWriter(&f);
-        saved = wqlWriter.writeDoc(this);
       }
       break;
 

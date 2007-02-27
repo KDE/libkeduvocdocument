@@ -12,7 +12,6 @@ set(kdeeducore_LIB_SRCS
    keduvocpaukerreader.cpp
    keduvocvokabelnreader.cpp
    keduvocwqlreader.cpp
-   keduvocwqlwriter.cpp
    leitnerbox.cpp
    leitnersystem.cpp
    leitnersystemview.cpp
@@ -46,7 +45,6 @@ install(FILES
    keduvocpaukerreader.h
    keduvocvokabelnreader.h
    keduvocwqlreader.h
-   keduvocwqlwriter.h
    leitnerbox.h
    leitnersystem.h
    leitnersystemview.h
