@@ -282,7 +282,7 @@ bool KEduVocKvtmlReader::readArticle(QDomElement &domElementParent)
       QString lang;
       attribute = currentElement.attributeNode(KV_LANG);
 
-      if (m_doc->numIdentifiers() <= i)
+      if (m_doc->identifierCount() <= i)
       {
         // first entry
         if (!attribute.isNull())         // no definition in first entry
@@ -427,7 +427,7 @@ bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVoc
       QString lang;
       QDomAttr domAttrLang = domElementConjugChild.attributeNode(KV_LANG);
 
-      if (m_doc->numIdentifiers() <= count)
+      if (m_doc->identifierCount() <= count)
       {
         // first entry
         if (!domAttrLang.isNull())            // no definition in first entry
@@ -1157,7 +1157,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
       q_trans = lang;
   }
 
-  if (m_doc->numIdentifiers() == 0)
+  if (m_doc->identifierCount() == 0)
   {
     // first entry
     if (lang.isEmpty())                 // no definition in first entry
@@ -1277,13 +1277,13 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
       }
 
-      if (m_doc->numIdentifiers() <= count)
+      if (m_doc->identifierCount() <= count)
       {
         // new translation
         if (lang.isEmpty())
         {
           // no definition in first entry ?
-          lang.setNum(m_doc->numIdentifiers());
+          lang.setNum(m_doc->identifierCount());
           lang.prepend("translation ");
         }
         m_doc->appendIdentifier(lang);

@@ -564,7 +564,7 @@ void KEduVocDocument::setOriginalIdentifier(const QString &id)
 bool KEduVocDocument::sort(int index, Qt::SortOrder order)
 {
   bool result = false;
-  if (m_sortingEnabled && index < numIdentifiers())
+  if (m_sortingEnabled && index < identifierCount())
   {
     if (m_sortIdentifier.count() < m_identifiers.count())
       for (int i = m_sortIdentifier.count(); i < (int) m_identifiers.count(); i++)
@@ -579,7 +579,7 @@ bool KEduVocDocument::sort(int index, Qt::SortOrder order)
 bool KEduVocDocument::sort(int index)
 {
   bool result = false;
-  if (m_sortingEnabled && index < numIdentifiers())
+  if (m_sortingEnabled && index < identifierCount())
   {
     if (m_sortIdentifier.count() < m_identifiers.count())
       for (int i = m_sortIdentifier.count(); i < (int) m_identifiers.count(); i++)
@@ -796,7 +796,7 @@ int KEduVocDocument::search(const QString &substr, int id, int first, int last, 
   if (first < 0)
     first = 0;
 
-  if (id >= numIdentifiers() || last < first)
+  if (id >= identifierCount() || last < first)
     return -1;
 
   if (id == 0) {
@@ -888,7 +888,7 @@ int KEduVocDocument::cleanUp()
 
     bool equal = true;
     if (kve1->original() == kve2->original() ) {
-      for (int l = 1; equal && l < (int) numIdentifiers(); l++ )
+      for (int l = 1; equal && l < identifierCount(); l++ )
         if (kve1->translation(l) != kve2->translation(l))
           equal = false;
 

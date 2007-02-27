@@ -518,7 +518,7 @@ public:
   /**
    * @returns the number of different identifiers (usually languages)
    */
-  inline int numIdentifiers() const { return m_identifiers.count(); } // org + translations
+  inline int identifierCount() const { return m_identifiers.count(); } // org + translations
 
   /**
    * Appends a new identifier (usually a language)
