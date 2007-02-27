@@ -174,7 +174,7 @@ bool KEduVocKvtmlReader::readBody(QDomElement &domElementParent)
   if (entryList.length() <= 0)
     return false;
 
-  for (int i = 0; i < entryList.length(); i++) {
+  for (int i = 0; i < entryList.count(); ++i) {
     currentElement = entryList.item(i).toElement();
     if (currentElement.parentNode() == domElementParent) {
       result = readExpression(currentElement);
@@ -214,7 +214,7 @@ bool KEduVocKvtmlReader::readLesson(QDomElement &domElementParent)
   QList<int> inQueryList;
   inQueryList.clear();
 
-  for (int i = 0; i < entryList.length(); i++) {
+  for (int i = 0; i < entryList.count(); ++i) {
     currentElement = entryList.item(i).toElement();
     if (currentElement.parentNode() == domElementParent) {
       int no = 0;
@@ -276,7 +276,7 @@ bool KEduVocKvtmlReader::readArticle(QDomElement &domElementParent)
   if (entryList.length() <= 0)
     return false;
 
-  for (int i = 0; i < entryList.length(); i++) {
+  for (int i = 0; i < entryList.count(); ++i) {
     currentElement = entryList.item(i).toElement();
     if (currentElement.parentNode() == domElementParent) {
       QString lang;
@@ -625,7 +625,7 @@ bool KEduVocKvtmlReader::readType(QDomElement &domElementParent)
 
   descriptions.clear();
 
-  for (int i = 0; i < entryList.length(); i++) {
+  for (int i = 0; i < entryList.count(); ++i) {
     currentElement = entryList.item(i).toElement();
     if (currentElement.parentNode() == domElementParent) {
       int no = 0;
@@ -658,7 +658,7 @@ bool KEduVocKvtmlReader::readTense(QDomElement &domElementParent)
 
   descriptions.clear();
 
-  for (int i = 0; i < entryList.length(); i++) {
+  for (int i = 0; i < entryList.count(); ++i) {
     currentElement = entryList.item(i).toElement();
     if (currentElement.parentNode() == domElementParent) {
       int no = 0;
@@ -691,7 +691,7 @@ bool KEduVocKvtmlReader::readUsage(QDomElement &domElementParent)
 
   descriptions.clear();
 
-  for (int i = 0; i < entryList.length(); i++) {
+  for (int i = 0; i < entryList.count(); ++i) {
     currentElement = entryList.item(i).toElement();
     if (currentElement.parentNode() == domElementParent) {
       int no = 0;
@@ -1248,7 +1248,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
   QDomNodeList translationList = domElementParent.elementsByTagName(KV_TRANS);
 
-  for (int i = 0; i < translationList.length(); i++)
+  for (int i = 0; i < translationList.count(); ++i)
   {
     currentElement = translationList.item(i).toElement();
     if (currentElement.parentNode() == domElementParent) {
