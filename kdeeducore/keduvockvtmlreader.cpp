@@ -1144,7 +1144,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     return false;
 
 
-  if (m_doc->numEntries() == 0)
+  if (m_doc->entryCount() == 0)
   {
     // only accept in first entry
     if (width >= 0)
@@ -1263,7 +1263,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
                                           pronunce, width, type, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase))
         return false;
 
-      if (m_doc->numEntries() == 0)
+      if (m_doc->entryCount() == 0)
       {
         // only accept in first entry
         if (width >= 0)
@@ -1373,7 +1373,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     }
   }
 
-  if (m_doc->numEntries() == 0)
+  if (m_doc->entryCount() == 0)
     m_doc->setQueryIdentifier(q_org, q_trans);
   m_doc->appendEntry(&expr);
 

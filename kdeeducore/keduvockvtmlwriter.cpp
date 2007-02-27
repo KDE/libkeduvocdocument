@@ -44,7 +44,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
   domElementKvtml.setAttribute(KV_ENCODING, (QString) "UTF-8");
   domElementKvtml.setAttribute(KV_GENERATOR, generator);
   domElementKvtml.setAttribute(KV_COLS, m_doc->identifierCount());
-  domElementKvtml.setAttribute(KV_LINES, m_doc->numEntries());
+  domElementKvtml.setAttribute(KV_LINES, m_doc->entryCount());
 
   if (!m_doc->title().isEmpty())
     domElementKvtml.setAttribute(KV_TITLE, m_doc->title());
@@ -87,7 +87,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
   QString q_org, q_trans;
   m_doc->queryIdentifier(q_org, q_trans);
 
-  int entryCount = m_doc->numEntries();
+  int entryCount = m_doc->entryCount();
 
   for (int i = 0; i < entryCount; i++)
   {

@@ -504,7 +504,7 @@ public:
   /**
    * @returns the number of entries
    */
-  inline int numEntries() const { return m_vocabulary.count(); }
+  inline int entryCount() const { return m_vocabulary.count(); }
 
   /**
    * Sets grades to KV_NORM_GRADE, counts to 0 ...

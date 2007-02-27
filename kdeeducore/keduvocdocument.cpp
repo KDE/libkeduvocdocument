@@ -790,8 +790,8 @@ void KEduVocDocument::setFont(QFont* font)
 
 int KEduVocDocument::search(const QString &substr, int id, int first, int last, bool word_start)
 {
-  if (last >= numEntries() || last < 0)
-    last = numEntries();
+  if (last >= entryCount() || last < 0)
+    last = entryCount();
 
   if (first < 0)
     first = 0;
