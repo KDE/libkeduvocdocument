@@ -579,11 +579,6 @@ public:
   QString docRemark() const;
 
   /**
-   * @returns the font
-   */
-  QFont* font() const;
-
-  /**
    * Retrieves the identifiers for the current query
    *
    * @param org        identifier for original
@@ -620,11 +615,6 @@ public:
    * Sets the remark of the file
    */
   void setDocRemark(const QString & rem);
-
-  /**
-   * Sets the font
-   */
-  void setFont(QFont *font);
 
   /**
    * Sets the generator of the file
@@ -763,7 +753,6 @@ private:
   int                       m_currentLesson;
   QList<int>                m_extraSizeHints;
   QList<int>                m_sizeHints;
-  QFont*                    m_font;
 
   QString                   m_generator;
   QString                   m_queryorg;

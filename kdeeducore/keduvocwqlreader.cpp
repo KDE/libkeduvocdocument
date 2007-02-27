@@ -84,7 +84,7 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   s = s.right(s.length() - (p + 1));
   bool it = (s == "1");
 
-  m_doc->setFont(new QFont(fam, ps, b, it));
+  //m_doc->setFont(new QFont(fam, ps, b, it));
 
 /* TODO
   while (inputStream.readLine() != "[Character Info]");

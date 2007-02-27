@@ -78,7 +78,6 @@ KEduVocDocument::KEduVocDocument(QObject *parent)
 
 KEduVocDocument::~KEduVocDocument()
 {
-  delete m_font;
 }
 
 
@@ -111,7 +110,7 @@ void KEduVocDocument::Init ()
   m_remark = "";
   m_version = "";
   m_generator = "";
-  m_font = NULL;
+//  m_font = NULL;
 
   m_activeLeitnerSystem = false;
   m_leitnerSystem = NULL;
@@ -751,12 +750,6 @@ QString KEduVocDocument::docRemark() const
 }
 
 
-QFont* KEduVocDocument::font() const
-{
-  return m_font;
-}
-
-
 void KEduVocDocument::setTitle(const QString & title)
 {
   m_title = title.simplified();
@@ -778,13 +771,6 @@ void KEduVocDocument::setLicense(const QString & s)
 void KEduVocDocument::setDocRemark(const QString & s)
 {
   m_remark = s.simplified();
-}
-
-
-void KEduVocDocument::setFont(QFont* font)
-{
-  delete m_font;
-  m_font = font;
 }
 
 
