@@ -36,7 +36,7 @@ bool KEduVocCsvWriter::writeDoc(KEduVocDocument *doc, const QString &generator)
 
   m_doc = doc;
 
-  QString separator = ",";
+  QString separator = m_doc->csvDelimiter();;
 
   QTextStream outputStream;
   outputStream.setDevice(m_outputFile);

@@ -726,6 +726,21 @@ public:
    */
   void setSizeHint (int index, const int width);
 
+  /**
+   * Returns the delimiter (separator) used for csv import and export.
+   * The default is a single tab character
+   *
+   * @returns                the delimiter used
+   */
+  inline QString csvDelimiter() const { return m_csvDelimiter; }
+
+  /**
+   * Sets the delimiter (separator) used for csv import and export
+   *
+   * @param delimiter        the delimiter to use
+   */
+  inline void setCsvDelimiter(const QString &delimiter) { m_csvDelimiter = delimiter; }
+
   bool leitnerSystemActive();
   void setLeitnerSystemActive(bool yes);
   void createStandardLeitnerSystem();
@@ -768,6 +783,7 @@ private:
   QString                   m_license;
   QString                   m_remark;
   QString                   m_version;
+  QString                   m_csvDelimiter;
 
   QList<KEduVocArticle>     m_articles;
   QList<KEduVocConjugation> m_conjugations;

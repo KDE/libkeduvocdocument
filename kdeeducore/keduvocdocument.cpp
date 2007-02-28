@@ -111,6 +111,7 @@ void KEduVocDocument::Init ()
   m_remark = "";
   m_version = "";
   m_generator = "";
+  m_csvDelimiter = QString('\t');
 //  m_font = NULL;
 
   m_activeLeitnerSystem = false;

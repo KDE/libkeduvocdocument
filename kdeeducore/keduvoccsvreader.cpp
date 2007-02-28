@@ -42,8 +42,7 @@ bool KEduVocCsvReader::readDoc(KEduVocDocument *doc)
 {
   m_doc = doc;
 
-  ///@todo handle more delimiters
-  QString separator = QString(",");
+  QString separator = m_doc->csvDelimiter();
 
   QTextStream inputStream(m_inputFile);
   inputStream.setCodec("UTF-8");
