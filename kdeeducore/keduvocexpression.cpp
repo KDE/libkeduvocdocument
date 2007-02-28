@@ -3,7 +3,7 @@
     -----------------------------------------------------------------------
     copyright            : (C) 1999-2001 Ewald Arnold
                            (C) 2001 The KDE-EDU team
-                           (C) 2005-2006 Peter Hedlund
+                           (C) 2005-2007 Peter Hedlund
     email                : peter.hedlund@kdemail.net
  ***************************************************************************/
 
@@ -43,7 +43,7 @@ KEduVocExpression::KEduVocExpression ()
 KEduVocExpression::KEduVocExpression(const QString & expression, int lesson)
 {
   Init();
-  setOriginal(expression.simplified() );
+  setOriginal(expression.simplified());
   m_lesson = lesson;
 }
 
@@ -78,7 +78,7 @@ KEduVocExpression::KEduVocExpression(const QString & expression, const QString &
   }
 }
 
-int KEduVocExpression::numTranslations() const
+int KEduVocExpression::translationCount() const
 {
   return m_translations.count();
 }
@@ -394,7 +394,7 @@ void KEduVocExpression::removeTranslation (int idx)
   if (idx <= 0)
     return;
 
-  if (idx <= numTranslations())
+  if (idx <= translationCount())
     m_translations.removeAt(idx - 1);
 
   if (idx < (int)m_remarks.size())
@@ -470,14 +470,6 @@ void KEduVocExpression::setTranslation (int idx, const QString & expr)
 
 //  if (idx <= (int)translations.size())
   m_translations[idx-1] = expr.simplified();
-}
-
-
-QString KEduVocExpression::gradeStr (int idx, bool rev_grade) const
-{
-  QString s;
-  s.setNum(grade(idx, rev_grade));
-  return s;
 }
 
 
@@ -730,7 +722,7 @@ bool KEduVocExpression::uniqueType () const
 {
   bool unique = true;
   QString type0 = type(0);
-  for (int i = 1; i < numTranslations(); i++)
+  for (int i = 1; i < translationCount(); i++)
     if (type0 != type(i) )
       unique = false;
   return unique;

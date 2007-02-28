@@ -208,7 +208,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
       }
 
       if (entry->grade(trans, false) != 0 || entry->grade(trans, true) != 0)
-        domElementTranslation.setAttribute(KV_GRADE, entry->gradeStr(trans, false) + ';' + entry->gradeStr(trans, true));
+        domElementTranslation.setAttribute(KV_GRADE, QString::number(entry->grade(trans, false)) + ';' + QString::number(entry->grade(trans, true)));
 
       if (entry->queryCount(trans, false) != 0 || entry->queryCount(trans, true) != 0)
         domElementTranslation.setAttribute(KV_COUNT, QString::number(entry->queryCount(trans, false)) + ';' + QString::number(entry->queryCount(trans, true)));

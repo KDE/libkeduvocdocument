@@ -831,7 +831,7 @@ public:
     if (cmp != 0)
       return cmp < 0;
 
-    for (int i = 1; i < (int) exp->numTranslations(); i++) {
+    for (int i = 1; i < exp->translationCount(); i++) {
 
       s1 = exp->translation(i);
       s2 = y.exp->translation(i);

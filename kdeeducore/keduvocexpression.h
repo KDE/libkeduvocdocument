@@ -3,7 +3,7 @@
     -----------------------------------------------------------------------
     copyright            : (C) 1999-2001 Ewald Arnold
                            (C) 2001 The KDE-EDU team
-                           (C) 2005-2006 Peter Hedlund
+                           (C) 2005-2007 Peter Hedlund
     email                : peter.hedlund@kdemail.net
  ***************************************************************************/
 
@@ -118,7 +118,7 @@ public:
 
   /** returns number of max. translations of all expressions
    */
-  int numTranslations() const;
+  int translationCount() const;
 
   /** returns flag if entry is "selected" for queries
    */
@@ -289,14 +289,6 @@ public:
    * @param type             type of this expression ("" = none)
    */
   void setType(int index, const QString & type);
-
-  /** returns grade of given translation as string
-   *
-   * @param index            index of expression
-   * @param reverse          if true, represents the direction translation to original
-   * @return                 number of knowlegde: 0=known, x=numbers not knows
-   */
-  QString gradeStr(int index, bool reverse = false) const;
 
   /** sets grade of given translation
    *
