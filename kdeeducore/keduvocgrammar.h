@@ -169,7 +169,11 @@ public:
   /**
    * The constructor
    */
-  KEduVocConjugation() {}
+  explicit KEduVocConjugation();
+
+  KEduVocConjugation(const KEduVocConjugation& rhs);
+
+  ~KEduVocConjugation();
 
   /**
    * @return
@@ -193,7 +197,7 @@ public:
   static int numInternalNames();
   static int numTenses();
 
-  const QString& getVerbName() const;
+  QString getVerbName() const;
 
   QString getType(int index);
   void setType(int index, const QString & type);
@@ -228,45 +232,12 @@ public:
   void setPers3MalePlural(const QString &type, const QString &str);
   void setPers3NaturalPlural(const QString &type, const QString &str);
 
+  KEduVocConjugation& operator = (const KEduVocConjugation& a);
   bool operator == (const KEduVocConjugation& a) const;
 
 private:
-  QString verbName; // added to have something to compare in operator ==, assumes that there is always only one
-                    // KEduVocConjugation per verb
-
-  struct conjug_name_t
-  {
-    const char *abbrev;
-    const char *name;
-  };
-
-  struct conjug_t
-  {
-     conjug_t() {
-        p3common = false;
-        s3common = false;
-     }
-
-     QString type;
-     bool    p3common;
-     bool    s3common;
-     QString pers1_sing;
-     QString pers2_sing;
-     QString pers3_m_sing;
-     QString pers3_f_sing;
-     QString pers3_n_sing;
-     QString pers1_plur;
-     QString pers2_plur;
-     QString pers3_m_plur;
-     QString pers3_f_plur;
-     QString pers3_n_plur;
-  };
-
-  typedef QList<conjug_t> conjug_tList;
-  conjug_tList conjugations;
-
-  static conjug_name_t names[];
-  static QStringList userTenses;
+  class Private;
+  Private* const d;
 };
 
 #endif // grammarmanager_included
