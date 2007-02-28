@@ -70,7 +70,7 @@ public:
 
   /** default constructor for an empty vocabulary expression
    */
-  KEduVocExpression ();
+  KEduVocExpression();
 
   /** Constructor for a vocabulary expression with an original
    *
@@ -178,7 +178,6 @@ public:
    */
   void setRemark(int index, const QString & expr);
 
-
   /** sets false friend of this expression
    *
    * @param index            index of expression
@@ -186,7 +185,6 @@ public:
    * @param reverse          if true, represents the direction translation to original
    */
   void setFauxAmi(int index, const QString & expression, bool reverse = false);
-
 
   /** returns false friend of this expression
    *
@@ -203,7 +201,6 @@ public:
    */
   void setSynonym(int index, const QString & expression);
 
-
   /** returns synonym of this expression
    *
    * @param index            index of expression
@@ -217,7 +214,6 @@ public:
    * @param expression       example of this index
    */
   void setExample(int index, const QString & expression);
-
 
   /** returns example of this expression
    *
@@ -233,7 +229,6 @@ public:
    */
   void setUsageLabel(int index, const QString & usage);
 
-
   /** returns usage label of this expression
    *
    * @param index            index of expression
@@ -248,7 +243,6 @@ public:
    */
   void setParaphrase(int index, const QString & expression);
 
-
   /** returns paraphrase of this expression
    *
    * @param index            index of expression
@@ -262,7 +256,6 @@ public:
    * @param expression       antonym of this index
    */
   void setAntonym(int index, const QString & expression);
-
 
   /** returns antonym of this expression
    *
@@ -420,7 +413,7 @@ public:
 
   /** sets the box of the Leitner system which actually contains the expression
    *
-   * @param box		     the box's name
+   * @param box              the box's name
    */
   void setLeitnerBox(const QString & box);
 
@@ -431,7 +424,6 @@ public:
   QString& leitnerBox();
 
 protected:
-
   void Init();
 
 private:

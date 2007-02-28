@@ -35,7 +35,7 @@ void KEduVocExpression::Init()
   m_sortIndex = 0;
 }
 
-KEduVocExpression::KEduVocExpression ()
+KEduVocExpression::KEduVocExpression()
 {
   Init();
 }
@@ -54,7 +54,7 @@ KEduVocExpression::KEduVocExpression(const QString & expression, const QString &
   QString expr = expression;
   m_lesson = lesson;
 
-  if (separator.length() ) {
+  if (separator.length()) {
     int pos = expr.indexOf(separator);
 
     if (pos == -1) {
@@ -63,15 +63,13 @@ KEduVocExpression::KEduVocExpression(const QString & expression, const QString &
     else {
       se = expr.left(pos).simplified();
       setOriginal(se);
-      expr.remove (0, pos + separator.length() );
-//      s.simplified();
+      expr.remove(0, pos + separator.length());
 
       // gather all translations
       while ((pos = expr.indexOf(separator)) != -1) {
         se = expr.left(pos).simplified();
         addTranslation(se, KV_NORM_GRADE, KV_NORM_GRADE);
-        expr.remove (0, pos + separator.length() );
-//        s.simplified();
+        expr.remove(0, pos + separator.length());
       }
       addTranslation(expr.simplified(), KV_NORM_GRADE, KV_NORM_GRADE);
     }
@@ -84,285 +82,294 @@ int KEduVocExpression::translationCount() const
 }
 
 
-QString KEduVocExpression::remark (int idx) const
+QString KEduVocExpression::remark(int index) const
 {
-  if (idx >= (int)m_remarks.count() || idx < 0) {
+  if (index >= m_remarks.count() || index < 0) {
     return "";
   }
   else {
-    return m_remarks[idx];
+    return m_remarks[index];
   }
 }
 
 
-void KEduVocExpression::setRemark (int idx, const QString & expr)
+void KEduVocExpression::setRemark(int index, const QString & expr)
 {
-  if ( idx < 0) return;
+  if (index < 0)
+    return;
 
   // extend remarks with empty strings if necessary
-  if ((int)m_remarks.size() <= idx )
-    for (int i = m_remarks.size(); i < idx+1; i++)
-      m_remarks.push_back ("");
+  if (m_remarks.count() <= index)
+    for (int i = m_remarks.count(); i < index + 1; i++)
+      m_remarks.append("");
 
-  m_remarks[idx] = expr.simplified();
+  m_remarks[index] = expr.simplified();
 }
 
 
-void KEduVocExpression::setFauxAmi (int idx, const QString & expr, bool rev_ami)
+void KEduVocExpression::setFauxAmi(int index, const QString & expr, bool rev_ami)
 {
-  if (idx < 1) return;
+  if (index < 1)
+    return;
 
   if (rev_ami) {
     // extend friend with empty strings if necessary
-    if ((int)m_reverseFauxAmi.size() <= idx )
-      for (int i = m_reverseFauxAmi.size(); i < idx+1; i++)
-        m_reverseFauxAmi.push_back ("");
+    if (m_reverseFauxAmi.count() <= index)
+      for (int i = m_reverseFauxAmi.count(); i < index + 1; i++)
+        m_reverseFauxAmi.append("");
 
-    m_reverseFauxAmi[idx] = expr.simplified();
-
+    m_reverseFauxAmi[index] = expr.simplified();
   }
   else {
     // extend friend with empty strings if necessary
-    if ((int)m_fauxAmi.size() <= idx )
-      for (int i = m_fauxAmi.size(); i < idx+1; i++)
-        m_fauxAmi.push_back ("");
+    if (m_fauxAmi.count() <= index)
+      for (int i = m_fauxAmi.count(); i < index + 1; i++)
+        m_fauxAmi.append("");
 
-    m_fauxAmi[idx] = expr.simplified();
+    m_fauxAmi[index] = expr.simplified();
   }
 }
 
 
-QString KEduVocExpression::fauxAmi (int idx, bool rev_ami) const
+QString KEduVocExpression::fauxAmi(int index, bool rev_ami) const
 {
   if (rev_ami) {
-    if (idx >= (int)m_reverseFauxAmi.size() || idx < 1 ) {
+    if (index >= m_reverseFauxAmi.count() || index < 1) {
       return "";
     }
 
-    return m_reverseFauxAmi[idx];
+    return m_reverseFauxAmi[index];
   }
 
-  if (idx >= (int)m_fauxAmi.size() || idx < 1 ) {
+  if (index >= m_fauxAmi.count() || index < 1) {
     return "";
   }
 
-  return m_fauxAmi[idx];
+  return m_fauxAmi[index];
 }
 
 
-void KEduVocExpression::setSynonym (int idx, const QString & expr)
+void KEduVocExpression::setSynonym(int index, const QString & expr)
 {
-  if ( idx < 0) return;
+  if (index < 0)
+    return;
 
   // extend synonym with empty strings if necessary
-  if ((int)m_synonym.size() <= idx )
-    for (int i = m_synonym.size(); i < idx+1; i++)
-      m_synonym.push_back ("-");
+  if (m_synonym.count() <= index)
+    for (int i = m_synonym.count(); i < index + 1; i++)
+      m_synonym.append("-");
 
-  m_synonym[idx] = expr.simplified();
+  m_synonym[index] = expr.simplified();
 }
 
 
-QString KEduVocExpression::synonym (int idx) const
+QString KEduVocExpression::synonym(int index) const
 {
-  if (idx >= (int)m_synonym.size() || idx < 0) {
+  if (index >= m_synonym.count() || index < 0) {
     return "";
   }
   else {
-    return m_synonym[idx];
+    return m_synonym[index];
   }
 }
 
 
-void KEduVocExpression::setExample (int idx, const QString & expr)
+void KEduVocExpression::setExample(int index, const QString & expr)
 {
-  if ( idx < 0) return;
+  if (index < 0)
+    return;
 
   // extend exampls with empty strings if necessary
-  if ((int)m_example.size() <= idx )
-    for (int i = m_example.size(); i < idx+1; i++)
-      m_example.push_back ("");
+  if (m_example.count() <= index)
+    for (int i = m_example.count(); i < index + 1; i++)
+      m_example.append("");
 
-  m_example[idx] = expr.simplified();
+  m_example[index] = expr.simplified();
 }
 
 
-QString KEduVocExpression::example (int idx) const
+QString KEduVocExpression::example(int index) const
 {
-  if (idx >= (int)m_example.size() || idx < 0) {
+  if (index >= m_example.count() || index < 0) {
     return "";
   }
   else {
-    return m_example[idx];
+    return m_example[index];
   }
 }
 
 
-void KEduVocExpression::setUsageLabel (int idx, const QString & expr)
+void KEduVocExpression::setUsageLabel(int index, const QString & expr)
 {
-  if ( idx < 0) return;
+  if (index < 0)
+    return;
 
   // extend labels with empty strings if necessary
-  if ((int)m_usageLabels.size() <= idx )
-    for (int i = m_usageLabels.size(); i < idx+1; i++)
-      m_usageLabels.push_back ("");
+  if (m_usageLabels.count() <= index)
+    for (int i = m_usageLabels.count(); i < index + 1; i++)
+      m_usageLabels.append("");
 
-  m_usageLabels[idx] = expr.simplified();
+  m_usageLabels[index] = expr.simplified();
 }
 
 
-QString KEduVocExpression::usageLabel (int idx) const
+QString KEduVocExpression::usageLabel(int index) const
 {
-  if (idx >= (int)m_usageLabels.size() || idx < 0) {
+  if (index >= m_usageLabels.count() || index < 0) {
     return "";
   }
   else {
-    return m_usageLabels[idx];
+    return m_usageLabels[index];
   }
 }
 
 
-void KEduVocExpression::setParaphrase (int idx, const QString & expr)
+void KEduVocExpression::setParaphrase(int index, const QString & expr)
 {
-  if ( idx < 0) return;
+  if (index < 0)
+    return;
 
   // extend phrase with empty strings if necessary
-  if ((int) m_paraphrases.size() <= idx )
-    for (int i = m_paraphrases.size(); i < idx+1; i++)
-      m_paraphrases.push_back ("");
+  if (m_paraphrases.count() <= index)
+    for (int i = m_paraphrases.count(); i < index + 1; i++)
+      m_paraphrases.append("");
 
-  m_paraphrases[idx] = expr.simplified();
+  m_paraphrases[index] = expr.simplified();
 }
 
 
-QString KEduVocExpression::paraphrase (int idx) const
+QString KEduVocExpression::paraphrase(int index) const
 {
-  if (idx >= (int)m_paraphrases.size() || idx < 0) {
+  if (index >= m_paraphrases.count() || index < 0) {
     return "";
   }
   else {
-    return m_paraphrases[idx];
+    return m_paraphrases[index];
   }
 }
 
 
-void KEduVocExpression::setAntonym (int idx, const QString & expr)
+void KEduVocExpression::setAntonym(int index, const QString & expr)
 {
-  if ( idx < 0) return;
+  if (index < 0)
+    return;
 
   // extend antonym with empty strings if necessary
-  if ((int)m_antonym.size() <= idx )
-    for (int i = m_antonym.size(); i < idx+1; i++)
-      m_antonym.push_back ("");
+  if (m_antonym.count() <= index)
+    for (int i = m_antonym.count(); i < index + 1; i++)
+      m_antonym.append("");
 
-  m_antonym[idx] = expr.simplified();
+  m_antonym[index] = expr.simplified();
 }
 
 
-QString KEduVocExpression::antonym (int idx) const
+QString KEduVocExpression::antonym(int index) const
 {
-  if (idx >= (int)m_antonym.size() || idx < 0) {
+  if (index >= m_antonym.count() || index < 0) {
     return "";
   }
   else {
-    return m_antonym[idx];
+    return m_antonym[index];
   }
 }
 
 
-void KEduVocExpression::setConjugation (int idx, const KEduVocConjugation &con)
+void KEduVocExpression::setConjugation(int index, const KEduVocConjugation &con)
 {
-  if ( idx < 0) return;
+  if (index < 0)
+    return;
 
   // extend conjugation with empty elements
-  if ((int)m_conjugations.size() <= idx )
-    for (int i = m_conjugations.size(); i < idx+1; i++)
-      m_conjugations.push_back (KEduVocConjugation());
+  if (m_conjugations.count() <= index)
+    for (int i = m_conjugations.count(); i < index + 1; i++)
+      m_conjugations.append(KEduVocConjugation());
 
-  m_conjugations[idx] = con;
+  m_conjugations[index] = con;
 }
 
 
-KEduVocConjugation KEduVocExpression::conjugation (int idx) const
+KEduVocConjugation KEduVocExpression::conjugation(int index) const
 {
-  if (idx >= (int)m_conjugations.size() || idx < 0) {
+  if (index >= m_conjugations.count() || index < 0) {
     return KEduVocConjugation();
   }
   else {
-    return m_conjugations[idx];
+    return m_conjugations[index];
   }
 }
 
 
-void KEduVocExpression::setComparison (int idx, const KEduVocComparison &con)
+void KEduVocExpression::setComparison(int index, const KEduVocComparison &con)
 {
-  if ( idx < 0) return;
+  if (index < 0)
+    return;
 
   // extend comparison with empty elements
-  if ((int)m_comparisons.size() <= idx )
-    for (int i = m_comparisons.size(); i < idx+1; i++)
-      m_comparisons.push_back (KEduVocComparison());
+  if (m_comparisons.count() <= index)
+    for (int i = m_comparisons.count(); i < index + 1; i++)
+      m_comparisons.append(KEduVocComparison());
 
-  m_comparisons[idx] = con;
+  m_comparisons[index] = con;
 }
 
 
-KEduVocComparison KEduVocExpression::comparison (int idx) const
+KEduVocComparison KEduVocExpression::comparison (int index) const
 {
-  if (idx >= (int)m_comparisons.size() || idx < 0) {
+  if (index >= m_comparisons.count() || index < 0) {
     return KEduVocComparison();
   }
   else {
-    return m_comparisons[idx];
+    return m_comparisons[index];
   }
 }
 
 
-void KEduVocExpression::setMultipleChoice (int idx, const KEduVocMultipleChoice &mc)
+void KEduVocExpression::setMultipleChoice(int index, const KEduVocMultipleChoice &mc)
 {
-  if ( idx < 0) return;
+  if (index < 0)
+    return;
 
   // extend comparison with empty elements
-  if ((int)m_multipleChoices.size() <= idx )
-    for (int i = m_multipleChoices.size(); i < idx+1; i++)
-      m_multipleChoices.push_back (KEduVocMultipleChoice());
+  if (m_multipleChoices.count() <= index)
+    for (int i = m_multipleChoices.count(); i < index + 1; i++)
+      m_multipleChoices.append(KEduVocMultipleChoice());
 
-  m_multipleChoices[idx] = mc;
+  m_multipleChoices[index] = mc;
 }
 
 
-KEduVocMultipleChoice KEduVocExpression::multipleChoice (int idx) const
+KEduVocMultipleChoice KEduVocExpression::multipleChoice(int index) const
 {
-  if (idx >= (int)m_multipleChoices.size() || idx < 0) {
+  if (index >= m_multipleChoices.count() || index < 0) {
     return KEduVocMultipleChoice();
   }
   else {
-    return m_multipleChoices[idx];
+    return m_multipleChoices[index];
   }
 }
 
 
-QString KEduVocExpression::pronunciation(int idx) const
+QString KEduVocExpression::pronunciation(int index) const
 {
-  if (idx >= (int)m_pronunciations.size() || idx < 0) {
+  if (index >= m_pronunciations.count() || index < 0) {
     return "";
   }
   else {
-    return m_pronunciations[idx];
+    return m_pronunciations[index];
   }
 }
 
 
-void KEduVocExpression::setPronunciation(int idx, const QString & expr)
+void KEduVocExpression::setPronunciation(int index, const QString & expr)
 {
-  if ( idx < 0) return;
+  if (index < 0) return;
 
   // extend with empty strings if necessary
-  if ((int)m_pronunciations.size() <= idx )
-    for (int i = m_pronunciations.size(); i < idx+1; i++)
-      m_pronunciations.push_back ("");
+  if (m_pronunciations.count() <= index)
+    for (int i = m_pronunciations.count(); i < index + 1; i++)
+      m_pronunciations.append("");
 
-  m_pronunciations[idx] = expr.simplified();
+  m_pronunciations[index] = expr.simplified();
 }
 
 
@@ -374,134 +381,136 @@ void KEduVocExpression::addTranslation(const QString & expr, grade_t grade, grad
   if (rev_grade > KV_MAX_GRADE)
     rev_grade = KV_MAX_GRADE;
 
-  m_grades.push_back (grade);
-  m_reverseGrades.push_back (rev_grade);
-  m_translations.push_back (expr.simplified());
+  m_grades.append(grade);
+  m_reverseGrades.append(rev_grade);
+  m_translations.append(expr.simplified());
 }
 
 
-QString KEduVocExpression::translation (int idx) const
+QString KEduVocExpression::translation(int index) const
 {
-  if (idx > (int)m_translations.size() || idx < 1)
+  if (index > m_translations.count() || index < 1)
     return "";
   else
-    return m_translations[idx-1];
+    return m_translations[index-1];
 }
 
 
-void KEduVocExpression::removeTranslation (int idx)
+void KEduVocExpression::removeTranslation(int index)
 {
-  if (idx <= 0)
+  if (index <= 0)
     return;
 
-  if (idx <= translationCount())
-    m_translations.removeAt(idx - 1);
+  if (index <= translationCount())
+    m_translations.removeAt(index - 1);
 
-  if (idx < (int)m_remarks.size())
-    m_remarks.removeAt(idx - 1);
+  if (index < m_remarks.count())
+    m_remarks.removeAt(index - 1);
 
-  if (idx < (int)m_conjugations.size())
-    m_conjugations.removeAt(idx -1);
+  if (index < m_conjugations.count())
+    m_conjugations.removeAt(index -1);
 
-  if (idx < (int)m_comparisons.size())
-    m_comparisons.removeAt(idx - 1);
+  if (index < m_comparisons.count())
+    m_comparisons.removeAt(index - 1);
 
-  if (idx < (int)m_fauxAmi.size())
-    m_fauxAmi.removeAt(idx -  1);
+  if (index < m_fauxAmi.count())
+    m_fauxAmi.removeAt(index -  1);
 
-  if (idx < (int)m_reverseFauxAmi.size())
-    m_reverseFauxAmi.removeAt(idx - 1);
+  if (index < m_reverseFauxAmi.count())
+    m_reverseFauxAmi.removeAt(index - 1);
 
-  if (idx < (int)m_synonym.size())
-    m_synonym.removeAt(idx - 1);
+  if (index < m_synonym.count())
+    m_synonym.removeAt(index - 1);
 
-  if (idx < (int)m_example.size())
-    m_example.removeAt(idx - 1);
+  if (index < m_example.count())
+    m_example.removeAt(index - 1);
 
-  if (idx < (int)m_usageLabels.size())
-    m_usageLabels.removeAt(idx - 1);
+  if (index < m_usageLabels.count())
+    m_usageLabels.removeAt(index - 1);
 
-  if (idx < (int)m_paraphrases.size())
-    m_paraphrases.removeAt(idx - 1);
+  if (index < m_paraphrases.count())
+    m_paraphrases.removeAt(index - 1);
 
-  if (idx < (int)m_antonym.size() )
-    m_antonym.removeAt(idx - 1);
+  if (index < m_antonym.count())
+    m_antonym.removeAt(index - 1);
 
-  if (idx < (int)m_expressionTypes.size())
-    m_expressionTypes.removeAt(idx - 1);
+  if (index < m_expressionTypes.count())
+    m_expressionTypes.removeAt(index - 1);
 
-  if (idx < (int)m_pronunciations.size())
-    m_pronunciations.removeAt(idx - 1);
+  if (index < m_pronunciations.count())
+    m_pronunciations.removeAt(index - 1);
 
-  if (idx < (int)m_grades.size())
-    m_grades.removeAt(idx - 1);
+  if (index < m_grades.count())
+    m_grades.removeAt(index - 1);
 
-  if (idx < (int)m_reverseGrades.size())
-    m_reverseGrades.removeAt(idx - 1);
+  if (index < m_reverseGrades.count())
+    m_reverseGrades.removeAt(index - 1);
 
-  if (idx < (int)m_queryCounts.size())
-    m_queryCounts.removeAt(idx - 1);
+  if (index < m_queryCounts.count())
+    m_queryCounts.removeAt(index - 1);
 
-  if (idx < (int)m_reverseQueryCounts.size())
-    m_reverseQueryCounts.removeAt(idx - 1);
+  if (index < m_reverseQueryCounts.count())
+    m_reverseQueryCounts.removeAt(index - 1);
 
-  if (idx < (int)m_badCounts.size())
-    m_badCounts.removeAt(idx - 1);
+  if (index < m_badCounts.count())
+    m_badCounts.removeAt(index - 1);
 
-  if (idx < (int)m_reverseBadCounts.size())
-    m_reverseBadCounts.removeAt(idx - 1);
+  if (index < m_reverseBadCounts.count())
+    m_reverseBadCounts.removeAt(index - 1);
 
-  if (idx < (int)m_queryDates.size())
-    m_queryDates.removeAt(idx - 1);
+  if (index < m_queryDates.count())
+    m_queryDates.removeAt(index - 1);
 
-  if (idx < (int)m_reverseQueryDates.size())
-    m_reverseQueryDates.removeAt(idx - 1);
+  if (index < m_reverseQueryDates.count())
+    m_reverseQueryDates.removeAt(index - 1);
 }
 
 
-void KEduVocExpression::setTranslation (int idx, const QString & expr)
+void KEduVocExpression::setTranslation(int index, const QString & expr)
 {
-  if ( idx <= 0) return;
+  if (index <= 0)
+    return;
 
   // extend translations with empty strings if necessary
-  if ((int)m_translations.size() < idx )
-    for (int i = m_translations.size(); i < idx; i++)
-      m_translations.push_back ("");
+  if (m_translations.count() < index)
+    for (int i = m_translations.count(); i < index; i++)
+      m_translations.append("");
 
-//  if (idx <= (int)translations.size())
-  m_translations[idx-1] = expr.simplified();
+//  if (index <= translations.count())
+  m_translations[index-1] = expr.simplified();
 }
 
 
-grade_t KEduVocExpression::grade (int idx, bool rev_grade) const
+grade_t KEduVocExpression::grade(int index, bool rev_grade) const
 {
   if (rev_grade) {
-    if (idx >= (int)m_reverseGrades.size() || idx < 1 ) {
+    if (index >= m_reverseGrades.count() || index < 1) {
       return KV_NORM_GRADE;
     }
-    else if (m_reverseGrades[idx] > KV_MAX_GRADE) {
+    else if (m_reverseGrades[index] > KV_MAX_GRADE) {
       return KV_MAX_GRADE;
     }
 
-    return m_reverseGrades[idx];
+    return m_reverseGrades[index];
 
   }
   else {
-    if (idx >= (int)m_grades.size() || idx < 1 ) {
+    if (index >= m_grades.count() || index < 1) {
       return KV_NORM_GRADE;
     }
-    else if (m_grades[idx] > KV_MAX_GRADE) {
+    else if (m_grades[index] > KV_MAX_GRADE) {
       return KV_MAX_GRADE;
     }
 
-    return m_grades[idx];
+    return m_grades[index];
   }
 }
 
 
-void KEduVocExpression::setGrade (int idx, grade_t grade, bool rev_grade)
+void KEduVocExpression::setGrade(int index, grade_t grade, bool rev_grade)
 {
-  if (idx < 1) return;
+  if (index < 1)
+    return;
 
   if (grade > KV_MAX_GRADE)
     grade = KV_MAX_GRADE;
@@ -510,290 +519,299 @@ void KEduVocExpression::setGrade (int idx, grade_t grade, bool rev_grade)
 
   if (rev_grade) {
     // extend rev grades with standard grade if necessary
-    if ((int)m_reverseGrades.size() <= idx )
-      for (int i = m_reverseGrades.size(); i <= idx; i++) {
-        m_reverseGrades.push_back (KV_NORM_GRADE);
+    if (m_reverseGrades.count() <= index)
+      for (int i = m_reverseGrades.count(); i <= index; i++) {
+        m_reverseGrades.append(KV_NORM_GRADE);
     }
-    m_reverseGrades[idx] = grade;
+    m_reverseGrades[index] = grade;
   }
   else {
     // extend grades with standard grade if necessary
-    if ((int)m_grades.size() <= idx )
-      for (int i = m_grades.size(); i <= idx; i++) {
-        m_grades.push_back (KV_NORM_GRADE);
+    if (m_grades.count() <= index)
+      for (int i = m_grades.count(); i <= index; i++) {
+        m_grades.append(KV_NORM_GRADE);
       }
-    m_grades[idx] = grade;
+    m_grades[index] = grade;
   }
 }
 
 
-void KEduVocExpression::incGrade (int idx, bool rev_grade)
+void KEduVocExpression::incGrade(int index, bool rev_grade)
 {
-  if (idx < 1) return;
+  if (index < 1)
+    return;
 
   if (rev_grade) {
     // extend rev grades with standard grade if necessary
-    if ((int)m_reverseGrades.size() <= idx )
-      for (int i = m_reverseGrades.size(); i <= idx; i++) {
-        m_reverseGrades.push_back (KV_NORM_GRADE);
+    if (m_reverseGrades.count() <= index)
+      for (int i = m_reverseGrades.count(); i <= index; i++) {
+        m_reverseGrades.append(KV_NORM_GRADE);
     }
-    if (m_reverseGrades[idx] < KV_MAX_GRADE)
-      m_reverseGrades[idx]++;
+    if (m_reverseGrades[index] < KV_MAX_GRADE)
+      m_reverseGrades[index]++;
   }
   else {
     // extend grades with standard grade if necessary
-    if ((int)m_grades.size() <= idx )
-      for (int i = m_grades.size(); i <= idx; i++) {
-        m_grades.push_back (KV_NORM_GRADE);
+    if (m_grades.count() <= index)
+      for (int i = m_grades.count(); i <= index; i++) {
+        m_grades.append(KV_NORM_GRADE);
       }
-    if (m_grades[idx] < KV_MAX_GRADE)
-      m_grades[idx]++;
+    if (m_grades[index] < KV_MAX_GRADE)
+      m_grades[index]++;
   }
 }
 
 
-void KEduVocExpression::decGrade (int idx, bool rev_grade)
+void KEduVocExpression::decGrade(int index, bool rev_grade)
 {
-  if (idx < 1) return;
+  if (index < 1)
+    return;
 
   if (rev_grade) {
     // extend rev grades with standard grade if necessary
-    if ((int)m_reverseGrades.size() <= idx )
-      for (int i = m_reverseGrades.size(); i <= idx; i++) {
-        m_reverseGrades.push_back (KV_NORM_GRADE);
+    if (m_reverseGrades.count() <= index)
+      for (int i = m_reverseGrades.count(); i <= index; i++) {
+        m_reverseGrades.append(KV_NORM_GRADE);
     }
-    if (m_reverseGrades[idx] > KV_MIN_GRADE)
-      m_reverseGrades[idx]--;
+    if (m_reverseGrades[index] > KV_MIN_GRADE)
+      m_reverseGrades[index]--;
   }
   else {
     // extend grades with standard grade if necessary
-    if ((int)m_grades.size() <= idx )
-      for (int i = m_grades.size(); i <= idx; i++) {
-        m_grades.push_back (KV_NORM_GRADE);
+    if (m_grades.count() <= index)
+      for (int i = m_grades.count(); i <= index; i++) {
+        m_grades.append(KV_NORM_GRADE);
       }
-    if (m_grades[idx] > KV_MIN_GRADE)
-      m_grades[idx]--;
+    if (m_grades[index] > KV_MIN_GRADE)
+      m_grades[index]--;
   }
 }
 
 
-count_t KEduVocExpression::queryCount (int idx, bool rev_count)  const
+count_t KEduVocExpression::queryCount(int index, bool rev_count)  const
 {
   if (rev_count) {
-    if (idx >= (int)m_reverseQueryCounts.size() || idx < 1 ) {
+    if (index >= m_reverseQueryCounts.count() || index < 1) {
       return 0;
     }
 
-    return m_reverseQueryCounts[idx];
+    return m_reverseQueryCounts[index];
   }
 
-  if (idx >= (int)m_queryCounts.size() || idx < 1 ) {
+  if (index >= m_queryCounts.count() || index < 1) {
     return 0;
   }
 
-  return m_queryCounts[idx];
+  return m_queryCounts[index];
 }
 
 
-void KEduVocExpression::setQueryCount (int idx, count_t count, bool rev_count)
+void KEduVocExpression::setQueryCount(int index, count_t count, bool rev_count)
 {
-  if (idx < 1) return;
+  if (index < 1)
+    return;
 
   if (rev_count) {
     // extend rev counts with 0 if necessary
-    if ((int)m_reverseQueryCounts.size() <= idx )
-      for (int i = m_reverseQueryCounts.size(); i <= idx; i++) {
-        m_reverseQueryCounts.push_back (0);
+    if (m_reverseQueryCounts.count() <= index)
+      for (int i = m_reverseQueryCounts.count(); i <= index; i++) {
+        m_reverseQueryCounts.append(0);
     }
 
-    m_reverseQueryCounts[idx] = count;
+    m_reverseQueryCounts[index] = count;
 
   }
   else {
     // extend counts with 0 if necessary
-    if ((int)m_queryCounts.size() <= idx )
-      for (int i = m_queryCounts.size(); i <= idx; i++) {
-        m_queryCounts.push_back (0);
+    if (m_queryCounts.count() <= index)
+      for (int i = m_queryCounts.count(); i <= index; i++) {
+        m_queryCounts.append(0);
       }
-    m_queryCounts[idx] = count;
+    m_queryCounts[index] = count;
   }
 }
 
 
-count_t KEduVocExpression::badCount (int idx, bool rev_count) const
+count_t KEduVocExpression::badCount(int index, bool rev_count) const
 {
   if (rev_count) {
-    if (idx >= (int)m_reverseBadCounts.size() || idx < 1 ) {
+    if (index >= m_reverseBadCounts.count() || index < 1) {
       return 0;
     }
 
-    return m_reverseBadCounts[idx];
+    return m_reverseBadCounts[index];
   }
 
-  if (idx >= (int)m_badCounts.size() || idx < 1 ) {
+  if (index >= m_badCounts.count() || index < 1) {
     return 0;
   }
 
-  return m_badCounts[idx];
+  return m_badCounts[index];
 }
 
 
-void KEduVocExpression::setBadCount (int idx, count_t count, bool rev_count)
+void KEduVocExpression::setBadCount(int index, count_t count, bool rev_count)
 {
-  if (idx < 1) return;
+  if (index < 1)
+    return;
 
   if (rev_count) {
     // extend rev counts with 0 if necessary
-    if ((int)m_reverseBadCounts.size() <= idx )
-      for (int i = m_reverseBadCounts.size(); i <= idx; i++) {
-        m_reverseBadCounts.push_back (0);
+    if (m_reverseBadCounts.count() <= index)
+      for (int i = m_reverseBadCounts.count(); i <= index; i++) {
+        m_reverseBadCounts.append(0);
     }
 
-    m_reverseBadCounts[idx] = count;
+    m_reverseBadCounts[index] = count;
 
   }
   else {
     // extend counts with 0 if necessary
-    if ((int)m_badCounts.size() <= idx )
-      for (int i = m_badCounts.size(); i <= idx; i++) {
-        m_badCounts.push_back (0);
+    if (m_badCounts.count() <= index)
+      for (int i = m_badCounts.count(); i <= index; i++) {
+        m_badCounts.append(0);
       }
-    m_badCounts[idx] = count;
+    m_badCounts[index] = count;
   }
 }
 
 
-QDateTime KEduVocExpression::queryDate (int idx, bool rev_date) const
+QDateTime KEduVocExpression::queryDate(int index, bool rev_date) const
 {
   if (rev_date) {
-    if (idx >= (int)m_reverseQueryDates.size() || idx < 1 )
+    if (index >= m_reverseQueryDates.count() || index < 1)
     {
       QDateTime dt;
       dt.setTime_t(0);
       return dt;
     }
 
-    return m_reverseQueryDates[idx];
+    return m_reverseQueryDates[index];
   }
 
-  if (idx >= (int)m_queryDates.size() || idx < 1 )
+  if (index >= m_queryDates.count() || index < 1)
   {
     QDateTime dt;
     dt.setTime_t(0);
     return dt;
   }
 
-  return m_queryDates[idx];
+  return m_queryDates[index];
 }
 
 
-void KEduVocExpression::setQueryDate (int idx, const QDateTime & date, bool rev_date)
+void KEduVocExpression::setQueryDate(int index, const QDateTime & date, bool rev_date)
 {
-  if (idx < 1) return;
+  if (index < 1)
+    return;
 
   if (rev_date) {
     // extend rev dates with 0 if necessary
-    if ((int)m_reverseQueryDates.size() <= idx )
-      for (int i = m_reverseQueryDates.size(); i <= idx; i++)
+    if (m_reverseQueryDates.count() <= index)
+      for (int i = m_reverseQueryDates.count(); i <= index; i++)
       {
         QDateTime dt;
         dt.setTime_t(0);
         m_reverseQueryDates.append(dt);
       }
 
-    m_reverseQueryDates[idx] = date;
+    m_reverseQueryDates[index] = date;
 
   }
   else {
     // extend dates with 0 if necessary
-    if ((int)m_queryDates.size() <= idx )
-      for (int i = m_queryDates.size(); i <= idx; i++)
+    if (m_queryDates.count() <= index)
+      for (int i = m_queryDates.count(); i <= index; i++)
       {
         QDateTime dt;
         dt.setTime_t(0);
         m_queryDates.append(dt);
       }
-    m_queryDates[idx] = date;
+    m_queryDates[index] = date;
   }
 }
 
 
-bool KEduVocExpression::uniqueType () const
+bool KEduVocExpression::uniqueType() const
 {
   bool unique = true;
   QString type0 = type(0);
   for (int i = 1; i < translationCount(); i++)
-    if (type0 != type(i) )
+    if (type0 != type(i))
       unique = false;
   return unique;
 }
 
 
-QString KEduVocExpression::type (int idx) const
+QString KEduVocExpression::type(int index) const
 {
-  if (idx >= (int)m_expressionTypes.count() || idx < 0) {
+  if (index >= m_expressionTypes.count() || index < 0) {
     return "";
   }
   else {
-    return m_expressionTypes[idx];
+    return m_expressionTypes[index];
   }
 }
 
 
-int KEduVocExpression::lesson () const
+void KEduVocExpression::setType(int index, const QString &type)
+{
+  if (index < 0)
+    return;
+
+  // extend types with empty strings if necessary
+  if (m_expressionTypes.count() <= index)
+    for (int i = m_expressionTypes.count(); i < index + 1; i++)
+      m_expressionTypes.append("");
+
+  m_expressionTypes[index] = type.simplified();
+}
+
+
+int KEduVocExpression::lesson() const
 {
   return m_lesson;
 }
 
-void KEduVocExpression::incQueryCount (int index, bool rev_count)
-{
-  setQueryCount (index, queryCount(index, rev_count)+1, rev_count);
-}
 
-
-void KEduVocExpression::incBadCount (int index, bool rev_count)
-{
-  setBadCount (index, badCount(index, rev_count)+1, rev_count);
-}
-
-
-void KEduVocExpression::setOriginal ( const QString & expr)
-{
-  m_original = expr;
-}
-
-
-QString KEduVocExpression::original () const
-{
-  return m_original;
-}
-
-
-void KEduVocExpression::setLesson (int l)
+void KEduVocExpression::setLesson(int l)
 {
   m_lesson = l;
 }
 
 
-void KEduVocExpression::setType (int idx, const QString &type)
+void KEduVocExpression::incQueryCount(int index, bool rev_count)
 {
-  if ( idx < 0) return;
-
-  // extend types with empty strings if necessary
-  if ((int)m_expressionTypes.count() <= idx )
-    for (int i = m_expressionTypes.count(); i < idx + 1; i++)
-      m_expressionTypes.append("");
-
-  m_expressionTypes[idx] = type.simplified();
+  setQueryCount(index, queryCount(index, rev_count) + 1, rev_count);
 }
 
-void KEduVocExpression::setLeitnerBox( const QString& box )
+
+void KEduVocExpression::incBadCount(int index, bool rev_count)
 {
-  m_leitnerBox = box;
+  setBadCount(index, badCount(index, rev_count) + 1, rev_count);
 }
+
+
+QString KEduVocExpression::original() const
+{
+  return m_original;
+}
+
+
+void KEduVocExpression::setOriginal(const QString & expr)
+{
+  m_original = expr;
+}
+
 
 QString& KEduVocExpression::leitnerBox()
 {
   return m_leitnerBox;
+}
+
+
+void KEduVocExpression::setLeitnerBox(const QString& box)
+{
+  m_leitnerBox = box;
 }
 
