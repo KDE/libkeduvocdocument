@@ -22,6 +22,7 @@
 
 #include "keduvockvtmlwriter.h"
 #include "keduvocdocument.h"
+#include "keduvocexpression.h"
 
 KEduVocKvtmlWriter::KEduVocKvtmlWriter(QFile *file)
 {

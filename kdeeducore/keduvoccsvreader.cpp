@@ -28,6 +28,7 @@
 #include <klocale.h>
 
 #include "keduvocdocument.h"
+#include "keduvocexpression.h"
 #include "keduvoccsvreader.h"
 
 KEduVocCsvReader::KEduVocCsvReader(QIODevice *file)

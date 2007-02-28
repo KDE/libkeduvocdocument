@@ -19,7 +19,6 @@
 
 #include <QApplication>
 #include <QFileInfo>
-#include <QList>
 #include <QTextStream>
 #include <QtAlgorithms>
 #include <QIODevice>
@@ -31,6 +30,7 @@
 #include <krandomsequence.h>
 #include <kfilterdev.h>
 
+#include "keduvocexpression.h"
 #include "keduvockvtmlwriter.h"
 #include "keduvoccsvreader.h"
 #include "keduvoccsvwriter.h"
@@ -39,6 +39,85 @@
 #include "keduvocpaukerreader.h"
 #include "keduvocvokabelnreader.h"
 #include "leitnersystem.h"
+
+class KEduVocDocument::Private
+{
+public:
+  Private(KEduVocDocument* qq)
+    : q(qq)
+  {
+    init();
+  }
+
+  void init();
+
+  KEduVocDocument* q;
+
+  bool                      m_dirty;
+  KUrl                      m_url;
+  QList<bool>               m_sortIdentifier;
+  bool                      m_sortLesson;
+  bool                      m_sortingEnabled;
+
+  // save these to document
+  QStringList               m_identifiers;      //0= origin, 1,.. translations
+  int                       m_currentLesson;
+  QList<int>                m_extraSizeHints;
+  QList<int>                m_sizeHints;
+
+  QString                   m_generator;
+  QString                   m_queryorg;
+  QString                   m_querytrans;
+  QList<KEduVocExpression>  m_vocabulary;
+  QList<bool>               m_lessonsInQuery;
+  QStringList               m_lessonDescriptions;
+  QStringList               m_typeDescriptions;
+  QStringList               m_tenseDescriptions;
+  QStringList               m_usageDescriptions;
+  QString                   m_title;
+  QString                   m_author;
+  QString                   m_license;
+  QString                   m_remark;
+  QString                   m_version;
+  QString                   m_csvDelimiter;
+
+  QList<KEduVocArticle>     m_articles;
+  QList<KEduVocConjugation> m_conjugations;
+
+  LeitnerSystem*            m_leitnerSystem;
+  bool                      m_activeLeitnerSystem;
+};
+
+
+void KEduVocDocument::Private::init()
+{
+  m_lessonDescriptions.clear();
+  m_articles.clear();
+  m_typeDescriptions.clear();
+  m_tenseDescriptions.clear();
+  m_identifiers.clear();
+  m_sortIdentifier.clear();
+  m_extraSizeHints.clear();
+  m_sizeHints.clear();
+  m_vocabulary.clear();
+  m_dirty = false;
+  m_sortingEnabled = true;
+  m_sortLesson = false;
+  q->setCurrentLesson(0);
+  m_queryorg = "";
+  m_querytrans = "";
+  m_url.setFileName(i18n("Untitled"));
+  m_title = "";
+  m_author = "";
+  m_remark = "";
+  m_version = "";
+  m_generator = "";
+  m_csvDelimiter = QString('\t');
+  m_activeLeitnerSystem = false;
+  m_leitnerSystem = NULL;
+}
+
+
 
 /**@todo possibly implement
   1. sorting based on lesson name
@@ -71,38 +150,35 @@ private:
 
 
 KEduVocDocument::KEduVocDocument(QObject *parent)
+  : QObject(parent), d(new Private(this))
 {
-  Q_UNUSED(parent);
-  Init();
 }
 
 
-void KEduVocDocument::Init ()
+KEduVocDocument::~KEduVocDocument()
 {
-  m_lessonDescriptions.clear();
-  m_articles.clear();
-  m_typeDescriptions.clear();
-  m_tenseDescriptions.clear();
-  m_identifiers.clear();
-  m_sortIdentifier.clear();
-  m_extraSizeHints.clear();
-  m_sizeHints.clear();
-  m_vocabulary.clear();
-  m_dirty = false;
-  m_sortingEnabled = true;
-  m_sortLesson = false;
-  setCurrentLesson (0);
-  m_queryorg = "";
-  m_querytrans = "";
-  m_url.setFileName(i18n("Untitled"));
-  m_title = "";
-  m_author = "";
-  m_remark = "";
-  m_version = "";
-  m_generator = "";
-  m_csvDelimiter = QString('\t');
-  m_activeLeitnerSystem = false;
-  m_leitnerSystem = NULL;
+  delete d;
+}
+
+
+void KEduVocDocument::setModified(bool dirty)
+{
+  d->m_dirty = dirty;
+  emit docModified(d->m_dirty);
+}
+
+
+void KEduVocDocument::appendEntry(KEduVocExpression *expression)
+{
+  d->m_vocabulary.append(*expression);
+  setModified();
+}
+
+
+void KEduVocDocument::insertEntry(KEduVocExpression *expression, int index)
+{
+  d->m_vocabulary.insert(index, *expression);
+  setModified();
 }
 
 
@@ -157,9 +233,9 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileNam
 
 bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
 {
-  Init();
+  d->init();
   if (!url.isEmpty())
-    m_url = url;
+    d->m_url = url;
 
   // TODO EPT  connect( this, SIGNAL(progressChanged(KEduVocDocument*,int)), parent, SLOT(slotProgress(KEduVocDocument*,int)) );
 
@@ -241,12 +317,12 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
         QString msg = i18n("Could not open \"%1\"\nDo you want to try again?\n(Error reported: %2)", url.path(), errorMessage);
         int result = KMessageBox::warningContinueCancel(0, msg, i18n("Error Opening File"), KGuiItem(i18n("&Retry")));
         if (result == KMessageBox::Cancel) {
-          Init();
+          d->init();
           return false;
         } else {
-          Init();
+          d->init();
           if (!url.isEmpty())
-            m_url = url;
+            d->m_url = url;
         }
       }
     }
@@ -317,7 +393,7 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
         return false;
     }
   }
-  m_url = tmp;
+  d->m_url = tmp;
   setModified(false);
   return true;
 }
@@ -325,25 +401,25 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
 
 KEduVocExpression *KEduVocDocument::entry(int index)
 {
-  if (index < 0 || index >= (int)m_vocabulary.size() )
+  if (index < 0 || index >= d->m_vocabulary.size() )
     return 0;
   else
-    return &m_vocabulary[index];
+    return &d->m_vocabulary[index];
 }
 
 
 void KEduVocDocument::removeEntry(int index)
 {
-  if (index >= 0 && index < (int)m_vocabulary.size() )
-    m_vocabulary.removeAt( index );
+  if (index >= 0 && index < d->m_vocabulary.size() )
+    d->m_vocabulary.removeAt( index );
 }
 
 
 int KEduVocDocument::findIdentifier(const QString &lang) const
 {
-  QStringList::const_iterator first = m_identifiers.begin();
+  QStringList::const_iterator first = d->m_identifiers.begin();
   int count = 0;
-  while (first != m_identifiers.end()) {
+  while (first != d->m_identifiers.end()) {
     if ( *first == lang)
       return count;
     first++;
@@ -355,75 +431,111 @@ int KEduVocDocument::findIdentifier(const QString &lang) const
 
 QString KEduVocDocument::identifier(int index) const
 {
-  if (index >= (int)m_identifiers.size() || index < 1 )
+  if (index >= d->m_identifiers.size() || index < 1 )
     return "";
   else
-    return m_identifiers[index];
+    return d->m_identifiers[index];
 }
 
 
 void KEduVocDocument::setIdentifier(int idx, const QString &id)
 {
-  if (idx < (int)m_identifiers.size() && idx >= 1 ) {
-    m_identifiers[idx] = id;
+  if (idx < d->m_identifiers.size() && idx >= 1 ) {
+    d->m_identifiers[idx] = id;
   }
 }
 
 
 QString KEduVocDocument::typeName (int index) const
 {
-  if (index >= (int)m_typeDescriptions.count())
+  if (index >= d->m_typeDescriptions.count())
     return "";
   else
-    return m_typeDescriptions[index];
+    return d->m_typeDescriptions[index];
 }
 
 
 void KEduVocDocument::setTypeName(int idx, QString &id)
 {
-  if (idx >= (int)m_typeDescriptions.size())
-    for (int i = (int)m_typeDescriptions.size(); i <= idx; i++)
-      m_typeDescriptions.push_back ("");
+  if (idx >= d->m_typeDescriptions.size())
+    for (int i = d->m_typeDescriptions.size(); i <= idx; i++)
+      d->m_typeDescriptions.push_back ("");
 
-  m_typeDescriptions[idx] = id;
+  d->m_typeDescriptions[idx] = id;
+}
+
+
+QStringList KEduVocDocument::typeDescriptions() const
+{
+  return d->m_typeDescriptions;
+}
+
+
+void KEduVocDocument::setTypeDescriptions(const QStringList &names)
+{
+  d->m_typeDescriptions = names;
 }
 
 
 QString KEduVocDocument::tenseName(int index) const
 {
-  if (index >= (int)m_tenseDescriptions.size())
+  if (index >= d->m_tenseDescriptions.size())
     return "";
   else
-    return m_tenseDescriptions[index];
+    return d->m_tenseDescriptions[index];
 }
 
 
 void KEduVocDocument::setTenseName(int idx, QString &id)
 {
-  if (idx >= (int)m_tenseDescriptions.size())
-    for (int i = (int)m_tenseDescriptions.size(); i <= idx; i++)
-      m_tenseDescriptions.push_back ("");
+  if (idx >= d->m_tenseDescriptions.size())
+    for (int i = d->m_tenseDescriptions.size(); i <= idx; i++)
+      d->m_tenseDescriptions.push_back ("");
 
-  m_tenseDescriptions[idx] = id;
+  d->m_tenseDescriptions[idx] = id;
+}
+
+
+QStringList KEduVocDocument::tenseDescriptions() const
+{
+  return d->m_tenseDescriptions;
+}
+
+
+void KEduVocDocument::setTenseDescriptions(const QStringList &names)
+{
+  d->m_tenseDescriptions = names;
 }
 
 
 QString KEduVocDocument::usageName(int index) const
 {
-  if (index >= (int)m_usageDescriptions.size())
+  if (index >= d->m_usageDescriptions.size())
     return "";
   else
-    return m_usageDescriptions[index];
+    return d->m_usageDescriptions[index];
 }
 
 
 void KEduVocDocument::setUsageName(int idx, QString &id)
 {
-  if (idx >= (int)m_usageDescriptions.size())
-    for (int i = (int)m_usageDescriptions.size(); i <= idx; i++)
-      m_usageDescriptions.push_back ("");
+  if (idx >= d->m_usageDescriptions.size())
+    for (int i = d->m_usageDescriptions.size(); i <= idx; i++)
+      d->m_usageDescriptions.push_back ("");
 
-  m_usageDescriptions[idx] = id;
+  d->m_usageDescriptions[idx] = id;
+}
+
+
+QStringList KEduVocDocument::usageDescriptions() const
+{
+  return d->m_usageDescriptions;
+}
+
+
+void KEduVocDocument::setUsageDescriptions(const QStringList &names)
+{
+  d->m_usageDescriptions = names;
 }
 
 
@@ -432,21 +544,27 @@ void KEduVocDocument::setConjugation(int idx, const KEduVocConjugation &con)
   if ( idx < 0) return;
 
   // extend conjugation with empty elements
-  if ((int)m_conjugations.size() <= idx )
-    for (int i = m_conjugations.size(); i < idx+1; i++)
-      m_conjugations.push_back (KEduVocConjugation());
+  if (d->m_conjugations.size() <= idx )
+    for (int i = d->m_conjugations.size(); i < idx+1; i++)
+      d->m_conjugations.push_back (KEduVocConjugation());
 
-  m_conjugations[idx] = con;
+  d->m_conjugations[idx] = con;
+}
+
+
+int KEduVocDocument::conjugationCount() const
+{
+  return d->m_conjugations.count();
 }
 
 
 KEduVocConjugation KEduVocDocument::conjugation (int idx) const
 {
-  if (idx >= (int)m_conjugations.size() || idx < 0) {
+  if (idx >= d->m_conjugations.size() || idx < 0) {
     return KEduVocConjugation();
   }
   else {
-    return m_conjugations[idx];
+    return d->m_conjugations[idx];
   }
 }
 
@@ -456,22 +574,28 @@ void KEduVocDocument::setArticle(int idx, const KEduVocArticle &art)
   if ( idx < 0) return;
 
   // extend conjugation with empty elements
-  if ((int)m_articles.size() <= idx )
-    for (int i = m_articles.size(); i < idx+1; i++)
-      m_articles.push_back (KEduVocArticle());
+  if (d->m_articles.size() <= idx )
+    for (int i = d->m_articles.size(); i < idx+1; i++)
+      d->m_articles.push_back (KEduVocArticle());
 
-  m_articles[idx] = art;
+  d->m_articles[idx] = art;
 }
 
 
 KEduVocArticle KEduVocDocument::article (int idx) const
 {
-  if (idx >= (int)m_articles.size() || idx < 0) {
+  if (idx >= d->m_articles.size() || idx < 0) {
     return KEduVocArticle();
   }
   else {
-    return m_articles[idx];
+    return d->m_articles[idx];
   }
+}
+
+
+int KEduVocDocument::articleCount() const
+{
+  return d->m_articles.count();
 }
 
 
@@ -479,19 +603,19 @@ int KEduVocDocument::sizeHint (int idx) const
 {
   if (idx < 0) {
     idx = -idx;
-    if (idx >= (int)m_extraSizeHints.size() )
+    if (idx >= d->m_extraSizeHints.size() )
       return 80; // make a good guess about column size
     else {
 //      cout << "gsh " << idx << "  " << extraSizehints[idx] << endl;
-      return m_extraSizeHints[idx];
+      return d->m_extraSizeHints[idx];
     }
   }
   else {
-    if (idx >= (int)m_sizeHints.size() )
+    if (idx >= d->m_sizeHints.size() )
       return 150; // make a good guess about column size
     else {
 //      cout << "gsh " << idx << "  " << sizehints[idx] << endl;
-      return m_sizeHints[idx];
+      return d->m_sizeHints[idx];
     }
   }
 }
@@ -502,38 +626,38 @@ void KEduVocDocument::setSizeHint (int idx, const int width)
 //  cout << "ssh " << idx << "  " << width << endl;
   if (idx < 0) {
     idx = -idx;
-    if (idx >= (int)m_extraSizeHints.size()) {
-      for (int i = (int)m_extraSizeHints.size(); i <= idx; i++)
-        m_extraSizeHints.push_back (80);
+    if (idx >= d->m_extraSizeHints.size()) {
+      for (int i = d->m_extraSizeHints.size(); i <= idx; i++)
+        d->m_extraSizeHints.push_back (80);
     }
-    m_extraSizeHints[idx] = width;
+    d->m_extraSizeHints[idx] = width;
 
   }
   else {
-    if (idx >= (int)m_sizeHints.size()) {
-      for (int i = (int)m_sizeHints.size(); i <= idx; i++)
-        m_sizeHints.push_back (150);
+    if (idx >= d->m_sizeHints.size()) {
+      for (int i = d->m_sizeHints.size(); i <= idx; i++)
+        d->m_sizeHints.push_back (150);
     }
-    m_sizeHints[idx] = width;
+    d->m_sizeHints[idx] = width;
   }
 }
 
 
 void KEduVocDocument::removeIdentifier(int index)
 {
-  if (index < (int)m_identifiers.size() && index >= 1 )
+  if (index < d->m_identifiers.size() && index >= 1 )
   {
-    m_identifiers.removeAt(index);
-    for (int i = 0; i < m_vocabulary.count(); i++)
-      m_vocabulary[i].removeTranslation(index);
+    d->m_identifiers.removeAt(index);
+    for (int i = 0; i < d->m_vocabulary.count(); i++)
+      d->m_vocabulary[i].removeTranslation(index);
   }
 }
 
 
 QString KEduVocDocument::originalIdentifier() const
 {
-  if (m_identifiers.size() > 0)
-    return m_identifiers[0];
+  if (d->m_identifiers.size() > 0)
+    return d->m_identifiers[0];
   else
     return "";
 }
@@ -541,8 +665,8 @@ QString KEduVocDocument::originalIdentifier() const
 
 void KEduVocDocument::setOriginalIdentifier(const QString &id)
 {
-  if (m_identifiers.size() > 0) {
-    m_identifiers[0] = id;
+  if (d->m_identifiers.size() > 0) {
+    d->m_identifiers[0] = id;
   }
 }
 
@@ -550,13 +674,13 @@ void KEduVocDocument::setOriginalIdentifier(const QString &id)
 bool KEduVocDocument::sort(int index, Qt::SortOrder order)
 {
   bool result = false;
-  if (m_sortingEnabled && index < identifierCount())
+  if (d->m_sortingEnabled && index < identifierCount())
   {
-    if (m_sortIdentifier.count() < m_identifiers.count())
-      for (int i = m_sortIdentifier.count(); i < (int) m_identifiers.count(); i++)
-          m_sortIdentifier.append(false);
+    if (d->m_sortIdentifier.count() < d->m_identifiers.count())
+      for (int i = d->m_sortIdentifier.count(); i < d->m_identifiers.count(); i++)
+          d->m_sortIdentifier.append(false);
 
-    m_sortIdentifier[index] = (order == Qt::AscendingOrder);
+    d->m_sortIdentifier[index] = (order == Qt::AscendingOrder);
     result = sort(index);
   }
   return result;
@@ -565,16 +689,16 @@ bool KEduVocDocument::sort(int index, Qt::SortOrder order)
 bool KEduVocDocument::sort(int index)
 {
   bool result = false;
-  if (m_sortingEnabled && index < identifierCount())
+  if (d->m_sortingEnabled && index < identifierCount())
   {
-    if (m_sortIdentifier.count() < m_identifiers.count())
-      for (int i = m_sortIdentifier.count(); i < (int) m_identifiers.count(); i++)
-          m_sortIdentifier.append(false);
+    if (d->m_sortIdentifier.count() < d->m_identifiers.count())
+      for (int i = d->m_sortIdentifier.count(); i < d->m_identifiers.count(); i++)
+          d->m_sortIdentifier.append(false);
 
-    KEduVocDocumentSortHelper sh(index, m_sortIdentifier[index] ? Qt::AscendingOrder : Qt::DescendingOrder);
-    qSort(m_vocabulary.begin(), m_vocabulary.end(), sh);
-    m_sortIdentifier[index] = !m_sortIdentifier[index];
-    result = m_sortIdentifier[index];
+    KEduVocDocumentSortHelper sh(index, d->m_sortIdentifier[index] ? Qt::AscendingOrder : Qt::DescendingOrder);
+    qSort(d->m_vocabulary.begin(), d->m_vocabulary.end(), sh);
+    d->m_sortIdentifier[index] = !d->m_sortIdentifier[index];
+    result = d->m_sortIdentifier[index];
   }
   return result;
 }
@@ -593,22 +717,41 @@ bool KEduVocDocument::sortByLessonIndex ()
   return false;
 }
 
+
+void KEduVocDocument::setSortingEnabled(bool enable)
+{
+  d->m_sortingEnabled = enable;
+}
+
+
+bool KEduVocDocument::isSortingEnabled() const
+{
+  return d->m_sortingEnabled;
+}
+
+
+bool KEduVocDocument::isModified() const
+{
+  return d->m_dirty;
+}
+
+
 bool KEduVocDocument::leitnerSystemActive()
 {
-	return m_activeLeitnerSystem;
+  return d->m_activeLeitnerSystem;
 }
 
 void KEduVocDocument::setLeitnerSystemActive( bool yes )
 {
 	if( yes )
 	{
-		if (m_leitnerSystem == 0)
+		if (d->m_leitnerSystem == 0)
 			createStandardLeitnerSystem(); //if nothing is loaded yet
 
-		m_activeLeitnerSystem = true;
+		d->m_activeLeitnerSystem = true;
 	}
 	else if( !yes )
-		m_activeLeitnerSystem = false;
+		d->m_activeLeitnerSystem = false;
 }
 
 void KEduVocDocument::createStandardLeitnerSystem()
@@ -638,39 +781,54 @@ void KEduVocDocument::createStandardLeitnerSystem()
 	tmpSystem->setCorrectBox( "Box 5", "Box 1" );
 	tmpSystem->setWrongBox( "Box 5", "Box 1" );
 
-	m_leitnerSystem = tmpSystem;
+	d->m_leitnerSystem = tmpSystem;
 }
 
 void KEduVocDocument::setLeitnerSystem( LeitnerSystem* system )
 {
-	m_leitnerSystem = system;
-
-	/*KWordQuizApp* app = (KWordQuizApp*) parent();
-	app->slotLeitnerSystem();*/
+  d->m_leitnerSystem = system;
 }
 
 LeitnerSystem* KEduVocDocument::leitnerSystem()
 {
-  return m_leitnerSystem;
+  return d->m_leitnerSystem;
+}
+
+
+int KEduVocDocument::entryCount() const
+{
+  return d->m_vocabulary.count();
 }
 
 
 void KEduVocDocument::resetEntry(int index, int lesson)
 {
-  for (int i = 0; i < m_vocabulary.count(); i++)
-    if (/*lesson == 0 ||*/ lesson == m_vocabulary[i].lesson())
+  for (int i = 0; i < d->m_vocabulary.count(); i++)
+    if (/*lesson == 0 ||*/ lesson == d->m_vocabulary[i].lesson())
     {
-      m_vocabulary[i].setGrade(index, KV_NORM_GRADE, false);
-      m_vocabulary[i].setGrade(index, KV_NORM_GRADE, true);
-      m_vocabulary[i].setQueryCount(index, 0, true);
-      m_vocabulary[i].setQueryCount(index, 0, false);
-      m_vocabulary[i].setBadCount(index, 0, true);
-      m_vocabulary[i].setBadCount(index, 0, false);
+      d->m_vocabulary[i].setGrade(index, KV_NORM_GRADE, false);
+      d->m_vocabulary[i].setGrade(index, KV_NORM_GRADE, true);
+      d->m_vocabulary[i].setQueryCount(index, 0, true);
+      d->m_vocabulary[i].setQueryCount(index, 0, false);
+      d->m_vocabulary[i].setBadCount(index, 0, true);
+      d->m_vocabulary[i].setBadCount(index, 0, false);
       QDateTime dt;
       dt.setTime_t(0);
-      m_vocabulary[i].setQueryDate(index, dt, true);
-      m_vocabulary[i].setQueryDate(index, dt, false);
+      d->m_vocabulary[i].setQueryDate(index, dt, true);
+      d->m_vocabulary[i].setQueryDate(index, dt, false);
     }
+}
+
+
+int KEduVocDocument::identifierCount() const
+{
+  return d->m_identifiers.count();  // org + translations
+}
+
+
+void KEduVocDocument::appendIdentifier(const QString & id)
+{
+  d->m_identifiers.append(id);
 }
 
 
@@ -679,18 +837,18 @@ QString KEduVocDocument::lessonDescription(int idx) const
   if (idx == 0)
     return i18n("<no lesson>");
 
-  if (idx <= 0 || idx > (int) m_lessonDescriptions.size() )
+  if (idx <= 0 || idx > d->m_lessonDescriptions.size() )
     return "";
 
-  return m_lessonDescriptions[idx-1];
+  return d->m_lessonDescriptions[idx-1];
 }
 
 
 QList<int> KEduVocDocument::lessonsInQuery() const
 {
   QList<int> iqvec;
-  for (int i = 0; i < m_lessonsInQuery.size(); i++)
-    if (m_lessonsInQuery[i]) {
+  for (int i = 0; i < d->m_lessonsInQuery.size(); i++)
+    if (d->m_lessonsInQuery[i]) {
       iqvec.push_back(i+1);   // Offset <no lesson>
 //      cout << "getliq: " << i+1 << endl;
     }
@@ -700,70 +858,144 @@ QList<int> KEduVocDocument::lessonsInQuery() const
 
 void KEduVocDocument::setLessonsInQuery(QList<int> lesson_iq)
 {
-  m_lessonsInQuery.clear();
-  for (int i = 0; i < m_lessonDescriptions.count(); i++)
-    m_lessonsInQuery.append(false);
+  d->m_lessonsInQuery.clear();
+  for (int i = 0; i < d->m_lessonDescriptions.count(); i++)
+    d->m_lessonsInQuery.append(false);
 
   foreach(int i, lesson_iq)
-    if (i <= m_lessonsInQuery.count())
-      m_lessonsInQuery[i - 1] = true;
+    if (i <= d->m_lessonsInQuery.count())
+      d->m_lessonsInQuery[i - 1] = true;
+}
+
+
+KUrl KEduVocDocument::URL() const
+{
+  return d->m_url;
+}
+
+
+void KEduVocDocument::setURL(const KUrl& url)
+{
+  d->m_url = url;
 }
 
 
 QString KEduVocDocument::title() const
 {
-  if (m_title.isEmpty())
-    return m_url.fileName();
+  if (d->m_title.isEmpty())
+    return d->m_url.fileName();
   else
-    return m_title;
+    return d->m_title;
 }
 
 
 QString KEduVocDocument::author() const
 {
-  return m_author;
+  return d->m_author;
 }
 
 
 QString KEduVocDocument::license() const
 {
-  return m_license;
+  return d->m_license;
 }
 
 
 QString KEduVocDocument::docRemark() const
 {
-  return m_remark;
+  return d->m_remark;
+}
+
+
+void KEduVocDocument::queryIdentifier(QString &org, QString &trans) const
+{
+  org = d->m_queryorg;
+  trans = d->m_querytrans;
+}
+
+
+void KEduVocDocument::setQueryIdentifier(const QString &org, const QString &trans)
+{
+  d->m_queryorg = org;
+  d->m_querytrans = trans;
 }
 
 
 void KEduVocDocument::setTitle(const QString & title)
 {
-  m_title = title.simplified();
+  d->m_title = title.simplified();
 }
 
 
 void KEduVocDocument::setAuthor(const QString & s)
 {
-  m_author = s.simplified();
+  d->m_author = s.simplified();
 }
 
 
 void KEduVocDocument::setLicense(const QString & s)
 {
-  m_license = s.simplified();
+  d->m_license = s.simplified();
 }
 
 
 void KEduVocDocument::setDocRemark(const QString & s)
 {
-  m_remark = s.simplified();
+  d->m_remark = s.simplified();
+}
+
+
+void KEduVocDocument::setGenerator(const QString & generator)
+{
+  d->m_generator = generator;
+}
+
+
+QString KEduVocDocument::generator() const
+{
+  return d->m_generator;
+}
+
+
+QString KEduVocDocument::version() const
+{
+  return d->m_version;
 }
 
 
 void KEduVocDocument::setVersion(const QString & vers)
 {
-  m_version = vers;
+  d->m_version = vers;
+}
+
+
+int KEduVocDocument::currentLesson() const
+{
+  return d->m_currentLesson;
+}
+
+
+void KEduVocDocument::setCurrentLesson(int lesson)
+{
+  d->m_currentLesson = lesson;
+}
+
+
+QStringList KEduVocDocument::lessonDescriptions() const
+{
+  return d->m_lessonDescriptions;
+}
+
+
+int KEduVocDocument::numLessons() const
+{
+  return d->m_lessonDescriptions.count();
+}
+
+
+void KEduVocDocument::setLessonDescriptions(const QStringList &names)
+{
+  d->m_lessonDescriptions = names;
 }
 
 
@@ -803,6 +1035,18 @@ int KEduVocDocument::search(const QString &substr, int id, int first, int last, 
     }
   }
   return -1;
+}
+
+
+QString KEduVocDocument::csvDelimiter() const
+{
+  return d->m_csvDelimiter;
+}
+
+
+void KEduVocDocument::setCsvDelimiter(const QString &delimiter)
+{
+  d->m_csvDelimiter = delimiter;
 }
 
 
@@ -848,13 +1092,13 @@ int KEduVocDocument::cleanUp()
   ExpRefList shadow;
   QList<int> to_delete;
 
-  for (int i = 0; i < (int) m_vocabulary.count(); i++)
+  for (int i = 0; i < d->m_vocabulary.count(); i++)
     shadow.append(ExpRef (entry(i), i));
   qStableSort(shadow.begin(), shadow.end());
 
   int ent_no = 0;
-  int ent_percent = m_vocabulary.size () / 100;
-  float f_ent_percent = m_vocabulary.size () / 100.0;
+  int ent_percent = d->m_vocabulary.size () / 100;
+  float f_ent_percent = d->m_vocabulary.size () / 100.0;
   emit progressChanged(this, 0);
 
   for (int i = shadow.size() - 1; i > 0; i--) {
@@ -900,7 +1144,7 @@ int KEduVocDocument::cleanUp()
 void KEduVocDocument::shuffle()
 {
   KRandomSequence rs;
-  rs.randomize(m_vocabulary);
+  rs.randomize(d->m_vocabulary);
   setModified();
 }
 

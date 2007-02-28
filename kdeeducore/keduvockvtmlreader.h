@@ -27,6 +27,7 @@
 #include <QString>
 
 #include "keduvocdocument.h"
+#include "keduvocexpression.h"
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
 

@@ -229,15 +229,15 @@ static const QLatin1String KV_ART_ENTRY("e");  // article entry
 #define TXT_EXT          "txt"
 #define WQL_EXT          "wql"
 
-#include <QObject>
-#include <QFont>
-#include <QList>
-#include <QTextStream>
+#include <QtCore/QObject>
+#include <QtCore/QList>
+
 #include <kurl.h>
 
-#include "keduvocexpression.h"
+#include "keduvocgrammar.h"
 
 class QStringList;
+class KEduVocExpression;
 class KEduVocMultipleChoice;
 class LeitnerSystem;
 
@@ -263,22 +263,26 @@ public:
    *
    * @param parent calling object
    */
-  KEduVocDocument(QObject* parent);
+  KEduVocDocument(QObject* parent = 0);
+
+  /**
+   * Destructor
+   */
+  ~KEduVocDocument();
 
   /**
    * Indicates if the document is modified
    *
    * @param dirty   new state
    */
-  inline void setModified (bool dirty = true) { emit docModified(m_dirty = dirty); }
+  void setModified(bool dirty = true);
 
   /**
    * Sppends a new expression to the end of the vocabulary
    *
    * @param expression      expression to append
    */
-  inline void appendEntry (KEduVocExpression *expression)
-    { m_vocabulary.append(*expression); setModified(); }
+  void appendEntry(KEduVocExpression *expression);
 
   /**
    * Inserts a new expression
@@ -286,8 +290,7 @@ public:
    * @param expression      expression to insert
    * @param index           index of entry
    */
-  inline void insertEntry(KEduVocExpression *expression, int index)
-    { m_vocabulary.insert(index, *expression); setModified(); }
+  void insertEntry(KEduVocExpression *expression, int index);
 
   /**
    * Removes an expression from the document
@@ -340,17 +343,17 @@ public:
   /**
    * Enables sorting
    */
-  inline void setSortingEnabled(bool enable) { m_sortingEnabled = enable; }
+  void setSortingEnabled(bool enable);
 
   /**
    * @returns whether sorting is enabled
    */
-  inline bool isSortingEnabled() { return m_sortingEnabled; }
+  bool isSortingEnabled() const;
 
   /**
    * @returns the modification state of the doc
    */
-  inline bool isModified() const { return m_dirty; }
+  bool isModified() const;
 
   /**
    * @returns the original identifier
@@ -414,12 +417,12 @@ public:
   /**
    * Gets the descriptions of the types
    */
-  inline QStringList typeDescriptions() const { return m_typeDescriptions; }
+  QStringList typeDescriptions() const;
 
   /**
    * Sets the descriptions of the types
    */
-  inline void setTypeDescriptions(QStringList names) { m_typeDescriptions = names; }
+  void setTypeDescriptions(const QStringList &names);
 
   /**
    * Returns the tense string
@@ -440,12 +443,12 @@ public:
   /**
    * Gets the descriptions of the tenses
    */
-  inline QStringList tenseDescriptions() const { return m_tenseDescriptions; }
+  QStringList tenseDescriptions() const;
 
   /**
    * Sets the description of the tenses
    */
-  inline void setTenseDescriptions(QStringList names) { m_tenseDescriptions = names; }
+  void setTenseDescriptions(const QStringList &names);
 
   /**
    * Returns usage string
@@ -466,12 +469,12 @@ public:
   /**
    * Gets the descriptions of the usages
    */
-  inline QStringList usageDescriptions() const { return m_usageDescriptions; }
+  QStringList usageDescriptions() const;
 
   /**
    * Sets the descriptions of the usages
    */
-  inline void setUsageDescriptions(QStringList names) { m_usageDescriptions = names; }
+  void setUsageDescriptions(const QStringList &names);
 
   /**
    * Open a document file
@@ -499,7 +502,7 @@ public:
   /**
    * @returns the number of entries
    */
-  inline int entryCount() const { return m_vocabulary.count(); }
+  int entryCount() const;
 
   /**
    * Sets grades to KV_NORM_GRADE, counts to 0 ...
@@ -513,14 +516,14 @@ public:
   /**
    * @returns the number of different identifiers (usually languages)
    */
-  inline int identifierCount() const { return m_identifiers.count(); } // org + translations
+  int identifierCount() const;
 
   /**
    * Appends a new identifier (usually a language)
    *
    * @param id         the identifier to append
    */
-  inline void appendIdentifier(const QString & id) { m_identifiers.append(id); }
+  void appendIdentifier(const QString & id);
 
   /**
    * Returns pointer to expression object @p index
@@ -546,12 +549,12 @@ public:
   /**
    * @returns the URL of the XML file
    */
-  inline KUrl URL() const {return m_url; }
+  KUrl URL() const;
 
   /**
    * Sets the URL of the XML file
    */
-  inline void setURL(const KUrl& url) {m_url = url;}
+  void setURL(const KUrl& url);
 
   /**
    * @returns the title of the XML file
@@ -579,8 +582,7 @@ public:
    * @param org        identifier for original
    * @param trans      identifier for translation
    */
-  inline void queryIdentifier(QString &org, QString &trans) const
-    { org = m_queryorg; trans = m_querytrans; }
+  void queryIdentifier(QString &org, QString &trans) const;
 
   /**
    * Sets the identifiers for the current query
@@ -588,8 +590,7 @@ public:
    * @param org        identifier for original
    * @param trans      identifier for translation
    */
-  inline void setQueryIdentifier(const QString &org, const QString &trans)
-    { m_queryorg = org; m_querytrans = trans; }
+  void setQueryIdentifier(const QString &org, const QString &trans);
 
   /**
    * Sets the title of the XML file
@@ -614,17 +615,17 @@ public:
   /**
    * Sets the generator of the file
    */
-  inline void setGenerator(const QString & generator) { m_generator = generator; }
+  void setGenerator(const QString & generator);
 
   /**
    * Gets the generator of the file
    */
-  inline QString generator() const { return m_generator; }
+  QString generator() const;
 
   /**
    * Gets the version of the loaded file
    */
-  inline QString version() const { return m_version; }
+  QString version() const;
 
   /**
    * Sets version of the loaded file
@@ -635,13 +636,13 @@ public:
   /**
    * @returns the current lesson index
    */
-  inline int currentLesson() const { return m_currentLesson; }
+  int currentLesson() const;
 
   /**
    * Sets current lesson index
    * @param lesson    index of lesson
    */
-  inline void setCurrentLesson(int lesson) { m_currentLesson = lesson; }
+  void setCurrentLesson(int lesson);
 
   /**
    * @returns the description of the lesson
@@ -658,14 +659,14 @@ public:
    */
   void setLessonsInQuery(QList<int>);
 
-  inline QStringList lessonDescriptions() const { return m_lessonDescriptions; }
+  QStringList lessonDescriptions() const;
 
-  inline int numLessons () const {return (int) m_lessonDescriptions.count(); }
+  int numLessons() const;
 
   /**
    * Sets the description of the lesson
    */
-  inline void setLessonDescriptions(QStringList names) { m_lessonDescriptions = names; }
+  void setLessonDescriptions(const QStringList &names);
 
   /**
    * @param index            index of translation
@@ -684,7 +685,7 @@ public:
   /**
    * @returns                the number of conjugations
   */
-  inline int conjugationCount() const { return m_conjugations.count(); }
+  int conjugationCount() const;
 
   /**
    * @param index            index of translation
@@ -703,7 +704,7 @@ public:
   /**
    * @returns                the number of articles
   */
-  inline int articleCount() const { return m_articles.count(); }
+  int articleCount() const;
 
   /**
    * Returns the recommended size
@@ -727,14 +728,14 @@ public:
    *
    * @returns                the delimiter used
    */
-  inline QString csvDelimiter() const { return m_csvDelimiter; }
+  QString csvDelimiter() const;
 
   /**
    * Sets the delimiter (separator) used for csv import and export
    *
    * @param delimiter        the delimiter to use
    */
-  inline void setCsvDelimiter(const QString &delimiter) { m_csvDelimiter = delimiter; }
+  void setCsvDelimiter(const QString &delimiter);
 
   bool leitnerSystemActive();
   void setLeitnerSystemActive(bool yes);
@@ -744,47 +745,15 @@ public:
 
   FileType detectFileType(const QString &fileName);
 
-signals:
+Q_SIGNALS:
   void progressChanged (KEduVocDocument *, int curr_percent);
   void docModified (bool mod);
 
-protected:
-  void Init();
-
 private:
-  bool                      m_dirty;
-  KUrl                      m_url;
-  QList<bool>               m_sortIdentifier;
-  bool                      m_sortLesson;
-  bool                      m_sortingEnabled;
+  class Private;
+  Private* const d;
 
-  // save these to document
-  QStringList               m_identifiers;      //0= origin, 1,.. translations
-  int                       m_currentLesson;
-  QList<int>                m_extraSizeHints;
-  QList<int>                m_sizeHints;
-
-  QString                   m_generator;
-  QString                   m_queryorg;
-  QString                   m_querytrans;
-  QList<KEduVocExpression>  m_vocabulary;
-  QList<bool>               m_lessonsInQuery;
-  QStringList               m_lessonDescriptions;
-  QStringList               m_typeDescriptions;
-  QStringList               m_tenseDescriptions;
-  QStringList               m_usageDescriptions;
-  QString                   m_title;
-  QString                   m_author;
-  QString                   m_license;
-  QString                   m_remark;
-  QString                   m_version;
-  QString                   m_csvDelimiter;
-
-  QList<KEduVocArticle>     m_articles;
-  QList<KEduVocConjugation> m_conjugations;
-
-  LeitnerSystem*            m_leitnerSystem;
-  bool                      m_activeLeitnerSystem;
+  Q_DISABLE_COPY(KEduVocDocument)
 };
 
 

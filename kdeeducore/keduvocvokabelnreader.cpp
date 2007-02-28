@@ -27,7 +27,7 @@
 #include <kdebug.h>
 
 #include "keduvocdocument.h"
-
+#include "keduvocexpression.h"
 #include "keduvocvokabelnreader.h"
 
 KEduVocVokabelnReader::KEduVocVokabelnReader(QIODevice *file)
