@@ -33,6 +33,7 @@
 
 #include "keduvockvtmlwriter.h"
 #include "keduvoccsvreader.h"
+#include "keduvoccsvwriter.h"
 #include "keduvockvtmlreader.h"
 #include "keduvocwqlreader.h"
 #include "keduvocpaukerreader.h"
@@ -270,7 +271,7 @@ bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
 
 bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, const QString & generator)
 {
-  connect( this, SIGNAL(progressChanged(KEduVocDocument*,int)), parent, SLOT(slotProgress(KEduVocDocument*,int)) );
+  connect(this, SIGNAL(progressChanged(KEduVocDocument*, int)), parent, SLOT(slotProgress(KEduVocDocument*, int)));
 
   KUrl tmp (url);
 
@@ -288,9 +289,9 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
   }
 
   bool saved = false;
+
   while (!saved)
   {
-
     QFile f(tmp.path());
 
     if (!f.open(QIODevice::WriteOnly))
@@ -308,8 +309,8 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
       break;
 
       case csv: {
-        QTextStream os( &f );                       // serialize using f
-        //TODO saved = saveToCsv(os, title);
+        KEduVocCsvWriter csvWriter(&f);
+        saved = csvWriter.writeDoc(this, generator);
       }
       break;
 
@@ -322,8 +323,6 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
     QApplication::restoreOverrideCursor();
 
     if (!saved) {
-      // TODO new writers provide an explicite error message
-      // the two messages should be merged
       QString msg = i18n("Could not save \"%1\"\nDo you want to try again?", tmp.path());
       int result = KMessageBox::warningContinueCancel(0, msg, i18n("Error Saving File"), KGuiItem(i18n("&Retry")));
       if (result == KMessageBox::Cancel) 
