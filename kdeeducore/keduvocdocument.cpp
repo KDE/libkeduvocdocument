@@ -77,17 +77,6 @@ KEduVocDocument::KEduVocDocument(QObject *parent)
 }
 
 
-KEduVocDocument::~KEduVocDocument()
-{
-}
-
-
-void KEduVocDocument::setVersion (const QString & vers)
-{
-  m_version = vers;
-}
-
-
 void KEduVocDocument::Init ()
 {
   m_lessonDescriptions.clear();
@@ -112,8 +101,6 @@ void KEduVocDocument::Init ()
   m_version = "";
   m_generator = "";
   m_csvDelimiter = QString('\t');
-//  m_font = NULL;
-
   m_activeLeitnerSystem = false;
   m_leitnerSystem = NULL;
 }
@@ -771,6 +758,12 @@ void KEduVocDocument::setLicense(const QString & s)
 void KEduVocDocument::setDocRemark(const QString & s)
 {
   m_remark = s.simplified();
+}
+
+
+void KEduVocDocument::setVersion(const QString & vers)
+{
+  m_version = vers;
 }
 
 

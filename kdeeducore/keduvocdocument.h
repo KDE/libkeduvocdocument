@@ -266,11 +266,6 @@ public:
   KEduVocDocument(QObject* parent);
 
   /**
-   * Destructor for the document class
-   */
-  ~KEduVocDocument();
-
-  /**
    * Indicates if the document is modified
    *
    * @param dirty   new state
