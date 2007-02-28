@@ -130,7 +130,7 @@ bool KEduVocKvtmlReader::readBody(QDomElement &domElementParent)
   currentElement = domElementParent.firstChildElement(KV_CONJUG_GRP);
   if (!currentElement.isNull()) {
     QList<KEduVocConjugation> conjugations;
-    result = readConjug(currentElement, conjugations, KV_CON_ENTRY);
+    result = readConjug(currentElement, conjugations);
     if (result) {
       KEduVocConjugation conjug;
       for (int i = 0; i< conjugations.count(); i++) {
@@ -266,7 +266,6 @@ bool KEduVocKvtmlReader::readArticle(QDomElement &domElementParent)
 */
 {
 
-  int count = 0;
   QString s;
   QDomAttr attribute;
   QDomElement currentElement;
@@ -361,7 +360,7 @@ bool KEduVocKvtmlReader::readArticle(QDomElement &domElementParent)
 }
 
 
-bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug, const QString &entry_tag)
+bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug)
 /*
  <conjugation>        used in header for definiton of "prefix"
   <e l="de">          lang determines also lang order in entries !!
@@ -1177,12 +1176,11 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
   //---------
   // Children
-  bool result = false;
 
   currentChild = currentElement.firstChildElement(KV_CONJUG_GRP);
   if (!currentChild.isNull()) {
       conjug.clear();
-      if (!readConjug(currentChild, conjug, (QString) KV_CON_TYPE))
+      if (!readConjug(currentChild, conjug))
         return false;
   }
 
@@ -1300,12 +1298,10 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
       //---------
       // Children
 
-      bool result = false;
-
       currentChild = currentElement.firstChildElement(KV_CONJUG_GRP);
       if (!currentChild.isNull()) {
           conjug.clear();
-          if (!readConjug(currentChild, conjug, (QString) KV_CON_TYPE))
+          if (!readConjug(currentChild, conjug))
             return false;
       }
 

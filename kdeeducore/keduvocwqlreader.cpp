@@ -68,7 +68,7 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   s = inputStream.readLine();
   p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
-  int ps = s.toInt(0);
+  //int ps = s.toInt(0);
 
   s = inputStream.readLine();
   p = s.indexOf("=", 0);
@@ -82,7 +82,7 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   s = inputStream.readLine();
   p = s.indexOf("=", 0);
   s = s.right(s.length() - (p + 1));
-  bool it = (s == "1");
+  //bool it = (s == "1");
 
   //m_doc->setFont(new QFont(fam, ps, b, it));
 
@@ -147,8 +147,8 @@ bool KEduVocWqlReader::readDoc(KEduVocDocument *doc)
   {
     s = inputStream.readLine();
     p = s.indexOf("[", 0);
-    QString r = s.mid(p + 1, 10);
-    int h = r.toInt();
+    //QString r = s.mid(p + 1, 10);
+    //int h = r.toInt();
     s = s.left(p);
     s = s.simplified();
 
