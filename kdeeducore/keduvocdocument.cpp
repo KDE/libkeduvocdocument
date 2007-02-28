@@ -856,7 +856,7 @@ QList<int> KEduVocDocument::lessonsInQuery() const
 }
 
 
-void KEduVocDocument::setLessonsInQuery(QList<int> lesson_iq)
+void KEduVocDocument::setLessonsInQuery(const QList<int> &lesson_iq)
 {
   d->m_lessonsInQuery.clear();
   for (int i = 0; i < d->m_lessonDescriptions.count(); i++)

@@ -75,6 +75,6 @@ QString KEduVocPaukerReader::cardText(const QDomNode & entry, const QString & ta
   if(!element.isNull())
     return element.text();
   else
-    return QString::null;
+    return QString();
 }
 

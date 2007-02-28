@@ -657,7 +657,7 @@ public:
   /**
    * Sets the lessons in the current query
    */
-  void setLessonsInQuery(QList<int>);
+  void setLessonsInQuery(const QList<int> &lesson_iq);
 
   QStringList lessonDescriptions() const;
 

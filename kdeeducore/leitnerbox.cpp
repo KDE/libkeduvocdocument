@@ -20,7 +20,7 @@ LeitnerBox::~LeitnerBox()
 {
 }
 
-int LeitnerBox::vocabCount()
+int LeitnerBox::vocabCount() const
 {
 	return m_vocabCount;
 }

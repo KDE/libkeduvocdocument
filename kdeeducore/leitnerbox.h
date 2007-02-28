@@ -39,7 +39,7 @@ public:
 	/**
 	 * The constructor
 	 */
-	LeitnerBox();
+	explicit LeitnerBox();
 
 	/**
 	 * The destructor
@@ -81,7 +81,7 @@ public:
 	 * Returns the current vocabCount
 	 * @return the number of cards/ vocabs that are currently assigned to the LeitnerBox.
 	 */
-	int vocabCount();
+	int vocabCount() const;
 
 	/**
 	 * Returns a pointer to the LeitnerBox correct cards of this LeitnerBox here are assigned to

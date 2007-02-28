@@ -70,14 +70,14 @@ public:
 
   /** default constructor for an empty vocabulary expression
    */
-  KEduVocExpression();
+  explicit KEduVocExpression();
 
   /** Constructor for a vocabulary expression with an original
    *
    * @param expression       original
    * @param lesson           lesson number, 0 for none
    */
-  KEduVocExpression(const QString & expression, int lesson = 0);
+  explicit KEduVocExpression(const QString & expression, int lesson = 0);
 
   /** Constructor for a vocabulary expression with an original and one or more translations
    *
