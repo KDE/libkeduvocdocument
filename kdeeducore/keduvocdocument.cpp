@@ -103,7 +103,7 @@ void KEduVocDocument::Private::init()
   m_dirty = false;
   m_sortingEnabled = true;
   m_sortLesson = false;
-  q->setCurrentLesson(0);
+  m_currentLesson = 0;
   m_queryorg = "";
   m_querytrans = "";
   m_url.setFileName(i18n("Untitled"));
