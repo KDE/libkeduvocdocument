@@ -659,9 +659,15 @@ public:
    */
   void setLessonsInQuery(const QList<int> &lesson_iq);
 
+  /**
+   * @returns                a list of defined lessons
+   */
   QStringList lessonDescriptions() const;
 
-  int numLessons() const;
+  /**
+   * @returns                the number of lessons defined
+   */
+  int lessonCount() const;
 
   /**
    * Sets the description of the lesson

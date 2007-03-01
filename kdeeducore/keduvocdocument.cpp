@@ -987,7 +987,7 @@ QStringList KEduVocDocument::lessonDescriptions() const
 }
 
 
-int KEduVocDocument::numLessons() const
+int KEduVocDocument::lessonCount() const
 {
   return d->m_lessonDescriptions.count();
 }
