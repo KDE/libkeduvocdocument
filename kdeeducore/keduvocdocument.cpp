@@ -1148,4 +1148,36 @@ void KEduVocDocument::shuffle()
   setModified();
 }
 
+
+QString KEduVocDocument::pattern(Mode mode)
+{
+  static const struct SupportedFilter
+  {
+    bool reading;
+    bool writing;
+    const char* extensions;
+    const char* description;
+  } filters[] = {
+    { true, true, "*.kvtml", I18N_NOOP("KDE Vocabulary Document") },
+    { true, false, "*.wql", I18N_NOOP("KWordQuiz Document") },
+    { true, false, "*.xml.qz *.pau.gz", I18N_NOOP("Pauker Lesson") },
+    { true, false, "*.voc", I18N_NOOP("Vokabeltrainer") },
+    { true, true, "*.csv", I18N_NOOP("Text") },
+    // last is marker for the end, do not remove it
+    { false, false, 0, 0 }
+  };
+  QStringList newfilters;
+  QStringList allext;
+  for (int i = 0; filters[i].extensions; ++i) {
+    if ((mode == Reading && filters[i].reading) ||
+        (mode == Writing && filters[i].writing)) {
+      newfilters.append(QLatin1String(filters[i].extensions) + '|' + i18n(filters[i].description));
+      allext.append(QLatin1String(filters[i].extensions));
+    }
+  }
+  newfilters.prepend(allext.join(" ") + '|' + i18n("All supported documents"));
+  return newfilters.join("\n");
+}
+
+
 #include "keduvocdocument.moc"

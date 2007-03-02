@@ -751,6 +751,21 @@ public:
 
   FileType detectFileType(const QString &fileName);
 
+  enum Mode {
+    Reading,
+    Writing
+  };
+
+  /**
+   * Create a string with the supported document types, that can be used
+   * as filter in KFileDialog. It includes also an entry to match all the
+   * supported types.
+   *
+   * @param mode             the mode for the supported document types
+   * @returns                the filter string
+   */
+  static QString pattern(Mode mode);
+
 Q_SIGNALS:
   void progressChanged (KEduVocDocument *, int curr_percent);
   void docModified (bool mod);
