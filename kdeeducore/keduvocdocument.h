@@ -1,9 +1,9 @@
 /***************************************************************************
-                        Vocabulary Document for KDE Edu
+                   Vocabulary Document for KDE Edu
     -----------------------------------------------------------------------
-    copyright           : (C) 1999-2001 Ewald Arnold
-                          (C) 2001 The KDE-EDU team
-                          (C) 2005 Peter Hedlund <peter.hedlund@kdemail.net>
+    copyright     : (C) 1999-2001 Ewald Arnold
+                    (C) 2001 The KDE-EDU team
+                    (C) 2005, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,11 +22,9 @@
 
 #include <QString>
 
-#define KVD_ZERO_TIME  934329599   // 1999-08-10 23:59:59, never change
 #define KVD_VERS_PREFIX " v"       // kvoctrain v0.1.0
 
 /** XML tags and attribute names */
-
 
 static const QLatin1String KV_DOCTYPE("kvtml"); // doctype
 #define KV_TITLE       "title"     // doc title
