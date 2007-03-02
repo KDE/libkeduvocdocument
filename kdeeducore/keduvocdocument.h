@@ -391,12 +391,12 @@ public:
   void removeIdentifier(int index);
 
   /**
-   * Determines if given translation is available and where
+   * Determines the index of a given identifier
    *
    * @param lang             identifier of language
-   * @returns                index of translation, 0=original, -1=none
+   * @returns                index of identifier, 0 = original, 1..n = translation, -1 = not found
    */
-  int findIdentifier(const QString &lang) const;
+  int indexOfIdentifier(const QString &lang) const;
 
   /**
    * Returns the attribute string

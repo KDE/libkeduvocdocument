@@ -415,12 +415,12 @@ void KEduVocDocument::removeEntry(int index)
 }
 
 
-int KEduVocDocument::findIdentifier(const QString &lang) const
+int KEduVocDocument::indexOfIdentifier(const QString &lang) const
 {
   QStringList::const_iterator first = d->m_identifiers.begin();
   int count = 0;
   while (first != d->m_identifiers.end()) {
-    if ( *first == lang)
+    if (*first == lang)
       return count;
     first++;
     count++;
