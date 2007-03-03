@@ -49,9 +49,7 @@
 #define KV_LEV7_GRADE      7
 #define KV_LEV7_TEXT       I18N_NOOP("Level 7")
 
-#include <QList>
-#include <QStringList>
-#include <QDateTime>
+#include <QtCore/QDateTime>
 
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
@@ -63,7 +61,6 @@ typedef unsigned short count_t;
   This class contains one vocabulary expression as an original with one or more
   translations
   */
-
 class KDEEDUCORE_EXPORT KEduVocExpression
 {
 public:
@@ -437,4 +434,3 @@ private:
 };
 
 #endif // KEduVocExpression_H
-
