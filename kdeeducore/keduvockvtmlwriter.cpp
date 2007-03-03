@@ -56,8 +56,8 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
   if (!m_doc->license().isEmpty())
     domElementKvtml.setAttribute(KV_LICENSE, m_doc->license());
 
-  if (!m_doc->docRemark().isEmpty())
-    domElementKvtml.setAttribute(KV_DOC_REM, m_doc->docRemark());
+  if (!m_doc->documentRemark().isEmpty())
+    domElementKvtml.setAttribute(KV_DOC_REM, m_doc->documentRemark());
 
   if (!writeLesson(domDoc, domElementKvtml))
     return false;

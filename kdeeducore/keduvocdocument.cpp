@@ -868,13 +868,13 @@ void KEduVocDocument::setLessonsInQuery(const QList<int> &lesson_iq)
 }
 
 
-KUrl KEduVocDocument::URL() const
+KUrl KEduVocDocument::url() const
 {
   return d->m_url;
 }
 
 
-void KEduVocDocument::setURL(const KUrl& url)
+void KEduVocDocument::setUrl(const KUrl& url)
 {
   d->m_url = url;
 }
@@ -901,7 +901,7 @@ QString KEduVocDocument::license() const
 }
 
 
-QString KEduVocDocument::docRemark() const
+QString KEduVocDocument::documentRemark() const
 {
   return d->m_remark;
 }
@@ -939,7 +939,7 @@ void KEduVocDocument::setLicense(const QString & s)
 }
 
 
-void KEduVocDocument::setDocRemark(const QString & s)
+void KEduVocDocument::setDocumentRemark(const QString & s)
 {
   d->m_remark = s.simplified();
 }

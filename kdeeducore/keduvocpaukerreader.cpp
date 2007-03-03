@@ -40,7 +40,7 @@ bool KEduVocPaukerReader::readDoc(KEduVocDocument * doc)
 
   QDomElement description = domDoc.documentElement().firstChildElement("Description");
   if(!description.isNull())
-    m_doc->setDocRemark(description.text());
+    m_doc->setDocumentRemark(description.text());
 
   QDomNodeList entries = domDoc.elementsByTagName("Card");
 

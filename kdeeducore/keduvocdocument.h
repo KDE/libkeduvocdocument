@@ -547,12 +547,12 @@ public:
   /**
    * @returns the URL of the XML file
    */
-  KUrl URL() const;
+  KUrl url() const;
 
   /**
    * Sets the URL of the XML file
    */
-  void setURL(const KUrl& url);
+  void setUrl(const KUrl& url);
 
   /**
    * @returns the title of the XML file
@@ -572,7 +572,7 @@ public:
   /**
    * @return the remark of the file
    */
-  QString docRemark() const;
+  QString documentRemark() const;
 
   /**
    * Retrieves the identifiers for the current query
@@ -608,7 +608,7 @@ public:
   /**
    * Sets the remark of the file
    */
-  void setDocRemark(const QString & rem);
+  void setDocumentRemark(const QString & rem);
 
   /**
    * Sets the generator of the file

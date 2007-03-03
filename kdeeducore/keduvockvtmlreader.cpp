@@ -78,7 +78,7 @@ bool KEduVocKvtmlReader::readDoc(KEduVocDocument *doc)
 
   documentAttribute = domElementKvtml.attributeNode(KV_DOC_REM);
   if (!documentAttribute.isNull())
-    m_doc->setDocRemark(documentAttribute.value());
+    m_doc->setDocumentRemark(documentAttribute.value());
 
   documentAttribute = domElementKvtml.attributeNode(KV_GENERATOR);
   if (!documentAttribute.isNull())
