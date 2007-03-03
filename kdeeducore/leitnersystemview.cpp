@@ -9,32 +9,52 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
+
 #include "leitnersystemview.h"
 
 #include "leitnersystem.h"
-//#include "kwordquiz.h"
 
-#include <stdlib.h>
-#include <kiconloader.h>
 #include <QPainter>
-//Added by qt3to4:
 #include <QMouseEvent>
 
 #include <kdebug.h>
 
-LeitnerSystemView::LeitnerSystemView( QWidget* parent ) : QWidget( parent )
+class LeitnerSystemView::Private
 {
-	m_highlightedBox = -1;
+public:
+	Private( LeitnerSystemView* qq )
+	  : q( qq ), m_highlightedBox( -1 )
+	{
+	}
+
+	LeitnerSystemView *q;
+
+	LeitnerSystem* m_leitnerSystem;		//the system which is shown
+
+	void drawSystem(QPainter*);		//paints the boxes
+	void drawConnections(QPainter*);	//paints the arrows between the boxes
+	void calculateSize();
+
+	int m_imageY; 				//high border of the images
+	int m_distPixmap;
+	int m_highlightedBox;			//the box which is currently highlighted
+};
+
+
+LeitnerSystemView::LeitnerSystemView( QWidget* parent )
+  : QWidget( parent ), d( new Private( this ) )
+{
 }
 
 
 LeitnerSystemView::~LeitnerSystemView()
 {
+	delete d;
 }
 
-void LeitnerSystemView::drawSystem( QPainter* p )
+void LeitnerSystemView::Private::drawSystem( QPainter* p )
 {
-	m_imageY = height() / 2 - 32;
+	m_imageY = q->height() / 2 - 32;
 
 	//draw the boxes' icons
 	for(int i = 0; i < m_leitnerSystem->getNumberOfBoxes(); i++)
@@ -53,7 +73,7 @@ void LeitnerSystemView::drawSystem( QPainter* p )
 	}
 }
 
-void LeitnerSystemView::drawConnections(QPainter* p)
+void LeitnerSystemView::Private::drawConnections(QPainter* p)
 {
 	//dist = number of boxes that are in between the two boxes
 	//width = width of the rect for the arc
@@ -111,16 +131,16 @@ void LeitnerSystemView::drawConnections(QPainter* p)
 
 void LeitnerSystemView::setSystem( LeitnerSystem* leitnersystem )
 {
-	m_leitnerSystem = leitnersystem;
+	d->m_leitnerSystem = leitnersystem;
 
 	//calculate the new sizes
-	calculateSize();
+	d->calculateSize();
 	update();
 }
 
 void LeitnerSystemView::highlightBox(int box)
 {
-	m_highlightedBox = box;
+	d->m_highlightedBox = box;
 	update();
 }
 
@@ -129,12 +149,12 @@ void LeitnerSystemView::paintEvent( QPaintEvent* )
 	QPainter p( this );
 	p.eraseRect( 0, 0, width(), height() );
 
-	drawSystem( &p );
+	d->drawSystem( &p );
 
-	drawConnections( &p );
+	d->drawConnections( &p );
 }
 
-void LeitnerSystemView::calculateSize()
+void LeitnerSystemView::Private::calculateSize()
 {
 	//margin = 12
 	//distance between boxes = 10
@@ -179,22 +199,22 @@ void LeitnerSystemView::calculateSize()
 	height += 24+64;
 
 //	resizeContents( numberOfBoxes * 64 + (numberOfBoxes - 1)*10 + 2 * 12, height );
-	setMinimumSize( numberOfBoxes * 64 + (numberOfBoxes - 1)*10 + 2 * 12, height );
+	q->setMinimumSize( numberOfBoxes * 64 + (numberOfBoxes - 1)*10 + 2 * 12, height );
 }
 
 void LeitnerSystemView::mousePressEvent(QMouseEvent* e)
 {
 	kDebug() << "mouseClick" << endl;
 	//if the user has clicked into a box
-	if( e->y() > m_imageY && e->y() < m_imageY + 64 && e->x() < width() )
+	if( e->y() > d->m_imageY && e->y() < d->m_imageY + 64 && e->x() < width() )
 	{
-		int d = (e->x()-12)/74;
+		int dd = (e->x()-12)/74;
 
-		if((e->x()-12-74*d) <= 64)
+		if((e->x()-12-74*dd) <= 64)
 		{
 			//signal for prefLeitner to set the comboboxes to the clicked box
-			emit boxClicked( d );
-			m_highlightedBox = d;
+			emit boxClicked( dd );
+			d->m_highlightedBox = dd;
 
 			update();
 		}

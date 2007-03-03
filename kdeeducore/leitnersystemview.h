@@ -14,12 +14,9 @@
 
 #include <libkdeedu_core_export.h>
 
-#include <QWidget>
-#include <QPixmap>
-#include <QMouseEvent>
+#include <QtGui/QWidget>
 
 class LeitnerSystem;
-
 
 /**
  * This class displays a given LeitnerSystem on a QWidget
@@ -27,7 +24,6 @@ class LeitnerSystem;
  * and add boxes within a GUI.
  * @author Martin Pfeiffer
  */
-
 class KDEEDUCORE_EXPORT LeitnerSystemView : public QWidget
 {
 	Q_OBJECT
@@ -37,7 +33,7 @@ public:
 	 * The public constructor
 	 * @param parent the QWidget that is the parent widget
 	 */
-    	LeitnerSystemView( QWidget* parent = 0 );
+	explicit LeitnerSystemView( QWidget* parent = 0 );
 
     	~LeitnerSystemView();
 
@@ -53,7 +49,7 @@ public:
 	 */
 	void highlightBox( int box );
 	
-signals:
+Q_SIGNALS:
 	void boxClicked(int box);		//is emited if the user clicks on a box 
 
 protected:
@@ -62,15 +58,10 @@ protected:
     	virtual void mousePressEvent(QMouseEvent* e);
 
 private:
-	LeitnerSystem* m_leitnerSystem;		//the system which is shown
+	class Private;
+	Private* const d;
 
-	void drawSystem(QPainter*);		//paints the boxes
-	void drawConnections(QPainter*);	//paints the arrows between the boxes
-	void calculateSize();
-
-	int m_imageY; 				//high border of the images
-	int m_distPixmap;
-	int m_highlightedBox;			//the box which is currently highlighted
+	Q_DISABLE_COPY( LeitnerSystemView )
 };
 
 #endif
