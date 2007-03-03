@@ -23,15 +23,9 @@
 
 #include <libkdeedu_core_export.h>
 
-#include <QDialog>
+#include <QtGui/QDialog>
 
-class LeitnerSystemView;
 class LeitnerSystem;
-class LeitnerBox;
-namespace Ui
-{
-	class PrefLeitnerBase;
-}
 
 /**
  * This class is a dialog for configuring a LeitnerSystem
@@ -46,14 +40,14 @@ public:
 	 * The public contructor
 	 * @param parent the widget's parent
 	 */
-	PrefLeitner( QWidget* parent = 0 );
+	explicit PrefLeitner( QWidget* parent = 0 );
 
 	/**
 	 * The public contructur which sets also the LeitnerSystem
 	 * @param parent is the parent widget
 	 * @param system a pointer to the LeitnerSystem to configure
 	 */
-	PrefLeitner( QWidget* parent = 0 , LeitnerSystem* system = 0 );
+	explicit PrefLeitner( LeitnerSystem* system, QWidget* parent = 0 );
 
 	/**
 	 * The public destructor
@@ -72,7 +66,7 @@ public:
 	 */
 	LeitnerSystem* system();
 
-public slots:
+public Q_SLOTS:
 	void slotCorrectWord( const QString& newBox );
 	void slotWrongWord( const QString& newBox );
 	void slotBoxName( const QString& newName );
@@ -81,22 +75,12 @@ public slots:
 	void slotDiscard();
 	void slotApply();
 
-private slots:
-	/**
-	 * catches the signal from the view if user clicks on a box
-	 */
-	void slotBoxClicked( int );
 private:
-	LeitnerSystemView* m_leitnerSystemView;	//the LeitnerSystemView which shows the selected system
-	LeitnerSystem* m_selectedSystem;	//the currently selected system to be changed
-	LeitnerBox* m_selectedBox;		//the currently selected box
+	class Private;
+	Private* const d;
 
-	Ui::PrefLeitnerBase* m_base;
-
-	void init( LeitnerSystem* system );
-
-	void refreshSystemView();		//refresh the LeitnerSystemView
-	void newSystem();
+	Q_DISABLE_COPY( PrefLeitner )
+	Q_PRIVATE_SLOT( d, void slotBoxClicked( int ) )
 };
 
 #endif //PREFLEITNER_H
