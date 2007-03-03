@@ -23,14 +23,12 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef grammarmanager_included
-#define grammarmanager_included
+#ifndef KEDUVOCGRAMMAR_H
+#define KEDUVOCGRAMMAR_H
 
 #include <libkdeedu_core_export.h>
 
-#include <QString>
-#include <QList>
-#include <QStringList>
+#include <QtCore/QStringList>
 
 #define CONJ_SIMPLE_PRESENT    "PrSi" // I live at home  what you frequently do
 #define CONJ_PRESENT_PROGR     "PrPr" // I am working    what you currently are doing
@@ -52,7 +50,6 @@
  *
  * It contains all available articles of the language as QString
  */
-
 class KDEEDUCORE_EXPORT KEduVocArticle
 {
 public:
@@ -60,7 +57,7 @@ public:
   /**
    * The constructor without arguments
    */
-  KEduVocArticle() {}
+  explicit KEduVocArticle();
 
   /**
    * The constructor with arguments
@@ -115,7 +112,7 @@ public:
   /**
    * The constructor without arguments
    */
-  KEduVocComparison() {}
+  explicit KEduVocComparison();
 
   /**
    * The constructor with arguments
@@ -145,7 +142,7 @@ private:
 };
 
 
-class KEduVocTenseRelation
+class KDEEDUCORE_EXPORT KEduVocTenseRelation
 {
 public:
   KEduVocTenseRelation() {}
@@ -240,4 +237,4 @@ private:
   Private* const d;
 };
 
-#endif // grammarmanager_included
+#endif // KEDUVOCGRAMMAR_H

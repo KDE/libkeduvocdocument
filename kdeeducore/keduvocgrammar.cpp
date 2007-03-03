@@ -93,6 +93,12 @@ QStringList KEduVocConjugation::Private::userTenses;
 
 //================================================================
 
+
+KEduVocComparison::KEduVocComparison()
+{
+}
+
+
 KEduVocComparison::KEduVocComparison(const QString &l1, const QString &l2, const QString &l3)
 {
   setL1(l1);
@@ -124,6 +130,11 @@ bool KEduVocComparison::operator ==(const KEduVocComparison& a) const
 
 
 //=================================================================
+
+
+KEduVocArticle::KEduVocArticle()
+{
+}
 
 
 KEduVocArticle::KEduVocArticle(const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &nat_def, const QString &nat_indef)
