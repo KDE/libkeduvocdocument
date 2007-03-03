@@ -89,12 +89,16 @@ public:
 	 */
 	LeitnerBox* correctWordBox();
 
+	const LeitnerBox* correctWordBox() const;
+
 	/**
 	 * Returns a pointer to the LeitnerBox wrong cards of this LeitnerBox here are assigned to
 	 * @return a pointer to a LeitnerBox
 	 */
 	LeitnerBox* wrongWordBox();
 	
+	const LeitnerBox* wrongWordBox() const;
+
 	bool operator == ( const LeitnerBox& a ) const;
 
 private:

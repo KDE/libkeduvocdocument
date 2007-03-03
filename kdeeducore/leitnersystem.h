@@ -28,7 +28,7 @@ class KDEEDUCORE_EXPORT LeitnerSystem
 {
 public:
 	/**Constructor without arguments*/
-	LeitnerSystem();
+	explicit LeitnerSystem();
 
 	/**Constructor with arguments
 	 * @param boxes reference to a QList of LeitnerBox
@@ -52,7 +52,7 @@ public:
 	/**Returns the LeitnerSystem's name
 	 * @return the LeitnerSystem's name as reference to QString
 	 */
-	QString& systemName();
+	QString systemName() const;
 
 	/**Sets the LeitnerSystem's name
    *
@@ -66,6 +66,8 @@ public:
 	 */
 	LeitnerBox* boxWithNumber( int number );
 
+	const LeitnerBox* boxWithNumber( int number ) const;
+
 	/**Returns a LeitnerBox by name
 	 * @param name the name of the LeitnerBox to be returned
 	 * @return a pointer to the LeitnerBox with the name,
@@ -73,31 +75,37 @@ public:
 	 */
 	LeitnerBox* boxWithName( const QString& name );
 
+	const LeitnerBox* boxWithName( const QString& name ) const;
+
 	/**Returns the number of the given LeitnerBox
 	 * @param box a pointer to the LeitnerBox
 	 * @return the number of the given LeitnerBox
 	 */
-	int number( LeitnerBox* box ) const;
+	int number( const LeitnerBox* box ) const;
 
 	/**Returns the name of the LeitnerBox with number @p i
 	 * @param i the LeitnerBox's number
 	 * @return the name of the LeitnerBox with number @p i
 	 */
-	const QString& box( int i ) const;
+	QString box( int i ) const;
 
 	/**Returns the LeitnerBox following @p previousBox
 	 * @param previousBox the name of the LeitnerBox
 	 * @return the name of the LeitnerBox following previousBox
 	 */
-	QString nextBox( QString& previousBox );
+	QString nextBox( const QString& previousBox );
 
-	const QString& correctBox( int box );	//returns the correct word box of "int box"
-	const QString& wrongBox( int box );		//returns the wrong word box of "int box"
-	const QString& correctBox( QString& box );
-	const QString& wrongBox( QString& box );
+	/**Returns the correct word box of "int box"
+	 */
+	QString correctBox( int box ) const;
+	/**Returns the wrong word box of "int box"
+	 */
+	QString wrongBox( int box ) const;
+	QString correctBox( const QString& box ) const;
+	QString wrongBox( const QString& box ) const;
 
-	int wrongBoxNumber( int box );
-	int correctBoxNumber( int box );
+	int wrongBoxNumber( int box ) const;
+	int correctBoxNumber( int box ) const;
 
 	void setCorrectBox( const QString& box, const QString& correctWordBox );
 	void setWrongBox( const QString& box, const QString& wrongWordBox );
@@ -108,8 +116,8 @@ public:
 	void setBoxVocabCount( QString& box, int vocabCount );
 	int boxVocabCount( QString& box );
 
-	void incrementBoxVocabCount( QString& box );
- 	void decrementBoxVocabCount( QString& box );
+	void incrementBoxVocabCount( const QString& box );
+ 	void decrementBoxVocabCount( const QString& box );
 
 	//inserts a box with number, name, correct and wrong word box
 	bool insertBox( const QString& name, int correctWordBox, int wrongWordBox );

@@ -50,6 +50,11 @@ LeitnerBox* LeitnerSystem::boxWithNumber( int number )
 	return &m_boxes[ number ];
 }
 
+const LeitnerBox* LeitnerSystem::boxWithNumber( int number ) const
+{
+	return &m_boxes.at( number );
+}
+
 LeitnerBox* LeitnerSystem::boxWithName( const QString& name )
 {
 	QList<LeitnerBox>::iterator it, it2;
@@ -64,12 +69,26 @@ LeitnerBox* LeitnerSystem::boxWithName( const QString& name )
 	return 0;
 }
 
-QString& LeitnerSystem::systemName()
+const LeitnerBox* LeitnerSystem::boxWithName( const QString& name ) const
+{
+	QList<LeitnerBox>::const_iterator it, it2;
+	it = m_boxes.begin();
+	it2 = m_boxes.end();
+	for ( ; it != it2; ++it)
+	{
+		if ( (*it).boxName() == name )
+			return &(*it);
+	}
+
+	return 0;
+}
+
+QString LeitnerSystem::systemName() const
 {
 	return m_systemName;
 }
 
-QString LeitnerSystem::nextBox( QString& previousBox )
+QString LeitnerSystem::nextBox( const QString& previousBox )
 {
 	for( int i = 0; i < m_boxes.count(); i++ )
 	{
@@ -80,32 +99,32 @@ QString LeitnerSystem::nextBox( QString& previousBox )
 	return QString();
 }
 
-const QString& LeitnerSystem::correctBox( int box )
+QString LeitnerSystem::correctBox( int box ) const
 {
 	return m_boxes[ box ].correctWordBox()->boxName();
 }
 
-const QString& LeitnerSystem::wrongBox( int box )
+QString LeitnerSystem::wrongBox( int box ) const
 {
 	return m_boxes[ box ].wrongWordBox()->boxName();
 }
 
-const QString& LeitnerSystem::correctBox( QString& box )
+QString LeitnerSystem::correctBox( const QString& box ) const
 {
 	return boxWithName( box )->correctWordBox()->boxName();
 }
 
-const QString& LeitnerSystem::wrongBox( QString& box )
+QString LeitnerSystem::wrongBox( const QString& box ) const
 {
 	return boxWithName( box )->wrongWordBox()->boxName();
 }
 
-int LeitnerSystem::wrongBoxNumber( int box )
+int LeitnerSystem::wrongBoxNumber( int box ) const
 {
 	return number( m_boxes[ box ].wrongWordBox() );
 }
 
-int LeitnerSystem::correctBoxNumber( int box )
+int LeitnerSystem::correctBoxNumber( int box ) const
 {
 	return number( m_boxes[ box ].correctWordBox() );
 }
@@ -148,7 +167,7 @@ void LeitnerSystem::setSystemName( const QString& name )
 	m_systemName = name;
 }
 
-int LeitnerSystem::number( LeitnerBox* box ) const
+int LeitnerSystem::number( const LeitnerBox* box ) const
 {
 	if( box == 0 )
 		return -1;
@@ -202,9 +221,9 @@ void LeitnerSystem::setWrongBox( const QString& box, const QString& wrongWordBox
 	boxWithName( box )->setWrongWordBox( boxWithName( wrongWordBox ) );
 }
 
-const QString& LeitnerSystem::box( int i ) const
+QString LeitnerSystem::box( int i ) const
 {
-	return m_boxes[ i ].boxName();
+	return m_boxes.at( i ).boxName();
 }
 
 void LeitnerSystem::setBoxVocabCount( QString& box, int vocabCount )
@@ -217,13 +236,13 @@ int LeitnerSystem::boxVocabCount( QString& box )
 	return boxWithName( box )->vocabCount();
 }
 
-void LeitnerSystem::incrementBoxVocabCount( QString& box )
+void LeitnerSystem::incrementBoxVocabCount( const QString& box )
 {
 	int tmp = boxWithName( box )->vocabCount();
 	boxWithName( box )->setVocabCount( tmp++ );
 }
 
-void LeitnerSystem::decrementBoxVocabCount( QString& box )
+void LeitnerSystem::decrementBoxVocabCount( const QString& box )
 {
 	int tmp = boxWithName( box )->vocabCount();
 	boxWithName( box )->setVocabCount( tmp-- );

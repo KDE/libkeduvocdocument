@@ -40,7 +40,17 @@ LeitnerBox* LeitnerBox::correctWordBox()
 	return m_correctWordBox;
 }
 
+const LeitnerBox* LeitnerBox::correctWordBox() const
+{
+	return m_correctWordBox;
+}
+
 LeitnerBox* LeitnerBox::wrongWordBox()
+{
+	return m_wrongWordBox;
+}
+
+const LeitnerBox* LeitnerBox::wrongWordBox() const
 {
 	return m_wrongWordBox;
 }
