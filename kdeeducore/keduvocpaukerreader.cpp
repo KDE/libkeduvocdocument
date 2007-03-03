@@ -14,6 +14,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <QIODevice>
+
 #include <klocale.h>
 
 #include "keduvocpaukerreader.h"

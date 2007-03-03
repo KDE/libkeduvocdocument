@@ -18,13 +18,10 @@
 #ifndef KEDUVOCWQLREADER_H
 #define KEDUVOCWQLREADER_H
 
-#include <libkdeedu_core_export.h>
-
-#include <QIODevice>
-
+class QIODevice;
 class KEduVocDocument;
 
-class KDEEDUCORE_EXPORT KEduVocWqlReader : public QObject
+class KEduVocWqlReader : public QObject
 {
 public:
   KEduVocWqlReader(QIODevice *file);

@@ -21,8 +21,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <QIODevice>
+
 #include <klocale.h>
-#include <kmessagebox.h>
 #include <kdebug.h>
 
 #include "keduvocdocument.h"

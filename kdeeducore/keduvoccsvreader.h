@@ -17,13 +17,10 @@
 #ifndef KEDUVOCCSVREADER_H
 #define KEDUVOCCSVREADER_H
 
-#include <libkdeedu_core_export.h>
-
-#include <QIODevice>
-
+class QIODevice;
 class KEduVocDocument;
 
-class KDEEDUCORE_EXPORT KEduVocCsvReader : public QObject
+class KEduVocCsvReader : public QObject
 {
 public:
   KEduVocCsvReader(QIODevice *file);

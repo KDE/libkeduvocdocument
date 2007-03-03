@@ -17,8 +17,8 @@
  ***************************************************************************/
 
 #include <kdebug.h>
-#include <QtXml/QDomDocument>
 #include <QTextStream>
+#include <QFile>
 
 #include "keduvockvtmlwriter.h"
 #include "keduvocdocument.h"

@@ -36,17 +36,10 @@ install(TARGETS kdeeducore  DESTINATION ${LIB_INSTALL_DIR} )
 
 install(FILES
    libkdeedu_core_export.h
-   keduvoccsvreader.h
-   keduvoccsvwriter.h
    keduvocdocument.h
    keduvocexpression.h
    keduvocgrammar.h
-   keduvockvtmlreader.h
-   keduvockvtmlwriter.h
    keduvocmultiplechoice.h
-   keduvocpaukerreader.h
-   keduvocvokabelnreader.h
-   keduvocwqlreader.h
    leitnerbox.h
    leitnersystem.h
    leitnersystemview.h

@@ -18,13 +18,10 @@
 #ifndef KEDUVOCCSVWRITER_H
 #define KEDUVOCCSVWRITER_H
 
-#include <libkdeedu_core_export.h>
-
-#include <QFile>
-
+class QFile;
 class KEduVocDocument;
 
-class KDEEDUCORE_EXPORT KEduVocCsvWriter
+class KEduVocCsvWriter
 {
 public:
   KEduVocCsvWriter(QFile *file);

@@ -19,18 +19,15 @@
 #ifndef KEDUVOCKVTMLREADER_H
 #define KEDUVOCKVTMLREADER_H
 
-#include <libkdeedu_core_export.h>
-
-#include <QIODevice>
 #include <QtXml/QDomDocument>
 #include <QList>
 #include <QString>
 
-#include "keduvocdocument.h"
 #include "keduvocexpression.h"
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
 
+class QIODevice;
 class KEduVocDocument;
 
 // internal types, indented are subtypes
@@ -73,7 +70,7 @@ class KEduVocDocument;
 /**
 @author Eric Pignet
 */
-class KDEEDUCORE_EXPORT  KEduVocKvtmlReader : public QObject
+class KEduVocKvtmlReader : public QObject
 {
   Q_OBJECT
 public:

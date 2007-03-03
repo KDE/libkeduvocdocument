@@ -17,14 +17,12 @@
 #ifndef KEDUVOCPAUKERREADER_H
 #define KEDUVOCPAUKERREADER_H
 
-#include <libkdeedu_core_export.h>
-
 #include <QtXml>
-#include <QIODevice>
 
+class QIODevice;
 class KEduVocDocument;
 
-class KDEEDUCORE_EXPORT KEduVocPaukerReader : public QObject
+class KEduVocPaukerReader : public QObject
 {
 public:
   KEduVocPaukerReader(QIODevice *file);

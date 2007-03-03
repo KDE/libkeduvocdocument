@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include <QTextStream>
+#include <QIODevice>
 
 #include <klocale.h>
 
