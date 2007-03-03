@@ -112,3 +112,14 @@ void KEduVocMultipleChoice::normalize()
   }
 
 }
+
+
+bool KEduVocMultipleChoice::operator==(const KEduVocMultipleChoice &choice) const
+{
+  return muc1 == choice.muc1 &&
+    muc2 == choice.muc2 &&
+    muc3 == choice.muc3 &&
+    muc4 == choice.muc4 &&
+    muc5 == choice.muc5;
+}
+

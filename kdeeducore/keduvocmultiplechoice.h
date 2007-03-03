@@ -61,6 +61,8 @@ public:
    void clear();
    unsigned size();
 
+   bool operator==(const KEduVocMultipleChoice &choice) const;
+
 protected:
 
    QString  muc1, muc2, muc3, muc4, muc5;
