@@ -63,7 +63,7 @@ public:
    *
    * @param parent calling object
    */
-  KEduVocDocument(QObject* parent = 0);
+  explicit KEduVocDocument(QObject* parent = 0);
 
   /**
    * Destructor
