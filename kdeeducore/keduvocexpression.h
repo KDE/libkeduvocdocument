@@ -87,6 +87,10 @@ public:
    */
   KEduVocExpression(const QString & expression, const QString & separator, int lesson = 0);
 
+  KEduVocExpression(const KEduVocExpression &expression);
+
+  ~KEduVocExpression();
+
   /** adds a new translation of this entry
    * @param expression       translation
    * @param grade            grade of knowledge of this translation
@@ -122,19 +126,19 @@ public:
 
   /** returns flag if entry is "selected" for queries
    */
-  bool isInQuery() const { return m_inQuery; }
+  bool isInQuery() const;
 
   /** set entry "selected"
    */
-  void setInQuery(bool flag = true) { m_inQuery = flag; }
+  void setInQuery(bool flag = true);
 
   /** returns flag if entry is activated for queries
    */
-  bool isActive() const  {return m_active; }
+  bool isActive() const;
 
   /** set entry active (enabled for queries)
    */
-  void setActive(bool flag = true) { m_active = flag; }
+  void setActive(bool flag = true);
 
   /** returns translation of this expression
    *
@@ -421,43 +425,15 @@ public:
    *
    * @return                 the box's name
    */
-  QString& leitnerBox();
+  QString leitnerBox();
 
-protected:
-  void Init();
+  KEduVocExpression& operator=(const KEduVocExpression &expression);
+
+  bool operator==(const KEduVocExpression &expression) const;
 
 private:
-  QString m_original;
-
-  // all these vectors must be deleted in removeTranslation()
-  QStringList m_expressionTypes;
-  QStringList m_translations;
-  QStringList m_remarks;
-  QStringList m_usageLabels;
-  QStringList m_paraphrases;
-  QStringList m_fauxAmi;
-  QStringList m_reverseFauxAmi;
-  QStringList m_synonym;
-  QStringList m_example;
-  QStringList m_antonym;
-  QStringList m_pronunciations;
-  QList<grade_t> m_grades;
-  QList<grade_t> m_reverseGrades;
-  QList<count_t> m_queryCounts;
-  QList<count_t> m_reverseQueryCounts;
-  QList<count_t> m_badCounts;
-  QList<count_t> m_reverseBadCounts;
-  QList<QDateTime> m_queryDates;
-  QList<QDateTime> m_reverseQueryDates;
-  QList<KEduVocConjugation> m_conjugations;
-  QList<KEduVocComparison> m_comparisons;
-  QList<KEduVocMultipleChoice> m_multipleChoices;
-
-  QString m_leitnerBox;
-  int m_sortIndex;
-  int m_lesson;
-  bool m_inQuery;
-  bool m_active;
+  class Private;
+  Private* const d;
 };
 
 #endif // KEduVocExpression_H
