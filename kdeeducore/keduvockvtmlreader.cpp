@@ -26,6 +26,7 @@
 
 #include "keduvockvtmlreader.h"
 #include "keduvocdocument.h"
+#include "kvtmldefs.h"
 
 KEduVocKvtmlReader::KEduVocKvtmlReader(QIODevice *file)
 {
