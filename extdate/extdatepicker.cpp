@@ -29,6 +29,7 @@
 #include <QMenu>
 
 #include <kdialog.h>
+#include <kglobal.h>
 #include <klocale.h>
 #include <kicon.h>
 #include <kdebug.h>
@@ -240,7 +241,7 @@ ExtDatePicker::dateChangedSlot(const ExtDate &date)
 //    const ExtCalendarSystem * calendar = KGlobal::locale()->calendar();
 
 //    line->setText(KGlobal::locale()->formatDate(date, true));
-		line->setText( date.toString( KGlobal::locale()->dateFormatShort() ) );
+    line->setText( date.toString( KGlobal::locale()->dateFormatShort() ) );
     selectMonth->setText(d->calendar->monthName(date, false));
     d->fillWeeksCombo(date);
 
