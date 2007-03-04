@@ -29,7 +29,6 @@
 #include <QMenu>
 
 #include <kdialog.h>
-#include <kglobal.h>
 #include <klocale.h>
 #include <kicon.h>
 #include <kdebug.h>
