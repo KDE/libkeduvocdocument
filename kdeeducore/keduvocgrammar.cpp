@@ -166,24 +166,30 @@ void KEduVocArticle::setNatural(const QString &def, const QString &indef)
 }
 
 
-void KEduVocArticle::female(QString &def, QString &indef) const
+void KEduVocArticle::getFemale(QString *def, QString *indef) const
 {
-  def = fem_def;
-  indef = fem_indef;
+  if (def)
+    *def = fem_def;
+  if (indef)
+    *indef = fem_indef;
 }
 
 
-void KEduVocArticle::male(QString &def, QString &indef) const
+void KEduVocArticle::getMale(QString *def, QString *indef) const
 {
-  def = mal_def;
-  indef = mal_indef;
+  if (def)
+    *def = mal_def;
+  if (indef)
+    *indef = mal_indef;
 }
 
 
-void KEduVocArticle::natural(QString &def, QString &indef) const
+void KEduVocArticle::getNatural(QString *def, QString *indef) const
 {
-  def = nat_def;
-  indef = nat_indef;
+  if (def)
+    *def = nat_def;
+  if (indef)
+    *indef = nat_indef;
 }
 
 

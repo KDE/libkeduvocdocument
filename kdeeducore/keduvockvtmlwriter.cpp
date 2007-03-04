@@ -378,7 +378,7 @@ bool KEduVocKvtmlWriter::writeArticle(QDomDocument &domDoc, QDomElement &domElem
     }
     domElementEntry.setAttribute(KV_LANG, s);
 
-    m_doc->article(lfn).female(def, indef);
+    m_doc->article(lfn).getFemale(&def, &indef);
     if (!def.isEmpty())
     {
       QDomElement domElementFD = domDoc.createElement(KV_ART_FD);
@@ -396,7 +396,7 @@ bool KEduVocKvtmlWriter::writeArticle(QDomDocument &domDoc, QDomElement &domElem
       domElementEntry.appendChild(domElementFI);
     }
 
-    m_doc->article(lfn).male(def, indef);
+    m_doc->article(lfn).getMale(&def, &indef);
     if (!def.isEmpty())
     {
       QDomElement domElementMD = domDoc.createElement(KV_ART_MD);
@@ -414,7 +414,7 @@ bool KEduVocKvtmlWriter::writeArticle(QDomDocument &domDoc, QDomElement &domElem
       domElementEntry.appendChild(domElementMI);
     }
 
-    m_doc->article(lfn).natural(def, indef);
+    m_doc->article(lfn).getNatural(&def, &indef);
     if (!def.isEmpty())
     {
       QDomElement domElementND = domDoc.createElement(KV_ART_ND);

@@ -91,9 +91,9 @@ public:
    */
   void setNatural(const QString &def, const QString &indef);
 
-  void female  (QString &def, QString &indef) const;
-  void male    (QString &def, QString &indef) const;
-  void natural (QString &def, QString &indef) const;
+  void getFemale (QString *def, QString *indef) const;
+  void getMale   (QString *def, QString *indef) const;
+  void getNatural(QString *def, QString *indef) const;
 
 private:
   QString fem_def;
