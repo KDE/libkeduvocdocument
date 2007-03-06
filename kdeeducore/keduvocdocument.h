@@ -78,7 +78,7 @@ public:
   void setModified(bool dirty = true);
 
   /**
-   * Sppends a new expression to the end of the vocabulary
+   * Appends a new expression to the end of the vocabulary
    *
    * @param expression      expression to append
    */
@@ -448,6 +448,12 @@ public:
    * @returns the description of the lesson
    */
   QString lessonDescription(int index) const;
+
+  /**
+   * @returns the index of the lesson (from its name)
+   * -1 if the lesson does not exist
+   */
+  int lessonIndex(const QString description) const;
 
   /**
    * @returns a list with the lessons in the current query

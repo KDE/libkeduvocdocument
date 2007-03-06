@@ -843,6 +843,11 @@ QString KEduVocDocument::lessonDescription(int idx) const
   return d->m_lessonDescriptions[idx-1];
 }
 
+int KEduVocDocument::lessonIndex(const QString description) const
+{
+  return d->m_lessonDescriptions.indexOf(description) +1;
+}
+
 
 QList<int> KEduVocDocument::lessonsInQuery() const
 {
