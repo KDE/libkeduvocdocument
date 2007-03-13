@@ -296,6 +296,15 @@ public:
   bool saveAs(QObject *parent, const KUrl & url, FileType ft, const QString & generator);
 
   /**
+   * Merges data from another document
+   *
+   * @param docToMerge       document containing the data to be merged
+   * @param matchIdentifiers if true only entries having identifiers present in the
+   *                         current document will be mergedurl is empty (or NULL) actual name is preserved
+   */
+  void merge(KEduVocDocument *docToMerge, bool matchIdentifiers);
+
+  /**
    * @returns the number of entries
    */
   int entryCount() const;
