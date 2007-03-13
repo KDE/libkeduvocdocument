@@ -169,7 +169,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
     else
       entype = s;
 
-    if (entype == QM_VERB && entry->conjugation(0).numEntries() > 0)
+    if (entype == QM_VERB && entry->conjugation(0).entryCount() > 0)
     {
       KEduVocConjugation conj = entry->conjugation(0);
       if (!writeConjugEntry(domDoc, domElementOriginal, conj))
@@ -262,7 +262,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
       else
         entype = s;
 
-      if (entype == QM_VERB && entry->conjugation(trans).numEntries() > 0)
+      if (entype == QM_VERB && entry->conjugation(trans).entryCount() > 0)
       {
         KEduVocConjugation conj = entry->conjugation(trans);
         if (!writeConjugEntry(domDoc, domElementTranslation, conj))
@@ -721,13 +721,13 @@ bool KEduVocKvtmlWriter::writeConjugEntry(QDomDocument &domDoc, QDomElement &dom
 */
 {
   curr_conjug.cleanUp();
-  if (curr_conjug.numEntries() == 0 )
+  if (curr_conjug.entryCount() == 0 )
     return true;
 
   QDomElement domElementConjug = domDoc.createElement(KV_CONJUG_GRP);
   QString type;
 
-  for (int lfn = 0; lfn < curr_conjug.numEntries(); lfn++)
+  for (int lfn = 0; lfn < curr_conjug.entryCount(); lfn++)
   {
     QDomElement domElementType = domDoc.createElement(KV_CON_TYPE);
 

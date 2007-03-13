@@ -233,7 +233,7 @@ QString KEduVocConjugation::getVerbName() const
   return d->verbName;
 }
 
-int KEduVocConjugation::numEntries() const
+int KEduVocConjugation::entryCount() const
 {
   return d->conjugations.count();
 }
@@ -291,7 +291,7 @@ QString KEduVocConjugation::getName(int idx)
 {
   if (idx < numInternalNames())
     return i18n(Private::names[idx].name);
-  else if (idx < numTenses() )
+  else if (idx < tenseCount())
     return Private::userTenses[idx-numInternalNames()];
   else
     return "";
@@ -321,7 +321,7 @@ QString KEduVocConjugation::getAbbrev(int idx)
   if (idx < numInternalNames() )
     return Private::names[idx].abbrev;
 
-  else if (idx < numTenses() ) {
+  else if (idx < tenseCount()) {
     QString s;
     s.setNum(idx - numInternalNames() + 1);
     s.prepend(UL_USER_TENSE);
@@ -339,7 +339,7 @@ int KEduVocConjugation::numInternalNames()
 }
 
 
-int KEduVocConjugation::numTenses()
+int KEduVocConjugation::tenseCount()
 {
   return numInternalNames() + Private::userTenses.size();
 }

@@ -175,7 +175,7 @@ public:
   /**
    * @return
    */
-  int numEntries() const;
+  int entryCount() const;
 
   /**
    * @return 
@@ -192,7 +192,7 @@ public:
   static QString getAbbrev(const QString &name);
   static QString getAbbrev(int index);
   static int numInternalNames();
-  static int numTenses();
+  static int tenseCount();
 
   QString getVerbName() const;
 
