@@ -231,7 +231,7 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileNam
 }
 
 
-bool KEduVocDocument::open(const KUrl& url, bool /*append*/)
+bool KEduVocDocument::open(const KUrl& url)
 {
   d->init();
   if (!url.isEmpty())

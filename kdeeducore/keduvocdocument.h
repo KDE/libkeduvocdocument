@@ -280,13 +280,9 @@ public:
    * Open a document file
    *
    * @param url      url to file to open
-   * @param append   if @c true, the words from @p url are appended to the
-   *                 existing collection; if @c false, the collection is
-   *                 emptied first so that only the words from @p url
-   *                 are in the result.
    * @returns        true if successful
    */
-  bool open(const KUrl& url, bool append);
+  bool open(const KUrl& url);
 
   /**
    * Saves the data under the given name
