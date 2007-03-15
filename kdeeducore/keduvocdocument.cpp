@@ -1210,6 +1210,31 @@ int KEduVocDocument::lessonCount() const
   return d->m_lessonDescriptions.count();
 }
 
+bool KEduVocDocument::deleteLesson(int lessonIndex, int deleteMode)
+{  // too bad we count from one!
+  lessonIndex++;
+  for (int ent = 0; ent < entryCount(); ent++) {
+    if (entry(ent)->lesson() == lessonIndex) {
+      if (deleteMode == DeleteEmptyLesson)
+        return false; // stop if there are vocabs left in the lesson
+      if (deleteMode == DeleteEntriesAndLesson)
+        // delete entries of this lesson with this lesson
+        removeEntry(ent);
+    }
+  }//for entries
+
+  // for all above this lesson number - reduce lesson by one.
+  for (int ent = 0; ent < entryCount(); ent++) {
+    if (entry(ent)->lesson() > lessonIndex) {
+      entry(ent)->setLesson(entry(ent)->lesson()-1);
+    }
+  } // reduce lesson
+
+  // finally just remove the lesson name
+  d->m_lessonDescriptions.removeAt(lessonIndex-1); // because of the damned 0 arghh
+  return true;
+}
+
 
 void KEduVocDocument::setLessonDescriptions(const QStringList &names)
 {

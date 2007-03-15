@@ -479,6 +479,13 @@ public:
    * @returns                the number of lessons defined
    */
   int lessonCount() const;
+  /**
+   * Delete a lesson.
+   * @param lessonIndex which lesson
+   * @param deleteMode either KVocDocument::DeleteEmptyLesson (delete only if empty) or KVocDocument::DeleteEntriesAndLesson (delete including vocabulary in that lesson)
+   * @returns if the deletion was successfull. If there are vocabularies in the lesson, but DeleteEmptyLesson, this will return false and not delete the lesson.
+   */
+  bool deleteLesson(int lessonIndex, int deleteMode);
 
   /**
    * Sets the description of the lesson
@@ -567,6 +574,11 @@ public:
     Writing
   };
 
+  enum LessonDeletion {
+    DeleteEmptyLesson,
+    DeleteEntriesAndLesson
+  };
+
   /**
    * Create a string with the supported document types, that can be used
    * as filter in KFileDialog. It includes also an entry to match all the
@@ -582,6 +594,7 @@ Q_SIGNALS:
   void docModified (bool mod);
 
 private:
+  // The private data of this - see KEduVocDocument::Private, implemented in keduvocdocument.cpp
   class Private;
   Private* const d;
 
