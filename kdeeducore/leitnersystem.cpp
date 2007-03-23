@@ -90,6 +90,7 @@ QString LeitnerSystem::systemName() const
 
 QString LeitnerSystem::nextBox( const QString& previousBox )
 {
+	Q_UNUSED( previousBox )
 	for( int i = 0; i < m_boxes.count(); i++ )
 	{
 		if( m_boxes[i].vocabCount() > 0 )
