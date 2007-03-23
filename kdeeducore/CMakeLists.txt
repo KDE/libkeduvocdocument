@@ -13,6 +13,7 @@ set(kdeeducore_LIB_SRCS
    keduvocpaukerreader.cpp
    keduvocvokabelnreader.cpp
    keduvocwqlreader.cpp
+   keduvocxdxfreader.cpp
    leitnerbox.cpp
    leitnersystem.cpp
    leitnersystemview.cpp

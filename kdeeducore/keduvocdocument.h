@@ -56,6 +56,7 @@ public:
                   wql,
                   pauker,
                   vokabeln,
+                  xdxf,
                   csv };
 
   /**

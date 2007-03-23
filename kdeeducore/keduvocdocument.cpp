@@ -38,6 +38,7 @@
 #include "keduvocwqlreader.h"
 #include "keduvocpaukerreader.h"
 #include "keduvocvokabelnreader.h"
+#include "keduvocxdxfreader.h"
 #include "leitnersystem.h"
 
 class KEduVocDocument::Private
@@ -217,6 +218,8 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileNam
   if (c1 == '<' && c2 == '?' && c3 == 'x' && c4 == 'm' && c5 == 'l') {
     if (line2.indexOf("pauker", 0) >  0)
       return pauker;
+    else if (line2.indexOf("xdxf", 0) >  0)
+      return xdxf;
     else
       return kvtml;
   }
@@ -299,6 +302,15 @@ bool KEduVocDocument::open(const KUrl& url)
           read = csvReader.readDoc(this);
           if (!read)
             errorMessage = csvReader.errorMessage();
+        }
+        break;
+
+        case xdxf:
+        {
+          KEduVocXdxfReader xdxfReader(f);
+          read = xdxfReader.readDoc(this);
+          if (!read)
+            errorMessage = xdxfReader.errorMessage();
         }
         break;
 
@@ -1405,6 +1417,7 @@ QString KEduVocDocument::pattern(Mode mode)
     { true, false, "*.wql", I18N_NOOP("KWordQuiz Document") },
     { true, false, "*.xml.qz *.pau.gz", I18N_NOOP("Pauker Lesson") },
     { true, false, "*.voc", I18N_NOOP("Vokabeltrainer") },
+    { true, false, "*.xdxf", I18N_NOOP("XML Dictionary Exchange Format") },
     { true, true, "*.csv", I18N_NOOP("Text") },
     // last is marker for the end, do not remove it
     { false, false, 0, 0 }

@@ -50,7 +50,7 @@ bool KEduVocKvtmlReader::readDoc(KEduVocDocument *doc)
   QDomElement domElementKvtml = domDoc.documentElement();
   if (domElementKvtml.tagName() != KV_DOCTYPE)
   {
-    m_errorMessage = i18n("Tag <%1> was expected but tag <%2> was found.", QString(KV_DOCTYPE), domElementKvtml.tagName());
+    m_errorMessage = i18n("This is not a KDE Vocabulary document.");
     return false;
   }
 
