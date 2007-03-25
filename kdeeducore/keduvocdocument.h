@@ -451,25 +451,51 @@ public:
   void setCurrentLesson(int lesson);
 
   /**
-   * @returns the description of the lesson
+   * Get the real name of a lesson from it's index as QString.
+   * @param index lesson index
+   * @returns the description (Name) of the lesson with index @p index .
    */
   QString lessonDescription(int index) const;
 
   /**
+   * Get the index from the long name of a lesson.
+   * @param index lesson index
    * @returns the index of the lesson (from its name)
    * -1 if the lesson does not exist
    */
   int lessonIndex(const QString description) const;
 
   /**
+   * Get list of ALL lessons that are selected for query.
    * @returns a list with the lessons in the current query
    */
   QList<int> lessonsInQuery() const;
 
   /**
-   * Sets the lessons in the current query
+   * Sets ALL lessons in the query. Better use addLessonToQuery and removeLessonFromQuery.
    */
   void setLessonsInQuery(const QList<int> &lesson_iq);
+
+  /**
+   * Check if @p lessonIndex is in the query.
+   * @param lessonIndex - index of the lesson
+   * @return true if in query
+   */
+  bool lessonInQuery(int lessonIndex) const;
+
+  /**
+   * Add @p lessonIndex to the query.
+   * @param lessonIndex - index of the lesson
+   */
+  void addLessonToQuery(int lessonIndex);
+
+  /**
+   * Remove @p lessonIndex from the query.
+   * @param lessonIndex - index of the lesson
+   */
+  void removeLessonFromQuery(int lessonIndex);
+
+
 
   /**
    * @returns                a list of defined lessons
@@ -490,8 +516,16 @@ public:
 
   /**
    * Sets the description of the lesson
+   * @param names list of all names of the lessons
    */
   void setLessonDescriptions(const QStringList &names);
+
+  /**
+   * Moves the lesson at index position from to index position to.
+   * @param from the lesson to be moved
+   * @param to the new position
+   */
+  void moveLesson(int from, int to);
 
   /**
    * @param index            index of translation

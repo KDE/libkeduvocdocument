@@ -316,13 +316,7 @@ bool KEduVocKvtmlWriter::writeLesson(QDomDocument &domDoc, QDomElement &domEleme
       domElementDesc.setAttribute(KV_LESS_NO, count);
       if (m_doc->currentLesson() == count)
         domElementDesc.setAttribute(KV_LESS_CURR, 1);
-      bool inQuery = false;
-      ///@todo check that this is working
-      foreach(int liq, m_doc->lessonsInQuery())
-        if (liq == count - 1)
-          inQuery = true;
-
-      if (count - 1 < m_doc->lessonsInQuery().count() && inQuery)
+      if (m_doc->lessonInQuery(count))
         domElementDesc.setAttribute(KV_LESS_QUERY, 1);
 
       domElementDesc.appendChild(domTextDesc);

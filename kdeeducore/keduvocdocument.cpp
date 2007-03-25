@@ -70,7 +70,7 @@ public:
   QString                   m_queryorg;
   QString                   m_querytrans;
   QList<KEduVocExpression>  m_vocabulary;
-  QList<bool>               m_lessonsInQuery;
+  QList<int>                m_lessonsInQuery;
   QStringList               m_lessonDescriptions;
   QStringList               m_typeDescriptions;
   QStringList               m_tenseDescriptions;
@@ -1074,29 +1074,39 @@ int KEduVocDocument::lessonIndex(const QString description) const
 }
 
 
+bool KEduVocDocument::lessonInQuery(int lessonIndex) const
+{
+  if (d->m_lessonsInQuery.contains(lessonIndex))
+    return true;
+  else
+    return false;
+}
+
+
+void KEduVocDocument::addLessonToQuery(int lessonIndex)
+{
+  if(!lessonInQuery(lessonIndex))
+    d->m_lessonsInQuery.append(lessonIndex);
+}
+
+
+void KEduVocDocument::removeLessonFromQuery(int lessonIndex)
+{
+  if(lessonInQuery(lessonIndex))
+    d->m_lessonsInQuery.removeAt(d->m_lessonsInQuery.indexOf(lessonIndex));
+}
+
+
 QList<int> KEduVocDocument::lessonsInQuery() const
 {
-  QList<int> iqvec;
-  for (int i = 0; i < d->m_lessonsInQuery.size(); i++)
-    if (d->m_lessonsInQuery[i]) {
-      iqvec.push_back(i+1);   // Offset <no lesson>
-//      cout << "getliq: " << i+1 << endl;
-    }
-  return iqvec;
+  return d->m_lessonsInQuery;
 }
 
 
 void KEduVocDocument::setLessonsInQuery(const QList<int> &lesson_iq)
 {
-  d->m_lessonsInQuery.clear();
-  for (int i = 0; i < d->m_lessonDescriptions.count(); i++)
-    d->m_lessonsInQuery.append(false);
-
-  foreach(int i, lesson_iq)
-    if (i <= d->m_lessonsInQuery.count())
-      d->m_lessonsInQuery[i - 1] = true;
+  d->m_lessonsInQuery = lesson_iq;
 }
-
 
 KUrl KEduVocDocument::url() const
 {
@@ -1253,6 +1263,37 @@ void KEduVocDocument::setLessonDescriptions(const QStringList &names)
   d->m_lessonDescriptions = names;
 }
 
+void KEduVocDocument::moveLesson(int from, int to)
+{
+  // still counting from 1
+  d->m_lessonDescriptions.move(from -1, to -1);
+
+  /*
+  to > from?
+    lesson >= from && lesson < to: lesson++
+  to < from?
+    lesson >= to && lesson < from: lesson++
+  */
+  for (int ent = 0; ent < entryCount(); ent++) {
+    // put from directly to to
+    if (entry(ent)->lesson() == from) {
+      entry(ent)->setLesson(to);
+    }
+    else
+    {
+      if(to > from)
+      {
+        if(entry(ent)->lesson() >= from && entry(ent)->lesson() < to)
+          entry(ent)->setLesson(entry(ent)->lesson()-1);
+      }
+      else
+      {
+        if(entry(ent)->lesson() >= to && entry(ent)->lesson() < from)
+          entry(ent)->setLesson(entry(ent)->lesson()+1);
+      }
+    }
+  }
+}
 
 int KEduVocDocument::search(const QString &substr, int id, int first, int last, bool word_start)
 {
