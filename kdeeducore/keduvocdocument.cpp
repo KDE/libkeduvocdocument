@@ -240,8 +240,7 @@ bool KEduVocDocument::open(const KUrl& url)
   if (!url.isEmpty())
     d->m_url = url;
 
-  // TODO EPT  connect( this, SIGNAL(progressChanged(KEduVocDocument*,int)), parent, SLOT(slotProgress(KEduVocDocument*,int)) );
-
+  bool read = false;
   QString errorMessage = i18n("<qt>Cannot open file<br><b>%1</b></qt>", url.path());
   QString temporaryFile;
   if (KIO::NetAccess::download(url, temporaryFile, 0))
@@ -256,100 +255,92 @@ bool KEduVocDocument::open(const KUrl& url)
 
     FileType ft = detectFileType(url.path());
 
-    bool read = false;
-    while (!read) {
-      QApplication::setOverrideCursor(Qt::WaitCursor);
-      switch (ft) {
-        case kvtml:
-        {
-          KEduVocKvtmlReader kvtmlReader(f);
-          read = kvtmlReader.readDoc(this);
-          if (!read)
-            errorMessage = kvtmlReader.errorMessage();
-        }
-        break;
-
-        case wql:
-        {
-          KEduVocWqlReader wqlReader(f);
-          read = wqlReader.readDoc(this);
-          if (!read)
-            errorMessage = wqlReader.errorMessage();
-        }
-        break;
-
-        case pauker:
-        {
-          KEduVocPaukerReader paukerReader(f);
-          read = paukerReader.readDoc(this);
-          if (!read)
-            errorMessage = paukerReader.errorMessage();
-        }
-        break;
-
-        case vokabeln:
-        {
-          KEduVocVokabelnReader vokabelnReader(f);
-          read = vokabelnReader.readDoc(this);
-          if (!read)
-            errorMessage = vokabelnReader.errorMessage();
-        }
-        break;
-
-        case csv:
-        {
-          KEduVocCsvReader csvReader(f);
-          read = csvReader.readDoc(this);
-          if (!read)
-            errorMessage = csvReader.errorMessage();
-        }
-        break;
-
-        case xdxf:
-        {
-          KEduVocXdxfReader xdxfReader(f);
-          read = xdxfReader.readDoc(this);
-          if (!read)
-            errorMessage = xdxfReader.errorMessage();
-        }
-        break;
-
-        default:
-        {
-          KEduVocKvtmlReader kvtmlReader(f);
-          read = kvtmlReader.readDoc(this);
-          if (!read)
-            errorMessage = kvtmlReader.errorMessage();
-        }
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    switch (ft) {
+      case kvtml:
+      {
+        KEduVocKvtmlReader kvtmlReader(f);
+        read = kvtmlReader.readDoc(this);
+        if (!read)
+          errorMessage = kvtmlReader.errorMessage();
       }
+      break;
 
-      QApplication::restoreOverrideCursor();
+      case wql:
+      {
+        KEduVocWqlReader wqlReader(f);
+        d->m_url.setFileName(i18n("Untitled"));
+        read = wqlReader.readDoc(this);
+        if (!read)
+          errorMessage = wqlReader.errorMessage();
+      }
+      break;
 
-      if (!read) {
-        QString msg = i18n("Could not open \"%1\"\nDo you want to try again?\n(Error reported: %2)", url.path(), errorMessage);
-        int result = KMessageBox::warningContinueCancel(0, msg, i18n("Error Opening File"), KGuiItem(i18n("&Retry")));
-        if (result == KMessageBox::Cancel) {
-          d->init();
-          return false;
-        } else {
-          d->init();
-          if (!url.isEmpty())
-            d->m_url = url;
-        }
+      case pauker:
+      {
+        KEduVocPaukerReader paukerReader(f);
+        d->m_url.setFileName(i18n("Untitled"));
+        read = paukerReader.readDoc(this);
+        if (!read)
+          errorMessage = paukerReader.errorMessage();
+      }
+      break;
+
+      case vokabeln:
+      {
+        KEduVocVokabelnReader vokabelnReader(f);
+        d->m_url.setFileName(i18n("Untitled"));
+        read = vokabelnReader.readDoc(this);
+        if (!read)
+          errorMessage = vokabelnReader.errorMessage();
+      }
+      break;
+
+      case csv:
+      {
+        KEduVocCsvReader csvReader(f);
+        read = csvReader.readDoc(this);
+        if (!read)
+          errorMessage = csvReader.errorMessage();
+      }
+      break;
+
+      case xdxf:
+      {
+        KEduVocXdxfReader xdxfReader(f);
+        d->m_url.setFileName(i18n("Untitled"));
+        read = xdxfReader.readDoc(this);
+        if (!read)
+          errorMessage = xdxfReader.errorMessage();
+      }
+      break;
+
+      default:
+      {
+        KEduVocKvtmlReader kvtmlReader(f);
+        read = kvtmlReader.readDoc(this);
+        if (!read)
+          errorMessage = kvtmlReader.errorMessage();
       }
     }
+
+    QApplication::restoreOverrideCursor();
+
+    if (!read) {
+      QString msg = i18n("Could not open \"%1\"\n(Error reported: %2)", url.path(), errorMessage);
+      KMessageBox::error(0, msg, i18n("Error Opening File"));
+    }
+
     f->close();
     KIO::NetAccess::removeTempFile(temporaryFile);
   }
-  return true;
+  return read;
 }
 
 
 bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, const QString & generator)
 {
-  connect(this, SIGNAL(progressChanged(KEduVocDocument*, int)), parent, SLOT(slotProgress(KEduVocDocument*, int)));
-
-  KUrl tmp (url);
+  KUrl tmp(url);
 
   if (ft == automatic)
   {
@@ -359,8 +350,7 @@ bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, con
       ft = csv;
     else
     {
-      tmp.setFileName(tmp.path() + "." KVTML_EXT);
-      ft = kvtml;
+      return false;
     }
   }
 
@@ -615,13 +605,8 @@ void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
         }
       }
     }
-    //delete (new_doc);
-    //fileOpenRecent->addUrl(url); // addRecentFile (url.path());
   }
-  //m_tableModel->reset();
-  //m_tableView->adjustContent();
   QApplication::restoreOverrideCursor();
-  //slotStatusMsg(IDS_DEFAULT);
 }
 
 KEduVocExpression *KEduVocDocument::entry(int index)
