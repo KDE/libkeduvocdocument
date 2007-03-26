@@ -1053,9 +1053,22 @@ QString KEduVocDocument::lessonDescription(int idx) const
   return d->m_lessonDescriptions[idx-1];
 }
 
-int KEduVocDocument::lessonIndex(const QString description) const
+int KEduVocDocument::lessonIndex(const QString &description) const
 {
   return d->m_lessonDescriptions.indexOf(description) +1;
+}
+
+
+int KEduVocDocument::appendLesson(const QString &lessonName)
+{
+  d->m_lessonDescriptions.append(lessonName);
+  return d->m_lessonDescriptions.count(); // counting from 1
+}
+
+
+void KEduVocDocument::renameLesson(const int lessonIndex, const QString &lessonName)
+{
+  d->m_lessonDescriptions.replace(lessonIndex-1, lessonName); // counting from 1
 }
 
 

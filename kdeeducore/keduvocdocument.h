@@ -463,7 +463,24 @@ public:
    * @returns the index of the lesson (from its name)
    * -1 if the lesson does not exist
    */
-  int lessonIndex(const QString description) const;
+  int lessonIndex(const QString &description) const;
+
+
+  /**
+   * Append a new lesson to the list of lessons.
+   * @param lessonName name for the new lesson
+   * @returns the index of the new lesson
+   */
+  int appendLesson(const QString &lessonName);
+
+
+  /**
+   * Rename a lesson.
+   * @param lessonIndex index of lesson
+   * @param lessonName new name for the lesson
+   */
+  void renameLesson(const int lessonIndex, const QString &lessonName);
+
 
   /**
    * Get list of ALL lessons that are selected for query.
@@ -496,8 +513,8 @@ public:
   void removeLessonFromQuery(int lessonIndex);
 
 
-
   /**
+   * All lesson descriptions as stringlist.
    * @returns                a list of defined lessons
    */
   QStringList lessonDescriptions() const;
