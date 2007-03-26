@@ -3,11 +3,6 @@ PluginName=KDEEduWidgets
 Includes=kcomponentdata.h
 Init=new KComponentData("kdeeduwidgets");
 
-[KPlotWidget]
-ToolTip=A plot widget (KDE-Edu)
-WhatsThis=A widget for easily making 2-dimensional plots
-Group=Plot (KDE-Edu)
-
 [ExtDateEdit]
 ToolTip=spinbox-based extended date editor (KDE-Edu)
 WhatsThis=Allows the user to specify an extended date
