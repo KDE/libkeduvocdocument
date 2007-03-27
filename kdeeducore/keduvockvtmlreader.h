@@ -108,7 +108,7 @@ public:
   bool readExpression(QDomElement &domElementParent);
   bool readBody(QDomElement &domElementParent);
 
-  QString errorMessage() const {return m_errorMessage;};
+  QString errorMessage() const {return m_errorMessage;}
 
 private:
   QIODevice *m_inputFile;

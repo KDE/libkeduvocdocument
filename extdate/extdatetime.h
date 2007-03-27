@@ -307,31 +307,31 @@ class EXTDATE_EXPORT ExtDate
 	/**
 		*@return true if the two ExtDates are equal
 		*/
-	bool operator==( const ExtDate &d ) const { return m_jd == d.jd(); };
+	bool operator==( const ExtDate &d ) const { return m_jd == d.jd(); }
 	/**
 		*@return true if the two ExtDates are not equal
 		*/
-	bool operator!=( const ExtDate &d ) const { return m_jd != d.jd(); };
+	bool operator!=( const ExtDate &d ) const { return m_jd != d.jd(); }
 	/**
 		*@return true if the left-hand ExtDate is earlier than the 
 		*right-hand ExtDate
 		*/
-	bool operator<( const ExtDate &d )  const { return m_jd  < d.jd(); };
+	bool operator<( const ExtDate &d )  const { return m_jd  < d.jd(); }
 	/**
 		*@return true if the left-hand ExtDate is earlier than or equal to the 
 		*right-hand ExtDate
 		*/
-	bool operator<=( const ExtDate &d ) const { return m_jd <= d.jd(); };
+	bool operator<=( const ExtDate &d ) const { return m_jd <= d.jd(); }
 	/**
 		*@return true if the left-hand ExtDate is later than the 
 		*right-hand ExtDate
 		*/
-	bool operator>( const ExtDate &d )  const { return m_jd  > d.jd(); };
+	bool operator>( const ExtDate &d )  const { return m_jd  > d.jd(); }
 	/**
 		*@return true if the left-hand ExtDate is later than or equal to the 
 		*right-hand ExtDate
 		*/
-	bool operator>=( const ExtDate &d ) const { return m_jd >= d.jd(); };
+	bool operator>=( const ExtDate &d ) const { return m_jd >= d.jd(); }
 	
 	/**
 		*@return an ExtDate representing the current date, according to the 

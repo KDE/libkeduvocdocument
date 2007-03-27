@@ -29,7 +29,7 @@ public:
 
   bool readDoc(KEduVocDocument *doc);
 
-  QString errorMessage() const {return m_errorMessage;};
+  QString errorMessage() const {return m_errorMessage;}
 
 private:
   QString cardText(const QDomNode &entry, const QString &tagName) const;

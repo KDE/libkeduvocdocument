@@ -104,7 +104,7 @@ public:
    * @returns the ExtDateTable widget child of this ExtDatePicker
    * widget.
    */
-  ExtDateTable *dateTable() const { return table; };
+  ExtDateTable *dateTable() const { return table; }
 
   /**
    * Sets the font size of the widgets elements.

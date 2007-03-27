@@ -29,7 +29,7 @@ public:
 
   bool readDoc(KEduVocDocument *doc);
 
-  QString errorMessage() const {return m_errorMessage;};
+  QString errorMessage() const {return m_errorMessage;}
 
 private:
   QIODevice *m_inputFile;
