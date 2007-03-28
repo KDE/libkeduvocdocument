@@ -1252,6 +1252,17 @@ bool KEduVocDocument::deleteLesson(int lessonIndex, int deleteMode)
 
   // finally just remove the lesson name
   d->m_lessonDescriptions.removeAt(lessonIndex-1); // because of the damned 0 arghh
+
+  int currentInQuery = d->m_lessonsInQuery.indexOf(lessonIndex);
+  if(currentInQuery != -1)
+    d->m_lessonsInQuery.removeAt(currentInQuery);
+
+  // move query entries
+  for(int queryLesson = 0; queryLesson < d->m_lessonsInQuery.count(); queryLesson++)
+  {
+    if(d->m_lessonsInQuery.at(queryLesson) > lessonIndex)
+      d->m_lessonsInQuery.replace(queryLesson, d->m_lessonsInQuery.at(queryLesson)-1);
+  }
   return true;
 }
 
@@ -1263,6 +1274,7 @@ void KEduVocDocument::setLessonDescriptions(const QStringList &names)
 
 void KEduVocDocument::moveLesson(int from, int to)
 {
+///@todo move in query as well!
   // still counting from 1
   d->m_lessonDescriptions.move(from -1, to -1);
 
