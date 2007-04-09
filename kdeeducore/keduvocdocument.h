@@ -459,7 +459,7 @@ public:
 
   /**
    * Get the index from the long name of a lesson.
-   * @param index lesson index
+   * @param description lesson name
    * @returns the index of the lesson (from its name)
    * -1 if the lesson does not exist
    */

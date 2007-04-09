@@ -119,7 +119,6 @@ void KEduVocDocument::Private::init()
 }
 
 
-
 /**@todo possibly implement
   1. sorting based on lesson name
   2. sorting based on lesson index and original.
