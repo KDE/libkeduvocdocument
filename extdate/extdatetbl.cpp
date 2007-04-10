@@ -887,7 +887,7 @@ ExtDateInternalYearSelector::setYear(int year)
 }
 
 KPopupFrame::KPopupFrame(QWidget* parent)
-  : QFrame(parent, Qt::WType_Popup),
+  : QFrame(parent, Qt::Popup),
     result(0), // rejected
     main(0)
 {

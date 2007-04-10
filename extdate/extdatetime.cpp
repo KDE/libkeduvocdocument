@@ -1128,12 +1128,12 @@ ExtDateTime ExtDateTime::fromString( const QString& s, Qt::DateFormat f )
 #ifndef QT_NO_DATASTREAM
 KDE_EXPORT QDataStream &operator<<( QDataStream & ostream, const ExtDate & date)
 {
-	return ostream << (Q_UINT32)(date.jd());
+	return ostream << (quint32)(date.jd());
 }
 
 KDE_EXPORT QDataStream &operator>>( QDataStream & ostream, ExtDate & date)
 {
-	Q_UINT32 julday;
+	quint32 julday;
 	ostream >> julday;
 	date.setJD( julday );
 	return ostream;
