@@ -337,7 +337,7 @@ bool KEduVocDocument::open(const KUrl& url)
 }
 
 
-bool KEduVocDocument::saveAs(QObject *parent, const KUrl & url, FileType ft, const QString & generator)
+bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & generator)
 {
   KUrl tmp(url);
 

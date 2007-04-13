@@ -288,13 +288,12 @@ public:
   /**
    * Saves the data under the given name
    *
-   * @param parent     the object that owns the document
    * @param url        if url is empty (or NULL) actual name is preserved
    * @param ft         the filetype to be used when saving the document
    * @param generator  the name of the application saving the document
    * @returns          true if successful
    */
-  bool saveAs(QObject *parent, const KUrl & url, FileType ft, const QString & generator);
+  bool saveAs(const KUrl & url, FileType ft, const QString & generator);
 
   /**
    * Merges data from another document
