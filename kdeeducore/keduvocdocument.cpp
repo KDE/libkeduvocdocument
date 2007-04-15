@@ -490,13 +490,13 @@ void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
               if (tg.length() == 0)
                 tg = t2;
               else
-                tg += ":" + t2;
+                tg += ':' + t2;
             }
 
             if (tg.length() == 0)
               tg = t;
             else if (t.length() != 0)
-              tg += ":" + t;
+              tg += ':' + t;
 
             expr->setUsageLabel (lang, tg);
           }
