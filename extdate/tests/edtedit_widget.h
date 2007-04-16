@@ -18,14 +18,14 @@
 #ifndef EDTEDIT_WIDGET_H
 #define EDTEDIT_WIDGET_H
 
-#include <kmainwindow.h>
+#include <kxmlguiwindow.h>
 
 class QVBoxLayout;
 class ExtDate;
 class ExtDateEdit;
 class ExtDateTimeEdit;
 
-class EDTEdit : public KMainWindow {
+class EDTEdit : public KXmlGuiWindow {
 	Q_OBJECT
 	public:
 		EDTEdit( QWidget *parent );

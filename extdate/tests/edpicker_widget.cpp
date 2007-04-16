@@ -26,7 +26,7 @@
 #include "../extdatewidget.h"
 #include "edpicker_widget.h"
 
-EDPicker::EDPicker( QWidget *p=0 ) : KMainWindow( p ) {
+EDPicker::EDPicker( QWidget *p=0 ) : KXmlGuiWindow( p ) {
 	QWidget *w = new QWidget(this);
 
 	glay = new QGridLayout(w);

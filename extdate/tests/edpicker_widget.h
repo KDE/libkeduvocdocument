@@ -18,7 +18,7 @@
 #ifndef EDPICKER_WIDGET_H
 #define EDPICKER_WIDGET_H
 
-#include <kmainwindow.h>
+#include <kxmlguiwindow.h>
 
 class QDate;
 class QGridLayout;
@@ -29,7 +29,7 @@ class ExtDate;
 class ExtDatePicker;
 class ExtDateWidget;
 
-class EDPicker : public KMainWindow {
+class EDPicker : public KXmlGuiWindow {
 	Q_OBJECT
 	public:
 		EDPicker( QWidget *parent );

@@ -24,7 +24,7 @@
 #include "../extdatetimeedit.h"
 #include "edtedit_widget.h"
 
-EDTEdit::EDTEdit( QWidget *p=0 ) : KMainWindow( p ) {
+EDTEdit::EDTEdit( QWidget *p=0 ) : KXmlGuiWindow( p ) {
 	QWidget *w = new QWidget(this);
 
 	vlay = new QVBoxLayout( w );
