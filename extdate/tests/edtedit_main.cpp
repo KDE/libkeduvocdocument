@@ -1,5 +1,4 @@
 #include "edtedit_widget.h"
-#include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <klocale.h>
