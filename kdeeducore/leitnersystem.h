@@ -15,7 +15,7 @@
 
 #include <libkdeedu_core_export.h>
 
-#include <QString>
+
 #include <QStringList>
 
 #include "leitnerbox.h"

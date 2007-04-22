@@ -18,7 +18,7 @@
 #ifndef KVTMLDEFS_H
 #define KVTMLDEFS_H
 
-#include <QString>
+
 
 /** XML tags and attribute names */
 

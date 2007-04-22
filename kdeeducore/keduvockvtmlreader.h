@@ -21,7 +21,7 @@
 
 #include <QtXml/QDomDocument>
 #include <QList>
-#include <QString>
+
 
 #include "keduvocexpression.h"
 #include "keduvocgrammar.h"
