@@ -119,36 +119,6 @@ void KEduVocDocument::Private::init()
 }
 
 
-/**@todo possibly implement
-  1. sorting based on lesson name
-  2. sorting based on lesson index and original.
-*/
-
-class KEduVocDocumentSortHelper
-{
-public:
-  inline KEduVocDocumentSortHelper(int column, Qt::SortOrder order) : sort_column(column), sort_order(order) {}
-
-  inline bool operator()(const KEduVocExpression &e1, const KEduVocExpression &e2) const
-    {
-    if (sort_order == Qt::AscendingOrder)
-      if (sort_column == 0)
-        return e1.original().toLower() < e2.original().toLower();
-      else
-        return e1.translation(sort_column).toLower() < e2.translation(sort_column).toLower();
-    else
-      if (sort_column == 0)
-        return !(e1.original().toLower() < e2.original().toLower());
-      else
-        return !(e1.translation(sort_column).toLower() < e2.translation(sort_column).toLower());
-    }
-
-private:
-  int sort_column;
-  Qt::SortOrder sort_order;
-};
-
-
 KEduVocDocument::KEduVocDocument(QObject *parent)
   : QObject(parent), d(new Private(this))
 {
@@ -877,53 +847,6 @@ void KEduVocDocument::setOriginalIdentifier(const QString &id)
   if (d->m_identifiers.size() > 0) {
     d->m_identifiers[0] = id;
   }
-}
-
-
-bool KEduVocDocument::sort(int index, Qt::SortOrder order)
-{
-  bool result = false;
-  if (d->m_sortingEnabled && index < identifierCount())
-  {
-    if (d->m_sortIdentifier.count() < d->m_identifiers.count())
-      for (int i = d->m_sortIdentifier.count(); i < d->m_identifiers.count(); i++)
-          d->m_sortIdentifier.append(false);
-
-    d->m_sortIdentifier[index] = (order == Qt::AscendingOrder);
-    result = sort(index);
-  }
-  return result;
-}
-
-bool KEduVocDocument::sort(int index)
-{
-  bool result = false;
-  if (d->m_sortingEnabled && index < identifierCount())
-  {
-    if (d->m_sortIdentifier.count() < d->m_identifiers.count())
-      for (int i = d->m_sortIdentifier.count(); i < d->m_identifiers.count(); i++)
-          d->m_sortIdentifier.append(false);
-
-    KEduVocDocumentSortHelper sh(index, d->m_sortIdentifier[index] ? Qt::AscendingOrder : Qt::DescendingOrder);
-    qSort(d->m_vocabulary.begin(), d->m_vocabulary.end(), sh);
-    d->m_sortIdentifier[index] = !d->m_sortIdentifier[index];
-    result = d->m_sortIdentifier[index];
-  }
-  return result;
-}
-
-
-bool KEduVocDocument::sortByLessonAlpha ()
-{
-  ///@todo remove?
-  return false;
-}
-
-
-bool KEduVocDocument::sortByLessonIndex ()
-{
-  ///@todo remove?
-  return false;
 }
 
 

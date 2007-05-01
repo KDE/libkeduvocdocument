@@ -101,23 +101,6 @@ public:
   void removeEntry(int index);
 
   /**
-   * Sorts vocabulary alphabetically
-   *
-   * @param index             index identifier (0 = original, 1..n = translations
-   * @returns                 the direction of sorting: true = ascending
-   */
-  bool sort(int index);
-
-  /**
-   * Sorts vocabulary alphabetically
-   *
-   * @param index             index identifier (0 = original, 1..n = translations
-   * @param order             the order used when sorting
-   * @returns                 the direction of sorting: true = ascending
-   */
-  bool sort(int index, Qt::SortOrder order);
-
-  /**
    * Shuffles vocabulary in a random order
    */
   void shuffle();
@@ -128,18 +111,6 @@ public:
    * @returns                 number of removed entries
    */
   int cleanUp();
-
-  /**
-   * Sorts vocabulary by lesson indices
-   * @returns direction of sorting: true = ascending
-   */
-  bool sortByLessonIndex();
-
-  /**
-   * Sorts vocabulary by lesson name
-   * @returns direction of sorting: true = ascending
-   */
-  bool sortByLessonAlpha();
 
   /**
    * Enables sorting
