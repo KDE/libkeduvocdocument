@@ -14,69 +14,140 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "keduvocpaukerreader.h"
+
 #include <QIODevice>
 
-#include <klocale.h>
+#include <KLocale>
 
-#include "keduvocpaukerreader.h"
 #include "keduvocexpression.h"
 #include "keduvocdocument.h"
 
-KEduVocPaukerReader::KEduVocPaukerReader(QIODevice * file)
+KEduVocPaukerReader::KEduVocPaukerReader(KEduVocDocument * doc)
 {
-  // the file must be already open
-  m_inputFile = file;
-  m_errorMessage = "";
+    m_doc = doc;
 }
 
 
-bool KEduVocPaukerReader::readDoc(KEduVocDocument * doc)
+bool KEduVocPaukerReader::read(QIODevice * device)
 {
-  m_doc = doc;
-  QString front;
-  QString back;
+    setDevice(device);
 
-  QDomDocument domDoc("Pauker");
-  if (!domDoc.setContent(m_inputFile, &m_errorMessage))
-    return false;
+    while (!atEnd()) {
+        readNext();
 
-  QDomElement description = domDoc.documentElement().firstChildElement("Description");
-  if(!description.isNull())
-    m_doc->setDocumentRemark(description.text());
-
-  QDomNodeList entries = domDoc.elementsByTagName("Card");
-
-  if (entries.count() <= 0) {
-    m_errorMessage = i18n("Error while reading file");
-    return false;
-  }
-
-  m_doc->setAuthor("http://pauker.sf.net");
-  ///Pauker does not provide any column titles
-  m_doc->appendIdentifier(i18n("Front Side"));
-  m_doc->appendIdentifier(i18n("Reverse Side"));
-
-  for (int i = 0; i < entries.count(); i++) {
-    QDomNode entry = entries.at(i);
-    if(!entry.isNull()) {
-      front = cardText(entry, "FrontSide");
-      back = cardText(entry, "ReverseSide");
-      KEduVocExpression expr = KEduVocExpression(front);
-      expr.setTranslation(1, back);
-      m_doc->appendEntry(&expr);
+        if (isStartElement()) {
+            if (name() == "Lesson")
+                readPauker();
+            else
+                raiseError(i18n("This is not a Pauker document"));
+        }
     }
-  }
-  return true;
+
+    return !error();
 }
 
 
-QString KEduVocPaukerReader::cardText(const QDomNode & entry, const QString & tagName) const
+void KEduVocPaukerReader::readUnknownElement()
 {
-  QDomElement element = entry.firstChildElement(tagName);
+    while (!atEnd()) {
+        readNext();
 
-  if(!element.isNull())
-    return element.text();
-  else
-    return QString();
+        if (isEndElement())
+            break;
+
+        if (isStartElement())
+            readUnknownElement();
+    }
 }
 
+
+void KEduVocPaukerReader::readPauker()
+{
+    m_doc->setAuthor("http://pauker.sf.net");
+    ///Pauker does not provide any column titles
+    m_doc->appendIdentifier(i18n("Front Side"));
+    m_doc->appendIdentifier(i18n("Reverse Side"));
+
+    while (!atEnd()) {
+        readNext();
+
+        if (isEndElement())
+            break;
+
+        if (isStartElement()) {
+            if (name() == "Description")
+                m_doc->setDocumentRemark(readElementText());
+            else if (name() == "Batch")
+                readBatch();
+            else
+                readUnknownElement();
+        }
+    }
+}
+
+
+void KEduVocPaukerReader::readBatch()
+{
+    while (!atEnd()) {
+        readNext();
+
+        if (isEndElement())
+            break;
+
+        if (isStartElement()) {
+            if (name() == "Card")
+                readCard();
+            else
+                readUnknownElement();
+        }
+    }
+}
+
+
+void KEduVocPaukerReader::readCard()
+{
+    QString front;
+    QString back;
+
+    while (!atEnd()) {
+        readNext();
+
+        if (isEndElement())
+            break;
+
+        if (isStartElement()) {
+            if (name() == "FrontSide")
+                front = readText();
+            else if (name() == "ReverseSide")
+                back = readText();
+            else
+                readUnknownElement();
+        }
+    }
+
+    KEduVocExpression expr = KEduVocExpression(front);
+    expr.setTranslation(1, back);
+    m_doc->appendEntry(&expr);
+}
+
+
+QString KEduVocPaukerReader::readText()
+{
+    QString result;
+
+    while (!atEnd()) {
+        readNext();
+
+        if (isEndElement())
+            break;
+
+        if (isStartElement()) {
+            if (name() == "Text")
+                result = readElementText();
+            else
+                readUnknownElement();
+        }
+    }
+    return result;
+}

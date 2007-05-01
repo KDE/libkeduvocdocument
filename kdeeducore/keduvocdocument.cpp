@@ -277,11 +277,11 @@ bool KEduVocDocument::open(const KUrl& url)
 
       case pauker:
       {
-        KEduVocPaukerReader paukerReader(f);
+        KEduVocPaukerReader paukerReader(this);
         d->m_url.setFileName(i18n("Untitled"));
-        read = paukerReader.readDoc(this);
+        read = paukerReader.read(f);
         if (!read)
-          errorMessage = paukerReader.errorMessage();
+          errorMessage = i18n("Parse error at line %1, column %2:\n%3", paukerReader.lineNumber(), paukerReader.columnNumber(), paukerReader.errorString());
       }
       break;
 
@@ -306,11 +306,11 @@ bool KEduVocDocument::open(const KUrl& url)
 
       case xdxf:
       {
-        KEduVocXdxfReader xdxfReader(f);
+        KEduVocXdxfReader xdxfReader(this);
         d->m_url.setFileName(i18n("Untitled"));
-        read = xdxfReader.readDoc(this);
+        read = xdxfReader.read(f);
         if (!read)
-          errorMessage = xdxfReader.errorMessage();
+          errorMessage = i18n("Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString());
       }
       break;
 
@@ -326,7 +326,7 @@ bool KEduVocDocument::open(const KUrl& url)
     QApplication::restoreOverrideCursor();
 
     if (!read) {
-      QString msg = i18n("Could not open \"%1\"\n(Error reported: %2)", url.path(), errorMessage);
+      QString msg = i18n("Could not open or properly read \"%1\"\n(Error reported: %2)", url.path(), errorMessage);
       KMessageBox::error(0, msg, i18n("Error Opening File"));
     }
 

@@ -14,81 +14,105 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "keduvocxdxfreader.h"
+
 #include <QIODevice>
 
-#include <klocale.h>
+#include <KLocale>
 
-#include "keduvocxdxfreader.h"
 #include "keduvocexpression.h"
 #include "keduvocdocument.h"
 
-KEduVocXdxfReader::KEduVocXdxfReader(QIODevice * file)
+KEduVocXdxfReader::KEduVocXdxfReader(KEduVocDocument *doc)
 {
-  // the file must be already open
-  m_inputFile = file;
-  m_errorMessage = "";
+    m_doc = doc;
 }
 
 
-bool KEduVocXdxfReader::readDoc(KEduVocDocument * doc)
+bool KEduVocXdxfReader::read(QIODevice *device)
 {
-  m_doc = doc;
-  QString front;
-  QString back;
+    setDevice(device);
 
-  QDomDocument domDoc("XDXF");
-  if (!domDoc.setContent(m_inputFile, &m_errorMessage))
-    return false;
+    while (!atEnd()) {
+        readNext();
 
-  if (domDoc.doctype().name() != "xdxf") {
-    m_errorMessage = i18n("This is not a XDXF document");
-    return false;
-  }
-
-  QDomElement description = domDoc.documentElement().firstChildElement("description");
-  if(!description.isNull())
-    m_doc->setDocumentRemark(description.text());
-
-  QDomElement title = domDoc.documentElement().firstChildElement("full_name");
-  if(!title.isNull())
-    m_doc->setTitle(title.text());
-
-  ///The language attributes are required and should be ISO 639-2 codes, but you never know...
-  QDomAttr id1 = domDoc.documentElement().attributeNode("lang_from");
-  if(!id1.isNull())
-    m_doc->appendIdentifier(id1.value().toLower());
-  else
-    m_doc->appendIdentifier(i18n("Original"));
-
-  QDomAttr id2 = domDoc.documentElement().attributeNode("lang_to");
-  if(!id2.isNull())
-    m_doc->appendIdentifier(id2.value().toLower());
-  else
-    m_doc->appendIdentifier(i18n("Translation"));
-
-  QDomNodeList entries = domDoc.elementsByTagName("ar");
-
-  if (entries.count() <= 0) {
-    m_errorMessage = i18n("Error while reading file");
-    return false;
-  }
-
-  m_doc->setAuthor("http://xdxf.sf.net");
-
-  for (int i = 0; i < entries.count(); i++) {
-    QDomNode entry = entries.at(i);
-    if(!entry.isNull()) {
-      QDomElement from = entry.firstChildElement("k");
-      if(!from.isNull())
-        front = from.text();
-      else
-        front = QString(); 
-
-      back = entry.toElement().lastChild().toText().data();
-      KEduVocExpression expr = KEduVocExpression(front);
-      expr.setTranslation(1, back);
-      m_doc->appendEntry(&expr);
+        if (isStartElement()) {
+            if (name() == "xdxf")
+                readXdxf();
+            else
+                raiseError(i18n("This is not a XDXF document"));
+        }
     }
-  }
-  return true;
+
+    return !error();
+}
+
+
+void KEduVocXdxfReader::readUnknownElement()
+{
+    while (!atEnd()) {
+        readNext();
+
+        if (isEndElement())
+            break;
+
+        if (isStartElement())
+            readUnknownElement();
+    }
+}
+
+
+void KEduVocXdxfReader::readXdxf()
+{
+    ///The language attributes are required and should be ISO 639-2 codes, but you never know...
+    QStringRef id1 = attributes().value("lang_from");
+    if(!id1.isNull())
+        m_doc->appendIdentifier(id1.toString().toLower());
+    else
+        m_doc->appendIdentifier(i18n("Original"));
+
+    QStringRef id2 = attributes().value("lang_to");
+    if(!id2.isNull())
+        m_doc->appendIdentifier(id2.toString().toLower());
+    else
+        m_doc->appendIdentifier(i18n("Translation"));
+
+    while (!atEnd()) {
+        readNext();
+
+        if (isEndElement())
+            break;
+
+        if (isStartElement()) {
+            if (name() == "description")
+                m_doc->setDocumentRemark(readElementText());
+            else if (name() == "full_name")
+                m_doc->setTitle(readElementText());
+            else if (name() == "ar")
+                readEntry();
+            else
+                readUnknownElement();
+        }
+    }
+
+    m_doc->setAuthor("http://xdxf.sf.net");
+}
+
+
+void KEduVocXdxfReader::readEntry()
+{
+    QString front;
+    QString back;
+
+    while (!(isEndElement() && name() == "ar")) {
+        readNext();
+        if (isStartElement() && name() == "k")
+            front = readElementText();
+        else if (isCharacters() || isEntityReference())
+            back.append(text().toString());
+    }
+
+    KEduVocExpression expr = KEduVocExpression(front);
+    expr.setTranslation(1, back);
+    m_doc->appendEntry(&expr);
 }

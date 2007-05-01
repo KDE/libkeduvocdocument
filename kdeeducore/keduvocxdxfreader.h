@@ -17,24 +17,24 @@
 #ifndef KEDUVOCXDXFREADER_H
 #define KEDUVOCXDXFREADER_H
 
-#include <QtXml>
+#include <QXmlStreamReader>
 
 class QIODevice;
 class KEduVocDocument;
 
-class KEduVocXdxfReader : public QObject
+class KEduVocXdxfReader : public QXmlStreamReader
 {
 public:
-  KEduVocXdxfReader(QIODevice *file);
+    KEduVocXdxfReader(KEduVocDocument *doc);
 
-  bool readDoc(KEduVocDocument *doc);
-
-  QString errorMessage() const {return m_errorMessage;}
+    bool read(QIODevice *device);
 
 private:
-  QIODevice *m_inputFile;
-  KEduVocDocument *m_doc;
-  QString m_errorMessage;
+    void readUnknownElement();
+    void readXdxf();
+    void readEntry();
+
+    KEduVocDocument *m_doc;
 };
 
 #endif

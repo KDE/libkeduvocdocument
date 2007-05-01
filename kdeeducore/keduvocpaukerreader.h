@@ -17,26 +17,26 @@
 #ifndef KEDUVOCPAUKERREADER_H
 #define KEDUVOCPAUKERREADER_H
 
-#include <QtXml>
+#include <QXmlStreamReader>
 
 class QIODevice;
 class KEduVocDocument;
 
-class KEduVocPaukerReader : public QObject
+class KEduVocPaukerReader : public QXmlStreamReader
 {
 public:
-  KEduVocPaukerReader(QIODevice *file);
+    KEduVocPaukerReader(KEduVocDocument *doc);
 
-  bool readDoc(KEduVocDocument *doc);
-
-  QString errorMessage() const {return m_errorMessage;}
+    bool read(QIODevice *device);
 
 private:
-  QString cardText(const QDomNode &entry, const QString &tagName) const;
+    void readUnknownElement();
+    void readPauker();
+    void readBatch();
+    void readCard();
+    QString readText();
 
-  QIODevice *m_inputFile;
-  KEduVocDocument *m_doc;
-  QString m_errorMessage;
+    KEduVocDocument *m_doc;
 };
 
 #endif
