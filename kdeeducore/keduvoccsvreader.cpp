@@ -23,6 +23,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "keduvoccsvreader.h"
+
 #include <QIODevice>
 #include <QTextStream>
 
@@ -30,7 +32,6 @@
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
-#include "keduvoccsvreader.h"
 
 KEduVocCsvReader::KEduVocCsvReader(QIODevice *file)
 {

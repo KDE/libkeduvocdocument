@@ -18,10 +18,12 @@
 #ifndef KEDUVOCVOKABELNREADER_H
 #define KEDUVOCVOKABELNREADER_H
 
+#include <QString>
+
 class QIODevice;
 class KEduVocDocument;
 
-class KEduVocVokabelnReader : public QObject
+class KEduVocVokabelnReader
 {
 public:
   KEduVocVokabelnReader(QIODevice *file);

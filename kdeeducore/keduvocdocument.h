@@ -1,7 +1,7 @@
 /***************************************************************************
                    Vocabulary Document for KDE Edu
     -----------------------------------------------------------------------
-    copyright     : (C) 1999-2001 Ewald Arnold
+    copyright     : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
                     (C) 2001 The KDE-EDU team
                     (C) 2005, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
  ***************************************************************************/
@@ -497,7 +497,7 @@ public:
    * Delete a lesson.
    * @param lessonIndex which lesson
    * @param deleteMode either KVocDocument::DeleteEmptyLesson (delete only if empty) or KVocDocument::DeleteEntriesAndLesson (delete including vocabulary in that lesson)
-   * @returns if the deletion was successfull. If there are vocabularies in the lesson, but DeleteEmptyLesson, this will return false and not delete the lesson.
+   * @returns if the deletion was successful. If there are vocabularies in the lesson, but DeleteEmptyLesson, this will return false and not delete the lesson.
    */
   bool deleteLesson(int lessonIndex, int deleteMode);
 

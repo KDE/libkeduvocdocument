@@ -1,7 +1,7 @@
 /***************************************************************************
                    export a KEduVocDocument to a KVTML file
     -----------------------------------------------------------------------
-    copyright           : (C) 1999-2001 Ewald Arnold
+    copyright           : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
                           (C) 2001 The KDE-EDU team
                           (C) 2005 Eric Pignet <eric at erixpage.com>
                           (C) 2007 Peter Hedlund <peter.hedlund@kdemail.net>
@@ -16,11 +16,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <kdebug.h>
+#include "keduvockvtmlwriter.h"
+
 #include <QTextStream>
 #include <QFile>
 
-#include "keduvockvtmlwriter.h"
+#include <kdebug.h>
+
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
 #include "kvtmldefs.h"

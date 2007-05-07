@@ -17,10 +17,13 @@
 #ifndef KEDUVOCCSVREADER_H
 #define KEDUVOCCSVREADER_H
 
+#include <QString>
+
 class QIODevice;
+
 class KEduVocDocument;
 
-class KEduVocCsvReader : public QObject
+class KEduVocCsvReader
 {
 public:
   KEduVocCsvReader(QIODevice *file);

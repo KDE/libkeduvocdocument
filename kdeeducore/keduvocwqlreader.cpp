@@ -15,12 +15,13 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "keduvocwqlreader.h"
+
 #include <QTextStream>
 #include <QIODevice>
 
 #include <klocale.h>
 
-#include "keduvocwqlreader.h"
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
 

@@ -1,6 +1,3 @@
-#ifndef LEITNERBOX_H
-#define LEITNERBOX_H
-
 /***************************************************************************
  *   Copyright (C) 2005      by Martin Pfeiffer <hubipete@gmx.net>         *
  *                                                                         *
@@ -19,6 +16,9 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
+
+#ifndef LEITNERBOX_H
+#define LEITNERBOX_H
 
 #include <libkdeedu_core_export.h>
 

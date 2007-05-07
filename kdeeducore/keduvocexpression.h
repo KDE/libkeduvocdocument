@@ -1,10 +1,9 @@
 /***************************************************************************
                         Vocabulary Expression for KDE Edu
     -----------------------------------------------------------------------
-    copyright            : (C) 1999-2001 Ewald Arnold
+    copyright            : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
                            (C) 2001 The KDE-EDU team
-                           (C) 2005-2007 Peter Hedlund
-    email                : peter.hedlund@kdemail.net
+                           (C) 2005-2007 Peter Hedlund <peter.hedlund@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************

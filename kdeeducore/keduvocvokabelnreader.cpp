@@ -21,6 +21,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "keduvocvokabelnreader.h"
+
 #include <QIODevice>
 
 #include <klocale.h>
@@ -28,7 +30,6 @@
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
-#include "keduvocvokabelnreader.h"
 
 KEduVocVokabelnReader::KEduVocVokabelnReader(QIODevice *file)
 {
