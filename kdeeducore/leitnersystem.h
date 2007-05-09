@@ -22,7 +22,7 @@
 
 #include <libkdeedu_core_export.h>
 
-#include <QStringList>
+#include <QtCore/QStringList>
 
 #include "leitnerbox.h"
 

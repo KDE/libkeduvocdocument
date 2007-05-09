@@ -95,7 +95,7 @@ public:
                                      QString &remark,
                                      int &bcount, int &rev_bcount,
                                      QString &query_id,
-                                     QString &pronunce,
+                                     QString &pronunciation,
                                      int &width,
                                      QString &type,
                                      QString &faux_ami_f,

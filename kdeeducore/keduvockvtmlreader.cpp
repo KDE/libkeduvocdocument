@@ -825,7 +825,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
                                                         QString &remark,
                                                         int &bcount, int &rev_bcount,
                                                         QString &query_id,
-                                                        QString &pronunce,
+                                                        QString &pronunciation,
                                                         int &width,
                                                         QString &type,
                                                         QString &faux_ami_f,
@@ -1004,10 +1004,10 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
     }
   }
 
-  pronunce = "";
+  pronunciation = "";
   attribute = domElementExpressionChild.attributeNode(KV_PRONUNCE);
   if (!attribute.isNull())
-    pronunce = attribute.value();
+    pronunciation = attribute.value();
 
   query_id = "";
   attribute = domElementExpressionChild.attributeNode(KV_QUERY);
@@ -1027,7 +1027,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   int                       bcount;
   int                       r_bcount;
   QString                   remark;
-  QString                   pronunce;
+  QString                   pronunciation;
   QDateTime                 qdate;
   QDateTime                 r_qdate;
   bool                      inquery;
@@ -1142,7 +1142,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   //-----------
   // Attributes
   if (!readExpressionChildAttributes(currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
-                                     pronunce, width, type, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase))
+                                     pronunciation, width, type, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase))
     return false;
 
 
@@ -1227,8 +1227,8 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   }
   if (!remark.isEmpty() )
     expr.setRemark (0, remark);
-  if (!pronunce.isEmpty() )
-    expr.setPronunciation(0, pronunce);
+  if (!pronunciation.isEmpty() )
+    expr.setPronunciation(0, pronunciation);
   if (!type.isEmpty() )
     expr.setType(0, type);
   if (!synonym.isEmpty() )
@@ -1261,7 +1261,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
       // Attributes
 
       if (!readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
-                                          pronunce, width, type, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase))
+                                          pronunciation, width, type, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase))
         return false;
 
       if (m_doc->entryCount() == 0)
@@ -1353,8 +1353,8 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
         expr.setType (count, type);
       if (!remark.isEmpty() )
         expr.setRemark (count, remark);
-      if (!pronunce.isEmpty() )
-        expr.setPronunciation(count, pronunce);
+      if (!pronunciation.isEmpty() )
+        expr.setPronunciation(count, pronunciation);
       if (!faux_ami_f.isEmpty() )
         expr.setFauxAmi (count, faux_ami_f, false);
       if (!faux_ami_t.isEmpty() )

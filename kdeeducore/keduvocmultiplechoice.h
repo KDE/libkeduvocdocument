@@ -29,7 +29,7 @@
 
 #include <libkdeedu_core_export.h>
 
-#include <QString>
+#include <QtCore/QString>
 
 #define MAX_MULTIPLE_CHOICE  5  // select one out of x
 

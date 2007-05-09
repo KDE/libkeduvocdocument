@@ -22,7 +22,7 @@
 
 #include <libkdeedu_core_export.h>
 
-#include <QString>
+#include <QtCore/QString>
 
 /**
  * A box in a LeitnerSystem - a LeitnerBox
