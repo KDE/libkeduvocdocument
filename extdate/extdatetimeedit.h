@@ -79,7 +79,7 @@ class EXTDATE_EXPORT ExtDateEdit : public QSpinBox {
 /**
 	*@short Constructor for UI files (contains only a parent widget argument)
 	*/
-		explicit ExtDateEdit( QWidget *parent = 0 );
+		explicit ExtDateEdit( QWidget *parent );
 
 /**
 	*@short Default destructor.  Empty.
