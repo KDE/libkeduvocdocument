@@ -27,10 +27,10 @@
 // Just a schema.
 
 
+#include "extcalendarsystemgregorian.h"
+
 #include <klocale.h>
 #include <kdebug.h>
-
-#include "extcalendarsystemgregorian.h"
 
 ExtCalendarSystemGregorian::ExtCalendarSystemGregorian(const KLocale * locale)
   : ExtCalendarSystem(locale)

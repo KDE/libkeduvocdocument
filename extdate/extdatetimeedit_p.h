@@ -14,6 +14,8 @@
 #ifndef EXTDATETIMEEDIT_P_H
 #define EXTDATETIMEEDIT_P_H
 
+#include <QLineEdit>
+
 /**
 	*@class edLineEdit
 	*@short A QLineEdit adapted for use by ExtDateEdit.

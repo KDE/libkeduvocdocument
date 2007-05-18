@@ -14,8 +14,10 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "extdatetimeedit.h"
+#include "extdatetimeedit_p.h"
+
 #include <QDateTimeEdit>
-#include <QLineEdit>
 #include <QTimeEdit>
 #include <QHBoxLayout>
 #include <QMouseEvent>
@@ -26,8 +28,6 @@
 
 #include "extdatetime.h"
 
-#include "extdatetimeedit.h"
-#include "extdatetimeedit_p.h"
 
 class ExtDateEdit::Private
 {

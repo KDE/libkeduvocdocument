@@ -19,6 +19,7 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "extdatewidget.h"
 
 #include <QComboBox>
 #include <QHBoxLayout>
@@ -26,7 +27,6 @@
 
 #include <kdialog.h>
 
-#include "extdatewidget.h"
 #include "extcalendarsystemgregorian.h"
 
 class ExtDateWidgetSpinBox : public QSpinBox

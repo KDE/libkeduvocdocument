@@ -20,6 +20,8 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "extdatepicker.h"
+
 #include <QApplication>
 #include <QComboBox>
 #include <QKeyEvent>
@@ -34,7 +36,6 @@
 #include <kdebug.h>
 #include <knotification.h>
 
-#include "extdatepicker.h"
 #include "extdatetbl.h"
 #include "extdatepicker.moc"
 

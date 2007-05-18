@@ -27,10 +27,10 @@
 // systems.
 // Also default gregorian and factory classes
 
-#include <kglobal.h>
-
 #include "extcalendarsystem.h"
 #include "klocale.h"
+
+#include <kglobal.h>
 
 class ExtCalendarSystemPrivate
 {
