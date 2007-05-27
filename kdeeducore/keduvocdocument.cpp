@@ -41,10 +41,10 @@
 #include "keduvocxdxfreader.h"
 #include "leitnersystem.h"
 
-class KEduVocDocument::Private
+class KEduVocDocument::KEduVocDocumentPrivate
 {
 public:
-  Private(KEduVocDocument* qq)
+  KEduVocDocumentPrivate(KEduVocDocument* qq)
     : q(qq)
   {
     init();
@@ -90,7 +90,7 @@ public:
 };
 
 
-void KEduVocDocument::Private::init()
+void KEduVocDocument::KEduVocDocumentPrivate::init()
 {
   m_lessonDescriptions.clear();
   m_articles.clear();
@@ -120,7 +120,7 @@ void KEduVocDocument::Private::init()
 
 
 KEduVocDocument::KEduVocDocument(QObject *parent)
-  : QObject(parent), d(new Private(this))
+  : QObject(parent), d(new KEduVocDocumentPrivate(this))
 {
 }
 
@@ -360,7 +360,7 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
     if (!saved) {
       QString msg = i18n("Could not save \"%1\"\nDo you want to try again?", tmp.path());
       int result = KMessageBox::warningContinueCancel(0, msg, i18n("Error Saving File"), KGuiItem(i18n("&Retry")));
-      if (result == KMessageBox::Cancel) 
+      if (result == KMessageBox::Cancel)
         return false;
     }
   }

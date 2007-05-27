@@ -26,10 +26,10 @@
 
 #include <kdebug.h>
 
-class LeitnerSystemView::Private
+class LeitnerSystemView::LeitnerSystemViewPrivate
 {
 public:
-	Private( LeitnerSystemView* qq )
+	LeitnerSystemViewPrivate( LeitnerSystemView* qq )
 	  : q( qq ), m_highlightedBox( -1 )
 	{
 	}
@@ -49,7 +49,7 @@ public:
 
 
 LeitnerSystemView::LeitnerSystemView( QWidget* parent )
-  : QWidget( parent ), d( new Private( this ) )
+  : QWidget( parent ), d( new LeitnerSystemViewPrivate( this ) )
 {
 }
 
@@ -59,7 +59,7 @@ LeitnerSystemView::~LeitnerSystemView()
 	delete d;
 }
 
-void LeitnerSystemView::Private::drawSystem( QPainter* p )
+void LeitnerSystemView::LeitnerSystemViewPrivate::drawSystem( QPainter* p )
 {
 	m_imageY = q->height() / 2 - 32;
 
@@ -80,7 +80,7 @@ void LeitnerSystemView::Private::drawSystem( QPainter* p )
 	}
 }
 
-void LeitnerSystemView::Private::drawConnections(QPainter* p)
+void LeitnerSystemView::LeitnerSystemViewPrivate::drawConnections(QPainter* p)
 {
 	//dist = number of boxes that are in between the two boxes
 	//width = width of the rect for the arc
@@ -161,7 +161,7 @@ void LeitnerSystemView::paintEvent( QPaintEvent* )
 	d->drawConnections( &p );
 }
 
-void LeitnerSystemView::Private::calculateSize()
+void LeitnerSystemView::LeitnerSystemViewPrivate::calculateSize()
 {
 	//margin = 12
 	//distance between boxes = 10

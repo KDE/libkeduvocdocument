@@ -617,8 +617,8 @@ Q_SIGNALS:
 
 private:
   // The private data of this - see KEduVocDocument::Private, implemented in keduvocdocument.cpp
-  class Private;
-  Private* const d;
+  class KEduVocDocumentPrivate;
+  KEduVocDocumentPrivate* const d;
 
   Q_DISABLE_COPY(KEduVocDocument)
 };

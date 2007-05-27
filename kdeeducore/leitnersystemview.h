@@ -35,7 +35,7 @@ class LeitnerSystem;
 class KDEEDUCORE_EXPORT LeitnerSystemView : public QWidget
 {
 	Q_OBJECT
-		
+
 public:
 	/**
 	 * The public constructor
@@ -56,9 +56,9 @@ public:
 	 * @param box the number of the box to be highlighted
 	 */
 	void highlightBox( int box );
-	
+
 Q_SIGNALS:
-	void boxClicked(int box);  //is emitted if the user clicks on a box 
+	void boxClicked(int box);  //is emitted if the user clicks on a box
 
 protected:
 	virtual void paintEvent( QPaintEvent* );
@@ -66,8 +66,8 @@ protected:
     	virtual void mousePressEvent(QMouseEvent* e);
 
 private:
-	class Private;
-	Private* const d;
+	class LeitnerSystemViewPrivate;
+	LeitnerSystemViewPrivate* const d;
 
 	Q_DISABLE_COPY( LeitnerSystemView )
 };
