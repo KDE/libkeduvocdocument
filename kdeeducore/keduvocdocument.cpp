@@ -610,7 +610,7 @@ int KEduVocDocument::indexOfIdentifier(const QString &lang) const
 
 QString KEduVocDocument::identifier(int index) const
 {
-  if (index >= d->m_identifiers.size() || index < 1 )
+  if (index >= d->m_identifiers.size() || index < 0 )
     return "";
   else
     return d->m_identifiers[index];
