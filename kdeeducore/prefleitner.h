@@ -76,8 +76,8 @@ public Q_SLOTS:
 	void slotApply();
 
 private:
-	class Private;
-	Private* const d;
+	class PrefLeitnerPrivate;
+	PrefLeitnerPrivate* const d;
 
 	Q_DISABLE_COPY( PrefLeitner )
 	Q_PRIVATE_SLOT( d, void slotBoxClicked( int ) )

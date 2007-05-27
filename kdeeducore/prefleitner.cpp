@@ -31,10 +31,10 @@
 
 #include <kdebug.h>
 
-class PrefLeitner::Private
+class PrefLeitner::PrefLeitnerPrivate
 {
 public:
-	Private( PrefLeitner* qq, LeitnerSystem* system )
+	PrefLeitnerPrivate( PrefLeitner* qq, LeitnerSystem* system )
 	  : q( qq ), m_leitnerSystemView( 0 ), m_selectedSystem( system ),
 	    m_selectedBox( 0 )
 	{
@@ -61,12 +61,12 @@ public:
 
 
 PrefLeitner::PrefLeitner( QWidget* parent )
-  : QDialog( parent ), d( new Private( this, 0 ) )
+  : QDialog( parent ), d( new PrefLeitnerPrivate( this, 0 ) )
 {
 }
 
 PrefLeitner::PrefLeitner( LeitnerSystem* system, QWidget* parent )
-  : QDialog( parent ), d( new Private( this, system ) )
+  : QDialog( parent ), d( new PrefLeitnerPrivate( this, system ) )
 {
 }
 
@@ -75,19 +75,19 @@ PrefLeitner::~PrefLeitner()
 	delete d;
 }
 
-void PrefLeitner::Private::init()
+void PrefLeitner::PrefLeitnerPrivate::init()
 {
 	m_ui.setupUi( q );
-	
+
 	QScrollArea *helperSV = new QScrollArea( q );
 
 	m_leitnerSystemView = new LeitnerSystemView( helperSV->viewport() );
         m_leitnerSystemView->setObjectName( "LeitnerSystemView" );
-	
+
         helperSV->setWidget( m_leitnerSystemView );
 
 	connect( m_leitnerSystemView, SIGNAL( boxClicked( int ) ), q, SLOT( slotBoxClicked( int ) ) );
-	
+
 	if ( m_selectedSystem )
 	{
 		//insert the list of box' names in the comboboxes
@@ -128,7 +128,7 @@ void PrefLeitner::slotBoxName( const QString& newName )
 	d->m_selectedSystem->setBoxName( d->m_selectedBox, newName );
 }
 
-void PrefLeitner::Private::newSystem()
+void PrefLeitner::PrefLeitnerPrivate::newSystem()
 {
 	m_ui.cmbCorrect->addItems( m_selectedSystem->getBoxNameList() );
 	m_ui.cmbWrong->addItems( m_selectedSystem->getBoxNameList() );
@@ -136,12 +136,12 @@ void PrefLeitner::Private::newSystem()
 	refreshSystemView();
 }
 
-void PrefLeitner::Private::refreshSystemView()
+void PrefLeitner::PrefLeitnerPrivate::refreshSystemView()
 {
 	m_leitnerSystemView->setSystem( m_selectedSystem );
 }
 
-void PrefLeitner::Private::slotBoxClicked( int box )
+void PrefLeitner::PrefLeitnerPrivate::slotBoxClicked( int box )
 {
 	m_selectedBox = m_selectedSystem->boxWithNumber( box );
 
