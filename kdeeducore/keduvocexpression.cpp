@@ -18,10 +18,10 @@
 #include "keduvocexpression.h"
 
 
-class KEduVocExpression::Private
+class KEduVocExpression::KEduVocExpressionPrivate
 {
 public:
-  Private(KEduVocExpression* qq)
+  KEduVocExpressionPrivate(KEduVocExpression* qq)
     : q(qq)
   {
     init();
@@ -29,7 +29,7 @@ public:
 
   void init();
 
-  bool operator==(const Private &p) const;
+  bool operator==(const KEduVocExpressionPrivate &p) const;
 
   KEduVocExpression* q;
 
@@ -67,7 +67,7 @@ public:
 };
 
 
-void KEduVocExpression::Private::init()
+void KEduVocExpression::KEduVocExpressionPrivate::init()
 {
   m_grades.append(KV_NORM_GRADE);
   m_reverseGrades.append(KV_NORM_GRADE);
@@ -85,7 +85,7 @@ void KEduVocExpression::Private::init()
 }
 
 
-bool KEduVocExpression::Private::operator==(const KEduVocExpression::Private &p) const
+bool KEduVocExpression::KEduVocExpressionPrivate::operator==(const KEduVocExpression::KEduVocExpressionPrivate &p) const
 {
   return m_original == p.m_original &&
     m_expressionTypes == p.m_expressionTypes &&
@@ -119,19 +119,19 @@ bool KEduVocExpression::Private::operator==(const KEduVocExpression::Private &p)
 
 
 KEduVocExpression::KEduVocExpression()
-  : d(new Private(this))
+  : d(new KEduVocExpressionPrivate(this))
 {
 }
 
 KEduVocExpression::KEduVocExpression(const QString & expression, int lesson)
-  : d(new Private(this))
+  : d(new KEduVocExpressionPrivate(this))
 {
   setOriginal(expression.simplified());
   d->m_lesson = lesson;
 }
 
 KEduVocExpression::KEduVocExpression(const QString & expression, const QString & separator, int lesson)
-  : d(new Private(this))
+  : d(new KEduVocExpressionPrivate(this))
 {
   QString se;
   QString expr = expression;
@@ -161,7 +161,7 @@ KEduVocExpression::KEduVocExpression(const QString & expression, const QString &
 
 
 KEduVocExpression::KEduVocExpression(const KEduVocExpression &expression)
-  : d(new Private(*expression.d))
+  : d(new KEduVocExpressionPrivate(*expression.d))
 {
 }
 

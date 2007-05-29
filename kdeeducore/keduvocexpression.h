@@ -428,8 +428,8 @@ public:
   bool operator==(const KEduVocExpression &expression) const;
 
 private:
-  class Private;
-  Private* const d;
+  class KEduVocExpressionPrivate;
+  KEduVocExpressionPrivate* const d;
 };
 
 #endif // KEduVocExpression_H
