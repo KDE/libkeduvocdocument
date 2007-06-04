@@ -38,7 +38,6 @@
 
 class QStringList;
 class KEduVocExpression;
-class KEduVocMultipleChoice;
 class LeitnerSystem;
 
 /**
