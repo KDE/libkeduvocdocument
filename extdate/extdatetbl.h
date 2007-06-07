@@ -276,9 +276,9 @@ public:
     /**
      * The constructor.
      */
-    ExtDateTable(QWidget *parent=0,
-	       ExtDate date=ExtDate::currentDate(),
-	       const char* name=0, Qt::WFlags f=0);
+    explicit ExtDateTable(QWidget *parent=0,
+                          ExtDate date=ExtDate::currentDate(),
+                          const char* name=0, Qt::WFlags f=0);
 
     /**
      * The destructor.
