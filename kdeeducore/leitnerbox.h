@@ -20,7 +20,7 @@
 #ifndef LEITNERBOX_H
 #define LEITNERBOX_H
 
-#include <libkdeedu_core_export.h>
+#include "libkdeedu_core_export.h"
 
 #include <QtCore/QString>
 

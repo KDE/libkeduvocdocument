@@ -27,7 +27,7 @@
 #ifndef MultipleChoice_included
 #define MultipleChoice_included
 
-#include <libkdeedu_core_export.h>
+#include "libkdeedu_core_export.h"
 
 #include <QtCore/QString>
 

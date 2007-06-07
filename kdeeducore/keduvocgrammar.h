@@ -26,7 +26,7 @@
 #ifndef KEDUVOCGRAMMAR_H
 #define KEDUVOCGRAMMAR_H
 
-#include <libkdeedu_core_export.h>
+#include "libkdeedu_core_export.h"
 
 #include <QtCore/QStringList>
 
