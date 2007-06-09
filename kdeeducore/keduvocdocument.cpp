@@ -619,7 +619,7 @@ QString KEduVocDocument::identifier(int index) const
 
 void KEduVocDocument::setIdentifier(int idx, const QString &id)
 {
-  if (idx < d->m_identifiers.size() && idx >= 1 ) {
+  if (idx < d->m_identifiers.size() && idx >= 0 ) {
     d->m_identifiers[idx] = id;
   }
 }
