@@ -485,8 +485,10 @@ void KEduVocExpression::addTranslation(const QString & expr, grade_t grade, grad
 
 QString KEduVocExpression::translation(int index) const
 {
-  if (index > d->m_translations.count() || index < 1)
+  if (index > d->m_translations.count() || index < 0)
     return "";
+  if (index == 0)
+    return d->m_original;
   else
     return d->m_translations[index-1];
 }
@@ -564,8 +566,13 @@ void KEduVocExpression::removeTranslation(int index)
 
 void KEduVocExpression::setTranslation(int index, const QString & expr)
 {
-  if (index <= 0)
+  if (index < 0)
     return;
+
+  if (index == 0) {
+    d->m_original = expr.simplified();
+    return;
+  }
 
   // extend translations with empty strings if necessary
   if (d->m_translations.count() < index)
