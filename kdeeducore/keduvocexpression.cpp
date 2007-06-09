@@ -15,6 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <KDebug>
+
 #include "keduvocexpression.h"
 
 
@@ -33,7 +35,7 @@ public:
 
   KEduVocExpression* q;
 
-  QString m_original;
+//  QString m_original;
 
   // all these vectors must be deleted in removeTranslation()
   QStringList m_expressionTypes;
@@ -87,7 +89,7 @@ void KEduVocExpression::KEduVocExpressionPrivate::init()
 
 bool KEduVocExpression::KEduVocExpressionPrivate::operator==(const KEduVocExpression::KEduVocExpressionPrivate &p) const
 {
-  return m_original == p.m_original &&
+  return
     m_expressionTypes == p.m_expressionTypes &&
     m_translations == p.m_translations &&
     m_remarks == p.m_remarks &&
@@ -126,7 +128,7 @@ KEduVocExpression::KEduVocExpression()
 KEduVocExpression::KEduVocExpression(const QString & expression, int lesson)
   : d(new KEduVocExpressionPrivate(this))
 {
-  setOriginal(expression.simplified());
+  setTranslation(0, expression.simplified());
   d->m_lesson = lesson;
 }
 
@@ -139,11 +141,11 @@ KEduVocExpression::KEduVocExpression(const QString & expression, const QString &
 
   if (separator.length()) {
     int pos = expr.indexOf(separator);
-
+/*
     if (pos == -1) {
-      setOriginal(expr.simplified());
+      setTranslation(0, expr.simplified()); ///@todo: no special original treatment
     }
-    else {
+    else {*/
       se = expr.left(pos).simplified();
       setOriginal(se);
       expr.remove(0, pos + separator.length());
@@ -155,7 +157,7 @@ KEduVocExpression::KEduVocExpression(const QString & expression, const QString &
         expr.remove(0, pos + separator.length());
       }
       addTranslation(expr.simplified(), KV_NORM_GRADE, KV_NORM_GRADE);
-    }
+    //}
   }
 }
 
@@ -174,7 +176,8 @@ KEduVocExpression::~KEduVocExpression()
 
 int KEduVocExpression::translationCount() const
 {
-  return d->m_translations.count();
+  /// @todo: once we get rid of the idea that there exists an original this should return simply d->m_translations.count().
+  return d->m_translations.count() - 1;
 }
 
 
@@ -471,36 +474,43 @@ void KEduVocExpression::setPronunciation(int index, const QString & expr)
 
 void KEduVocExpression::addTranslation(const QString & expr, grade_t grade, grade_t rev_grade)
 {
-  if (grade > KV_MAX_GRADE)
-    grade = KV_MAX_GRADE;
+  if (d->m_translations.count() > 0) { // we only keep grades for translation 1..n - later this will change, as all combinations are allowed, so only from grades are saved relative to the other languages.
+    if (grade > KV_MAX_GRADE)
+        grade = KV_MAX_GRADE;
 
-  if (rev_grade > KV_MAX_GRADE)
-    rev_grade = KV_MAX_GRADE;
+    if (rev_grade > KV_MAX_GRADE)
+        rev_grade = KV_MAX_GRADE;
 
-  d->m_grades.append(grade);
-  d->m_reverseGrades.append(rev_grade);
+    d->m_grades.append(grade);
+    d->m_reverseGrades.append(rev_grade);
+  }
   d->m_translations.append(expr.simplified());
 }
 
 
 QString KEduVocExpression::translation(int index) const
 {
-  if (index > d->m_translations.count() || index < 0)
+  if (index > d->m_translations.count() - 1 || index < 0) {
     return "";
-  if (index == 0)
-    return d->m_original;
-  else
-    return d->m_translations[index-1];
+  }
+  return d->m_translations[index];
 }
 
 
 void KEduVocExpression::removeTranslation(int index)
 {
-  if (index <= 0)
+  if (index < 0)
     return;
 
+  if (index == 0) {
+    kDebug() << "Warning - attempting to use removeTranslation(0) to remove the first translation!" << endl;
+    // This will only work when we get everything moved into a translation class.
+    d->m_translations[0] = "";
+    return;
+  }
+
   if (index <= translationCount())
-    d->m_translations.removeAt(index - 1);
+    d->m_translations.removeAt(index);
 
   if (index < d->m_remarks.count())
     d->m_remarks.removeAt(index - 1);
@@ -569,18 +579,13 @@ void KEduVocExpression::setTranslation(int index, const QString & expr)
   if (index < 0)
     return;
 
-  if (index == 0) {
-    d->m_original = expr.simplified();
-    return;
+  // extend translations with empty strings if necessary
+  for (int i = d->m_translations.count(); i < index + 1; i++) {
+      d->m_translations.append("");
   }
 
-  // extend translations with empty strings if necessary
-  if (d->m_translations.count() < index)
-    for (int i = d->m_translations.count(); i < index; i++)
-      d->m_translations.append("");
-
 //  if (index <= translations.count())
-  d->m_translations[index-1] = expr.simplified();
+  d->m_translations[index] = expr.simplified();
 }
 
 
@@ -897,13 +902,17 @@ void KEduVocExpression::incBadCount(int index, bool rev_count)
 
 QString KEduVocExpression::original() const
 {
-  return d->m_original;
+  return translation(0);
 }
 
 
 void KEduVocExpression::setOriginal(const QString & expr)
 {
-  d->m_original = expr;
+  if (d->m_translations.count() == 0) {
+    d->m_translations.append(expr);
+  } else {
+    d->m_translations[0] = expr;
+  }
 }
 
 
