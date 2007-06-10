@@ -6,6 +6,7 @@ set(kdeeducore_LIB_SRCS
    keduvoccsvwriter.cpp
    keduvocdocument.cpp
    keduvocexpression.cpp
+   keduvoctranslation.cpp
    keduvocgrammar.cpp
    keduvockvtmlreader.cpp
    keduvockvtmlwriter.cpp

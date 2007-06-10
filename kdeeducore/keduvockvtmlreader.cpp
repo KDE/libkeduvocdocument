@@ -295,7 +295,7 @@ bool KEduVocKvtmlReader::readArticle(QDomElement &domElementParent)
       }
       else
       {
-        if (!attribute.isNull() && attribute.value() != (i == 0 ? m_doc->originalIdentifier():m_doc->identifier(i)))
+        if (!attribute.isNull() && attribute.value() != (m_doc->identifier(i)))
         {
           // different originals ?
           m_errorMessage = i18n("Ambiguous definition of language code");

@@ -18,6 +18,7 @@
 #include <KDebug>
 
 #include "keduvocexpression.h"
+#include "keduvoctranslation.h"
 
 
 class KEduVocExpression::KEduVocExpressionPrivate
@@ -39,7 +40,7 @@ public:
 
   // all these vectors must be deleted in removeTranslation()
   QStringList m_expressionTypes;
-  QStringList m_translations;
+//  QStringList m_translations;
   QStringList m_remarks;
   QStringList m_usageLabels;
   QStringList m_paraphrases;
@@ -66,11 +67,15 @@ public:
   int m_lesson;
   bool m_inQuery;
   bool m_active;
+
+  QMap <int, KEduVocTranslation> m_translations;
 };
 
 
 void KEduVocExpression::KEduVocExpressionPrivate::init()
 {
+  m_translations.clear();
+
   m_grades.append(KV_NORM_GRADE);
   m_reverseGrades.append(KV_NORM_GRADE);
   m_inQuery = false;
@@ -90,8 +95,8 @@ void KEduVocExpression::KEduVocExpressionPrivate::init()
 bool KEduVocExpression::KEduVocExpressionPrivate::operator==(const KEduVocExpression::KEduVocExpressionPrivate &p) const
 {
   return
-    m_expressionTypes == p.m_expressionTypes &&
     m_translations == p.m_translations &&
+    m_expressionTypes == p.m_expressionTypes &&
     m_remarks == p.m_remarks &&
     m_usageLabels == p.m_usageLabels &&
     m_paraphrases == p.m_paraphrases &&
@@ -176,8 +181,10 @@ KEduVocExpression::~KEduVocExpression()
 
 int KEduVocExpression::translationCount() const
 {
-  /// @todo: once we get rid of the idea that there exists an original this should return simply d->m_translations.count().
-  return d->m_translations.count() - 1;
+  /// @todo: maybe this should go away? it is very rare with QMap
+  // the minus 1 is because traditionally it used to be original + translations
+  /// @todo get rid of the minus one. but for now this implies too many other changes.
+  return d->m_translations.size() - 1;
 }
 
 
@@ -474,7 +481,7 @@ void KEduVocExpression::setPronunciation(int index, const QString & expr)
 
 void KEduVocExpression::addTranslation(const QString & expr, grade_t grade, grade_t rev_grade)
 {
-  if (d->m_translations.count() > 0) { // we only keep grades for translation 1..n - later this will change, as all combinations are allowed, so only from grades are saved relative to the other languages.
+  if (d->m_translations.count() > 0) { // we only keep grades for translation 1..n - later this will change, as all combinations are allowed, so only from grades are saved relative to the other languages. As soon as grades are only from grades and moved into the translation class this will become nice and free of sorrows.
     if (grade > KV_MAX_GRADE)
         grade = KV_MAX_GRADE;
 
@@ -484,21 +491,28 @@ void KEduVocExpression::addTranslation(const QString & expr, grade_t grade, grad
     d->m_grades.append(grade);
     d->m_reverseGrades.append(rev_grade);
   }
-  d->m_translations.append(expr.simplified());
+  //d->m_translations.append(expr.simplified());
+
+  // keys are always in ascending order, so we can insert with the last key + 1
+  // I suppose we deprecate this in favor of setTranslation(index, ... )
+  d->m_translations[d->m_translations.keys()[d->m_translations.keys().count()-1] + 1]
+    = KEduVocTranslation( expr.simplified() );
 }
 
 
 QString KEduVocExpression::translation(int index) const
 {
-  if (index > d->m_translations.count() - 1 || index < 0) {
+  if ( !d->m_translations.contains(index) ) {
     return "";
   }
-  return d->m_translations[index];
+  return d->m_translations.value(index).translation();
 }
 
 
 void KEduVocExpression::removeTranslation(int index)
 {
+    /// @todo IMPLEMENT ME - this will be really easy to implement as soon as the translation class contains all this rubbish.
+/*
   if (index < 0)
     return;
 
@@ -571,6 +585,7 @@ void KEduVocExpression::removeTranslation(int index)
 
   if (index < d->m_reverseQueryDates.count())
     d->m_reverseQueryDates.removeAt(index - 1);
+*/
 }
 
 
@@ -579,12 +594,18 @@ void KEduVocExpression::setTranslation(int index, const QString & expr)
   if (index < 0)
     return;
 
+///@todo get rid of this nonsense:
+/* not needed with qmap but for now all translations <= index are expected to exist
   // extend translations with empty strings if necessary
   for (int i = d->m_translations.count(); i < index + 1; i++) {
       d->m_translations.append("");
   }
-
+*/
+  for (int i = d->m_translations.count(); i <= index; i++) {
+      d->m_translations[i] = KEduVocTranslation("");
+  }
 //  if (index <= translations.count())
+
   d->m_translations[index] = expr.simplified();
 }
 
@@ -908,11 +929,18 @@ QString KEduVocExpression::original() const
 
 void KEduVocExpression::setOriginal(const QString & expr)
 {
+    if ( d->m_translations.contains(0) ) {
+        d->m_translations[0].setTranslation(expr);
+    } else {
+        d->m_translations[0] = KEduVocTranslation(expr);
+    }
+
+    /*
   if (d->m_translations.count() == 0) {
     d->m_translations.append(expr);
   } else {
     d->m_translations[0] = expr;
-  }
+  }*/
 }
 
 
