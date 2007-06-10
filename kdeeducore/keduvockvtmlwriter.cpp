@@ -126,7 +126,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
       QString s;
       domElementOriginal.setAttribute(KV_SIZEHINT, m_doc->sizeHint(0));
 
-      s = m_doc->originalIdentifier().simplified();
+      s = m_doc->identifier(0).simplified();
       if (s.isEmpty() )
         s = "original";
       domElementOriginal.setAttribute(KV_LANG, s);
@@ -184,7 +184,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
         return false;
     }
 
-    QDomText domTextOriginal = domDoc.createTextNode(entry->original());
+    QDomText domTextOriginal = domDoc.createTextNode(entry->translation(0));
     domElementOriginal.appendChild(domTextOriginal);
     domElementExpression.appendChild(domElementOriginal);
 
@@ -359,7 +359,7 @@ bool KEduVocKvtmlWriter::writeArticle(QDomDocument &domDoc, QDomElement &domElem
     QDomElement domElementEntry = domDoc.createElement(KV_ART_ENTRY);
     if (lfn == 0)
     {
-      s = m_doc->originalIdentifier().simplified();
+      s = m_doc->identifier(0).simplified();
       if (s.isEmpty())
         s = "original";
     }
@@ -670,21 +670,13 @@ bool KEduVocKvtmlWriter::writeConjugHeader(QDomDocument &domDoc, QDomElement &do
   {
     QDomElement domElementEntry = domDoc.createElement(KV_CON_ENTRY);
 
-    if (ent == 0)
-    {
-      s = m_doc->originalIdentifier().simplified();
-      if (s.isEmpty())
-        s = "original";
-    }
-    else
-    {
       s = m_doc->identifier(ent).simplified();
       if (s.isEmpty())
       {
         s.setNum(ent);
         s.prepend("translation ");
       }
-    }
+
     domElementEntry.setAttribute(KV_LANG, s);
 
     if (!writeConjug(domDoc, domElementEntry, curr_conjug[ent], CONJ_PREFIX))

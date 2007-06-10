@@ -63,9 +63,6 @@ bool KEduVocCsvWriter::writeDoc(KEduVocDocument *doc, const QString &generator)
       else
         currentRow += separator;
 
-      if (i == 0)
-        currentRow += expression->original();
-      else
         currentRow += expression->translation(i);
     }
 
