@@ -1,24 +1,28 @@
-//
-// C++ Implementation: KEduVocTranslationtranslation
-//
-// Description:
-//
-//
-// Author: Frederik Gladhorn <frederik.gladhorn@kdemail.net>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+/***************************************************************************
+                        Vocabulary Expression Translation for KDE Edu
+    -----------------------------------------------------------------------
+    copyright      :(C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
 
 //#include "keduvocexpression.h"
 
 #include "keduvoctranslation.h"
 #include <KDebug>
 
+/*
 class KEduVocTranslationPrivate
 {
 public:
-/*
+
     KEduVocTranslationPrivate () // ( KEduVocTranslation* qq )
             //: q ( qq )
     {
@@ -32,36 +36,9 @@ public:
     bool operator== ( const KEduVocTranslationPrivate &p ) const;
 
     //KEduVocTranslation* q;
-*/
-    QString m_translation; // This is the word itself. The vocabulary. This is what it is all about.
-
-//     QString m_types; // noun:male etc (language dependend)
-//     QString m_usageLabel;
-//     QString m_comment;
-//     QString m_paraphrase;
-//     QString m_synonym;
-//     QString m_example;
-//     QString m_antonym;
-//     QString m_pronunciation;
-//
-//     //QMap<int, KEduVocConjugation> m_conjugations; /// Conjugations are numbered 0..n with respect to the tenses they are for.
-//
-//     KEduVocComparison m_comparison;
-//
-//     KEduVocMultipleChoice m_multipleChoice;
-
-        // Here come all int indexFrom grades. (If you want, imagine the TO grades as int indexFrom of the other translation. That is where they belong. )
-    // User is asked to give THIS here as answer, than the grades go here.
-    // User answers, this is the source, grades go to the other translation.
-    // Grades go to the translation the user has to supply.
-    //not all have to be supplied
-
-    //QMap<int, TranslationGrade> m_grades;
-
-    // one false friend per other language is allowed
-    //QMap<int, QString> m_falseFriends;
 
 };
+*/
 
 /*
 void KEduVocTranslation::KEduVocTranslationPrivate::init()
@@ -400,19 +377,7 @@ bool KEduVocTranslation::operator ==(const KEduVocTranslation & translation) con
 
 KEduVocTranslation & KEduVocTranslation::operator =(const KEduVocTranslation & translation)
 {
-    // Check for self-assignment!
-    if (this == &translation) {      // Same object?
-      return *this;        // Yes, so skip assignment, and just return *this.
-      kDebug() << "Warning - self assignment" << endl;
-    }
-//kDebug() << "KEduVocTranslation & KEduVocTranslation::operator =(const KEduVocTranslation & translation)" << translation.d->m_translation << " d: " << d << endl;
-
     m_translation = translation.m_translation;
-
-//    *d = *translation.d;
-
-//    d->m_translation = translation.d->m_translation;
-kDebug() << "KEduVocTranslation & KEduVocTranslation::operator =(const KEduVocTranslation & translation)" << translation.m_translation << "This: " << this << endl;
     return *this;
 }
 

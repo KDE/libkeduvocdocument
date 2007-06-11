@@ -1,14 +1,17 @@
-//
-// C++ Interface: keduvocexpressiontranslation
-//
-// Description:
-//
-//
-// Author: Frederik Gladhorn <frederik.gladhorn@kdemail.net>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+/***************************************************************************
+                        Vocabulary Expression Translation for KDE Edu
+    -----------------------------------------------------------------------
+    copyright      :(C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
 
 
 #ifndef KEDUVOCEXPRESSIONTRANSLATION_H
@@ -50,21 +53,15 @@
 #include <QMap>
 #include <QString>
 
-//#include "keduvocgrammar.h"
-//#include "keduvocconjugation.h"
-//#include "keduvocmultiplechoice.h"
-/*
-///@todo move this into a seperate header, I guess
-typedef signed char grade_t;
-typedef unsigned short count_t;
-*/
+#include "keduvocgrade.h"
+#include "keduvocgrammar.h"
+#include "keduvocmultiplechoice.h"
+// @todo: move conjugation to it's proper file #include "keduvocconjugation.h"
+
 
 /**
 	@author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
-
-
-class KEduVocTranslationPrivate;
 
 class KDEEDUCORE_EXPORT KEduVocTranslation
 {
@@ -357,19 +354,36 @@ public:
     bool operator==(const KEduVocTranslation &translation) const;
 
 private:
-/*
-    class TranslationGrade
-    {
-    public:
-        grade_t m_grade;
-        count_t m_queryCount;
-        count_t m_badCount;
-        QDateTime m_queryDate;
-    };
-*/
-
     //KEduVocTranslationPrivate* const d;
+
+    /// This is the word itself. The vocabulary. This is what it is all about.
     QString m_translation;
+    /// noun:male etc (language dependend)
+    QString m_types;
+    QString m_usageLabel;
+    QString m_comment;
+    QString m_paraphrase;
+    QString m_synonym;
+    QString m_example;
+    QString m_antonym;
+    QString m_pronunciation;
+
+    /// Conjugations are numbered 0..n with respect to the tenses they are for.
+    QMap<int, KEduVocConjugation> m_conjugations;
+
+    KEduVocComparison m_comparison;
+
+    KEduVocMultipleChoice m_multipleChoice;
+
+    // Here come all int indexFrom grades. (If you want, imagine the TO grades as int indexFrom of the other translation. That is where they belong. )
+    // User is asked to give THIS here as answer, than the grades go here.
+    // User answers, this is the source, grades go to the other translation.
+    // Grades go to the translation the user has to type/choose/whatever.
+    // not all have to be supplied
+    QMap<int, KEduVocGrade> m_grades;
+
+    /// One false friend string per other language
+    QMap<int, QString> m_falseFriends;
 
 };
 

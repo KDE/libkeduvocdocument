@@ -18,8 +18,6 @@
 #include <KDebug>
 
 #include "keduvocexpression.h"
-#include "keduvoctranslation.h"
-
 
 class KEduVocExpression::KEduVocExpressionPrivate
 {

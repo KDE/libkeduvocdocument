@@ -52,9 +52,7 @@
 
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
-
-typedef signed char grade_t;
-typedef unsigned short count_t;
+#include "keduvoctranslation.h"
 
 /**
   This class contains one vocabulary expression as an original with one or more
