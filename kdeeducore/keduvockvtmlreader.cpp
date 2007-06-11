@@ -295,7 +295,7 @@ bool KEduVocKvtmlReader::readArticle(QDomElement &domElementParent)
       }
       else
       {
-        if (!attribute.isNull() && attribute.value() != (m_doc->identifier(i)))
+        if (!attribute.isNull() && attribute.value() != m_doc->identifier(i))
         {
           // different originals ?
           m_errorMessage = i18n("Ambiguous definition of language code");
@@ -440,7 +440,7 @@ bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVoc
       }
       else
       {
-        if (!domAttrLang.isNull() && domAttrLang.value() != (count == 0 ? m_doc->originalIdentifier():m_doc->identifier(count)))
+        if (!domAttrLang.isNull() && domAttrLang.value() != m_doc->identifier(count))
         {
           // different originals ?
           m_errorMessage = i18n("Ambiguous definition of language code");
@@ -1035,7 +1035,6 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   QString                   lang;
   QString                   textstr;
   QString                   exprtype;
-  bool                      org_found = false;
   QString                   q_org;
   QString                   q_trans;
   QString                   query_id;
@@ -1123,176 +1122,73 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   }
 
   //-------------------------------------------------------------------------
-  // Child 'Original'
-  //-------------------------------------------------------------------------
-
-  // now want "original" and one or more "translations"
-  int count = 0;
-  org_found = false;
-  currentElement = domElementParent.firstChildElement(KV_ORG);
-  if (currentElement.isNull()) {
-    m_errorMessage = i18n("Data for original language missing");
-    return false;
-  }
-
-  // found original <o>
-  org_found = true;
-  type = exprtype;
-
-  //-----------
-  // Attributes
-  if (!readExpressionChildAttributes(currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
-                                     pronunciation, width, type, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase))
-    return false;
-
-
-  if (m_doc->entryCount() == 0)
-  {
-    // only accept in first entry
-    if (width >= 0)
-      m_doc->setSizeHint(count, width);
-
-    if (query_id == KV_O)
-      q_org = lang;
-
-    if (query_id == KV_T)
-      q_trans = lang;
-  }
-
-  if (m_doc->identifierCount() == 0)
-  {
-    // first entry
-    if (lang.isEmpty())                 // no definition in first entry
-      lang = "original";
-    m_doc->appendIdentifier(lang);
-  }
-  else
-  {
-    if (lang != m_doc->originalIdentifier() && !lang.isEmpty())
-    {
-      // different originals ?
-      m_errorMessage = i18n("Ambiguous definition of language code");
-      return false;
-    }
-  }
-  count = 0;
-
-  //---------
-  // Children
-
-  currentChild = currentElement.firstChildElement(KV_CONJUG_GRP);
-  if (!currentChild.isNull()) {
-      conjug.clear();
-      if (!readConjug(currentChild, conjug))
-        return false;
-  }
-
-  currentChild = currentElement.firstChildElement(KV_COMPARISON_GRP);
-  if (!currentChild.isNull()) {
-      comparison.clear();
-      if (!readComparison(currentChild, comparison))
-        return false;
-  }
-
-  currentChild = currentElement.firstChildElement(KV_MULTIPLECHOICE_GRP);
-  if (!currentChild.isNull()) {
-      mc.clear();
-      if (!readMultipleChoice(currentChild, mc))
-        return false;
-  }
-
-  textstr = currentElement.lastChild().toText().data();
-  if (textstr.isNull())
-    textstr = "";
-
-  expr = KEduVocExpression(textstr);
-  expr.setLesson (lesson);
-  expr.setInQuery(inquery);
-  expr.setActive(active);
-
-  if (conjug.size() > 0)
-  {
-    expr.setConjugation(0, conjug[0]);
-    conjug.clear();
-  }
-  if (!comparison.isEmpty())
-  {
-    expr.setComparison(0, comparison);
-    comparison.clear();
-  }
-  if (!mc.isEmpty())
-  {
-    expr.setMultipleChoice(0, mc);
-    mc.clear();
-  }
-  if (!remark.isEmpty() )
-    expr.setRemark (0, remark);
-  if (!pronunciation.isEmpty() )
-    expr.setPronunciation(0, pronunciation);
-  if (!type.isEmpty() )
-    expr.setType(0, type);
-  if (!synonym.isEmpty() )
-    expr.setSynonym(0, synonym);
-  if (!example.isEmpty() )
-    expr.setExample(0, example);
-  if (!usage.isEmpty() )
-    expr.setUsageLabel(0, usage);
-  if (!paraphrase.isEmpty() )
-    expr.setParaphrase(0, paraphrase);
-  if (!antonym.isEmpty() )
-    expr.setAntonym(0, antonym);
-
-
-  //-------------------------------------------------------------------------
   // Children 'Translation'
   //-------------------------------------------------------------------------
 
   QDomNodeList translationList = domElementParent.elementsByTagName(KV_TRANS);
-
-  for (int i = 0; i < translationList.count(); ++i)
+  for (int i = 0; i < 1 + translationList.count(); ++i)
   {
-    currentElement = translationList.item(i).toElement();
-    if (currentElement.parentNode() == domElementParent) {
+	if (i == 0)
+	{
+	  currentElement = domElementParent.firstChildElement(KV_ORG);
+    } 
+	else
+	{
+      currentElement = translationList.item(i - 1).toElement();
+    }
+	if (i == 0 && currentElement.isNull())
+	{
+	  m_errorMessage = i18n("Data for original language missing");
+      return false;
+    }
 
-      count++;
       type = exprtype;
 
       //-----------
       // Attributes
+      if (i == 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
+                                          pronunciation, width, type, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase))
+        return false;
 
-      if (!readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
+      if (i != 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
                                           pronunciation, width, type, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase))
         return false;
+
 
       if (m_doc->entryCount() == 0)
       {
         // only accept in first entry
         if (width >= 0)
-          m_doc->setSizeHint(count, width);
+          m_doc->setSizeHint(i, width);
 
         if (query_id == KV_O)
           q_org = lang;
 
         if (query_id == KV_T)
           q_trans = lang;
-
       }
 
-      if (m_doc->identifierCount() <= count)
+      if (m_doc->identifierCount() <= i)
       {
         // new translation
         if (lang.isEmpty())
-        {
-          // no definition in first entry ?
-          lang.setNum(m_doc->identifierCount());
-          lang.prepend("translation ");
+		{
+		  if (i == 0)
+		    lang = "original";
+	      else
+		  {
+            // no definition in first entry ?
+            lang.setNum(m_doc->identifierCount());
+            lang.prepend("translation ");
+		  }
         }
         m_doc->appendIdentifier(lang);
       }
       else
       {
-        if (lang != (count == 0 ? m_doc->originalIdentifier():m_doc->identifier(count)) && !lang.isEmpty())
-        { // different language ?
+        if (lang != m_doc->identifier(i) && !lang.isEmpty())
+        { 
+		  // different language ?
           m_errorMessage = i18n("ambiguous definition of language code");
           return false;
         }
@@ -1326,50 +1222,59 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
       if (textstr.isNull())
         textstr = "";
 
-      expr.addTranslation(textstr, grade, r_grade);
-      expr.setQueryCount(count, qcount, false);
-      expr.setQueryCount(count, r_qcount, true);
-      expr.setBadCount(count, bcount, false);
-      expr.setBadCount(count, r_bcount, true);
-      expr.setQueryDate(count, qdate, false);
-      expr.setQueryDate(count, r_qdate, true);
+      if (i == 0)
+	  {
+		  expr = KEduVocExpression(textstr);
+		  expr.setLesson(lesson);
+		  expr.setInQuery(inquery);
+		  expr.setActive(active);
+	  }
+	  else
+	  {
+		  expr.addTranslation(textstr, grade, r_grade);
+		  expr.setQueryCount(i, qcount, false);
+		  expr.setQueryCount(i, r_qcount, true);
+		  expr.setBadCount(i, bcount, false);
+		  expr.setBadCount(i, r_bcount, true);
+		  expr.setQueryDate(i, qdate, false);
+		  expr.setQueryDate(i, r_qdate, true);
+	  }
 
       if (conjug.size() > 0)
       {
-        expr.setConjugation(count, conjug[0]);
+        expr.setConjugation(i, conjug[0]);
         conjug.clear();
       }
       if (!comparison.isEmpty())
       {
-        expr.setComparison(count, comparison);
+        expr.setComparison(i, comparison);
         comparison.clear();
       }
       if (!mc.isEmpty())
       {
-        expr.setMultipleChoice(count, mc);
+        expr.setMultipleChoice(i, mc);
         mc.clear();
       }
       if (!type.isEmpty() )
-        expr.setType (count, type);
+        expr.setType (i, type);
       if (!remark.isEmpty() )
-        expr.setRemark (count, remark);
+        expr.setRemark (i, remark);
       if (!pronunciation.isEmpty() )
-        expr.setPronunciation(count, pronunciation);
+        expr.setPronunciation(i, pronunciation);
       if (!faux_ami_f.isEmpty() )
-        expr.setFauxAmi (count, faux_ami_f, false);
+        expr.setFauxAmi (i, faux_ami_f, false);
       if (!faux_ami_t.isEmpty() )
-        expr.setFauxAmi (count, faux_ami_t, true);
+        expr.setFauxAmi (i, faux_ami_t, true);
       if (!synonym.isEmpty() )
-        expr.setSynonym (count, synonym);
+        expr.setSynonym (i, synonym);
       if (!example.isEmpty() )
-        expr.setExample (count, example);
+        expr.setExample (i, example);
       if (!usage.isEmpty() )
-        expr.setUsageLabel (count, usage);
+        expr.setUsageLabel (i, usage);
       if (!paraphrase.isEmpty() )
-        expr.setParaphrase (count, paraphrase);
+        expr.setParaphrase (i, paraphrase);
       if (!antonym.isEmpty() )
-        expr.setAntonym (count, antonym);
-    }
+        expr.setAntonym (i, antonym);
   }
 
   if (m_doc->entryCount() == 0)
