@@ -116,8 +116,8 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
     if (!entry->isActive())
       domElementExpression.setAttribute (KV_INACTIVE, 1);
 
-    if (entry->uniqueType() && !entry->type(0).isEmpty())
-      domElementExpression.setAttribute (KV_EXPRTYPE, entry->type(0));
+    if (entry->uniqueType() && !entry->translation(0).type().isEmpty())
+      domElementExpression.setAttribute (KV_EXPRTYPE, entry->translation(0).type());
 
     QDomElement domElementOriginal = domDoc.createElement(KV_ORG);
     if (first_expr)
@@ -136,55 +136,55 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
         domElementOriginal.setAttribute(KV_QUERY, (QString) KV_T);
     }
 
-    if (!entry->remark(0).isEmpty() )
-      domElementOriginal.setAttribute(KV_REMARK, entry->remark(0));
+    if (!entry->translation(0).comment().isEmpty() )
+      domElementOriginal.setAttribute(KV_REMARK, entry->translation(0).comment());
 
-    if (!entry->synonym(0).isEmpty() )
-      domElementOriginal.setAttribute(KV_SYNONYM, entry->synonym(0));
+    if (!entry->translation(0).synonym().isEmpty() )
+      domElementOriginal.setAttribute(KV_SYNONYM, entry->translation(0).synonym());
 
-    if (!entry->example(0).isEmpty() )
-      domElementOriginal.setAttribute(KV_EXAMPLE, entry->example(0));
+    if (!entry->translation(0).example().isEmpty() )
+      domElementOriginal.setAttribute(KV_EXAMPLE, entry->translation(0).example());
 
-    if (!entry->usageLabel(0).isEmpty() )
-      domElementOriginal.setAttribute(KV_USAGE, entry->usageLabel(0));
+    if (!entry->translation(0).usageLabel().isEmpty() )
+      domElementOriginal.setAttribute(KV_USAGE, entry->translation(0).usageLabel());
 
-    if (!entry->paraphrase(0).isEmpty() )
-      domElementOriginal.setAttribute(KV_PARAPHRASE, entry->paraphrase(0));
+    if (!entry->translation(0).paraphrase().isEmpty() )
+      domElementOriginal.setAttribute(KV_PARAPHRASE, entry->translation(0).paraphrase());
 
-    if (!entry->antonym(0).isEmpty() )
-      domElementOriginal.setAttribute(KV_ANTONYM, entry->antonym(0));
+    if (!entry->translation(0).antonym().isEmpty() )
+      domElementOriginal.setAttribute(KV_ANTONYM, entry->translation(0).antonym());
 
-    if (!entry->pronunciation(0).isEmpty() )
-      domElementOriginal.setAttribute(KV_PRONUNCE, entry->pronunciation(0));
+    if (!entry->translation(0).pronunciation().isEmpty() )
+      domElementOriginal.setAttribute(KV_PRONUNCE, entry->translation(0).pronunciation());
 
-    if (!entry->uniqueType() && !entry->type(0).isEmpty())
-      domElementOriginal.setAttribute(KV_EXPRTYPE, entry->type(0));
+    if (!entry->uniqueType() && !entry->translation(0).type().isEmpty())
+      domElementOriginal.setAttribute(KV_EXPRTYPE, entry->translation(0).type());
 
-    if (!writeMultipleChoice(domDoc, domElementOriginal, entry->multipleChoice(0)))
+    if (!writeMultipleChoice(domDoc, domElementOriginal, entry->translation(0).multipleChoice()))
       return false;
 
     QString s;
-    QString entype = s = entry->type(0);
+    QString entype = s = entry->translation(0).type();
     int pos = s.indexOf(QM_TYPE_DIV);
     if (pos >= 0)
       entype = s.left(pos);
     else
       entype = s;
 
-    if (entype == QM_VERB && entry->conjugation(0).entryCount() > 0)
+    if (entype == QM_VERB && entry->translation(0).conjugation().entryCount() > 0)
     {
-      KEduVocConjugation conj = entry->conjugation(0);
+      KEduVocConjugation conj = entry->translation(0).conjugation();
       if (!writeConjugEntry(domDoc, domElementOriginal, conj))
         return false;
     }
-    else if (entype == QM_ADJ && !entry->comparison(0).isEmpty())
+    else if (entype == QM_ADJ && !entry->translation(0).comparison().isEmpty())
     {
-      KEduVocComparison comp = entry->comparison(0);
+      KEduVocComparison comp = entry->translation(0).comparison();
       if (!writeComparison(domDoc, domElementOriginal, comp))
         return false;
     }
 
-    QDomText domTextOriginal = domDoc.createTextNode(entry->translation(0));
+    QDomText domTextOriginal = domDoc.createTextNode(entry->translation(0).translation());
     domElementOriginal.appendChild(domTextOriginal);
     domElementExpression.appendChild(domElementOriginal);
 
@@ -211,74 +211,74 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
           domElementTranslation.setAttribute(KV_QUERY, (QString) KV_T);
       }
 
-      if (entry->grade(trans, false) != 0 || entry->grade(trans, true) != 0)
-        domElementTranslation.setAttribute(KV_GRADE, QString::number(entry->grade(trans, false)) + ';' + QString::number(entry->grade(trans, true)));
+      if (entry->translation(trans).grade(0) != 0 || entry->translation(0).grade(trans) != 0)
+        domElementTranslation.setAttribute(KV_GRADE, QString::number(entry->translation(trans).grade(0)) + ';' + QString::number(entry->translation(0).grade(trans)));
 
-      if (entry->queryCount(trans, false) != 0 || entry->queryCount(trans, true) != 0)
-        domElementTranslation.setAttribute(KV_COUNT, QString::number(entry->queryCount(trans, false)) + ';' + QString::number(entry->queryCount(trans, true)));
+      if (entry->translation(trans).queryCount(0) != 0 || entry->translation(0).queryCount(trans) != 0)
+        domElementTranslation.setAttribute(KV_COUNT, QString::number(entry->translation(trans).queryCount(0)) + ';' + QString::number(entry->translation(0).queryCount(trans)));
 
-      if (entry->badCount(trans, false) != 0 || entry->badCount(trans, true) != 0)
-        domElementTranslation.setAttribute(KV_BAD, QString::number(entry->badCount(trans, false)) + ';' + QString::number(entry->badCount(trans, true)));
+      if (entry->translation(trans).badCount(0) != 0 || entry->translation(0).badCount(trans) != 0)
+        domElementTranslation.setAttribute(KV_BAD, QString::number(entry->translation(trans).badCount(0)) + ';' + QString::number(entry->translation(0).badCount(trans)));
 
-      if (entry->queryDate(trans, false).toTime_t() != 0 || entry->queryDate(trans, true).toTime_t() != 0)
-        domElementTranslation.setAttribute(KV_DATE, QString::number(entry->queryDate(trans, false).toTime_t()) + ';' + QString::number(entry->queryDate(trans, true).toTime_t()));
+      if (entry->translation(trans).queryDate(0).toTime_t() != 0 || entry->translation(0).queryDate(trans).toTime_t() != 0)
+        domElementTranslation.setAttribute(KV_DATE, QString::number(entry->translation(trans).queryDate(0).toTime_t()) + ';' + QString::number(entry->translation(0).queryDate(trans).toTime_t()));
 
-      if (!entry->remark(trans).isEmpty() )
-        domElementTranslation.setAttribute(KV_REMARK, entry->remark(trans));
+      if (!entry->translation(trans).comment().isEmpty() )
+        domElementTranslation.setAttribute(KV_REMARK, entry->translation(trans).comment());
 
-      if (!entry->fauxAmi(trans, false).isEmpty() )
-        domElementTranslation.setAttribute(KV_FAUX_AMI_F, entry->fauxAmi(trans, false));
+      if (!entry->translation(trans).falseFriend(0).isEmpty() )
+        domElementTranslation.setAttribute(KV_FAUX_AMI_F, entry->translation(trans).falseFriend(0));
 
-      if (!entry->fauxAmi(trans, true).isEmpty() )
-        domElementTranslation.setAttribute(KV_FAUX_AMI_T, entry->fauxAmi(trans, true));
+      if (!entry->translation(0).falseFriend(trans).isEmpty() )
+        domElementTranslation.setAttribute(KV_FAUX_AMI_T, entry->translation(0).falseFriend(trans));
 
-      if (!entry->synonym(trans).isEmpty() )
-        domElementTranslation.setAttribute(KV_SYNONYM, entry->synonym(trans));
+      if (!entry->translation(trans).synonym().isEmpty() )
+        domElementTranslation.setAttribute(KV_SYNONYM, entry->translation(trans).synonym());
 
-      if (!entry->example(trans).isEmpty() )
-        domElementTranslation.setAttribute(KV_EXAMPLE, entry->example(trans));
+      if (!entry->translation(trans).example().isEmpty() )
+        domElementTranslation.setAttribute(KV_EXAMPLE, entry->translation(trans).example());
 
-      if (!entry->usageLabel(trans).isEmpty() )
-        domElementTranslation.setAttribute(KV_USAGE, entry->usageLabel(trans));
+      if (!entry->translation(trans).usageLabel().isEmpty() )
+        domElementTranslation.setAttribute(KV_USAGE, entry->translation(trans).usageLabel());
 
-      if (!entry->paraphrase(trans).isEmpty() )
-        domElementTranslation.setAttribute(KV_PARAPHRASE, entry->paraphrase(trans));
+      if (!entry->translation(trans).paraphrase().isEmpty() )
+        domElementTranslation.setAttribute(KV_PARAPHRASE, entry->translation(trans).paraphrase());
 
-      if (!entry->antonym(trans).isEmpty() )
-        domElementTranslation.setAttribute(KV_ANTONYM, entry->antonym(trans));
+      if (!entry->translation(trans).antonym().isEmpty() )
+        domElementTranslation.setAttribute(KV_ANTONYM, entry->translation(trans).antonym());
 
-      if (!entry->pronunciation(trans).isEmpty() )
-        domElementTranslation.setAttribute(KV_PRONUNCE, entry->pronunciation(trans));
+      if (!entry->translation(trans).pronunciation().isEmpty() )
+        domElementTranslation.setAttribute(KV_PRONUNCE, entry->translation(trans).pronunciation());
 
-      if (!entry->uniqueType() && !entry->type(trans).isEmpty())
-        domElementTranslation.setAttribute(KV_EXPRTYPE, entry->type(trans));
+      if (!entry->uniqueType() && !entry->translation(trans).type().isEmpty())
+        domElementTranslation.setAttribute(KV_EXPRTYPE, entry->translation(trans).type());
 
-      if (!writeMultipleChoice(domDoc, domElementTranslation, entry->multipleChoice(trans)))
+      if (!writeMultipleChoice(domDoc, domElementTranslation, entry->translation(trans).multipleChoice()))
         return false;
 
       QString s;
-      QString entype = s = entry->type(0);
+      QString entype = s = entry->translation(0).type();
       int pos = s.indexOf(QM_TYPE_DIV);
       if (pos >= 0)
         entype = s.left (pos);
       else
         entype = s;
 
-      if (entype == QM_VERB && entry->conjugation(trans).entryCount() > 0)
+      if (entype == QM_VERB && entry->translation(trans).conjugation().entryCount() > 0)
       {
-        KEduVocConjugation conj = entry->conjugation(trans);
+        KEduVocConjugation conj = entry->translation(trans).conjugation();
         if (!writeConjugEntry(domDoc, domElementTranslation, conj))
           return false;
       }
 
-      if (entype == QM_ADJ && !entry->comparison(trans).isEmpty())
+      if (entype == QM_ADJ && !entry->translation(trans).comparison().isEmpty())
       {
-        KEduVocComparison comp = entry->comparison(trans);
+        KEduVocComparison comp = entry->translation(trans).comparison();
         if (!writeComparison(domDoc, domElementTranslation, comp))
           return false;
       }
 
-      QDomText domTextTranslation = domDoc.createTextNode(entry->translation(trans));
+      QDomText domTextTranslation = domDoc.createTextNode(entry->translation(trans).translation());
       domElementTranslation.appendChild(domTextTranslation);
       domElementExpression.appendChild(domElementTranslation);
 

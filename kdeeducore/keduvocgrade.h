@@ -16,6 +16,8 @@
 #ifndef KEDUVOCGRADE_H
 #define KEDUVOCGRADE_H
 
+#include <QDateTime>
+
 typedef signed char grade_t;
 typedef unsigned short count_t;
 
@@ -26,12 +28,17 @@ Contains grading information (query date, bad count) for one language with respe
 */
 class KEduVocGrade
 {
+public:
+    void resetGrades();
+
 /// @todo make these private and write the according functions like updateQueryDate, increaseGrade, decreaseGrade etc.
 public:
     grade_t m_grade;
     count_t m_queryCount;
     count_t m_badCount;
     QDateTime m_queryDate;
+
+
 };
 
 #endif

@@ -2,19 +2,20 @@
 ########### next target ###############
 
 set(kdeeducore_LIB_SRCS
-   keduvoccsvreader.cpp
-   keduvoccsvwriter.cpp
+#   keduvoccsvreader.cpp
+#   keduvoccsvwriter.cpp
    keduvocdocument.cpp
    keduvocexpression.cpp
    keduvoctranslation.cpp
+   keduvocgrade.cpp
    keduvocgrammar.cpp
    keduvockvtmlreader.cpp
    keduvockvtmlwriter.cpp
    keduvocmultiplechoice.cpp
-   keduvocpaukerreader.cpp
-   keduvocvokabelnreader.cpp
-   keduvocwqlreader.cpp
-   keduvocxdxfreader.cpp
+#   keduvocpaukerreader.cpp
+#   keduvocvokabelnreader.cpp
+#   keduvocwqlreader.cpp
+#   keduvocxdxfreader.cpp
    leitnerbox.cpp
    leitnersystem.cpp
    leitnersystemview.cpp

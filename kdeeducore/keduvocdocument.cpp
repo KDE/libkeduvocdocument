@@ -41,6 +41,7 @@
 #include "keduvocxdxfreader.h"
 #include "leitnersystem.h"
 
+
 class KEduVocDocument::KEduVocDocumentPrivate
 {
 public:
@@ -234,7 +235,7 @@ bool KEduVocDocument::open(const KUrl& url)
           errorMessage = kvtmlReader.errorMessage();
       }
       break;
-
+/*
       case wql:
       {
         KEduVocWqlReader wqlReader(f);
@@ -283,7 +284,7 @@ bool KEduVocDocument::open(const KUrl& url)
           errorMessage = i18n("Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString());
       }
       break;
-
+*/
       default:
       {
         KEduVocKvtmlReader kvtmlReader(f);
@@ -342,13 +343,13 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
         saved = kvtmlWriter.writeDoc(this, generator);
       }
       break;
-
+/** @todo include the csv write again, as soon as it's ported to the new classes
       case csv: {
         KEduVocCsvWriter csvWriter(&f);
         saved = csvWriter.writeDoc(this, generator);
       }
       break;
-
+*/
       default: {
         kError() << "kvcotrainDoc::saveAs(): unknown filetype" << endl;
       }
@@ -369,8 +370,12 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
   return true;
 }
 
+
+
 void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
 {
+    kDebug() << "Merging of docs is not implemented" << endl; /// @todo IMPLEMENT ME
+/*
   if (docToMerge) {
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
@@ -427,17 +432,17 @@ void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
         expr->setLesson(expr->lesson() + lesson_offset);
 
         for (int lang = 0; lang <= expr->translationCount(); lang++) {
-          QString t = expr->type(lang);
+          QString t = expr->translation(lang).type();
           // adjust type offset
           if (!t.isEmpty() && t.left(1) == QM_USER_TYPE) {
             QString t2;
             t.remove(0, 1);
             t2.setNum(t.toInt() + types_offset);
             t2.prepend(QM_USER_TYPE);
-            expr->setType (lang, t2);
+            expr->translation(lang).setType (t2);
           }
 
-          t = expr->usageLabel(lang);
+          t = expr->translation(lang).usageLabel();
           // adjust usage offset
           QString tg;
           if (!t.isEmpty()) {
@@ -468,10 +473,10 @@ void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
             else if (t.length() != 0)
               tg += ':' + t;
 
-            expr->setUsageLabel (lang, tg);
+            expr->translation(lang).setUsageLabel (tg);
           }
 
-          KEduVocConjugation conj = expr->conjugation(lang);
+          KEduVocConjugation conj = expr->translation(lang).conjugation();
           bool condirty = false;
           for (int ci = 0; ci < conj.entryCount(); ci++) {
             t = conj.getType(ci);
@@ -484,7 +489,7 @@ void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
               condirty = true;
             }
             if (condirty)
-              expr->setConjugation(lang, conj);
+              expr->translation(lang).setConjugation(conj);
           }
         }
 
@@ -576,7 +581,9 @@ void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
     }
   }
   QApplication::restoreOverrideCursor();
+*/
 }
+
 
 KEduVocExpression *KEduVocDocument::entry(int index)
 {
@@ -638,7 +645,7 @@ void KEduVocDocument::setTypeName(int idx, QString &id)
 {
   if (idx >= d->m_typeDescriptions.size())
     for (int i = d->m_typeDescriptions.size(); i <= idx; i++)
-      d->m_typeDescriptions.push_back ("");
+      d->m_typeDescriptions.append ("");
 
   d->m_typeDescriptions[idx] = id;
 }
@@ -669,7 +676,7 @@ void KEduVocDocument::setTenseName(int idx, QString &id)
 {
   if (idx >= d->m_tenseDescriptions.size())
     for (int i = d->m_tenseDescriptions.size(); i <= idx; i++)
-      d->m_tenseDescriptions.push_back ("");
+      d->m_tenseDescriptions.append ("");
 
   d->m_tenseDescriptions[idx] = id;
 }
@@ -700,7 +707,7 @@ void KEduVocDocument::setUsageName(int idx, QString &id)
 {
   if (idx >= d->m_usageDescriptions.size())
     for (int i = d->m_usageDescriptions.size(); i <= idx; i++)
-      d->m_usageDescriptions.push_back ("");
+      d->m_usageDescriptions.append ("");
 
   d->m_usageDescriptions[idx] = id;
 }
@@ -725,7 +732,7 @@ void KEduVocDocument::setConjugation(int idx, const KEduVocConjugation &con)
   // extend conjugation with empty elements
   if (d->m_conjugations.size() <= idx )
     for (int i = d->m_conjugations.size(); i < idx+1; i++)
-      d->m_conjugations.push_back (KEduVocConjugation());
+      d->m_conjugations.append (KEduVocConjugation());
 
   d->m_conjugations[idx] = con;
 }
@@ -755,7 +762,7 @@ void KEduVocDocument::setArticle(int idx, const KEduVocArticle &art)
   // extend conjugation with empty elements
   if (d->m_articles.size() <= idx )
     for (int i = d->m_articles.size(); i < idx+1; i++)
-      d->m_articles.push_back (KEduVocArticle());
+      d->m_articles.append (KEduVocArticle());
 
   d->m_articles[idx] = art;
 }
@@ -807,7 +814,7 @@ void KEduVocDocument::setSizeHint (int idx, const int width)
     idx = -idx;
     if (idx >= d->m_extraSizeHints.size()) {
       for (int i = d->m_extraSizeHints.size(); i <= idx; i++)
-        d->m_extraSizeHints.push_back (80);
+        d->m_extraSizeHints.append (80);
     }
     d->m_extraSizeHints[idx] = width;
 
@@ -815,7 +822,7 @@ void KEduVocDocument::setSizeHint (int idx, const int width)
   else {
     if (idx >= d->m_sizeHints.size()) {
       for (int i = d->m_sizeHints.size(); i <= idx; i++)
-        d->m_sizeHints.push_back (150);
+        d->m_sizeHints.append (150);
     }
     d->m_sizeHints[idx] = width;
   }
@@ -938,16 +945,8 @@ void KEduVocDocument::resetEntry(int index, int lesson)
   for (int i = 0; i < d->m_vocabulary.count(); i++)
     if (/*lesson == 0 ||*/ lesson == d->m_vocabulary[i].lesson())
     {
-      d->m_vocabulary[i].setGrade(index, KV_NORM_GRADE, false);
-      d->m_vocabulary[i].setGrade(index, KV_NORM_GRADE, true);
-      d->m_vocabulary[i].setQueryCount(index, 0, true);
-      d->m_vocabulary[i].setQueryCount(index, 0, false);
-      d->m_vocabulary[i].setBadCount(index, 0, true);
-      d->m_vocabulary[i].setBadCount(index, 0, false);
-      QDateTime dt;
-      dt.setTime_t(0);
-      d->m_vocabulary[i].setQueryDate(index, dt, true);
-      d->m_vocabulary[i].setQueryDate(index, dt, false);
+        // index is the translation number whose grades are reset
+        d->m_vocabulary[i].resetGrades(index);
     }
 }
 
@@ -1238,29 +1237,17 @@ int KEduVocDocument::search(const QString &substr, int id, int first, int last, 
   if (id >= identifierCount() || last < first)
     return -1;
 
-  if (id == 0) {
+
     for (int i = first; i < last; i++) {
       if (word_start) {
-        if (entry(i)->original().indexOf(substr, 0, Qt::CaseInsensitive) == 0)  // case insensitive
+        if (entry(i)->translation(id).translation().indexOf(substr, 0, Qt::CaseInsensitive) == 0) // case insensitive
           return i;
       }
       else {
-        if (entry(i)->original().indexOf(substr, 0, Qt::CaseInsensitive) > -1)  // case insensitive
+        if (entry(i)->translation(id).translation().indexOf(substr, 0, Qt::CaseInsensitive) > -1) // case insensitive
           return i;
       }
-    }
-  }
-  else {
-    for (int i = first; i < last; i++) {
-      if (word_start) {
-        if (entry(i)->translation(id).indexOf(substr, 0, Qt::CaseInsensitive) == 0) // case insensitive
-          return i;
-      }
-      else {
-        if (entry(i)->translation(id).indexOf(substr, 0, Qt::CaseInsensitive) > -1) // case insensitive
-          return i;
-      }
-    }
+
   }
   return -1;
 }
@@ -1290,16 +1277,13 @@ public:
 
   bool operator< (const ExpRef& y) const
   {
-    QString s1 = exp->original();
-    QString s2 = y.exp->original();
-    int cmp = QString::compare(s1.toUpper(), s2.toUpper());
-    if (cmp != 0)
-      return cmp < 0;
+    QString s1;
+    QString s2;
+    int cmp;
+    for (int i = 0; i < exp->translationCount(); i++) {
 
-    for (int i = 1; i < exp->translationCount(); i++) {
-
-      s1 = exp->translation(i);
-      s2 = y.exp->translation(i);
+      s1 = exp->translation(i).translation();
+      s2 = y.exp->translation(i).translation();
       cmp = QString::compare(s1.toUpper(), s2.toUpper() );
       if (cmp != 0)
         return cmp < 0;
@@ -1338,15 +1322,15 @@ int KEduVocDocument::cleanUp()
       emit progressChanged(this, (int)((ent_no / f_ent_percent) / 2.0));
 
     bool equal = true;
-    if (kve1->original() == kve2->original() ) {
-      for (int l = 1; equal && l < identifierCount(); l++ )
-        if (kve1->translation(l) != kve2->translation(l))
-          equal = false;
+    for (int l = 0; equal && l < identifierCount(); l++ ) {
+        if (kve1->translation(l).translation() != kve2->translation(l).translation()) {
+            equal = false;
+        }
+    }
 
-      if (equal) {
+    if (equal) {
         to_delete.append(shadow[i - 1].idx);
         count++;
-      }
     }
   }
 

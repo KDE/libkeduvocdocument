@@ -37,17 +37,19 @@ public:
 //  QString m_original;
 
   // all these vectors must be deleted in removeTranslation()
-  QStringList m_expressionTypes;
+//  QStringList m_expressionTypes;
 //  QStringList m_translations;
-  QStringList m_remarks;
-  QStringList m_usageLabels;
-  QStringList m_paraphrases;
-  QStringList m_fauxAmi;
-  QStringList m_reverseFauxAmi;
-  QStringList m_synonym;
-  QStringList m_example;
-  QStringList m_antonym;
-  QStringList m_pronunciations;
+//  QStringList m_remarks;
+//  QStringList m_usageLabels;
+//  QStringList m_paraphrases;
+//  QStringList m_fauxAmi;
+//  QStringList m_reverseFauxAmi;
+//   QStringList m_synonym;
+//   QStringList m_example;
+//   QStringList m_antonym;
+//   QStringList m_pronunciations;
+
+/*
   QList<grade_t> m_grades;
   QList<grade_t> m_reverseGrades;
   QList<count_t> m_queryCounts;
@@ -59,6 +61,7 @@ public:
   QList<KEduVocConjugation> m_conjugations;
   QList<KEduVocComparison> m_comparisons;
   QList<KEduVocMultipleChoice> m_multipleChoices;
+*/
 
   QString m_leitnerBox;
   int m_sortIndex;
@@ -74,17 +77,17 @@ void KEduVocExpression::KEduVocExpressionPrivate::init()
 {
   m_translations.clear();
 
-  m_grades.append(KV_NORM_GRADE);
-  m_reverseGrades.append(KV_NORM_GRADE);
+//  m_grades.append(KV_NORM_GRADE);
+//  m_reverseGrades.append(KV_NORM_GRADE);
   m_inQuery = false;
   m_active = true;
-  m_queryCounts.append(0);
-  m_reverseQueryCounts.append(0);
-  m_badCounts.append(0);
-  m_reverseBadCounts.append(0);
-  QDateTime dt;
-  m_queryDates.append(dt);
-  m_reverseQueryDates.append(dt);
+//  m_queryCounts.append(0);
+//  m_reverseQueryCounts.append(0);
+//  m_badCounts.append(0);
+//  m_reverseBadCounts.append(0);
+//  QDateTime dt;
+//  m_queryDates.append(dt);
+//  m_reverseQueryDates.append(dt);
   m_lesson = 0;
   m_sortIndex = 0;
 }
@@ -94,27 +97,27 @@ bool KEduVocExpression::KEduVocExpressionPrivate::operator==(const KEduVocExpres
 {
   return
     m_translations == p.m_translations &&
-    m_expressionTypes == p.m_expressionTypes &&
-    m_remarks == p.m_remarks &&
-    m_usageLabels == p.m_usageLabels &&
-    m_paraphrases == p.m_paraphrases &&
-    m_fauxAmi == p.m_fauxAmi &&
-    m_reverseFauxAmi == p.m_reverseFauxAmi &&
-    m_synonym == p.m_synonym &&
-    m_example == p.m_example &&
-    m_antonym == p.m_antonym &&
-    m_pronunciations == p.m_pronunciations &&
-    m_grades == p.m_grades &&
-    m_reverseGrades == p.m_reverseGrades &&
-    m_queryCounts == p.m_queryCounts &&
-    m_reverseQueryCounts == p.m_reverseQueryCounts &&
-    m_badCounts == p.m_badCounts &&
-    m_reverseBadCounts == p.m_reverseBadCounts &&
-    m_queryDates == p.m_queryDates &&
-    m_reverseQueryDates == p.m_reverseQueryDates &&
-    m_conjugations == p.m_conjugations &&
-    m_comparisons == p.m_comparisons &&
-    m_multipleChoices == p.m_multipleChoices &&
+//    m_expressionTypes == p.m_expressionTypes &&
+//    m_remarks == p.m_remarks &&
+//    m_usageLabels == p.m_usageLabels &&
+//    m_paraphrases == p.m_paraphrases &&
+//    m_fauxAmi == p.m_fauxAmi &&
+//    m_reverseFauxAmi == p.m_reverseFauxAmi &&
+//     m_synonym == p.m_synonym &&
+//     m_example == p.m_example &&
+//     m_antonym == p.m_antonym &&
+//     m_pronunciations == p.m_pronunciations &&
+//     m_grades == p.m_grades &&
+//     m_reverseGrades == p.m_reverseGrades &&
+//     m_queryCounts == p.m_queryCounts &&
+//     m_reverseQueryCounts == p.m_reverseQueryCounts &&
+//     m_badCounts == p.m_badCounts &&
+//     m_reverseBadCounts == p.m_reverseBadCounts &&
+//     m_queryDates == p.m_queryDates &&
+//     m_reverseQueryDates == p.m_reverseQueryDates &&
+//     m_conjugations == p.m_conjugations &&
+//     m_comparisons == p.m_comparisons &&
+//     m_multipleChoices == p.m_multipleChoices &&
     m_leitnerBox == p.m_leitnerBox &&
     m_lesson == p.m_lesson &&
     m_sortIndex == p.m_sortIndex &&
@@ -149,17 +152,20 @@ KEduVocExpression::KEduVocExpression(const QString & expression, const QString &
       setTranslation(0, expr.simplified()); ///@todo: no special original treatment
     }
     else {*/
+    int translationIndex = 0;
       se = expr.left(pos).simplified();
-      setOriginal(se);
+      setTranslation(translationIndex, se);
       expr.remove(0, pos + separator.length());
 
       // gather all translations
       while ((pos = expr.indexOf(separator)) != -1) {
+        translationIndex++;
         se = expr.left(pos).simplified();
-        addTranslation(se, KV_NORM_GRADE, KV_NORM_GRADE);
+        setTranslation(translationIndex, se);
         expr.remove(0, pos + separator.length());
       }
-      addTranslation(expr.simplified(), KV_NORM_GRADE, KV_NORM_GRADE);
+      translationIndex++;
+      setTranslation(translationIndex, expr.simplified());
     //}
   }
 }
@@ -182,10 +188,10 @@ int KEduVocExpression::translationCount() const
   /// @todo: maybe this should go away? it is very rare with QMap
   // the minus 1 is because traditionally it used to be original + translations
   /// @todo get rid of the minus one. but for now this implies too many other changes.
-  return d->m_translations.size() - 1;
+  return d->m_translations.size();
 }
 
-
+/*
 QString KEduVocExpression::remark(int index) const
 {
   if (index >= d->m_remarks.count() || index < 0) {
@@ -376,8 +382,9 @@ QString KEduVocExpression::antonym(int index) const
     return d->m_antonym[index];
   }
 }
+*/
 
-
+/*
 void KEduVocExpression::setConjugation(int index, const KEduVocConjugation &con)
 {
   if (index < 0)
@@ -475,8 +482,9 @@ void KEduVocExpression::setPronunciation(int index, const QString & expr)
 
   d->m_pronunciations[index] = expr.simplified();
 }
+*/
 
-
+/*
 void KEduVocExpression::addTranslation(const QString & expr, grade_t grade, grade_t rev_grade)
 {
   if (d->m_translations.count() > 0) { // we only keep grades for translation 1..n - later this will change, as all combinations are allowed, so only from grades are saved relative to the other languages. As soon as grades are only from grades and moved into the translation class this will become nice and free of sorrows.
@@ -496,8 +504,9 @@ void KEduVocExpression::addTranslation(const QString & expr, grade_t grade, grad
   d->m_translations[d->m_translations.keys()[d->m_translations.keys().count()-1] + 1]
     = KEduVocTranslation( expr.simplified() );
 }
+*/
 
-
+/*
 QString KEduVocExpression::translation(int index) const
 {
   if ( !d->m_translations.contains(index) ) {
@@ -505,7 +514,7 @@ QString KEduVocExpression::translation(int index) const
   }
   return d->m_translations.value(index).translation();
 }
-
+*/
 
 void KEduVocExpression::removeTranslation(int index)
 {
@@ -607,7 +616,7 @@ void KEduVocExpression::setTranslation(int index, const QString & expr)
   d->m_translations[index] = expr.simplified();
 }
 
-
+/*
 grade_t KEduVocExpression::grade(int index, bool rev_grade) const
 {
   if (rev_grade) {
@@ -857,19 +866,20 @@ void KEduVocExpression::setQueryDate(int index, const QDateTime & date, bool rev
     d->m_queryDates[index] = date;
   }
 }
-
+*/
 
 bool KEduVocExpression::uniqueType() const
 {
+/// @todo use .keys() instead of translationCount()!
   bool unique = true;
-  QString type0 = type(0);
+  QString type0 = d->m_translations[0].type();
   for (int i = 1; i < translationCount(); i++)
-    if (type0 != type(i))
+    if (type0 != d->m_translations[i].type())
       unique = false;
   return unique;
 }
 
-
+/*
 QString KEduVocExpression::type(int index) const
 {
   if (index >= d->m_expressionTypes.count() || index < 0) {
@@ -893,7 +903,7 @@ void KEduVocExpression::setType(int index, const QString &type)
 
   d->m_expressionTypes[index] = type.simplified();
 }
-
+*/
 
 int KEduVocExpression::lesson() const
 {
@@ -906,7 +916,7 @@ void KEduVocExpression::setLesson(int l)
   d->m_lesson = l;
 }
 
-
+/*
 void KEduVocExpression::incQueryCount(int index, bool rev_count)
 {
   setQueryCount(index, queryCount(index, rev_count) + 1, rev_count);
@@ -932,15 +942,16 @@ void KEduVocExpression::setOriginal(const QString & expr)
     } else {
         d->m_translations[0] = KEduVocTranslation(expr);
     }
-
+*/
     /*
   if (d->m_translations.count() == 0) {
     d->m_translations.append(expr);
   } else {
     d->m_translations[0] = expr;
   }*/
+/*
 }
-
+*/
 
 QString KEduVocExpression::leitnerBox()
 {
@@ -978,6 +989,22 @@ void KEduVocExpression::setActive(bool flag)
 }
 
 
+void KEduVocExpression::resetGrades(int index)
+{
+    if ( index == -1 ) { // clear grades for all languages
+        foreach (KEduVocTranslation trans, d->m_translations) {
+            trans.resetGrades();
+        }
+        return;
+    }
+
+    // only language index
+    if ( d->m_translations.contains(index) ) {
+        d->m_translations[index].resetGrades();
+    }
+}
+
+
 KEduVocExpression& KEduVocExpression::operator=(const KEduVocExpression &expression)
 {
   *d = *expression.d;
@@ -988,5 +1015,10 @@ KEduVocExpression& KEduVocExpression::operator=(const KEduVocExpression &express
 bool KEduVocExpression::operator==(const KEduVocExpression &expression) const
 {
   return (*d == *expression.d);
+}
+
+KEduVocTranslation & KEduVocExpression::translation(int index) const
+{
+    return d->m_translations[index];
 }
 

@@ -571,7 +571,7 @@ bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVoc
 
     if (domElementConjugChild.tagName() == KV_CON_ENTRY)
       while (count + 1 > (int) curr_conjug.size() )
-        curr_conjug.push_back(KEduVocConjugation());
+        curr_conjug.append(KEduVocConjugation());
 
     curr_conjug[count].setPers3SingularCommon(type, s3_common);
     curr_conjug[count].setPers3PluralCommon(type, p3_common);
@@ -1131,7 +1131,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 	if (i == 0)
 	{
 	  currentElement = domElementParent.firstChildElement(KV_ORG);
-    } 
+    }
 	else
 	{
       currentElement = translationList.item(i - 1).toElement();
@@ -1187,7 +1187,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
       else
       {
         if (lang != m_doc->identifier(i) && !lang.isEmpty())
-        { 
+        {
 		  // different language ?
           m_errorMessage = i18n("ambiguous definition of language code");
           return false;
@@ -1231,50 +1231,48 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 	  }
 	  else
 	  {
-		  expr.addTranslation(textstr, grade, r_grade);
-		  expr.setQueryCount(i, qcount, false);
-		  expr.setQueryCount(i, r_qcount, true);
-		  expr.setBadCount(i, bcount, false);
-		  expr.setBadCount(i, r_bcount, true);
-		  expr.setQueryDate(i, qdate, false);
-		  expr.setQueryDate(i, r_qdate, true);
+		  expr.setTranslation(i, textstr);
 	  }
 
       if (conjug.size() > 0)
       {
-        expr.setConjugation(i, conjug[0]);
+        for ( int conjugationIndex = 0; conjugationIndex < conjug.size(); conjugationIndex++ ) {
+            expr.translation(i).setConjugation(conjug[conjugationIndex]);
+        }
+
+        //expr.setConjugation(i, conjug[0]); ///@todo check if this is better than the above!
         conjug.clear();
       }
       if (!comparison.isEmpty())
       {
-        expr.setComparison(i, comparison);
+        expr.translation(i).setComparison(comparison);
         comparison.clear();
       }
       if (!mc.isEmpty())
       {
-        expr.setMultipleChoice(i, mc);
+        expr.translation(i).setMultipleChoice(mc);
         mc.clear();
       }
       if (!type.isEmpty() )
-        expr.setType (i, type);
+        expr.translation(i).setType (type);
       if (!remark.isEmpty() )
-        expr.setRemark (i, remark);
+        expr.translation(i).setComment (remark);
       if (!pronunciation.isEmpty() )
-        expr.setPronunciation(i, pronunciation);
+        expr.translation(i).setPronunciation(pronunciation);
       if (!faux_ami_f.isEmpty() )
-        expr.setFauxAmi (i, faux_ami_f, false);
+        expr.translation(i).setFalseFriend (0, faux_ami_f);
       if (!faux_ami_t.isEmpty() )
-        expr.setFauxAmi (i, faux_ami_t, true);
+        expr.translation(0).setFalseFriend (i, faux_ami_t);
       if (!synonym.isEmpty() )
-        expr.setSynonym (i, synonym);
+        expr.translation(i).setSynonym (synonym);
       if (!example.isEmpty() )
-        expr.setExample (i, example);
+        expr.translation(i).setExample (example);
       if (!usage.isEmpty() )
-        expr.setUsageLabel (i, usage);
+        expr.translation(i).setUsageLabel (usage);
       if (!paraphrase.isEmpty() )
-        expr.setParaphrase (i, paraphrase);
+        expr.translation(i).setParaphrase (paraphrase);
       if (!antonym.isEmpty() )
-        expr.setAntonym (i, antonym);
+        expr.translation(i).setAntonym (antonym);
   }
 
   if (m_doc->entryCount() == 0)

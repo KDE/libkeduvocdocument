@@ -19,3 +19,8 @@
 // {
 // }
 //
+
+void KEduVocGrade::resetGrades()
+{
+
+}

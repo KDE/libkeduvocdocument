@@ -124,203 +124,206 @@ void KEduVocTranslation::setTranslation ( const QString & expr )
 */
 
 
-// QString KEduVocTranslation::comment ( ) const
-// {
-//     return d->m_comment;
-// }
-//
-//
-// void KEduVocTranslation::setComment ( const QString & expr )
-// {
-//     d->m_comment = expr.simplified();
-// }
-//
-//
-// void KEduVocTranslation::setFalseFriend ( int indexFrom, const QString & expr )
-// {
-// //    d->m_falseFriends[indexFrom] = expr.simplified();
-// }
-//
-//
-// QString KEduVocTranslation::falseFriend ( int indexFrom ) const
-// {
-// //    return d->m_falseFriends.value(indexFrom);
-// return QString();
-// }
-//
-//
-// void KEduVocTranslation::setSynonym (  const QString & expr )
-// {
-//     d->m_synonym = expr.simplified();
-// }
-//
-//
-// QString KEduVocTranslation::synonym ( ) const
-// {
-//     return d->m_synonym;
-// }
-//
-//
-// void KEduVocTranslation::setExample (  const QString & expr )
-// {
-//    d->m_example = expr.simplified();
-// }
-//
-//
-// QString KEduVocTranslation::example ( ) const
-// {
-//     return d->m_example;
-// }
-//
-//
-// void KEduVocTranslation::setUsageLabel (  const QString & usage )
-// {
-//     d->m_usageLabel = usage;
-// }
-//
-//
-// QString KEduVocTranslation::usageLabel () const
-// {
-//     return d->m_usageLabel;
-// }
-//
-//
-// void KEduVocTranslation::setParaphrase (  const QString & expr )
-// {
-//     d->m_paraphrase = expr.simplified();
-// }
-//
-//
-// QString KEduVocTranslation::paraphrase ( ) const
-// {
-//     return d->m_paraphrase;
-// }
-//
-//
-// void KEduVocTranslation::setAntonym (  const QString & expr )
-// {
-//     d->m_antonym = expr.simplified();
-// }
-//
-//
-// QString KEduVocTranslation::antonym ( ) const
-// {
-//     return d->m_antonym;
-// }
-//
-//
-// void KEduVocTranslation::setConjugation ( int tense, const KEduVocConjugation &con )
-// {
-// //    d->m_conjugations[tense] = con;
-// }
-//
-//
-// KEduVocConjugation KEduVocTranslation::conjugation ( int tense ) const
-// {
-// //    return d->m_conjugations.value(tense);
-// }
-//
-//
-// void KEduVocTranslation::setComparison (  const KEduVocComparison &con )
-// {
-//     d->m_comparison = con;
-// }
-//
-//
-// KEduVocComparison KEduVocTranslation::comparison ( ) const
-// {
-//     return d->m_comparison;
-// }
-//
-//
-// void KEduVocTranslation::setMultipleChoice (  const KEduVocMultipleChoice &mc )
-// {
-//     d->m_multipleChoice = mc;
-// }
-//
-//
-// KEduVocMultipleChoice KEduVocTranslation::multipleChoice ( ) const
-// {
-//     return d->m_multipleChoice;
-// }
-//
-//
-// QString KEduVocTranslation::pronunciation ( ) const
-// {
-//     return d->m_pronunciation;
-// }
-//
-//
-// void KEduVocTranslation::setPronunciation (  const QString & expr )
-// {
-//     d->m_pronunciation = expr.simplified();
-// }
-//
-//
-// grade_t KEduVocTranslation::grade (  int indexFrom ) const
-// {
-// //    return d->m_grades.value(indexFrom).m_grade;
-// }
-//
-//
-// void KEduVocTranslation::setGrade (  int indexFrom, grade_t grade )
-// {
-//     if ( grade > KV_MAX_GRADE )
-//         grade = KV_MAX_GRADE;
-//     if ( grade < KV_MIN_GRADE )
-//         grade = KV_MIN_GRADE;
-// //    d->m_grades[indexFrom].m_grade = grade;
-// }
-//
-//
-// void KEduVocTranslation::incGrade (  int indexFrom )
-// {
-//     setGrade ( indexFrom, grade( indexFrom) + 1 );
-// }
-//
-//
-// void KEduVocTranslation::decGrade (  int indexFrom )
-// {
-//     setGrade ( indexFrom, grade( indexFrom) - 1 );
-// }
-//
-//
-// count_t KEduVocTranslation::queryCount (  int indexFrom )  const
-// {
-// //    return d->m_grades.value(indexFrom).m_queryCount;
-// }
-//
-//
-// void KEduVocTranslation::setQueryCount (  int indexFrom, count_t count )
-// {
-// //    d->m_grades[indexFrom].m_queryCount = count;
-// }
-//
-//
-// count_t KEduVocTranslation::badCount (  int indexFrom ) const
-// {
-// //    return d->m_grades.value(indexFrom).m_badCount;
-// }
-//
-//
-// void KEduVocTranslation::setBadCount (  int indexFrom, count_t count )
-// {
-// //    d->m_grades[indexFrom].m_badCount = count;
-// }
-//
-//
-// QDateTime KEduVocTranslation::queryDate (  int indexFrom ) const
-// {
-// //    return d->m_grades.value(indexFrom).m_queryDate;
-// }
-//
-//
-// void KEduVocTranslation::setQueryDate (  int indexFrom, const QDateTime & date )
-// {
-// //    d->m_grades[indexFrom].m_queryDate = date;
-// }
-//
-//
+QString KEduVocTranslation::comment ( ) const
+{
+    return m_comment;
+}
+
+
+void KEduVocTranslation::setComment ( const QString & expr )
+{
+    m_comment = expr.simplified();
+}
+
+
+void KEduVocTranslation::setFalseFriend ( int indexFrom, const QString & expr )
+{
+//    m_falseFriends[indexFrom] = expr.simplified();
+}
+
+
+QString KEduVocTranslation::falseFriend ( int indexFrom ) const
+{
+//    return m_falseFriends.value(indexFrom);
+return QString();
+}
+
+
+void KEduVocTranslation::setSynonym (  const QString & expr )
+{
+    m_synonym = expr.simplified();
+}
+
+
+QString KEduVocTranslation::synonym ( ) const
+{
+    return m_synonym;
+}
+
+
+void KEduVocTranslation::setExample (  const QString & expr )
+{
+   m_example = expr.simplified();
+}
+
+
+QString KEduVocTranslation::example ( ) const
+{
+    return m_example;
+}
+
+
+void KEduVocTranslation::setUsageLabel (  const QString & usage )
+{
+    m_usageLabel = usage;
+}
+
+
+QString KEduVocTranslation::usageLabel () const
+{
+    return m_usageLabel;
+}
+
+
+void KEduVocTranslation::setParaphrase (  const QString & expr )
+{
+    m_paraphrase = expr.simplified();
+}
+
+
+QString KEduVocTranslation::paraphrase ( ) const
+{
+    return m_paraphrase;
+}
+
+
+void KEduVocTranslation::setAntonym (  const QString & expr )
+{
+    m_antonym = expr.simplified();
+}
+
+
+QString KEduVocTranslation::antonym ( ) const
+{
+    return m_antonym;
+}
+
+
+void KEduVocTranslation::setConjugation ( const KEduVocConjugation &con )
+{
+    m_conjugation = con;
+}
+
+
+KEduVocConjugation KEduVocTranslation::conjugation ( ) const
+{
+    return m_conjugation;
+}
+
+
+void KEduVocTranslation::setComparison (  const KEduVocComparison &con )
+{
+    m_comparison = con;
+}
+
+
+KEduVocComparison KEduVocTranslation::comparison ( ) const
+{
+    return m_comparison;
+}
+
+
+void KEduVocTranslation::setMultipleChoice (  const KEduVocMultipleChoice &mc )
+{
+    m_multipleChoice = mc;
+}
+
+
+KEduVocMultipleChoice KEduVocTranslation::multipleChoice ( ) const
+{
+    return m_multipleChoice;
+}
+
+
+QString KEduVocTranslation::pronunciation ( ) const
+{
+    return m_pronunciation;
+}
+
+
+void KEduVocTranslation::setPronunciation (  const QString & expr )
+{
+    m_pronunciation = expr.simplified();
+}
+
+
+grade_t KEduVocTranslation::grade (  int indexFrom ) const
+{
+    if (m_grades.contains(indexFrom)) {
+        return m_grades.value(indexFrom).m_grade;
+    }
+    return KV_NORM_GRADE;
+}
+
+
+void KEduVocTranslation::setGrade (  int indexFrom, grade_t grade )
+{
+    if ( grade > KV_MAX_GRADE )
+        grade = KV_MAX_GRADE;
+    if ( grade < KV_MIN_GRADE )
+        grade = KV_MIN_GRADE;
+//    m_grades[indexFrom].m_grade = grade;
+}
+
+
+void KEduVocTranslation::incGrade (  int indexFrom )
+{
+    setGrade ( indexFrom, grade( indexFrom) + 1 );
+}
+
+
+void KEduVocTranslation::decGrade (  int indexFrom )
+{
+    setGrade ( indexFrom, grade( indexFrom) - 1 );
+}
+
+
+count_t KEduVocTranslation::queryCount (  int indexFrom )  const
+{
+    return m_grades.value(indexFrom).m_queryCount;
+}
+
+
+void KEduVocTranslation::setQueryCount (  int indexFrom, count_t count )
+{
+    m_grades[indexFrom].m_queryCount = count;
+}
+
+
+count_t KEduVocTranslation::badCount (  int indexFrom ) const
+{
+    return m_grades.value(indexFrom).m_badCount;
+}
+
+
+void KEduVocTranslation::setBadCount (  int indexFrom, count_t count )
+{
+    m_grades[indexFrom].m_badCount = count;
+}
+
+
+QDateTime KEduVocTranslation::queryDate (  int indexFrom ) const
+{
+    return m_grades.value(indexFrom).m_queryDate;
+}
+
+
+void KEduVocTranslation::setQueryDate (  int indexFrom, const QDateTime & date )
+{
+    m_grades[indexFrom].m_queryDate = date;
+}
+
+
 // bool KEduVocTranslation::uniqueType() const
 // { ///@todo what is this??? I have no clue... help!
 // /*
@@ -333,45 +336,58 @@ void KEduVocTranslation::setTranslation ( const QString & expr )
 //     return false;
 // }
 //
-//
-// QString KEduVocTranslation::type() const
-// {
-//     return d->m_types;
-// }
-//
-//
-// void KEduVocTranslation::setType (  const QString &type )
-// {
-//     d->m_types = type;
-// }
-//
-//
-// void KEduVocTranslation::incQueryCount (  int indexFrom )
-// {
-//     setQueryCount ( indexFrom, queryCount ( indexFrom ) + 1 );
-// }
-//
-//
-// void KEduVocTranslation::incBadCount (  int indexFrom )
-// {
-//     setBadCount ( indexFrom, badCount ( indexFrom ) + 1 );
-// }
-//
-//
-// void KEduVocTranslation::resetGrades(){
-// //    d->m_grades.clear();
-// }
-//
-//
-// QList< int > KEduVocTranslation::conjugationTenses() const
-// {
-// //    return d->m_conjugations.keys();
-// }
+
+QString KEduVocTranslation::type() const
+{
+    return m_types;
+}
+
+
+void KEduVocTranslation::setType (  const QString &type )
+{
+    m_types = type;
+}
+
+
+void KEduVocTranslation::incQueryCount (  int indexFrom )
+{
+    setQueryCount ( indexFrom, queryCount ( indexFrom ) + 1 );
+}
+
+
+void KEduVocTranslation::incBadCount (  int indexFrom )
+{
+    setBadCount ( indexFrom, badCount ( indexFrom ) + 1 );
+}
+
+
+void KEduVocTranslation::resetGrades(){
+//    m_grades.clear();
+}
+
+/*
+QList< int > KEduVocTranslation::conjugationTenses() const
+{
+    return m_conjugations.keys();
+}*/
 
 bool KEduVocTranslation::operator ==(const KEduVocTranslation & translation) const
 {
-    return m_translation == translation.m_translation;
-    //return ( *d == *translation.d );
+    return m_translation == translation.m_translation &&
+        m_types == translation.m_types &&
+        m_usageLabel == translation.m_usageLabel &&
+        m_comment == translation.m_comment &&
+        m_paraphrase == translation.m_paraphrase &&
+        m_synonym == translation.m_synonym &&
+        m_example == translation.m_example &&
+        m_antonym == translation.m_antonym &&
+        m_pronunciation == translation.m_pronunciation &&
+        m_comparison == translation.m_comparison &&
+        m_multipleChoice == translation.m_multipleChoice
+        /// @todo m_falseFriends == translation.m_falseFriends &&
+        /// @todo m_grades == translation.m_grades &&
+        /// @todo m_conjugations == translation.m_conjugations
+        ;
 }
 
 
