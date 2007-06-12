@@ -15,12 +15,20 @@
 
 #include "keduvocgrade.h"
 
-// KEduVocGrade::KEduVocGrade()
-// {
-// }
-//
+KEduVocGrade::KEduVocGrade()
+{
+    m_grade = KV_NORM_GRADE;
+    m_queryCount = 0;
+    m_badCount = 0;
+
+    QDateTime dt;
+    dt.setTime_t(0);
+    m_queryDate = dt;
+}
+
 
 void KEduVocGrade::resetGrades()
 {
 
 }
+
