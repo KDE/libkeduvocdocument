@@ -279,6 +279,8 @@ bool KEduVocKvtmlReader::readArticle(QDomElement &domElementParent)
     return false;
 
   for (int i = 0; i < entryList.count(); ++i) {
+
+kDebug() << "KEduVocKvtmlReader::readArticle() read " << entryList.count() << " articles. " << endl;
     currentElement = entryList.item(i).toElement();
     if (currentElement.parentNode() == domElementParent) {
       QString lang;
@@ -292,6 +294,7 @@ bool KEduVocKvtmlReader::readArticle(QDomElement &domElementParent)
         else
           lang = "original";
         m_doc->appendIdentifier(lang);
+kDebug() << " Identifier " << i << " is " << lang << endl;
       }
       else
       {
@@ -1167,32 +1170,33 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
         if (query_id == KV_T)
           q_trans = lang;
       }
-
-      if (m_doc->identifierCount() <= i)
-      {
-        // new translation
-        if (lang.isEmpty())
-		{
-		  if (i == 0)
-		    lang = "original";
-	      else
-		  {
-            // no definition in first entry ?
-            lang.setNum(m_doc->identifierCount());
-            lang.prepend("translation ");
-		  }
+kDebug() << " Entry count: " << m_doc->entryCount() << endl;
+        if (m_doc->entryCount() == 0) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
+kDebug() << " Read Expression with identifiers: " << i << endl;
+            // new translation
+            if (lang.isEmpty())
+            {
+    kDebug() << "LANG IS EMPTY! " << endl;
+            if (i == 0)
+                lang = "original";
+            else
+            {
+                // no definition in first entry ?
+                lang.setNum(m_doc->identifierCount());
+                lang.prepend("translation ");
+            }
+            }
+            m_doc->appendIdentifier(lang);
         }
-        m_doc->appendIdentifier(lang);
-      }
-      else
-      {
-        if (lang != m_doc->identifier(i) && !lang.isEmpty())
+        else
         {
-		  // different language ?
-          m_errorMessage = i18n("ambiguous definition of language code");
-          return false;
+            if (lang != m_doc->identifier(i) && !lang.isEmpty())
+            {
+            // different language ?
+            m_errorMessage = i18n("ambiguous definition of language code");
+            return false;
+            }
         }
-      }
 
       //---------
       // Children
@@ -1239,8 +1243,8 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
         for ( int conjugationIndex = 0; conjugationIndex < conjug.size(); conjugationIndex++ ) {
             expr.translation(i).setConjugation(conjug[conjugationIndex]);
         }
-
         //expr.setConjugation(i, conjug[0]); ///@todo check if this is better than the above!
+
         conjug.clear();
       }
       if (!comparison.isEmpty())

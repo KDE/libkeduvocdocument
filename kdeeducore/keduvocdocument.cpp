@@ -235,7 +235,7 @@ bool KEduVocDocument::open(const KUrl& url)
           errorMessage = kvtmlReader.errorMessage();
       }
       break;
-/*
+
       case wql:
       {
         KEduVocWqlReader wqlReader(f);
@@ -284,7 +284,7 @@ bool KEduVocDocument::open(const KUrl& url)
           errorMessage = i18n("Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString());
       }
       break;
-*/
+
       default:
       {
         KEduVocKvtmlReader kvtmlReader(f);
@@ -953,7 +953,7 @@ void KEduVocDocument::resetEntry(int index, int lesson)
 
 int KEduVocDocument::identifierCount() const
 {
-  return d->m_identifiers.count();  // org + translations
+  return d->m_identifiers.count();  // number of translations
 }
 
 

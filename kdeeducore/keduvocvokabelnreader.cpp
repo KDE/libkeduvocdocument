@@ -121,11 +121,11 @@ bool KEduVocVokabelnReader::readDoc(KEduVocDocument *doc)
     lesson = words[2].toInt();
 
     KEduVocExpression kve;
-    kve.setOriginal(original);
-    kve.setGrade(1, 0, false);
-    kve.setGrade(1, 0, true);
+    kve.setTranslation(0, original);
+    kve.setTranslation(1, translation);
+    kve.translation(1).setGrade(0, 0);
+    kve.translation(0).setGrade(1, 0);
     kve.setLesson(lesson);
-    kve.addTranslation(translation);
 
     m_doc->appendEntry(&kve);
 
