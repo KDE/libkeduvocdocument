@@ -1175,19 +1175,16 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
         if (m_doc->entryCount() == 0) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
 kDebug() << " Read Expression with identifiers: " << i << endl;
             // new translation
-            if (lang.isEmpty())
-            {
-    kDebug() << "LANG IS EMPTY! " << endl;
-            if (i == 0)
-                lang = "original";
-            else
-            {
-                // no definition in first entry ?
-                lang.setNum(m_doc->identifierCount());
-                lang.prepend("translation ");
+            if (lang.isEmpty()) {
+                if (i == 0) {
+                    lang = "original";
+                } else {
+                    // no definition in first entry ?
+                    lang.setNum(m_doc->identifierCount());
+                    lang.prepend("translation ");
+                }
+                m_doc->appendIdentifier(lang);
             }
-            }
-            m_doc->appendIdentifier(lang);
         }
         else
         {
