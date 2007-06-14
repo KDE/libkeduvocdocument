@@ -1127,27 +1127,26 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   // Children 'Translation'
   //-------------------------------------------------------------------------
 
-  QDomNodeList translationList = domElementParent.elementsByTagName(KV_TRANS);
-  for (int i = 0; i < 1 + translationList.count(); ++i)
-  {
-	if (i == 0)
-	{
-	  currentElement = domElementParent.firstChildElement(KV_ORG);
-    }
-	else
-	{
-      currentElement = translationList.item(i - 1).toElement();
-    }
-	if (i == 0 && currentElement.isNull())
-	{
-	  m_errorMessage = i18n("Data for original language missing");
-      return false;
+  //QDomNodeList translationList = domElementParent.elementsByTagName(KV_TRANS);
+
+    // count which translation we are on
+    int i=0;
+
+    // kvtml 1: we always have an original element (required)
+    currentElement = domElementParent.firstChildElement(KV_ORG);
+    if (currentElement.isNull()) { // sanity check
+        m_errorMessage = i18n("Data for original language missing");
+        return false;
     }
 
+    while (!currentElement.isNull()) {
       type = exprtype;
 
       //-----------
       // Attributes
+      //-----------
+
+      // read attributes - the order of the query grades is interchanged!
       if (i == 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
                                           pronunciation, width, type, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase))
         return false;
@@ -1159,6 +1158,8 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
       if (m_doc->entryCount() == 0)
       {
+
+
         // only accept in first entry
         if (width >= 0)
           m_doc->setSizeHint(i, width);
@@ -1167,9 +1168,10 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
           q_org = lang;
 
         if (query_id == KV_T)
+
           q_trans = lang;
       }
-kDebug() << " Entry count: " << m_doc->entryCount() << endl;
+//kDebug() << " TranslationList.count(): " << translationList.count() << "  Entry count: " << m_doc->entryCount() << endl;
         if (m_doc->entryCount() == 0) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
 kDebug() << " Read Expression with identifiers: " << i << endl;
             // new translation
@@ -1225,20 +1227,16 @@ kDebug() << " Read Expression with identifiers: " << i << endl;
       if (textstr.isNull())
         textstr = "";
 
-      if (i == 0)
-	  {
+      if (i == 0) {
 		  expr = KEduVocExpression(textstr);
 		  expr.setLesson(lesson);
 		  expr.setInQuery(inquery);
 		  expr.setActive(active);
-	  }
-	  else
-	  {
+	  } else {
 		  expr.setTranslation(i, textstr);
 	  }
 
-      if (conjug.size() > 0)
-      {
+      if (conjug.size() > 0) {
         for ( int conjugationIndex = 0; conjugationIndex < conjug.size(); conjugationIndex++ ) {
             expr.translation(i).setConjugation(conjug[conjugationIndex]);
         }
@@ -1276,6 +1274,10 @@ kDebug() << " Read Expression with identifiers: " << i << endl;
         expr.translation(i).setParaphrase (paraphrase);
       if (!antonym.isEmpty() )
         expr.translation(i).setAntonym (antonym);
+
+      // Next translation
+      currentElement = currentElement.nextSiblingElement(KV_TRANS);
+      i++;
   }
 
   if (m_doc->entryCount() == 0)
