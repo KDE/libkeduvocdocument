@@ -20,7 +20,6 @@
 
 #include <QTextStream>
 #include <QList>
-#include <QStringList>
 #include <QIODevice>
 
 #include <kdebug.h>
