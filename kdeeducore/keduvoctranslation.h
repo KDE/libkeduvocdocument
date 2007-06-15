@@ -327,7 +327,7 @@ private:
 
     /// This is the word itself. The vocabulary. This is what it is all about.
     QString m_translation;
-    /// noun:male etc (language dependend)
+    /// noun:male etc (language dependent)
     QString m_types;
     QString m_usageLabel;
     QString m_comment;
