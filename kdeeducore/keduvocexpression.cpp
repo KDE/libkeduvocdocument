@@ -15,9 +15,11 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <KDebug>
 
 #include "keduvocexpression.h"
+
+#include <KDebug>
+
 
 class KEduVocExpression::KEduVocExpressionPrivate
 {
