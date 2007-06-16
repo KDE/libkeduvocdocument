@@ -1,0 +1,148 @@
+<!ELEMENT kvtml         (information, identifiers, types, tenses?, usages?, lessons?)     >
+<!ATTLIST kvtml version    CDATA  #REQUIRED>
+
+<!-- xml tree
+ kvtml
+  information
+   generator
+   title
+   author
+   license
+   comment
+  identifiers
+   identifier
+    type
+    twoalpha
+    name
+    comment
+    sizehint
+    article
+     definite
+      male
+      female
+      neutral
+     indefinite
+      male
+      female
+      neutral
+    conjugation
+     singular
+     plural
+  types
+   type
+  tenses
+   tense
+  usages
+   usage
+  lessons
+   lesson
+    name
+    query
+    current
+   entry
+    inactive
+    inquery
+    sizehint
+    translation
+     text
+     type
+     inquery
+     comment
+     pronunciation
+     falsefriendfrom
+     falsefriendto
+     falsefriend
+     antonym
+     synonym
+     example
+     usage
+     paraphrase
+     comparison
+      comp1
+      comp2
+      comp3
+     multiplechoice
+      choice
+     image
+     sound
+     grade
+      currentgradeint
+      count
+      errorcount
+      date 
+-->
+
+<!ELEMENT information    (generator?, title, author, license, comment?) >
+<!-- generator and comment are optional, all others are required exactly once -->
+
+<!ELEMENT generator      (#CDATA) >
+<!ELEMENT title          (#CDATA) >
+<!ELEMENT author         (#CDATA) >
+<!ELEMENT license        (#CDATA) >
+<!ELEMENT comment        (#CDATA) >
+
+<!ELEMENT identifiers    (identifier*) >
+<!ELEMENT identifier     (type, twoalpha, name, comment, sizehint, article, conjugation) >
+<!ELEMENT type           (user|language|#CDATA) >
+<!ELEMENT twoalpha       (#CDATA) >
+<!ELEMENT name           (#CDATA) >
+<!ELEMENT comment        (#CDATA) >
+<!ELEMENT sizehint       (#CDATA) >
+<!ELEMENT article        (definite?, indefinite?) >
+<!ELEMENT definite       (male?, female?, neutral?) >
+<!ELEMENT indefinite     (male?, female?, neutral?) >
+<!ELEMENT male           (#CDATA) >
+<!ELEMENT female         (#CDATA) >
+<!ELEMENT neutral        (#CDATA) >
+<!ELEMENT conjugation    (singular?, plural?) >
+<!ELEMENT singular       (#CDATA) >
+<!ELEMENT plural         (#CDATA) >
+
+<!ELEMENT types          (type*) >
+<!ELEMENT type           (#CDATA) >
+
+<!ELEMENT tenses         (tense*) >
+<!ELEMENT tense          (#CDATA) >
+
+<!ELEMENT usages         (usage*) >
+<!ELEMENT usage          (#CDATA) >
+
+<!ELEMENT lessons        (lesson*, entry*) >
+<!ELEMENT lesson         (name, query?, current?)
+<!ELEMENT query          (#CDATA) >
+<!ELEMENT current        EMPTY >
+
+<!ELEMENT entry          (inactive?, inquery?, sizehint?, translation*) >
+<!ELEMENT inactive       EMPTY >
+<!ELEMENT inquery        EMPTY >
+<!ELEMENT sizehint       (#CDATA) >
+
+<!ELEMENT translation    (text, type, inquery?, comment?, pronunciation, falsfriendfrom, falsefriendto, falsefriend, antonym*, synonym*, example, usage, paraphrase, comparison) >
+<!ELEMENT text           (#CDATA) >
+<!ELEMENT pronunciation  (#CDATA) >
+<!ELEMENT falsefriendfrom  (#CDATA) >
+<!ELEMENT falsefriendto  (#CDATA) >
+<!ELEMENT falsefriend    (#CDATA) >
+<!ELEMENT antonym        (#CDATA) >
+<!ELEMENT synonym        (#CDATA) >
+<!ELEMENT example        (#CDATA) >
+<!ELEMENT usage          (#CDATA) >
+<!ELEMENT paraphrase     (#CDATA) >
+
+<!ELEMENT comparison     (comp1, comp2, comp3) >
+<!ELEMENT comp1          (#CDATA) >
+<!ELEMENT comp2          (#CDATA) >
+<!ELEMENT comp3          (#CDATA) >
+
+<!ELEMENT multiplechoice  (choice+) >
+<!ELEMENT choice          (#CDATA) >
+
+<!ELEMENT image          (#CDATA) >
+<!ELEMENT sound          (#CDATA) >
+
+<!ELEMENT grade          (currentgradeint, count, errorcount, date) >
+<!ELEMENT currentgradeint  (#CDATA) >
+<!ELEMENT count          (#CDATA) >
+<!ELEMENT errorcount     (#CDATA) >
+<!ELEMENT date           (#CDATA) >
+
