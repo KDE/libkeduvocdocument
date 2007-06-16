@@ -19,8 +19,7 @@ set(kdeeducore_LIB_SRCS
    leitnerbox.cpp
    leitnersystem.cpp
    leitnersystemview.cpp
-   prefleitner.cpp 
-   kvtmlfiles.cpp )
+   prefleitner.cpp )
 
 kde4_automoc(${kdeeducore_LIB_SRCS})
 
@@ -47,7 +46,6 @@ install(FILES
    leitnerbox.h
    leitnersystem.h
    leitnersystemview.h
-   prefleitner.h 
-   kvtmlfiles.h DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu
+   prefleitner.h DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu
 )
 
