@@ -36,15 +36,36 @@
 class KDEEDUCORE_EXPORT KEduVocTranslation
 {
 public:
+    /**
+     * Default constructor for an empty translation.
+     */
     KEduVocTranslation( );
+    /**
+     * Constructor
+     * @param translation is used as translation
+     */
     KEduVocTranslation( const QString &translation );
 
+    /**
+     * Destructor
+     */
     ~KEduVocTranslation();
 
+    /**
+     * The translation as string (the word itself)
+     * @return the translation
+     */
     QString translation () const;
+    /**
+     * Sets the translation
+     * @param expr
+     */
     void setTranslation ( const QString & expr );
 
 
+    /**
+     * Clears grading and date information.
+     */
     void resetGrades();
 
 
@@ -167,13 +188,6 @@ public:
    * @return                 type or "" if no type available
    */
   QString type() const;
-
-/// @todo is this still needed? if so rather in KEduVocExpression
-//   /** all langs have same type ?
-//    *
-//    * @return                 true if all have same type
-//    */
-//   bool uniqueType () const;
 
  /** sets type of this expression
    *
@@ -319,7 +333,17 @@ public:
    */
   void incQueryCount( int indexFrom );
 
+    /**
+     * Equal operator to assing a translation to another one.
+     * @param translation translation to be copied
+     * @return reference to the new translation
+     */
     KEduVocTranslation& operator=(const KEduVocTranslation &translation);
+    /**
+     * Compare two translations, including word type etc.
+     * @param translation
+     * @return true if equal
+     */
     bool operator==(const KEduVocTranslation &translation) const;
 
 private:

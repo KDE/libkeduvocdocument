@@ -13,7 +13,6 @@
  *                                                                         *
  ***************************************************************************/
 
-//#include "keduvocexpression.h"
 
 #include "keduvoctranslation.h"
 #include <KDebug>
@@ -323,19 +322,6 @@ void KEduVocTranslation::setQueryDate (  int indexFrom, const QDateTime & date )
     m_grades[indexFrom].m_queryDate = date;
 }
 
-
-// bool KEduVocTranslation::uniqueType() const
-// { ///@todo what is this??? I have no clue... help!
-// /*
-//     bool unique = true;
-//     QString type0 = type ( 0 );
-//     for ( int i = 1; i < translationCount(); i++ )
-//         if ( type0 != type ( i ) )
-//             unique = false;
-//     return unique; */
-//     return false;
-// }
-//
 
 QString KEduVocTranslation::type() const
 {
