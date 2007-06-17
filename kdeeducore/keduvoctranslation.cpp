@@ -272,7 +272,7 @@ void KEduVocTranslation::setGrade (  int indexFrom, grade_t grade )
         grade = KV_MAX_GRADE;
     if ( grade < KV_MIN_GRADE )
         grade = KV_MIN_GRADE;
-//    m_grades[indexFrom].m_grade = grade;
+    m_grades[indexFrom].m_grade = grade;
 }
 
 
@@ -394,6 +394,19 @@ bool KEduVocTranslation::operator ==(const KEduVocTranslation & translation) con
 KEduVocTranslation & KEduVocTranslation::operator =(const KEduVocTranslation & translation)
 {
     m_translation = translation.m_translation;
+    m_types = translation.m_types;
+    m_usageLabel = translation.m_usageLabel;
+    m_comment = translation.m_comment;
+    m_paraphrase = translation.m_paraphrase;
+    m_synonym = translation.m_synonym;
+    m_example = translation.m_example;
+    m_antonym = translation.m_antonym;
+    m_pronunciation = translation.m_pronunciation;
+    m_comparison = translation.m_comparison;
+    m_multipleChoice = translation.m_multipleChoice;
+    /// @todo m_falseFriends == translation.m_falseFriends;
+    /// @todo m_grades == translation.m_grades;
+    /// @todo m_conjugations == translation.m_conjugations;
     return *this;
 }
 

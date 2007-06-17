@@ -44,6 +44,7 @@
 #define KV_LEV7_GRADE      7
 #define KV_LEV7_TEXT       I18N_NOOP("Level 7")
 
+#include "libkdeedu_core_export.h"
 
 #include <QtCore/QDateTime>
 
@@ -55,7 +56,7 @@ Contains grading information (query date, bad count) for one language with respe
 
 	@author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
-class KEduVocGrade
+class KDEEDUCORE_EXPORT KEduVocGrade
 {
 public:
     KEduVocGrade();
@@ -67,7 +68,6 @@ public:
     count_t m_queryCount;
     count_t m_badCount;
     QDateTime m_queryDate;
-
 
 };
 
