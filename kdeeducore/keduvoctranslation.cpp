@@ -362,7 +362,7 @@ void KEduVocTranslation::incBadCount (  int indexFrom )
 
 
 void KEduVocTranslation::resetGrades(){
-//    m_grades.clear();
+    m_grades.clear();
 }
 
 /*
