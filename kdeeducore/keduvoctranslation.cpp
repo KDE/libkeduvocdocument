@@ -256,73 +256,6 @@ void KEduVocTranslation::setPronunciation (  const QString & expr )
 }
 
 
-grade_t KEduVocTranslation::grade (  int indexFrom ) const
-{
-    if (m_grades.contains(indexFrom)) {
-        return m_grades.value(indexFrom).m_grade;
-    }
-    return KV_NORM_GRADE;
-}
-
-
-void KEduVocTranslation::setGrade (  int indexFrom, grade_t grade )
-{
-    if ( grade > KV_MAX_GRADE )
-        grade = KV_MAX_GRADE;
-    if ( grade < KV_MIN_GRADE )
-        grade = KV_MIN_GRADE;
-    m_grades[indexFrom].m_grade = grade;
-}
-
-
-void KEduVocTranslation::incGrade (  int indexFrom )
-{
-    setGrade ( indexFrom, grade( indexFrom) + 1 );
-}
-
-
-void KEduVocTranslation::decGrade (  int indexFrom )
-{
-    setGrade ( indexFrom, grade( indexFrom) - 1 );
-}
-
-
-count_t KEduVocTranslation::queryCount (  int indexFrom )  const
-{
-    return m_grades.value(indexFrom).m_queryCount;
-}
-
-
-void KEduVocTranslation::setQueryCount (  int indexFrom, count_t count )
-{
-    m_grades[indexFrom].m_queryCount = count;
-}
-
-
-count_t KEduVocTranslation::badCount (  int indexFrom ) const
-{
-    return m_grades.value(indexFrom).m_badCount;
-}
-
-
-void KEduVocTranslation::setBadCount (  int indexFrom, count_t count )
-{
-    m_grades[indexFrom].m_badCount = count;
-}
-
-
-QDateTime KEduVocTranslation::queryDate (  int indexFrom ) const
-{
-    return m_grades.value(indexFrom).m_queryDate;
-}
-
-
-void KEduVocTranslation::setQueryDate (  int indexFrom, const QDateTime & date )
-{
-    m_grades[indexFrom].m_queryDate = date;
-}
-
-
 QString KEduVocTranslation::type() const
 {
     return m_types;
@@ -332,18 +265,6 @@ QString KEduVocTranslation::type() const
 void KEduVocTranslation::setType (  const QString &type )
 {
     m_types = type;
-}
-
-
-void KEduVocTranslation::incQueryCount (  int indexFrom )
-{
-    setQueryCount ( indexFrom, queryCount ( indexFrom ) + 1 );
-}
-
-
-void KEduVocTranslation::incBadCount (  int indexFrom )
-{
-    setBadCount ( indexFrom, badCount ( indexFrom ) + 1 );
 }
 
 
@@ -394,5 +315,10 @@ KEduVocTranslation & KEduVocTranslation::operator =(const KEduVocTranslation & t
     /// @todo m_grades == translation.m_grades;
     /// @todo m_conjugations == translation.m_conjugations;
     return *this;
+}
+
+KEduVocGrade & KEduVocTranslation::gradeFrom(int indexFrom)
+{
+    return m_grades[indexFrom];
 }
 

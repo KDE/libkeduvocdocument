@@ -63,12 +63,6 @@ public:
     void setTranslation ( const QString & expr );
 
 
-    /**
-     * Clears grading and date information.
-     */
-    void resetGrades();
-
-
   /** sets the pronunciation of this expression
    *
    * @param index            index of expression
@@ -196,54 +190,10 @@ public:
    */
   void setType( const QString &type);
 
-  /** sets grade of given translation
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom        the identifier displayed to the user
-   * @param grade            number of knowlegde: 0=known, x=numbers not knows
-   */
-  void setGrade( int indexFrom, grade_t grade );
+  void resetGrades();
 
-  /** returns grade of given translation as int
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom          the identifier displayed to the user
-   * @return                 number of knowlegde: 0=known, x=numbers not knows
-   */
-  grade_t grade( int indexFrom ) const;
+  KEduVocGrade & gradeFrom( int indexFrom );
 
-  /** increments grade of given translation
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom        the identifier displayed to the user
-
-   */
-  void incGrade(  int indexFrom );
-
-  /** decrements grade of given translation
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom        the identifier displayed to the user
-
-   */
-  void decGrade(  int indexFrom );
-
-  /** returns last query date of given translation as int
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom        the identifier displayed to the user
-
-   */
-  QDateTime queryDate(  int indexFrom ) const;
-
-  /** set last query date of given translation as int
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom        the identifier displayed to the user
-   * @param date             the new date
-
-   */
-  void setQueryDate(  int indexFrom, const QDateTime & date );
 
   /** returns conjugations if available
    *
@@ -284,54 +234,6 @@ public:
    */
   void setMultipleChoice( const KEduVocMultipleChoice &mc);
 
-
-  /** returns query count of given translation as int
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom        the identifier displayed to the user
-
-   */
-  count_t queryCount(  int indexFrom  ) const;
-
-  /** set query count of given translation as int
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom        the identifier displayed to the user
-   * @param count            the new count
-
-   */
-  void setQueryCount( int indexFrom, count_t count );
-
-  /** returns bad query count of given translation as int
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom        the identifier displayed to the user
-   * @param reverse          dito, in opposite direction
-   */
-  count_t badCount( int indexFrom ) const;
-
-  /** set bad query count of given translation as int
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom        the identifier displayed to the user
-   * @param count            the new count
-   */
-  void setBadCount( int indexFrom, count_t count );
-
-  /** increment bad query count of given translation by 1
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom        the identifier displayed to the user
-   */
-  void incBadCount( int indexFrom );
-
-  /** increment query count of given translation by 1
-   *
-   * @param index            index of translation
-   * @param indexint indexFrom        the identifier displayed to the user
-
-   */
-  void incQueryCount( int indexFrom );
 
     /**
      * Equal operator to assing a translation to another one.

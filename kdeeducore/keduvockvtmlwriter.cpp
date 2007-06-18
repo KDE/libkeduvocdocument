@@ -211,17 +211,17 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
           domElementTranslation.setAttribute(KV_QUERY, (QString) KV_T);
       }
 
-      if (entry->translation(trans).grade(0) != 0 || entry->translation(0).grade(trans) != 0)
-        domElementTranslation.setAttribute(KV_GRADE, QString::number(entry->translation(trans).grade(0)) + ';' + QString::number(entry->translation(0).grade(trans)));
+      if (entry->translation(trans).gradeFrom(0).grade() != 0 || entry->translation(0).gradeFrom(trans).grade() != 0)
+        domElementTranslation.setAttribute(KV_GRADE, QString::number(entry->translation(trans).gradeFrom(0).grade()) + ';' + QString::number(entry->translation(0).gradeFrom(trans).grade()));
 
-      if (entry->translation(trans).queryCount(0) != 0 || entry->translation(0).queryCount(trans) != 0)
-        domElementTranslation.setAttribute(KV_COUNT, QString::number(entry->translation(trans).queryCount(0)) + ';' + QString::number(entry->translation(0).queryCount(trans)));
+      if (entry->translation(trans).gradeFrom(0).queryCount() != 0 || entry->translation(0).gradeFrom(trans).queryCount() != 0)
+        domElementTranslation.setAttribute(KV_COUNT, QString::number(entry->translation(trans).gradeFrom(0).queryCount()) + ';' + QString::number(entry->translation(0).gradeFrom(trans).queryCount()));
 
-      if (entry->translation(trans).badCount(0) != 0 || entry->translation(0).badCount(trans) != 0)
-        domElementTranslation.setAttribute(KV_BAD, QString::number(entry->translation(trans).badCount(0)) + ';' + QString::number(entry->translation(0).badCount(trans)));
+      if (entry->translation(trans).gradeFrom(0).badCount() != 0 || entry->translation(0).gradeFrom(trans).badCount() != 0)
+        domElementTranslation.setAttribute(KV_BAD, QString::number(entry->translation(trans).gradeFrom(0).badCount()) + ';' + QString::number(entry->translation(0).gradeFrom(trans).badCount()));
 
-      if (entry->translation(trans).queryDate(0).toTime_t() != 0 || entry->translation(0).queryDate(trans).toTime_t() != 0)
-        domElementTranslation.setAttribute(KV_DATE, QString::number(entry->translation(trans).queryDate(0).toTime_t()) + ';' + QString::number(entry->translation(0).queryDate(trans).toTime_t()));
+      if (entry->translation(trans).gradeFrom(0).queryDate().toTime_t() != 0 || entry->translation(0).gradeFrom(trans).queryDate().toTime_t() != 0)
+        domElementTranslation.setAttribute(KV_DATE, QString::number(entry->translation(trans).gradeFrom(0).queryDate().toTime_t()) + ';' + QString::number(entry->translation(0).gradeFrom(trans).queryDate().toTime_t()));
 
       if (!entry->translation(trans).comment().isEmpty() )
         domElementTranslation.setAttribute(KV_REMARK, entry->translation(trans).comment());

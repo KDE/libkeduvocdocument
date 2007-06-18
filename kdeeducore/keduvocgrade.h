@@ -60,10 +60,110 @@ class KDEEDUCORE_EXPORT KEduVocGrade
 {
 public:
     KEduVocGrade();
+
+      /** returns query count of given translation as int
+   *
+   * @param index            index of translation
+   * @param index       the identifier displayed to the user
+
+   */
+  count_t queryCount(   ) const;
+
+  /** set query count of given translation as int
+   *
+   * @param index            index of translation
+   * @param index       the identifier displayed to the user
+   * @param count            the new count
+
+   */
+  void setQueryCount( count_t count );
+
+  /** returns bad query count of given translation as int
+   *
+   * @param index            index of translation
+   * @param index       the identifier displayed to the user
+   * @param reverse          dito, in opposite direction
+   */
+  count_t badCount( ) const;
+
+  /** set bad query count of given translation as int
+   *
+   * @param index            index of translation
+   * @param index       the identifier displayed to the user
+   * @param count            the new count
+   */
+  void setBadCount( count_t count );
+
+  /** increment bad query count of given translation by 1
+   *
+   * @param index            index of translation
+   * @param index       the identifier displayed to the user
+   */
+  void incBadCount( );
+
+  /** increment query count of given translation by 1
+   *
+   * @param index            index of translation
+   * @param index       the identifier displayed to the user
+
+   */
+  void incQueryCount( );
+
+
+    /**
+     * Clears grading and date information.
+     */
     void resetGrades();
 
-/// @todo make these private and write the according functions like updateQueryDate, increaseGrade, decreaseGrade etc.
-public:
+  /** sets grade of given translation
+   *
+   * @param index            index of translation
+   * @param index       the identifier displayed to the user
+   * @param grade            number of knowlegde: 0=known, x=numbers not knows
+   */
+  void setGrade( grade_t grade );
+
+  /** returns grade of given translation as int
+   *
+   * @param index            index of translation
+   * @param index         the identifier displayed to the user
+   * @return                 number of knowlegde: 0=known, x=numbers not knows
+   */
+  grade_t grade() const;
+
+  /** increments grade of given translation
+   *
+   * @param index            index of translation
+   * @param index       the identifier displayed to the user
+
+   */
+  void incGrade(  );
+
+  /** decrements grade of given translation
+   *
+   * @param index            index of translation
+   * @param index       the identifier displayed to the user
+
+   */
+  void decGrade(  );
+
+  /** returns last query date of given translation as int
+   *
+   * @param index            index of translation
+   * @param index       the identifier displayed to the user
+
+   */
+  QDateTime queryDate(  ) const;
+
+
+   /**
+   * Set last query date
+   * @param index            index of translation
+   * @param date             the new date
+   */
+    void setQueryDate ( const QDateTime & date );
+
+private:
     grade_t m_grade;
     count_t m_queryCount;
     count_t m_badCount;

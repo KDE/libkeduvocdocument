@@ -123,8 +123,8 @@ bool KEduVocVokabelnReader::readDoc(KEduVocDocument *doc)
     KEduVocExpression kve;
     kve.setTranslation(0, original);
     kve.setTranslation(1, translation);
-    kve.translation(1).setGrade(0, 0);
-    kve.translation(0).setGrade(1, 0);
+    kve.translation(1).gradeFrom(0).setGrade(0);
+    kve.translation(0).gradeFrom(1).setGrade(0);
     kve.setLesson(lesson);
 
     m_doc->appendEntry(&kve);
