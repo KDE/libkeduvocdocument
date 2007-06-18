@@ -130,9 +130,9 @@
 <!ELEMENT paraphrase     (#CDATA) >
 
 <!ELEMENT comparison     (comp1, comp2, comp3) >
-<!ELEMENT comp1          (#CDATA) >
-<!ELEMENT comp2          (#CDATA) >
-<!ELEMENT comp3          (#CDATA) >
+<!ELEMENT absolute       (#CDATA) >
+<!ELEMENT comparative    (#CDATA) >
+<!ELEMENT superlative    (#CDATA) >
 
 <!ELEMENT multiplechoice  (choice+) >
 <!ELEMENT choice          (#CDATA) >
