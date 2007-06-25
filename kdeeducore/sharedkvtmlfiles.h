@@ -19,8 +19,8 @@
 #include "libkdeedu_core_export.h"
 
 #include <QtXml/QDomDocument>
-#include <QMap>
-#include <QStringList>
+#include <QtCore/QMap>
+#include <QtCore/QStringList>
 
 #include <kglobal.h>
 
