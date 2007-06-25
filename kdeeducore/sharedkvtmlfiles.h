@@ -35,43 +35,32 @@ class SharedKvtmlFilesPrivate;
  *about files found there
  *@author Jeremy Whiting
  */
-class KDEEDUCORE_EXPORT SharedKvtmlFiles
+namespace SharedKvtmlFiles
 {
-  friend class SharedKvtmlFilesPrivate;
-  public:
-    /** singleton accessor */
-    static SharedKvtmlFiles *self();
-
     /** get list of all languages found in any files */
-    QStringList languages();
-	
-	/** get list of filenames found of given language 
-	 *@param language language requested QString() for all languages
-	 *@return a list of filenames with words in language
-	 */
-    QStringList fileNames(const QString &language = QString());
+    KDEEDUCORE_EXPORT QStringList languages();
+
+    /** get list of filenames found of given language 
+     *@param language language requested QString() for all languages
+     *@return a list of filenames with words in language
+     */
+    KDEEDUCORE_EXPORT QStringList fileNames(const QString &language = QString());
 
     /** get the list of document titles found of a given language
-	  *@param language requested language QString() for all titles
-	  *@return a list of document titles with words in language
-	  */
-	QStringList titles(const QString &language = QString());
-	
-	/** get the list of document remarts found of a given language
-	  *@param language requested language QString() for all comments
-	  *@return a list of document remarks with words in language
-	  */
-	QStringList comments(const QString &language = QString());
+     *@param language requested language QString() for all titles
+     *@return a list of document titles with words in language
+     */
+    KDEEDUCORE_EXPORT QStringList titles(const QString &language = QString());
 
-	/** rescan the shared kvtml locations */
-	void rescan();
+    /** get the list of document remarts found of a given language
+     *@param language requested language QString() for all comments
+     *@return a list of document remarks with words in language
+     */
+    KDEEDUCORE_EXPORT QStringList comments(const QString &language = QString());
 
-  private:
-    /** default contstuctor */
-    SharedKvtmlFiles();
-	
-	/** default destructor */
-    ~SharedKvtmlFiles();
+    /** rescan the shared kvtml locations */
+    KDEEDUCORE_EXPORT void rescan();
+
 };
 
 #endif

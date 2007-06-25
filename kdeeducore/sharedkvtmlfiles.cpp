@@ -38,8 +38,6 @@ class SharedKvtmlFilesPrivate
 	{
 	}
 	
-	SharedKvtmlFiles instance;
-	
 	/** scan the folder for documents, and record what is found */
 	void rescan();
 
@@ -57,20 +55,6 @@ class SharedKvtmlFilesPrivate
 };
 
 K_GLOBAL_STATIC(SharedKvtmlFilesPrivate, sharedKvtmlFilesPrivate)
-
-SharedKvtmlFiles *SharedKvtmlFiles::self()
-{
-    // returns the singleton; automatically creates a new instance if that has not happened yet.
-    return &sharedKvtmlFilesPrivate->instance;
-}
-
-SharedKvtmlFiles::SharedKvtmlFiles()
-{
-}
-
-SharedKvtmlFiles::~SharedKvtmlFiles()
-{
-}
 
 void SharedKvtmlFilesPrivate::rescan()
 {
