@@ -61,7 +61,7 @@ namespace SharedKvtmlFiles
     /** rescan the shared kvtml locations */
     KDEEDUCORE_EXPORT void rescan();
 
-};
+}
 
 #endif
 
