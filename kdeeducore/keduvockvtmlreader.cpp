@@ -1140,7 +1140,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     }
 
     while (!currentElement.isNull()) {
-      type = exprtype;
+      type = exprtype; // seems like type can be in the paren element and overwritten in the children here :(
 
       //-----------
       // Attributes
@@ -1155,11 +1155,8 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
                                           pronunciation, width, type, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase))
         return false;
 
-
       if (m_doc->entryCount() == 0)
       {
-
-
         // only accept in first entry
         if (width >= 0)
           m_doc->setSizeHint(i, width);
@@ -1271,6 +1268,16 @@ kDebug() << " Read Expression with identifiers: " << i << endl;
         expr.translation(i).setParaphrase (paraphrase);
       if (!antonym.isEmpty() )
         expr.translation(i).setAntonym (antonym);
+
+      if ( i != 0 ) {
+        expr.translation(i).gradeFrom(0).setQueryCount(qcount);
+        expr.translation(0).gradeFrom(i).setQueryCount(r_qcount);
+        expr.translation(i).gradeFrom(0).setBadCount(bcount);
+        expr.translation(0).gradeFrom(i).setBadCount(r_bcount);
+        expr.translation(i).gradeFrom(0).setQueryDate(qdate);
+        expr.translation(0).gradeFrom(i).setQueryDate(r_qdate);
+      }
+//kDebug() << "KEduVocKvtmlReader::readExpression(): id: " << i << " translation: " << textstr << endl;
 
       // Next translation
       currentElement = currentElement.nextSiblingElement(KV_TRANS);
