@@ -1,77 +1,6 @@
 <!ELEMENT kvtml         (information, identifiers, types, tenses?, usages?, lessons?)     >
 <!ATTLIST kvtml version    CDATA  #REQUIRED>
 
-<!-- xml tree
- kvtml
-  information
-   generator
-   title
-   author
-   license
-   comment
-  identifiers
-   identifier
-    type
-    twoalpha
-    name
-    comment
-    sizehint
-    article
-     definite
-      male
-      female
-      neutral
-     indefinite
-      male
-      female
-      neutral
-    conjugation
-     singular
-     plural
-  types
-   type
-  tenses
-   tense
-  usages
-   usage
-  lessons
-   lesson
-    name
-    query
-    current
-   entry
-    inactive
-    inquery
-    sizehint
-    translation
-     text
-     type
-     inquery
-     comment
-     pronunciation
-     falsefriendfrom
-     falsefriendto
-     falsefriend
-     antonym
-     synonym
-     example
-     usage
-     paraphrase
-     comparison
-      comp1
-      comp2
-      comp3
-     multiplechoice
-      choice
-     image
-     sound
-     grade
-      currentgradeint
-      count
-      errorcount
-      date 
--->
-
 <!ELEMENT information    (generator?, title, author, license, comment?) >
 <!-- generator and comment are optional, all others are required exactly once -->
 
@@ -129,7 +58,7 @@
 <!ELEMENT usage          (#CDATA) >
 <!ELEMENT paraphrase     (#CDATA) >
 
-<!ELEMENT comparison     (comp1, comp2, comp3) >
+<!ELEMENT comparison     (absolute, comparative, superlative) >
 <!ELEMENT absolute       (#CDATA) >
 <!ELEMENT comparative    (#CDATA) >
 <!ELEMENT superlative    (#CDATA) >
