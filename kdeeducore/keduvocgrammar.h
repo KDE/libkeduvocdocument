@@ -122,13 +122,13 @@ public:
    */
   KEduVocComparison(const QString &l1, const QString &l2, const QString &l3);
 
-  void setL1(const QString &s) { ls1 = s; }
-  void setL2(const QString &s) { ls2 = s; }
-  void setL3(const QString &s) { ls3 = s; }
+  void setL1(const QString &s);
+  void setL2(const QString &s);
+  void setL3(const QString &s);
 
-  QString l1() const { return ls1; }
-  QString l2() const { return ls2; }
-  QString l3() const { return ls3; }
+  QString l1() const;
+  QString l2() const;
+  QString l3() const;
 
   bool isEmpty() const;
   void clear();

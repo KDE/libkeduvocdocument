@@ -128,6 +128,35 @@ bool KEduVocComparison::operator ==(const KEduVocComparison& a) const
   return false;
 }
 
+void KEduVocComparison::setL1(const QString &s)
+{ 
+    ls1 = s; 
+}
+
+void KEduVocComparison::setL2(const QString &s) 
+{ 
+    ls2 = s; 
+}
+
+void KEduVocComparison::setL3(const QString &s) 
+{ 
+    ls3 = s; 
+}
+
+QString KEduVocComparison::l1() const 
+{ 
+    return ls1; 
+}
+QString KEduVocComparison::l2() const 
+{ 
+    return ls2; 
+}
+
+QString KEduVocComparison::l3() const 
+{ 
+    return ls3; 
+}
+
 
 //=================================================================
 

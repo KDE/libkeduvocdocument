@@ -42,17 +42,17 @@ public:
 
    KEduVocMultipleChoice (const QString &mc1, const QString &mc2, const QString &mc3, const QString &mc4, const QString &mc5);
 
-   void setMC1 (const QString &s) { muc1 = s; }
-   void setMC2 (const QString &s) { muc2 = s; }
-   void setMC3 (const QString &s) { muc3 = s; }
-   void setMC4 (const QString &s) { muc4 = s; }
-   void setMC5 (const QString &s) { muc5 = s; }
+   void setMC1 (const QString &s);
+   void setMC2 (const QString &s);
+   void setMC3 (const QString &s);
+   void setMC4 (const QString &s);
+   void setMC5 (const QString &s);
 
-   QString mc1 () const { return muc1; }
-   QString mc2 () const { return muc2; }
-   QString mc3 () const { return muc3; }
-   QString mc4 () const { return muc4; }
-   QString mc5 () const { return muc5; }
+   QString mc1 () const;
+   QString mc2 () const;
+   QString mc3 () const;
+   QString mc4 () const;
+   QString mc5 () const;
 
    QString mc (unsigned idx) const;
 

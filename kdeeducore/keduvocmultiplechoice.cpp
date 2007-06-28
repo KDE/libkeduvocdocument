@@ -123,3 +123,53 @@ bool KEduVocMultipleChoice::operator==(const KEduVocMultipleChoice &choice) cons
     muc5 == choice.muc5;
 }
 
+void KEduVocMultipleChoice::setMC1(const QString &s) 
+{ 
+	muc1 = s; 
+}
+
+void KEduVocMultipleChoice::setMC2(const QString &s) 
+{ 
+	muc2 = s; 
+}
+
+void KEduVocMultipleChoice::setMC3(const QString &s) 
+{ 
+	muc3 = s; 
+}
+
+void KEduVocMultipleChoice::setMC4(const QString &s) 
+{ 
+    muc4 = s; 
+}
+
+void KEduVocMultipleChoice::setMC5(const QString &s) 
+{ 
+    muc5 = s; 
+}
+
+QString KEduVocMultipleChoice::mc1() const 
+{ 
+    return muc1; 
+}
+
+QString KEduVocMultipleChoice::mc2() const 
+{ 
+    return muc2; 
+}
+
+QString KEduVocMultipleChoice::mc3() const 
+{ 
+    return muc3; 
+}
+
+QString KEduVocMultipleChoice::mc4() const 
+{ 
+    return muc4; 
+}
+
+QString KEduVocMultipleChoice::mc5() const 
+{ 
+	return muc5; 
+}
+
