@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Chemical Data Engine
+ServiceTypes=Plasma/DataEngine
+Type=Service
+Icon=kalzium
+X-KDE-Library=plasma_engine_chemicaldata
+X-EngineName=chemicaldata
