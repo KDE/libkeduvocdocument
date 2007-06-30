@@ -55,57 +55,49 @@ using namespace Plasma;
 Rypton::Rypton(QObject *parent, const QStringList &args)
     : Plasma::Applet(parent, args),
       m_defDisplay(0),
-      m_dialog(0),
-      m_showTimeStringCheckBox(0),
-      m_spinWidth(0)
+      m_dialog(0)
 {
     setFlags(QGraphicsItem::ItemIsMovable);
-    
-    KConfigGroup cg = appletConfig();
-    m_width = cg.readEntry("width", 500);
-    m_wordEdit = new Plasma::LineEdit(this);
-    m_wordEdit->setTextInteractionFlags(Qt::TextEditorInteraction);
-    m_wordEdit->setDefaultText(i18n("Enter word to define here"));
-    Phase::self()->animateItem(m_wordEdit, Phase::Appear);
-    m_defEdit = new Plasma::LineEdit(this);
-    m_defEdit->setTextInteractionFlags(Qt::TextBrowserInteraction);
 
-    m_defEdit->hide();
-    m_wordEdit->setZValue(m_defEdit->zValue()+1);
+    dataEngine("chemicaldata")->connectSource("11", this);
 
     //  Icon in upper-left corner
-    QIcon *m_icon = new KIcon("dictionary");
-    m_graphicsIcon = new QGraphicsPixmapItem(m_icon->pixmap(32,32), this);
+    QIcon *icon = new KIcon("dictionary");
+    m_graphicsIcon = new QGraphicsPixmapItem(icon->pixmap(32,32), this);
 
     //  Position lineedits
     const int wordEditOffset = 40;
     m_graphicsIcon->setPos(-40 + wordEditOffset,-7);
-    m_wordEdit->setPos(wordEditOffset,0);
-    m_wordEdit->setTextWidth(m_width-wordEditOffset);
-    m_defEdit->setTextWidth(m_width);
-    m_defEdit->setPos(0,40);
 
-    m_word = QString("22");
-    Plasma::DataEngine* m_dataEngine = dataEngine("chemicaldata");
-    m_dataEngine->connectSource(m_word, this);
+
+    m_wordEdit = new Plasma::LineEdit(this);
+    m_wordEdit->setTextInteractionFlags(Qt::TextEditorInteraction);
+    m_wordEdit->setDefaultText(i18n("Enter word to define here"));
+
     connect(m_wordEdit, SIGNAL(editingFinished()), this, SLOT(define()));
+
+
+    Phase::self()->animateItem(m_wordEdit, Phase::Appear);
+
+
+
+    m_theme = new Plasma::Svg("widgets/toolbox-button", this);
+    m_theme->resize();
+    constraintsUpdated();
 }
 
 void Rypton::define()
 {
     kDebug() << "Rypton::define()" << endl;
-
-    m_word = m_wordEdit->toPlainText();
-    Plasma::DataEngine* m_dataEngine = dataEngine("chemicaldata");
-    m_dataEngine->connectSource(m_word, this);
+    dataEngine("chemicaldata")->connectSource("11", this);
 }
 
 QRectF Rypton::boundingRect() const
 {
-    if (m_defEdit->isVisible()) 
-        return m_defEdit->geometry().adjusted(-15,-12,15,12+40);
+    if (m_wordEdit->isVisible()) 
+        return m_wordEdit->geometry().adjusted(-15,-12,15,12+40);
     else 
-        return m_defEdit->geometry().adjusted(-15,-12,15,12);
+        return m_wordEdit->geometry().adjusted(-15,-12,15,12);
 }
 
 void Rypton::constraintsUpdated()

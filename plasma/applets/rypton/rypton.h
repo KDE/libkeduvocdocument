@@ -76,26 +76,16 @@ class Rypton : public Plasma::Applet
 
     private:
         QRectF m_bounds;
-        int m_pixelSize;
-        QString m_timezone;
         Plasma::Svg* m_theme;
-        QTime m_time;
-        QVariant m_thedef;
+        int m_pixelSize;
         KDialog *m_dialog; //should we move this into another class?
-        QCheckBox *m_showTimeStringCheckBox;
-        QCheckBox *m_showSecondHandCheckBox;
-        QCheckBox *m_swapTzs;
-        QSpinBox *m_spinWidth;
+
+        QGraphicsPixmapItem * m_graphicsIcon;
+
 	QTextEdit *m_defDisplay;
 	QLineEdit *m_wordChooser;
 	QString m_word;
-        QTimer* m_timer;
-        int m_width;
-        QGraphicsPixmapItem *m_graphicsIcon; 
 	Plasma::LineEdit *m_wordEdit;
-        Plasma::LineEdit *m_defEdit;
-        QStringList m_defList;
-        QStringList::iterator m_i;
 };
 
 K_EXPORT_PLASMA_APPLET(rypton, Rypton)
