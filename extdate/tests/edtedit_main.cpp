@@ -9,11 +9,11 @@ static const char notice[] = I18N_NOOP("Displays an ExtDateTimeEdit widget to te
 
 int main( int argc, char *argv[] )
 {
-	KAboutData aboutData( "test_extdatetimeedit", I18N_NOOP("Test ExtDateTimeEdit"),
-				"0.1", description, KAboutData::License_GPL,
-				I18N_NOOP("(c) 2005, Jason Harris"), notice,
+	KAboutData aboutData( "test_extdatetimeedit", 0, ki18n("Test ExtDateTimeEdit"),
+				"0.1", ki18n(description), KAboutData::License_GPL,
+				ki18n("(c) 2005, Jason Harris"), ki18n(notice),
 				"http://edu.kde.org/kstars");
-	aboutData.addAuthor("Jason Harris", 0,
+	aboutData.addAuthor(ki18n("Jason Harris"), KLocalizedString(),
 				"kstars@30doradus.org", "http://edu.kde.org/kstars");
 
 	KCmdLineArgs::init( argc, argv, &aboutData );
