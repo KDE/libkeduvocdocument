@@ -58,6 +58,7 @@ Rypton::Rypton(QObject *parent, const QStringList &args)
       m_dialog(0)
 {
     setFlags(QGraphicsItem::ItemIsMovable);
+    //setHasConfigurationInterface(true);
 
     dataEngine("chemicaldata")->connectSource("11", this);
 
