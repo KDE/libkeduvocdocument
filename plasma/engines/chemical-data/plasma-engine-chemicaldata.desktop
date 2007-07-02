@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Chemical Data Engine
 Name[sv]=Gränssnitt för kemisk data
+Name[zh_TW]=化學資料引擎
 ServiceTypes=Plasma/DataEngine
 Type=Service
 Icon=kalzium
