@@ -79,8 +79,6 @@ Rypton::Rypton(QObject *parent, const QStringList &args)
 
     Phase::self()->animateItem(m_wordEdit, Phase::Appear);
 
-
-
     m_theme = new Plasma::Svg("widgets/toolbox-button", this);
     m_theme->resize();
     constraintsUpdated();
@@ -89,7 +87,8 @@ Rypton::Rypton(QObject *parent, const QStringList &args)
 void Rypton::define()
 {
     kDebug() << "Rypton::define()" << endl;
-    dataEngine("chemicaldata")->connectSource("11", this);
+    m_word = m_wordEdit->toPlainText();
+    dataEngine("chemicaldata")->connectSource(m_word, this);
 }
 
 QRectF Rypton::boundingRect() const
