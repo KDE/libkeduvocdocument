@@ -59,11 +59,11 @@ bool ChemicalDataEngine::sourceRequested(const QString &name)
     QString e_name   = m_elements.at(num)->dataAsString( ChemicalDataObject::name );
     QString e_symbol = m_elements.at(num)->dataAsString( ChemicalDataObject::symbol );
     QString e_weight = m_elements.at(num)->dataAsString( ChemicalDataObject::mass );
-    setData( e_name, "Symbol", e_symbol );
-    setData( e_name, "Mass", e_weight );
+    kDebug() << "    name, symbol and weight: " << e_name << " " << e_symbol << " " << e_weight << endl;
+    setData( name, I18N_NOOP("Name"), e_name);
+    setData( name, I18N_NOOP("Symbol"), e_symbol );
+    setData( name, I18N_NOOP("Mass"), e_weight );
 
-    checkForUpdates( );
-    
     return true;
 }
 
