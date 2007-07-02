@@ -69,7 +69,7 @@ class Rypton : public Plasma::Applet
     public slots:
         void updated(const QString &name, const Plasma::DataEngine::Data &data);
         void define();
-        void configureDialog();
+        void showConfigurationInterface();
 
     protected slots:
         void configAccepted();
