@@ -221,6 +221,17 @@ void KEduVocArticle::getNatural(QString *def, QString *indef) const
     *indef = nat_indef;
 }
 
+//==============================================================
+
+QString KEduVocTenseRelation::shortStr() const 
+{ 
+    return shortId; 
+}
+
+QString KEduVocTenseRelation::longStr()  const 
+{ 
+    return longId;  
+}
 
 
 //==============================================================

@@ -211,7 +211,7 @@ bool KEduVocDocument::open(const KUrl& url)
     d->m_url = url;
 
   bool read = false;
-  QString errorMessage = i18n("<qt>Cannot open file<br><b>%1</b></qt>", url.path());
+  QString errorMessage = i18n("<qt>Cannot open file<br /><b>%1</b></qt>", url.path());
   QString temporaryFile;
   if (KIO::NetAccess::download(url, temporaryFile, 0))
   {
@@ -332,7 +332,7 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
 
     if (!f.open(QIODevice::WriteOnly))
     {
-      KMessageBox::error(0, i18n("<qt>Cannot write to file<br><b>%1</b></qt>", tmp.path()));
+      KMessageBox::error(0, i18n("<qt>Cannot write to file<br /><b>%1</b></qt>", tmp.path()));
       return false;
     }
 

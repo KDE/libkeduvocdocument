@@ -148,8 +148,8 @@ public:
   KEduVocTenseRelation() {}
   KEduVocTenseRelation (const QString & _short, const QString & _long): shortId (_short), longId(_long) {}
 
-  inline QString shortStr() const { return shortId; }
-  inline QString longStr()  const { return longId;  }
+  QString shortStr() const;
+  QString longStr()  const;
 
 private:
   QString shortId;
