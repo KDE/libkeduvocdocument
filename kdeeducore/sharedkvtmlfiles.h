@@ -18,16 +18,7 @@
 
 #include "libkdeedu_core_export.h"
 
-#include <QtXml/QDomDocument>
-#include <QtCore/QMap>
 #include <QtCore/QStringList>
-
-#include <kglobal.h>
-
-#include "kvtmldefs.h"
-
-class QIODevice;
-class SharedKvtmlFilesPrivate;
 
 /**
  *namespace and singleton class to scan groups of kvtml files
