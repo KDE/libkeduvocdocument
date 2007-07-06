@@ -42,8 +42,10 @@ install(FILES
    libkdeedu_core_export.h
    keduvocdocument.h
    keduvocexpression.h
+   keduvocgrade.h
    keduvocgrammar.h
    keduvocmultiplechoice.h
+   keduvoctranslation.h
    leitnerbox.h
    leitnersystem.h
    leitnersystemview.h
