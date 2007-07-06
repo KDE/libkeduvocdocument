@@ -17,11 +17,10 @@
 #ifndef KEDUVOCEXPRESSIONTRANSLATION_H
 #define KEDUVOCEXPRESSIONTRANSLATION_H
 
+#include "libkdeedu_core_export.h"
 
-#include <libkdeedu_core_export.h>
-
-#include <QMap>
-#include <QString>
+#include <QtCore/QMap>
+#include <QtCore/QString>
 
 #include "keduvocgrade.h"
 #include "keduvocgrammar.h"
