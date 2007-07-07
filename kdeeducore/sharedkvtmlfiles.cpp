@@ -20,7 +20,9 @@
 #include <klocale.h>
 #include <kstandarddirs.h>
 
+#include <QDir>
 #include <QList>
+#include <QSet>
 
 #include <kglobal.h>
 
@@ -61,37 +63,46 @@ void SharedKvtmlFilesPrivate::rescan()
 	this->m_titleList.clear();
 	this->m_commentList.clear();
 	this->m_filesByLang.clear();
-	this->m_fileList = KGlobal::dirs()->findAllResources("data", "kvtml/*.kvtml");
+    this->m_fileList.clear();
 	
+    QStringList locales;
+    
+    QStringList dataPaths = KGlobal::dirs()->findDirs("data", "kvtml/");
+    for (int i = 0; i < dataPaths.size(); ++i)
+    {
+        locales += QDir(dataPaths[i]).entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name);
+    }
+    
+    // remove duplicates
+    locales = locales.toSet().toList();
+    
+    for (int i = 0; i < locales.size(); ++i)
+    {
+        // get all files for this language
+        QStringList thisLangFiles = KGlobal::dirs()->findAllResources("data", 
+                QString("kvtml/%1/*.kvtml").arg(QDir(locales[i]).dirName()));
+        // add them to the big list
+        this->m_fileList << thisLangFiles;
+        
+        // then add them to their respective language maps
+        for (int j = 0; j < thisLangFiles.size(); ++j)
+        {
+            this->m_filesByLang[locales[i]].append(thisLangFiles[j]);
+        }
+    }
+    
 	KEduVocDocument *doc = new KEduVocDocument();
-	for (int i = 0; i < this->m_fileList.size(); ++i)
-	{
-		// open the file
-		doc->open(KUrl::fromPath(this->m_fileList[i]));
-		
-		// add it's title to the title list
-		this->m_titleList.append(doc->title());
-		
-		// add it's comment to the comment list
-		this->m_commentList.append(doc->documentRemark());
-		
-		// then add it under its main language in the map
-		QString language = doc->originalIdentifier();
-		if (language.isEmpty())
-		{
-			language = I18N_NOOP("none");
-		}
-		if (this->m_filesByLang.contains(language))
-		{
-			this->m_filesByLang[language].append(this->m_fileList[i]);
-		}
-		else
-		{
-			QStringList list;
-			list.append(this->m_fileList[i]);
-			this->m_filesByLang.insert(language, list);
-		}
-	}
+    for (int i = 0; i < this->m_fileList.size(); ++i)
+    {
+        // open the file
+        doc->open(KUrl::fromPath(this->m_fileList[i]));
+        
+        // add it's title to the title list
+        this->m_titleList.append(doc->title());
+        
+        // add it's comment to the comment list
+        this->m_commentList.append(doc->documentRemark());
+    }
 }
 
 void SharedKvtmlFiles::rescan()
