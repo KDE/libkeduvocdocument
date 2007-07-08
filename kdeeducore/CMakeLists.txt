@@ -10,6 +10,7 @@ set(kdeeducore_LIB_SRCS
    keduvocgrade.cpp
    keduvocgrammar.cpp
    keduvockvtmlreader.cpp
+   keduvockvtml2reader.cpp
    keduvockvtmlwriter.cpp
    keduvocmultiplechoice.cpp
    keduvocpaukerreader.cpp

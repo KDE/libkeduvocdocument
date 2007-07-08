@@ -34,7 +34,7 @@
 #include "keduvockvtmlwriter.h"
 #include "keduvoccsvreader.h"
 #include "keduvoccsvwriter.h"
-#include "keduvockvtmlreader.h"
+#include "keduvockvtml2reader.h"
 #include "keduvocwqlreader.h"
 #include "keduvocpaukerreader.h"
 #include "keduvocvokabelnreader.h"
@@ -229,7 +229,7 @@ bool KEduVocDocument::open(const KUrl& url)
     switch (ft) {
       case kvtml:
       {
-        KEduVocKvtmlReader kvtmlReader(f);
+        KEduVocKvtml2Reader kvtmlReader(f);
         read = kvtmlReader.readDoc(this);
         if (!read)
           errorMessage = kvtmlReader.errorMessage();
@@ -287,7 +287,7 @@ bool KEduVocDocument::open(const KUrl& url)
 
       default:
       {
-        KEduVocKvtmlReader kvtmlReader(f);
+        KEduVocKvtml2Reader kvtmlReader(f);
         read = kvtmlReader.readDoc(this);
         if (!read)
           errorMessage = kvtmlReader.errorMessage();
