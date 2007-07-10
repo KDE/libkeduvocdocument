@@ -7,7 +7,6 @@ set(kdeeduui_LIB_SRCS
    kdeeduglossary.cpp
 )
 
-kde4_automoc(${kdeeduui_LIB_SRCS})
 
 kde4_add_library(kdeeduui SHARED ${kdeeduui_LIB_SRCS})
 
