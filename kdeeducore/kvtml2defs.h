@@ -18,6 +18,7 @@
 
 #define KVTML_TAG "kvtml"
 #define KVTML_VERSION "version"
+#define KVTML_ID "id"
 
 #define KVTML_INFORMATION "information"
 
@@ -56,20 +57,21 @@
 #define KVTML_QUERY "query"
 #define KVTML_CURRENT "current"
 
+#define KVTML_ENTRIES "entries"
 #define KVTML_ENTRY "entry"
 #define KVTML_INACTIVE "inactive"
 #define KVTML_INQUERY "inquery"
 
-#define KVTML_TRANS "translation"
+#define KVTML_TRANSLATION "translation"
 #define KVTML_TEXT "text"
-#define KVTML_PRONUNC "pronunciation"
-#define KVTML_FFF "falsefriendfrom"
-#define KVTML_FFT "falsefriendto"
-#define KVTML_FF "falsefriend"
-#define KVTML_ANT "antonym"
-#define KVTML_SYN "synonym"
-#define KVTML_EX "example"
-#define KVTML_PAR "paraphrase"
+#define KVTML_PRONUNCIATION "pronunciation"
+#define KVTML_FALSEFRIENDFROM "falsefriendfrom"
+#define KVTML_FALSEFRIENDTO "falsefriendto"
+#define KVTML_FALSEFRIEND "falsefriend"
+#define KVTML_ANTONYM "antonym"
+#define KVTML_SYNONYM "synonym"
+#define KVTML_EXAMPLE "example"
+#define KVTML_PARAPHRASE "paraphrase"
 
 #define KVTML_COMPARISON "comparison"
 #define KVTML_ABS "absolute"

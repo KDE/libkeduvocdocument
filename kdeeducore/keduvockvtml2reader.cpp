@@ -41,8 +41,6 @@ KEduVocKvtml2Reader::KEduVocKvtml2Reader(QIODevice *file)
 bool KEduVocKvtml2Reader::readDoc(KEduVocDocument *doc)
 {
   m_doc = doc;
-  m_cols = 0;
-  m_lines = 0;
 
   QDomDocument domDoc("KEduVocDocument");
 
@@ -79,46 +77,8 @@ bool KEduVocKvtml2Reader::readDoc(KEduVocDocument *doc)
   QDomElement info = domElementKvtml.firstChildElement(KVTML_INFORMATION);
   if (!info.isNull())
   {
-    // read the generator
-    QDomElement generator = info.firstChildElement(KVTML_GENERATOR);
-    if (!generator.isNull())
-    {
-      m_doc->setGenerator(generator.text());
-      // add the version if it's there
-      int pos = m_doc->generator().lastIndexOf(KVD_VERS_PREFIX);
-      if (pos >= 0)
-      {
-        m_doc->setVersion(m_doc->generator().remove(0, pos + 2));
-      }
-    }
-    
-    // read the title
-    QDomElement title = info.firstChildElement(KVTML_TITLE);
-    if (!title.isNull())
-    {
-      m_doc->setTitle(title.text());
-    }
-    
-    // read the comment
-    QDomElement comment = info.firstChildElement(KVTML_COMMENT);
-    if (!comment.isNull())
-    {
-      m_doc->setDocumentRemark(comment.text());
-    }
-    
-    // read the author
-    QDomElement author = info.firstChildElement(KVTML_AUTHOR);
-    if (!author.isNull())
-    {
-      m_doc->setAuthor(author.text());
-    }
-    
-    // read the license
-    QDomElement license = info.firstChildElement(KVTML_LICENSE);
-    if (!license.isNull())
-    {
-      m_doc->setLicense(license.text());
-    }
+    if (!readInformation(info))
+      return false;
   }
 
 
@@ -131,37 +91,106 @@ bool KEduVocKvtml2Reader::readDoc(KEduVocDocument *doc)
   // Children
   //-------------------------------------------------------------------------
 
-  bool result = readBody(domElementKvtml);  // read vocabulary
+  bool result = readGroups(domElementKvtml);  // read vocabulary
 
   return result;
 }
 
+bool KEduVocKvtml2Reader::readInformation(QDomElement &informationElement)
+{
+  // read the generator
+  QDomElement currentElement = informationElement.firstChildElement(KVTML_GENERATOR);
+  if (!currentElement.isNull())
+  {
+    m_doc->setGenerator(currentElement.text());
+    // add the version if it's there
+    int pos = m_doc->generator().lastIndexOf(KVD_VERS_PREFIX);
+    if (pos >= 0)
+    {
+      m_doc->setVersion(m_doc->generator().remove(0, pos + 2));
+    }
+  }
+  
+  // read the title
+  currentElement = informationElement.firstChildElement(KVTML_TITLE);
+  if (!currentElement.isNull())
+  {
+    m_doc->setTitle(currentElement.text());
+  }
+  
+  // read the author
+  currentElement = informationElement.firstChildElement(KVTML_AUTHOR);
+  if (!currentElement.isNull())
+  {
+    m_doc->setAuthor(currentElement.text());
+  }
+  
+  // read the license
+  currentElement = informationElement.firstChildElement(KVTML_LICENSE);
+  if (!currentElement.isNull())
+  {
+    m_doc->setLicense(currentElement.text());
+  }
 
-bool KEduVocKvtml2Reader::readBody(QDomElement &domElementParent)
+  // read the comment
+  currentElement = informationElement.firstChildElement(KVTML_COMMENT);
+  if (!currentElement.isNull())
+  {
+    m_doc->setDocumentRemark(currentElement.text());
+  }
+
+  return true;
+}
+  
+bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
 {
   bool result = false;
   
-  QDomElement identifiers = domElementParent.firstChildElement(KVTML_IDENTIFIERS);
   QDomElement currentElement;
 
-  if (!identifiers.isNull())
+  QDomElement groupElement = domElementParent.firstChildElement(KVTML_IDENTIFIERS);
+  if (!groupElement.isNull())
   {
-    QDomNodeList entryList = identifiers.elementsByTagName(KVTML_IDENTIFIER);
+    QDomNodeList entryList = groupElement.elementsByTagName(KVTML_IDENTIFIER);
     if (entryList.length() <= 0)
+    {
+      m_errorMessage = i18n("missing identifiers");
       return false;
+    }
 
     for (int i = 0; i < entryList.count(); ++i) 
     {
       currentElement = entryList.item(i).toElement();
-      if (currentElement.parentNode() == identifiers) 
+      if (currentElement.parentNode() == groupElement) 
       {
-        result = readExpression(currentElement);
+        result = readIdentifier(currentElement);
         if (!result)
           return false;
       }
     }    
   }
   
+  groupElement = domElementParent.firstChildElement(KVTML_ENTRIES);
+  if (!groupElement.isNull())
+  {
+	  QDomNodeList entryList = groupElement.elementsByTagName(KVTML_ENTRY);
+    if (entryList.length() <= 0)
+    {
+      m_errorMessage = i18n("no entries found");
+      return false; // at least one entry is required
+    }
+    
+    for (int i = 0; i < entryList.count(); ++i)
+    {
+      currentElement = entryList.item(i).toElement();
+      if (currentElement.parentNode() == groupElement)
+      {
+        result = readEntry(currentElement);
+        if (!result)
+          return false;
+      }
+    }
+  }
   // old code for kvtml
   //QDomElement currentElement;
 
@@ -222,9 +251,237 @@ bool KEduVocKvtml2Reader::readBody(QDomElement &domElementParent)
   //    return false;
   //}
 
+  return true;
+}
+
+bool KEduVocKvtml2Reader::readIdentifier(QDomElement &identifierElement)
+{
+  bool result = true;
+  int id = identifierElement.attribute(KVTML_ID).toInt(&result);
+  if (!result)
+  {
+    m_errorMessage = i18n("identifier missing id");
+    return false;
+  }
+  
+  QDomElement currentElement = identifierElement.firstChildElement(KVTML_TYPE);
+  if (!currentElement.isNull())
+  {
+    
+  }
   return result;
 }
 
+bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
+{
+  KEduVocExpression expr;
+  QDomElement currentElement;
+  bool result = true;
+
+  // get entry id
+  
+  // read info tags: inactive, inquery, and sizehint
+  
+  // read translation children
+  QDomNodeList translationList = entryElement.elementsByTagName(KVTML_TRANSLATION);
+  if (translationList.length() <= 0)
+  {
+    m_errorMessage = i18n("no translations found");
+    return false; // at least one entry is required
+  }
+  
+  for (int i = 0; i < translationList.count(); ++i)
+  {
+    currentElement = translationList.item(i).toElement();
+    if (currentElement.parentNode() == entryElement)
+    {
+      result = readTranslation(currentElement, expr, i);
+      if (!result)
+        return false;
+    }
+  }
+  
+  m_doc->appendEntry(&expr);
+  return result;
+}
+
+bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement, 
+                                          KEduVocExpression &expr, int index)
+{
+  QDomElement currentElement = translationElement.firstChildElement(KVTML_TEXT);
+  if (!currentElement.isNull())
+  {
+    expr.translation(index).setTranslation(currentElement.text());
+  }
+  
+  currentElement = translationElement.firstChildElement(KVTML_COMMENT);
+  if (!currentElement.isNull())
+  {
+    expr.translation(index).setComment(currentElement.text());
+  }
+  
+  currentElement = translationElement.firstChildElement(KVTML_TYPE);
+  if (!currentElement.isNull())
+  {
+    expr.translation(index).setType(currentElement.text());
+  }
+
+// kvtml 1: we always have an original element (required)
+//    currentElement = domElementParent.firstChildElement(KV_ORG);
+//    if (currentElement.isNull()) { // sanity check
+//        m_errorMessage = i18n("Data for original language missing");
+//        return false;
+//    }
+
+//    while (!currentElement.isNull()) {
+//      type = exprtype; // seems like type can be in the parent element and overwritten in the children here :(
+
+//      //-----------
+//      // Attributes
+//      //-----------
+
+//      // read attributes - the order of the query grades is interchanged!
+//      if (i == 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
+//                                          pronunciation, width, type, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase))
+//        return false;
+
+//      if (i != 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
+//                                          pronunciation, width, type, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase))
+//        return false;
+
+//      if (m_doc->entryCount() == 0)
+//      {
+//        // only accept in first entry
+//        if (width >= 0)
+//          m_doc->setSizeHint(i, width);
+
+//        if (query_id == KV_O)
+//          q_org = lang;
+
+//        if (query_id == KV_T)
+
+//          q_trans = lang;
+//      }
+////kDebug() << " TranslationList.count(): " << translationList.count() << "  Entry count: " << m_doc->entryCount() << endl;
+//        if (m_doc->entryCount() == 0) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
+//kDebug() << " Read Expression with identifiers: " << i << endl;
+//            // new translation
+//            if (lang.isEmpty()) {
+//                if (i == 0) {
+//                    lang = "original";
+//                } else {
+//                    // no definition in first entry ?
+//                    lang.setNum(m_doc->identifierCount());
+//                    lang.prepend("translation ");
+//                }
+//                m_doc->appendIdentifier(lang);
+//            }
+//        }
+//        else
+//        {
+//            if (lang != m_doc->identifier(i) && !lang.isEmpty())
+//            {
+//            // different language ?
+//            m_errorMessage = i18n("ambiguous definition of language code");
+//            return false;
+//            }
+//        }
+
+//      //---------
+//      // Children
+
+//      currentChild = currentElement.firstChildElement(KV_CONJUG_GRP);
+//      if (!currentChild.isNull()) {
+//          conjug.clear();
+//          if (!readConjug(currentChild, conjug))
+//            return false;
+//      }
+
+//      currentChild = currentElement.firstChildElement(KV_COMPARISON_GRP);
+//      if (!currentChild.isNull()) {
+//          comparison.clear();
+//          if (!readComparison(currentChild, comparison))
+//            return false;
+//      }
+
+//      currentChild = currentElement.firstChildElement(KV_MULTIPLECHOICE_GRP);
+//      if (!currentChild.isNull()) {
+//          mc.clear();
+//          if (!readMultipleChoice(currentChild, mc))
+//            return false;
+//      }
+
+//      textstr = currentElement.lastChild().toText().data();
+//      if (textstr.isNull())
+//        textstr = "";
+
+//      if (i == 0) {
+//        expr = KEduVocExpression(textstr);
+//        expr.setLesson(lesson);
+//        expr.setInQuery(inquery);
+//        expr.setActive(active);
+//      } else {
+//        expr.setTranslation(i, textstr);
+//      }
+
+//      if (conjug.size() > 0) {
+//        for ( int conjugationIndex = 0; conjugationIndex < conjug.size(); conjugationIndex++ ) {
+//            expr.translation(i).setConjugation(conjug[conjugationIndex]);
+//        }
+//        //expr.setConjugation(i, conjug[0]); ///@todo check if this is better than the above!
+
+//        conjug.clear();
+//      }
+//      if (!comparison.isEmpty())
+//      {
+//        expr.translation(i).setComparison(comparison);
+//        comparison.clear();
+//      }
+//      if (!mc.isEmpty())
+//      {
+//        expr.translation(i).setMultipleChoice(mc);
+//        mc.clear();
+//      }
+//      if (!type.isEmpty() )
+//        expr.translation(i).setType (type);
+//      if (!remark.isEmpty() )
+//        expr.translation(i).setComment (remark);
+//      if (!pronunciation.isEmpty() )
+//        expr.translation(i).setPronunciation(pronunciation);
+//      if (!faux_ami_f.isEmpty() )
+//        expr.translation(i).setFalseFriend (0, faux_ami_f);
+//      if (!faux_ami_t.isEmpty() )
+//        expr.translation(0).setFalseFriend (i, faux_ami_t);
+//      if (!synonym.isEmpty() )
+//        expr.translation(i).setSynonym (synonym);
+//      if (!example.isEmpty() )
+//        expr.translation(i).setExample (example);
+//      if (!usage.isEmpty() )
+//        expr.translation(i).setUsageLabel (usage);
+//      if (!paraphrase.isEmpty() )
+//        expr.translation(i).setParaphrase (paraphrase);
+//      if (!antonym.isEmpty() )
+//        expr.translation(i).setAntonym (antonym);
+
+//      if ( i != 0 ) {
+//        expr.translation(i).gradeFrom(0).setQueryCount(qcount);
+//        expr.translation(0).gradeFrom(i).setQueryCount(r_qcount);
+//        expr.translation(i).gradeFrom(0).setBadCount(bcount);
+//        expr.translation(0).gradeFrom(i).setBadCount(r_bcount);
+//        expr.translation(i).gradeFrom(0).setQueryDate(qdate);
+//        expr.translation(0).gradeFrom(i).setQueryDate(r_qdate);
+//      }
+////kDebug() << "KEduVocKvtml2Reader::readExpression(): id: " << i << " translation: " << textstr << endl;
+
+//      // Next translation
+//      currentElement = currentElement.nextSiblingElement(KV_TRANS);
+//      i++;
+//  }
+
+  //if (m_doc->entryCount() == 0)
+  //  m_doc->setQueryIdentifier(q_org, q_trans);
+  return true;
+}
 
 bool KEduVocKvtml2Reader::readLesson(QDomElement &domElementParent)
 {
@@ -1057,298 +1314,5 @@ bool KEduVocKvtml2Reader::readExpressionChildAttributes( QDomElement &domElement
 }
 
 
-bool KEduVocKvtml2Reader::readExpression(QDomElement &expressionElement)
-{
-  //grade_t                   grade;
-  //grade_t                   r_grade;
-  //int                       qcount;
-  //int                       r_qcount;
-  //int                       bcount;
-  //int                       r_bcount;
-  QString                   comment;
-  //QString                   pronunciation;
-  //QDateTime                 qdate;
-  //QDateTime                 r_qdate;
-  //bool                      inquery;
-  //bool                      active;
-  //QString                   lang;
-  QString                   textstr;
-  //QString                   exprtype;
-  //QString                   q_org;
-  //QString                   q_trans;
-  //QString                   query_id;
-  //int                       lesson = 0;
-  //int                       width;
-  //QString                   type;
-  //QString                   faux_ami_f;
-  //QString                   faux_ami_t;
-  //QString                   synonym;
-  //QString                   example;
-  //QString                   antonym;
-  //QString                   usage;
-  //QString                   paraphrase;
-  //QList<KEduVocConjugation> conjug;
-  //KEduVocComparison         comparison;
-  //KEduVocMultipleChoice     mc;
-  KEduVocExpression         expr;
-
-  QDomAttr                  attribute;
-  QDomElement               currentElement;
-  QDomElement               currentChild;
-
-  //-------------------------------------------------------------------------
-  // Attributes
-  //-------------------------------------------------------------------------
-
-  //attribute = domElementParent.attributeNode(KV_LESS_MEMBER);
-  //if (!attribute.isNull())
-  //  lesson = attribute.value().toInt();
-
-  //if (lesson && lesson > m_doc->lessonDescriptions().count())
-  //{
-  //  // description missing ?
-  //  QString s;
-  //  QStringList sl = m_doc->lessonDescriptions();
-  //  for (int i = m_doc->lessonDescriptions().count(); i < lesson; i++)
-  //  {
-  //    s.setNum(i + 1);
-  //    s.prepend("#"); //create descriptions from number
-  //    sl.append(s);
-  //  }
-  //  m_doc->setLessonDescriptions(sl);
-  //}
-
-  //attribute = domElementParent.attributeNode(KV_SELECTED);
-  //if (!attribute.isNull())
-  //  inquery = attribute.value() == "1" ? true : false;
-  //else
-  //  inquery = false;
-
-  //attribute = domElementParent.attributeNode(KV_INACTIVE);
-  //if (!attribute.isNull())
-  //  active = attribute.value() == "1" ? false : true;
-  //else
-  //  active = true;
-
-  //attribute = domElementParent.attributeNode(KV_EXPRTYPE);
-  //if (!attribute.isNull())
-  //{
-  //  exprtype = attribute.value();
-  //  if (exprtype == "1")
-  //    exprtype = QM_VERB;
-  //  else if (exprtype == "2")  // convert from pre-0.5 versions
-  //    exprtype = QM_NOUN;
-  //  else if (exprtype == "3")
-  //    exprtype = QM_NAME;
-
-  //  if (exprtype.length() != 0 && exprtype.left(1) == QM_USER_TYPE)
-  //  {
-  //    int num = qMin(exprtype.mid(1, 40).toInt(), 1000); // paranoia check
-  //    if (num > m_doc->typeDescriptions().count())
-  //    {
-  //      // description missing ?
-  //      QString s;
-  //      QStringList sl = m_doc->typeDescriptions();
-  //      for (int i = m_doc->typeDescriptions().count(); i < num; i++)
-  //      {
-  //        s.setNum(i + 1);
-  //        s.prepend("#");  // invent descr according to number
-  //        sl.append(s);
-  //      }
-  //      m_doc->setTypeDescriptions(sl);
-  //    }
-  //  }
-  //}
-
-  //-------------------------------------------------------------------------
-  // Children 'Translation'
-  //-------------------------------------------------------------------------
-
-  //QDomNodeList translationList = domElementParent.elementsByTagName(KV_TRANS);
-
-    // count which translation we are on
-    int i=0;
-    
-    currentElement = expressionElement.firstChildElement(KVTML_NAME);
-    if (!currentElement.isNull())
-    {
-      expr = KEduVocExpression(currentElement.text());
-    }
-    
-    currentElement = expressionElement.firstChildElement(KVTML_COMMENT);
-    if (!currentElement.isNull())
-    {
-      expr.translation(0).setComment(currentElement.text());
-    }
-    
-    currentElement = expressionElement.firstChildElement(KVTML_TYPE);
-    if (!currentElement.isNull())
-    {
-      expr.translation(0).setType(currentElement.text());
-    }
-    
-    currentElement = expressionElement.firstChildElement(KVTML_LOCALE);
-    if (!currentElement.isNull())
-    {
-    }
-    
-    // kvtml 1: we always have an original element (required)
-//    currentElement = domElementParent.firstChildElement(KV_ORG);
-//    if (currentElement.isNull()) { // sanity check
-//        m_errorMessage = i18n("Data for original language missing");
-//        return false;
-//    }
-
-//    while (!currentElement.isNull()) {
-//      type = exprtype; // seems like type can be in the parent element and overwritten in the children here :(
-
-//      //-----------
-//      // Attributes
-//      //-----------
-
-//      // read attributes - the order of the query grades is interchanged!
-//      if (i == 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
-//                                          pronunciation, width, type, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase))
-//        return false;
-
-//      if (i != 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
-//                                          pronunciation, width, type, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase))
-//        return false;
-
-//      if (m_doc->entryCount() == 0)
-//      {
-//        // only accept in first entry
-//        if (width >= 0)
-//          m_doc->setSizeHint(i, width);
-
-//        if (query_id == KV_O)
-//          q_org = lang;
-
-//        if (query_id == KV_T)
-
-//          q_trans = lang;
-//      }
-////kDebug() << " TranslationList.count(): " << translationList.count() << "  Entry count: " << m_doc->entryCount() << endl;
-//        if (m_doc->entryCount() == 0) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
-//kDebug() << " Read Expression with identifiers: " << i << endl;
-//            // new translation
-//            if (lang.isEmpty()) {
-//                if (i == 0) {
-//                    lang = "original";
-//                } else {
-//                    // no definition in first entry ?
-//                    lang.setNum(m_doc->identifierCount());
-//                    lang.prepend("translation ");
-//                }
-//                m_doc->appendIdentifier(lang);
-//            }
-//        }
-//        else
-//        {
-//            if (lang != m_doc->identifier(i) && !lang.isEmpty())
-//            {
-//            // different language ?
-//            m_errorMessage = i18n("ambiguous definition of language code");
-//            return false;
-//            }
-//        }
-
-//      //---------
-//      // Children
-
-//      currentChild = currentElement.firstChildElement(KV_CONJUG_GRP);
-//      if (!currentChild.isNull()) {
-//          conjug.clear();
-//          if (!readConjug(currentChild, conjug))
-//            return false;
-//      }
-
-//      currentChild = currentElement.firstChildElement(KV_COMPARISON_GRP);
-//      if (!currentChild.isNull()) {
-//          comparison.clear();
-//          if (!readComparison(currentChild, comparison))
-//            return false;
-//      }
-
-//      currentChild = currentElement.firstChildElement(KV_MULTIPLECHOICE_GRP);
-//      if (!currentChild.isNull()) {
-//          mc.clear();
-//          if (!readMultipleChoice(currentChild, mc))
-//            return false;
-//      }
-
-//      textstr = currentElement.lastChild().toText().data();
-//      if (textstr.isNull())
-//        textstr = "";
-
-//      if (i == 0) {
-//        expr = KEduVocExpression(textstr);
-//        expr.setLesson(lesson);
-//        expr.setInQuery(inquery);
-//        expr.setActive(active);
-//      } else {
-//        expr.setTranslation(i, textstr);
-//      }
-
-//      if (conjug.size() > 0) {
-//        for ( int conjugationIndex = 0; conjugationIndex < conjug.size(); conjugationIndex++ ) {
-//            expr.translation(i).setConjugation(conjug[conjugationIndex]);
-//        }
-//        //expr.setConjugation(i, conjug[0]); ///@todo check if this is better than the above!
-
-//        conjug.clear();
-//      }
-//      if (!comparison.isEmpty())
-//      {
-//        expr.translation(i).setComparison(comparison);
-//        comparison.clear();
-//      }
-//      if (!mc.isEmpty())
-//      {
-//        expr.translation(i).setMultipleChoice(mc);
-//        mc.clear();
-//      }
-//      if (!type.isEmpty() )
-//        expr.translation(i).setType (type);
-//      if (!remark.isEmpty() )
-//        expr.translation(i).setComment (remark);
-//      if (!pronunciation.isEmpty() )
-//        expr.translation(i).setPronunciation(pronunciation);
-//      if (!faux_ami_f.isEmpty() )
-//        expr.translation(i).setFalseFriend (0, faux_ami_f);
-//      if (!faux_ami_t.isEmpty() )
-//        expr.translation(0).setFalseFriend (i, faux_ami_t);
-//      if (!synonym.isEmpty() )
-//        expr.translation(i).setSynonym (synonym);
-//      if (!example.isEmpty() )
-//        expr.translation(i).setExample (example);
-//      if (!usage.isEmpty() )
-//        expr.translation(i).setUsageLabel (usage);
-//      if (!paraphrase.isEmpty() )
-//        expr.translation(i).setParaphrase (paraphrase);
-//      if (!antonym.isEmpty() )
-//        expr.translation(i).setAntonym (antonym);
-
-//      if ( i != 0 ) {
-//        expr.translation(i).gradeFrom(0).setQueryCount(qcount);
-//        expr.translation(0).gradeFrom(i).setQueryCount(r_qcount);
-//        expr.translation(i).gradeFrom(0).setBadCount(bcount);
-//        expr.translation(0).gradeFrom(i).setBadCount(r_bcount);
-//        expr.translation(i).gradeFrom(0).setQueryDate(qdate);
-//        expr.translation(0).gradeFrom(i).setQueryDate(r_qdate);
-//      }
-////kDebug() << "KEduVocKvtml2Reader::readExpression(): id: " << i << " translation: " << textstr << endl;
-
-//      // Next translation
-//      currentElement = currentElement.nextSiblingElement(KV_TRANS);
-//      i++;
-//  }
-
-  //if (m_doc->entryCount() == 0)
-  //  m_doc->setQueryIdentifier(q_org, q_trans);
-  m_doc->appendEntry(&expr);
-
-  return true;
-}
 
 #include "keduvockvtml2reader.moc"

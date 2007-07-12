@@ -64,15 +64,45 @@ class KEduVocDocument;
 #define UL_USER_USAGE  "#"   // designates number of user type
 
 /**
-@author Eric Pignet
+* @brief class to read kvtml2 data files into keduvocdocument
+@author Jeremy Whiting
 */
 class KEduVocKvtml2Reader : public QObject
 {
   Q_OBJECT
 public:
+  /** default constructor 
+   * @param file file to read from
+   */
   KEduVocKvtml2Reader(QIODevice *file);
 
+  /** read the document
+   * @param doc document object to store the data in
+   */
   bool readDoc(KEduVocDocument *doc);
+  
+  /** read information entries
+   * @param informationElement QDomElement <information>
+   */
+  bool readInformation(QDomElement &informationElement);
+
+  /** read group elements: identifiers, entries, types, usages, lessons */
+  bool readGroups(QDomElement &domElementParent);
+
+  /** read an identifier
+   * @param identifierElement QDomElement for the identifier to read
+   */
+  bool readIdentifier(QDomElement &identifierElement);
+  
+  /** read an entry
+   * @param entryElement QDomElement for the entry to read
+   */
+  bool readEntry(QDomElement &entryElement);
+
+  /** read a translation
+   * @param translationElement QDomElement for the translation to read
+   */
+  bool readTranslation(QDomElement &translationElement, KEduVocExpression &expr, int index);
 
   bool readLesson(QDomElement &domElementParent);
   bool readArticle(QDomElement &domElementParent);
@@ -101,17 +131,19 @@ public:
                                      QString &antonym,
                                      QString &usage,
                                      QString &paraphrase);
-  bool readExpression(QDomElement &expressionElement);
-  bool readBody(QDomElement &domElementParent);
 
   QString errorMessage() const {return m_errorMessage;}
 
 private:
+
+  /** pre-opened QIODevice to read from */
   QIODevice *m_inputFile;
+  
+  /** KEduVocDocument to read to */
   KEduVocDocument *m_doc;
+  
+  /** error message */
   QString m_errorMessage;
-  int m_cols;
-  int m_lines;
 };
 
 #endif

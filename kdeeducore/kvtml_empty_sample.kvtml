@@ -64,59 +64,61 @@
     <usage>professional usage</usage>
   </usages>
 
+  <entries>
+    <entry id="0">
+      <inactive>true</inactive> to deactivate an entry (won't be queried)
+      <inquery>true</inquery>
+      <sizehint>25</sizehint>
+      <translation id="0">
+        <text>Kniebeugen</text>
+        <type></type>
+        <inquery>1</inquery>
+        <comment></comment>
+        <pronunciation></pronunciation>
+        <falsefriendfrom></falsefriendfrom>
+        <falsefriendto></falsefriendto>
+        <falsefriend></falsefriend>
+        <antonym></antonym>
+        <synonym></synonym>
+        <example></example>
+        <usage></usage>
+        <paraphrase></paraphrase>
+        <comparison>
+          <comp1>gut</comp1>
+          <comp2>besser</comp2>
+          <comp3>am besten</comp3>
+        </comparison>
+        <multiplechoice>
+          <choice></choice>
+          <choice></choice>
+        </multiplechoice>
+
+        <image></image>
+        <sound></sound>
+        <grade fromid="1">
+          <currentgradeint>1</currentgradeint>
+          <count>1</count>
+          <errorcount>1</errorcount>
+          <date>949757271</date>
+        </grade>
+      </translation>
+      <translation id="1">
+        <text>genuflect</text>
+        <grade fromId="0">
+          <currentgradefloat>0.8</currentgradefloat>
+          <count>6</count>
+          <errorcount>1</errorcount>
+          <date>949757271</date>
+        </grade>
+      </translation>
+     </entry>
+  </entries>
   <lessons>
     <lesson>
       <name>Lesson with grades example</name>
       <query>true</query>
       <current>true</current>
 
-    <entry>
-      <inactive>true</inactive> to deactivate an entry (won't be queried)
-      <inquery>true</inquery>
-      <sizehint>25</sizehint>
-         <translation id="0">
-           <text>Kniebeugen</text>
-           <type></type>
-           <inquery>1</inquery>
-           <comment></comment>
-           <pronunciation></pronunciation>
-           <falsefriendfrom></falsefriendfrom>
-           <falsefriendto></falsefriendto>
-           <falsefriend></falsefriend>
-           <antonym></antonym>
-           <synonym></synonym>
-           <example></example>
-           <usage></usage>
-           <paraphrase></paraphrase>
-           <comparison>
-             <comp1>gut</comp1>
-             <comp2>besser</comp2>
-             <comp3>am besten</comp3>
-           </comparison>
-           <multiplechoice>
-             <choice></choice>
-             <choice></choice>
-           </multiplechoice>
-
-           <image></image>
-           <sound></sound>
-           <grade fromid="1">
-             <currentgradeint>1</currentgradeint>
-             <count>1</count>
-             <errorcount>1</errorcount>
-             <date>949757271</date>
-           </grade>
-         </translation>
-         <translation id="1">
-           <text>genuflect</text>
-           <grade fromId="0">
-             <currentgradefloat>0.8</currentgradefloat>
-             <count>6</count>
-             <errorcount>1</errorcount>
-             <date>949757271</date>
-           </grade>
-         </translation>
-       </entry>
      </lesson>
    </lessons>
  </kvtml>
