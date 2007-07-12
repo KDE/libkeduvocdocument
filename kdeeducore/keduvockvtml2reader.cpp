@@ -81,7 +81,6 @@ bool KEduVocKvtml2Reader::readDoc(KEduVocDocument *doc)
       return false;
   }
 
-
   // possibly add lines support to information section of kvtml2 dtd?
   //documentAttribute = domElementKvtml.attributeNode(KV_LINES);
   //if (!documentAttribute.isNull())
@@ -91,7 +90,7 @@ bool KEduVocKvtml2Reader::readDoc(KEduVocDocument *doc)
   // Children
   //-------------------------------------------------------------------------
 
-  bool result = readGroups(domElementKvtml);  // read vocabulary
+  bool result = readGroups(domElementKvtml);  // read sub-groups
 
   return result;
 }
@@ -154,7 +153,7 @@ bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
     QDomNodeList entryList = groupElement.elementsByTagName(KVTML_IDENTIFIER);
     if (entryList.length() <= 0)
     {
-      m_errorMessage = i18n("missing identifiers");
+      m_errorMessage = i18n("missing identifiers from identifiers tag");
       return false;
     }
 
@@ -170,13 +169,79 @@ bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
     }    
   }
   
+  groupElement = domElementParent.firstChildElement(KVTML_TYPES);
+  if (!groupElement.isNull())
+  {
+	  QDomNodeList entryList = groupElement.elementsByTagName(KVTML_TYPE);
+	  if (entryList.length() <= 0)
+    {
+      m_errorMessage = i18n("no types found in types tag");
+      return false;
+    }
+    
+    for (int i = 0; i < entryList.count(); ++i)
+    {
+      currentElement = entryList.item(i).toElement();
+      if (currentElement.parentNode() == groupElement)
+      {
+        result = readType(currentElement);
+        if (!result)
+          return false;
+      }
+    }
+  }
+  
+  groupElement = domElementParent.firstChildElement(KVTML_TENSES);
+  if (!groupElement.isNull())
+  {
+	  QDomNodeList entryList = groupElement.elementsByTagName(KVTML_TENSE);
+	  if (entryList.length() <= 0)
+    {
+      m_errorMessage = i18n("no tenses found in tenses tag");
+      return false;
+    }
+    
+    for (int i = 0; i < entryList.count(); ++i)
+    {
+      currentElement = entryList.item(i).toElement();
+      if (currentElement.parentNode() == groupElement)
+      {
+        result = readTense(currentElement);
+        if (!result)
+          return false;
+      }
+    }
+  }
+  
+  groupElement = domElementParent.firstChildElement(KVTML_USAGES);
+  if (!groupElement.isNull())
+  {
+	  QDomNodeList entryList = groupElement.elementsByTagName(KVTML_USAGE);
+	  if (entryList.length() <= 0)
+    {
+      m_errorMessage = i18n("no usages found in usages tag");
+      return false;
+    }
+    
+    for (int i = 0; i < entryList.count(); ++i)
+    {
+      currentElement = entryList.item(i).toElement();
+      if (currentElement.parentNode() == groupElement)
+      {
+        result = readUsage(currentElement);
+        if (!result)
+          return false;
+      }
+    }
+  }
+
   groupElement = domElementParent.firstChildElement(KVTML_ENTRIES);
   if (!groupElement.isNull())
   {
 	  QDomNodeList entryList = groupElement.elementsByTagName(KVTML_ENTRY);
     if (entryList.length() <= 0)
     {
-      m_errorMessage = i18n("no entries found");
+      m_errorMessage = i18n("no entries found in entries tag");
       return false; // at least one entry is required
     }
     
@@ -191,65 +256,28 @@ bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
       }
     }
   }
-  // old code for kvtml
-  //QDomElement currentElement;
 
-  //currentElement = domElementParent.firstChildElement(KV_LESS_GRP);
-  //if (!currentElement.isNull()) {
-  //  result = readLesson(currentElement);
-  //  if (!result)
-  //    return false;
-  //}
-
-  //currentElement = domElementParent.firstChildElement(KV_ARTICLE_GRP);
-  //if (!currentElement.isNull()) {
-  //  result = readArticle(currentElement);
-  //  if (!result)
-  //    return false;
-  //}
-
-  //currentElement = domElementParent.firstChildElement(KV_CONJUG_GRP);
-  //if (!currentElement.isNull()) {
-  //  QList<KEduVocConjugation> conjugations;
-  //  result = readConjug(currentElement, conjugations);
-  //  if (result) {
-  //    KEduVocConjugation conjug;
-  //    for (int i = 0; i< conjugations.count(); i++) {
-  //      conjug = conjugations[i];
-  //      m_doc->setConjugation(i, conjug);
-  //    }
-  //  }
-  //  else
-  //    return false;
-  //}
-
-  //currentElement = domElementParent.firstChildElement(KV_OPTION_GRP);
-  //if (!currentElement.isNull()) {
-  //  result = readOptions(currentElement);
-  //  if (!result)
-  //    return false;
-  //}
-
-  //currentElement = domElementParent.firstChildElement(KV_TYPE_GRP);
-  //if (!currentElement.isNull()) {
-  //  result = readType(currentElement);
-  //  if (!result)
-  //    return false;
-  //}
-
-  //currentElement = domElementParent.firstChildElement(KV_TENSE_GRP);
-  //if (!currentElement.isNull()) {
-  //  result = readTense(currentElement);
-  //  if (!result)
-  //    return false;
-  //}
-
-  //currentElement = domElementParent.firstChildElement(KV_USAGE_GRP);
-  //if (!currentElement.isNull()) {
-  //  result = readUsage(currentElement);
-  //  if (!result)
-  //    return false;
-  //}
+  groupElement = domElementParent.firstChildElement(KVTML_LESSONS);
+  if (!groupElement.isNull())
+  {
+	  QDomNodeList entryList = groupElement.elementsByTagName(KVTML_LESSON);
+    if (entryList.length() <= 0)
+    {
+      m_errorMessage = i18n("no lessons found in lessons tag");
+      return false; // at least one entry is required
+    }
+    
+    for (int i = 0; i < entryList.count(); ++i)
+    {
+      currentElement = entryList.item(i).toElement();
+      if (currentElement.parentNode() == groupElement)
+      {
+        result = readLesson(currentElement);
+        if (!result)
+          return false;
+      }
+    }
+  }
 
   return true;
 }
@@ -279,6 +307,12 @@ bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
   bool result = true;
 
   // get entry id
+  int id = entryElement.attribute(KVTML_ID).toInt(&result);
+  if (!result)
+  {
+    m_errorMessage = i18n("entry missing id");
+    return false;
+  }
   
   // read info tags: inactive, inquery, and sizehint
   
@@ -301,6 +335,7 @@ bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
     }
   }
   
+  // TODO: probably should insert at id position with a check to see if it exists
   m_doc->appendEntry(&expr);
   return result;
 }
@@ -892,23 +927,23 @@ bool KEduVocKvtml2Reader::readConjug(QDomElement &domElementParent, QList<KEduVo
 }
 
 
-bool KEduVocKvtml2Reader::readOptions(QDomElement &domElementParent)
-{
-  m_doc->setSortingEnabled(true);
-  QDomElement currentElement = domElementParent.firstChildElement(KV_OPT_SORT);
-  if (!currentElement.isNull()) {
-    QDomAttr attribute = currentElement.attributeNode(KV_BOOL_FLAG);
-    if (!attribute.isNull())
-    {
-      bool ok = true;
-      m_doc->setSortingEnabled(attribute.value().toInt(&ok));  // returns 0 if the conversion fails
-      if (!ok)
-        m_doc->setSortingEnabled(true);
-    }
-  }
+//bool KEduVocKvtml2Reader::readOptions(QDomElement &domElementParent)
+//{
+//  m_doc->setSortingEnabled(true);
+//  QDomElement currentElement = domElementParent.firstChildElement(KV_OPT_SORT);
+//  if (!currentElement.isNull()) {
+//    QDomAttr attribute = currentElement.attributeNode(KV_BOOL_FLAG);
+//    if (!attribute.isNull())
+//    {
+//      bool ok = true;
+//      m_doc->setSortingEnabled(attribute.value().toInt(&ok));  // returns 0 if the conversion fails
+//      if (!ok)
+//        m_doc->setSortingEnabled(true);
+//    }
+//  }
 
-  return true;
-}
+//  return true;
+//}
 
 
 bool KEduVocKvtml2Reader::readType(QDomElement &domElementParent)
@@ -1113,205 +1148,205 @@ bool KEduVocKvtml2Reader::readMultipleChoice(QDomElement &domElementParent, KEdu
 }
 
 
-bool KEduVocKvtml2Reader::readExpressionChildAttributes( QDomElement &domElementExpressionChild,
-                                                        QString &lang,
-                                                        grade_t &grade, grade_t &rev_grade,
-                                                        int &count, int &rev_count,
-                                                        QDateTime &date, QDateTime &rev_date,
-                                                        QString &remark,
-                                                        int &bcount, int &rev_bcount,
-                                                        QString &query_id,
-                                                        QString &pronunciation,
-                                                        int &width,
-                                                        QString &type,
-                                                        QString &faux_ami_f,
-                                                        QString &faux_ami_t,
-                                                        QString &synonym,
-                                                        QString &example,
-                                                        QString &antonym,
-                                                        QString &usage,
-                                                        QString &paraphrase)
-{
-  int pos;
-  QDomAttr attribute;
+//bool KEduVocKvtml2Reader::readExpressionChildAttributes( QDomElement &domElementExpressionChild,
+//                                                        QString &lang,
+//                                                        grade_t &grade, grade_t &rev_grade,
+//                                                        int &count, int &rev_count,
+//                                                        QDateTime &date, QDateTime &rev_date,
+//                                                        QString &remark,
+//                                                        int &bcount, int &rev_bcount,
+//                                                        QString &query_id,
+//                                                        QString &pronunciation,
+//                                                        int &width,
+//                                                        QString &type,
+//                                                        QString &faux_ami_f,
+//                                                        QString &faux_ami_t,
+//                                                        QString &synonym,
+//                                                        QString &example,
+//                                                        QString &antonym,
+//                                                        QString &usage,
+//                                                        QString &paraphrase)
+//{
+//  int pos;
+//  QDomAttr attribute;
 
-  lang = "";
-  attribute = domElementExpressionChild.attributeNode(KV_LANG);
-  if (!attribute.isNull())
-    lang = attribute.value();
+//  lang = "";
+//  attribute = domElementExpressionChild.attributeNode(KV_LANG);
+//  if (!attribute.isNull())
+//    lang = attribute.value();
 
-  width = -1;
-  attribute = domElementExpressionChild.attributeNode(KV_SIZEHINT);
-  if (!attribute.isNull())
-    width = attribute.value().toInt();
+//  width = -1;
+//  attribute = domElementExpressionChild.attributeNode(KV_SIZEHINT);
+//  if (!attribute.isNull())
+//    width = attribute.value().toInt();
 
-  grade = KV_NORM_GRADE;
-  rev_grade = KV_NORM_GRADE;
-  attribute = domElementExpressionChild.attributeNode(KV_GRADE);
-  if (!attribute.isNull())
-  {
-    QString s = attribute.value();
-    if ((pos = s.indexOf(';')) >= 1)
-    {
-      grade = s.left(pos).toInt();
-      rev_grade = s.mid(pos + 1, s.length()).toInt();
-    }
-    else
-      grade = s.toInt();
-  }
+//  grade = KV_NORM_GRADE;
+//  rev_grade = KV_NORM_GRADE;
+//  attribute = domElementExpressionChild.attributeNode(KV_GRADE);
+//  if (!attribute.isNull())
+//  {
+//    QString s = attribute.value();
+//    if ((pos = s.indexOf(';')) >= 1)
+//    {
+//      grade = s.left(pos).toInt();
+//      rev_grade = s.mid(pos + 1, s.length()).toInt();
+//    }
+//    else
+//      grade = s.toInt();
+//  }
 
-  count = 0;
-  rev_count = 0;
-  attribute = domElementExpressionChild.attributeNode(KV_COUNT);
-  if (!attribute.isNull())
-  {
-    QString s = attribute.value();
-    if ((pos = s.indexOf(';')) >= 1)
-    {
-      count = s.left(pos).toInt();
-      rev_count = s.mid(pos + 1, s.length()).toInt();
-    }
-    else
-      count = s.toInt();
-  }
+//  count = 0;
+//  rev_count = 0;
+//  attribute = domElementExpressionChild.attributeNode(KV_COUNT);
+//  if (!attribute.isNull())
+//  {
+//    QString s = attribute.value();
+//    if ((pos = s.indexOf(';')) >= 1)
+//    {
+//      count = s.left(pos).toInt();
+//      rev_count = s.mid(pos + 1, s.length()).toInt();
+//    }
+//    else
+//      count = s.toInt();
+//  }
 
-  bcount = 0;
-  rev_bcount = 0;
-  attribute = domElementExpressionChild.attributeNode(KV_BAD);
-  if (!attribute.isNull())
-  {
-    QString s = attribute.value();
-    if ((pos = s.indexOf(';')) >= 1)
-    {
-      bcount = s.left(pos).toInt();
-      rev_bcount = s.mid(pos + 1, s.length()).toInt();
-    }
-    else
-      bcount = s.toInt();
-  }
+//  bcount = 0;
+//  rev_bcount = 0;
+//  attribute = domElementExpressionChild.attributeNode(KV_BAD);
+//  if (!attribute.isNull())
+//  {
+//    QString s = attribute.value();
+//    if ((pos = s.indexOf(';')) >= 1)
+//    {
+//      bcount = s.left(pos).toInt();
+//      rev_bcount = s.mid(pos + 1, s.length()).toInt();
+//    }
+//    else
+//      bcount = s.toInt();
+//  }
 
-  date.setTime_t(0);
-  rev_date.setTime_t(0);
-  attribute = domElementExpressionChild.attributeNode(KV_DATE);
-  if (!attribute.isNull())
-  {
-    QString s = attribute.value();
-    if ((pos = s.indexOf(';')) >= 1)
-    {
-      date.setTime_t(s.left(pos).toInt());
-      rev_date.setTime_t(s.mid(pos + 1, s.length()).toInt());
-    }
-    else
-      date.setTime_t(s.toInt());
-  }
+//  date.setTime_t(0);
+//  rev_date.setTime_t(0);
+//  attribute = domElementExpressionChild.attributeNode(KV_DATE);
+//  if (!attribute.isNull())
+//  {
+//    QString s = attribute.value();
+//    if ((pos = s.indexOf(';')) >= 1)
+//    {
+//      date.setTime_t(s.left(pos).toInt());
+//      rev_date.setTime_t(s.mid(pos + 1, s.length()).toInt());
+//    }
+//    else
+//      date.setTime_t(s.toInt());
+//  }
 
-  attribute = domElementExpressionChild.attributeNode(KV_DATE2);
-  if (!attribute.isNull())
-  {
-    //this format is deprecated and ignored.
-  }
+//  attribute = domElementExpressionChild.attributeNode(KV_DATE2);
+//  if (!attribute.isNull())
+//  {
+//    //this format is deprecated and ignored.
+//  }
 
-  remark = "";
-  attribute = domElementExpressionChild.attributeNode(KV_REMARK);
-  if (!attribute.isNull())
-    remark = attribute.value();
+//  remark = "";
+//  attribute = domElementExpressionChild.attributeNode(KV_REMARK);
+//  if (!attribute.isNull())
+//    remark = attribute.value();
 
-  faux_ami_f = "";
-  attribute = domElementExpressionChild.attributeNode(KV_FAUX_AMI_F);
-  if (!attribute.isNull())
-    faux_ami_f = attribute.value();
+//  faux_ami_f = "";
+//  attribute = domElementExpressionChild.attributeNode(KV_FAUX_AMI_F);
+//  if (!attribute.isNull())
+//    faux_ami_f = attribute.value();
 
-  faux_ami_t = "";
-  attribute = domElementExpressionChild.attributeNode(KV_FAUX_AMI_T);
-  if (!attribute.isNull())
-    faux_ami_t = attribute.value();
+//  faux_ami_t = "";
+//  attribute = domElementExpressionChild.attributeNode(KV_FAUX_AMI_T);
+//  if (!attribute.isNull())
+//    faux_ami_t = attribute.value();
 
-  synonym = "";
-  attribute = domElementExpressionChild.attributeNode(KV_SYNONYM);
-  if (!attribute.isNull())
-    synonym = attribute.value();
+//  synonym = "";
+//  attribute = domElementExpressionChild.attributeNode(KV_SYNONYM);
+//  if (!attribute.isNull())
+//    synonym = attribute.value();
 
-  example = "";
-  attribute = domElementExpressionChild.attributeNode(KV_EXAMPLE);
-  if (!attribute.isNull())
-    example = attribute.value();
+//  example = "";
+//  attribute = domElementExpressionChild.attributeNode(KV_EXAMPLE);
+//  if (!attribute.isNull())
+//    example = attribute.value();
 
-  usage = "";
-  attribute = domElementExpressionChild.attributeNode(KV_USAGE);
-  if (!attribute.isNull())
-  {
-    usage = attribute.value();
-    if (usage.length() != 0 && usage.left(1) == UL_USER_USAGE)
-    {
-      int num = qMin(usage.mid (1, 40).toInt(), 1000); // paranioa check
-      if (num > m_doc->usageDescriptions().count())
-      {
-        // description missing ?
-        QStringList sl = m_doc->usageDescriptions();
-        QString s;
-        for (int i = m_doc->usageDescriptions().count(); i < num; i++)
-        {
-          s.setNum(i + 1);
-          s.prepend("#");  // invent descr according to number
-          sl.append(s);
-        }
-        m_doc->setUsageDescriptions(sl);
-      }
-    }
-  }
+//  usage = "";
+//  attribute = domElementExpressionChild.attributeNode(KV_USAGE);
+//  if (!attribute.isNull())
+//  {
+//    usage = attribute.value();
+//    if (usage.length() != 0 && usage.left(1) == UL_USER_USAGE)
+//    {
+//      int num = qMin(usage.mid (1, 40).toInt(), 1000); // paranioa check
+//      if (num > m_doc->usageDescriptions().count())
+//      {
+//        // description missing ?
+//        QStringList sl = m_doc->usageDescriptions();
+//        QString s;
+//        for (int i = m_doc->usageDescriptions().count(); i < num; i++)
+//        {
+//          s.setNum(i + 1);
+//          s.prepend("#");  // invent descr according to number
+//          sl.append(s);
+//        }
+//        m_doc->setUsageDescriptions(sl);
+//      }
+//    }
+//  }
 
-  paraphrase = "";
-  attribute = domElementExpressionChild.attributeNode(KV_PARAPHRASE);
-  if (!attribute.isNull())
-    paraphrase = attribute.value();
+//  paraphrase = "";
+//  attribute = domElementExpressionChild.attributeNode(KV_PARAPHRASE);
+//  if (!attribute.isNull())
+//    paraphrase = attribute.value();
 
-  antonym = "";
-  attribute = domElementExpressionChild.attributeNode(KV_ANTONYM);
-  if (!attribute.isNull())
-    antonym = attribute.value();
+//  antonym = "";
+//  attribute = domElementExpressionChild.attributeNode(KV_ANTONYM);
+//  if (!attribute.isNull())
+//    antonym = attribute.value();
 
-  attribute = domElementExpressionChild.attributeNode(KV_EXPRTYPE);
-  if (!attribute.isNull())
-  {
-    type = attribute.value();
-    if (type == "1")
-      type = QM_VERB;
-    else if (type == "2")  // convert from pre-0.5 versions
-      type = QM_NOUN;
-    else if (type == "3")
-      type = QM_NAME;
+//  attribute = domElementExpressionChild.attributeNode(KV_EXPRTYPE);
+//  if (!attribute.isNull())
+//  {
+//    type = attribute.value();
+//    if (type == "1")
+//      type = QM_VERB;
+//    else if (type == "2")  // convert from pre-0.5 versions
+//      type = QM_NOUN;
+//    else if (type == "3")
+//      type = QM_NAME;
 
-    if (type.length() != 0 && type.left(1) == QM_USER_TYPE)
-    {
-      int num = qMin(type.mid (1, 40).toInt(), 1000); // paranoia check
-      if (num > m_doc->typeDescriptions().count())
-      {
-        // description missing ?
-        QString s;
-        QStringList sl = m_doc->typeDescriptions();
-        for (int i = m_doc->typeDescriptions().count(); i < num; i++)
-        {
-          s.setNum(i + 1);
-          s.prepend("#");  // invent descr according to number
-          sl.append(s);
-        }
-        m_doc->setTypeDescriptions(sl);
-      }
-    }
-  }
+//    if (type.length() != 0 && type.left(1) == QM_USER_TYPE)
+//    {
+//      int num = qMin(type.mid (1, 40).toInt(), 1000); // paranoia check
+//      if (num > m_doc->typeDescriptions().count())
+//      {
+//        // description missing ?
+//        QString s;
+//        QStringList sl = m_doc->typeDescriptions();
+//        for (int i = m_doc->typeDescriptions().count(); i < num; i++)
+//        {
+//          s.setNum(i + 1);
+//          s.prepend("#");  // invent descr according to number
+//          sl.append(s);
+//        }
+//        m_doc->setTypeDescriptions(sl);
+//      }
+//    }
+//  }
 
-  pronunciation = "";
-  attribute = domElementExpressionChild.attributeNode(KV_PRONUNCE);
-  if (!attribute.isNull())
-    pronunciation = attribute.value();
+//  pronunciation = "";
+//  attribute = domElementExpressionChild.attributeNode(KV_PRONUNCE);
+//  if (!attribute.isNull())
+//    pronunciation = attribute.value();
 
-  query_id = "";
-  attribute = domElementExpressionChild.attributeNode(KV_QUERY);
-  if (!attribute.isNull())
-    query_id = attribute.value();
+//  query_id = "";
+//  attribute = domElementExpressionChild.attributeNode(KV_QUERY);
+//  if (!attribute.isNull())
+//    query_id = attribute.value();
 
-  return true;
-}
+//  return true;
+//}
 
 
 

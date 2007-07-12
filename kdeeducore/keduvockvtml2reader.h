@@ -94,6 +94,13 @@ public:
    */
   bool readIdentifier(QDomElement &identifierElement);
   
+  bool readArticle(QDomElement &articleElement);
+  bool readConjug(QDomElement &conjugElement, QList<KEduVocConjugation> &curr_conjug);
+
+  bool readType(QDomElement &typeElement);
+  bool readTense(QDomElement &tenseElement);
+  bool readUsage(QDomElement &usageElement);
+
   /** read an entry
    * @param entryElement QDomElement for the entry to read
    */
@@ -104,35 +111,13 @@ public:
    */
   bool readTranslation(QDomElement &translationElement, KEduVocExpression &expr, int index);
 
-  bool readLesson(QDomElement &domElementParent);
-  bool readArticle(QDomElement &domElementParent);
-  bool readConjug(QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug);
-  bool readOptions(QDomElement &domElementParent);
-  bool readType(QDomElement &domElementParent);
-  bool readTense(QDomElement &domElementParent);
-  bool readUsage(QDomElement &domElementParent);
-  bool readComparison(QDomElement &domElementParent, KEduVocComparison &comp);
-  bool readMultipleChoice(QDomElement &domElementParent, KEduVocMultipleChoice &mc);
-  bool readExpressionChildAttributes(QDomElement &domElementExpressionChild,
-                                     QString &lang,
-                                     grade_t &grade, grade_t &rev_grade,
-                                     int &count, int &rev_count,
-                                     QDateTime &date, QDateTime &rev_date,
-                                     QString &remark,
-                                     int &bcount, int &rev_bcount,
-                                     QString &query_id,
-                                     QString &pronunciation,
-                                     int &width,
-                                     QString &type,
-                                     QString &faux_ami_f,
-                                     QString &faux_ami_t,
-                                     QString &synonym,
-                                     QString &example,
-                                     QString &antonym,
-                                     QString &usage,
-                                     QString &paraphrase);
+  bool readComparison(QDomElement &comparisonElement, KEduVocComparison &comp);
+  bool readMultipleChoice(QDomElement &multipleChoiceElement, KEduVocMultipleChoice &mc);
+  bool readGrade(QDomElement &gradeElement);
 
-  QString errorMessage() const {return m_errorMessage;}
+  bool readLesson(QDomElement &lessonElement);
+
+  QString errorMessage() const { return m_errorMessage; }
 
 private:
 
