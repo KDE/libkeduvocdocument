@@ -94,12 +94,27 @@ public:
    */
   bool readIdentifier(QDomElement &identifierElement);
   
-  bool readArticle(QDomElement &articleElement);
-  bool readConjug(QDomElement &conjugElement, QList<KEduVocConjugation> &curr_conjug);
+  /** read an identifiers articles
+   * @param articleElement QDomElement for the article group
+   * @param identifierNum number of the identifier this article is inside of
+   */
+  bool readArticle(QDomElement &articleElement, int identifierNum);
+  bool readConjug(QDomElement &conjugElement, QList<KEduVocConjugation> &curr_conjug, int identifierNum);
 
-  bool readType(QDomElement &typeElement);
-  bool readTense(QDomElement &tenseElement);
-  bool readUsage(QDomElement &usageElement);
+  /** read the types
+   * @param typesElement QDomElement for the types group
+   */
+  bool readTypes(QDomElement &typesElement);
+  
+  /** read the tenses
+   * @param tensesElement QDomElement for the tenses group
+   */
+  bool readTenses(QDomElement &tensesElement);
+  
+  /** read the usages
+   * @param usagesElement QDomElement for the usages group
+   */
+  bool readUsages(QDomElement &usagesElement);
 
   /** read an entry
    * @param entryElement QDomElement for the entry to read

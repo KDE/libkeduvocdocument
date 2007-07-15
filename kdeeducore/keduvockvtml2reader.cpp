@@ -172,67 +172,19 @@ bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
   groupElement = domElementParent.firstChildElement(KVTML_TYPES);
   if (!groupElement.isNull())
   {
-	  QDomNodeList entryList = groupElement.elementsByTagName(KVTML_TYPE);
-	  if (entryList.length() <= 0)
-    {
-      m_errorMessage = i18n("no types found in types tag");
-      return false;
-    }
-    
-    for (int i = 0; i < entryList.count(); ++i)
-    {
-      currentElement = entryList.item(i).toElement();
-      if (currentElement.parentNode() == groupElement)
-      {
-        result = readType(currentElement);
-        if (!result)
-          return false;
-      }
-    }
+    readTypes(groupElement);
   }
   
   groupElement = domElementParent.firstChildElement(KVTML_TENSES);
   if (!groupElement.isNull())
   {
-	  QDomNodeList entryList = groupElement.elementsByTagName(KVTML_TENSE);
-	  if (entryList.length() <= 0)
-    {
-      m_errorMessage = i18n("no tenses found in tenses tag");
-      return false;
-    }
-    
-    for (int i = 0; i < entryList.count(); ++i)
-    {
-      currentElement = entryList.item(i).toElement();
-      if (currentElement.parentNode() == groupElement)
-      {
-        result = readTense(currentElement);
-        if (!result)
-          return false;
-      }
-    }
+    readTenses(groupElement);
   }
   
   groupElement = domElementParent.firstChildElement(KVTML_USAGES);
   if (!groupElement.isNull())
   {
-	  QDomNodeList entryList = groupElement.elementsByTagName(KVTML_USAGE);
-	  if (entryList.length() <= 0)
-    {
-      m_errorMessage = i18n("no usages found in usages tag");
-      return false;
-    }
-    
-    for (int i = 0; i < entryList.count(); ++i)
-    {
-      currentElement = entryList.item(i).toElement();
-      if (currentElement.parentNode() == groupElement)
-      {
-        result = readUsage(currentElement);
-        if (!result)
-          return false;
-      }
-    }
+    readUsages(groupElement);
   }
 
   groupElement = domElementParent.firstChildElement(KVTML_ENTRIES);
@@ -582,119 +534,79 @@ bool KEduVocKvtml2Reader::readLesson(QDomElement &domElementParent)
 }
 
 
-bool KEduVocKvtml2Reader::readArticle(QDomElement &domElementParent)
+bool KEduVocKvtml2Reader::readArticle(QDomElement &articleElement, int identifierNum)
 /*
  <article>
-  <e l="de">        lang determines also lang order in entries !!
-   <fi>eine</fi>    which must NOT differ
-   <fd>die</fd>
-   <mi>ein</mi>
-   <md>der</md>
-   <ni>ein</ni>
-   <nd>das</nd>
-  </e>
+  <definite>
+    <male>der</male>
+	<female>die</female>
+	<neutral>das</neutral>
+  </definite>
+  <indefinite>
+    <male>ein</male>
+	<female>eine</female>
+	<neutral>ein</neutral>
+  </indefinite>
  </article>
 */
-{
+{ 
+  QString fem_def = "";
+  QString mal_def = "";
+  QString nat_def = "";
+  QString fem_indef = "";
+  QString mal_indef = "";
+  QString nat_indef = "";
 
-  QString s;
-  QDomAttr attribute;
-  QDomElement currentElement;
-  QDomElement article;
-
-  QDomNodeList entryList = domElementParent.elementsByTagName(KV_ART_ENTRY);
-  if (entryList.length() <= 0)
-    return false;
-
-  for (int i = 0; i < entryList.count(); ++i) {
-
-kDebug() << "KEduVocKvtml2Reader::readArticle() read " << entryList.count() << " articles. " << endl;
-    currentElement = entryList.item(i).toElement();
-    if (currentElement.parentNode() == domElementParent) {
-      QString lang;
-      attribute = currentElement.attributeNode(KV_LANG);
-
-      if (m_doc->identifierCount() <= i)
-      {
-        // first entry
-        if (!attribute.isNull())         // no definition in first entry
-          lang = attribute.value();
-        else
-          lang = "original";
-        m_doc->appendIdentifier(lang);
-kDebug() << " Identifier " << i << " is " << lang << endl;
-      }
-      else
-      {
-        if (!attribute.isNull() && attribute.value() != m_doc->identifier(i))
-        {
-          // different originals ?
-          m_errorMessage = i18n("Ambiguous definition of language code");
-          return false;
-        }
-      }
-
-      //---------
-      // Children
-
-      QString fem_def = "";
-      QString mal_def = "";
-      QString nat_def = "";
-      QString fem_indef = "";
-      QString mal_indef = "";
-      QString nat_indef = "";
-
-      article = currentElement.firstChildElement(KV_ART_FD);
-      if (!article.isNull()) {
-        fem_def = article.text();
-        if (fem_def.isNull())
-          fem_def = "";
-      }
-
-      article = currentElement.firstChildElement(KV_ART_FI);
-      if (!article.isNull()) {
-        fem_indef = article.text();
-        if (fem_indef.isNull())
-          fem_indef = "";
-      }
-
-      article = currentElement.firstChildElement(KV_ART_MD);
-      if (!article.isNull()) {
-        mal_def = article.text();
-        if (mal_def.isNull())
-          mal_def = "";
-      }
-
-      article = currentElement.firstChildElement(KV_ART_MI);
-      if (!article.isNull()) {
-        mal_indef = article.text();
-        if (mal_indef.isNull())
-          mal_indef = "";
-      }
-
-      article = currentElement.firstChildElement(KV_ART_ND);
-      if (!article.isNull()) {
-        nat_def = article.text();
-        if (nat_def.isNull())
-          nat_def = "";
-      }
-
-      article = currentElement.firstChildElement(KV_ART_NI);
-      if (!article.isNull()) {
-        nat_indef = article.text();
-        if (nat_indef.isNull())
-          nat_indef = "";
-      }
-
-      m_doc->setArticle(i, KEduVocArticle(fem_def, fem_indef, mal_def, mal_indef, nat_def, nat_indef));
+  QDomElement currentElement = articleElement.firstChildElement(KVTML_DEFINITE);
+  if (!currentElement.isNull())
+  {
+    QDomElement subElement = currentElement.firstChildElement(KVTML_MALE);
+    if (!subElement.isNull())
+    {
+      mal_def = subElement.text();
+    }
+    
+    subElement = currentElement.firstChildElement(KVTML_FEMALE);
+    if (!subElement.isNull())
+    {
+      fem_def = subElement.text();
+    }
+    
+    subElement = currentElement.firstChildElement(KVTML_NEUTRAL);
+    if (!subElement.isNull())
+    {
+      nat_def = subElement.text();
     }
   }
+  
+  currentElement = articleElement.firstChildElement(KVTML_INDEFINITE);
+  if (!currentElement.isNull())
+  {
+    QDomElement subElement = currentElement.firstChildElement(KVTML_MALE);
+    if (!subElement.isNull())
+    {
+      mal_indef = subElement.text();
+    }
+    
+    subElement = currentElement.firstChildElement(KVTML_FEMALE);
+    if (!subElement.isNull())
+    {
+      fem_indef = subElement.text();
+    }
+    
+    subElement = currentElement.firstChildElement(KVTML_NEUTRAL);
+    if (!subElement.isNull())
+    {
+      nat_indef = subElement.text();
+    }
+  }
+  m_doc->setArticle(identifierNum, KEduVocArticle(fem_def, fem_indef, mal_def, mal_indef, nat_def, nat_indef));
 
   return true;
 }
 
 
-bool KEduVocKvtml2Reader::readConjug(QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug)
+bool KEduVocKvtml2Reader::readConjug(QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug, int)
 /*
  <conjugation>        used in header for definiton of "prefix"
   <e l="de">          lang determines also lang order in entries !!
@@ -926,121 +838,59 @@ bool KEduVocKvtml2Reader::readConjug(QDomElement &domElementParent, QList<KEduVo
   return true;
 }
 
-
-//bool KEduVocKvtml2Reader::readOptions(QDomElement &domElementParent)
-//{
-//  m_doc->setSortingEnabled(true);
-//  QDomElement currentElement = domElementParent.firstChildElement(KV_OPT_SORT);
-//  if (!currentElement.isNull()) {
-//    QDomAttr attribute = currentElement.attributeNode(KV_BOOL_FLAG);
-//    if (!attribute.isNull())
-//    {
-//      bool ok = true;
-//      m_doc->setSortingEnabled(attribute.value().toInt(&ok));  // returns 0 if the conversion fails
-//      if (!ok)
-//        m_doc->setSortingEnabled(true);
-//    }
-//  }
-
-//  return true;
-//}
-
-
-bool KEduVocKvtml2Reader::readType(QDomElement &domElementParent)
+bool KEduVocKvtml2Reader::readTypes(QDomElement &typesElement)
 {
-  QString s;
-  QDomElement currentElement;
-  QStringList descriptions;
+  QStringList types;
 
-  QDomNodeList entryList = domElementParent.elementsByTagName(KV_TYPE_DESC);
-  if (entryList.length() <= 0)
-    return false;
-
-  descriptions.clear();
-
-  for (int i = 0; i < entryList.count(); ++i) {
-    currentElement = entryList.item(i).toElement();
-    if (currentElement.parentNode() == domElementParent) {
-      int no = 0;
-
-      QDomAttr attribute = currentElement.attributeNode(KV_TYPE_NO);
-      if (!attribute.isNull())
-        no = attribute.value().toInt();
-
-      s = currentElement.text();
-      if (s.isNull())
-        s = "";
-      descriptions.append(s);
+  QDomNodeList typeNodes = typesElement.elementsByTagName(KVTML_TYPE);
+  for (int i = 0; i < typeNodes.count(); ++i)
+  {
+    QDomElement currentElement = typeNodes.item(i).toElement();
+    if (currentElement.parentNode() == typesElement)
+    {
+      types.append(currentElement.text());
     }
   }
 
-  m_doc->setTypeDescriptions(descriptions);
+  m_doc->setTypeDescriptions(types);
   return true;
 }
 
 
-bool KEduVocKvtml2Reader::readTense(QDomElement &domElementParent)
+bool KEduVocKvtml2Reader::readTenses(QDomElement &tensesElement)
 {
-  QString s;
-  QDomElement currentElement;
-  QStringList descriptions;
+  QStringList tenses;
 
-  QDomNodeList entryList = domElementParent.elementsByTagName(KV_TENSE_DESC);
-  if (entryList.length() <= 0)
-    return false;
-
-  descriptions.clear();
-
-  for (int i = 0; i < entryList.count(); ++i) {
-    currentElement = entryList.item(i).toElement();
-    if (currentElement.parentNode() == domElementParent) {
-      int no = 0;
-
-      QDomAttr attribute = currentElement.attributeNode(KV_TENSE_NO);
-      if (!attribute.isNull())
-        no = attribute.value().toInt();
-
-      s = currentElement.text();
-      if (s.isNull())
-        s = "";
-      descriptions.append(s);
+  QDomNodeList tenseNodes = tensesElement.elementsByTagName(KVTML_TENSE);
+  for (int i = 0; i < tenseNodes.count(); ++i)
+  {
+    QDomElement currentElement = tenseNodes.item(i).toElement();
+    if (currentElement.parentNode() == tensesElement)
+    {
+      tenses.append(currentElement.text());
     }
   }
 
-  m_doc->setTenseDescriptions(descriptions);
+  m_doc->setTenseDescriptions(tenses);
   return true;
 }
 
 
-bool KEduVocKvtml2Reader::readUsage(QDomElement &domElementParent)
+bool KEduVocKvtml2Reader::readUsages(QDomElement &usagesElement)
 {
-  QString s;
-  QDomElement currentElement;
-  QStringList descriptions;
+  QStringList usages;
 
-  QDomNodeList entryList = domElementParent.elementsByTagName(KV_USAGE_DESC);
-  if (entryList.length() <= 0)
-    return false;
-
-  descriptions.clear();
-
-  for (int i = 0; i < entryList.count(); ++i) {
-    currentElement = entryList.item(i).toElement();
-    if (currentElement.parentNode() == domElementParent) {
-      int no = 0;
-
-      QDomAttr attribute = currentElement.attributeNode(KV_USAGE_NO);
-      if (!attribute.isNull())
-        no = attribute.value().toInt();
-
-      s = currentElement.text();
-      if (s.isNull())
-        s = "";
-      descriptions.append(s);
+  QDomNodeList usageNodes = usagesElement.elementsByTagName(KVTML_USAGE);
+  for (int i = 0; i < usageNodes.count(); ++i)
+  {
+    QDomElement currentElement = usageNodes.item(i).toElement();
+    if (currentElement.parentNode() == usagesElement)
+    {
+      usages.append(currentElement.text());
     }
   }
 
-  m_doc->setUsageDescriptions(descriptions);
+  m_doc->setUsageDescriptions(usages);
   return true;
 }
 
