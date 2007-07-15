@@ -11,9 +11,9 @@
 <!ELEMENT comment        (#PCDATA) >
 
 <!ELEMENT identifiers    (identifier*) >
-<!ELEMENT identifier     (type, twoalpha, name, comment, sizehint, article, conjugation) >
+<!ELEMENT identifier     (type, locale, name, comment, sizehint?, article?, conjugation?) >
 <!ELEMENT type           (user|language|CDATA) >
-<!ELEMENT twoalpha       (#PCDATA) >
+<!ELEMENT locale         (#PCDATA) >
 <!ELEMENT name           (#PCDATA) >
 <!ELEMENT comment        (#PCDATA) >
 <!ELEMENT sizehint       (#PCDATA) >
