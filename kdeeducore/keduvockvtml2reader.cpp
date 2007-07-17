@@ -31,10 +31,13 @@
 #include "keduvockvtmlreader.h"
 
 KEduVocKvtml2Reader::KEduVocKvtml2Reader(QIODevice *file)
+: m_inputFile(file)
 {
   // the file must be already open
-  m_inputFile = file;
-  m_errorMessage = "";
+  if (!m_inputFile->isOpen())
+  {
+    m_errorMessage = i18n("file must be opened first");
+  }
 }
 
 
