@@ -250,7 +250,40 @@ bool KEduVocKvtml2Reader::readIdentifier(QDomElement &identifierElement)
   QDomElement currentElement = identifierElement.firstChildElement(KVTML_TYPE);
   if (!currentElement.isNull())
   {
-    
+    // TODO: do something with the type
+  }
+  
+  currentElement = identifierElement.firstChildElement(KVTML_LOCALE);
+  if (!currentElement.isNull())
+  {
+    // TODO: do something with the locale
+  }
+  
+  currentElement = identifierElement.firstChildElement(KVTML_NAME);
+  if (!currentElement.isNull())
+  {
+    // TODO: do something with the name
+  }
+  
+  currentElement = identifierElement.firstChildElement(KVTML_SIZEHINT);
+  if (!currentElement.isNull())
+  {
+    // TODO: do something with the sizehint
+  }
+  
+  // read sub-parts
+  currentElement = identifierElement.firstChildElement(KVTML_ARTICLE);
+  if (!currentElement.isNull())
+  {
+    readArticle(currentElement, id);
+  }
+  
+  currentElement = identifierElement.firstChildElement(KVTML_PERSONALPRONOUNS);
+  if (!currentElement.isNull())
+  {
+    KEduVocConjugation personalPronouns;
+    readConjug(currentElement, personalPronouns);
+    // TODO: do something with these personalpronouns
   }
   return result;
 }
