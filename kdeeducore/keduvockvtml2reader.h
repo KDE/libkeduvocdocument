@@ -99,7 +99,12 @@ public:
    * @param identifierNum number of the identifier this article is inside of
    */
   bool readArticle(QDomElement &articleElement, int identifierNum);
-  bool readConjug(QDomElement &conjugElement, QList<KEduVocConjugation> &curr_conjug, int identifierNum);
+  
+  /** read in a conjugation
+   * @param conjugElement QDomElement for the conjugation group
+   * @param curr_conjug conjugation object to populate
+   */
+  bool readConjug(QDomElement &conjugElement, KEduVocConjugation &curr_conjug);
 
   /** read the types
    * @param typesElement QDomElement for the types group

@@ -41,8 +41,13 @@
 #define KVTML_FEMALE "female"
 #define KVTML_NEUTRAL "neutral"
 #define KVTML_CONJUGATION "conjugation"
+#define KVTML_PERSONALPRONOUNS "personalpronouns"
 #define KVTML_SINGULAR "singular"
 #define KVTML_PLURAL "plural"
+#define KVTML_FIRSTPERSON "firstperson"
+#define KVTML_SECONDPERSON "secondperson"
+#define KVTML_THIRDPERSON "thirdperson"
+#define KVTML_COMMON "common"
 
 #define KVTML_TYPES "types"
 

@@ -276,7 +276,7 @@ bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
   if (translationList.length() <= 0)
   {
     m_errorMessage = i18n("no translations found");
-    return false; // at least one entry is required
+    return false; // at least one translation is required
   }
   
   for (int i = 0; i < translationList.count(); ++i)
@@ -609,234 +609,156 @@ bool KEduVocKvtml2Reader::readArticle(QDomElement &articleElement, int identifie
 }
 
 
-bool KEduVocKvtml2Reader::readConjug(QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug, int)
+bool KEduVocKvtml2Reader::readConjug(QDomElement &conjugElement, KEduVocConjugation &curr_conjug)
 /*
- <conjugation>        used in header for definiton of "prefix"
-  <e l="de">          lang determines also lang order in entries !!
-   <s1>I</s1>         which must NOT differ
-   <s2>you<2>
-   <s3f>he</s3f>
-   <s3m>she</s3m>
-   <s3n>it</s3n>
-   <p1>we</p1>
-   <p2>you</p2>
-   <p3f>they</p3f>
-   <p3m>they</p3m>
-   <p3n>they</p3n>
-  </e>
- </conjugation>
-
- <conjugation>        and in entry for definition of tenses of (irreg.) verbs
-  <t n="sipa">
-   <s1>go</s1>
-   <s2>go</s2>
-   <s3f>goes</s3f>
-   <s3m>goes</s3m>
-   <s3n>goes</s3n>
-   <p1>go</p1>
-   <p2>go</p2>
-   <p3f>go</p3f>
-   <p3m>go</p3m>
-   <p3n>go</p3n>
-  </t>
+ <conjugation>
+  <singular>
+    <first person></first person>
+    <second person></second person>
+    <third person>
+      <male></male>
+      <female></female>
+      <neutral></neutral>
+    </third person>
+  </singular>
+  <plural>
+    <first person></first person>
+    <second person></second person>
+    <third person>
+      <common></common>
+    </third person>
+  </plural>
  </conjugation>
 */
 {
-  QString s;
   bool p3_common;
   bool s3_common;
-  QString pers1_sing;
-  QString pers2_sing;
-  QString pers3_m_sing;
-  QString pers3_f_sing;
-  QString pers3_n_sing;
-  QString pers1_plur;
-  QString pers2_plur;
-  QString pers3_m_plur;
-  QString pers3_f_plur;
-  QString pers3_n_plur;
-  QString lang;
+  QString singfirst;
+  QString singsecond;
+  QString singthirdmale;
+  QString singthirdfemale;
+  QString singthirdneutral;
+  QString plurfirst;
+  QString plursecond;
+  QString plurthirdmale;
+  QString plurthirdfemale;
+  QString plurthirdneutral;
   QString type;
-  int count = 0;
 
-  curr_conjug.clear();
-  curr_conjug.append(KEduVocConjugation());
-
-  QDomElement domElementConjugChild = domElementParent.firstChild().toElement();
-  while (!domElementConjugChild.isNull())
+  QDomElement currentGroup = conjugElement.firstChildElement(KVTML_SINGULAR);
+  if (!currentGroup.isNull())
   {
-    if (domElementConjugChild.tagName() == KV_CON_ENTRY)
+    QDomElement currentElement = currentGroup.firstChildElement(KVTML_FIRSTPERSON);
+    if (!currentElement.isNull())
     {
-      type = CONJ_PREFIX;
-
-      //----------
-      // Attribute
-
-      QString lang;
-      QDomAttr domAttrLang = domElementConjugChild.attributeNode(KV_LANG);
-
-      if (m_doc->identifierCount() <= count)
+      singfirst = currentElement.text();
+    }
+    
+    currentElement = currentGroup.firstChildElement(KVTML_SECONDPERSON);
+    if (!currentElement.isNull())
+    {
+      singsecond = currentElement.text();
+    }
+    
+    currentGroup = currentGroup.firstChildElement(KVTML_THIRDPERSON);
+    if (!currentGroup.isNull())
+    {
+      currentElement = currentGroup.firstChildElement(KVTML_COMMON);
+      if (!currentElement.isNull())
       {
-        // first entry
-        if (!domAttrLang.isNull())            // no definition in first entry
-          lang = domAttrLang.value();
-        else
-          lang = "original";
-        m_doc->appendIdentifier(lang);
+        s3_common = true;
+        singthirdmale = currentElement.text();
+        singthirdfemale = singthirdmale;
+        singthirdneutral = singthirdmale;
       }
       else
       {
-        if (!domAttrLang.isNull() && domAttrLang.value() != m_doc->identifier(count))
+        s3_common = false;
+        currentElement = currentGroup.firstChildElement(KVTML_MALE);
+        if (!currentElement.isNull())
         {
-          // different originals ?
-          m_errorMessage = i18n("Ambiguous definition of language code");
-          return false;
+          singthirdmale = currentElement.text();
+        }
+        
+        currentElement = currentGroup.firstChildElement(KVTML_FEMALE);
+        if (!currentElement.isNull())
+        {
+          singthirdfemale = currentElement.text();
+        }
+        
+        currentElement = currentGroup.firstChildElement(KVTML_NEUTRAL);
+        if (!currentElement.isNull())
+        {
+          singthirdneutral = currentElement.text();
         }
       }
+      
     }
-    else if (domElementConjugChild.tagName() == KV_CON_TYPE)
-    {
-      //----------
-      // Attribute
-
-      QDomAttr domAttrLang = domElementConjugChild.attributeNode(KV_CON_NAME);
-      type = domAttrLang.value();
-      if (type.isNull())
-        type = "";
-
-      if (type.length() != 0 && type.left(1) == UL_USER_TENSE)
-      {
-        int num = qMin(type.mid (1, 40).toInt(), 1000); // paranoia check
-        if (num > m_doc->tenseDescriptions().count())
-        {
-          // description missing ?
-          QString s;
-          QStringList sl = m_doc->tenseDescriptions();
-          for (int i = m_doc->tenseDescriptions().count(); i < num; i++)
-          {
-            s.setNum(i + 1);
-            s.prepend("#");  // invent descr according to number
-            sl.append(s);
-          }
-          m_doc->setTenseDescriptions(sl);
-        }
-      }
-    }
-
-    pers1_sing = "";
-    pers2_sing = "";
-    pers3_m_sing = "";
-    pers3_f_sing = "";
-    pers3_n_sing = "";
-    pers1_plur = "";
-    pers2_plur = "";
-    pers3_m_plur = "";
-    pers3_f_plur = "";
-    pers3_n_plur = "";
-    p3_common = false;
-    s3_common = false;
-
-    QDomElement domElementConjugGrandChild = domElementConjugChild.firstChild().toElement();
-    while (!domElementConjugGrandChild.isNull())
-    {
-      if (domElementConjugGrandChild.tagName() == KV_CON_P1S)
-      {
-        pers1_sing = domElementConjugGrandChild.text();
-        if (pers1_sing.isNull())
-          pers1_sing = "";
-      }
-      else if (domElementConjugGrandChild.tagName() == KV_CON_P2S)
-      {
-        pers2_sing = domElementConjugGrandChild.text();
-        if (pers2_sing.isNull())
-          pers2_sing = "";
-      }
-      else if (domElementConjugGrandChild.tagName() == KV_CON_P3SF)
-      {
-        QDomAttr domAttrCommon = domElementConjugGrandChild.attributeNode(KV_CONJ_COMMON);
-        if (!domAttrCommon.isNull())
-          s3_common = domAttrCommon.value().toInt();  // returns 0 if the conversion fails
-
-        pers3_f_sing = domElementConjugGrandChild.text();
-        if (pers3_f_sing.isNull())
-          pers3_f_sing = "";
-      }
-      else if (domElementConjugGrandChild.tagName() == KV_CON_P3SM)
-      {
-        pers3_m_sing = domElementConjugGrandChild.text();
-        if (pers3_m_sing.isNull())
-          pers3_m_sing = "";
-      }
-      else if (domElementConjugGrandChild.tagName() == KV_CON_P3SN)
-      {
-        pers3_n_sing = domElementConjugGrandChild.text();
-        if (pers3_n_sing.isNull())
-          pers3_n_sing = "";
-      }
-      else if (domElementConjugGrandChild.tagName() == KV_CON_P1P)
-      {
-        pers1_plur = domElementConjugGrandChild.text();
-        if (pers1_plur.isNull())
-          pers1_plur = "";
-      }
-      else if (domElementConjugGrandChild.tagName() == KV_CON_P2P)
-      {
-        pers2_plur = domElementConjugGrandChild.text();
-        if (pers2_plur.isNull())
-          pers2_plur = "";
-      }
-      else if (domElementConjugGrandChild.tagName() == KV_CON_P3PF)
-      {
-        QDomAttr domAttrCommon = domElementConjugGrandChild.attributeNode(KV_CONJ_COMMON);
-        if (!domAttrCommon.isNull())
-          p3_common = domAttrCommon.value().toInt();  // returns 0 if the conversion fails
-
-        pers3_f_plur = domElementConjugGrandChild.text();
-        if (pers3_f_plur.isNull())
-          pers3_f_plur = "";
-      }
-      else if (domElementConjugGrandChild.tagName() == KV_CON_P3PM)
-      {
-        pers3_m_plur = domElementConjugGrandChild.text();
-        if (pers3_m_plur.isNull())
-          pers3_m_plur = "";
-      }
-      else if (domElementConjugGrandChild.tagName() == KV_CON_P3PN)
-      {
-        pers3_n_plur = domElementConjugGrandChild.text();
-        if (pers3_n_plur.isNull())
-          pers3_n_plur = "";
-      }
-      else
-      {
-        return false;
-      }
-
-      domElementConjugGrandChild = domElementConjugGrandChild.nextSibling().toElement();
-    }
-
-    if (domElementConjugChild.tagName() == KV_CON_ENTRY)
-      while (count + 1 > (int) curr_conjug.size() )
-        curr_conjug.append(KEduVocConjugation());
-
-    curr_conjug[count].setPers3SingularCommon(type, s3_common);
-    curr_conjug[count].setPers3PluralCommon(type, p3_common);
-    curr_conjug[count].setPers1Singular(type, pers1_sing);
-    curr_conjug[count].setPers2Singular(type, pers2_sing);
-    curr_conjug[count].setPers3FemaleSingular(type, pers3_f_sing);
-    curr_conjug[count].setPers3MaleSingular(type, pers3_m_sing);
-    curr_conjug[count].setPers3NaturalSingular(type, pers3_n_sing);
-    curr_conjug[count].setPers1Plural(type, pers1_plur);
-    curr_conjug[count].setPers2Plural(type, pers2_plur);
-    curr_conjug[count].setPers3FemalePlural(type, pers3_f_plur);
-    curr_conjug[count].setPers3MalePlural(type, pers3_m_plur);
-    curr_conjug[count].setPers3NaturalPlural(type, pers3_n_plur);
-
-    if (domElementConjugChild.tagName() == KV_CON_ENTRY)
-      count++;
-
-    domElementConjugChild = domElementConjugChild.nextSibling().toElement();
   }
+
+  currentGroup = conjugElement.firstChildElement(KVTML_PLURAL);
+  if (!currentGroup.isNull())
+  {
+    QDomElement currentElement = currentGroup.firstChildElement(KVTML_FIRSTPERSON);
+    if (!currentElement.isNull())
+    {
+      plurfirst = currentElement.text();
+    }
+    
+    currentElement = currentGroup.firstChildElement(KVTML_SECONDPERSON);
+    if (!currentElement.isNull())
+    {
+      plursecond = currentElement.text();
+    }
+    
+    currentGroup = currentGroup.firstChildElement(KVTML_THIRDPERSON);
+    if (!currentGroup.isNull())
+    {
+      currentElement = currentGroup.firstChildElement(KVTML_COMMON);
+      if (!currentElement.isNull())
+      {
+        p3_common = true;
+        plurthirdmale = currentElement.text();
+        plurthirdfemale = singthirdmale;
+        plurthirdneutral = singthirdmale;
+      }
+      else
+      {
+        p3_common = false;
+        currentElement = currentGroup.firstChildElement(KVTML_MALE);
+        if (!currentElement.isNull())
+        {
+          plurthirdmale = currentElement.text();
+        }
+        
+        currentElement = currentGroup.firstChildElement(KVTML_FEMALE);
+        if (!currentElement.isNull())
+        {
+          plurthirdfemale = currentElement.text();
+        }
+        
+        currentElement = currentGroup.firstChildElement(KVTML_NEUTRAL);
+        if (!currentElement.isNull())
+        {
+          plurthirdneutral = currentElement.text();
+        }
+      }
+      
+    }
+  }
+  
+  curr_conjug.setPers3SingularCommon(type, s3_common);
+  curr_conjug.setPers3PluralCommon(type, p3_common);
+  curr_conjug.setPers1Singular(type, singfirst);
+  curr_conjug.setPers2Singular(type, singsecond);
+  curr_conjug.setPers3FemaleSingular(type, singthirdfemale);
+  curr_conjug.setPers3MaleSingular(type, singthirdmale);
+  curr_conjug.setPers3NaturalSingular(type, singthirdneutral);
+  curr_conjug.setPers1Plural(type, plurfirst);
+  curr_conjug.setPers2Plural(type, plursecond);
+  curr_conjug.setPers3FemalePlural(type, plurthirdfemale);
+  curr_conjug.setPers3MalePlural(type, plurthirdmale);
+  curr_conjug.setPers3NaturalPlural(type, plurthirdneutral);
 
   return true;
 }
