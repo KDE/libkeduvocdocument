@@ -681,19 +681,19 @@ bool KEduVocKvtml2Reader::readConjug(QDomElement &conjugElement, KEduVocConjugat
   QDomElement currentGroup = conjugElement.firstChildElement(KVTML_SINGULAR);
   if (!currentGroup.isNull())
   {
-    QDomElement currentElement = currentGroup.firstChildElement(KVTML_FIRSTPERSON);
+    QDomElement currentElement = currentGroup.firstChildElement(KVTML_1STPERSON);
     if (!currentElement.isNull())
     {
       singfirst = currentElement.text();
     }
     
-    currentElement = currentGroup.firstChildElement(KVTML_SECONDPERSON);
+    currentElement = currentGroup.firstChildElement(KVTML_2NDPERSON);
     if (!currentElement.isNull())
     {
       singsecond = currentElement.text();
     }
     
-    currentGroup = currentGroup.firstChildElement(KVTML_THIRDPERSON);
+    currentGroup = currentGroup.firstChildElement(KVTML_3RDPERSON);
     if (!currentGroup.isNull())
     {
       currentElement = currentGroup.firstChildElement(KVTML_COMMON);
@@ -732,19 +732,19 @@ bool KEduVocKvtml2Reader::readConjug(QDomElement &conjugElement, KEduVocConjugat
   currentGroup = conjugElement.firstChildElement(KVTML_PLURAL);
   if (!currentGroup.isNull())
   {
-    QDomElement currentElement = currentGroup.firstChildElement(KVTML_FIRSTPERSON);
+    QDomElement currentElement = currentGroup.firstChildElement(KVTML_1STPERSON);
     if (!currentElement.isNull())
     {
       plurfirst = currentElement.text();
     }
     
-    currentElement = currentGroup.firstChildElement(KVTML_SECONDPERSON);
+    currentElement = currentGroup.firstChildElement(KVTML_2NDPERSON);
     if (!currentElement.isNull())
     {
       plursecond = currentElement.text();
     }
     
-    currentGroup = currentGroup.firstChildElement(KVTML_THIRDPERSON);
+    currentGroup = currentGroup.firstChildElement(KVTML_3RDPERSON);
     if (!currentGroup.isNull())
     {
       currentElement = currentGroup.firstChildElement(KVTML_COMMON);
