@@ -84,6 +84,8 @@
         <usage></usage>
         <paraphrase></paraphrase>
         <conjugation>
+          <tenseid>1</tenseid>
+          <type>regular</type>
           <singular>
               <firstPerson>ich</firstPerson>
               <secondPerson>du</secondPerson>
