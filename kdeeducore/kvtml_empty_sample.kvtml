@@ -29,7 +29,7 @@
             <neutral>ein</neutral>
         </indefinite>
       </article>
-      <conjugation>
+      <personalpronouns>
         <singular>
             <firstPerson>ich</firstPerson>
             <secondPerson>du</secondPerson>
@@ -46,7 +46,7 @@
                 <common>sie</common>
             </thirdPerson>
         </plural>
-      </conjugation>
+      </personalpronouns>
     </identifier>
   </identifiers>
 
@@ -83,6 +83,24 @@
         <example></example>
         <usage></usage>
         <paraphrase></paraphrase>
+        <conjugation>
+          <singular>
+              <firstPerson>ich</firstPerson>
+              <secondPerson>du</secondPerson>
+              <thirdPerson>
+                  <male>er</male>
+                  <female>sie</female>
+                  <neutral>es</neutral>
+              </thirdPerson>
+          </singular>
+          <plural>
+              <firstPerson>wir</firstPerson>
+              <secondPerson>ihr</secondPerson>
+              <thirdPerson>
+                  <common>sie</common>
+              </thirdPerson>
+          </plural>
+        </conjugation>
         <comparison>
           <comp1>gut</comp1>
           <comp2>besser</comp2>

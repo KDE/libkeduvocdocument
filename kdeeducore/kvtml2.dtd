@@ -11,7 +11,7 @@
 <!ELEMENT comment        (#PCDATA) >
 
 <!ELEMENT identifiers    (identifier*) >
-<!ELEMENT identifier     (type, locale, name, comment, sizehint?, article?, conjugation?) >
+<!ELEMENT identifier     (type, locale, name, comment, sizehint?, article?, personalpronouns?) >
 <!ELEMENT type           (user|language|CDATA) >
 <!ELEMENT locale         (#PCDATA) >
 <!ELEMENT name           (#PCDATA) >
@@ -23,9 +23,12 @@
 <!ELEMENT male           (#PCDATA) >
 <!ELEMENT female         (#PCDATA) >
 <!ELEMENT neutral        (#PCDATA) >
-<!ELEMENT conjugation    (singular?, plural?) >
-<!ELEMENT singular       (#PCDATA) >
-<!ELEMENT plural         (#PCDATA) >
+<!ELEMENT personalpronouns (singular?, plural?) >
+<!ELEMENT singular       (firstperson, secondperson, thirdperson) >
+<!ELEMENT plural         (firstperson, secondperson, thirdperson) >
+<!ELEMENT firstperson    (#PCDATA) >
+<!ELEMENT secondperson   (#PCDATA) >
+<!ELEMENT thirdperson    (common|(male, female, neutral)) >
 
 <!ELEMENT types          (type*) >
 <!ELEMENT type           (#PCDATA) >
@@ -46,7 +49,7 @@
 <!ELEMENT inquery        EMPTY >
 <!ELEMENT sizehint       (#PCDATA) >
 
-<!ELEMENT translation    (text, type, inquery?, comment?, pronunciation, falsfriendfrom, falsefriendto, falsefriend, antonym*, synonym*, example, usage, paraphrase, comparison) >
+<!ELEMENT translation    (text, type, inquery?, comment?, pronunciation, falsfriendfrom, falsefriendto, falsefriend, antonym*, synonym*, example, usage, paraphrase, comparison, conjugation?) >
 <!ELEMENT text           (#PCDATA) >
 <!ELEMENT pronunciation  (#PCDATA) >
 <!ELEMENT falsefriendfrom  (#PCDATA) >
@@ -57,6 +60,7 @@
 <!ELEMENT example        (#PCDATA) >
 <!ELEMENT usage          (#PCDATA) >
 <!ELEMENT paraphrase     (#PCDATA) >
+<!ELEMENT conjugation    (singular?, plural?) >
 
 <!ELEMENT comparison     (absolute, comparative, superlative) >
 <!ELEMENT absolute       (#PCDATA) >
