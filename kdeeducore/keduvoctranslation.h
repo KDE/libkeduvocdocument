@@ -14,8 +14,8 @@
  ***************************************************************************/
 
 
-#ifndef KEDUVOCEXPRESSIONTRANSLATION_H
-#define KEDUVOCEXPRESSIONTRANSLATION_H
+#ifndef KEDUVOCTRANSLATION_H
+#define KEDUVOCTRANSLATION_H
 
 #include "libkdeedu_core_export.h"
 

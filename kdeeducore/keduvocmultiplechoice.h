@@ -24,8 +24,8 @@
  ***************************************************************************/
 
 
-#ifndef MultipleChoice_included
-#define MultipleChoice_included
+#ifndef KEDUVOCMULTIPLECHOICE_H
+#define KEDUVOCMULTIPLECHOICE_H
 
 #include "libkdeedu_core_export.h"
 
