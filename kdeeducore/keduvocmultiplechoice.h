@@ -30,6 +30,7 @@
 #include "libkdeedu_core_export.h"
 
 #include <QtCore/QString>
+#include <QtCore/QStringList>
 
 #define MAX_MULTIPLE_CHOICE  5  // select one out of x
 
@@ -40,24 +41,17 @@ public:
 
    KEduVocMultipleChoice() {}
 
-   KEduVocMultipleChoice (const QString &mc1, const QString &mc2, const QString &mc3, const QString &mc4, const QString &mc5);
+   KEduVocMultipleChoice (const QStringList &choices);
+   
+   void setChoices (const QStringList &choices);
+   QStringList choices() const;
 
-   void setMC1 (const QString &s);
-   void setMC2 (const QString &s);
-   void setMC3 (const QString &s);
-   void setMC4 (const QString &s);
-   void setMC5 (const QString &s);
+   void appendChoice (const QString &s);
 
-   QString mc1 () const;
-   QString mc2 () const;
-   QString mc3 () const;
-   QString mc4 () const;
-   QString mc5 () const;
-
-   QString mc (unsigned idx) const;
+   void setChoice(int index, const QString &s);
+   QString choice (int index) const;
 
    bool isEmpty() const;
-   void normalize();
    void clear();
    unsigned size();
 
@@ -65,7 +59,7 @@ public:
 
 protected:
 
-   QString  muc1, muc2, muc3, muc4, muc5;
+   QStringList m_choices;
 };
 
 

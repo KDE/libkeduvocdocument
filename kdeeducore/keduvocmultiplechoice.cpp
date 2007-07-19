@@ -26,150 +26,54 @@
 #include "keduvocmultiplechoice.h"
 
 KEduVocMultipleChoice::KEduVocMultipleChoice
-  (const QString &mc1, const QString &mc2, const QString &mc3, const QString &mc4,const QString &mc5)
+  (const QStringList &choices)
+  : m_choices(choices)
 {
-   setMC1 (mc1);
-   setMC2 (mc2);
-   setMC3 (mc3);
-   setMC4 (mc4);
-   setMC5 (mc5);
 }
 
 
 bool KEduVocMultipleChoice::isEmpty() const
 {
-  return muc1.simplified().isEmpty() &&
-         muc2.simplified().isEmpty() &&
-         muc3.simplified().isEmpty() &&
-         muc4.simplified().isEmpty() &&
-         muc5.simplified().isEmpty();
+  return m_choices.isEmpty();
 }
 
 
 void KEduVocMultipleChoice::clear()
 {
-   muc1 = "";
-   muc2 = "";
-   muc3 = "";
-   muc4 = "";
-   muc5 = "";
+  m_choices.clear();
 }
 
 
-QString KEduVocMultipleChoice::mc (unsigned idx) const
+QString KEduVocMultipleChoice::choice (int index) const
 {
-   switch (idx) {
-     case 0: return muc1;
-     case 1: return muc2;
-     case 2: return muc3;
-     case 3: return muc4;
-     case 4: return muc5;
-   }
-   return "";
+  QString choice;
+  if (m_choices.size() >= index)
+  {
+    choice = m_choices[index];
+  }
+  return choice;
 }
 
+void KEduVocMultipleChoice::setChoice(int index, const QString &s)
+{
+  while (m_choices.size() < index)
+  {
+    m_choices.append(QString());
+  }
+  m_choices[index] = s;
+}
 
 unsigned KEduVocMultipleChoice::size()
 {
-   normalize();
-   unsigned num = 0;
-   if (!muc1.isEmpty())
-     ++num;
-   if (!muc2.isEmpty())
-     ++num;
-   if (!muc3.isEmpty())
-     ++num;
-   if (!muc4.isEmpty())
-     ++num;
-   if (!muc5.isEmpty())
-     ++num;
-   return num;
+  return m_choices.size();
 }
-
-
-void KEduVocMultipleChoice::normalize()
-{
-  // fill from first to last
-
-  if (muc1.isEmpty()) {
-    muc1 = muc2;
-    muc2 = "";
-  }
-
-  if (muc2.isEmpty()) {
-    muc2 = muc3;
-    muc3 = "";
-  }
-
-  if (muc3.isEmpty()) {
-    muc3 = muc4;
-    muc4 = "";
-  }
-
-  if (muc4.isEmpty()) {
-    muc4 = muc5;
-    muc5 = "";
-  }
-
-}
-
 
 bool KEduVocMultipleChoice::operator==(const KEduVocMultipleChoice &choice) const
 {
-  return muc1 == choice.muc1 &&
-    muc2 == choice.muc2 &&
-    muc3 == choice.muc3 &&
-    muc4 == choice.muc4 &&
-    muc5 == choice.muc5;
+  return m_choices == choice.m_choices;
 }
 
-void KEduVocMultipleChoice::setMC1(const QString &s) 
+void KEduVocMultipleChoice::appendChoice(const QString &s) 
 { 
-	muc1 = s; 
+  m_choices.append(s);
 }
-
-void KEduVocMultipleChoice::setMC2(const QString &s) 
-{ 
-	muc2 = s; 
-}
-
-void KEduVocMultipleChoice::setMC3(const QString &s) 
-{ 
-	muc3 = s; 
-}
-
-void KEduVocMultipleChoice::setMC4(const QString &s) 
-{ 
-    muc4 = s; 
-}
-
-void KEduVocMultipleChoice::setMC5(const QString &s) 
-{ 
-    muc5 = s; 
-}
-
-QString KEduVocMultipleChoice::mc1() const 
-{ 
-    return muc1; 
-}
-
-QString KEduVocMultipleChoice::mc2() const 
-{ 
-    return muc2; 
-}
-
-QString KEduVocMultipleChoice::mc3() const 
-{ 
-    return muc3; 
-}
-
-QString KEduVocMultipleChoice::mc4() const 
-{ 
-    return muc4; 
-}
-
-QString KEduVocMultipleChoice::mc5() const 
-{ 
-	return muc5; 
-}
-

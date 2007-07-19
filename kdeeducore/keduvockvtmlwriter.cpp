@@ -591,46 +591,46 @@ bool KEduVocKvtmlWriter::writeMultipleChoice(QDomDocument &domDoc, QDomElement &
 
   QDomElement domElementMC = domDoc.createElement(KV_MULTIPLECHOICE_GRP);
 
-  if (!mc.mc1().isEmpty() )
+  if (!mc.choice(1).isEmpty() )
   {
     QDomElement domElementMC1 = domDoc.createElement(KV_MC_1);
-    QDomText domTextMC1 = domDoc.createTextNode(mc.mc1());
+    QDomText domTextMC1 = domDoc.createTextNode(mc.choice(1));
 
     domElementMC1.appendChild(domTextMC1);
     domElementMC.appendChild(domElementMC1);
   }
 
-  if (!mc.mc2().isEmpty() )
+  if (!mc.choice(2).isEmpty() )
   {
     QDomElement domElementMC2 = domDoc.createElement(KV_MC_2);
-    QDomText domTextMC2 = domDoc.createTextNode(mc.mc2());
+    QDomText domTextMC2 = domDoc.createTextNode(mc.choice(2));
 
     domElementMC2.appendChild(domTextMC2);
     domElementMC.appendChild(domElementMC2);
   }
 
-  if (!mc.mc3().isEmpty() )
+  if (!mc.choice(3).isEmpty() )
   {
     QDomElement domElementMC3 = domDoc.createElement(KV_MC_3);
-    QDomText domTextMC3 = domDoc.createTextNode(mc.mc3());
+    QDomText domTextMC3 = domDoc.createTextNode(mc.choice(3));
 
     domElementMC3.appendChild(domTextMC3);
     domElementMC.appendChild(domElementMC3);
   }
 
-  if (!mc.mc4().isEmpty() )
+  if (!mc.choice(4).isEmpty() )
   {
     QDomElement domElementMC4 = domDoc.createElement(KV_MC_4);
-    QDomText domTextMC4 = domDoc.createTextNode(mc.mc4());
+    QDomText domTextMC4 = domDoc.createTextNode(mc.choice(4));
 
     domElementMC4.appendChild(domTextMC4);
     domElementMC.appendChild(domElementMC4);
   }
 
-  if (!mc.mc5().isEmpty() )
+  if (!mc.choice(5).isEmpty() )
   {
     QDomElement domElementMC5 = domDoc.createElement(KV_MC_5);
-    QDomText domTextMC5 = domDoc.createTextNode(mc.mc5());
+    QDomText domTextMC5 = domDoc.createTextNode(mc.choice(5));
 
     domElementMC5.appendChild(domTextMC5);
     domElementMC.appendChild(domElementMC5);

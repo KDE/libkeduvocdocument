@@ -921,64 +921,31 @@ bool KEduVocKvtml2Reader::readComparison(QDomElement &domElementParent, KEduVocC
 }
 
 
-bool KEduVocKvtml2Reader::readMultipleChoice(QDomElement &domElementParent, KEduVocMultipleChoice &mc)
+bool KEduVocKvtml2Reader::readMultipleChoice(QDomElement &multipleChoiceElement, KEduVocMultipleChoice &mc)
 /*
  <multiplechoice>
-   <mc1>good</mc1>
-   <mc2>better</mc2>
-   <mc3>best</mc3>
-   <mc4>best 2</mc4>
-   <mc5>best 3</mc5>
+   <choice>good</choice>
+   <choice>better</choice>
+   <choice>best</choice>
+   <choice>best 2</choice>
+   <choice>best 3</choice>
  </multiplechoice>
 */
 
 {
+  QDomElement currentElement;
   QString s;
   mc.clear();
 
-  QDomElement currentElement;
-
-  currentElement = domElementParent.firstChildElement(KV_MC_1);
-  if (!currentElement.isNull()) {
-    s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    mc.setMC1(s);
+  QDomNodeList choiceNodes = multipleChoiceElement.elementsByTagName(KVTML_CHOICE);
+  for (int i = 0; i < choiceNodes.count(); ++i)
+  {
+    currentElement = choiceNodes.item(i).toElement();
+    if (currentElement.parentNode() == multipleChoiceElement)
+    {
+      mc.appendChoice(currentElement.text());
+    }
   }
-
-  currentElement = domElementParent.firstChildElement(KV_MC_2);
-  if (!currentElement.isNull()) {
-    s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    mc.setMC2(s);
-  }
-
-  currentElement = domElementParent.firstChildElement(KV_MC_3);
-  if (!currentElement.isNull()) {
-    s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    mc.setMC3(s);
-  }
-
-  currentElement = domElementParent.firstChildElement(KV_MC_4);
-  if (!currentElement.isNull()) {
-    s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    mc.setMC4(s);
-  }
-
-  currentElement = domElementParent.firstChildElement(KV_MC_5);
-  if (!currentElement.isNull()) {
-    s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    mc.setMC5(s);
-  }
-
-  mc.normalize();
   return true;
 }
 

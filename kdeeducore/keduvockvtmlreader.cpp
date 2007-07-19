@@ -777,44 +777,33 @@ bool KEduVocKvtmlReader::readMultipleChoice(QDomElement &domElementParent, KEduV
   currentElement = domElementParent.firstChildElement(KV_MC_1);
   if (!currentElement.isNull()) {
     s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    mc.setMC1(s);
+    mc.appendChoice(s);
   }
 
   currentElement = domElementParent.firstChildElement(KV_MC_2);
   if (!currentElement.isNull()) {
     s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    mc.setMC2(s);
+    mc.appendChoice(s);
   }
 
   currentElement = domElementParent.firstChildElement(KV_MC_3);
   if (!currentElement.isNull()) {
     s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    mc.setMC3(s);
+    mc.appendChoice(s);
   }
 
   currentElement = domElementParent.firstChildElement(KV_MC_4);
   if (!currentElement.isNull()) {
     s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    mc.setMC4(s);
+    mc.appendChoice(s);
   }
 
   currentElement = domElementParent.firstChildElement(KV_MC_5);
   if (!currentElement.isNull()) {
     s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    mc.setMC5(s);
+    mc.appendChoice(s);
   }
 
-  mc.normalize();
   return true;
 }
 
