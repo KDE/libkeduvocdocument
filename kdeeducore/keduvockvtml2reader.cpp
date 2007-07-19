@@ -84,15 +84,6 @@ bool KEduVocKvtml2Reader::readDoc(KEduVocDocument *doc)
       return false;
   }
 
-  // possibly add lines support to information section of kvtml2 dtd?
-  //documentAttribute = domElementKvtml.attributeNode(KV_LINES);
-  //if (!documentAttribute.isNull())
-  //  m_lines = documentAttribute.value().toInt();
-
-  //-------------------------------------------------------------------------
-  // Children
-  //-------------------------------------------------------------------------
-
   bool result = readGroups(domElementKvtml);  // read sub-groups
 
   return result;
@@ -156,7 +147,7 @@ bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
     QDomNodeList entryList = groupElement.elementsByTagName(KVTML_IDENTIFIER);
     if (entryList.length() <= 0)
     {
-      m_errorMessage = i18n("missing identifiers from identifiers tag");
+      m_errorMessage = i18n("missing identifier elements from identifiers tag");
       return false;
     }
 
@@ -256,7 +247,8 @@ bool KEduVocKvtml2Reader::readIdentifier(QDomElement &identifierElement)
   currentElement = identifierElement.firstChildElement(KVTML_LOCALE);
   if (!currentElement.isNull())
   {
-    // TODO: do something with the locale
+    // TODO: do we want to use this for the identifier, or the name?
+    m_doc->setIdentifier(id, currentElement.text());
   }
   
   currentElement = identifierElement.firstChildElement(KVTML_NAME);
@@ -283,6 +275,7 @@ bool KEduVocKvtml2Reader::readIdentifier(QDomElement &identifierElement)
   {
     KEduVocConjugation personalPronouns;
     readConjug(currentElement, personalPronouns);
+    m_doc->setConjugation(id, personalPronouns);
     // TODO: do something with these personalpronouns
   }
   return result;
@@ -303,6 +296,40 @@ bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
   }
   
   // read info tags: inactive, inquery, and sizehint
+  currentElement = entryElement.firstChildElement(KVTML_INACTIVE);
+  if (!currentElement.isNull())
+  {
+    // set the active state of the expression
+    if (currentElement.text() == KVTML_TRUE)
+    {
+      expr.setActive(false);
+    }
+    else
+    {
+      expr.setActive(true);
+    }
+  }
+  
+  currentElement = entryElement.firstChildElement(KVTML_INQUERY);
+  if (!currentElement.isNull())
+  {
+    // set the inquery information
+    if (currentElement.text() == KVTML_TRUE)
+    {
+      expr.setInQuery(true);
+    }
+    else
+    {
+      expr.setInQuery(false);
+    }
+  }
+  
+  currentElement = entryElement.firstChildElement(KVTML_SIZEHINT);
+  if (!currentElement.isNull())
+  {
+    // set the sizehint
+    expr.setSizeHint(currentElement.text().toInt());
+  }
   
   // read translation children
   QDomNodeList translationList = entryElement.elementsByTagName(KVTML_TRANSLATION);

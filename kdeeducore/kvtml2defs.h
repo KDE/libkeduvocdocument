@@ -96,5 +96,8 @@
 #define KVTML_WRONG             "errorcount"
 #define KVTML_DATE              "date"
 
+#define KVTML_TRUE              "true"
+#define KVTML_FALSE             "false"  
+
 #endif
 

@@ -70,6 +70,7 @@ public:
   int m_lesson;
   bool m_inQuery;
   bool m_active;
+  int m_sizeHint;
 
   QMap <int, KEduVocTranslation> m_translations;
 };
@@ -990,6 +991,15 @@ void KEduVocExpression::setActive(bool flag)
   d->m_active = flag;
 }
 
+int KEduVocExpression::sizeHint() const
+{
+  return d->m_sizeHint;
+}
+
+void KEduVocExpression::setSizeHint(int sizeHint)
+{
+  d->m_sizeHint = sizeHint;
+}
 
 void KEduVocExpression::resetGrades(int index)
 {
