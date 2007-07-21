@@ -104,9 +104,9 @@
           </plural>
         </conjugation>
         <comparison>
-          <comp1>gut</comp1>
-          <comp2>besser</comp2>
-          <comp3>am besten</comp3>
+          <absolute>gut</absolute>
+          <comparative>besser</comparative>
+          <superlative>am besten</superlative>
         </comparison>
         <multiplechoice>
           <choice></choice>

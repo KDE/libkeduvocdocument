@@ -274,9 +274,8 @@ bool KEduVocKvtml2Reader::readIdentifier(QDomElement &identifierElement)
   if (!currentElement.isNull())
   {
     KEduVocConjugation personalPronouns;
-    readConjug(currentElement, personalPronouns);
+    readConjugation(currentElement, personalPronouns);
     m_doc->setConjugation(id, personalPronouns);
-    // TODO: do something with these personalpronouns
   }
   return result;
 }
@@ -375,35 +374,128 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
   {
     expr.translation(index).setType(currentElement.text());
   }
+  
+  currentElement = translationElement.firstChildElement(KVTML_INQUERY);
+  if (!currentElement.isNull())
+  {
+    // TODO: ask fregl what inquery is for, and do something with it
+  }
 
-// kvtml 1: we always have an original element (required)
-//    currentElement = domElementParent.firstChildElement(KV_ORG);
-//    if (currentElement.isNull()) { // sanity check
-//        m_errorMessage = i18n("Data for original language missing");
-//        return false;
-//    }
+  //<pronunciation></pronunciation>
+  currentElement = translationElement.firstChildElement(KVTML_PRONUNCIATION);
+  if (!currentElement.isNull())
+  {
+    expr.translation(index).setPronunciation(currentElement.text());
+  }
+  
+  //<falsefriendfrom></falsefriendfrom>
+  currentElement = translationElement.firstChildElement(KVTML_FALSEFRIENDFROM);
+  if (!currentElement.isNull())
+  {
+    // TODO: figure out what to do with falsefriend information
+  }
 
-//    while (!currentElement.isNull()) {
-//      type = exprtype; // seems like type can be in the parent element and overwritten in the children here :(
+  //<falsefriendto></falsefriendto>
+  currentElement = translationElement.firstChildElement(KVTML_FALSEFRIENDTO);
+  if (!currentElement.isNull())
+  {
+  }
 
-//      //-----------
-//      // Attributes
-//      //-----------
+  //<falsefriend></falsefriend>
+  currentElement = translationElement.firstChildElement(KVTML_FALSEFRIEND);
+  if (!currentElement.isNull())
+  {
+    // TODO: figure out what to do with falsefriend information
+  }
 
-//      // read attributes - the order of the query grades is interchanged!
-//      if (i == 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
-//                                          pronunciation, width, type, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase))
-//        return false;
+  //<antonym></antonym>
+  currentElement = translationElement.firstChildElement(KVTML_ANTONYM);
+  if (!currentElement.isNull())
+  {
+    // TODO: figure out what to do with falsefriend information
+  }
 
-//      if (i != 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
-//                                          pronunciation, width, type, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase))
-//        return false;
+  //<synonym></synonym>
+  currentElement = translationElement.firstChildElement(KVTML_SYNONYM);
+  if (!currentElement.isNull())
+  {
+    expr.translation(index).setSynonym(currentElement.text());
+  }
 
-//      if (m_doc->entryCount() == 0)
-//      {
-//        // only accept in first entry
-//        if (width >= 0)
-//          m_doc->setSizeHint(i, width);
+  //<example></example>
+  currentElement = translationElement.firstChildElement(KVTML_EXAMPLE);
+  if (!currentElement.isNull())
+  {
+    expr.translation(index).setExample(currentElement.text());
+  }
+
+  //<usage></usage>
+  currentElement = translationElement.firstChildElement(KVTML_USAGE);
+  if (!currentElement.isNull())
+  {
+    expr.translation(index).setUsageLabel(currentElement.text());
+  }
+
+  //<paraphrase></paraphrase>
+  currentElement = translationElement.firstChildElement(KVTML_PARAPHRASE);
+  if (!currentElement.isNull())
+  {
+    expr.translation(index).setParaphrase(currentElement.text());
+  }
+
+  // conjugations
+  currentElement = translationElement.firstChildElement(KVTML_CONJUGATION);
+  KEduVocConjugation conjugation;
+  while (!currentElement.isNull())
+  {
+    // read any conjugations (NOTE: this will overwrite any conjugations of the same type for this
+    // translation, as the type is used as the key
+    readConjugation(currentElement, conjugation);  
+    currentElement = currentElement.nextSiblingElement(KVTML_CONJUGATION);
+  }
+  if (conjugation.entryCount() > 0)
+  {
+    expr.translation(index).setConjugation(conjugation);
+  }
+
+  // comparisons
+  currentElement = translationElement.firstChildElement(KVTML_COMPARISON);
+  if (!currentElement.isNull())
+  {
+    KEduVocComparison comparison;
+    readComparison(currentElement, comparison);
+    expr.translation(index).setComparison(comparison);
+  }
+
+  // multiple choice
+  currentElement = translationElement.firstChildElement(KVTML_MULTIPLECHOICE);
+  if (!currentElement.isNull())
+  {
+    KEduVocMultipleChoice mc;
+    readMultipleChoice(currentElement, mc);
+    expr.translation(index).setMultipleChoice(mc);
+  }
+
+  // image
+  currentElement = translationElement.firstChildElement(KVTML_IMAGE);
+  if (!currentElement.isNull())
+  {
+    // TODO: do something with the image
+  }
+
+  // sound
+  currentElement = translationElement.firstChildElement(KVTML_SOUND);
+  if (!currentElement.isNull())
+  {
+    // TODO: do something with the sound
+  }
+
+  // grade
+  currentElement = translationElement.firstChildElement(KVTML_GRADE);
+  if (!currentElement.isNull())
+  {
+    // TODO: read grade
+  }
 
 //        if (query_id == KV_O)
 //          q_org = lang;
@@ -411,108 +503,12 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
 //        if (query_id == KV_T)
 
 //          q_trans = lang;
-//      }
-////kDebug() << " TranslationList.count(): " << translationList.count() << "  Entry count: " << m_doc->entryCount() << endl;
-//        if (m_doc->entryCount() == 0) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
-//kDebug() << " Read Expression with identifiers: " << i << endl;
-//            // new translation
-//            if (lang.isEmpty()) {
-//                if (i == 0) {
-//                    lang = "original";
-//                } else {
-//                    // no definition in first entry ?
-//                    lang.setNum(m_doc->identifierCount());
-//                    lang.prepend("translation ");
-//                }
-//                m_doc->appendIdentifier(lang);
-//            }
-//        }
-//        else
-//        {
-//            if (lang != m_doc->identifier(i) && !lang.isEmpty())
-//            {
-//            // different language ?
-//            m_errorMessage = i18n("ambiguous definition of language code");
-//            return false;
-//            }
-//        }
 
-//      //---------
-//      // Children
 
-//      currentChild = currentElement.firstChildElement(KV_CONJUG_GRP);
-//      if (!currentChild.isNull()) {
-//          conjug.clear();
-//          if (!readConjug(currentChild, conjug))
-//            return false;
-//      }
-
-//      currentChild = currentElement.firstChildElement(KV_COMPARISON_GRP);
-//      if (!currentChild.isNull()) {
-//          comparison.clear();
-//          if (!readComparison(currentChild, comparison))
-//            return false;
-//      }
-
-//      currentChild = currentElement.firstChildElement(KV_MULTIPLECHOICE_GRP);
-//      if (!currentChild.isNull()) {
-//          mc.clear();
-//          if (!readMultipleChoice(currentChild, mc))
-//            return false;
-//      }
-
-//      textstr = currentElement.lastChild().toText().data();
-//      if (textstr.isNull())
-//        textstr = "";
-
-//      if (i == 0) {
-//        expr = KEduVocExpression(textstr);
-//        expr.setLesson(lesson);
-//        expr.setInQuery(inquery);
-//        expr.setActive(active);
-//      } else {
-//        expr.setTranslation(i, textstr);
-//      }
-
-//      if (conjug.size() > 0) {
-//        for ( int conjugationIndex = 0; conjugationIndex < conjug.size(); conjugationIndex++ ) {
-//            expr.translation(i).setConjugation(conjug[conjugationIndex]);
-//        }
-//        //expr.setConjugation(i, conjug[0]); ///@todo check if this is better than the above!
-
-//        conjug.clear();
-//      }
-//      if (!comparison.isEmpty())
-//      {
-//        expr.translation(i).setComparison(comparison);
-//        comparison.clear();
-//      }
-//      if (!mc.isEmpty())
-//      {
-//        expr.translation(i).setMultipleChoice(mc);
-//        mc.clear();
-//      }
-//      if (!type.isEmpty() )
-//        expr.translation(i).setType (type);
-//      if (!remark.isEmpty() )
-//        expr.translation(i).setComment (remark);
-//      if (!pronunciation.isEmpty() )
-//        expr.translation(i).setPronunciation(pronunciation);
 //      if (!faux_ami_f.isEmpty() )
 //        expr.translation(i).setFalseFriend (0, faux_ami_f);
 //      if (!faux_ami_t.isEmpty() )
 //        expr.translation(0).setFalseFriend (i, faux_ami_t);
-//      if (!synonym.isEmpty() )
-//        expr.translation(i).setSynonym (synonym);
-//      if (!example.isEmpty() )
-//        expr.translation(i).setExample (example);
-//      if (!usage.isEmpty() )
-//        expr.translation(i).setUsageLabel (usage);
-//      if (!paraphrase.isEmpty() )
-//        expr.translation(i).setParaphrase (paraphrase);
-//      if (!antonym.isEmpty() )
-//        expr.translation(i).setAntonym (antonym);
-
 //      if ( i != 0 ) {
 //        expr.translation(i).gradeFrom(0).setQueryCount(qcount);
 //        expr.translation(0).gradeFrom(i).setQueryCount(r_qcount);
@@ -669,7 +665,7 @@ bool KEduVocKvtml2Reader::readArticle(QDomElement &articleElement, int identifie
 }
 
 
-bool KEduVocKvtml2Reader::readConjug(QDomElement &conjugElement, KEduVocConjugation &curr_conjug)
+bool KEduVocKvtml2Reader::readConjugation(QDomElement &conjugElement, KEduVocConjugation &curr_conjug)
 /*
  <conjugation>
   <singular>
@@ -704,6 +700,12 @@ bool KEduVocKvtml2Reader::readConjug(QDomElement &conjugElement, KEduVocConjugat
   QString plurthirdfemale;
   QString plurthirdneutral;
   QString type;
+  
+  QDomElement typeElement = conjugElement.firstChildElement(KVTML_TYPE);
+  if (!typeElement.isNull())
+  {
+    type = typeElement.text();
+  }
 
   QDomElement currentGroup = conjugElement.firstChildElement(KVTML_SINGULAR);
   if (!currentGroup.isNull())
@@ -883,39 +885,29 @@ bool KEduVocKvtml2Reader::readUsages(QDomElement &usagesElement)
 bool KEduVocKvtml2Reader::readComparison(QDomElement &domElementParent, KEduVocComparison &comp)
 /*
  <comparison>
-   <l1>good</l1>
-   <l2>better</l2>
-   <l3>best</l3>
+   <absolute>good</absolute>
+   <comparative>better</comparative>
+   <superlative>best</superlative>
  </comparison>
 */
 {
-  QString s;
-  comp.clear();
-
   QDomElement currentElement;
 
-  currentElement = domElementParent.firstChildElement(KV_COMP_L1);
+  currentElement = domElementParent.firstChildElement(KVTML_ABSOLUTE);
   if (!currentElement.isNull()) {
-    s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    comp.setL1(s);
+    comp.setL1(currentElement.text());
   }
 
-  currentElement = domElementParent.firstChildElement(KV_COMP_L2);
-  if (!currentElement.isNull()) {
-    s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    comp.setL2(s);
+  currentElement = domElementParent.firstChildElement(KVTML_COMPARATIVE);
+  if (!currentElement.isNull()) 
+  {
+    comp.setL2(currentElement.text());
   }
 
-  currentElement = domElementParent.firstChildElement(KV_COMP_L3);
-  if (!currentElement.isNull()) {
-    s = currentElement.text();
-    if (s.isNull())
-      s = "";
-    comp.setL3(s);
+  currentElement = domElementParent.firstChildElement(KVTML_SUPERLATIVE);
+  if (!currentElement.isNull()) 
+  {
+    comp.setL3(currentElement.text());
   }
   return true;
 }

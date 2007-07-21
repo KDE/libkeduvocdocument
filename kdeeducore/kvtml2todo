@@ -2,9 +2,9 @@ Temporary todo for kvtml2
 
 reader:
   read lessons
-  read translations
-  read translation sub-parts
-  store identifier sub-parts
+  read falsefriend tags
+  read grades
+  store identifier name, sizehint and type? (need a place to store it first)
 
 writer:
   everything

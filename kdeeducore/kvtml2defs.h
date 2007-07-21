@@ -80,15 +80,15 @@
 #define KVTML_PARAPHRASE        "paraphrase"
 
 #define KVTML_COMPARISON        "comparison"
-#define KVTML_ABS               "absolute"
-#define KVTML_COMP              "comparative"
-#define KVTML_SUPER             "superlative"
+#define KVTML_ABSOLUTE          "absolute"
+#define KVTML_COMPARATIVE       "comparative"
+#define KVTML_SUPERLATIVE       "superlative"
 
-#define KVTML_MULTI             "multiplechoice"
+#define KVTML_MULTIPLECHOICE    "multiplechoice"
 #define KVTML_CHOICE            "choice"
 
-#define KVTML_IMG               "image"
-#define KVTML_SND               "sound"
+#define KVTML_IMAGE             "image"
+#define KVTML_SOUND             "sound"
 
 #define KVTML_GRADE             "grade"
 #define KVTML_CURRENTGRADE      "currentgradeint"

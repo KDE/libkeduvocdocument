@@ -67,7 +67,7 @@ public:
    * @param conjugElement QDomElement for the conjugation group
    * @param curr_conjug conjugation object to populate
    */
-  bool readConjug(QDomElement &conjugElement, KEduVocConjugation &curr_conjug);
+  bool readConjugation(QDomElement &conjugElement, KEduVocConjugation &curr_conjug);
 
   /** read the types
    * @param typesElement QDomElement for the types group
@@ -94,7 +94,16 @@ public:
    */
   bool readTranslation(QDomElement &translationElement, KEduVocExpression &expr, int index);
 
+  /** read a comparison
+   * @param comparisonElement comparison group element
+   * @param comp comparison object to read into
+   */
   bool readComparison(QDomElement &comparisonElement, KEduVocComparison &comp);
+  
+  /** read a multiple choice group
+   * @param multipleChoiceElement element to read from
+   * @param mc KEduVocMultipleChoice object to read to
+   */
   bool readMultipleChoice(QDomElement &multipleChoiceElement, KEduVocMultipleChoice &mc);
   bool readGrade(QDomElement &gradeElement);
 
