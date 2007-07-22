@@ -105,7 +105,12 @@ public:
    * @param mc KEduVocMultipleChoice object to read to
    */
   bool readMultipleChoice(QDomElement &multipleChoiceElement, KEduVocMultipleChoice &mc);
-  bool readGrade(QDomElement &gradeElement);
+  
+  /** read a grade
+   * @param gradeElement element to read from
+   * #param grade object to read to
+   */
+  bool readGrade(QDomElement &gradeElement, KEduVocGrade &grade);
 
   bool readLesson(QDomElement &lessonElement);
 

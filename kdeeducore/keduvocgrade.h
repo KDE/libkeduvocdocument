@@ -51,6 +51,8 @@
 typedef signed char grade_t;
 typedef unsigned short count_t;
 
+class KEduVocGradePrivate;
+
 /**
 Contains grading information (query date, bad count) for one language with respect to another.
 
@@ -60,6 +62,11 @@ class KDEEDUCORE_EXPORT KEduVocGrade
 {
 public:
     KEduVocGrade();
+
+    /** copy constructor
+     * provides safe copy of d pointer
+     */
+    KEduVocGrade(const KEduVocGrade &other);
 
       /** returns query count of given translation as int
    *
@@ -164,11 +171,8 @@ public:
     void setQueryDate ( const QDateTime & date );
 
 private:
-    grade_t m_grade;
-    count_t m_queryCount;
-    count_t m_badCount;
-    QDateTime m_queryDate;
 
+    KEduVocGradePrivate *d;
 };
 
 #endif
