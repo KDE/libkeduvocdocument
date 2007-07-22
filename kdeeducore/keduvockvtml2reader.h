@@ -108,9 +108,10 @@ public:
   
   /** read a grade
    * @param gradeElement element to read from
-   * #param grade object to read to
+   * @param expr expression element to add grades to
+   * @param index index of the current translation
    */
-  bool readGrade(QDomElement &gradeElement, KEduVocGrade &grade);
+  bool readGrade(QDomElement &gradeElement, KEduVocExpression &expr, int index);
 
   bool readLesson(QDomElement &lessonElement);
 

@@ -91,9 +91,10 @@
 #define KVTML_SOUND             "sound"
 
 #define KVTML_GRADE             "grade"
-#define KVTML_CURRENTGRADE      "currentgradeint"
+#define KVTML_FROMID            "fromid"
+#define KVTML_CURRENTGRADE      "currentgrade"
 #define KVTML_COUNT             "count"
-#define KVTML_WRONG             "errorcount"
+#define KVTML_ERRORCOUNT        "errorcount"
 #define KVTML_DATE              "date"
 
 #define KVTML_TRUE              "true"

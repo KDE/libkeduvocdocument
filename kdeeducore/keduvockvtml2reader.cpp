@@ -458,6 +458,15 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
     expr.translation(index).setConjugation(conjugation);
   }
 
+  // grade elements
+  currentElement = translationElement.firstChildElement(KVTML_GRADE);
+  while (!currentElement.isNull())
+  {
+    // TODO: read grade
+    readGrade(currentElement, expr, index);
+    currentElement = currentElement.nextSiblingElement(KVTML_GRADE);
+  }
+
   // comparisons
   currentElement = translationElement.firstChildElement(KVTML_COMPARISON);
   if (!currentElement.isNull())
@@ -488,13 +497,6 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
   if (!currentElement.isNull())
   {
     // TODO: do something with the sound
-  }
-
-  // grade
-  currentElement = translationElement.firstChildElement(KVTML_GRADE);
-  if (!currentElement.isNull())
-  {
-    // TODO: read grade
   }
 
 //        if (query_id == KV_O)
@@ -945,6 +947,44 @@ bool KEduVocKvtml2Reader::readMultipleChoice(QDomElement &multipleChoiceElement,
   return true;
 }
 
+bool KEduVocKvtml2Reader::readGrade(QDomElement &gradeElement, KEduVocExpression &expr, int index)
+{
+  bool result = true;
+  int id = gradeElement.attribute(KVTML_FROMID).toInt(&result);
+  if (!result)
+  {
+    m_errorMessage = i18n("identifier missing id");
+    return false;
+  }
+  
+  QDomElement currentElement = gradeElement.firstChildElement(KVTML_CURRENTGRADE);
+  if (!currentElement.isNull())
+  {
+    // TODO: find out how to use the current grade class for 
+    // currentGradeInt and currentGradeFloat, or if this will always just have a float
+  }
+  
+  currentElement = gradeElement.firstChildElement(KVTML_COUNT);
+  if (!currentElement.isNull())
+  {
+    int value = currentElement.text().toInt();
+    expr.translation(index).gradeFrom(id).setQueryCount(value);
+  }
+  
+  currentElement = gradeElement.firstChildElement(KVTML_ERRORCOUNT);
+  if (!currentElement.isNull())
+  {
+    int value = currentElement.text().toInt();
+    expr.translation(index).gradeFrom(id).setBadCount(value);
+  }
+  
+  currentElement = gradeElement.firstChildElement(KVTML_DATE);
+  if (!currentElement.isNull())
+  {
+    QDateTime value = QDateTime::fromTime_t(currentElement.text().toUInt());
+    expr.translation(index).gradeFrom(id).setQueryDate(value);
+  }
+}
 
 
 //**** old code from kvtmlreader
