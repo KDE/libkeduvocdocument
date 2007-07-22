@@ -668,6 +668,8 @@ bool KEduVocKvtml2Reader::readArticle(QDomElement &articleElement, int identifie
 bool KEduVocKvtml2Reader::readConjugation(QDomElement &conjugElement, KEduVocConjugation &curr_conjug)
 /*
  <conjugation>
+  <tenseid>1</tenseid>
+  <type>regular</type>
   <singular>
     <first person></first person>
     <second person></second person>
@@ -706,6 +708,8 @@ bool KEduVocKvtml2Reader::readConjugation(QDomElement &conjugElement, KEduVocCon
   {
     type = typeElement.text();
   }
+  
+  // TODO: add something here to link and/or store tense information
 
   QDomElement currentGroup = conjugElement.firstChildElement(KVTML_SINGULAR);
   if (!currentGroup.isNull())
@@ -942,38 +946,8 @@ bool KEduVocKvtml2Reader::readMultipleChoice(QDomElement &multipleChoiceElement,
 }
 
 
-//bool KEduVocKvtml2Reader::readExpressionChildAttributes( QDomElement &domElementExpressionChild,
-//                                                        QString &lang,
-//                                                        grade_t &grade, grade_t &rev_grade,
-//                                                        int &count, int &rev_count,
-//                                                        QDateTime &date, QDateTime &rev_date,
-//                                                        QString &remark,
-//                                                        int &bcount, int &rev_bcount,
-//                                                        QString &query_id,
-//                                                        QString &pronunciation,
-//                                                        int &width,
-//                                                        QString &type,
-//                                                        QString &faux_ami_f,
-//                                                        QString &faux_ami_t,
-//                                                        QString &synonym,
-//                                                        QString &example,
-//                                                        QString &antonym,
-//                                                        QString &usage,
-//                                                        QString &paraphrase)
-//{
-//  int pos;
-//  QDomAttr attribute;
 
-//  lang = "";
-//  attribute = domElementExpressionChild.attributeNode(KV_LANG);
-//  if (!attribute.isNull())
-//    lang = attribute.value();
-
-//  width = -1;
-//  attribute = domElementExpressionChild.attributeNode(KV_SIZEHINT);
-//  if (!attribute.isNull())
-//    width = attribute.value().toInt();
-
+//**** old code from kvtmlreader
 //  grade = KV_NORM_GRADE;
 //  rev_grade = KV_NORM_GRADE;
 //  attribute = domElementExpressionChild.attributeNode(KV_GRADE);
@@ -1040,11 +1014,6 @@ bool KEduVocKvtml2Reader::readMultipleChoice(QDomElement &multipleChoiceElement,
 //    //this format is deprecated and ignored.
 //  }
 
-//  remark = "";
-//  attribute = domElementExpressionChild.attributeNode(KV_REMARK);
-//  if (!attribute.isNull())
-//    remark = attribute.value();
-
 //  faux_ami_f = "";
 //  attribute = domElementExpressionChild.attributeNode(KV_FAUX_AMI_F);
 //  if (!attribute.isNull())
@@ -1054,16 +1023,6 @@ bool KEduVocKvtml2Reader::readMultipleChoice(QDomElement &multipleChoiceElement,
 //  attribute = domElementExpressionChild.attributeNode(KV_FAUX_AMI_T);
 //  if (!attribute.isNull())
 //    faux_ami_t = attribute.value();
-
-//  synonym = "";
-//  attribute = domElementExpressionChild.attributeNode(KV_SYNONYM);
-//  if (!attribute.isNull())
-//    synonym = attribute.value();
-
-//  example = "";
-//  attribute = domElementExpressionChild.attributeNode(KV_EXAMPLE);
-//  if (!attribute.isNull())
-//    example = attribute.value();
 
 //  usage = "";
 //  attribute = domElementExpressionChild.attributeNode(KV_USAGE);
@@ -1089,27 +1048,6 @@ bool KEduVocKvtml2Reader::readMultipleChoice(QDomElement &multipleChoiceElement,
 //    }
 //  }
 
-//  paraphrase = "";
-//  attribute = domElementExpressionChild.attributeNode(KV_PARAPHRASE);
-//  if (!attribute.isNull())
-//    paraphrase = attribute.value();
-
-//  antonym = "";
-//  attribute = domElementExpressionChild.attributeNode(KV_ANTONYM);
-//  if (!attribute.isNull())
-//    antonym = attribute.value();
-
-//  attribute = domElementExpressionChild.attributeNode(KV_EXPRTYPE);
-//  if (!attribute.isNull())
-//  {
-//    type = attribute.value();
-//    if (type == "1")
-//      type = QM_VERB;
-//    else if (type == "2")  // convert from pre-0.5 versions
-//      type = QM_NOUN;
-//    else if (type == "3")
-//      type = QM_NAME;
-
 //    if (type.length() != 0 && type.left(1) == QM_USER_TYPE)
 //    {
 //      int num = qMin(type.mid (1, 40).toInt(), 1000); // paranoia check
@@ -1128,20 +1066,5 @@ bool KEduVocKvtml2Reader::readMultipleChoice(QDomElement &multipleChoiceElement,
 //      }
 //    }
 //  }
-
-//  pronunciation = "";
-//  attribute = domElementExpressionChild.attributeNode(KV_PRONUNCE);
-//  if (!attribute.isNull())
-//    pronunciation = attribute.value();
-
-//  query_id = "";
-//  attribute = domElementExpressionChild.attributeNode(KV_QUERY);
-//  if (!attribute.isNull())
-//    query_id = attribute.value();
-
-//  return true;
-//}
-
-
 
 #include "keduvockvtml2reader.moc"

@@ -25,55 +25,81 @@
 
 #include "keduvocmultiplechoice.h"
 
-KEduVocMultipleChoice::KEduVocMultipleChoice
-  (const QStringList &choices)
-  : m_choices(choices)
+class KEduVocMultipleChoicePrivate
+{
+  public:
+   QStringList m_choices;
+};
+
+KEduVocMultipleChoice::KEduVocMultipleChoice()
+  : d(new KEduVocMultipleChoicePrivate)
 {
 }
 
+KEduVocMultipleChoice::KEduVocMultipleChoice(const KEduVocMultipleChoice &other)
+  : d(new KEduVocMultipleChoicePrivate)
+{
+  d->m_choices = other.choices();
+}
+
+KEduVocMultipleChoice::KEduVocMultipleChoice(const QStringList &choices)
+  : d(new KEduVocMultipleChoicePrivate)
+{
+  setChoices(choices);
+}
+
+void KEduVocMultipleChoice::setChoices (const QStringList &choices)
+{
+  d->m_choices = choices;
+}
+
+QStringList KEduVocMultipleChoice::choices() const
+{
+  return d->m_choices;
+}
 
 bool KEduVocMultipleChoice::isEmpty() const
 {
-  return m_choices.isEmpty();
+  return d->m_choices.isEmpty();
 }
 
 
 void KEduVocMultipleChoice::clear()
 {
-  m_choices.clear();
+  d->m_choices.clear();
 }
 
 
 QString KEduVocMultipleChoice::choice (int index) const
 {
   QString choice;
-  if (m_choices.size() >= index)
+  if (d->m_choices.size() >= index)
   {
-    choice = m_choices[index];
+    choice = d->m_choices[index];
   }
   return choice;
 }
 
 void KEduVocMultipleChoice::setChoice(int index, const QString &s)
 {
-  while (m_choices.size() < index)
+  while (d->m_choices.size() < index)
   {
-    m_choices.append(QString());
+    d->m_choices.append(QString());
   }
-  m_choices[index] = s;
+  d->m_choices[index] = s;
 }
 
 unsigned KEduVocMultipleChoice::size()
 {
-  return m_choices.size();
+  return d->m_choices.size();
 }
 
 bool KEduVocMultipleChoice::operator==(const KEduVocMultipleChoice &choice) const
 {
-  return m_choices == choice.m_choices;
+  return d->m_choices == choice.choices();
 }
 
 void KEduVocMultipleChoice::appendChoice(const QString &s) 
 { 
-  m_choices.append(s);
+  d->m_choices.append(s);
 }
