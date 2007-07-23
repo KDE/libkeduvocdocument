@@ -12,6 +12,7 @@ set(kdeeducore_LIB_SRCS
    keduvockvtmlreader.cpp
    keduvockvtml2reader.cpp
    keduvockvtmlwriter.cpp
+   keduvockvtml2writer.cpp
    keduvocmultiplechoice.cpp
    keduvocpaukerreader.cpp
    keduvocvokabelnreader.cpp
