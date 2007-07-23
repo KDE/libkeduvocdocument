@@ -50,12 +50,13 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
   writeInformation(currentElement, generator);
   domElementKvtml.appendChild(currentElement);
   
+  // identifiers
+  currentElement = m_domDoc.createElement(KVTML_IDENTIFIERS);
+  writeIdentifiers(currentElement);
+  domElementKvtml.appendChild(currentElement);
   
   //** NOTE: everything below this point has not been updated to use kvtml2 format****
   if (!writeLesson(m_domDoc, domElementKvtml))
-    return false;
-
-  if (!writeArticle(m_domDoc, domElementKvtml))
     return false;
 
   QList<KEduVocConjugation> conjugations;
@@ -338,6 +339,39 @@ bool KEduVocKvtml2Writer::writeInformation(QDomElement &informationElement, cons
   return true;
 }
 
+
+bool KEduVocKvtml2Writer::writeIdentifiers(QDomElement &identifiersElement)
+{
+  for (int i = 0; i < m_doc->identifierCount(); ++i)
+  {
+    // create the node
+    QDomElement identifier = m_domDoc.createElement(KVTML_IDENTIFIER);
+    
+    // set the id
+    identifier.setAttribute(KVTML_ID, QString::number(i));
+    
+    // record the identifier as the locale for now 
+    // TODO: when support for more parts of the identifier is in the document class (name, type, etc.) store those here as well
+    QDomElement locale = m_domDoc.createElement(KVTML_LOCALE);
+    QDomText textNode = m_domDoc.createTextNode(m_doc->identifier(i));
+    locale.appendChild(textNode);
+    identifier.appendChild(locale);
+    
+    // record articles
+    QDomElement article = m_domDoc.createElement(KVTML_ARTICLE);
+    writeArticle(article, i);
+    if (article.hasChildNodes())
+    {
+      identifier.appendChild(article);
+    }
+    
+    // record personalpronouns
+    
+    // add this identifier to the group
+    identifiersElement.appendChild(identifier);
+  }
+}
+
 bool KEduVocKvtml2Writer::writeLesson(QDomDocument &domDoc, QDomElement &domElementParent)
 {
   if (m_doc->lessonDescriptions().count() == 0)
@@ -371,106 +405,55 @@ bool KEduVocKvtml2Writer::writeLesson(QDomDocument &domDoc, QDomElement &domElem
 }
 
 
-bool KEduVocKvtml2Writer::writeArticle(QDomDocument &domDoc, QDomElement &domElementParent)
-/*
- <article>
-  <e l="de">    lang determines also lang order in entries !!
-   <fi>eine</fi>  which must NOT differ
-   <fd>die</fd>
-   <mi>ein</mi>
-   <md>der</md>
-   <ni>ein</ni>
-   <nd>das</nd>
-  </e>
- </article>
-*/
+bool KEduVocKvtml2Writer::writeArticle(QDomElement &articleElement, int article)
 {
-  if (m_doc->articleCount() == 0)
-    return true;
-
-  QDomElement domElementArticle = domDoc.createElement(KV_ARTICLE_GRP);
+  QDomElement definite = m_domDoc.createElement(KVTML_DEFINITE);
+  QDomElement indefinite = m_domDoc.createElement(KVTML_INDEFINITE);
   QString def;
   QString indef;
-  QString s;
+  QDomElement currentElement;
+  QDomText textNode;
+  
+  // male
+  m_doc->article(article).getMale(&def, &indef);
 
-  for (int lfn = 0; lfn < qMin(m_doc->articleCount(), m_doc->identifierCount()); lfn++)
-  {
-    QDomElement domElementEntry = domDoc.createElement(KV_ART_ENTRY);
-    if (lfn == 0)
-    {
-      s = m_doc->identifier(0).simplified();
-      if (s.isEmpty())
-        s = "original";
-    }
-    else
-    {
-      s = m_doc->identifier(lfn).simplified();
-      if (s.isEmpty())
-      {
-        s.setNum(lfn);
-        s.prepend("translation ");
-      }
-    }
-    domElementEntry.setAttribute(KV_LANG, s);
+  currentElement = m_domDoc.createElement(KVTML_MALE);
+  textNode = m_domDoc.createTextNode(def);
+  currentElement.appendChild(textNode);
+  definite.appendChild(currentElement);
+  
+  textNode = m_domDoc.createTextNode(indef);
+  currentElement = m_domDoc.createElement(KVTML_MALE);
+  currentElement.appendChild(textNode);
+  indefinite.appendChild(currentElement);
+  
+  // female
+  m_doc->article(article).getFemale(&def, &indef);
+  currentElement = m_domDoc.createElement(KVTML_FEMALE);
+  textNode = m_domDoc.createTextNode(def);
+  currentElement.appendChild(textNode);
+  definite.appendChild(currentElement);
+  
+  textNode = m_domDoc.createTextNode(indef);
+  currentElement = m_domDoc.createElement(KVTML_FEMALE);
+  currentElement.appendChild(textNode);
+  indefinite.appendChild(currentElement);
+  
+  // neutral
+  m_doc->article(article).getNatural(&def, &indef);
+  currentElement = m_domDoc.createElement(KVTML_NEUTRAL);
+  textNode = m_domDoc.createTextNode(def);
+  currentElement.appendChild(textNode);
+  definite.appendChild(currentElement);
+  
+  textNode = m_domDoc.createTextNode(indef);
+  currentElement = m_domDoc.createElement(KVTML_NEUTRAL);
+  currentElement.appendChild(textNode);
+  indefinite.appendChild(currentElement);
+  
 
-    m_doc->article(lfn).getFemale(&def, &indef);
-    if (!def.isEmpty())
-    {
-      QDomElement domElementFD = domDoc.createElement(KV_ART_FD);
-      QDomText domTextFD = domDoc.createTextNode(def);
-
-      domElementFD.appendChild(domTextFD);
-      domElementEntry.appendChild(domElementFD);
-    }
-    if (!indef.isEmpty())
-    {
-      QDomElement domElementFI = domDoc.createElement(KV_ART_FI);
-      QDomText domTextFI = domDoc.createTextNode(indef);
-
-      domElementFI.appendChild(domTextFI);
-      domElementEntry.appendChild(domElementFI);
-    }
-
-    m_doc->article(lfn).getMale(&def, &indef);
-    if (!def.isEmpty())
-    {
-      QDomElement domElementMD = domDoc.createElement(KV_ART_MD);
-      QDomText domTextMD = domDoc.createTextNode(def);
-
-      domElementMD.appendChild(domTextMD);
-      domElementEntry.appendChild(domElementMD);
-    }
-    if (!indef.isEmpty())
-    {
-      QDomElement domElementMI = domDoc.createElement(KV_ART_MI);
-      QDomText domTextMI = domDoc.createTextNode(indef);
-
-      domElementMI.appendChild(domTextMI);
-      domElementEntry.appendChild(domElementMI);
-    }
-
-    m_doc->article(lfn).getNatural(&def, &indef);
-    if (!def.isEmpty())
-    {
-      QDomElement domElementND = domDoc.createElement(KV_ART_ND);
-      QDomText domTextND = domDoc.createTextNode(def);
-
-      domElementND.appendChild(domTextND);
-      domElementEntry.appendChild(domElementND);
-    }
-    if (!indef.isEmpty())
-    {
-      QDomElement domElementNI = domDoc.createElement(KV_ART_NI);
-      QDomText domTextNI = domDoc.createTextNode(indef);
-
-      domElementNI.appendChild(domTextNI);
-      domElementEntry.appendChild(domElementNI);
-    }
-
-    domElementArticle.appendChild(domElementEntry);
-  }
-
-  domElementParent.appendChild(domElementArticle);
+  articleElement.appendChild(definite);
+  articleElement.appendChild(indefinite);
   return true;
 }
 

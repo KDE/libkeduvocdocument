@@ -38,13 +38,22 @@ public:
    */
   bool writeInformation(QDomElement &informationElement, const QString &generator);
 
-
+  /** write identifiers group
+   * @param identifiersElement QDomElement <identifiers> to write to
+   */
+  bool writeIdentifiers(QDomElement &identifiersElement);
+  
+  /** write article
+   * @param articleElement QDomElement <article> to write to
+   * @param article the article number to write
+   */
+  bool writeArticle(QDomElement &articleElement, int article);
+  
   bool writeLesson(QDomDocument &domDoc, QDomElement &domElementParent);
   bool writeType(QDomDocument &domDoc, QDomElement &domElementParent);
   bool writeTense(QDomDocument &domDoc, QDomElement &domElementParent);
   bool writeUsage(QDomDocument &domDoc, QDomElement &domElementParent);
   bool writeOption(QDomDocument &domDoc, QDomElement &domElementParent);
-  bool writeArticle (QDomDocument &domDoc, QDomElement &domElementParent);
   bool writeConjugHeader(QDomDocument &domDoc, QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug);
   bool writeConjug(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocConjugation &curr_conjug, const QString &type);
   bool writeConjugEntry(QDomDocument &domDoc, QDomElement &domElementParent, KEduVocConjugation &curr_conjug);
