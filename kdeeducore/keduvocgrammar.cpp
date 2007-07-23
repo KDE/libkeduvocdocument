@@ -160,65 +160,98 @@ QString KEduVocComparison::l3() const
 
 //=================================================================
 
+class KEduVocArticle::Private
+{
+  public:
+    QString fem_def;
+    QString fem_indef;
+    QString mal_def;
+    QString mal_indef;
+    QString nat_def;
+    QString nat_indef;
+};
 
 KEduVocArticle::KEduVocArticle()
+:d(new Private)
 {
 }
 
+KEduVocArticle::KEduVocArticle(const KEduVocArticle &other)
+:d(new Private)
+{
+  operator=(other);
+}
+
+KEduVocArticle &KEduVocArticle::operator=(const KEduVocArticle& other)
+{
+  d->fem_def = other.d->fem_def;
+  d->fem_indef = other.d->fem_indef;
+  d->mal_def = other.d->mal_def;
+  d->mal_indef = other.d->mal_indef;
+  d->nat_def = other.d->nat_def;
+  d->nat_indef = other.d->nat_indef;
+  
+  return *this;
+}
 
 KEduVocArticle::KEduVocArticle(const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &nat_def, const QString &nat_indef)
+:d(new Private)
 {
   setFemale  (fem_def, fem_indef);
   setMale    (mal_def, mal_indef);
   setNatural (nat_def, nat_indef);
 }
 
+KEduVocArticle::~KEduVocArticle()
+{
+  delete d;
+}
 
 void KEduVocArticle::setFemale(const QString &def, const QString &indef)
 {
-  fem_def = def;
-  fem_indef = indef;
+  d->fem_def = def;
+  d->fem_indef = indef;
 }
 
 
 void KEduVocArticle::setMale(const QString &def, const QString &indef)
 {
-  mal_def = def;
-  mal_indef = indef;
+  d->mal_def = def;
+  d->mal_indef = indef;
 }
 
 
 void KEduVocArticle::setNatural(const QString &def, const QString &indef)
 {
-  nat_def = def;
-  nat_indef = indef;
+  d->nat_def = def;
+  d->nat_indef = indef;
 }
 
 
 void KEduVocArticle::getFemale(QString *def, QString *indef) const
 {
   if (def)
-    *def = fem_def;
+    *def = d->fem_def;
   if (indef)
-    *indef = fem_indef;
+    *indef = d->fem_indef;
 }
 
 
 void KEduVocArticle::getMale(QString *def, QString *indef) const
 {
   if (def)
-    *def = mal_def;
+    *def = d->mal_def;
   if (indef)
-    *indef = mal_indef;
+    *indef = d->mal_indef;
 }
 
 
 void KEduVocArticle::getNatural(QString *def, QString *indef) const
 {
   if (def)
-    *def = nat_def;
+    *def = d->nat_def;
   if (indef)
-    *indef = nat_indef;
+    *indef = d->nat_indef;
 }
 
 //==============================================================

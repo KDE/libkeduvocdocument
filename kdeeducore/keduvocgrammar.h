@@ -45,6 +45,8 @@
 #define UL_USER_TENSE          "#"   // designates number of user tense
 
 
+class KEduVocArticlePrivate;
+
 /**
  * Class representing the articles of a language
  *
@@ -58,6 +60,9 @@ public:
    * The constructor without arguments
    */
   explicit KEduVocArticle();
+  
+  /** copy constructor for d-pointer safety */
+  KEduVocArticle(const KEduVocArticle &other);
 
   /**
    * The constructor with arguments
@@ -70,6 +75,11 @@ public:
    */
   KEduVocArticle( const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &nat_def, const QString &nat_indef );
 
+  /**
+   * default destructor, deletes the d pointer
+   */
+  ~KEduVocArticle();
+  
   /**
    * Sets the female articles
    * @param def const reference to a QString with the definite female article
@@ -94,14 +104,12 @@ public:
   void getFemale (QString *def, QString *indef) const;
   void getMale   (QString *def, QString *indef) const;
   void getNatural(QString *def, QString *indef) const;
+  
+  KEduVocArticle &operator=(const KEduVocArticle& other);
 
 private:
-  QString fem_def;
-  QString fem_indef;
-  QString mal_def;
-  QString mal_indef;
-  QString nat_def;
-  QString nat_indef;
+  class Private;
+  Private * const d;
 };
 
 
