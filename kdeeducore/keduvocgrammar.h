@@ -44,9 +44,6 @@
 
 #define UL_USER_TENSE          "#"   // designates number of user tense
 
-
-class KEduVocArticlePrivate;
-
 /**
  * Class representing the articles of a language
  *
@@ -105,6 +102,9 @@ public:
   void getMale   (QString *def, QString *indef) const;
   void getNatural(QString *def, QString *indef) const;
   
+  /**
+   * assignment operator for d-pointer copying
+   */
   KEduVocArticle &operator=(const KEduVocArticle& other);
 
 private:
@@ -121,6 +121,9 @@ public:
    * The constructor without arguments
    */
   explicit KEduVocComparison();
+  
+  /** copy constructor */
+  KEduVocComparison(const KEduVocComparison &other);
 
   /**
    * The constructor with arguments
@@ -130,6 +133,9 @@ public:
    */
   KEduVocComparison(const QString &l1, const QString &l2, const QString &l3);
 
+  /** default destructor, deletes the d-pointer */
+  ~KEduVocComparison();
+  
   void setL1(const QString &s);
   void setL2(const QString &s);
   void setL3(const QString &s);
@@ -143,25 +149,35 @@ public:
 
   bool operator == (const KEduVocComparison& a) const;
 
+  /**
+   * assignment operator for d-pointer copying
+   */
+  KEduVocComparison &operator=(const KEduVocComparison& other);
+
 private:
-  QString ls1;
-  QString ls2;
-  QString ls3;
+  class Private;
+  Private * const d;
 };
 
 
 class KDEEDUCORE_EXPORT KEduVocTenseRelation
 {
 public:
-  KEduVocTenseRelation() {}
-  KEduVocTenseRelation (const QString & _short, const QString & _long): shortId (_short), longId(_long) {}
+  /** default constructor */
+  KEduVocTenseRelation();
+  KEduVocTenseRelation (const QString & _short, const QString & _long);
+  
+  /** default destructor, deletes the d-pointer */
+  ~KEduVocTenseRelation();
 
   QString shortStr() const;
   QString longStr()  const;
 
+  KEduVocTenseRelation &operator=(const KEduVocTenseRelation &other);
+
 private:
-  QString shortId;
-  QString longId;
+  class Private;
+  Private * const d;
 };
 
 /**

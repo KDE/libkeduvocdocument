@@ -93,68 +93,94 @@ QStringList KEduVocConjugation::Private::userTenses;
 
 //================================================================
 
+class KEduVocComparison::Private
+{
+  public:
+    QString ls1;
+    QString ls2;
+    QString ls3;
+};
 
 KEduVocComparison::KEduVocComparison()
+: d(new Private)
 {
 }
 
+KEduVocComparison::KEduVocComparison(const KEduVocComparison &other)
+: d(new Private)
+{
+  setL1(other.l1());
+  setL2(other.l2());
+  setL3(other.l3());
+}
 
 KEduVocComparison::KEduVocComparison(const QString &l1, const QString &l2, const QString &l3)
+: d(new Private)
 {
   setL1(l1);
   setL2(l2);
   setL3(l3);
 }
 
+KEduVocComparison::~KEduVocComparison()
+{
+  delete d;
+}
+
+KEduVocComparison &KEduVocComparison::operator=(const KEduVocComparison& other)
+{
+  setL1(other.l1());
+  setL2(other.l2());
+  setL3(other.l3());
+  
+  return *this;
+}
 
 bool KEduVocComparison::isEmpty() const
 {
-  return   ls1.simplified().isEmpty() && ls2.simplified().isEmpty() && ls3.simplified().isEmpty();
+  return d->ls1.simplified().isEmpty() && d->ls2.simplified().isEmpty() && d->ls3.simplified().isEmpty();
 }
 
 
 void KEduVocComparison::clear()
 {
-  ls1 = "";
-  ls2 = "";
-  ls3 = "";
+  d->ls1 = "";
+  d->ls2 = "";
+  d->ls3 = "";
 }
 
 bool KEduVocComparison::operator ==(const KEduVocComparison& a) const
 {
-  if (ls1 == a.l1() && ls2 == a.l2() && ls3 == a.l3())
-    return true;
-  else
-  return false;
+  return (d->ls1 == a.l1() && d->ls2 == a.l2() && d->ls3 == a.l3());
 }
 
 void KEduVocComparison::setL1(const QString &s)
 { 
-    ls1 = s; 
+  d->ls1 = s; 
 }
 
 void KEduVocComparison::setL2(const QString &s) 
 { 
-    ls2 = s; 
+  d->ls2 = s; 
 }
 
 void KEduVocComparison::setL3(const QString &s) 
 { 
-    ls3 = s; 
+  d->ls3 = s; 
 }
 
 QString KEduVocComparison::l1() const 
 { 
-    return ls1; 
+  return d->ls1; 
 }
 QString KEduVocComparison::l2() const 
 { 
-    return ls2; 
+  return d->ls2; 
 }
 
 QString KEduVocComparison::l3() const 
 { 
-    return ls3; 
+  return d->ls3; 
 }
 
 
@@ -255,15 +281,44 @@ void KEduVocArticle::getNatural(QString *def, QString *indef) const
 }
 
 //==============================================================
+class KEduVocTenseRelation::Private
+{
+  public:
+    QString shortId;
+    QString longId;
+};
+
+KEduVocTenseRelation::KEduVocTenseRelation()
+: d(new Private)
+{
+}
+
+KEduVocTenseRelation::KEduVocTenseRelation (const QString & _short, const QString & _long)
+: d(new Private)
+{
+  d->shortId = _short;
+  d->longId = _long;
+}
+
+KEduVocTenseRelation::~KEduVocTenseRelation()
+{
+  delete d;
+}
+
+KEduVocTenseRelation &KEduVocTenseRelation::operator=(const KEduVocTenseRelation &other)
+{
+  d->shortId = other.shortStr();
+  d->longId = other.longStr();
+}
 
 QString KEduVocTenseRelation::shortStr() const 
 { 
-    return shortId; 
+  return d->shortId; 
 }
 
 QString KEduVocTenseRelation::longStr()  const 
 { 
-    return longId;  
+  return d->longId;  
 }
 
 
