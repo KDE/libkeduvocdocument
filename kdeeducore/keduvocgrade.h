@@ -67,6 +67,8 @@ public:
      * provides safe copy of d pointer
      */
     KEduVocGrade(const KEduVocGrade &other);
+    
+    ~KEduVocGrade();
 
       /** returns query count of given translation as int
    *
@@ -172,7 +174,7 @@ public:
 
 private:
 
-    KEduVocGradePrivate *d;
+    KEduVocGradePrivate * const d;
 };
 
 #endif

@@ -39,6 +39,11 @@ KEduVocGrade::KEduVocGrade(const KEduVocGrade &other)
     setQueryDate(other.queryDate());
 }
 
+KEduVocGrade::~KEduVocGrade()
+{
+  delete d;
+}
+
 void KEduVocGrade::resetGrades()
 {
     d->m_grade = KV_NORM_GRADE;
