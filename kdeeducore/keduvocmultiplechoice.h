@@ -45,6 +45,8 @@ public:
    KEduVocMultipleChoice(const KEduVocMultipleChoice &other);
    KEduVocMultipleChoice (const QStringList &choices);
    
+   ~KEduVocMultipleChoice();
+   
    void setChoices (const QStringList &choices);
    QStringList choices() const;
 
@@ -58,10 +60,12 @@ public:
    unsigned size();
 
    bool operator==(const KEduVocMultipleChoice &choice) const;
+   
+   KEduVocMultipleChoice &operator=(const KEduVocMultipleChoice &other);
 
 private:
 
-   KEduVocMultipleChoicePrivate * d;
+   KEduVocMultipleChoicePrivate * const d;
 };
 
 

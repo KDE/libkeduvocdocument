@@ -48,6 +48,17 @@ KEduVocMultipleChoice::KEduVocMultipleChoice(const QStringList &choices)
   setChoices(choices);
 }
 
+KEduVocMultipleChoice::~KEduVocMultipleChoice()
+{
+  delete d;
+}
+
+KEduVocMultipleChoice &KEduVocMultipleChoice::operator=(const KEduVocMultipleChoice &other)
+{
+  d->m_choices = other.choices();
+  return *this;
+}
+
 void KEduVocMultipleChoice::setChoices (const QStringList &choices)
 {
   d->m_choices = choices;
