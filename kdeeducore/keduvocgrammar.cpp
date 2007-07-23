@@ -309,6 +309,7 @@ KEduVocTenseRelation &KEduVocTenseRelation::operator=(const KEduVocTenseRelation
 {
   d->shortId = other.shortStr();
   d->longId = other.longStr();
+  return *this;
 }
 
 QString KEduVocTenseRelation::shortStr() const 

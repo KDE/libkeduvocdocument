@@ -984,6 +984,7 @@ bool KEduVocKvtml2Reader::readGrade(QDomElement &gradeElement, KEduVocExpression
     QDateTime value = QDateTime::fromTime_t(currentElement.text().toUInt());
     expr.translation(index).gradeFrom(id).setQueryDate(value);
   }
+  return true;
 }
 
 
