@@ -393,6 +393,7 @@ bool KEduVocKvtml2Writer::writeIdentifiers(QDomElement &identifiersElement)
     // add this identifier to the group
     identifiersElement.appendChild(identifier);
   }
+  return true;
 }
 
 bool KEduVocKvtml2Writer::writeLesson(QDomDocument &domDoc, QDomElement &domElementParent)
