@@ -6,9 +6,6 @@ reader:
   store identifier name, sizehint and type? (need a place to store it first)
 
 writer:
-  write types
-  write tenses
-  write usages
   write entries
     write translations
     write comparisons
