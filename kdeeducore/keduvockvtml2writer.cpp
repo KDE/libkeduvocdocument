@@ -80,6 +80,13 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
   }
   
   // entries
+  currentElement = m_domDoc.createElement(KVTML_ENTRIES);
+  if (!writeEntries(currentElement))
+  {
+    // at least one entry is required!
+    return false;
+  }
+  domElementKvtml.appendChild(currentElement);
   
   // lessons
   
@@ -489,6 +496,97 @@ bool KEduVocKvtml2Writer::writeUsages(QDomElement &usagesElement)
   return true;
 }
 
+bool KEduVocKvtml2Writer::writeEntries(QDomElement &entriesElement)
+{
+  // loop through entries
+  for (int i = 0; i < m_doc->entryCount(); ++i)
+  {
+    KEduVocExpression *thisEntry = m_doc->entry(i);
+    
+    // write entry tag
+    QDomElement entryElement = m_domDoc.createElement(KVTML_ENTRY);
+
+    // add id
+    entryElement.setAttribute(KVTML_ID, QString::number(i));
+
+    // write inactive
+    entryElement.appendChild(newTextElement(KVTML_INACTIVE, thisEntry->isActive() ? KVTML_FALSE : KVTML_TRUE));
+    
+    // write inquery
+    entryElement.appendChild(newTextElement(KVTML_INQUERY, thisEntry->isInQuery() ? KVTML_TRUE : KVTML_FALSE));
+    
+    // write sizehint
+    entryElement.appendChild(newTextElement(KVTML_SIZEHINT, QString::number(thisEntry->sizeHint()) ));
+
+    // loop through translations
+    for (int trans = 0; trans < thisEntry->translationCount(); ++trans)
+    {
+      // write translations
+      QDomElement translation = m_domDoc.createElement(KVTML_TRANSLATION);
+      translation.setAttribute(KVTML_ID, QString::number(trans));
+      writeTranslation(translation, thisEntry->translation(trans));
+      entryElement.appendChild(translation);
+    }
+    // add this entry to the entriesElement
+    entriesElement.appendChild(entryElement);
+  }
+  return true;
+}
+
+bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, const KEduVocTranslation &translation)
+{
+  // <text>Kniebeugen</text>
+  translationElement.appendChild(newTextElement(KVTML_TEXT, translation.translation()));
+  
+  // <type></type>
+  translationElement.appendChild(newTextElement(KVTML_TYPE, translation.type()));
+  
+  // <inquery>1</inquery>
+  // TODO
+  
+  // <comment></comment>
+  translationElement.appendChild(newTextElement(KVTML_COMMENT, translation.comment()));
+
+  // <pronunciation></pronunciation>
+  translationElement.appendChild(newTextElement(KVTML_PRONUNCIATION, translation.pronunciation()));
+  
+  // <falsefriendfrom></falsefriendfrom>
+  // TODO
+  // <falsefriendto></falsefriendto>
+  // <falsefriend></falsefriend>
+
+  // <antonym></antonym>
+  translationElement.appendChild(newTextElement(KVTML_ANTONYM, translation.antonym()));
+  
+  // <synonym></synonym>
+  translationElement.appendChild(newTextElement(KVTML_SYNONYM, translation.synonym()));
+  
+  // <example></example>
+  translationElement.appendChild(newTextElement(KVTML_EXAMPLE, translation.example()));
+  
+  // <usage></usage>
+  translationElement.appendChild(newTextElement(KVTML_USAGE, translation.usageLabel()));
+  
+  // <paraphrase></paraphrase>
+  translationElement.appendChild(newTextElement(KVTML_USAGE, translation.paraphrase()));
+  
+  // grades
+  // TODO
+  
+  // conjugation
+  // TODO
+  
+  // comparison
+  // TODO
+  
+  // multiplechoice
+  // TODO
+  
+  // image
+  // sound
+
+  return true;
+}
 
 bool KEduVocKvtml2Writer::writeComparison(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp)
 /*

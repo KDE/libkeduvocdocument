@@ -22,6 +22,7 @@
 
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
+#include "keduvoctranslation.h"
 
 class KEduVocDocument;
 
@@ -72,6 +73,17 @@ public:
    */
   bool writeUsages(QDomElement &usagesElement);
 
+  /** write entries
+   * @param entriesElement QDomElement <entries> to write to
+   */
+  bool writeEntries(QDomElement &entriesElement);
+  
+  /** write a translation
+   * @param translationElement QDomElement <translation> to write to, with id pre-set
+   * @param translation object to write
+   */
+  bool writeTranslation(QDomElement &translationElement, const KEduVocTranslation &translation);
+  
   bool writeLesson(QDomDocument &domDoc, QDomElement &domElementParent);
   bool writeConjugEntry(QDomDocument &domDoc, QDomElement &domElementParent, KEduVocConjugation &curr_conjug);
   bool writeComparison(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp);

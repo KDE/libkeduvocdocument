@@ -6,10 +6,6 @@ reader:
   store identifier name, sizehint and type? (need a place to store it first)
 
 writer:
-  write entries
-    write translations
-    write comparisons
-    write multiplechoices
-    write grades
+  write translation sub-parts: comparisons, conjugations, multiplechoices, grades
   write lessons
 
