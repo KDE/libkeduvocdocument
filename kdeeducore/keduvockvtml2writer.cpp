@@ -55,6 +55,34 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
   writeIdentifiers(currentElement);
   domElementKvtml.appendChild(currentElement);
   
+  // types
+  currentElement = m_domDoc.createElement(KVTML_TYPES);
+  writeTypes(currentElement);
+  if (currentElement.hasChildNodes())
+  {
+    domElementKvtml.appendChild(currentElement);
+  }
+  
+  // tenses
+  currentElement = m_domDoc.createElement(KVTML_TENSES);
+  writeTenses(currentElement);
+  if (currentElement.hasChildNodes())
+  {
+    domElementKvtml.appendChild(currentElement);
+  }
+  
+  // usages
+  currentElement = m_domDoc.createElement(KVTML_USAGES);
+  writeUsages(currentElement);
+  if (currentElement.hasChildNodes())
+  {
+    domElementKvtml.appendChild(currentElement);
+  }
+  
+  // entries
+  
+  // lessons
+  
   //** NOTE: everything below this point has not been updated to use kvtml2 format****
   //if (!writeLesson(m_domDoc, domElementKvtml))
   //  return false;
@@ -420,82 +448,44 @@ bool KEduVocKvtml2Writer::writeArticle(QDomElement &articleElement, int article)
   return true;
 }
 
-bool KEduVocKvtml2Writer::writeType(QDomDocument &domDoc, QDomElement &domElementParent)
+bool KEduVocKvtml2Writer::writeTypes(QDomElement &typesElement)
 {
-  if (m_doc->typeDescriptions().count() == 0)
-    return true;
-
-  QDomElement domElementType = domDoc.createElement(KV_TYPE_GRP);
-  int count = 1;
-
   foreach(QString type, m_doc->typeDescriptions())
   {
     if (!(type.isNull()) )
     {
-      QDomElement domElementDesc = domDoc.createElement(KV_TYPE_DESC);
-      QDomText domTextDesc = domDoc.createTextNode(type);
-
-      domElementDesc.setAttribute(KV_TYPE_NO, count);
-      domElementDesc.appendChild(domTextDesc);
-      domElementType.appendChild(domElementDesc);
-      count++;
+      typesElement.appendChild(newTextElement(KVTML_TYPE, type));
     }
   }
 
-  domElementParent.appendChild(domElementType);
   return true;
 }
 
 
-bool KEduVocKvtml2Writer::writeTense(QDomDocument &domDoc, QDomElement &domElementParent)
+bool KEduVocKvtml2Writer::writeTenses(QDomElement &tensesElement)
 {
-  if (m_doc->tenseDescriptions().count() == 0)
-    return true;
-
-  QDomElement domElementTense = domDoc.createElement(KV_TENSE_GRP);
-  int count = 1;
-
   foreach(QString tense, m_doc->tenseDescriptions())
   {
-    if (!(tense.isNull())) {
-      QDomElement domElementDesc = domDoc.createElement(KV_TENSE_DESC);
-      QDomText domTextDesc = domDoc.createTextNode(tense);
-
-      domElementDesc.setAttribute(KV_TENSE_NO, count);
-      domElementDesc.appendChild(domTextDesc);
-      domElementTense.appendChild(domElementDesc);
-      count++;
+    if (!(tense.isNull())) 
+    {
+      tensesElement.appendChild(newTextElement(KVTML_TENSE, tense));
     }
   }
 
-  domElementParent.appendChild(domElementTense);
   return true;
 }
 
 
-bool KEduVocKvtml2Writer::writeUsage(QDomDocument &domDoc, QDomElement &domElementParent)
+bool KEduVocKvtml2Writer::writeUsages(QDomElement &usagesElement)
 {
-  if (m_doc->usageDescriptions().count() == 0)
-    return true;
-
-  QDomElement domElementUsage = domDoc.createElement(KV_USAGE_GRP);
-  int count = 1;
-
   foreach(QString usage, m_doc->usageDescriptions())
   {
     if (!(usage.isNull()))
     {
-      QDomElement domElementDesc = domDoc.createElement(KV_USAGE_DESC);
-      QDomText domTextDesc = domDoc.createTextNode(usage);
-
-      domElementDesc.setAttribute(KV_USAGE_NO, count);
-      domElementDesc.appendChild(domTextDesc);
-      domElementUsage.appendChild(domElementDesc);
-      count++;
+      usagesElement.appendChild(newTextElement(KVTML_USAGE, usage));
     }
   }
 
-  domElementParent.appendChild(domElementUsage);
   return true;
 }
 

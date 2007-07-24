@@ -57,10 +57,22 @@ public:
   bool writeConjugation(QDomElement &conjugationElement, const KEduVocConjugation &conjugation, 
                         const QString &type);
 
+  /** write types
+   * @param typesElement QDomElement <types> to write to
+   */
+  bool writeTypes(QDomElement &typesElement);
+  
+  /** write tenses
+   * @param tensesElement QDomElement <tenses> to write to
+   */
+  bool writeTenses(QDomElement &tensesElement);
+  
+  /** write usages
+   * @param usagesElement QDomElement <usages> to write to
+   */
+  bool writeUsages(QDomElement &usagesElement);
+
   bool writeLesson(QDomDocument &domDoc, QDomElement &domElementParent);
-  bool writeType(QDomDocument &domDoc, QDomElement &domElementParent);
-  bool writeTense(QDomDocument &domDoc, QDomElement &domElementParent);
-  bool writeUsage(QDomDocument &domDoc, QDomElement &domElementParent);
   bool writeConjugEntry(QDomDocument &domDoc, QDomElement &domElementParent, KEduVocConjugation &curr_conjug);
   bool writeComparison(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp);
   bool writeMultipleChoice(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocMultipleChoice &mc);
