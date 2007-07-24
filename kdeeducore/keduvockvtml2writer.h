@@ -49,18 +49,26 @@ public:
    */
   bool writeArticle(QDomElement &articleElement, int article);
   
+  /** write conjugation
+   * @param conjugationElement QDomElement <conjugation> or <personalpronouns> to write to
+   * @param conjugation object to write
+   * @param type conjugation type
+   */
+  bool writeConjugation(QDomElement &conjugationElement, const KEduVocConjugation &conjugation, 
+                        const QString &type);
+
   bool writeLesson(QDomDocument &domDoc, QDomElement &domElementParent);
   bool writeType(QDomDocument &domDoc, QDomElement &domElementParent);
   bool writeTense(QDomDocument &domDoc, QDomElement &domElementParent);
   bool writeUsage(QDomDocument &domDoc, QDomElement &domElementParent);
-  bool writeOption(QDomDocument &domDoc, QDomElement &domElementParent);
-  bool writeConjugHeader(QDomDocument &domDoc, QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug);
-  bool writeConjug(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocConjugation &curr_conjug, const QString &type);
   bool writeConjugEntry(QDomDocument &domDoc, QDomElement &domElementParent, KEduVocConjugation &curr_conjug);
   bool writeComparison(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp);
   bool writeMultipleChoice(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocMultipleChoice &mc);
 
 private:
+
+  QDomElement newTextElement(const QString &elementName, const QString &text);
+  
   QFile *m_outputFile;
   KEduVocDocument *m_doc;
   
