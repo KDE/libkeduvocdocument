@@ -248,7 +248,12 @@ bool KEduVocKvtml2Reader::readIdentifier(QDomElement &identifierElement)
   if (!currentElement.isNull())
   {
     // TODO: do we want to use this for the identifier, or the name?
-    m_doc->setIdentifier(id, currentElement.text());
+    int index = m_doc->appendIdentifier(currentElement.text());
+    if (index != id)
+    {
+      m_errorMessage = i18n("identifiers out of order");
+      return false;
+    }
   }
   
   currentElement = identifierElement.firstChildElement(KVTML_NAME);

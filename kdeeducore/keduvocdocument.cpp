@@ -32,6 +32,7 @@
 
 #include "keduvocexpression.h"
 #include "keduvockvtmlwriter.h"
+#include "keduvockvtml2writer.h"
 #include "keduvoccsvreader.h"
 #include "keduvoccsvwriter.h"
 #include "keduvockvtml2reader.h"
@@ -957,9 +958,11 @@ int KEduVocDocument::identifierCount() const
 }
 
 
-void KEduVocDocument::appendIdentifier(const QString & id)
+int KEduVocDocument::appendIdentifier(const QString & id)
 {
   d->m_identifiers.append(id);
+  kDebug() << "appending identifier" << id;
+  return d->m_identifiers.size() - 1;
 }
 
 
@@ -995,10 +998,7 @@ void KEduVocDocument::renameLesson(const int lessonIndex, const QString &lessonN
 
 bool KEduVocDocument::lessonInQuery(int lessonIndex) const
 {
-  if (d->m_lessonsInQuery.contains(lessonIndex))
-    return true;
-  else
-    return false;
+  return d->m_lessonsInQuery.contains(lessonIndex);
 }
 
 

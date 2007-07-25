@@ -297,8 +297,9 @@ public:
    * Appends a new identifier (usually a language)
    *
    * @param id         the identifier to append
+   * @returns the identifier number
    */
-  void appendIdentifier(const QString & id);
+  int appendIdentifier(const QString & id);
 
   /**
    * Returns pointer to expression object @p index
