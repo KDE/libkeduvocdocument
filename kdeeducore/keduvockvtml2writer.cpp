@@ -34,8 +34,6 @@ KEduVocKvtml2Writer::KEduVocKvtml2Writer(QFile *file)
 
 bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generator)
 {
-  bool first_expr = true;
-
   m_doc = doc;
 
   m_domDoc = QDomDocument("kvtml SYSTEM \"kvtml2.dtd\"");
@@ -89,6 +87,12 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
   domElementKvtml.appendChild(currentElement);
   
   // lessons
+  currentElement = m_domDoc.createElement(KVTML_LESSONS);
+  writeLessons(currentElement);
+  if (currentElement.hasChildNodes())
+  {
+    domElementKvtml.appendChild(currentElement);
+  }
   
   //** NOTE: everything below this point has not been updated to use kvtml2 format****
   //if (!writeLesson(m_domDoc, domElementKvtml))
@@ -396,35 +400,32 @@ bool KEduVocKvtml2Writer::writeIdentifiers(QDomElement &identifiersElement)
   return true;
 }
 
-bool KEduVocKvtml2Writer::writeLesson(QDomDocument &domDoc, QDomElement &domElementParent)
+bool KEduVocKvtml2Writer::writeLessons(QDomElement &lessonsElement)
 {
   if (m_doc->lessonDescriptions().count() == 0)
     return true;
 
-  QDomElement domElementLesson = domDoc.createElement(KV_LESS_GRP);
-  domElementLesson.setAttribute(KV_SIZEHINT, m_doc->sizeHint(-1));
-  int count = 1;
-
+  int count = 0;
   foreach(QString lesson, m_doc->lessonDescriptions())
   {
-    if (!lesson.isNull())
-    {
-      QDomElement domElementDesc = domDoc.createElement(KV_LESS_DESC);
-      QDomText domTextDesc = domDoc.createTextNode(lesson);
-
-      domElementDesc.setAttribute(KV_LESS_NO, count);
-      if (m_doc->currentLesson() == count)
-        domElementDesc.setAttribute(KV_LESS_CURR, 1);
-      if (m_doc->lessonInQuery(count))
-        domElementDesc.setAttribute(KV_LESS_QUERY, 1);
-
-      domElementDesc.appendChild(domTextDesc);
-      domElementLesson.appendChild(domElementDesc);
-      count++;
-    }
+    // make lesson element
+    QDomElement thisLesson = m_domDoc.createElement(KVTML_LESSON);
+    
+    // add a name
+    thisLesson.appendChild(newTextElement(KVTML_NAME, lesson));
+    
+    // add a inquery tag
+    thisLesson.appendChild(newTextElement(KVTML_QUERY, m_doc->lessonInQuery(count) ? KVTML_TRUE : KVTML_FALSE));
+    
+    // add a current tag
+    thisLesson.appendChild(newTextElement(KVTML_CURRENT, m_doc->currentLesson() == count ? KVTML_TRUE : KVTML_FALSE));
+    
+    // TODO: add the entryids...
+    
+    lessonsElement.appendChild(thisLesson);
+    ++count;
   }
 
-  domElementParent.appendChild(domElementLesson);
   return true;
 }
 
@@ -729,6 +730,7 @@ bool KEduVocKvtml2Writer::writeConjugation(QDomElement &conjugationElement,
       singular.appendChild(newTextElement(KVTML_FEMALE, third_female));
       singular.appendChild(newTextElement(KVTML_NEUTRAL, third_neutral));
     }
+    conjugationElement.appendChild(singular);
   }
   
   // now for plurals
@@ -757,6 +759,7 @@ bool KEduVocKvtml2Writer::writeConjugation(QDomElement &conjugationElement,
       plural.appendChild(newTextElement(KVTML_FEMALE, third_female));
       plural.appendChild(newTextElement(KVTML_NEUTRAL, third_neutral));
     }
+    conjugationElement.appendChild(plural);
   }
 
   return true;

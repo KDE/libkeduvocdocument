@@ -6,5 +6,5 @@ reader:
 
 writer:
   write translation sub-parts: comparisons, conjugations, multiplechoices, grades
-  write lessons
+  write lesson entryids
 

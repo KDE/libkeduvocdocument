@@ -84,7 +84,11 @@ public:
    */
   bool writeTranslation(QDomElement &translationElement, const KEduVocTranslation &translation);
   
-  bool writeLesson(QDomDocument &domDoc, QDomElement &domElementParent);
+  /** write the lesson group
+   * @param lessonsElement QDomElement <lessons> to write to
+   */
+  bool writeLessons(QDomElement &lessonsElement);
+  
   bool writeConjugEntry(QDomDocument &domDoc, QDomElement &domElementParent, KEduVocConjugation &curr_conjug);
   bool writeComparison(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp);
   bool writeMultipleChoice(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocMultipleChoice &mc);
