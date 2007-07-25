@@ -62,6 +62,7 @@
 #define KVTML_LESSON            "lesson"
 #define KVTML_QUERY             "query"
 #define KVTML_CURRENT           "current"
+#define KVTML_ENTRYID           "entryid"
 
 #define KVTML_ENTRIES           "entries"
 #define KVTML_ENTRY             "entry"
@@ -71,9 +72,8 @@
 #define KVTML_TRANSLATION       "translation"
 #define KVTML_TEXT              "text"
 #define KVTML_PRONUNCIATION     "pronunciation"
-#define KVTML_FALSEFRIENDFROM   "falsefriendfrom"
-#define KVTML_FALSEFRIENDTO     "falsefriendto"
 #define KVTML_FALSEFRIEND       "falsefriend"
+#define KVTML_FROMID            "fromid"
 #define KVTML_ANTONYM           "antonym"
 #define KVTML_SYNONYM           "synonym"
 #define KVTML_EXAMPLE           "example"

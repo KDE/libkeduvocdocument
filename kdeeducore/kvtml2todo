@@ -1,7 +1,6 @@
 Temporary todo for kvtml2
 
 reader:
-  read lessons
   read falsefriend tags
   store identifier name, sizehint and type? (need a place to store it first)
 

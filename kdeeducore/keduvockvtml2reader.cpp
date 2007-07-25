@@ -350,7 +350,7 @@ bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
   }
   
   // TODO: probably should insert at id position with a check to see if it exists
-  m_doc->appendEntry(&expr);
+  m_doc->insertEntry(&expr, id);
   return result;
 }
 
@@ -375,12 +375,6 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
     expr.translation(index).setType(currentElement.text());
   }
   
-  currentElement = translationElement.firstChildElement(KVTML_INQUERY);
-  if (!currentElement.isNull())
-  {
-    // TODO: ask fregl what inquery is for, and do something with it
-  }
-
   //<pronunciation></pronunciation>
   currentElement = translationElement.firstChildElement(KVTML_PRONUNCIATION);
   if (!currentElement.isNull())
@@ -388,20 +382,7 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
     expr.translation(index).setPronunciation(currentElement.text());
   }
   
-  //<falsefriendfrom></falsefriendfrom>
-  currentElement = translationElement.firstChildElement(KVTML_FALSEFRIENDFROM);
-  if (!currentElement.isNull())
-  {
-    // TODO: figure out what to do with falsefriend information
-  }
-
-  //<falsefriendto></falsefriendto>
-  currentElement = translationElement.firstChildElement(KVTML_FALSEFRIENDTO);
-  if (!currentElement.isNull())
-  {
-  }
-
-  //<falsefriend></falsefriend>
+  //<falsefriend fromid="1"></falsefriendfrom>
   currentElement = translationElement.firstChildElement(KVTML_FALSEFRIEND);
   if (!currentElement.isNull())
   {
@@ -412,7 +393,7 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
   currentElement = translationElement.firstChildElement(KVTML_ANTONYM);
   if (!currentElement.isNull())
   {
-    // TODO: figure out what to do with falsefriend information
+    expr.translation(index).setAntonym(currentElement.text());
   }
 
   //<synonym></synonym>
@@ -499,98 +480,58 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
     // TODO: do something with the sound
   }
 
-//        if (query_id == KV_O)
-//          q_org = lang;
-
-//        if (query_id == KV_T)
-
-//          q_trans = lang;
-
-
-//      if (!faux_ami_f.isEmpty() )
-//        expr.translation(i).setFalseFriend (0, faux_ami_f);
-//      if (!faux_ami_t.isEmpty() )
-//        expr.translation(0).setFalseFriend (i, faux_ami_t);
-//      if ( i != 0 ) {
-//        expr.translation(i).gradeFrom(0).setQueryCount(qcount);
-//        expr.translation(0).gradeFrom(i).setQueryCount(r_qcount);
-//        expr.translation(i).gradeFrom(0).setBadCount(bcount);
-//        expr.translation(0).gradeFrom(i).setBadCount(r_bcount);
-//        expr.translation(i).gradeFrom(0).setQueryDate(qdate);
-//        expr.translation(0).gradeFrom(i).setQueryDate(r_qdate);
-//      }
-////kDebug() << "KEduVocKvtml2Reader::readExpression(): id: " << i << " translation: " << textstr << endl;
-
-//      // Next translation
-//      currentElement = currentElement.nextSiblingElement(KV_TRANS);
-//      i++;
-//  }
-
-  //if (m_doc->entryCount() == 0)
-  //  m_doc->setQueryIdentifier(q_org, q_trans);
   return true;
 }
 
-bool KEduVocKvtml2Reader::readLesson(QDomElement &domElementParent)
+bool KEduVocKvtml2Reader::readLesson(QDomElement &lessonElement)
 {
-  QString s;
-  QStringList descriptions;
-  QDomAttr attribute;
-  QDomElement currentElement;
-
-  //-------------------------------------------------------------------------
-  // Attributes
-  //-------------------------------------------------------------------------
-
-  attribute = domElementParent.attributeNode(KV_SIZEHINT);
-  if (!attribute.isNull())
-    m_doc->setSizeHint(-1, attribute.value().toInt());
-
-  //-------------------------------------------------------------------------
-  // Children
-  //-------------------------------------------------------------------------
-
-  QDomNodeList entryList = domElementParent.elementsByTagName(KV_LESS_DESC);
-  if (entryList.length() <= 0)
+  // NOTE: currently this puts an identifier into the last lesson it is in, once support for multiple lessons
+  // is in the entry class, all lessons that include an entry will be in there
+  int lessonId = 0;
+  
+  //<name>Lesson name</name>
+  QDomElement currentElement = lessonElement.firstChildElement(KVTML_NAME);
+  if (!currentElement.isNull())
+  {
+    lessonId = m_doc->appendLesson(currentElement.text());
+  }
+  else
+  {
+    m_errorMessage = i18n("each lesson must have a name");
     return false;
-
-  descriptions.clear();
-  QList<int> inQueryList;
-  inQueryList.clear();
-
-  for (int i = 0; i < entryList.count(); ++i) {
-    currentElement = entryList.item(i).toElement();
-    if (currentElement.parentNode() == domElementParent) {
-      int no = 0;
-      bool isCurr = false;
-
-      attribute = currentElement.attributeNode(KV_LESS_NO);
-      if (!attribute.isNull())
-        no = attribute.value().toInt();
-
-      attribute = currentElement.attributeNode(KV_LESS_CURR);
-      if (!attribute.isNull())
-        isCurr = attribute.value().toInt() != 0;
-
-      if (isCurr && no != 0)
-        m_doc->setCurrentLesson(no);
-
-      attribute = currentElement.attributeNode(KV_LESS_QUERY);
-      if (!attribute.isNull())
-        if (attribute.value().toInt() != 0 && no > 0)
-          inQueryList.append(no);
-
-      s = currentElement.text();
-      if (s.isNull())
-        s = "";
-      descriptions.append(s);
+  }
+  
+  //<query>true</query>
+  currentElement = lessonElement.firstChildElement(KVTML_QUERY);
+  if (!currentElement.isNull())
+  {
+    if (currentElement.text() == KVTML_TRUE)
+    {
+      m_doc->addLessonToQuery(lessonId);
     }
   }
-
-  if (inQueryList.count() > 0)
-    m_doc->setLessonsInQuery(inQueryList);
-  m_doc->setLessonDescriptions(descriptions);
-
+  
+  //<current>true</current>
+  currentElement = lessonElement.firstChildElement(KVTML_CURRENT);
+  if (!currentElement.isNull())
+  {
+    if (currentElement.text() == KVTML_TRUE)
+    {
+      m_doc->setCurrentLesson(lessonId);
+    }
+  }
+  
+  //<entryid>0</entryid>
+  currentElement = lessonElement.firstChildElement(KVTML_ENTRYID);
+  while (!currentElement.isNull())
+  {
+    int entryId = currentElement.text().toInt();
+    // TODO: once we have a lesson class, add each of these entryids to the lesson
+    // set this lesson for the given enty
+    m_doc->entry(entryId)->setLesson(lessonId);
+    currentElement = currentElement.nextSiblingElement(KVTML_ENTRYID);
+  }
+  
   return true;
 }
 
@@ -600,13 +541,13 @@ bool KEduVocKvtml2Reader::readArticle(QDomElement &articleElement, int identifie
  <article>
   <definite>
     <male>der</male>
-	<female>die</female>
-	<neutral>das</neutral>
+    <female>die</female>
+    <neutral>das</neutral>
   </definite>
   <indefinite>
     <male>ein</male>
-	<female>eine</female>
-	<neutral>ein</neutral>
+    <female>eine</female>
+    <neutral>ein</neutral>
   </indefinite>
  </article>
 */

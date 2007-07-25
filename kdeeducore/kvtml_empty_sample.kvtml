@@ -72,12 +72,9 @@
       <translation id="0">
         <text>Kniebeugen</text>
         <type></type>
-        <inquery>1</inquery>
         <comment></comment>
         <pronunciation></pronunciation>
-        <falsefriendfrom></falsefriendfrom>
-        <falsefriendto></falsefriendto>
-        <falsefriend></falsefriend>
+        <falsefriend fromid="1"></falsefriend>
         <antonym></antonym>
         <synonym></synonym>
         <example></example>
@@ -138,7 +135,7 @@
       <name>Lesson with grades example</name>
       <query>true</query>
       <current>true</current>
-
+      <entryid>0</entryid>
      </lesson>
    </lessons>
  </kvtml>

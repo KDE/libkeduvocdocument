@@ -113,6 +113,9 @@ public:
    */
   bool readGrade(QDomElement &gradeElement, KEduVocExpression &expr, int index);
 
+  /** read a lesson, and append it to the document
+   * @param lessonElement element to read from
+   */
   bool readLesson(QDomElement &lessonElement);
 
   QString errorMessage() const { return m_errorMessage; }
