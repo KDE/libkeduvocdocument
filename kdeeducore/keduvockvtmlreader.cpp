@@ -279,7 +279,7 @@ bool KEduVocKvtmlReader::readArticle(QDomElement &domElementParent)
 
   for (int i = 0; i < entryList.count(); ++i) {
 
-kDebug() << "KEduVocKvtmlReader::readArticle() read " << entryList.count() << " articles. " << endl;
+//kDebug() << "KEduVocKvtmlReader::readArticle() read " << entryList.count() << " articles. " << endl;
     currentElement = entryList.item(i).toElement();
     if (currentElement.parentNode() == domElementParent) {
       QString lang;
@@ -293,7 +293,7 @@ kDebug() << "KEduVocKvtmlReader::readArticle() read " << entryList.count() << " 
         else
           lang = "original";
         m_doc->appendIdentifier(lang);
-kDebug() << " Identifier " << i << " is " << lang << endl;
+//kDebug() << " Identifier " << i << " is " << lang << endl;
       }
       else
       {
@@ -1159,7 +1159,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
       }
 //kDebug() << " TranslationList.count(): " << translationList.count() << "  Entry count: " << m_doc->entryCount() << endl;
         if (m_doc->entryCount() == 0) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
-kDebug() << " Read Expression with identifiers: " << i << endl;
+//kDebug() << " Read Expression with identifiers: " << i << endl;
             // new translation
             if (lang.isEmpty()) {
                 if (i == 0) {
