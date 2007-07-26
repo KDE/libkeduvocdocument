@@ -90,8 +90,19 @@ public:
   bool writeLessons(QDomElement &lessonsElement);
   
   bool writeConjugEntry(QDomDocument &domDoc, QDomElement &domElementParent, KEduVocConjugation &curr_conjug);
-  bool writeComparison(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp);
-  bool writeMultipleChoice(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocMultipleChoice &mc);
+  
+  /** write a comparison
+   * @param comparisonElement QDomElement <comparison> to write to
+   * @param comparison object to write
+   * @returns success
+   */
+  bool writeComparison(QDomElement &comparisonElement, const KEduVocComparison &comparison);
+  
+  /** write multiple choice choices
+   * @param multipleChoiceElement QDomElement <multiplechoice> to write to
+   * @returns success
+   */
+  bool writeMultipleChoice(QDomElement &multipleChoiceElement, const KEduVocMultipleChoice &mc);
 
 private:
 

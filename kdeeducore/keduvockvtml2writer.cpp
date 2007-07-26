@@ -543,19 +543,14 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, cons
   // <type></type>
   translationElement.appendChild(newTextElement(KVTML_TYPE, translation.type()));
   
-  // <inquery>1</inquery>
-  // TODO
-  
   // <comment></comment>
   translationElement.appendChild(newTextElement(KVTML_COMMENT, translation.comment()));
 
   // <pronunciation></pronunciation>
   translationElement.appendChild(newTextElement(KVTML_PRONUNCIATION, translation.pronunciation()));
   
-  // <falsefriendfrom></falsefriendfrom>
   // TODO
-  // <falsefriendto></falsefriendto>
-  // <falsefriend></falsefriend>
+  // <falsefriend fromid="0"></falsefriend>
 
   // <antonym></antonym>
   translationElement.appendChild(newTextElement(KVTML_ANTONYM, translation.antonym()));
@@ -579,10 +574,20 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, cons
   // TODO
   
   // comparison
-  // TODO
+  if (!translation.comparison().isEmpty())
+  {
+    QDomElement comparisonElement = m_domDoc.createElement(KVTML_COMPARISON);
+    writeComparison(comparisonElement, translation.comparison());
+    translationElement.appendChild(comparisonElement);
+  }
   
   // multiplechoice
-  // TODO
+  if (!translation.multipleChoice().isEmpty())
+  {
+    QDomElement multipleChoiceElement = m_domDoc.createElement(KVTML_MULTIPLECHOICE);
+    writeMultipleChoice(multipleChoiceElement, translation.multipleChoice());
+    translationElement.appendChild(multipleChoiceElement);
+  }
   
   // image
   // sound
@@ -590,114 +595,40 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, cons
   return true;
 }
 
-bool KEduVocKvtml2Writer::writeComparison(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp)
+bool KEduVocKvtml2Writer::writeComparison(QDomElement &comparisonElement, const KEduVocComparison &comparison)
 /*
  <comparison>
-   <l1>good</l1>
-   <l2>better</l2>
-   <l3>best</l3>
+   <absolute>good</absolute>
+   <comparative>better</comparative>
+   <superlative>best</superlative>
  </comparison>
 */
 {
-  if (comp.isEmpty())
-    return true;
+  comparisonElement.appendChild(newTextElement(KVTML_ABSOLUTE, comparison.l1()));
+  comparisonElement.appendChild(newTextElement(KVTML_COMPARATIVE, comparison.l2()));
+  comparisonElement.appendChild(newTextElement(KVTML_SUPERLATIVE, comparison.l3()));
 
-  QDomElement domElementComparison = domDoc.createElement(KV_COMPARISON_GRP);
-
-  if (!comp.l1().isEmpty() )
-  {
-    QDomElement domElementL1 = domDoc.createElement(KV_COMP_L1);
-    QDomText domTextL1 = domDoc.createTextNode(comp.l1());
-
-    domElementL1.appendChild(domTextL1);
-    domElementComparison.appendChild(domElementL1);
-  }
-
-  if (!comp.l2().isEmpty() )
-  {
-    QDomElement domElementL2 = domDoc.createElement(KV_COMP_L2);
-    QDomText domTextL2 = domDoc.createTextNode(comp.l2());
-
-    domElementL2.appendChild(domTextL2);
-    domElementComparison.appendChild(domElementL2);
-  }
-
-  if (!comp.l3().isEmpty() )
-  {
-    QDomElement domElementL3 = domDoc.createElement(KV_COMP_L3);
-    QDomText domTextL3 = domDoc.createTextNode(comp.l3());
-
-    domElementL3.appendChild(domTextL3);
-    domElementComparison.appendChild(domElementL3);
-  }
-
-  domElementParent.appendChild(domElementComparison);
   return true;
 }
 
 
-bool KEduVocKvtml2Writer::writeMultipleChoice(QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocMultipleChoice &mc)
+bool KEduVocKvtml2Writer::writeMultipleChoice(QDomElement &multipleChoiceElement, const KEduVocMultipleChoice &mc)
 /*
  <multiplechoice>
-   <mc1>good</mc1>
-   <mc2>better</mc2>
-   <mc3>best</mc3>
-   <mc4>best 2</mc4>
-   <mc5>best 3</mc5>
+   <choice>good</choice>
+   <choice>better</choice>
+   <choice>best</choice>
+   <choice>best 2</choice>
+   <choice>best 3</choice>
  </multiplechoice>
 */
 {
-  if (mc.isEmpty())
-    return true;
-
-  QDomElement domElementMC = domDoc.createElement(KV_MULTIPLECHOICE_GRP);
-
-  if (!mc.choice(1).isEmpty() )
+  QStringList choices = mc.choices();
+  for (int i = 0; i < choices.size(); ++i)
   {
-    QDomElement domElementMC1 = domDoc.createElement(KV_MC_1);
-    QDomText domTextMC1 = domDoc.createTextNode(mc.choice(1));
-
-    domElementMC1.appendChild(domTextMC1);
-    domElementMC.appendChild(domElementMC1);
+    multipleChoiceElement.appendChild(newTextElement(KVTML_CHOICE, choices[i]));
   }
 
-  if (!mc.choice(2).isEmpty() )
-  {
-    QDomElement domElementMC2 = domDoc.createElement(KV_MC_2);
-    QDomText domTextMC2 = domDoc.createTextNode(mc.choice(2));
-
-    domElementMC2.appendChild(domTextMC2);
-    domElementMC.appendChild(domElementMC2);
-  }
-
-  if (!mc.choice(3).isEmpty() )
-  {
-    QDomElement domElementMC3 = domDoc.createElement(KV_MC_3);
-    QDomText domTextMC3 = domDoc.createTextNode(mc.choice(3));
-
-    domElementMC3.appendChild(domTextMC3);
-    domElementMC.appendChild(domElementMC3);
-  }
-
-  if (!mc.choice(4).isEmpty() )
-  {
-    QDomElement domElementMC4 = domDoc.createElement(KV_MC_4);
-    QDomText domTextMC4 = domDoc.createTextNode(mc.choice(4));
-
-    domElementMC4.appendChild(domTextMC4);
-    domElementMC.appendChild(domElementMC4);
-  }
-
-  if (!mc.choice(5).isEmpty() )
-  {
-    QDomElement domElementMC5 = domDoc.createElement(KV_MC_5);
-    QDomText domTextMC5 = domDoc.createTextNode(mc.choice(5));
-
-    domElementMC5.appendChild(domTextMC5);
-    domElementMC.appendChild(domElementMC5);
-  }
-
-  domElementParent.appendChild(domElementMC);
   return true;
 }
 
