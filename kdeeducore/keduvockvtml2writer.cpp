@@ -547,31 +547,58 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, cons
   translationElement.appendChild(newTextElement(KVTML_COMMENT, translation.comment()));
 
   // <pronunciation></pronunciation>
-  translationElement.appendChild(newTextElement(KVTML_PRONUNCIATION, translation.pronunciation()));
+  if (!translation.pronunciation().isEmpty())
+  {
+    translationElement.appendChild(newTextElement(KVTML_PRONUNCIATION, translation.pronunciation()));
+  }
   
   // TODO
   // <falsefriend fromid="0"></falsefriend>
 
   // <antonym></antonym>
-  translationElement.appendChild(newTextElement(KVTML_ANTONYM, translation.antonym()));
+  if (!translation.antonym().isEmpty())
+  {
+    translationElement.appendChild(newTextElement(KVTML_ANTONYM, translation.antonym()));
+  }
   
   // <synonym></synonym>
-  translationElement.appendChild(newTextElement(KVTML_SYNONYM, translation.synonym()));
+  if (!translation.synonym().isEmpty())
+  {
+    translationElement.appendChild(newTextElement(KVTML_SYNONYM, translation.synonym()));
+  }
   
   // <example></example>
-  translationElement.appendChild(newTextElement(KVTML_EXAMPLE, translation.example()));
+  if (!translation.example().isEmpty())
+  {
+    translationElement.appendChild(newTextElement(KVTML_EXAMPLE, translation.example()));
+  }
   
   // <usage></usage>
-  translationElement.appendChild(newTextElement(KVTML_USAGE, translation.usageLabel()));
+  if (!translation.usageLabel().isEmpty())
+  {
+    translationElement.appendChild(newTextElement(KVTML_USAGE, translation.usageLabel()));
+  }
   
   // <paraphrase></paraphrase>
-  translationElement.appendChild(newTextElement(KVTML_USAGE, translation.paraphrase()));
+  if (!translation.paraphrase().isEmpty())
+  {
+    translationElement.appendChild(newTextElement(KVTML_USAGE, translation.paraphrase()));
+  }
   
   // grades
   // TODO
   
   // conjugation
-  // TODO
+  if (!translation.conjugation().entryCount() > 0)
+  {
+    KEduVocConjugation conjugation = translation.conjugation();
+    for (int i = 0; i < conjugation.entryCount(); ++i)
+    {
+      QDomElement thisElement = m_domDoc.createElement(KVTML_CONJUGATION);
+      writeConjugation(thisElement, conjugation, conjugation.getType(i));
+      translationElement.appendChild(thisElement);
+    }
+  }
   
   // comparison
   if (!translation.comparison().isEmpty())
