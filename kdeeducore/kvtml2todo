@@ -1,10 +1,9 @@
 Temporary todo for kvtml2
 
 reader:
-  read falsefriend tags
   store identifier name, sizehint and type? (need a place to store it first)
 
 writer:
-  write translation sub-parts: grades
+  write translation sub-parts: falsefriend grades
   write lesson entryids
 

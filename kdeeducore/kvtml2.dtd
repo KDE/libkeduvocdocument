@@ -1,8 +1,7 @@
-<!ELEMENT kvtml         (information, identifiers, types, tenses?, usages?, lessons?)     >
+<!ELEMENT kvtml         (information, identifiers, types?, entries, tenses?, usages?, lessons?)     >
 <!ATTLIST kvtml version    CDATA  #REQUIRED>
 
-<!ELEMENT information    (generator?, title, author, license, comment?) >
-<!-- generator and comment are optional, all others are required exactly once -->
+<!ELEMENT information    (generator?, title, author?, license?, comment?) >
 
 <!ELEMENT generator      (#PCDATA) >
 <!ELEMENT title          (#PCDATA) >
@@ -11,11 +10,11 @@
 <!ELEMENT comment        (#PCDATA) >
 
 <!ELEMENT identifiers    (identifier*) >
-<!ELEMENT identifier     (type, locale, name, comment, sizehint?, article?, personalpronouns?) >
-<!ELEMENT type           (user|language|CDATA) >
+<!ELEMENT identifier     (type, locale, name?, comment?, sizehint?, article?, personalpronouns?) >
+<!ATTLIST identifier id  CDATA  #REQUIRED>
+<!ELEMENT type           (#PCDATA) >
 <!ELEMENT locale         (#PCDATA) >
 <!ELEMENT name           (#PCDATA) >
-<!ELEMENT comment        (#PCDATA) >
 <!ELEMENT sizehint       (#PCDATA) >
 <!ELEMENT article        (definite?, indefinite?) >
 <!ELEMENT definite       (male?, female?, neutral?) >
@@ -31,7 +30,6 @@
 <!ELEMENT thirdperson    (common|(male, female, neutral)) >
 
 <!ELEMENT types          (type*) >
-<!ELEMENT type           (#PCDATA) >
 
 <!ELEMENT tenses         (tense*) >
 <!ELEMENT tense          (#PCDATA) >
@@ -39,28 +37,27 @@
 <!ELEMENT usages         (usage*) >
 <!ELEMENT usage          (#PCDATA) >
 
-<!ELEMENT lessons        (lesson*, entry*) >
-<!ELEMENT lesson         (name, query?, current?) >
+<!ELEMENT lessons        (lesson*) >
+<!ELEMENT lesson         (name, query?, current?, entryid*) >
 <!ELEMENT query          (#PCDATA) >
-<!ELEMENT current        EMPTY >
+<!ELEMENT current        (#PCDATA) >
+<!ELEMENT entryid        (#PCDATA) >
 
+<!ELEMENT entries        (entry*) >
 <!ELEMENT entry          (inactive?, inquery?, sizehint?, translation*) >
+<!ATTLIST entry id       CDATA  #REQUIRED>
 <!ELEMENT inactive       EMPTY >
 <!ELEMENT inquery        EMPTY >
-<!ELEMENT sizehint       (#PCDATA) >
 
-<!ELEMENT translation    (text, type, inquery?, comment?, pronunciation, falsfriendfrom, falsefriendto, falsefriend, antonym*, synonym*, example, usage, paraphrase, comparison, conjugation?) >
+<!ELEMENT translation    (text, type?, inquery?, comment?, pronunciation?, falsfriend?, antonym?, synonym?, example?, usage?, paraphrase?, comparison?, conjugation*) >
 <!ELEMENT text           (#PCDATA) >
 <!ELEMENT pronunciation  (#PCDATA) >
-<!ELEMENT falsefriendfrom  (#PCDATA) >
-<!ELEMENT falsefriendto  (#PCDATA) >
 <!ELEMENT falsefriend    (#PCDATA) >
 <!ELEMENT antonym        (#PCDATA) >
 <!ELEMENT synonym        (#PCDATA) >
 <!ELEMENT example        (#PCDATA) >
-<!ELEMENT usage          (#PCDATA) >
 <!ELEMENT paraphrase     (#PCDATA) >
-<!ELEMENT conjugation    (singular?, plural?) >
+<!ELEMENT conjugation    (tense?, type?, singular?, plural?) >
 
 <!ELEMENT comparison     (absolute, comparative, superlative) >
 <!ELEMENT absolute       (#PCDATA) >
