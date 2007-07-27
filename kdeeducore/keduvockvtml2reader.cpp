@@ -391,7 +391,8 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
   currentElement = translationElement.firstChildElement(KVTML_FALSEFRIEND);
   if (!currentElement.isNull())
   {
-    // TODO: figure out what to do with falsefriend information
+    int fromid = currentElement.attribute(KVTML_FROMID).toInt();
+    expr.translation(index).setFalseFriend(fromid, currentElement.text());
   }
 
   //<antonym></antonym>
