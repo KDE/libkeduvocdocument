@@ -1159,7 +1159,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
       }
 //kDebug() << " TranslationList.count(): " << translationList.count() << "  Entry count: " << m_doc->entryCount() << endl;
         if (m_doc->entryCount() == 0) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
-//kDebug() << " Read Expression with identifiers: " << i << endl;
+//kDebug() << " Read Expression with identifiers: " << lang << endl;
             // new translation
             if (lang.isEmpty()) {
                 if (i == 0) {
@@ -1169,8 +1169,10 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
                     lang.setNum(m_doc->identifierCount());
                     lang.prepend("translation ");
                 }
-                m_doc->appendIdentifier(lang);
+
             }
+            if (m_doc->identifierCount() <= i)
+              m_doc->appendIdentifier(lang);
         }
         else
         {
