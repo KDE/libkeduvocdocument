@@ -961,7 +961,7 @@ int KEduVocDocument::identifierCount() const
 int KEduVocDocument::appendIdentifier(const QString & id)
 {
   d->m_identifiers.append(id);
-  kDebug() << "appending identifier" << id;
+  kDebug() << "appending identifier" << id << endl;
   return d->m_identifiers.size() - 1;
 }
 
