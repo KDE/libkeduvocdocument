@@ -70,12 +70,105 @@ public:
    */
   ~KEduVocDocument();
 
+  // *** whole document methods ***
+  
+  /**
+   * Open a document file
+   *
+   * @param url      url to file to open
+   * @returns        true if successful
+   */
+  bool open(const KUrl& url);
+
+  /**
+   * Saves the data under the given name
+   *
+   * @param url        if url is empty (or NULL) actual name is preserved
+   * @param ft         the filetype to be used when saving the document
+   * @param generator  the name of the application saving the document
+   * @returns          true if successful
+   */
+  bool saveAs(const KUrl & url, FileType ft, const QString & generator);
+
+  /**
+   * Merges data from another document
+   *
+   * @param docToMerge       document containing the data to be merged
+   * @param matchIdentifiers if true only entries having identifiers present in the
+   *                         current document will be mergedurl is empty (or NULL) actual name is preserved
+   */
+  void merge(KEduVocDocument *docToMerge, bool matchIdentifiers);
+
   /**
    * Indicates if the document is modified
    *
    * @param dirty   new state
    */
   void setModified(bool dirty = true);
+
+  /** @returns the modification state of the doc */
+  bool isModified() const;
+
+  /**
+   * Enables sorting
+   */
+  void setSortingEnabled(bool enable);
+
+  /** @returns whether sorting is enabled */
+  bool isSortingEnabled() const;
+
+  /**
+   * Sets the URL of the XML file
+   */
+  void setUrl(const KUrl& url);
+
+  /** @returns the URL of the XML file */
+  KUrl url() const;
+
+  /** set the title of the XML file
+   * @param title title to set */
+  void setTitle(const QString & title);
+
+  /** @returns the title of the XML file */
+  QString title() const;
+
+  /** set the author of the file
+   * @param author author to set */
+  void setAuthor(const QString & author);
+
+  /** @returns the author of the file */
+  QString author() const;
+
+  /** set the license of the file
+   * @param license license to set */
+  void setLicense(const QString & license);
+
+  /** @returns the license of the file */
+  QString license() const;
+
+  /** set the remark of the file 
+   * @param rem remark to set */
+  void setDocumentRemark(const QString & rem);
+
+  /** @return the remark of the file */
+  QString documentRemark() const;
+
+  /**
+   * Sets the generator of the file
+   */
+  void setGenerator(const QString & generator);
+
+  /** @returns the generator of the file */
+  QString generator() const;
+
+  /** Sets version of the loaded file
+   * @param ver the new version */
+  void setVersion(const QString & ver);
+
+  /** @returns the version of the loaded file */
+  QString version() const;
+
+  // *** entry methods ***
 
   /**
    * Appends a new expression to the end of the vocabulary
@@ -110,26 +203,42 @@ public:
    * @returns                 number of removed entries
    */
   int cleanUp();
+  
+  /**
+   * @returns the number of entries
+   */
+  int entryCount() const;
 
   /**
-   * Enables sorting
+   * Returns the recommended size
+   *
+   * @param index            number of expr, -1 = lesson
+   * @returns                width of column
    */
-  void setSortingEnabled(bool enable);
+  int sizeHint(int index) const;
 
   /**
-   * @returns whether sorting is enabled
+   * Sets the recommended size
+   *
+   * @param index            number of expr, -1 = lesson
+   * @param width            width of column
    */
-  bool isSortingEnabled() const;
+  void setSizeHint (int index, const int width);
+
+  // *** identifier methods ***
+  
+  /**
+   * @returns the number of different identifiers (usually languages)
+   */
+  int identifierCount() const;
 
   /**
-   * @returns the modification state of the doc
+   * Appends a new identifier (usually a language)
+   *
+   * @param id         the identifier to append
+   * @returns the identifier number
    */
-  bool isModified() const;
-
-  /**
-   * @returns the original identifier
-   */
-  QString originalIdentifier() const;
+  int appendIdentifier(const QString & id);
 
   /**
    * Sets the original identifier
@@ -139,12 +248,9 @@ public:
   void setOriginalIdentifier(const QString &id);
 
   /**
-   * Returns the identifier of translation @p index
-   *
-   * @param index            number of translation 1..x
-   * @returns                the language identifier: en=english, de=german, ...
+   * @returns the original identifier
    */
-  QString identifier(int index) const;
+  QString originalIdentifier() const;
 
   /**
    * Sets the identifier of translation
@@ -153,6 +259,14 @@ public:
    * @param lang             thr language identifier: en=english, de=german, ...
    */
   void setIdentifier(int index, const QString &lang);
+
+  /**
+   * Returns the identifier of translation @p index
+   *
+   * @param index            number of translation 1..x
+   * @returns                the language identifier: en=english, de=german, ...
+   */
+  QString identifier(int index) const;
 
   /**
    * Removes identifier an the according translation in all entries
@@ -169,14 +283,8 @@ public:
    */
   int indexOfIdentifier(const QString &lang) const;
 
-  /**
-   * Returns the attribute string
-   *
-   * @param index            number of attribute
-   * @returns                string
-   */
-  QString typeName(int index) const;
-
+  // *** type methods ***
+  
   /**
    * Sets attribute string
    *
@@ -186,9 +294,12 @@ public:
   void setTypeName(int index, QString &str);
 
   /**
-   * Gets the descriptions of the types
+   * Returns the attribute string
+   *
+   * @param index            number of attribute
+   * @returns                string
    */
-  QStringList typeDescriptions() const;
+  QString typeName(int index) const;
 
   /**
    * Sets the descriptions of the types
@@ -196,12 +307,11 @@ public:
   void setTypeDescriptions(const QStringList &names);
 
   /**
-   * Returns the tense string
-   *
-   * @param index            number of tense
-   * @returns                string
+   * Gets the descriptions of the types
    */
-  QString tenseName(int index) const;
+  QStringList typeDescriptions() const;
+
+  // *** tense methods ***
 
   /**
    * Sets the tense string
@@ -212,14 +322,32 @@ public:
   void setTenseName(int index, QString &str);
 
   /**
-   * Gets the descriptions of the tenses
+   * Returns the tense string
+   *
+   * @param index            number of tense
+   * @returns                string
    */
-  QStringList tenseDescriptions() const;
+  QString tenseName(int index) const;
 
   /**
    * Sets the description of the tenses
    */
   void setTenseDescriptions(const QStringList &names);
+
+  /**
+   * Gets the descriptions of the tenses
+   */
+  QStringList tenseDescriptions() const;
+
+  // *** usage methods ***
+  
+  /**
+   * Sets usage string
+   *
+   * @param index            number of usage
+   * @param str              name of usage
+   */
+  void setUsageName(int index, QString &str);
 
   /**
    * Returns usage string
@@ -230,54 +358,16 @@ public:
   QString usageName(int index) const;
 
   /**
-   * Sets usage string
-   *
-   * @param index            number of usage
-   * @param str              name of usage
+   * Sets the descriptions of the usages
    */
-  void setUsageName(int index, QString &str);
+  void setUsageDescriptions(const QStringList &names);
 
   /**
    * Gets the descriptions of the usages
    */
   QStringList usageDescriptions() const;
 
-  /**
-   * Sets the descriptions of the usages
-   */
-  void setUsageDescriptions(const QStringList &names);
-
-  /**
-   * Open a document file
-   *
-   * @param url      url to file to open
-   * @returns        true if successful
-   */
-  bool open(const KUrl& url);
-
-  /**
-   * Saves the data under the given name
-   *
-   * @param url        if url is empty (or NULL) actual name is preserved
-   * @param ft         the filetype to be used when saving the document
-   * @param generator  the name of the application saving the document
-   * @returns          true if successful
-   */
-  bool saveAs(const KUrl & url, FileType ft, const QString & generator);
-
-  /**
-   * Merges data from another document
-   *
-   * @param docToMerge       document containing the data to be merged
-   * @param matchIdentifiers if true only entries having identifiers present in the
-   *                         current document will be mergedurl is empty (or NULL) actual name is preserved
-   */
-  void merge(KEduVocDocument *docToMerge, bool matchIdentifiers);
-
-  /**
-   * @returns the number of entries
-   */
-  int entryCount() const;
+  // *** grade methods ***
 
   /**
    * Sets grades to KV_NORM_GRADE, counts to 0 ...
@@ -287,19 +377,6 @@ public:
    *                 otherwise only matching numbers
    */
   void resetEntry(int index = -1, int lesson = 0);
-
-  /**
-   * @returns the number of different identifiers (usually languages)
-   */
-  int identifierCount() const;
-
-  /**
-   * Appends a new identifier (usually a language)
-   *
-   * @param id         the identifier to append
-   * @returns the identifier number
-   */
-  int appendIdentifier(const QString & id);
 
   /**
    * Returns pointer to expression object @p index
@@ -323,36 +400,6 @@ public:
   int search(const QString &substr, int id, int first=0, int last=-1, bool word_start = false);
 
   /**
-   * @returns the URL of the XML file
-   */
-  KUrl url() const;
-
-  /**
-   * Sets the URL of the XML file
-   */
-  void setUrl(const KUrl& url);
-
-  /**
-   * @returns the title of the XML file
-   */
-  QString title() const;
-
-  /**
-   * @returns the author of the file
-   */
-  QString author() const;
-
-  /**
-   * @returns the license of the file
-   */
-  QString license() const;
-
-  /**
-   * @return the remark of the file
-   */
-  QString documentRemark() const;
-
-  /**
    * Retrieves the identifiers for the current query
    *
    * @param org        identifier for original
@@ -368,47 +415,8 @@ public:
    */
   void setQueryIdentifier(const QString &org, const QString &trans);
 
-  /**
-   * Sets the title of the XML file
-   */
-  void setTitle(const QString & title);
-
-  /**
-   * Sets the author of the file
-   */
-  void setAuthor(const QString & author);
-
-  /**
-   * Sets the license of the file
-   */
-  void setLicense(const QString & license);
-
-  /**
-   * Sets the remark of the file
-   */
-  void setDocumentRemark(const QString & rem);
-
-  /**
-   * Sets the generator of the file
-   */
-  void setGenerator(const QString & generator);
-
-  /**
-   * Gets the generator of the file
-   */
-  QString generator() const;
-
-  /**
-   * Gets the version of the loaded file
-   */
-  QString version() const;
-
-  /**
-   * Sets version of the loaded file
-   * @param ver the new version
-   */
-  void setVersion(const QString & ver);
-
+  // *** lesson methods ***
+  
   /**
    * @returns the current lesson index
    */
@@ -435,7 +443,6 @@ public:
    */
   int lessonIndex(const QString &description) const;
 
-
   /**
    * Append a new lesson to the list of lessons.
    * @param lessonName name for the new lesson
@@ -443,14 +450,12 @@ public:
    */
   int appendLesson(const QString &lessonName);
 
-
   /**
    * Rename a lesson.
    * @param lessonIndex index of lesson
    * @param lessonName new name for the lesson
    */
   void renameLesson(const int lessonIndex, const QString &lessonName);
-
 
   /**
    * Get list of ALL lessons that are selected for query.
@@ -482,7 +487,6 @@ public:
    */
   void removeLessonFromQuery(int lessonIndex);
 
-
   /**
    * All lesson descriptions as stringlist.
    * @returns                a list of defined lessons
@@ -493,6 +497,7 @@ public:
    * @returns                the number of lessons defined
    */
   int lessonCount() const;
+
   /**
    * Delete a lesson.
    * @param lessonIndex which lesson
@@ -514,6 +519,8 @@ public:
    */
   void moveLesson(int from, int to);
 
+  // *** conjugation methods ***
+
   /**
    * @param index            index of translation
    * @returns                a pointer to conjugations if available
@@ -533,6 +540,8 @@ public:
   */
   int conjugationCount() const;
 
+  // *** article methods ***
+  
   /**
    * @param index            index of translation
    * @returns                a pointer to articles if available
@@ -552,21 +561,7 @@ public:
   */
   int articleCount() const;
 
-  /**
-   * Returns the recommended size
-   *
-   * @param index            number of expr, -1 = lesson
-   * @returns                width of column
-   */
-  int sizeHint(int index) const;
-
-  /**
-   * Sets the recommended size
-   *
-   * @param index            number of expr, -1 = lesson
-   * @param width            width of column
-   */
-  void setSizeHint (int index, const int width);
+  // *** file format specific methods ***
 
   /**
    * Returns the delimiter (separator) used for csv import and export.
