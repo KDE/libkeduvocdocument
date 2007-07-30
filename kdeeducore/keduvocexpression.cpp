@@ -93,6 +93,7 @@ void KEduVocExpression::KEduVocExpressionPrivate::init()
 //  m_reverseQueryDates.append(dt);
   m_lesson = 0;
   m_sortIndex = 0;
+  m_sizeHint = 0;
 }
 
 
