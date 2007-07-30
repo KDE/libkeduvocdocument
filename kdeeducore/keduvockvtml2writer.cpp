@@ -447,21 +447,46 @@ bool KEduVocKvtml2Writer::writeArticle(QDomElement &articleElement, int article)
   
   // male
   m_doc->article(article).getMale(&def, &indef);
-  definite.appendChild(newTextElement(KVTML_MALE, def));
-  indefinite.appendChild(newTextElement(KVTML_MALE, indef));
+  if (!def.isEmpty())
+  {
+    definite.appendChild(newTextElement(KVTML_MALE, def));
+  }
+  if (!indef.isEmpty())
+  {
+    indefinite.appendChild(newTextElement(KVTML_MALE, indef));
+  }
   
   // female
   m_doc->article(article).getFemale(&def, &indef);
-  definite.appendChild(newTextElement(KVTML_FEMALE, def));
-  indefinite.appendChild(newTextElement(KVTML_FEMALE, indef));
+  if (!def.isEmpty())
+  {
+    definite.appendChild(newTextElement(KVTML_FEMALE, def));
+  }
+  if (!indef.isEmpty())
+  {
+    indefinite.appendChild(newTextElement(KVTML_FEMALE, indef));
+  }
     
   // neutral
   m_doc->article(article).getNatural(&def, &indef);
-  definite.appendChild(newTextElement(KVTML_NEUTRAL, def));
-  indefinite.appendChild(newTextElement(KVTML_NEUTRAL, indef));
+  if (!def.isEmpty())
+  {
+    definite.appendChild(newTextElement(KVTML_NEUTRAL, def));
+  }
+  if (!indef.isEmpty())
+  {
+    indefinite.appendChild(newTextElement(KVTML_NEUTRAL, indef));
+  }
 
-  articleElement.appendChild(definite);
-  articleElement.appendChild(indefinite);
+  if (definite.hasChildNodes())
+  {
+    articleElement.appendChild(definite);
+  }
+  
+  if (indefinite.hasChildNodes())
+  {
+    articleElement.appendChild(indefinite);
+  }
   return true;
 }
 
