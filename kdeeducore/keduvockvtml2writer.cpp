@@ -36,7 +36,7 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
 {
   m_doc = doc;
 
-  m_domDoc = QDomDocument("kvtml SYSTEM \"kvtml2.dtd\"");
+  m_domDoc = QDomDocument("kvtml PUBLIC \"kvtml2.dtd\" \"http://edu.kde.org/kanagram/kvtml2.dtd\"");
   m_domDoc.appendChild(m_domDoc.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""));
   QDomElement domElementKvtml = m_domDoc.createElement("kvtml");
   m_domDoc.appendChild(domElementKvtml);
@@ -405,7 +405,8 @@ bool KEduVocKvtml2Writer::writeLessons(QDomElement &lessonsElement)
   if (m_doc->lessonDescriptions().count() == 0)
     return true;
 
-  int count = 0;
+  int count = 1; // this starts at 1 because appendLesson returns the count of the lessondescriptions
+  // instead of the index the lesson was appended at (size() - 1)
   foreach(QString lesson, m_doc->lessonDescriptions())
   {
     // make lesson element
@@ -421,6 +422,13 @@ bool KEduVocKvtml2Writer::writeLessons(QDomElement &lessonsElement)
     thisLesson.appendChild(newTextElement(KVTML_CURRENT, m_doc->currentLesson() == count ? KVTML_TRUE : KVTML_FALSE));
     
     // TODO: add the entryids...
+    for (int i = 0; i < m_doc->entryCount(); ++i)
+    {
+      if (m_doc->entry(i)->lesson() == count)
+      {
+        thisLesson.appendChild(newTextElement(KVTML_ENTRYID, QString::number(i)));
+      }
+    }
     
     lessonsElement.appendChild(thisLesson);
     ++count;
@@ -518,7 +526,10 @@ bool KEduVocKvtml2Writer::writeEntries(QDomElement &entriesElement)
     entryElement.appendChild(newTextElement(KVTML_INQUERY, thisEntry->isInQuery() ? KVTML_TRUE : KVTML_FALSE));
     
     // write sizehint
-    entryElement.appendChild(newTextElement(KVTML_SIZEHINT, QString::number(thisEntry->sizeHint()) ));
+    if (thisEntry->sizeHint() > 0)
+    {
+      entryElement.appendChild(newTextElement(KVTML_SIZEHINT, QString::number(thisEntry->sizeHint()) ));
+    }
 
     // loop through translations
     for (int trans = 0; trans < thisEntry->translationCount(); ++trans)
@@ -541,10 +552,16 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, cons
   translationElement.appendChild(newTextElement(KVTML_TEXT, translation.translation()));
   
   // <type></type>
-  translationElement.appendChild(newTextElement(KVTML_TYPE, translation.type()));
+  if (!translation.type().isEmpty())
+  {
+    translationElement.appendChild(newTextElement(KVTML_TYPE, translation.type()));
+  }
   
   // <comment></comment>
-  translationElement.appendChild(newTextElement(KVTML_COMMENT, translation.comment()));
+  if (!translation.comment().isEmpty())
+  {
+    translationElement.appendChild(newTextElement(KVTML_COMMENT, translation.comment()));
+  }
 
   // <pronunciation></pronunciation>
   if (!translation.pronunciation().isEmpty())

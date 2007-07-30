@@ -5,5 +5,7 @@ reader:
 
 writer:
   write translation sub-parts: falsefriend grades
-  write lesson entryids
+  
+extra classes:
+  lesson class
 
