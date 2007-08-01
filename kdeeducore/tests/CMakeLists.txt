@@ -1,12 +1,14 @@
 
-include_directories( ${CMAKE_SOURCE_DIR}/kdeeducore  )
+include_directories( ${CMAKE_SOURCE_DIR}/libkdeedu/kdeeducore/   )
 
 
 ########### next target ###############
-set(loader_SRCS loader.cpp )
+
+set(converter_SRCS
+   converter.cpp )
 
 
-kde4_add_test_executable(loader ${loader_SRCS})
+kde4_add_executable(converter ${converter_SRCS})
 
-target_link_libraries(loader  ${KDE4_KDECORE_LIBS} kdeeducore )
+target_link_libraries(converter kdeeducore )
 
