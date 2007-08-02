@@ -54,9 +54,9 @@ int main (int argc, char ** argv)
       KUrl outfile(arguments->url(1));
       
       KEduVocDocument document;
-      kDebug() << "Reading " << infile << endl;
+      kDebug() << "Reading " << infile;
       document.open(infile);
-      kDebug() << "Writing to " << outfile << endl;
+      kDebug() << "Writing to " << outfile;
       document.saveAs(outfile, KEduVocDocument::kvtml, "converter");
     }
   }

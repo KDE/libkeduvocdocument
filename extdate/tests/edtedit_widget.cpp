@@ -40,8 +40,8 @@ EDTEdit::EDTEdit( QWidget *p=0 ) : KXmlGuiWindow( p ) {
 
 EDTEdit::~EDTEdit() {
 	//Output current date setting on exit
-	kDebug() << "ExDateEdit:     " << ed->date().toString() << endl;
-	kDebug() << "ExDateTimeEdit: " << edt->date().toString() << endl;
+	kDebug() << "ExDateEdit:     " << ed->date().toString();
+	kDebug() << "ExDateTimeEdit: " << edt->date().toString();
 }
 
 #include "edtedit_widget.moc"

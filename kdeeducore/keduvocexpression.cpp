@@ -528,7 +528,7 @@ void KEduVocExpression::removeTranslation(int index)
     return;
 
   if (index == 0) {
-    kDebug() << "Warning - attempting to use removeTranslation(0) to remove the first translation!" << endl;
+    kDebug() << "Warning - attempting to use removeTranslation(0) to remove the first translation!";
     // This will only work when we get everything moved into a translation class.
     d->m_translations[0] = "";
     return;

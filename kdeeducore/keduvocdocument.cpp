@@ -375,7 +375,7 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
 
 void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
 {
-    kDebug() << "Merging of docs is not implemented" << endl; /// @todo IMPLEMENT ME
+    kDebug() << "Merging of docs is not implemented"; /// @todo IMPLEMENT ME
 /*
   if (docToMerge) {
     QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -961,7 +961,7 @@ int KEduVocDocument::identifierCount() const
 int KEduVocDocument::appendIdentifier(const QString & id)
 {
   d->m_identifiers.append(id);
-  kDebug() << "appending identifier" << id << endl;
+  kDebug() << "appending identifier" << id;
   return d->m_identifiers.size() - 1;
 }
 

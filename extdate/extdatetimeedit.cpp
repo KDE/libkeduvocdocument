@@ -141,7 +141,7 @@ void ExtDateEdit::highlightActiveField() {
 	lineEdit()->setSelection( iStart, iLength );
 
 // 	//DEBUG
-// 	kDebug() << "selected text: " << lineEdit()->selectedText() << endl;
+// 	kDebug() << "selected text: " << lineEdit()->selectedText();
 
 }
 
@@ -231,7 +231,7 @@ bool ExtDateEdit::focusNextPrevChild( bool next ) {
 		if ( c == 'Y' ) NewField = 2;
 
 // 		//DEBUG
-// 		kDebug() << pos << "  " << c << "  " << NewField << endl;
+// 		kDebug() << pos << "  " << c << "  " << NewField;
 
 	}
 
@@ -247,7 +247,7 @@ void ExtDateEdit::invokeKey( Qt::Key k ) {
 
 void ExtDateEdit::focusInEvent( QFocusEvent *e ) {
 // 	//DEBUG
-// 	kDebug() << "focusInEvent()" << endl;
+// 	kDebug() << "focusInEvent()";
 
 	QSpinBox::focusInEvent(e);
 	highlightActiveField();
@@ -342,7 +342,7 @@ edLineEdit::edLineEdit( ExtDateEdit *parent ) : QLineEdit( parent ) {
 
 void edLineEdit::mouseReleaseEvent( QMouseEvent * ) {
 // 	//DEBUG
-// 	kDebug() << "mousePressEvent()" << endl;
+// 	kDebug() << "mousePressEvent()";
 
 	//assumes no prefix/suffix!
 	QString sdf = edParent->simpleDateFormat();
@@ -357,14 +357,14 @@ void edLineEdit::mouseReleaseEvent( QMouseEvent * ) {
 	else if ( c == 'Y' ) edParent->setActiveField( 2 );
 
 // 	//DEBUG
-// 	kDebug() << "ActiveField = " << edParent->activeField() << endl;
+// 	kDebug() << "ActiveField = " << edParent->activeField();
 
 	edParent->highlightActiveField();
 }
 
 void edLineEdit::keyPressEvent( QKeyEvent *e ) {
 // 	//DEBUG
-// 	kDebug() << "keyPressEvent()" << endl;
+// 	kDebug() << "keyPressEvent()";
 
 	switch ( e->key() ) {
 		case Qt::Key_Up:

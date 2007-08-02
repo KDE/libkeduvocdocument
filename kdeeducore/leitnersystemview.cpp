@@ -211,7 +211,7 @@ void LeitnerSystemView::LeitnerSystemViewPrivate::calculateSize()
 
 void LeitnerSystemView::mousePressEvent(QMouseEvent* e)
 {
-	kDebug() << "mouseClick" << endl;
+	kDebug() << "mouseClick";
 	//if the user has clicked into a box
 	if( e->y() > d->m_imageY && e->y() < d->m_imageY + 64 && e->x() < width() )
 	{

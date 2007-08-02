@@ -25,7 +25,7 @@ public:
     KEduVocTranslationPrivate () // ( KEduVocTranslation* qq )
             //: q ( qq )
     {
-        kDebug() << "KEduVocTranslationPrivate()" <<endl;
+        kDebug() << "KEduVocTranslationPrivate()";
         init();
     }
 
@@ -42,7 +42,7 @@ public:
 /*
 void KEduVocTranslation::KEduVocTranslationPrivate::init()
 {
-kDebug() << "KEduVocTranslation::KEduVocTranslationPrivate::init()" << endl;
+kDebug() << "KEduVocTranslation::KEduVocTranslationPrivate::init()";
     m_translation = QString();
 }
 */
@@ -86,7 +86,7 @@ bool KEduVocTranslation::KEduVocTranslationPrivate::operator== ( const KEduVocTr
 /*
 void KEduVocTranslation::KEduVocTranslationPrivate::operator= ( const KEduVocTranslation::KEduVocTranslationPrivate &p )
 {
-    kDebug() << "KEduVocTranslation::KEduVocTranslationPrivate::operator=" << endl;
+    kDebug() << "KEduVocTranslation::KEduVocTranslationPrivate::operator=";
 }
 */
 
