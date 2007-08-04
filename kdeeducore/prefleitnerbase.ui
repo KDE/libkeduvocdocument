@@ -35,9 +35,6 @@
        <property name="text" >
         <string>Appl&amp;y Changes</string>
        </property>
-       <property name="shortcut" >
-        <string>Alt+Y</string>
-       </property>
       </widget>
      </item>
      <item row="3" column="0" colspan="2" >
@@ -81,9 +78,6 @@
        <property name="text" >
         <string>Disc&amp;ard Changes</string>
        </property>
-       <property name="shortcut" >
-        <string>Alt+A</string>
-       </property>
       </widget>
      </item>
      <item row="1" column="0" >
@@ -91,18 +85,12 @@
        <property name="text" >
         <string>Add a bo&amp;x</string>
        </property>
-       <property name="shortcut" >
-        <string>Alt+X</string>
-       </property>
       </widget>
      </item>
      <item row="2" column="0" >
       <widget class="QPushButton" name="btnDeleteBox" >
        <property name="text" >
         <string>Delete selected &amp;box</string>
-       </property>
-       <property name="shortcut" >
-        <string>Alt+B</string>
        </property>
       </widget>
      </item>
