@@ -44,7 +44,7 @@ class LeitnerSystem;
  * This class contains the expressions of your vocabulary
  * as well as other information about the vocabulary
  */
-class KDEEDUCORE_EXPORT KEduVocDocument : public QObject
+class KEDUVOCDOCUMENT_EXPORT KEduVocDocument : public QObject
 {
   Q_OBJECT
 public:

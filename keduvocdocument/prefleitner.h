@@ -31,7 +31,7 @@ class LeitnerSystem;
  * This class is a dialog for configuring a LeitnerSystem
  * @author Martin Pfeiffer <hubipete@gmx.net>
  */
-class KDEEDUCORE_EXPORT PrefLeitner : public QDialog
+class KEDUVOCDOCUMENT_EXPORT PrefLeitner : public QDialog
 {
 	Q_OBJECT
 

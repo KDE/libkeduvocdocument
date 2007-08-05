@@ -36,7 +36,7 @@
 
 class KEduVocMultipleChoicePrivate;
 
-class KDEEDUCORE_EXPORT KEduVocMultipleChoice
+class KEDUVOCDOCUMENT_EXPORT KEduVocMultipleChoice
 {
 
 public:

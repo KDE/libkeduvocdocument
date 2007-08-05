@@ -30,7 +30,7 @@
 @author Martin Pfeiffer
 */
 
-class KDEEDUCORE_EXPORT LeitnerSystem
+class KEDUVOCDOCUMENT_EXPORT LeitnerSystem
 {
 public:
 	/**Constructor without arguments*/

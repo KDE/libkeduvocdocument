@@ -29,28 +29,28 @@
 namespace SharedKvtmlFiles
 {
     /** get list of all languages found in any files */
-    KDEEDUCORE_EXPORT QStringList languages();
+    KEDUVOCDOCUMENT_EXPORT QStringList languages();
 
     /** get list of filenames found of given language 
      *@param language language requested QString() for all languages
      *@return a list of filenames with words in language
      */
-    KDEEDUCORE_EXPORT QStringList fileNames(const QString &language = QString());
+    KEDUVOCDOCUMENT_EXPORT QStringList fileNames(const QString &language = QString());
 
     /** get the list of document titles found of a given language
      *@param language requested language QString() for all titles
      *@return a list of document titles with words in language
      */
-    KDEEDUCORE_EXPORT QStringList titles(const QString &language = QString());
+    KEDUVOCDOCUMENT_EXPORT QStringList titles(const QString &language = QString());
 
     /** get the list of document remarts found of a given language
      *@param language requested language QString() for all comments
      *@return a list of document remarks with words in language
      */
-    KDEEDUCORE_EXPORT QStringList comments(const QString &language = QString());
+    KEDUVOCDOCUMENT_EXPORT QStringList comments(const QString &language = QString());
 
     /** rescan the shared kvtml locations */
-    KDEEDUCORE_EXPORT void rescan();
+    KEDUVOCDOCUMENT_EXPORT void rescan();
 }
 
 #endif

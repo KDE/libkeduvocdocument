@@ -2,7 +2,7 @@ add_subdirectory(tests)
 
 ########### next target ###############
 
-set(kdeeducore_LIB_SRCS
+set(keduvocdocument_LIB_SRCS
    keduvoccsvreader.cpp
    keduvoccsvwriter.cpp
    keduvocdocument.cpp
@@ -26,16 +26,16 @@ set(kdeeducore_LIB_SRCS
    prefleitner.cpp )
 
 
-kde4_add_ui_files(kdeeducore_LIB_SRCS
+kde4_add_ui_files(keduvocdocument_LIB_SRCS
    prefleitnerbase.ui
 )
 
-kde4_add_library(kdeeducore SHARED ${kdeeducore_LIB_SRCS})
+kde4_add_library(keduvocdocument SHARED ${keduvocdocument_LIB_SRCS})
 
-target_link_libraries(kdeeducore  ${KDE4_KIO_LIBS} ${QT_QTXML_LIBRARY})
+target_link_libraries(keduvocdocument  ${KDE4_KIO_LIBS} ${QT_QTXML_LIBRARY})
 
-set_target_properties(kdeeducore PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-install(TARGETS kdeeducore  DESTINATION ${LIB_INSTALL_DIR} )
+set_target_properties(keduvocdocument PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
+install(TARGETS keduvocdocument  DESTINATION ${LIB_INSTALL_DIR} )
 
 
 ########### install files ###############

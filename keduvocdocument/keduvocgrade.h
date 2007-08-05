@@ -58,7 +58,7 @@ Contains grading information (query date, bad count) for one language with respe
 
 	@author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
-class KDEEDUCORE_EXPORT KEduVocGrade
+class KEDUVOCDOCUMENT_EXPORT KEduVocGrade
 {
 public:
     KEduVocGrade();

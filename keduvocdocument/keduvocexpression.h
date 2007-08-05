@@ -30,7 +30,7 @@
   This class contains one vocabulary expression as an original with one or more
   translations
   */
-class KDEEDUCORE_EXPORT KEduVocExpression
+class KEDUVOCDOCUMENT_EXPORT KEduVocExpression
 {
 public:
 

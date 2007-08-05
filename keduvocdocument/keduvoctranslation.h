@@ -32,7 +32,7 @@
 	@author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
 
-class KDEEDUCORE_EXPORT KEduVocTranslation
+class KEDUVOCDOCUMENT_EXPORT KEduVocTranslation
 {
 public:
     /**

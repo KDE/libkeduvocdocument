@@ -33,7 +33,7 @@
  * cards of this LeitnerBox
  * @author Martin Pfeiffer <hubipete@gmx.net>
  */
-class KDEEDUCORE_EXPORT LeitnerBox
+class KEDUVOCDOCUMENT_EXPORT LeitnerBox
 {
 public:
 	/**

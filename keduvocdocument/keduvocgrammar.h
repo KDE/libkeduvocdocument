@@ -49,7 +49,7 @@
  *
  * It contains all available articles of the language as QString
  */
-class KDEEDUCORE_EXPORT KEduVocArticle
+class KEDUVOCDOCUMENT_EXPORT KEduVocArticle
 {
 public:
 
@@ -113,7 +113,7 @@ private:
 };
 
 
-class KDEEDUCORE_EXPORT KEduVocComparison
+class KEDUVOCDOCUMENT_EXPORT KEduVocComparison
 {
 public:
 
@@ -160,7 +160,7 @@ private:
 };
 
 
-class KDEEDUCORE_EXPORT KEduVocTenseRelation
+class KEDUVOCDOCUMENT_EXPORT KEduVocTenseRelation
 {
 public:
   /** default constructor */
@@ -183,7 +183,7 @@ private:
 /**
  * The conjugation of a verb
  */
-class KDEEDUCORE_EXPORT KEduVocConjugation
+class KEDUVOCDOCUMENT_EXPORT KEduVocConjugation
 {
 public:
 

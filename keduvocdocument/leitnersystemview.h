@@ -32,7 +32,7 @@ class LeitnerSystem;
  * and add boxes within a GUI.
  * @author Martin Pfeiffer
  */
-class KDEEDUCORE_EXPORT LeitnerSystemView : public QWidget
+class KEDUVOCDOCUMENT_EXPORT LeitnerSystemView : public QWidget
 {
 	Q_OBJECT
 
