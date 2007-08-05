@@ -17,7 +17,6 @@
 
 #include "keduvocdocument.h"
 
-#include <QApplication>
 #include <QFileInfo>
 #include <QTextStream>
 #include <QtAlgorithms>
@@ -226,7 +225,6 @@ bool KEduVocDocument::open(const KUrl& url)
 
     FileType ft = detectFileType(url.path());
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
     switch (ft) {
       case kvtml:
       {
@@ -295,8 +293,6 @@ bool KEduVocDocument::open(const KUrl& url)
       }
     }
 
-    QApplication::restoreOverrideCursor();
-
     if (!read) {
       QString msg = i18n("Could not open or properly read \"%1\"\n(Error reported: %2)", url.path(), errorMessage);
       KMessageBox::error(0, msg, i18n("Error Opening File"));
@@ -337,7 +333,6 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
       return false;
     }
 
-    QApplication::setOverrideCursor(Qt::WaitCursor);
     switch (ft) {
       case kvtml: {
         KEduVocKvtmlWriter kvtmlWriter(&f);
@@ -357,7 +352,6 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
       break;
     }
     f.close();
-    QApplication::restoreOverrideCursor();
 
     if (!saved) {
       QString msg = i18n("Could not save \"%1\"\nDo you want to try again?", tmp.path());
@@ -378,7 +372,6 @@ void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
     kDebug() << "Merging of docs is not implemented"; /// @todo IMPLEMENT ME
 /*
   if (docToMerge) {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
 
     QStringList new_names = docToMerge->lessonDescriptions();
 
@@ -581,7 +574,6 @@ void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
       }
     }
   }
-  QApplication::restoreOverrideCursor();
 */
 }
 
@@ -961,7 +953,6 @@ int KEduVocDocument::identifierCount() const
 int KEduVocDocument::appendIdentifier(const QString & id)
 {
   d->m_identifiers.append(id);
-  kDebug() << "appending identifier" << id;
   return d->m_identifiers.size() - 1;
 }
 
