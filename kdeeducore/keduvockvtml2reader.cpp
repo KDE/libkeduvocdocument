@@ -386,7 +386,7 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
     expr.translation(index).setPronunciation(currentElement.text());
   }
   
-  //<falsefriend fromid="1"></falsefriendfrom>
+  //<falsefriend fromid="1"></falsefriend>
   currentElement = translationElement.firstChildElement(KVTML_FALSEFRIEND);
   if (!currentElement.isNull())
   {
