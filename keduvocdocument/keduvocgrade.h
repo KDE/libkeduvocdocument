@@ -44,7 +44,7 @@
 #define KV_LEV7_GRADE      7
 #define KV_LEV7_TEXT       I18N_NOOP("Level 7")
 
-#include "libkdeedu_core_export.h"
+#include "libkeduvocdocument_export.h"
 
 #include <QtCore/QDateTime>
 

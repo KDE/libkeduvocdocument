@@ -27,7 +27,7 @@
 #ifndef KEDUVOCMULTIPLECHOICE_H
 #define KEDUVOCMULTIPLECHOICE_H
 
-#include "libkdeedu_core_export.h"
+#include "libkeduvocdocument_export.h"
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>

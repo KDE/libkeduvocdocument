@@ -41,7 +41,7 @@ install(TARGETS keduvocdocument  DESTINATION ${LIB_INSTALL_DIR} )
 ########### install files ###############
 
 install(FILES
-   libkdeedu_core_export.h
+   libkeduvocdocument_export.h
    keduvocdocument.h
    keduvocexpression.h
    keduvocgrade.h

@@ -21,7 +21,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  **************************************************************************/
 
-#include "libkdeedu_core_export.h"
+#include "libkeduvocdocument_export.h"
 
 #include <QtGui/QDialog>
 

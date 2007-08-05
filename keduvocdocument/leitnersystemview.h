@@ -20,7 +20,7 @@
 #ifndef LEITNERSYSTEMVIEW_H
 #define LEITNERSYSTEMVIEW_H
 
-#include "libkdeedu_core_export.h"
+#include "libkeduvocdocument_export.h"
 
 #include <QtGui/QWidget>
 

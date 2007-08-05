@@ -17,7 +17,7 @@
 #ifndef KEDUVOCTRANSLATION_H
 #define KEDUVOCTRANSLATION_H
 
-#include "libkdeedu_core_export.h"
+#include "libkeduvocdocument_export.h"
 
 #include <QtCore/QMap>
 #include <QtCore/QString>

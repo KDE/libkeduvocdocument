@@ -16,7 +16,7 @@
 #ifndef SHAREDKVTMLFILES_H
 #define SHAREDKVTMLFILES_H
 
-#include "libkdeedu_core_export.h"
+#include "libkeduvocdocument_export.h"
 
 #include <QtCore/QStringList>
 

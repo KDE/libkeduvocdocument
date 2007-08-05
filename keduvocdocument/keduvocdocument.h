@@ -18,7 +18,7 @@
 #ifndef KEDUVOCDOCUMENT_H
 #define KEDUVOCDOCUMENT_H
 
-#include "libkdeedu_core_export.h"
+#include "libkeduvocdocument_export.h"
 
 #define KVD_VERS_PREFIX " v"       // kvoctrain v0.1.0
 
