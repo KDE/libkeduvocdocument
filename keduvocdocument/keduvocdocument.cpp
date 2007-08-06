@@ -1145,7 +1145,7 @@ int KEduVocDocument::lessonCount() const
 bool KEduVocDocument::deleteLesson(int lessonIndex, int deleteMode)
 {  // too bad we count from one!
   lessonIndex++;
-  for (int ent = 0; ent < entryCount(); ent++) {
+  for (int ent = entryCount() - 1; ent  >= 0 ; ent--) {
     if (entry(ent)->lesson() == lessonIndex) {
       if (deleteMode == DeleteEmptyLesson)
         return false; // stop if there are vocabs left in the lesson
