@@ -10,5 +10,5 @@ set(converter_SRCS
 
 kde4_add_executable(converter ${converter_SRCS})
 
-target_link_libraries(converter kdeeducore )
+target_link_libraries(converter keduvocdocument )
 
