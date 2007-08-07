@@ -39,11 +39,15 @@ public:
      * Default constructor for an empty translation.
      */
     KEduVocTranslation( );
-    /**
+    
+	/**
      * Constructor
      * @param translation is used as translation
      */
     KEduVocTranslation( const QString &translation );
+	
+	/** copy constructor for d-pointer safet */
+	KEduVocTranslation( const KEduVocTranslation &other);
 
     /**
      * Destructor
@@ -248,36 +252,8 @@ public:
     bool operator==(const KEduVocTranslation &translation) const;
 
 private:
-    //KEduVocTranslationPrivate* const d;
-
-    /// This is the word itself. The vocabulary. This is what it is all about.
-    QString m_translation;
-    /// noun:male etc (language dependent)
-    QString m_types;
-    QString m_usageLabel;
-    QString m_comment;
-    QString m_paraphrase;
-    QString m_synonym;
-    QString m_example;
-    QString m_antonym;
-    QString m_pronunciation;
-
-    KEduVocConjugation m_conjugation;
-
-    KEduVocComparison m_comparison;
-
-    KEduVocMultipleChoice m_multipleChoice;
-
-    // Here come all int indexFrom grades. (If you want, imagine the TO grades as int indexFrom of the other translation. That is where they belong. )
-    // User is asked to give THIS here as answer, than the grades go here.
-    // User answers, this is the source, grades go to the other translation.
-    // Grades go to the translation the user has to type/choose/whatever.
-    // not all have to be supplied
-    QMap<int, KEduVocGrade> m_grades;
-
-    /// One false friend string per other language
-    QMap<int, QString> m_falseFriends;
-
+	class KEduVocTranslationPrivate;
+    KEduVocTranslationPrivate* const d;
 };
 
 #endif
