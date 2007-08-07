@@ -82,7 +82,7 @@ public:
    * @param translationElement QDomElement <translation> to write to, with id pre-set
    * @param translation object to write
    */
-  bool writeTranslation(QDomElement &translationElement, const KEduVocTranslation &translation);
+  bool writeTranslation(QDomElement &translationElement, KEduVocTranslation &translation);
   
   /** write the lesson group
    * @param lessonsElement QDomElement <lessons> to write to

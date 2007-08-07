@@ -1,11 +1,8 @@
-Temporary todo for kvtml2
+todo for kvtml2
 
 reader:
   store identifier name, sizehint and type? (need a place to store it first)
 
-writer:
-  write translation sub-parts: falsefriend grades
-  
 extra classes:
   lesson class
 

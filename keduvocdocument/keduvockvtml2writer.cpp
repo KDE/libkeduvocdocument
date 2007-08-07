@@ -571,7 +571,7 @@ bool KEduVocKvtml2Writer::writeEntries(QDomElement &entriesElement)
   return true;
 }
 
-bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, const KEduVocTranslation &translation)
+bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEduVocTranslation &translation)
 {
   // <text>Kniebeugen</text>
   translationElement.appendChild(newTextElement(KVTML_TEXT, translation.translation()));
@@ -594,8 +594,20 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, cons
     translationElement.appendChild(newTextElement(KVTML_PRONUNCIATION, translation.pronunciation()));
   }
   
-  // TODO
   // <falsefriend fromid="0"></falsefriend>
+  // loop through the identifiers
+  for (int i = 0; i < m_doc->identifierCount(); ++i)
+  {
+	// see if this identifier has a falsefriend in this translation
+	QString thisFriend = translation.falseFriend(i);
+	if (!thisFriend.isEmpty())
+	{
+	  // if so, create it, and set the fromid to i
+	  QDomElement thisFriendElement = newTextElement(KVTML_FALSEFRIEND, thisFriend);
+	  thisFriendElement.setAttribute(KVTML_FROMID, QString::number(i));
+	  translationElement.appendChild(thisFriendElement);
+	}
+  }
 
   // <antonym></antonym>
   if (!translation.antonym().isEmpty())
@@ -628,7 +640,27 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, cons
   }
   
   // grades
-  // TODO
+  for (int i = 0; i < m_doc->identifierCount(); ++i)
+  {
+	KEduVocGrade thisGrade = translation.gradeFrom(i);
+	if (thisGrade.queryCount() > 0)
+	{
+	  QDomElement gradeElement = m_domDoc.createElement(KVTML_GRADE);
+	  gradeElement.setAttribute(KVTML_FROMID, QString::number(i));
+	  //<currentgradefloat>0.8</currentgradefloat>
+
+	  //<count>6</count>
+	  gradeElement.appendChild(newTextElement(KVTML_COUNT, QString::number(thisGrade.queryCount())));
+
+	  //<errorcount>1</errorcount>
+	  gradeElement.appendChild(newTextElement(KVTML_ERRORCOUNT, QString::number(thisGrade.badCount())));
+
+	  //<date>949757271</date>
+	  gradeElement.appendChild(newTextElement(KVTML_DATE, QString::number(thisGrade.queryDate().toTime_t())));
+	  
+	  translationElement.appendChild(gradeElement);
+	}
+  }
   
   // conjugation
   if (!translation.conjugation().entryCount() > 0)
