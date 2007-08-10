@@ -51,6 +51,9 @@ namespace SharedKvtmlFiles
 
     /** rescan the shared kvtml locations */
     KEDUVOCDOCUMENT_EXPORT void rescan();
+	
+	/** sort files downloaded to kvtml top-level dir into locale sub-folders */
+	KEDUVOCDOCUMENT_EXPORT void sortDownloadedFiles();
 }
 
 #endif

@@ -17,6 +17,8 @@
 
 #include "keduvocdocument.h"
 
+#include <kio/copyjob.h>
+#include <kio/job.h>
 #include <klocale.h>
 #include <kstandarddirs.h>
 
@@ -103,6 +105,8 @@ void SharedKvtmlFilesPrivate::rescan()
         // add it's comment to the comment list
         this->m_commentList.append(doc->documentRemark());
     }
+	// plug a memory leak
+	delete doc;
 }
 
 void SharedKvtmlFiles::rescan()
@@ -164,4 +168,36 @@ QStringList SharedKvtmlFiles::comments(const QString &language)
 	}
 
 	return retlist;
+}
+
+void SharedKvtmlFiles::sortDownloadedFiles()
+{
+	QStringList unsortedFiles = KGlobal::dirs()->findAllResources("data", 
+		QString("kvtml/*.kvtml"));
+	
+	KEduVocDocument *doc = new KEduVocDocument();
+
+	while (unsortedFiles.size() > 0)
+	{
+		KUrl fileUrl(KUrl::fromPath(unsortedFiles.first()));
+		// find the file's locale
+        // open the file
+        doc->open(fileUrl);
+
+		QString locale = doc->identifier(0);
+
+		// make sure the locale sub-folder exists
+		KUrl pathUrl(fileUrl);
+		pathUrl.setFileName(QString());
+		pathUrl.addPath(locale);
+		KIO::mkdir(pathUrl);
+		
+		// move the file into the locale sub-folder
+		KIO::move(fileUrl, pathUrl);
+		
+		// take off the one we just did
+		unsortedFiles.removeFirst();
+	}
+	
+	rescan();
 }
