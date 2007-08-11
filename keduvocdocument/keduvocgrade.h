@@ -48,7 +48,7 @@
 
 #include <QtCore/QDateTime>
 
-typedef signed char grade_t;
+typedef unsigned short grade_t;
 typedef unsigned short count_t;
 
 class KEduVocGradePrivate;
