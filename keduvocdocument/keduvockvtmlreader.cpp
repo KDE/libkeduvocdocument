@@ -1261,6 +1261,8 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
         expr.translation(i).setAntonym (antonym);
 
       if ( i != 0 ) {
+		expr.translation(i).gradeFrom(0).setGrade(grade);
+		expr.translation(0).gradeFrom(i).setGrade(r_grade);
         expr.translation(i).gradeFrom(0).setQueryCount(qcount);
         expr.translation(0).gradeFrom(i).setQueryCount(r_qcount);
         expr.translation(i).gradeFrom(0).setBadCount(bcount);
