@@ -157,14 +157,13 @@ void KEduVocTranslation::setComment ( const QString & expr )
 
 void KEduVocTranslation::setFalseFriend ( int indexFrom, const QString & expr )
 {
-//    m_falseFriends[indexFrom] = expr.simplified();
+    d->m_falseFriends[indexFrom] = expr.simplified();
 }
 
 
 QString KEduVocTranslation::falseFriend ( int indexFrom ) const
 {
-//    return m_falseFriends.value(indexFrom);
-return QString();
+    return d->m_falseFriends.value(indexFrom);
 }
 
 
