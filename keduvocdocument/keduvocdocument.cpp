@@ -335,10 +335,17 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
 
     switch (ft) {
       case kvtml: {
-        KEduVocKvtmlWriter kvtmlWriter(&f);
+		// write version 2 file
+        KEduVocKvtml2Writer kvtmlWriter(&f);
         saved = kvtmlWriter.writeDoc(this, generator);
       }
       break;
+	  case kvtml1: {
+		// write old version 1 file
+		KEduVocKvtmlWriter kvtmlWriter(&f);
+		saved = kvtmlWriter.writeDoc(this, generator);
+	    }
+		break;
 /** @todo include the csv write again, as soon as it's ported to the new classes
       case csv: {
         KEduVocCsvWriter csvWriter(&f);

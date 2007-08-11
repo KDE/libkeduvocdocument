@@ -56,7 +56,8 @@ public:
                   pauker,
                   vokabeln,
                   xdxf,
-                  csv };
+                  csv,
+				  kvtml1 };
 
   /**
    * Constructor for a KdeEdu vocabulary document
