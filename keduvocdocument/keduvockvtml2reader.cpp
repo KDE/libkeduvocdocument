@@ -906,8 +906,8 @@ bool KEduVocKvtml2Reader::readGrade(QDomElement &gradeElement, KEduVocExpression
   QDomElement currentElement = gradeElement.firstChildElement(KVTML_CURRENTGRADE);
   if (!currentElement.isNull())
   {
-    // TODO: find out how to use the current grade class for 
-    // currentGradeInt and currentGradeFloat, or if this will always just have a float
+	int value = currentElement.text().toInt();
+	expr.translation(index).gradeFrom(id).setGrade(value);
   }
   
   currentElement = gradeElement.firstChildElement(KVTML_COUNT);

@@ -647,7 +647,8 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
 	{
 	  QDomElement gradeElement = m_domDoc.createElement(KVTML_GRADE);
 	  gradeElement.setAttribute(KVTML_FROMID, QString::number(i));
-	  //<currentgradefloat>0.8</currentgradefloat>
+	  //<currentgrade>2</currentgrade>
+	  gradeElement.appendChild(newTextElement(KVTML_CURRENTGRADE, QString::number(thisGrade.grade())));
 
 	  //<count>6</count>
 	  gradeElement.appendChild(newTextElement(KVTML_COUNT, QString::number(thisGrade.queryCount())));
