@@ -66,9 +66,9 @@ bool KEduVocCsvReader::readDoc(KEduVocDocument *doc)
 
   for (int j = 0; j < languageCount; j++)
     if (j == 0)
-      m_doc->appendIdentifier(i18n("Original"));
+      m_doc->appendIdentifier(i18nc("@title:column the original language column", "Original"));
     else
-      m_doc->appendIdentifier(i18n("Translation %1", j));
+      m_doc->appendIdentifier(i18nc("@title:column one of the translation columns", "Translation %1", j));
 
   return true;
 }
