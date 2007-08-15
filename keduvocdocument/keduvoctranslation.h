@@ -160,8 +160,13 @@ public:
    */
   void setType( const QString &type);
 
+  /** reset the grades for this translation */
   void resetGrades();
 
+  /** get the gradeobject from given identifier 
+   * @param indexFrom which identifier to get the grade from
+   * @returns the grade object
+   */
   KEduVocGrade & gradeFrom( int indexFrom );
 
 

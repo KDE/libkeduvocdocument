@@ -88,9 +88,7 @@ public:
    * @param lessonsElement QDomElement <lessons> to write to
    */
   bool writeLessons(QDomElement &lessonsElement);
-  
-  bool writeConjugEntry(QDomDocument &domDoc, QDomElement &domElementParent, KEduVocConjugation &curr_conjug);
-  
+ 
   /** write a comparison
    * @param comparisonElement QDomElement <comparison> to write to
    * @param comparison object to write

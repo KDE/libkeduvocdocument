@@ -118,6 +118,9 @@ public:
    */
   bool readLesson(QDomElement &lessonElement);
 
+  /** get the errormessage string 
+   * @returns the errormessage string
+   */
   QString errorMessage() const { return m_errorMessage; }
 
 private:
