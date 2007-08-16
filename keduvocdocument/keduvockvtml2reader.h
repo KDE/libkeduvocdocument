@@ -45,7 +45,7 @@ public:
   bool readDoc(KEduVocDocument *doc);
   
   /** read information entries
-   * @param informationElement QDomElement <information>
+   * @param informationElement QDomElement information
    */
   bool readInformation(QDomElement &informationElement);
 
