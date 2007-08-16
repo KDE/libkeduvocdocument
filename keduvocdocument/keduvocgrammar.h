@@ -58,7 +58,9 @@ public:
    */
   explicit KEduVocArticle();
   
-  /** copy constructor for d-pointer safety */
+  /** copy constructor for d-pointer safety 
+   * @param other article object to copy
+   */
   KEduVocArticle(const KEduVocArticle &other);
 
   /**
@@ -98,8 +100,22 @@ public:
    */
   void setNatural(const QString &def, const QString &indef);
 
+  /** get the female articles
+   * @param def pointer to the definite form
+   * @param indef pointer to the indefinite form
+   */
   void getFemale (QString *def, QString *indef) const;
+
+  /** get the male articles
+   * @param def pointer to the definite form
+   * @param indef pointer to the indefinite form
+   */
   void getMale   (QString *def, QString *indef) const;
+  
+  /** get the neutral articles
+   * @param def pointer to the definite form
+   * @param indef pointer to the indefinite form
+   */
   void getNatural(QString *def, QString *indef) const;
   
   /**
@@ -122,7 +138,9 @@ public:
    */
   explicit KEduVocComparison();
   
-  /** copy constructor */
+  /** copy constructor 
+   * @param other comparison object to copy
+   */
   KEduVocComparison(const KEduVocComparison &other);
 
   /**
@@ -136,21 +154,53 @@ public:
   /** default destructor, deletes the d-pointer */
   ~KEduVocComparison();
   
+  /** set the first comparison
+   @param s value to set
+   */
   void setL1(const QString &s);
+
+  /** set the second comparison
+   @param s value to set
+   */
   void setL2(const QString &s);
+
+  /** set the third comparison
+   @param s value to set
+   */
   void setL3(const QString &s);
 
+  /** get the first comparison
+   * @returns the first comparison
+   */
   QString l1() const;
+
+  /** get the second comparison
+   * @returns the second comparison
+   */
   QString l2() const;
+
+  /** get the third comparison
+   * @returns the third comparison
+   */
   QString l3() const;
 
+  /** is the comparison empty
+   * @returns true if empty, false otherwise
+   */
   bool isEmpty() const;
+  
+  /** clear the comparison */
   void clear();
 
+  /** equality operator
+   * @param a object to compare to
+   * @returns true if comparisons are the same, false otherwise
+   */
   bool operator == (const KEduVocComparison& a) const;
 
-  /**
-   * assignment operator for d-pointer copying
+  /** assignment operator for d-pointer copying
+   * @param other object to copy from
+   * @returns reference to this object
    */
   KEduVocComparison &operator=(const KEduVocComparison& other);
 
