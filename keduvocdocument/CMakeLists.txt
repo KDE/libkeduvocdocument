@@ -8,6 +8,7 @@ set(keduvocdocument_LIB_SRCS
    keduvocdocument.cpp
    keduvocexpression.cpp
    keduvoctranslation.cpp
+   keduvoclesson.cpp
    keduvocgrade.cpp
    keduvocgrammar.cpp
    keduvockvtmlreader.cpp
@@ -46,6 +47,7 @@ install(FILES
    keduvocexpression.h
    keduvocgrade.h
    keduvocgrammar.h
+   keduvoclesson.h
    keduvocmultiplechoice.h
    keduvoctranslation.h
    leitnerbox.h
