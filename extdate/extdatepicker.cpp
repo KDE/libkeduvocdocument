@@ -23,7 +23,7 @@
 #include "extdatepicker.h"
 
 #include <QApplication>
-#include <QComboBox>
+#include <KComboBox>
 #include <QKeyEvent>
 #include <QLayout>
 #include <QStyle>
@@ -53,7 +53,7 @@ public:
     ExtDatePicker *q;
 
     QToolButton *closeButton;
-    QComboBox *selectWeek;
+    KComboBox *selectWeek;
     QToolButton *todayButton;
     QBoxLayout *navigationLayout;
     ExtCalendarSystem *calendar;
@@ -143,7 +143,7 @@ void ExtDatePicker::init( const ExtDate &dt )
 
   ++d->fontsize; // Make a little bigger
 
-  d->selectWeek = new QComboBox(this);
+  d->selectWeek = new KComboBox(this);
   d->selectWeek->setEditable(false);  // read only week selection
   d->todayButton = new QToolButton(this);
   d->todayButton->setIcon(KIcon("calendar-today"));
@@ -533,4 +533,3 @@ bool ExtDatePicker::hasCloseButton() const
 {
     return (d->closeButton != 0L);
 }
-

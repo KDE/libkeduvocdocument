@@ -21,7 +21,7 @@
 
 #include "extdatewidget.h"
 
-#include <QComboBox>
+#include <KComboBox>
 #include <QHBoxLayout>
 #include <QSpinBox>
 
@@ -60,7 +60,7 @@ public:
 
    ExtDateWidget *q;
    ExtDateWidgetSpinBox *m_day;
-   QComboBox *m_month;
+   KComboBox *m_month;
    ExtDateWidgetSpinBox *m_year;
    ExtDate m_dat;
    ExtCalendarSystemGregorian *calendar;
@@ -89,7 +89,7 @@ void ExtDateWidget::init(const ExtDate& date)
   layout->setSpacing(KDialog::spacingHint());
   d->m_day = new ExtDateWidgetSpinBox(1, 1, this);
   layout->addWidget(d->m_day);
-  d->m_month = new QComboBox(this);
+  d->m_month = new KComboBox(this);
   layout->addWidget(d->m_month);
   d->m_month->setEditable(false);
   for (int i = 1; ; ++i)
