@@ -48,12 +48,12 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
   QDomElement currentElement = m_domDoc.createElement(KVTML_INFORMATION);
   writeInformation(currentElement, generator);
   domElementKvtml.appendChild(currentElement);
-  
+
   // identifiers
   currentElement = m_domDoc.createElement(KVTML_IDENTIFIERS);
   writeIdentifiers(currentElement);
   domElementKvtml.appendChild(currentElement);
-  
+
   // types
   currentElement = m_domDoc.createElement(KVTML_TYPES);
   writeTypes(currentElement);
@@ -61,7 +61,7 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
   {
     domElementKvtml.appendChild(currentElement);
   }
-  
+
   // tenses
   currentElement = m_domDoc.createElement(KVTML_TENSES);
   writeTenses(currentElement);
@@ -69,7 +69,7 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
   {
     domElementKvtml.appendChild(currentElement);
   }
-  
+
   // usages
   currentElement = m_domDoc.createElement(KVTML_USAGES);
   writeUsages(currentElement);
@@ -77,7 +77,7 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
   {
     domElementKvtml.appendChild(currentElement);
   }
-  
+
   // entries
   currentElement = m_domDoc.createElement(KVTML_ENTRIES);
   if (!writeEntries(currentElement))
@@ -86,7 +86,7 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
     return false;
   }
   domElementKvtml.appendChild(currentElement);
-  
+
   // lessons
   currentElement = m_domDoc.createElement(KVTML_LESSONS);
   writeLessons(currentElement);
@@ -94,7 +94,7 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
   {
     domElementKvtml.appendChild(currentElement);
   }
-  
+
   //** NOTE: everything below this point has not been updated to use kvtml2 format****
   //if (!writeLesson(m_domDoc, domElementKvtml))
   //  return false;
@@ -333,10 +333,10 @@ bool KEduVocKvtml2Writer::writeInformation(QDomElement &informationElement, cons
 {
   QDomElement currentElement;
   QDomText textNode;
-  
+
   // generator
   informationElement.appendChild(newTextElement(KVTML_GENERATOR, generator));
-  
+
   // title
   if (!m_doc->title().isEmpty())
   {
@@ -360,7 +360,7 @@ bool KEduVocKvtml2Writer::writeInformation(QDomElement &informationElement, cons
   {
     informationElement.appendChild(newTextElement(KVTML_COMMENT, m_doc->documentRemark()));
   }
-  
+
   return true;
 }
 
@@ -371,14 +371,14 @@ bool KEduVocKvtml2Writer::writeIdentifiers(QDomElement &identifiersElement)
   {
     // create the node
     QDomElement identifier = m_domDoc.createElement(KVTML_IDENTIFIER);
-    
+
     // set the id
     identifier.setAttribute(KVTML_ID, QString::number(i));
-    
-    // record the identifier as the locale for now 
+
+    // record the identifier as the locale for now
     // TODO: when support for more parts of the identifier is in the document class (name, type, etc.) store those here as well
     identifier.appendChild(newTextElement(KVTML_LOCALE, m_doc->identifier(i)));
-    
+
     // record articles
     QDomElement article = m_domDoc.createElement(KVTML_ARTICLE);
     writeArticle(article, i);
@@ -386,7 +386,7 @@ bool KEduVocKvtml2Writer::writeIdentifiers(QDomElement &identifiersElement)
     {
       identifier.appendChild(article);
     }
-    
+
     // record personalpronouns
     QDomElement personalpronouns = m_domDoc.createElement(KVTML_PERSONALPRONOUNS);
     writeConjugation(personalpronouns, m_doc->conjugation(i), QString());
@@ -394,7 +394,7 @@ bool KEduVocKvtml2Writer::writeIdentifiers(QDomElement &identifiersElement)
     {
       identifier.appendChild(personalpronouns);
     }
-    
+
     // add this identifier to the group
     identifiersElement.appendChild(identifier);
   }
@@ -407,7 +407,7 @@ bool KEduVocKvtml2Writer::writeLessons(QDomElement &lessonsElement)
     return true;
 
   QMap<int, KEduVocLesson*> lessons = m_doc->lessons();
-  
+
   foreach(int lessonid, lessons.keys())
   {
     KEduVocLesson * thisLesson = lessons[lessonid];
@@ -417,13 +417,13 @@ bool KEduVocKvtml2Writer::writeLessons(QDomElement &lessonsElement)
 
     // add a name
     thisLessonElement.appendChild(newTextElement(KVTML_NAME, thisLesson->description()));
-    
+
     // add a inquery tag
     thisLessonElement.appendChild(newTextElement(KVTML_QUERY, m_doc->lessonInQuery(lessonid) ? KVTML_TRUE : KVTML_FALSE));
-    
+
     // add a current tag
     thisLessonElement.appendChild(newTextElement(KVTML_CURRENT, m_doc->currentLesson() == lessonid ? KVTML_TRUE : KVTML_FALSE));
-    
+
     // TODO: add the entryids...
     for (int i = 0; i < m_doc->entryCount(); ++i)
     {
@@ -432,7 +432,7 @@ bool KEduVocKvtml2Writer::writeLessons(QDomElement &lessonsElement)
         thisLessonElement.appendChild(newTextElement(KVTML_ENTRYID, QString::number(i)));
       }
     }
-    
+
     lessonsElement.appendChild(thisLessonElement);
   }
 
@@ -446,7 +446,7 @@ bool KEduVocKvtml2Writer::writeArticle(QDomElement &articleElement, int article)
   QDomElement indefinite = m_domDoc.createElement(KVTML_INDEFINITE);
   QString def;
   QString indef;
-  
+
   // male
   m_doc->article(article).getMale(&def, &indef);
   if (!def.isEmpty())
@@ -457,7 +457,7 @@ bool KEduVocKvtml2Writer::writeArticle(QDomElement &articleElement, int article)
   {
     indefinite.appendChild(newTextElement(KVTML_MALE, indef));
   }
-  
+
   // female
   m_doc->article(article).getFemale(&def, &indef);
   if (!def.isEmpty())
@@ -468,7 +468,7 @@ bool KEduVocKvtml2Writer::writeArticle(QDomElement &articleElement, int article)
   {
     indefinite.appendChild(newTextElement(KVTML_FEMALE, indef));
   }
-    
+
   // neutral
   m_doc->article(article).getNatural(&def, &indef);
   if (!def.isEmpty())
@@ -484,7 +484,7 @@ bool KEduVocKvtml2Writer::writeArticle(QDomElement &articleElement, int article)
   {
     articleElement.appendChild(definite);
   }
-  
+
   if (indefinite.hasChildNodes())
   {
     articleElement.appendChild(indefinite);
@@ -510,7 +510,7 @@ bool KEduVocKvtml2Writer::writeTenses(QDomElement &tensesElement)
 {
   foreach(QString tense, m_doc->tenseDescriptions())
   {
-    if (!(tense.isNull())) 
+    if (!(tense.isNull()))
     {
       tensesElement.appendChild(newTextElement(KVTML_TENSE, tense));
     }
@@ -539,7 +539,7 @@ bool KEduVocKvtml2Writer::writeEntries(QDomElement &entriesElement)
   for (int i = 0; i < m_doc->entryCount(); ++i)
   {
     KEduVocExpression *thisEntry = m_doc->entry(i);
-    
+
     // write entry tag
     QDomElement entryElement = m_domDoc.createElement(KVTML_ENTRY);
 
@@ -548,10 +548,10 @@ bool KEduVocKvtml2Writer::writeEntries(QDomElement &entriesElement)
 
     // write inactive
     entryElement.appendChild(newTextElement(KVTML_INACTIVE, thisEntry->isActive() ? KVTML_FALSE : KVTML_TRUE));
-    
+
     // write inquery
     entryElement.appendChild(newTextElement(KVTML_INQUERY, thisEntry->isInQuery() ? KVTML_TRUE : KVTML_FALSE));
-    
+
     // write sizehint
     if (thisEntry->sizeHint() > 0)
     {
@@ -577,13 +577,13 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
 {
   // <text>Kniebeugen</text>
   translationElement.appendChild(newTextElement(KVTML_TEXT, translation.translation()));
-  
+
   // <type></type>
   if (!translation.type().isEmpty())
   {
     translationElement.appendChild(newTextElement(KVTML_TYPE, translation.type()));
   }
-  
+
   // <comment></comment>
   if (!translation.comment().isEmpty())
   {
@@ -595,7 +595,7 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
   {
     translationElement.appendChild(newTextElement(KVTML_PRONUNCIATION, translation.pronunciation()));
   }
-  
+
   // <falsefriend fromid="0"></falsefriend>
   // loop through the identifiers
   for (int i = 0; i < m_doc->identifierCount(); ++i)
@@ -616,31 +616,31 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
   {
     translationElement.appendChild(newTextElement(KVTML_ANTONYM, translation.antonym()));
   }
-  
+
   // <synonym></synonym>
   if (!translation.synonym().isEmpty())
   {
     translationElement.appendChild(newTextElement(KVTML_SYNONYM, translation.synonym()));
   }
-  
+
   // <example></example>
   if (!translation.example().isEmpty())
   {
     translationElement.appendChild(newTextElement(KVTML_EXAMPLE, translation.example()));
   }
-  
+
   // <usage></usage>
   if (!translation.usageLabel().isEmpty())
   {
     translationElement.appendChild(newTextElement(KVTML_USAGE, translation.usageLabel()));
   }
-  
+
   // <paraphrase></paraphrase>
   if (!translation.paraphrase().isEmpty())
   {
-    translationElement.appendChild(newTextElement(KVTML_USAGE, translation.paraphrase()));
+    translationElement.appendChild(newTextElement(KVTML_PARAPHRASE, translation.paraphrase()));
   }
-  
+
   // grades
   for (int i = 0; i < m_doc->identifierCount(); ++i)
   {
@@ -660,11 +660,11 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
 
 	  //<date>949757271</date>
 	  gradeElement.appendChild(newTextElement(KVTML_DATE, QString::number(thisGrade.queryDate().toTime_t())));
-	  
+
 	  translationElement.appendChild(gradeElement);
 	}
   }
-  
+
   // conjugation
   if (!translation.conjugation().entryCount() > 0)
   {
@@ -676,7 +676,7 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
       translationElement.appendChild(thisElement);
     }
   }
-  
+
   // comparison
   if (!translation.comparison().isEmpty())
   {
@@ -684,7 +684,7 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
     writeComparison(comparisonElement, translation.comparison());
     translationElement.appendChild(comparisonElement);
   }
-  
+
   // multiplechoice
   if (!translation.multipleChoice().isEmpty())
   {
@@ -692,7 +692,7 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
     writeMultipleChoice(multipleChoiceElement, translation.multipleChoice());
     translationElement.appendChild(multipleChoiceElement);
   }
-  
+
   // image
   // sound
 
@@ -736,7 +736,7 @@ bool KEduVocKvtml2Writer::writeMultipleChoice(QDomElement &multipleChoiceElement
   return true;
 }
 
-bool KEduVocKvtml2Writer::writeConjugation(QDomElement &conjugationElement, 
+bool KEduVocKvtml2Writer::writeConjugation(QDomElement &conjugationElement,
                         const KEduVocConjugation &conjugation, const QString &type)
 {
   // first singular conjugations
@@ -746,15 +746,15 @@ bool KEduVocKvtml2Writer::writeConjugation(QDomElement &conjugationElement,
   QString third_male = conjugation.pers3MaleSingular(type);
   QString third_female = conjugation.pers3FemaleSingular(type);
   QString third_neutral = conjugation.pers3NaturalSingular(type);
-  
+
   if (!first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
       !third_male.isEmpty() || !third_neutral.isEmpty())
   {
     QDomElement singular = m_domDoc.createElement(KVTML_SINGULAR);
-    
+
     singular.appendChild(newTextElement(KVTML_1STPERSON, first));
     singular.appendChild(newTextElement(KVTML_2NDPERSON, second));
-    
+
     if (third_common)
     {
       singular.appendChild(newTextElement(KVTML_COMMON, third_female));
@@ -767,7 +767,7 @@ bool KEduVocKvtml2Writer::writeConjugation(QDomElement &conjugationElement,
     }
     conjugationElement.appendChild(singular);
   }
-  
+
   // now for plurals
   first = conjugation.pers1Plural(type);
   second = conjugation.pers2Plural(type);
@@ -775,15 +775,15 @@ bool KEduVocKvtml2Writer::writeConjugation(QDomElement &conjugationElement,
   third_male = conjugation.pers3MalePlural(type);
   third_female = conjugation.pers3FemalePlural(type);
   third_neutral = conjugation.pers3NaturalPlural(type);
-  
+
   if (!first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
       !third_male.isEmpty() || !third_neutral.isEmpty())
   {
     QDomElement plural = m_domDoc.createElement(KVTML_PLURAL);
-    
+
     plural.appendChild(newTextElement(KVTML_1STPERSON, first));
     plural.appendChild(newTextElement(KVTML_2NDPERSON, second));
-    
+
     if (third_common)
     {
       plural.appendChild(newTextElement(KVTML_COMMON, third_female));
