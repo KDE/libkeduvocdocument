@@ -187,7 +187,7 @@ bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
 	  QDomNodeList entryList = groupElement.elementsByTagName(KVTML_ENTRY);
     if (entryList.length() <= 0)
     {
-      m_errorMessage = i18n("no entries found in entries tag");
+      m_errorMessage = i18n("no entries found in 'entries' tag");
       return false; // at least one entry is required
     }
     
@@ -209,7 +209,7 @@ bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
 	  QDomNodeList entryList = groupElement.elementsByTagName(KVTML_LESSON);
     if (entryList.length() <= 0)
     {
-      m_errorMessage = i18n("no lessons found in lessons tag");
+      m_errorMessage = i18n("no lessons found in 'lessons' tag");
       return false; // at least one entry is required
     }
     
