@@ -24,6 +24,7 @@
 #include <kdebug.h>
 
 #include "keduvocdocument.h"
+#include "keduvoclesson.h"
 #include "keduvocexpression.h"
 #include "kvtmldefs.h"
 
@@ -101,7 +102,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
     if (entry->lesson() != 0)
     {
       int lm = entry->lesson();
-      if (lm > m_doc->lessonDescriptions().count())
+      if (lm > m_doc->lessonCount())
       {
         // should not be
         kError() << "index of lesson member too high: " << lm << endl;
@@ -301,30 +302,28 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
 
 bool KEduVocKvtmlWriter::writeLesson(QDomDocument &domDoc, QDomElement &domElementParent)
 {
-  if (m_doc->lessonDescriptions().count() == 0)
+  if (m_doc->lessonCount() == 0)
     return true;
 
   QDomElement domElementLesson = domDoc.createElement(KV_LESS_GRP);
   domElementLesson.setAttribute(KV_SIZEHINT, m_doc->sizeHint(-1));
-  int count = 1;
 
-  foreach(QString lesson, m_doc->lessonDescriptions())
+  const QMap<int, KEduVocLesson*> lessons = m_doc->lessons();
+  QList<int> keys = lessons.keys();
+  for (int i = 0; i < keys.size(); ++i)
   {
-    if (!lesson.isNull())
-    {
-      QDomElement domElementDesc = domDoc.createElement(KV_LESS_DESC);
-      QDomText domTextDesc = domDoc.createTextNode(lesson);
+    int thiskey = keys[i];
+    QDomElement domElementDesc = domDoc.createElement(KV_LESS_DESC);
+    QDomText domTextDesc = domDoc.createTextNode(lessons[thiskey]->description());
 
-      domElementDesc.setAttribute(KV_LESS_NO, count);
-      if (m_doc->currentLesson() == count)
-        domElementDesc.setAttribute(KV_LESS_CURR, 1);
-      if (m_doc->lessonInQuery(count))
-        domElementDesc.setAttribute(KV_LESS_QUERY, 1);
+    domElementDesc.setAttribute(KV_LESS_NO, thiskey);
+    if (m_doc->currentLesson() == thiskey)
+      domElementDesc.setAttribute(KV_LESS_CURR, 1);
+    if (m_doc->lessonInQuery(thiskey))
+      domElementDesc.setAttribute(KV_LESS_QUERY, 1);
 
-      domElementDesc.appendChild(domTextDesc);
-      domElementLesson.appendChild(domElementDesc);
-      count++;
-    }
+    domElementDesc.appendChild(domTextDesc);
+    domElementLesson.appendChild(domElementDesc);
   }
 
   domElementParent.appendChild(domElementLesson);

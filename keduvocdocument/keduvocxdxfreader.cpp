@@ -69,13 +69,13 @@ void KEduVocXdxfReader::readXdxf()
     if(!id1.isNull())
         m_doc->appendIdentifier(id1.toString().toLower());
     else
-        m_doc->appendIdentifier(i18n("Original"));
+        m_doc->appendIdentifier(i18nc("@title:column the original language column", "Original"));
 
     QStringRef id2 = attributes().value("lang_to");
     if(!id2.isNull())
         m_doc->appendIdentifier(id2.toString().toLower());
     else
-        m_doc->appendIdentifier(i18n("Translation"));
+        m_doc->appendIdentifier(i18nc("@title:column one of the translation columns", "Translation"));
 
     while (!atEnd()) {
         readNext();

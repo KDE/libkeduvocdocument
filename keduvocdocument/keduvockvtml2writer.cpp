@@ -22,6 +22,7 @@
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
+#include "keduvoclesson.h"
 #include "kvtmldefs.h"
 #include "kvtml2defs.h"
 
@@ -402,36 +403,37 @@ bool KEduVocKvtml2Writer::writeIdentifiers(QDomElement &identifiersElement)
 
 bool KEduVocKvtml2Writer::writeLessons(QDomElement &lessonsElement)
 {
-  if (m_doc->lessonDescriptions().count() == 0)
+  if (m_doc->lessonCount() == 0)
     return true;
 
-  int count = 1; // this starts at 1 because appendLesson returns the count of the lessondescriptions
-  // instead of the index the lesson was appended at (size() - 1)
-  foreach(QString lesson, m_doc->lessonDescriptions())
+  QMap<int, KEduVocLesson*> lessons = m_doc->lessons();
+  
+  foreach(int lessonid, lessons.keys())
   {
+    KEduVocLesson * thisLesson = lessons[lessonid];
+
     // make lesson element
-    QDomElement thisLesson = m_domDoc.createElement(KVTML_LESSON);
-    
+    QDomElement thisLessonElement = m_domDoc.createElement(KVTML_LESSON);
+
     // add a name
-    thisLesson.appendChild(newTextElement(KVTML_NAME, lesson));
+    thisLessonElement.appendChild(newTextElement(KVTML_NAME, thisLesson->description()));
     
     // add a inquery tag
-    thisLesson.appendChild(newTextElement(KVTML_QUERY, m_doc->lessonInQuery(count) ? KVTML_TRUE : KVTML_FALSE));
+    thisLessonElement.appendChild(newTextElement(KVTML_QUERY, m_doc->lessonInQuery(lessonid) ? KVTML_TRUE : KVTML_FALSE));
     
     // add a current tag
-    thisLesson.appendChild(newTextElement(KVTML_CURRENT, m_doc->currentLesson() == count ? KVTML_TRUE : KVTML_FALSE));
+    thisLessonElement.appendChild(newTextElement(KVTML_CURRENT, m_doc->currentLesson() == lessonid ? KVTML_TRUE : KVTML_FALSE));
     
     // TODO: add the entryids...
     for (int i = 0; i < m_doc->entryCount(); ++i)
     {
-      if (m_doc->entry(i)->lesson() == count)
+      if (m_doc->entry(i)->lesson() == lessonid)
       {
-        thisLesson.appendChild(newTextElement(KVTML_ENTRYID, QString::number(i)));
+        thisLessonElement.appendChild(newTextElement(KVTML_ENTRYID, QString::number(i)));
       }
     }
     
-    lessonsElement.appendChild(thisLesson);
-    ++count;
+    lessonsElement.appendChild(thisLessonElement);
   }
 
   return true;

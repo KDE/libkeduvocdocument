@@ -25,6 +25,7 @@
 #include <klocale.h>
 
 #include "keduvocdocument.h"
+#include "keduvoclesson.h"
 #include "kvtml2defs.h"
 #include "kvtmldefs.h"
 #include "keduvockvtmlreader.h"
@@ -354,6 +355,7 @@ bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
   }
   
   // TODO: probably should insert at id position with a check to see if it exists
+  // may be useful for detecting corrupt documents
   m_doc->insertEntry(&expr, id);
   return result;
 }
@@ -498,7 +500,7 @@ bool KEduVocKvtml2Reader::readLesson(QDomElement &lessonElement)
   QDomElement currentElement = lessonElement.firstChildElement(KVTML_NAME);
   if (!currentElement.isNull())
   {
-    lessonId = m_doc->appendLesson(currentElement.text());
+    lessonId = m_doc->addLesson(currentElement.text());
   }
   else
   {
@@ -534,6 +536,7 @@ bool KEduVocKvtml2Reader::readLesson(QDomElement &lessonElement)
     // TODO: once we have a lesson class, add each of these entryids to the lesson
     // set this lesson for the given enty
     m_doc->entry(entryId)->setLesson(lessonId);
+    m_doc->lesson(lessonId)->addEntry(entryId);
     currentElement = currentElement.nextSiblingElement(KVTML_ENTRYID);
   }
   

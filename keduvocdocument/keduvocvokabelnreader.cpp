@@ -67,8 +67,7 @@ bool KEduVocVokabelnReader::readDoc(KEduVocDocument *doc)
 
   QStringList titles,
               languages,
-              words,
-              lessonDescriptions;
+              words;
 
   bool keepGoing = true;
 
@@ -142,14 +141,11 @@ bool KEduVocVokabelnReader::readDoc(KEduVocDocument *doc)
     lessonDescr = inputStream.readLine();
     lessonDescr = lessonDescr.mid(1, lessonDescr.length() - 2);
     if (!lessonDescr.isEmpty())
-      lessonDescriptions.append(lessonDescr);
+      m_doc->addLesson(lessonDescr);
     else
       break;
     inputStream.readLine();
   }
-
-  if (lessonDescriptions.count() > 0)
-    m_doc->setLessonDescriptions(lessonDescriptions);
 
   return true;
 }

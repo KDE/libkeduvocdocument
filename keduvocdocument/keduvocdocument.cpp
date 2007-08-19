@@ -30,6 +30,7 @@
 #include <kfilterdev.h>
 
 #include "keduvocexpression.h"
+#include "keduvoclesson.h"
 #include "keduvockvtmlwriter.h"
 #include "keduvockvtml2writer.h"
 #include "keduvoccsvreader.h"
@@ -72,7 +73,7 @@ public:
   QString                   m_querytrans;
   QList<KEduVocExpression>  m_vocabulary;
   QList<int>                m_lessonsInQuery;
-  QStringList               m_lessonDescriptions;
+  //QStringList               m_lessonDescriptions;
   QStringList               m_typeDescriptions;
   QStringList               m_tenseDescriptions;
   QStringList               m_usageDescriptions;
@@ -85,6 +86,9 @@ public:
 
   QList<KEduVocArticle>     m_articles;
   QList<KEduVocConjugation> m_conjugations;
+  
+  // make this a map so removals don't require renumbering :)
+  QMap<int, KEduVocLesson*>		m_lessons;
 
   LeitnerSystem*            m_leitnerSystem;
   bool                      m_activeLeitnerSystem;
@@ -93,7 +97,7 @@ public:
 
 void KEduVocDocument::KEduVocDocumentPrivate::init()
 {
-  m_lessonDescriptions.clear();
+  m_lessons.clear();
   m_articles.clear();
   m_typeDescriptions.clear();
   m_tenseDescriptions.clear();
@@ -956,42 +960,66 @@ int KEduVocDocument::identifierCount() const
   return d->m_identifiers.count();  // number of translations
 }
 
-
 int KEduVocDocument::appendIdentifier(const QString & id)
 {
   d->m_identifiers.append(id);
   return d->m_identifiers.size() - 1;
 }
 
+//QString KEduVocDocument::lessonDescription(int idx) const
+//{
+//  if (idx == 0)
+//    return i18nc("@label:listbox","<placeholder>no lesson</placeholder>");
 
-QString KEduVocDocument::lessonDescription(int idx) const
+//  if (idx <= 0 || idx > d->m_lessons.size() )
+//    return "";
+
+//  return d->m_lessons[idx-1].description();
+//}
+
+//int KEduVocDocument::lessonIndex(const QString &description) const
+//{
+//  return d->m_lessonDescriptions.indexOf(description) +1;
+//}
+
+
+int KEduVocDocument::addLesson(const QString &lessonName, int position)
 {
-  if (idx == 0)
-    return i18n("<no lesson>");
-
-  if (idx <= 0 || idx > d->m_lessonDescriptions.size() )
-    return "";
-
-  return d->m_lessonDescriptions[idx-1];
+  if (position == -1)
+  {
+    // no position was specified, so put it wherever there's a slot
+    position = 1;
+    while (d->m_lessons.contains(position))
+    {
+      ++position;
+    }
+  }
+  
+  KEduVocLesson *lesson = new KEduVocLesson;
+  lesson->setDescription(lessonName);
+  d->m_lessons.insert(position, lesson);
+  return position;
 }
 
-int KEduVocDocument::lessonIndex(const QString &description) const
+const QMap<int, KEduVocLesson *> &KEduVocDocument::lessons() const
 {
-  return d->m_lessonDescriptions.indexOf(description) +1;
+  return d->m_lessons;
 }
 
-
-int KEduVocDocument::appendLesson(const QString &lessonName)
+KEduVocLesson * KEduVocDocument::lesson(int index)
 {
-  d->m_lessonDescriptions.append(lessonName);
-  return d->m_lessonDescriptions.count(); // counting from 1
+  KEduVocLesson * retval(NULL);
+  if (d->m_lessons.contains(index))
+  {
+     retval = d->m_lessons[index];
+  }
+  return retval;
 }
 
-
-void KEduVocDocument::renameLesson(const int lessonIndex, const QString &lessonName)
-{
-  d->m_lessonDescriptions.replace(lessonIndex-1, lessonName); // counting from 1
-}
+//void KEduVocDocument::renameLesson(const int lessonIndex, const QString &lessonName)
+//{
+//  d->m_lessonDescriptions.replace(lessonIndex-1, lessonName); // counting from 1
+//}
 
 
 bool KEduVocDocument::lessonInQuery(int lessonIndex) const
@@ -1140,13 +1168,19 @@ void KEduVocDocument::setCurrentLesson(int lesson)
 
 QStringList KEduVocDocument::lessonDescriptions() const
 {
-  return d->m_lessonDescriptions;
+  QStringList descriptions;
+  QList<KEduVocLesson*> lessonObjects = lessons().values();
+  for (int i = 0; i < lessonObjects.count(); ++i)
+  {
+    descriptions.append(lessonObjects[i]->description());
+  }
+  return descriptions;
 }
 
 
 int KEduVocDocument::lessonCount() const
 {
-  return d->m_lessonDescriptions.count();
+  return d->m_lessons.count();
 }
 
 bool KEduVocDocument::deleteLesson(int lessonIndex, int deleteMode)
@@ -1170,7 +1204,7 @@ bool KEduVocDocument::deleteLesson(int lessonIndex, int deleteMode)
   } // reduce lesson
 
   // finally just remove the lesson name
-  d->m_lessonDescriptions.removeAt(lessonIndex-1); // because of the damned 0 arghh
+  //d->m_lessonDescriptions.removeAt(lessonIndex-1); // because of the damned 0 arghh
 
   int currentInQuery = d->m_lessonsInQuery.indexOf(lessonIndex);
   if(currentInQuery != -1)
@@ -1186,43 +1220,43 @@ bool KEduVocDocument::deleteLesson(int lessonIndex, int deleteMode)
 }
 
 
-void KEduVocDocument::setLessonDescriptions(const QStringList &names)
-{
-  d->m_lessonDescriptions = names;
-}
+//void KEduVocDocument::setLessonDescriptions(const QStringList &names)
+//{
+//  d->m_lessonDescriptions = names;
+//}
 
-void KEduVocDocument::moveLesson(int from, int to)
-{
-///@todo move in query as well!
-  // still counting from 1
-  d->m_lessonDescriptions.move(from -1, to -1);
+//void KEduVocDocument::moveLesson(int from, int to)
+//{
+/////@todo move in query as well!
+//  // still counting from 1
+//  d->m_lessonDescriptions.move(from -1, to -1);
 
-  /*
-  to > from?
-    lesson >= from && lesson < to: lesson++
-  to < from?
-    lesson >= to && lesson < from: lesson++
-  */
-  for (int ent = 0; ent < entryCount(); ent++) {
-    // put from directly to to
-    if (entry(ent)->lesson() == from) {
-      entry(ent)->setLesson(to);
-    }
-    else
-    {
-      if(to > from)
-      {
-        if(entry(ent)->lesson() >= from && entry(ent)->lesson() < to)
-          entry(ent)->setLesson(entry(ent)->lesson()-1);
-      }
-      else
-      {
-        if(entry(ent)->lesson() >= to && entry(ent)->lesson() < from)
-          entry(ent)->setLesson(entry(ent)->lesson()+1);
-      }
-    }
-  }
-}
+//  /*
+//  to > from?
+//    lesson >= from && lesson < to: lesson++
+//  to < from?
+//    lesson >= to && lesson < from: lesson++
+//  */
+//  for (int ent = 0; ent < entryCount(); ent++) {
+//    // put from directly to to
+//    if (entry(ent)->lesson() == from) {
+//      entry(ent)->setLesson(to);
+//    }
+//    else
+//    {
+//      if(to > from)
+//      {
+//        if(entry(ent)->lesson() >= from && entry(ent)->lesson() < to)
+//          entry(ent)->setLesson(entry(ent)->lesson()-1);
+//      }
+//      else
+//      {
+//        if(entry(ent)->lesson() >= to && entry(ent)->lesson() < from)
+//          entry(ent)->setLesson(entry(ent)->lesson()+1);
+//      }
+//    }
+//  }
+//}
 
 int KEduVocDocument::search(const QString &substr, int id, int first, int last, bool word_start)
 {

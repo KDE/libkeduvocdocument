@@ -38,6 +38,7 @@
 
 class QStringList;
 class KEduVocExpression;
+class KEduVocLesson;
 class LeitnerSystem;
 
 /**
@@ -429,34 +430,20 @@ public:
    */
   void setCurrentLesson(int lesson);
 
-  /**
-   * Get the real name of a lesson from it's index as QString.
-   * @param index lesson index
-   * @returns the description (Name) of the lesson with index @p index .
+  /** get a lesson object
+   * @returns a pointer to the lesson object at the specified index or NULL if there isn't one
    */
-  QString lessonDescription(int index) const;
+  KEduVocLesson *lesson(int index);
+  
+  /** get all lesson objects
+   * @returns a map of pointers to lesson objects
+   */
+  const QMap<int, KEduVocLesson *> &lessons() const;
 
   /**
-   * Get the index from the long name of a lesson.
-   * @param description lesson name
-   * @returns the index of the lesson (from its name)
-   * -1 if the lesson does not exist
+   * @returns                the number of lessons defined
    */
-  int lessonIndex(const QString &description) const;
-
-  /**
-   * Append a new lesson to the list of lessons.
-   * @param lessonName name for the new lesson
-   * @returns the index of the new lesson
-   */
-  int appendLesson(const QString &lessonName);
-
-  /**
-   * Rename a lesson.
-   * @param lessonIndex index of lesson
-   * @param lessonName new name for the lesson
-   */
-  void renameLesson(const int lessonIndex, const QString &lessonName);
+  int lessonCount() const;
 
   /**
    * Get list of ALL lessons that are selected for query.
@@ -489,15 +476,12 @@ public:
   void removeLessonFromQuery(int lessonIndex);
 
   /**
-   * All lesson descriptions as stringlist.
-   * @returns                a list of defined lessons
+   * Append a new lesson to the list of lessons.
+   * @param lessonName name for the new lesson
+   * @param position lesson number to use (-1 to find the next hole to put it in)
+   * @returns the index of the new lesson
    */
-  QStringList lessonDescriptions() const;
-
-  /**
-   * @returns                the number of lessons defined
-   */
-  int lessonCount() const;
+  int addLesson(const QString &lessonName, int position = -1);
 
   /**
    * Delete a lesson.
@@ -507,18 +491,46 @@ public:
    */
   bool deleteLesson(int lessonIndex, int deleteMode);
 
+  ///**
+  // * Get the real name of a lesson from it's index as QString.
+  // * @param index lesson index
+  // * @returns the description (Name) of the lesson with index @p index .
+  // */
+  //QString lessonDescription(int index) const;
+
+  /**
+   * Get the index from the long name of a lesson.
+   * @param description lesson name
+   * @returns the index of the lesson (from its name)
+   * -1 if the lesson does not exist
+   */
+  //int lessonIndex(const QString &description) const;
+
+  /**
+   * Rename a lesson.
+   * @param lessonIndex index of lesson
+   * @param lessonName new name for the lesson
+   */
+  //void renameLesson(const int lessonIndex, const QString &lessonName);
+
+  /**
+   * All lesson descriptions as stringlist.
+   * @returns a list of defined lessons
+   */
+  QStringList lessonDescriptions() const;
+
   /**
    * Sets the description of the lesson
    * @param names list of all names of the lessons
    */
-  void setLessonDescriptions(const QStringList &names);
+  //void setLessonDescriptions(const QStringList &names);
 
   /**
    * Moves the lesson at index position from to index position to.
    * @param from the lesson to be moved
    * @param to the new position
    */
-  void moveLesson(int from, int to);
+  //void moveLesson(int from, int to);
 
   // *** conjugation methods ***
 

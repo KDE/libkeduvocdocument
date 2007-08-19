@@ -26,6 +26,7 @@
 #include <klocale.h>
 
 #include "keduvocdocument.h"
+#include "keduvoclesson.h"
 #include "kvtmldefs.h"
 
 KEduVocKvtmlReader::KEduVocKvtmlReader(QIODevice *file)
@@ -192,7 +193,6 @@ bool KEduVocKvtmlReader::readBody(QDomElement &domElementParent)
 bool KEduVocKvtmlReader::readLesson(QDomElement &domElementParent)
 {
   QString s;
-  QStringList descriptions;
   QDomAttr attribute;
   QDomElement currentElement;
 
@@ -212,9 +212,7 @@ bool KEduVocKvtmlReader::readLesson(QDomElement &domElementParent)
   if (entryList.length() <= 0)
     return false;
 
-  descriptions.clear();
   QList<int> inQueryList;
-  inQueryList.clear();
 
   for (int i = 0; i < entryList.count(); ++i) {
     currentElement = entryList.item(i).toElement();
@@ -241,13 +239,12 @@ bool KEduVocKvtmlReader::readLesson(QDomElement &domElementParent)
       s = currentElement.text();
       if (s.isNull())
         s = "";
-      descriptions.append(s);
+      m_doc->addLesson(s, no);
     }
   }
 
   if (inQueryList.count() > 0)
     m_doc->setLessonsInQuery(inQueryList);
-  m_doc->setLessonDescriptions(descriptions);
 
   return true;
 }
@@ -1054,22 +1051,17 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
   attribute = domElementParent.attributeNode(KV_LESS_MEMBER);
   if (!attribute.isNull())
-    lesson = attribute.value().toInt();
-
-  if (lesson && lesson > m_doc->lessonDescriptions().count())
   {
-    // description missing ?
-    QString s;
-    QStringList sl = m_doc->lessonDescriptions();
-    for (int i = m_doc->lessonDescriptions().count(); i < lesson; i++)
-    {
-      s.setNum(i + 1);
-      s.prepend("#"); //create descriptions from number
-      sl.append(s);
-    }
-    m_doc->setLessonDescriptions(sl);
+    lesson = attribute.value().toInt();
   }
 
+  if (lesson && lesson > m_doc->lessonCount())
+  {
+    // it's from a lesson that hasn't been added yet
+    // so make sure this lesson is in the document
+    m_doc->addLesson(QString("#") + QString::number(lesson), lesson);
+  }
+  
   attribute = domElementParent.attributeNode(KV_SELECTED);
   if (!attribute.isNull())
     inquery = attribute.value() == "1" ? true : false;
@@ -1270,7 +1262,6 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
         expr.translation(i).gradeFrom(0).setQueryDate(qdate);
         expr.translation(0).gradeFrom(i).setQueryDate(r_qdate);
       }
-//kDebug() << "KEduVocKvtmlReader::readExpression(): id: " << i << " translation: " << textstr;
 
       // Next translation
       currentElement = currentElement.nextSiblingElement(KV_TRANS);
@@ -1281,6 +1272,9 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     m_doc->setQueryIdentifier(q_org, q_trans);
   m_doc->appendEntry(&expr);
 
+  // also add this entryid to the lesson it's part of
+  m_doc->lesson(lesson)->addEntry(m_doc->entryCount());
+  
   return true;
 }
 
