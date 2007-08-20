@@ -666,7 +666,7 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
   }
 
   // conjugation
-  if (!translation.conjugation().entryCount() > 0)
+  if (translation.conjugation().entryCount() <= 0)
   {
     KEduVocConjugation conjugation = translation.conjugation();
     for (int i = 0; i < conjugation.entryCount(); ++i)

@@ -51,6 +51,7 @@ KEduVocLesson& KEduVocLesson::operator=(const KEduVocLesson &other)
 {
   d->m_entries = other.d->m_entries;
   d->m_description = other.d->m_description;
+  return *this;
 }
 
 void KEduVocLesson::setDescription(const QString &description)
