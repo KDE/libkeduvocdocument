@@ -93,7 +93,7 @@ QString KEduVocMultipleChoice::choice (int index) const
 
 void KEduVocMultipleChoice::setChoice(int index, const QString &s)
 {
-  while (d->m_choices.size() < index)
+  while (d->m_choices.size() <= index)
   {
     d->m_choices.append(QString());
   }
@@ -110,7 +110,7 @@ bool KEduVocMultipleChoice::operator==(const KEduVocMultipleChoice &choice) cons
   return d->m_choices == choice.choices();
 }
 
-void KEduVocMultipleChoice::appendChoice(const QString &s) 
-{ 
+void KEduVocMultipleChoice::appendChoice(const QString &s)
+{
   d->m_choices.append(s);
 }
