@@ -63,7 +63,9 @@
 <!ELEMENT synonym        (#PCDATA) >
 <!ELEMENT example        (#PCDATA) >
 <!ELEMENT paraphrase     (#PCDATA) >
-<!ELEMENT conjugation    (tense?, type?, singular?, plural?) >
+
+<!ELEMENT conjugationtype (#PCDATA) >
+<!ELEMENT conjugation    (tense?, conjugationtype?, singular?, plural?) >
 
 <!ELEMENT comparison     (absolute, comparative, superlative) >
 <!ELEMENT absolute       (#PCDATA) >
