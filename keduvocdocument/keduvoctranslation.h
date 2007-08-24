@@ -160,10 +160,21 @@ public:
    */
   void setType( const QString &type);
 
+  /** returns subtype of this expression
+   *
+   * @return                 type or "" if no type available
+   */
+  QString subType() const;
+
+ /** sets subtype of this expression
+   * @param type             type of this expression ("" = none)
+   */
+  void setSubType( const QString &type);
+
   /** reset the grades for this translation */
   void resetGrades();
 
-  /** get the gradeobject from given identifier 
+  /** get the gradeobject from given identifier
    * @param indexFrom which identifier to get the grade from
    * @returns the grade object
    */

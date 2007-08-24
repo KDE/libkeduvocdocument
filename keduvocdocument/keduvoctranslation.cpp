@@ -38,7 +38,8 @@ public:
     // This is the word itself. The vocabulary. This is what it is all about.
     QString m_translation;
     /// noun:male etc (language dependent)
-    QString m_types;
+    QString m_type;
+    QString m_subType;
     QString m_usageLabel;
     QString m_comment;
     QString m_paraphrase;
@@ -75,7 +76,8 @@ void KEduVocTranslation::KEduVocTranslationPrivate::init()
 bool KEduVocTranslation::KEduVocTranslationPrivate::operator== ( const KEduVocTranslation::KEduVocTranslationPrivate &other ) const
 {
     return 	m_translation == other.m_translation &&
-		m_types == other.m_types &&
+		m_type == other.m_type &&
+        m_subType == other.m_subType &&
 		m_usageLabel == other.m_usageLabel &&
 		m_comment == other.m_comment &&
 		m_paraphrase == other.m_paraphrase &&
@@ -106,7 +108,8 @@ KEduVocTranslation::KEduVocTranslation( const QString &translation ) : d ( new K
 KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other) : d ( new KEduVocTranslationPrivate )
 {
 	d->m_translation = other.d->m_translation;
-    d->m_types = other.d->m_types;
+    d->m_type = other.d->m_type;
+    d->m_subType = other.d->m_subType;
     d->m_usageLabel = other.d->m_usageLabel;
     d->m_comment = other.d->m_comment;
     d->m_paraphrase = other.d->m_paraphrase;
@@ -277,15 +280,25 @@ void KEduVocTranslation::setPronunciation (  const QString & expr )
 
 QString KEduVocTranslation::type() const
 {
-    return d->m_types;
+    return d->m_type;
 }
 
 
 void KEduVocTranslation::setType (  const QString &type )
 {
-    d->m_types = type;
+    d->m_type = type;
 }
 
+QString KEduVocTranslation::subType() const
+{
+    return d->m_subType;
+}
+
+
+void KEduVocTranslation::setSubType (  const QString &type )
+{
+    d->m_subType = type;
+}
 
 void KEduVocTranslation::resetGrades(){
     d->m_grades.clear();
@@ -300,7 +313,8 @@ QList< int > KEduVocTranslation::conjugationTenses() const
 bool KEduVocTranslation::operator ==(const KEduVocTranslation & translation) const
 {
     return d->m_translation == translation.d->m_translation &&
-        d->m_types == translation.d->m_types &&
+        d->m_type == translation.d->m_type &&
+        d->m_subType == translation.d->m_subType &&
         d->m_usageLabel == translation.d->m_usageLabel &&
         d->m_comment == translation.d->m_comment &&
         d->m_paraphrase == translation.d->m_paraphrase &&
@@ -320,7 +334,8 @@ bool KEduVocTranslation::operator ==(const KEduVocTranslation & translation) con
 KEduVocTranslation & KEduVocTranslation::operator =(const KEduVocTranslation & translation)
 {
     d->m_translation = translation.d->m_translation;
-    d->m_types = translation.d->m_types;
+    d->m_type = translation.d->m_type;
+    d->m_subType = translation.d->m_subType;
     d->m_usageLabel = translation.d->m_usageLabel;
     d->m_comment = translation.d->m_comment;
     d->m_paraphrase = translation.d->m_paraphrase;

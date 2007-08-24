@@ -4,6 +4,7 @@
     copyright      : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
                      (C) 2001 The KDE-EDU team
                      (C) 2005-2007 Peter Hedlund <peter.hedlund@kdemail.net>
+                     (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -86,7 +87,7 @@ public:
 
   QList<KEduVocArticle>     m_articles;
   QList<KEduVocConjugation> m_conjugations;
-  
+
   // make this a map so removals don't require renumbering :)
   QMap<int, KEduVocLesson*>		m_lessons;
 
@@ -994,7 +995,7 @@ int KEduVocDocument::addLesson(const QString &lessonName, int position)
       ++position;
     }
   }
-  
+
   KEduVocLesson *lesson = new KEduVocLesson;
   lesson->setDescription(lessonName);
   d->m_lessons.insert(position, lesson);

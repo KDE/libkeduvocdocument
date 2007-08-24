@@ -4,6 +4,7 @@
     copyright     : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
                     (C) 2001 The KDE-EDU team
                     (C) 2005, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
+                    (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -73,7 +74,7 @@ public:
   ~KEduVocDocument();
 
   // *** whole document methods ***
-  
+
   /**
    * Open a document file
    *
@@ -148,7 +149,7 @@ public:
   /** @returns the license of the file */
   QString license() const;
 
-  /** set the remark of the file 
+  /** set the remark of the file
    * @param rem remark to set */
   void setDocumentRemark(const QString & rem);
 
@@ -205,7 +206,7 @@ public:
    * @returns                 number of removed entries
    */
   int cleanUp();
-  
+
   /**
    * @returns the number of entries
    */
@@ -228,7 +229,7 @@ public:
   void setSizeHint (int index, const int width);
 
   // *** identifier methods ***
-  
+
   /**
    * @returns the number of different identifiers (usually languages)
    */
@@ -286,7 +287,7 @@ public:
   int indexOfIdentifier(const QString &lang) const;
 
   // *** type methods ***
-  
+
   /**
    * Sets attribute string
    *
@@ -342,7 +343,7 @@ public:
   QStringList tenseDescriptions() const;
 
   // *** usage methods ***
-  
+
   /**
    * Sets usage string
    *
@@ -418,7 +419,7 @@ public:
   void setQueryIdentifier(const QString &org, const QString &trans);
 
   // *** lesson methods ***
-  
+
   /**
    * @returns the current lesson index
    */
@@ -434,7 +435,7 @@ public:
    * @returns a pointer to the lesson object at the specified index or NULL if there isn't one
    */
   KEduVocLesson *lesson(int index);
-  
+
   /** get all lesson objects
    * @returns a map of pointers to lesson objects
    */
@@ -554,7 +555,7 @@ public:
   int conjugationCount() const;
 
   // *** article methods ***
-  
+
   /**
    * @param index            index of translation
    * @returns                a pointer to articles if available
