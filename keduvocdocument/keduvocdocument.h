@@ -439,7 +439,7 @@ public:
   /** get all lesson objects
    * @returns a map of pointers to lesson objects
    */
-  const QMap<int, KEduVocLesson *> &lessons() const;
+  const QMap<int, KEduVocLesson *> lessons() const;
 
   /**
    * @returns                the number of lessons defined

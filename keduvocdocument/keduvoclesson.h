@@ -23,8 +23,8 @@
 
 #include "libkeduvocdocument_export.h"
 
-#include <QList>
-#include <QString>
+#include <QtCore/QList>
+#include <QtCore/QString>
 
 /** class to store information about a lesson */
 class KEDUVOCDOCUMENT_EXPORT KEduVocLesson
