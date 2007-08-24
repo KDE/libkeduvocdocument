@@ -1002,7 +1002,7 @@ int KEduVocDocument::addLesson(const QString &lessonName, int position)
   return position;
 }
 
-const QMap<int, KEduVocLesson *> KEduVocDocument::lessons() const
+QMap<int, KEduVocLesson *> KEduVocDocument::lessons() const
 {
   return d->m_lessons;
 }
