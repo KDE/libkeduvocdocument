@@ -1,4 +1,4 @@
-<!ELEMENT kvtml         (information, identifiers, types?, entries, tenses?, usages?, lessons?)     >
+<!ELEMENT kvtml         (information, identifiers, typedefinitions?, entries, tenses?, usages?, lessons?)     >
 <!ATTLIST kvtml version    CDATA  #REQUIRED>
 
 <!ELEMENT information    (generator?, title, author?, license?, comment?) >
@@ -10,9 +10,10 @@
 <!ELEMENT comment        (#PCDATA) >
 
 <!ELEMENT identifiers    (identifier*) >
-<!ELEMENT identifier     (type, locale, name?, comment?, sizehint?, article?, personalpronouns?) >
+<!ELEMENT identifier     (identifiertype, locale, name?, comment?, sizehint?, article?, personalpronouns?) >
 <!ATTLIST identifier id  CDATA  #REQUIRED>
-<!ELEMENT type           (#PCDATA) >
+
+<!ELEMENT identifiertype (#PCDATA) >
 <!ELEMENT locale         (#PCDATA) >
 <!ELEMENT name           (#PCDATA) >
 <!ELEMENT sizehint       (#PCDATA) >
@@ -29,7 +30,11 @@
 <!ELEMENT secondperson   (#PCDATA) >
 <!ELEMENT thirdperson    (common|(male, female, neutral)) >
 
-<!ELEMENT types          (type*) >
+<!ELEMENT specialtype    (#PCDATA) >
+<!ELEMENT subtype        (#PCDATA, specialtype?) >
+<!ELEMENT type           (#PCDATA, specialtype?, subtype?) >
+<!ELEMENT typedefinition (#PCDATA, specialtype?, subtype*) >
+<!ELEMENT typedefinitions (typedefinition*) >
 
 <!ELEMENT tenses         (tense*) >
 <!ELEMENT tense          (#PCDATA) >
