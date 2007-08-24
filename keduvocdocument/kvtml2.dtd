@@ -31,9 +31,10 @@
 <!ELEMENT thirdperson    (common|(male, female, neutral)) >
 
 <!ELEMENT specialtype    (#PCDATA) >
-<!ELEMENT subtype        (#PCDATA, specialtype?) >
-<!ELEMENT type           (#PCDATA, specialtype?, subtype?) >
-<!ELEMENT typedefinition (#PCDATA, specialtype?, subtype*) >
+<!ELEMENT subtype        (#PCDATA) >
+<!ELEMENT type           (#PCDATA, subtype?) >
+<!ELEMENT subtypedefinition (#PCDATA, specialtype?) >
+<!ELEMENT typedefinition (#PCDATA, specialtype?, subtypedefinition*) >
 <!ELEMENT typedefinitions (typedefinition*) >
 
 <!ELEMENT tenses         (tense*) >
