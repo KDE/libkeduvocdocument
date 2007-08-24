@@ -84,7 +84,7 @@ void KEduVocMultipleChoice::clear()
 QString KEduVocMultipleChoice::choice (int index) const
 {
   QString choice;
-  if (d->m_choices.size() >= index)
+  if (d->m_choices.size() > index)
   {
     choice = d->m_choices[index];
   }
