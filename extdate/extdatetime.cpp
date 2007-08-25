@@ -462,9 +462,6 @@ ExtDate ExtDate::fromString( const QString& s )
 	dResult = ExtDate::fromString( s, Qt::ISODate );
 	if ( dResult.isValid() ) return dResult;
 
-	dResult = ExtDate::fromString( s, "%Y-%m-%d" );
-	if ( dResult.isValid() ) return dResult;
-
 	dResult = ExtDate::fromString( s, "%m/%d/%Y" );
 	if ( dResult.isValid() ) return dResult;
 
@@ -487,8 +484,8 @@ ExtDate ExtDate::fromString( const QString& s, Qt::DateFormat f )
 		case Qt::ISODate :
 		{
 			int year( s.mid( 0, 4 ).toInt() );
-			int month( s.mid( 4, 2 ).toInt() );
-			int day( s.mid( 6, 2 ).toInt() );
+			int month( s.mid( 5, 2 ).toInt() );
+			int day( s.mid( 8, 2 ).toInt() );
 			if ( year && month && day )
 				return ExtDate( year, month, day );
 		}
