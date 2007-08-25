@@ -461,6 +461,13 @@ ExtDate ExtDate::fromString( const QString& s )
 
 	dResult = ExtDate::fromString( s, Qt::ISODate );
 	if ( dResult.isValid() ) return dResult;
+
+	dResult = ExtDate::fromString( s, "%Y-%m-%d" );
+	if ( dResult.isValid() ) return dResult;
+
+	dResult = ExtDate::fromString( s, "%m/%d/%Y" );
+	if ( dResult.isValid() ) return dResult;
+
 	else return ExtDate(); //invalid	
 
 }
