@@ -170,17 +170,17 @@ void KEduVocWordType::initOldTypeLists()
     d->m_oldMainTypeNames.insert("fig", i18n("Figuratively"));
 
     d->m_oldSubTypeNames.clear();
-    d->m_oldSubTypeNames.insert("ord", i18n("Numeral Ordinal"));
-    d->m_oldSubTypeNames.insert("crd", i18n("Numeral Cardinal"));
-    d->m_oldSubTypeNames.insert("def", i18n("Article Definite"));
-    d->m_oldSubTypeNames.insert("ind", i18n("Article Indefinite"));
-    d->m_oldSubTypeNames.insert("re", i18n("Verb Regular"));
-    d->m_oldSubTypeNames.insert("ir", i18n("Verb Irregular"));
-    d->m_oldSubTypeNames.insert("pos", i18n("Pronoun Possessive"));
-    d->m_oldSubTypeNames.insert("per", i18n("Pronoun Personal"));
-    d->m_oldSubTypeNames.insert("m", i18n("Noun Male"));
-    d->m_oldSubTypeNames.insert("f", i18n("Noun Female"));
-    d->m_oldSubTypeNames.insert("s", i18n("Noun Neutral"));
+    d->m_oldSubTypeNames.insert("ord", i18n("Ordinal"));
+    d->m_oldSubTypeNames.insert("crd", i18n("Cardinal"));
+    d->m_oldSubTypeNames.insert("def", i18n("Definite"));
+    d->m_oldSubTypeNames.insert("ind", i18n("Indefinite"));
+    d->m_oldSubTypeNames.insert("re", i18n("Regular"));
+    d->m_oldSubTypeNames.insert("ir", i18n("Irregular"));
+    d->m_oldSubTypeNames.insert("pos", i18n("Possessive"));
+    d->m_oldSubTypeNames.insert("per", i18n("Personal"));
+    d->m_oldSubTypeNames.insert("m", i18n("Male"));
+    d->m_oldSubTypeNames.insert("f", i18n("Female"));
+    d->m_oldSubTypeNames.insert("s", i18n("Neutral"));
 
 }
 
@@ -212,21 +212,17 @@ QString KEduVocWordType::oldType(const QString & mainType, const QString & subTy
 */
 
 
-void KEduVocWordType::createSampleData()
+void KEduVocWordType::createOldWordTypeLists()
 {
-    //d->m_wordTypeList.clear();
-
-    // for now let's create some fantasy word types:
-
+    kDebug() << "Creating word type lists for compability with kvtml-1.";
+    // first the special types which cannot be deleted:
     addType("Noun", "noun", "This holds the words of type noun. You can rename it but not delete since the article training relies on it!");
 
-    int noun = mainTypeIndex("Noun");
     addSubType("Noun", "Male", "noun male", "This holds the words of type noun male. You can rename it but not delete since the article training relies on it!");
 
     addSubType("Noun", "Female", "noun female", "This holds the words of type noun female. You can rename it but not delete since the article training relies on it!");
 
     addSubType("Noun", "Neutral", "noun neutral", "This holds the words of type noun neutral. You can rename it but not delete since the article training relies on it!");
-
 
     addType("Verb", "verb", "This holds the words of type verb. You can rename it but not delete since the article training relies on it!");
 
@@ -234,20 +230,29 @@ void KEduVocWordType::createSampleData()
 
     addSubType("Verb", "Irregular", "irregular", "This holds the words of type irregular verbs. You can rename it but not delete since the article training relies on it!");
 
-
     addType("Adjective", "adjective", "This holds the words of type adjective. You can rename it but not delete since the article training relies on it!");
 
     addType("Adverb", "adverb", "This holds the words of type adverb. You can rename it but not delete since the article training relies on it!");
 
     addType("Question");
     addType("Name");
+    addType("Article");
+    addSubType("Article", "Definite");
+    addSubType("Article", "Indefinite");
 
-    addType("Rot");
-    addType("Blau");
-    addType("Violett");
-    addType("Rosa");
-    addType("Gelb");
+    addType("Pronoun");
+    addSubType("Pronoun", "Possessive");
+    addSubType("Pronoun", "Personal");
 
+    addType("Phrase");
+    addType("Numeral");
+    addSubType("Numeral", "Ordinal");
+    addSubType("Numeral", "Cardinal");
+
+    addType("Conjunction");
+    addType("Preposition");
+    addType("Informal");
+    addType("Figuratively");
 }
 
 

@@ -152,6 +152,8 @@ bool KEduVocKvtmlReader::readBody(QDomElement &domElementParent)
       return false;
   }
 
+  // initialize the list of predefined types
+  m_doc->wordTypes()->createOldWordTypeLists();
   currentElement = domElementParent.firstChildElement(KV_TYPE_GRP);
   if (!currentElement.isNull()) {
     result = readType(currentElement);
@@ -963,7 +965,6 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
     if (!attribute.isNull())
     {
         QString oldType = attribute.value();
-
         if (oldType.length() >= 2 && type.left(1) == QM_USER_TYPE)
         {
             // they started counting at 1
@@ -988,7 +989,6 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
 
             type = m_doc->wordTypes()->mainTypeFromOldFormat(oldType);
             subType = m_doc->wordTypes()->subTypeFromOldFormat(oldType);
-
         } // not user defined - preset types
     }
 
@@ -1022,7 +1022,6 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   bool                      active;
   QString                   lang;
   QString                   textstr;
-  QString                   exprtype;
   QString                   q_org;
   QString                   q_trans;
   QString                   query_id;
@@ -1105,7 +1104,6 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
             type = m_doc->wordTypes()->mainTypeFromOldFormat(oldType);
             subType = m_doc->wordTypes()->subTypeFromOldFormat(oldType);
-
         } // not user defined - preset types
     }
 
@@ -1127,7 +1125,6 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     }
 
     while (!currentElement.isNull()) {
-      type = exprtype; // seems like type can be in the paren element and overwritten in the children here :(
 
       //-----------
       // Attributes
@@ -1238,8 +1235,12 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
         mc.clear();
       }
 
-      expr.translation(i).setType(type);
-      expr.translation(i).setType(subType);
+      if (!type.isEmpty()) {
+        expr.translation(i).setType(type);
+        if (!subType.isEmpty()) {
+            expr.translation(i).setSubType(subType);
+        }
+      }
 
       if (!remark.isEmpty() )
         expr.translation(i).setComment (remark);

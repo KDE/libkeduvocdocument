@@ -50,10 +50,7 @@ public:
     /** assignment operator */
     KEduVocWordType& operator=(const KEduVocWordType& other);
 
-    /** will be gone when we have it inside the lib */
-//     void setDocument(KEduVocDocument *doc);
-    void createSampleData();
-
+    void createOldWordTypeLists();
 
     /**
      * Create a new word type in the list of known types
