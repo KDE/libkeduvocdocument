@@ -23,7 +23,7 @@
 
 #include "keduvocwordtype.h"
 
-#include <klocale.h>
+#include <KLocale>
 
 // #define QM_VERB           "v"    // go
 // #define   QM_VERB_IRR     "ir"

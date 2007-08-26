@@ -18,10 +18,10 @@
 
 #include "keduvocdocument.h"
 
-#include <QFileInfo>
-#include <QTextStream>
-#include <QtAlgorithms>
-#include <QIODevice>
+#include <QtCore/QFileInfo>
+#include <QtCore/QTextStream>
+#include <QtCore/QtAlgorithms>
+#include <QtCore/QIODevice>
 
 #include <klocale.h>
 #include <kdebug.h>

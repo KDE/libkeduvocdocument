@@ -21,7 +21,7 @@
 #define KEDUVOCKVTMLREADER_H
 
 #include <QtXml/QDomDocument>
-#include <QList>
+#include <QtCore/QList>
 
 
 #include "keduvocexpression.h"

@@ -33,7 +33,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 
-#include <kurl.h>
+#include <KUrl>
 
 #include "keduvocgrammar.h"
 #include "keduvocwordtype.h"

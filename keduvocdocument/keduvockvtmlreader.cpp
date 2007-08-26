@@ -19,9 +19,9 @@
 
 #include "keduvockvtmlreader.h"
 
-#include <QTextStream>
-#include <QList>
-#include <QIODevice>
+#include <QtCore/QTextStream>
+#include <QtCore/QList>
+#include <QtCore/QIODevice>
 
 #include <kdebug.h>
 #include <klocale.h>

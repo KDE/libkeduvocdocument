@@ -2,6 +2,7 @@
                    export a KEduVocDocument to a KVTML file
     -----------------------------------------------------------------------
     copyright           : (C) 2007 Jeremy Whiting <jeremy@scitools.com>
+                          (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -15,10 +16,10 @@
 
 #include "keduvockvtml2writer.h"
 
-#include <QTextStream>
-#include <QFile>
+#include <QtCore/QTextStream>
+#include <QtCore/QFile>
 
-#include <kdebug.h>
+#include <KDebug>
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
