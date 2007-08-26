@@ -154,7 +154,7 @@ bool KEduVocKvtmlReader::readBody(QDomElement &domElementParent)
   }
 
   // initialize the list of predefined types
-  m_doc->wordTypes()->createOldWordTypeLists();
+  m_doc->wordTypes()->createDefaultWordTypes();
   currentElement = domElementParent.firstChildElement(KV_TYPE_GRP);
   if (!currentElement.isNull()) {
     result = readType(currentElement);

@@ -56,10 +56,6 @@
 // #define QM_USER_TYPE  "#"   // designates number of user type
 // #define QM_TYPE_DIV   ":"   // divide main from subtype
 
-const QString KEduVocWordType::KVTML_1_TYPE_USER = QString("#");
-const QString KEduVocWordType::KVTML_1_TYPE_DIV = QString(":");
-
-
 class KEduVocWordType::Private {
 
 public:
@@ -80,8 +76,13 @@ public:
 
     QMap<QString, QString> m_oldMainTypeNames;
     QMap<QString, QString> m_oldSubTypeNames;
+
+    static const QString KVTML_1_TYPE_USER;
+    static const QString KVTML_1_TYPE_DIV;
 };
 
+const QString KEduVocWordType::Private::KVTML_1_TYPE_USER = QString("#");
+const QString KEduVocWordType::Private::KVTML_1_TYPE_DIV = QString(":");
 
 
 
@@ -118,7 +119,7 @@ QString KEduVocWordType::mainTypeFromOldFormat(const QString & typeSubtypeString
     QString mainType;
     int i;
 
-    if ((i = typeSubtypeString.indexOf(KVTML_1_TYPE_DIV)) >= 0)
+    if ((i = typeSubtypeString.indexOf(d->KVTML_1_TYPE_DIV)) >= 0)
         mainType = typeSubtypeString.left(i);
     else
         mainType = typeSubtypeString;
@@ -136,7 +137,7 @@ QString KEduVocWordType::subTypeFromOldFormat(const QString & typeSubtypeString)
 {
     int i;
     QString t = typeSubtypeString;
-    if ((i = t.indexOf(KVTML_1_TYPE_DIV)) >= 0) {
+    if ((i = t.indexOf(d->KVTML_1_TYPE_DIV)) >= 0) {
         t.remove(0, i+1);
     } else {
         return QString();
@@ -212,9 +213,8 @@ QString KEduVocWordType::oldType(const QString & mainType, const QString & subTy
 */
 
 
-void KEduVocWordType::createOldWordTypeLists()
+void KEduVocWordType::createDefaultWordTypes()
 {
-    kDebug() << "Creating word type lists for compability with kvtml-1.";
     // first the special types which cannot be deleted:
     addType("Noun", "noun", "This holds the words of type noun. You can rename it but not delete since the article training relies on it!");
 

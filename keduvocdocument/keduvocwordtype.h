@@ -50,7 +50,7 @@ public:
     /** assignment operator */
     KEduVocWordType& operator=(const KEduVocWordType& other);
 
-    void createOldWordTypeLists();
+    void createDefaultWordTypes();
 
     /**
      * Create a new word type in the list of known types
@@ -103,9 +103,6 @@ public:
     QString subTypeFromOldFormat(const QString& typeSubtypeString) const;
 
 private:
-    static const QString KVTML_1_TYPE_USER;
-    static const QString KVTML_1_TYPE_DIV;
-
     void initOldTypeLists();
 
 
