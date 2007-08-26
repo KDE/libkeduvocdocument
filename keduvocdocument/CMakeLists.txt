@@ -11,6 +11,7 @@ set(keduvocdocument_LIB_SRCS
    keduvoclesson.cpp
    keduvocgrade.cpp
    keduvocgrammar.cpp
+   keduvocwordtype.cpp
    keduvockvtmlreader.cpp
    keduvockvtml2reader.cpp
    keduvockvtmlwriter.cpp
@@ -50,6 +51,7 @@ install(FILES
    keduvoclesson.h
    keduvocmultiplechoice.h
    keduvoctranslation.h
+   keduvocwordtype.h
    leitnerbox.h
    leitnersystem.h
    leitnersystemview.h

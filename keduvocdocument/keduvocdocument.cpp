@@ -75,7 +75,9 @@ public:
   QList<KEduVocExpression>  m_vocabulary;
   QList<int>                m_lessonsInQuery;
   //QStringList               m_lessonDescriptions;
+
   QStringList               m_typeDescriptions;
+
   QStringList               m_tenseDescriptions;
   QStringList               m_usageDescriptions;
   QString                   m_title;
@@ -90,6 +92,8 @@ public:
 
   // make this a map so removals don't require renumbering :)
   QMap<int, KEduVocLesson*>		m_lessons;
+
+  KEduVocWordType*          m_wordTypes;
 
   LeitnerSystem*            m_leitnerSystem;
   bool                      m_activeLeitnerSystem;
@@ -122,6 +126,10 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
   m_csvDelimiter = QString('\t');
   m_activeLeitnerSystem = false;
   m_leitnerSystem = NULL;
+
+  m_wordTypes = new KEduVocWordType();
+  ///@todo delete this: it only creates the sample entries for word types:
+  //m_wordTypes->createSampleData();
 }
 
 
@@ -133,7 +141,8 @@ KEduVocDocument::KEduVocDocument(QObject *parent)
 
 KEduVocDocument::~KEduVocDocument()
 {
-  delete d;
+    delete d->m_wordTypes;
+    delete d;
 }
 
 
@@ -1425,5 +1434,9 @@ QString KEduVocDocument::pattern(Mode mode)
   return newfilters.join("\n");
 }
 
+
+KEduVocWordType* KEduVocDocument::wordTypes() {
+    return d->m_wordTypes;
+}
 
 #include "keduvocdocument.moc"

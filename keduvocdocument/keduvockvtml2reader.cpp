@@ -56,18 +56,18 @@ bool KEduVocKvtml2Reader::readDoc(KEduVocDocument *doc)
     m_errorMessage = i18n("This is not a KDE Vocabulary document.");
     return false;
   }
-  
+
   if (domElementKvtml.attribute(KVTML_VERSION).toFloat() < 2.0)
   {
     // read the file with the old format
-    
+
     // first reset the file to the beginning
     m_inputFile->seek(0);
     KEduVocKvtmlReader oldFormat(m_inputFile);
-      
+
     // get the return value
     bool retval = oldFormat.readDoc(doc);
-      
+
     // pass the errormessage up
     m_errorMessage = oldFormat.errorMessage();
     return retval;
@@ -103,21 +103,21 @@ bool KEduVocKvtml2Reader::readInformation(QDomElement &informationElement)
       m_doc->setVersion(m_doc->generator().remove(0, pos + 2));
     }
   }
-  
+
   // read the title
   currentElement = informationElement.firstChildElement(KVTML_TITLE);
   if (!currentElement.isNull())
   {
     m_doc->setTitle(currentElement.text());
   }
-  
+
   // read the author
   currentElement = informationElement.firstChildElement(KVTML_AUTHOR);
   if (!currentElement.isNull())
   {
     m_doc->setAuthor(currentElement.text());
   }
-  
+
   // read the license
   currentElement = informationElement.firstChildElement(KVTML_LICENSE);
   if (!currentElement.isNull())
@@ -134,11 +134,11 @@ bool KEduVocKvtml2Reader::readInformation(QDomElement &informationElement)
 
   return true;
 }
-  
+
 bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
 {
   bool result = false;
-  
+
   QDomElement currentElement;
 
   QDomElement groupElement = domElementParent.firstChildElement(KVTML_IDENTIFIERS);
@@ -151,30 +151,30 @@ bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
       return false;
     }
 
-    for (int i = 0; i < entryList.count(); ++i) 
+    for (int i = 0; i < entryList.count(); ++i)
     {
       currentElement = entryList.item(i).toElement();
-      if (currentElement.parentNode() == groupElement) 
+      if (currentElement.parentNode() == groupElement)
       {
         result = readIdentifier(currentElement);
         if (!result)
           return false;
       }
-    }    
+    }
   }
-  
-  groupElement = domElementParent.firstChildElement(KVTML_TYPES);
+
+  groupElement = domElementParent.firstChildElement(KVTML_WORDTYPEDEFINITIONS);
   if (!groupElement.isNull())
   {
     readTypes(groupElement);
   }
-  
+
   groupElement = domElementParent.firstChildElement(KVTML_TENSES);
   if (!groupElement.isNull())
   {
     readTenses(groupElement);
   }
-  
+
   groupElement = domElementParent.firstChildElement(KVTML_USAGES);
   if (!groupElement.isNull())
   {
@@ -190,7 +190,7 @@ bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
       m_errorMessage = i18n("no entries found in 'entries' tag");
       return false; // at least one entry is required
     }
-    
+
     for (int i = 0; i < entryList.count(); ++i)
     {
       currentElement = entryList.item(i).toElement();
@@ -212,7 +212,7 @@ bool KEduVocKvtml2Reader::readGroups(QDomElement &domElementParent)
       m_errorMessage = i18n("no lessons found in 'lessons' tag");
       return false; // at least one entry is required
     }
-    
+
     for (int i = 0; i < entryList.count(); ++i)
     {
       currentElement = entryList.item(i).toElement();
@@ -237,13 +237,13 @@ bool KEduVocKvtml2Reader::readIdentifier(QDomElement &identifierElement)
     m_errorMessage = i18n("identifier missing id");
     return false;
   }
-  
-  QDomElement currentElement = identifierElement.firstChildElement(KVTML_TYPE);
+
+  QDomElement currentElement = identifierElement.firstChildElement(KVTML_IDENTIFIERTYPE);
   if (!currentElement.isNull())
   {
     // TODO: do something with the type
   }
-  
+
   currentElement = identifierElement.firstChildElement(KVTML_LOCALE);
   if (!currentElement.isNull())
   {
@@ -255,26 +255,26 @@ bool KEduVocKvtml2Reader::readIdentifier(QDomElement &identifierElement)
       return false;
     }
   }
-  
+
   currentElement = identifierElement.firstChildElement(KVTML_NAME);
   if (!currentElement.isNull())
   {
     // TODO: do something with the name
   }
-  
+
   currentElement = identifierElement.firstChildElement(KVTML_SIZEHINT);
   if (!currentElement.isNull())
   {
     // TODO: do something with the sizehint
   }
-  
+
   // read sub-parts
   currentElement = identifierElement.firstChildElement(KVTML_ARTICLE);
   if (!currentElement.isNull())
   {
     readArticle(currentElement, id);
   }
-  
+
   currentElement = identifierElement.firstChildElement(KVTML_PERSONALPRONOUNS);
   if (!currentElement.isNull())
   {
@@ -298,7 +298,7 @@ bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
     m_errorMessage = i18n("entry missing id");
     return false;
   }
-  
+
   // read info tags: inactive, inquery, and sizehint
   currentElement = entryElement.firstChildElement(KVTML_INACTIVE);
   if (!currentElement.isNull())
@@ -313,7 +313,7 @@ bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
       expr.setActive(true);
     }
   }
-  
+
   currentElement = entryElement.firstChildElement(KVTML_INQUERY);
   if (!currentElement.isNull())
   {
@@ -327,14 +327,14 @@ bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
       expr.setInQuery(false);
     }
   }
-  
+
   currentElement = entryElement.firstChildElement(KVTML_SIZEHINT);
   if (!currentElement.isNull())
   {
     // set the sizehint
     expr.setSizeHint(currentElement.text().toInt());
   }
-  
+
   // read translation children
   QDomNodeList translationList = entryElement.elementsByTagName(KVTML_TRANSLATION);
   if (translationList.length() <= 0)
@@ -342,7 +342,7 @@ bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
     m_errorMessage = i18n("no translations found");
     return false; // at least one translation is required
   }
-  
+
   for (int i = 0; i < translationList.count(); ++i)
   {
     currentElement = translationList.item(i).toElement();
@@ -353,14 +353,14 @@ bool KEduVocKvtml2Reader::readEntry(QDomElement &entryElement)
         return false;
     }
   }
-  
+
   // TODO: probably should insert at id position with a check to see if it exists
   // may be useful for detecting corrupt documents
   m_doc->insertEntry(&expr, id);
   return result;
 }
 
-bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement, 
+bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
                                           KEduVocExpression &expr, int index)
 {
   QDomElement currentElement = translationElement.firstChildElement(KVTML_TEXT);
@@ -368,26 +368,33 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
   {
     expr.translation(index).setTranslation(currentElement.text());
   }
-  
+
   currentElement = translationElement.firstChildElement(KVTML_COMMENT);
   if (!currentElement.isNull())
   {
     expr.translation(index).setComment(currentElement.text());
   }
-  
-  currentElement = translationElement.firstChildElement(KVTML_TYPE);
+
+  currentElement = translationElement.firstChildElement(KVTML_WORDTYPE);
   if (!currentElement.isNull())
   {
-    expr.translation(index).setType(currentElement.text());
+    QDomElement typeElement = currentElement.firstChildElement(KVTML_TYPENAME);
+    expr.translation(index).setType(typeElement.text());
+    // read subtype if the type is not empty
+    typeElement = currentElement.firstChildElement(KVTML_SUBTYPENAME);
+    if (!typeElement.isNull())
+    {
+      expr.translation(index).setSubType(typeElement.text());
+    }
   }
-  
+
   //<pronunciation></pronunciation>
   currentElement = translationElement.firstChildElement(KVTML_PRONUNCIATION);
   if (!currentElement.isNull())
   {
     expr.translation(index).setPronunciation(currentElement.text());
   }
-  
+
   //<falsefriend fromid="1"></falsefriend>
   currentElement = translationElement.firstChildElement(KVTML_FALSEFRIEND);
   if (!currentElement.isNull())
@@ -438,7 +445,7 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
   {
     // read any conjugations (NOTE: this will overwrite any conjugations of the same type for this
     // translation, as the type is used as the key
-    readConjugation(currentElement, conjugation);  
+    readConjugation(currentElement, conjugation);
     currentElement = currentElement.nextSiblingElement(KVTML_CONJUGATION);
   }
   if (conjugation.entryCount() > 0)
@@ -495,7 +502,7 @@ bool KEduVocKvtml2Reader::readLesson(QDomElement &lessonElement)
   // NOTE: currently this puts an identifier into the last lesson it is in, once support for multiple lessons
   // is in the entry class, all lessons that include an entry will be in there
   int lessonId = 0;
-  
+
   //<name>Lesson name</name>
   QDomElement currentElement = lessonElement.firstChildElement(KVTML_NAME);
   if (!currentElement.isNull())
@@ -507,7 +514,7 @@ bool KEduVocKvtml2Reader::readLesson(QDomElement &lessonElement)
     m_errorMessage = i18n("each lesson must have a name");
     return false;
   }
-  
+
   //<query>true</query>
   currentElement = lessonElement.firstChildElement(KVTML_QUERY);
   if (!currentElement.isNull())
@@ -517,7 +524,7 @@ bool KEduVocKvtml2Reader::readLesson(QDomElement &lessonElement)
       m_doc->addLessonToQuery(lessonId);
     }
   }
-  
+
   //<current>true</current>
   currentElement = lessonElement.firstChildElement(KVTML_CURRENT);
   if (!currentElement.isNull())
@@ -527,7 +534,7 @@ bool KEduVocKvtml2Reader::readLesson(QDomElement &lessonElement)
       m_doc->setCurrentLesson(lessonId);
     }
   }
-  
+
   //<entryid>0</entryid>
   currentElement = lessonElement.firstChildElement(KVTML_ENTRYID);
   while (!currentElement.isNull())
@@ -539,7 +546,7 @@ bool KEduVocKvtml2Reader::readLesson(QDomElement &lessonElement)
     m_doc->lesson(lessonId)->addEntry(entryId);
     currentElement = currentElement.nextSiblingElement(KVTML_ENTRYID);
   }
-  
+
   return true;
 }
 
@@ -559,7 +566,7 @@ bool KEduVocKvtml2Reader::readArticle(QDomElement &articleElement, int identifie
   </indefinite>
  </article>
 */
-{ 
+{
   QString fem_def = "";
   QString mal_def = "";
   QString nat_def = "";
@@ -575,20 +582,20 @@ bool KEduVocKvtml2Reader::readArticle(QDomElement &articleElement, int identifie
     {
       mal_def = subElement.text();
     }
-    
+
     subElement = currentElement.firstChildElement(KVTML_FEMALE);
     if (!subElement.isNull())
     {
       fem_def = subElement.text();
     }
-    
+
     subElement = currentElement.firstChildElement(KVTML_NEUTRAL);
     if (!subElement.isNull())
     {
       nat_def = subElement.text();
     }
   }
-  
+
   currentElement = articleElement.firstChildElement(KVTML_INDEFINITE);
   if (!currentElement.isNull())
   {
@@ -597,13 +604,13 @@ bool KEduVocKvtml2Reader::readArticle(QDomElement &articleElement, int identifie
     {
       mal_indef = subElement.text();
     }
-    
+
     subElement = currentElement.firstChildElement(KVTML_FEMALE);
     if (!subElement.isNull())
     {
       fem_indef = subElement.text();
     }
-    
+
     subElement = currentElement.firstChildElement(KVTML_NEUTRAL);
     if (!subElement.isNull())
     {
@@ -653,13 +660,13 @@ bool KEduVocKvtml2Reader::readConjugation(QDomElement &conjugElement, KEduVocCon
   QString plurthirdfemale;
   QString plurthirdneutral;
   QString type;
-  
-  QDomElement typeElement = conjugElement.firstChildElement(KVTML_TYPE);
+
+  QDomElement typeElement = conjugElement.firstChildElement(KVTML_CONJUGATIONTYPE);
   if (!typeElement.isNull())
   {
     type = typeElement.text();
   }
-  
+
   // TODO: add something here to link and/or store tense information
 
   QDomElement currentGroup = conjugElement.firstChildElement(KVTML_SINGULAR);
@@ -670,13 +677,13 @@ bool KEduVocKvtml2Reader::readConjugation(QDomElement &conjugElement, KEduVocCon
     {
       singfirst = currentElement.text();
     }
-    
+
     currentElement = currentGroup.firstChildElement(KVTML_2NDPERSON);
     if (!currentElement.isNull())
     {
       singsecond = currentElement.text();
     }
-    
+
     currentGroup = currentGroup.firstChildElement(KVTML_3RDPERSON);
     if (!currentGroup.isNull())
     {
@@ -696,20 +703,20 @@ bool KEduVocKvtml2Reader::readConjugation(QDomElement &conjugElement, KEduVocCon
         {
           singthirdmale = currentElement.text();
         }
-        
+
         currentElement = currentGroup.firstChildElement(KVTML_FEMALE);
         if (!currentElement.isNull())
         {
           singthirdfemale = currentElement.text();
         }
-        
+
         currentElement = currentGroup.firstChildElement(KVTML_NEUTRAL);
         if (!currentElement.isNull())
         {
           singthirdneutral = currentElement.text();
         }
       }
-      
+
     }
   }
 
@@ -721,13 +728,13 @@ bool KEduVocKvtml2Reader::readConjugation(QDomElement &conjugElement, KEduVocCon
     {
       plurfirst = currentElement.text();
     }
-    
+
     currentElement = currentGroup.firstChildElement(KVTML_2NDPERSON);
     if (!currentElement.isNull())
     {
       plursecond = currentElement.text();
     }
-    
+
     currentGroup = currentGroup.firstChildElement(KVTML_3RDPERSON);
     if (!currentGroup.isNull())
     {
@@ -747,23 +754,23 @@ bool KEduVocKvtml2Reader::readConjugation(QDomElement &conjugElement, KEduVocCon
         {
           plurthirdmale = currentElement.text();
         }
-        
+
         currentElement = currentGroup.firstChildElement(KVTML_FEMALE);
         if (!currentElement.isNull())
         {
           plurthirdfemale = currentElement.text();
         }
-        
+
         currentElement = currentGroup.firstChildElement(KVTML_NEUTRAL);
         if (!currentElement.isNull())
         {
           plurthirdneutral = currentElement.text();
         }
       }
-      
+
     }
   }
-  
+
   curr_conjug.setPers3SingularCommon(type, s3_common);
   curr_conjug.setPers3PluralCommon(type, p3_common);
   curr_conjug.setPers1Singular(type, singfirst);
@@ -782,19 +789,64 @@ bool KEduVocKvtml2Reader::readConjugation(QDomElement &conjugElement, KEduVocCon
 
 bool KEduVocKvtml2Reader::readTypes(QDomElement &typesElement)
 {
-  QStringList types;
+    QString mainTypeName;
 
-  QDomNodeList typeNodes = typesElement.elementsByTagName(KVTML_TYPE);
+    QDomElement currentTypeElement =    typesElement.firstChildElement(KVTML_WORDTYPEDEFINITION);
+    // go over <wordtypedefinition> elements
+    while ( !currentTypeElement.isNull() ) {
+        // set type and specialtype
+        mainTypeName =
+            currentTypeElement.firstChildElement(KVTML_TYPENAME).text();
+        m_doc->wordTypes()->addType( mainTypeName,
+            currentTypeElement.firstChildElement(KVTML_SPECIALWORDTYPE).text());
+
+        // iterate sub type elements <subwordtypedefinition>
+        QDomElement currentSubTypeElement =    currentTypeElement.firstChildElement(KVTML_SUBWORDTYPEDEFINITION);
+        while ( !currentSubTypeElement.isNull() ) {
+            // set type and specialtype
+            m_doc->wordTypes()->addSubType( mainTypeName,
+                currentSubTypeElement.firstChildElement(KVTML_SUBTYPENAME).text(),
+                currentSubTypeElement.firstChildElement(KVTML_SPECIALWORDTYPE).text());
+
+
+            currentSubTypeElement = currentSubTypeElement.nextSiblingElement(KVTML_SUBWORDTYPEDEFINITION);
+        }
+
+
+
+
+
+        currentTypeElement = currentTypeElement.nextSiblingElement(KVTML_WORDTYPEDEFINITION);
+    }
+
+
+  /*
   for (int i = 0; i < typeNodes.count(); ++i)
   {
     QDomElement currentElement = typeNodes.item(i).toElement();
     if (currentElement.parentNode() == typesElement)
     {
-      types.append(currentElement.text());
+      m_doc->wordTypes()->addType(currentElement.text());
     }
-  }
+  }*/
 
-  m_doc->setTypeDescriptions(types);
+
+
+
+
+
+
+//   QDomNodeList typeNodes = typesElement.elementsByTagName(KVTML_WORDTYPEDEFINITION);
+//   for (int i = 0; i < typeNodes.count(); ++i)
+//   {
+//     QDomElement currentElement = typeNodes.item(i).toElement();
+//     if (currentElement.parentNode() == typesElement)
+//     {
+//       m_doc->wordTypes()->addType(currentElement.text());
+//     }
+//   }
+
+//   m_doc->setTypeDescriptions(types);
   return true;
 }
 
@@ -854,13 +906,13 @@ bool KEduVocKvtml2Reader::readComparison(QDomElement &domElementParent, KEduVocC
   }
 
   currentElement = domElementParent.firstChildElement(KVTML_COMPARATIVE);
-  if (!currentElement.isNull()) 
+  if (!currentElement.isNull())
   {
     comp.setL2(currentElement.text());
   }
 
   currentElement = domElementParent.firstChildElement(KVTML_SUPERLATIVE);
-  if (!currentElement.isNull()) 
+  if (!currentElement.isNull())
   {
     comp.setL3(currentElement.text());
   }
@@ -905,35 +957,35 @@ bool KEduVocKvtml2Reader::readGrade(QDomElement &gradeElement, KEduVocExpression
     m_errorMessage = i18n("identifier missing id");
     return false;
   }
-  
+
   QDomElement currentElement = gradeElement.firstChildElement(KVTML_CURRENTGRADE);
   if (!currentElement.isNull())
   {
 	int value = currentElement.text().toInt();
 	expr.translation(index).gradeFrom(id).setGrade(value);
   }
-  
+
   currentElement = gradeElement.firstChildElement(KVTML_COUNT);
   if (!currentElement.isNull())
   {
     int value = currentElement.text().toInt();
     expr.translation(index).gradeFrom(id).setQueryCount(value);
   }
-  
+
   currentElement = gradeElement.firstChildElement(KVTML_ERRORCOUNT);
   if (!currentElement.isNull())
   {
     int value = currentElement.text().toInt();
     expr.translation(index).gradeFrom(id).setBadCount(value);
   }
-  
+
   currentElement = gradeElement.firstChildElement(KVTML_DATE);
   if (!currentElement.isNull())
   {
     QDateTime value = QDateTime::fromTime_t(currentElement.text().toUInt());
     expr.translation(index).gradeFrom(id).setQueryDate(value);
   }
-  
+
   return true;
 }
 

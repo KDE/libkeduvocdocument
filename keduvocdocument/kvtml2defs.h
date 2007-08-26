@@ -30,17 +30,24 @@
 
 #define KVTML_IDENTIFIERS       "identifiers"
 #define KVTML_IDENTIFIER        "identifier"
-#define KVTML_TYPE              "type"
+#define KVTML_IDENTIFIERTYPE    "identifiertype"
 #define KVTML_LOCALE            "locale"
 #define KVTML_NAME              "name"
 #define KVTML_SIZEHINT          "sizehint"
+
+// articles
 #define KVTML_ARTICLE           "article"
 #define KVTML_DEFINITE          "definite"
 #define KVTML_INDEFINITE        "indefinite"
+
+// conjugation and personal pronouns
+#define KVTML_CONJUGATION       "conjugation"
+#define KVTML_CONJUGATIONTYPE   "conjugationtype"
+#define KVTML_PERSONALPRONOUNS  "personalpronouns"
+
 #define KVTML_MALE              "male"
 #define KVTML_FEMALE            "female"
 #define KVTML_NEUTRAL           "neutral"
-#define KVTML_PERSONALPRONOUNS  "personalpronouns"
 #define KVTML_SINGULAR          "singular"
 #define KVTML_PLURAL            "plural"
 #define KVTML_1STPERSON         "firstperson"
@@ -48,9 +55,15 @@
 #define KVTML_3RDPERSON         "thirdperson"
 #define KVTML_COMMON            "common"
 
-#define KVTML_CONJUGATION       "conjugation"
+// word types
+#define KVTML_WORDTYPEDEFINITIONS   "wordtypedefinitions"
+#define KVTML_WORDTYPEDEFINITION    "wordtypedefinition"
+#define KVTML_SUBWORDTYPEDEFINITION   "subwordtypedefinition"
 
-#define KVTML_TYPES             "types"
+#define KVTML_WORDTYPE              "wordtype"
+#define KVTML_TYPENAME              "typename"
+#define KVTML_SUBTYPENAME           "subtypename"
+#define KVTML_SPECIALWORDTYPE       "specialwordtype"
 
 #define KVTML_TENSES            "tenses"
 #define KVTML_TENSE             "tense"
@@ -98,7 +111,7 @@
 #define KVTML_DATE              "date"
 
 #define KVTML_TRUE              "true"
-#define KVTML_FALSE             "false"  
+#define KVTML_FALSE             "false"
 
 #endif
 

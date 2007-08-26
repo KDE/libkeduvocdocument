@@ -55,7 +55,7 @@ bool KEduVocKvtml2Writer::writeDoc(KEduVocDocument *doc, const QString &generato
   domElementKvtml.appendChild(currentElement);
 
   // types
-  currentElement = m_domDoc.createElement(KVTML_TYPES);
+  currentElement = m_domDoc.createElement(KVTML_WORDTYPEDEFINITIONS);
   writeTypes(currentElement);
   if (currentElement.hasChildNodes())
   {
@@ -494,13 +494,39 @@ bool KEduVocKvtml2Writer::writeArticle(QDomElement &articleElement, int article)
 
 bool KEduVocKvtml2Writer::writeTypes(QDomElement &typesElement)
 {
+    KEduVocWordType* wt = m_doc->wordTypes();
+    foreach ( QString mainTypeName, wt->typeNameList() ) {
+kDebug() << "Writing type: " << mainTypeName;
+        QDomElement typeDefinitionElement = m_domDoc.createElement(KVTML_WORDTYPEDEFINITION);
+        typeDefinitionElement.appendChild(newTextElement(KVTML_TYPENAME, mainTypeName));
+        if ( !wt->specialType(mainTypeName).isEmpty() ) {
+            typeDefinitionElement.appendChild(newTextElement(KVTML_SPECIALWORDTYPE, wt->specialType(mainTypeName)));
+        }
+
+        // subtypes
+        foreach ( QString subTypeName, wt->subTypeNameList(mainTypeName) ) {
+            QDomElement subTypeDefinitionElement = m_domDoc.createElement(KVTML_SUBWORDTYPEDEFINITION);
+            subTypeDefinitionElement.appendChild(newTextElement(KVTML_SUBTYPENAME, subTypeName));
+            if ( !wt->specialSubType(mainTypeName, subTypeName).isEmpty() ) {
+                subTypeDefinitionElement.appendChild(newTextElement(KVTML_SPECIALWORDTYPE, wt->specialSubType(mainTypeName, subTypeName)));
+            }
+            typeDefinitionElement.appendChild(subTypeDefinitionElement);
+        }
+        typesElement.appendChild(typeDefinitionElement);
+    }
+
+
+
+
+
+/*
   foreach(QString type, m_doc->typeDescriptions())
   {
     if (!(type.isNull()) )
     {
-      typesElement.appendChild(newTextElement(KVTML_TYPE, type));
+      typesElement.appendChild(newTextElement(KVTML_WORDTYPE, type));
     }
-  }
+  }*/
 
   return true;
 }
@@ -578,10 +604,18 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
   // <text>Kniebeugen</text>
   translationElement.appendChild(newTextElement(KVTML_TEXT, translation.translation()));
 
-  // <type></type>
+  // <wordtype></wordtype>
   if (!translation.type().isEmpty())
   {
-    translationElement.appendChild(newTextElement(KVTML_TYPE, translation.type()));
+    QDomElement wordTypeElement = m_domDoc.createElement(KVTML_WORDTYPE);
+    translationElement.appendChild(wordTypeElement);
+    //<typename>noun</typename>
+    wordTypeElement.appendChild(newTextElement(KVTML_TYPENAME, translation.type()));
+    // <subwordtype>male</subwordtype>
+    if (!translation.subType().isEmpty())
+    {
+      wordTypeElement.appendChild(newTextElement(KVTML_SUBTYPENAME, translation.subType()));
+    }
   }
 
   // <comment></comment>

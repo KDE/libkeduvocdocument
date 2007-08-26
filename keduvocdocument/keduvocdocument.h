@@ -36,11 +36,13 @@
 #include <kurl.h>
 
 #include "keduvocgrammar.h"
+#include "keduvocwordtype.h"
 
 class QStringList;
 class KEduVocExpression;
 class KEduVocLesson;
 class LeitnerSystem;
+class KEduVocWordType;
 
 /**
  * This class contains the expressions of your vocabulary
@@ -288,6 +290,10 @@ public:
 
   // *** type methods ***
 
+  KEduVocWordType* wordTypes();
+
+
+///@todo delete the type methods below
   /**
    * Sets attribute string
    *

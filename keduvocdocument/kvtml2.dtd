@@ -1,4 +1,4 @@
-<!ELEMENT kvtml         (information, identifiers, typedefinitions?, entries, tenses?, usages?, lessons?)     >
+<!ELEMENT kvtml         (information, identifiers, wordtypedefinitions?, entries, tenses?, usages?, lessons?)     >
 <!ATTLIST kvtml version    CDATA  #REQUIRED>
 
 <!ELEMENT information    (generator?, title, author?, license?, comment?) >
@@ -30,12 +30,14 @@
 <!ELEMENT secondperson   (#PCDATA) >
 <!ELEMENT thirdperson    (common|(male, female, neutral)) >
 
-<!ELEMENT specialtype    (#PCDATA) >
-<!ELEMENT subtype        (#PCDATA) >
-<!ELEMENT type           (#PCDATA, subtype?) >
-<!ELEMENT subtypedefinition (#PCDATA, specialtype?) >
-<!ELEMENT typedefinition (#PCDATA, specialtype?, subtypedefinition*) >
-<!ELEMENT typedefinitions (typedefinition*) >
+<!ELEMENT specialwordtype    (#PCDATA) >
+<!ELEMENT subtypename        (#PCDATA) >
+<!ELEMENT typename           (#PCDATA) >
+<!ELEMENT wordtype           (typename?|(typename, subtypename?)) >
+
+<!ELEMENT subwordtypedefinition (subtypename, specialwordtype?) >
+<!ELEMENT wordtypedefinition (typename, specialwordtype?, subwordtypedefinition*) >
+<!ELEMENT wordtypedefinitions (wordtypedefinition*) >
 
 <!ELEMENT tenses         (tense*) >
 <!ELEMENT tense          (#PCDATA) >
@@ -55,7 +57,7 @@
 <!ELEMENT inactive       EMPTY >
 <!ELEMENT inquery        EMPTY >
 
-<!ELEMENT translation    (text, type?, inquery?, comment?, pronunciation?, falsfriend?, antonym?, synonym?, example?, usage?, paraphrase?, comparison?, conjugation*) >
+<!ELEMENT translation    (text, wordtype?, inquery?, comment?, pronunciation?, falsfriend?, antonym?, synonym?, example?, usage?, paraphrase?, comparison?, conjugation*) >
 <!ELEMENT text           (#PCDATA) >
 <!ELEMENT pronunciation  (#PCDATA) >
 <!ELEMENT falsefriend    (#PCDATA) >
