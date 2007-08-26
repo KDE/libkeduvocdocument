@@ -5,6 +5,7 @@
                           (C) 2001 The KDE-EDU team
                           (C) 2005 Eric Pignet <eric at erixpage.com>
                           (C) 2007 Peter Hedlund <peter.hedlund@kdemail.net>
+                          (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
