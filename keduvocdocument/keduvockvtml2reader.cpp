@@ -27,7 +27,7 @@
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"
 #include "kvtml2defs.h"
-#include "kvtmldefs.h"
+// should no longer be needed: #include "kvtmldefs.h"
 #include "keduvockvtmlreader.h"
 
 KEduVocKvtml2Reader::KEduVocKvtml2Reader(QIODevice *file)

@@ -74,9 +74,6 @@ public:
   QString                   m_querytrans;
   QList<KEduVocExpression>  m_vocabulary;
   QList<int>                m_lessonsInQuery;
-  //QStringList               m_lessonDescriptions;
-
-  QStringList               m_typeDescriptions;
 
   QStringList               m_tenseDescriptions;
   QStringList               m_usageDescriptions;
@@ -104,7 +101,6 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
 {
   m_lessons.clear();
   m_articles.clear();
-  m_typeDescriptions.clear();
   m_tenseDescriptions.clear();
   m_identifiers.clear();
   m_sortIdentifier.clear();
@@ -643,37 +639,6 @@ void KEduVocDocument::setIdentifier(int idx, const QString &id)
   if (idx < d->m_identifiers.size() && idx >= 0 ) {
     d->m_identifiers[idx] = id;
   }
-}
-
-
-QString KEduVocDocument::typeName (int index) const
-{
-  if (index >= d->m_typeDescriptions.count())
-    return "";
-  else
-    return d->m_typeDescriptions[index];
-}
-
-
-void KEduVocDocument::setTypeName(int idx, QString &id)
-{
-  if (idx >= d->m_typeDescriptions.size())
-    for (int i = d->m_typeDescriptions.size(); i <= idx; i++)
-      d->m_typeDescriptions.append ("");
-
-  d->m_typeDescriptions[idx] = id;
-}
-
-
-QStringList KEduVocDocument::typeDescriptions() const
-{
-  return d->m_typeDescriptions;
-}
-
-
-void KEduVocDocument::setTypeDescriptions(const QStringList &names)
-{
-  d->m_typeDescriptions = names;
 }
 
 

@@ -290,35 +290,13 @@ public:
 
   // *** type methods ***
 
+  /**
+   * Returns the type handling class. See KEduVocWordType.
+   *
+   * @returns the KEduVocWordType* type handling class
+   */
   KEduVocWordType* wordTypes();
 
-
-///@todo delete the type methods below
-  /**
-   * Sets attribute string
-   *
-   * @param index            number of attribute
-   * @param str              name of attribute
-   */
-  void setTypeName(int index, QString &str);
-
-  /**
-   * Returns the attribute string
-   *
-   * @param index            number of attribute
-   * @returns                string
-   */
-  QString typeName(int index) const;
-
-  /**
-   * Sets the descriptions of the types
-   */
-  void setTypeDescriptions(const QStringList &names);
-
-  /**
-   * Gets the descriptions of the types
-   */
-  QStringList typeDescriptions() const;
 
   // *** tense methods ***
 

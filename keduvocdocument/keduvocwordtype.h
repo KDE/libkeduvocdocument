@@ -101,6 +101,10 @@ public:
 
     void printDebugWordTypes();
 
+    // these should move into the old writer/reader
+    QString mainTypeFromOldFormat(const QString& typeSubtypeString) const;
+    QString subTypeFromOldFormat(const QString& typeSubtypeString) const;
+
 private:
     static const QString KVTML_1_TYPE_USER;
     static const QString KVTML_1_TYPE_DIV;
@@ -109,19 +113,13 @@ private:
 
 
     /// user defined types of old documents
-    QStringList m_userTypeDescriptions;
-
-    QMap<QString, QString> m_oldMainTypeNames;
-    QMap<QString, QString> m_oldSubTypeNames;
-
+//     QStringList m_userTypeDescriptions;
 
 
     QString mainTypeName(int index) const;
     int mainTypeIndex(const QString& name) const;
     int subTypeIndex( const QString& mainTypeName, const QString& subTypeName ) const;
 
-    QString mainTypeFromOldFormat(const QString& typeSubtypeString) const;
-    QString subTypeFromOldFormat(const QString& typeSubtypeString) const;
     QString oldType(const QString& mainType, const QString& subType) const;
 
     class Private;

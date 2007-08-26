@@ -77,6 +77,9 @@ public:
 
     /// Map containing the word type name and its properties.
     QList<wordType> m_wordTypeList;
+
+    QMap<QString, QString> m_oldMainTypeNames;
+    QMap<QString, QString> m_oldSubTypeNames;
 };
 
 
@@ -85,6 +88,16 @@ public:
 KEduVocWordType::KEduVocWordType()
 : d(new Private)
 {
+    // this should go into the old reader/writer
+    initOldTypeLists();
+}
+
+KEduVocWordType::KEduVocWordType(const KEduVocWordType & other)
+: d(new Private)
+{
+    d->m_wordTypeList = other.d->m_wordTypeList;
+    d->m_oldMainTypeNames = other.d->m_oldMainTypeNames;
+    d->m_oldSubTypeNames = other.d->m_oldSubTypeNames;
 }
 
 KEduVocWordType::~KEduVocWordType()
@@ -99,15 +112,7 @@ KEduVocWordType & KEduVocWordType::operator =(const KEduVocWordType & other)
     return *this;
 }
 
-KEduVocWordType::KEduVocWordType(const KEduVocWordType & other)
-: d(new Private)
-{
-    d->m_wordTypeList = other.d->m_wordTypeList;
-}
 
-
-
-/*
 QString KEduVocWordType::mainTypeFromOldFormat(const QString & typeSubtypeString) const
 {
     QString mainType;
@@ -118,16 +123,7 @@ QString KEduVocWordType::mainTypeFromOldFormat(const QString & typeSubtypeString
     else
         mainType = typeSubtypeString;
 
-    if ( mainType.startsWith(KVTML_1_TYPE_USER) ) {
-        mainType.remove(0, 1);
-        i = mainType.toInt()-1;
-        if (i >= 0 && i < m_userTypeDescriptions.count())
-            return m_userTypeDescriptions[i];
-        else
-            return QString();
-    }
-
-    QString wt = m_oldMainTypeNames.value( mainType );
+    QString wt = d->m_oldMainTypeNames.value( mainType );
     if ( wt == QString() ) {
         kDebug() << "Unknown old maintype: " << typeSubtypeString;
         return typeSubtypeString;
@@ -146,46 +142,45 @@ QString KEduVocWordType::subTypeFromOldFormat(const QString & typeSubtypeString)
         return QString();
     }
 
-    QString wt = m_oldSubTypeNames.value( t );
+    QString wt = d->m_oldSubTypeNames.value( t );
     if ( wt == QString() ) {
         kDebug() << "Unknown old maintype: " << typeSubtypeString;
         return typeSubtypeString;
     }
     return wt;
 }
-*/
 
 
 void KEduVocWordType::initOldTypeLists()
 {
-    m_oldMainTypeNames.clear();
-    m_oldMainTypeNames.insert("v", i18n("Verb"));
-    m_oldMainTypeNames.insert("n", i18n("Noun"));
-    m_oldMainTypeNames.insert("nm", i18n("Name"));
-    m_oldMainTypeNames.insert("ar", i18n("Article"));
-    m_oldMainTypeNames.insert("aj", i18n("Adjective"));
-    m_oldMainTypeNames.insert("av", i18n("Adverb"));
-    m_oldMainTypeNames.insert("pr", i18n("Pronoun"));
-    m_oldMainTypeNames.insert("ph", i18n("Phrase"));
-    m_oldMainTypeNames.insert("num", i18n("Numeral"));
-    m_oldMainTypeNames.insert("con", i18n("Conjunction"));
-    m_oldMainTypeNames.insert("pre", i18n("Preposition"));
-    m_oldMainTypeNames.insert("qu", i18n("Question"));
-    m_oldMainTypeNames.insert("ifm", i18n("Informal"));
-    m_oldMainTypeNames.insert("fig", i18n("Figuratively"));
+    d->m_oldMainTypeNames.clear();
+    d->m_oldMainTypeNames.insert("v", i18n("Verb"));
+    d->m_oldMainTypeNames.insert("n", i18n("Noun"));
+    d->m_oldMainTypeNames.insert("nm", i18n("Name"));
+    d->m_oldMainTypeNames.insert("ar", i18n("Article"));
+    d->m_oldMainTypeNames.insert("aj", i18n("Adjective"));
+    d->m_oldMainTypeNames.insert("av", i18n("Adverb"));
+    d->m_oldMainTypeNames.insert("pr", i18n("Pronoun"));
+    d->m_oldMainTypeNames.insert("ph", i18n("Phrase"));
+    d->m_oldMainTypeNames.insert("num", i18n("Numeral"));
+    d->m_oldMainTypeNames.insert("con", i18n("Conjunction"));
+    d->m_oldMainTypeNames.insert("pre", i18n("Preposition"));
+    d->m_oldMainTypeNames.insert("qu", i18n("Question"));
+    d->m_oldMainTypeNames.insert("ifm", i18n("Informal"));
+    d->m_oldMainTypeNames.insert("fig", i18n("Figuratively"));
 
-    m_oldSubTypeNames.clear();
-    m_oldSubTypeNames.insert("ord", i18n("Numeral Ordinal"));
-    m_oldSubTypeNames.insert("crd", i18n("Numeral Cardinal"));
-    m_oldSubTypeNames.insert("def", i18n("Article Definite"));
-    m_oldSubTypeNames.insert("ind", i18n("Article Indefinite"));
-    m_oldSubTypeNames.insert("re", i18n("Verb Regular"));
-    m_oldSubTypeNames.insert("ir", i18n("Verb Irregular"));
-    m_oldSubTypeNames.insert("pos", i18n("Pronoun Possessive"));
-    m_oldSubTypeNames.insert("per", i18n("Pronoun Personal"));
-    m_oldSubTypeNames.insert("m", i18n("Noun Male"));
-    m_oldSubTypeNames.insert("f", i18n("Noun Female"));
-    m_oldSubTypeNames.insert("s", i18n("Noun Neutral"));
+    d->m_oldSubTypeNames.clear();
+    d->m_oldSubTypeNames.insert("ord", i18n("Numeral Ordinal"));
+    d->m_oldSubTypeNames.insert("crd", i18n("Numeral Cardinal"));
+    d->m_oldSubTypeNames.insert("def", i18n("Article Definite"));
+    d->m_oldSubTypeNames.insert("ind", i18n("Article Indefinite"));
+    d->m_oldSubTypeNames.insert("re", i18n("Verb Regular"));
+    d->m_oldSubTypeNames.insert("ir", i18n("Verb Irregular"));
+    d->m_oldSubTypeNames.insert("pos", i18n("Pronoun Possessive"));
+    d->m_oldSubTypeNames.insert("per", i18n("Pronoun Personal"));
+    d->m_oldSubTypeNames.insert("m", i18n("Noun Male"));
+    d->m_oldSubTypeNames.insert("f", i18n("Noun Female"));
+    d->m_oldSubTypeNames.insert("s", i18n("Noun Neutral"));
 
 }
 
@@ -208,10 +203,10 @@ QStringList KEduVocWordType::mainTypeList() const
 QString KEduVocWordType::oldType(const QString & mainType, const QString & subType) const
 {
     QString oldType;
-    oldType = m_oldMainTypeNames.key(mainType);
+    oldType = d->m_oldMainTypeNames.key(mainType);
     if ( subType != QString() ) {
         oldType.append(KVTML_1_TYPE_DIV);
-        oldType.append(m_oldSubTypeNames.key(subType));
+        oldType.append(d->m_oldSubTypeNames.key(subType));
     }
 
     if ( oldType.isEmpty() ) {
@@ -308,6 +303,14 @@ kDebug() << "Get subtypes for " << mainType << " = " << mainIndex;
 
 void KEduVocWordType::addType(const QString & typeName, const QString & specialType, const QString & specialTypeExplanation)
 {
+    if (typeName.isEmpty()) {
+        kDebug() << "Attempting to add empty type. When opening old kvtml documents this is ok.";
+        return;
+    }
+    if (typeNameList().contains(typeName)) {
+        kDebug() << "Attempting to add type \"" << typeName << "\" twice.";
+        return;
+    }
     d->m_wordTypeList.append(Private::wordType());
     d->m_wordTypeList[d->m_wordTypeList.count()-1].m_typeName = typeName;
     d->m_wordTypeList[d->m_wordTypeList.count()-1].m_specialType = specialType;

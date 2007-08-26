@@ -450,6 +450,7 @@ bool KEduVocKvtmlWriter::writeOption(QDomDocument &domDoc, QDomElement &domEleme
 
 bool KEduVocKvtmlWriter::writeType(QDomDocument &domDoc, QDomElement &domElementParent)
 {
+/** @todo port to new type handling
   if (m_doc->typeDescriptions().count() == 0)
     return true;
 
@@ -471,6 +472,7 @@ bool KEduVocKvtmlWriter::writeType(QDomDocument &domDoc, QDomElement &domElement
   }
 
   domElementParent.appendChild(domElementType);
+*/
   return true;
 }
 

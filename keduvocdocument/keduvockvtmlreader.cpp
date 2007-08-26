@@ -618,31 +618,26 @@ bool KEduVocKvtmlReader::readType(QDomElement &domElementParent)
 {
   QString s;
   QDomElement currentElement;
-  QStringList descriptions;
 
   QDomNodeList entryList = domElementParent.elementsByTagName(KV_TYPE_DESC);
   if (entryList.length() <= 0)
     return false;
 
-  descriptions.clear();
-
   for (int i = 0; i < entryList.count(); ++i) {
     currentElement = entryList.item(i).toElement();
     if (currentElement.parentNode() == domElementParent) {
-      int no = 0;
+      // We need to even add empty elements since the old system relied on
+      // the order. So "type1" "" "type2" should be just like that.
 
-      QDomAttr attribute = currentElement.attributeNode(KV_TYPE_NO);
-      if (!attribute.isNull())
-        no = attribute.value().toInt();
+      kDebug() << "Adding old self defined type: " << currentElement.text();
+      // add the type to the list of available types
+      m_doc->wordTypes()->addType(currentElement.text());
 
-      s = currentElement.text();
-      if (s.isNull())
-        s = "";
-      descriptions.append(s);
+      // from this the #1 are transformed to something sensible again
+      m_oldSelfDefinedTypes.append(currentElement.text());
     }
   }
 
-  m_doc->setTypeDescriptions(descriptions);
   return true;
 }
 
@@ -816,6 +811,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
                                                         QString &pronunciation,
                                                         int &width,
                                                         QString &type,
+                                                        QString &subType,
                                                         QString &faux_ami_f,
                                                         QString &faux_ami_t,
                                                         QString &synonym,
@@ -962,35 +958,39 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
   if (!attribute.isNull())
     antonym = attribute.value();
 
-  attribute = domElementExpressionChild.attributeNode(KV_EXPRTYPE);
-  if (!attribute.isNull())
-  {
-    type = attribute.value();
-    if (type == "1")
-      type = QM_VERB;
-    else if (type == "2")  // convert from pre-0.5 versions
-      type = QM_NOUN;
-    else if (type == "3")
-      type = QM_NAME;
-
-    if (type.length() != 0 && type.left(1) == QM_USER_TYPE)
+    // this is all done by reference - so we have to care about "type" :(
+    attribute = domElementExpressionChild.attributeNode(KV_EXPRTYPE);
+    if (!attribute.isNull())
     {
-      int num = qMin(type.mid (1, 40).toInt(), 1000); // paranoia check
-      if (num > m_doc->typeDescriptions().count())
-      {
-        // description missing ?
-        QString s;
-        QStringList sl = m_doc->typeDescriptions();
-        for (int i = m_doc->typeDescriptions().count(); i < num; i++)
+        QString oldType = attribute.value();
+
+        if (oldType.length() >= 2 && type.left(1) == QM_USER_TYPE)
         {
-          s.setNum(i + 1);
-          s.prepend("#");  // invent descr according to number
-          sl.append(s);
-        }
-        m_doc->setTypeDescriptions(sl);
-      }
+            // they started counting at 1
+            int selfDefinedTypeIndex = oldType.right(type.count()-1).toInt() -1;
+            // append invented types (do we not trust our own writer?)
+            if ( selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count() )
+            {
+                while (selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count()) {
+                    m_oldSelfDefinedTypes.append( i18n("User defined word type %1", m_oldSelfDefinedTypes.count() - 1) );
+                }
+            }
+            type = m_oldSelfDefinedTypes.value(selfDefinedTypeIndex);
+        } else { // not user defined - preset types
+                // convert from pre-0.5 versions (I guess we can just leave that in here.
+            // I seriously doubt that any such documents exist...
+            if (oldType == "1")
+                oldType = QM_VERB;
+            else if (oldType == "2")
+                oldType = QM_NOUN;
+            else if (oldType == "3")
+                oldType = QM_NAME;
+
+            type = m_doc->wordTypes()->mainTypeFromOldFormat(oldType);
+            subType = m_doc->wordTypes()->subTypeFromOldFormat(oldType);
+
+        } // not user defined - preset types
     }
-  }
 
   pronunciation = "";
   attribute = domElementExpressionChild.attributeNode(KV_PRONUNCE);
@@ -1029,6 +1029,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   int                       lesson = 0;
   int                       width;
   QString                   type;
+  QString                   subType;
   QString                   faux_ami_f;
   QString                   faux_ami_t;
   QString                   synonym;
@@ -1061,7 +1062,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
     // so make sure this lesson is in the document
     m_doc->addLesson(QString("#") + QString::number(lesson), lesson);
   }
-  
+
   attribute = domElementParent.attributeNode(KV_SELECTED);
   if (!attribute.isNull())
     inquery = attribute.value() == "1" ? true : false;
@@ -1074,35 +1075,40 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   else
     active = true;
 
-  attribute = domElementParent.attributeNode(KV_EXPRTYPE);
-  if (!attribute.isNull())
-  {
-    exprtype = attribute.value();
-    if (exprtype == "1")
-      exprtype = QM_VERB;
-    else if (exprtype == "2")  // convert from pre-0.5 versions
-      exprtype = QM_NOUN;
-    else if (exprtype == "3")
-      exprtype = QM_NAME;
-
-    if (exprtype.length() != 0 && exprtype.left(1) == QM_USER_TYPE)
+    // this is all done by reference - so we have to care about "type" :(
+    attribute = domElementParent.attributeNode(KV_EXPRTYPE);
+    if (!attribute.isNull())
     {
-      int num = qMin(exprtype.mid(1, 40).toInt(), 1000); // paranoia check
-      if (num > m_doc->typeDescriptions().count())
-      {
-        // description missing ?
-        QString s;
-        QStringList sl = m_doc->typeDescriptions();
-        for (int i = m_doc->typeDescriptions().count(); i < num; i++)
+        QString oldType = attribute.value();
+
+        if (oldType.length() >= 2 && type.left(1) == QM_USER_TYPE)
         {
-          s.setNum(i + 1);
-          s.prepend("#");  // invent descr according to number
-          sl.append(s);
-        }
-        m_doc->setTypeDescriptions(sl);
-      }
+            // they started counting at 1
+            int selfDefinedTypeIndex = oldType.right(type.count()-1).toInt() -1;
+            // append invented types (do we not trust our own writer?)
+            if ( selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count() )
+            {
+                while (selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count()) {
+                    m_oldSelfDefinedTypes.append( i18n("User defined word type %1", m_oldSelfDefinedTypes.count() - 1) );
+                }
+            }
+            type = m_oldSelfDefinedTypes.value(selfDefinedTypeIndex);
+        } else { // not user defined - preset types
+                // convert from pre-0.5 versions (I guess we can just leave that in here.
+            // I seriously doubt that any such documents exist...
+            if (oldType == "1")
+                oldType = QM_VERB;
+            else if (oldType == "2")
+                oldType = QM_NOUN;
+            else if (oldType == "3")
+                oldType = QM_NAME;
+
+            type = m_doc->wordTypes()->mainTypeFromOldFormat(oldType);
+            subType = m_doc->wordTypes()->subTypeFromOldFormat(oldType);
+
+        } // not user defined - preset types
     }
-  }
+
 
   //-------------------------------------------------------------------------
   // Children 'Translation'
@@ -1129,11 +1135,11 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
 
       // read attributes - the order of the query grades is interchanged!
       if (i == 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
-                                          pronunciation, width, type, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase))
+                                          pronunciation, width, type, subType, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase))
         return false;
 
       if (i != 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
-                                          pronunciation, width, type, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase))
+                                          pronunciation, width, type, subType, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase))
         return false;
 
       if (m_doc->entryCount() == 0)
@@ -1231,8 +1237,10 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
         expr.translation(i).setMultipleChoice(mc);
         mc.clear();
       }
-      if (!type.isEmpty() )
-        expr.translation(i).setType (type);
+
+      expr.translation(i).setType(type);
+      expr.translation(i).setType(subType);
+
       if (!remark.isEmpty() )
         expr.translation(i).setComment (remark);
       if (!pronunciation.isEmpty() )
@@ -1277,7 +1285,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   {
 	m_doc->lesson(lesson)->addEntry(m_doc->entryCount());
   }
-  
+
   return true;
 }
 
