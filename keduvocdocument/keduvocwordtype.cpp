@@ -185,20 +185,6 @@ void KEduVocWordType::initOldTypeLists()
 }
 
 /*
-QStringList KEduVocWordType::subTypeList(const QString & mainType) const
-{
-    return d->m_wordTypeList.value( mainType );
-}
-
-
-
-QStringList KEduVocWordType::mainTypeList() const
-{
-    QStringList mainTypeList = d->m_wordTypeList.keys();
-    mainTypeList << m_userTypeDescriptions;
-    kDebug() << "m_userTypeDescriptions: " << m_userTypeDescriptions;
-    return mainTypeList;
-}
 
 QString KEduVocWordType::oldType(const QString & mainType, const QString & subType) const
 {
