@@ -390,6 +390,10 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
 void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
 {
     kDebug() << "Merging of docs is not implemented"; /// @todo IMPLEMENT ME
+    // This code was really horribly broken.
+    // Now with the new classes we could attempt to reactivate it.
+    // A rewrite might be easier.
+
 /*
   if (docToMerge) {
 
