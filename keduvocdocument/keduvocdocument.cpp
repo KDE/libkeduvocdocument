@@ -131,8 +131,6 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
   m_leitnerSystem = NULL;
 
   m_wordTypes = new KEduVocWordType();
-  ///@todo delete this: it only creates the sample entries for word types:
-  //m_wordTypes->createSampleData();
 }
 
 
@@ -363,13 +361,11 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
 		saved = kvtmlWriter.writeDoc(this, generator);
 	    }
 		break;
-/** @todo include the csv write again, as soon as it's ported to the new classes
       case Csv: {
         KEduVocCsvWriter csvWriter(&f);
         saved = csvWriter.writeDoc(this, generator);
       }
       break;
-*/
       default: {
         kError() << "kvcotrainDoc::saveAs(): unknown filetype" << endl;
       }
