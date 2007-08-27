@@ -102,6 +102,13 @@ public:
     QString mainTypeFromOldFormat(const QString& typeSubtypeString) const;
     QString subTypeFromOldFormat(const QString& typeSubtypeString) const;
 
+    QString typeOfSpecialType( const QString& specialType ) const;
+
+    QString nounSpecialType() const;
+    QString verbSpecialType() const;
+    QString adjectiveSpecialType() const;
+    QString adverbSpecialType() const;
+
 private:
     void initOldTypeLists();
 

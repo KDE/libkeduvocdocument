@@ -79,10 +79,53 @@ public:
 
     static const QString KVTML_1_TYPE_USER;
     static const QString KVTML_1_TYPE_DIV;
+
+    static const QString WORDTYPE_NOUN;
+    static const QString WORDTYPE_NOUN_MALE;
+    static const QString WORDTYPE_NOUN_FEMALE;
+    static const QString WORDTYPE_NOUN_NEUTRAL;
+
+    static const QString WORDTYPE_VERB;
+    static const QString WORDTYPE_VERB_REGULAR;
+    static const QString WORDTYPE_VERB_IRREGULAR;
+    static const QString WORDTYPE_ADJECTIVE;
+    static const QString WORDTYPE_ADVERB;
+
+    static const QString WORDTYPE_NOUN_EXPLANATION;
 };
 
 const QString KEduVocWordType::Private::KVTML_1_TYPE_USER = QString("#");
 const QString KEduVocWordType::Private::KVTML_1_TYPE_DIV = QString(":");
+
+const QString KEduVocWordType::Private::WORDTYPE_NOUN = QString("noun");
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_MALE = QString("noun:male");
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_FEMALE = QString("noun:female");
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_NEUTRAL = QString("noun:neutral");
+
+const QString KEduVocWordType::Private::WORDTYPE_VERB = QString("verb");
+const QString KEduVocWordType::Private::WORDTYPE_VERB_REGULAR = QString("verb:regular");
+const QString KEduVocWordType::Private::WORDTYPE_VERB_IRREGULAR = QString("verb:irregular");
+
+const QString KEduVocWordType::Private::WORDTYPE_ADJECTIVE = QString("adjective");
+const QString KEduVocWordType::Private::WORDTYPE_ADVERB = QString("adverb");
+
+
+
+
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_EXPLANATION = QString(i18n("This holds the words of type noun. You can rename it but not delete since the article training relies on it!"));
+
+/*
+
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_MALE = QString("male", "This holds the words of type noun male. You can rename it but not delete since the article training relies on it!");
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_FEMALE = QString("female", "This holds the words of type noun female. You can rename it but not delete since the article training relies on it!");
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_NEUTRAL = QString("neutral", "This holds the words of type noun neutral. You can rename it but not delete since the article training relies on it!");
+
+const QString KEduVocWordType::Private::WORDTYPE_VERB = QString("verb", "This holds the words of type verb. You can rename it but not delete since the article training relies on it!");
+const QString KEduVocWordType::Private::WORDTYPE_VERB_REGULAR = QString("regular", "This holds the words of type regular verbs. You can rename it but not delete since the article training relies on it!");
+const QString KEduVocWordType::Private::WORDTYPE_VERB_IRREGULAR = QString("irregular", "This holds the words of type irregular verbs. You can rename it but not delete since the article training relies on it!");
+
+const QString KEduVocWordType::Private::WORDTYPE_ADJECTIVE = QString("adjective", "This holds the words of type adjective. You can rename it but not delete since the article training relies on it!");
+const QString KEduVocWordType::Private::WORDTYPE_ADVERB = QString("adverb", "This holds the words of type adverb. You can rename it but not delete since the article training relies on it!");*/
 
 
 
@@ -408,6 +451,38 @@ QString KEduVocWordType::specialSubType(const QString & mainTypeName, const QStr
         int subIndex = subTypeIndex( mainTypeName, subTypeName );
         if (subIndex >= 0) {
             return d->m_wordTypeList[mainIndex].m_subWordTypeList[subIndex].m_specialType;
+        }
+    }
+    return QString();
+}
+
+
+
+QString KEduVocWordType::nounSpecialType() const
+{
+    return d->WORDTYPE_NOUN;
+}
+
+QString KEduVocWordType::verbSpecialType() const
+{
+    return d->WORDTYPE_VERB;
+}
+
+QString KEduVocWordType::adjectiveSpecialType() const
+{
+    return d->WORDTYPE_ADJECTIVE;
+}
+
+QString KEduVocWordType::adverbSpecialType() const
+{
+    return d->WORDTYPE_ADVERB;
+}
+
+QString KEduVocWordType::typeOfSpecialType(const QString & specialType) const
+{
+    for ( int i=0; i < d->m_wordTypeList.count(); i++ ) {
+        if ( d->m_wordTypeList.value(i).m_specialType == specialType ) {
+            return d->m_wordTypeList.value(i).m_typeName;
         }
     }
     return QString();
