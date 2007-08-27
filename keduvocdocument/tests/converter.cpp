@@ -57,7 +57,7 @@ int main (int argc, char ** argv)
       kDebug() << "Reading " << infile;
       document.open(infile);
       kDebug() << "Writing to " << outfile;
-      document.saveAs(outfile, KEduVocDocument::kvtml, "converter");
+      document.saveAs(outfile, KEduVocDocument::Kvtml, "converter");
     }
   }
   

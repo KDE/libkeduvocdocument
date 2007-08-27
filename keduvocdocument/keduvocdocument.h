@@ -44,15 +44,18 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocDocument : public QObject
   Q_OBJECT
 public:
 
-  enum FileType { kvd_none,
-                  automatic,
-                  kvtml,
-                  wql,
-                  pauker,
-                  vokabeln,
-                  xdxf,
-                  csv,
-				  kvtml1 };
+  enum FileType
+  {
+    KvdNone,
+    Automatic,
+    Kvtml,
+    Wql,
+    Pauker,
+    Vokabeln,
+    Xdxf,
+    Csv,
+    Kvtml1
+  };
 
   /**
    * Constructor for a KdeEdu vocabulary document

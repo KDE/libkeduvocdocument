@@ -174,7 +174,7 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileNam
 {
   QIODevice * f = KFilterDev::deviceForFile(fileName);
   if (!f->open(QIODevice::ReadOnly))
-    return csv;
+    return Csv;
 
   QDataStream is(f);
 
@@ -199,25 +199,25 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileNam
   line.prepend(c1);
 
   if (!is.device()->isOpen())
-    return kvd_none;
+    return KvdNone;
 
   f->close();
   if (c1 == '<' && c2 == '?' && c3 == 'x' && c4 == 'm' && c5 == 'l') {
     if (line2.indexOf("pauker", 0) >  0)
-      return pauker;
+      return Pauker;
     else if (line2.indexOf("xdxf", 0) >  0)
-      return xdxf;
+      return Xdxf;
     else
-      return kvtml;
+      return Kvtml;
   }
 
   if (line == WQL_IDENT)
-    return wql;
+    return Wql;
 
   if (c1 == '"' && (line.contains('"') == 1 || line.contains(QRegExp("\",[0-9]"))))
-    return vokabeln;
+    return Vokabeln;
 
-  return csv;
+  return Csv;
 }
 
 
@@ -243,7 +243,7 @@ bool KEduVocDocument::open(const KUrl& url)
     FileType ft = detectFileType(url.path());
 
     switch (ft) {
-      case kvtml:
+      case Kvtml:
       {
         KEduVocKvtml2Reader kvtmlReader(f);
         read = kvtmlReader.readDoc(this);
@@ -252,7 +252,7 @@ bool KEduVocDocument::open(const KUrl& url)
       }
       break;
 
-      case wql:
+      case Wql:
       {
         KEduVocWqlReader wqlReader(f);
         d->m_url.setFileName(i18n("Untitled"));
@@ -262,7 +262,7 @@ bool KEduVocDocument::open(const KUrl& url)
       }
       break;
 
-      case pauker:
+      case Pauker:
       {
         KEduVocPaukerReader paukerReader(this);
         d->m_url.setFileName(i18n("Untitled"));
@@ -272,7 +272,7 @@ bool KEduVocDocument::open(const KUrl& url)
       }
       break;
 
-      case vokabeln:
+      case Vokabeln:
       {
         KEduVocVokabelnReader vokabelnReader(f);
         d->m_url.setFileName(i18n("Untitled"));
@@ -282,7 +282,7 @@ bool KEduVocDocument::open(const KUrl& url)
       }
       break;
 
-      case csv:
+      case Csv:
       {
         KEduVocCsvReader csvReader(f);
         read = csvReader.readDoc(this);
@@ -291,7 +291,7 @@ bool KEduVocDocument::open(const KUrl& url)
       }
       break;
 
-      case xdxf:
+      case Xdxf:
       {
         KEduVocXdxfReader xdxfReader(this);
         d->m_url.setFileName(i18n("Untitled"));
@@ -326,12 +326,12 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
 {
   KUrl tmp(url);
 
-  if (ft == automatic)
+  if (ft == Automatic)
   {
     if (tmp.path().right(strlen("." KVTML_EXT)) == "." KVTML_EXT)
-      ft = kvtml;
+      ft = Kvtml;
     else if (tmp.path().right(strlen("." CSV_EXT)) == "." CSV_EXT)
-      ft = csv;
+      ft = Csv;
     else
     {
       return false;
@@ -351,20 +351,20 @@ bool KEduVocDocument::saveAs(const KUrl & url, FileType ft, const QString & gene
     }
 
     switch (ft) {
-      case kvtml: {
+      case Kvtml: {
 		// write version 2 file
         KEduVocKvtml2Writer kvtmlWriter(&f);
         saved = kvtmlWriter.writeDoc(this, generator);
       }
       break;
-	  case kvtml1: {
+	  case Kvtml1: {
 		// write old version 1 file
 		KEduVocKvtmlWriter kvtmlWriter(&f);
 		saved = kvtmlWriter.writeDoc(this, generator);
 	    }
 		break;
 /** @todo include the csv write again, as soon as it's ported to the new classes
-      case csv: {
+      case Csv: {
         KEduVocCsvWriter csvWriter(&f);
         saved = csvWriter.writeDoc(this, generator);
       }
