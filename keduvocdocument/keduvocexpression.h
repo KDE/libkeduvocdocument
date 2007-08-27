@@ -331,7 +331,7 @@ public:
    *
    * @return                 the box's name
    */
-  QString leitnerBox();
+  QString leitnerBox() const;
 
 
   KEduVocExpression& operator=(const KEduVocExpression &expression);

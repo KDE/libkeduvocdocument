@@ -50,7 +50,7 @@ public:
 
    bool isEmpty() const;
    void clear();
-   unsigned size();
+   unsigned size() const;
 
    bool operator==(const KEduVocMultipleChoice &choice) const;
 

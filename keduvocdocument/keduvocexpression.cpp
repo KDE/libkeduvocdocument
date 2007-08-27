@@ -957,7 +957,7 @@ void KEduVocExpression::setOriginal(const QString & expr)
 }
 */
 
-QString KEduVocExpression::leitnerBox()
+QString KEduVocExpression::leitnerBox() const
 {
   return d->m_leitnerBox;
 }

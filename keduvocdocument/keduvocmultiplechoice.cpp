@@ -100,7 +100,7 @@ void KEduVocMultipleChoice::setChoice(int index, const QString &s)
   d->m_choices[index] = s;
 }
 
-unsigned KEduVocMultipleChoice::size()
+unsigned KEduVocMultipleChoice::size() const
 {
   return d->m_choices.size();
 }
