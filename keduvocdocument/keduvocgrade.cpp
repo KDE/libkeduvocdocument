@@ -15,7 +15,7 @@
 
 #include "keduvocgrade.h"
 
-class KEduVocGradePrivate
+class KEduVocGrade::KEduVocGradePrivate
 {
   public:
     grade_t m_grade;
