@@ -92,11 +92,6 @@ KEduVocExpression::KEduVocExpression(const QString & expression, const QString &
 
   if (separator.length()) {
     int pos = expr.indexOf(separator);
-/*
-    if (pos == -1) {
-      setTranslation(0, expr.simplified()); ///@todo: no special original treatment
-    }
-    else {*/
     int translationIndex = 0;
       se = expr.left(pos).simplified();
       setTranslation(translationIndex, se);
