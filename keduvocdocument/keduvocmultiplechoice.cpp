@@ -25,7 +25,7 @@
 
 #include "keduvocmultiplechoice.h"
 
-class KEduVocMultipleChoicePrivate
+class KEduVocMultipleChoice::KEduVocMultipleChoicePrivate
 {
   public:
    QStringList m_choices;

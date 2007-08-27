@@ -34,7 +34,7 @@
 
 #define MAX_MULTIPLE_CHOICE  5  // select one out of x
 
-class KEduVocMultipleChoicePrivate;
+
 
 class KEDUVOCDOCUMENT_EXPORT KEduVocMultipleChoice
 {
@@ -44,9 +44,9 @@ public:
    KEduVocMultipleChoice();
    KEduVocMultipleChoice(const KEduVocMultipleChoice &other);
    KEduVocMultipleChoice (const QStringList &choices);
-   
+
    ~KEduVocMultipleChoice();
-   
+
    void setChoices (const QStringList &choices);
    QStringList choices() const;
 
@@ -60,12 +60,12 @@ public:
    unsigned size();
 
    bool operator==(const KEduVocMultipleChoice &choice) const;
-   
+
    KEduVocMultipleChoice &operator=(const KEduVocMultipleChoice &other);
 
 private:
-
-   KEduVocMultipleChoicePrivate * const d;
+    class KEduVocMultipleChoicePrivate;
+    KEduVocMultipleChoicePrivate * const d;
 };
 
 
