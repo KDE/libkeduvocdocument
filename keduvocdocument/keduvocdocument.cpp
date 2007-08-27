@@ -1398,7 +1398,7 @@ void KEduVocDocument::addUsage(const QString &usage){
 }
 
 
-QString KEduVocDocument::renameUsage(const QString &oldName, const QString &newName){
+void KEduVocDocument::renameUsage(const QString &oldName, const QString &newName){
     d->m_usages[d->m_usages.indexOf(oldName)]=newName;
 }
 
