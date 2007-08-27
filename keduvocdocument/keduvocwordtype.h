@@ -62,7 +62,7 @@ public:
 
 
     /**
-     * Same as above but for a sub word type (male/female/nutral for noun for example)
+     * Same as addType but for a sub word type (male/female/nutral for noun for example)
      * @param mainType The word type to which the subtype belongs.
      * @param typeName Sub type name
      * @param specialType See above
@@ -70,16 +70,48 @@ public:
      */
     void addSubType(const QString& mainType, const QString& typeName, const QString& specialType = QString(), const QString& specialTypeExplanation = QString());
 
+    /**
+     * Get a list of all known main word types.
+     * This can be for example: noun, verb, adjective...
+     * @return List of type names
+     */
     QStringList typeNameList() const;
+
+    /**
+     * Same as typeNameList for subtypes.
+     * Could be male, female, nutral for nouns.
+     * @param mainType The type whos subtypes are requested.
+     * @return The subtypes.
+     */
     QStringList subTypeNameList(const QString& mainType) const;
 
-
-//should we rather use strings instead of index below? yes probably...
-
+    /**
+     * Rename a type.
+     * @param oldTypeName Old name
+     * @param newTypeName New name
+     */
     void renameType( const QString& oldTypeName, const QString& newTypeName);
+    /**
+     * Rename a subtype.
+     * @param mainTypeName Main type
+     * @param oldTypeName Old name
+     * @param newTypeName New name
+     */
     void renameSubType( const QString& mainTypeName, const QString& oldTypeName, const QString& newTypeName);
 
+    /**
+     * Delete a type.
+     * Special types cannot be deleted.
+     * @param typeName name
+     * @return true if it was possible to delete the type
+     */
     bool removeType( const QString& typeName );
+    /**
+     * removeType for subtypes.
+     * @param mainTypeName main type
+     * @param typeName type name
+     * @return true if it was possible to delete the type
+     */
     bool removeSubType( const QString& mainTypeName, const QString& typeName );
 
     /**
