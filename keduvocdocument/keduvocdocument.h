@@ -350,7 +350,9 @@ public:
   void setUsageDescriptions(const QStringList &names);
 
   /**
-   * Gets the descriptions of the usages
+   * Gets the descriptions of the usages.
+   * Usages are context information in a dictionary you may find [biol.]
+   * [am.] and the like to hint at the context in which the word is usually used.
    */
   QStringList usageDescriptions() const;
 
@@ -606,6 +608,11 @@ public:
 
 Q_SIGNALS:
   void progressChanged (KEduVocDocument *, int curr_percent);
+
+  /**
+   * Emitted when the document becomes modified or saved.
+   * @returns state (true=modified)
+   */
   void docModified (bool mod);
 
 private:
