@@ -92,6 +92,15 @@ public:
     static const QString WORDTYPE_ADVERB;
 
     static const QString WORDTYPE_NOUN_EXPLANATION;
+    static const QString WORDTYPE_NOUN_MALE_EXPLANATION;
+    static const QString WORDTYPE_NOUN_FEMALE_EXPLANATION;
+    static const QString WORDTYPE_NOUN_NEUTRAL_EXPLANATION;
+
+    static const QString WORDTYPE_VERB_EXPLANATION;
+    static const QString WORDTYPE_VERB_REGULAR_EXPLANATION;
+    static const QString WORDTYPE_VERB_IRREGULAR_EXPLANATION;
+    static const QString WORDTYPE_ADJECTIVE_EXPLANATION;
+    static const QString WORDTYPE_ADVERB_EXPLANATION;
 };
 
 const QString KEduVocWordType::Private::KVTML_1_TYPE_USER = QString("#");
@@ -110,22 +119,17 @@ const QString KEduVocWordType::Private::WORDTYPE_ADJECTIVE = QString("adjective"
 const QString KEduVocWordType::Private::WORDTYPE_ADVERB = QString("adverb");
 
 
-
-
 const QString KEduVocWordType::Private::WORDTYPE_NOUN_EXPLANATION = QString(i18n("This holds the words of type noun. You can rename it but not delete since the article training relies on it!"));
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_MALE_EXPLANATION = QString("This holds the words of type noun male. You can rename it but not delete since the article training relies on it!");
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_FEMALE_EXPLANATION = QString("This holds the words of type noun female. You can rename it but not delete since the article training relies on it!");
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_NEUTRAL_EXPLANATION = QString("This holds the words of type noun neutral. You can rename it but not delete since the article training relies on it!");
 
-/*
+const QString KEduVocWordType::Private::WORDTYPE_VERB_EXPLANATION = QString("This holds the words of type verb. You can rename it but not delete since the article training relies on it!");
+const QString KEduVocWordType::Private::WORDTYPE_VERB_REGULAR_EXPLANATION = QString("This holds the words of type regular verbs. You can rename it but not delete since the article training relies on it!");
+const QString KEduVocWordType::Private::WORDTYPE_VERB_IRREGULAR_EXPLANATION = QString("This holds the words of type irregular verbs. You can rename it but not delete since the article training relies on it!");
 
-const QString KEduVocWordType::Private::WORDTYPE_NOUN_MALE = QString("male", "This holds the words of type noun male. You can rename it but not delete since the article training relies on it!");
-const QString KEduVocWordType::Private::WORDTYPE_NOUN_FEMALE = QString("female", "This holds the words of type noun female. You can rename it but not delete since the article training relies on it!");
-const QString KEduVocWordType::Private::WORDTYPE_NOUN_NEUTRAL = QString("neutral", "This holds the words of type noun neutral. You can rename it but not delete since the article training relies on it!");
-
-const QString KEduVocWordType::Private::WORDTYPE_VERB = QString("verb", "This holds the words of type verb. You can rename it but not delete since the article training relies on it!");
-const QString KEduVocWordType::Private::WORDTYPE_VERB_REGULAR = QString("regular", "This holds the words of type regular verbs. You can rename it but not delete since the article training relies on it!");
-const QString KEduVocWordType::Private::WORDTYPE_VERB_IRREGULAR = QString("irregular", "This holds the words of type irregular verbs. You can rename it but not delete since the article training relies on it!");
-
-const QString KEduVocWordType::Private::WORDTYPE_ADJECTIVE = QString("adjective", "This holds the words of type adjective. You can rename it but not delete since the article training relies on it!");
-const QString KEduVocWordType::Private::WORDTYPE_ADVERB = QString("adverb", "This holds the words of type adverb. You can rename it but not delete since the article training relies on it!");*/
+const QString KEduVocWordType::Private::WORDTYPE_ADJECTIVE_EXPLANATION = QString("This holds the words of type adjective. You can rename it but not delete since the article training relies on it!");
+const QString KEduVocWordType::Private::WORDTYPE_ADVERB_EXPLANATION = QString("This holds the words of type adverb. You can rename it but not delete since the article training relies on it!");
 
 
 
