@@ -30,16 +30,6 @@
 
 #include <QtCore/QStringList>
 
-#define CONJ_SIMPLE_PRESENT    "PrSi" // I live at home  what you frequently do
-#define CONJ_PRESENT_PROGR     "PrPr" // I am working    what you currently are doing
-#define CONJ_PRESENT_PERFECT   "PrPe" // I have cleaned  tell, #that# something has happened
-
-#define CONJ_SIMPLE_PAST       "PaSi" // the train left 2 min ago  when did it happen
-#define CONJ_PAST_PROGR        "PaPr" // it was raining  what happen at a given time in the past
-#define CONJ_PAST_PARTICIPLE   "PaPa" // I cleaned       tell, #that# it happened
-
-#define CONJ_FUTURE            "FuSi"
-
 #define CONJ_PREFIX            "--"   // definition of prefixes (I, you, ..)
 
 #define UL_USER_TENSE          "#"   // designates number of user tense

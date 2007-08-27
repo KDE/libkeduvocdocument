@@ -25,6 +25,8 @@
 
 #include "keduvocgrammar.h"
 
+#include "keduvoccommon_p.h"
+
 #include <klocale.h>
 
 class KEduVocConjugation::Private

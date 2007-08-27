@@ -28,6 +28,7 @@
 #include "keduvoclesson.h"
 #include "keduvocexpression.h"
 #include "kvtmldefs.h"
+#include "keduvoccommon_p.h"
 
 KEduVocKvtmlWriter::KEduVocKvtmlWriter(QFile *file)
 {

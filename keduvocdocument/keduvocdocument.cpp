@@ -43,6 +43,12 @@
 #include "keduvocxdxfreader.h"
 #include "leitnersystem.h"
 
+#define WQL_IDENT      "WordQuiz"
+
+#define KVTML_EXT        "kvtml"
+#define CSV_EXT          "csv"
+#define TXT_EXT          "txt"
+#define WQL_EXT          "wql"
 
 class KEduVocDocument::KEduVocDocumentPrivate
 {

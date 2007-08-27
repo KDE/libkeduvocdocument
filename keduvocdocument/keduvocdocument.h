@@ -21,15 +21,6 @@
 
 #include "libkeduvocdocument_export.h"
 
-#define KVD_VERS_PREFIX " v"       // kvoctrain v0.1.0
-
-#define WQL_IDENT      "WordQuiz"
-
-#define KVTML_EXT        "kvtml"
-#define CSV_EXT          "csv"
-#define TXT_EXT          "txt"
-#define WQL_EXT          "wql"
-
 #include <QtCore/QObject>
 #include <QtCore/QList>
 

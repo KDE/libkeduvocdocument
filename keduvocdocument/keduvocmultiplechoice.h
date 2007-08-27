@@ -32,9 +32,6 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 
-#define MAX_MULTIPLE_CHOICE  5  // select one out of x
-
-
 
 class KEDUVOCDOCUMENT_EXPORT KEduVocMultipleChoice
 {

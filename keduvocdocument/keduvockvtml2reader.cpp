@@ -30,6 +30,7 @@
 #include "kvtml2defs.h"
 // should no longer be needed: #include "kvtmldefs.h"
 #include "keduvockvtmlreader.h"
+#include "keduvoccommon_p.h"
 
 KEduVocKvtml2Reader::KEduVocKvtml2Reader(QIODevice *file)
 : m_inputFile(file)

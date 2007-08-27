@@ -20,7 +20,6 @@
 #define KV_MIN_GRADE       0
 
 #define KV_NORM_GRADE      0       // not queried yet
-#define KV_NORM_COLOR      Qt::black
 #define KV_NORM_TEXT       I18N_NOOP("Not Queried Yet")
 
 #define KV_LEV1_GRADE      1
