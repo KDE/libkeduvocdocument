@@ -329,13 +329,26 @@ public:
    */
   QStringList usages();
 
-
+  /**
+   * Adds a usage label to the doc.
+   *
+   * @param usage    name of the usage
+   */
   void addUsage(const QString &usage);
 
+  /**
+   * Rename a usage label.
+   *
+   * @param oldName    old name of the usage label
+   * @param newName    new name of the usage label
+   */
+  void renameUsage(const QString &oldName, const QString &newName);
 
-  QString renameUsage(const QString &oldName, const QString &newName);
-
-
+  /**
+   * Remove a usage label.
+   *
+   * @param name    new name of the usage label
+   */
   void removeUsage(const QString &name);
 
   // *** grade methods ***
