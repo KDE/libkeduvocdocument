@@ -1,0 +1,35 @@
+/** @mainpage KEduVocDocument
+
+KEduVocDocument is a library for reading and writing vocabulary files used by KVocTrain, KAnagram, KHangman and KWordQuiz.
+
+
+Important classes are:
+ - KEduVocExpression to hold an abstract entry. It contains translations in KEduVocTranslation.
+ - Lessons are organized by KEduVocLesson.
+
+Grammatical terms are part of KEduVocTranslation and also contained in:
+ - KEduVocArticle (articles of a language)
+ - KEduVocConjugation (conjugations and personal pronouns)
+ - KEduVocWordType (word type management)
+
+Grammar is accesed by using an instance of KEduVocDocument.
+
+Grades can be stored using the KEduVocGrade class (part of a KEduVocTranslation).
+
+KEduVocDocument supports reading and writing of different file formats. KVTML (version 2) is the default.
+
+Readers:
+ - KEduVocKvtml2Reader the current default file format since KDE4
+ - KEduVocKvtmlReader for compability (pre KDE4)
+ - KEduVocCsvReader Comma seperated values (text files)
+ - KEduVocPaukerReader Pauker file format
+ - KEduVocVokabelnReader Vokabeln file format
+ - KEduVocXdxfReader XDXF file format
+
+Writers:
+ - KEduVocKvtml2Writer
+ - KEduVocKvtmlWriter
+ - KEduVocCsvWriter
+
+
+*/
