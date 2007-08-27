@@ -15,8 +15,12 @@
 
 
 #include "keduvoctranslation.h"
+
+#include <QtCore/QMap>
+
 #include <KDebug>
 
+#include "keduvocgrade.h"
 
 class KEduVocTranslation::KEduVocTranslationPrivate
 {

@@ -19,19 +19,16 @@
 
 #include "libkeduvocdocument_export.h"
 
-#include <QtCore/QMap>
 #include <QtCore/QString>
 
-#include "keduvocgrade.h"
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
-// @todo: move conjugation to it's proper file #include "keduvocconjugation.h"
 
+class KEduVocGrade;
 
 /**
 	@author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
-
 class KEDUVOCDOCUMENT_EXPORT KEduVocTranslation
 {
 public:

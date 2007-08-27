@@ -28,6 +28,7 @@
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"
+#include "keduvocwordtype.h"
 #include "kvtmldefs.h"
 #include "keduvoccommon_p.h"
 

@@ -25,6 +25,7 @@
 
 
 #include "keduvocexpression.h"
+#include "keduvocgrade.h"
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
 

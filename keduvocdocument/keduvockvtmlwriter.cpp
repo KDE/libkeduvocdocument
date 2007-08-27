@@ -25,6 +25,7 @@
 #include <KDebug>
 
 #include "keduvocdocument.h"
+#include "keduvocgrade.h"
 #include "keduvoclesson.h"
 #include "keduvocexpression.h"
 #include "kvtmldefs.h"

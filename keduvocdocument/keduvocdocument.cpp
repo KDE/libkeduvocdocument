@@ -32,6 +32,7 @@
 
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"
+#include "keduvocwordtype.h"
 #include "keduvockvtmlwriter.h"
 #include "keduvockvtml2writer.h"
 #include "keduvoccsvreader.h"

@@ -30,6 +30,7 @@
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
+#include "keduvocgrade.h"
 
 KEduVocVokabelnReader::KEduVocVokabelnReader(QIODevice *file)
 {

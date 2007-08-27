@@ -27,8 +27,8 @@
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"
+#include "keduvocwordtype.h"
 #include "kvtml2defs.h"
-// should no longer be needed: #include "kvtmldefs.h"
 #include "keduvockvtmlreader.h"
 #include "keduvoccommon_p.h"
 

@@ -21,13 +21,13 @@
 
 #include "libkeduvocdocument_export.h"
 
+#include "keduvocgrammar.h"
+
 #include <QtCore/QObject>
 #include <QtCore/QList>
+#include <QtCore/QMap>
 
-#include <KUrl>
-
-#include "keduvocgrammar.h"
-#include "keduvocwordtype.h"
+#include <KDE/KUrl>
 
 class QStringList;
 class KEduVocExpression;

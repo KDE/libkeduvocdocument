@@ -23,8 +23,9 @@
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
+#include "keduvocgrade.h"
 #include "keduvoclesson.h"
-// should no longer be needed: #include "kvtmldefs.h"
+#include "keduvocwordtype.h"
 #include "kvtml2defs.h"
 
 KEduVocKvtml2Writer::KEduVocKvtml2Writer(QFile *file)
