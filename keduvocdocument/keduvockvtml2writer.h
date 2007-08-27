@@ -27,6 +27,10 @@
 
 class KEduVocDocument;
 
+/**
+* @brief Class to write kvtml2 data files from KEduVocDocument
+* @author Jeremy Whiting
+*/
 class KEduVocKvtml2Writer
 {
 public:
