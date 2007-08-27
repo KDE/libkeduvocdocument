@@ -338,6 +338,7 @@ public:
 
   /**
    * Rename a usage label.
+   * Actually changes the label in the vocabulary as well.
    *
    * @param oldName    old name of the usage label
    * @param newName    new name of the usage label
@@ -346,6 +347,7 @@ public:
 
   /**
    * Remove a usage label.
+   * Also removes the label from all translations.
    *
    * @param name    new name of the usage label
    */

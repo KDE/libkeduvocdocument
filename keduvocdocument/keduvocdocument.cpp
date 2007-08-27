@@ -1400,11 +1400,29 @@ void KEduVocDocument::addUsage(const QString &usage){
 
 void KEduVocDocument::renameUsage(const QString &oldName, const QString &newName){
     d->m_usages[d->m_usages.indexOf(oldName)]=newName;
+
+    for ( int i = 0; i < d->m_vocabulary.count(); i++) {
+        foreach (int translationIndex, d->m_vocabulary[i].translationIndices()) {
+            int usageIndex = d->m_vocabulary[i].translation(translationIndex).usages().indexOf(oldName);
+            if ( usageIndex >= 0 ) {
+                d->m_vocabulary[i].translation(translationIndex).usages()[usageIndex] = newName;
+            }
+        }
+    }
 }
 
 
 void KEduVocDocument::removeUsage(const QString &name){
     d->m_usages.removeAt(d->m_usages.indexOf(name));
+
+    for ( int i = 0; i < d->m_vocabulary.count(); i++) {
+        foreach (int translationIndex, d->m_vocabulary[i].translationIndices()) {
+            int usageIndex = d->m_vocabulary[i].translation(translationIndex).usages().indexOf(name);
+            if ( usageIndex >= 0 ) {
+                d->m_vocabulary[i].translation(translationIndex).usages().removeAt(usageIndex);
+            }
+        }
+    }
 }
 
 

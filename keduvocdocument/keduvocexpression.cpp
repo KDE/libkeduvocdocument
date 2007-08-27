@@ -262,3 +262,8 @@ KEduVocTranslation & KEduVocExpression::translation(int index) const
     return d->m_translations[index];
 }
 
+QList< int > KEduVocExpression::translationIndices() const
+{
+    return d->m_translations.keys();
+}
+
