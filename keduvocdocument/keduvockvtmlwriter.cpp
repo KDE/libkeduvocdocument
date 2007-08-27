@@ -535,8 +535,8 @@ bool KEduVocKvtmlWriter::writeUsage(QDomDocument &domDoc, QDomElement &domElemen
   }
 
   domElementParent.appendChild(domElementUsage);
-  return true;
 */
+  return true;
 }
 
 
