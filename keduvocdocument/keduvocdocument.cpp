@@ -83,7 +83,7 @@ public:
   QList<int>                m_lessonsInQuery;
 
   QStringList               m_tenseDescriptions;
-  QStringList               m_usageDescriptions;
+  QStringList               m_usages;
   QString                   m_title;
   QString                   m_author;
   QString                   m_license;
@@ -677,37 +677,6 @@ QStringList KEduVocDocument::tenseDescriptions() const
 void KEduVocDocument::setTenseDescriptions(const QStringList &names)
 {
   d->m_tenseDescriptions = names;
-}
-
-
-QString KEduVocDocument::usageName(int index) const
-{
-  if (index >= d->m_usageDescriptions.size())
-    return "";
-  else
-    return d->m_usageDescriptions[index];
-}
-
-
-void KEduVocDocument::setUsageName(int idx, QString &id)
-{
-  if (idx >= d->m_usageDescriptions.size())
-    for (int i = d->m_usageDescriptions.size(); i <= idx; i++)
-      d->m_usageDescriptions.append ("");
-
-  d->m_usageDescriptions[idx] = id;
-}
-
-
-QStringList KEduVocDocument::usageDescriptions() const
-{
-  return d->m_usageDescriptions;
-}
-
-
-void KEduVocDocument::setUsageDescriptions(const QStringList &names)
-{
-  d->m_usageDescriptions = names;
 }
 
 
@@ -1410,5 +1379,35 @@ QString KEduVocDocument::pattern(Mode mode)
 KEduVocWordType* KEduVocDocument::wordTypes() {
     return d->m_wordTypes;
 }
+
+
+QStringList KEduVocDocument::usages(){
+    return d->m_usages;
+}
+
+
+/*
+void KEduVocDocument::setUsageDescriptions(const QStringList &names)
+{
+  d->m_usageDescriptions = names;
+}*/
+
+
+void KEduVocDocument::addUsage(const QString &usage){
+    d->m_usages.append(usage);
+}
+
+
+QString KEduVocDocument::renameUsage(const QString &oldName, const QString &newName){
+    d->m_usages[d->m_usages.indexOf(oldName)]=newName;
+}
+
+
+void KEduVocDocument::removeUsage(const QString &name){
+    d->m_usages.removeAt(d->m_usages.indexOf(name));
+}
+
+
+
 
 #include "keduvocdocument.moc"

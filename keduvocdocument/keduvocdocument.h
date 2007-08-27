@@ -323,32 +323,20 @@ public:
   // *** usage methods ***
 
   /**
-   * Sets usage string
-   *
-   * @param index            number of usage
-   * @param str              name of usage
-   */
-  void setUsageName(int index, QString &str);
-
-  /**
-   * Returns usage string
-   *
-   * @param index            number of usage
-   * @returns                string
-   */
-  QString usageName(int index) const;
-
-  /**
-   * Sets the descriptions of the usages
-   */
-  void setUsageDescriptions(const QStringList &names);
-
-  /**
    * Gets the descriptions of the usages.
    * Usages are context information in a dictionary you may find [biol.]
    * [am.] and the like to hint at the context in which the word is usually used.
    */
-  QStringList usageDescriptions() const;
+  QStringList usages();
+
+
+  void addUsage(const QString &usage);
+
+
+  QString renameUsage(const QString &oldName, const QString &newName);
+
+
+  void removeUsage(const QString &name);
 
   // *** grade methods ***
 

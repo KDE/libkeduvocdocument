@@ -57,7 +57,7 @@
 <!ELEMENT inactive       EMPTY >
 <!ELEMENT inquery        EMPTY >
 
-<!ELEMENT translation    (text, wordtype?, inquery?, comment?, pronunciation?, falsfriend?, antonym?, synonym?, example?, usage?, paraphrase?, comparison?, conjugation*) >
+<!ELEMENT translation    (text, wordtype?, inquery?, comment?, pronunciation?, falsfriend?, antonym?, synonym?, example?, usage*, paraphrase?, comparison?, conjugation*) >
 <!ELEMENT text           (#PCDATA) >
 <!ELEMENT pronunciation  (#PCDATA) >
 <!ELEMENT falsefriend    (#PCDATA) >

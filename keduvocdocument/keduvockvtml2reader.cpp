@@ -426,11 +426,12 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
     expr.translation(index).setExample(currentElement.text());
   }
 
-  //<usage></usage>
+  //<usage></usage> can be as often as there are usage labels
   currentElement = translationElement.firstChildElement(KVTML_USAGE);
-  if (!currentElement.isNull())
+  while (!currentElement.isNull())
   {
-    expr.translation(index).setUsageLabel(currentElement.text());
+    expr.translation(index).usages().append(currentElement.text());
+    currentElement = currentElement.nextSiblingElement(KVTML_USAGE);
   }
 
   //<paraphrase></paraphrase>
@@ -882,11 +883,10 @@ bool KEduVocKvtml2Reader::readUsages(QDomElement &usagesElement)
     QDomElement currentElement = usageNodes.item(i).toElement();
     if (currentElement.parentNode() == usagesElement)
     {
-      usages.append(currentElement.text());
+      m_doc->addUsage(currentElement.text());
     }
   }
 
-  m_doc->setUsageDescriptions(usages);
   return true;
 }
 

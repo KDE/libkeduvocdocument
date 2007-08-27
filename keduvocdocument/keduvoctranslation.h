@@ -116,15 +116,17 @@ public:
     */
     QString example() const;
 
-    /** sets usage label this expression
-    * @param usage            usage label of this index
-    */
-    void setUsageLabel( const QString & usage);
 
-    /** returns usage label of this expression
-    * @return                 usage or "" if no string available
+    /** sets usages this expression
+    * @param usage            usage labels of this index
     */
-    QString usageLabel() const;
+    void setUsages( const QStringList & usage);
+
+
+    /** returns usages of this expression
+    * @return                 usages
+    */
+    QStringList& usages();
 
     /** sets paraphrase of this expression
     * @param expression       paraphrase of this index

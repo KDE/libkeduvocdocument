@@ -44,7 +44,7 @@ public:
     /// noun:male etc (language dependent)
     QString m_type;
     QString m_subType;
-    QString m_usageLabel;
+    QStringList m_usages;
     QString m_comment;
     QString m_paraphrase;
     QString m_synonym;
@@ -82,7 +82,7 @@ bool KEduVocTranslation::KEduVocTranslationPrivate::operator== ( const KEduVocTr
     return 	m_translation == other.m_translation &&
 		m_type == other.m_type &&
         m_subType == other.m_subType &&
-		m_usageLabel == other.m_usageLabel &&
+		m_usages == other.m_usages &&
 		m_comment == other.m_comment &&
 		m_paraphrase == other.m_paraphrase &&
 		m_synonym == other.m_synonym &&
@@ -114,7 +114,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other) : d ( n
 	d->m_translation = other.d->m_translation;
     d->m_type = other.d->m_type;
     d->m_subType = other.d->m_subType;
-    d->m_usageLabel = other.d->m_usageLabel;
+    d->m_usages = other.d->m_usages;
     d->m_comment = other.d->m_comment;
     d->m_paraphrase = other.d->m_paraphrase;
     d->m_synonym = other.d->m_synonym;
@@ -198,15 +198,15 @@ QString KEduVocTranslation::example ( ) const
 }
 
 
-void KEduVocTranslation::setUsageLabel (  const QString & usage )
+void KEduVocTranslation::setUsages (  const QStringList & usages )
 {
-    d->m_usageLabel = usage;
+    d->m_usages = usages;
 }
 
 
-QString KEduVocTranslation::usageLabel () const
+QStringList& KEduVocTranslation::usages ()
 {
-    return d->m_usageLabel;
+    return d->m_usages;
 }
 
 
@@ -319,7 +319,7 @@ bool KEduVocTranslation::operator ==(const KEduVocTranslation & translation) con
     return d->m_translation == translation.d->m_translation &&
         d->m_type == translation.d->m_type &&
         d->m_subType == translation.d->m_subType &&
-        d->m_usageLabel == translation.d->m_usageLabel &&
+        d->m_usages == translation.d->m_usages &&
         d->m_comment == translation.d->m_comment &&
         d->m_paraphrase == translation.d->m_paraphrase &&
         d->m_synonym == translation.d->m_synonym &&
@@ -340,7 +340,7 @@ KEduVocTranslation & KEduVocTranslation::operator =(const KEduVocTranslation & t
     d->m_translation = translation.d->m_translation;
     d->m_type = translation.d->m_type;
     d->m_subType = translation.d->m_subType;
-    d->m_usageLabel = translation.d->m_usageLabel;
+    d->m_usages = translation.d->m_usages;
     d->m_comment = translation.d->m_comment;
     d->m_paraphrase = translation.d->m_paraphrase;
     d->m_synonym = translation.d->m_synonym;

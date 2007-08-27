@@ -690,7 +690,6 @@ bool KEduVocKvtmlReader::readUsage(QDomElement &domElementParent)
   if (entryList.length() <= 0)
     return false;
 
-  descriptions.clear();
 
   for (int i = 0; i < entryList.count(); ++i) {
     currentElement = entryList.item(i).toElement();
@@ -704,11 +703,10 @@ bool KEduVocKvtmlReader::readUsage(QDomElement &domElementParent)
       s = currentElement.text();
       if (s.isNull())
         s = "";
-      descriptions.append(s);
+      m_doc->addUsage(s);
     }
   }
 
-  m_doc->setUsageDescriptions(descriptions);
   return true;
 }
 
@@ -929,6 +927,8 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
   if (!attribute.isNull())
     example = attribute.value();
 
+///@todo usages
+/*
   usage = "";
   attribute = domElementExpressionChild.attributeNode(KV_USAGE);
   if (!attribute.isNull())
@@ -951,7 +951,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
         m_doc->setUsageDescriptions(sl);
       }
     }
-  }
+  }*/
 
   paraphrase = "";
   attribute = domElementExpressionChild.attributeNode(KV_PARAPHRASE);
@@ -1257,8 +1257,11 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
         expr.translation(i).setSynonym (synonym);
       if (!example.isEmpty() )
         expr.translation(i).setExample (example);
+///@todo enable reading of usages into a qstringlist
+/*
       if (!usage.isEmpty() )
         expr.translation(i).setUsageLabel (usage);
+*/
       if (!paraphrase.isEmpty() )
         expr.translation(i).setParaphrase (paraphrase);
       if (!antonym.isEmpty() )

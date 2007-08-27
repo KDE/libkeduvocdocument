@@ -148,10 +148,11 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
 
     if (!entry->translation(0).example().isEmpty() )
       domElementOriginal.setAttribute(KV_EXAMPLE, entry->translation(0).example());
-
+///@todo enable writing of usages into a qstringlist
+/*
     if (!entry->translation(0).usageLabel().isEmpty() )
       domElementOriginal.setAttribute(KV_USAGE, entry->translation(0).usageLabel());
-
+*/
     if (!entry->translation(0).paraphrase().isEmpty() )
       domElementOriginal.setAttribute(KV_PARAPHRASE, entry->translation(0).paraphrase());
 
@@ -242,9 +243,11 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
       if (!entry->translation(trans).example().isEmpty() )
         domElementTranslation.setAttribute(KV_EXAMPLE, entry->translation(trans).example());
 
+///@todo enable writing of usages in old format
+/*
       if (!entry->translation(trans).usageLabel().isEmpty() )
         domElementTranslation.setAttribute(KV_USAGE, entry->translation(trans).usageLabel());
-
+*/
       if (!entry->translation(trans).paraphrase().isEmpty() )
         domElementTranslation.setAttribute(KV_PARAPHRASE, entry->translation(trans).paraphrase());
 
@@ -508,6 +511,9 @@ bool KEduVocKvtmlWriter::writeTense(QDomDocument &domDoc, QDomElement &domElemen
 
 bool KEduVocKvtmlWriter::writeUsage(QDomDocument &domDoc, QDomElement &domElementParent)
 {
+
+///@todo usages
+/*
   if (m_doc->usageDescriptions().count() == 0)
     return true;
 
@@ -530,6 +536,7 @@ bool KEduVocKvtmlWriter::writeUsage(QDomDocument &domDoc, QDomElement &domElemen
 
   domElementParent.appendChild(domElementUsage);
   return true;
+*/
 }
 
 

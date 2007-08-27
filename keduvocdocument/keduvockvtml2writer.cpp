@@ -550,12 +550,9 @@ bool KEduVocKvtml2Writer::writeTenses(QDomElement &tensesElement)
 
 bool KEduVocKvtml2Writer::writeUsages(QDomElement &usagesElement)
 {
-  foreach(QString usage, m_doc->usageDescriptions())
+  foreach(QString usage, m_doc->usages())
   {
-    if (!(usage.isNull()))
-    {
-      usagesElement.appendChild(newTextElement(KVTML_USAGE, usage));
-    }
+    usagesElement.appendChild(newTextElement(KVTML_USAGE, usage));
   }
 
   return true;
@@ -666,9 +663,9 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
   }
 
   // <usage></usage>
-  if (!translation.usageLabel().isEmpty())
+  foreach (QString usage, translation.usages())
   {
-    translationElement.appendChild(newTextElement(KVTML_USAGE, translation.usageLabel()));
+    translationElement.appendChild(newTextElement(KVTML_USAGE, usage));
   }
 
   // <paraphrase></paraphrase>
