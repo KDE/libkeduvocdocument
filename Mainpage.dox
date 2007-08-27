@@ -1,7 +1,6 @@
 /** @mainpage libkdeedu
 
-libkdeedu is a set of shared libraries used
-by the KDEEDU applications
+libkdeedu is a set of shared libraries used by the KDE Education Project applications.
 
 It consists of several parts:
 
