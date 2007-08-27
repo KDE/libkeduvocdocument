@@ -462,22 +462,22 @@ QString KEduVocWordType::specialSubType(const QString & mainTypeName, const QStr
 
 
 
-QString KEduVocWordType::nounSpecialType() const
+QString KEduVocWordType::specialTypeNoun() const
 {
     return d->WORDTYPE_NOUN;
 }
 
-QString KEduVocWordType::verbSpecialType() const
+QString KEduVocWordType::specialTypeVerb() const
 {
     return d->WORDTYPE_VERB;
 }
 
-QString KEduVocWordType::adjectiveSpecialType() const
+QString KEduVocWordType::specialTypeAdjective() const
 {
     return d->WORDTYPE_ADJECTIVE;
 }
 
-QString KEduVocWordType::adverbSpecialType() const
+QString KEduVocWordType::specialTypeAdverb() const
 {
     return d->WORDTYPE_ADVERB;
 }

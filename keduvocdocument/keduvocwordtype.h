@@ -104,10 +104,10 @@ public:
 
     QString typeOfSpecialType( const QString& specialType ) const;
 
-    QString nounSpecialType() const;
-    QString verbSpecialType() const;
-    QString adjectiveSpecialType() const;
-    QString adverbSpecialType() const;
+    QString specialTypeNoun() const;
+    QString specialTypeVerb() const;
+    QString specialTypeAdjective() const;
+    QString specialTypeAdverb() const;
 
 private:
     void initOldTypeLists();
