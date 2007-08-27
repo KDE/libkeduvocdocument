@@ -263,43 +263,43 @@ QString KEduVocWordType::oldType(const QString & mainType, const QString & subTy
 void KEduVocWordType::createDefaultWordTypes()
 {
     // first the special types which cannot be deleted:
-    addType("Noun", "noun", "This holds the words of type noun. You can rename it but not delete since the article training relies on it!");
+    addType(i18n("Noun"), d->WORDTYPE_NOUN, d->WORDTYPE_NOUN_EXPLANATION);
 
-    addSubType("Noun", "Male", "noun male", "This holds the words of type noun male. You can rename it but not delete since the article training relies on it!");
+    addSubType(i18n("Noun"), i18n("Male"), d->WORDTYPE_NOUN_MALE, d->WORDTYPE_NOUN_MALE_EXPLANATION);
 
-    addSubType("Noun", "Female", "noun female", "This holds the words of type noun female. You can rename it but not delete since the article training relies on it!");
+    addSubType(i18n("Noun"), i18n("Female"), d->WORDTYPE_NOUN_FEMALE, d->WORDTYPE_NOUN_FEMALE_EXPLANATION);
 
-    addSubType("Noun", "Neutral", "noun neutral", "This holds the words of type noun neutral. You can rename it but not delete since the article training relies on it!");
+    addSubType(i18n("Noun"), i18n("Neutral"), d->WORDTYPE_NOUN_NEUTRAL, d->WORDTYPE_NOUN_NEUTRAL_EXPLANATION);
 
-    addType("Verb", "verb", "This holds the words of type verb. You can rename it but not delete since the article training relies on it!");
+    addType(i18n("Verb"), d->WORDTYPE_VERB, d->WORDTYPE_VERB_EXPLANATION);
 
-    addSubType("Verb", "Regular", "regular", "This holds the words of type regular verbs. You can rename it but not delete since the article training relies on it!");
+    addSubType(i18n("Verb"), i18n("Regular"), d->WORDTYPE_VERB_REGULAR, d->WORDTYPE_VERB_REGULAR_EXPLANATION);
 
-    addSubType("Verb", "Irregular", "irregular", "This holds the words of type irregular verbs. You can rename it but not delete since the article training relies on it!");
+    addSubType(i18n("Verb"), i18n("Irregular"), d->WORDTYPE_VERB_IRREGULAR, d->WORDTYPE_VERB_IRREGULAR_EXPLANATION);
 
-    addType("Adjective", "adjective", "This holds the words of type adjective. You can rename it but not delete since the article training relies on it!");
+    addType(i18n("Adjective"), d->WORDTYPE_ADJECTIVE, d->WORDTYPE_ADJECTIVE_EXPLANATION);
 
-    addType("Adverb", "adverb", "This holds the words of type adverb. You can rename it but not delete since the article training relies on it!");
+    addType(i18n("Adverb"), d->WORDTYPE_ADVERB, d->WORDTYPE_ADVERB_EXPLANATION);
 
-    addType("Question");
-    addType("Name");
-    addType("Article");
-    addSubType("Article", "Definite");
-    addSubType("Article", "Indefinite");
+    addType(i18n("Question"));
+    addType(i18n("Name"));
+    addType(i18n("Article"));
+    addSubType(i18n("Article"), i18n("Definite"));
+    addSubType(i18n("Article"), i18n("Indefinite"));
 
-    addType("Pronoun");
-    addSubType("Pronoun", "Possessive");
-    addSubType("Pronoun", "Personal");
+    addType(i18n("Pronoun"));
+    addSubType(i18n("Pronoun"), i18n("Possessive"));
+    addSubType(i18n("Pronoun"), i18n("Personal"));
 
-    addType("Phrase");
-    addType("Numeral");
-    addSubType("Numeral", "Ordinal");
-    addSubType("Numeral", "Cardinal");
+    addType(i18n("Phrase"));
+    addType(i18n("Numeral"));
+    addSubType(i18n("Numeral"), i18n("Ordinal"));
+    addSubType(i18n("Numeral"), i18n("Cardinal"));
 
-    addType("Conjunction");
-    addType("Preposition");
-    addType("Informal");
-    addType("Figuratively");
+    addType(i18n("Conjunction"));
+    addType(i18n("Preposition"));
+    addType(i18n("Informal"));
+    addType(i18n("Figuratively"));
 }
 
 
