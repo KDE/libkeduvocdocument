@@ -579,7 +579,7 @@ public:
   void setLeitnerSystem( LeitnerSystem* system );
   LeitnerSystem* leitnerSystem();
 
-  FileType detectFileType(const QString &fileName);
+  static FileType detectFileType(const QString &fileName);
 
   enum Mode {
     Reading,
