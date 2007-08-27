@@ -248,7 +248,7 @@ void KEduVocTranslation::setComparison (  const KEduVocComparison &con )
 }
 
 
-KEduVocComparison KEduVocTranslation::comparison ( ) const
+KEduVocComparison & KEduVocTranslation::comparison ( )
 {
     return d->m_comparison;
 }
@@ -260,7 +260,7 @@ void KEduVocTranslation::setMultipleChoice (  const KEduVocMultipleChoice &mc )
 }
 
 
-KEduVocMultipleChoice KEduVocTranslation::multipleChoice ( ) const
+KEduVocMultipleChoice & KEduVocTranslation::multipleChoice ( )
 {
     return d->m_multipleChoice;
 }
