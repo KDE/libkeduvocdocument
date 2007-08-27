@@ -128,14 +128,6 @@ KEduVocExpression::~KEduVocExpression()
 }
 
 
-int KEduVocExpression::translationCount() const
-{
-  /// @todo: maybe this should go away? it is very rare with QMap
-  // the minus 1 is because traditionally it used to be original + translations
-  /// @todo get rid of the minus one. but for now this implies too many other changes.
-  return d->m_translations.size();
-}
-
 void KEduVocExpression::removeTranslation(int index)
 {
     /// @todo IMPLEMENT ME - this will be really easy to implement as soon as the translation class contains all this rubbish.
@@ -164,12 +156,13 @@ void KEduVocExpression::setTranslation(int index, const QString & expr)
 
 bool KEduVocExpression::uniqueType() const
 {
-/// @todo use .keys() instead of translationCount()!
   bool unique = true;
   QString type0 = d->m_translations[0].type();
-  for (int i = 1; i < translationCount(); i++)
-    if (type0 != d->m_translations[i].type())
+  foreach (int i, translationIndices()) {
+    if (type0 != d->m_translations[i].type()) {
       unique = false;
+    }
+  }
   return unique;
 }
 

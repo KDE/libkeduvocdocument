@@ -59,7 +59,7 @@ bool KEduVocCsvReader::readDoc(KEduVocDocument *doc)
 
     if (!s.simplified().isEmpty()) {
       KEduVocExpression expression(s, separator);
-      languageCount = qMax(languageCount, expression.translationCount());
+      languageCount = qMax(languageCount, expression.translationIndices().count());
       m_doc->appendEntry(&expression);
     }
   }

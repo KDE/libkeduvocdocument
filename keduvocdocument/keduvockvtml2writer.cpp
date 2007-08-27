@@ -584,8 +584,7 @@ bool KEduVocKvtml2Writer::writeEntries(QDomElement &entriesElement)
     }
 
     // loop through translations
-    for (int trans = 0; trans < thisEntry->translationCount(); ++trans)
-    {
+    foreach (int trans, thisEntry->translationIndices()) {
       // write translations
       QDomElement translation = m_domDoc.createElement(KVTML_TRANSLATION);
       translation.setAttribute(KVTML_ID, QString::number(trans));

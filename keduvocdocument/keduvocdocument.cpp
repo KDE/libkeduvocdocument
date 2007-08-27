@@ -1263,7 +1263,7 @@ public:
     QString s1;
     QString s2;
     int cmp;
-    for (int i = 0; i < exp->translationCount(); i++) {
+    foreach (int i, exp->translationIndices()) {
 
       s1 = exp->translation(i).translation();
       s2 = y.exp->translation(i).translation();

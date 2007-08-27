@@ -117,10 +117,6 @@ public:
    */
   void removeTranslation(int index);
 
-  /** returns number of max. translations of all expressions
-    @todo kill this - will be wrong. We now should have a Identifiers class to handle this kind of stuff
-   */
-  int translationCount() const;
 
     /**
      * Get a mutable reference to the translation
