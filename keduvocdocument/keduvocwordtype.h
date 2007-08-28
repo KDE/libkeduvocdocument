@@ -144,8 +144,6 @@ private:
     int mainTypeIndex(const QString& name) const;
     int subTypeIndex( const QString& mainTypeName, const QString& subTypeName ) const;
 
-    QString oldType(const QString& mainType, const QString& subType) const;
-
     class Private;
     Private * const d;
 };

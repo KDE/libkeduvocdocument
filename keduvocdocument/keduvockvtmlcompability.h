@@ -113,8 +113,27 @@ public:
     QSet<QString> documentUsages() const;
 
     ///// TYPES
+    /**
+     * Get the type from an old type definition
+     * @param typeSubtypeString the old string containing everything
+     * @return new main type
+     */
     QString mainTypeFromOldFormat(const QString& typeSubtypeString) const;
+
+    /**
+     * Get the subtype from an old type definition
+     * @param typeSubtypeString the old string containing everything
+     * @return new sub type
+     */
     QString subTypeFromOldFormat(const QString& typeSubtypeString) const;
+
+    /**
+     * To write old docs: convert a nice new type to the ugly old style.
+     * @param mainType type
+     * @param subType subtype
+     * @return old type string
+     */
+    QString oldType(const QString& mainType, const QString& subType) const;
 
 
 private:
