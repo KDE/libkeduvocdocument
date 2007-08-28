@@ -11,6 +11,7 @@ set(keduvocdocument_LIB_SRCS
    keduvoclesson.cpp
    keduvocgrade.cpp
    keduvocgrammar.cpp
+   keduvocconjugation.cpp
    keduvocwordtype.cpp
    keduvockvtmlreader.cpp
    keduvockvtml2reader.cpp
@@ -49,6 +50,7 @@ install(FILES
    keduvocexpression.h
    keduvocgrade.h
    keduvocgrammar.h
+   keduvocconjugation.h
    keduvoclesson.h
    keduvocmultiplechoice.h
    keduvoctranslation.h

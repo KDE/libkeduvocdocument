@@ -22,6 +22,7 @@
 #include <QtCore/QString>
 
 #include "keduvocgrammar.h"
+#include "keduvocconjugation.h"
 #include "keduvocmultiplechoice.h"
 
 class KEduVocGrade;
@@ -56,7 +57,7 @@ public:
      * @return the translation
      */
     QString text () const;
-	
+
     /**
      * Sets the translation
      * @param expr

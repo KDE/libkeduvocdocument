@@ -22,6 +22,7 @@
 #include "libkeduvocdocument_export.h"
 
 #include "keduvocgrammar.h"
+#include "keduvocconjugation.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QList>
