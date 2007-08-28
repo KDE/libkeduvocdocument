@@ -130,10 +130,6 @@ public:
 
     void printDebugWordTypes();
 
-    // these should move into the old writer/reader
-    QString mainTypeFromOldFormat(const QString& typeSubtypeString) const;
-    QString subTypeFromOldFormat(const QString& typeSubtypeString) const;
-
     QString typeOfSpecialType( const QString& specialType ) const;
 
     QString specialTypeNoun() const;
@@ -142,11 +138,6 @@ public:
     QString specialTypeAdverb() const;
 
 private:
-    void initOldTypeLists();
-
-
-    /// user defined types of old documents
-//     QStringList m_userTypeDescriptions;
 
 
     QString mainTypeName(int index) const;

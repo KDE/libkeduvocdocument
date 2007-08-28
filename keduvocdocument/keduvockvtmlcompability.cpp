@@ -23,21 +23,28 @@
 
 #include "keduvockvtmlcompability.h"
 
-const QString KEduVocKvtmlCompability::USAGE_USER_DEFINED = QString("#");
-const QString KEduVocKvtmlCompability::USAGE_SEPERATOR = QString(":");
+#include <KDebug>
+
+const QString KEduVocKvtmlCompability::KVTML_1_USAGE_USER_DEFINED = QString("#");
+const QString KEduVocKvtmlCompability::KVTML_1_USAGE_SEPERATOR = QString(":");
+
+const QString KEduVocKvtmlCompability::KVTML_1_TYPE_USER = QString("#");
+const QString KEduVocKvtmlCompability::KVTML_1_TYPE_DIV = QString(":");
 
 
 KEduVocKvtmlCompability::KEduVocKvtmlCompability()
 {
     m_usages = usageMap();
     m_userdefinedUsageCounter = 0;
+
+    initOldTypeLists();
 }
 
 
 QSet<QString> KEduVocKvtmlCompability::usageFromKvtml1(const QString & oldUsage) const
 {
     QSet<QString> usages;
-    foreach ( QString usage , oldUsage.split(USAGE_SEPERATOR, QString::SkipEmptyParts) ) {
+    foreach ( QString usage , oldUsage.split(KVTML_1_USAGE_SEPERATOR, QString::SkipEmptyParts) ) {
         usages.insert( m_usages[usage] );
     }
     return usages;
@@ -103,7 +110,7 @@ void KEduVocKvtmlCompability::addUserdefinedUsage(const QString & usage)
 {
     // start counting at 1 !!!
     m_userdefinedUsageCounter++;
-    m_usages[USAGE_USER_DEFINED + QString::number(m_userdefinedUsageCounter)] = usage;
+    m_usages[KVTML_1_USAGE_USER_DEFINED + QString::number(m_userdefinedUsageCounter)] = usage;
 }
 
 QSet< QString > KEduVocKvtmlCompability::documentUsages() const
@@ -112,3 +119,87 @@ QSet< QString > KEduVocKvtmlCompability::documentUsages() const
 }
 
 
+
+////////////////// TYPES /////////////////////////////////////////
+void KEduVocKvtmlCompability::initOldTypeLists()
+{
+    m_oldMainTypeNames.clear();
+    m_oldMainTypeNames.insert("v", i18n("Verb"));
+    m_oldMainTypeNames.insert("n", i18n("Noun"));
+    m_oldMainTypeNames.insert("nm", i18n("Name"));
+    m_oldMainTypeNames.insert("ar", i18n("Article"));
+    m_oldMainTypeNames.insert("aj", i18n("Adjective"));
+    m_oldMainTypeNames.insert("av", i18n("Adverb"));
+    m_oldMainTypeNames.insert("pr", i18n("Pronoun"));
+    m_oldMainTypeNames.insert("ph", i18n("Phrase"));
+    m_oldMainTypeNames.insert("num", i18n("Numeral"));
+    m_oldMainTypeNames.insert("con", i18n("Conjunction"));
+    m_oldMainTypeNames.insert("pre", i18n("Preposition"));
+    m_oldMainTypeNames.insert("qu", i18n("Question"));
+    m_oldMainTypeNames.insert("ifm", i18n("Informal"));
+    m_oldMainTypeNames.insert("fig", i18n("Figuratively"));
+
+    m_oldSubTypeNames.clear();
+    m_oldSubTypeNames.insert("ord", i18n("Ordinal"));
+    m_oldSubTypeNames.insert("crd", i18n("Cardinal"));
+    m_oldSubTypeNames.insert("def", i18n("Definite"));
+    m_oldSubTypeNames.insert("ind", i18n("Indefinite"));
+    m_oldSubTypeNames.insert("re", i18n("Regular"));
+    m_oldSubTypeNames.insert("ir", i18n("Irregular"));
+    m_oldSubTypeNames.insert("pos", i18n("Possessive"));
+    m_oldSubTypeNames.insert("per", i18n("Personal"));
+    m_oldSubTypeNames.insert("m", i18n("Male"));
+    m_oldSubTypeNames.insert("f", i18n("Female"));
+    m_oldSubTypeNames.insert("s", i18n("Neutral"));
+
+}
+
+
+QString KEduVocKvtmlCompability::mainTypeFromOldFormat(const QString & typeSubtypeString) const
+{
+    QString mainType;
+    int i;
+
+    if ((i = typeSubtypeString.indexOf(KVTML_1_TYPE_DIV)) >= 0)
+        mainType = typeSubtypeString.left(i);
+    else
+        mainType = typeSubtypeString;
+
+    // convert from pre-0.5 versions (I guess we can just leave that in here.
+    // I seriously doubt that any such documents exist...
+    if (mainType == "1") {
+        mainType = QM_VERB;
+    }
+    else if (mainType == "2") {
+        mainType = QM_NOUN;
+    }
+    else if (mainType == "3") {
+        mainType = QM_NAME;
+    }
+
+    QString wt = m_oldMainTypeNames.value( mainType );
+    if ( wt == QString() ) {
+        kDebug() << "Unknown old maintype: " << typeSubtypeString;
+        return typeSubtypeString;
+    }
+    return wt;
+}
+
+
+QString KEduVocKvtmlCompability::subTypeFromOldFormat(const QString & typeSubtypeString) const
+{
+    int i;
+    QString t = typeSubtypeString;
+    if ((i = t.indexOf(KVTML_1_TYPE_DIV)) >= 0) {
+        t.remove(0, i+1);
+    } else {
+        return QString();
+    }
+
+    QString wt = m_oldSubTypeNames.value( t );
+    if ( wt == QString() ) {
+        kDebug() << "Unknown old maintype: " << typeSubtypeString;
+        return typeSubtypeString;
+    }
+    return wt;
+}

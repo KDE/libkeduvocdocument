@@ -980,18 +980,9 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
                 }
             }
             type = m_oldSelfDefinedTypes.value(selfDefinedTypeIndex);
-        } else { // not user defined - preset types
-                // convert from pre-0.5 versions (I guess we can just leave that in here.
-            // I seriously doubt that any such documents exist...
-            if (oldType == "1")
-                oldType = QM_VERB;
-            else if (oldType == "2")
-                oldType = QM_NOUN;
-            else if (oldType == "3")
-                oldType = QM_NAME;
-
-            type = m_doc->wordTypes()->mainTypeFromOldFormat(oldType);
-            subType = m_doc->wordTypes()->subTypeFromOldFormat(oldType);
+        } else {
+            type = m_compability.mainTypeFromOldFormat(oldType);
+            subType = m_compability.subTypeFromOldFormat(oldType);
         } // not user defined - preset types
     }
 
@@ -1095,18 +1086,9 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
                 }
             }
             type = m_oldSelfDefinedTypes.value(selfDefinedTypeIndex);
-        } else { // not user defined - preset types
-                // convert from pre-0.5 versions (I guess we can just leave that in here.
-            // I seriously doubt that any such documents exist...
-            if (oldType == "1")
-                oldType = QM_VERB;
-            else if (oldType == "2")
-                oldType = QM_NOUN;
-            else if (oldType == "3")
-                oldType = QM_NAME;
-
-            type = m_doc->wordTypes()->mainTypeFromOldFormat(oldType);
-            subType = m_doc->wordTypes()->subTypeFromOldFormat(oldType);
+        } else {
+            type = m_compability.mainTypeFromOldFormat(oldType);
+            subType = m_compability.subTypeFromOldFormat(oldType);
         } // not user defined - preset types
     }
 

@@ -30,6 +30,54 @@
 
 #include <KLocalizedString>
 
+
+
+
+
+// internal types, indented are subtypes
+
+#define QM_VERB           "v"    // go
+// #define   QM_VERB_IRR     "ir"
+// #define   QM_VERB_REG     "re"
+#define QM_NOUN           "n"    // table, coffee
+// #define   QM_NOUN_F       "f"
+// #define   QM_NOUN_M       "m"
+// #define   QM_NOUN_S       "s"
+#define QM_NAME           "nm"
+// #define QM_ART            "ar"   // article
+// #define   QM_ART_DEF      "def"  // definite    a/an
+// #define   QM_ART_IND      "ind"  // indefinite  the
+#define QM_ADJ            "aj"   // adjective   expensive, good
+// #define QM_ADV            "av"   // adverb      today, strongly
+// #define QM_PRON           "pr"   // pronoun     you, she
+// #define   QM_PRON_POS     "pos"  // possessive  my, your
+// #define   QM_PRON_PER     "per"  // personal
+// #define QM_PHRASE         "ph"
+// #define QM_NUM            "num"  // numeral
+// #define   QM_NUM_ORD      "ord"  // ordinal     first, second
+// #define   QM_NUM_CARD     "crd"  // cardinal    one, two
+// #define QM_INFORMAL       "ifm"
+// #define QM_FIG            "fig"
+// #define QM_CON            "con"  // conjuncton  and, but
+// #define QM_PREP           "pre"  // preposition behind, between
+// #define QM_QUEST          "qu"   // question    who, what
+
+// type delimiters
+
+#define QM_USER_TYPE  "#"   // designates number of user type
+#define QM_TYPE_DIV   ":"   // divide main from subtype
+
+// usage delimiters (also declared in UsageManager.h)
+
+#define UL_USER_USAGE  "#"   // designates number of user type
+
+
+
+
+
+
+
+
 /**
   * @file contains defines and constants necessary for reading kvtml files prior to KDE4. kvtml version 1.
   */
@@ -64,6 +112,11 @@ public:
      */
     QSet<QString> documentUsages() const;
 
+    ///// TYPES
+    QString mainTypeFromOldFormat(const QString& typeSubtypeString) const;
+    QString subTypeFromOldFormat(const QString& typeSubtypeString) const;
+
+
 private:
     /**
      * This gives a map of old abbreviations used in the files and their meaning.
@@ -76,12 +129,29 @@ private:
     QMap< QString, QString > m_usages;
 
     /// # defines user defined usage
-    static const QString USAGE_USER_DEFINED;
+    static const QString KVTML_1_USAGE_USER_DEFINED;
     /// : seperates usages
-    static const QString USAGE_SEPERATOR;
+    static const QString KVTML_1_USAGE_SEPERATOR;
 
     /// only order was decisive, we have to keep count.
     int m_userdefinedUsageCounter;
+
+
+//////////// TYPES /////////////////
+    void initOldTypeLists();
+
+
+    /// user defined types of old documents
+//     QStringList m_userTypeDescriptions;
+
+
+
+    QMap<QString, QString> m_oldMainTypeNames;
+    QMap<QString, QString> m_oldSubTypeNames;
+
+    static const QString KVTML_1_TYPE_USER;
+    static const QString KVTML_1_TYPE_DIV;
+
 };
 
 

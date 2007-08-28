@@ -74,12 +74,6 @@ public:
     /// Map containing the word type name and its properties.
     QList<wordType> m_wordTypeList;
 
-    QMap<QString, QString> m_oldMainTypeNames;
-    QMap<QString, QString> m_oldSubTypeNames;
-
-    static const QString KVTML_1_TYPE_USER;
-    static const QString KVTML_1_TYPE_DIV;
-
     static const QString WORDTYPE_NOUN;
     static const QString WORDTYPE_NOUN_MALE;
     static const QString WORDTYPE_NOUN_FEMALE;
@@ -102,9 +96,6 @@ public:
     static const QString WORDTYPE_ADJECTIVE_EXPLANATION;
     static const QString WORDTYPE_ADVERB_EXPLANATION;
 };
-
-const QString KEduVocWordType::Private::KVTML_1_TYPE_USER = QString("#");
-const QString KEduVocWordType::Private::KVTML_1_TYPE_DIV = QString(":");
 
 const QString KEduVocWordType::Private::WORDTYPE_NOUN = QString("noun");
 const QString KEduVocWordType::Private::WORDTYPE_NOUN_MALE = QString("noun:male");
@@ -136,16 +127,13 @@ const QString KEduVocWordType::Private::WORDTYPE_ADVERB_EXPLANATION = QString("T
 KEduVocWordType::KEduVocWordType()
 : d(new Private)
 {
-    // this should go into the old reader/writer
-    initOldTypeLists();
+
 }
 
 KEduVocWordType::KEduVocWordType(const KEduVocWordType & other)
 : d(new Private)
 {
     d->m_wordTypeList = other.d->m_wordTypeList;
-    d->m_oldMainTypeNames = other.d->m_oldMainTypeNames;
-    d->m_oldSubTypeNames = other.d->m_oldSubTypeNames;
 }
 
 KEduVocWordType::~KEduVocWordType()
@@ -160,77 +148,6 @@ KEduVocWordType & KEduVocWordType::operator =(const KEduVocWordType & other)
     return *this;
 }
 
-
-QString KEduVocWordType::mainTypeFromOldFormat(const QString & typeSubtypeString) const
-{
-    QString mainType;
-    int i;
-
-    if ((i = typeSubtypeString.indexOf(d->KVTML_1_TYPE_DIV)) >= 0)
-        mainType = typeSubtypeString.left(i);
-    else
-        mainType = typeSubtypeString;
-
-    QString wt = d->m_oldMainTypeNames.value( mainType );
-    if ( wt == QString() ) {
-        kDebug() << "Unknown old maintype: " << typeSubtypeString;
-        return typeSubtypeString;
-    }
-    return wt;
-}
-
-
-QString KEduVocWordType::subTypeFromOldFormat(const QString & typeSubtypeString) const
-{
-    int i;
-    QString t = typeSubtypeString;
-    if ((i = t.indexOf(d->KVTML_1_TYPE_DIV)) >= 0) {
-        t.remove(0, i+1);
-    } else {
-        return QString();
-    }
-
-    QString wt = d->m_oldSubTypeNames.value( t );
-    if ( wt == QString() ) {
-        kDebug() << "Unknown old maintype: " << typeSubtypeString;
-        return typeSubtypeString;
-    }
-    return wt;
-}
-
-
-void KEduVocWordType::initOldTypeLists()
-{
-    d->m_oldMainTypeNames.clear();
-    d->m_oldMainTypeNames.insert("v", i18n("Verb"));
-    d->m_oldMainTypeNames.insert("n", i18n("Noun"));
-    d->m_oldMainTypeNames.insert("nm", i18n("Name"));
-    d->m_oldMainTypeNames.insert("ar", i18n("Article"));
-    d->m_oldMainTypeNames.insert("aj", i18n("Adjective"));
-    d->m_oldMainTypeNames.insert("av", i18n("Adverb"));
-    d->m_oldMainTypeNames.insert("pr", i18n("Pronoun"));
-    d->m_oldMainTypeNames.insert("ph", i18n("Phrase"));
-    d->m_oldMainTypeNames.insert("num", i18n("Numeral"));
-    d->m_oldMainTypeNames.insert("con", i18n("Conjunction"));
-    d->m_oldMainTypeNames.insert("pre", i18n("Preposition"));
-    d->m_oldMainTypeNames.insert("qu", i18n("Question"));
-    d->m_oldMainTypeNames.insert("ifm", i18n("Informal"));
-    d->m_oldMainTypeNames.insert("fig", i18n("Figuratively"));
-
-    d->m_oldSubTypeNames.clear();
-    d->m_oldSubTypeNames.insert("ord", i18n("Ordinal"));
-    d->m_oldSubTypeNames.insert("crd", i18n("Cardinal"));
-    d->m_oldSubTypeNames.insert("def", i18n("Definite"));
-    d->m_oldSubTypeNames.insert("ind", i18n("Indefinite"));
-    d->m_oldSubTypeNames.insert("re", i18n("Regular"));
-    d->m_oldSubTypeNames.insert("ir", i18n("Irregular"));
-    d->m_oldSubTypeNames.insert("pos", i18n("Possessive"));
-    d->m_oldSubTypeNames.insert("per", i18n("Personal"));
-    d->m_oldSubTypeNames.insert("m", i18n("Male"));
-    d->m_oldSubTypeNames.insert("f", i18n("Female"));
-    d->m_oldSubTypeNames.insert("s", i18n("Neutral"));
-
-}
 
 /*
 

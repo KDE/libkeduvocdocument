@@ -26,6 +26,7 @@
 
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
+#include "keduvockvtmlcompability.h"
 
 class KEduVocDocument;
 
