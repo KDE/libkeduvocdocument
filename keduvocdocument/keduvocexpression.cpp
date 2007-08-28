@@ -106,7 +106,6 @@ KEduVocExpression::KEduVocExpression(const QString & expression, const QString &
       }
       translationIndex++;
       setTranslation(translationIndex, expr.simplified());
-    //}
   }
 }
 
@@ -125,7 +124,7 @@ KEduVocExpression::~KEduVocExpression()
 
 void KEduVocExpression::removeTranslation(int index)
 {
-    /// @todo IMPLEMENT ME - this will be really easy to implement as soon as the translation class contains all this rubbish.
+    d->m_translations.remove(index);
 }
 
 
