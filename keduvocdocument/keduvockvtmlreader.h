@@ -28,6 +28,7 @@
 #include "keduvocgrade.h"
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
+#include "keduvockvtmlcompability.h"
 
 class QIODevice;
 class KEduVocDocument;
@@ -70,7 +71,7 @@ public:
                                      QString &synonym,
                                      QString &example,
                                      QString &antonym,
-                                     QString &usage,
+                                     QSet<QString> &usage,
                                      QString &paraphrase);
   bool readExpression(QDomElement &domElementParent);
   bool readBody(QDomElement &domElementParent);
@@ -84,6 +85,8 @@ private:
   int m_cols;
   int m_lines;
   QStringList m_oldSelfDefinedTypes;
+
+  KEduVocKvtmlCompability m_compability;
 };
 
 #endif

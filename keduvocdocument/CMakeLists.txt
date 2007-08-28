@@ -16,6 +16,7 @@ set(keduvocdocument_LIB_SRCS
    keduvockvtml2reader.cpp
    keduvockvtmlwriter.cpp
    keduvockvtml2writer.cpp
+   keduvockvtmlcompability.cpp
    keduvocmultiplechoice.cpp
    keduvocpaukerreader.cpp
    keduvocvokabelnreader.cpp

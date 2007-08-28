@@ -682,29 +682,25 @@ bool KEduVocKvtmlReader::readTense(QDomElement &domElementParent)
 
 bool KEduVocKvtmlReader::readUsage(QDomElement &domElementParent)
 {
-  QString s;
+  // get user defined usages
+
   QDomElement currentElement;
-  QStringList descriptions;
 
   QDomNodeList entryList = domElementParent.elementsByTagName(KV_USAGE_DESC);
-  if (entryList.length() <= 0)
+  if (entryList.length() <= 0) {
     return false;
+  }
 
 
   for (int i = 0; i < entryList.count(); ++i) {
     currentElement = entryList.item(i).toElement();
     if (currentElement.parentNode() == domElementParent) {
-      int no = 0;
-
-      QDomAttr attribute = currentElement.attributeNode(KV_USAGE_NO);
-      if (!attribute.isNull())
-        no = attribute.value().toInt();
-
-      s = currentElement.text();
-      if (s.isNull())
-        s = "";
-      m_doc->addUsage(s);
+      m_compability.addUserdefinedUsage(currentElement.text());
     }
+  }
+
+  foreach ( QString usage, m_compability.documentUsages() ) {
+    m_doc->addUsage(usage);
   }
 
   return true;
@@ -820,7 +816,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
                                                         QString &synonym,
                                                         QString &example,
                                                         QString &antonym,
-                                                        QString &usage,
+                                                        QSet<QString> &usages,
                                                         QString &paraphrase)
 {
   int pos;
@@ -928,12 +924,16 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
     example = attribute.value();
 
 ///@todo usages
-/*
-  usage = "";
+
   attribute = domElementExpressionChild.attributeNode(KV_USAGE);
   if (!attribute.isNull())
   {
+    kDebug() << "Read usages: " << attribute.value();
+    usages = m_compability.usageFromKvtml1(attribute.value());
+
+    /*
     usage = attribute.value();
+
     if (usage.length() != 0 && usage.left(1) == UL_USER_USAGE)
     {
       int num = qMin(usage.mid (1, 40).toInt(), 1000); // paranioa check
@@ -950,8 +950,8 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
         }
         m_doc->setUsageDescriptions(sl);
       }
-    }
-  }*/
+    }*/
+  }
 
   paraphrase = "";
   attribute = domElementExpressionChild.attributeNode(KV_PARAPHRASE);
@@ -1037,7 +1037,7 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
   QString                   synonym;
   QString                   example;
   QString                   antonym;
-  QString                   usage;
+  QSet<QString>             usage;
   QString                   paraphrase;
   QList<KEduVocConjugation> conjug;
   KEduVocComparison         comparison;
@@ -1257,11 +1257,8 @@ bool KEduVocKvtmlReader::readExpression(QDomElement &domElementParent)
         expr.translation(i).setSynonym (synonym);
       if (!example.isEmpty() )
         expr.translation(i).setExample (example);
-///@todo enable reading of usages into a qstringlist
-/*
       if (!usage.isEmpty() )
-        expr.translation(i).setUsageLabel (usage);
-*/
+        expr.translation(i).setUsages (usage);
       if (!paraphrase.isEmpty() )
         expr.translation(i).setParaphrase (paraphrase);
       if (!antonym.isEmpty() )
