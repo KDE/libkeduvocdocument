@@ -145,11 +145,6 @@ void KEduVocTranslation::setTranslation ( const QString & expr )
 }
 
 
-/**
-    @todo CHANGE ALL [index] to .value(index) in get methods! otherwise the element is automatically created!!!
-*/
-
-
 QString KEduVocTranslation::comment ( ) const
 {
     return d->m_comment;
@@ -327,8 +322,8 @@ bool KEduVocTranslation::operator ==(const KEduVocTranslation & translation) con
         d->m_antonym == translation.d->m_antonym &&
         d->m_pronunciation == translation.d->m_pronunciation &&
         d->m_comparison == translation.d->m_comparison &&
-        d->m_multipleChoice == translation.d->m_multipleChoice
-        /// @todo m_falseFriends == translation.m_falseFriends &&
+        d->m_multipleChoice == translation.d->m_multipleChoice &&
+        d->m_falseFriends == translation.d->m_falseFriends
         /// @todo m_grades == translation.m_grades &&
         /// @todo m_conjugations == translation.m_conjugations
         ;
@@ -349,7 +344,7 @@ KEduVocTranslation & KEduVocTranslation::operator =(const KEduVocTranslation & t
     d->m_pronunciation = translation.d->m_pronunciation;
     d->m_comparison = translation.d->m_comparison;
     d->m_multipleChoice = translation.d->m_multipleChoice;
-    /// @todo m_falseFriends == translation.m_falseFriends;
+    d->m_falseFriends == translation.d->m_falseFriends;
     /// @todo m_grades == translation.m_grades;
     /// @todo m_conjugations == translation.m_conjugations;
     return *this;
