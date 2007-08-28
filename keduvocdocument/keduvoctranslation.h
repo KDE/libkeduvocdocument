@@ -55,12 +55,13 @@ public:
      * The translation as string (the word itself)
      * @return the translation
      */
-    QString translation () const;
+    QString text () const;
+	
     /**
      * Sets the translation
      * @param expr
      */
-    void setTranslation ( const QString & expr );
+    void setText ( const QString & expr );
 
 
     /** sets the pronunciation of this expression

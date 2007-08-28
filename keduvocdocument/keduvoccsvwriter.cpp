@@ -63,7 +63,7 @@ bool KEduVocCsvWriter::writeDoc(KEduVocDocument *doc, const QString &generator)
       else
         currentRow += separator;
 
-        currentRow += expression->translation(i).translation();
+        currentRow += expression->translation(i).text();
     }
 
     if (!currentRow.isEmpty())

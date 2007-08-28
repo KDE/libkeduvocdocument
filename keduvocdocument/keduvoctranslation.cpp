@@ -133,13 +133,13 @@ KEduVocTranslation::~KEduVocTranslation()
     delete d;
 }
 
-QString KEduVocTranslation::translation ( ) const
+QString KEduVocTranslation::text ( ) const
 {
     return d->m_translation;
 }
 
 
-void KEduVocTranslation::setTranslation ( const QString & expr )
+void KEduVocTranslation::setText ( const QString & expr )
 {
     d->m_translation = expr.simplified();
 }

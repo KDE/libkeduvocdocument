@@ -368,7 +368,7 @@ bool KEduVocKvtml2Reader::readTranslation(QDomElement &translationElement,
   QDomElement currentElement = translationElement.firstChildElement(KVTML_TEXT);
   if (!currentElement.isNull())
   {
-    expr.translation(index).setTranslation(currentElement.text());
+    expr.translation(index).setText(currentElement.text());
   }
 
   currentElement = translationElement.firstChildElement(KVTML_COMMENT);

@@ -189,7 +189,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
         return false;
     }
 
-    QDomText domTextOriginal = domDoc.createTextNode(entry->translation(0).translation());
+    QDomText domTextOriginal = domDoc.createTextNode(entry->translation(0).text());
     domElementOriginal.appendChild(domTextOriginal);
     domElementExpression.appendChild(domElementOriginal);
 
@@ -285,7 +285,7 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
           return false;
       }
 
-      QDomText domTextTranslation = domDoc.createTextNode(entry->translation(trans).translation());
+      QDomText domTextTranslation = domDoc.createTextNode(entry->translation(trans).text());
       domElementTranslation.appendChild(domTextTranslation);
       domElementExpression.appendChild(domElementTranslation);
 

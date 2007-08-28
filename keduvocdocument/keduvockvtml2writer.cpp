@@ -600,7 +600,7 @@ bool KEduVocKvtml2Writer::writeEntries(QDomElement &entriesElement)
 bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEduVocTranslation &translation)
 {
   // <text>Kniebeugen</text>
-  translationElement.appendChild(newTextElement(KVTML_TEXT, translation.translation()));
+  translationElement.appendChild(newTextElement(KVTML_TEXT, translation.text()));
 
   // <wordtype></wordtype>
   if (!translation.type().isEmpty())
@@ -617,10 +617,7 @@ bool KEduVocKvtml2Writer::writeTranslation(QDomElement &translationElement, KEdu
   }
 
   // <comment></comment>
-  if (!translation.comment().isEmpty())
-  {
-    translationElement.appendChild(newTextElement(KVTML_COMMENT, translation.comment()));
-  }
+  translationElement.appendChild(newTextElement(KVTML_COMMENT, translation.comment()));
 
   // <pronunciation></pronunciation>
   if (!translation.pronunciation().isEmpty())

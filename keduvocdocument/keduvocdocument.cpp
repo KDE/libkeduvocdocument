@@ -1223,11 +1223,11 @@ int KEduVocDocument::search(const QString &substr, int id, int first, int last, 
 
     for (int i = first; i < last; i++) {
       if (word_start) {
-        if (entry(i)->translation(id).translation().indexOf(substr, 0, Qt::CaseInsensitive) == 0) // case insensitive
+        if (entry(i)->translation(id).text().indexOf(substr, 0, Qt::CaseInsensitive) == 0) // case insensitive
           return i;
       }
       else {
-        if (entry(i)->translation(id).translation().indexOf(substr, 0, Qt::CaseInsensitive) > -1) // case insensitive
+        if (entry(i)->translation(id).text().indexOf(substr, 0, Qt::CaseInsensitive) > -1) // case insensitive
           return i;
       }
 
@@ -1265,8 +1265,8 @@ public:
     int cmp;
     foreach (int i, exp->translationIndices()) {
 
-      s1 = exp->translation(i).translation();
-      s2 = y.exp->translation(i).translation();
+      s1 = exp->translation(i).text();
+      s2 = y.exp->translation(i).text();
       cmp = QString::compare(s1.toUpper(), s2.toUpper() );
       if (cmp != 0)
         return cmp < 0;
@@ -1287,8 +1287,9 @@ int KEduVocDocument::cleanUp()
   ExpRefList shadow;
   QList<int> to_delete;
 
-  for (int i = 0; i < d->m_vocabulary.count(); i++)
+  for (int i = 0; i < d->m_vocabulary.count(); i++) {
     shadow.append(ExpRef (entry(i), i));
+  }
   qStableSort(shadow.begin(), shadow.end());
 
   int ent_no = 0;
@@ -1301,12 +1302,13 @@ int KEduVocDocument::cleanUp()
     kve2 = shadow[i - 1].exp;
 
     ent_no++;
-    if (ent_percent != 0 && (ent_no % ent_percent) == 0 )
+    if (ent_percent != 0 && (ent_no % ent_percent) == 0 ) {
       emit progressChanged(this, (int)((ent_no / f_ent_percent) / 2.0));
+	}
 
     bool equal = true;
     for (int l = 0; equal && l < identifierCount(); l++ ) {
-        if (kve1->translation(l).translation() != kve2->translation(l).translation()) {
+        if (kve1->translation(l).text() != kve2->translation(l).text()) {
             equal = false;
         }
     }
