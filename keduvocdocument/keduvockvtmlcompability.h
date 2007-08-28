@@ -58,6 +58,10 @@ public:
      */
     QSet<QString> usageFromKvtml1( const QString& oldUsage ) const;
 
+    /**
+     * Return set of all available usages. Since the doc also needs them.
+     * @return usage set
+     */
     QSet<QString> documentUsages() const;
 
 private:
