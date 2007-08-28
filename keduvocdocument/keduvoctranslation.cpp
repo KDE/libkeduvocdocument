@@ -44,13 +44,13 @@ public:
     /// noun:male etc (language dependent)
     QString m_type;
     QString m_subType;
-    QStringList m_usages;
     QString m_comment;
     QString m_paraphrase;
     QString m_synonym;
     QString m_example;
     QString m_antonym;
     QString m_pronunciation;
+    QSet<QString> m_usages;
 
     KEduVocConjugation m_conjugation;
 
@@ -198,13 +198,13 @@ QString KEduVocTranslation::example ( ) const
 }
 
 
-void KEduVocTranslation::setUsages (  const QStringList & usages )
+void KEduVocTranslation::setUsages (  const QSet<QString> & usages )
 {
     d->m_usages = usages;
 }
 
 
-QStringList& KEduVocTranslation::usages ()
+QSet<QString>& KEduVocTranslation::usages()
 {
     return d->m_usages;
 }
