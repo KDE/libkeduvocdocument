@@ -55,6 +55,8 @@ public:
 private:
   QFile *m_outputFile;
   KEduVocDocument *m_doc;
+
+  KEduVocKvtmlCompability m_compability;
 };
 
 #endif

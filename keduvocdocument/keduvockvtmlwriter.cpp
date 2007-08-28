@@ -120,9 +120,6 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
     if (!entry->isActive())
       domElementExpression.setAttribute (KV_INACTIVE, 1);
 
-    if (entry->uniqueType() && !entry->translation(0).type().isEmpty())
-      domElementExpression.setAttribute (KV_EXPRTYPE, entry->translation(0).type());
-
     QDomElement domElementOriginal = domDoc.createElement(KV_ORG);
     if (first_expr)
     {
@@ -162,8 +159,8 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
     if (!entry->translation(0).pronunciation().isEmpty() )
       domElementOriginal.setAttribute(KV_PRONUNCE, entry->translation(0).pronunciation());
 
-    if (!entry->uniqueType() && !entry->translation(0).type().isEmpty())
-      domElementOriginal.setAttribute(KV_EXPRTYPE, entry->translation(0).type());
+    if (!entry->translation(0).type().isEmpty())
+      domElementOriginal.setAttribute(KV_EXPRTYPE, m_compability.oldType(entry->translation(0).type(), entry->translation(0).subType()));
 
     if (!writeMultipleChoice(domDoc, domElementOriginal, entry->translation(0).multipleChoice()))
       return false;
@@ -257,8 +254,8 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
       if (!entry->translation(trans).pronunciation().isEmpty() )
         domElementTranslation.setAttribute(KV_PRONUNCE, entry->translation(trans).pronunciation());
 
-      if (!entry->uniqueType() && !entry->translation(trans).type().isEmpty())
-        domElementTranslation.setAttribute(KV_EXPRTYPE, entry->translation(trans).type());
+      if (!entry->translation(trans).type().isEmpty())
+        domElementTranslation.setAttribute(KV_EXPRTYPE, m_compability.oldType(entry->translation(trans).type(), entry->translation(trans).subType()));
 
       if (!writeMultipleChoice(domDoc, domElementTranslation, entry->translation(trans).multipleChoice()))
         return false;

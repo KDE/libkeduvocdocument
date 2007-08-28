@@ -148,17 +148,6 @@ void KEduVocExpression::setTranslation(int index, const QString & expr)
   d->m_translations[index] = expr.simplified();
 }
 
-bool KEduVocExpression::uniqueType() const
-{
-  bool unique = true;
-  QString type0 = d->m_translations[0].type();
-  foreach (int i, translationIndices()) {
-    if (type0 != d->m_translations[i].type()) {
-      unique = false;
-    }
-  }
-  return unique;
-}
 
 int KEduVocExpression::lesson() const
 {

@@ -70,12 +70,6 @@ public:
      */
     void resetGrades(int index);
 
-  /** all langs have same type ?
-   *
-   * @return                 true if all have same type
-   */
-  bool uniqueType () const;
-
   /** returns flag if entry is "selected" for queries
    */
   bool isInQuery() const;
