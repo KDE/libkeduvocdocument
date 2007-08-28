@@ -24,6 +24,7 @@
 #include "keduvocconjugation.h"
 #include "keduvoccommon_p.h"
 #include <KLocalizedString>
+#include <KDebug>
 
 class KEduVocConjugation::Private
 {
@@ -133,23 +134,23 @@ int KEduVocConjugation::entryCount() const
 }
 
 
-QList<KEduVocTenseRelation> KEduVocConjugation::getRelation ()
-{
-  QList<KEduVocTenseRelation> vec;
-
-  for (int i = 0; i < numInternalNames(); i++) {
-    vec.append(KEduVocTenseRelation(Private::names[i].abbrev, i18n(Private::names[i].name)));
-  }
-
-  for (int i = 0; i < Private::userTenses.count(); i++) {
-    QString s;
-    s.setNum(i + 1);
-    s.prepend(UL_USER_TENSE);
-    vec.append(KEduVocTenseRelation(s, Private::userTenses[i]));
-  }
-
-  return vec;
-}
+// QList<KEduVocTenseRelation> KEduVocConjugation::getRelation ()
+// {
+//   QList<KEduVocTenseRelation> vec;
+//
+//   for (int i = 0; i < numInternalNames(); i++) {
+//     vec.append(KEduVocTenseRelation(Private::names[i].abbrev, i18n(Private::names[i].name)));
+//   }
+//
+//   for (int i = 0; i < Private::userTenses.count(); i++) {
+//     QString s;
+//     s.setNum(i + 1);
+//     s.prepend(UL_USER_TENSE);
+//     vec.append(KEduVocTenseRelation(s, Private::userTenses[i]));
+//   }
+//
+//   return vec;
+// }
 
 
 void KEduVocConjugation::setTenseNames(const QStringList& names)
@@ -241,6 +242,8 @@ int KEduVocConjugation::tenseCount()
 
 QString KEduVocConjugation::getType(int idx)
 {
+
+kDebug() << "KEduVocConjugation::getType()" << idx;
   if (idx >= d->conjugations.count())
     return "";
 

@@ -417,21 +417,24 @@ bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVoc
   QString type;
   int count = 0;
 
+// reset
   curr_conjug.clear();
+// create new empty one
   curr_conjug.append(KEduVocConjugation());
 
   QDomElement domElementConjugChild = domElementParent.firstChild().toElement();
   while (!domElementConjugChild.isNull())
   {
     if (domElementConjugChild.tagName() == KV_CON_ENTRY)
-    {
+    {               // if KV_CON_ENTRY == "e" is found, we are reading a personal pronun definition.
+      // CONJ_PREFIX is defined as "--"
       type = CONJ_PREFIX;
 
       //----------
       // Attribute
 
       QString lang;
-      QDomAttr domAttrLang = domElementConjugChild.attributeNode(KV_LANG);
+      QDomAttr domAttrLang = domElementConjugChild.attributeNode(KV_LANG); // "l"
 
       if (m_doc->identifierCount() <= count)
       {
@@ -453,15 +456,17 @@ bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVoc
       }
     }
     else if (domElementConjugChild.tagName() == KV_CON_TYPE)
-    {
+    {                       // this means reading translations KV_CON_TYPE == "t"
       //----------
       // Attribute
 
+        // "n" == is the type is the tense
       QDomAttr domAttrLang = domElementConjugChild.attributeNode(KV_CON_NAME);
       type = domAttrLang.value();
       if (type.isNull())
         type = "";
 
+        // if it starts with "#" the user typed in the tense name
       if (type.length() != 0 && type.left(1) == UL_USER_TENSE)
       {
         int num = qMin(type.mid (1, 40).toInt(), 1000); // paranoia check
@@ -494,6 +499,7 @@ bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVoc
     p3_common = false;
     s3_common = false;
 
+    // get the individual entries for persons...
     QDomElement domElementConjugGrandChild = domElementConjugChild.firstChild().toElement();
     while (!domElementConjugGrandChild.isNull())
     {
@@ -571,12 +577,21 @@ bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVoc
       }
 
       domElementConjugGrandChild = domElementConjugGrandChild.nextSibling().toElement();
-    }
+    } // while - probably to be sure, because the persons could be in any order.
+      // I guess this goes over only one set, such as:
+      // <s1>traigo</s1><s2>traes</s2><s3fcommon="1">trae</s3f>
+      // <p1>traemos</p1><p2>traéis</p2><p3f common="1">traen</p3f>
+      // until no elements are left in that soup.
+
+
 
     if (domElementConjugChild.tagName() == KV_CON_ENTRY)
       while (count + 1 > (int) curr_conjug.size() )
         curr_conjug.append(KEduVocConjugation());
 
+    // now set the data: [count] - number of conjug?
+    // type - the tense?
+    // finally the person
     curr_conjug[count].setPers3SingularCommon(type, s3_common);
     curr_conjug[count].setPers3PluralCommon(type, p3_common);
     curr_conjug[count].setPers1Singular(type, pers1_sing);
@@ -594,7 +609,7 @@ bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVoc
       count++;
 
     domElementConjugChild = domElementConjugChild.nextSibling().toElement();
-  }
+  } // while -> next type, count++
 
   return true;
 }

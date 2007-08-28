@@ -80,7 +80,7 @@ public:
   /**
    * @return
    */
-  static QList<KEduVocTenseRelation> getRelation();
+//  static QList<KEduVocTenseRelation> getRelation();
 
   /**
    * @param names

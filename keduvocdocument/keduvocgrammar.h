@@ -31,10 +31,6 @@
 
 #include <QtCore/QStringList>
 
-// #define CONJ_PREFIX            "--"   // definition of prefixes (I, you, ..)
-//
-// #define UL_USER_TENSE          "#"   // designates number of user tense
-
 /**
  * Class representing the articles of a language
  *
