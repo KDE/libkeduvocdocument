@@ -83,7 +83,7 @@ public:
   QList<int>                m_lessonsInQuery;
 
   QStringList               m_tenseDescriptions;
-  QStringList               m_usages;
+  QSet<QString>             m_usages;
   QString                   m_title;
   QString                   m_author;
   QString                   m_license;
@@ -1382,24 +1382,22 @@ KEduVocWordType* KEduVocDocument::wordTypes() {
 
 
 QStringList KEduVocDocument::usages(){
-    return d->m_usages;
+    return d->m_usages.values();
 }
 
 
-/*
-void KEduVocDocument::setUsageDescriptions(const QStringList &names)
-{
-  d->m_usageDescriptions = names;
-}*/
-
-
 void KEduVocDocument::addUsage(const QString &usage){
-    d->m_usages.append(usage);
+    d->m_usages.insert(usage);
 }
 
 
 void KEduVocDocument::renameUsage(const QString &oldName, const QString &newName){
-    d->m_usages[d->m_usages.indexOf(oldName)]=newName;
+    if ( d->m_usages.contains(oldName) ) {
+        d->m_usages.remove(oldName);
+        d->m_usages.insert(newName);
+    } else {
+        return;
+    }
 
     for ( int i = 0; i < d->m_vocabulary.count(); i++) {
         foreach (int translationIndex, d->m_vocabulary[i].translationIndices()) {
@@ -1413,7 +1411,7 @@ void KEduVocDocument::renameUsage(const QString &oldName, const QString &newName
 
 
 void KEduVocDocument::removeUsage(const QString &name){
-    d->m_usages.removeAt(d->m_usages.indexOf(name));
+    d->m_usages.remove(name);
 
     for ( int i = 0; i < d->m_vocabulary.count(); i++) {
         foreach (int translationIndex, d->m_vocabulary[i].translationIndices()) {
