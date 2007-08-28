@@ -106,6 +106,11 @@ KEduVocConjugation::KEduVocConjugation(const KEduVocConjugation& rhs)
 
 KEduVocConjugation::~KEduVocConjugation()
 {
+if (d->conjugations.count() > 0) {
+    kDebug() << "Killing Conjugation d->verbName: " << d->verbName << " conjugations.count(): " << d->conjugations.count() <<
+
+    " getType(0): " << getType(0) << " getAbbrev(0): " << getAbbrev(0) << " getName(0): " << getName(0);
+}
   delete d;
 }
 

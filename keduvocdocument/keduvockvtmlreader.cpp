@@ -415,6 +415,8 @@ bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVoc
   QString pers3_n_plur;
   QString lang;
   QString type;
+
+  // this gets a list of keduvocconjugations, count will be the conjug number to be filled.
   int count = 0;
 
 // reset
