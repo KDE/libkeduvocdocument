@@ -203,3 +203,16 @@ QString KEduVocKvtmlCompability::subTypeFromOldFormat(const QString & typeSubtyp
     }
     return wt;
 }
+
+QString KEduVocKvtmlCompability::oldType(const QString & mainType, const QString & subType) const
+{
+    QString oldType;
+    QString oldSubType;
+    oldType = m_oldMainTypeNames.key(mainType);
+    oldSubType = m_oldSubTypeNames.key(subType);
+    if ( !oldSubType.isEmpty() ) {
+        return oldType + KVTML_1_TYPE_DIV + oldSubType;
+    }
+    return oldType;
+
+}
