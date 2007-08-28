@@ -66,8 +66,6 @@ void KEduVocGrade::setGrade ( grade_t grade )
 {
     if ( grade > KV_MAX_GRADE )
         grade = KV_MAX_GRADE;
-    if ( grade < KV_MIN_GRADE )
-        grade = KV_MIN_GRADE;
     d->m_grade = grade;
 }
 
