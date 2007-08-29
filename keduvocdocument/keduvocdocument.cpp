@@ -1156,31 +1156,6 @@ bool KEduVocDocument::deleteLesson( int lessonIndex, int deleteMode )
 //  }
 //}
 
-int KEduVocDocument::search( const QString &substr, int id, int first, int last, bool word_start )
-{
-    if ( last >= entryCount() || last < 0 )
-        last = entryCount();
-
-    if ( first < 0 )
-        first = 0;
-
-    if ( id >= identifierCount() || last < first )
-        return -1;
-
-
-    for ( int i = first; i < last; i++ ) {
-        if ( word_start ) {
-            if ( entry( i )->translation( id ).text().indexOf( substr, 0, Qt::CaseInsensitive ) == 0 )    // case insensitive
-                return i;
-        } else {
-            if ( entry( i )->translation( id ).text().indexOf( substr, 0, Qt::CaseInsensitive ) > -1 )    // case insensitive
-                return i;
-        }
-
-    }
-    return -1;
-}
-
 
 QString KEduVocDocument::csvDelimiter() const
 {

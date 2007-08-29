@@ -355,18 +355,6 @@ public:
      */
     KEduVocExpression *entry( int index );
 
-    /**
-     * Search substring in vocabulary (case insensitive always)
-     *
-     * @param substr     partial string to search
-     * @param id         which language to search: 0=org, 1..x=translation
-     * @param first      index from where to start
-     * @param last       index of last entry, -1 goes till end
-     * @param word_start false: search partial string,
-     *                   true:always from beginning of word
-     * @returns          the index of found entry, -1 if none
-     */
-    int search( const QString &substr, int id, int first=0, int last=-1, bool word_start = false );
 
     /**
      * Retrieves the identifiers for the current query
