@@ -118,7 +118,6 @@ public:
     KUrl url() const;
 
 
-
     /** set the title of the file
      * @param title title to set */
     void setTitle( const QString & title );
@@ -162,6 +161,7 @@ public:
     /** @returns the version of the loaded file */
     QString version() const;
 
+
     // *** entry methods ***
 
     /**
@@ -172,7 +172,7 @@ public:
     void appendEntry( KEduVocExpression *expression );
 
     /**
-     * Inserts a new expression
+     * Inserts a new expression at position @p index
      *
      * @param expression      expression to insert
      * @param index           index of entry
@@ -235,21 +235,9 @@ public:
     int appendIdentifier( const QString & id );
 
     /**
-     * Sets the original identifier
-     *
-     * @param id              the new identifier
-     */
-    void setOriginalIdentifier( const QString &id );
-
-    /**
-     * @returns the original identifier
-     */
-    QString originalIdentifier() const;
-
-    /**
      * Sets the identifier of translation
      *
-     * @param index            number of translation 1..x
+     * @param index            number of translation 0..x
      * @param lang             thr language identifier: en=english, de=german, ...
      */
     void setIdentifier( int index, const QString &lang );
@@ -257,7 +245,7 @@ public:
     /**
      * Returns the identifier of translation @p index
      *
-     * @param index            number of translation 1..x
+     * @param index            number of translation 0..x
      * @returns                the language identifier: en=english, de=german, ...
      */
     QString identifier( int index ) const;

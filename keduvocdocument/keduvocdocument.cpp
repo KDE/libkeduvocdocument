@@ -779,23 +779,6 @@ void KEduVocDocument::removeIdentifier( int index )
 }
 
 
-QString KEduVocDocument::originalIdentifier() const
-{
-    if ( d->m_identifiers.size() > 0 )
-        return d->m_identifiers[0];
-    else
-        return "";
-}
-
-
-void KEduVocDocument::setOriginalIdentifier( const QString &id )
-{
-    if ( d->m_identifiers.size() > 0 ) {
-        d->m_identifiers[0] = id;
-    }
-}
-
-
 bool KEduVocDocument::isModified() const
 {
     return d->m_dirty;
@@ -1302,6 +1285,7 @@ int KEduVocDocument::cleanUp()
 
     return count;
 }
+
 
 void KEduVocDocument::shuffle()
 {
