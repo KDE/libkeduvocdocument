@@ -80,9 +80,6 @@ bool KEduVocKvtmlWriter::writeDoc(KEduVocDocument *doc, const QString &generator
       return false;
   }
 
-  if (!writeOption(domDoc, domElementKvtml))
-    return false;
-
   if (!writeType(domDoc, domElementKvtml))
     return false;
 
@@ -434,19 +431,6 @@ bool KEduVocKvtmlWriter::writeArticle(QDomDocument &domDoc, QDomElement &domElem
   }
 
   domElementParent.appendChild(domElementArticle);
-  return true;
-}
-
-
-bool KEduVocKvtmlWriter::writeOption(QDomDocument &domDoc, QDomElement &domElementParent)
-{
-  QDomElement domElementOption = domDoc.createElement(KV_OPTION_GRP);
-  QDomElement domElementSort = domDoc.createElement(KV_OPT_SORT);
-
-  domElementSort.setAttribute(KV_BOOL_FLAG, (m_doc->isSortingEnabled()?1:0));
-  domElementOption.appendChild(domElementSort);
-
-  domElementParent.appendChild(domElementOption);
   return true;
 }
 

@@ -68,7 +68,6 @@ public:
   KUrl                      m_url;
   QList<bool>               m_sortIdentifier;
   bool                      m_sortLesson;
-  bool                      m_sortingEnabled;
 
   // save these to document
   QStringList               m_identifiers;      //0= origin, 1,.. translations
@@ -90,6 +89,11 @@ public:
   QString                   m_remark;
   QString                   m_version;
   QString                   m_csvDelimiter;
+
+  /** Categories that can later be used to sork kvtml files:
+    * language, music, children, anatomy
+    */
+  QString                   m_category;
 
   QList<KEduVocArticle>     m_articles;
   QList<KEduVocConjugation> m_conjugations;
@@ -115,7 +119,6 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
   m_sizeHints.clear();
   m_vocabulary.clear();
   m_dirty = false;
-  m_sortingEnabled = true;
   m_sortLesson = false;
   m_currentLesson = 0;
   m_queryorg = "";
@@ -809,18 +812,6 @@ void KEduVocDocument::setOriginalIdentifier(const QString &id)
   if (d->m_identifiers.size() > 0) {
     d->m_identifiers[0] = id;
   }
-}
-
-
-void KEduVocDocument::setSortingEnabled(bool enable)
-{
-  d->m_sortingEnabled = enable;
-}
-
-
-bool KEduVocDocument::isSortingEnabled() const
-{
-  return d->m_sortingEnabled;
 }
 
 

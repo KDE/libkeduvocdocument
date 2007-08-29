@@ -148,12 +148,6 @@ bool KEduVocKvtmlReader::readBody(QDomElement &domElementParent)
       return false;
   }
 
-  currentElement = domElementParent.firstChildElement(KV_OPTION_GRP);
-  if (!currentElement.isNull()) {
-    result = readOptions(currentElement);
-    if (!result)
-      return false;
-  }
 
   // initialize the list of predefined types
   m_doc->wordTypes()->createDefaultWordTypes();
@@ -612,25 +606,6 @@ bool KEduVocKvtmlReader::readConjug(QDomElement &domElementParent, QList<KEduVoc
 
     domElementConjugChild = domElementConjugChild.nextSibling().toElement();
   } // while -> next type, count++
-
-  return true;
-}
-
-
-bool KEduVocKvtmlReader::readOptions(QDomElement &domElementParent)
-{
-  m_doc->setSortingEnabled(true);
-  QDomElement currentElement = domElementParent.firstChildElement(KV_OPT_SORT);
-  if (!currentElement.isNull()) {
-    QDomAttr attribute = currentElement.attributeNode(KV_BOOL_FLAG);
-    if (!attribute.isNull())
-    {
-      bool ok = true;
-      m_doc->setSortingEnabled(attribute.value().toInt(&ok));  // returns 0 if the conversion fails
-      if (!ok)
-        m_doc->setSortingEnabled(true);
-    }
-  }
 
   return true;
 }

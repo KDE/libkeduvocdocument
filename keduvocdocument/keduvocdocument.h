@@ -110,14 +110,6 @@ public:
   bool isModified() const;
 
   /**
-   * Enables sorting
-   */
-  void setSortingEnabled(bool enable);
-
-  /** @returns whether sorting is enabled */
-  bool isSortingEnabled() const;
-
-  /**
    * Sets the URL of the XML file
    */
   void setUrl(const KUrl& url);
@@ -125,11 +117,13 @@ public:
   /** @returns the URL of the XML file */
   KUrl url() const;
 
-  /** set the title of the XML file
+
+
+  /** set the title of the file
    * @param title title to set */
   void setTitle(const QString & title);
 
-  /** @returns the title of the XML file */
+  /** @returns the title of the file */
   QString title() const;
 
   /** set the author of the file
