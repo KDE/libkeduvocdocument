@@ -126,10 +126,6 @@ QStringList SharedKvtmlFiles::fileNames(const QString &language)
 	return language.isEmpty() ? sharedKvtmlFilesPrivate->m_fileList : sharedKvtmlFilesPrivate->m_filesByLang.value(language);
 }
 
-/** get the list of document titles found of a given language
-  *@param language requested language 
-  *@return a list of document titles with words in language
-  */
 QStringList SharedKvtmlFiles::titles(const QString &language)
 {
 	QStringList retlist;

@@ -59,62 +59,43 @@ Contains grading information (query date, bad count) for one language with respe
 class KEDUVOCDOCUMENT_EXPORT KEduVocGrade
 {
 public:
+    /** default constructor */
     KEduVocGrade();
 
     /** copy constructor
      * provides safe copy of d pointer
+     * @param other object to copy from
      */
     KEduVocGrade(const KEduVocGrade &other);
 
+    /** default destructor */
     ~KEduVocGrade();
 
-      /** returns query count of given translation as int
-   *
-   * @param index            index of translation
-   * @param index       the identifier displayed to the user
+    /** returns query count as int 
+    * @returns query count
+    */
+    count_t queryCount(   ) const;
 
-   */
-  count_t queryCount(   ) const;
+    /** set query count as int
+    * @param count the new count
+    */
+    void setQueryCount( count_t count );
 
-  /** set query count of given translation as int
-   *
-   * @param index            index of translation
-   * @param index       the identifier displayed to the user
-   * @param count            the new count
+    /** returns bad query count as int
+    * @returns bad query count
+    */
+    count_t badCount( ) const;
 
-   */
-  void setQueryCount( count_t count );
+    /** set bad query count as int
+    * @param count the new count
+    */
+    void setBadCount( count_t count );
 
-  /** returns bad query count of given translation as int
-   *
-   * @param index            index of translation
-   * @param index       the identifier displayed to the user
-   * @param reverse          dito, in opposite direction
-   */
-  count_t badCount( ) const;
+    /** increment bad query count of given translation by 1 */
+    void incBadCount( );
 
-  /** set bad query count of given translation as int
-   *
-   * @param index            index of translation
-   * @param index       the identifier displayed to the user
-   * @param count            the new count
-   */
-  void setBadCount( count_t count );
-
-  /** increment bad query count of given translation by 1
-   *
-   * @param index            index of translation
-   * @param index       the identifier displayed to the user
-   */
-  void incBadCount( );
-
-  /** increment query count of given translation by 1
-   *
-   * @param index            index of translation
-   * @param index       the identifier displayed to the user
-
-   */
-  void incQueryCount( );
+    /** increment query count of given translation by 1 */
+    void incQueryCount( );
 
 
     /**
@@ -122,51 +103,30 @@ public:
      */
     void resetGrades();
 
-  /** sets grade of given translation
-   *
-   * @param index            index of translation
-   * @param index       the identifier displayed to the user
-   * @param grade            number of knowlegde: 0=known, x=numbers not knows
-   */
-  void setGrade( grade_t grade );
+    /** sets the grade
+    * @param grade number of knowlegde: 0=known, x=numbers not knows
+    */
+    void setGrade( grade_t grade );
 
-  /** returns grade of given translation as int
-   *
-   * @param index            index of translation
-   * @param index         the identifier displayed to the user
-   * @return                 number of knowlegde: 0=known, x=numbers not knows
-   */
-  grade_t grade() const;
+    /** returns grade of given translation as int
+    * @returns number of knowlegde: 0=known, x=numbers not knows
+    */
+    grade_t grade() const;
 
-  /** increments grade of given translation
-   *
-   * @param index            index of translation
-   * @param index       the identifier displayed to the user
+    /** increments grade of given translation */
+    void incGrade(  );
 
-   */
-  void incGrade(  );
+    /** decrements grade of given translation */
+    void decGrade(  );
 
-  /** decrements grade of given translation
-   *
-   * @param index            index of translation
-   * @param index       the identifier displayed to the user
-
-   */
-  void decGrade(  );
-
-  /** returns last query date of given translation as int
-   *
-   * @param index            index of translation
-   * @param index       the identifier displayed to the user
-   */
-  QDateTime queryDate(  ) const;
+    /** returns last query date of given translation as int
+    */
+    QDateTime queryDate(  ) const;
 
 
-   /**
-   * Set last query date
-   * @param index            index of translation
-   * @param date             the new date
-   */
+    /** Set last query date
+    * @param date             the new date
+    */
     void setQueryDate ( const QDateTime & date );
 
 private:

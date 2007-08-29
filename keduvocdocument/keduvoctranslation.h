@@ -86,7 +86,7 @@ public:
     void setComment( const QString & expr);
 
     /** sets false friend of this expression
-    * @param indexint indexFrom        index of original translation
+    * @param indexFrom        index of original translation
     * @param expression       false friend of this index
     */
     void setFalseFriend( int indexFrom, const QString & expression );
