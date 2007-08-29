@@ -86,7 +86,7 @@ public:
     QString                   m_title;
     QString                   m_author;
     QString                   m_license;
-    QString                   m_remark;
+    QString                   m_comment;
     QString                   m_version;
     QString                   m_csvDelimiter;
 
@@ -126,7 +126,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_url.setFileName( i18n( "Untitled" ) );
     m_title = "";
     m_author = "";
-    m_remark = "";
+    m_comment = "";
     m_version = "";
     m_generator = "";
     m_csvDelimiter = QString( '\t' );
@@ -1003,9 +1003,9 @@ QString KEduVocDocument::license() const
 }
 
 
-QString KEduVocDocument::documentRemark() const
+QString KEduVocDocument::documentComment() const
 {
-    return d->m_remark;
+    return d->m_comment;
 }
 
 
@@ -1041,9 +1041,9 @@ void KEduVocDocument::setLicense( const QString & s )
 }
 
 
-void KEduVocDocument::setDocumentRemark( const QString & s )
+void KEduVocDocument::setDocumentComment( const QString & s )
 {
-    d->m_remark = s.simplified();
+    d->m_comment = s.simplified();
 }
 
 

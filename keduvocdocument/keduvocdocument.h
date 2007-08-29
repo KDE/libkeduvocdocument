@@ -140,12 +140,12 @@ public:
     /** @returns the license of the file */
     QString license() const;
 
-    /** set the remark of the file
-     * @param rem remark to set */
-    void setDocumentRemark( const QString & rem );
+    /** set the comment of the file
+     * @param comment comment to set */
+    void setDocumentComment( const QString & comment );
 
-    /** @return the remark of the file */
-    QString documentRemark() const;
+    /** @return the comment of the file */
+    QString documentComment() const;
 
     /**
      * Sets the generator of the file

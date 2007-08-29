@@ -85,7 +85,7 @@ void KEduVocXdxfReader::readXdxf()
 
         if ( isStartElement() ) {
             if ( name() == "description" )
-                m_doc->setDocumentRemark( readElementText() );
+                m_doc->setDocumentComment( readElementText() );
             else if ( name() == "full_name" )
                 m_doc->setTitle( readElementText() );
             else if ( name() == "ar" )

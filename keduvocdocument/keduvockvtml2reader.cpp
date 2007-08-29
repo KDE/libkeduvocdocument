@@ -121,7 +121,7 @@ bool KEduVocKvtml2Reader::readInformation( QDomElement &informationElement )
     // read the comment
     currentElement = informationElement.firstChildElement( KVTML_COMMENT );
     if ( !currentElement.isNull() ) {
-        m_doc->setDocumentRemark( currentElement.text() );
+        m_doc->setDocumentComment( currentElement.text() );
     }
 
     return true;

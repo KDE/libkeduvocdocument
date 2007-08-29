@@ -124,8 +124,8 @@ bool KEduVocKvtml2Writer::writeInformation( QDomElement &informationElement, con
     }
 
     // comment
-    if ( !m_doc->documentRemark().isEmpty() ) {
-        informationElement.appendChild( newTextElement( KVTML_COMMENT, m_doc->documentRemark() ) );
+    if ( !m_doc->documentComment().isEmpty() ) {
+        informationElement.appendChild( newTextElement( KVTML_COMMENT, m_doc->documentComment() ) );
     }
 
     return true;

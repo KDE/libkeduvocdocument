@@ -77,7 +77,7 @@ void KEduVocPaukerReader::readPauker()
 
         if ( isStartElement() ) {
             if ( name() == "Description" )
-                m_doc->setDocumentRemark( readElementText() );
+                m_doc->setDocumentComment( readElementText() );
             else if ( name() == "Batch" )
                 readBatch();
             else

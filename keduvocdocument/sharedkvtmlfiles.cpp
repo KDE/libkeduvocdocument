@@ -98,7 +98,7 @@ void SharedKvtmlFilesPrivate::rescan()
         this->m_titleList.append( doc->title() );
 
         // add it's comment to the comment list
-        this->m_commentList.append( doc->documentRemark() );
+        this->m_commentList.append( doc->documentComment() );
     }
     // plug a memory leak
     delete doc;
