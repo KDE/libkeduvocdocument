@@ -472,7 +472,7 @@ public:
      * All lesson descriptions as stringlist.
      * @returns a list of defined lessons
      */
-    QStringList lessonDescriptions() const;
+    QStringList lessonNames() const;
 
     /**
      * Sets the description of the lesson

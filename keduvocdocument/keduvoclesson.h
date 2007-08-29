@@ -42,13 +42,13 @@ public:
     /** assignment operator */
     KEduVocLesson& operator= ( const KEduVocLesson& );
 
-    /** set the lesson description
-     * @param description text to set for the description
+    /** set the lesson name
+     * @param name text to set for the name
      */
-    void setDescription( const QString &description );
+    void setName( const QString &name );
 
-    /** get the lesson description */
-    QString description();
+    /** get the lesson name */
+    QString name();
 
     /** get a list of all entries in the lesson */
     QList<int> entries();

@@ -301,7 +301,7 @@ bool KEduVocKvtmlWriter::writeLesson( QDomDocument &domDoc, QDomElement &domElem
     for ( int i = 0; i < keys.size(); ++i ) {
         int thiskey = keys[i];
         QDomElement domElementDesc = domDoc.createElement( KV_LESS_DESC );
-        QDomText domTextDesc = domDoc.createTextNode( lessons[thiskey]->description() );
+        QDomText domTextDesc = domDoc.createTextNode( lessons[thiskey]->name() );
 
         domElementDesc.setAttribute( KV_LESS_NO, thiskey );
         if ( m_doc->currentLesson() == thiskey )

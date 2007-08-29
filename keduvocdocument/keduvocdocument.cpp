@@ -897,7 +897,7 @@ int KEduVocDocument::addLesson( const QString &lessonName, int position )
     }
 
     KEduVocLesson *lesson = new KEduVocLesson;
-    lesson->setDescription( lessonName );
+    lesson->setName( lessonName );
     d->m_lessons.insert( position, lesson );
     return position;
 }
@@ -1066,12 +1066,12 @@ void KEduVocDocument::setCurrentLesson( int lesson )
 }
 
 
-QStringList KEduVocDocument::lessonDescriptions() const
+QStringList KEduVocDocument::lessonNames() const
 {
     QStringList descriptions;
     QList<KEduVocLesson*> lessonObjects = lessons().values();
     for ( int i = 0; i < lessonObjects.count(); ++i ) {
-        descriptions.append( lessonObjects[i]->description() );
+        descriptions.append( lessonObjects[i]->name() );
     }
     return descriptions;
 }

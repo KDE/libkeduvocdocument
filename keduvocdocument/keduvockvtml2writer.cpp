@@ -179,7 +179,7 @@ bool KEduVocKvtml2Writer::writeLessons( QDomElement &lessonsElement )
         QDomElement thisLessonElement = m_domDoc.createElement( KVTML_LESSON );
 
         // add a name
-        thisLessonElement.appendChild( newTextElement( KVTML_NAME, thisLesson->description() ) );
+        thisLessonElement.appendChild( newTextElement( KVTML_NAME, thisLesson->name() ) );
 
         // add a inquery tag
         thisLessonElement.appendChild( newTextElement( KVTML_QUERY, m_doc->lessonInQuery( lessonid ) ? KVTML_TRUE : KVTML_FALSE ) );

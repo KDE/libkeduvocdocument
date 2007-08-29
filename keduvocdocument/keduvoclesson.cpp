@@ -27,7 +27,7 @@ class KEduVocLesson::Private
 {
 public:
     QSet<int> m_entries;
-    QString m_description;
+    QString m_name;
 };
 
 KEduVocLesson::KEduVocLesson()
@@ -38,7 +38,7 @@ KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
         : d( new Private )
 {
     d->m_entries = other.d->m_entries;
-    d->m_description = other.d->m_description;
+    d->m_name = other.d->m_name;
 }
 
 KEduVocLesson::~KEduVocLesson()
@@ -49,18 +49,18 @@ KEduVocLesson::~KEduVocLesson()
 KEduVocLesson& KEduVocLesson::operator= ( const KEduVocLesson &other )
 {
     d->m_entries = other.d->m_entries;
-    d->m_description = other.d->m_description;
+    d->m_name = other.d->m_name;
     return *this;
 }
 
-void KEduVocLesson::setDescription( const QString &description )
+void KEduVocLesson::setName( const QString &name )
 {
-    d->m_description = description;
+    d->m_name = name;
 }
 
-QString KEduVocLesson::description()
+QString KEduVocLesson::name()
 {
-    return d->m_description;
+    return d->m_name;
 }
 
 QList<int> KEduVocLesson::entries()
