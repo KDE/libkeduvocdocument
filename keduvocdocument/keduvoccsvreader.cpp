@@ -33,42 +33,42 @@
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
 
-KEduVocCsvReader::KEduVocCsvReader(QIODevice *file)
+KEduVocCsvReader::KEduVocCsvReader( QIODevice *file )
 {
-  // the file must be already open
-  m_inputFile = file;
-  m_errorMessage = "";
+    // the file must be already open
+    m_inputFile = file;
+    m_errorMessage = "";
 }
 
 
-bool KEduVocCsvReader::readDoc(KEduVocDocument *doc)
+bool KEduVocCsvReader::readDoc( KEduVocDocument *doc )
 {
-  m_doc = doc;
+    m_doc = doc;
 
-  QString separator = m_doc->csvDelimiter();
+    QString separator = m_doc->csvDelimiter();
 
-  QTextStream inputStream(m_inputFile);
-  inputStream.setCodec("UTF-8");
-  inputStream.setAutoDetectUnicode(true);
-  inputStream.seek(0);
+    QTextStream inputStream( m_inputFile );
+    inputStream.setCodec( "UTF-8" );
+    inputStream.setAutoDetectUnicode( true );
+    inputStream.seek( 0 );
 
-  int languageCount = 0;
+    int languageCount = 0;
 
-  while (!inputStream.atEnd()) {
-    QString s = inputStream.readLine();
+    while ( !inputStream.atEnd() ) {
+        QString s = inputStream.readLine();
 
-    if (!s.simplified().isEmpty()) {
-      KEduVocExpression expression(s, separator);
-      languageCount = qMax(languageCount, expression.translationIndices().count());
-      m_doc->appendEntry(&expression);
+        if ( !s.simplified().isEmpty() ) {
+            KEduVocExpression expression( s, separator );
+            languageCount = qMax( languageCount, expression.translationIndices().count() );
+            m_doc->appendEntry( &expression );
+        }
     }
-  }
 
-  for (int j = 0; j < languageCount; j++)
-    if (j == 0)
-      m_doc->appendIdentifier(i18nc("@title:column the original language column", "Original"));
-    else
-      m_doc->appendIdentifier(i18nc("@title:column one of the translation columns", "Translation %1", j));
+    for ( int j = 0; j < languageCount; j++ )
+        if ( j == 0 )
+            m_doc->appendIdentifier( i18nc( "@title:column the original language column", "Original" ) );
+        else
+            m_doc->appendIdentifier( i18nc( "@title:column one of the translation columns", "Translation %1", j ) );
 
-  return true;
+    return true;
 }

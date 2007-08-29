@@ -33,22 +33,23 @@
     Word type handling including subtypes (noun - male/female) etc.
     Special types: To let KVocTrain decide which word type is a verb for example the
     special tag is used.
-	@author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+ @author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
-class KEDUVOCDOCUMENT_EXPORT KEduVocWordType {
+class KEDUVOCDOCUMENT_EXPORT KEduVocWordType
+{
 
 public:
     /** default constructor */
     explicit KEduVocWordType();
 
     /** copy constructor for d-pointer safe copying */
-    KEduVocWordType(const KEduVocWordType& other);
+    KEduVocWordType( const KEduVocWordType& other );
 
     /** destructor */
     ~KEduVocWordType();
 
     /** assignment operator */
-    KEduVocWordType& operator=(const KEduVocWordType& other);
+    KEduVocWordType& operator= ( const KEduVocWordType& other );
 
     void createDefaultWordTypes();
 
@@ -58,7 +59,7 @@ public:
      * @param specialType Name of the special type - this is used internally to identify which types are use for special queries - verb query needs special == "verb" for example.
      * @param specialTypeExplanation An explanation which can be shown to the user. Since the type can be renamed if it's special, but not deleted this is necessary.
      */
-    void addType(const QString& typeName, const QString& specialType = QString(), const QString& specialTypeExplanation = QString());
+    void addType( const QString& typeName, const QString& specialType = QString(), const QString& specialTypeExplanation = QString() );
 
 
     /**
@@ -68,7 +69,7 @@ public:
      * @param specialType See above
      * @param specialTypeExplanation See above
      */
-    void addSubType(const QString& mainType, const QString& typeName, const QString& specialType = QString(), const QString& specialTypeExplanation = QString());
+    void addSubType( const QString& mainType, const QString& typeName, const QString& specialType = QString(), const QString& specialTypeExplanation = QString() );
 
     /**
      * Get a list of all known main word types.
@@ -83,21 +84,21 @@ public:
      * @param mainType The type whos subtypes are requested.
      * @return The subtypes.
      */
-    QStringList subTypeNameList(const QString& mainType) const;
+    QStringList subTypeNameList( const QString& mainType ) const;
 
     /**
      * Rename a type.
      * @param oldTypeName Old name
      * @param newTypeName New name
      */
-    void renameType( const QString& oldTypeName, const QString& newTypeName);
+    void renameType( const QString& oldTypeName, const QString& newTypeName );
     /**
      * Rename a subtype.
      * @param mainTypeName Main type
      * @param oldTypeName Old name
      * @param newTypeName New name
      */
-    void renameSubType( const QString& mainTypeName, const QString& oldTypeName, const QString& newTypeName);
+    void renameSubType( const QString& mainTypeName, const QString& oldTypeName, const QString& newTypeName );
 
     /**
      * Delete a type.
@@ -140,8 +141,8 @@ public:
 private:
 
 
-    QString mainTypeName(int index) const;
-    int mainTypeIndex(const QString& name) const;
+    QString mainTypeName( int index ) const;
+    int mainTypeIndex( const QString& name ) const;
     int subTypeIndex( const QString& mainTypeName, const QString& subTypeName ) const;
 
     class Private;

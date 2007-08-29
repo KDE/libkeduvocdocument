@@ -81,7 +81,8 @@
 /**
   * @file contains defines and constants necessary for reading kvtml files prior to KDE4. kvtml version 1.
   */
-class KEduVocKvtmlCompability {
+class KEduVocKvtmlCompability
+{
 
 public:
     /**
@@ -118,14 +119,14 @@ public:
      * @param typeSubtypeString the old string containing everything
      * @return new main type
      */
-    QString mainTypeFromOldFormat(const QString& typeSubtypeString) const;
+    QString mainTypeFromOldFormat( const QString& typeSubtypeString ) const;
 
     /**
      * Get the subtype from an old type definition
      * @param typeSubtypeString the old string containing everything
      * @return new sub type
      */
-    QString subTypeFromOldFormat(const QString& typeSubtypeString) const;
+    QString subTypeFromOldFormat( const QString& typeSubtypeString ) const;
 
     /**
      * To write old docs: convert a nice new type to the ugly old style.
@@ -133,7 +134,7 @@ public:
      * @param subType subtype
      * @return old type string
      */
-    QString oldType(const QString& mainType, const QString& subType) const;
+    QString oldType( const QString& mainType, const QString& subType ) const;
 
 
 private:

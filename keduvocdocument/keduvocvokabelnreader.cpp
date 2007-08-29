@@ -32,121 +32,117 @@
 #include "keduvocexpression.h"
 #include "keduvocgrade.h"
 
-KEduVocVokabelnReader::KEduVocVokabelnReader(QIODevice *file)
+KEduVocVokabelnReader::KEduVocVokabelnReader( QIODevice *file )
 {
-  // the file must be already open
-  m_inputFile = file;
-  m_errorMessage = "";
+    // the file must be already open
+    m_inputFile = file;
+    m_errorMessage = "";
 }
 
 
-bool KEduVocVokabelnReader::readDoc(KEduVocDocument *doc)
+bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
 {
-  m_doc = doc;
+    m_doc = doc;
 
-  m_doc->setAuthor("http://www.vokabeln.de");
+    m_doc->setAuthor( "http://www.vokabeln.de" );
 
-  QTextStream inputStream(m_inputFile);
-  inputStream.setCodec("ISO-8851-1");
-  inputStream.setAutoDetectUnicode(false);
-  inputStream.seek(0);
+    QTextStream inputStream( m_inputFile );
+    inputStream.setCodec( "ISO-8851-1" );
+    inputStream.setAutoDetectUnicode( false );
+    inputStream.seek( 0 );
 
-  QString title,
-          lang1,
-          lang2,
-          expression,
-          original,
-          translation,
-          lessonDescr,
-          temp;
+    QString title,
+    lang1,
+    lang2,
+    expression,
+    original,
+    translation,
+    lessonDescr,
+    temp;
 
-  int     i,
-          wordCount,
-          lesson;
+    int     i,
+    wordCount,
+    lesson;
 
-  int lines = 10000;
+    int lines = 10000;
 
-  QStringList titles,
-              languages,
-              words;
+    QStringList titles,
+    languages,
+    words;
 
-  bool keepGoing = true;
+    bool keepGoing = true;
 
-  while (keepGoing)
-  {
-    temp = inputStream.readLine();
-    keepGoing = !(temp.indexOf("\",") > 0);
-    title.append(temp);
-    if (keepGoing)
-      title.append(" ");
-  }
-
-  titles = title.split("\",");
-  m_doc->setTitle(titles[0].mid(1));
-  wordCount = titles[1].section(',', 0, 0).toInt();
-
-  inputStream.readLine();
-  inputStream.readLine();
-
-  lang1 = inputStream.readLine();
-  languages = lang1.split("\",");
-
-  m_doc->appendIdentifier(languages[0].mid(1));
-  m_doc->appendIdentifier(languages[1].mid(1));
-
-  keepGoing = true;
-  while (keepGoing)
-    keepGoing = !(inputStream.readLine().indexOf("8. Lernhilfe") > 0); //DO NOT translate
-
-  for (i = 0; i <= 14; i++)
-    inputStream.readLine();
-
-  for (i = 0; i < wordCount - 1; i++)
-  {
-    int c = 0;
-    expression.resize(0);
-
-    while (c < 2)
-    {
-      temp = inputStream.readLine();
-      c+= temp.count("\",", Qt::CaseSensitive);
-      expression.append(temp);
-      if (c < 2)
-        expression.append(" ");
+    while ( keepGoing ) {
+        temp = inputStream.readLine();
+        keepGoing = !( temp.indexOf( "\"," ) > 0 );
+        title.append( temp );
+        if ( keepGoing )
+            title.append( " " );
     }
 
-    words = expression.split("\",");
-    original = words[0].mid(1);
-    translation = words[1].mid(1);
-    lesson = words[2].toInt();
-
-    KEduVocExpression kve;
-    kve.setTranslation(0, original);
-    kve.setTranslation(1, translation);
-    kve.translation(1).gradeFrom(0).setGrade(0);
-    kve.translation(0).gradeFrom(1).setGrade(0);
-    kve.setLesson(lesson);
-
-    m_doc->appendEntry(&kve);
+    titles = title.split( "\"," );
+    m_doc->setTitle( titles[0].mid( 1 ) );
+    wordCount = titles[1].section( ',', 0, 0 ).toInt();
 
     inputStream.readLine();
     inputStream.readLine();
-  }
 
-  inputStream.readLine();
-  inputStream.readLine();
-  inputStream.readLine();
+    lang1 = inputStream.readLine();
+    languages = lang1.split( "\"," );
 
-  for (int i = 0; !inputStream.atEnd() && i < lines; i++)
-  {
-    lessonDescr = inputStream.readLine();
-    lessonDescr = lessonDescr.mid(1, lessonDescr.length() - 2);
-    if (!lessonDescr.isEmpty())
-      m_doc->addLesson(lessonDescr);
-    else
-      break;
+    m_doc->appendIdentifier( languages[0].mid( 1 ) );
+    m_doc->appendIdentifier( languages[1].mid( 1 ) );
+
+    keepGoing = true;
+    while ( keepGoing )
+        keepGoing = !( inputStream.readLine().indexOf( "8. Lernhilfe" ) > 0 ); //DO NOT translate
+
+    for ( i = 0; i <= 14; i++ )
+        inputStream.readLine();
+
+    for ( i = 0; i < wordCount - 1; i++ ) {
+        int c = 0;
+        expression.resize( 0 );
+
+        while ( c < 2 ) {
+            temp = inputStream.readLine();
+            c+= temp.count( "\",", Qt::CaseSensitive );
+            expression.append( temp );
+            if ( c < 2 )
+                expression.append( " " );
+        }
+
+        words = expression.split( "\"," );
+        original = words[0].mid( 1 );
+        translation = words[1].mid( 1 );
+        lesson = words[2].toInt();
+
+        KEduVocExpression kve;
+        kve.setTranslation( 0, original );
+        kve.setTranslation( 1, translation );
+        kve.translation( 1 ).gradeFrom( 0 ).setGrade( 0 );
+        kve.translation( 0 ).gradeFrom( 1 ).setGrade( 0 );
+        kve.setLesson( lesson );
+
+        m_doc->appendEntry( &kve );
+
+        inputStream.readLine();
+        inputStream.readLine();
+    }
+
     inputStream.readLine();
-  }
+    inputStream.readLine();
+    inputStream.readLine();
 
-  return true;
+    for ( int i = 0; !inputStream.atEnd() && i < lines; i++ ) {
+        lessonDescr = inputStream.readLine();
+        lessonDescr = lessonDescr.mid( 1, lessonDescr.length() - 2 );
+        if ( !lessonDescr.isEmpty() )
+            m_doc->addLesson( lessonDescr );
+        else
+            break;
+        inputStream.readLine();
+    }
+
+    return true;
 }

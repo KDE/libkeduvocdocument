@@ -23,7 +23,7 @@
 
 /** XML tags and attribute names */
 
-static const QLatin1String KV_DOCTYPE("kvtml"); // doctype
+static const QLatin1String KV_DOCTYPE( "kvtml" ); // doctype
 #define KV_TITLE       "title"     // doc title
 #define KV_AUTHOR      "author"    // doc author
 #define KV_LICENSE     "license"   // doc license
@@ -34,8 +34,8 @@ static const QLatin1String KV_DOCTYPE("kvtml"); // doctype
 #define KV_ENCODING    "encoding"  // document encoding  (obsolete!)
 
 #define KV_EXPR        "e"         // entry for one expression
-static const QLatin1String KV_ORG("o");         // original expression in specified language
-static const QLatin1String KV_TRANS("t");       // translated expression in specified language
+static const QLatin1String KV_ORG( "o" );       // original expression in specified language
+static const QLatin1String KV_TRANS( "t" );     // translated expression in specified language
 #define KV_LANG        "l"         // language: en, de, it, fr ...
 #define KV_QUERY       "q"         // query: org or translation
 #define KV_O           "o"         // org
@@ -131,7 +131,7 @@ static const QLatin1String KV_TRANS("t");       // translated expression in spec
 */
 
 #define KV_ARTICLE_GRP "article"   // article descriptor group
-static const QLatin1String KV_ART_ENTRY("e");  // article entry
+static const QLatin1String KV_ART_ENTRY( "e" ); // article entry
 #define KV_ART_FD      "fd"        // female definite
 #define KV_ART_MD      "md"        // male definite
 #define KV_ART_ND      "nd"        // natural definite

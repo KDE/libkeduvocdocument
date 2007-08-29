@@ -34,151 +34,148 @@
 class PrefLeitner::PrefLeitnerPrivate
 {
 public:
-	PrefLeitnerPrivate( PrefLeitner* qq, LeitnerSystem* system )
-	  : q( qq ), m_leitnerSystemView( 0 ), m_selectedSystem( system ),
-	    m_selectedBox( 0 )
-	{
-		init();
-	}
+    PrefLeitnerPrivate( PrefLeitner* qq, LeitnerSystem* system )
+            : q( qq ), m_leitnerSystemView( 0 ), m_selectedSystem( system ),
+            m_selectedBox( 0 )
+    {
+        init();
+    }
 
-	PrefLeitner* q;
+    PrefLeitner* q;
 
-	LeitnerSystemView* m_leitnerSystemView;	//the LeitnerSystemView which shows the selected system
-	LeitnerSystem* m_selectedSystem;	//the currently selected system to be changed
-	LeitnerBox* m_selectedBox;		//the currently selected box
+    LeitnerSystemView* m_leitnerSystemView; //the LeitnerSystemView which shows the selected system
+    LeitnerSystem* m_selectedSystem; //the currently selected system to be changed
+    LeitnerBox* m_selectedBox;  //the currently selected box
 
-	Ui::PrefLeitnerBase m_ui;
+    Ui::PrefLeitnerBase m_ui;
 
-	void init();
+    void init();
 
-	void refreshSystemView();		//refresh the LeitnerSystemView
-	void newSystem();
+    void refreshSystemView();  //refresh the LeitnerSystemView
+    void newSystem();
 
-	// slots
-	// catches the signal from the view if user clicks on a box
-	void slotBoxClicked( int );
+    // slots
+    // catches the signal from the view if user clicks on a box
+    void slotBoxClicked( int );
 };
 
 
 PrefLeitner::PrefLeitner( QWidget* parent )
-  : QDialog( parent ), d( new PrefLeitnerPrivate( this, 0 ) )
-{
-}
+        : QDialog( parent ), d( new PrefLeitnerPrivate( this, 0 ) )
+{}
 
 PrefLeitner::PrefLeitner( LeitnerSystem* system, QWidget* parent )
-  : QDialog( parent ), d( new PrefLeitnerPrivate( this, system ) )
-{
-}
+        : QDialog( parent ), d( new PrefLeitnerPrivate( this, system ) )
+{}
 
 PrefLeitner::~PrefLeitner()
 {
-	delete d;
+    delete d;
 }
 
 void PrefLeitner::PrefLeitnerPrivate::init()
 {
-	m_ui.setupUi( q );
+    m_ui.setupUi( q );
 
-	QScrollArea *helperSV = new QScrollArea( q );
+    QScrollArea *helperSV = new QScrollArea( q );
 
-	m_leitnerSystemView = new LeitnerSystemView( helperSV->viewport() );
-        m_leitnerSystemView->setObjectName( "LeitnerSystemView" );
+    m_leitnerSystemView = new LeitnerSystemView( helperSV->viewport() );
+    m_leitnerSystemView->setObjectName( "LeitnerSystemView" );
 
-        helperSV->setWidget( m_leitnerSystemView );
+    helperSV->setWidget( m_leitnerSystemView );
 
-	connect( m_leitnerSystemView, SIGNAL( boxClicked( int ) ), q, SLOT( slotBoxClicked( int ) ) );
+    connect( m_leitnerSystemView, SIGNAL( boxClicked( int ) ), q, SLOT( slotBoxClicked( int ) ) );
 
-	if ( m_selectedSystem )
-	{
-		//insert the list of box' names in the comboboxes
-		m_ui.cmbWrong->addItems( m_selectedSystem->getBoxNameList() );
-		m_ui.cmbCorrect->addItems( m_selectedSystem->getBoxNameList() );
+    if ( m_selectedSystem ) {
+        //insert the list of box' names in the comboboxes
+        m_ui.cmbWrong->addItems( m_selectedSystem->getBoxNameList() );
+        m_ui.cmbCorrect->addItems( m_selectedSystem->getBoxNameList() );
 
-		//show leitnersystem
-		m_leitnerSystemView->setSystem( m_selectedSystem );
-	}
+        //show leitnersystem
+        m_leitnerSystemView->setSystem( m_selectedSystem );
+    }
 }
 
 void PrefLeitner::slotCorrectWord( const QString& newBox )
 {
-	if( d->m_selectedBox == 0 )
-		return;
+    if ( d->m_selectedBox == 0 )
+        return;
 
-	//when the correct word box was changed in the combobox
-	d->m_selectedBox->setCorrectWordBox( d->m_selectedSystem->boxWithName( newBox ) );
-	d->refreshSystemView();
+    //when the correct word box was changed in the combobox
+    d->m_selectedBox->setCorrectWordBox( d->m_selectedSystem->boxWithName( newBox ) );
+    d->refreshSystemView();
 }
 
 void PrefLeitner::slotWrongWord( const QString& newBox )
 {
-	if( d->m_selectedBox == 0 )
-		return;
+    if ( d->m_selectedBox == 0 )
+        return;
 
-	//when the wrong word box was changed in the combobox
-	d->m_selectedBox->setWrongWordBox( d->m_selectedSystem->boxWithName( newBox ) );
-	d->refreshSystemView();
+    //when the wrong word box was changed in the combobox
+    d->m_selectedBox->setWrongWordBox( d->m_selectedSystem->boxWithName( newBox ) );
+    d->refreshSystemView();
 }
 
 void PrefLeitner::slotBoxName( const QString& newName )
 {
-	if( d->m_selectedBox == 0 )
-		return;
+    if ( d->m_selectedBox == 0 )
+        return;
 
-	//when the boxes name was changed
-	d->m_selectedSystem->setBoxName( d->m_selectedBox, newName );
+    //when the boxes name was changed
+    d->m_selectedSystem->setBoxName( d->m_selectedBox, newName );
 }
 
 void PrefLeitner::PrefLeitnerPrivate::newSystem()
 {
-	m_ui.cmbCorrect->addItems( m_selectedSystem->getBoxNameList() );
-	m_ui.cmbWrong->addItems( m_selectedSystem->getBoxNameList() );
+    m_ui.cmbCorrect->addItems( m_selectedSystem->getBoxNameList() );
+    m_ui.cmbWrong->addItems( m_selectedSystem->getBoxNameList() );
 
-	refreshSystemView();
+    refreshSystemView();
 }
 
 void PrefLeitner::PrefLeitnerPrivate::refreshSystemView()
 {
-	m_leitnerSystemView->setSystem( m_selectedSystem );
+    m_leitnerSystemView->setSystem( m_selectedSystem );
 }
 
 void PrefLeitner::PrefLeitnerPrivate::slotBoxClicked( int box )
 {
-	m_selectedBox = m_selectedSystem->boxWithNumber( box );
+    m_selectedBox = m_selectedSystem->boxWithNumber( box );
 
-	m_ui.cmbCorrect->setCurrentIndex( m_selectedSystem->correctBoxNumber( box ) );
-	m_ui.cmbWrong->setCurrentIndex( m_selectedSystem->wrongBoxNumber( box ) );
-	m_ui.lndBoxName->setText( m_selectedBox->boxName() );
+    m_ui.cmbCorrect->setCurrentIndex( m_selectedSystem->correctBoxNumber( box ) );
+    m_ui.cmbWrong->setCurrentIndex( m_selectedSystem->wrongBoxNumber( box ) );
+    m_ui.lndBoxName->setText( m_selectedBox->boxName() );
 }
 
 void PrefLeitner::slotAddBox()
 {
-	d->m_selectedSystem->insertBox( "New Box", 1, 1 );
-	d->refreshSystemView();
+    d->m_selectedSystem->insertBox( "New Box", 1, 1 );
+    d->refreshSystemView();
 }
 
 void PrefLeitner::slotDeleteBox()
 {
-	d->m_selectedSystem->deleteBox( d->m_selectedBox );
-	d->m_selectedBox = 0;
+    d->m_selectedSystem->deleteBox( d->m_selectedBox );
+    d->m_selectedBox = 0;
 
-	d->refreshSystemView();
+    d->refreshSystemView();
 }
 
 void PrefLeitner::slotApply()
 {
-	setResult( QDialog::Accepted );
-	close();
+    setResult( QDialog::Accepted );
+    close();
 }
 
 void PrefLeitner::slotDiscard()
 {
-	setResult( QDialog::Rejected );
-	close();
+    setResult( QDialog::Rejected );
+    close();
 }
 
 LeitnerSystem* PrefLeitner::system()
 {
-	return d->m_selectedSystem;
+    return d->m_selectedSystem;
 }
 
 #include "prefleitner.moc"

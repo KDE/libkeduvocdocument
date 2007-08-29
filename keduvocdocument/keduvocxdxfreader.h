@@ -25,9 +25,9 @@ class KEduVocDocument;
 class KEduVocXdxfReader : public QXmlStreamReader
 {
 public:
-    KEduVocXdxfReader(KEduVocDocument *doc);
+    KEduVocXdxfReader( KEduVocDocument *doc );
 
-    bool read(QIODevice *device);
+    bool read( QIODevice *device );
 
 private:
     void readUnknownElement();

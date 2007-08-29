@@ -25,13 +25,13 @@ class KEduVocDocument;
 class KEduVocCsvWriter
 {
 public:
-  KEduVocCsvWriter(QFile *file);
+    KEduVocCsvWriter( QFile *file );
 
-  bool writeDoc(KEduVocDocument *doc, const QString &generator);
+    bool writeDoc( KEduVocDocument *doc, const QString &generator );
 
 private:
-  QFile *m_outputFile;
-  KEduVocDocument *m_doc;
+    QFile *m_outputFile;
+    KEduVocDocument *m_doc;
 };
 
 #endif

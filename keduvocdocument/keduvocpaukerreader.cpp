@@ -23,24 +23,24 @@
 #include "keduvocexpression.h"
 #include "keduvocdocument.h"
 
-KEduVocPaukerReader::KEduVocPaukerReader(KEduVocDocument * doc)
+KEduVocPaukerReader::KEduVocPaukerReader( KEduVocDocument * doc )
 {
     m_doc = doc;
 }
 
 
-bool KEduVocPaukerReader::read(QIODevice * device)
+bool KEduVocPaukerReader::read( QIODevice * device )
 {
-    setDevice(device);
+    setDevice( device );
 
-    while (!atEnd()) {
+    while ( !atEnd() ) {
         readNext();
 
-        if (isStartElement()) {
-            if (name() == "Lesson")
+        if ( isStartElement() ) {
+            if ( name() == "Lesson" )
                 readPauker();
             else
-                raiseError(i18n("This is not a Pauker document"));
+                raiseError( i18n( "This is not a Pauker document" ) );
         }
     }
 
@@ -50,13 +50,13 @@ bool KEduVocPaukerReader::read(QIODevice * device)
 
 void KEduVocPaukerReader::readUnknownElement()
 {
-    while (!atEnd()) {
+    while ( !atEnd() ) {
         readNext();
 
-        if (isEndElement())
+        if ( isEndElement() )
             break;
 
-        if (isStartElement())
+        if ( isStartElement() )
             readUnknownElement();
     }
 }
@@ -64,21 +64,21 @@ void KEduVocPaukerReader::readUnknownElement()
 
 void KEduVocPaukerReader::readPauker()
 {
-    m_doc->setAuthor("http://pauker.sf.net");
+    m_doc->setAuthor( "http://pauker.sf.net" );
     ///Pauker does not provide any column titles
-    m_doc->appendIdentifier(i18n("Front Side"));
-    m_doc->appendIdentifier(i18n("Reverse Side"));
+    m_doc->appendIdentifier( i18n( "Front Side" ) );
+    m_doc->appendIdentifier( i18n( "Reverse Side" ) );
 
-    while (!atEnd()) {
+    while ( !atEnd() ) {
         readNext();
 
-        if (isEndElement())
+        if ( isEndElement() )
             break;
 
-        if (isStartElement()) {
-            if (name() == "Description")
-                m_doc->setDocumentRemark(readElementText());
-            else if (name() == "Batch")
+        if ( isStartElement() ) {
+            if ( name() == "Description" )
+                m_doc->setDocumentRemark( readElementText() );
+            else if ( name() == "Batch" )
                 readBatch();
             else
                 readUnknownElement();
@@ -89,14 +89,14 @@ void KEduVocPaukerReader::readPauker()
 
 void KEduVocPaukerReader::readBatch()
 {
-    while (!atEnd()) {
+    while ( !atEnd() ) {
         readNext();
 
-        if (isEndElement())
+        if ( isEndElement() )
             break;
 
-        if (isStartElement()) {
-            if (name() == "Card")
+        if ( isStartElement() ) {
+            if ( name() == "Card" )
                 readCard();
             else
                 readUnknownElement();
@@ -110,25 +110,25 @@ void KEduVocPaukerReader::readCard()
     QString front;
     QString back;
 
-    while (!atEnd()) {
+    while ( !atEnd() ) {
         readNext();
 
-        if (isEndElement())
+        if ( isEndElement() )
             break;
 
-        if (isStartElement()) {
-            if (name() == "FrontSide")
+        if ( isStartElement() ) {
+            if ( name() == "FrontSide" )
                 front = readText();
-            else if (name() == "ReverseSide")
+            else if ( name() == "ReverseSide" )
                 back = readText();
             else
                 readUnknownElement();
         }
     }
 
-    KEduVocExpression expr = KEduVocExpression(front);
-    expr.setTranslation(1, back);
-    m_doc->appendEntry(&expr);
+    KEduVocExpression expr = KEduVocExpression( front );
+    expr.setTranslation( 1, back );
+    m_doc->appendEntry( &expr );
 }
 
 
@@ -136,14 +136,14 @@ QString KEduVocPaukerReader::readText()
 {
     QString result;
 
-    while (!atEnd()) {
+    while ( !atEnd() ) {
         readNext();
 
-        if (isEndElement())
+        if ( isEndElement() )
             break;
 
-        if (isStartElement()) {
-            if (name() == "Text")
+        if ( isStartElement() ) {
+            if ( name() == "Text" )
                 result = readElementText();
             else
                 readUnknownElement();

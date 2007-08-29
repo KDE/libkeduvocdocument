@@ -28,7 +28,7 @@
 class KEduVocGrade;
 
 /**
-	@author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+ @author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
 class KEDUVOCDOCUMENT_EXPORT KEduVocTranslation
 {
@@ -36,16 +36,16 @@ public:
     /**
      * Default constructor for an empty translation.
      */
-    KEduVocTranslation( );
+    KEduVocTranslation();
 
-	/**
-     * Constructor
-     * @param translation is used as translation
-     */
+    /**
+        * Constructor
+        * @param translation is used as translation
+        */
     KEduVocTranslation( const QString &translation );
 
-	/** copy constructor for d-pointer safet */
-	KEduVocTranslation( const KEduVocTranslation &other);
+    /** copy constructor for d-pointer safet */
+    KEduVocTranslation( const KEduVocTranslation &other );
 
     /**
      * Destructor
@@ -56,19 +56,19 @@ public:
      * The translation as string (the word itself)
      * @return the translation
      */
-    QString text () const;
+    QString text() const;
 
     /**
      * Sets the translation
      * @param expr
      */
-    void setText ( const QString & expr );
+    void setText( const QString & expr );
 
 
     /** sets the pronunciation of this expression
     * @param expression       pronunciation of this index
     */
-    void setPronunciation( const QString & expression);
+    void setPronunciation( const QString & expression );
 
     /** returns the pronunciation of this expression
     * @return                 pronunciation or "" if none available
@@ -83,7 +83,7 @@ public:
     /** sets comment of this expression
     * @param expr             comment of this index
     */
-    void setComment( const QString & expr);
+    void setComment( const QString & expr );
 
     /** sets false friend of this expression
     * @param indexFrom        index of original translation
@@ -96,12 +96,12 @@ public:
     * @param indexFrom index of original translation
     * @return false friend or "" if no string available
     */
-    QString falseFriend( int indexFrom) const;
+    QString falseFriend( int indexFrom ) const;
 
     /** sets synonym this expression
     * @param expression       synonym of this index
     */
-    void setSynonym( const QString & expression);
+    void setSynonym( const QString & expression );
 
     /** returns synonym of this expression
     * @return                 synonym or "" if no string available
@@ -111,7 +111,7 @@ public:
     /** sets example this expression
     * @param expression       example of this index
     */
-    void setExample( const QString & expression);
+    void setExample( const QString & expression );
 
     /** returns example of this expression
     * @return                 example or "" if no string available
@@ -122,7 +122,7 @@ public:
     /** sets usages this expression
     * @param usage            usage labels of this index
     */
-    void setUsages( const QSet<QString> & usage);
+    void setUsages( const QSet<QString> & usage );
 
 
     /** returns usages of this expression
@@ -133,7 +133,7 @@ public:
     /** sets paraphrase of this expression
     * @param expression       paraphrase of this index
     */
-    void setParaphrase( const QString & expression);
+    void setParaphrase( const QString & expression );
 
     /** returns paraphrase of this expression
     * @return                 paraphrase or "" if no string available
@@ -143,7 +143,7 @@ public:
     /** sets antonym this expression
     * @param expression       antonym of this index
     */
-    void setAntonym( const QString & expression);
+    void setAntonym( const QString & expression );
 
     /** returns antonym of this expression
     * @return                 antonym or "" if no string available
@@ -159,7 +159,7 @@ public:
     /** sets type of this expression
     * @param type             type of this expression ("" = none)
     */
-    void setType( const QString &type);
+    void setType( const QString &type );
 
     /** returns subtype of this expression
     *
@@ -170,7 +170,7 @@ public:
     /** sets subtype of this expression
     * @param type             type of this expression ("" = none)
     */
-    void setSubType( const QString &type);
+    void setSubType( const QString &type );
 
     /** reset the grades for this translation */
     void resetGrades();
@@ -188,25 +188,25 @@ public:
     /** sets conjugations
     * @param conjugation      conjugation block
     */
-    void setConjugation(const KEduVocConjugation & conjugation);
+    void setConjugation( const KEduVocConjugation & conjugation );
 
-  /** returns comparison if available
-   */
-  KEduVocComparison & comparison();
+    /** returns comparison if available
+     */
+    KEduVocComparison & comparison();
 
-  /** sets comparison
-   * @param comparison       comparison block
-   */
-  void setComparison( const KEduVocComparison & comparison);
+    /** sets comparison
+     * @param comparison       comparison block
+     */
+    void setComparison( const KEduVocComparison & comparison );
 
-  /** returns multiple choice if available
-    */
-  KEduVocMultipleChoice & multipleChoice();
+    /** returns multiple choice if available
+      */
+    KEduVocMultipleChoice & multipleChoice();
 
-  /** sets multiple choice
-   * @param mc               multiple choice block
-    */
-  void setMultipleChoice( const KEduVocMultipleChoice &mc);
+    /** sets multiple choice
+     * @param mc               multiple choice block
+      */
+    void setMultipleChoice( const KEduVocMultipleChoice &mc );
 
 
     /**
@@ -214,16 +214,16 @@ public:
      * @param translation translation to be copied
      * @return reference to the new translation
      */
-    KEduVocTranslation& operator=(const KEduVocTranslation &translation);
+    KEduVocTranslation& operator= ( const KEduVocTranslation &translation );
     /**
      * Compare two translations, including word type etc.
      * @param translation
      * @return true if equal
      */
-    bool operator==(const KEduVocTranslation &translation) const;
+    bool operator== ( const KEduVocTranslation &translation ) const;
 
 private:
-	class KEduVocTranslationPrivate;
+    class KEduVocTranslationPrivate;
     KEduVocTranslationPrivate* const d;
 };
 

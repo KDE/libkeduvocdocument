@@ -29,43 +29,43 @@
 /** class to store information about a lesson */
 class KEDUVOCDOCUMENT_EXPORT KEduVocLesson
 {
-	public:
-		/** default constructor */
-		explicit KEduVocLesson();
+public:
+    /** default constructor */
+    explicit KEduVocLesson();
 
-		/** copy constructor for d-pointer safe copying */
-		KEduVocLesson(const KEduVocLesson &other);
+    /** copy constructor for d-pointer safe copying */
+    KEduVocLesson( const KEduVocLesson &other );
 
-		/** destructor */
-		~KEduVocLesson();
+    /** destructor */
+    ~KEduVocLesson();
 
     /** assignment operator */
-    KEduVocLesson& operator=(const KEduVocLesson&);
+    KEduVocLesson& operator= ( const KEduVocLesson& );
 
-		/** set the lesson description
-		 * @param description text to set for the description
-		 */
-		void setDescription(const QString &description);
+    /** set the lesson description
+     * @param description text to set for the description
+     */
+    void setDescription( const QString &description );
 
-		/** get the lesson description */
-		QString description();
+    /** get the lesson description */
+    QString description();
 
-		/** get a list of all entries in the lesson */
-		QList<int> entries();
+    /** get a list of all entries in the lesson */
+    QList<int> entries();
 
-		/** add an entry to the lesson
-		 * @param entryid id of the entry to add
-		 */
-		void addEntry(int entryid);
+    /** add an entry to the lesson
+     * @param entryid id of the entry to add
+     */
+    void addEntry( int entryid );
 
-		/** remove an entry from the lesson
-		 * @param entryid id of the entry to remove
-		 */
-		void removeEntry(int entryid);
+    /** remove an entry from the lesson
+     * @param entryid id of the entry to remove
+     */
+    void removeEntry( int entryid );
 
-	private:
-		class Private;
-		Private * const d;
+private:
+    class Private;
+    Private * const d;
 };
 
 #endif

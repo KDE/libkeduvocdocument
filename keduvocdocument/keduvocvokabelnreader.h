@@ -26,16 +26,19 @@ class KEduVocDocument;
 class KEduVocVokabelnReader
 {
 public:
-  KEduVocVokabelnReader(QIODevice *file);
+    KEduVocVokabelnReader( QIODevice *file );
 
-  bool readDoc(KEduVocDocument *doc);
+    bool readDoc( KEduVocDocument *doc );
 
-  QString errorMessage() const {return m_errorMessage;}
+    QString errorMessage() const
+    {
+        return m_errorMessage;
+    }
 
 private:
-  QIODevice *m_inputFile;
-  KEduVocDocument *m_doc;
-  QString m_errorMessage;
+    QIODevice *m_inputFile;
+    KEduVocDocument *m_doc;
+    QString m_errorMessage;
 };
 
 #endif

@@ -25,56 +25,55 @@
 /** private class to store information about a lesson */
 class KEduVocLesson::Private
 {
-	public:
-		QSet<int> m_entries;
-		QString m_description;
+public:
+    QSet<int> m_entries;
+    QString m_description;
 };
 
 KEduVocLesson::KEduVocLesson()
-: d(new Private)
-{
-}
+        : d( new Private )
+{}
 
-KEduVocLesson::KEduVocLesson(const KEduVocLesson &other)
-: d(new Private)
+KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
+        : d( new Private )
 {
-	d->m_entries = other.d->m_entries;
-	d->m_description = other.d->m_description;
+    d->m_entries = other.d->m_entries;
+    d->m_description = other.d->m_description;
 }
 
 KEduVocLesson::~KEduVocLesson()
 {
-	delete d;
+    delete d;
 }
 
-KEduVocLesson& KEduVocLesson::operator=(const KEduVocLesson &other)
+KEduVocLesson& KEduVocLesson::operator= ( const KEduVocLesson &other )
 {
-  d->m_entries = other.d->m_entries;
-  d->m_description = other.d->m_description;
-  return *this;
+    d->m_entries = other.d->m_entries;
+    d->m_description = other.d->m_description;
+    return *this;
 }
 
-void KEduVocLesson::setDescription(const QString &description)
+void KEduVocLesson::setDescription( const QString &description )
 {
-	d->m_description = description;
+    d->m_description = description;
 }
 
 QString KEduVocLesson::description()
 {
-	return d->m_description;
+    return d->m_description;
 }
 
 QList<int> KEduVocLesson::entries()
 {
-	return d->m_entries.toList();
+    return d->m_entries.toList();
 }
 
-void KEduVocLesson::addEntry(int entryid)
+void KEduVocLesson::addEntry( int entryid )
 {
-	d->m_entries.insert(entryid);
+    d->m_entries.insert( entryid );
 }
 
-void KEduVocLesson::removeEntry(int entryid)
+void KEduVocLesson::removeEntry( int entryid )
 {
-	d->m_entries.remove(entryid);
+    d->m_entries.remove( entryid );
 }

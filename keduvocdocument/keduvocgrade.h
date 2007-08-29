@@ -54,7 +54,7 @@ typedef unsigned short count_t;
 /**
 Contains grading information (query date, bad count) for one language with respect to another.
 
-	@author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+ @author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
 class KEDUVOCDOCUMENT_EXPORT KEduVocGrade
 {
@@ -66,15 +66,15 @@ public:
      * provides safe copy of d pointer
      * @param other object to copy from
      */
-    KEduVocGrade(const KEduVocGrade &other);
+    KEduVocGrade( const KEduVocGrade &other );
 
     /** default destructor */
     ~KEduVocGrade();
 
-    /** returns query count as int 
+    /** returns query count as int
     * @returns query count
     */
-    count_t queryCount(   ) const;
+    count_t queryCount() const;
 
     /** set query count as int
     * @param count the new count
@@ -84,7 +84,7 @@ public:
     /** returns bad query count as int
     * @returns bad query count
     */
-    count_t badCount( ) const;
+    count_t badCount() const;
 
     /** set bad query count as int
     * @param count the new count
@@ -92,10 +92,10 @@ public:
     void setBadCount( count_t count );
 
     /** increment bad query count of given translation by 1 */
-    void incBadCount( );
+    void incBadCount();
 
     /** increment query count of given translation by 1 */
-    void incQueryCount( );
+    void incQueryCount();
 
 
     /**
@@ -114,20 +114,20 @@ public:
     grade_t grade() const;
 
     /** increments grade of given translation */
-    void incGrade(  );
+    void incGrade();
 
     /** decrements grade of given translation */
-    void decGrade(  );
+    void decGrade();
 
     /** returns last query date of given translation as int
     */
-    QDateTime queryDate(  ) const;
+    QDateTime queryDate() const;
 
 
     /** Set last query date
     * @param date             the new date
     */
-    void setQueryDate ( const QDateTime & date );
+    void setQueryDate( const QDateTime & date );
 
 private:
     class KEduVocGradePrivate;

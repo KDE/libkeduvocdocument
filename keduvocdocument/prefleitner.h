@@ -33,54 +33,54 @@ class LeitnerSystem;
  */
 class KEDUVOCDOCUMENT_EXPORT PrefLeitner : public QDialog
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	/**
-	 * The public contructor
-	 * @param parent the widget's parent
-	 */
-	explicit PrefLeitner( QWidget* parent = 0 );
+    /**
+     * The public contructor
+     * @param parent the widget's parent
+     */
+    explicit PrefLeitner( QWidget* parent = 0 );
 
-	/**
-	 * The public contructur which sets also the LeitnerSystem
-	 * @param parent is the parent widget
-	 * @param system a pointer to the LeitnerSystem to configure
-	 */
-	explicit PrefLeitner( LeitnerSystem* system, QWidget* parent = 0 );
+    /**
+     * The public contructur which sets also the LeitnerSystem
+     * @param parent is the parent widget
+     * @param system a pointer to the LeitnerSystem to configure
+     */
+    explicit PrefLeitner( LeitnerSystem* system, QWidget* parent = 0 );
 
-	/**
-	 * The public destructor
-	 */
-	~PrefLeitner();
+    /**
+     * The public destructor
+     */
+    ~PrefLeitner();
 
-	/**
-	 * Sets the LeitnerSystem for the dialog
-	 * @param system a pointer to the LeitnerSystem to configure
-	 */
-	void setLeitnerSystem( LeitnerSystem* system );
+    /**
+     * Sets the LeitnerSystem for the dialog
+     * @param system a pointer to the LeitnerSystem to configure
+     */
+    void setLeitnerSystem( LeitnerSystem* system );
 
-	/**
-	 * Get the LeitnerSystem that is set to the dialog
-	 * @return a pointer to the actual set LeitnerSystem
-	 */
-	LeitnerSystem* system();
+    /**
+     * Get the LeitnerSystem that is set to the dialog
+     * @return a pointer to the actual set LeitnerSystem
+     */
+    LeitnerSystem* system();
 
 public Q_SLOTS:
-	void slotCorrectWord( const QString& newBox );
-	void slotWrongWord( const QString& newBox );
-	void slotBoxName( const QString& newName );
-	void slotAddBox();
-	void slotDeleteBox();
-	void slotDiscard();
-	void slotApply();
+    void slotCorrectWord( const QString& newBox );
+    void slotWrongWord( const QString& newBox );
+    void slotBoxName( const QString& newName );
+    void slotAddBox();
+    void slotDeleteBox();
+    void slotDiscard();
+    void slotApply();
 
 private:
-	class PrefLeitnerPrivate;
-	PrefLeitnerPrivate* const d;
+    class PrefLeitnerPrivate;
+    PrefLeitnerPrivate* const d;
 
-	Q_DISABLE_COPY( PrefLeitner )
-	Q_PRIVATE_SLOT( d, void slotBoxClicked( int ) )
+    Q_DISABLE_COPY( PrefLeitner )
+    Q_PRIVATE_SLOT( d, void slotBoxClicked( int ) )
 };
 
 #endif //PREFLEITNER_H

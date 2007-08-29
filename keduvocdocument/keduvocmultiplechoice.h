@@ -34,27 +34,27 @@
 class KEDUVOCDOCUMENT_EXPORT KEduVocMultipleChoice
 {
 public:
-   KEduVocMultipleChoice();
-   KEduVocMultipleChoice(const KEduVocMultipleChoice &other);
-   KEduVocMultipleChoice (const QStringList &choices);
+    KEduVocMultipleChoice();
+    KEduVocMultipleChoice( const KEduVocMultipleChoice &other );
+    KEduVocMultipleChoice( const QStringList &choices );
 
-   ~KEduVocMultipleChoice();
+    ~KEduVocMultipleChoice();
 
-   void setChoices (const QStringList &choices);
-   QStringList choices() const;
+    void setChoices( const QStringList &choices );
+    QStringList choices() const;
 
-   void appendChoice (const QString &s);
+    void appendChoice( const QString &s );
 
-   void setChoice(int index, const QString &s);
-   QString choice (int index) const;
+    void setChoice( int index, const QString &s );
+    QString choice( int index ) const;
 
-   bool isEmpty() const;
-   void clear();
-   unsigned size() const;
+    bool isEmpty() const;
+    void clear();
+    unsigned size() const;
 
-   bool operator==(const KEduVocMultipleChoice &choice) const;
+    bool operator== ( const KEduVocMultipleChoice &choice ) const;
 
-   KEduVocMultipleChoice &operator=(const KEduVocMultipleChoice &other);
+    KEduVocMultipleChoice &operator= ( const KEduVocMultipleChoice &other );
 
 private:
     class KEduVocMultipleChoicePrivate;

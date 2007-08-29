@@ -36,76 +36,76 @@
 class KEDUVOCDOCUMENT_EXPORT LeitnerBox
 {
 public:
-	/**
-	 * The constructor
-	 */
-	explicit LeitnerBox();
+    /**
+     * The constructor
+     */
+    explicit LeitnerBox();
 
-	/**
-	 * The destructor
-	 */
-	~LeitnerBox();
+    /**
+     * The destructor
+     */
+    ~LeitnerBox();
 
-	/**
-	 * Sets the LeitnerBox's pointer to the correct word LeitnerBox
-	 * @param correctWordBox a pointer to the LeitnerBox to be set
-	 */
-	void setCorrectWordBox( LeitnerBox* correctWordBox );
+    /**
+     * Sets the LeitnerBox's pointer to the correct word LeitnerBox
+     * @param correctWordBox a pointer to the LeitnerBox to be set
+     */
+    void setCorrectWordBox( LeitnerBox* correctWordBox );
 
-	/**
-	 * Sets the LeitnerBox's pointer to the wrong word LeitnerBox
-	 * @param wrongWordBox a pointer to the LeitnerBox to be set
-	 */
-	void setWrongWordBox( LeitnerBox* wrongWordBox );
-	
+    /**
+     * Sets the LeitnerBox's pointer to the wrong word LeitnerBox
+     * @param wrongWordBox a pointer to the LeitnerBox to be set
+     */
+    void setWrongWordBox( LeitnerBox* wrongWordBox );
 
-	/**
-	 * Sets the LeitnerBox's name to name. The name is the unique identifier of a LeitnerBox.
-	 * @param name a QString with the LeitnerBox's new name
-	 */	
-	void setBoxName( const QString& name );
 
-	/**
-	 * Returns the current name of the LeitnerBox
-	 * @return a const QString with the name of the LeitnerBox
-	 */
-	const QString& boxName() const;
+    /**
+     * Sets the LeitnerBox's name to name. The name is the unique identifier of a LeitnerBox.
+     * @param name a QString with the LeitnerBox's new name
+     */
+    void setBoxName( const QString& name );
 
-	/**
-	 * Sets the LeitnerBox's vocabCount to count
-	 * @param count the new vocabCount to be set
-	 */
-	void setVocabCount( int count );
+    /**
+     * Returns the current name of the LeitnerBox
+     * @return a const QString with the name of the LeitnerBox
+     */
+    const QString& boxName() const;
 
-	/**
-	 * Returns the current vocabCount
-	 * @return the number of cards/ vocabs that are currently assigned to the LeitnerBox.
-	 */
-	int vocabCount() const;
+    /**
+     * Sets the LeitnerBox's vocabCount to count
+     * @param count the new vocabCount to be set
+     */
+    void setVocabCount( int count );
 
-	/**
-	 * Returns a pointer to the LeitnerBox correct cards of this LeitnerBox here are assigned to
-	 * @return a pointer to a LeitnerBox
-	 */
-	LeitnerBox* correctWordBox();
+    /**
+     * Returns the current vocabCount
+     * @return the number of cards/ vocabs that are currently assigned to the LeitnerBox.
+     */
+    int vocabCount() const;
 
-	const LeitnerBox* correctWordBox() const;
+    /**
+     * Returns a pointer to the LeitnerBox correct cards of this LeitnerBox here are assigned to
+     * @return a pointer to a LeitnerBox
+     */
+    LeitnerBox* correctWordBox();
 
-	/**
-	 * Returns a pointer to the LeitnerBox wrong cards of this LeitnerBox here are assigned to
-	 * @return a pointer to a LeitnerBox
-	 */
-	LeitnerBox* wrongWordBox();
-	
-	const LeitnerBox* wrongWordBox() const;
+    const LeitnerBox* correctWordBox() const;
 
-	bool operator == ( const LeitnerBox& a ) const;
+    /**
+     * Returns a pointer to the LeitnerBox wrong cards of this LeitnerBox here are assigned to
+     * @return a pointer to a LeitnerBox
+     */
+    LeitnerBox* wrongWordBox();
+
+    const LeitnerBox* wrongWordBox() const;
+
+    bool operator == ( const LeitnerBox& a ) const;
 
 private:
-	QString m_name;
-	int m_vocabCount;
-	LeitnerBox* m_wrongWordBox;
-	LeitnerBox* m_correctWordBox;
+    QString m_name;
+    int m_vocabCount;
+    LeitnerBox* m_wrongWordBox;
+    LeitnerBox* m_correctWordBox;
 };
 
 #endif

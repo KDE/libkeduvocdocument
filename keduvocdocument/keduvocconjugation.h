@@ -38,21 +38,21 @@
 class KEDUVOCDOCUMENT_EXPORT KEduVocTenseRelation
 {
 public:
-  /** default constructor */
-  KEduVocTenseRelation();
-  KEduVocTenseRelation (const QString & _short, const QString & _long);
+    /** default constructor */
+    KEduVocTenseRelation();
+    KEduVocTenseRelation( const QString & _short, const QString & _long );
 
-  /** default destructor, deletes the d-pointer */
-  ~KEduVocTenseRelation();
+    /** default destructor, deletes the d-pointer */
+    ~KEduVocTenseRelation();
 
-  QString shortStr() const;
-  QString longStr()  const;
+    QString shortStr() const;
+    QString longStr()  const;
 
-  KEduVocTenseRelation &operator=(const KEduVocTenseRelation &other);
+    KEduVocTenseRelation &operator= ( const KEduVocTenseRelation &other );
 
 private:
-  class Private;
-  Private * const d;
+    class Private;
+    Private * const d;
 };
 
 
@@ -63,78 +63,78 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocConjugation
 {
 public:
 
-  /**
-   * The constructor
-   */
-  explicit KEduVocConjugation();
+    /**
+     * The constructor
+     */
+    explicit KEduVocConjugation();
 
-  KEduVocConjugation(const KEduVocConjugation& rhs);
+    KEduVocConjugation( const KEduVocConjugation& rhs );
 
-  ~KEduVocConjugation();
+    ~KEduVocConjugation();
 
-  /**
-   * @return
-   */
-  int entryCount() const;
+    /**
+     * @return
+     */
+    int entryCount() const;
 
-  /**
-   * @return
-   */
+    /**
+     * @return
+     */
 //  static QList<KEduVocTenseRelation> getRelation();
 
-  /**
-   * @param names
-   */
-  static void setTenseNames(const QStringList& names);
+    /**
+     * @param names
+     */
+    static void setTenseNames( const QStringList& names );
 
-  static QString getName(const QString &abbrev);
-  static QString getName(int index);
-  static QString getAbbrev(const QString &name);
-  static QString getAbbrev(int index);
-  static int numInternalNames();
-  static int tenseCount();
+    static QString getName( const QString &abbrev );
+    static QString getName( int index );
+    static QString getAbbrev( const QString &name );
+    static QString getAbbrev( int index );
+    static int numInternalNames();
+    static int tenseCount();
 
-  QString getVerbName() const;
+    QString getVerbName() const;
 
-  QString getType(int index);
-  void setType(int index, const QString & type);
-  void cleanUp();
-  bool isEmpty(int idx);
+    QString getType( int index );
+    void setType( int index, const QString & type );
+    void cleanUp();
+    bool isEmpty( int idx );
 
-  QString pers1Singular(const QString &type) const;
-  QString pers2Singular(const QString &type) const;
-  bool    pers3SingularCommon(const QString &type) const;
-  QString pers3FemaleSingular(const QString &type) const;
-  QString pers3MaleSingular(const QString &type) const;
-  QString pers3NaturalSingular(const QString &type) const;
+    QString pers1Singular( const QString &type ) const;
+    QString pers2Singular( const QString &type ) const;
+    bool    pers3SingularCommon( const QString &type ) const;
+    QString pers3FemaleSingular( const QString &type ) const;
+    QString pers3MaleSingular( const QString &type ) const;
+    QString pers3NaturalSingular( const QString &type ) const;
 
-  QString pers1Plural(const QString &type) const;
-  QString pers2Plural(const QString &type) const;
-  bool    pers3PluralCommon(const QString &type) const;
-  QString pers3FemalePlural(const QString &type) const;
-  QString pers3MalePlural(const QString &type) const;
-  QString pers3NaturalPlural(const QString &type) const;
+    QString pers1Plural( const QString &type ) const;
+    QString pers2Plural( const QString &type ) const;
+    bool    pers3PluralCommon( const QString &type ) const;
+    QString pers3FemalePlural( const QString &type ) const;
+    QString pers3MalePlural( const QString &type ) const;
+    QString pers3NaturalPlural( const QString &type ) const;
 
-  void setPers1Singular(const QString &type, const QString &str);
-  void setPers2Singular(const QString &type, const QString &str);
-  void setPers3SingularCommon(const QString &type, bool f);
-  void setPers3FemaleSingular(const QString &type, const QString &str);
-  void setPers3MaleSingular(const QString &type, const QString &str);
-  void setPers3NaturalSingular(const QString &type, const QString &str);
+    void setPers1Singular( const QString &type, const QString &str );
+    void setPers2Singular( const QString &type, const QString &str );
+    void setPers3SingularCommon( const QString &type, bool f );
+    void setPers3FemaleSingular( const QString &type, const QString &str );
+    void setPers3MaleSingular( const QString &type, const QString &str );
+    void setPers3NaturalSingular( const QString &type, const QString &str );
 
-  void setPers1Plural(const QString &type, const QString &str);
-  void setPers2Plural(const QString &type, const QString &str);
-  void setPers3PluralCommon(const QString &type, bool f);
-  void setPers3FemalePlural(const QString &type, const QString &str);
-  void setPers3MalePlural(const QString &type, const QString &str);
-  void setPers3NaturalPlural(const QString &type, const QString &str);
+    void setPers1Plural( const QString &type, const QString &str );
+    void setPers2Plural( const QString &type, const QString &str );
+    void setPers3PluralCommon( const QString &type, bool f );
+    void setPers3FemalePlural( const QString &type, const QString &str );
+    void setPers3MalePlural( const QString &type, const QString &str );
+    void setPers3NaturalPlural( const QString &type, const QString &str );
 
-  KEduVocConjugation& operator = (const KEduVocConjugation& a);
-  bool operator == (const KEduVocConjugation& a) const;
+    KEduVocConjugation& operator = ( const KEduVocConjugation& a );
+    bool operator == ( const KEduVocConjugation& a ) const;
 
 private:
-  class Private;
-  Private* const d;
+    class Private;
+    Private* const d;
 };
 
 

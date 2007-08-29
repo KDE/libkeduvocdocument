@@ -23,24 +23,24 @@
 #include "keduvocexpression.h"
 #include "keduvocdocument.h"
 
-KEduVocXdxfReader::KEduVocXdxfReader(KEduVocDocument *doc)
+KEduVocXdxfReader::KEduVocXdxfReader( KEduVocDocument *doc )
 {
     m_doc = doc;
 }
 
 
-bool KEduVocXdxfReader::read(QIODevice *device)
+bool KEduVocXdxfReader::read( QIODevice *device )
 {
-    setDevice(device);
+    setDevice( device );
 
-    while (!atEnd()) {
+    while ( !atEnd() ) {
         readNext();
 
-        if (isStartElement()) {
-            if (name() == "xdxf")
+        if ( isStartElement() ) {
+            if ( name() == "xdxf" )
                 readXdxf();
             else
-                raiseError(i18n("This is not a XDXF document"));
+                raiseError( i18n( "This is not a XDXF document" ) );
         }
     }
 
@@ -50,13 +50,13 @@ bool KEduVocXdxfReader::read(QIODevice *device)
 
 void KEduVocXdxfReader::readUnknownElement()
 {
-    while (!atEnd()) {
+    while ( !atEnd() ) {
         readNext();
 
-        if (isEndElement())
+        if ( isEndElement() )
             break;
 
-        if (isStartElement())
+        if ( isStartElement() )
             readUnknownElement();
     }
 }
@@ -65,37 +65,37 @@ void KEduVocXdxfReader::readUnknownElement()
 void KEduVocXdxfReader::readXdxf()
 {
     ///The language attributes are required and should be ISO 639-2 codes, but you never know...
-    QStringRef id1 = attributes().value("lang_from");
-    if(!id1.isNull())
-        m_doc->appendIdentifier(id1.toString().toLower());
+    QStringRef id1 = attributes().value( "lang_from" );
+    if ( !id1.isNull() )
+        m_doc->appendIdentifier( id1.toString().toLower() );
     else
-        m_doc->appendIdentifier(i18nc("@title:column the original language column", "Original"));
+        m_doc->appendIdentifier( i18nc( "@title:column the original language column", "Original" ) );
 
-    QStringRef id2 = attributes().value("lang_to");
-    if(!id2.isNull())
-        m_doc->appendIdentifier(id2.toString().toLower());
+    QStringRef id2 = attributes().value( "lang_to" );
+    if ( !id2.isNull() )
+        m_doc->appendIdentifier( id2.toString().toLower() );
     else
-        m_doc->appendIdentifier(i18nc("@title:column one of the translation columns", "Translation"));
+        m_doc->appendIdentifier( i18nc( "@title:column one of the translation columns", "Translation" ) );
 
-    while (!atEnd()) {
+    while ( !atEnd() ) {
         readNext();
 
-        if (isEndElement())
+        if ( isEndElement() )
             break;
 
-        if (isStartElement()) {
-            if (name() == "description")
-                m_doc->setDocumentRemark(readElementText());
-            else if (name() == "full_name")
-                m_doc->setTitle(readElementText());
-            else if (name() == "ar")
+        if ( isStartElement() ) {
+            if ( name() == "description" )
+                m_doc->setDocumentRemark( readElementText() );
+            else if ( name() == "full_name" )
+                m_doc->setTitle( readElementText() );
+            else if ( name() == "ar" )
                 readEntry();
             else
                 readUnknownElement();
         }
     }
 
-    m_doc->setAuthor("http://xdxf.sf.net");
+    m_doc->setAuthor( "http://xdxf.sf.net" );
 }
 
 
@@ -104,15 +104,15 @@ void KEduVocXdxfReader::readEntry()
     QString front;
     QString back;
 
-    while (!(isEndElement() && name() == "ar")) {
+    while ( !( isEndElement() && name() == "ar" ) ) {
         readNext();
-        if (isStartElement() && name() == "k")
+        if ( isStartElement() && name() == "k" )
             front = readElementText();
-        else if (isCharacters() || isEntityReference())
-            back.append(text().toString());
+        else if ( isCharacters() || isEntityReference() )
+            back.append( text().toString() );
     }
 
-    KEduVocExpression expr = KEduVocExpression(front);
-    expr.setTranslation(1, back);
-    m_doc->appendEntry(&expr);
+    KEduVocExpression expr = KEduVocExpression( front );
+    expr.setTranslation( 1, back );
+    m_doc->appendEntry( &expr );
 }

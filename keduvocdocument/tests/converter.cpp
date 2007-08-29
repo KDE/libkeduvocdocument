@@ -34,34 +34,32 @@
 #include <KDebug>
 #include <KUrl>
 
-int main (int argc, char ** argv)
+int main( int argc, char ** argv )
 {
-	KAboutData about("converter", 0, ki18n("Converter"), "0.1", ki18n("kvtml file converter"), KAboutData::License_GPL, ki18n("© 2007 Jeremy Whiting"));
-  KCmdLineOptions options;
-  options.add("+infile");
-  options.add("+outfile");
+    KAboutData about( "converter", 0, ki18n( "Converter" ), "0.1", ki18n( "kvtml file converter" ), KAboutData::License_GPL, ki18n( "ÃÂ© 2007 Jeremy Whiting" ) );
+    KCmdLineOptions options;
+    options.add( "+infile" );
+    options.add( "+outfile" );
 
-  KCmdLineArgs::init(argc, argv, &about);
-  KCmdLineArgs::addCmdLineOptions(options);
-  QCoreApplication app(KCmdLineArgs::qtArgc(), KCmdLineArgs::qtArgv());
+    KCmdLineArgs::init( argc, argv, &about );
+    KCmdLineArgs::addCmdLineOptions( options );
+    QCoreApplication app( KCmdLineArgs::qtArgc(), KCmdLineArgs::qtArgv() );
 
-  KCmdLineArgs * arguments = KCmdLineArgs::parsedArgs();
-  if (arguments != NULL && arguments->count() > 0)
-  {
-    KUrl infile(arguments->url(0));
-    if (arguments->count() > 1)
-    {
-      KUrl outfile(arguments->url(1));
-      
-      KEduVocDocument document;
-      kDebug() << "Reading " << infile;
-      document.open(infile);
-      kDebug() << "Writing to " << outfile;
-      document.saveAs(outfile, KEduVocDocument::Kvtml, "converter");
+    KCmdLineArgs * arguments = KCmdLineArgs::parsedArgs();
+    if ( arguments != NULL && arguments->count() > 0 ) {
+        KUrl infile( arguments->url( 0 ) );
+        if ( arguments->count() > 1 ) {
+            KUrl outfile( arguments->url( 1 ) );
+
+            KEduVocDocument document;
+            kDebug() << "Reading " << infile;
+            document.open( infile );
+            kDebug() << "Writing to " << outfile;
+            document.saveAs( outfile, KEduVocDocument::Kvtml, "converter" );
+        }
     }
-  }
-  
-  arguments->clear();
-  
-  return 0;
+
+    arguments->clear();
+
+    return 0;
 }

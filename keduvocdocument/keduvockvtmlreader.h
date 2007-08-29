@@ -39,54 +39,57 @@ class KEduVocDocument;
 */
 class KEduVocKvtmlReader : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  KEduVocKvtmlReader(QIODevice *file);
+    KEduVocKvtmlReader( QIODevice *file );
 
-  bool readDoc(KEduVocDocument *doc);
+    bool readDoc( KEduVocDocument *doc );
 
-  bool readLesson(QDomElement &domElementParent);
-  bool readArticle(QDomElement &domElementParent);
-  bool readConjug(QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug);
-  bool readOptions(QDomElement &domElementParent);
-  bool readType(QDomElement &domElementParent);
-  bool readTense(QDomElement &domElementParent);
-  bool readUsage(QDomElement &domElementParent);
-  bool readComparison(QDomElement &domElementParent, KEduVocComparison &comp);
-  bool readMultipleChoice(QDomElement &domElementParent, KEduVocMultipleChoice &mc);
-  bool readExpressionChildAttributes(QDomElement &domElementExpressionChild,
-                                     QString &lang,
-                                     grade_t &grade, grade_t &rev_grade,
-                                     int &count, int &rev_count,
-                                     QDateTime &date, QDateTime &rev_date,
-                                     QString &remark,
-                                     int &bcount, int &rev_bcount,
-                                     QString &query_id,
-                                     QString &pronunciation,
-                                     int &width,
-                                     QString &type,
-                                     QString &subType,
-                                     QString &faux_ami_f,
-                                     QString &faux_ami_t,
-                                     QString &synonym,
-                                     QString &example,
-                                     QString &antonym,
-                                     QSet<QString> &usage,
-                                     QString &paraphrase);
-  bool readExpression(QDomElement &domElementParent);
-  bool readBody(QDomElement &domElementParent);
+    bool readLesson( QDomElement &domElementParent );
+    bool readArticle( QDomElement &domElementParent );
+    bool readConjug( QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug );
+    bool readOptions( QDomElement &domElementParent );
+    bool readType( QDomElement &domElementParent );
+    bool readTense( QDomElement &domElementParent );
+    bool readUsage( QDomElement &domElementParent );
+    bool readComparison( QDomElement &domElementParent, KEduVocComparison &comp );
+    bool readMultipleChoice( QDomElement &domElementParent, KEduVocMultipleChoice &mc );
+    bool readExpressionChildAttributes( QDomElement &domElementExpressionChild,
+                                        QString &lang,
+                                        grade_t &grade, grade_t &rev_grade,
+                                        int &count, int &rev_count,
+                                        QDateTime &date, QDateTime &rev_date,
+                                        QString &remark,
+                                        int &bcount, int &rev_bcount,
+                                        QString &query_id,
+                                        QString &pronunciation,
+                                        int &width,
+                                        QString &type,
+                                        QString &subType,
+                                        QString &faux_ami_f,
+                                        QString &faux_ami_t,
+                                        QString &synonym,
+                                        QString &example,
+                                        QString &antonym,
+                                        QSet<QString> &usage,
+                                        QString &paraphrase );
+    bool readExpression( QDomElement &domElementParent );
+    bool readBody( QDomElement &domElementParent );
 
-  QString errorMessage() const {return m_errorMessage;}
+    QString errorMessage() const
+    {
+        return m_errorMessage;
+    }
 
 private:
-  QIODevice *m_inputFile;
-  KEduVocDocument *m_doc;
-  QString m_errorMessage;
-  int m_cols;
-  int m_lines;
-  QStringList m_oldSelfDefinedTypes;
+    QIODevice *m_inputFile;
+    KEduVocDocument *m_doc;
+    QString m_errorMessage;
+    int m_cols;
+    int m_lines;
+    QStringList m_oldSelfDefinedTypes;
 
-  KEduVocKvtmlCompability m_compability;
+    KEduVocKvtmlCompability m_compability;
 };
 
 #endif

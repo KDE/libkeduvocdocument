@@ -29,63 +29,63 @@
 class KEduVocConjugation::Private
 {
 public:
-  Private()
-  {
-  }
+    Private()
+    {}
 
-  QString verbName; // added to have something to compare in operator ==, assumes that there is always only one
-                    // KEduVocConjugation per verb
+    QString verbName; // added to have something to compare in operator ==, assumes that there is always only one
+    // KEduVocConjugation per verb
 
-  struct conjug_name_t
-  {
-    const char *abbrev;
-    const char *name;
-  };
+    struct conjug_name_t
+    {
+        const char *abbrev;
+        const char *name;
+    };
 
-  struct conjug_t
-  {
-     conjug_t() {
-        p3common = false;
-        s3common = false;
-     }
+    struct conjug_t
+    {
+        conjug_t()
+        {
+            p3common = false;
+            s3common = false;
+        }
 
-     QString type;
-     bool    p3common;
-     bool    s3common;
-     QString pers1_sing;
-     QString pers2_sing;
-     QString pers3_m_sing;
-     QString pers3_f_sing;
-     QString pers3_n_sing;
-     QString pers1_plur;
-     QString pers2_plur;
-     QString pers3_m_plur;
-     QString pers3_f_plur;
-     QString pers3_n_plur;
-  };
+        QString type;
+        bool    p3common;
+        bool    s3common;
+        QString pers1_sing;
+        QString pers2_sing;
+        QString pers3_m_sing;
+        QString pers3_f_sing;
+        QString pers3_n_sing;
+        QString pers1_plur;
+        QString pers2_plur;
+        QString pers3_m_plur;
+        QString pers3_f_plur;
+        QString pers3_n_plur;
+    };
 
-  typedef QList<conjug_t> conjug_tList;
-  conjug_tList conjugations;
+    typedef QList<conjug_t> conjug_tList;
+    conjug_tList conjugations;
 
-  static conjug_name_t names[];
-  static QStringList userTenses;
+    static conjug_name_t names[];
+    static QStringList userTenses;
 };
 
 
 KEduVocConjugation::Private::conjug_name_t
 
 KEduVocConjugation::Private::names [] =
-{
-  { CONJ_SIMPLE_PRESENT,    I18N_NOOP("Simple Present") },
-  { CONJ_PRESENT_PROGR,     I18N_NOOP("Present Progressive") },
-  { CONJ_PRESENT_PERFECT,   I18N_NOOP("Present Perfect") },
+    {
+        { CONJ_SIMPLE_PRESENT,    I18N_NOOP( "Simple Present" ) },
+        { CONJ_PRESENT_PROGR,     I18N_NOOP( "Present Progressive" ) },
+        { CONJ_PRESENT_PERFECT,   I18N_NOOP( "Present Perfect" ) },
 
-  { CONJ_SIMPLE_PAST,       I18N_NOOP("Simple Past") },
-  { CONJ_PAST_PROGR,        I18N_NOOP("Past Progressive") },
-  { CONJ_PAST_PARTICIPLE,   I18N_NOOP("Past Participle") },
+        { CONJ_SIMPLE_PAST,       I18N_NOOP( "Simple Past" ) },
+        { CONJ_PAST_PROGR,        I18N_NOOP( "Past Progressive" ) },
+        { CONJ_PAST_PARTICIPLE,   I18N_NOOP( "Past Participle" ) },
 
-  { CONJ_FUTURE,            I18N_NOOP("Future") }
-};
+        { CONJ_FUTURE,            I18N_NOOP( "Future" ) }
+    };
 
 
 QStringList KEduVocConjugation::Private::userTenses;
@@ -93,49 +93,47 @@ QStringList KEduVocConjugation::Private::userTenses;
 
 
 KEduVocConjugation::KEduVocConjugation()
-  : d(new Private)
-{
-}
+        : d( new Private )
+{}
 
 
-KEduVocConjugation::KEduVocConjugation(const KEduVocConjugation& rhs)
-  : d(new Private(*rhs.d))
-{
-}
+KEduVocConjugation::KEduVocConjugation( const KEduVocConjugation& rhs )
+        : d( new Private( *rhs.d ) )
+{}
 
 
 KEduVocConjugation::~KEduVocConjugation()
 {
-if (d->conjugations.count() > 0) {
-    kDebug() << "Killing Conjugation d->verbName: " << d->verbName << " conjugations.count(): " << d->conjugations.count() <<
+    if ( d->conjugations.count() > 0 ) {
+        kDebug() << "Killing Conjugation d->verbName: " << d->verbName << " conjugations.count(): " << d->conjugations.count() <<
 
-    " getType(0): " << getType(0) << " getAbbrev(0): " << getAbbrev(0) << " getName(0): " << getName(0);
+        " getType(0): " << getType( 0 ) << " getAbbrev(0): " << getAbbrev( 0 ) << " getName(0): " << getName( 0 );
+    }
+    delete d;
 }
-  delete d;
-}
 
 
-KEduVocConjugation& KEduVocConjugation::operator =(const KEduVocConjugation& a)
+KEduVocConjugation& KEduVocConjugation::operator = ( const KEduVocConjugation& a )
 {
-  *d = *a.d;
-  return *this;
+    *d = *a.d;
+    return *this;
 }
 
 
-bool KEduVocConjugation::operator ==(const KEduVocConjugation& a) const
+bool KEduVocConjugation::operator == ( const KEduVocConjugation& a ) const
 {
-  return d->verbName == a.getVerbName();
+    return d->verbName == a.getVerbName();
 }
 
 
 QString KEduVocConjugation::getVerbName() const
 {
-  return d->verbName;
+    return d->verbName;
 }
 
 int KEduVocConjugation::entryCount() const
 {
-  return d->conjugations.count();
+    return d->conjugations.count();
 }
 
 
@@ -158,149 +156,146 @@ int KEduVocConjugation::entryCount() const
 // }
 
 
-void KEduVocConjugation::setTenseNames(const QStringList& names)
+void KEduVocConjugation::setTenseNames( const QStringList& names )
 {
-  Private::userTenses = names;
+    Private::userTenses = names;
 }
 
 
-QString KEduVocConjugation::getName(const QString &abbrev)
+QString KEduVocConjugation::getName( const QString &abbrev )
 {
-  if (abbrev.length() >= 2 && QString(abbrev[0]) == QString(UL_USER_TENSE)) {
-    QString s = abbrev;
-    s.remove(0, 1);
-    int i = s.toInt() - 1;
+    if ( abbrev.length() >= 2 && QString( abbrev[0] ) == QString( UL_USER_TENSE ) ) {
+        QString s = abbrev;
+        s.remove( 0, 1 );
+        int i = s.toInt() - 1;
 
-    if (i < Private::userTenses.count() )
-      return Private::userTenses[i];
-    else
-      return "";
-  }
-  else {
-    for (int i = 0; i < numInternalNames(); i++)
-      if (Private::names[i].abbrev == abbrev) {
-        return i18n(Private::names[i].name);
-      }
-  }
-
-  return "";
-}
-
-
-QString KEduVocConjugation::getName(int idx)
-{
-  if (idx < numInternalNames())
-    return i18n(Private::names[idx].name);
-  else if (idx < tenseCount())
-    return Private::userTenses[idx-numInternalNames()];
-  else
-    return "";
-}
-
-
-QString KEduVocConjugation::getAbbrev(const QString &name)
-{
-  for (int i = 0; i < Private::userTenses.count(); i++)
-    if (Private::userTenses[i] == name) {
-      QString s;
-      s.setNum(i + 1);
-      s.prepend(UL_USER_TENSE);
-      return s;
+        if ( i < Private::userTenses.count() )
+            return Private::userTenses[i];
+        else
+            return "";
+    } else {
+        for ( int i = 0; i < numInternalNames(); i++ )
+            if ( Private::names[i].abbrev == abbrev ) {
+                return i18n( Private::names[i].name );
+            }
     }
 
-  for (int i = 0; i < numInternalNames(); i++)
-    if (Private::names[i].name == name)
-      return Private::names[i].abbrev;
-
-  return "";
+    return "";
 }
 
 
-QString KEduVocConjugation::getAbbrev(int idx)
+QString KEduVocConjugation::getName( int idx )
 {
-  if (idx < numInternalNames() )
-    return Private::names[idx].abbrev;
+    if ( idx < numInternalNames() )
+        return i18n( Private::names[idx].name );
+    else if ( idx < tenseCount() )
+        return Private::userTenses[idx-numInternalNames()];
+    else
+        return "";
+}
 
-  else if (idx < tenseCount()) {
-    QString s;
-    s.setNum(idx - numInternalNames() + 1);
-    s.prepend(UL_USER_TENSE);
-    return s;
-  }
 
-  else
+QString KEduVocConjugation::getAbbrev( const QString &name )
+{
+    for ( int i = 0; i < Private::userTenses.count(); i++ )
+        if ( Private::userTenses[i] == name ) {
+            QString s;
+            s.setNum( i + 1 );
+            s.prepend( UL_USER_TENSE );
+            return s;
+        }
+
+    for ( int i = 0; i < numInternalNames(); i++ )
+        if ( Private::names[i].name == name )
+            return Private::names[i].abbrev;
+
     return "";
+}
+
+
+QString KEduVocConjugation::getAbbrev( int idx )
+{
+    if ( idx < numInternalNames() )
+        return Private::names[idx].abbrev;
+
+    else if ( idx < tenseCount() ) {
+        QString s;
+        s.setNum( idx - numInternalNames() + 1 );
+        s.prepend( UL_USER_TENSE );
+        return s;
+    } else
+        return "";
 }
 
 
 int KEduVocConjugation::numInternalNames()
 {
-  return sizeof(Private::names) / sizeof(Private::names[0]);
+    return sizeof( Private::names ) / sizeof( Private::names[0] );
 }
 
 
 int KEduVocConjugation::tenseCount()
 {
-  return numInternalNames() + Private::userTenses.size();
+    return numInternalNames() + Private::userTenses.size();
 }
 
 
-QString KEduVocConjugation::getType(int idx)
+QString KEduVocConjugation::getType( int idx )
 {
 
-kDebug() << "KEduVocConjugation::getType()" << idx;
-  if (idx >= d->conjugations.count())
-    return "";
+    kDebug() << "KEduVocConjugation::getType()" << idx;
+    if ( idx >= d->conjugations.count() )
+        return "";
 
-  return d->conjugations[idx].type;
+    return d->conjugations[idx].type;
 }
 
 
-void KEduVocConjugation::setType(int idx, const QString & type)
+void KEduVocConjugation::setType( int idx, const QString & type )
 {
-  if (idx >= d->conjugations.size())
-    return;
+    if ( idx >= d->conjugations.size() )
+        return;
 
-  d->conjugations[idx].type = type;
+    d->conjugations[idx].type = type;
 }
 
 
 void KEduVocConjugation::cleanUp()
 {
-  for (int i = d->conjugations.count() - 1; i >= 0; i--) {
-    const Private::conjug_t *ctp = &d->conjugations[i];
-    if (   ctp->pers1_sing.simplified().isEmpty()
-        && ctp->pers2_sing.simplified().isEmpty()
-        && ctp->pers3_m_sing.simplified().isEmpty()
-        && ctp->pers3_f_sing.simplified().isEmpty()
-        && ctp->pers3_n_sing.simplified().isEmpty()
-        && ctp->pers1_plur.simplified().isEmpty()
-        && ctp->pers2_plur.simplified().isEmpty()
-        && ctp->pers3_m_plur.simplified().isEmpty()
-        && ctp->pers3_f_plur.simplified().isEmpty()
-        && ctp->pers3_n_plur.simplified().isEmpty()
-       )
-     d->conjugations.removeAt(i);
-  }
+    for ( int i = d->conjugations.count() - 1; i >= 0; i-- ) {
+        const Private::conjug_t *ctp = &d->conjugations[i];
+        if ( ctp->pers1_sing.simplified().isEmpty()
+                && ctp->pers2_sing.simplified().isEmpty()
+                && ctp->pers3_m_sing.simplified().isEmpty()
+                && ctp->pers3_f_sing.simplified().isEmpty()
+                && ctp->pers3_n_sing.simplified().isEmpty()
+                && ctp->pers1_plur.simplified().isEmpty()
+                && ctp->pers2_plur.simplified().isEmpty()
+                && ctp->pers3_m_plur.simplified().isEmpty()
+                && ctp->pers3_f_plur.simplified().isEmpty()
+                && ctp->pers3_n_plur.simplified().isEmpty()
+           )
+            d->conjugations.removeAt( i );
+    }
 }
 
 
-bool KEduVocConjugation::isEmpty(int idx)
+bool KEduVocConjugation::isEmpty( int idx )
 {
-  if (idx < d->conjugations.count()) {
-    const Private::conjug_t *ctp = &d->conjugations[idx];
-    return ctp->pers1_sing.simplified().isEmpty()
-        && ctp->pers2_sing.simplified().isEmpty()
-        && ctp->pers3_m_sing.simplified().isEmpty()
-        && ctp->pers3_f_sing.simplified().isEmpty()
-        && ctp->pers3_n_sing.simplified().isEmpty()
-        && ctp->pers1_plur.simplified().isEmpty()
-        && ctp->pers2_plur.simplified().isEmpty()
-        && ctp->pers3_m_plur.simplified().isEmpty()
-        && ctp->pers3_f_plur.simplified().isEmpty()
-        && ctp->pers3_n_plur.simplified().isEmpty();
-  }
-  return true;
+    if ( idx < d->conjugations.count() ) {
+        const Private::conjug_t *ctp = &d->conjugations[idx];
+        return ctp->pers1_sing.simplified().isEmpty()
+               && ctp->pers2_sing.simplified().isEmpty()
+               && ctp->pers3_m_sing.simplified().isEmpty()
+               && ctp->pers3_f_sing.simplified().isEmpty()
+               && ctp->pers3_n_sing.simplified().isEmpty()
+               && ctp->pers1_plur.simplified().isEmpty()
+               && ctp->pers2_plur.simplified().isEmpty()
+               && ctp->pers3_m_plur.simplified().isEmpty()
+               && ctp->pers3_f_plur.simplified().isEmpty()
+               && ctp->pers3_n_plur.simplified().isEmpty();
+    }
+    return true;
 }
 
 
@@ -311,75 +306,75 @@ bool KEduVocConjugation::isEmpty(int idx)
    return default;
 
 
-bool KEduVocConjugation::pers3SingularCommon(const QString &type) const
+bool KEduVocConjugation::pers3SingularCommon( const QString &type ) const
 {
-  _GET_CON_(s3common, type, false);
+    _GET_CON_( s3common, type, false );
 }
 
 
-bool KEduVocConjugation::pers3PluralCommon(const QString &type) const
+bool KEduVocConjugation::pers3PluralCommon( const QString &type ) const
 {
-  _GET_CON_(p3common, type, false);
+    _GET_CON_( p3common, type, false );
 }
 
 
-QString KEduVocConjugation::pers1Singular(const QString &type) const
+QString KEduVocConjugation::pers1Singular( const QString &type ) const
 {
-  _GET_CON_(pers1_sing, type, "");
+    _GET_CON_( pers1_sing, type, "" );
 }
 
 
-QString KEduVocConjugation::pers2Singular(const QString &type) const
+QString KEduVocConjugation::pers2Singular( const QString &type ) const
 {
-  _GET_CON_(pers2_sing, type, "");
+    _GET_CON_( pers2_sing, type, "" );
 }
 
 
-QString KEduVocConjugation::pers3FemaleSingular(const QString &type) const
+QString KEduVocConjugation::pers3FemaleSingular( const QString &type ) const
 {
-  _GET_CON_(pers3_f_sing, type, "");
+    _GET_CON_( pers3_f_sing, type, "" );
 }
 
 
-QString KEduVocConjugation::pers3MaleSingular(const QString &type) const
+QString KEduVocConjugation::pers3MaleSingular( const QString &type ) const
 {
-  _GET_CON_(pers3_m_sing, type, "");
+    _GET_CON_( pers3_m_sing, type, "" );
 }
 
 
-QString KEduVocConjugation::pers3NaturalSingular(const QString &type) const
+QString KEduVocConjugation::pers3NaturalSingular( const QString &type ) const
 {
-  _GET_CON_(pers3_n_sing, type, "");
+    _GET_CON_( pers3_n_sing, type, "" );
 }
 
 
-QString KEduVocConjugation::pers1Plural(const QString &type) const
+QString KEduVocConjugation::pers1Plural( const QString &type ) const
 {
-  _GET_CON_(pers1_plur, type, "");
+    _GET_CON_( pers1_plur, type, "" );
 }
 
 
-QString KEduVocConjugation::pers2Plural(const QString &type) const
+QString KEduVocConjugation::pers2Plural( const QString &type ) const
 {
-  _GET_CON_(pers2_plur, type, "");
+    _GET_CON_( pers2_plur, type, "" );
 }
 
 
-QString KEduVocConjugation::pers3FemalePlural(const QString &type) const
+QString KEduVocConjugation::pers3FemalePlural( const QString &type ) const
 {
-  _GET_CON_(pers3_f_plur, type, "");
+    _GET_CON_( pers3_f_plur, type, "" );
 }
 
 
-QString KEduVocConjugation::pers3MalePlural(const QString &type) const
+QString KEduVocConjugation::pers3MalePlural( const QString &type ) const
 {
-  _GET_CON_(pers3_m_plur, type, "");
+    _GET_CON_( pers3_m_plur, type, "" );
 }
 
 
-QString KEduVocConjugation::pers3NaturalPlural(const QString &type) const
+QString KEduVocConjugation::pers3NaturalPlural( const QString &type ) const
 {
-  _GET_CON_(pers3_n_plur, type, "");
+    _GET_CON_( pers3_n_plur, type, "" );
 }
 
 
@@ -398,75 +393,75 @@ QString KEduVocConjugation::pers3NaturalPlural(const QString &type) const
    d->conjugations.append(ct);
 
 
-void KEduVocConjugation::setPers3PluralCommon(const QString &type, bool f)
+void KEduVocConjugation::setPers3PluralCommon( const QString &type, bool f )
 {
-  _SET_CON_(p3common, type, f);
+    _SET_CON_( p3common, type, f );
 }
 
 
-void KEduVocConjugation::setPers3SingularCommon(const QString &type, bool f)
+void KEduVocConjugation::setPers3SingularCommon( const QString &type, bool f )
 {
-  _SET_CON_(s3common, type, f);
+    _SET_CON_( s3common, type, f );
 }
 
 
-void KEduVocConjugation::setPers1Singular(const QString &type, const QString &str)
+void KEduVocConjugation::setPers1Singular( const QString &type, const QString &str )
 {
-  _SET_CON_(pers1_sing, type, str);
+    _SET_CON_( pers1_sing, type, str );
 }
 
 
-void KEduVocConjugation::setPers2Singular(const QString &type, const QString &str)
+void KEduVocConjugation::setPers2Singular( const QString &type, const QString &str )
 {
-  _SET_CON_(pers2_sing, type, str);
+    _SET_CON_( pers2_sing, type, str );
 }
 
 
-void KEduVocConjugation::setPers3FemaleSingular(const QString &type, const QString &str)
+void KEduVocConjugation::setPers3FemaleSingular( const QString &type, const QString &str )
 {
-  _SET_CON_(pers3_f_sing, type, str);
+    _SET_CON_( pers3_f_sing, type, str );
 }
 
 
-void KEduVocConjugation::setPers3MaleSingular(const QString &type, const QString &str)
+void KEduVocConjugation::setPers3MaleSingular( const QString &type, const QString &str )
 {
-  _SET_CON_(pers3_m_sing, type, str);
+    _SET_CON_( pers3_m_sing, type, str );
 }
 
 
-void KEduVocConjugation::setPers3NaturalSingular(const QString &type, const QString &str)
+void KEduVocConjugation::setPers3NaturalSingular( const QString &type, const QString &str )
 {
-  _SET_CON_(pers3_n_sing, type, str);
+    _SET_CON_( pers3_n_sing, type, str );
 }
 
 
-void KEduVocConjugation::setPers1Plural(const QString &type, const QString &str)
+void KEduVocConjugation::setPers1Plural( const QString &type, const QString &str )
 {
-  _SET_CON_(pers1_plur, type, str);
+    _SET_CON_( pers1_plur, type, str );
 }
 
 
-void KEduVocConjugation::setPers2Plural(const QString &type, const QString &str)
+void KEduVocConjugation::setPers2Plural( const QString &type, const QString &str )
 {
-  _SET_CON_(pers2_plur, type, str);
+    _SET_CON_( pers2_plur, type, str );
 }
 
 
-void KEduVocConjugation::setPers3FemalePlural(const QString &type, const QString &str)
+void KEduVocConjugation::setPers3FemalePlural( const QString &type, const QString &str )
 {
-  _SET_CON_(pers3_f_plur, type, str);
+    _SET_CON_( pers3_f_plur, type, str );
 }
 
 
-void KEduVocConjugation::setPers3MalePlural(const QString &type, const QString &str)
+void KEduVocConjugation::setPers3MalePlural( const QString &type, const QString &str )
 {
-  _SET_CON_(pers3_m_plur, type, str);
+    _SET_CON_( pers3_m_plur, type, str );
 }
 
 
-void KEduVocConjugation::setPers3NaturalPlural(const QString &type, const QString &str)
+void KEduVocConjugation::setPers3NaturalPlural( const QString &type, const QString &str )
 {
-  _SET_CON_(pers3_n_plur, type, str);
+    _SET_CON_( pers3_n_plur, type, str );
 }
 
 #undef _SET_CON_
@@ -475,42 +470,41 @@ void KEduVocConjugation::setPers3NaturalPlural(const QString &type, const QStrin
 //==============================================================
 class KEduVocTenseRelation::Private
 {
-  public:
+public:
     QString shortId;
     QString longId;
 };
 
 KEduVocTenseRelation::KEduVocTenseRelation()
-: d(new Private)
-{
-}
+        : d( new Private )
+{}
 
-KEduVocTenseRelation::KEduVocTenseRelation (const QString & _short, const QString & _long)
-: d(new Private)
+KEduVocTenseRelation::KEduVocTenseRelation( const QString & _short, const QString & _long )
+        : d( new Private )
 {
-  d->shortId = _short;
-  d->longId = _long;
+    d->shortId = _short;
+    d->longId = _long;
 }
 
 KEduVocTenseRelation::~KEduVocTenseRelation()
 {
-  delete d;
+    delete d;
 }
 
-KEduVocTenseRelation &KEduVocTenseRelation::operator=(const KEduVocTenseRelation &other)
+KEduVocTenseRelation &KEduVocTenseRelation::operator= ( const KEduVocTenseRelation &other )
 {
-  d->shortId = other.shortStr();
-  d->longId = other.longStr();
-  return *this;
+    d->shortId = other.shortStr();
+    d->longId = other.longStr();
+    return *this;
 }
 
 QString KEduVocTenseRelation::shortStr() const
 {
-  return d->shortId;
+    return d->shortId;
 }
 
 QString KEduVocTenseRelation::longStr()  const
 {
-  return d->longId;
+    return d->longId;
 }
 

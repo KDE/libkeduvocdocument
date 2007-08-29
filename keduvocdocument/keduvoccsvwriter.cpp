@@ -25,51 +25,51 @@
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
 
-KEduVocCsvWriter::KEduVocCsvWriter(QFile *file)
+KEduVocCsvWriter::KEduVocCsvWriter( QFile *file )
 {
-  // the file must be already open
-  m_outputFile = file;
+    // the file must be already open
+    m_outputFile = file;
 }
 
 
-bool KEduVocCsvWriter::writeDoc(KEduVocDocument *doc, const QString &generator)
+bool KEduVocCsvWriter::writeDoc( KEduVocDocument *doc, const QString &generator )
 {
-  Q_UNUSED(generator);
+    Q_UNUSED( generator );
 
-  m_doc = doc;
+    m_doc = doc;
 
-  QString separator = m_doc->csvDelimiter();;
+    QString separator = m_doc->csvDelimiter();
+    ;
 
-  QTextStream outputStream;
-  outputStream.setDevice(m_outputFile);
-  outputStream.setCodec("UTF-8");
+    QTextStream outputStream;
+    outputStream.setDevice( m_outputFile );
+    outputStream.setCodec( "UTF-8" );
 
-  outputStream << i18nc("@item:intable the title of the document will be written here", "! Title:")  << separator << m_doc->title() << "\n";
-  outputStream << i18nc("@item:intable the author will be written here", "! Author:") << separator << m_doc->author() << "\n";
+    outputStream << i18nc( "@item:intable the title of the document will be written here", "! Title:" )  << separator << m_doc->title() << "\n";
+    outputStream << i18nc( "@item:intable the author will be written here", "! Author:" ) << separator << m_doc->author() << "\n";
 
-  KEduVocExpression *expression;
-  int idCount = m_doc->identifierCount();
-  QString currentRow;
+    KEduVocExpression *expression;
+    int idCount = m_doc->identifierCount();
+    QString currentRow;
 
-  for (int e = 0; e < m_doc->entryCount(); e++)
-  {
-    expression = m_doc->entry(e);
-    currentRow = "";
-    bool sep = false;
+    for ( int e = 0; e < m_doc->entryCount(); e++ ) {
+        expression = m_doc->entry( e );
+        currentRow = "";
+        bool sep = false;
 
-    for (int i = 0; i < idCount; i++) {
-      if (!sep)
-        sep = true;
-      else
-        currentRow += separator;
+        for ( int i = 0; i < idCount; i++ ) {
+            if ( !sep )
+                sep = true;
+            else
+                currentRow += separator;
 
-        currentRow += expression->translation(i).text();
+            currentRow += expression->translation( i ).text();
+        }
+
+        if ( !currentRow.isEmpty() )
+            outputStream << currentRow << "\n";
     }
 
-    if (!currentRow.isEmpty())
-      outputStream << currentRow << "\n";
-  }
-
-  return true;
+    return true;
 }
 

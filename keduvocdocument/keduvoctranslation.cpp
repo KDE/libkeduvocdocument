@@ -26,15 +26,15 @@ class KEduVocTranslation::KEduVocTranslationPrivate
 {
 public:
 
-    KEduVocTranslationPrivate () // ( KEduVocTranslation* qq )
-            //: q ( qq )
+    KEduVocTranslationPrivate()  // ( KEduVocTranslation* qq )
+    //: q ( qq )
     {
         init();
     }
 
     void init();
 
-    KEduVocTranslationPrivate& operator=(const KEduVocTranslationPrivate &translation);
+    KEduVocTranslationPrivate& operator= ( const KEduVocTranslationPrivate &translation );
     bool operator== ( const KEduVocTranslationPrivate &p ) const;
 
     //KEduVocTranslation* q;
@@ -79,39 +79,38 @@ void KEduVocTranslation::KEduVocTranslationPrivate::init()
 
 bool KEduVocTranslation::KEduVocTranslationPrivate::operator== ( const KEduVocTranslation::KEduVocTranslationPrivate &other ) const
 {
-    return 	m_translation == other.m_translation &&
-		m_type == other.m_type &&
-        m_subType == other.m_subType &&
-		m_usages == other.m_usages &&
-		m_comment == other.m_comment &&
-		m_paraphrase == other.m_paraphrase &&
-		m_synonym == other.m_synonym &&
-		m_example == other.m_example &&
-		m_antonym == other.m_antonym &&
-		m_pronunciation == other.m_pronunciation &&
-		m_conjugation == other.m_conjugation &&
-		m_comparison == other.m_comparison &&
-		m_multipleChoice == other.m_multipleChoice &&
-		m_grades.keys() == other.m_grades.keys() &&
-		// uncomment this when grade class has an operator== defined
-		//m_grades.values() == other.m_grades.values() &&
-		m_falseFriends.keys() == other.m_falseFriends.keys() &&
-		m_falseFriends.values() == other.m_falseFriends.values();
+    return  m_translation == other.m_translation &&
+            m_type == other.m_type &&
+            m_subType == other.m_subType &&
+            m_usages == other.m_usages &&
+            m_comment == other.m_comment &&
+            m_paraphrase == other.m_paraphrase &&
+            m_synonym == other.m_synonym &&
+            m_example == other.m_example &&
+            m_antonym == other.m_antonym &&
+            m_pronunciation == other.m_pronunciation &&
+            m_conjugation == other.m_conjugation &&
+            m_comparison == other.m_comparison &&
+            m_multipleChoice == other.m_multipleChoice &&
+            m_grades.keys() == other.m_grades.keys() &&
+            // uncomment this when grade class has an operator== defined
+            //m_grades.values() == other.m_grades.values() &&
+            m_falseFriends.keys() == other.m_falseFriends.keys() &&
+            m_falseFriends.values() == other.m_falseFriends.values();
 }
 
-KEduVocTranslation::KEduVocTranslation() : d ( new KEduVocTranslationPrivate )
-{
-}
+KEduVocTranslation::KEduVocTranslation() : d( new KEduVocTranslationPrivate )
+{}
 
 
-KEduVocTranslation::KEduVocTranslation( const QString &translation ) : d ( new KEduVocTranslationPrivate )
+KEduVocTranslation::KEduVocTranslation( const QString &translation ) : d( new KEduVocTranslationPrivate )
 {
     d->m_translation = translation.simplified();
 }
 
-KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other) : d ( new KEduVocTranslationPrivate )
+KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( new KEduVocTranslationPrivate )
 {
-	d->m_translation = other.d->m_translation;
+    d->m_translation = other.d->m_translation;
     d->m_type = other.d->m_type;
     d->m_subType = other.d->m_subType;
     d->m_usages = other.d->m_usages;
@@ -121,11 +120,11 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other) : d ( n
     d->m_example = other.d->m_example;
     d->m_antonym = other.d->m_antonym;
     d->m_pronunciation = other.d->m_pronunciation;
-	d->m_conjugation = other.d->m_conjugation;
+    d->m_conjugation = other.d->m_conjugation;
     d->m_comparison = other.d->m_comparison;
     d->m_multipleChoice = other.d->m_multipleChoice;
     d->m_grades = other.d->m_grades;
-	d->m_falseFriends = other.d->m_falseFriends;
+    d->m_falseFriends = other.d->m_falseFriends;
 }
 
 KEduVocTranslation::~KEduVocTranslation()
@@ -133,67 +132,67 @@ KEduVocTranslation::~KEduVocTranslation()
     delete d;
 }
 
-QString KEduVocTranslation::text ( ) const
+QString KEduVocTranslation::text() const
 {
     return d->m_translation;
 }
 
 
-void KEduVocTranslation::setText ( const QString & expr )
+void KEduVocTranslation::setText( const QString & expr )
 {
     d->m_translation = expr.simplified();
 }
 
 
-QString KEduVocTranslation::comment ( ) const
+QString KEduVocTranslation::comment() const
 {
     return d->m_comment;
 }
 
 
-void KEduVocTranslation::setComment ( const QString & expr )
+void KEduVocTranslation::setComment( const QString & expr )
 {
     d->m_comment = expr.simplified();
 }
 
 
-void KEduVocTranslation::setFalseFriend ( int indexFrom, const QString & expr )
+void KEduVocTranslation::setFalseFriend( int indexFrom, const QString & expr )
 {
     d->m_falseFriends[indexFrom] = expr.simplified();
 }
 
 
-QString KEduVocTranslation::falseFriend ( int indexFrom ) const
+QString KEduVocTranslation::falseFriend( int indexFrom ) const
 {
-    return d->m_falseFriends.value(indexFrom);
+    return d->m_falseFriends.value( indexFrom );
 }
 
 
-void KEduVocTranslation::setSynonym (  const QString & expr )
+void KEduVocTranslation::setSynonym( const QString & expr )
 {
     d->m_synonym = expr.simplified();
 }
 
 
-QString KEduVocTranslation::synonym ( ) const
+QString KEduVocTranslation::synonym() const
 {
     return d->m_synonym;
 }
 
 
-void KEduVocTranslation::setExample (  const QString & expr )
+void KEduVocTranslation::setExample( const QString & expr )
 {
-   d->m_example = expr.simplified();
+    d->m_example = expr.simplified();
 }
 
 
-QString KEduVocTranslation::example ( ) const
+QString KEduVocTranslation::example() const
 {
     return d->m_example;
 }
 
 
-void KEduVocTranslation::setUsages (  const QSet<QString> & usages )
+void KEduVocTranslation::setUsages( const QSet<QString> & usages )
 {
     d->m_usages = usages;
 }
@@ -205,73 +204,73 @@ QSet<QString>& KEduVocTranslation::usages()
 }
 
 
-void KEduVocTranslation::setParaphrase (  const QString & expr )
+void KEduVocTranslation::setParaphrase( const QString & expr )
 {
     d->m_paraphrase = expr.simplified();
 }
 
 
-QString KEduVocTranslation::paraphrase ( ) const
+QString KEduVocTranslation::paraphrase() const
 {
     return d->m_paraphrase;
 }
 
 
-void KEduVocTranslation::setAntonym (  const QString & expr )
+void KEduVocTranslation::setAntonym( const QString & expr )
 {
     d->m_antonym = expr.simplified();
 }
 
 
-QString KEduVocTranslation::antonym ( ) const
+QString KEduVocTranslation::antonym() const
 {
     return d->m_antonym;
 }
 
 
-void KEduVocTranslation::setConjugation ( const KEduVocConjugation &con )
+void KEduVocTranslation::setConjugation( const KEduVocConjugation &con )
 {
     d->m_conjugation = con;
 }
 
 
-KEduVocConjugation KEduVocTranslation::conjugation ( ) const
+KEduVocConjugation KEduVocTranslation::conjugation() const
 {
     return d->m_conjugation;
 }
 
 
-void KEduVocTranslation::setComparison (  const KEduVocComparison &con )
+void KEduVocTranslation::setComparison( const KEduVocComparison &con )
 {
     d->m_comparison = con;
 }
 
 
-KEduVocComparison & KEduVocTranslation::comparison ( )
+KEduVocComparison & KEduVocTranslation::comparison()
 {
     return d->m_comparison;
 }
 
 
-void KEduVocTranslation::setMultipleChoice (  const KEduVocMultipleChoice &mc )
+void KEduVocTranslation::setMultipleChoice( const KEduVocMultipleChoice &mc )
 {
     d->m_multipleChoice = mc;
 }
 
 
-KEduVocMultipleChoice & KEduVocTranslation::multipleChoice ( )
+KEduVocMultipleChoice & KEduVocTranslation::multipleChoice()
 {
     return d->m_multipleChoice;
 }
 
 
-QString KEduVocTranslation::pronunciation ( ) const
+QString KEduVocTranslation::pronunciation() const
 {
     return d->m_pronunciation;
 }
 
 
-void KEduVocTranslation::setPronunciation (  const QString & expr )
+void KEduVocTranslation::setPronunciation( const QString & expr )
 {
     d->m_pronunciation = expr.simplified();
 }
@@ -283,7 +282,7 @@ QString KEduVocTranslation::type() const
 }
 
 
-void KEduVocTranslation::setType (  const QString &type )
+void KEduVocTranslation::setType( const QString &type )
 {
     d->m_type = type;
 }
@@ -294,12 +293,13 @@ QString KEduVocTranslation::subType() const
 }
 
 
-void KEduVocTranslation::setSubType (  const QString &type )
+void KEduVocTranslation::setSubType( const QString &type )
 {
     d->m_subType = type;
 }
 
-void KEduVocTranslation::resetGrades(){
+void KEduVocTranslation::resetGrades()
+{
     d->m_grades.clear();
 }
 
@@ -309,28 +309,28 @@ QList< int > KEduVocTranslation::conjugationTenses() const
     return m_conjugations.keys();
 }*/
 
-bool KEduVocTranslation::operator ==(const KEduVocTranslation & translation) const
+bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) const
 {
     return d->m_translation == translation.d->m_translation &&
-        d->m_type == translation.d->m_type &&
-        d->m_subType == translation.d->m_subType &&
-        d->m_usages == translation.d->m_usages &&
-        d->m_comment == translation.d->m_comment &&
-        d->m_paraphrase == translation.d->m_paraphrase &&
-        d->m_synonym == translation.d->m_synonym &&
-        d->m_example == translation.d->m_example &&
-        d->m_antonym == translation.d->m_antonym &&
-        d->m_pronunciation == translation.d->m_pronunciation &&
-        d->m_comparison == translation.d->m_comparison &&
-        d->m_multipleChoice == translation.d->m_multipleChoice &&
-        d->m_falseFriends == translation.d->m_falseFriends
-        /// @todo m_grades == translation.m_grades &&
-        /// @todo m_conjugations == translation.m_conjugations
-        ;
+           d->m_type == translation.d->m_type &&
+           d->m_subType == translation.d->m_subType &&
+           d->m_usages == translation.d->m_usages &&
+           d->m_comment == translation.d->m_comment &&
+           d->m_paraphrase == translation.d->m_paraphrase &&
+           d->m_synonym == translation.d->m_synonym &&
+           d->m_example == translation.d->m_example &&
+           d->m_antonym == translation.d->m_antonym &&
+           d->m_pronunciation == translation.d->m_pronunciation &&
+           d->m_comparison == translation.d->m_comparison &&
+           d->m_multipleChoice == translation.d->m_multipleChoice &&
+           d->m_falseFriends == translation.d->m_falseFriends
+           /// @todo m_grades == translation.m_grades &&
+           /// @todo m_conjugations == translation.m_conjugations
+           ;
 }
 
 
-KEduVocTranslation & KEduVocTranslation::operator =(const KEduVocTranslation & translation)
+KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation & translation )
 {
     d->m_translation = translation.d->m_translation;
     d->m_type = translation.d->m_type;
@@ -350,7 +350,7 @@ KEduVocTranslation & KEduVocTranslation::operator =(const KEduVocTranslation & t
     return *this;
 }
 
-KEduVocGrade & KEduVocTranslation::gradeFrom(int indexFrom)
+KEduVocGrade & KEduVocTranslation::gradeFrom( int indexFrom )
 {
     return d->m_grades[indexFrom];
 }
