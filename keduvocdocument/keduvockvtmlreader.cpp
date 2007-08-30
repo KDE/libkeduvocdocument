@@ -1043,11 +1043,11 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
 
                 q_trans = lang;
         }
-//kDebug() << " TranslationList.count(): " << translationList.count() << "  Entry count: " << m_doc->entryCount();
+
         if ( m_doc->entryCount() == 0 ) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
-//kDebug() << " Read Expression with identifiers: " << lang;
+
             // new translation
-            if (!addLanguage(i, attribute.value())) {
+            if (!addLanguage(i, lang)) {
                 return false;
             }
         }
