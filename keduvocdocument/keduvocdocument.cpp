@@ -96,7 +96,6 @@ public:
       */
     QString                   m_category;
 
-    QList<KEduVocArticle>     m_articles;
     QList<KEduVocConjugation> m_conjugations;
 
     // make this a map so removals don't require renumbering :)
@@ -112,7 +111,6 @@ public:
 void KEduVocDocument::KEduVocDocumentPrivate::init()
 {
     m_lessons.clear();
-    m_articles.clear();
     m_tenseDescriptions.clear();
     m_identifiers.clear();
     m_sortIdentifier.clear();
@@ -696,35 +694,6 @@ KEduVocConjugation KEduVocDocument::conjugation( int idx ) const
 }
 
 
-void KEduVocDocument::setArticle( int idx, const KEduVocArticle &art )
-{
-    if ( idx < 0 ) return;
-
-    // extend conjugation with empty elements
-    if ( d->m_articles.size() <= idx )
-        for ( int i = d->m_articles.size(); i < idx+1; i++ )
-            d->m_articles.append( KEduVocArticle() );
-
-    d->m_articles[idx] = art;
-}
-
-
-KEduVocArticle KEduVocDocument::article( int idx ) const
-{
-    if ( idx >= d->m_articles.size() || idx < 0 ) {
-        return KEduVocArticle();
-    } else {
-        return d->m_articles[idx];
-    }
-}
-
-
-int KEduVocDocument::articleCount() const
-{
-    return d->m_articles.count();
-}
-
-
 int KEduVocDocument::sizeHint( int idx ) const
 {
     if ( idx < 0 ) {
@@ -864,6 +833,7 @@ int KEduVocDocument::identifierCount() const
 int KEduVocDocument::appendIdentifier( const KEduVocIdentifier& id )
 {
     int i = d->m_identifiers.size();
+kDebug() << "appendIdentifier: " << i << id.name() << id.locale();
     d->m_identifiers.append( id );
     if ( id.name().isEmpty() ) {
         if ( i == 0 ) {

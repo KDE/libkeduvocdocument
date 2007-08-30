@@ -211,7 +211,7 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
     QString indef;
 
     // male
-    m_doc->article( article ).getMale( &def, &indef );
+    m_doc->identifier(article).article().getMale( &def, &indef );
     if ( !def.isEmpty() ) {
         definite.appendChild( newTextElement( KVTML_MALE, def ) );
     }
@@ -220,7 +220,7 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
     }
 
     // female
-    m_doc->article( article ).getFemale( &def, &indef );
+    m_doc->identifier(article).article().getFemale( &def, &indef );
     if ( !def.isEmpty() ) {
         definite.appendChild( newTextElement( KVTML_FEMALE, def ) );
     }
@@ -229,7 +229,7 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
     }
 
     // neutral
-    m_doc->article( article ).getNatural( &def, &indef );
+    m_doc->identifier(article).article().getNatural( &def, &indef );
     if ( !def.isEmpty() ) {
         definite.appendChild( newTextElement( KVTML_NEUTRAL, def ) );
     }

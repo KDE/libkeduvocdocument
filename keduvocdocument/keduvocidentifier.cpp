@@ -59,7 +59,6 @@ public:
 KEduVocIdentifier::KEduVocIdentifier()
 : d( new Private )
 {
-    d->m_name = i18nc("A default title for a single column of vocabulary. Will hardly be used. Should be very generic.", "Title");
     ///@todo maybe the user locale would be more appropriate
     d->m_locale = "en";
 }
@@ -107,5 +106,17 @@ QString KEduVocIdentifier::locale() const
 void KEduVocIdentifier::setLocale(const QString & locale)
 {
     d->m_locale = locale;
+}
+
+
+void KEduVocIdentifier::setArticle( const KEduVocArticle& articles )
+{
+    d->m_articles = articles;
+}
+
+
+KEduVocArticle KEduVocIdentifier::article() const
+{
+    return d->m_articles;
 }
 

@@ -517,30 +517,6 @@ public:
     */
     int conjugationCount() const;
 
-
-
-///@todo move into identifier!
-    // *** article methods ***
-
-    /**
-     * @param index            index of translation
-     * @returns                a pointer to articles if available
-     */
-    KEduVocArticle article( int index ) const;
-
-    /**
-     * Sets the articles
-     *
-     * @param index            index of translation
-     * @param art              article block
-     */
-    void setArticle( int index, const KEduVocArticle &art );
-
-    /**
-     * @returns                the number of articles
-    */
-    int articleCount() const;
-
     // *** file format specific methods ***
 
     /**

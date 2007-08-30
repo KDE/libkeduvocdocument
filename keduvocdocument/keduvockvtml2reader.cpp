@@ -539,7 +539,7 @@ bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifi
             nat_indef = subElement.text();
         }
     }
-    m_doc->setArticle( identifierNum, KEduVocArticle( fem_def, fem_indef, mal_def, mal_indef, nat_def, nat_indef ) );
+    m_doc->identifier(identifierNum).setArticle( KEduVocArticle( fem_def, fem_indef, mal_def, mal_indef, nat_def, nat_indef ) );
 
     return true;
 }

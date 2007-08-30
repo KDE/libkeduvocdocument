@@ -144,7 +144,6 @@ bool KEduVocKvtmlReader::readBody( QDomElement &domElementParent )
             return false;
     }
 
-
     // initialize the list of predefined types
     m_doc->wordTypes()->createDefaultWordTypes();
     currentElement = domElementParent.firstChildElement( KV_TYPE_GRP );
@@ -333,7 +332,7 @@ bool KEduVocKvtmlReader::readArticle( QDomElement &domElementParent )
                     nat_indef = "";
             }
 
-            m_doc->setArticle( i, KEduVocArticle( fem_def, fem_indef, mal_def, mal_indef, nat_def, nat_indef ) );
+            m_doc->identifier(i).setArticle( KEduVocArticle( fem_def, fem_indef, mal_def, mal_indef, nat_def, nat_indef ) );
         }
     }
 
@@ -1163,6 +1162,8 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
 
 bool KEduVocKvtmlReader::addLanguage( int languageId, const QString& language)
 {
+
+kDebug() << "addLanguage( " << languageId << ", " << language << ")";
     if ( m_doc->identifierCount() <= languageId ) {
         m_doc->appendIdentifier();
         // first entry
@@ -1172,13 +1173,14 @@ bool KEduVocKvtmlReader::addLanguage( int languageId, const QString& language)
         }
     } else {
         if ( !language.isEmpty() ) {
-            if ( language != m_doc->identifier( languageId ).locale() ) {
+            if ( language != m_doc->identifier(languageId).locale() ) {
                 // different originals ?
                 m_errorMessage = i18n( "Ambiguous definition of language code" );
                 return false;
             }
         }
     }
+    return true;
 }
 
 

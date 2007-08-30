@@ -87,6 +87,20 @@ public:
      */
     void setLocale( const QString& name );
 
+
+    /**
+     * Articles (a, the in English, el, la,... in Spanish)
+     * @returns articles
+     */
+    KEduVocArticle article() const;
+
+    /**
+     * Sets the articles for this identifier
+     * @param art              article block
+     */
+    void setArticle( const KEduVocArticle& article );
+
+
 private:
     class Private;
     Private * const d;

@@ -332,31 +332,18 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
  </article>
 */
 {
-    if ( m_doc->articleCount() == 0 )
-        return true;
-
     QDomElement domElementArticle = domDoc.createElement( KV_ARTICLE_GRP );
     QString def;
     QString indef;
     QString s;
 
-    for ( int i = 0; i < qMin( m_doc->articleCount(), m_doc->identifierCount() ); i++ )
+    for ( int i = 0; i < m_doc->identifierCount(); i++ )
     {
         QDomElement domElementEntry = domDoc.createElement( KV_ART_ENTRY );
-        if ( i == 0 ) {
-            s = m_doc->identifier( 0 ).name().simplified();
-            if ( s.isEmpty() )
-                s = "original";
-        } else {
-            s = m_doc->identifier( i ).name().simplified();
-            if ( s.isEmpty() ) {
-                s.setNum( i );
-                s.prepend( "translation " );
-            }
-        }
+        s = m_doc->identifier(i).name().simplified();
         domElementEntry.setAttribute( KV_LANG, s );
 
-        m_doc->article( i ).getFemale( &def, &indef );
+        m_doc->identifier(i).article().getFemale( &def, &indef );
         if ( !def.isEmpty() ) {
             QDomElement domElementFD = domDoc.createElement( KV_ART_FD );
             QDomText domTextFD = domDoc.createTextNode( def );
@@ -372,7 +359,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
             domElementEntry.appendChild( domElementFI );
         }
 
-        m_doc->article( i ).getMale( &def, &indef );
+        m_doc->identifier(i).article().getMale( &def, &indef );
         if ( !def.isEmpty() ) {
             QDomElement domElementMD = domDoc.createElement( KV_ART_MD );
             QDomText domTextMD = domDoc.createTextNode( def );
@@ -388,7 +375,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
             domElementEntry.appendChild( domElementMI );
         }
 
-        m_doc->article( i ).getNatural( &def, &indef );
+        m_doc->identifier(i).article().getNatural( &def, &indef );
         if ( !def.isEmpty() ) {
             QDomElement domElementND = domDoc.createElement( KV_ART_ND );
             QDomText domTextND = domDoc.createTextNode( def );
