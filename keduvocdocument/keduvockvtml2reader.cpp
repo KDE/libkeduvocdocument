@@ -214,24 +214,21 @@ bool KEduVocKvtml2Reader::readIdentifier( QDomElement &identifierElement )
         return false;
     }
 
-    QDomElement currentElement = identifierElement.firstChildElement( KVTML_IDENTIFIERTYPE );
-    if ( !currentElement.isNull() ) {
-        // TODO: do something with the type
+    // generate empty identifiers in the doc
+    for ( int i = m_doc->identifierCount(); i <= id; i++ ) {
+        m_doc->appendIdentifier( KEduVocIdentifier() );
     }
+
+    // the first element, create the identifier, even if empty
+    QDomElement currentElement = identifierElement.firstChildElement( KVTML_NAME );
+    m_doc->identifier(id).setName( currentElement.text() );
 
     currentElement = identifierElement.firstChildElement( KVTML_LOCALE );
-    if ( !currentElement.isNull() ) {
-        // TODO: do we want to use this for the identifier, or the name?
-        int index = m_doc->appendIdentifier( currentElement.text() );
-        if ( index != id ) {
-            m_errorMessage = i18n( "identifiers out of order" );
-            return false;
-        }
-    }
+    m_doc->identifier(id).setLocale( currentElement.text() );
 
-    currentElement = identifierElement.firstChildElement( KVTML_NAME );
+    currentElement = identifierElement.firstChildElement( KVTML_IDENTIFIERTYPE );
     if ( !currentElement.isNull() ) {
-        // TODO: do something with the name
+        // TODO: do something with the type
     }
 
     currentElement = identifierElement.firstChildElement( KVTML_SIZEHINT );

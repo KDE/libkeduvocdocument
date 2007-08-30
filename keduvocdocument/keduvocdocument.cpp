@@ -70,7 +70,8 @@ public:
     bool                      m_sortLesson;
 
     // save these to document
-    QStringList               m_identifiers;      //0= origin, 1,.. translations
+    QList<KEduVocIdentifier>  m_identifiers;
+
     int                       m_currentLesson;
     QList<int>                m_extraSizeHints;
     QList<int>                m_sizeHints;
@@ -607,32 +608,29 @@ void KEduVocDocument::removeEntry( int index )
 }
 
 
-int KEduVocDocument::indexOfIdentifier( const QString &lang ) const
+int KEduVocDocument::indexOfIdentifier( const QString& name ) const
 {
-    QStringList::const_iterator first = d->m_identifiers.begin();
-    int count = 0;
-    while ( first != d->m_identifiers.end() ) {
-        if ( *first == lang )
-            return count;
-        first++;
-        count++;
+    for ( int i=0; i < d->m_identifiers.count(); i++ ) {
+        if ( d->m_identifiers.value(i).name() == name ) {
+            return i;
+        }
     }
     return -1;
 }
 
 
-QString KEduVocDocument::identifier( int index ) const
+KEduVocIdentifier& KEduVocDocument::identifier( int index )
 {
-    if ( index >= d->m_identifiers.size() || index < 0 )
-        return "";
-    else
-        return d->m_identifiers[index];
+    if ( index < 0 || index >= d->m_identifiers.size() ) {
+        kError() << "Invalid identifier index: " << index;
+    }
+    return d->m_identifiers[index];
 }
 
 
-void KEduVocDocument::setIdentifier( int idx, const QString &id )
+void KEduVocDocument::setIdentifier( int idx, const KEduVocIdentifier &id )
 {
-    if ( idx < d->m_identifiers.size() && idx >= 0 ) {
+    if ( idx >= 0 && idx < d->m_identifiers.size() ) {
         d->m_identifiers[idx] = id;
     }
 }
@@ -771,7 +769,7 @@ void KEduVocDocument::setSizeHint( int idx, const int width )
 
 void KEduVocDocument::removeIdentifier( int index )
 {
-    if ( index < d->m_identifiers.size() && index >= 1 ) {
+    if ( index < d->m_identifiers.size() && index >= 0 ) {
         d->m_identifiers.removeAt( index );
         for ( int i = 0; i < d->m_vocabulary.count(); i++ )
             d->m_vocabulary[i].removeTranslation( index );
@@ -863,11 +861,30 @@ int KEduVocDocument::identifierCount() const
     return d->m_identifiers.count();  // number of translations
 }
 
-int KEduVocDocument::appendIdentifier( const QString & id )
+int KEduVocDocument::appendIdentifier( const KEduVocIdentifier& id )
 {
+    int i = d->m_identifiers.size();
     d->m_identifiers.append( id );
-    return d->m_identifiers.size() - 1;
+    if ( id.name().isEmpty() ) {
+        if ( i == 0 ) {
+            identifier(i).setName(i18nc("The name of the first language/column of vocabulary, if we have to guess it.", "Original"));
+        } else {
+            identifier(i).setName(i18nc( "The name of the second, third ... language/column of vocabulary, if we have to guess it.", "Translation %1", i ) );
+        }
+    }
+
+    return i;
 }
+
+
+// int KEduVocDocument::appendIdentifier(const QString & name)
+// {
+//     KEduVocIdentifier identifier;
+//     identifier.setName(name);
+//     return appendIdentifier(identifier);
+// }
+
+
 
 //QString KEduVocDocument::lessonDescription(int idx) const
 //{
@@ -1350,8 +1367,6 @@ void KEduVocDocument::removeUsage( const QString &name )
         }
     }
 }
-
-
 
 
 #include "keduvocdocument.moc"

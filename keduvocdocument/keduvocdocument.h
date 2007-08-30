@@ -21,6 +21,7 @@
 
 #include "libkeduvocdocument_export.h"
 
+#include "keduvocidentifier.h"
 #include "keduvocgrammar.h"
 #include "keduvocconjugation.h"
 
@@ -229,10 +230,12 @@ public:
     /**
      * Appends a new identifier (usually a language)
      *
-     * @param id         the identifier to append
+     * @param name the identifier to append
      * @returns the identifier number
      */
-    int appendIdentifier( const QString & id );
+//     int appendIdentifier( const QString& name );
+
+    int appendIdentifier( const KEduVocIdentifier & identifier = KEduVocIdentifier());
 
     /**
      * Sets the identifier of translation
@@ -240,7 +243,7 @@ public:
      * @param index            number of translation 0..x
      * @param lang             thr language identifier: en=english, de=german, ...
      */
-    void setIdentifier( int index, const QString &lang );
+    void setIdentifier( int index, const KEduVocIdentifier& lang );
 
     /**
      * Returns the identifier of translation @p index
@@ -248,12 +251,13 @@ public:
      * @param index            number of translation 0..x
      * @returns                the language identifier: en=english, de=german, ...
      */
-    QString identifier( int index ) const;
+//     QString identifier( int index ) const;
+    KEduVocIdentifier& identifier( int index );
 
     /**
-     * Removes identifier an the according translation in all entries
+     * Removes identifier and the according translations in all entries
      *
-     * @param index            number of translation 1..x
+     * @param index            number of translation 0..x
      */
     void removeIdentifier( int index );
 
@@ -263,7 +267,7 @@ public:
      * @param lang             identifier of language
      * @returns                index of identifier, 0 = original, 1..n = translation, -1 = not found
      */
-    int indexOfIdentifier( const QString &lang ) const;
+    int indexOfIdentifier( const QString &name ) const;
 
     // *** type methods ***
 

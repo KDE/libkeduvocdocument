@@ -45,10 +45,19 @@ public:
 
     bool readDoc( KEduVocDocument *doc );
 
+    /**
+     * Attempt to add a language/locale. Language/locale are set to the same value.
+     * No error if already there with the same value.
+     * @param languageId idenifier number
+     * @param language name
+     * @return true if successful
+     */
+    bool addLanguage( int languageId, const QString& language);
+
     bool readLesson( QDomElement &domElementParent );
     bool readArticle( QDomElement &domElementParent );
     bool readConjug( QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug );
-    bool readOptions( QDomElement &domElementParent );
+//     bool readOptions( QDomElement &domElementParent );
     bool readType( QDomElement &domElementParent );
     bool readTense( QDomElement &domElementParent );
     bool readUsage( QDomElement &domElementParent );

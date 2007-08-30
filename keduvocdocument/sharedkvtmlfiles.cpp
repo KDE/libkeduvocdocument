@@ -166,7 +166,7 @@ void SharedKvtmlFiles::sortDownloadedFiles()
         // open the file
         doc->open( fileUrl );
 
-        QString locale = doc->identifier( 0 );
+        QString locale = doc->identifier( 0 ).name();
 
         // make sure the locale sub-folder exists
         KUrl pathUrl( fileUrl );

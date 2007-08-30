@@ -143,7 +143,9 @@ bool KEduVocKvtml2Writer::writeIdentifiers( QDomElement &identifiersElement )
 
         // record the identifier as the locale for now
         // TODO: when support for more parts of the identifier is in the document class (name, type, etc.) store those here as well
-        identifier.appendChild( newTextElement( KVTML_LOCALE, m_doc->identifier( i ) ) );
+        identifier.appendChild( newTextElement( KVTML_NAME, m_doc->identifier( i ).name() ) );
+
+        identifier.appendChild( newTextElement( KVTML_LOCALE, m_doc->identifier( i ).locale() ) );
 
         // record articles
         QDomElement article = m_domDoc.createElement( KVTML_ARTICLE );

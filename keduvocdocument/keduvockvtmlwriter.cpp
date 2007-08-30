@@ -120,7 +120,7 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
             QString s;
             domElementOriginal.setAttribute( KV_SIZEHINT, m_doc->sizeHint( 0 ) );
 
-            s = m_doc->identifier( 0 ).simplified();
+            s = m_doc->identifier( 0 ).name().simplified();
             if ( s.isEmpty() )
                 s = "original";
             domElementOriginal.setAttribute( KV_LANG, s );
@@ -188,7 +188,7 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
                 QString s;
                 domElementTranslation.setAttribute( KV_SIZEHINT, m_doc->sizeHint( trans ) );
 
-                s = m_doc->identifier( trans ).simplified();
+                s = m_doc->identifier( trans ).name().simplified();
                 if ( s.isEmpty() ) {
                     s.setNum( trans );
                     s.prepend( "translation " );
@@ -340,23 +340,23 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
     QString indef;
     QString s;
 
-    for ( int lfn = 0; lfn < qMin( m_doc->articleCount(), m_doc->identifierCount() ); lfn++ )
+    for ( int i = 0; i < qMin( m_doc->articleCount(), m_doc->identifierCount() ); i++ )
     {
         QDomElement domElementEntry = domDoc.createElement( KV_ART_ENTRY );
-        if ( lfn == 0 ) {
-            s = m_doc->identifier( 0 ).simplified();
+        if ( i == 0 ) {
+            s = m_doc->identifier( 0 ).name().simplified();
             if ( s.isEmpty() )
                 s = "original";
         } else {
-            s = m_doc->identifier( lfn ).simplified();
+            s = m_doc->identifier( i ).name().simplified();
             if ( s.isEmpty() ) {
-                s.setNum( lfn );
+                s.setNum( i );
                 s.prepend( "translation " );
             }
         }
         domElementEntry.setAttribute( KV_LANG, s );
 
-        m_doc->article( lfn ).getFemale( &def, &indef );
+        m_doc->article( i ).getFemale( &def, &indef );
         if ( !def.isEmpty() ) {
             QDomElement domElementFD = domDoc.createElement( KV_ART_FD );
             QDomText domTextFD = domDoc.createTextNode( def );
@@ -372,7 +372,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
             domElementEntry.appendChild( domElementFI );
         }
 
-        m_doc->article( lfn ).getMale( &def, &indef );
+        m_doc->article( i ).getMale( &def, &indef );
         if ( !def.isEmpty() ) {
             QDomElement domElementMD = domDoc.createElement( KV_ART_MD );
             QDomText domTextMD = domDoc.createTextNode( def );
@@ -388,7 +388,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
             domElementEntry.appendChild( domElementMI );
         }
 
-        m_doc->article( lfn ).getNatural( &def, &indef );
+        m_doc->article( i ).getNatural( &def, &indef );
         if ( !def.isEmpty() ) {
             QDomElement domElementND = domDoc.createElement( KV_ART_ND );
             QDomText domTextND = domDoc.createTextNode( def );
@@ -629,7 +629,7 @@ bool KEduVocKvtmlWriter::writeConjugHeader( QDomDocument &domDoc, QDomElement &d
     for ( int ent = 0; ent < qMin( curr_conjug.count(), m_doc->identifierCount() ); ent++ ) {
         QDomElement domElementEntry = domDoc.createElement( KV_CON_ENTRY );
 
-        s = m_doc->identifier( ent ).simplified();
+        s = m_doc->identifier( ent ).name().simplified();
         if ( s.isEmpty() ) {
             s.setNum( ent );
             s.prepend( "translation " );

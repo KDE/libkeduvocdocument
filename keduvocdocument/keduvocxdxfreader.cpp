@@ -66,16 +66,17 @@ void KEduVocXdxfReader::readXdxf()
 {
     ///The language attributes are required and should be ISO 639-2 codes, but you never know...
     QStringRef id1 = attributes().value( "lang_from" );
-    if ( !id1.isNull() )
-        m_doc->appendIdentifier( id1.toString().toLower() );
-    else
-        m_doc->appendIdentifier( i18nc( "@title:column the original language column", "Original" ) );
-
+    m_doc->appendIdentifier();
+    if ( !id1.isNull() ) {
+        m_doc->identifier(0).setLocale( id1.toString().toLower() );
+        m_doc->identifier(0).setName( id1.toString().toLower() );
+    }
     QStringRef id2 = attributes().value( "lang_to" );
-    if ( !id2.isNull() )
-        m_doc->appendIdentifier( id2.toString().toLower() );
-    else
-        m_doc->appendIdentifier( i18nc( "@title:column one of the translation columns", "Translation" ) );
+    m_doc->appendIdentifier();
+    if ( !id2.isNull() ) {
+        m_doc->identifier(1).setLocale( id2.toString().toLower() );
+        m_doc->identifier(1).setName( id2.toString().toLower() );
+    }
 
     while ( !atEnd() ) {
         readNext();

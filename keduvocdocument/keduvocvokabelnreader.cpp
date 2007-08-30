@@ -7,6 +7,7 @@
     begin        : Wed Jun 15 19:32:00 PDT 2005
 
     copyright    : (C) 2005, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
+                   (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
     -----------------------------------------------------------------------
 
@@ -90,8 +91,12 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
     lang1 = inputStream.readLine();
     languages = lang1.split( "\"," );
 
-    m_doc->appendIdentifier( languages[0].mid( 1 ) );
-    m_doc->appendIdentifier( languages[1].mid( 1 ) );
+    m_doc->appendIdentifier();
+    m_doc->identifier(0).setLocale( languages[0].mid( 1 ) );
+    m_doc->identifier(0).setName( languages[0].mid( 1 ) );
+    m_doc->appendIdentifier();
+    m_doc->identifier(1).setLocale( languages[1].mid( 1 ) );
+    m_doc->identifier(1).setName( languages[1].mid( 1 ) );
 
     keepGoing = true;
     while ( keepGoing )

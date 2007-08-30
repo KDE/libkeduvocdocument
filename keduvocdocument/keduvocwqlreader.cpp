@@ -3,6 +3,7 @@
     -----------------------------------------------------------------------
     copyright     : (C) 2004, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
                     (C) 2005 Eric Pignet
+                    (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
  ***************************************************************************/
 
@@ -140,8 +141,13 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
     p = s.indexOf( "   [", 0 );
     s = s.left( p );
     s = s.simplified();
-    m_doc->appendIdentifier( s );
-    m_doc->appendIdentifier( inputStream.readLine() );
+    m_doc->appendIdentifier();
+    m_doc->identifier(0).setLocale( s );
+    m_doc->identifier(0).setName( s );
+    s = inputStream.readLine();
+    m_doc->appendIdentifier();
+    m_doc->identifier(1).setLocale( s );
+    m_doc->identifier(1).setName( s );
 
     while ( !s.isNull() ) {
         s = inputStream.readLine();

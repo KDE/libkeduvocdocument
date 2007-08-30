@@ -6,6 +6,7 @@ set(keduvocdocument_LIB_SRCS
    keduvoccsvreader.cpp
    keduvoccsvwriter.cpp
    keduvocdocument.cpp
+   keduvocidentifier.cpp
    keduvocexpression.cpp
    keduvoctranslation.cpp
    keduvoclesson.cpp
@@ -47,6 +48,7 @@ install(TARGETS keduvocdocument  DESTINATION ${LIB_INSTALL_DIR} )
 install(FILES
    libkeduvocdocument_export.h
    keduvocdocument.h
+   keduvocidentifier.h
    keduvocexpression.h
    keduvocgrade.h
    keduvocgrammar.h

@@ -277,20 +277,8 @@ bool KEduVocKvtmlReader::readArticle( QDomElement &domElementParent )
             QString lang;
             attribute = currentElement.attributeNode( KV_LANG );
 
-            if ( m_doc->identifierCount() <= i ) {
-                // first entry
-                if ( !attribute.isNull() )       // no definition in first entry
-                    lang = attribute.value();
-                else
-                    lang = "original";
-                m_doc->appendIdentifier( lang );
-//kDebug() << " Identifier " << i << " is " << lang;
-            } else {
-                if ( !attribute.isNull() && attribute.value() != m_doc->identifier( i ) ) {
-                    // different originals ?
-                    m_errorMessage = i18n( "Ambiguous definition of language code" );
-                    return false;
-                }
+            if (!addLanguage(i, attribute.value())) {
+                return false;
             }
 
             //---------
@@ -423,20 +411,10 @@ bool KEduVocKvtmlReader::readConjug( QDomElement &domElementParent, QList<KEduVo
             QString lang;
             QDomAttr domAttrLang = domElementConjugChild.attributeNode( KV_LANG ); // "l"
 
-            if ( m_doc->identifierCount() <= count ) {
-                // first entry
-                if ( !domAttrLang.isNull() )          // no definition in first entry
-                    lang = domAttrLang.value();
-                else
-                    lang = "original";
-                m_doc->appendIdentifier( lang );
-            } else {
-                if ( !domAttrLang.isNull() && domAttrLang.value() != m_doc->identifier( count ) ) {
-                    // different originals ?
-                    m_errorMessage = i18n( "Ambiguous definition of language code" );
-                    return false;
-                }
+            if (!addLanguage(count, domAttrLang.value())) {
+                return false;
             }
+
         } else if ( domElementConjugChild.tagName() == KV_CON_TYPE ) {                    // this means reading translations KV_CON_TYPE == "t"
             //----------
             // Attribute
@@ -1070,26 +1048,10 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         if ( m_doc->entryCount() == 0 ) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
 //kDebug() << " Read Expression with identifiers: " << lang;
             // new translation
-            if ( lang.isEmpty() ) {
-                if ( i == 0 ) {
-                    lang = "original";
-                } else {
-                    // no definition in first entry ?
-                    lang.setNum( m_doc->identifierCount() );
-                    lang.prepend( "translation " );
-                }
-
-            }
-            if ( m_doc->identifierCount() <= i )
-                m_doc->appendIdentifier( lang );
-        } else {
-            if ( lang != m_doc->identifier( i ) && !lang.isEmpty() ) {
-                // different language ?
-                m_errorMessage = i18n( "ambiguous definition of language code" );
+            if (!addLanguage(i, attribute.value())) {
                 return false;
             }
         }
-
         //---------
         // Children
 
@@ -1197,5 +1159,29 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
 
     return true;
 }
+
+
+bool KEduVocKvtmlReader::addLanguage( int languageId, const QString& language)
+{
+    if ( m_doc->identifierCount() <= languageId ) {
+        m_doc->appendIdentifier();
+        // first entry
+        if ( !language.isEmpty() ) {      // no definition in first entry
+            m_doc->identifier(languageId).setLocale(language);
+            m_doc->identifier(languageId).setName(language);
+        }
+    } else {
+        if ( !language.isEmpty() ) {
+            if ( language != m_doc->identifier( languageId ).locale() ) {
+                // different originals ?
+                m_errorMessage = i18n( "Ambiguous definition of language code" );
+                return false;
+            }
+        }
+    }
+}
+
+
+
 
 #include "keduvockvtmlreader.moc"
