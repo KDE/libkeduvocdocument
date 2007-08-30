@@ -491,6 +491,11 @@ public:
      */
     //void moveLesson(int from, int to);
 
+
+
+
+
+/// @todo move conjugation to personal pronouns, move that into identifier!
     // *** conjugation methods ***
 
     /**
@@ -512,6 +517,9 @@ public:
     */
     int conjugationCount() const;
 
+
+
+///@todo move into identifier!
     // *** article methods ***
 
     /**

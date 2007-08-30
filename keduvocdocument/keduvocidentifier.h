@@ -41,14 +41,50 @@ Class to store meta information about a language or any other category in the vo
 class KEDUVOCDOCUMENT_EXPORT KEduVocIdentifier
 {
 public:
-    KEduVocIdentifier();
-    KEduVocIdentifier( const KEduVocIdentifier &other );
-    ~KEduVocIdentifier();
-    KEduVocIdentifier& operator= ( const KEduVocIdentifier &other );
+    /**
+     * Default ctor.
+     */
+    explicit KEduVocIdentifier();
 
+    /**
+     * Copy ctor.
+     * @param other
+     */
+    KEduVocIdentifier( const KEduVocIdentifier &other );
+
+    /**
+     * dtor
+     */
+    ~KEduVocIdentifier();
+
+    /**
+     * assignment operator
+     * @param other
+     * @return
+     */
+    KEduVocIdentifier& operator= ( const KEduVocIdentifier &other );
+public:
+
+    /**
+     * Name of this identifier. (English, Anatomy, Fruit salad...)
+     * @return name
+     */
     QString name() const;
+    /**
+     * Set the name
+     * @param name
+     */
     void setName( const QString& name );
+
+    /**
+     * The locale of the contents: en, de, es, ...
+     * @return locale
+     */
     QString locale() const;
+    /**
+     * Set the locale
+     * @param name
+     */
     void setLocale( const QString& name );
 
 private:
