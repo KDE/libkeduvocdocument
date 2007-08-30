@@ -138,7 +138,7 @@ bool KEduVocKvtmlReader::readBody( QDomElement &domElementParent )
             KEduVocConjugation conjug;
             for ( int i = 0; i< conjugations.count(); i++ ) {
                 conjug = conjugations[i];
-                m_doc->setConjugation( i, conjug );
+                m_doc->identifier(i).setPersonalPronouns( conjug );
             }
         } else
             return false;

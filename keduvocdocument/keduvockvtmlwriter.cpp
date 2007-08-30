@@ -73,8 +73,8 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
         return false;
 
     QList<KEduVocConjugation> conjugations;
-    for ( int i = 0; i < m_doc->conjugationCount(); i++ )
-        conjugations.append( m_doc->conjugation( i ) );
+    for ( int i = 0; i < m_doc->identifierCount(); i++ )
+        conjugations.append( m_doc->identifier(i).personalPronouns() );
     if ( conjugations.count() > 0 ) {
         if ( !writeConjugHeader( domDoc, domElementKvtml, conjugations ) )
             return false;

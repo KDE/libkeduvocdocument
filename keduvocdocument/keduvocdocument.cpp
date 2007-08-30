@@ -96,8 +96,6 @@ public:
       */
     QString                   m_category;
 
-    QList<KEduVocConjugation> m_conjugations;
-
     // make this a map so removals don't require renumbering :)
     QMap<int, KEduVocLesson*>  m_lessons;
 
@@ -662,35 +660,6 @@ QStringList KEduVocDocument::tenseDescriptions() const
 void KEduVocDocument::setTenseDescriptions( const QStringList &names )
 {
     d->m_tenseDescriptions = names;
-}
-
-
-void KEduVocDocument::setConjugation( int idx, const KEduVocConjugation &con )
-{
-    if ( idx < 0 ) return;
-
-    // extend conjugation with empty elements
-    if ( d->m_conjugations.size() <= idx )
-        for ( int i = d->m_conjugations.size(); i < idx+1; i++ )
-            d->m_conjugations.append( KEduVocConjugation() );
-
-    d->m_conjugations[idx] = con;
-}
-
-
-int KEduVocDocument::conjugationCount() const
-{
-    return d->m_conjugations.count();
-}
-
-
-KEduVocConjugation KEduVocDocument::conjugation( int idx ) const
-{
-    if ( idx >= d->m_conjugations.size() || idx < 0 ) {
-        return KEduVocConjugation();
-    } else {
-        return d->m_conjugations[idx];
-    }
 }
 
 

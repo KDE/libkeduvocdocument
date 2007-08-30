@@ -76,7 +76,8 @@ KEduVocIdentifier::KEduVocIdentifier( const KEduVocIdentifier &other )
 ///@todo
     d->m_locale = other.d->m_locale;
     d->m_name = other.d->m_name;
-
+    d->m_articles = other.d->m_articles;
+    d->m_personalPronouns = other.d->m_personalPronouns;
 }
 
 
@@ -84,6 +85,8 @@ KEduVocIdentifier& KEduVocIdentifier::operator= ( const KEduVocIdentifier &other
 {
     d->m_locale = other.d->m_locale;
     d->m_name = other.d->m_name;
+    d->m_articles = other.d->m_articles;
+    d->m_personalPronouns = other.d->m_personalPronouns;
     return *this;
 }
 
@@ -114,9 +117,19 @@ void KEduVocIdentifier::setArticle( const KEduVocArticle& articles )
     d->m_articles = articles;
 }
 
-
 KEduVocArticle KEduVocIdentifier::article() const
 {
     return d->m_articles;
 }
 
+
+
+KEduVocConjugation KEduVocIdentifier::personalPronouns() const
+{
+    return d->m_personalPronouns;
+}
+
+void KEduVocIdentifier::setPersonalPronouns( const KEduVocConjugation & pronouns )
+{
+    d->m_personalPronouns = pronouns;
+}

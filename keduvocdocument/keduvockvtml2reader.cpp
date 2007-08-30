@@ -246,7 +246,7 @@ bool KEduVocKvtml2Reader::readIdentifier( QDomElement &identifierElement )
     if ( !currentElement.isNull() ) {
         KEduVocConjugation personalPronouns;
         readConjugation( currentElement, personalPronouns );
-        m_doc->setConjugation( id, personalPronouns );
+        m_doc->identifier(id).setPersonalPronouns( personalPronouns );
     }
     return result;
 }

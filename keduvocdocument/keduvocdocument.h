@@ -491,32 +491,6 @@ public:
      */
     //void moveLesson(int from, int to);
 
-
-
-
-
-/// @todo move conjugation to personal pronouns, move that into identifier!
-    // *** conjugation methods ***
-
-    /**
-     * @param index            index of translation
-     * @returns                a pointer to conjugations if available
-     */
-    KEduVocConjugation conjugation( int index ) const;
-
-    /**
-     * Sets conjugations
-     *
-     * @param index            index of translation
-     * @param con              conjugation block
-     */
-    void setConjugation( int index, const KEduVocConjugation &con );
-
-    /**
-     * @returns                the number of conjugations
-    */
-    int conjugationCount() const;
-
     // *** file format specific methods ***
 
     /**

@@ -156,7 +156,7 @@ bool KEduVocKvtml2Writer::writeIdentifiers( QDomElement &identifiersElement )
 
         // record personalpronouns
         QDomElement personalpronouns = m_domDoc.createElement( KVTML_PERSONALPRONOUNS );
-        writeConjugation( personalpronouns, m_doc->conjugation( i ), QString() );
+        writeConjugation( personalpronouns, m_doc->identifier(i).personalPronouns(), QString() );
         if ( personalpronouns.hasChildNodes() ) {
             identifier.appendChild( personalpronouns );
         }

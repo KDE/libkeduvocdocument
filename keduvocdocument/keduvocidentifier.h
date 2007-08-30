@@ -101,6 +101,18 @@ public:
     void setArticle( const KEduVocArticle& article );
 
 
+    /**
+     * Get the personal pronouns for this identifier
+     * @returns a KEduVocConjugation containing the personal pronouns
+     */
+    KEduVocConjugation personalPronouns() const;
+
+    /**
+     * Sets personal pronouns
+     * @param pronouns a KEduVocConjugation containing the personal pronouns
+     */
+    void setPersonalPronouns( const KEduVocConjugation &pronouns );
+
 private:
     class Private;
     Private * const d;
