@@ -25,27 +25,25 @@
 
 #include <KDebug>
 
-const QString KEduVocKvtmlCompability::KVTML_1_USAGE_USER_DEFINED = QString( "#" );
-const QString KEduVocKvtmlCompability::KVTML_1_USAGE_SEPERATOR = QString( ":" );
-
-const QString KEduVocKvtmlCompability::KVTML_1_TYPE_USER = QString( "#" );
-const QString KEduVocKvtmlCompability::KVTML_1_TYPE_DIV = QString( ":" );
+const QString KEduVocKvtmlCompability::KVTML_1_USER_DEFINED = QString( "#" );
+const QString KEduVocKvtmlCompability::KVTML_1_SEPERATOR = QString( ":" );
 
 
 KEduVocKvtmlCompability::KEduVocKvtmlCompability()
 {
     m_usages = usageMap();
     m_userdefinedUsageCounter = 0;
+    m_userdefinedTenseCounter = 0;
 
     initOldTypeLists();
-    initOldConjugations();
+    initOldTenses();
 }
 
 
 QSet<QString> KEduVocKvtmlCompability::usageFromKvtml1( const QString & oldUsage ) const
 {
     QSet<QString> usages;
-    foreach( QString usage , oldUsage.split( KVTML_1_USAGE_SEPERATOR, QString::SkipEmptyParts ) ) {
+    foreach( QString usage , oldUsage.split( KVTML_1_SEPERATOR, QString::SkipEmptyParts ) ) {
         usages.insert( m_usages[usage] );
     }
     return usages;
@@ -111,7 +109,7 @@ void KEduVocKvtmlCompability::addUserdefinedUsage( const QString & usage )
 {
     // start counting at 1 !!!
     m_userdefinedUsageCounter++;
-    m_usages[KVTML_1_USAGE_USER_DEFINED + QString::number( m_userdefinedUsageCounter )] = usage;
+    m_usages[KVTML_1_USER_DEFINED + QString::number( m_userdefinedUsageCounter )] = usage;
 }
 
 QSet< QString > KEduVocKvtmlCompability::documentUsages() const
@@ -161,7 +159,7 @@ QString KEduVocKvtmlCompability::mainTypeFromOldFormat( const QString & typeSubt
     QString mainType;
     int i;
 
-    if (( i = typeSubtypeString.indexOf( KVTML_1_TYPE_DIV ) ) >= 0 )
+    if (( i = typeSubtypeString.indexOf( KVTML_1_SEPERATOR ) ) >= 0 )
         mainType = typeSubtypeString.left( i );
     else
         mainType = typeSubtypeString;
@@ -189,7 +187,7 @@ QString KEduVocKvtmlCompability::subTypeFromOldFormat( const QString & typeSubty
 {
     int i;
     QString t = typeSubtypeString;
-    if (( i = t.indexOf( KVTML_1_TYPE_DIV ) ) >= 0 ) {
+    if (( i = t.indexOf( KVTML_1_SEPERATOR ) ) >= 0 ) {
         t.remove( 0, i+1 );
     } else {
         return QString();
@@ -210,13 +208,13 @@ QString KEduVocKvtmlCompability::oldType( const QString & mainType, const QStrin
     oldType = m_oldMainTypeNames.key( mainType );
     oldSubType = m_oldSubTypeNames.key( subType );
     if ( !oldSubType.isEmpty() ) {
-        return oldType + KVTML_1_TYPE_DIV + oldSubType;
+        return oldType + KVTML_1_SEPERATOR + oldSubType;
     }
     return oldType;
 
 }
 
-void KEduVocKvtmlCompability::initOldConjugations()
+void KEduVocKvtmlCompability::initOldTenses()
 {
     m_oldTenses["PrSi"] = i18n( "Simple Present" );
     m_oldTenses["PrPr"] = i18n( "Present Progressive" );
@@ -226,3 +224,32 @@ void KEduVocKvtmlCompability::initOldConjugations()
     m_oldTenses["PaPa"] = i18n( "Past Participle" );
     m_oldTenses["FuSi"] = i18n( "Future" );
 }
+
+
+void KEduVocKvtmlCompability::addUserdefinedTense(const QString & tense)
+{
+    m_userdefinedTenseCounter++;
+    m_oldTenses[KVTML_1_USER_DEFINED + QString::number( m_userdefinedTenseCounter )] = tense;
+    m_tenses.insert(tense);
+
+    kDebug() << " Add tense: " << KVTML_1_USER_DEFINED + QString::number( m_userdefinedTenseCounter ) << " - " << tense;
+}
+
+
+QString KEduVocKvtmlCompability::tenseFromKvtml1(const QString & oldTense)
+{
+    // in case the document got chaged, at least make up something as tense
+    if (!m_oldTenses.keys().contains(oldTense)) {
+        m_oldTenses[oldTense] = oldTense;
+        kDebug() << "Warning, tense not found in document!";
+    }
+    m_tenses.insert(m_oldTenses.value(oldTense));
+    return m_oldTenses.value(oldTense);
+}
+
+
+QStringList KEduVocKvtmlCompability::documentTenses() const
+{
+    return m_tenses.values();
+}
+

@@ -72,9 +72,6 @@
 #define UL_USER_USAGE  "#"   // designates number of user type
 
 
-
-
-
 /**
   * @file contains defines and constants necessary for reading kvtml files prior to KDE4. kvtml version 1.
   */
@@ -134,6 +131,9 @@ public:
     QString oldType( const QString& mainType, const QString& subType ) const;
 
 
+    void addUserdefinedTense( const QString& tense );
+    QString tenseFromKvtml1( const QString & oldTense );
+    QStringList documentTenses() const;
 
 private:
     /**
@@ -146,10 +146,6 @@ private:
     /// Map to store usages. Initialized with preset values by the constructor. Later user defined usages can be added.
     QMap< QString, QString > m_usages;
 
-    /// # defines user defined usage
-    static const QString KVTML_1_USAGE_USER_DEFINED;
-    /// : seperates usages
-    static const QString KVTML_1_USAGE_SEPERATOR;
 
     /// only order was decisive, we have to keep count.
     int m_userdefinedUsageCounter;
@@ -161,14 +157,17 @@ private:
     QMap<QString, QString> m_oldMainTypeNames;
     QMap<QString, QString> m_oldSubTypeNames;
 
-    static const QString KVTML_1_TYPE_USER;
-    static const QString KVTML_1_TYPE_DIV;
-
 ///////////TENSES/CONJUGATIONS///////
-    void initOldConjugations();
+    void initOldTenses();
+
     QMap<QString, QString> m_oldTenses;
+    int m_userdefinedTenseCounter;
+    QSet<QString> m_tenses;
 
-
+    /// # defines user defined usage/word type/tense
+    static const QString KVTML_1_USER_DEFINED;
+    /// : seperates usages/word types
+    static const QString KVTML_1_SEPERATOR;
 };
 
 

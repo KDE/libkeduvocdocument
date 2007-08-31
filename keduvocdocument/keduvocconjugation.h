@@ -29,10 +29,8 @@
 
 #include <QtCore/QStringList>
 
-
+///@todo get rid of this old strange prefix thing: used to mark personal pronouns.
 #define CONJ_PREFIX            "--"   // definition of prefixes (I, you, ..)
-
-#define UL_USER_TENSE          "#"   // designates number of user tense
 
 
 class KEDUVOCDOCUMENT_EXPORT KEduVocTenseRelation
@@ -72,13 +70,7 @@ public:
 
     ~KEduVocConjugation();
 
-    /**
-     * @return
-     */
     int entryCount() const;
-
-
-    QString getVerbName() const;
 
     QString getType( int index );
     void setType( int index, const QString & type );

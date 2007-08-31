@@ -180,6 +180,8 @@ bool KEduVocKvtmlReader::readBody( QDomElement &domElementParent )
         }
     }
 
+    m_doc->setTenseDescriptions(m_compability.documentTenses());
+
     return true;
 }
 
@@ -387,7 +389,7 @@ bool KEduVocKvtmlReader::readConjug( QDomElement &domElementParent, QList<KEduVo
     QString pers3_f_plur;
     QString pers3_n_plur;
     QString lang;
-    QString type;
+    QString tense; // former type
 
     // this gets a list of keduvocconjugations, count will be the conjug number to be filled.
     int count = 0;
@@ -402,7 +404,7 @@ bool KEduVocKvtmlReader::readConjug( QDomElement &domElementParent, QList<KEduVo
     {
         if ( domElementConjugChild.tagName() == KV_CON_ENTRY ) {            // if KV_CON_ENTRY == "e" is found, we are reading a personal pronun definition.
             // CONJ_PREFIX is defined as "--"
-            type = CONJ_PREFIX;
+            tense = CONJ_PREFIX;
 
             //----------
             // Attribute
@@ -420,25 +422,9 @@ bool KEduVocKvtmlReader::readConjug( QDomElement &domElementParent, QList<KEduVo
 
             // "n" == is the type is the tense
             QDomAttr domAttrLang = domElementConjugChild.attributeNode( KV_CON_NAME );
-            type = domAttrLang.value();
-            if ( type.isNull() )
-                type = "";
+            QString oldShortTense = domAttrLang.value();
 
-            // if it starts with "#" the user typed in the tense name
-            if ( type.length() != 0 && type.left( 1 ) == UL_USER_TENSE ) {
-                int num = qMin( type.mid( 1, 40 ).toInt(), 1000 ); // paranoia check
-                if ( num > m_doc->tenseDescriptions().count() ) {
-                    // description missing ?
-                    QString s;
-                    QStringList sl = m_doc->tenseDescriptions();
-                    for ( int i = m_doc->tenseDescriptions().count(); i < num; i++ ) {
-                        s.setNum( i + 1 );
-                        s.prepend( "#" ); // invent descr according to number
-                        sl.append( s );
-                    }
-                    m_doc->setTenseDescriptions( sl );
-                }
-            }
+            tense = m_compability.tenseFromKvtml1( oldShortTense );
         }
 
         pers1_sing = "";
@@ -525,24 +511,24 @@ bool KEduVocKvtmlReader::readConjug( QDomElement &domElementParent, QList<KEduVo
         // now set the data: [count] - number of conjug?
         // type - the tense?
         // finally the person
-        curr_conjug[count].setPers3SingularCommon( type, s3_common );
-        curr_conjug[count].setPers3PluralCommon( type, p3_common );
-        curr_conjug[count].setPers1Singular( type, pers1_sing );
-        curr_conjug[count].setPers2Singular( type, pers2_sing );
-        curr_conjug[count].setPers3FemaleSingular( type, pers3_f_sing );
-        curr_conjug[count].setPers3MaleSingular( type, pers3_m_sing );
-        curr_conjug[count].setPers3NaturalSingular( type, pers3_n_sing );
-        curr_conjug[count].setPers1Plural( type, pers1_plur );
-        curr_conjug[count].setPers2Plural( type, pers2_plur );
-        curr_conjug[count].setPers3FemalePlural( type, pers3_f_plur );
-        curr_conjug[count].setPers3MalePlural( type, pers3_m_plur );
-        curr_conjug[count].setPers3NaturalPlural( type, pers3_n_plur );
+        curr_conjug[count].setPers3SingularCommon( tense, s3_common );
+        curr_conjug[count].setPers3PluralCommon( tense, p3_common );
+        curr_conjug[count].setPers1Singular( tense, pers1_sing );
+        curr_conjug[count].setPers2Singular( tense, pers2_sing );
+        curr_conjug[count].setPers3FemaleSingular( tense, pers3_f_sing );
+        curr_conjug[count].setPers3MaleSingular( tense, pers3_m_sing );
+        curr_conjug[count].setPers3NaturalSingular( tense, pers3_n_sing );
+        curr_conjug[count].setPers1Plural( tense, pers1_plur );
+        curr_conjug[count].setPers2Plural( tense, pers2_plur );
+        curr_conjug[count].setPers3FemalePlural( tense, pers3_f_plur );
+        curr_conjug[count].setPers3MalePlural( tense, pers3_m_plur );
+        curr_conjug[count].setPers3NaturalPlural( tense, pers3_n_plur );
 
         if ( domElementConjugChild.tagName() == KV_CON_ENTRY )
             count++;
 
         domElementConjugChild = domElementConjugChild.nextSibling().toElement();
-    } // while -> next type, count++
+    } // while -> next tense, count++
 
     return true;
 }
@@ -578,33 +564,19 @@ bool KEduVocKvtmlReader::readType( QDomElement &domElementParent )
 
 bool KEduVocKvtmlReader::readTense( QDomElement &domElementParent )
 {
-    QString s;
     QDomElement currentElement;
-    QStringList descriptions;
 
     QDomNodeList entryList = domElementParent.elementsByTagName( KV_TENSE_DESC );
     if ( entryList.length() <= 0 )
         return false;
 
-    descriptions.clear();
-
     for ( int i = 0; i < entryList.count(); ++i ) {
         currentElement = entryList.item( i ).toElement();
         if ( currentElement.parentNode() == domElementParent ) {
-            int no = 0;
-
-            QDomAttr attribute = currentElement.attributeNode( KV_TENSE_NO );
-            if ( !attribute.isNull() )
-                no = attribute.value().toInt();
-
-            s = currentElement.text();
-            if ( s.isNull() )
-                s = "";
-            descriptions.append( s );
+            m_compability.addUserdefinedTense( currentElement.text() );
         }
     }
 
-    m_doc->setTenseDescriptions( descriptions );
     return true;
 }
 
