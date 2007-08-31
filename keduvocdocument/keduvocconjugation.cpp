@@ -65,7 +65,6 @@ KEduVocConjugation::KEduVocConjugation()
 KEduVocConjugation::KEduVocConjugation( const KEduVocConjugation& rhs )
         : d( new Private( *rhs.d ) )
 {
-///@todo something's missing here!?!?
 }
 
 
@@ -85,7 +84,8 @@ KEduVocConjugation& KEduVocConjugation::operator = ( const KEduVocConjugation& a
 bool KEduVocConjugation::operator == ( const KEduVocConjugation& a ) const
 {
 ///@todo conjugations: rewrite operator==
-    return d->m_conjugations[1].type == a.d->m_conjugations[1].type;
+kDebug() <<"Implement KEduVocConjugation::operator==";
+    return d->m_conjugations[0].type == a.d->m_conjugations[0].type;
 }
 
 
