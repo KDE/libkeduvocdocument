@@ -29,9 +29,6 @@
 class KEduVocConjugation::Private
 {
 public:
-    Private()
-    {}
-
     struct conjug_t
     {
         conjug_t()
@@ -56,7 +53,7 @@ public:
     };
 
     typedef QList<conjug_t> conjug_tList;
-    conjug_tList conjugations;
+    conjug_tList m_conjugations;
 };
 
 
@@ -80,7 +77,7 @@ KEduVocConjugation::~KEduVocConjugation()
 
 KEduVocConjugation& KEduVocConjugation::operator = ( const KEduVocConjugation& a )
 {
-///@todo
+    d->m_conjugations = a.d->m_conjugations;
     return *this;
 }
 
@@ -88,13 +85,13 @@ KEduVocConjugation& KEduVocConjugation::operator = ( const KEduVocConjugation& a
 bool KEduVocConjugation::operator == ( const KEduVocConjugation& a ) const
 {
 ///@todo conjugations: rewrite operator==
-    return d->conjugations[1].type == a.d->conjugations[1].type;
+    return d->m_conjugations[1].type == a.d->m_conjugations[1].type;
 }
 
 
 int KEduVocConjugation::entryCount() const
 {
-    return d->conjugations.count();
+    return d->m_conjugations.count();
 }
 
 
@@ -103,26 +100,26 @@ int KEduVocConjugation::entryCount() const
 QString KEduVocConjugation::getType( int idx )
 {
     kDebug() << "KEduVocConjugation::getType()" << idx;
-    if ( idx >= d->conjugations.count() )
+    if ( idx >= d->m_conjugations.count() )
         return QString();
 
-    return d->conjugations[idx].type;
+    return d->m_conjugations[idx].type;
 }
 
 
 void KEduVocConjugation::setType( int idx, const QString & type )
 {
-    if ( idx >= d->conjugations.size() )
+    if ( idx >= d->m_conjugations.size() )
         return;
 
-    d->conjugations[idx].type = type;
+    d->m_conjugations[idx].type = type;
 }
 
 
 void KEduVocConjugation::cleanUp()
 {
-    for ( int i = d->conjugations.count() - 1; i >= 0; i-- ) {
-        const Private::conjug_t *ctp = &d->conjugations[i];
+    for ( int i = d->m_conjugations.count() - 1; i >= 0; i-- ) {
+        const Private::conjug_t *ctp = &d->m_conjugations[i];
         if ( ctp->pers1_sing.simplified().isEmpty()
                 && ctp->pers2_sing.simplified().isEmpty()
                 && ctp->pers3_m_sing.simplified().isEmpty()
@@ -134,15 +131,15 @@ void KEduVocConjugation::cleanUp()
                 && ctp->pers3_f_plur.simplified().isEmpty()
                 && ctp->pers3_n_plur.simplified().isEmpty()
            )
-            d->conjugations.removeAt( i );
+            d->m_conjugations.removeAt( i );
     }
 }
 
 
 bool KEduVocConjugation::isEmpty( int idx )
 {
-    if ( idx < d->conjugations.count() ) {
-        const Private::conjug_t *ctp = &d->conjugations[idx];
+    if ( idx < d->m_conjugations.count() ) {
+        const Private::conjug_t *ctp = &d->m_conjugations[idx];
         return ctp->pers1_sing.simplified().isEmpty()
                && ctp->pers2_sing.simplified().isEmpty()
                && ctp->pers3_m_sing.simplified().isEmpty()
@@ -159,9 +156,9 @@ bool KEduVocConjugation::isEmpty( int idx )
 
 
 #define _GET_CON_(elem, type, default) \
-   for (int i = 0; i < d->conjugations.size(); i++) \
-     if (d->conjugations[i].type == type) \
-        return d->conjugations[i].elem; \
+   for (int i = 0; i < d->m_conjugations.size(); i++) \
+     if (d->m_conjugations[i].type == type) \
+        return d->m_conjugations[i].elem; \
    return default;
 
 
@@ -241,15 +238,15 @@ QString KEduVocConjugation::pers3NaturalPlural( const QString &type ) const
 
 
 #define _SET_CON_(elem, type, str) \
-   for (int i = 0; i < d->conjugations.size(); i++) \
-     if (d->conjugations[i].type == type) { \
-       d->conjugations[i].elem = str; \
+   for (int i = 0; i < d->m_conjugations.size(); i++) \
+     if (d->m_conjugations[i].type == type) { \
+       d->m_conjugations[i].elem = str; \
        return; \
      } \
    Private::conjug_t ct; \
    ct.type = type; \
    ct.elem = str; \
-   d->conjugations.append(ct);
+   d->m_conjugations.append(ct);
 
 
 void KEduVocConjugation::setPers3PluralCommon( const QString &type, bool f )
