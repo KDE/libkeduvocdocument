@@ -500,8 +500,9 @@ bool KEduVocKvtml2Writer::writeMultipleChoice( QDomElement &multipleChoiceElemen
 bool KEduVocKvtml2Writer::writeConjugation( QDomElement &conjugationElement,
         const KEduVocConjugation &conjugation, const QString &tense )
 {
+    // write the tense tag
+    conjugationElement.appendChild( newTextElement(KVTML_TENSE, tense) );
 
-kDebug() << tense << " first person: " << conjugation.pers1Singular( tense );
     // first singular conjugations
     QString first = conjugation.pers1Singular( tense );
     QString second = conjugation.pers2Singular( tense );
