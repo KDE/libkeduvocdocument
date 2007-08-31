@@ -77,22 +77,6 @@ public:
      */
     int entryCount() const;
 
-    /**
-     * @return
-     */
-//  static QList<KEduVocTenseRelation> getRelation();
-
-    /**
-     * @param names
-     */
-    static void setTenseNames( const QStringList& names );
-
-    static QString getName( const QString &abbrev );
-    static QString getName( int index );
-    static QString getAbbrev( const QString &name );
-    static QString getAbbrev( int index );
-    static int numInternalNames();
-    static int tenseCount();
 
     QString getVerbName() const;
 
