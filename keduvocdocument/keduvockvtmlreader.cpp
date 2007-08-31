@@ -425,6 +425,7 @@ bool KEduVocKvtmlReader::readConjug( QDomElement &domElementParent, QList<KEduVo
             QString oldShortTense = domAttrLang.value();
 
             tense = m_compability.tenseFromKvtml1( oldShortTense );
+kDebug() << "Reading conjugation for " << tense;
         }
 
         pers1_sing = "";

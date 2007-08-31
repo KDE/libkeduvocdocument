@@ -57,36 +57,7 @@ public:
 
     typedef QList<conjug_t> conjug_tList;
     conjug_tList conjugations;
-
-//     // for the static stuff:
-//     struct conjug_name_t
-//     {
-//         const char *abbrev;
-//         const char *name;
-//     };
-//     static conjug_name_t names[];
-//     static QStringList userTenses;
 };
-
-
-// KEduVocConjugation::Private::conjug_name_t
-//
-// KEduVocConjugation::Private::names [] =
-//     {
-//         { CONJ_SIMPLE_PRESENT,    I18N_NOOP( "Simple Present" ) },
-//         { CONJ_PRESENT_PROGR,     I18N_NOOP( "Present Progressive" ) },
-//         { CONJ_PRESENT_PERFECT,   I18N_NOOP( "Present Perfect" ) },
-//
-//         { CONJ_SIMPLE_PAST,       I18N_NOOP( "Simple Past" ) },
-//         { CONJ_PAST_PROGR,        I18N_NOOP( "Past Progressive" ) },
-//         { CONJ_PAST_PARTICIPLE,   I18N_NOOP( "Past Participle" ) },
-//
-//         { CONJ_FUTURE,            I18N_NOOP( "Future" ) }
-//     };
-
-
-// QStringList KEduVocConjugation::Private::userTenses;
-
 
 
 KEduVocConjugation::KEduVocConjugation()
@@ -127,115 +98,13 @@ int KEduVocConjugation::entryCount() const
 }
 
 
-// QList<KEduVocTenseRelation> KEduVocConjugation::getRelation ()
-// {
-//   QList<KEduVocTenseRelation> vec;
-//
-//   for (int i = 0; i < numInternalNames(); i++) {
-//     vec.append(KEduVocTenseRelation(Private::names[i].abbrev, i18n(Private::names[i].name)));
-//   }
-//
-//   for (int i = 0; i < Private::userTenses.count(); i++) {
-//     QString s;
-//     s.setNum(i + 1);
-//     s.prepend(UL_USER_TENSE);
-//     vec.append(KEduVocTenseRelation(s, Private::userTenses[i]));
-//   }
-//
-//   return vec;
-// }
-
-
-// void KEduVocConjugation::setTenseNames( const QStringList& names )
-// {
-//     Private::userTenses = names;
-// }
-
-
-// QString KEduVocConjugation::getName( const QString &abbrev )
-// {
-//     if ( abbrev.length() >= 2 && QString( abbrev[0] ) == QString( UL_USER_TENSE ) ) {
-//         QString s = abbrev;
-//         s.remove( 0, 1 );
-//         int i = s.toInt() - 1;
-//
-//         if ( i < Private::userTenses.count() )
-//             return Private::userTenses[i];
-//         else
-//             return "";
-//     } else {
-//         for ( int i = 0; i < numInternalNames(); i++ )
-//             if ( Private::names[i].abbrev == abbrev ) {
-//                 return i18n( Private::names[i].name );
-//             }
-//     }
-//
-//     return "";
-// }
-
-
-// QString KEduVocConjugation::getName( int idx )
-// {
-//     if ( idx < numInternalNames() )
-//         return i18n( Private::names[idx].name );
-//     else if ( idx < tenseCount() )
-//         return Private::userTenses[idx-numInternalNames()];
-//     else
-//         return "";
-// }
-
-
-// QString KEduVocConjugation::getAbbrev( const QString &name )
-// {
-//     for ( int i = 0; i < Private::userTenses.count(); i++ )
-//         if ( Private::userTenses[i] == name ) {
-//             QString s;
-//             s.setNum( i + 1 );
-//             s.prepend( UL_USER_TENSE );
-//             return s;
-//         }
-//
-//     for ( int i = 0; i < numInternalNames(); i++ )
-//         if ( Private::names[i].name == name )
-//             return Private::names[i].abbrev;
-//
-//     return "";
-// }
-
-
-// QString KEduVocConjugation::getAbbrev( int idx )
-// {
-//     if ( idx < numInternalNames() )
-//         return Private::names[idx].abbrev;
-//
-//     else if ( idx < tenseCount() ) {
-//         QString s;
-//         s.setNum( idx - numInternalNames() + 1 );
-//         s.prepend( UL_USER_TENSE );
-//         return s;
-//     } else
-//         return "";
-// }
-
-
-// int KEduVocConjugation::numInternalNames()
-// {
-//     return sizeof( Private::names ) / sizeof( Private::names[0] );
-// }
-
-
-// int KEduVocConjugation::tenseCount()
-// {
-//     return numInternalNames() + Private::userTenses.size();
-// }
 
 
 QString KEduVocConjugation::getType( int idx )
 {
-
     kDebug() << "KEduVocConjugation::getType()" << idx;
     if ( idx >= d->conjugations.count() )
-        return "";
+        return QString();
 
     return d->conjugations[idx].type;
 }
@@ -456,45 +325,4 @@ void KEduVocConjugation::setPers3NaturalPlural( const QString &type, const QStri
 
 #undef _SET_CON_
 
-
-//==============================================================
-class KEduVocTenseRelation::Private
-{
-public:
-    QString shortId;
-    QString longId;
-};
-
-KEduVocTenseRelation::KEduVocTenseRelation()
-        : d( new Private )
-{}
-
-KEduVocTenseRelation::KEduVocTenseRelation( const QString & _short, const QString & _long )
-        : d( new Private )
-{
-    d->shortId = _short;
-    d->longId = _long;
-}
-
-KEduVocTenseRelation::~KEduVocTenseRelation()
-{
-    delete d;
-}
-
-KEduVocTenseRelation &KEduVocTenseRelation::operator= ( const KEduVocTenseRelation &other )
-{
-    d->shortId = other.shortStr();
-    d->longId = other.longStr();
-    return *this;
-}
-
-QString KEduVocTenseRelation::shortStr() const
-{
-    return d->shortId;
-}
-
-QString KEduVocTenseRelation::longStr()  const
-{
-    return d->longId;
-}
 
