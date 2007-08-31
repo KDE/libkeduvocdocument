@@ -66,8 +66,7 @@
 <!ELEMENT example        (#PCDATA) >
 <!ELEMENT paraphrase     (#PCDATA) >
 
-<!ELEMENT conjugationtype (#PCDATA) >
-<!ELEMENT conjugation    (tense, conjugationtype?, singular?, plural?) >
+<!ELEMENT conjugation    (tense, singular?, plural?) >
 
 <!ELEMENT comparison     (absolute, comparative, superlative) >
 <!ELEMENT absolute       (#PCDATA) >
