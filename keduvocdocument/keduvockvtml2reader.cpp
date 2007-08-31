@@ -548,8 +548,7 @@ bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifi
 bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocConjugation &curr_conjug )
 /*
  <conjugation>
-  <tenseid>1</tenseid>
-  <type>regular</type>
+  <tense>Futurepastperfekt:)</tense>
   <singular>
     <first person></first person>
     <second person></second person>
@@ -581,16 +580,11 @@ bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocCo
     QString plurthirdmale;
     QString plurthirdfemale;
     QString plurthirdneutral;
-    QString type;
+    QString tense;
 
-    QDomElement typeElement = conjugElement.firstChildElement( KVTML_CONJUGATIONTYPE );
-    if ( !typeElement.isNull() )
-    {
-        type = typeElement.text();
-    }
-
-    // TODO: add something here to link and/or store tense information
-
+    QDomElement tenseElement = conjugElement.firstChildElement( KVTML_TENSE );
+    tense = tenseElement.text();
+kDebug() << "Reading conjugation for tense: " << tense;
     QDomElement currentGroup = conjugElement.firstChildElement( KVTML_SINGULAR );
     if ( !currentGroup.isNull() )
     {
@@ -675,18 +669,18 @@ bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocCo
         }
     }
 
-    curr_conjug.setPers3SingularCommon( type, s3_common );
-    curr_conjug.setPers3PluralCommon( type, p3_common );
-    curr_conjug.setPers1Singular( type, singfirst );
-    curr_conjug.setPers2Singular( type, singsecond );
-    curr_conjug.setPers3FemaleSingular( type, singthirdfemale );
-    curr_conjug.setPers3MaleSingular( type, singthirdmale );
-    curr_conjug.setPers3NaturalSingular( type, singthirdneutral );
-    curr_conjug.setPers1Plural( type, plurfirst );
-    curr_conjug.setPers2Plural( type, plursecond );
-    curr_conjug.setPers3FemalePlural( type, plurthirdfemale );
-    curr_conjug.setPers3MalePlural( type, plurthirdmale );
-    curr_conjug.setPers3NaturalPlural( type, plurthirdneutral );
+    curr_conjug.setPers3SingularCommon( tense, s3_common );
+    curr_conjug.setPers3PluralCommon( tense, p3_common );
+    curr_conjug.setPers1Singular( tense, singfirst );
+    curr_conjug.setPers2Singular( tense, singsecond );
+    curr_conjug.setPers3FemaleSingular( tense, singthirdfemale );
+    curr_conjug.setPers3MaleSingular( tense, singthirdmale );
+    curr_conjug.setPers3NaturalSingular( tense, singthirdneutral );
+    curr_conjug.setPers1Plural( tense, plurfirst );
+    curr_conjug.setPers2Plural( tense, plursecond );
+    curr_conjug.setPers3FemalePlural( tense, plurthirdfemale );
+    curr_conjug.setPers3MalePlural( tense, plurthirdmale );
+    curr_conjug.setPers3NaturalPlural( tense, plurthirdneutral );
 
     return true;
 }
