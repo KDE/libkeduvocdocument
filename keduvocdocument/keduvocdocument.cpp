@@ -59,8 +59,13 @@ public:
     {
         init();
     }
+    
+    ~KEduVocDocumentPrivate();
 
     void init();
+    
+    
+    void ClearLessons();
 
     KEduVocDocument* q;
 
@@ -105,10 +110,24 @@ public:
     bool                      m_activeLeitnerSystem;
 };
 
+KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
+{
+    ClearLessons();
+}
+
+void KEduVocDocument::KEduVocDocumentPrivate::ClearLessons()
+{
+    QList<int> keys = m_lessons.keys();
+    for (int i = 0; i < keys.size(); ++i)
+    {
+        delete m_lessons.value(keys[i]);
+    }
+    m_lessons.clear();
+}
 
 void KEduVocDocument::KEduVocDocumentPrivate::init()
 {
-    m_lessons.clear();
+    ClearLessons();
     m_tenseDescriptions.clear();
     m_identifiers.clear();
     m_sortIdentifier.clear();
