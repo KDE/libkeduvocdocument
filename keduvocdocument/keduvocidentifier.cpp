@@ -122,8 +122,6 @@ KEduVocArticle KEduVocIdentifier::article() const
     return d->m_articles;
 }
 
-
-
 KEduVocConjugation KEduVocIdentifier::personalPronouns() const
 {
     return d->m_personalPronouns;

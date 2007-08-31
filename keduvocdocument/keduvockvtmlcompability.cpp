@@ -38,6 +38,7 @@ KEduVocKvtmlCompability::KEduVocKvtmlCompability()
     m_userdefinedUsageCounter = 0;
 
     initOldTypeLists();
+    initOldConjugations();
 }
 
 
@@ -213,4 +214,15 @@ QString KEduVocKvtmlCompability::oldType( const QString & mainType, const QStrin
     }
     return oldType;
 
+}
+
+void KEduVocKvtmlCompability::initOldConjugations()
+{
+    m_oldTenses["PrSi"] = i18n( "Simple Present" );
+    m_oldTenses["PrPr"] = i18n( "Present Progressive" );
+    m_oldTenses["PrPe"] = i18n( "Present Perfect" );
+    m_oldTenses["PaSi"] = i18n( "Simple Past" );
+    m_oldTenses["PaPr"] = i18n( "Past Progressive" );
+    m_oldTenses["PaPa"] = i18n( "Past Participle" );
+    m_oldTenses["FuSi"] = i18n( "Future" );
 }

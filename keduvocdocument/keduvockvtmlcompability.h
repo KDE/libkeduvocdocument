@@ -75,9 +75,6 @@
 
 
 
-
-
-
 /**
   * @file contains defines and constants necessary for reading kvtml files prior to KDE4. kvtml version 1.
   */
@@ -137,6 +134,7 @@ public:
     QString oldType( const QString& mainType, const QString& subType ) const;
 
 
+
 private:
     /**
      * This gives a map of old abbreviations used in the files and their meaning.
@@ -160,17 +158,16 @@ private:
 //////////// TYPES /////////////////
     void initOldTypeLists();
 
-
-    /// user defined types of old documents
-//     QStringList m_userTypeDescriptions;
-
-
-
     QMap<QString, QString> m_oldMainTypeNames;
     QMap<QString, QString> m_oldSubTypeNames;
 
     static const QString KVTML_1_TYPE_USER;
     static const QString KVTML_1_TYPE_DIV;
+
+///////////TENSES/CONJUGATIONS///////
+    void initOldConjugations();
+    QMap<QString, QString> m_oldTenses;
+
 
 };
 
