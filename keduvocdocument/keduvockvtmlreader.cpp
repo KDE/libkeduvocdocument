@@ -358,7 +358,7 @@ bool KEduVocKvtmlReader::readTranslationConjugations( QDomElement &domElementPar
 
     QString tense;
 
-    QDomElement domElementConjugChild = domElementParent.firstChildElement(KV_CON_ENTRY);
+    QDomElement domElementConjugChild = domElementParent.firstChildElement(KV_CON_TYPE);
     while ( !domElementConjugChild.isNull() )
     {
         // "n" == is the type is the tense
@@ -370,7 +370,7 @@ bool KEduVocKvtmlReader::readTranslationConjugations( QDomElement &domElementPar
         readConjugation(domElementConjugChild, conjugation);
         translation.setConjugation(tense, conjugation);
 
-        domElementConjugChild = domElementConjugChild.nextSiblingElement( KV_CON_ENTRY );
+        domElementConjugChild = domElementConjugChild.nextSiblingElement( KV_CON_TYPE );
     } // while -> next tense, count++
     return true;
 }
@@ -425,55 +425,54 @@ bool KEduVocKvtmlReader::readConjugation( QDomElement &domElementParent, KEduVoc
     p3_common = false;
     s3_common = false;
 
-        // get the individual entries for persons...
-        QDomElement domElementConjugGrandChild = domElementParent.firstChild().toElement();
-        while ( !domElementConjugGrandChild.isNull() ) {
-            if ( domElementConjugGrandChild.tagName() == KV_CON_P1S ) {
-                pers1_sing = domElementConjugGrandChild.text();
-            } else if ( domElementConjugGrandChild.tagName() == KV_CON_P2S ) {
-                pers2_sing = domElementConjugGrandChild.text();
-            } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SF ) {
-                QDomAttr domAttrCommon = domElementConjugGrandChild.attributeNode( KV_CONJ_COMMON );
-                if ( !domAttrCommon.isNull() )
-                    s3_common = domAttrCommon.value().toInt();  // returns 0 if the conversion fails
-                pers3_f_sing = domElementConjugGrandChild.text();
+    // get the individual entries for persons...
+    QDomElement domElementConjugGrandChild = domElementParent.firstChild().toElement();
+    while ( !domElementConjugGrandChild.isNull() ) {
+        if ( domElementConjugGrandChild.tagName() == KV_CON_P1S ) {
+            pers1_sing = domElementConjugGrandChild.text();
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P2S ) {
+            pers2_sing = domElementConjugGrandChild.text();
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SF ) {
+            QDomAttr domAttrCommon = domElementConjugGrandChild.attributeNode( KV_CONJ_COMMON );
+            if ( !domAttrCommon.isNull() )
+                s3_common = domAttrCommon.value().toInt();  // returns 0 if the conversion fails
+            pers3_f_sing = domElementConjugGrandChild.text();
 
-            } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SM ) {
-                pers3_m_sing = domElementConjugGrandChild.text();
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SM ) {
+            pers3_m_sing = domElementConjugGrandChild.text();
 
-            } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SN ) {
-                pers3_n_sing = domElementConjugGrandChild.text();
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SN ) {
+            pers3_n_sing = domElementConjugGrandChild.text();
 
-            } else if ( domElementConjugGrandChild.tagName() == KV_CON_P1P ) {
-                pers1_plur = domElementConjugGrandChild.text();
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P1P ) {
+            pers1_plur = domElementConjugGrandChild.text();
 
-            } else if ( domElementConjugGrandChild.tagName() == KV_CON_P2P ) {
-                pers2_plur = domElementConjugGrandChild.text();
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P2P ) {
+            pers2_plur = domElementConjugGrandChild.text();
 
-            } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PF ) {
-                QDomAttr domAttrCommon = domElementConjugGrandChild.attributeNode( KV_CONJ_COMMON );
-                if ( !domAttrCommon.isNull() )
-                    p3_common = domAttrCommon.value().toInt();  // returns 0 if the conversion fails
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PF ) {
+            QDomAttr domAttrCommon = domElementConjugGrandChild.attributeNode( KV_CONJ_COMMON );
+            if ( !domAttrCommon.isNull() )
+                p3_common = domAttrCommon.value().toInt();  // returns 0 if the conversion fails
 
-                pers3_f_plur = domElementConjugGrandChild.text();
+            pers3_f_plur = domElementConjugGrandChild.text();
 
-            } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PM ) {
-                pers3_m_plur = domElementConjugGrandChild.text();
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PM ) {
+            pers3_m_plur = domElementConjugGrandChild.text();
 
-            } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PN ) {
-                pers3_n_plur = domElementConjugGrandChild.text();
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PN ) {
+            pers3_n_plur = domElementConjugGrandChild.text();
 
-            } else {
-                return false;
-            }
+        } else {
+            return false;
+        }
 
-            domElementConjugGrandChild = domElementConjugGrandChild.nextSibling().toElement();
-        } // while - probably to be sure, because the persons could be in any order.
-        // I guess this goes over only one set, such as:
-        // <s1>traigo</s1><s2>traes</s2><s3fcommon="1">trae</s3f>
-        // <p1>traemos</p1><p2>traÃÂ©is</p2><p3f common="1">traen</p3f>
-        // until no elements are left in that soup.
-
+        domElementConjugGrandChild = domElementConjugGrandChild.nextSibling().toElement();
+    } // while - probably to be sure, because the persons could be in any order.
+    // I guess this goes over only one set, such as:
+    // <s1>traigo</s1><s2>traes</s2><s3fcommon="1">trae</s3f>
+    // <p1>traemos</p1><p2>traÃÂ©is</p2><p3f common="1">traen</p3f>
+    // until no elements are left in that soup.
 
 
     // now set the data: [count] - number of conjug?
