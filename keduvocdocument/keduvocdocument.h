@@ -508,7 +508,7 @@ public:
      */
     void setCsvDelimiter( const QString &delimiter );
 
-    bool leitnerSystemActive();
+    bool leitnerSystemActive() const;
     void setLeitnerSystemActive( bool yes );
     void createStandardLeitnerSystem();
     void setLeitnerSystem( LeitnerSystem* system );

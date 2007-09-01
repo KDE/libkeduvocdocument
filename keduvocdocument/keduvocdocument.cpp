@@ -740,7 +740,7 @@ bool KEduVocDocument::isModified() const
 }
 
 
-bool KEduVocDocument::leitnerSystemActive()
+bool KEduVocDocument::leitnerSystemActive() const
 {
     return d->m_activeLeitnerSystem;
 }

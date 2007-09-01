@@ -230,7 +230,7 @@ void LeitnerSystem::setBoxVocabCount( QString& box, int vocabCount )
     boxWithName( box )->setVocabCount( vocabCount );
 }
 
-int LeitnerSystem::boxVocabCount( QString& box )
+int LeitnerSystem::boxVocabCount( QString& box ) const
 {
     return boxWithName( box )->vocabCount();
 }

@@ -120,7 +120,7 @@ public:
     bool setBoxName( LeitnerBox* box, const QString& name );
 
     void setBoxVocabCount( QString& box, int vocabCount );
-    int boxVocabCount( QString& box );
+    int boxVocabCount( QString& box ) const;
 
     void incrementBoxVocabCount( const QString& box );
     void decrementBoxVocabCount( const QString& box );
