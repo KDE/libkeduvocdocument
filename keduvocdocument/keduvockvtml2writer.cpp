@@ -518,12 +518,15 @@ bool KEduVocKvtml2Writer::writeConjugation( QDomElement &conjugationElement,
         singular.appendChild( newTextElement( KVTML_1STPERSON, first ) );
         singular.appendChild( newTextElement( KVTML_2NDPERSON, second ) );
 
+        QDomElement thirdPerson = m_domDoc.createElement( KVTML_3RDPERSON );
+        singular.appendChild( thirdPerson );
+
         if ( third_common ) {
-            singular.appendChild( newTextElement( KVTML_COMMON, third_female ) );
+            thirdPerson.appendChild( newTextElement( KVTML_COMMON, third_female ) );
         } else {
-            singular.appendChild( newTextElement( KVTML_MALE, third_male ) );
-            singular.appendChild( newTextElement( KVTML_FEMALE, third_female ) );
-            singular.appendChild( newTextElement( KVTML_NEUTRAL, third_neutral ) );
+            thirdPerson.appendChild( newTextElement( KVTML_MALE, third_male ) );
+            thirdPerson.appendChild( newTextElement( KVTML_FEMALE, third_female ) );
+            thirdPerson.appendChild( newTextElement( KVTML_NEUTRAL, third_neutral ) );
         }
         conjugationElement.appendChild( singular );
     }
@@ -543,12 +546,15 @@ bool KEduVocKvtml2Writer::writeConjugation( QDomElement &conjugationElement,
         plural.appendChild( newTextElement( KVTML_1STPERSON, first ) );
         plural.appendChild( newTextElement( KVTML_2NDPERSON, second ) );
 
+        QDomElement thirdPerson = m_domDoc.createElement( KVTML_3RDPERSON );
+        plural.appendChild( thirdPerson );
+
         if ( third_common ) {
-            plural.appendChild( newTextElement( KVTML_COMMON, third_female ) );
+            thirdPerson.appendChild( newTextElement( KVTML_COMMON, third_female ) );
         } else {
-            plural.appendChild( newTextElement( KVTML_MALE, third_male ) );
-            plural.appendChild( newTextElement( KVTML_FEMALE, third_female ) );
-            plural.appendChild( newTextElement( KVTML_NEUTRAL, third_neutral ) );
+            thirdPerson.appendChild( newTextElement( KVTML_MALE, third_male ) );
+            thirdPerson.appendChild( newTextElement( KVTML_FEMALE, third_female ) );
+            thirdPerson.appendChild( newTextElement( KVTML_NEUTRAL, third_neutral ) );
         }
         conjugationElement.appendChild( plural );
     }

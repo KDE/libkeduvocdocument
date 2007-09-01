@@ -73,7 +73,6 @@ public:
     int entryCount() const;
 
     QString getType( int index );
-    void setType( int index, const QString & type );
 
     QString pers1Singular( const QString &type ) const;
     QString pers2Singular( const QString &type ) const;

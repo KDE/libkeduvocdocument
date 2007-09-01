@@ -604,6 +604,7 @@ kDebug() << "Reading conjugation for tense: " << tense;
             if ( !currentElement.isNull() ) {
                 s3_common = true;
                 singthirdmale = currentElement.text();
+kDebug() << " Reading common: " << tense << " first sing: " << singfirst << " sing third: " << singthirdmale;
                 singthirdfemale = singthirdmale;
                 singthirdneutral = singthirdmale;
             } else {
@@ -612,6 +613,7 @@ kDebug() << "Reading conjugation for tense: " << tense;
                 if ( !currentElement.isNull() ) {
                     singthirdmale = currentElement.text();
                 }
+kDebug() << " Reading NOT common: " << tense << " first sing: " << singfirst << " sing third: " << singthirdmale;
 
                 currentElement = currentGroup.firstChildElement( KVTML_FEMALE );
                 if ( !currentElement.isNull() ) {
