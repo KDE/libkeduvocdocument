@@ -314,7 +314,7 @@ public:
      * Usages are context information in a dictionary you may find [biol.]
      * [am.] and the like to hint at the context in which the word is usually used.
      */
-    QStringList usages();
+    QStringList usages() const;
 
     /**
      * Adds a usage label to the doc.

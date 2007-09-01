@@ -59,12 +59,12 @@ public:
     {
         init();
     }
-    
+
     ~KEduVocDocumentPrivate();
 
     void init();
-    
-    
+
+
     void ClearLessons();
 
     KEduVocDocument* q;
@@ -1283,7 +1283,7 @@ KEduVocWordType* KEduVocDocument::wordTypes()
 }
 
 
-QStringList KEduVocDocument::usages()
+QStringList KEduVocDocument::usages() const
 {
     return d->m_usages.values();
 }
