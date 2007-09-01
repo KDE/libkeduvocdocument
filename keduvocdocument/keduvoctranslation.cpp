@@ -106,8 +106,7 @@ bool KEduVocTranslation::KEduVocTranslationPrivate::operator== ( const KEduVocTr
             m_conjugations == other.m_conjugations &&
             m_comparison == other.m_comparison &&
             m_multipleChoice == other.m_multipleChoice &&
-//             m_grades.keys() == other.m_grades.keys() &&
-//             m_grades.values() == other.m_grades.values() &&
+//             m_grades == other.m_grades &&
             m_falseFriends.keys() == other.m_falseFriends.keys() &&
             m_falseFriends.values() == other.m_falseFriends.values();
 }
@@ -360,7 +359,7 @@ KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation &
     d->m_multipleChoice = translation.d->m_multipleChoice;
     d->m_falseFriends == translation.d->m_falseFriends;
     /// @todo m_grades == translation.m_grades;
-    /// @todo m_conjugations == translation.m_conjugations;
+    d->m_conjugations == translation.d->m_conjugations;
     return *this;
 }
 
