@@ -158,15 +158,15 @@ void SharedKvtmlFiles::sortDownloadedFiles()
     QStringList unsortedFiles = KGlobal::dirs()->findAllResources( "data",
                                 QString( "kvtml/*.kvtml" ) );
 
-    KEduVocDocument *doc = new KEduVocDocument();
+    KEduVocDocument doc;
 
-    while ( unsortedFiles.size() > 0 ) {
+    while ( !unsortedFiles.isEmpty() ) {
         KUrl fileUrl( KUrl::fromPath( unsortedFiles.first() ) );
         // find the file's locale
         // open the file
-        doc->open( fileUrl );
+        doc.open( fileUrl );
 
-        QString locale = doc->identifier( 0 ).name();
+        QString locale = doc.identifier( 0 ).name();
 
         // make sure the locale sub-folder exists
         KUrl pathUrl( fileUrl );
