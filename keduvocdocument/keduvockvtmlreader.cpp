@@ -132,7 +132,6 @@ bool KEduVocKvtmlReader::readBody( QDomElement &domElementParent )
 
     currentElement = domElementParent.firstChildElement( KV_CONJUG_GRP );
     if ( !currentElement.isNull() ) {
-///@todo conjugations
         int count = 0;
 
         QDomElement domElementConjugChild = currentElement.firstChildElement(KV_CON_ENTRY);

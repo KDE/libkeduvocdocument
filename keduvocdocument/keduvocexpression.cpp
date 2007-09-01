@@ -131,16 +131,10 @@ void KEduVocExpression::setTranslation( int index, const QString & expr )
     if ( index < 0 )
         return;
 
-///@todo get rid of this nonsense:
-    /* not needed with qmap but for now all translations <= index are expected to exist
-      // extend translations with empty strings if necessary
-      for (int i = d->m_translations.count(); i < index + 1; i++) {
-          d->m_translations.append("");
-      }
-    */
-    for ( int i = d->m_translations.count(); i <= index; i++ ) {
-        d->m_translations[i] = KEduVocTranslation( "" );
-    }
+// extend translations with empty strings if necessary
+//     for ( int i = d->m_translations.count(); i <= index; i++ ) {
+//         d->m_translations[i] = KEduVocTranslation( "" );
+//     }
 //  if (index <= translations.count())
 
     d->m_translations[index] = expr.simplified();

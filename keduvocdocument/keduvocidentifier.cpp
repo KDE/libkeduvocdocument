@@ -73,11 +73,14 @@ KEduVocIdentifier::~KEduVocIdentifier()
 KEduVocIdentifier::KEduVocIdentifier( const KEduVocIdentifier &other )
 : d( new Private )
 {
-///@todo
     d->m_locale = other.d->m_locale;
     d->m_name = other.d->m_name;
     d->m_articles = other.d->m_articles;
     d->m_personalPronouns = other.d->m_personalPronouns;
+    d->m_comment = other.d->m_comment;
+    d->m_sizeHint = other.d->m_sizeHint;
+    d->m_tenses = other.d->m_tenses;
+    d->m_type = other.d->m_type;
 }
 
 

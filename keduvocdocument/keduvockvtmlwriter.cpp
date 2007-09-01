@@ -138,7 +138,7 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
 
         if ( !entry->translation( 0 ).example().isEmpty() )
             domElementOriginal.setAttribute( KV_EXAMPLE, entry->translation( 0 ).example() );
-///@todo enable writing of usages
+///@todo enable writing of usages in old format
         /*
             if (!entry->translation(0).usageLabel().isEmpty() )
               domElementOriginal.setAttribute(KV_USAGE, entry->translation(0).usageLabel());
