@@ -150,6 +150,18 @@ public:
     */
     QString antonym() const;
 
+    /**
+     * Set a irregular plural form.
+     * @param plural plural of the word
+     */
+    void setIrregularPlural( const QString& plural );
+
+    /**
+     * Get a irregular plural form.
+     * @return plural of the word
+     */
+    QString irregularPlural() const;
+
     /** returns type of this expression
     *
     * @return                 type or "" if no type available

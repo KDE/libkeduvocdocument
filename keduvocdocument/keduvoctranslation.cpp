@@ -39,23 +39,36 @@ public:
 
     //KEduVocTranslation* q;
 
-    // This is the word itself. The vocabulary. This is what it is all about.
+    /// This is the word itself. The vocabulary. This is what it is all about.
     QString m_translation;
-    /// noun:male etc (language dependent)
+    /// Some languages (german) have irregular plurals. Kept here.
+    QString m_irregularPlural;
+
+    /// Type of a word noun, verb, adjective etc
     QString m_type;
+    /// Subtype of a word: male/female or regular/irregular...
     QString m_subType;
+    /// A comment giving additional information.
     QString m_comment;
+    /// A hint, to make guessing the word easier.
+    QString m_hint;
+    /// Paraphrase
     QString m_paraphrase;
+    /// A synonyme for a word: sick and ill, student and pupil
     QString m_synonym;
+    /// An example
     QString m_example;
+    /// An antonym - the opposite: hot - cold
     QString m_antonym;
+    /// Pronunciation
     QString m_pronunciation;
+    /// Usages give a context (eg. this word is usually used in [biology])
     QSet<QString> m_usages;
-
+    /// Conjugations of a word (I go, you go, he goes... boring in english)
     QMap <QString, KEduVocConjugation> m_conjugations;
-
+    /// The comparison forms of adjectives and adverbs: fast, faster, fastest
     KEduVocComparison m_comparison;
-
+    /// When creating multiple choice tests, these are possible answers. (otherwise other words are added randomly)
     KEduVocMultipleChoice m_multipleChoice;
 
     // Here come all int indexFrom grades. (If you want, imagine the TO grades as int indexFrom of the other translation. That is where they belong. )
@@ -84,6 +97,7 @@ bool KEduVocTranslation::KEduVocTranslationPrivate::operator== ( const KEduVocTr
             m_subType == other.m_subType &&
             m_usages == other.m_usages &&
             m_comment == other.m_comment &&
+            m_irregularPlural == other.m_irregularPlural &&
             m_paraphrase == other.m_paraphrase &&
             m_synonym == other.m_synonym &&
             m_example == other.m_example &&
@@ -92,9 +106,8 @@ bool KEduVocTranslation::KEduVocTranslationPrivate::operator== ( const KEduVocTr
             m_conjugations == other.m_conjugations &&
             m_comparison == other.m_comparison &&
             m_multipleChoice == other.m_multipleChoice &&
-            m_grades.keys() == other.m_grades.keys() &&
-            // uncomment this when grade class has an operator== defined
-            //m_grades.values() == other.m_grades.values() &&
+//             m_grades.keys() == other.m_grades.keys() &&
+//             m_grades.values() == other.m_grades.values() &&
             m_falseFriends.keys() == other.m_falseFriends.keys() &&
             m_falseFriends.values() == other.m_falseFriends.values();
 }
@@ -115,6 +128,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
     d->m_subType = other.d->m_subType;
     d->m_usages = other.d->m_usages;
     d->m_comment = other.d->m_comment;
+    d->m_irregularPlural = other.d->m_irregularPlural;
     d->m_paraphrase = other.d->m_paraphrase;
     d->m_synonym = other.d->m_synonym;
     d->m_example = other.d->m_example;
@@ -123,7 +137,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
     d->m_conjugations = other.d->m_conjugations;
     d->m_comparison = other.d->m_comparison;
     d->m_multipleChoice = other.d->m_multipleChoice;
-    d->m_grades = other.d->m_grades;
+//     d->m_grades = other.d->m_grades;
     d->m_falseFriends = other.d->m_falseFriends;
 }
 
@@ -368,5 +382,15 @@ QMap< QString, KEduVocConjugation > KEduVocTranslation::conjugations() const
 void KEduVocTranslation::setConjugations(const QMap< QString, KEduVocConjugation > & conjugations)
 {
     d->m_conjugations = conjugations;
+}
+
+void KEduVocTranslation::setIrregularPlural(const QString & plural)
+{
+    d->m_irregularPlural = plural;
+}
+
+QString KEduVocTranslation::irregularPlural() const
+{
+    return d->m_irregularPlural;
 }
 
