@@ -134,6 +134,7 @@ public:
     void addUserdefinedTense( const QString& tense );
     QString tenseFromKvtml1( const QString & oldTense );
     QStringList documentTenses() const;
+    QString oldTense( const QString& tense );
 
 private:
     /**

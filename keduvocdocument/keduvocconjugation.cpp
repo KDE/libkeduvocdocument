@@ -83,9 +83,6 @@ KEduVocConjugation& KEduVocConjugation::operator = ( const KEduVocConjugation& a
 
 bool KEduVocConjugation::operator == ( const KEduVocConjugation& a ) const
 {
-///@todo conjugations: rewrite operator==
-kDebug() <<"Implement KEduVocConjugation::operator==";
-//     return d->m_conjugations[0].type == a.d->m_conjugations[0].type;
     return d->m_conjugations == a.d->m_conjugations;
 }
 
@@ -94,18 +91,6 @@ int KEduVocConjugation::entryCount() const
 {
     return d->m_conjugations.count();
 }
-
-
-QString KEduVocConjugation::getType( int idx )
-{
-    kDebug() << "KEduVocConjugation::getType()" << idx;
-    if ( idx >= d->m_conjugations.count() )
-        return QString();
-
-    return d->m_conjugations.keys().value(idx);
-}
-
-
 
 
 bool KEduVocConjugation::pers3SingularCommon( const QString &type ) const

@@ -660,16 +660,13 @@ bool KEduVocKvtmlWriter::writeConjugEntry( QDomDocument &domDoc, QDomElement &do
     }
 
     QDomElement domElementConjug = domDoc.createElement( KV_CONJUG_GRP );
-    QString type;
 
-    for ( int lfn = 0; lfn < curr_conjug.entryCount(); lfn++ )
-    {
+    foreach ( QString tense, curr_conjug.tenses() ) {
         QDomElement domElementType = domDoc.createElement( KV_CON_TYPE );
 
-        type = curr_conjug.getType( lfn );
-        domElementType.setAttribute( KV_CON_NAME, type );
+        domElementType.setAttribute( KV_CON_NAME, m_compability.oldTense(tense) );
 
-        if ( !writeConjug( domDoc, domElementType, curr_conjug, curr_conjug.getType( lfn ) ) )
+        if ( !writeConjug( domDoc, domElementType, curr_conjug, m_compability.oldTense(tense) ) )
             return false;
 
         domElementConjug.appendChild( domElementType );

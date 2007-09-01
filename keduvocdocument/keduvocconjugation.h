@@ -51,7 +51,6 @@ public:
 
     int entryCount() const;
 
-    QString getType( int index );
     QStringList tenses() const;
 
     QString pers1Singular( const QString &type ) const;

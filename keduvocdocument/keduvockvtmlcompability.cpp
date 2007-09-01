@@ -253,3 +253,13 @@ QStringList KEduVocKvtmlCompability::documentTenses() const
     return m_tenses.values();
 }
 
+
+QString KEduVocKvtmlCompability::oldTense(const QString & tense)
+{
+///@todo writing of the user defined tenses is probably messed up
+    if ( !m_oldTenses.values().contains(tense) ) {
+        m_userdefinedTenseCounter++;
+        m_oldTenses[KVTML_1_USER_DEFINED + QString::number( m_userdefinedTenseCounter )] = tense;
+    }
+    return m_oldTenses.key(tense);
+}

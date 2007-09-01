@@ -432,11 +432,10 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
 
     // conjugation
     if ( translation.conjugation().entryCount() > 0 ) {
-kDebug() << "Writing conjugations: " << translation.text();
         KEduVocConjugation conjugation = translation.conjugation();
-        for ( int i = 0; i < conjugation.entryCount(); ++i ) {
+        foreach ( QString tense, conjugation.tenses() ) {
             QDomElement thisElement = m_domDoc.createElement( KVTML_CONJUGATION );
-            writeConjugation( thisElement, conjugation, conjugation.getType( i ) );
+            writeConjugation( thisElement, conjugation, tense );
             translationElement.appendChild( thisElement );
         }
     }
