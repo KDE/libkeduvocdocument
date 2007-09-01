@@ -336,9 +336,9 @@ bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) 
            d->m_pronunciation == translation.d->m_pronunciation &&
            d->m_comparison == translation.d->m_comparison &&
            d->m_multipleChoice == translation.d->m_multipleChoice &&
-           d->m_falseFriends == translation.d->m_falseFriends
-           /// @todo m_grades == translation.m_grades &&
-           /// @todo m_conjugations == translation.m_conjugations
+           d->m_falseFriends == translation.d->m_falseFriends &&
+           d->m_conjugations == translation.d->m_conjugations
+           /// @todo d->m_grades == translation.d->m_grades &&
            ;
 }
 
@@ -357,9 +357,9 @@ KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation &
     d->m_pronunciation = translation.d->m_pronunciation;
     d->m_comparison = translation.d->m_comparison;
     d->m_multipleChoice = translation.d->m_multipleChoice;
-    d->m_falseFriends == translation.d->m_falseFriends;
-    /// @todo m_grades == translation.m_grades;
-    d->m_conjugations == translation.d->m_conjugations;
+    d->m_falseFriends = translation.d->m_falseFriends;
+    /// @todo d->m_grades == translation.d->m_grades;
+    d->m_conjugations = translation.d->m_conjugations;
     return *this;
 }
 
