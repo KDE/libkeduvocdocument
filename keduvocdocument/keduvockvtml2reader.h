@@ -67,7 +67,7 @@ public:
      * @param conjugElement QDomElement for the conjugation group
      * @param curr_conjug conjugation object to populate
      */
-    bool readConjugation( QDomElement &conjugElement, KEduVocConjugation &curr_conjug );
+    bool readConjugation( QDomElement &conjugElement, KEduVocConjugation &conjugation );
 
     /** read the types
      * @param typesElement QDomElement for the types group

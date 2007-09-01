@@ -29,33 +29,31 @@
 class KEduVocConjugation::Private
 {
 public:
-    struct conjug_t
-    {
-        conjug_t()
-        {
-            p3common = false;
-            s3common = false;
-        }
+    Private();
 
-        bool operator==(const conjug_t& other) const;
+//     bool operator==(const conjug_t& other) const;
 
-        bool    p3common;
-        bool    s3common;
-        QString pers1_sing;
-        QString pers2_sing;
-        QString pers3_m_sing;
-        QString pers3_f_sing;
-        QString pers3_n_sing;
-        QString pers1_plur;
-        QString pers2_plur;
-        QString pers3_m_plur;
-        QString pers3_f_plur;
-        QString pers3_n_plur;
-    };
+    bool    p3common;
+    bool    s3common;
+    QString pers1_sing;
+    QString pers2_sing;
+    QString pers3_m_sing;
+    QString pers3_f_sing;
+    QString pers3_n_sing;
+    QString pers1_plur;
+    QString pers2_plur;
+    QString pers3_m_plur;
+    QString pers3_f_plur;
+    QString pers3_n_plur;
 
-    QMap <QString, conjug_t> m_conjugations;
 };
 
+
+KEduVocConjugation::Private::Private()
+{
+    p3common = false;
+    s3common = false;
+}
 
 KEduVocConjugation::KEduVocConjugation()
         : d( new Private )
@@ -74,188 +72,179 @@ KEduVocConjugation::~KEduVocConjugation()
 }
 
 
-KEduVocConjugation& KEduVocConjugation::operator = ( const KEduVocConjugation& a )
+KEduVocConjugation& KEduVocConjugation::operator = ( const KEduVocConjugation& other )
 {
-    d->m_conjugations = a.d->m_conjugations;
+    d->s3common = other.d->s3common;
+    d->p3common = other.d->p3common;
+    d->pers1_sing = other.d->pers1_sing;
+    d->pers2_sing = other.d->pers2_sing;
+    d->pers3_m_sing = other.d->pers3_m_sing;
+    d->pers3_f_sing = other.d->pers3_f_sing;
+    d->pers3_n_sing = other.d->pers3_n_sing;
+    d->pers1_plur = other.d->pers1_plur;
+    d->pers2_plur = other.d->pers2_plur;
+    d->pers3_m_plur = other.d->pers3_m_plur;
+    d->pers3_f_plur = other.d->pers3_f_plur;
+    d->pers3_n_plur = other.d->pers3_n_plur;
     return *this;
 }
 
-
-bool KEduVocConjugation::operator == ( const KEduVocConjugation& a ) const
+bool KEduVocConjugation::operator ==(const KEduVocConjugation& other) const
 {
-    return d->m_conjugations == a.d->m_conjugations;
+    return d->s3common == other.d->s3common &&
+        d->p3common == other.d->p3common &&
+        d->pers1_sing == other.d->pers1_sing &&
+        d->pers2_sing == other.d->pers2_sing &&
+        d->pers3_m_sing == other.d->pers3_m_sing &&
+        d->pers3_f_sing == other.d->pers3_f_sing &&
+        d->pers3_n_sing == other.d->pers3_n_sing &&
+        d->pers1_plur == other.d->pers1_plur &&
+        d->pers2_plur == other.d->pers2_plur &&
+        d->pers3_m_plur == other.d->pers3_m_plur &&
+        d->pers3_f_plur == other.d->pers3_f_plur &&
+        d->pers3_n_plur == other.d->pers3_n_plur;
+}
+
+bool KEduVocConjugation::pers3SingularCommon() const
+{
+    return d->s3common;
 }
 
 
-int KEduVocConjugation::entryCount() const
+bool KEduVocConjugation::pers3PluralCommon() const
 {
-    return d->m_conjugations.count();
+    return d->p3common;
 }
 
 
-bool KEduVocConjugation::pers3SingularCommon( const QString &type ) const
+QString KEduVocConjugation::pers1Singular() const
 {
-    return d->m_conjugations.value(type).s3common;
+    return d->pers1_sing;
 }
 
 
-bool KEduVocConjugation::pers3PluralCommon( const QString &type ) const
+QString KEduVocConjugation::pers2Singular() const
 {
-    return d->m_conjugations.value(type).p3common;
+    return d->pers2_sing;
 }
 
 
-QString KEduVocConjugation::pers1Singular( const QString &type ) const
+QString KEduVocConjugation::pers3FemaleSingular() const
 {
-    return d->m_conjugations.value(type).pers1_sing;
+    return d->pers3_f_sing;
 }
 
 
-QString KEduVocConjugation::pers2Singular( const QString &type ) const
+QString KEduVocConjugation::pers3MaleSingular() const
 {
-    return d->m_conjugations.value(type).pers2_sing;
+    return d->pers3_m_sing;
 }
 
 
-QString KEduVocConjugation::pers3FemaleSingular( const QString &type ) const
+QString KEduVocConjugation::pers3NaturalSingular() const
 {
-    return d->m_conjugations.value(type).pers3_f_sing;
+    return d->pers3_n_sing;
 }
 
 
-QString KEduVocConjugation::pers3MaleSingular( const QString &type ) const
+QString KEduVocConjugation::pers1Plural() const
 {
-    return d->m_conjugations.value(type).pers3_m_sing;
+    return d->pers1_plur;
 }
 
 
-QString KEduVocConjugation::pers3NaturalSingular( const QString &type ) const
+QString KEduVocConjugation::pers2Plural() const
 {
-    return d->m_conjugations.value(type).pers3_n_sing;
+    return d->pers2_plur;
 }
 
 
-QString KEduVocConjugation::pers1Plural( const QString &type ) const
+QString KEduVocConjugation::pers3FemalePlural() const
 {
-    return d->m_conjugations.value(type).pers1_plur;
+    return d->pers3_f_plur;
 }
 
 
-QString KEduVocConjugation::pers2Plural( const QString &type ) const
+QString KEduVocConjugation::pers3MalePlural() const
 {
-    return d->m_conjugations.value(type).pers2_plur;
+    return d->pers3_m_plur;
 }
 
 
-QString KEduVocConjugation::pers3FemalePlural( const QString &type ) const
+QString KEduVocConjugation::pers3NaturalPlural() const
 {
-    return d->m_conjugations.value(type).pers3_f_plur;
+    return d->pers3_n_plur;
 }
 
 
-QString KEduVocConjugation::pers3MalePlural( const QString &type ) const
+void KEduVocConjugation::setPers3PluralCommon( bool f )
 {
-    return d->m_conjugations.value(type).pers3_m_plur;
+    d->p3common = f;
 }
 
 
-QString KEduVocConjugation::pers3NaturalPlural( const QString &type ) const
+void KEduVocConjugation::setPers3SingularCommon( bool f )
 {
-    return d->m_conjugations.value(type).pers3_n_plur;
+    d->s3common = f;
 }
 
 
-void KEduVocConjugation::setPers3PluralCommon( const QString &type, bool f )
+void KEduVocConjugation::setPers1Singular( const QString &str )
 {
-    d->m_conjugations[type].p3common = f;
+    d->pers1_sing = str;
 }
 
 
-void KEduVocConjugation::setPers3SingularCommon( const QString &type, bool f )
+void KEduVocConjugation::setPers2Singular( const QString &str )
 {
-    d->m_conjugations[type].s3common = f;
+    d->pers2_sing = str;
 }
 
 
-void KEduVocConjugation::setPers1Singular( const QString &type, const QString &str )
+void KEduVocConjugation::setPers3FemaleSingular( const QString &str )
 {
-    d->m_conjugations[type].pers1_sing = str;
+    d->pers3_f_sing = str;
 }
 
 
-void KEduVocConjugation::setPers2Singular( const QString &type, const QString &str )
+void KEduVocConjugation::setPers3MaleSingular( const QString &str )
 {
-    d->m_conjugations[type].pers2_sing = str;
+    d->pers3_m_sing = str;
 }
 
 
-void KEduVocConjugation::setPers3FemaleSingular( const QString &type, const QString &str )
+void KEduVocConjugation::setPers3NaturalSingular( const QString &str )
 {
-    d->m_conjugations[type].pers3_f_sing = str;
+    d->pers3_n_sing = str;
 }
 
 
-void KEduVocConjugation::setPers3MaleSingular( const QString &type, const QString &str )
+void KEduVocConjugation::setPers1Plural( const QString &str )
 {
-    d->m_conjugations[type].pers3_m_sing = str;
+    d->pers1_plur = str;
 }
 
 
-void KEduVocConjugation::setPers3NaturalSingular( const QString &type, const QString &str )
+void KEduVocConjugation::setPers2Plural( const QString &str )
 {
-    d->m_conjugations[type].pers3_n_sing = str;
+    d->pers2_plur = str;
 }
 
 
-void KEduVocConjugation::setPers1Plural( const QString &type, const QString &str )
+void KEduVocConjugation::setPers3FemalePlural( const QString &str )
 {
-    d->m_conjugations[type].pers1_plur = str;
+    d->pers3_f_plur = str;
 }
 
 
-void KEduVocConjugation::setPers2Plural( const QString &type, const QString &str )
+void KEduVocConjugation::setPers3MalePlural( const QString &str )
 {
-    d->m_conjugations[type].pers2_plur = str;
+    d->pers3_m_plur = str;
 }
 
 
-void KEduVocConjugation::setPers3FemalePlural( const QString &type, const QString &str )
+void KEduVocConjugation::setPers3NaturalPlural( const QString &str )
 {
-    d->m_conjugations[type].pers3_f_plur = str;
+    d->pers3_n_plur = str;
 }
-
-
-void KEduVocConjugation::setPers3MalePlural( const QString &type, const QString &str )
-{
-    d->m_conjugations[type].pers3_m_plur = str;
-}
-
-
-void KEduVocConjugation::setPers3NaturalPlural( const QString &type, const QString &str )
-{
-    d->m_conjugations[type].pers3_n_plur = str;
-}
-
-
-bool KEduVocConjugation::Private::conjug_t::operator ==(const conjug_t & other) const
-{
-    return s3common == other.s3common &&
-        p3common == other.p3common &&
-        pers1_sing == other.pers1_sing &&
-        pers2_sing == other.pers2_sing &&
-        pers3_m_sing == other.pers3_m_sing &&
-        pers3_f_sing == other.pers3_f_sing &&
-        pers3_n_sing == other.pers3_n_sing &&
-        pers1_plur == other.pers1_plur &&
-        pers2_plur == other.pers2_plur &&
-        pers3_m_plur == other.pers3_m_plur &&
-        pers3_f_plur == other.pers3_f_plur &&
-        pers3_n_plur == other.pers3_n_plur;
-}
-
-QStringList KEduVocConjugation::tenses() const
-{
-    return d->m_conjugations.keys();
-}
-
 

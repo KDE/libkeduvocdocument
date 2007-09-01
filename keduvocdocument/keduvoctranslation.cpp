@@ -52,7 +52,7 @@ public:
     QString m_pronunciation;
     QSet<QString> m_usages;
 
-    KEduVocConjugation m_conjugation;
+    QMap <QString, KEduVocConjugation> m_conjugations;
 
     KEduVocComparison m_comparison;
 
@@ -89,7 +89,7 @@ bool KEduVocTranslation::KEduVocTranslationPrivate::operator== ( const KEduVocTr
             m_example == other.m_example &&
             m_antonym == other.m_antonym &&
             m_pronunciation == other.m_pronunciation &&
-            m_conjugation == other.m_conjugation &&
+            m_conjugations == other.m_conjugations &&
             m_comparison == other.m_comparison &&
             m_multipleChoice == other.m_multipleChoice &&
             m_grades.keys() == other.m_grades.keys() &&
@@ -120,7 +120,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
     d->m_example = other.d->m_example;
     d->m_antonym = other.d->m_antonym;
     d->m_pronunciation = other.d->m_pronunciation;
-    d->m_conjugation = other.d->m_conjugation;
+    d->m_conjugations = other.d->m_conjugations;
     d->m_comparison = other.d->m_comparison;
     d->m_multipleChoice = other.d->m_multipleChoice;
     d->m_grades = other.d->m_grades;
@@ -228,15 +228,15 @@ QString KEduVocTranslation::antonym() const
 }
 
 
-void KEduVocTranslation::setConjugation( const KEduVocConjugation &con )
+void KEduVocTranslation::setConjugation( const QString& tense, const KEduVocConjugation& con )
 {
-    d->m_conjugation = con;
+    d->m_conjugations[tense] = con;
 }
 
 
-KEduVocConjugation KEduVocTranslation::conjugation() const
+KEduVocConjugation& KEduVocTranslation::conjugation( const QString& tense )
 {
-    return d->m_conjugation;
+    return d->m_conjugations[tense];
 }
 
 
@@ -353,5 +353,20 @@ KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation &
 KEduVocGrade & KEduVocTranslation::gradeFrom( int indexFrom )
 {
     return d->m_grades[indexFrom];
+}
+
+QStringList KEduVocTranslation::conjugationTenses() const
+{
+    return d->m_conjugations.keys();
+}
+
+QMap< QString, KEduVocConjugation > KEduVocTranslation::conjugations() const
+{
+    return d->m_conjugations;
+}
+
+void KEduVocTranslation::setConjugations(const QMap< QString, KEduVocConjugation > & conjugations)
+{
+    d->m_conjugations = conjugations;
 }
 

@@ -431,13 +431,10 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     }
 
     // conjugation
-    if ( translation.conjugation().entryCount() > 0 ) {
-        KEduVocConjugation conjugation = translation.conjugation();
-        foreach ( QString tense, conjugation.tenses() ) {
-            QDomElement thisElement = m_domDoc.createElement( KVTML_CONJUGATION );
-            writeConjugation( thisElement, conjugation, tense );
-            translationElement.appendChild( thisElement );
-        }
+    foreach ( QString tense, translation.conjugationTenses() ) {
+        QDomElement thisElement = m_domDoc.createElement( KVTML_CONJUGATION );
+        writeConjugation( thisElement, translation.conjugation(tense), tense );
+        translationElement.appendChild( thisElement );
     }
 
     // comparison
@@ -503,12 +500,12 @@ bool KEduVocKvtml2Writer::writeConjugation( QDomElement &conjugationElement,
     conjugationElement.appendChild( newTextElement(KVTML_TENSE, tense) );
 
     // first singular conjugations
-    QString first = conjugation.pers1Singular( tense );
-    QString second = conjugation.pers2Singular( tense );
-    bool third_common = conjugation.pers3SingularCommon( tense );
-    QString third_male = conjugation.pers3MaleSingular( tense );
-    QString third_female = conjugation.pers3FemaleSingular( tense );
-    QString third_neutral = conjugation.pers3NaturalSingular( tense );
+    QString first = conjugation.pers1Singular();
+    QString second = conjugation.pers2Singular();
+    bool third_common = conjugation.pers3SingularCommon();
+    QString third_male = conjugation.pers3MaleSingular();
+    QString third_female = conjugation.pers3FemaleSingular();
+    QString third_neutral = conjugation.pers3NaturalSingular();
 
     if ( !first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
             !third_male.isEmpty() || !third_neutral.isEmpty() ) {
@@ -531,12 +528,12 @@ bool KEduVocKvtml2Writer::writeConjugation( QDomElement &conjugationElement,
     }
 
     // now for plurals
-    first = conjugation.pers1Plural( tense );
-    second = conjugation.pers2Plural( tense );
-    third_common = conjugation.pers3PluralCommon( tense );
-    third_male = conjugation.pers3MalePlural( tense );
-    third_female = conjugation.pers3FemalePlural( tense );
-    third_neutral = conjugation.pers3NaturalPlural( tense );
+    first = conjugation.pers1Plural();
+    second = conjugation.pers2Plural();
+    third_common = conjugation.pers3PluralCommon();
+    third_male = conjugation.pers3MalePlural();
+    third_female = conjugation.pers3FemalePlural();
+    third_neutral = conjugation.pers3NaturalPlural();
 
     if ( !first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
             !third_male.isEmpty() || !third_neutral.isEmpty() ) {

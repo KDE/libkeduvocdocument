@@ -132,16 +132,28 @@ bool KEduVocKvtmlReader::readBody( QDomElement &domElementParent )
 
     currentElement = domElementParent.firstChildElement( KV_CONJUG_GRP );
     if ( !currentElement.isNull() ) {
-        QList<KEduVocConjugation> conjugations;
-        result = readConjug( currentElement, conjugations );
-        if ( result ) {
-            KEduVocConjugation conjug;
-            for ( int i = 0; i< conjugations.count(); i++ ) {
-                conjug = conjugations[i];
-                m_doc->identifier(i).setPersonalPronouns( conjug );
+///@todo conjugations
+        int count = 0;
+
+        QDomElement domElementConjugChild = currentElement.firstChildElement(KV_CON_ENTRY);
+        while ( !domElementConjugChild.isNull() ) {
+            QString lang;
+            QDomAttr domAttrLang = domElementConjugChild.attributeNode( KV_LANG ); // "l"
+            // make sure, the identifier is there
+            if (!addLanguage(count, domAttrLang.value())) {
+                return false;
             }
-        } else
-            return false;
+
+            KEduVocConjugation pronouns;
+            if (! readConjugation( domElementConjugChild, pronouns ) ) {
+                return false;
+            }
+            m_doc->identifier(count).setPersonalPronouns( pronouns );
+
+            count ++;
+
+            domElementConjugChild = domElementConjugChild.nextSiblingElement( KV_CON_ENTRY );
+        }
     }
 
     // initialize the list of predefined types
@@ -342,7 +354,28 @@ bool KEduVocKvtmlReader::readArticle( QDomElement &domElementParent )
 }
 
 
-bool KEduVocKvtmlReader::readConjug( QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug )
+bool KEduVocKvtmlReader::readTranslationConjugations( QDomElement &domElementParent, KEduVocTranslation &translation ) {
+
+    QString tense;
+
+    QDomElement domElementConjugChild = domElementParent.firstChildElement(KV_CON_ENTRY);
+    while ( !domElementConjugChild.isNull() )
+    {
+        // "n" == is the type is the tense
+        QDomAttr domAttrLang = domElementConjugChild.attributeNode( KV_CON_NAME );
+        QString oldShortTense = domAttrLang.value();
+
+        tense = m_compability.tenseFromKvtml1( oldShortTense );
+        KEduVocConjugation conjugation;
+        readConjugation(domElementConjugChild, conjugation);
+        translation.setConjugation(tense, conjugation);
+
+        domElementConjugChild = domElementConjugChild.nextSiblingElement( KV_CON_ENTRY );
+    } // while -> next tense, count++
+    return true;
+}
+
+bool KEduVocKvtmlReader::readConjugation( QDomElement &domElementParent, KEduVocConjugation& conjugation )
 /*
  <conjugation>        used in header for definiton of "prefix"
   <e l="de">          lang determines also lang order in entries !!
@@ -375,7 +408,7 @@ bool KEduVocKvtmlReader::readConjug( QDomElement &domElementParent, QList<KEduVo
  </conjugation>
 */
 {
-    QString s;
+//     QString s;
     bool p3_common;
     bool s3_common;
     QString pers1_sing;
@@ -388,110 +421,48 @@ bool KEduVocKvtmlReader::readConjug( QDomElement &domElementParent, QList<KEduVo
     QString pers3_m_plur;
     QString pers3_f_plur;
     QString pers3_n_plur;
-    QString lang;
-    QString tense; // former type
 
-    // this gets a list of keduvocconjugations, count will be the conjug number to be filled.
-    int count = 0;
-
-// reset
-    curr_conjug.clear();
-// create new empty one
-    curr_conjug.append( KEduVocConjugation() );
-
-    QDomElement domElementConjugChild = domElementParent.firstChild().toElement();
-    while ( !domElementConjugChild.isNull() )
-    {
-        if ( domElementConjugChild.tagName() == KV_CON_ENTRY ) {            // if KV_CON_ENTRY == "e" is found, we are reading a personal pronun definition.
-            // CONJ_PREFIX is defined as "--"
-            tense = CONJ_PREFIX;
-
-            //----------
-            // Attribute
-
-            QString lang;
-            QDomAttr domAttrLang = domElementConjugChild.attributeNode( KV_LANG ); // "l"
-
-            if (!addLanguage(count, domAttrLang.value())) {
-                return false;
-            }
-
-        } else if ( domElementConjugChild.tagName() == KV_CON_TYPE ) {                    // this means reading translations KV_CON_TYPE == "t"
-            //----------
-            // Attribute
-
-            // "n" == is the type is the tense
-            QDomAttr domAttrLang = domElementConjugChild.attributeNode( KV_CON_NAME );
-            QString oldShortTense = domAttrLang.value();
-
-            tense = m_compability.tenseFromKvtml1( oldShortTense );
-kDebug() << "Reading conjugation for " << tense;
-        }
-
-        pers1_sing = "";
-        pers2_sing = "";
-        pers3_m_sing = "";
-        pers3_f_sing = "";
-        pers3_n_sing = "";
-        pers1_plur = "";
-        pers2_plur = "";
-        pers3_m_plur = "";
-        pers3_f_plur = "";
-        pers3_n_plur = "";
-        p3_common = false;
-        s3_common = false;
+    p3_common = false;
+    s3_common = false;
 
         // get the individual entries for persons...
-        QDomElement domElementConjugGrandChild = domElementConjugChild.firstChild().toElement();
+        QDomElement domElementConjugGrandChild = domElementParent.firstChild().toElement();
         while ( !domElementConjugGrandChild.isNull() ) {
             if ( domElementConjugGrandChild.tagName() == KV_CON_P1S ) {
                 pers1_sing = domElementConjugGrandChild.text();
-                if ( pers1_sing.isNull() )
-                    pers1_sing = "";
             } else if ( domElementConjugGrandChild.tagName() == KV_CON_P2S ) {
                 pers2_sing = domElementConjugGrandChild.text();
-                if ( pers2_sing.isNull() )
-                    pers2_sing = "";
             } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SF ) {
                 QDomAttr domAttrCommon = domElementConjugGrandChild.attributeNode( KV_CONJ_COMMON );
                 if ( !domAttrCommon.isNull() )
                     s3_common = domAttrCommon.value().toInt();  // returns 0 if the conversion fails
-
                 pers3_f_sing = domElementConjugGrandChild.text();
-                if ( pers3_f_sing.isNull() )
-                    pers3_f_sing = "";
+
             } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SM ) {
                 pers3_m_sing = domElementConjugGrandChild.text();
-                if ( pers3_m_sing.isNull() )
-                    pers3_m_sing = "";
+
             } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SN ) {
                 pers3_n_sing = domElementConjugGrandChild.text();
-                if ( pers3_n_sing.isNull() )
-                    pers3_n_sing = "";
+
             } else if ( domElementConjugGrandChild.tagName() == KV_CON_P1P ) {
                 pers1_plur = domElementConjugGrandChild.text();
-                if ( pers1_plur.isNull() )
-                    pers1_plur = "";
+
             } else if ( domElementConjugGrandChild.tagName() == KV_CON_P2P ) {
                 pers2_plur = domElementConjugGrandChild.text();
-                if ( pers2_plur.isNull() )
-                    pers2_plur = "";
+
             } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PF ) {
                 QDomAttr domAttrCommon = domElementConjugGrandChild.attributeNode( KV_CONJ_COMMON );
                 if ( !domAttrCommon.isNull() )
                     p3_common = domAttrCommon.value().toInt();  // returns 0 if the conversion fails
 
                 pers3_f_plur = domElementConjugGrandChild.text();
-                if ( pers3_f_plur.isNull() )
-                    pers3_f_plur = "";
+
             } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PM ) {
                 pers3_m_plur = domElementConjugGrandChild.text();
-                if ( pers3_m_plur.isNull() )
-                    pers3_m_plur = "";
+
             } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PN ) {
                 pers3_n_plur = domElementConjugGrandChild.text();
-                if ( pers3_n_plur.isNull() )
-                    pers3_n_plur = "";
+
             } else {
                 return false;
             }
@@ -505,31 +476,21 @@ kDebug() << "Reading conjugation for " << tense;
 
 
 
-        if ( domElementConjugChild.tagName() == KV_CON_ENTRY )
-            while ( count + 1 > ( int ) curr_conjug.size() )
-                curr_conjug.append( KEduVocConjugation() );
-
-        // now set the data: [count] - number of conjug?
-        // type - the tense?
-        // finally the person
-        curr_conjug[count].setPers3SingularCommon( tense, s3_common );
-        curr_conjug[count].setPers3PluralCommon( tense, p3_common );
-        curr_conjug[count].setPers1Singular( tense, pers1_sing );
-        curr_conjug[count].setPers2Singular( tense, pers2_sing );
-        curr_conjug[count].setPers3FemaleSingular( tense, pers3_f_sing );
-        curr_conjug[count].setPers3MaleSingular( tense, pers3_m_sing );
-        curr_conjug[count].setPers3NaturalSingular( tense, pers3_n_sing );
-        curr_conjug[count].setPers1Plural( tense, pers1_plur );
-        curr_conjug[count].setPers2Plural( tense, pers2_plur );
-        curr_conjug[count].setPers3FemalePlural( tense, pers3_f_plur );
-        curr_conjug[count].setPers3MalePlural( tense, pers3_m_plur );
-        curr_conjug[count].setPers3NaturalPlural( tense, pers3_n_plur );
-
-        if ( domElementConjugChild.tagName() == KV_CON_ENTRY )
-            count++;
-
-        domElementConjugChild = domElementConjugChild.nextSibling().toElement();
-    } // while -> next tense, count++
+    // now set the data: [count] - number of conjug?
+    // type - the tense?
+    // finally the person
+    conjugation.setPers3SingularCommon( s3_common );
+    conjugation.setPers3PluralCommon( p3_common );
+    conjugation.setPers1Singular( pers1_sing );
+    conjugation.setPers2Singular( pers2_sing );
+    conjugation.setPers3FemaleSingular( pers3_f_sing );
+    conjugation.setPers3MaleSingular( pers3_m_sing );
+    conjugation.setPers3NaturalSingular( pers3_n_sing );
+    conjugation.setPers1Plural( pers1_plur );
+    conjugation.setPers2Plural( pers2_plur );
+    conjugation.setPers3FemalePlural( pers3_f_plur );
+    conjugation.setPers3MalePlural( pers3_m_plur );
+    conjugation.setPers3NaturalPlural( pers3_n_plur );
 
     return true;
 }
@@ -915,7 +876,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
     QString                   antonym;
     QSet<QString>             usage;
     QString                   paraphrase;
-    QList<KEduVocConjugation> conjug;
+
     KEduVocComparison         comparison;
     KEduVocMultipleChoice     mc;
     KEduVocExpression         expr;
@@ -1027,13 +988,6 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         //---------
         // Children
 
-        currentChild = currentElement.firstChildElement( KV_CONJUG_GRP );
-        if ( !currentChild.isNull() ) {
-            conjug.clear();
-            if ( !readConjug( currentChild, conjug ) )
-                return false;
-        }
-
         currentChild = currentElement.firstChildElement( KV_COMPARISON_GRP );
         if ( !currentChild.isNull() ) {
             comparison.clear();
@@ -1049,8 +1003,6 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         }
 
         textstr = currentElement.lastChild().toText().data();
-        if ( textstr.isNull() )
-            textstr = "";
 
         if ( i == 0 ) {
             expr = KEduVocExpression( textstr );
@@ -1061,14 +1013,14 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
             expr.setTranslation( i, textstr );
         }
 
-        if ( conjug.size() > 0 ) {
-            for ( int conjugationIndex = 0; conjugationIndex < conjug.size(); conjugationIndex++ ) {
-                expr.translation( i ).setConjugation( conjug[conjugationIndex] );
+        // better make sure, translation(i) already exists...
+        currentChild = currentElement.firstChildElement( KV_CONJUG_GRP );
+        if ( !currentChild.isNull() ) {
+            if ( !readTranslationConjugations( currentChild, expr.translation(i) ) ) {
+                return false;
             }
-            //expr.setConjugation(i, conjug[0]); ///@todo check if this is better than the above!
-
-            conjug.clear();
         }
+
         if ( !comparison.isEmpty() ) {
             expr.translation( i ).setComparison( comparison );
             comparison.clear();

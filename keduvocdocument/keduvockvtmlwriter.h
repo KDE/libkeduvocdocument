@@ -28,6 +28,7 @@
 #include "keduvocconjugation.h"
 #include "keduvocmultiplechoice.h"
 #include "keduvockvtmlcompability.h"
+#include "keduvoctranslation.h"
 
 class KEduVocDocument;
 
@@ -49,7 +50,7 @@ public:
     bool writeArticle( QDomDocument &domDoc, QDomElement &domElementParent );
     bool writeConjugHeader( QDomDocument &domDoc, QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug );
     bool writeConjug( QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocConjugation &curr_conjug, const QString &type );
-    bool writeConjugEntry( QDomDocument &domDoc, QDomElement &domElementParent, KEduVocConjugation &curr_conjug );
+    bool writeConjugEntry( QDomDocument &domDoc, QDomElement &domElementParent, KEduVocTranslation &translation  );
     bool writeComparison( QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp );
     bool writeMultipleChoice( QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocMultipleChoice &mc );
 

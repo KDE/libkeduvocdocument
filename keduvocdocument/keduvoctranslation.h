@@ -181,14 +181,28 @@ public:
     */
     KEduVocGrade & gradeFrom( int indexFrom );
 
-    /** returns conjugations if available
+    /** returns a conjugation if available
     */
-    KEduVocConjugation conjugation() const;
+    KEduVocConjugation& conjugation( const QString& tense );
 
-    /** sets conjugations
-    * @param conjugation      conjugation block
+    /** adds conjugations or replaces them, if they exist.
+    * @param conjugation      conjugation
     */
-    void setConjugation( const KEduVocConjugation & conjugation );
+    void setConjugation( const QString& tense, const KEduVocConjugation & conjugation );
+
+    /**
+     * Bad, only used for tense entry page, will be deleted later. Deprecated.
+     * @param conjugation
+     */
+    void setConjugations( const QMap<QString, KEduVocConjugation>& conjugations );
+
+    QStringList conjugationTenses() const;
+
+    /**
+     * Bad, only compability. Deprecated.
+     * @return
+     */
+    QMap <QString, KEduVocConjugation> conjugations() const;
 
     /** returns comparison if available
      */

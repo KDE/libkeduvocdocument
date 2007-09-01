@@ -56,8 +56,8 @@ public:
 
     bool readLesson( QDomElement &domElementParent );
     bool readArticle( QDomElement &domElementParent );
-    bool readConjug( QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug );
-//     bool readOptions( QDomElement &domElementParent );
+    bool readConjugation( QDomElement &domElementParent, KEduVocConjugation &conjugation );
+    bool readTranslationConjugations( QDomElement &domElementParent, KEduVocTranslation &translation );
     bool readType( QDomElement &domElementParent );
     bool readTense( QDomElement &domElementParent );
     bool readUsage( QDomElement &domElementParent );

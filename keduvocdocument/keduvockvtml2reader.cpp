@@ -383,15 +383,14 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
 
     // conjugations
     currentElement = translationElement.firstChildElement( KVTML_CONJUGATION );
-    KEduVocConjugation conjugation;
     while ( !currentElement.isNull() ) {
         // read any conjugations (NOTE: this will overwrite any conjugations of the same type for this
         // translation, as the type is used as the key
-        readConjugation( currentElement, conjugation );
+        QDomElement tenseElement = currentElement.firstChildElement( KVTML_TENSE );
+        QString tense = tenseElement.text();
+
+        readConjugation( currentElement, expr.translation(index).conjugation(tense) );
         currentElement = currentElement.nextSiblingElement( KVTML_CONJUGATION );
-    }
-    if ( conjugation.entryCount() > 0 ) {
-        expr.translation( index ).setConjugation( conjugation );
     }
 
     // grade elements
@@ -545,7 +544,7 @@ bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifi
 }
 
 
-bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocConjugation &curr_conjug )
+bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocConjugation &conjugation )
 /*
  <conjugation>
   <tense>Futurepastperfekt:)</tense>
@@ -580,10 +579,7 @@ bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocCo
     QString plurthirdmale;
     QString plurthirdfemale;
     QString plurthirdneutral;
-    QString tense;
 
-    QDomElement tenseElement = conjugElement.firstChildElement( KVTML_TENSE );
-    tense = tenseElement.text();
     QDomElement currentGroup = conjugElement.firstChildElement( KVTML_SINGULAR );
     if ( !currentGroup.isNull() )
     {
@@ -645,18 +641,18 @@ bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocCo
         }
     }
 
-    curr_conjug.setPers3SingularCommon( tense, s3_common );
-    curr_conjug.setPers3PluralCommon( tense, p3_common );
-    curr_conjug.setPers1Singular( tense, singfirst );
-    curr_conjug.setPers2Singular( tense, singsecond );
-    curr_conjug.setPers3FemaleSingular( tense, singthirdfemale );
-    curr_conjug.setPers3MaleSingular( tense, singthirdmale );
-    curr_conjug.setPers3NaturalSingular( tense, singthirdneutral );
-    curr_conjug.setPers1Plural( tense, plurfirst );
-    curr_conjug.setPers2Plural( tense, plursecond );
-    curr_conjug.setPers3FemalePlural( tense, plurthirdfemale );
-    curr_conjug.setPers3MalePlural( tense, plurthirdmale );
-    curr_conjug.setPers3NaturalPlural( tense, plurthirdneutral );
+    conjugation.setPers3SingularCommon( s3_common );
+    conjugation.setPers3PluralCommon( p3_common );
+    conjugation.setPers1Singular( singfirst );
+    conjugation.setPers2Singular( singsecond );
+    conjugation.setPers3FemaleSingular( singthirdfemale );
+    conjugation.setPers3MaleSingular( singthirdmale );
+    conjugation.setPers3NaturalSingular( singthirdneutral );
+    conjugation.setPers1Plural( plurfirst );
+    conjugation.setPers2Plural( plursecond );
+    conjugation.setPers3FemalePlural( plurthirdfemale );
+    conjugation.setPers3MalePlural( plurthirdmale );
+    conjugation.setPers3NaturalPlural( plurthirdneutral );
 
     return true;
 }
