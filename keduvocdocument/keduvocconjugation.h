@@ -74,8 +74,6 @@ public:
 
     QString getType( int index );
     void setType( int index, const QString & type );
-    void cleanUp();
-    bool isEmpty( int idx );
 
     QString pers1Singular( const QString &type ) const;
     QString pers2Singular( const QString &type ) const;

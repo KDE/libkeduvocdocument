@@ -116,45 +116,6 @@ void KEduVocConjugation::setType( int idx, const QString & type )
 }
 
 
-void KEduVocConjugation::cleanUp()
-{
-    for ( int i = d->m_conjugations.count() - 1; i >= 0; i-- ) {
-        const Private::conjug_t *ctp = &d->m_conjugations[i];
-        if ( ctp->pers1_sing.simplified().isEmpty()
-                && ctp->pers2_sing.simplified().isEmpty()
-                && ctp->pers3_m_sing.simplified().isEmpty()
-                && ctp->pers3_f_sing.simplified().isEmpty()
-                && ctp->pers3_n_sing.simplified().isEmpty()
-                && ctp->pers1_plur.simplified().isEmpty()
-                && ctp->pers2_plur.simplified().isEmpty()
-                && ctp->pers3_m_plur.simplified().isEmpty()
-                && ctp->pers3_f_plur.simplified().isEmpty()
-                && ctp->pers3_n_plur.simplified().isEmpty()
-           )
-            d->m_conjugations.removeAt( i );
-    }
-}
-
-
-bool KEduVocConjugation::isEmpty( int idx )
-{
-    if ( idx < d->m_conjugations.count() ) {
-        const Private::conjug_t *ctp = &d->m_conjugations[idx];
-        return ctp->pers1_sing.simplified().isEmpty()
-               && ctp->pers2_sing.simplified().isEmpty()
-               && ctp->pers3_m_sing.simplified().isEmpty()
-               && ctp->pers3_f_sing.simplified().isEmpty()
-               && ctp->pers3_n_sing.simplified().isEmpty()
-               && ctp->pers1_plur.simplified().isEmpty()
-               && ctp->pers2_plur.simplified().isEmpty()
-               && ctp->pers3_m_plur.simplified().isEmpty()
-               && ctp->pers3_f_plur.simplified().isEmpty()
-               && ctp->pers3_n_plur.simplified().isEmpty();
-    }
-    return true;
-}
-
-
 #define _GET_CON_(elem, type, default) \
    for (int i = 0; i < d->m_conjugations.size(); i++) \
      if (d->m_conjugations[i].type == type) \

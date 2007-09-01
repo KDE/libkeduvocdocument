@@ -653,9 +653,11 @@ bool KEduVocKvtmlWriter::writeConjugEntry( QDomDocument &domDoc, QDomElement &do
  </conjugation>
 */
 {
-    curr_conjug.cleanUp();
-    if ( curr_conjug.entryCount() == 0 )
+
+//     curr_conjug.cleanUp();
+    if ( curr_conjug.entryCount() == 0 ) {
         return true;
+    }
 
     QDomElement domElementConjug = domDoc.createElement( KV_CONJUG_GRP );
     QString type;
