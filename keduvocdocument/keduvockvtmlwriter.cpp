@@ -626,8 +626,7 @@ bool KEduVocKvtmlWriter::writeConjugHeader( QDomDocument &domDoc, QDomElement &d
         }
 
         domElementEntry.setAttribute( KV_LANG, s );
-
-        if ( !writeConjug( domDoc, domElementEntry, curr_conjug[ent], CONJ_PREFIX ) )
+        if ( !writeConjug( domDoc, domElementEntry, curr_conjug[ent], "--" ) )
             return false;
 
         domElementConjug.appendChild( domElementEntry );

@@ -29,10 +29,6 @@
 
 #include <QtCore/QStringList>
 
-///@todo get rid of this old strange prefix thing: used to mark personal pronouns.
-#define CONJ_PREFIX            "--"   // definition of prefixes (I, you, ..)
-
-
 /**
  * The conjugation of a verb
  */
