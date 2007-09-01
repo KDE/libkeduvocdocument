@@ -71,6 +71,20 @@ public:
     /** default destructor */
     ~KEduVocGrade();
 
+    /**
+     * Equal operator to copy grades.
+     * @param other grades copied
+     * @return reference to the new grades
+     */
+    KEduVocGrade& operator= ( const KEduVocGrade &other );
+    /**
+     * Compare two sets of grades.
+     * @param other
+     * @return true if equal
+     */
+    bool operator== ( const KEduVocGrade &other ) const;
+
+
     /** returns query count as int
     * @returns query count
     */

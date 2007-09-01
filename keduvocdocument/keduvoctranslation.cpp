@@ -25,20 +25,6 @@
 class KEduVocTranslation::KEduVocTranslationPrivate
 {
 public:
-
-    KEduVocTranslationPrivate()  // ( KEduVocTranslation* qq )
-    //: q ( qq )
-    {
-        init();
-    }
-
-    void init();
-
-    KEduVocTranslationPrivate& operator= ( const KEduVocTranslationPrivate &translation );
-    bool operator== ( const KEduVocTranslationPrivate &p ) const;
-
-    //KEduVocTranslation* q;
-
     /// This is the word itself. The vocabulary. This is what it is all about.
     QString m_translation;
     /// Some languages (german) have irregular plurals. Kept here.
@@ -83,34 +69,6 @@ public:
 };
 
 
-
-void KEduVocTranslation::KEduVocTranslationPrivate::init()
-{
-    m_translation = QString();
-}
-
-
-bool KEduVocTranslation::KEduVocTranslationPrivate::operator== ( const KEduVocTranslation::KEduVocTranslationPrivate &other ) const
-{
-    return  m_translation == other.m_translation &&
-            m_type == other.m_type &&
-            m_subType == other.m_subType &&
-            m_usages == other.m_usages &&
-            m_comment == other.m_comment &&
-            m_irregularPlural == other.m_irregularPlural &&
-            m_paraphrase == other.m_paraphrase &&
-            m_synonym == other.m_synonym &&
-            m_example == other.m_example &&
-            m_antonym == other.m_antonym &&
-            m_pronunciation == other.m_pronunciation &&
-            m_conjugations == other.m_conjugations &&
-            m_comparison == other.m_comparison &&
-            m_multipleChoice == other.m_multipleChoice &&
-//             m_grades == other.m_grades &&
-            m_falseFriends.keys() == other.m_falseFriends.keys() &&
-            m_falseFriends.values() == other.m_falseFriends.values();
-}
-
 KEduVocTranslation::KEduVocTranslation() : d( new KEduVocTranslationPrivate )
 {}
 
@@ -136,7 +94,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
     d->m_conjugations = other.d->m_conjugations;
     d->m_comparison = other.d->m_comparison;
     d->m_multipleChoice = other.d->m_multipleChoice;
-//     d->m_grades = other.d->m_grades;
+    d->m_grades = other.d->m_grades;
     d->m_falseFriends = other.d->m_falseFriends;
 }
 
@@ -144,6 +102,48 @@ KEduVocTranslation::~KEduVocTranslation()
 {
     delete d;
 }
+
+
+bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) const
+{
+    return d->m_translation == translation.d->m_translation &&
+           d->m_type == translation.d->m_type &&
+           d->m_subType == translation.d->m_subType &&
+           d->m_usages == translation.d->m_usages &&
+           d->m_comment == translation.d->m_comment &&
+           d->m_paraphrase == translation.d->m_paraphrase &&
+           d->m_synonym == translation.d->m_synonym &&
+           d->m_example == translation.d->m_example &&
+           d->m_antonym == translation.d->m_antonym &&
+           d->m_pronunciation == translation.d->m_pronunciation &&
+           d->m_comparison == translation.d->m_comparison &&
+           d->m_multipleChoice == translation.d->m_multipleChoice &&
+           d->m_falseFriends == translation.d->m_falseFriends &&
+           d->m_conjugations == translation.d->m_conjugations &&
+           d->m_grades == translation.d->m_grades;
+}
+
+
+KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation & translation )
+{
+    d->m_translation = translation.d->m_translation;
+    d->m_type = translation.d->m_type;
+    d->m_subType = translation.d->m_subType;
+    d->m_usages = translation.d->m_usages;
+    d->m_comment = translation.d->m_comment;
+    d->m_paraphrase = translation.d->m_paraphrase;
+    d->m_synonym = translation.d->m_synonym;
+    d->m_example = translation.d->m_example;
+    d->m_antonym = translation.d->m_antonym;
+    d->m_pronunciation = translation.d->m_pronunciation;
+    d->m_comparison = translation.d->m_comparison;
+    d->m_multipleChoice = translation.d->m_multipleChoice;
+    d->m_falseFriends = translation.d->m_falseFriends;
+    d->m_grades == translation.d->m_grades;
+    d->m_conjugations = translation.d->m_conjugations;
+    return *this;
+}
+
 
 QString KEduVocTranslation::text() const
 {
@@ -314,53 +314,6 @@ void KEduVocTranslation::setSubType( const QString &type )
 void KEduVocTranslation::resetGrades()
 {
     d->m_grades.clear();
-}
-
-/*
-QList< int > KEduVocTranslation::conjugationTenses() const
-{
-    return m_conjugations.keys();
-}*/
-
-bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) const
-{
-    return d->m_translation == translation.d->m_translation &&
-           d->m_type == translation.d->m_type &&
-           d->m_subType == translation.d->m_subType &&
-           d->m_usages == translation.d->m_usages &&
-           d->m_comment == translation.d->m_comment &&
-           d->m_paraphrase == translation.d->m_paraphrase &&
-           d->m_synonym == translation.d->m_synonym &&
-           d->m_example == translation.d->m_example &&
-           d->m_antonym == translation.d->m_antonym &&
-           d->m_pronunciation == translation.d->m_pronunciation &&
-           d->m_comparison == translation.d->m_comparison &&
-           d->m_multipleChoice == translation.d->m_multipleChoice &&
-           d->m_falseFriends == translation.d->m_falseFriends &&
-           d->m_conjugations == translation.d->m_conjugations
-           /// @todo d->m_grades == translation.d->m_grades &&
-           ;
-}
-
-
-KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation & translation )
-{
-    d->m_translation = translation.d->m_translation;
-    d->m_type = translation.d->m_type;
-    d->m_subType = translation.d->m_subType;
-    d->m_usages = translation.d->m_usages;
-    d->m_comment = translation.d->m_comment;
-    d->m_paraphrase = translation.d->m_paraphrase;
-    d->m_synonym = translation.d->m_synonym;
-    d->m_example = translation.d->m_example;
-    d->m_antonym = translation.d->m_antonym;
-    d->m_pronunciation = translation.d->m_pronunciation;
-    d->m_comparison = translation.d->m_comparison;
-    d->m_multipleChoice = translation.d->m_multipleChoice;
-    d->m_falseFriends = translation.d->m_falseFriends;
-    /// @todo d->m_grades == translation.d->m_grades;
-    d->m_conjugations = translation.d->m_conjugations;
-    return *this;
 }
 
 KEduVocGrade & KEduVocTranslation::gradeFrom( int indexFrom )

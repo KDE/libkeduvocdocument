@@ -128,3 +128,19 @@ void KEduVocGrade::setQueryDate( const QDateTime & date )
 {
     d->m_queryDate = date;
 }
+
+KEduVocGrade & KEduVocGrade::operator =(const KEduVocGrade & other)
+{
+    d->m_grade = other.d->m_grade;
+    d->m_queryCount = other.d->m_queryCount;
+    d->m_badCount = other.d->m_badCount;
+    d->m_queryDate = other.d->m_queryDate;
+}
+
+bool KEduVocGrade::operator ==(const KEduVocGrade & other) const
+{
+    return d->m_grade == other.d->m_grade &&
+        d->m_queryCount == other.d->m_queryCount &&
+        d->m_badCount == other.d->m_badCount &&
+        d->m_queryDate == other.d->m_queryDate;
+}
