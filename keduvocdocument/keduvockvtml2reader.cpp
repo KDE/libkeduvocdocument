@@ -550,18 +550,18 @@ bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocCo
  <conjugation>
   <tense>Futurepastperfekt:)</tense>
   <singular>
-    <first person></first person>
-    <second person></second person>
-    <third person>
+    <firstperson></firstperson>
+    <secondperson></secondperson>
+    <thirdperson>
       <male></male>
       <female></female>
       <neutral></neutral>
-    </third person>
+    </thirdperson>
   </singular>
   <plural>
-    <first person></first person>
-    <second person></second person>
-    <third person>
+    <firstperson></firstperson>
+    <secondperson></secondperson>
+    <thirdsperson>
       <common></common>
     </third person>
   </plural>
@@ -584,19 +584,14 @@ bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocCo
 
     QDomElement tenseElement = conjugElement.firstChildElement( KVTML_TENSE );
     tense = tenseElement.text();
-kDebug() << "Reading conjugation for tense: " << tense;
     QDomElement currentGroup = conjugElement.firstChildElement( KVTML_SINGULAR );
     if ( !currentGroup.isNull() )
     {
         QDomElement currentElement = currentGroup.firstChildElement( KVTML_1STPERSON );
-        if ( !currentElement.isNull() ) {
-            singfirst = currentElement.text();
-        }
+        singfirst = currentElement.text();
 
         currentElement = currentGroup.firstChildElement( KVTML_2NDPERSON );
-        if ( !currentElement.isNull() ) {
-            singsecond = currentElement.text();
-        }
+        singsecond = currentElement.text();
 
         currentGroup = currentGroup.firstChildElement( KVTML_3RDPERSON );
         if ( !currentGroup.isNull() ) {
@@ -604,26 +599,17 @@ kDebug() << "Reading conjugation for tense: " << tense;
             if ( !currentElement.isNull() ) {
                 s3_common = true;
                 singthirdmale = currentElement.text();
-kDebug() << " Reading common: " << tense << " first sing: " << singfirst << " sing third: " << singthirdmale;
                 singthirdfemale = singthirdmale;
                 singthirdneutral = singthirdmale;
             } else {
                 s3_common = false;
                 currentElement = currentGroup.firstChildElement( KVTML_MALE );
-                if ( !currentElement.isNull() ) {
-                    singthirdmale = currentElement.text();
-                }
-kDebug() << " Reading NOT common: " << tense << " first sing: " << singfirst << " sing third: " << singthirdmale;
+                singthirdmale = currentElement.text();
 
                 currentElement = currentGroup.firstChildElement( KVTML_FEMALE );
-                if ( !currentElement.isNull() ) {
-                    singthirdfemale = currentElement.text();
-                }
-
+                singthirdfemale = currentElement.text();
                 currentElement = currentGroup.firstChildElement( KVTML_NEUTRAL );
-                if ( !currentElement.isNull() ) {
-                    singthirdneutral = currentElement.text();
-                }
+                singthirdneutral = currentElement.text();
             }
 
         }
@@ -633,14 +619,10 @@ kDebug() << " Reading NOT common: " << tense << " first sing: " << singfirst << 
     if ( !currentGroup.isNull() )
     {
         QDomElement currentElement = currentGroup.firstChildElement( KVTML_1STPERSON );
-        if ( !currentElement.isNull() ) {
-            plurfirst = currentElement.text();
-        }
+        plurfirst = currentElement.text();
 
         currentElement = currentGroup.firstChildElement( KVTML_2NDPERSON );
-        if ( !currentElement.isNull() ) {
-            plursecond = currentElement.text();
-        }
+        plursecond = currentElement.text();
 
         currentGroup = currentGroup.firstChildElement( KVTML_3RDPERSON );
         if ( !currentGroup.isNull() ) {
@@ -653,19 +635,11 @@ kDebug() << " Reading NOT common: " << tense << " first sing: " << singfirst << 
             } else {
                 p3_common = false;
                 currentElement = currentGroup.firstChildElement( KVTML_MALE );
-                if ( !currentElement.isNull() ) {
-                    plurthirdmale = currentElement.text();
-                }
-
+                plurthirdmale = currentElement.text();
                 currentElement = currentGroup.firstChildElement( KVTML_FEMALE );
-                if ( !currentElement.isNull() ) {
-                    plurthirdfemale = currentElement.text();
-                }
-
+                plurthirdfemale = currentElement.text();
                 currentElement = currentGroup.firstChildElement( KVTML_NEUTRAL );
-                if ( !currentElement.isNull() ) {
-                    plurthirdneutral = currentElement.text();
-                }
+                plurthirdneutral = currentElement.text();
             }
 
         }

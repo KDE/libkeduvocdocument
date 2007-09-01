@@ -33,27 +33,6 @@
 #define CONJ_PREFIX            "--"   // definition of prefixes (I, you, ..)
 
 
-class KEDUVOCDOCUMENT_EXPORT KEduVocTenseRelation
-{
-public:
-    /** default constructor */
-    KEduVocTenseRelation();
-    KEduVocTenseRelation( const QString & _short, const QString & _long );
-
-    /** default destructor, deletes the d-pointer */
-    ~KEduVocTenseRelation();
-
-    QString shortStr() const;
-    QString longStr()  const;
-
-    KEduVocTenseRelation &operator= ( const KEduVocTenseRelation &other );
-
-private:
-    class Private;
-    Private * const d;
-};
-
-
 /**
  * The conjugation of a verb
  */
@@ -73,6 +52,7 @@ public:
     int entryCount() const;
 
     QString getType( int index );
+    QStringList tenses() const;
 
     QString pers1Singular( const QString &type ) const;
     QString pers2Singular( const QString &type ) const;

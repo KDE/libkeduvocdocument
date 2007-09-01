@@ -106,6 +106,8 @@ QString KEduVocConjugation::getType( int idx )
 }
 
 
+
+
 bool KEduVocConjugation::pers3SingularCommon( const QString &type ) const
 {
     return d->m_conjugations.value(type).s3common;
@@ -264,6 +266,11 @@ bool KEduVocConjugation::Private::conjug_t::operator ==(const conjug_t & other) 
         pers3_m_plur == other.pers3_m_plur &&
         pers3_f_plur == other.pers3_f_plur &&
         pers3_n_plur == other.pers3_n_plur;
+}
+
+QStringList KEduVocConjugation::tenses() const
+{
+    return d->m_conjugations.keys();
 }
 
 
