@@ -124,6 +124,12 @@ bool KEduVocKvtml2Reader::readInformation( QDomElement &informationElement )
         m_doc->setDocumentComment( currentElement.text() );
     }
 
+    // read the category
+    currentElement = informationElement.firstChildElement( KVTML_CATEGORY );
+    if ( !currentElement.isNull() ) {
+        m_doc->setCategory( currentElement.text() );
+    }
+
     return true;
 }
 

@@ -28,6 +28,7 @@
 #define KVTML_AUTHOR            "author"
 #define KVTML_LICENSE           "license"
 #define KVTML_COMMENT           "comment"
+#define KVTML_CATEGORY          "category"
 
 #define KVTML_IDENTIFIERS       "identifiers"
 #define KVTML_IDENTIFIER        "identifier"

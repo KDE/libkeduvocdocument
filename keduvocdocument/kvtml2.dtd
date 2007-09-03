@@ -1,13 +1,14 @@
 <!ELEMENT kvtml         (information, identifiers, wordtypedefinitions?, entries, tenses?, usages?, lessons?)     >
 <!ATTLIST kvtml version    CDATA  #REQUIRED>
 
-<!ELEMENT information    (generator?, title, author?, license?, comment?) >
+<!ELEMENT information    (generator?, title, author?, license?, comment?, category?) >
 
 <!ELEMENT generator      (#PCDATA) >
 <!ELEMENT title          (#PCDATA) >
 <!ELEMENT author         (#PCDATA) >
 <!ELEMENT license        (#PCDATA) >
 <!ELEMENT comment        (#PCDATA) >
+<!ELEMENT category       (#PCDATA) >
 
 <!ELEMENT identifiers    (identifier*) >
 <!ELEMENT identifier     (identifiertype, locale, name?, comment?, sizehint?, article?, personalpronouns?) >

@@ -128,6 +128,11 @@ bool KEduVocKvtml2Writer::writeInformation( QDomElement &informationElement, con
         informationElement.appendChild( newTextElement( KVTML_COMMENT, m_doc->documentComment() ) );
     }
 
+    // category
+    if ( !m_doc->category().isEmpty() ) {
+        informationElement.appendChild( newTextElement( KVTML_CATEGORY, m_doc->category() ) );
+    }
+
     return true;
 }
 
