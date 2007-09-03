@@ -172,16 +172,16 @@ bool KEduVocKvtml2Writer::writeLessons( QDomElement &lessonsElement )
     if ( m_doc->lessonCount() == 0 )
         return true;
 
-    QMap<int, KEduVocLesson*> lessons = m_doc->lessons();
+    QMap<int, KEduVocLesson> lessons = m_doc->lessons();
 
     foreach( int lessonid, lessons.keys() ) {
-        KEduVocLesson * thisLesson = lessons[lessonid];
+        KEduVocLesson thisLesson = lessons[lessonid];
 
         // make lesson element
         QDomElement thisLessonElement = m_domDoc.createElement( KVTML_LESSON );
 
         // add a name
-        thisLessonElement.appendChild( newTextElement( KVTML_NAME, thisLesson->name() ) );
+        thisLessonElement.appendChild( newTextElement( KVTML_NAME, thisLesson.name() ) );
 
         // add a inquery tag
         thisLessonElement.appendChild( newTextElement( KVTML_QUERY, m_doc->lessonInQuery( lessonid ) ? KVTML_TRUE : KVTML_FALSE ) );

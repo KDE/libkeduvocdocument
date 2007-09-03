@@ -62,6 +62,9 @@ public:
      * @param entryid id of the entry to remove
      */
     void removeEntry( int entryid );
+    
+    /** equality operator */
+    bool operator==(const KEduVocLesson &other);
 
 private:
     class Private;

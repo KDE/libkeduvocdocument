@@ -64,9 +64,6 @@ public:
 
     void init();
 
-
-    void ClearLessons();
-
     KEduVocDocument* q;
 
     bool                      m_dirty;
@@ -102,7 +99,7 @@ public:
     QString                   m_category;
 
     // make this a map so removals don't require renumbering :)
-    QMap<int, KEduVocLesson*>  m_lessons;
+    QMap<int, KEduVocLesson>  m_lessons;
 
     KEduVocWordType*          m_wordTypes;
 
@@ -112,22 +109,11 @@ public:
 
 KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
 {
-    ClearLessons();
-}
-
-void KEduVocDocument::KEduVocDocumentPrivate::ClearLessons()
-{
-    QList<int> keys = m_lessons.keys();
-    for (int i = 0; i < keys.size(); ++i)
-    {
-        delete m_lessons.value(keys[i]);
-    }
-    m_lessons.clear();
 }
 
 void KEduVocDocument::KEduVocDocumentPrivate::init()
 {
-    ClearLessons();
+    m_lessons.clear();
     m_tenseDescriptions.clear();
     m_identifiers.clear();
     m_sortIdentifier.clear();
@@ -871,24 +857,20 @@ int KEduVocDocument::addLesson( const QString &lessonName, int position )
         }
     }
 
-    KEduVocLesson *lesson = new KEduVocLesson;
-    lesson->setName( lessonName );
+    KEduVocLesson lesson;
+    lesson.setName( lessonName );
     d->m_lessons.insert( position, lesson );
     return position;
 }
 
-QMap<int, KEduVocLesson *> KEduVocDocument::lessons() const
+QMap<int, KEduVocLesson> & KEduVocDocument::lessons() const
 {
     return d->m_lessons;
 }
 
-KEduVocLesson * KEduVocDocument::lesson( int index )
+KEduVocLesson & KEduVocDocument::lesson( int index )
 {
-    KEduVocLesson * retval( NULL );
-    if ( d->m_lessons.contains( index ) ) {
-        retval = d->m_lessons[index];
-    }
-    return retval;
+    return d->m_lessons[index];
 }
 
 //void KEduVocDocument::renameLesson(const int lessonIndex, const QString &lessonName)
@@ -1044,9 +1026,9 @@ void KEduVocDocument::setCurrentLesson( int lesson )
 QStringList KEduVocDocument::lessonNames() const
 {
     QStringList descriptions;
-    QList<KEduVocLesson*> lessonObjects = lessons().values();
+    QList<KEduVocLesson> lessonObjects = lessons().values();
     for ( int i = 0; i < lessonObjects.count(); ++i ) {
-        descriptions.append( lessonObjects[i]->name() );
+        descriptions.append( lessonObjects[i].name() );
     }
     return descriptions;
 }

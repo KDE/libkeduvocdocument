@@ -470,7 +470,7 @@ bool KEduVocKvtml2Reader::readLesson( QDomElement &lessonElement )
         // TODO: once we have a lesson class, add each of these entryids to the lesson
         // set this lesson for the given enty
         m_doc->entry( entryId )->setLesson( lessonId );
-        m_doc->lesson( lessonId )->addEntry( entryId );
+        m_doc->lesson( lessonId ).addEntry( entryId );
         currentElement = currentElement.nextSiblingElement( KVTML_ENTRYID );
     }
 

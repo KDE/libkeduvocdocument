@@ -53,6 +53,11 @@ KEduVocLesson& KEduVocLesson::operator= ( const KEduVocLesson &other )
     return *this;
 }
 
+bool KEduVocLesson::operator==(const KEduVocLesson &other)
+{
+    return d->m_entries == other.d->m_entries && d->m_name == other.d->m_name;
+}
+
 void KEduVocLesson::setName( const QString &name )
 {
     d->m_name = name;

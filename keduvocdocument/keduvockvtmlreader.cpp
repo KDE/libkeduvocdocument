@@ -1075,9 +1075,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
     m_doc->appendEntry( &expr );
 
     // also add this entryid to the lesson it's part of
-    if ( m_doc->lesson( lesson ) != NULL ) {
-        m_doc->lesson( lesson )->addEntry( m_doc->entryCount() );
-    }
+    m_doc->lesson( lesson ).addEntry( m_doc->entryCount() );
 
     return true;
 }

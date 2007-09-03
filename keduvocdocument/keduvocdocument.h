@@ -390,14 +390,15 @@ public:
     void setCurrentLesson( int lesson );
 
     /** get a lesson object
-     * @returns a pointer to the lesson object at the specified index or NULL if there isn't one
+     * @returns a pointer to the lesson object at the specified index
+     * NOTE: this will create one if it doesn't exist
      */
-    KEduVocLesson *lesson( int index );
+    KEduVocLesson & lesson( int index );
 
     /** get all lesson objects
      * @returns a map of pointers to lesson objects
      */
-    QMap<int, KEduVocLesson *> lessons() const;
+    QMap<int, KEduVocLesson> & lessons() const;
 
     /**
      * @returns                the number of lessons defined
