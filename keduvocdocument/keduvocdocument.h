@@ -147,6 +147,13 @@ public:
     /** @return the comment of the file */
     QString documentComment() const;
 
+    /** set the category of the file
+     * @param category category to set */
+    void setCategory( const QString & category );
+
+    /** @return the category of the file */
+    QString category() const;
+
     /**
      * Sets the generator of the file
      */

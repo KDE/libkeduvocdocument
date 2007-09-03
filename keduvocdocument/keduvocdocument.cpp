@@ -948,6 +948,16 @@ QString KEduVocDocument::documentComment() const
     return d->m_comment;
 }
 
+void KEduVocDocument::setCategory( const QString & category )
+{
+    d->m_category = category;
+}
+
+QString KEduVocDocument::category() const
+{
+    return d->m_category;
+    ///@todo make writer/reader use this
+}
 
 void KEduVocDocument::queryIdentifier( QString &org, QString &trans ) const
 {
