@@ -46,6 +46,7 @@
 #include <kdebug.h>
 #include <kmenu.h>
 #include <knotification.h>
+#include <kcolorscheme.h>
 #include <QApplication>
 #include <QPainter>
 #include <Q3Dict>
@@ -139,7 +140,7 @@ ExtDateTable::ExtDateTable(QWidget *parent, ExtDate date_, const char* name, Qt:
   setHScrollBarMode(AlwaysOff);
   setVScrollBarMode(AlwaysOff);
   QPalette pal = viewport()->palette();
-  pal.setColor(viewport()->backgroundRole(), KGlobalSettings::baseColor());
+  pal.setColor(viewport()->backgroundRole(), KColorScheme(QPalette::Active, KColorScheme::View).background().color());
   viewport()->setPalette(pal);
   setDate(date_); // this initializes firstday, numdays, numDaysPrevMonth
 }
@@ -673,7 +674,7 @@ ExtDateInternalMonthPicker::ExtDateInternalMonthPicker
   // enable to find drawing failures:
   // setTableFlags(Tbl_clipCellPainting);
   QPalette pal = viewport()->palette();
-  pal.setColor(viewport()->backgroundRole(), KGlobalSettings::baseColor());  // for consistency with the datepicker
+  pal.setColor(viewport()->backgroundRole(), KColorScheme(QPalette::Active, KColorScheme::View).background().color());  // for consistency with the datepicker
   viewport()->setPalette(pal);
   // ----- find the preferred size
   //       (this is slow, possibly, but unfortunately it is needed here):
@@ -705,7 +706,7 @@ ExtDateInternalMonthPicker::getResult() const
 void
 ExtDateInternalMonthPicker::setupPainter(QPainter *p)
 {
-  p->setPen(KGlobalSettings::textColor());
+  p->setPen(KColorScheme(QPalette::Active, KColorScheme::View).foreground().color());
 }
 
 void
