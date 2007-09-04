@@ -1081,20 +1081,26 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
 }
 
 
-bool KEduVocKvtmlReader::addLanguage( int languageId, const QString& language)
+bool KEduVocKvtmlReader::addLanguage( int languageId, const QString& locale)
 {
-
-kDebug() << "addLanguage( " << languageId << ", " << language << ")";
     if ( m_doc->identifierCount() <= languageId ) {
         m_doc->appendIdentifier();
         // first entry
-        if ( !language.isEmpty() ) {      // no definition in first entry
-            m_doc->identifier(languageId).setLocale(language);
-            m_doc->identifier(languageId).setName(language);
+        if ( !locale.isEmpty() ) {      // no definition in first entry
+            m_doc->identifier(languageId).setLocale(locale);
+
+            QString languageName = KGlobal::locale()->languageCodeToName(locale);
+            if ( languageName.isEmpty() ) {
+                languageName = locale;
+            }
+
+            m_doc->identifier(languageId).setName(languageName);
+            kDebug() << "addLanguage( " << languageId << ", " << locale << "): " << languageName;
+
         }
     } else {
-        if ( !language.isEmpty() ) {
-            if ( language != m_doc->identifier(languageId).locale() ) {
+        if ( !locale.isEmpty() ) {
+            if ( locale != m_doc->identifier(languageId).locale() ) {
                 // different originals ?
                 m_errorMessage = i18n( "Ambiguous definition of language code" );
                 return false;
