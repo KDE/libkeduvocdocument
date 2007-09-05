@@ -135,8 +135,6 @@ void KEduVocKvtmlCompability::initOldTypeLists()
     m_oldMainTypeNames.insert( "con", i18n( "Conjunction" ) );
     m_oldMainTypeNames.insert( "pre", i18n( "Preposition" ) );
     m_oldMainTypeNames.insert( "qu", i18n( "Question" ) );
-    m_oldMainTypeNames.insert( "ifm", i18n( "Informal" ) );
-    m_oldMainTypeNames.insert( "fig", i18n( "Figuratively" ) );
 
     m_oldSubTypeNames.clear();
     m_oldSubTypeNames.insert( "ord", i18n( "Ordinal" ) );
