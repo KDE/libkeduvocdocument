@@ -51,7 +51,7 @@ public:
      * @param separator        expression will be split into an original and one or more translations using separator
      * @param lesson           lesson number, 0 for none
      */
-    KEduVocExpression( const QString & expression, const QString & separator, int lesson = 0 );
+    KEduVocExpression( const QStringList & translations, int lesson = 0 );
 
     KEduVocExpression( const KEduVocExpression &expression );
 

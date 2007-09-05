@@ -58,7 +58,7 @@ bool KEduVocCsvReader::readDoc( KEduVocDocument *doc )
         QString s = inputStream.readLine();
 
         if ( !s.simplified().isEmpty() ) {
-            KEduVocExpression expression( s, separator );
+            KEduVocExpression expression( s.split(separator) );
             languageCount = qMax( languageCount, expression.translationIndices().count() );
             m_doc->appendEntry( &expression );
         }

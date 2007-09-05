@@ -78,33 +78,16 @@ KEduVocExpression::KEduVocExpression()
 KEduVocExpression::KEduVocExpression( const QString & expression, int lesson )
         : d( new KEduVocExpressionPrivate( this ) )
 {
-    setTranslation( 0, expression.simplified() );
     d->m_lesson = lesson;
+    setTranslation( 0, expression.simplified() );
 }
 
-KEduVocExpression::KEduVocExpression( const QString & expression, const QString & separator, int lesson )
+KEduVocExpression::KEduVocExpression( const QStringList & translations, int lesson )
         : d( new KEduVocExpressionPrivate( this ) )
 {
-    QString se;
-    QString expr = expression;
     d->m_lesson = lesson;
-
-    if ( separator.length() ) {
-        int pos = expr.indexOf( separator );
-        int translationIndex = 0;
-        se = expr.left( pos ).simplified();
-        setTranslation( translationIndex, se );
-        expr.remove( 0, pos + separator.length() );
-
-        // gather all translations
-        while (( pos = expr.indexOf( separator ) ) != -1 ) {
-            translationIndex++;
-            se = expr.left( pos ).simplified();
-            setTranslation( translationIndex, se );
-            expr.remove( 0, pos + separator.length() );
-        }
-        translationIndex++;
-        setTranslation( translationIndex, expr.simplified() );
+    foreach ( QString translation, translations ) {
+        setTranslation(d->m_translations.count(), translation);
     }
 }
 
