@@ -68,8 +68,6 @@ public:
 
     bool                      m_dirty;
     KUrl                      m_url;
-    QList<bool>               m_sortIdentifier;
-    bool                      m_sortLesson;
 
     // save these to document
     QList<KEduVocIdentifier>  m_identifiers;
@@ -116,12 +114,10 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_lessons.clear();
     m_tenseDescriptions.clear();
     m_identifiers.clear();
-    m_sortIdentifier.clear();
     m_extraSizeHints.clear();
     m_sizeHints.clear();
     m_vocabulary.clear();
     m_dirty = false;
-    m_sortLesson = false;
     m_currentLesson = 0;
     m_queryorg = "";
     m_querytrans = "";

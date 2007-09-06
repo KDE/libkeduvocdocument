@@ -91,11 +91,9 @@ KEduVocExpression::KEduVocExpression( const QStringList & translations, int less
     }
 }
 
-
 KEduVocExpression::KEduVocExpression( const KEduVocExpression &expression )
         : d( new KEduVocExpressionPrivate( *expression.d ) )
 {}
-
 
 KEduVocExpression::~KEduVocExpression()
 {
@@ -111,14 +109,9 @@ void KEduVocExpression::removeTranslation( int index )
 
 void KEduVocExpression::setTranslation( int index, const QString & expr )
 {
-    if ( index < 0 )
+    if ( index < 0 ) {
         return;
-
-// extend translations with empty strings if necessary
-//     for ( int i = d->m_translations.count(); i <= index; i++ ) {
-//         d->m_translations[i] = KEduVocTranslation( "" );
-//     }
-//  if (index <= translations.count())
+    }
 
     d->m_translations[index] = expr.simplified();
 }

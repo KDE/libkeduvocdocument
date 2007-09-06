@@ -103,7 +103,7 @@ public:
      */
     void setTranslation( int index, const QString &expression );
 
-    void setTranslation( const QString &identifier, const QString & expression );
+//     void setTranslation( const QString &identifier, const QString & expression );
 
     /** removes a translation
      *
