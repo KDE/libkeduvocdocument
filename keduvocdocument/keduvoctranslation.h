@@ -234,6 +234,20 @@ public:
       */
     void setMultipleChoice( const KEduVocMultipleChoice &mc );
 
+    /** get the sound url for this translation if it exists */
+    QString soundUrl();
+    
+    /** set the sound url for this translation
+     * @param url               url of the sound file */
+    void setSoundUrl(const QString &url);
+    
+    /** get the image url for this translation if it exists */
+    QString imageUrl();
+    
+    /** set the image url for this translation 
+     * @param url               url of the image
+     */
+    void setImageUrl(const QString &url);
 
     /**
      * Equal operator to assing a translation to another one.
@@ -241,6 +255,7 @@ public:
      * @return reference to the new translation
      */
     KEduVocTranslation& operator= ( const KEduVocTranslation &translation );
+    
     /**
      * Compare two translations, including word type etc.
      * @param translation

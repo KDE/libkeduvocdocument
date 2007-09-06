@@ -84,6 +84,23 @@ bool KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
 
     bool result = readGroups( domElementKvtml ); // read sub-groups
 
+    int defaultLessonNumber = m_doc->addLesson(i18n("Default Lesson"));
+
+    // now make sure we don't have any orphan entries (lesson 0)
+    for (int i = 0; i < m_doc->entryCount(); ++i)
+    {
+        if (m_doc->entry(i)->lesson() == 0)
+        {
+            m_doc->entry(i)->setLesson(defaultLessonNumber);
+            m_doc->lesson(defaultLessonNumber).addEntry(i);
+        }
+    }
+    
+    if (m_doc->lesson(defaultLessonNumber).entries().size() == 0)
+    {
+        m_doc->deleteLesson(defaultLessonNumber, KEduVocDocument::DeleteEmptyLesson);
+    }
+    
     return result;
 }
 
@@ -426,13 +443,13 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     // image
     currentElement = translationElement.firstChildElement( KVTML_IMAGE );
     if ( !currentElement.isNull() ) {
-        // TODO: do something with the image
+        expr.translation( index ).setImageUrl( currentElement.text() );
     }
 
     // sound
     currentElement = translationElement.firstChildElement( KVTML_SOUND );
     if ( !currentElement.isNull() ) {
-        // TODO: do something with the sound
+        expr.translation( index ).setSoundUrl( currentElement.text() );
     }
 
     return true;

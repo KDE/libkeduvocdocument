@@ -457,7 +457,15 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     }
 
     // image
+    if ( !translation.imageUrl().isEmpty() ) {
+        translationElement.appendChild( newTextElement( KVTML_IMAGE, translation.imageUrl() ) );
+    }
+
     // sound
+    if ( !translation.soundUrl().isEmpty() ) {
+        translationElement.appendChild( newTextElement( KVTML_SOUND, translation.soundUrl() ) );
+    }
+
 
     return true;
 }

@@ -48,6 +48,10 @@ public:
     QString m_antonym;
     /// Pronunciation
     QString m_pronunciation;
+    /// Image url
+    QString m_imageUrl;
+    /// Sound url
+    QString m_soundUrl;
     /// Usages give a context (eg. this word is usually used in [biology])
     QSet<QString> m_usages;
     /// Conjugations of a word (I go, you go, he goes... boring in english)
@@ -96,6 +100,8 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
     d->m_multipleChoice = other.d->m_multipleChoice;
     d->m_grades = other.d->m_grades;
     d->m_falseFriends = other.d->m_falseFriends;
+    d->m_imageUrl = other.d->m_imageUrl;
+    d->m_soundUrl = other.d->m_soundUrl;
 }
 
 KEduVocTranslation::~KEduVocTranslation()
@@ -116,6 +122,8 @@ bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) 
            d->m_example == translation.d->m_example &&
            d->m_antonym == translation.d->m_antonym &&
            d->m_pronunciation == translation.d->m_pronunciation &&
+           d->m_imageUrl == translation.d->m_imageUrl &&
+           d->m_soundUrl == translation.d->m_soundUrl &&
            d->m_comparison == translation.d->m_comparison &&
            d->m_multipleChoice == translation.d->m_multipleChoice &&
            d->m_falseFriends == translation.d->m_falseFriends &&
@@ -136,6 +144,8 @@ KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation &
     d->m_example = translation.d->m_example;
     d->m_antonym = translation.d->m_antonym;
     d->m_pronunciation = translation.d->m_pronunciation;
+    d->m_imageUrl = translation.d->m_imageUrl;
+    d->m_soundUrl = translation.d->m_soundUrl;
     d->m_comparison = translation.d->m_comparison;
     d->m_multipleChoice = translation.d->m_multipleChoice;
     d->m_falseFriends = translation.d->m_falseFriends;
@@ -346,3 +356,29 @@ QString KEduVocTranslation::irregularPlural() const
     return d->m_irregularPlural;
 }
 
+/** get the sound url for this translation if it exists */
+QString KEduVocTranslation::soundUrl()
+{
+    return d->m_soundUrl;
+}
+
+/** set the sound url for this translation
+ * @param url               url of the sound file */
+void KEduVocTranslation::setSoundUrl(const QString &url)
+{
+    d->m_soundUrl = url;
+}
+
+/** get the image url for this translation if it exists */
+QString KEduVocTranslation::imageUrl()
+{
+    return d->m_imageUrl;
+}
+
+/** set the image url for this translation 
+ * @param url               url of the image
+ */
+void KEduVocTranslation::setImageUrl(const QString &url)
+{
+    d->m_imageUrl = url;
+}
