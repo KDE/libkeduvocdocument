@@ -237,10 +237,10 @@ bool KEduVocKvtmlReader::readLesson( QDomElement &domElementParent )
                 }
             }
 
-            bool inQuery;
+            bool inQuery = false;
             attribute = currentElement.attributeNode( KV_LESS_QUERY );
             if ( !attribute.isNull() ) {
-                inQuery =  attribute.value().toInt() != 0;
+                inQuery = (attribute.value().toInt() != 0);
             }
 
             s = currentElement.text();

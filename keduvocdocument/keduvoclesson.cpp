@@ -40,6 +40,7 @@ KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
 {
     d->m_entries = other.d->m_entries;
     d->m_name = other.d->m_name;
+    d->m_inQuery = other.d->m_inQuery;
 }
 
 KEduVocLesson::~KEduVocLesson()
@@ -51,12 +52,15 @@ KEduVocLesson& KEduVocLesson::operator= ( const KEduVocLesson &other )
 {
     d->m_entries = other.d->m_entries;
     d->m_name = other.d->m_name;
+    d->m_inQuery = other.d->m_inQuery;
     return *this;
 }
 
 bool KEduVocLesson::operator==(const KEduVocLesson &other)
 {
-    return d->m_entries == other.d->m_entries && d->m_name == other.d->m_name;
+    return d->m_entries == other.d->m_entries &&
+        d->m_name == other.d->m_name &&
+        d->m_inQuery == other.d->m_inQuery;;
 }
 
 void KEduVocLesson::setName( const QString &name )

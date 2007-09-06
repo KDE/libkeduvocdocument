@@ -449,9 +449,7 @@ bool KEduVocKvtml2Reader::readLesson( QDomElement &lessonElement )
 
     //<query>true</query>
     currentElement = lessonElement.firstChildElement( KVTML_QUERY );
-    if ( !currentElement.isNull() ) {
-        m_doc->lesson(lessonId).setInQuery(currentElement.text() == KVTML_TRUE);
-    }
+    m_doc->lesson(lessonId).setInQuery(currentElement.text() == KVTML_TRUE);
 
     //<current>true</current>
     currentElement = lessonElement.firstChildElement( KVTML_CURRENT );
