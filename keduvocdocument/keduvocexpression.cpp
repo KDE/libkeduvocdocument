@@ -53,7 +53,7 @@ void KEduVocExpression::KEduVocExpressionPrivate::init()
 
     m_inQuery = false;
     m_active = true;
-    m_lesson = 0;
+    m_lesson = -1;
     m_sortIndex = 0;
     m_sizeHint = 0;
 }

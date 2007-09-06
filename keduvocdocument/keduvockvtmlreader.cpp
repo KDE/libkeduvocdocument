@@ -220,39 +220,37 @@ bool KEduVocKvtmlReader::readLesson( QDomElement &domElementParent )
     if ( entryList.length() <= 0 )
         return false;
 
-    QList<int> inQueryList;
-
     for ( int i = 0; i < entryList.count(); ++i ) {
         currentElement = entryList.item( i ).toElement();
         if ( currentElement.parentNode() == domElementParent ) {
-            int no = 0;
+            int no;
             bool isCurr = false;
 
             attribute = currentElement.attributeNode( KV_LESS_NO );
-            if ( !attribute.isNull() )
+            if ( !attribute.isNull() ) {
                 no = attribute.value().toInt();
+            }
 
             attribute = currentElement.attributeNode( KV_LESS_CURR );
-            if ( !attribute.isNull() )
-                isCurr = attribute.value().toInt() != 0;
+            if ( !attribute.isNull() ) {
+                if ( attribute.value().toInt() != 0 ) {
+                    m_doc->setCurrentLesson( no );
+                }
+            }
 
-            if ( isCurr && no != 0 )
-                m_doc->setCurrentLesson( no );
-
+            bool inQuery;
             attribute = currentElement.attributeNode( KV_LESS_QUERY );
-            if ( !attribute.isNull() )
-                if ( attribute.value().toInt() != 0 && no > 0 )
-                    inQueryList.append( no );
+            if ( !attribute.isNull() ) {
+                inQuery =  attribute.value().toInt() != 0;
+            }
 
             s = currentElement.text();
-            if ( s.isNull() )
-                s = "";
-            m_doc->addLesson( s, no );
+            int index = m_doc->appendLesson( s, inQuery );
+            if ( index != no-1 ) {
+                kDebug() << "Warning! Lesson order may be confused. Are all lessons in order in the file?";
+            }
         }
     }
-
-    if ( inQueryList.count() > 0 )
-        m_doc->setLessonsInQuery( inQueryList );
 
     return true;
 }
@@ -864,7 +862,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
     QString                   q_org;
     QString                   q_trans;
     QString                   query_id;
-    int                       lesson = 0;
+    int                       lesson = - 1;
     int                       width;
     QString                   type;
     QString                   subType;
@@ -890,13 +888,15 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
 
     attribute = domElementParent.attributeNode( KV_LESS_MEMBER );
     if ( !attribute.isNull() ) {
-        lesson = attribute.value().toInt();
-    }
-
-    if ( lesson && lesson > m_doc->lessonCount() ) {
-        // it's from a lesson that hasn't been added yet
-        // so make sure this lesson is in the document
-        m_doc->addLesson( QString( "#" ) + QString::number( lesson ), lesson );
+        // we start conting from 0 in new documents
+        lesson = attribute.value().toInt() - 1;
+        if ( lesson > m_doc->lessonCount() ) {
+            ///@todo can this happen? does it need a while loop?
+            // it's from a lesson that hasn't been added yet
+            // so make sure this lesson is in the document
+            kDebug() << "Warning: lesson > m_doc->lessonCount() in readExpression.";
+            m_doc->appendLesson( i18nc("A generic name for a new lesson and its number.", "Lesson %1" ), lesson );
+        }
     }
 
     attribute = domElementParent.attributeNode( KV_SELECTED );
@@ -1071,12 +1071,15 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         i++;
     }
 
-    if ( m_doc->entryCount() == 0 )
+    if ( m_doc->entryCount() == 0 ) {
         m_doc->setQueryIdentifier( q_org, q_trans );
+    }
     m_doc->appendEntry( &expr );
 
     // also add this entryid to the lesson it's part of
-    m_doc->lesson( lesson ).addEntry( m_doc->entryCount() );
+    if ( lesson >= 0 ) {
+        m_doc->lesson( lesson ).addEntry( m_doc->entryCount() );
+    }
 
     return true;
 }

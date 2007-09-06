@@ -62,7 +62,10 @@ public:
      * @param entryid id of the entry to remove
      */
     void removeEntry( int entryid );
-    
+
+    bool inQuery();
+    void setInQuery( bool inQuery );
+
     /** equality operator */
     bool operator==(const KEduVocLesson &other);
 

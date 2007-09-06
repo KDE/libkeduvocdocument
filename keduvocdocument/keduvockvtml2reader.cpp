@@ -84,23 +84,6 @@ bool KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
 
     bool result = readGroups( domElementKvtml ); // read sub-groups
 
-    int defaultLessonNumber = m_doc->addLesson(i18n("Default Lesson"));
-
-    // now make sure we don't have any orphan entries (lesson 0)
-    for (int i = 0; i < m_doc->entryCount(); ++i)
-    {
-        if (m_doc->entry(i)->lesson() == 0)
-        {
-            m_doc->entry(i)->setLesson(defaultLessonNumber);
-            m_doc->lesson(defaultLessonNumber).addEntry(i);
-        }
-    }
-    
-    if (m_doc->lesson(defaultLessonNumber).entries().size() == 0)
-    {
-        m_doc->deleteLesson(defaultLessonNumber, KEduVocDocument::DeleteEmptyLesson);
-    }
-    
     return result;
 }
 
@@ -192,11 +175,6 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
     groupElement = domElementParent.firstChildElement( KVTML_ENTRIES );
     if ( !groupElement.isNull() ) {
         QDomNodeList entryList = groupElement.elementsByTagName( KVTML_ENTRY );
-        if ( entryList.length() <= 0 ) {
-            m_errorMessage = i18n( "no entries found in 'entries' tag" );
-            return false; // at least one entry is required
-        }
-
         for ( int i = 0; i < entryList.count(); ++i ) {
             currentElement = entryList.item( i ).toElement();
             if ( currentElement.parentNode() == groupElement ) {
@@ -459,12 +437,11 @@ bool KEduVocKvtml2Reader::readLesson( QDomElement &lessonElement )
 {
     // NOTE: currently this puts an identifier into the last lesson it is in, once support for multiple lessons
     // is in the entry class, all lessons that include an entry will be in there
-    int lessonId = 0;
-
+    int lessonId;
     //<name>Lesson name</name>
     QDomElement currentElement = lessonElement.firstChildElement( KVTML_NAME );
     if ( !currentElement.isNull() ) {
-        lessonId = m_doc->addLesson( currentElement.text() );
+        lessonId = m_doc->appendLesson( currentElement.text() );
     } else {
         m_errorMessage = i18n( "each lesson must have a name" );
         return false;
@@ -473,9 +450,7 @@ bool KEduVocKvtml2Reader::readLesson( QDomElement &lessonElement )
     //<query>true</query>
     currentElement = lessonElement.firstChildElement( KVTML_QUERY );
     if ( !currentElement.isNull() ) {
-        if ( currentElement.text() == KVTML_TRUE ) {
-            m_doc->addLessonToQuery( lessonId );
-        }
+        m_doc->lesson(lessonId).setInQuery(currentElement.text() == KVTML_TRUE);
     }
 
     //<current>true</current>

@@ -28,6 +28,7 @@ class KEduVocLesson::Private
 public:
     QSet<int> m_entries;
     QString m_name;
+    bool m_inQuery;
 };
 
 KEduVocLesson::KEduVocLesson()
@@ -81,4 +82,14 @@ void KEduVocLesson::addEntry( int entryid )
 void KEduVocLesson::removeEntry( int entryid )
 {
     d->m_entries.remove( entryid );
+}
+
+bool KEduVocLesson::inQuery()
+{
+    return d->m_inQuery;
+}
+
+void KEduVocLesson::setInQuery(bool inQuery)
+{
+    d->m_inQuery = inQuery;
 }

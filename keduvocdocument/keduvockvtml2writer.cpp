@@ -174,29 +174,26 @@ bool KEduVocKvtml2Writer::writeIdentifiers( QDomElement &identifiersElement )
 
 bool KEduVocKvtml2Writer::writeLessons( QDomElement &lessonsElement )
 {
-    if ( m_doc->lessonCount() == 0 )
-        return true;
-
-    QMap<int, KEduVocLesson> lessons = m_doc->lessons();
-
-    foreach( int lessonid, lessons.keys() ) {
-        KEduVocLesson thisLesson = lessons[lessonid];
-
+    for( int lessonId = 0; lessonId < m_doc->lessonCount(); lessonId++ ) {
         // make lesson element
         QDomElement thisLessonElement = m_domDoc.createElement( KVTML_LESSON );
 
         // add a name
-        thisLessonElement.appendChild( newTextElement( KVTML_NAME, thisLesson.name() ) );
+        thisLessonElement.appendChild( newTextElement( KVTML_NAME, m_doc->lesson(lessonId).name() ) );
 
         // add a inquery tag
-        thisLessonElement.appendChild( newTextElement( KVTML_QUERY, m_doc->lessonInQuery( lessonid ) ? KVTML_TRUE : KVTML_FALSE ) );
+        if ( m_doc->lesson(lessonId).inQuery() ) {
+            thisLessonElement.appendChild( newTextElement( KVTML_QUERY, KVTML_TRUE ) );
+        }
 
         // add a current tag
-        thisLessonElement.appendChild( newTextElement( KVTML_CURRENT, m_doc->currentLesson() == lessonid ? KVTML_TRUE : KVTML_FALSE ) );
+        if ( lessonId == m_doc->currentLesson() ) {
+            thisLessonElement.appendChild( newTextElement( KVTML_CURRENT, KVTML_TRUE ) );
+        }
 
         // TODO: add the entryids...
         for ( int i = 0; i < m_doc->entryCount(); ++i ) {
-            if ( m_doc->entry( i )->lesson() == lessonid ) {
+            if ( m_doc->entry( i )->lesson() == lessonId ) {
                 thisLessonElement.appendChild( newTextElement( KVTML_ENTRYID, QString::number( i ) ) );
             }
         }

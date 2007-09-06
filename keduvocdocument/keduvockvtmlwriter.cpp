@@ -299,19 +299,17 @@ bool KEduVocKvtmlWriter::writeLesson( QDomDocument &domDoc, QDomElement &domElem
     QDomElement domElementLesson = domDoc.createElement( KV_LESS_GRP );
     domElementLesson.setAttribute( KV_SIZEHINT, m_doc->sizeHint( -1 ) );
 
-    QMap<int, KEduVocLesson> lessons = m_doc->lessons();
-    QList<int> keys = lessons.keys();
-    for ( int i = 0; i < keys.size(); ++i ) {
-        int thiskey = keys[i];
+    for ( int i = 0; i < m_doc->lessonCount(); ++i ) {
         QDomElement domElementDesc = domDoc.createElement( KV_LESS_DESC );
-        QDomText domTextDesc = domDoc.createTextNode( lessons[thiskey].name() );
+        QDomText domTextDesc = domDoc.createTextNode( m_doc->lesson(i).name() );
 
-        domElementDesc.setAttribute( KV_LESS_NO, thiskey );
-        if ( m_doc->currentLesson() == thiskey )
+        domElementDesc.setAttribute( KV_LESS_NO, i );
+        if ( m_doc->currentLesson() == i ) {
             domElementDesc.setAttribute( KV_LESS_CURR, 1 );
-        if ( m_doc->lessonInQuery( thiskey ) )
+        }
+        if ( m_doc->lesson(i).inQuery() ) {
             domElementDesc.setAttribute( KV_LESS_QUERY, 1 );
-
+        }
         domElementDesc.appendChild( domTextDesc );
         domElementLesson.appendChild( domElementDesc );
     }

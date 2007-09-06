@@ -405,38 +405,38 @@ public:
     /** get all lesson objects
      * @returns a map of pointers to lesson objects
      */
-    QMap<int, KEduVocLesson> & lessons() const;
+    QList<KEduVocLesson> & lessons() const;
 
     /**
      * @returns                the number of lessons defined
      */
     int lessonCount() const;
 
-    /**
+    /** DEPRECATED - USE lesson.inQuery();
      * Get list of ALL lessons that are selected for query.
      * @returns a list with the lessons in the current query
      */
     QList<int> lessonsInQuery() const;
 
-    /**
+    /** DEPRECATED - USE lesson.setInQuery();
      * Sets ALL lessons in the query. Better use addLessonToQuery and removeLessonFromQuery.
      */
     void setLessonsInQuery( const QList<int> &lesson_iq );
 
-    /**
+    /** DEPRECATED - USE lesson.inQuery();
      * Check if @p lessonIndex is in the query.
      * @param lessonIndex - index of the lesson
      * @return true if in query
      */
     bool lessonInQuery( int lessonIndex ) const;
 
-    /**
+    /** DEPRECATED - USE lesson.setInQuery();
      * Add @p lessonIndex to the query.
      * @param lessonIndex - index of the lesson
      */
     void addLessonToQuery( int lessonIndex );
 
-    /**
+    /** DEPRECATED - USE lesson.setInQuery();
      * Remove @p lessonIndex from the query.
      * @param lessonIndex - index of the lesson
      */
@@ -445,10 +445,9 @@ public:
     /**
      * Append a new lesson to the list of lessons.
      * @param lessonName name for the new lesson
-     * @param position lesson number to use (-1 to find the next hole to put it in)
      * @returns the index of the new lesson
      */
-    int addLesson( const QString &lessonName, int position = -1 );
+    int appendLesson( const QString &lessonName, bool inQuery=true );
 
     /**
      * Delete a lesson.
@@ -458,46 +457,18 @@ public:
      */
     bool deleteLesson( int lessonIndex, int deleteMode );
 
-    ///**
-    // * Get the real name of a lesson from it's index as QString.
-    // * @param index lesson index
-    // * @returns the description (Name) of the lesson with index @p index .
-    // */
-    //QString lessonDescription(int index) const;
-
-    /**
-     * Get the index from the long name of a lesson.
-     * @param description lesson name
-     * @returns the index of the lesson (from its name)
-     * -1 if the lesson does not exist
-     */
-    //int lessonIndex(const QString &description) const;
-
-    /**
-     * Rename a lesson.
-     * @param lessonIndex index of lesson
-     * @param lessonName new name for the lesson
-     */
-    //void renameLesson(const int lessonIndex, const QString &lessonName);
-
-    /**
+    /** DEPRECATED
      * All lesson descriptions as stringlist.
      * @returns a list of defined lessons
      */
     QStringList lessonNames() const;
 
-    /**
-     * Sets the description of the lesson
-     * @param names list of all names of the lessons
-     */
-    //void setLessonDescriptions(const QStringList &names);
-
-    /**
+    /** @todo implement this?
      * Moves the lesson at index position from to index position to.
      * @param from the lesson to be moved
      * @param to the new position
      */
-    //void moveLesson(int from, int to);
+    void moveLesson(int from, int to);
 
     // *** file format specific methods ***
 

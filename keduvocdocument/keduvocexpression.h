@@ -38,12 +38,12 @@ public:
      */
     explicit KEduVocExpression();
 
-    /** Constructor for a vocabulary expression with an original
+    /** Constructor for a vocabulary expression with one translation
      *
-     * @param expression       original
-     * @param lesson           lesson number, 0 for none
+     * @param expression       translation
+     * @param lesson           lesson number
      */
-    explicit KEduVocExpression( const QString & expression, int lesson = 0 );
+    explicit KEduVocExpression( const QString & expression, int lesson = -1 );
 
     /** Constructor for a vocabulary expression with an original and one or more translations
      *
@@ -51,17 +51,17 @@ public:
      * @param separator        expression will be split into an original and one or more translations using separator
      * @param lesson           lesson number, 0 for none
      */
-    KEduVocExpression( const QStringList & translations, int lesson = 0 );
+    KEduVocExpression( const QStringList & translations, int lesson = -1 );
 
     KEduVocExpression( const KEduVocExpression &expression );
 
     ~KEduVocExpression();
 
-    /** returns index of lesson (0 = none)
+    /** returns index of lesson (-1 = none)
      */
     int lesson() const;
 
-    /** sets index of lesson (0 = none)
+    /** sets index of lesson (-1 = none)
      */
     void setLesson( int l );
 

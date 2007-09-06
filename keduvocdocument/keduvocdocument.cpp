@@ -80,7 +80,6 @@ public:
     QString                   m_queryorg;
     QString                   m_querytrans;
     QList<KEduVocExpression>  m_vocabulary;
-    QList<int>                m_lessonsInQuery;
 
     QStringList               m_tenseDescriptions;
     QSet<QString>             m_usages;
@@ -96,8 +95,8 @@ public:
       */
     QString                   m_category;
 
-    // make this a map so removals don't require renumbering :)
-    QMap<int, KEduVocLesson>  m_lessons;
+    // A map is too error prone. Lesson order is very important.
+    QList<KEduVocLesson>      m_lessons;
 
     KEduVocWordType*          m_wordTypes;
 
@@ -307,6 +306,23 @@ bool KEduVocDocument::open( const KUrl& url )
         f->close();
         KIO::NetAccess::removeTempFile( temporaryFile );
     }
+
+    // Additional cleanup: Put entries without a lesson into a default lesson.
+    int defaultLessonNumber = appendLesson(i18n("Default Lesson"));
+    // now make sure we don't have any orphan entries (lesson -1)
+    for (int i = 0; i < entryCount(); ++i)
+    {
+        if (entry(i)->lesson() == -1)
+        {
+            entry(i)->setLesson(defaultLessonNumber);
+            lesson(defaultLessonNumber).addEntry(i);
+        }
+    }
+    if (lesson(defaultLessonNumber).entries().size() == 0)
+    {
+        deleteLesson(defaultLessonNumber, DeleteEmptyLesson);
+    }
+
     return read;
 }
 
@@ -817,49 +833,16 @@ kDebug() << "appendIdentifier: " << i << id.name() << id.locale();
 }
 
 
-// int KEduVocDocument::appendIdentifier(const QString & name)
-// {
-//     KEduVocIdentifier identifier;
-//     identifier.setName(name);
-//     return appendIdentifier(identifier);
-// }
-
-
-
-//QString KEduVocDocument::lessonDescription(int idx) const
-//{
-//  if (idx == 0)
-//    return i18nc("@label:listbox","<placeholder>no lesson</placeholder>");
-
-//  if (idx <= 0 || idx > d->m_lessons.size() )
-//    return "";
-
-//  return d->m_lessons[idx-1].description();
-//}
-
-//int KEduVocDocument::lessonIndex(const QString &description) const
-//{
-//  return d->m_lessonDescriptions.indexOf(description) +1;
-//}
-
-
-int KEduVocDocument::addLesson( const QString &lessonName, int position )
+int KEduVocDocument::appendLesson( const QString &lessonName, bool inQuery )
 {
-    if ( position == -1 ) {
-        // no position was specified, so put it wherever there's a slot
-        position = 1;
-        while ( d->m_lessons.contains( position ) ) {
-            ++position;
-        }
-    }
-
     KEduVocLesson lesson;
     lesson.setName( lessonName );
-    d->m_lessons.insert( position, lesson );
-    return position;
+    lesson.setInQuery( inQuery );
+    d->m_lessons.append( lesson );
+    return d->m_lessons.count() - 1;
 }
 
-QMap<int, KEduVocLesson> & KEduVocDocument::lessons() const
+QList<KEduVocLesson> & KEduVocDocument::lessons() const
 {
     return d->m_lessons;
 }
@@ -869,41 +852,37 @@ KEduVocLesson & KEduVocDocument::lesson( int index )
     return d->m_lessons[index];
 }
 
-//void KEduVocDocument::renameLesson(const int lessonIndex, const QString &lessonName)
-//{
-//  d->m_lessonDescriptions.replace(lessonIndex-1, lessonName); // counting from 1
-//}
-
-
 bool KEduVocDocument::lessonInQuery( int lessonIndex ) const
 {
-    return d->m_lessonsInQuery.contains( lessonIndex );
+    return d->m_lessons.value(lessonIndex).inQuery();
 }
-
 
 void KEduVocDocument::addLessonToQuery( int lessonIndex )
 {
-    if ( !lessonInQuery( lessonIndex ) )
-        d->m_lessonsInQuery.append( lessonIndex );
+    d->m_lessons[lessonIndex].setInQuery( true );
 }
-
 
 void KEduVocDocument::removeLessonFromQuery( int lessonIndex )
 {
-    if ( lessonInQuery( lessonIndex ) )
-        d->m_lessonsInQuery.removeAt( d->m_lessonsInQuery.indexOf( lessonIndex ) );
+    d->m_lessons[lessonIndex].setInQuery( false );
 }
-
 
 QList<int> KEduVocDocument::lessonsInQuery() const
 {
-    return d->m_lessonsInQuery;
+    QList<int> lessons;
+    for ( int i = 0; i < d->m_lessons.count(); i++ ) {
+        if ( d->m_lessons.value(i).inQuery() ) {
+            lessons.append(i);
+        }
+    }
+    return lessons;
 }
-
 
 void KEduVocDocument::setLessonsInQuery( const QList<int> &lesson_iq )
 {
-    d->m_lessonsInQuery = lesson_iq;
+    for ( int i = 0; i < d->m_lessons.count(); i++ ) {
+        d->m_lessons[i].setInQuery( lesson_iq.contains(i) );
+    }
 }
 
 KUrl KEduVocDocument::url() const
@@ -1032,9 +1011,8 @@ void KEduVocDocument::setCurrentLesson( int lesson )
 QStringList KEduVocDocument::lessonNames() const
 {
     QStringList descriptions;
-    QList<KEduVocLesson> lessonObjects = lessons().values();
-    for ( int i = 0; i < lessonObjects.count(); ++i ) {
-        descriptions.append( lessonObjects[i].name() );
+    foreach ( KEduVocLesson lesson, d->m_lessons ) {
+        descriptions.append(lesson.name());
     }
     return descriptions;
 }
@@ -1046,8 +1024,7 @@ int KEduVocDocument::lessonCount() const
 }
 
 bool KEduVocDocument::deleteLesson( int lessonIndex, int deleteMode )
-{  // too bad we count from one!
-    lessonIndex++;
+{
     for ( int ent = entryCount() - 1; ent  >= 0 ; ent-- ) {
         if ( entry( ent )->lesson() == lessonIndex ) {
             if ( deleteMode == DeleteEmptyLesson )
@@ -1065,18 +1042,9 @@ bool KEduVocDocument::deleteLesson( int lessonIndex, int deleteMode )
         }
     } // reduce lesson
 
-    // finally just remove the lesson name
-    //d->m_lessonDescriptions.removeAt(lessonIndex-1); // because of the damned 0 arghh
+    // finally just remove the lesson
+    d->m_lessons.removeAt(lessonIndex);
 
-    int currentInQuery = d->m_lessonsInQuery.indexOf( lessonIndex );
-    if ( currentInQuery != -1 )
-        d->m_lessonsInQuery.removeAt( currentInQuery );
-
-    // move query entries
-    for ( int queryLesson = 0; queryLesson < d->m_lessonsInQuery.count(); queryLesson++ ) {
-        if ( d->m_lessonsInQuery.at( queryLesson ) > lessonIndex )
-            d->m_lessonsInQuery.replace( queryLesson, d->m_lessonsInQuery.at( queryLesson )-1 );
-    }
     return true;
 }
 

@@ -127,6 +127,7 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         kve.setTranslation( 1, translation );
         kve.translation( 1 ).gradeFrom( 0 ).setGrade( 0 );
         kve.translation( 0 ).gradeFrom( 1 ).setGrade( 0 );
+        /// @todo lesson might need a -1. I have no specs or documents to verify.
         kve.setLesson( lesson );
 
         m_doc->appendEntry( &kve );
@@ -143,7 +144,7 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         lessonDescr = inputStream.readLine();
         lessonDescr = lessonDescr.mid( 1, lessonDescr.length() - 2 );
         if ( !lessonDescr.isEmpty() )
-            m_doc->addLesson( lessonDescr );
+            m_doc->appendLesson( lessonDescr );
         else
             break;
         inputStream.readLine();
