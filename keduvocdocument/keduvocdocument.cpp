@@ -852,38 +852,6 @@ KEduVocLesson & KEduVocDocument::lesson( int index )
     return d->m_lessons[index];
 }
 
-bool KEduVocDocument::lessonInQuery( int lessonIndex ) const
-{
-    return d->m_lessons.value(lessonIndex).inQuery();
-}
-
-void KEduVocDocument::addLessonToQuery( int lessonIndex )
-{
-    d->m_lessons[lessonIndex].setInQuery( true );
-}
-
-void KEduVocDocument::removeLessonFromQuery( int lessonIndex )
-{
-    d->m_lessons[lessonIndex].setInQuery( false );
-}
-
-QList<int> KEduVocDocument::lessonsInQuery() const
-{
-    QList<int> lessons;
-    for ( int i = 0; i < d->m_lessons.count(); i++ ) {
-        if ( d->m_lessons.value(i).inQuery() ) {
-            lessons.append(i);
-        }
-    }
-    return lessons;
-}
-
-void KEduVocDocument::setLessonsInQuery( const QList<int> &lesson_iq )
-{
-    for ( int i = 0; i < d->m_lessons.count(); i++ ) {
-        d->m_lessons[i].setInQuery( lesson_iq.contains(i) );
-    }
-}
 
 KUrl KEduVocDocument::url() const
 {

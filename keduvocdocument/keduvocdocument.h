@@ -412,36 +412,6 @@ public:
      */
     int lessonCount() const;
 
-    /** DEPRECATED - USE lesson.inQuery();
-     * Get list of ALL lessons that are selected for query.
-     * @returns a list with the lessons in the current query
-     */
-    KDE_DEPRECATED QList<int> lessonsInQuery() const;
-
-    /** DEPRECATED - USE lesson.setInQuery();
-     * Sets ALL lessons in the query. Better use addLessonToQuery and removeLessonFromQuery.
-     */
-    KDE_DEPRECATED void setLessonsInQuery( const QList<int> &lesson_iq );
-
-    /** DEPRECATED - USE lesson.inQuery();
-     * Check if @p lessonIndex is in the query.
-     * @param lessonIndex - index of the lesson
-     * @return true if in query
-     */
-    KDE_DEPRECATED bool lessonInQuery( int lessonIndex ) const;
-
-    /** DEPRECATED - USE lesson.setInQuery();
-     * Add @p lessonIndex to the query.
-     * @param lessonIndex - index of the lesson
-     */
-    KDE_DEPRECATED void addLessonToQuery( int lessonIndex );
-
-    /** DEPRECATED - USE lesson.setInQuery();
-     * Remove @p lessonIndex from the query.
-     * @param lessonIndex - index of the lesson
-     */
-    KDE_DEPRECATED void removeLessonFromQuery( int lessonIndex );
-
     /**
      * Append a new lesson to the list of lessons.
      * @param lessonName name for the new lesson
