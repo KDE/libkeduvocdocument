@@ -224,7 +224,6 @@ bool KEduVocKvtmlReader::readLesson( QDomElement &domElementParent )
         currentElement = entryList.item( i ).toElement();
         if ( currentElement.parentNode() == domElementParent ) {
             int no;
-            bool isCurr = false;
 
             attribute = currentElement.attributeNode( KV_LESS_NO );
             if ( !attribute.isNull() ) {
