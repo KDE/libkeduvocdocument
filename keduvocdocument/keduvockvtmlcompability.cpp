@@ -122,33 +122,34 @@ QSet< QString > KEduVocKvtmlCompability::documentUsages() const
 ////////////////// TYPES /////////////////////////////////////////
 void KEduVocKvtmlCompability::initOldTypeLists()
 {
+
     m_oldMainTypeNames.clear();
-    m_oldMainTypeNames.insert( "v", i18n( "Verb" ) );
-    m_oldMainTypeNames.insert( "n", i18n( "Noun" ) );
-    m_oldMainTypeNames.insert( "nm", i18n( "Name" ) );
-    m_oldMainTypeNames.insert( "ar", i18n( "Article" ) );
-    m_oldMainTypeNames.insert( "aj", i18n( "Adjective" ) );
-    m_oldMainTypeNames.insert( "av", i18n( "Adverb" ) );
-    m_oldMainTypeNames.insert( "pr", i18n( "Pronoun" ) );
-    m_oldMainTypeNames.insert( "ph", i18n( "Phrase" ) );
-    m_oldMainTypeNames.insert( "num", i18n( "Numeral" ) );
-    m_oldMainTypeNames.insert( "con", i18n( "Conjunction" ) );
-    m_oldMainTypeNames.insert( "pre", i18n( "Preposition" ) );
-    m_oldMainTypeNames.insert( "qu", i18n( "Question" ) );
+    m_oldMainTypeNames.insert( "v", i18nc( "@item:inlistbox The grammatical type of a word", "Verb" ) );
+    m_oldMainTypeNames.insert( "n", i18nc( "@item:inlistbox The grammatical type of a word", "Noun" ) );
+    m_oldMainTypeNames.insert( "nm", i18nc( "@item:inlistbox The grammatical type of a word", "Name" ) );
+    m_oldMainTypeNames.insert( "ar", i18nc( "@item:inlistbox The grammatical type of a word", "Article" ) );
+    m_oldMainTypeNames.insert( "aj", i18nc( "@item:inlistbox The grammatical type of a word", "Adjective" ) );
+    m_oldMainTypeNames.insert( "av", i18nc( "@item:inlistbox The grammatical type of a word", "Adverb" ) );
+    m_oldMainTypeNames.insert( "pr", i18nc( "@item:inlistbox The grammatical type of a word", "Pronoun" ) );
+    m_oldMainTypeNames.insert( "ph", i18nc( "@item:inlistbox The grammatical type of an entry", "Phrase" ) );
+    m_oldMainTypeNames.insert( "num", i18nc( "@item:inlistbox The grammatical type of a word", "Numeral" ) );
+    m_oldMainTypeNames.insert( "con", i18nc( "@item:inlistbox The grammatical type of a word", "Conjunction" ) );
+    m_oldMainTypeNames.insert( "pre", i18nc( "@item:inlistbox The grammatical type of a word", "Preposition" ) );
+    m_oldMainTypeNames.insert( "qu", i18nc( "@item:inlistbox The grammatical type of an entry", "Question" ) );
+
 
     m_oldSubTypeNames.clear();
-    m_oldSubTypeNames.insert( "ord", i18n( "Ordinal" ) );
-    m_oldSubTypeNames.insert( "crd", i18n( "Cardinal" ) );
-    m_oldSubTypeNames.insert( "def", i18n( "Definite" ) );
-    m_oldSubTypeNames.insert( "ind", i18n( "Indefinite" ) );
-    m_oldSubTypeNames.insert( "re", i18n( "Regular" ) );
-    m_oldSubTypeNames.insert( "ir", i18n( "Irregular" ) );
-    m_oldSubTypeNames.insert( "pos", i18n( "Possessive" ) );
-    m_oldSubTypeNames.insert( "per", i18n( "Personal" ) );
-    m_oldSubTypeNames.insert( "m", i18n( "Male" ) );
-    m_oldSubTypeNames.insert( "f", i18n( "Female" ) );
-    m_oldSubTypeNames.insert( "s", i18n( "Neutral" ) );
-
+    m_oldSubTypeNames.insert( "ord", i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  (one, two, three, ...)","Ordinal" ) );
+    m_oldSubTypeNames.insert( "crd", i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal (first, second, third, ...)","Cardinal" ) );
+    m_oldSubTypeNames.insert( "def", i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (the)","Definite" ) );
+    m_oldSubTypeNames.insert( "ind", i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (a)","Indefinite" ) );
+    m_oldSubTypeNames.insert( "re", i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with regular conjugation","Regular" ) );
+    m_oldSubTypeNames.insert( "ir", i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with irregular conjugation","Irregular" ) );
+    m_oldSubTypeNames.insert( "pos", i18nc( "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, his, her...)", "Possessive" ) );
+    m_oldSubTypeNames.insert( "per", i18nc( "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, he...)", "Personal" ) );
+    m_oldSubTypeNames.insert( "m", i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Male" ) );
+    m_oldSubTypeNames.insert( "f", i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Female" ) );
+    m_oldSubTypeNames.insert( "s", i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Neutral" ) );
 }
 
 

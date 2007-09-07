@@ -181,45 +181,63 @@ QString KEduVocWordType::oldType(const QString & mainType, const QString & subTy
 void KEduVocWordType::createDefaultWordTypes()
 {
     // first the special types which cannot be deleted:
-    addType( i18n( "Noun" ), d->WORDTYPE_NOUN, d->WORDTYPE_NOUN_EXPLANATION );
+    addType( i18nc( "@item:inlistbox The grammatical type of a word", "Noun" ),
+        d->WORDTYPE_NOUN, d->WORDTYPE_NOUN_EXPLANATION );
 
-    addSubType( i18n( "Noun" ), i18n( "Male" ), d->WORDTYPE_NOUN_MALE, d->WORDTYPE_NOUN_MALE_EXPLANATION );
+    addSubType( i18nc( "@item:inlistbox The grammatical type of a word", "Noun" ),
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Male" ),
+        d->WORDTYPE_NOUN_MALE, d->WORDTYPE_NOUN_MALE_EXPLANATION );
 
-    addSubType( i18n( "Noun" ), i18n( "Female" ), d->WORDTYPE_NOUN_FEMALE, d->WORDTYPE_NOUN_FEMALE_EXPLANATION );
+    addSubType( i18nc( "@item:inlistbox The grammatical type of a word", "Noun" ),
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Female" ),
+        d->WORDTYPE_NOUN_FEMALE, d->WORDTYPE_NOUN_FEMALE_EXPLANATION );
 
-    addSubType( i18n( "Noun" ), i18n( "Neutral" ), d->WORDTYPE_NOUN_NEUTRAL, d->WORDTYPE_NOUN_NEUTRAL_EXPLANATION );
+    addSubType( i18nc( "@item:inlistbox The grammatical type of a word", "Noun" ),
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Neutral" ),
+        d->WORDTYPE_NOUN_NEUTRAL, d->WORDTYPE_NOUN_NEUTRAL_EXPLANATION );
 
-    addType( i18n( "Verb" ), d->WORDTYPE_VERB, d->WORDTYPE_VERB_EXPLANATION );
+    addType( i18nc( "@item:inlistbox The grammatical type of a word", "Verb" ),
+        d->WORDTYPE_VERB, d->WORDTYPE_VERB_EXPLANATION );
 
-    addSubType( i18n( "Verb" ), i18n( "Regular" ), d->WORDTYPE_VERB_REGULAR, d->WORDTYPE_VERB_REGULAR_EXPLANATION );
+    addSubType( i18nc( "@item:inlistbox The grammatical type of a word", "Verb" ),
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with regular conjugation","Regular" ),
+        d->WORDTYPE_VERB_REGULAR, d->WORDTYPE_VERB_REGULAR_EXPLANATION );
 
-    addSubType( i18n( "Verb" ), i18n( "Irregular" ), d->WORDTYPE_VERB_IRREGULAR, d->WORDTYPE_VERB_IRREGULAR_EXPLANATION );
+    addSubType( i18nc( "@item:inlistbox The grammatical type of a word", "Verb" ),
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with irregular conjugation","Irregular" ),
+        d->WORDTYPE_VERB_IRREGULAR, d->WORDTYPE_VERB_IRREGULAR_EXPLANATION );
 
-    addType( i18n( "Adjective" ), d->WORDTYPE_ADJECTIVE, d->WORDTYPE_ADJECTIVE_EXPLANATION );
+    addType(  i18nc( "@item:inlistbox The grammatical type of a word", "Adjective" ) ,
+        d->WORDTYPE_ADJECTIVE, d->WORDTYPE_ADJECTIVE_EXPLANATION );
 
-    addType( i18n( "Adverb" ), d->WORDTYPE_ADVERB, d->WORDTYPE_ADVERB_EXPLANATION );
+    addType(  i18nc( "@item:inlistbox The grammatical type of a word", "Adverb" ),
+        d->WORDTYPE_ADVERB, d->WORDTYPE_ADVERB_EXPLANATION );
 
-    addType( i18n( "Question" ) );
-    addType( i18n( "Name" ) );
-    addType( i18n( "Article" ) );
-    addSubType( i18n( "Article" ), i18n( "Definite" ) );
-    addSubType( i18n( "Article" ), i18n( "Indefinite" ) );
 
-    addType( i18n( "Pronoun" ) );
-    addSubType( i18n( "Pronoun" ), i18n( "Possessive" ) );
-    addSubType( i18n( "Pronoun" ), i18n( "Personal" ) );
+    addType( i18nc( "@item:inlistbox The grammatical type of an entry", "Question" ) );
+    addType( i18nc( "@item:inlistbox The grammatical type of a word", "Name" ) );
+    addType( i18nc( "@item:inlistbox The grammatical type of a word", "Article" ) );
+    addSubType( i18nc( "@item:inlistbox The grammatical type of a word", "Article" ),
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (the)","Definite" ) );
+    addSubType( i18nc( "@item:inlistbox The grammatical type of a word", "Article" ),
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (a)","Indefinite" ) );
 
-    addType( i18n( "Phrase" ) );
-    addType( i18n( "Numeral" ) );
-    addSubType( i18n( "Numeral" ), i18n( "Ordinal" ) );
-    addSubType( i18n( "Numeral" ), i18n( "Cardinal" ) );
+    addType( i18nc( "@item:inlistbox The grammatical type of a word", "Pronoun" ) );
+    addSubType( i18nc( "@item:inlistbox The grammatical type of a word", "Pronoun" ),
+         i18nc( "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, his, her...)", "Possessive" ) );
+    addSubType( i18nc( "@item:inlistbox The grammatical type of a word", "Pronoun" ),
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, he...)", "Personal" ) );
 
-    addType( i18n( "Conjunction" ) );
-    addType( i18n( "Preposition" ) );
-    addType( i18n( "Informal" ) );
-    addType( i18n( "Figuratively" ) );
+    addType( i18nc( "@item:inlistbox The grammatical type of an entry", "Phrase" ) );
+    addType( i18nc( "@item:inlistbox The grammatical type of a word", "Numeral" ) );
+    addSubType( i18nc( "@item:inlistbox The grammatical type of a word", "Numeral" ),
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  (one, two, three, ...)","Ordinal" ) );
+    addSubType( i18nc( "@item:inlistbox The grammatical type of a word", "Numeral" ),
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal (first, second, third, ...)","Cardinal" ) );
+
+    addType( i18nc( "@item:inlistbox The grammatical type of a word", "Conjunction" ) );
+    addType( i18nc( "@item:inlistbox The grammatical type of a word", "Preposition" ) );
 }
-
 
 QString KEduVocWordType::mainTypeName( int index ) const
 {
