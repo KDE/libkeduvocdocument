@@ -369,19 +369,21 @@ public:
 
     /**
      * Retrieves the identifiers for the current query
+     * not written in the new version!
      *
      * @param org        identifier for original
      * @param trans      identifier for translation
      */
-    void queryIdentifier( QString &org, QString &trans ) const;
+    KDE_DEPRECATED void queryIdentifier( QString &org, QString &trans ) const;
 
     /**
      * Sets the identifiers for the current query
+     * not written in the new version!
      *
      * @param org        identifier for original
      * @param trans      identifier for translation
      */
-    void setQueryIdentifier( const QString &org, const QString &trans );
+    KDE_DEPRECATED void setQueryIdentifier( const QString &org, const QString &trans );
 
     // *** lesson methods ***
 
