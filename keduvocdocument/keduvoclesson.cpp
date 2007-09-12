@@ -93,6 +93,36 @@ void KEduVocLesson::removeEntry( int entryid )
     d->m_entries.remove( entryid );
 }
 
+void KEduVocLesson::incrementEntriesAbove( int entryid )
+{
+    QList<int> entries = d->m_entries.toList();
+    
+    // increment all entry id's above entryid
+    for (int i = 0; i < entries.size(); ++i) {
+        if (entries[i] >= entryid) {
+            entries[i] = entries[i] + 1;
+        }
+    }
+    
+    // then put the new list into the set
+    d->m_entries = entries.toSet();
+}
+    
+void KEduVocLesson::decrementEntriesAbove( int entryid )
+{
+    QList<int> entries = d->m_entries.toList();
+    
+    // increment all entry id's above entryid
+    for (int i = 0; i < entries.size(); ++i) {
+        if (entries[i] > entryid) {
+            entries[i] = entries[i] - 1;
+        }
+    }
+    
+    // then put the new list into the set
+    d->m_entries = entries.toSet();
+}
+
 bool KEduVocLesson::inQuery()
 {
     return d->m_inQuery;

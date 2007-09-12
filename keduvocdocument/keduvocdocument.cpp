@@ -163,6 +163,13 @@ void KEduVocDocument::appendEntry( KEduVocExpression *expression )
 void KEduVocDocument::insertEntry( KEduVocExpression *expression, int index )
 {
     d->m_vocabulary.insert( index, *expression );
+    
+    // now we need to go fix the entryids that are greater than index in the lessons
+    for (int i = 0; i < d->m_lessons.size(); ++i)
+    {
+        d->m_lessons[i].incrementEntriesAbove(index);
+    }
+    
     setModified();
 }
 
@@ -387,8 +394,6 @@ bool KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gen
     setModified( false );
     return true;
 }
-
-
 
 void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers )
 {
@@ -616,8 +621,15 @@ KEduVocExpression *KEduVocDocument::entry( int index )
 
 void KEduVocDocument::removeEntry( int index )
 {
-    if ( index >= 0 && index < d->m_vocabulary.size() )
+    if ( index >= 0 && index < d->m_vocabulary.size() ) {
         d->m_vocabulary.removeAt( index );
+    }
+    
+    // now we need to go fix the entryids that are greater than index in the lessons
+    for (int i = 0; i < d->m_lessons.size(); ++i)
+    {
+        d->m_lessons[i].decrementEntriesAbove(index);
+    }    
 }
 
 

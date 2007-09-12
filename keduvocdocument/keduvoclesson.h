@@ -65,6 +65,16 @@ public:
      * @param entryid id of the entry to remove
      */
     void removeEntry( int entryid );
+    
+    /** increments all entryids > entryid, because their entryid has been incremented
+     * @param entryid       id of the entry that was inserted
+     */
+    void incrementEntriesAbove( int entryid );
+    
+    /** decrements all etryids > entryid, because their entryid has been decremented
+     * @param entryid       id of the entry that was removed
+     */
+    void decrementEntriesAbove( int entryid );
 
     bool inQuery();
     void setInQuery( bool inQuery );

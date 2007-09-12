@@ -424,7 +424,7 @@ public:
     /**
      * Delete a lesson.
      * @param lessonIndex which lesson
-     * @param deleteMode either KVocDocument::DeleteEmptyLesson (delete only if empty) or KVocDocument::DeleteEntriesAndLesson (delete including vocabulary in that lesson)
+     * @param deleteMode either KEduVocDocument::DeleteEmptyLesson (delete only if empty) or KEduVocDocument::DeleteEntriesAndLesson (delete including vocabulary in that lesson)
      * @returns if the deletion was successful. If there are vocabularies in the lesson, but DeleteEmptyLesson, this will return false and not delete the lesson.
      */
     bool deleteLesson( int lessonIndex, int deleteMode );
