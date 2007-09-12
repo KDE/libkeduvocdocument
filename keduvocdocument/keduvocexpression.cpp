@@ -39,7 +39,6 @@ public:
     QString m_leitnerBox;
     int m_sortIndex;
     int m_lesson;
-    bool m_inQuery;
     bool m_active;
     int m_sizeHint;
 
@@ -50,8 +49,6 @@ public:
 void KEduVocExpression::KEduVocExpressionPrivate::init()
 {
     m_translations.clear();
-
-    m_inQuery = false;
     m_active = true;
     m_lesson = -1;
     m_sortIndex = 0;
@@ -66,7 +63,6 @@ bool KEduVocExpression::KEduVocExpressionPrivate::operator== ( const KEduVocExpr
         m_leitnerBox == p.m_leitnerBox &&
         m_lesson == p.m_lesson &&
         m_sortIndex == p.m_sortIndex &&
-        m_inQuery == p.m_inQuery &&
         m_active == p.m_active;
 }
 
@@ -137,18 +133,6 @@ QString KEduVocExpression::leitnerBox() const
 void KEduVocExpression::setLeitnerBox( const QString& box )
 {
     d->m_leitnerBox = box;
-}
-
-
-bool KEduVocExpression::isInQuery() const
-{
-    return d->m_inQuery;
-}
-
-
-void KEduVocExpression::setInQuery( bool flag )
-{
-    d->m_inQuery = flag;
 }
 
 

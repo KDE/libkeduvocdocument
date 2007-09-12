@@ -108,8 +108,9 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
             domElementExpression.setAttribute( KV_LESS_MEMBER, lm );
         }
 
-        if ( entry->isInQuery() )
-            domElementExpression.setAttribute( KV_SELECTED, 1 );
+// Sorry, but we don't support this any more.
+//         if ( entry->isInQuery() )
+//             domElementExpression.setAttribute( KV_SELECTED, 1 );
 
         if ( !entry->isActive() )
             domElementExpression.setAttribute( KV_INACTIVE, 1 );

@@ -237,11 +237,9 @@ public:
     /**
      * Appends a new identifier (usually a language)
      *
-     * @param name the identifier to append
+     * @param identifier the identifier to append. If empty default names are used.
      * @returns the identifier number
      */
-//     int appendIdentifier( const QString& name );
-
     int appendIdentifier( const KEduVocIdentifier & identifier = KEduVocIdentifier());
 
     /**
@@ -258,7 +256,6 @@ public:
      * @param index            number of translation 0..x
      * @returns                the language identifier: en=english, de=german, ...
      */
-//     QString identifier( int index ) const;
     KEduVocIdentifier& identifier( int index );
 
     /**

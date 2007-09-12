@@ -325,8 +325,9 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
         // write inactive
         entryElement.appendChild( newTextElement( KVTML_INACTIVE, thisEntry->isActive() ? KVTML_FALSE : KVTML_TRUE ) );
 
-        // write inquery
-        entryElement.appendChild( newTextElement( KVTML_INQUERY, thisEntry->isInQuery() ? KVTML_TRUE : KVTML_FALSE ) );
+// kvtml 1 relic no longer used
+//         // write inquery
+//         entryElement.appendChild( newTextElement( KVTML_INQUERY, thisEntry->isInQuery() ? KVTML_TRUE : KVTML_FALSE ) );
 
         // write sizehint
         if ( thisEntry->sizeHint() > 0 ) {

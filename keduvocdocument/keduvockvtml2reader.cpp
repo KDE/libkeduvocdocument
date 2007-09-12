@@ -276,15 +276,15 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
         }
     }
 
-    currentElement = entryElement.firstChildElement( KVTML_INQUERY );
-    if ( !currentElement.isNull() ) {
-        // set the inquery information
-        if ( currentElement.text() == KVTML_TRUE ) {
-            expr.setInQuery( true );
-        } else {
-            expr.setInQuery( false );
-        }
-    }
+//     currentElement = entryElement.firstChildElement( KVTML_INQUERY );
+//     if ( !currentElement.isNull() ) {
+//         // set the inquery information
+//         if ( currentElement.text() == KVTML_TRUE ) {
+//             expr.setInQuery( true );
+//         } else {
+//             expr.setInQuery( false );
+//         }
+//     }
 
     currentElement = entryElement.firstChildElement( KVTML_SIZEHINT );
     if ( !currentElement.isNull() ) {

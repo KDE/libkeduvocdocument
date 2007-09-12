@@ -70,14 +70,6 @@ public:
      */
     void resetGrades( int index );
 
-    /** returns flag if entry is "selected" for queries
-     */
-    bool isInQuery() const;
-
-    /** set entry "selected"
-     */
-    void setInQuery( bool flag = true );
-
     /** returns flag if entry is activated for queries
      */
     bool isActive() const;
