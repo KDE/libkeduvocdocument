@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:kvtml2="http://pskd.dyndns.org:8080/KVTMLII"
+        targetNamespace="http://pskd.dyndns.org:8080/KVTMLII"
+        elementFormDefault="qualified">
+  <element name="kvtml">
+    <complexType>
+      <sequence>
+        <element name="information">
+          <complexType>
+            <sequence>
+              <element name="generator" minOccurs="0" />
+              <element name="title" />
+              <element name="author" minOccurs="0" />
+              <element name="license" minOccurs="0" />
+              <element name="comment" minOccurs="0" />
+              <element name="category" minOccurs="0" />
+            </sequence>
+          </complexType>
+        </element>
+        
+        <element name="identifiers">
+          <complexType>
+            <sequence>
+             <element name="identifier" minOccurs="0" maxOccurs="unbounded">
+                <complexType>
+                  <sequence>
+                    <element name="identifiertype" minOccurs="0" />
+                    <element name="name" minOccurs="0" />
+                    <element name="locale" />
+                    <element name="comment" minOccurs="0" />
+                    <element name="sizehint" minOccurs="0" />
+                    <element name="article" minOccurs="0">
+                      <complexType>
+                        <sequence>
+                          <element name="definite" type="kvtml2:dt_article" minOccurs="0" />
+                          <element name="indefinite" type="kvtml2:dt_article" minOccurs="0" />
+                        </sequence>
+                      </complexType>
+                    </element>
+                    <element name="personalpronouns" minOccurs="0">
+                      <complexType>
+                        <sequence>
+                          <element name="singular" type="kvtml2:dt_personalPronouns" minOccurs="0" />
+                          <element name="plural" type="kvtml2:dt_personalPronouns" minOccurs="0" />
+                          <element name="tense" minOccurs="0" />
+                        </sequence>
+                      </complexType>
+                    </element>
+                  </sequence>
+                  <attribute name="id"/>
+                </complexType>
+              </element>
+            </sequence>
+          </complexType>
+        </element>
+        
+        <element name="wordtypedefinitions" minOccurs="0">
+          <complexType>
+            <sequence>
+              <element name="wordtypedefinition" minOccurs="0" maxOccurs="unbounded">
+                <complexType>
+                  <sequence>
+                    <element name="typename" />
+                    <element name="specialwordtype" minOccurs="0" />
+                    <element name="subwordtypedefinition" type="kvtml2:dt_subwordtypedefinition" minOccurs="0" maxOccurs="unbounded" />
+                  </sequence>
+                </complexType>
+              </element>
+            </sequence>
+          </complexType>
+        </element>
+        
+        <element name="tenses" minOccurs="0">
+          <complexType>
+            <sequence>
+              <element name="tense" minOccurs="0" maxOccurs="unbounded" />
+            </sequence>
+          </complexType>
+        </element>
+        
+        <element name="usages" minOccurs="0">
+          <complexType>
+            <sequence>
+              <element name="usage" minOccurs="0" maxOccurs="unbounded" />
+            </sequence>
+          </complexType>
+        </element>
+        
+        <element name="lessons" minOccurs="0">
+          <complexType>
+            <sequence>
+              <element name="lesson" minOccurs="0" maxOccurs="unbounded">
+                <complexType>
+                  <sequence>
+                    <element name="name" />
+                    <element name="query" minOccurs="0" />
+                    <element name="current" minOccurs="0" />
+                    <element name="entryid" minOccurs="0" maxOccurs="unbounded" />
+                  </sequence>
+                </complexType>
+              </element>
+            </sequence>
+          </complexType>
+        </element>
+        
+        <element name="entries">
+          <complexType>
+            <sequence>
+              <element name="entry" minOccurs="0" maxOccurs="unbounded">
+                <complexType>
+                  <sequence>
+                    <element name="inactive" minOccurs="0" />
+                    <element name="inquery" minOccurs="0" />
+                    <element name="sizehint" minOccurs="0" />
+                    <element name="translation" minOccurs="0" maxOccurs="unbounded">
+                      <complexType>
+                        <sequence>
+                          <element name="text" />
+                          <element name="wordtype" minOccurs="0">
+                            <complexType>
+                              <choice>
+                                <element name="typename" minOccurs="0" />
+                                <element name="subtypename" minOccurs="0" />
+                              </choice>
+                            </complexType>
+                          </element>
+                          <element name="inquery" minOccurs="0" />
+                          <element name="comment" minOccurs="0" />
+                          <element name="pronounciation" minOccurs="0" />
+                          <element name="falsefriend" minOccurs="0">
+                            <complexType>
+                              <simpleContent>
+                                <extension base="string">
+                                  <attribute name="fromid" type="integer" />
+                                </extension>
+                              </simpleContent>
+                            </complexType>
+                          </element>
+                          <element name="antonym" minOccurs="0" />
+                          <element name="synonym" minOccurs="0" />
+                          <element name="example" minOccurs="0" />
+                          <element name="usage" minOccurs="0" maxOccurs="unbounded"/>
+                          <element name="paraphrase" minOccurs="0" />
+                          <element name="comparison" minOccurs="0">
+                            <complexType>
+                              <sequence>
+                                <element name="absolute" />
+                                <element name="comparative" />
+                                <element name="superlative" />
+                              </sequence>
+                            </complexType>
+                          </element>
+                          <element name="conjugation" minOccurs="0" maxOccurs="unbounded">
+                            <complexType>
+                              <sequence>
+                                <element name="tense" minOccurs="0" />
+                                <element name="singular" type="kvtml2:dt_article" minOccurs="0" />
+                                <element name="plural" type="kvtml2:dt_article" minOccurs="0" />
+                              </sequence>
+                            </complexType>
+                          </element>
+                          <element name="grade" minOccurs="0">
+                            <complexType>
+                              <sequence>
+                                <element name="currentgrade" />
+                                <element name="count" />
+                                <element name="errorcount" />
+                                <element name="date" />
+                              </sequence>
+                              <attribute name="fromid" use="required" />
+                            </complexType>
+                          </element>
+                          <element name="image" minOccurs="0" />
+                          <element name="multiplechoice" minOccurs="0">
+                            <complexType>
+                              <sequence>
+                                <element name="choice" maxOccurs="unbounded" />
+                              </sequence>
+                            </complexType>
+                          </element>
+                          <element name="sound" minOccurs="0" />
+                        </sequence>
+                        <attribute name="id" use="required" />
+                      </complexType>
+                    </element>
+                  </sequence>
+                  <attribute name="id" use="required" />
+                </complexType>
+              </element>
+            </sequence>
+          </complexType>
+        </element>
+      </sequence>
+      <attribute name="version" use="required" />
+    </complexType>
+  </element>
+  
+  <complexType name="dt_article">
+    <choice>
+      <element name="male" />
+      <element name="female" />
+      <element name="neutral" />
+    </choice>
+  </complexType>
+
+  <complexType name="dt_personalPronouns">
+    <sequence>
+      <element name="firstperson" />
+      <element name="secondperson" />
+      <element name="thirdperson">
+        <complexType>
+          <choice>
+            <group ref="kvtml2:gr_thirdperson" />
+            <element name="common" />
+          </choice>
+        </complexType>
+      </element>
+    </sequence>
+  </complexType>
+  
+  <complexType name="dt_subwordtypedefinition">
+    <sequence>
+      <element name="subtypename" />
+      <element name="specialwordtype" minOccurs="0" />
+    </sequence>
+  </complexType>
+
+  <group name="gr_thirdperson">
+    <sequence>
+      <element name="male" />
+      <element name="female" />
+      <element name="neutral" />
+    </sequence>
+  </group>
+</schema>
