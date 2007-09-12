@@ -61,6 +61,7 @@
 <!ELEMENT text           (#PCDATA) >
 <!ELEMENT pronunciation  (#PCDATA) >
 <!ELEMENT falsefriend    (#PCDATA) >
+<!ATTLIST falsefriend fromid    CDATA  #REQUIRED>
 <!ELEMENT antonym        (#PCDATA) >
 <!ELEMENT synonym        (#PCDATA) >
 <!ELEMENT example        (#PCDATA) >
