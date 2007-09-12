@@ -31,14 +31,12 @@
 <!ELEMENT secondperson   (#PCDATA) >
 <!ELEMENT thirdperson    (common|(male, female, neutral)) >
 
+<!ELEMENT wordtypedefinitions (wordtypedefinition*) >
+<!ELEMENT wordtypedefinition (typename, specialwordtype?, subwordtypedefinition*) >
+<!ELEMENT subwordtypedefinition (subtypename, specialwordtype?) >
 <!ELEMENT specialwordtype    (#PCDATA) >
 <!ELEMENT subtypename        (#PCDATA) >
 <!ELEMENT typename           (#PCDATA) >
-<!ELEMENT wordtype           (typename?|(typename, subtypename?)) >
-
-<!ELEMENT subwordtypedefinition (subtypename, specialwordtype?) >
-<!ELEMENT wordtypedefinition (typename, specialwordtype?, subwordtypedefinition*) >
-<!ELEMENT wordtypedefinitions (wordtypedefinition*) >
 
 <!ELEMENT tenses         (tense*) >
 <!ELEMENT tense          (#PCDATA) >
@@ -58,7 +56,8 @@
 <!ELEMENT inactive       EMPTY >
 <!ELEMENT inquery        EMPTY >
 
-<!ELEMENT translation    (text, wordtype?, inquery?, comment?, pronunciation?, falsfriend?, antonym?, synonym?, example?, usage*, paraphrase?, comparison?, conjugation*) >
+<!ELEMENT translation    (text, wordtype?, inquery?, comment?, pronunciation?, falsefriend?, antonym?, synonym?, example?, usage*, paraphrase?, comparison?, conjugation*) >
+<!ELEMENT wordtype       (typename?|(typename, subtypename?)) >
 <!ELEMENT text           (#PCDATA) >
 <!ELEMENT pronunciation  (#PCDATA) >
 <!ELEMENT falsefriend    (#PCDATA) >
