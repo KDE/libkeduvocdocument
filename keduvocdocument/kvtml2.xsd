@@ -71,35 +71,10 @@
           </complexType>
         </element>
         
-        <element name="tenses" minOccurs="0">
-          <complexType>
-            <sequence>
-              <element name="tense" minOccurs="0" maxOccurs="unbounded" />
-            </sequence>
-          </complexType>
-        </element>
-        
         <element name="usages" minOccurs="0">
           <complexType>
             <sequence>
               <element name="usage" minOccurs="0" maxOccurs="unbounded" />
-            </sequence>
-          </complexType>
-        </element>
-        
-        <element name="lessons" minOccurs="0">
-          <complexType>
-            <sequence>
-              <element name="lesson" minOccurs="0" maxOccurs="unbounded">
-                <complexType>
-                  <sequence>
-                    <element name="name" />
-                    <element name="query" minOccurs="0" />
-                    <element name="current" minOccurs="0" />
-                    <element name="entryid" minOccurs="0" maxOccurs="unbounded" />
-                  </sequence>
-                </complexType>
-              </element>
             </sequence>
           </complexType>
         </element>
@@ -119,15 +94,15 @@
                           <element name="text" />
                           <element name="wordtype" minOccurs="0">
                             <complexType>
-                              <choice>
+                              <sequence>
                                 <element name="typename" minOccurs="0" />
                                 <element name="subtypename" minOccurs="0" />
-                              </choice>
+                              </sequence>
                             </complexType>
                           </element>
                           <element name="inquery" minOccurs="0" />
                           <element name="comment" minOccurs="0" />
-                          <element name="pronounciation" minOccurs="0" />
+                          <element name="pronunciation" minOccurs="0" />
                           <element name="falsefriend" minOccurs="0">
                             <complexType>
                               <simpleContent>
@@ -186,6 +161,31 @@
                     </element>
                   </sequence>
                   <attribute name="id" use="required" />
+                </complexType>
+              </element>
+            </sequence>
+          </complexType>
+        </element>
+
+        <element name="tenses" minOccurs="0">
+          <complexType>
+            <sequence>
+              <element name="tense" minOccurs="0" maxOccurs="unbounded" />
+            </sequence>
+          </complexType>
+        </element>
+
+        <element name="lessons" minOccurs="0">
+          <complexType>
+            <sequence>
+              <element name="lesson" minOccurs="0" maxOccurs="unbounded">
+                <complexType>
+                  <sequence>
+                    <element name="name" />
+                    <element name="query" minOccurs="0" />
+                    <element name="current" minOccurs="0" />
+                    <element name="entryid" minOccurs="0" maxOccurs="unbounded" />
+                  </sequence>
                 </complexType>
               </element>
             </sequence>
