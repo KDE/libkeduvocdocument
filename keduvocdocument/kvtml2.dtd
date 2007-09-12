@@ -1,4 +1,4 @@
-<!ELEMENT kvtml         (information, identifiers, wordtypedefinitions?, entries, tenses?, usages?, lessons?)     >
+﻿<!ELEMENT kvtml         (information, identifiers, wordtypedefinitions?, usages?, entries, tenses?, lessons?)     >
 <!ATTLIST kvtml version    CDATA  #REQUIRED>
 
 <!ELEMENT information    (generator?, title, author?, license?, comment?, category?) >
@@ -11,7 +11,7 @@
 <!ELEMENT category       (#PCDATA) >
 
 <!ELEMENT identifiers    (identifier*) >
-<!ELEMENT identifier     (identifiertype, locale, name?, comment?, sizehint?, article?, personalpronouns?) >
+<!ELEMENT identifier     (identifiertype?, name?, locale, comment?, sizehint?, article?, personalpronouns?) >
 <!ATTLIST identifier id  CDATA  #REQUIRED>
 
 <!ELEMENT identifiertype (#PCDATA) >
@@ -24,7 +24,7 @@
 <!ELEMENT male           (#PCDATA) >
 <!ELEMENT female         (#PCDATA) >
 <!ELEMENT neutral        (#PCDATA) >
-<!ELEMENT personalpronouns (singular?, plural?) >
+<!ELEMENT personalpronouns (singular?, plural?, tense?) >
 <!ELEMENT singular       (firstperson, secondperson, thirdperson) >
 <!ELEMENT plural         (firstperson, secondperson, thirdperson) >
 <!ELEMENT firstperson    (#PCDATA) >
@@ -53,10 +53,11 @@
 <!ELEMENT entries        (entry*) >
 <!ELEMENT entry          (inactive?, inquery?, sizehint?, translation*) >
 <!ATTLIST entry id       CDATA  #REQUIRED>
-<!ELEMENT inactive       EMPTY >
-<!ELEMENT inquery        EMPTY >
+<!ELEMENT inactive       (#PCDATA) >
+<!ELEMENT inquery        (#PCDATA) >
 
-<!ELEMENT translation    (text, wordtype?, inquery?, comment?, pronunciation?, falsefriend?, antonym?, synonym?, example?, usage*, paraphrase?, comparison?, conjugation*) >
+<!ELEMENT translation    (text, wordtype?, inquery?, comment?, pronunciation?, falsefriend?, antonym?, synonym?, example?, usage*, paraphrase?, comparison?, conjugation*, grade?, image?, multiplechoice?, sound?) >
+<!ATTLIST translation id  CDATA #REQUIRED >
 <!ELEMENT wordtype       (typename?|(typename, subtypename?)) >
 <!ELEMENT text           (#PCDATA) >
 <!ELEMENT pronunciation  (#PCDATA) >
@@ -80,8 +81,9 @@
 <!ELEMENT image          (#PCDATA) >
 <!ELEMENT sound          (#PCDATA) >
 
-<!ELEMENT grade          (currentgradeint, count, errorcount, date) >
-<!ELEMENT currentgradeint  (#PCDATA) >
+<!ELEMENT grade          (currentgrade, count, errorcount, date) >
+<!ATTLIST grade fromid   CDATA #REQUIRED >
+<!ELEMENT currentgrade  (#PCDATA) >
 <!ELEMENT count          (#PCDATA) >
 <!ELEMENT errorcount     (#PCDATA) >
 <!ELEMENT date           (#PCDATA) >
