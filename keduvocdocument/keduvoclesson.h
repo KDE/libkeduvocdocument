@@ -52,6 +52,9 @@ public:
 
     /** get a list of all entries in the lesson */
     QList<int> entries();
+    
+    /** get the number of entries in the lesson */
+    int entryCount();
 
     /** add an entry to the lesson
      * @param entryid id of the entry to add

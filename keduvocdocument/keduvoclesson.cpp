@@ -78,6 +78,11 @@ QList<int> KEduVocLesson::entries()
     return d->m_entries.toList();
 }
 
+int KEduVocLesson::entryCount()
+{
+    return d->m_entries.count();
+}
+
 void KEduVocLesson::addEntry( int entryid )
 {
     d->m_entries.insert( entryid );
