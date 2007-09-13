@@ -397,11 +397,23 @@ QString KEduVocWordType::specialSubType( const QString & mainTypeName, const QSt
 }
 
 
-
 QString KEduVocWordType::specialTypeNoun() const
 {
     return d->WORDTYPE_NOUN;
 }
+QString KEduVocWordType::specialTypeNounMale() const
+{
+    return d->WORDTYPE_NOUN_MALE;
+}
+QString KEduVocWordType::specialTypeNounFemale() const
+{
+    return d->WORDTYPE_NOUN_FEMALE;
+}
+QString KEduVocWordType::specialTypeNounNeutral() const
+{
+    return d->WORDTYPE_NOUN_NEUTRAL;
+}
+
 
 QString KEduVocWordType::specialTypeVerb() const
 {

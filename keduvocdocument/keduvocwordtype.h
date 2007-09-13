@@ -134,6 +134,10 @@ public:
     QString typeOfSpecialType( const QString& specialType ) const;
 
     QString specialTypeNoun() const;
+    QString specialTypeNounMale() const;
+    QString specialTypeNounFemale() const;
+    QString specialTypeNounNeutral() const;
+
     QString specialTypeVerb() const;
     QString specialTypeAdjective() const;
     QString specialTypeAdverb() const;
