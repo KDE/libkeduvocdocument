@@ -163,13 +163,16 @@ void KEduVocDocument::appendEntry( KEduVocExpression *expression )
 void KEduVocDocument::insertEntry( KEduVocExpression *expression, int index )
 {
     d->m_vocabulary.insert( index, *expression );
-    
+
     // now we need to go fix the entryids that are greater than index in the lessons
     for (int i = 0; i < d->m_lessons.size(); ++i)
     {
         d->m_lessons[i].incrementEntriesAbove(index);
     }
-    
+    // if the expression is added and the lesson already exists (not at doc loading time, but added later) make sure it ends up in the lesson as well.
+    if ( expression->lesson() > 0 && expression->lesson() < d->m_lessons.count() ) {
+        d->m_lessons[expression->lesson()].addEntry(index);
+    }
     setModified();
 }
 
@@ -624,12 +627,12 @@ void KEduVocDocument::removeEntry( int index )
     if ( index >= 0 && index < d->m_vocabulary.size() ) {
         d->m_vocabulary.removeAt( index );
     }
-    
+
     // now we need to go fix the entryids that are greater than index in the lessons
     for (int i = 0; i < d->m_lessons.size(); ++i)
     {
         d->m_lessons[i].decrementEntriesAbove(index);
-    }    
+    }
 }
 
 

@@ -375,7 +375,7 @@ QString KEduVocTranslation::imageUrl()
     return d->m_imageUrl;
 }
 
-/** set the image url for this translation 
+/** set the image url for this translation
  * @param url               url of the image
  */
 void KEduVocTranslation::setImageUrl(const QString &url)
