@@ -430,7 +430,7 @@ public:
      * All lesson descriptions as stringlist.
      * @returns a list of defined lessons
      */
-    QStringList lessonNames() const;
+    KDE_DEPRECATED QStringList lessonNames() const;
 
     /** @todo implement this?
      * Moves the lesson at index position from to index position to.
