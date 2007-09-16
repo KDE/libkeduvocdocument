@@ -135,6 +135,8 @@ KEduVocGrade & KEduVocGrade::operator =(const KEduVocGrade & other)
     d->m_queryCount = other.d->m_queryCount;
     d->m_badCount = other.d->m_badCount;
     d->m_queryDate = other.d->m_queryDate;
+
+    return *this;
 }
 
 bool KEduVocGrade::operator ==(const KEduVocGrade & other) const
