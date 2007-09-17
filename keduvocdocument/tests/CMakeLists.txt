@@ -1,4 +1,13 @@
 
+
+kde4_add_unit_test(keduvocdocumentvalidatortest keduvocdocumentvalidatortest.cpp)
+target_link_libraries(keduvocdocumentvalidatortest keduvocdocument
+    ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTTEST_LIBRARY})
+
+
+# CONVERTER:
+
+
 include_directories( ${CMAKE_SOURCE_DIR}/libkdeedu/keduvocdocument/   )
 
 
@@ -11,4 +20,8 @@ set(converter_SRCS
 kde4_add_executable(converter ${converter_SRCS})
 
 target_link_libraries(converter keduvocdocument )
+
+
+
+
 
