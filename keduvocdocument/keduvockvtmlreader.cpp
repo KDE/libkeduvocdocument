@@ -1003,11 +1003,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         textstr = currentElement.lastChild().toText().data();
 
         if ( i == 0 ) {
-            expr = KEduVocExpression( textstr );
-            expr.setLesson( lesson );
-
-///@todo inquery is old and no longer used. get rid of reading it.
-//             expr.setInQuery( inquery );
+            expr = KEduVocExpression( textstr, lesson );
             expr.setActive( active );
         } else {
             expr.setTranslation( i, textstr );
@@ -1076,11 +1072,6 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
 //         m_doc->setQueryIdentifier( q_org, q_trans );
 //     }
     m_doc->appendEntry( &expr );
-
-    // also add this entryid to the lesson it's part of
-    if ( lesson >= 0 ) {
-        m_doc->lesson( lesson ).addEntry( m_doc->entryCount() );
-    }
 
     return true;
 }

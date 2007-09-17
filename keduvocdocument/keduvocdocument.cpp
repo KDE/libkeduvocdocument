@@ -155,8 +155,7 @@ void KEduVocDocument::setModified( bool dirty )
 
 void KEduVocDocument::appendEntry( KEduVocExpression *expression )
 {
-    d->m_vocabulary.append( *expression );
-    setModified();
+    insertEntry(expression, d->m_vocabulary.count());
 }
 
 
