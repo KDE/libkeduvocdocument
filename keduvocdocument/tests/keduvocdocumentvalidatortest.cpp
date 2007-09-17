@@ -43,30 +43,23 @@ void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
     KUrl fileName = KUrl(temp.fileName());
     temp.close();
 
+    KEduVocDocument doc;
+    doc.setAuthor("Validator Test");
+    doc.setLicense("test license");
+    doc.setDocumentComment("comment");
+    doc.setCategory("test document");
+    doc.setTitle("Validator Test Title");
 
-//     KUrl fileName = KUrl("/tmp/ValidatorTestDocument.kvtml");
+    doc.saveAs(fileName, KEduVocDocument::Kvtml, "Validator Unit Tests");
 
-    KEduVocDocument* doc = new KEduVocDocument;
-    doc->setAuthor("Validator Test");
-    doc->setLicense("test license");
-    doc->setDocumentComment("comment");
-    doc->setCategory("test document");
-    doc->setTitle("Validator Test Title");
+    KEduVocDocument docRead;
+    docRead.open(fileName);
 
-
-    doc->saveAs(fileName, KEduVocDocument::Kvtml, "Validator Unit Tests");
-    delete doc;
-
-    doc = new KEduVocDocument;
-    doc->open(fileName);
-
-    QVERIFY( doc->author() == "Validator Test" );
-    QVERIFY( doc->license() == "test license" );
-    QVERIFY( doc->documentComment() == "comment" );
-    QVERIFY( doc->category() == "test document" );
-    QVERIFY( doc->title() == "Validator Test Title" );
-
-
+    QVERIFY( docRead.author() == "Validator Test" );
+    QVERIFY( docRead.license() == "test license" );
+    QVERIFY( docRead.documentComment() == "comment" );
+    QVERIFY( docRead.category() == "test document" );
+    QVERIFY( docRead.title() == "Validator Test Title" );
 }
 
 QTEST_KDEMAIN_CORE( KEduVocDocumentValidatorTest )
