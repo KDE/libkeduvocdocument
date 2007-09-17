@@ -43,23 +43,31 @@ void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
     KUrl fileName = KUrl(temp.fileName());
     temp.close();
 
-    KEduVocDocument doc;
-    doc.setAuthor("Validator Test");
-    doc.setLicense("test license");
-    doc.setDocumentComment("comment");
-    doc.setCategory("test document");
-    doc.setTitle("Validator Test Title");
+    const QString generator = QString::fromLatin1( "Validator Unit Tests" );
+    const QString author = QString::fromLatin1( "Validator Test" );
+    const QString license = QString::fromLatin1( "test license" );
+    const QString comment = QString::fromLatin1( "comment" );
+    const QString category = QString::fromLatin1( "test document" );
+    const QString title = QString::fromLatin1( "Validator Test Title" );
 
-    doc.saveAs(fileName, KEduVocDocument::Kvtml, "Validator Unit Tests");
+    KEduVocDocument doc;
+    doc.setAuthor( author );
+    doc.setLicense( license );
+    doc.setDocumentComment( comment );
+    doc.setCategory( category );
+    doc.setTitle( title );
+
+    doc.saveAs(fileName, KEduVocDocument::Kvtml, generator);
 
     KEduVocDocument docRead;
     docRead.open(fileName);
 
-    QVERIFY( docRead.author() == "Validator Test" );
-    QVERIFY( docRead.license() == "test license" );
-    QVERIFY( docRead.documentComment() == "comment" );
-    QVERIFY( docRead.category() == "test document" );
-    QVERIFY( docRead.title() == "Validator Test Title" );
+    QCOMPARE( docRead.generator(), generator );
+    QCOMPARE( docRead.author(), author );
+    QCOMPARE( docRead.license(), license );
+    QCOMPARE( docRead.documentComment(), comment );
+    QCOMPARE( docRead.category(), category );
+    QCOMPARE( docRead.title(), title );
 }
 
 QTEST_KDEMAIN_CORE( KEduVocDocumentValidatorTest )
