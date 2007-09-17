@@ -1251,7 +1251,7 @@ QString KEduVocDocument::errorDescription( int errorCode )
         return i18n("The file does not exist.");
     case Unknown:
     default:
-        return i18n("Unknown error message.");
+        return i18n("Unknown error.");
     }
 }
 
