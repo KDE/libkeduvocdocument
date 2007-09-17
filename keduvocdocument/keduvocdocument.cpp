@@ -25,7 +25,6 @@
 
 #include <klocale.h>
 #include <kdebug.h>
-#include <kmessagebox.h>
 #include <kio/netaccess.h>
 #include <krandomsequence.h>
 #include <kfilterdev.h>
@@ -227,11 +226,12 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileNa
 }
 
 
-bool KEduVocDocument::open( const KUrl& url )
+int KEduVocDocument::open( const KUrl& url )
 {
     d->init();
-    if ( !url.isEmpty() )
+    if ( !url.isEmpty() ) {
         d->m_url = url;
+    }
 
     bool read = false;
     QString errorMessage = i18n( "<qt>Cannot open file<br /><b>%1</b></qt>", url.path() );
@@ -240,8 +240,8 @@ bool KEduVocDocument::open( const KUrl& url )
         QIODevice * f = KFilterDev::deviceForFile( temporaryFile );
 
         if ( !f->open( QIODevice::ReadOnly ) ) {
-            KMessageBox::error( 0, errorMessage );
-            return false;
+            kError() << errorMessage;
+            return FileCannotRead;
         }
 
         FileType ft = detectFileType( url.path() );
@@ -309,7 +309,9 @@ bool KEduVocDocument::open( const KUrl& url )
 
         if ( !read ) {
             QString msg = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)", url.path(), errorMessage );
-            KMessageBox::error( 0, msg, i18n( "Error Opening File" ) );
+            kError() << msg << i18n( "Error Opening File" );
+            ///@todo make the readers return int, pass on the error message properly
+            return FileReaderFailed;
         }
 
         f->close();
@@ -332,11 +334,15 @@ bool KEduVocDocument::open( const KUrl& url )
         deleteLesson(defaultLessonNumber, DeleteEmptyLesson);
     }
 
-    return read;
+    if ( !read ) {
+        return FileReaderFailed;
+    }
+
+    return 0;
 }
 
 
-bool KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & generator )
+int KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & generator )
 {
     KUrl tmp( url );
 
@@ -356,8 +362,8 @@ bool KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gen
         QFile f( tmp.path() );
 
         if ( !f.open( QIODevice::WriteOnly ) ) {
-            KMessageBox::error( 0, i18n( "<qt>Cannot write to file<br /><b>%1</b></qt>", tmp.path() ) );
-            return false;
+            kError() << i18n( "Cannot write to file %1", tmp.path() );
+            return FileCannotWrite;
         }
 
         switch ( ft ) {
@@ -386,15 +392,13 @@ bool KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gen
         f.close();
 
         if ( !saved ) {
-            QString msg = i18n( "Could not save \"%1\"\nDo you want to try again?", tmp.path() );
-            int result = KMessageBox::warningContinueCancel( 0, msg, i18n( "Error Saving File" ), KGuiItem( i18n( "&Retry" ) ) );
-            if ( result == KMessageBox::Cancel )
-                return false;
+            kError() << "Error Saving File" << tmp.path();
+            return FileWriterFailed;
         }
     }
     d->m_url = tmp;
     setModified( false );
-    return true;
+    return 0;
 }
 
 void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers )
@@ -1194,7 +1198,7 @@ void KEduVocDocument::shuffle()
 }
 
 
-QString KEduVocDocument::pattern( Mode mode )
+QString KEduVocDocument::pattern( FileDialogMode mode )
 {
     static const struct SupportedFilter {
         bool reading;
@@ -1225,6 +1229,31 @@ QString KEduVocDocument::pattern( Mode mode )
     return newfilters.join( "\n" );
 }
 
+QString KEduVocDocument::errorDescription( int errorCode )
+{
+    switch (errorCode) {
+    case NoError:
+        return i18n("No error found.");
+
+    case InvalidXml:
+        return i18n("Invalid XML in document.");
+    case FileTypeUnknown:
+        return i18n("Unknown file type.");
+    case FileCannotWrite:
+        return i18n("File could not be written.");
+    case FileWriterFailed:
+        return i18n("File writer failed.");
+    case FileCannotRead:
+        return i18n("File could not be read.");
+    case FileReaderFailed:
+        return i18n("The file reader failed.");
+    case FileDoesNotExist:
+        return i18n("The file does not exist.");
+    case Unknown:
+    default:
+        return i18n("Unknown error message.");
+    }
+}
 
 KEduVocWordType* KEduVocDocument::wordTypes()
 {

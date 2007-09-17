@@ -19,6 +19,8 @@
 
 #include "../keduvocdocument.h"
 
+#include <KTemporaryFile>
+
 #include <qtest_kde.h>
 
 #include <qobject.h>
@@ -35,7 +37,36 @@ private slots:
 
 void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
 {
-    QVERIFY( 1==1 );
+    KTemporaryFile temp;
+    temp.setSuffix(".kvtml");
+    temp.open();
+    KUrl fileName = KUrl(temp.fileName());
+    temp.close();
+
+
+//     KUrl fileName = KUrl("/tmp/ValidatorTestDocument.kvtml");
+
+    KEduVocDocument* doc = new KEduVocDocument;
+    doc->setAuthor("Validator Test");
+    doc->setLicense("test license");
+    doc->setDocumentComment("comment");
+    doc->setCategory("test document");
+    doc->setTitle("Validator Test Title");
+
+
+    doc->saveAs(fileName, KEduVocDocument::Kvtml, "Validator Unit Tests");
+    delete doc;
+
+    doc = new KEduVocDocument;
+    doc->open(fileName);
+
+    QVERIFY( doc->author() == "Validator Test" );
+    QVERIFY( doc->license() == "test license" );
+    QVERIFY( doc->documentComment() == "comment" );
+    QVERIFY( doc->category() == "test document" );
+    QVERIFY( doc->title() == "Validator Test Title" );
+
+
 }
 
 QTEST_KDEMAIN_CORE( KEduVocDocumentValidatorTest )

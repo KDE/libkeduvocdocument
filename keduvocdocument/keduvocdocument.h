@@ -46,8 +46,8 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocDocument : public QObject
     Q_OBJECT
 public:
 
-    enum FileType
-    {
+    /// known vocabulary file types
+    enum FileType {
         KvdNone,
         Automatic,
         Kvtml,
@@ -57,6 +57,33 @@ public:
         Xdxf,
         Csv,
         Kvtml1
+    };
+
+    /// the return code when opening/saving
+    enum ErrorCode {
+        NoError = 0,
+        Unknown,
+        InvalidXml,
+        FileTypeUnknown,
+        FileCannotWrite,
+        FileWriterFailed,
+        FileCannotRead,
+        FileReaderFailed,
+        FileDoesNotExist
+    };
+
+    /// used as parameter for pattern
+    enum FileDialogMode
+    {
+        Reading,
+        Writing
+    };
+
+    /// delete only empty lessons or also if they have entries
+    enum LessonDeletion
+    {
+        DeleteEmptyLesson,
+        DeleteEntriesAndLesson
     };
 
     /**
@@ -77,9 +104,9 @@ public:
      * Open a document file
      *
      * @param url      url to file to open
-     * @returns        true if successful
+     * @returns        ErrorCode
      */
-    bool open( const KUrl& url );
+    int open( const KUrl& url );
 
     /**
      * Saves the data under the given name
@@ -87,9 +114,9 @@ public:
      * @param url        if url is empty (or NULL) actual name is preserved
      * @param ft         the filetype to be used when saving the document
      * @param generator  the name of the application saving the document
-     * @returns          true if successful
+     * @returns          ErrorCode
      */
-    bool saveAs( const KUrl & url, FileType ft, const QString & generator );
+    int saveAs( const KUrl & url, FileType ft, const QString & generator );
 
     /**
      * Merges data from another document
@@ -464,18 +491,6 @@ public:
 
     static FileType detectFileType( const QString &fileName );
 
-    enum Mode
-    {
-        Reading,
-        Writing
-    };
-
-    enum LessonDeletion
-    {
-        DeleteEmptyLesson,
-        DeleteEntriesAndLesson
-    };
-
     /**
      * Create a string with the supported document types, that can be used
      * as filter in KFileDialog. It includes also an entry to match all the
@@ -484,7 +499,9 @@ public:
      * @param mode             the mode for the supported document types
      * @returns                the filter string
      */
-    static QString pattern( Mode mode );
+    static QString pattern( FileDialogMode mode );
+
+    static QString errorDescription( int errorCode );
 
 Q_SIGNALS:
     void progressChanged( KEduVocDocument *, int curr_percent );
