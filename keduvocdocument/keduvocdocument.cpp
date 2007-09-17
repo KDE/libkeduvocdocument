@@ -169,7 +169,7 @@ void KEduVocDocument::insertEntry( KEduVocExpression *expression, int index )
         d->m_lessons[i].incrementEntriesAbove(index);
     }
     // if the expression is added and the lesson already exists (not at doc loading time, but added later) make sure it ends up in the lesson as well.
-    if ( expression->lesson() > 0 && expression->lesson() < d->m_lessons.count() ) {
+    if ( expression->lesson() >= 0 && expression->lesson() < d->m_lessons.count() ) {
         d->m_lessons[expression->lesson()].addEntry(index);
     }
     setModified();
