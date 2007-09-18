@@ -1237,7 +1237,9 @@ QString KEduVocDocument::pattern( FileDialogMode mode )
             allext.append( QLatin1String( filters[i].extensions ) );
         }
     }
-    newfilters.prepend( allext.join( " " ) + '|' + i18n( "All supported documents" ) );
+    if ( mode == Reading ) {
+        newfilters.prepend( allext.join( " " ) + '|' + i18n( "All supported documents" ) );
+    }
     return newfilters.join( "\n" );
 }
 
