@@ -242,7 +242,7 @@ int KEduVocDocument::open( const KUrl& url )
             return FileCannotRead;
         }
 
-        FileType ft = detectFileType( url.path() );
+        FileType ft = detectFileType( temporaryFile );
 
         switch ( ft ) {
             case Kvtml: {
