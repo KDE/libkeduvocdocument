@@ -178,49 +178,47 @@ void KEduVocDocument::insertEntry( KEduVocExpression *expression, int index )
 KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileName )
 {
     QIODevice * f = KFilterDev::deviceForFile( fileName );
-    if ( !f->open( QIODevice::ReadOnly ) )
+    if ( !f->open( QIODevice::ReadOnly ) ) {
+        kDebug() << "Warning, could not open QIODevice for file: " << fileName;
         return Csv;
-
-    QDataStream is( f );
-
-    qint8 c1, c2, c3, c4, c5;
-    is >> c1
-    >> c2
-    >> c3
-    >> c4
-    >> c5;  // guess filetype by first x bytes
-
-    QTextStream ts( f );
-    QString line;
-    QString line2;
-
-    line = ts.readLine();
-    if ( !ts.atEnd() )
-        line2 = ts.readLine();
-    line.prepend( c5 );
-    line.prepend( c4 );
-    line.prepend( c3 );
-    line.prepend( c2 );
-    line.prepend( c1 );
-
-    if ( !is.device()->isOpen() )
-        return KvdNone;
-
-    f->close();
-    if ( c1 == '<' && c2 == '?' && c3 == 'x' && c4 == 'm' && c5 == 'l' ) {
-        if ( line2.indexOf( "pauker", 0 ) >  0 )
-            return Pauker;
-        else if ( line2.indexOf( "xdxf", 0 ) >  0 )
-            return Xdxf;
-        else
-            return Kvtml;
     }
 
-    if ( line == WQL_IDENT )
-        return Wql;
+    QTextStream ts( f );
+    QString line1;
+    QString line2;
 
-    if ( c1 == '"' && ( line.contains( '"' ) == 1 || line.contains( QRegExp( "\",[0-9]" ) ) ) )
+    line1 = ts.readLine();
+    if ( !ts.atEnd() ) {
+        line2 = ts.readLine();
+    }
+
+    f->close();
+    if ( line1.startsWith(QString::fromLatin1("<?xml")) ) {
+        if ( line2.indexOf( "pauker", 0 ) >  0 ) {
+            return Pauker;
+        }
+        if ( line2.indexOf( "xdxf", 0 ) >  0 ) {
+            return Xdxf;
+        } else {
+            return Kvtml;
+        }
+    }
+
+    if ( line1 == WQL_IDENT ) {
+        return Wql;
+    }
+
+    /*
+    Vokabeln.de files:
+    The header seems to be something like this:
+    "Name
+    Lang1 - Lang2",123,234,456
+    */
+    if ( line1.startsWith(QChar::fromLatin1('"')) &&
+        ((line1.contains(QRegExp( "\",[0-9]" ))) ||
+        (line2.contains(QRegExp( "\",[0-9]" ))))) {
         return Vokabeln;
+    }
 
     return Csv;
 }
