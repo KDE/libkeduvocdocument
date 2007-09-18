@@ -364,50 +364,50 @@ int KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gene
         else if ( tmp.path().right( strlen( "." CSV_EXT ) ) == "." CSV_EXT )
             ft = Csv;
         else {
-            return false;
+            return FileTypeUnknown;
         }
+    }
+
+    QFile f( tmp.path() );
+
+    if ( !f.open( QIODevice::WriteOnly ) ) {
+        kError() << i18n( "Cannot write to file %1", tmp.path() );
+        return FileCannotWrite;
     }
 
     bool saved = false;
 
-    while ( !saved ) {
-        QFile f( tmp.path() );
-
-        if ( !f.open( QIODevice::WriteOnly ) ) {
-            kError() << i18n( "Cannot write to file %1", tmp.path() );
-            return FileCannotWrite;
+    switch ( ft ) {
+        case Kvtml: {
+            // write version 2 file
+            KEduVocKvtml2Writer kvtmlWriter( &f );
+            saved = kvtmlWriter.writeDoc( this, generator );
         }
-
-        switch ( ft ) {
-            case Kvtml: {
-                // write version 2 file
-                KEduVocKvtml2Writer kvtmlWriter( &f );
-                saved = kvtmlWriter.writeDoc( this, generator );
-            }
-            break;
-            case Kvtml1: {
-                // write old version 1 file
-                KEduVocKvtmlWriter kvtmlWriter( &f );
-                saved = kvtmlWriter.writeDoc( this, generator );
-            }
-            break;
-            case Csv: {
-                KEduVocCsvWriter csvWriter( &f );
-                saved = csvWriter.writeDoc( this, generator );
-            }
-            break;
-            default: {
-                kError() << "kvcotrainDoc::saveAs(): unknown filetype" << endl;
-            }
-            break;
+        break;
+        case Kvtml1: {
+            // write old version 1 file
+            KEduVocKvtmlWriter kvtmlWriter( &f );
+            saved = kvtmlWriter.writeDoc( this, generator );
         }
-        f.close();
-
-        if ( !saved ) {
-            kError() << "Error Saving File" << tmp.path();
-            return FileWriterFailed;
+        break;
+        case Csv: {
+            KEduVocCsvWriter csvWriter( &f );
+            saved = csvWriter.writeDoc( this, generator );
         }
+        break;
+        default: {
+            kError() << "kvcotrainDoc::saveAs(): unknown filetype" << endl;
+        }
+        break;
+    } // switch
+
+    f.close();
+
+    if ( !saved ) {
+        kError() << "Error Saving File" << tmp.path();
+        return FileWriterFailed;
     }
+
     d->m_url = tmp;
     setModified( false );
     return 0;
@@ -1254,11 +1254,11 @@ QString KEduVocDocument::errorDescription( int errorCode )
     case FileTypeUnknown:
         return i18n("Unknown file type.");
     case FileCannotWrite:
-        return i18n("File could not be written.");
+        return i18n("File is not writeable.");
     case FileWriterFailed:
         return i18n("File writer failed.");
     case FileCannotRead:
-        return i18n("File could not be read.");
+        return i18n("File is not readable.");
     case FileReaderFailed:
         return i18n("The file reader failed.");
     case FileDoesNotExist:
