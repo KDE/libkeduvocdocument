@@ -248,62 +248,76 @@ int KEduVocDocument::open( const KUrl& url )
 
         switch ( ft ) {
             case Kvtml: {
+                kDebug() << "Reading KVTML document...";
                 KEduVocKvtml2Reader kvtmlReader( f );
                 read = kvtmlReader.readDoc( this );
-                if ( !read )
+                if ( !read ) {
                     errorMessage = kvtmlReader.errorMessage();
+                }
             }
             break;
 
             case Wql: {
+                kDebug() << "Reading WordQuiz (WQL) document...";
                 KEduVocWqlReader wqlReader( f );
                 d->m_url.setFileName( i18n( "Untitled" ) );
                 read = wqlReader.readDoc( this );
-                if ( !read )
+                if ( !read ) {
                     errorMessage = wqlReader.errorMessage();
+                }
             }
             break;
 
             case Pauker: {
+                kDebug() << "Reading Pauker document...";
                 KEduVocPaukerReader paukerReader( this );
                 d->m_url.setFileName( i18n( "Untitled" ) );
                 read = paukerReader.read( f );
-                if ( !read )
+                if ( !read ) {
                     errorMessage = i18n( "Parse error at line %1, column %2:\n%3", paukerReader.lineNumber(), paukerReader.columnNumber(), paukerReader.errorString() );
+                }
             }
             break;
 
             case Vokabeln: {
+                kDebug() << "Reading Vokabeln document...";
                 KEduVocVokabelnReader vokabelnReader( f );
                 d->m_url.setFileName( i18n( "Untitled" ) );
                 read = vokabelnReader.readDoc( this );
-                if ( !read )
+                if ( !read ) {
                     errorMessage = vokabelnReader.errorMessage();
+                }
             }
             break;
 
             case Csv: {
+                kDebug() << "Reading CVS document...";
                 KEduVocCsvReader csvReader( f );
                 read = csvReader.readDoc( this );
-                if ( !read )
+                if ( !read ) {
                     errorMessage = csvReader.errorMessage();
+                }
             }
             break;
 
             case Xdxf: {
+                kDebug() << "Reading XDXF document...";
                 KEduVocXdxfReader xdxfReader( this );
                 d->m_url.setFileName( i18n( "Untitled" ) );
                 read = xdxfReader.read( f );
-                if ( !read )
+                if ( !read ) {
                     errorMessage = i18n( "Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString() );
+                }
             }
             break;
 
             default: {
+                kDebug() << "Reading KVTML document (fallback)...";
                 KEduVocKvtml2Reader kvtmlReader( f );
                 read = kvtmlReader.readDoc( this );
-                if ( !read )
+                if ( !read ) {
                     errorMessage = kvtmlReader.errorMessage();
+                }
             }
         }
 
