@@ -1224,7 +1224,7 @@ QString KEduVocDocument::pattern( FileDialogMode mode )
                     { true, false, "*.xml.qz *.pau.gz", I18N_NOOP( "Pauker Lesson" ) },
                     { true, false, "*.voc", I18N_NOOP( "Vokabeltrainer" ) },
                     { true, false, "*.xdxf", I18N_NOOP( "XML Dictionary Exchange Format" ) },
-                    { true, true, "*.csv", I18N_NOOP( "Text" ) },
+                    { true, true, "*.csv", I18N_NOOP( "Comma Separated Values (CSV)" ) },
                     // last is marker for the end, do not remove it
                     { false, false, 0, 0 }
                 };
