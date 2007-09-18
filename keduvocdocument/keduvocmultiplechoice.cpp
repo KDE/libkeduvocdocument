@@ -44,7 +44,10 @@ KEduVocMultipleChoice::KEduVocMultipleChoice( const KEduVocMultipleChoice &other
 KEduVocMultipleChoice::KEduVocMultipleChoice( const QStringList &choices )
         : d( new KEduVocMultipleChoicePrivate )
 {
-    setChoices( choices );
+    foreach ( QString choice, choices ) {
+        // use appendChoice to check for empty entries
+        appendChoice(choice);
+    }
 }
 
 KEduVocMultipleChoice::~KEduVocMultipleChoice()
@@ -56,11 +59,6 @@ KEduVocMultipleChoice &KEduVocMultipleChoice::operator= ( const KEduVocMultipleC
 {
     d->m_choices = other.choices();
     return *this;
-}
-
-void KEduVocMultipleChoice::setChoices( const QStringList &choices )
-{
-    d->m_choices = choices;
 }
 
 QStringList KEduVocMultipleChoice::choices() const
@@ -89,14 +87,6 @@ QString KEduVocMultipleChoice::choice( int index ) const
     return choice;
 }
 
-void KEduVocMultipleChoice::setChoice( int index, const QString &s )
-{
-    while ( d->m_choices.size() <= index ) {
-        d->m_choices.append( QString() );
-    }
-    d->m_choices[index] = s;
-}
-
 unsigned KEduVocMultipleChoice::size() const
 {
     return d->m_choices.size();
@@ -109,5 +99,7 @@ bool KEduVocMultipleChoice::operator== ( const KEduVocMultipleChoice &choice ) c
 
 void KEduVocMultipleChoice::appendChoice( const QString &s )
 {
-    d->m_choices.append( s );
+    if ( !s.isEmpty() ) {
+        d->m_choices.append( s );
+    }
 }

@@ -40,12 +40,9 @@ public:
 
     ~KEduVocMultipleChoice();
 
-    void setChoices( const QStringList &choices );
     QStringList choices() const;
-
     void appendChoice( const QString &s );
 
-    void setChoice( int index, const QString &s );
     QString choice( int index ) const;
 
     bool isEmpty() const;
