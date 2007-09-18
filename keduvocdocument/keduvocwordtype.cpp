@@ -150,34 +150,6 @@ KEduVocWordType & KEduVocWordType::operator = ( const KEduVocWordType & other )
 }
 
 
-/*
-
-QString KEduVocWordType::oldType(const QString & mainType, const QString & subType) const
-{
-    QString oldType;
-    oldType = d->m_oldMainTypeNames.key(mainType);
-    if ( subType != QString() ) {
-        oldType.append(KVTML_1_TYPE_DIV);
-        oldType.append(d->m_oldSubTypeNames.key(subType));
-    }
-
-    if ( oldType.isEmpty() ) {
-        kDebug() << "Not found in preset types.";
-        int index = m_userTypeDescriptions.indexOf(mainType);
-        if ( index >= 0 ) {
-            kDebug() << "Found user type.";
-            // for some reason we count from one
-            oldType = KVTML_1_TYPE_USER;
-            oldType.append(QString::number(index + 1));
-        }
-    }
-
-    kDebug() << "KEduVocWordType::getOldType(): " << mainType << ", "<< subType << " gives: " << oldType;
-    return oldType;
-}
-*/
-
-
 void KEduVocWordType::createDefaultWordTypes()
 {
     // first the special types which cannot be deleted:

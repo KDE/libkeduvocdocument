@@ -131,7 +131,7 @@ public:
 
     void printDebugWordTypes();
 
-    QString typeOfSpecialType( const QString& specialType ) const;
+    KDE_DEPRECATED QString typeOfSpecialType( const QString& specialType ) const;
 
     QString specialTypeNoun() const;
     QString specialTypeNounMale() const;
