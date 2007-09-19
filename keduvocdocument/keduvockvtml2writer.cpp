@@ -231,7 +231,7 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
     }
 
     // neutral
-    m_doc->identifier(article).article().getNatural( &def, &indef );
+    m_doc->identifier(article).article().getNeutral( &def, &indef );
     if ( !def.isEmpty() ) {
         definite.appendChild( newTextElement( KVTML_NEUTRAL, def ) );
     }

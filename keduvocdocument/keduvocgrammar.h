@@ -85,7 +85,7 @@ public:
      * @param def const reference to a QString with the definite neutral article
      * @param indef const reference to a QString with the indefinite neutral article
      */
-    void setNatural( const QString &def, const QString &indef );
+    void setNeutral( const QString &def, const QString &indef );
 
     /** get the female articles
      * @param def pointer to the definite form
@@ -103,7 +103,7 @@ public:
      * @param def pointer to the definite form
      * @param indef pointer to the indefinite form
      */
-    void getNatural( QString *def, QString *indef ) const;
+    void getNeutral( QString *def, QString *indef ) const;
 
     /**
      * assignment operator for d-pointer copying

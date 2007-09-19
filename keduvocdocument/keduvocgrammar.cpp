@@ -157,7 +157,7 @@ KEduVocArticle::KEduVocArticle( const QString &fem_def, const QString &fem_indef
 {
     setFemale( fem_def, fem_indef );
     setMale( mal_def, mal_indef );
-    setNatural( nat_def, nat_indef );
+    setNeutral( nat_def, nat_indef );
 }
 
 KEduVocArticle::~KEduVocArticle()
@@ -179,7 +179,7 @@ void KEduVocArticle::setMale( const QString &def, const QString &indef )
 }
 
 
-void KEduVocArticle::setNatural( const QString &def, const QString &indef )
+void KEduVocArticle::setNeutral( const QString &def, const QString &indef )
 {
     d->nat_def = def;
     d->nat_indef = indef;
@@ -204,7 +204,7 @@ void KEduVocArticle::getMale( QString *def, QString *indef ) const
 }
 
 
-void KEduVocArticle::getNatural( QString *def, QString *indef ) const
+void KEduVocArticle::getNeutral( QString *def, QString *indef ) const
 {
     if ( def )
         *def = d->nat_def;

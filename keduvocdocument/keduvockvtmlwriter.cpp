@@ -377,7 +377,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
             domElementEntry.appendChild( domElementMI );
         }
 
-        m_doc->identifier(i).article().getNatural( &def, &indef );
+        m_doc->identifier(i).article().getNeutral( &def, &indef );
         if ( !def.isEmpty() ) {
             QDomElement domElementND = domDoc.createElement( KV_ART_ND );
             QDomText domTextND = domDoc.createTextNode( def );
