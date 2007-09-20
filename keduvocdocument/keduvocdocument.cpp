@@ -1266,9 +1266,9 @@ QString KEduVocDocument::errorDescription( int errorCode )
     }
 }
 
-KEduVocWordType* KEduVocDocument::wordTypes()
+KEduVocWordType& KEduVocDocument::wordTypes()
 {
-    return &d->m_wordTypes;
+    return d->m_wordTypes;
 }
 
 
