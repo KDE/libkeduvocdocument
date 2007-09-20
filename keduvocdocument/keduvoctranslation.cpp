@@ -21,14 +21,13 @@
 #include <KDebug>
 
 #include "keduvocgrade.h"
+// #include "keduvocdeclination.h"
 
 class KEduVocTranslation::KEduVocTranslationPrivate
 {
 public:
     /// This is the word itself. The vocabulary. This is what it is all about.
     QString m_translation;
-    /// Some languages (german) have irregular plurals. Kept here.
-    QString m_irregularPlural;
 
     /// Type of a word noun, verb, adjective etc
     QString m_type;
@@ -54,12 +53,15 @@ public:
     QString m_soundUrl;
     /// Usages give a context (eg. this word is usually used in [biology])
     QSet<QString> m_usages;
+    /// When creating multiple choice tests, these are possible answers. (otherwise other words are added randomly)
+    KEduVocMultipleChoice m_multipleChoice;
+
     /// Conjugations of a word (I go, you go, he goes... boring in english)
     QMap <QString, KEduVocConjugation> m_conjugations;
     /// The comparison forms of adjectives and adverbs: fast, faster, fastest
     KEduVocComparison m_comparison;
-    /// When creating multiple choice tests, these are possible answers. (otherwise other words are added randomly)
-    KEduVocMultipleChoice m_multipleChoice;
+
+//     KEduVocDeclination* m_declination;
 
     // Here come all int indexFrom grades. (If you want, imagine the TO grades as int indexFrom of the other translation. That is where they belong. )
     // User is asked to give THIS here as answer, than the grades go here.
@@ -89,7 +91,6 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
     d->m_subType = other.d->m_subType;
     d->m_usages = other.d->m_usages;
     d->m_comment = other.d->m_comment;
-    d->m_irregularPlural = other.d->m_irregularPlural;
     d->m_paraphrase = other.d->m_paraphrase;
     d->m_synonym = other.d->m_synonym;
     d->m_example = other.d->m_example;
@@ -344,16 +345,6 @@ QMap< QString, KEduVocConjugation > KEduVocTranslation::conjugations() const
 void KEduVocTranslation::setConjugations(const QMap< QString, KEduVocConjugation > & conjugations)
 {
     d->m_conjugations = conjugations;
-}
-
-void KEduVocTranslation::setIrregularPlural(const QString & plural)
-{
-    d->m_irregularPlural = plural;
-}
-
-QString KEduVocTranslation::irregularPlural() const
-{
-    return d->m_irregularPlural;
 }
 
 /** get the sound url for this translation if it exists */

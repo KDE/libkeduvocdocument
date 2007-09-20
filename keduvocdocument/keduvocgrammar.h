@@ -40,6 +40,24 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocArticle
 {
 public:
 
+    enum ArticleNumber {
+        Singular,
+        Dual,
+        Plural
+    };
+
+    enum ArticleGender {
+        Masculine,
+        Feminine,
+        Neuter
+    };
+
+    enum ArticleDefiniteness {
+        Definite,
+        Indefinite
+    };
+
+
     /**
      * The constructor without arguments
      */
