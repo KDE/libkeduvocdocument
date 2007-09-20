@@ -97,7 +97,7 @@ public:
     // A map is too error prone. Lesson order is very important.
     QList<KEduVocLesson>      m_lessons;
 
-    KEduVocWordType*          m_wordTypes;
+    KEduVocWordType           m_wordTypes;
 
     LeitnerSystem*            m_leitnerSystem;
     bool                      m_activeLeitnerSystem;
@@ -128,8 +128,6 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_csvDelimiter = QString( '\t' );
     m_activeLeitnerSystem = false;
     m_leitnerSystem = NULL;
-
-    m_wordTypes = new KEduVocWordType();
 }
 
 
@@ -140,7 +138,6 @@ KEduVocDocument::KEduVocDocument( QObject *parent )
 
 KEduVocDocument::~KEduVocDocument()
 {
-    delete d->m_wordTypes;
     delete d;
 }
 
@@ -1269,7 +1266,7 @@ QString KEduVocDocument::errorDescription( int errorCode )
     }
 }
 
-KEduVocWordType* KEduVocDocument::wordTypes()
+KEduVocWordType& KEduVocDocument::wordTypes()
 {
     return d->m_wordTypes;
 }

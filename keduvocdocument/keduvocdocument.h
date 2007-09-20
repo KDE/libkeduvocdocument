@@ -307,7 +307,7 @@ public:
      *
      * @returns the KEduVocWordType* type handling class
      */
-    KEduVocWordType* wordTypes();
+    KEduVocWordType& wordTypes();
 
 
     // *** tense methods ***

@@ -157,7 +157,7 @@ bool KEduVocKvtmlReader::readBody( QDomElement &domElementParent )
     }
 
     // initialize the list of predefined types
-    m_doc->wordTypes()->createDefaultWordTypes();
+    m_doc->wordTypes().createDefaultWordTypes();
     currentElement = domElementParent.firstChildElement( KV_TYPE_GRP );
     if ( !currentElement.isNull() ) {
         result = readType( currentElement );
@@ -509,7 +509,7 @@ bool KEduVocKvtmlReader::readType( QDomElement &domElementParent )
 
             kDebug() << "Adding old self defined type: " << currentElement.text();
             // add the type to the list of available types
-            m_doc->wordTypes()->addType( currentElement.text() );
+            m_doc->wordTypes().addType( currentElement.text() );
 
             // from this the #1 are transformed to something sensible again
             m_oldSelfDefinedTypes.append( currentElement.text() );

@@ -251,21 +251,21 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
 
 bool KEduVocKvtml2Writer::writeTypes( QDomElement &typesElement )
 {
-    KEduVocWordType* wt = m_doc->wordTypes();
-    foreach( QString mainTypeName, wt->typeNameList() ) {
+    KEduVocWordType wt = m_doc->wordTypes();
+    foreach( QString mainTypeName, wt.typeNameList() ) {
         kDebug() << "Writing type: " << mainTypeName;
         QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_WORDTYPEDEFINITION );
         typeDefinitionElement.appendChild( newTextElement( KVTML_TYPENAME, mainTypeName ) );
-        if ( !wt->specialType( mainTypeName ).isEmpty() ) {
-            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, wt->specialType( mainTypeName ) ) );
+        if ( !wt.specialType( mainTypeName ).isEmpty() ) {
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, wt.specialType( mainTypeName ) ) );
         }
 
         // subtypes
-        foreach( QString subTypeName, wt->subTypeNameList( mainTypeName ) ) {
+        foreach( QString subTypeName, wt.subTypeNameList( mainTypeName ) ) {
             QDomElement subTypeDefinitionElement = m_domDoc.createElement( KVTML_SUBWORDTYPEDEFINITION );
             subTypeDefinitionElement.appendChild( newTextElement( KVTML_SUBTYPENAME, subTypeName ) );
-            if ( !wt->specialSubType( mainTypeName, subTypeName ).isEmpty() ) {
-                subTypeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, wt->specialSubType( mainTypeName, subTypeName ) ) );
+            if ( !wt.specialSubType( mainTypeName, subTypeName ).isEmpty() ) {
+                subTypeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, wt.specialSubType( mainTypeName, subTypeName ) ) );
             }
             typeDefinitionElement.appendChild( subTypeDefinitionElement );
         }
