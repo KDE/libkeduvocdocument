@@ -62,5 +62,13 @@ KEduVocDeclination::~KEduVocDeclination()
     delete d;
 }
 
+QString KEduVocDeclination::declination(DeclinationNumber number, DeclinationCase decCase)
+{
+}
+
+void KEduVocDeclination::setDeclination(const QString & declination, DeclinationNumber number, DeclinationCase decCase)
+{
+}
+
 
 

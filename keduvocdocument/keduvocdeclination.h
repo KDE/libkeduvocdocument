@@ -35,13 +35,13 @@ public:
         Dual,
         Plural
     };
-
+/*
     enum DeclinationGender {
         Undefined,
         Masculine,
         Feminine,
         Neuter
-    };
+    };*/
 
     enum DeclinationCase {
         Nominative = 1,
@@ -78,6 +78,22 @@ public:
      * @returns reference to this object
      */
     KEduVocDeclination& operator= ( const KEduVocDeclination& other );
+
+    /**
+     * The grammatical number, there is singular and plural for english, some languages have dual for exactly two items.
+     * @param gender
+     * @param decCase
+     * @return
+     */
+    QString declination(DeclinationNumber number, DeclinationCase decCase);
+
+    /**
+     * Set a declination
+     * @param
+     * @param number
+     * @param decCase
+     */
+    void setDeclination(const QString& declination, DeclinationNumber number, DeclinationCase decCase);
 
 private:
     class Private;
