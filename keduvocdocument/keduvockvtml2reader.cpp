@@ -497,7 +497,7 @@ bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifi
     QString mal_indef = "";
     QString nat_indef = "";
 
-    QDomElement currentElement = articleElement.firstChildElement( KVTML_DEFINITE );
+    QDomElement currentElement = articleElement.firstChildElement( KVTML_SINGULAR ).firstChildElement( KVTML_DEFINITE );
     if ( !currentElement.isNull() )
     {
         QDomElement subElement = currentElement.firstChildElement( KVTML_MALE );
@@ -516,7 +516,7 @@ bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifi
         }
     }
 
-    currentElement = articleElement.firstChildElement( KVTML_INDEFINITE );
+    currentElement = articleElement.firstChildElement( KVTML_SINGULAR ).firstChildElement( KVTML_INDEFINITE );
     if ( !currentElement.isNull() )
     {
         QDomElement subElement = currentElement.firstChildElement( KVTML_MALE );

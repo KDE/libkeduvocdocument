@@ -26,6 +26,8 @@
 
 #include "keduvocgrammar.h"
 
+#include <QtCore/QMap>
+#include <KDebug>
 
 class KEduVocComparison::Private
 {
@@ -117,17 +119,14 @@ QString KEduVocComparison::l3() const
 }
 
 
+
+
 //=================================================================
 
 class KEduVocArticle::Private
 {
 public:
-    QString fem_def;
-    QString fem_indef;
-    QString mal_def;
-    QString mal_indef;
-    QString nat_def;
-    QString nat_indef;
+    QMap <int, QString>    m_articles;
 };
 
 KEduVocArticle::KEduVocArticle()
@@ -137,27 +136,25 @@ KEduVocArticle::KEduVocArticle()
 KEduVocArticle::KEduVocArticle( const KEduVocArticle &other )
         :d( new Private )
 {
-    operator= ( other );
+    d->m_articles = other.d->m_articles;
 }
 
 KEduVocArticle &KEduVocArticle::operator= ( const KEduVocArticle& other )
 {
-    d->fem_def = other.d->fem_def;
-    d->fem_indef = other.d->fem_indef;
-    d->mal_def = other.d->mal_def;
-    d->mal_indef = other.d->mal_indef;
-    d->nat_def = other.d->nat_def;
-    d->nat_indef = other.d->nat_indef;
-
+    d->m_articles = other.d->m_articles;
     return *this;
 }
 
-KEduVocArticle::KEduVocArticle( const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &nat_def, const QString &nat_indef )
+KEduVocArticle::KEduVocArticle( const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &neu_def, const QString &neu_indef )
         :d( new Private )
 {
-    setFemale( fem_def, fem_indef );
-    setMale( mal_def, mal_indef );
-    setNeutral( nat_def, nat_indef );
+    setArticle( mal_def, Singular, Definite, Masculine );
+    setArticle( fem_def, Singular, Definite, Feminine );
+    setArticle( neu_def, Singular, Definite, Neuter );
+
+    setArticle( mal_indef, Singular, Indefinite, Masculine );
+    setArticle( fem_indef, Singular, Indefinite, Feminine );
+    setArticle( neu_indef, Singular, Indefinite, Neuter );
 }
 
 KEduVocArticle::~KEduVocArticle()
@@ -165,51 +162,22 @@ KEduVocArticle::~KEduVocArticle()
     delete d;
 }
 
-void KEduVocArticle::setFemale( const QString &def, const QString &indef )
+
+QString KEduVocArticle::article(ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender)
 {
-    d->fem_def = def;
-    d->fem_indef = indef;
+    if ( d->m_articles.contains( indexOf(number, definite, gender) ) ) {
+        return d->m_articles.value( indexOf(number, definite, gender) );
+    }
+    return QString();
 }
 
-
-void KEduVocArticle::setMale( const QString &def, const QString &indef )
+void KEduVocArticle::setArticle(const QString & article, ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender)
 {
-    d->mal_def = def;
-    d->mal_indef = indef;
+    kDebug() << article << "#" << number << "def" << definite << "indef"  << gender << "index" << indexOf(number, definite, gender);
+    d->m_articles[indexOf(number, definite, gender)] = article;
 }
 
-
-void KEduVocArticle::setNeutral( const QString &def, const QString &indef )
+int KEduVocArticle::indexOf(ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender)
 {
-    d->nat_def = def;
-    d->nat_indef = indef;
+    return number + (definite * NumberMAX) + (gender * NumberMAX * DefinitenessMAX);
 }
-
-
-void KEduVocArticle::getFemale( QString *def, QString *indef ) const
-{
-    if ( def )
-        *def = d->fem_def;
-    if ( indef )
-        *indef = d->fem_indef;
-}
-
-
-void KEduVocArticle::getMale( QString *def, QString *indef ) const
-{
-    if ( def )
-        *def = d->mal_def;
-    if ( indef )
-        *indef = d->mal_indef;
-}
-
-
-void KEduVocArticle::getNeutral( QString *def, QString *indef ) const
-{
-    if ( def )
-        *def = d->nat_def;
-    if ( indef )
-        *indef = d->nat_indef;
-}
-
-

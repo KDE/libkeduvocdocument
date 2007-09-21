@@ -43,18 +43,21 @@ public:
     enum ArticleNumber {
         Singular,
         Dual,
-        Plural
+        Plural,
+        NumberMAX
     };
 
     enum ArticleGender {
         Masculine,
         Feminine,
-        Neuter
+        Neuter,
+        GenderMAX
     };
 
     enum ArticleDefiniteness {
         Definite,
-        Indefinite
+        Indefinite,
+        DefinitenessMAX
     };
 
 
@@ -69,7 +72,7 @@ public:
     KEduVocArticle( const KEduVocArticle &other );
 
     /**
-     * The constructor with arguments
+     * DEPRECATED The constructor with arguments, assumes singular!
      * @param fem_def reference to a QString with the definite female article
      * @param fem_indef reference to a QString with the indefinite female article
      * @param mal_def reference to a QString with the definite male article
@@ -77,58 +80,27 @@ public:
      * @param nat_def reference to a QString with the definite neutral article
      * @param nat_indef reference to a QString with the indefinite neutral article
      */
-    KEduVocArticle( const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &nat_def, const QString &nat_indef );
+    KDE_DEPRECATED KEduVocArticle( const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &nat_def, const QString &nat_indef );
 
     /**
      * default destructor, deletes the d pointer
      */
     ~KEduVocArticle();
 
-    /**
-     * Sets the female articles
-     * @param def const reference to a QString with the definite female article
-     * @param indef const reference to a QString with the indefinite female article
-     */
-    void setFemale( const QString &def, const QString &indef );
-
-    /**
-     * Sets the male articles
-     * @param def const reference to a QString with the definite male article
-     * @param indef const reference to a QString with the indefinite male article
-     */
-    void setMale( const QString &def, const QString &indef );
-
-    /**
-     * Sets the neutral articles
-     * @param def const reference to a QString with the definite neutral article
-     * @param indef const reference to a QString with the indefinite neutral article
-     */
-    void setNeutral( const QString &def, const QString &indef );
-
-    /** get the female articles
-     * @param def pointer to the definite form
-     * @param indef pointer to the indefinite form
-     */
-    void getFemale( QString *def, QString *indef ) const;
-
-    /** get the male articles
-     * @param def pointer to the definite form
-     * @param indef pointer to the indefinite form
-     */
-    void getMale( QString *def, QString *indef ) const;
-
-    /** get the neutral articles
-     * @param def pointer to the definite form
-     * @param indef pointer to the indefinite form
-     */
-    void getNeutral( QString *def, QString *indef ) const;
 
     /**
      * assignment operator for d-pointer copying
      */
     KEduVocArticle &operator= ( const KEduVocArticle& other );
 
+
+    QString article(ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
+
+    void setArticle(const QString& article, ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
+
 private:
+    int indexOf(ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
+
     class Private;
     Private * const d;
 };

@@ -207,44 +207,59 @@ bool KEduVocKvtml2Writer::writeLessons( QDomElement &lessonsElement )
 
 bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article )
 {
+    ///@todo: this is ugly as hell and writes only singular
+
+    QDomElement singular = m_domDoc.createElement( KVTML_SINGULAR );
+
     QDomElement definite = m_domDoc.createElement( KVTML_DEFINITE );
     QDomElement indefinite = m_domDoc.createElement( KVTML_INDEFINITE );
     QString def;
     QString indef;
 
     // male
-    m_doc->identifier(article).article().getMale( &def, &indef );
-    if ( !def.isEmpty() ) {
-        definite.appendChild( newTextElement( KVTML_MALE, def ) );
+    QString articleString;
+    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Masculine );
+    if ( !articleString.isEmpty() ) {
+        definite.appendChild( newTextElement( KVTML_MALE, articleString ) );
     }
-    if ( !indef.isEmpty() ) {
-        indefinite.appendChild( newTextElement( KVTML_MALE, indef ) );
+    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Masculine );
+    if ( !articleString.isEmpty() ) {
+        indefinite.appendChild( newTextElement( KVTML_MALE, articleString ) );
     }
 
     // female
-    m_doc->identifier(article).article().getFemale( &def, &indef );
-    if ( !def.isEmpty() ) {
-        definite.appendChild( newTextElement( KVTML_FEMALE, def ) );
+    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Feminine );
+    if ( !articleString.isEmpty() ) {
+        definite.appendChild( newTextElement( KVTML_FEMALE, articleString ) );
     }
-    if ( !indef.isEmpty() ) {
-        indefinite.appendChild( newTextElement( KVTML_FEMALE, indef ) );
+    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Feminine );
+    if ( !articleString.isEmpty() ) {
+        indefinite.appendChild( newTextElement( KVTML_FEMALE, articleString ) );
     }
 
     // neutral
-    m_doc->identifier(article).article().getNeutral( &def, &indef );
-    if ( !def.isEmpty() ) {
-        definite.appendChild( newTextElement( KVTML_NEUTRAL, def ) );
+    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Neuter );
+    if ( !articleString.isEmpty() ) {
+        definite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
     }
-    if ( !indef.isEmpty() ) {
-        indefinite.appendChild( newTextElement( KVTML_NEUTRAL, indef ) );
+    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Neuter );
+    if ( !articleString.isEmpty() ) {
+        indefinite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
     }
 
+
+
+
     if ( definite.hasChildNodes() ) {
-        articleElement.appendChild( definite );
+        singular.appendChild( definite );
     }
 
     if ( indefinite.hasChildNodes() ) {
-        articleElement.appendChild( indefinite );
+        singular.appendChild( indefinite );
+    }
+
+    if ( singular.hasChildNodes() ) {
+        articleElement.appendChild( singular );
     }
     return true;
 }

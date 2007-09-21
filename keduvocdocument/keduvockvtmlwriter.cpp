@@ -345,49 +345,57 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
         s = m_doc->identifier(i).name().simplified();
         domElementEntry.setAttribute( KV_LANG, s );
 
-        m_doc->identifier(i).article().getFemale( &def, &indef );
-        if ( !def.isEmpty() ) {
+        QString articleString;
+        // female
+        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Feminine );
+        if ( !articleString.isEmpty() ) {
             QDomElement domElementFD = domDoc.createElement( KV_ART_FD );
-            QDomText domTextFD = domDoc.createTextNode( def );
+            QDomText domTextFD = domDoc.createTextNode( articleString );
 
             domElementFD.appendChild( domTextFD );
             domElementEntry.appendChild( domElementFD );
         }
-        if ( !indef.isEmpty() ) {
+        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Feminine );
+        if ( !articleString.isEmpty() ) {
             QDomElement domElementFI = domDoc.createElement( KV_ART_FI );
-            QDomText domTextFI = domDoc.createTextNode( indef );
+            QDomText domTextFI = domDoc.createTextNode( articleString );
 
             domElementFI.appendChild( domTextFI );
             domElementEntry.appendChild( domElementFI );
         }
 
-        m_doc->identifier(i).article().getMale( &def, &indef );
-        if ( !def.isEmpty() ) {
+
+        // male
+        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Masculine );
+        if ( !articleString.isEmpty() ) {
             QDomElement domElementMD = domDoc.createElement( KV_ART_MD );
-            QDomText domTextMD = domDoc.createTextNode( def );
+            QDomText domTextMD = domDoc.createTextNode( articleString );
 
             domElementMD.appendChild( domTextMD );
             domElementEntry.appendChild( domElementMD );
         }
-        if ( !indef.isEmpty() ) {
+        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Masculine );
+        if ( !articleString.isEmpty() ) {
             QDomElement domElementMI = domDoc.createElement( KV_ART_MI );
-            QDomText domTextMI = domDoc.createTextNode( indef );
+            QDomText domTextMI = domDoc.createTextNode( articleString );
 
             domElementMI.appendChild( domTextMI );
             domElementEntry.appendChild( domElementMI );
         }
 
-        m_doc->identifier(i).article().getNeutral( &def, &indef );
-        if ( !def.isEmpty() ) {
+        // neuter
+        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Neuter );
+        if ( !articleString.isEmpty() ) {
             QDomElement domElementND = domDoc.createElement( KV_ART_ND );
-            QDomText domTextND = domDoc.createTextNode( def );
+            QDomText domTextND = domDoc.createTextNode( articleString );
 
             domElementND.appendChild( domTextND );
             domElementEntry.appendChild( domElementND );
         }
-        if ( !indef.isEmpty() ) {
+        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Neuter );
+        if ( !articleString.isEmpty() ) {
             QDomElement domElementNI = domDoc.createElement( KV_ART_NI );
-            QDomText domTextNI = domDoc.createTextNode( indef );
+            QDomText domTextNI = domDoc.createTextNode( articleString );
 
             domElementNI.appendChild( domTextNI );
             domElementEntry.appendChild( domElementNI );
