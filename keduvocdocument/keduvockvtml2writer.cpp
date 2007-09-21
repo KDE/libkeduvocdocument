@@ -456,14 +456,27 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
 
     // image
     if ( !translation.imageUrl().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_IMAGE, translation.imageUrl() ) );
+        QString urlString;
+        if ( translation.imageUrl().url().startsWith(m_doc->url().upUrl().url()) ) {
+            // try to save as relative url
+            urlString = KUrl::relativeUrl( m_doc->url() , translation.imageUrl() );
+        } else {
+            urlString =  translation.imageUrl().url();
+        }
+        translationElement.appendChild( newTextElement( KVTML_IMAGE, urlString ) );
     }
 
     // sound
     if ( !translation.soundUrl().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_SOUND, translation.soundUrl() ) );
+        QString urlString;
+        if ( translation.soundUrl().url().startsWith(m_doc->url().upUrl().url()) ) {
+            // try to save as relative url
+            urlString = KUrl::relativeUrl( m_doc->url() , translation.soundUrl() );
+        } else {
+            urlString =  translation.soundUrl().url();
+        }
+        translationElement.appendChild( newTextElement( KVTML_SOUND, urlString ) );
     }
-
 
     return true;
 }

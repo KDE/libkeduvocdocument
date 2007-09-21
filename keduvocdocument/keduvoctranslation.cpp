@@ -48,9 +48,9 @@ public:
     /// Pronunciation
     QString m_pronunciation;
     /// Image url
-    QString m_imageUrl;
+    KUrl m_imageUrl;
     /// Sound url
-    QString m_soundUrl;
+    KUrl m_soundUrl;
     /// Usages give a context (eg. this word is usually used in [biology])
     QSet<QString> m_usages;
     /// When creating multiple choice tests, these are possible answers. (otherwise other words are added randomly)
@@ -348,20 +348,20 @@ void KEduVocTranslation::setConjugations(const QMap< QString, KEduVocConjugation
 }
 
 /** get the sound url for this translation if it exists */
-QString KEduVocTranslation::soundUrl()
+KUrl KEduVocTranslation::soundUrl()
 {
     return d->m_soundUrl;
 }
 
 /** set the sound url for this translation
  * @param url               url of the sound file */
-void KEduVocTranslation::setSoundUrl(const QString &url)
+void KEduVocTranslation::setSoundUrl(const KUrl &url)
 {
     d->m_soundUrl = url;
 }
 
 /** get the image url for this translation if it exists */
-QString KEduVocTranslation::imageUrl()
+KUrl KEduVocTranslation::imageUrl()
 {
     return d->m_imageUrl;
 }
@@ -369,7 +369,7 @@ QString KEduVocTranslation::imageUrl()
 /** set the image url for this translation
  * @param url               url of the image
  */
-void KEduVocTranslation::setImageUrl(const QString &url)
+void KEduVocTranslation::setImageUrl(const KUrl &url)
 {
     d->m_imageUrl = url;
 }

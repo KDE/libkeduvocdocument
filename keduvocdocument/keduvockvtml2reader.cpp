@@ -421,13 +421,13 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     // image
     currentElement = translationElement.firstChildElement( KVTML_IMAGE );
     if ( !currentElement.isNull() ) {
-        expr.translation( index ).setImageUrl( currentElement.text() );
+        expr.translation( index ).setImageUrl( KUrl( m_doc->url(), currentElement.text() ) );
     }
 
     // sound
     currentElement = translationElement.firstChildElement( KVTML_SOUND );
     if ( !currentElement.isNull() ) {
-        expr.translation( index ).setSoundUrl( currentElement.text() );
+        expr.translation( index ).setSoundUrl( KUrl( m_doc->url(), currentElement.text() ) );
     }
 
     return true;

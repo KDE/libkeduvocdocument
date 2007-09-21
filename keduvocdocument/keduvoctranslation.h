@@ -18,12 +18,12 @@
 #define KEDUVOCTRANSLATION_H
 
 #include "libkeduvocdocument_export.h"
-
-#include <QtCore/QString>
-
 #include "keduvocgrammar.h"
 #include "keduvocconjugation.h"
 #include "keduvocmultiplechoice.h"
+#include <KUrl>
+#include <QtCore/QString>
+
 
 class KEduVocGrade;
 
@@ -235,19 +235,19 @@ public:
     void setMultipleChoice( const KEduVocMultipleChoice &mc );
 
     /** get the sound url for this translation if it exists */
-    QString soundUrl();
-    
+    KUrl soundUrl();
+
     /** set the sound url for this translation
      * @param url               url of the sound file */
-    void setSoundUrl(const QString &url);
-    
+    void setSoundUrl(const KUrl &url);
+
     /** get the image url for this translation if it exists */
-    QString imageUrl();
-    
-    /** set the image url for this translation 
+    KUrl imageUrl();
+
+    /** set the image url for this translation
      * @param url               url of the image
      */
-    void setImageUrl(const QString &url);
+    void setImageUrl(const KUrl &url);
 
     /**
      * Equal operator to assing a translation to another one.
@@ -255,7 +255,7 @@ public:
      * @return reference to the new translation
      */
     KEduVocTranslation& operator= ( const KEduVocTranslation &translation );
-    
+
     /**
      * Compare two translations, including word type etc.
      * @param translation
