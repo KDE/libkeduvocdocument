@@ -101,7 +101,7 @@ void KEduVocDocumentValidatorTest::testLessons()
     bool removed = doc.removeLesson(indexLesson2, KEduVocDocument::DeleteEmptyLesson); // only remove if empty
     QCOMPARE(doc.lessonCount(), 2);
     QVERIFY(removed);
-    QCOMPARE(doc.lesson(2), lesson3);
+    QCOMPARE(doc.lesson(2).name(), lesson3);
 
     doc.appendLesson(lesson2, true);
 // Not yet implemented:
