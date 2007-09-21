@@ -122,6 +122,9 @@ void KEduVocLesson::decrementEntriesAbove( int entryid )
             entries[i] = entries[i] - 1;
             ++i;
         }
+        else {
+            ++i;
+        }
     }
     
     // then put the new list into the set
