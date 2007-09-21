@@ -166,16 +166,18 @@ void SharedKvtmlFiles::sortDownloadedFiles()
         // open the file
         doc.open( fileUrl );
 
-        QString locale = doc.identifier( 0 ).name();
+        if (doc.identifierCount() == 1) {
+            QString locale = doc.identifier( 0 ).name();
 
-        // make sure the locale sub-folder exists
-        KUrl pathUrl( fileUrl );
-        pathUrl.setFileName( QString() );
-        pathUrl.addPath( locale );
-        KIO::mkdir( pathUrl );
+            // make sure the locale sub-folder exists
+            KUrl pathUrl( fileUrl );
+            pathUrl.setFileName( QString() );
+            pathUrl.addPath( locale );
+            KIO::mkdir( pathUrl );
 
-        // move the file into the locale sub-folder
-        KIO::move( fileUrl, pathUrl );
+            // move the file into the locale sub-folder
+            KIO::move( fileUrl, pathUrl );
+        }
 
         // take off the one we just did
         unsortedFiles.removeFirst();
