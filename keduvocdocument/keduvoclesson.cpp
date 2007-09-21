@@ -113,9 +113,14 @@ void KEduVocLesson::decrementEntriesAbove( int entryid )
     QList<int> entries = d->m_entries.toList();
     
     // increment all entry id's above entryid
-    for (int i = 0; i < entries.size(); ++i) {
-        if (entries[i] > entryid) {
+    int i = 0;
+    while (i < entries.size()) {
+        if (entries[i] == entryid) {
+            entries.removeAt(i);
+        }
+        else if (entries[i] > entryid) {
             entries[i] = entries[i] - 1;
+            ++i;
         }
     }
     
