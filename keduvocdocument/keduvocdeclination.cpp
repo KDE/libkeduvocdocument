@@ -44,6 +44,7 @@ KEduVocDeclination::KEduVocDeclination(const KEduVocDeclination & other)
 KEduVocDeclination & KEduVocDeclination::operator =(const KEduVocDeclination & other)
 {
     d->m_declinations = other.d->m_declinations;
+    return *this;
 }
 
 KEduVocDeclination::~KEduVocDeclination()
