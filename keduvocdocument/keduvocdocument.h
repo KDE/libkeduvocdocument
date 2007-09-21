@@ -451,7 +451,7 @@ public:
      * @param deleteMode either KEduVocDocument::DeleteEmptyLesson (delete only if empty) or KEduVocDocument::DeleteEntriesAndLesson (delete including vocabulary in that lesson)
      * @returns if the deletion was successful. If there are vocabularies in the lesson, but DeleteEmptyLesson, this will return false and not delete the lesson.
      */
-    bool deleteLesson( int lessonIndex, int deleteMode );
+    bool removeLesson( int lessonIndex, int deleteMode );
 
     /** DEPRECATED
      * All lesson descriptions as stringlist.
@@ -517,7 +517,7 @@ private:
     class KEduVocDocumentPrivate;
     KEduVocDocumentPrivate* const d;
 
-    Q_DISABLE_COPY( KEduVocDocument )
+    Q_DISABLE_COPY( KEduVocDocument );
 };
 
 

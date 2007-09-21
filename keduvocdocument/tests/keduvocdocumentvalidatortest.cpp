@@ -18,6 +18,11 @@
 */
 
 #include "../keduvocdocument.h"
+#include "../keduvoclesson.h"
+#include "../keduvocexpression.h"
+#include "../keduvoctranslation.h"
+#include "../keduvocconjugation.h"
+#include "../keduvocdeclination.h"
 
 #include <KTemporaryFile>
 
@@ -33,6 +38,7 @@ class KEduVocDocumentValidatorTest
 
 private slots:
     void testDocumentAboutInfo();
+    void testLessons();
 };
 
 void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
@@ -68,6 +74,39 @@ void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
     QCOMPARE( docRead.documentComment(), comment );
     QCOMPARE( docRead.category(), category );
     QCOMPARE( docRead.title(), title );
+}
+
+void KEduVocDocumentValidatorTest::testLessons()
+{
+    QString lesson1 = QString::fromLatin1( "Lesson 1" );
+    QString lesson2 = QString::fromLatin1( "Lesson 2" );
+    QString lesson3 = QString::fromLatin1( "Lesson 3" );
+
+    KEduVocDocument doc;
+    int indexLesson1 = doc.appendLesson(lesson1, true);
+    QCOMPARE(indexLesson1, 0);
+    QCOMPARE(doc.lessonCount(), 1);
+    QCOMPARE(doc.lesson(indexLesson1).name(), lesson1);
+    QVERIFY(doc.lesson(indexLesson1).inQuery());
+
+    int indexLesson2 = doc.appendLesson(lesson2, false);
+    QCOMPARE(indexLesson2, 1);
+    QCOMPARE(doc.lessonCount(), 2);
+    QVERIFY(!doc.lesson(indexLesson2).inQuery());
+
+    int indexLesson3 = doc.appendLesson(lesson3, false);
+    QCOMPARE(indexLesson3, 2);
+    QCOMPARE(doc.lessonCount(), 3);
+
+    bool removed = doc.removeLesson(indexLesson2, KEduVocDocument::DeleteEmptyLesson); // only remove if empty
+    QCOMPARE(doc.lessonCount(), 2);
+    QVERIFY(removed);
+    QCOMPARE(doc.lesson(2), lesson3);
+
+    doc.appendLesson(lesson2, true);
+// Not yet implemented:
+//     doc.moveLesson(2, 1);
+//     QCOMPARE(doc.lesson(2), lesson2);
 }
 
 QTEST_KDEMAIN_CORE( KEduVocDocumentValidatorTest )

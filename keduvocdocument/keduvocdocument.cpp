@@ -340,7 +340,7 @@ int KEduVocDocument::open( const KUrl& url )
     }
     if (lesson(defaultLessonNumber).entries().size() == 0)
     {
-        deleteLesson(defaultLessonNumber, DeleteEmptyLesson);
+        removeLesson(defaultLessonNumber, DeleteEmptyLesson);
     }
 
     if ( !read ) {
@@ -1023,7 +1023,7 @@ int KEduVocDocument::lessonCount() const
     return d->m_lessons.count();
 }
 
-bool KEduVocDocument::deleteLesson( int lessonIndex, int deleteMode )
+bool KEduVocDocument::removeLesson( int lessonIndex, int deleteMode )
 {
     if (deleteMode == DeleteEmptyLesson) {
         if (d->m_lessons[lessonIndex].entryCount() > 0) {
