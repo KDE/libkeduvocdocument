@@ -95,7 +95,11 @@ public:
      */
     void setDeclination(const QString& declination, DeclinationNumber number, DeclinationCase decCase);
 
+    bool isEmpty();
+
 private:
+    int indexOf(DeclinationNumber number, DeclinationCase decCase);
+
     class Private;
     Private * const d;
 };

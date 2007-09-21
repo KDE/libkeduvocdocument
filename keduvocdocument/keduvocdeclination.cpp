@@ -27,20 +27,8 @@
 class KEduVocDeclination::Private
 {
 public:
-    struct DeclinationCase {
-        QStringList test;
-    };
-
-
-    DeclinationGender m_gender;
-
-    Private();
+    QMap<int, QString> m_declinations;
 };
-
-KEduVocDeclination::Private::Private()
-{
-    m_gender = Undefined;
-}
 
 KEduVocDeclination::KEduVocDeclination()
     :d (new Private)
@@ -50,11 +38,12 @@ KEduVocDeclination::KEduVocDeclination()
 KEduVocDeclination::KEduVocDeclination(const KEduVocDeclination & other)
     :d (new Private)
 {
+    d->m_declinations = other.d->m_declinations;
 }
 
 KEduVocDeclination & KEduVocDeclination::operator =(const KEduVocDeclination & other)
 {
-    d->m_gender = other.d->m_gender;
+    d->m_declinations = other.d->m_declinations;
 }
 
 KEduVocDeclination::~KEduVocDeclination()
@@ -64,10 +53,26 @@ KEduVocDeclination::~KEduVocDeclination()
 
 QString KEduVocDeclination::declination(DeclinationNumber number, DeclinationCase decCase)
 {
+    if ( m_declinations.contains(indexOf(number, decCase)) ) {
+        return m_declinations.value(indexOf(number, decCase));
+    } else {
+        return QString();
+    }
 }
 
 void KEduVocDeclination::setDeclination(const QString & declination, DeclinationNumber number, DeclinationCase decCase)
 {
+    m_declinations[indexOf(number, decCase)] = declination;
+}
+
+int KEduVocDeclination::indexOf(DeclinationNumber number, DeclinationCase decCase)
+{
+    return number * 10 + decCase;
+}
+
+bool KEduVocDeclination::isEmpty()
+{
+    return m_declinations.isEmpty();
 }
 
 
