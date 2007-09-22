@@ -517,7 +517,7 @@ private:
     class KEduVocDocumentPrivate;
     KEduVocDocumentPrivate* const d;
 
-    Q_DISABLE_COPY( KEduVocDocument );
+    Q_DISABLE_COPY( KEduVocDocument )
 };
 
 
