@@ -753,8 +753,12 @@ void KEduVocDocument::removeIdentifier( int index )
 {
     if ( index < d->m_identifiers.size() && index >= 0 ) {
         d->m_identifiers.removeAt( index );
-        for ( int i = 0; i < d->m_vocabulary.count(); i++ )
+        for ( int i = 0; i < d->m_vocabulary.count(); i++ ) {
             d->m_vocabulary[i].removeTranslation( index );
+            for ( int j = index; j < d->m_identifiers.size(); j++ ) {
+                d->m_vocabulary[i].translation(j) = d->m_vocabulary[i].translation(j+1);
+            }
+        }
     }
 }
 
