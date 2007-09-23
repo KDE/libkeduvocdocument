@@ -442,7 +442,7 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
             gradeElement.appendChild( newTextElement( KVTML_ERRORCOUNT, QString::number( thisGrade.badCount() ) ) );
 
             //<date>949757271</date>
-            gradeElement.appendChild( newTextElement( KVTML_DATE, QString::number( thisGrade.queryDate().toTime_t() ) ) );
+            gradeElement.appendChild( newTextElement( KVTML_DATE,  thisGrade.queryDate().toString( Qt::ISODate ) ) );
 
             translationElement.appendChild( gradeElement );
         }

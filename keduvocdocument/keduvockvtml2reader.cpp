@@ -837,7 +837,7 @@ bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpressio
 
     currentElement = gradeElement.firstChildElement( KVTML_DATE );
     if ( !currentElement.isNull() ) {
-        QDateTime value = QDateTime::fromTime_t( currentElement.text().toUInt() );
+        QDateTime value = QDateTime::fromString( currentElement.text(), Qt::ISODate );
         expr.translation( index ).gradeFrom( id ).setQueryDate( value );
     }
 
