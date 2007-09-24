@@ -540,15 +540,15 @@ bool KEduVocKvtml2Writer::writeConjugation( QDomElement &conjugationElement,
 
     for ( KEduVocConjugation::ConjugationNumber num = KEduVocConjugation::Singular; num < KEduVocConjugation::NumberMAX; num = KEduVocConjugation::ConjugationNumber(num +1) ) {
         QString first = conjugation.conjugation(
-            KEduVocConjugation::First, KEduVocConjugation::Singular );
+            KEduVocConjugation::First, num );
         QString second = conjugation.conjugation(
-            KEduVocConjugation::Second, KEduVocConjugation::Singular );
+            KEduVocConjugation::Second, num );
         QString third_male = conjugation.conjugation(
-            KEduVocConjugation::ThirdMale, KEduVocConjugation::Singular );
+            KEduVocConjugation::ThirdMale, num );
         QString third_female = conjugation.conjugation(
-            KEduVocConjugation::ThirdFemale, KEduVocConjugation::Singular );
+            KEduVocConjugation::ThirdFemale, num );
         QString third_neutral = conjugation.conjugation(
-            KEduVocConjugation::ThirdNeuterCommon, KEduVocConjugation::Singular );
+            KEduVocConjugation::ThirdNeuterCommon, num );
 
         if ( !first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
                 !third_male.isEmpty() || !third_neutral.isEmpty() ) {
