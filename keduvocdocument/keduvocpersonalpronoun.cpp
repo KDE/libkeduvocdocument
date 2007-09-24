@@ -23,6 +23,7 @@ public:
 
     bool m_maleFemaleDifferent;
     bool m_neuterExists;
+    bool m_dualExists;
     QMap<int, QString> m_personalpronouns;
 };
 
@@ -31,6 +32,7 @@ KEduVocPersonalPronoun::Private::Private()
 {
     m_maleFemaleDifferent = false;
     m_neuterExists = false;
+    m_dualExists = false;
 }
 
 KEduVocPersonalPronoun::KEduVocPersonalPronoun()
@@ -44,6 +46,7 @@ KEduVocPersonalPronoun::KEduVocPersonalPronoun( const KEduVocPersonalPronoun& ot
     d->m_maleFemaleDifferent = other.d->m_maleFemaleDifferent;
     d->m_neuterExists = other.d->m_neuterExists;
     d->m_personalpronouns = other.d->m_personalpronouns;
+    d->m_dualExists = other.d->m_dualExists;
 }
 
 
@@ -58,14 +61,17 @@ KEduVocPersonalPronoun& KEduVocPersonalPronoun::operator = ( const KEduVocPerson
     d->m_maleFemaleDifferent = other.d->m_maleFemaleDifferent;
     d->m_neuterExists = other.d->m_neuterExists;
     d->m_personalpronouns = other.d->m_personalpronouns;
+    d->m_dualExists = other.d->m_dualExists;
     return *this;
 }
+
 
 bool KEduVocPersonalPronoun::operator ==(const KEduVocPersonalPronoun& other) const
 {
     return d->m_personalpronouns == other.d->m_personalpronouns &&
         d->m_maleFemaleDifferent == other.d->m_maleFemaleDifferent &&
         d->m_neuterExists == other.d->m_neuterExists;
+        d->m_dualExists == other.d->m_dualExists;
 }
 
 
@@ -108,3 +114,14 @@ void KEduVocPersonalPronoun::setNeuterExists(bool exists)
 {
     d->m_neuterExists = exists;
 }
+
+bool KEduVocPersonalPronoun::dualExists() const
+{
+    return d->m_dualExists;
+}
+
+void KEduVocPersonalPronoun::setDualExists(bool exists)
+{
+    d->m_dualExists = exists;
+}
+

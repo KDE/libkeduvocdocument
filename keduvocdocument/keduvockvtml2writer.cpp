@@ -595,6 +595,9 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
     if ( pronoun.neuterExists() ) {
         pronounElement.appendChild( m_domDoc.createElement( KVTML_THIRD_PERSON_NEUTER_EXISTS ) );
     }
+    if ( pronoun.dualExists() ) {
+        pronounElement.appendChild( m_domDoc.createElement( KVTML_DUAL_EXISTS ) );
+    }
 
     for ( KEduVocConjugation::ConjugationNumber num = KEduVocConjugation::Singular; num < KEduVocConjugation::NumberMAX; num = KEduVocConjugation::ConjugationNumber(num +1) ) {
         QString first = pronoun.personalPronoun(

@@ -65,6 +65,7 @@
 #define KVTML_THIRD_PERSON_MALE_FEMALE_DIFFERENT "malefemaledifferent"
 // if this tag exists conjugations even have a neuter form for the third person
 #define KVTML_THIRD_PERSON_NEUTER_EXISTS "neuterexists"
+#define KVTML_DUAL_EXISTS        "dualexists"
 
 // word types
 #define KVTML_WORDTYPEDEFINITIONS   "wordtypedefinitions"

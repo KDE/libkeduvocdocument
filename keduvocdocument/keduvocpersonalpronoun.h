@@ -46,6 +46,9 @@ public:
 
     bool neuterExists() const;
     void setNeuterExists(bool exists);
+
+    bool dualExists() const;
+    void setDualExists(bool exists);
 private:
     class Private;
     Private* const d;

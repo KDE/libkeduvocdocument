@@ -804,6 +804,13 @@ bool KEduVocKvtml2Reader::readConjugationPerson(QDomElement & personElement, KEd
 
 bool KEduVocKvtml2Reader::readPersonalPronoun(QDomElement & pronounElement, KEduVocPersonalPronoun & pronoun)
 {
+    pronoun.setMaleFemaleDifferent(!pronounElement.firstChildElement(
+        KVTML_THIRD_PERSON_MALE_FEMALE_DIFFERENT).isNull());
+    pronoun.setNeuterExists( !pronounElement.firstChildElement(
+        KVTML_THIRD_PERSON_NEUTER_EXISTS).isNull() );
+    pronoun.setDualExists( !pronounElement.firstChildElement(
+        KVTML_DUAL_EXISTS).isNull() );
+
     QDomElement personElement = pronounElement.firstChildElement( KVTML_SINGULAR );
     if ( !personElement.isNull() ) {
         readPersonalPronounChild( personElement, pronoun, KEduVocConjugation::Singular );
@@ -842,18 +849,6 @@ bool KEduVocKvtml2Reader::readPersonalPronounChild(QDomElement & personElement, 
     currentElement = personElement.firstChildElement( KVTML_THIRD_NEUTER_COMMON );
     pronoun.setPersonalPronoun( currentElement.text(),
         KEduVocConjugation::ThirdNeuterCommon, number );
-
-    if ( !personElement.firstChildElement(KVTML_THIRD_PERSON_MALE_FEMALE_DIFFERENT).isNull() ){
-        pronoun.setMaleFemaleDifferent(true);
-        if ( !personElement.firstChildElement(KVTML_THIRD_PERSON_NEUTER_EXISTS).isNull() ){
-            pronoun.setNeuterExists(true);
-        } else {
-            pronoun.setNeuterExists(false);
-        }
-    } else {
-        pronoun.setMaleFemaleDifferent(false);
-        pronoun.setNeuterExists(false);
-    }
 }
 
 
