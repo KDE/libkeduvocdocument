@@ -598,15 +598,15 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
 
     for ( KEduVocConjugation::ConjugationNumber num = KEduVocConjugation::Singular; num < KEduVocConjugation::NumberMAX; num = KEduVocConjugation::ConjugationNumber(num +1) ) {
         QString first = pronoun.personalPronoun(
-            KEduVocConjugation::First, KEduVocConjugation::Singular );
+            KEduVocConjugation::First, num );
         QString second = pronoun.personalPronoun(
-            KEduVocConjugation::Second, KEduVocConjugation::Singular );
+            KEduVocConjugation::Second, num );
         QString third_male = pronoun.personalPronoun(
-            KEduVocConjugation::ThirdMale, KEduVocConjugation::Singular );
+            KEduVocConjugation::ThirdMale, num );
         QString third_female = pronoun.personalPronoun(
-            KEduVocConjugation::ThirdFemale, KEduVocConjugation::Singular );
+            KEduVocConjugation::ThirdFemale, num );
         QString third_neutral = pronoun.personalPronoun(
-            KEduVocConjugation::ThirdNeuterCommon, KEduVocConjugation::Singular );
+            KEduVocConjugation::ThirdNeuterCommon, num );
 
         if ( !first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
                 !third_male.isEmpty() || !third_neutral.isEmpty() ) {
