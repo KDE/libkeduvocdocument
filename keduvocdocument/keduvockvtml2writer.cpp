@@ -629,6 +629,12 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
             number.appendChild( newTextElement( KVTML_THIRD_FEMALE, third_female ) );
             number.appendChild( newTextElement( KVTML_THIRD_NEUTER_COMMON, third_neutral ) );
 
+            if ( pronoun.maleFemaleDifferent() ) {
+                number.appendChild( m_domDoc.createElement( KVTML_THIRD_PERSON_MALE_FEMALE_DIFFERENT ) );
+            }
+            if ( pronoun.neuterExists() ) {
+                number.appendChild( m_domDoc.createElement( KVTML_THIRD_PERSON_NEUTER_EXISTS ) );
+            }
             pronounElement.appendChild( number );
         }
     }
