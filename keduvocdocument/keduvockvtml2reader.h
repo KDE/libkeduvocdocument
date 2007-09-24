@@ -20,6 +20,7 @@
 #include <QList>
 
 #include "keduvocexpression.h"
+#include "keduvocpersonalpronoun.h"
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
 
@@ -44,6 +45,15 @@ public:
      */
     bool readDoc( KEduVocDocument *doc );
 
+    /** get the errormessage string
+     * @returns the errormessage string
+     */
+    QString errorMessage() const
+    {
+        return m_errorMessage;
+    }
+
+private:
     /** read information entries
      * @param informationElement QDomElement information
      */
@@ -63,11 +73,17 @@ public:
      */
     bool readArticle( QDomElement &articleElement, int identifierNum );
 
+    bool readPersonalPronoun( QDomElement &conjugElement, KEduVocPersonalPronoun &pronoun );
+
+    bool readPersonalPronounChild(QDomElement & personElement, KEduVocPersonalPronoun & pronoun, KEduVocConjugation::ConjugationNumber number);
+
+
     /** read in a conjugation
      * @param conjugElement QDomElement for the conjugation group
      * @param curr_conjug conjugation object to populate
      */
     bool readConjugation( QDomElement &conjugElement, KEduVocConjugation &conjugation );
+    bool readConjugationPerson( QDomElement &personElement, KEduVocConjugation &conjugation, KEduVocConjugation::ConjugationNumber number );
 
     /** read the types
      * @param typesElement QDomElement for the types group
@@ -117,16 +133,6 @@ public:
      * @param lessonElement element to read from
      */
     bool readLesson( QDomElement &lessonElement );
-
-    /** get the errormessage string
-     * @returns the errormessage string
-     */
-    QString errorMessage() const
-    {
-        return m_errorMessage;
-    }
-
-private:
 
     /** pre-opened QIODevice to read from */
     QIODevice *m_inputFile;

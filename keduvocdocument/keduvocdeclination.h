@@ -23,6 +23,8 @@
 #ifndef KEDUVOCDECLINATION_H
 #define KEDUVOCDECLINATION_H
 
+#include <QtCore/QString>
+
 /**
 A declination contains all forms that a NOUN possibly can have.
 
@@ -50,7 +52,8 @@ public:
         Accusative,
         Ablative,
         Locative,
-        Vocative
+        Vocative,
+        DeclinationCaseMAX
     };
 
 

@@ -144,8 +144,8 @@ bool KEduVocKvtmlReader::readBody( QDomElement &domElementParent )
                 return false;
             }
 
-            KEduVocConjugation pronouns;
-            if (! readConjugation( domElementConjugChild, pronouns ) ) {
+            KEduVocPersonalPronoun pronouns;
+            if (! readPersonalPronouns( domElementConjugChild, pronouns ) ) {
                 return false;
             }
             m_doc->identifier(count).setPersonalPronouns( pronouns );
@@ -471,22 +471,151 @@ bool KEduVocKvtmlReader::readConjugation( QDomElement &domElementParent, KEduVoc
     // <p1>traemos</p1><p2>traÃÂ©is</p2><p3f common="1">traen</p3f>
     // until no elements are left in that soup.
 
+    // now set the data: [count] - number of conjug?
+    // type - the tense?
+    // finally the person
+
+    const KEduVocConjugation::ConjugationNumber numS = KEduVocConjugation::Singular;
+    const KEduVocConjugation::ConjugationNumber numP = KEduVocConjugation::Plural;
+
+    conjugation.setConjugation( pers1_sing, KEduVocConjugation::First, numS);
+    conjugation.setConjugation( pers2_sing, KEduVocConjugation::Second, numS);
+    conjugation.setConjugation( pers1_plur, KEduVocConjugation::First, numP);
+    conjugation.setConjugation( pers2_plur, KEduVocConjugation::Second, numP);
+
+    if ( s3_common ) {
+        conjugation.setConjugation( pers3_f_sing, KEduVocConjugation::ThirdNeuterCommon, KEduVocConjugation::Singular );
+    } else  {
+        conjugation.setConjugation( pers3_m_sing,
+            KEduVocConjugation::ThirdMale, KEduVocConjugation::Singular );
+        conjugation.setConjugation( pers3_f_sing,
+            KEduVocConjugation::ThirdFemale, KEduVocConjugation::Singular );
+        conjugation.setConjugation( pers3_n_sing,
+            KEduVocConjugation::ThirdNeuterCommon, KEduVocConjugation::Singular );
+    }
+
+    if ( p3_common ) {
+        conjugation.setConjugation( pers3_f_plur, KEduVocConjugation::ThirdNeuterCommon, KEduVocConjugation::Plural );
+    } else  {
+        conjugation.setConjugation( pers3_m_plur,
+            KEduVocConjugation::ThirdMale, KEduVocConjugation::Plural );
+        conjugation.setConjugation( pers3_f_plur,
+            KEduVocConjugation::ThirdFemale, KEduVocConjugation::Plural );
+        conjugation.setConjugation( pers3_n_plur,
+            KEduVocConjugation::ThirdNeuterCommon, KEduVocConjugation::Plural );
+    }
+
+    return true;
+}
+
+
+
+
+bool KEduVocKvtmlReader::readPersonalPronouns( QDomElement &domElementParent, KEduVocPersonalPronoun& pronouns )
+{
+//     QString s;
+    bool p3_common;
+    bool s3_common;
+    QString pers1_sing;
+    QString pers2_sing;
+    QString pers3_m_sing;
+    QString pers3_f_sing;
+    QString pers3_n_sing;
+    QString pers1_plur;
+    QString pers2_plur;
+    QString pers3_m_plur;
+    QString pers3_f_plur;
+    QString pers3_n_plur;
+
+    p3_common = false;
+    s3_common = false;
+
+    // get the individual entries for persons...
+    QDomElement domElementConjugGrandChild = domElementParent.firstChild().toElement();
+    while ( !domElementConjugGrandChild.isNull() ) {
+        if ( domElementConjugGrandChild.tagName() == KV_CON_P1S ) {
+            pers1_sing = domElementConjugGrandChild.text();
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P2S ) {
+            pers2_sing = domElementConjugGrandChild.text();
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SF ) {
+            QDomAttr domAttrCommon = domElementConjugGrandChild.attributeNode( KV_CONJ_COMMON );
+            if ( !domAttrCommon.isNull() )
+                s3_common = domAttrCommon.value().toInt();  // returns 0 if the conversion fails
+            pers3_f_sing = domElementConjugGrandChild.text();
+
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SM ) {
+            pers3_m_sing = domElementConjugGrandChild.text();
+
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3SN ) {
+            pers3_n_sing = domElementConjugGrandChild.text();
+
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P1P ) {
+            pers1_plur = domElementConjugGrandChild.text();
+
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P2P ) {
+            pers2_plur = domElementConjugGrandChild.text();
+
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PF ) {
+            QDomAttr domAttrCommon = domElementConjugGrandChild.attributeNode( KV_CONJ_COMMON );
+            if ( !domAttrCommon.isNull() )
+                p3_common = domAttrCommon.value().toInt();  // returns 0 if the conversion fails
+
+            pers3_f_plur = domElementConjugGrandChild.text();
+
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PM ) {
+            pers3_m_plur = domElementConjugGrandChild.text();
+
+        } else if ( domElementConjugGrandChild.tagName() == KV_CON_P3PN ) {
+            pers3_n_plur = domElementConjugGrandChild.text();
+
+        } else {
+            return false;
+        }
+
+        domElementConjugGrandChild = domElementConjugGrandChild.nextSibling().toElement();
+    } // while - probably to be sure, because the persons could be in any order.
+    // I guess this goes over only one set, such as:
+    // <s1>traigo</s1><s2>traes</s2><s3fcommon="1">trae</s3f>
+    // <p1>traemos</p1><p2>traÃÂ©is</p2><p3f common="1">traen</p3f>
+    // until no elements are left in that soup.
 
     // now set the data: [count] - number of conjug?
     // type - the tense?
     // finally the person
-    conjugation.setPers3SingularCommon( s3_common );
-    conjugation.setPers3PluralCommon( p3_common );
-    conjugation.setPers1Singular( pers1_sing );
-    conjugation.setPers2Singular( pers2_sing );
-    conjugation.setPers3FemaleSingular( pers3_f_sing );
-    conjugation.setPers3MaleSingular( pers3_m_sing );
-    conjugation.setPers3NaturalSingular( pers3_n_sing );
-    conjugation.setPers1Plural( pers1_plur );
-    conjugation.setPers2Plural( pers2_plur );
-    conjugation.setPers3FemalePlural( pers3_f_plur );
-    conjugation.setPers3MalePlural( pers3_m_plur );
-    conjugation.setPers3NaturalPlural( pers3_n_plur );
+
+    const KEduVocConjugation::ConjugationNumber numS = KEduVocConjugation::Singular;
+    pronouns.setMaleFemaleDifferent(false);
+    pronouns.setPersonalPronoun( pers1_sing, KEduVocConjugation::First, numS );
+    pronouns.setPersonalPronoun( pers2_sing, KEduVocConjugation::Second, numS );
+
+    // used to have common in female
+    if ( s3_common ) {
+        pronouns.setPersonalPronoun( pers3_f_sing, KEduVocConjugation::ThirdNeuterCommon, numS );
+    } else  {
+        pronouns.setPersonalPronoun( pers3_m_sing,
+            KEduVocConjugation::ThirdMale, numS );
+        pronouns.setPersonalPronoun( pers3_f_sing,
+            KEduVocConjugation::ThirdFemale, numS );
+        pronouns.setPersonalPronoun( pers3_n_sing,
+            KEduVocConjugation::ThirdNeuterCommon, numS );
+        pronouns.setMaleFemaleDifferent(true);
+    }
+
+    const KEduVocConjugation::ConjugationNumber numP = KEduVocConjugation::Plural;
+
+    pronouns.setPersonalPronoun( pers1_sing, KEduVocConjugation::First, numP );
+    pronouns.setPersonalPronoun( pers2_sing, KEduVocConjugation::Second, numP );
+    if ( p3_common ) {
+        pronouns.setPersonalPronoun( pers3_f_plur, KEduVocConjugation::ThirdNeuterCommon, numP );
+    } else  {
+        pronouns.setPersonalPronoun( pers3_m_plur,
+            KEduVocConjugation::ThirdMale, numP );
+        pronouns.setPersonalPronoun( pers3_f_plur,
+            KEduVocConjugation::ThirdFemale, numP );
+        pronouns.setPersonalPronoun( pers3_n_plur,
+            KEduVocConjugation::ThirdNeuterCommon, numP );
+        pronouns.setMaleFemaleDifferent(true);
+    }
 
     return true;
 }

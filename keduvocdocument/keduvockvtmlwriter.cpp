@@ -44,10 +44,10 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
 
     m_doc = doc;
 
-    QDomDocument domDoc( "kvtml SYSTEM \"kvoctrain.dtd\"" );
-    domDoc.appendChild( domDoc.createProcessingInstruction( "xml", "version=\"1.0\" encoding=\"UTF-8\"" ) );
-    QDomElement domElementKvtml = domDoc.createElement( "kvtml" );
-    domDoc.appendChild( domElementKvtml );
+    m_domDoc = QDomDocument( "kvtml SYSTEM \"kvoctrain.dtd\"" );
+    m_domDoc.appendChild( m_domDoc.createProcessingInstruction( "xml", "version=\"1.0\" encoding=\"UTF-8\"" ) );
+    QDomElement domElementKvtml = m_domDoc.createElement( "kvtml" );
+    m_domDoc.appendChild( domElementKvtml );
 
     domElementKvtml.setAttribute( KV_ENCODING, ( QString ) "UTF-8" );
     domElementKvtml.setAttribute( KV_GENERATOR, generator );
@@ -66,27 +66,27 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
     if ( !m_doc->documentComment().isEmpty() )
         domElementKvtml.setAttribute( KV_DOC_REM, m_doc->documentComment() );
 
-    if ( !writeLesson( domDoc, domElementKvtml ) )
+    if ( !writeLesson( domElementKvtml ) )
         return false;
 
-    if ( !writeArticle( domDoc, domElementKvtml ) )
+    if ( !writeArticle( domElementKvtml ) )
         return false;
 
-    QList<KEduVocConjugation> conjugations;
+    QList<KEduVocPersonalPronoun> pronouns;
     for ( int i = 0; i < m_doc->identifierCount(); i++ )
-        conjugations.append( m_doc->identifier(i).personalPronouns() );
-    if ( conjugations.count() > 0 ) {
-        if ( !writeConjugHeader( domDoc, domElementKvtml, conjugations ) )
+        pronouns.append( m_doc->identifier(i).personalPronouns() );
+    if ( pronouns.count() > 0 ) {
+        if ( !writePersonalPronouns(domElementKvtml, pronouns ) )
             return false;
     }
 
-    if ( !writeType( domDoc, domElementKvtml ) )
+    if ( !writeType( domElementKvtml ) )
         return false;
 
-    if ( !writeTense( domDoc, domElementKvtml ) )
+    if ( !writeTense( domElementKvtml ) )
         return false;
 
-    if ( !writeUsage( domDoc, domElementKvtml ) )
+    if ( !writeUsage( domElementKvtml ) )
         return false;
 
     QString q_org, q_trans;
@@ -96,7 +96,7 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
 
     for ( int i = 0; i < entryCount; i++ ) {
         KEduVocExpression *entry = m_doc->entry( i );
-        QDomElement domElementExpression = domDoc.createElement( KV_EXPR );
+        QDomElement domElementExpression = m_domDoc.createElement( KV_EXPR );
 
         if ( entry->lesson() != 0 ) {
             int lm = entry->lesson();
@@ -115,7 +115,7 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
         if ( !entry->isActive() )
             domElementExpression.setAttribute( KV_INACTIVE, 1 );
 
-        QDomElement domElementOriginal = domDoc.createElement( KV_ORG );
+        QDomElement domElementOriginal = m_domDoc.createElement( KV_ORG );
         if ( first_expr ) {
             // save space, only tell language in first entry
             QString s;
@@ -156,7 +156,7 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
         if ( !entry->translation( 0 ).type().isEmpty() )
             domElementOriginal.setAttribute( KV_EXPRTYPE, m_compability.oldType( entry->translation( 0 ).type(), entry->translation( 0 ).subType() ) );
 
-        if ( !writeMultipleChoice( domDoc, domElementOriginal, entry->translation( 0 ).multipleChoice() ) )
+        if ( !writeMultipleChoice(domElementOriginal, entry->translation( 0 ).multipleChoice() ) )
             return false;
 
         QString s;
@@ -169,24 +169,24 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
 
         if ( entype == QM_VERB ) {
                 // conjugation
-            if ( !writeConjugEntry( domDoc, domElementOriginal, entry->translation( 0 )) ) {
+            if ( !writeConjugEntry(domElementOriginal, entry->translation( 0 )) ) {
                     return false;
             }
 
 
         } else if ( entype == QM_ADJ && !entry->translation( 0 ).comparison().isEmpty() ) {
             KEduVocComparison comp = entry->translation( 0 ).comparison();
-            if ( !writeComparison( domDoc, domElementOriginal, comp ) )
+            if ( !writeComparison(domElementOriginal, comp ) )
                 return false;
         }
 
-        QDomText domTextOriginal = domDoc.createTextNode( entry->translation( 0 ).text() );
+        QDomText domTextOriginal = m_domDoc.createTextNode( entry->translation( 0 ).text() );
         domElementOriginal.appendChild( domTextOriginal );
         domElementExpression.appendChild( domElementOriginal );
 
         int trans = 1;
         while ( trans < m_doc->identifierCount() ) {
-            QDomElement domElementTranslation = domDoc.createElement( KV_TRANS );
+            QDomElement domElementTranslation = m_domDoc.createElement( KV_TRANS );
             if ( first_expr ) {
                 // save space, only tell language in first entry
                 QString s;
@@ -248,7 +248,7 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
             if ( !entry->translation( trans ).type().isEmpty() )
                 domElementTranslation.setAttribute( KV_EXPRTYPE, m_compability.oldType( entry->translation( trans ).type(), entry->translation( trans ).subType() ) );
 
-            if ( !writeMultipleChoice( domDoc, domElementTranslation, entry->translation( trans ).multipleChoice() ) )
+            if ( !writeMultipleChoice(domElementTranslation, entry->translation( trans ).multipleChoice() ) )
                 return false;
 
             QString s;
@@ -260,18 +260,18 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
                 entype = s;
 
             if ( entype == QM_VERB ) {
-                if ( !writeConjugEntry( domDoc, domElementTranslation, entry->translation( trans ) ) ) {
+                if ( !writeConjugEntry(domElementTranslation, entry->translation( trans ) ) ) {
                     return false;
                 }
             }
 
             if ( entype == QM_ADJ && !entry->translation( trans ).comparison().isEmpty() ) {
                 KEduVocComparison comp = entry->translation( trans ).comparison();
-                if ( !writeComparison( domDoc, domElementTranslation, comp ) )
+                if ( !writeComparison(domElementTranslation, comp ) )
                     return false;
             }
 
-            QDomText domTextTranslation = domDoc.createTextNode( entry->translation( trans ).text() );
+            QDomText domTextTranslation = m_domDoc.createTextNode( entry->translation( trans ).text() );
             domElementTranslation.appendChild( domTextTranslation );
             domElementExpression.appendChild( domElementTranslation );
 
@@ -283,26 +283,26 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
         first_expr = false;
     }
 
-    domDoc.appendChild( domElementKvtml );
+    m_domDoc.appendChild( domElementKvtml );
 
     QTextStream ts( m_outputFile );
-    domDoc.save( ts, 2 );
+    m_domDoc.save( ts, 2 );
 
     return true;
 }
 
 
-bool KEduVocKvtmlWriter::writeLesson( QDomDocument &domDoc, QDomElement &domElementParent )
+bool KEduVocKvtmlWriter::writeLesson( QDomElement &domElementParent )
 {
     if ( m_doc->lessonCount() == 0 )
         return true;
 
-    QDomElement domElementLesson = domDoc.createElement( KV_LESS_GRP );
+    QDomElement domElementLesson = m_domDoc.createElement( KV_LESS_GRP );
     domElementLesson.setAttribute( KV_SIZEHINT, m_doc->sizeHint( -1 ) );
 
     for ( int i = 0; i < m_doc->lessonCount(); ++i ) {
-        QDomElement domElementDesc = domDoc.createElement( KV_LESS_DESC );
-        QDomText domTextDesc = domDoc.createTextNode( m_doc->lesson(i).name() );
+        QDomElement domElementDesc = m_domDoc.createElement( KV_LESS_DESC );
+        QDomText domTextDesc = m_domDoc.createTextNode( m_doc->lesson(i).name() );
 
         domElementDesc.setAttribute( KV_LESS_NO, i );
         if ( m_doc->currentLesson() == i ) {
@@ -320,7 +320,7 @@ bool KEduVocKvtmlWriter::writeLesson( QDomDocument &domDoc, QDomElement &domElem
 }
 
 
-bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domElementParent )
+bool KEduVocKvtmlWriter::writeArticle( QDomElement &domElementParent )
 /*
  <article>
   <e l="de">    lang determines also lang order in entries !!
@@ -334,14 +334,14 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
  </article>
 */
 {
-    QDomElement domElementArticle = domDoc.createElement( KV_ARTICLE_GRP );
+    QDomElement domElementArticle = m_domDoc.createElement( KV_ARTICLE_GRP );
     QString def;
     QString indef;
     QString s;
 
     for ( int i = 0; i < m_doc->identifierCount(); i++ )
     {
-        QDomElement domElementEntry = domDoc.createElement( KV_ART_ENTRY );
+        QDomElement domElementEntry = m_domDoc.createElement( KV_ART_ENTRY );
         s = m_doc->identifier(i).name().simplified();
         domElementEntry.setAttribute( KV_LANG, s );
 
@@ -349,16 +349,16 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
         // female
         articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Feminine );
         if ( !articleString.isEmpty() ) {
-            QDomElement domElementFD = domDoc.createElement( KV_ART_FD );
-            QDomText domTextFD = domDoc.createTextNode( articleString );
+            QDomElement domElementFD = m_domDoc.createElement( KV_ART_FD );
+            QDomText domTextFD = m_domDoc.createTextNode( articleString );
 
             domElementFD.appendChild( domTextFD );
             domElementEntry.appendChild( domElementFD );
         }
         articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Feminine );
         if ( !articleString.isEmpty() ) {
-            QDomElement domElementFI = domDoc.createElement( KV_ART_FI );
-            QDomText domTextFI = domDoc.createTextNode( articleString );
+            QDomElement domElementFI = m_domDoc.createElement( KV_ART_FI );
+            QDomText domTextFI = m_domDoc.createTextNode( articleString );
 
             domElementFI.appendChild( domTextFI );
             domElementEntry.appendChild( domElementFI );
@@ -368,16 +368,16 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
         // male
         articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Masculine );
         if ( !articleString.isEmpty() ) {
-            QDomElement domElementMD = domDoc.createElement( KV_ART_MD );
-            QDomText domTextMD = domDoc.createTextNode( articleString );
+            QDomElement domElementMD = m_domDoc.createElement( KV_ART_MD );
+            QDomText domTextMD = m_domDoc.createTextNode( articleString );
 
             domElementMD.appendChild( domTextMD );
             domElementEntry.appendChild( domElementMD );
         }
         articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Masculine );
         if ( !articleString.isEmpty() ) {
-            QDomElement domElementMI = domDoc.createElement( KV_ART_MI );
-            QDomText domTextMI = domDoc.createTextNode( articleString );
+            QDomElement domElementMI = m_domDoc.createElement( KV_ART_MI );
+            QDomText domTextMI = m_domDoc.createTextNode( articleString );
 
             domElementMI.appendChild( domTextMI );
             domElementEntry.appendChild( domElementMI );
@@ -386,16 +386,16 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
         // neuter
         articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Neuter );
         if ( !articleString.isEmpty() ) {
-            QDomElement domElementND = domDoc.createElement( KV_ART_ND );
-            QDomText domTextND = domDoc.createTextNode( articleString );
+            QDomElement domElementND = m_domDoc.createElement( KV_ART_ND );
+            QDomText domTextND = m_domDoc.createTextNode( articleString );
 
             domElementND.appendChild( domTextND );
             domElementEntry.appendChild( domElementND );
         }
         articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Neuter );
         if ( !articleString.isEmpty() ) {
-            QDomElement domElementNI = domDoc.createElement( KV_ART_NI );
-            QDomText domTextNI = domDoc.createTextNode( articleString );
+            QDomElement domElementNI = m_domDoc.createElement( KV_ART_NI );
+            QDomText domTextNI = m_domDoc.createTextNode( articleString );
 
             domElementNI.appendChild( domTextNI );
             domElementEntry.appendChild( domElementNI );
@@ -409,21 +409,21 @@ bool KEduVocKvtmlWriter::writeArticle( QDomDocument &domDoc, QDomElement &domEle
 }
 
 
-bool KEduVocKvtmlWriter::writeType( QDomDocument &domDoc, QDomElement &domElementParent )
+bool KEduVocKvtmlWriter::writeType( QDomElement &domElementParent )
 {
     /** @todo port to new type handling
       if (m_doc->typeDescriptions().count() == 0)
         return true;
 
-      QDomElement domElementType = domDoc.createElement(KV_TYPE_GRP);
+      QDomElement domElementType = m_domDoc.createElement(KV_TYPE_GRP);
       int count = 1;
 
       foreach(QString type, m_doc->typeDescriptions())
       {
         if (!(type.isNull()) )
         {
-          QDomElement domElementDesc = domDoc.createElement(KV_TYPE_DESC);
-          QDomText domTextDesc = domDoc.createTextNode(type);
+          QDomElement domElementDesc = m_domDoc.createElement(KV_TYPE_DESC);
+          QDomText domTextDesc = m_domDoc.createTextNode(type);
 
           domElementDesc.setAttribute(KV_TYPE_NO, count);
           domElementDesc.appendChild(domTextDesc);
@@ -438,18 +438,18 @@ bool KEduVocKvtmlWriter::writeType( QDomDocument &domDoc, QDomElement &domElemen
 }
 
 
-bool KEduVocKvtmlWriter::writeTense( QDomDocument &domDoc, QDomElement &domElementParent )
+bool KEduVocKvtmlWriter::writeTense( QDomElement &domElementParent )
 {
     if ( m_doc->tenseDescriptions().count() == 0 )
         return true;
 
-    QDomElement domElementTense = domDoc.createElement( KV_TENSE_GRP );
+    QDomElement domElementTense = m_domDoc.createElement( KV_TENSE_GRP );
     int count = 1;
 
     foreach( QString tense, m_doc->tenseDescriptions() ) {
         if ( !( tense.isNull() ) ) {
-            QDomElement domElementDesc = domDoc.createElement( KV_TENSE_DESC );
-            QDomText domTextDesc = domDoc.createTextNode( tense );
+            QDomElement domElementDesc = m_domDoc.createElement( KV_TENSE_DESC );
+            QDomText domTextDesc = m_domDoc.createTextNode( tense );
 
             domElementDesc.setAttribute( KV_TENSE_NO, count );
             domElementDesc.appendChild( domTextDesc );
@@ -463,7 +463,7 @@ bool KEduVocKvtmlWriter::writeTense( QDomDocument &domDoc, QDomElement &domEleme
 }
 
 
-bool KEduVocKvtmlWriter::writeUsage( QDomDocument &domDoc, QDomElement &domElementParent )
+bool KEduVocKvtmlWriter::writeUsage( QDomElement &domElementParent )
 {
 
 ///@todo usages
@@ -471,15 +471,15 @@ bool KEduVocKvtmlWriter::writeUsage( QDomDocument &domDoc, QDomElement &domEleme
       if (m_doc->usageDescriptions().count() == 0)
         return true;
 
-      QDomElement domElementUsage = domDoc.createElement(KV_USAGE_GRP);
+      QDomElement domElementUsage = m_domDoc.createElement(KV_USAGE_GRP);
       int count = 1;
 
       foreach(QString usage, m_doc->usageDescriptions())
       {
         if (!(usage.isNull()))
         {
-          QDomElement domElementDesc = domDoc.createElement(KV_USAGE_DESC);
-          QDomText domTextDesc = domDoc.createTextNode(usage);
+          QDomElement domElementDesc = m_domDoc.createElement(KV_USAGE_DESC);
+          QDomText domTextDesc = m_domDoc.createTextNode(usage);
 
           domElementDesc.setAttribute(KV_USAGE_NO, count);
           domElementDesc.appendChild(domTextDesc);
@@ -494,7 +494,7 @@ bool KEduVocKvtmlWriter::writeUsage( QDomDocument &domDoc, QDomElement &domEleme
 }
 
 
-bool KEduVocKvtmlWriter::writeComparison( QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp )
+bool KEduVocKvtmlWriter::writeComparison( QDomElement &domElementParent, const KEduVocComparison &comp )
 /*
  <comparison>
    <l1>good</l1>
@@ -506,27 +506,27 @@ bool KEduVocKvtmlWriter::writeComparison( QDomDocument &domDoc, QDomElement &dom
     if ( comp.isEmpty() )
         return true;
 
-    QDomElement domElementComparison = domDoc.createElement( KV_COMPARISON_GRP );
+    QDomElement domElementComparison = m_domDoc.createElement( KV_COMPARISON_GRP );
 
     if ( !comp.l1().isEmpty() ) {
-        QDomElement domElementL1 = domDoc.createElement( KV_COMP_L1 );
-        QDomText domTextL1 = domDoc.createTextNode( comp.l1() );
+        QDomElement domElementL1 = m_domDoc.createElement( KV_COMP_L1 );
+        QDomText domTextL1 = m_domDoc.createTextNode( comp.l1() );
 
         domElementL1.appendChild( domTextL1 );
         domElementComparison.appendChild( domElementL1 );
     }
 
     if ( !comp.l2().isEmpty() ) {
-        QDomElement domElementL2 = domDoc.createElement( KV_COMP_L2 );
-        QDomText domTextL2 = domDoc.createTextNode( comp.l2() );
+        QDomElement domElementL2 = m_domDoc.createElement( KV_COMP_L2 );
+        QDomText domTextL2 = m_domDoc.createTextNode( comp.l2() );
 
         domElementL2.appendChild( domTextL2 );
         domElementComparison.appendChild( domElementL2 );
     }
 
     if ( !comp.l3().isEmpty() ) {
-        QDomElement domElementL3 = domDoc.createElement( KV_COMP_L3 );
-        QDomText domTextL3 = domDoc.createTextNode( comp.l3() );
+        QDomElement domElementL3 = m_domDoc.createElement( KV_COMP_L3 );
+        QDomText domTextL3 = m_domDoc.createTextNode( comp.l3() );
 
         domElementL3.appendChild( domTextL3 );
         domElementComparison.appendChild( domElementL3 );
@@ -537,7 +537,7 @@ bool KEduVocKvtmlWriter::writeComparison( QDomDocument &domDoc, QDomElement &dom
 }
 
 
-bool KEduVocKvtmlWriter::writeMultipleChoice( QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocMultipleChoice &mc )
+bool KEduVocKvtmlWriter::writeMultipleChoice( QDomElement &domElementParent, const KEduVocMultipleChoice &mc )
 /*
  <multiplechoice>
    <mc1>good</mc1>
@@ -551,43 +551,43 @@ bool KEduVocKvtmlWriter::writeMultipleChoice( QDomDocument &domDoc, QDomElement 
     if ( mc.isEmpty() )
         return true;
 
-    QDomElement domElementMC = domDoc.createElement( KV_MULTIPLECHOICE_GRP );
+    QDomElement domElementMC = m_domDoc.createElement( KV_MULTIPLECHOICE_GRP );
 
     if ( !mc.choice( 1 ).isEmpty() ) {
-        QDomElement domElementMC1 = domDoc.createElement( KV_MC_1 );
-        QDomText domTextMC1 = domDoc.createTextNode( mc.choice( 1 ) );
+        QDomElement domElementMC1 = m_domDoc.createElement( KV_MC_1 );
+        QDomText domTextMC1 = m_domDoc.createTextNode( mc.choice( 1 ) );
 
         domElementMC1.appendChild( domTextMC1 );
         domElementMC.appendChild( domElementMC1 );
     }
 
     if ( !mc.choice( 2 ).isEmpty() ) {
-        QDomElement domElementMC2 = domDoc.createElement( KV_MC_2 );
-        QDomText domTextMC2 = domDoc.createTextNode( mc.choice( 2 ) );
+        QDomElement domElementMC2 = m_domDoc.createElement( KV_MC_2 );
+        QDomText domTextMC2 = m_domDoc.createTextNode( mc.choice( 2 ) );
 
         domElementMC2.appendChild( domTextMC2 );
         domElementMC.appendChild( domElementMC2 );
     }
 
     if ( !mc.choice( 3 ).isEmpty() ) {
-        QDomElement domElementMC3 = domDoc.createElement( KV_MC_3 );
-        QDomText domTextMC3 = domDoc.createTextNode( mc.choice( 3 ) );
+        QDomElement domElementMC3 = m_domDoc.createElement( KV_MC_3 );
+        QDomText domTextMC3 = m_domDoc.createTextNode( mc.choice( 3 ) );
 
         domElementMC3.appendChild( domTextMC3 );
         domElementMC.appendChild( domElementMC3 );
     }
 
     if ( !mc.choice( 4 ).isEmpty() ) {
-        QDomElement domElementMC4 = domDoc.createElement( KV_MC_4 );
-        QDomText domTextMC4 = domDoc.createTextNode( mc.choice( 4 ) );
+        QDomElement domElementMC4 = m_domDoc.createElement( KV_MC_4 );
+        QDomText domTextMC4 = m_domDoc.createTextNode( mc.choice( 4 ) );
 
         domElementMC4.appendChild( domTextMC4 );
         domElementMC.appendChild( domElementMC4 );
     }
 
     if ( !mc.choice( 5 ).isEmpty() ) {
-        QDomElement domElementMC5 = domDoc.createElement( KV_MC_5 );
-        QDomText domTextMC5 = domDoc.createTextNode( mc.choice( 5 ) );
+        QDomElement domElementMC5 = m_domDoc.createElement( KV_MC_5 );
+        QDomText domTextMC5 = m_domDoc.createTextNode( mc.choice( 5 ) );
 
         domElementMC5.appendChild( domTextMC5 );
         domElementMC.appendChild( domElementMC5 );
@@ -598,7 +598,7 @@ bool KEduVocKvtmlWriter::writeMultipleChoice( QDomDocument &domDoc, QDomElement 
 }
 
 
-bool KEduVocKvtmlWriter::writeConjugHeader( QDomDocument &domDoc, QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug )
+bool KEduVocKvtmlWriter::writeConjugHeader( QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug )
 {
     /*
      <conjugation>    used in header for definiton of "prefix"
@@ -620,11 +620,11 @@ bool KEduVocKvtmlWriter::writeConjugHeader( QDomDocument &domDoc, QDomElement &d
     if ( curr_conjug.size() == 0 )
         return true;
 
-    QDomElement domElementConjug = domDoc.createElement( KV_CONJUG_GRP );
+    QDomElement domElementConjug = m_domDoc.createElement( KV_CONJUG_GRP );
     QString s;
 
     for ( int ent = 0; ent < qMin( curr_conjug.count(), m_doc->identifierCount() ); ent++ ) {
-        QDomElement domElementEntry = domDoc.createElement( KV_CON_ENTRY );
+        QDomElement domElementEntry = m_domDoc.createElement( KV_CON_ENTRY );
 
         s = m_doc->identifier( ent ).name().simplified();
         if ( s.isEmpty() ) {
@@ -633,7 +633,7 @@ bool KEduVocKvtmlWriter::writeConjugHeader( QDomDocument &domDoc, QDomElement &d
         }
 
         domElementEntry.setAttribute( KV_LANG, s );
-        if ( !writeConjug( domDoc, domElementEntry, curr_conjug[ent], "--" ) )
+        if ( !writeConjug(domElementEntry, curr_conjug[ent], "--" ) )
             return false;
 
         domElementConjug.appendChild( domElementEntry );
@@ -644,7 +644,7 @@ bool KEduVocKvtmlWriter::writeConjugHeader( QDomDocument &domDoc, QDomElement &d
 }
 
 
-bool KEduVocKvtmlWriter::writeConjugEntry( QDomDocument &domDoc, QDomElement &domElementParent, KEduVocTranslation &translation )
+bool KEduVocKvtmlWriter::writeConjugEntry( QDomElement &domElementParent, KEduVocTranslation &translation )
 /*
  <conjugation>    in entry for definition of tenses of (irreg.) verbs
   <t n="sipa">
@@ -664,14 +664,14 @@ bool KEduVocKvtmlWriter::writeConjugEntry( QDomDocument &domDoc, QDomElement &do
 {
 
 //     curr_conjug.cleanUp();
-    QDomElement domElementConjug = domDoc.createElement( KV_CONJUG_GRP );
+    QDomElement domElementConjug = m_domDoc.createElement( KV_CONJUG_GRP );
 
     foreach ( QString tense, translation.conjugationTenses() ) {
-        QDomElement domElementType = domDoc.createElement( KV_CON_TYPE );
+        QDomElement domElementType = m_domDoc.createElement( KV_CON_TYPE );
 
         domElementType.setAttribute( KV_CON_NAME, m_compability.oldTense(tense) );
 
-        if ( !writeConjug( domDoc, domElementType, translation.conjugation(tense), m_compability.oldTense(tense) ) )
+        if ( !writeConjug(domElementType, translation.conjugation(tense), m_compability.oldTense(tense) ) )
             return false;
 
         domElementConjug.appendChild( domElementType );
@@ -682,27 +682,29 @@ bool KEduVocKvtmlWriter::writeConjugEntry( QDomDocument &domDoc, QDomElement &do
 }
 
 
-bool KEduVocKvtmlWriter::writeConjug( QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocConjugation &curr_conjug, const QString &type )
+bool KEduVocKvtmlWriter::writeConjug( QDomElement &domElementParent, const KEduVocConjugation &curr_conjug, const QString &type )
 {
+///@todo if we are to enable the writer: port this!
+/*
     if ( !curr_conjug.pers1Singular().isEmpty() ) {
-        QDomElement domElementP1s = domDoc.createElement( KV_CON_P1S );
-        QDomText domTextP1s = domDoc.createTextNode( curr_conjug.pers1Singular() );
+        QDomElement domElementP1s = m_domDoc.createElement( KV_CON_P1S );
+        QDomText domTextP1s = m_domDoc.createTextNode( curr_conjug.pers1Singular() );
 
         domElementP1s.appendChild( domTextP1s );
         domElementParent.appendChild( domElementP1s );
     }
 
     if ( !curr_conjug.pers2Singular().isEmpty() ) {
-        QDomElement domElementP2s = domDoc.createElement( KV_CON_P2S );
-        QDomText domTextP2s = domDoc.createTextNode( curr_conjug.pers2Singular() );
+        QDomElement domElementP2s = m_domDoc.createElement( KV_CON_P2S );
+        QDomText domTextP2s = m_domDoc.createTextNode( curr_conjug.pers2Singular() );
 
         domElementP2s.appendChild( domTextP2s );
         domElementParent.appendChild( domElementP2s );
     }
 
     if ( !curr_conjug.pers3FemaleSingular().isEmpty() || curr_conjug.pers3SingularCommon() ) {
-        QDomElement domElementP3sf = domDoc.createElement( KV_CON_P3SF );
-        QDomText domTextP3sf = domDoc.createTextNode( curr_conjug.pers3FemaleSingular() );
+        QDomElement domElementP3sf = m_domDoc.createElement( KV_CON_P3SF );
+        QDomText domTextP3sf = m_domDoc.createTextNode( curr_conjug.pers3FemaleSingular() );
 
         if ( curr_conjug.pers3SingularCommon() )
             domElementP3sf.setAttribute( KV_CONJ_COMMON, 1 );
@@ -712,40 +714,40 @@ bool KEduVocKvtmlWriter::writeConjug( QDomDocument &domDoc, QDomElement &domElem
     }
 
     if ( !curr_conjug.pers3MaleSingular().isEmpty() ) {
-        QDomElement domElementP3sm = domDoc.createElement( KV_CON_P3SM );
-        QDomText domTextP3sm = domDoc.createTextNode( curr_conjug.pers3MaleSingular() );
+        QDomElement domElementP3sm = m_domDoc.createElement( KV_CON_P3SM );
+        QDomText domTextP3sm = m_domDoc.createTextNode( curr_conjug.pers3MaleSingular() );
 
         domElementP3sm.appendChild( domTextP3sm );
         domElementParent.appendChild( domElementP3sm );
     }
 
     if ( !curr_conjug.pers3NaturalSingular().isEmpty() ) {
-        QDomElement domElementP3sn = domDoc.createElement( KV_CON_P3SN );
-        QDomText domTextP3sn = domDoc.createTextNode( curr_conjug.pers3NaturalSingular() );
+        QDomElement domElementP3sn = m_domDoc.createElement( KV_CON_P3SN );
+        QDomText domTextP3sn = m_domDoc.createTextNode( curr_conjug.pers3NaturalSingular() );
 
         domElementP3sn.appendChild( domTextP3sn );
         domElementParent.appendChild( domElementP3sn );
     }
 
     if ( !curr_conjug.pers1Plural().isEmpty() ) {
-        QDomElement domElementP1p = domDoc.createElement( KV_CON_P1P );
-        QDomText domTextP1p = domDoc.createTextNode( curr_conjug.pers1Plural() );
+        QDomElement domElementP1p = m_domDoc.createElement( KV_CON_P1P );
+        QDomText domTextP1p = m_domDoc.createTextNode( curr_conjug.pers1Plural() );
 
         domElementP1p.appendChild( domTextP1p );
         domElementParent.appendChild( domElementP1p );
     }
 
     if ( !curr_conjug.pers2Plural().isEmpty() ) {
-        QDomElement domElementP2p = domDoc.createElement( KV_CON_P2P );
-        QDomText domTextP2p = domDoc.createTextNode( curr_conjug.pers2Plural() );
+        QDomElement domElementP2p = m_domDoc.createElement( KV_CON_P2P );
+        QDomText domTextP2p = m_domDoc.createTextNode( curr_conjug.pers2Plural() );
 
         domElementP2p.appendChild( domTextP2p );
         domElementParent.appendChild( domElementP2p );
     }
 
     if ( !curr_conjug.pers3FemalePlural().isEmpty() || curr_conjug.pers3PluralCommon() ) {
-        QDomElement domElementP3pf = domDoc.createElement( KV_CON_P3PF );
-        QDomText domTextP3pf = domDoc.createTextNode( curr_conjug.pers3FemalePlural() );
+        QDomElement domElementP3pf = m_domDoc.createElement( KV_CON_P3PF );
+        QDomText domTextP3pf = m_domDoc.createTextNode( curr_conjug.pers3FemalePlural() );
 
         if ( curr_conjug.pers3PluralCommon() )
             domElementP3pf.setAttribute( KV_CONJ_COMMON, 1 );
@@ -755,20 +757,175 @@ bool KEduVocKvtmlWriter::writeConjug( QDomDocument &domDoc, QDomElement &domElem
     }
 
     if ( !curr_conjug.pers3MalePlural().isEmpty() ) {
-        QDomElement domElementP3pm = domDoc.createElement( KV_CON_P3PM );
-        QDomText domTextP3pm = domDoc.createTextNode( curr_conjug.pers3MalePlural() );
+        QDomElement domElementP3pm = m_domDoc.createElement( KV_CON_P3PM );
+        QDomText domTextP3pm = m_domDoc.createTextNode( curr_conjug.pers3MalePlural() );
 
         domElementP3pm.appendChild( domTextP3pm );
         domElementParent.appendChild( domElementP3pm );
     }
 
     if ( !curr_conjug.pers3NaturalPlural().isEmpty() ) {
-        QDomElement domElementP3pn = domDoc.createElement( KV_CON_P3PN );
-        QDomText domTextP3pn = domDoc.createTextNode( curr_conjug.pers3NaturalPlural() );
+        QDomElement domElementP3pn = m_domDoc.createElement( KV_CON_P3PN );
+        QDomText domTextP3pn = m_domDoc.createTextNode( curr_conjug.pers3NaturalPlural() );
 
         domElementP3pn.appendChild( domTextP3pn );
         domElementParent.appendChild( domElementP3pn );
     }
 
+    return true; */
+    kDebug() << "Implement me!";
+    return false;
+}
+
+bool KEduVocKvtmlWriter::writePersonalPronouns( QDomElement &domElementParent, QList<KEduVocPersonalPronoun> &curr_conjug )
+{
+    /*
+     <conjugation>    used in header for definiton of "prefix"
+      <e l="de">      lang determines also lang order in entries !!
+       <s1>I</s1>     which must NOT differ
+       <s2>you<2>
+       <s3f common="0">he</s3f>
+       <s3m>she</s3m>
+       <s3n>it</s3n>
+       <p1>we</p1>
+       <p2>you</p2>
+       <p3f common="1">they</p3f>
+       <p3m>they</p3m>
+       <p3n>they</p3n>
+      </e>
+     </conjugation>
+    */
+    const QString type = QString::fromLatin1("--");
+
+    if ( curr_conjug.size() == 0 )
+        return true;
+
+    QDomElement domElementConjug = m_domDoc.createElement( KV_CONJUG_GRP );
+    QString s;
+
+    for ( int ent = 0; ent < qMin( curr_conjug.count(), m_doc->identifierCount() ); ent++ ) {
+        QDomElement domElementEntry = m_domDoc.createElement( KV_CON_ENTRY );
+
+        s = m_doc->identifier( ent ).name().simplified();
+        if ( s.isEmpty() ) {
+            s.setNum( ent );
+            s.prepend( "translation " );
+        }
+
+        domElementEntry.setAttribute( KV_LANG, s );
+        if ( !writePersonalPronounChild(domElementEntry, curr_conjug[ent] ) )
+            return false;
+
+        domElementConjug.appendChild( domElementEntry );
+    }
+
+    domElementParent.appendChild( domElementConjug );
     return true;
 }
+
+
+bool KEduVocKvtmlWriter::writePersonalPronounChild( QDomElement &domElementParent, const KEduVocPersonalPronoun &curr_conjug )
+{
+    // the old stuff only has singular
+    const KEduVocConjugation::ConjugationNumber num = KEduVocConjugation::Singular;
+
+    if ( !curr_conjug.personalPronoun( KEduVocConjugation::First, num ).isEmpty() ) {
+        domElementParent.appendChild( newTextElement( KV_CON_P1S, curr_conjug.personalPronoun( KEduVocConjugation::First, num ) ) );
+    }
+
+    if ( !curr_conjug.personalPronoun( KEduVocConjugation::Second, num ).isEmpty() ) {
+        domElementParent.appendChild( newTextElement( KV_CON_P2S, curr_conjug.personalPronoun( KEduVocConjugation::Second, num ) ) );
+    }
+
+    ///@todo if the writer ever becomes enabled, write the other pronouns
+/*
+    if ( !curr_conjug.pers2Singular().isEmpty() ) {
+        QDomElement domElementP2s = m_domDoc.createElement( KV_CON_P2S );
+        QDomText domTextP2s = m_domDoc.createTextNode( curr_conjug.pers2Singular() );
+
+        domElementP2s.appendChild( domTextP2s );
+        domElementParent.appendChild( domElementP2s );
+    }
+
+    if ( !curr_conjug.pers3FemaleSingular().isEmpty() || curr_conjug.pers3SingularCommon() ) {
+        QDomElement domElementP3sf = m_domDoc.createElement( KV_CON_P3SF );
+        QDomText domTextP3sf = m_domDoc.createTextNode( curr_conjug.pers3FemaleSingular() );
+
+        if ( curr_conjug.pers3SingularCommon() )
+            domElementP3sf.setAttribute( KV_CONJ_COMMON, 1 );
+
+        domElementP3sf.appendChild( domTextP3sf );
+        domElementParent.appendChild( domElementP3sf );
+    }
+
+    if ( !curr_conjug.pers3MaleSingular().isEmpty() ) {
+        QDomElement domElementP3sm = m_domDoc.createElement( KV_CON_P3SM );
+        QDomText domTextP3sm = m_domDoc.createTextNode( curr_conjug.pers3MaleSingular() );
+
+        domElementP3sm.appendChild( domTextP3sm );
+        domElementParent.appendChild( domElementP3sm );
+    }
+
+    if ( !curr_conjug.pers3NaturalSingular().isEmpty() ) {
+        QDomElement domElementP3sn = m_domDoc.createElement( KV_CON_P3SN );
+        QDomText domTextP3sn = m_domDoc.createTextNode( curr_conjug.pers3NaturalSingular() );
+
+        domElementP3sn.appendChild( domTextP3sn );
+        domElementParent.appendChild( domElementP3sn );
+    }
+
+    if ( !curr_conjug.pers1Plural().isEmpty() ) {
+        QDomElement domElementP1p = m_domDoc.createElement( KV_CON_P1P );
+        QDomText domTextP1p = m_domDoc.createTextNode( curr_conjug.pers1Plural() );
+
+        domElementP1p.appendChild( domTextP1p );
+        domElementParent.appendChild( domElementP1p );
+    }
+
+    if ( !curr_conjug.pers2Plural().isEmpty() ) {
+        QDomElement domElementP2p = m_domDoc.createElement( KV_CON_P2P );
+        QDomText domTextP2p = m_domDoc.createTextNode( curr_conjug.pers2Plural() );
+
+        domElementP2p.appendChild( domTextP2p );
+        domElementParent.appendChild( domElementP2p );
+    }
+
+    if ( !curr_conjug.pers3FemalePlural().isEmpty() || curr_conjug.pers3PluralCommon() ) {
+        QDomElement domElementP3pf = m_domDoc.createElement( KV_CON_P3PF );
+        QDomText domTextP3pf = m_domDoc.createTextNode( curr_conjug.pers3FemalePlural() );
+
+        if ( curr_conjug.pers3PluralCommon() )
+            domElementP3pf.setAttribute( KV_CONJ_COMMON, 1 );
+
+        domElementP3pf.appendChild( domTextP3pf );
+        domElementParent.appendChild( domElementP3pf );
+    }
+
+    if ( !curr_conjug.pers3MalePlural().isEmpty() ) {
+        QDomElement domElementP3pm = m_domDoc.createElement( KV_CON_P3PM );
+        QDomText domTextP3pm = m_domDoc.createTextNode( curr_conjug.pers3MalePlural() );
+
+        domElementP3pm.appendChild( domTextP3pm );
+        domElementParent.appendChild( domElementP3pm );
+    }
+
+    if ( !curr_conjug.pers3NaturalPlural().isEmpty() ) {
+        QDomElement domElementP3pn = m_domDoc.createElement( KV_CON_P3PN );
+        QDomText domTextP3pn = m_domDoc.createTextNode( curr_conjug.pers3NaturalPlural() );
+
+        domElementP3pn.appendChild( domTextP3pn );
+        domElementParent.appendChild( domElementP3pn );
+    }*/
+
+    return true;
+}
+
+QDomElement KEduVocKvtmlWriter::newTextElement( const QString &elementName, const QString &text )
+{
+    QDomElement retval = m_domDoc.createElement( elementName );
+    QDomText textNode = m_domDoc.createTextNode( text );
+    retval.appendChild( textNode );
+    return retval;
+}
+
+

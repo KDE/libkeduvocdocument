@@ -29,10 +29,10 @@
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
 #include "keduvockvtmlcompability.h"
+#include "keduvocpersonalpronoun.h"
 
 class QIODevice;
 class KEduVocDocument;
-
 
 /**
 @author Eric Pignet
@@ -56,6 +56,7 @@ public:
 
     bool readLesson( QDomElement &domElementParent );
     bool readArticle( QDomElement &domElementParent );
+    bool readPersonalPronouns( QDomElement &domElementParent, KEduVocPersonalPronoun& pronouns );
     bool readConjugation( QDomElement &domElementParent, KEduVocConjugation &conjugation );
     bool readTranslationConjugations( QDomElement &domElementParent, KEduVocTranslation &translation );
     bool readType( QDomElement &domElementParent );

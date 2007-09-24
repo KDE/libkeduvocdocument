@@ -161,7 +161,7 @@ bool KEduVocKvtml2Writer::writeIdentifiers( QDomElement &identifiersElement )
 
         // record personalpronouns
         QDomElement personalpronouns = m_domDoc.createElement( KVTML_PERSONALPRONOUNS );
-        writeConjugation( personalpronouns, m_doc->identifier(i).personalPronouns(), QString() );
+        writePersonalPronoun( personalpronouns, m_doc->identifier(i).personalPronouns() );
         if ( personalpronouns.hasChildNodes() ) {
             identifier.appendChild( personalpronouns );
         }
@@ -538,60 +538,41 @@ bool KEduVocKvtml2Writer::writeConjugation( QDomElement &conjugationElement,
     // write the tense tag
     conjugationElement.appendChild( newTextElement(KVTML_TENSE, tense) );
 
-    // first singular conjugations
-    QString first = conjugation.pers1Singular();
-    QString second = conjugation.pers2Singular();
-    bool third_common = conjugation.pers3SingularCommon();
-    QString third_male = conjugation.pers3MaleSingular();
-    QString third_female = conjugation.pers3FemaleSingular();
-    QString third_neutral = conjugation.pers3NaturalSingular();
+    for ( KEduVocConjugation::ConjugationNumber num = KEduVocConjugation::Singular; num < KEduVocConjugation::NumberMAX; num = KEduVocConjugation::ConjugationNumber(num +1) ) {
+        QString first = conjugation.conjugation(
+            KEduVocConjugation::First, KEduVocConjugation::Singular );
+        QString second = conjugation.conjugation(
+            KEduVocConjugation::Second, KEduVocConjugation::Singular );
+        QString third_male = conjugation.conjugation(
+            KEduVocConjugation::ThirdMale, KEduVocConjugation::Singular );
+        QString third_female = conjugation.conjugation(
+            KEduVocConjugation::ThirdFemale, KEduVocConjugation::Singular );
+        QString third_neutral = conjugation.conjugation(
+            KEduVocConjugation::ThirdNeuterCommon, KEduVocConjugation::Singular );
 
-    if ( !first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
-            !third_male.isEmpty() || !third_neutral.isEmpty() ) {
-        QDomElement singular = m_domDoc.createElement( KVTML_SINGULAR );
+        if ( !first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
+                !third_male.isEmpty() || !third_neutral.isEmpty() ) {
+            QDomElement number;
+            switch (num) {
+            case KEduVocConjugation::Singular:
+                number = m_domDoc.createElement( KVTML_SINGULAR );
+                break;
+            case KEduVocConjugation::Dual:
+                number = m_domDoc.createElement( KVTML_DUAL );
+                break;
+            case KEduVocConjugation::Plural:
+                number = m_domDoc.createElement( KVTML_PLURAL );
+                break;
+            }
 
-        singular.appendChild( newTextElement( KVTML_1STPERSON, first ) );
-        singular.appendChild( newTextElement( KVTML_2NDPERSON, second ) );
+            number.appendChild( newTextElement( KVTML_1STPERSON, first ) );
+            number.appendChild( newTextElement( KVTML_2NDPERSON, second ) );
+            number.appendChild( newTextElement( KVTML_THIRD_MALE, third_male ) );
+            number.appendChild( newTextElement( KVTML_THIRD_FEMALE, third_female ) );
+            number.appendChild( newTextElement( KVTML_THIRD_NEUTER_COMMON, third_neutral ) );
 
-        QDomElement thirdPerson = m_domDoc.createElement( KVTML_3RDPERSON );
-        singular.appendChild( thirdPerson );
-
-        if ( third_common ) {
-            thirdPerson.appendChild( newTextElement( KVTML_COMMON, third_female ) );
-        } else {
-            thirdPerson.appendChild( newTextElement( KVTML_MALE, third_male ) );
-            thirdPerson.appendChild( newTextElement( KVTML_FEMALE, third_female ) );
-            thirdPerson.appendChild( newTextElement( KVTML_NEUTRAL, third_neutral ) );
+            conjugationElement.appendChild( number );
         }
-        conjugationElement.appendChild( singular );
-    }
-
-    // now for plurals
-    first = conjugation.pers1Plural();
-    second = conjugation.pers2Plural();
-    third_common = conjugation.pers3PluralCommon();
-    third_male = conjugation.pers3MalePlural();
-    third_female = conjugation.pers3FemalePlural();
-    third_neutral = conjugation.pers3NaturalPlural();
-
-    if ( !first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
-            !third_male.isEmpty() || !third_neutral.isEmpty() ) {
-        QDomElement plural = m_domDoc.createElement( KVTML_PLURAL );
-
-        plural.appendChild( newTextElement( KVTML_1STPERSON, first ) );
-        plural.appendChild( newTextElement( KVTML_2NDPERSON, second ) );
-
-        QDomElement thirdPerson = m_domDoc.createElement( KVTML_3RDPERSON );
-        plural.appendChild( thirdPerson );
-
-        if ( third_common ) {
-            thirdPerson.appendChild( newTextElement( KVTML_COMMON, third_female ) );
-        } else {
-            thirdPerson.appendChild( newTextElement( KVTML_MALE, third_male ) );
-            thirdPerson.appendChild( newTextElement( KVTML_FEMALE, third_female ) );
-            thirdPerson.appendChild( newTextElement( KVTML_NEUTRAL, third_neutral ) );
-        }
-        conjugationElement.appendChild( plural );
     }
 
     return true;
@@ -603,4 +584,52 @@ QDomElement KEduVocKvtml2Writer::newTextElement( const QString &elementName, con
     QDomText textNode = m_domDoc.createTextNode( text );
     retval.appendChild( textNode );
     return retval;
+}
+
+bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, const KEduVocPersonalPronoun & pronoun)
+{
+    // general pronoun properties
+    if ( pronoun.maleFemaleDifferent() ) {
+        pronounElement.appendChild( m_domDoc.createElement( KVTML_THIRD_PERSON_MALE_FEMALE_DIFFERENT ) );
+    }
+    if ( pronoun.neuterExists() ) {
+        pronounElement.appendChild( m_domDoc.createElement( KVTML_THIRD_PERSON_NEUTER_EXISTS ) );
+    }
+
+    for ( KEduVocConjugation::ConjugationNumber num = KEduVocConjugation::Singular; num < KEduVocConjugation::NumberMAX; num = KEduVocConjugation::ConjugationNumber(num +1) ) {
+        QString first = pronoun.personalPronoun(
+            KEduVocConjugation::First, KEduVocConjugation::Singular );
+        QString second = pronoun.personalPronoun(
+            KEduVocConjugation::Second, KEduVocConjugation::Singular );
+        QString third_male = pronoun.personalPronoun(
+            KEduVocConjugation::ThirdMale, KEduVocConjugation::Singular );
+        QString third_female = pronoun.personalPronoun(
+            KEduVocConjugation::ThirdFemale, KEduVocConjugation::Singular );
+        QString third_neutral = pronoun.personalPronoun(
+            KEduVocConjugation::ThirdNeuterCommon, KEduVocConjugation::Singular );
+
+        if ( !first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
+                !third_male.isEmpty() || !third_neutral.isEmpty() ) {
+            QDomElement number;
+            switch (num) {
+            case KEduVocConjugation::Singular:
+                number = m_domDoc.createElement( KVTML_SINGULAR );
+                break;
+            case KEduVocConjugation::Dual:
+                number = m_domDoc.createElement( KVTML_DUAL );
+                break;
+            case KEduVocConjugation::Plural:
+                number = m_domDoc.createElement( KVTML_PLURAL );
+                break;
+            }
+
+            number.appendChild( newTextElement( KVTML_1STPERSON, first ) );
+            number.appendChild( newTextElement( KVTML_2NDPERSON, second ) );
+            number.appendChild( newTextElement( KVTML_THIRD_MALE, third_male ) );
+            number.appendChild( newTextElement( KVTML_THIRD_FEMALE, third_female ) );
+            number.appendChild( newTextElement( KVTML_THIRD_NEUTER_COMMON, third_neutral ) );
+
+            pronounElement.appendChild( number );
+        }
+    }
 }

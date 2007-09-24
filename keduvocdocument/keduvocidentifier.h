@@ -25,7 +25,7 @@
 
 #include "libkeduvocdocument_export.h"
 
-#include "keduvocconjugation.h"
+#include "keduvocpersonalpronoun.h"
 #include "keduvocgrammar.h"
 
 #include <QtCore/QList>
@@ -103,15 +103,15 @@ public:
 
     /**
      * Get the personal pronouns for this identifier
-     * @returns a KEduVocConjugation containing the personal pronouns
+     * @returns a KEduVocPersonalPronoun containing the personal pronouns
      */
-    KEduVocConjugation personalPronouns() const;
+    KEduVocPersonalPronoun personalPronouns() const;
 
     /**
      * Sets personal pronouns
      * @param pronouns a KEduVocConjugation containing the personal pronouns
      */
-    void setPersonalPronouns( const KEduVocConjugation &pronouns );
+    void setPersonalPronouns( const KEduVocPersonalPronoun &pronouns );
 
 private:
     class Private;

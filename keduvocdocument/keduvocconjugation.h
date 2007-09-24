@@ -36,6 +36,24 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocConjugation
 {
 public:
 
+    enum ConjugationNumber {
+        Singular,
+        Dual,
+        Plural,
+        NumberMAX
+    };
+
+    // store third person neuter/common in the same sttr
+    enum ConjugationPerson {
+        First,
+        Second,
+        ThirdMale,
+        ThirdFemale,
+        ThirdNeuterCommon,
+        PersonMAX
+    };
+
+
     /**
      * The constructor
      */
@@ -45,40 +63,17 @@ public:
 
     ~KEduVocConjugation();
 
-    QString pers1Singular( ) const;
-    QString pers2Singular( ) const;
-    bool    pers3SingularCommon( ) const;
-    QString pers3FemaleSingular( ) const;
-    QString pers3MaleSingular( ) const;
-    QString pers3NaturalSingular( ) const;
-
-    QString pers1Plural( ) const;
-    QString pers2Plural( ) const;
-    bool    pers3PluralCommon( ) const;
-    QString pers3FemalePlural( ) const;
-    QString pers3MalePlural( ) const;
-    QString pers3NaturalPlural( ) const;
-
-    void setPers1Singular( const QString &str );
-    void setPers2Singular( const QString &str );
-    void setPers3SingularCommon( bool f );
-    void setPers3FemaleSingular( const QString &str );
-    void setPers3MaleSingular( const QString &str );
-    void setPers3NaturalSingular( const QString &str );
-
-    void setPers1Plural( const QString &str );
-    void setPers2Plural( const QString &str );
-    void setPers3PluralCommon( bool f );
-    void setPers3FemalePlural( const QString &str );
-    void setPers3MalePlural( const QString &str );
-    void setPers3NaturalPlural( const QString &str );
-
     KEduVocConjugation& operator = ( const KEduVocConjugation& a );
     bool operator == ( const KEduVocConjugation& a ) const;
+
+    QString conjugation(ConjugationPerson person, ConjugationNumber number) const;
+    void setConjugation(const QString& conjugation, ConjugationPerson person, ConjugationNumber number);
 
 private:
     class Private;
     Private* const d;
+
+    int indexOf(ConjugationPerson person, ConjugationNumber number) const;
 };
 
 

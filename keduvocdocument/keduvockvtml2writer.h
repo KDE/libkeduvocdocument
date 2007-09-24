@@ -24,6 +24,7 @@
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
 #include "keduvoctranslation.h"
+#include "keduvocpersonalpronoun.h"
 
 class KEduVocDocument;
 
@@ -61,8 +62,9 @@ public:
      * @param type conjugation type
      */
     bool writeConjugation( QDomElement &conjugationElement, const KEduVocConjugation &conjugation,
-                           const QString &type );
+                           const QString &tense );
 
+    bool writePersonalPronoun( QDomElement &pronounElement, const KEduVocPersonalPronoun &pronoun);
     /** write types
      * @param typesElement QDomElement types to write to
      */

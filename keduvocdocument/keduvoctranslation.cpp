@@ -327,7 +327,7 @@ void KEduVocTranslation::resetGrades()
     d->m_grades.clear();
 }
 
-KEduVocGrade & KEduVocTranslation::gradeFrom( int indexFrom )
+KEduVocGrade& KEduVocTranslation::gradeFrom( int indexFrom )
 {
     return d->m_grades[indexFrom];
 }

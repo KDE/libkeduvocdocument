@@ -22,7 +22,7 @@
  ***************************************************************************/
 #include "keduvocdeclination.h"
 
-#include <QtCore/QStringList>
+#include <QtCore/QMap>
 
 class KEduVocDeclination::Private
 {
@@ -54,8 +54,8 @@ KEduVocDeclination::~KEduVocDeclination()
 
 QString KEduVocDeclination::declination(DeclinationNumber number, DeclinationCase decCase)
 {
-    if ( m_declinations.contains(indexOf(number, decCase)) ) {
-        return m_declinations.value(indexOf(number, decCase));
+    if ( d->m_declinations.contains(indexOf(number, decCase)) ) {
+        return d->m_declinations.value(indexOf(number, decCase));
     } else {
         return QString();
     }
@@ -63,17 +63,17 @@ QString KEduVocDeclination::declination(DeclinationNumber number, DeclinationCas
 
 void KEduVocDeclination::setDeclination(const QString & declination, DeclinationNumber number, DeclinationCase decCase)
 {
-    m_declinations[indexOf(number, decCase)] = declination;
+    d->m_declinations[indexOf(number, decCase)] = declination;
 }
 
 int KEduVocDeclination::indexOf(DeclinationNumber number, DeclinationCase decCase)
 {
-    return number * 10 + decCase;
+    return number * DeclinationCaseMAX + decCase;
 }
 
 bool KEduVocDeclination::isEmpty()
 {
-    return m_declinations.isEmpty();
+    return d->m_declinations.isEmpty();
 }
 
 

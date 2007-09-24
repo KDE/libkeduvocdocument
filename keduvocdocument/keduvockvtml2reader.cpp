@@ -245,9 +245,9 @@ bool KEduVocKvtml2Reader::readIdentifier( QDomElement &identifierElement )
 
     currentElement = identifierElement.firstChildElement( KVTML_PERSONALPRONOUNS );
     if ( !currentElement.isNull() ) {
-        KEduVocConjugation personalPronouns;
-        readConjugation( currentElement, personalPronouns );
-        m_doc->identifier(id).setPersonalPronouns( personalPronouns );
+        KEduVocPersonalPronoun personalPronoun;
+        readPersonalPronoun( currentElement, personalPronoun );
+        m_doc->identifier(id).setPersonalPronouns( personalPronoun );
     }
     return result;
 }
@@ -540,119 +540,6 @@ bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifi
 }
 
 
-bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocConjugation &conjugation )
-/*
- <conjugation>
-  <tense>Futurepastperfekt:)</tense>
-  <singular>
-    <firstperson></firstperson>
-    <secondperson></secondperson>
-    <thirdperson>
-      <male></male>
-      <female></female>
-      <neutral></neutral>
-    </thirdperson>
-  </singular>
-  <plural>
-    <firstperson></firstperson>
-    <secondperson></secondperson>
-    <thirdsperson>
-      <common></common>
-    </third person>
-  </plural>
- </conjugation>
-*/
-{
-    bool p3_common;
-    bool s3_common;
-    QString singfirst;
-    QString singsecond;
-    QString singthirdmale;
-    QString singthirdfemale;
-    QString singthirdneutral;
-    QString plurfirst;
-    QString plursecond;
-    QString plurthirdmale;
-    QString plurthirdfemale;
-    QString plurthirdneutral;
-
-    QDomElement currentGroup = conjugElement.firstChildElement( KVTML_SINGULAR );
-    if ( !currentGroup.isNull() )
-    {
-        QDomElement currentElement = currentGroup.firstChildElement( KVTML_1STPERSON );
-        singfirst = currentElement.text();
-
-        currentElement = currentGroup.firstChildElement( KVTML_2NDPERSON );
-        singsecond = currentElement.text();
-
-        currentGroup = currentGroup.firstChildElement( KVTML_3RDPERSON );
-        if ( !currentGroup.isNull() ) {
-            currentElement = currentGroup.firstChildElement( KVTML_COMMON );
-            if ( !currentElement.isNull() ) {
-                s3_common = true;
-                singthirdmale = currentElement.text();
-                singthirdfemale = singthirdmale;
-                singthirdneutral = singthirdmale;
-            } else {
-                s3_common = false;
-                currentElement = currentGroup.firstChildElement( KVTML_MALE );
-                singthirdmale = currentElement.text();
-
-                currentElement = currentGroup.firstChildElement( KVTML_FEMALE );
-                singthirdfemale = currentElement.text();
-                currentElement = currentGroup.firstChildElement( KVTML_NEUTRAL );
-                singthirdneutral = currentElement.text();
-            }
-
-        }
-    }
-
-    currentGroup = conjugElement.firstChildElement( KVTML_PLURAL );
-    if ( !currentGroup.isNull() )
-    {
-        QDomElement currentElement = currentGroup.firstChildElement( KVTML_1STPERSON );
-        plurfirst = currentElement.text();
-
-        currentElement = currentGroup.firstChildElement( KVTML_2NDPERSON );
-        plursecond = currentElement.text();
-
-        currentGroup = currentGroup.firstChildElement( KVTML_3RDPERSON );
-        if ( !currentGroup.isNull() ) {
-            currentElement = currentGroup.firstChildElement( KVTML_COMMON );
-            if ( !currentElement.isNull() ) {
-                p3_common = true;
-                plurthirdmale = currentElement.text();
-                plurthirdfemale = singthirdmale;
-                plurthirdneutral = singthirdmale;
-            } else {
-                p3_common = false;
-                currentElement = currentGroup.firstChildElement( KVTML_MALE );
-                plurthirdmale = currentElement.text();
-                currentElement = currentGroup.firstChildElement( KVTML_FEMALE );
-                plurthirdfemale = currentElement.text();
-                currentElement = currentGroup.firstChildElement( KVTML_NEUTRAL );
-                plurthirdneutral = currentElement.text();
-            }
-
-        }
-    }
-
-    conjugation.setPers3SingularCommon( s3_common );
-    conjugation.setPers3PluralCommon( p3_common );
-    conjugation.setPers1Singular( singfirst );
-    conjugation.setPers2Singular( singsecond );
-    conjugation.setPers3FemaleSingular( singthirdfemale );
-    conjugation.setPers3MaleSingular( singthirdmale );
-    conjugation.setPers3NaturalSingular( singthirdneutral );
-    conjugation.setPers1Plural( plurfirst );
-    conjugation.setPers2Plural( plursecond );
-    conjugation.setPers3FemalePlural( plurthirdfemale );
-    conjugation.setPers3MalePlural( plurthirdmale );
-    conjugation.setPers3NaturalPlural( plurthirdneutral );
-
-    return true;
-}
-
 bool KEduVocKvtml2Reader::readTypes( QDomElement &typesElement )
 {
     QString mainTypeName;
@@ -845,124 +732,129 @@ bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpressio
 }
 
 
-//**** old code from kvtmlreader
-//  grade = KV_NORM_GRADE;
-//  rev_grade = KV_NORM_GRADE;
-//  attribute = domElementExpressionChild.attributeNode(KV_GRADE);
-//  if (!attribute.isNull())
-//  {
-//    QString s = attribute.value();
-//    if ((pos = s.indexOf(';')) >= 1)
-//    {
-//      grade = s.left(pos).toInt();
-//      rev_grade = s.mid(pos + 1, s.length()).toInt();
-//    }
-//    else
-//      grade = s.toInt();
-//  }
 
-//  count = 0;
-//  rev_count = 0;
-//  attribute = domElementExpressionChild.attributeNode(KV_COUNT);
-//  if (!attribute.isNull())
-//  {
-//    QString s = attribute.value();
-//    if ((pos = s.indexOf(';')) >= 1)
-//    {
-//      count = s.left(pos).toInt();
-//      rev_count = s.mid(pos + 1, s.length()).toInt();
-//    }
-//    else
-//      count = s.toInt();
-//  }
+bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocConjugation &conjugation )
+/*
+ <conjugation>
+  <tense>Futurepastperfekt:)</tense>
+  <singular>
+    <firstperson></firstperson>
+    <secondperson></secondperson>
+    <thirdperson>
+      <male></male>
+      <female></female>
+      <neutral></neutral>
+    </thirdperson>
+  </singular>
+  <plural>
+    <firstperson></firstperson>
+    <secondperson></secondperson>
+    <thirdsperson>
+      <common></common>
+    </third person>
+  </plural>
+ </conjugation>
+*/
+{
+    QDomElement personElement = conjugElement.firstChildElement( KVTML_SINGULAR );
+    if ( !personElement.isNull() )
+    {
+        readConjugationPerson( personElement, conjugation, KEduVocConjugation::Singular );
+    }
 
-//  bcount = 0;
-//  rev_bcount = 0;
-//  attribute = domElementExpressionChild.attributeNode(KV_BAD);
-//  if (!attribute.isNull())
-//  {
-//    QString s = attribute.value();
-//    if ((pos = s.indexOf(';')) >= 1)
-//    {
-//      bcount = s.left(pos).toInt();
-//      rev_bcount = s.mid(pos + 1, s.length()).toInt();
-//    }
-//    else
-//      bcount = s.toInt();
-//  }
+    personElement = conjugElement.firstChildElement( KVTML_DUAL );
+    if ( !personElement.isNull() )
+    {
+        readConjugationPerson( personElement, conjugation, KEduVocConjugation::Dual );
+    }
 
-//  date.setTime_t(0);
-//  rev_date.setTime_t(0);
-//  attribute = domElementExpressionChild.attributeNode(KV_DATE);
-//  if (!attribute.isNull())
-//  {
-//    QString s = attribute.value();
-//    if ((pos = s.indexOf(';')) >= 1)
-//    {
-//      date.setTime_t(s.left(pos).toInt());
-//      rev_date.setTime_t(s.mid(pos + 1, s.length()).toInt());
-//    }
-//    else
-//      date.setTime_t(s.toInt());
-//  }
+    personElement = conjugElement.firstChildElement( KVTML_PLURAL );
+    if ( !personElement.isNull() )
+    {
+        readConjugationPerson( personElement, conjugation, KEduVocConjugation::Plural );
+    }
 
-//  attribute = domElementExpressionChild.attributeNode(KV_DATE2);
-//  if (!attribute.isNull())
-//  {
-//    //this format is deprecated and ignored.
-//  }
+    return true;
+}
 
-//  faux_ami_f = "";
-//  attribute = domElementExpressionChild.attributeNode(KV_FAUX_AMI_F);
-//  if (!attribute.isNull())
-//    faux_ami_f = attribute.value();
 
-//  faux_ami_t = "";
-//  attribute = domElementExpressionChild.attributeNode(KV_FAUX_AMI_T);
-//  if (!attribute.isNull())
-//    faux_ami_t = attribute.value();
+bool KEduVocKvtml2Reader::readConjugationPerson(QDomElement & personElement, KEduVocConjugation & conjugation, KEduVocConjugation::ConjugationNumber number)
+{
+    QDomElement currentElement = personElement.firstChildElement( KVTML_1STPERSON );
+    conjugation.setConjugation( currentElement.text(),
+        KEduVocConjugation::First, number );
 
-//  usage = "";
-//  attribute = domElementExpressionChild.attributeNode(KV_USAGE);
-//  if (!attribute.isNull())
-//  {
-//    usage = attribute.value();
-//    if (usage.length() != 0 && usage.left(1) == UL_USER_USAGE)
-//    {
-//      int num = qMin(usage.mid (1, 40).toInt(), 1000); // paranioa check
-//      if (num > m_doc->usageDescriptions().count())
-//      {
-//        // description missing ?
-//        QStringList sl = m_doc->usageDescriptions();
-//        QString s;
-//        for (int i = m_doc->usageDescriptions().count(); i < num; i++)
-//        {
-//          s.setNum(i + 1);
-//          s.prepend("#");  // invent descr according to number
-//          sl.append(s);
-//        }
-//        m_doc->setUsageDescriptions(sl);
-//      }
-//    }
-//  }
+    currentElement = personElement.firstChildElement( KVTML_2NDPERSON );
+    conjugation.setConjugation( currentElement.text(),
+        KEduVocConjugation::Second, number );
 
-//    if (type.length() != 0 && type.left(1) == QM_USER_TYPE)
-//    {
-//      int num = qMin(type.mid (1, 40).toInt(), 1000); // paranoia check
-//      if (num > m_doc->typeDescriptions().count())
-//      {
-//        // description missing ?
-//        QString s;
-//        QStringList sl = m_doc->typeDescriptions();
-//        for (int i = m_doc->typeDescriptions().count(); i < num; i++)
-//        {
-//          s.setNum(i + 1);
-//          s.prepend("#");  // invent descr according to number
-//          sl.append(s);
-//        }
-//        m_doc->setTypeDescriptions(sl);
-//      }
-//    }
-//  }
+    currentElement = personElement.firstChildElement( KVTML_THIRD_MALE );
+    conjugation.setConjugation( currentElement.text(),
+        KEduVocConjugation::ThirdMale, number );
+
+    currentElement = personElement.firstChildElement( KVTML_THIRD_FEMALE );
+    conjugation.setConjugation( currentElement.text(),
+        KEduVocConjugation::ThirdFemale, number );
+
+    currentElement = personElement.firstChildElement( KVTML_THIRD_NEUTER_COMMON );
+    conjugation.setConjugation( currentElement.text(),
+        KEduVocConjugation::ThirdNeuterCommon, number );
+}
+
+
+bool KEduVocKvtml2Reader::readPersonalPronoun(QDomElement & pronounElement, KEduVocPersonalPronoun & pronoun)
+{
+    QDomElement personElement = pronounElement.firstChildElement( KVTML_SINGULAR );
+    if ( !personElement.isNull() ) {
+        readPersonalPronounChild( personElement, pronoun, KEduVocConjugation::Singular );
+    }
+
+    personElement = pronounElement.firstChildElement( KVTML_DUAL );
+    if ( !personElement.isNull() ) {
+        readPersonalPronounChild( personElement, pronoun, KEduVocConjugation::Dual );
+    }
+
+    personElement = pronounElement.firstChildElement( KVTML_PLURAL );
+    if ( !personElement.isNull() ) {
+        readPersonalPronounChild( personElement, pronoun, KEduVocConjugation::Plural );
+    }
+}
+
+
+bool KEduVocKvtml2Reader::readPersonalPronounChild(QDomElement & personElement, KEduVocPersonalPronoun & pronoun, KEduVocConjugation::ConjugationNumber number)
+{
+    QDomElement currentElement = personElement.firstChildElement( KVTML_1STPERSON );
+    pronoun.setPersonalPronoun( currentElement.text(),
+        KEduVocConjugation::First, number );
+
+    currentElement = personElement.firstChildElement( KVTML_2NDPERSON );
+    pronoun.setPersonalPronoun( currentElement.text(),
+        KEduVocConjugation::Second, number );
+
+    currentElement = personElement.firstChildElement( KVTML_THIRD_MALE );
+    pronoun.setPersonalPronoun( currentElement.text(),
+        KEduVocConjugation::ThirdMale, number );
+
+    currentElement = personElement.firstChildElement( KVTML_THIRD_FEMALE );
+    pronoun.setPersonalPronoun( currentElement.text(),
+        KEduVocConjugation::ThirdFemale, number );
+
+    currentElement = personElement.firstChildElement( KVTML_THIRD_NEUTER_COMMON );
+    pronoun.setPersonalPronoun( currentElement.text(),
+        KEduVocConjugation::ThirdNeuterCommon, number );
+
+    if ( !personElement.firstChildElement(KVTML_THIRD_PERSON_MALE_FEMALE_DIFFERENT).isNull() ){
+        pronoun.setMaleFemaleDifferent(true);
+        if ( !personElement.firstChildElement(KVTML_THIRD_PERSON_NEUTER_EXISTS).isNull() ){
+            pronoun.setNeuterExists(true);
+        } else {
+            pronoun.setNeuterExists(false);
+        }
+    } else {
+        pronoun.setMaleFemaleDifferent(false);
+        pronoun.setNeuterExists(false);
+    }
+}
+
 
 #include "keduvockvtml2reader.moc"

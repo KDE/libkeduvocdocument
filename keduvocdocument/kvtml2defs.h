@@ -51,11 +51,20 @@
 #define KVTML_FEMALE            "female"
 #define KVTML_NEUTRAL           "neutral"
 #define KVTML_SINGULAR          "singular"
+// dual is the case where there's a special form for exactly two
+#define KVTML_DUAL              "dual"
 #define KVTML_PLURAL            "plural"
 #define KVTML_1STPERSON         "firstperson"
 #define KVTML_2NDPERSON         "secondperson"
-#define KVTML_3RDPERSON         "thirdperson"
-#define KVTML_COMMON            "common"
+#define KVTML_THIRD_MALE        "thirdpersonmale"
+#define KVTML_THIRD_FEMALE      "thirdpersonfemale"
+#define KVTML_THIRD_NEUTER_COMMON "thirdpersonneutercommon"
+
+// for the personal pronuns:
+// if this tag exists, in a conjugation male/female are different
+#define KVTML_THIRD_PERSON_MALE_FEMALE_DIFFERENT "malefemaledifferent"
+// if this tag exists conjugations even have a neuter form for the third person
+#define KVTML_THIRD_PERSON_NEUTER_EXISTS "neuterexists"
 
 // word types
 #define KVTML_WORDTYPEDEFINITIONS   "wordtypedefinitions"

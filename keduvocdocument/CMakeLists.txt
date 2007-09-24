@@ -13,7 +13,8 @@ set(keduvocdocument_LIB_SRCS
    keduvocgrade.cpp
    keduvocgrammar.cpp
    keduvocconjugation.cpp
-#    keduvocdeclination.cpp
+   keduvocpersonalpronoun.cpp
+   keduvocdeclination.cpp
    keduvocwordtype.cpp
    keduvockvtmlreader.cpp
    keduvockvtml2reader.cpp

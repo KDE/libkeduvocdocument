@@ -185,7 +185,7 @@ bool KEduVocExpression::operator== ( const KEduVocExpression &expression ) const
     return ( *d == *expression.d );
 }
 
-KEduVocTranslation & KEduVocExpression::translation( int index ) const
+KEduVocTranslation& KEduVocExpression::translation( int index ) const
 {
     return d->m_translations[index];
 }

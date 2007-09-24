@@ -42,7 +42,7 @@ public:
     QString m_type;
 
     /** I, you, he, she, it... */
-    KEduVocConjugation  m_personalPronouns;
+    KEduVocPersonalPronoun  m_personalPronouns;
 
     /** the for english ;)
        der, die, das ... in german */
@@ -125,12 +125,12 @@ KEduVocArticle KEduVocIdentifier::article() const
     return d->m_articles;
 }
 
-KEduVocConjugation KEduVocIdentifier::personalPronouns() const
+KEduVocPersonalPronoun KEduVocIdentifier::personalPronouns() const
 {
     return d->m_personalPronouns;
 }
 
-void KEduVocIdentifier::setPersonalPronouns( const KEduVocConjugation & pronouns )
+void KEduVocIdentifier::setPersonalPronouns( const KEduVocPersonalPronoun & pronouns )
 {
     d->m_personalPronouns = pronouns;
 }

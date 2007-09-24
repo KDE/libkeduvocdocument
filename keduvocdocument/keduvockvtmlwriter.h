@@ -25,6 +25,7 @@
 #include <QtCore/QFile>
 
 #include "keduvocgrammar.h"
+#include "keduvocpersonalpronoun.h"
 #include "keduvocconjugation.h"
 #include "keduvocmultiplechoice.h"
 #include "keduvockvtmlcompability.h"
@@ -42,21 +43,29 @@ public:
 
     bool writeDoc( KEduVocDocument *doc, const QString &generator );
 
-    bool writeLesson( QDomDocument &domDoc, QDomElement &domElementParent );
-    bool writeType( QDomDocument &domDoc, QDomElement &domElementParent );
-    bool writeTense( QDomDocument &domDoc, QDomElement &domElementParent );
-    bool writeUsage( QDomDocument &domDoc, QDomElement &domElementParent );
-    bool writeOption( QDomDocument &domDoc, QDomElement &domElementParent );
-    bool writeArticle( QDomDocument &domDoc, QDomElement &domElementParent );
-    bool writeConjugHeader( QDomDocument &domDoc, QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug );
-    bool writeConjug( QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocConjugation &curr_conjug, const QString &type );
-    bool writeConjugEntry( QDomDocument &domDoc, QDomElement &domElementParent, KEduVocTranslation &translation  );
-    bool writeComparison( QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocComparison &comp );
-    bool writeMultipleChoice( QDomDocument &domDoc, QDomElement &domElementParent, const KEduVocMultipleChoice &mc );
-
 private:
+    bool writeLesson( QDomElement &domElementParent );
+    bool writeType( QDomElement &domElementParent );
+    bool writeTense( QDomElement &domElementParent );
+    bool writeUsage( QDomElement &domElementParent );
+    bool writeOption( QDomElement &domElementParent );
+    bool writeArticle( QDomElement &domElementParent );
+
+    bool writePersonalPronouns( QDomElement &domElementParent, QList<KEduVocPersonalPronoun> &curr_conjug );
+    bool writePersonalPronounChild( QDomElement &domElementParent, const KEduVocPersonalPronoun &curr_conjug );
+
+    bool writeConjugHeader( QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug );
+    bool writeConjug( QDomElement &domElementParent, const KEduVocConjugation &curr_conjug, const QString &type );
+    bool writeConjugEntry( QDomElement &domElementParent, KEduVocTranslation &translation  );
+    bool writeComparison( QDomElement &domElementParent, const KEduVocComparison &comp );
+    bool writeMultipleChoice( QDomElement &domElementParent, const KEduVocMultipleChoice &mc );
+
+    QDomElement newTextElement( const QString &elementName, const QString &text );
+
     QFile *m_outputFile;
     KEduVocDocument *m_doc;
+
+    QDomDocument m_domDoc;
 
     KEduVocKvtmlCompability m_compability;
 };
