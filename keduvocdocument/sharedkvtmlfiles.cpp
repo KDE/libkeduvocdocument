@@ -182,6 +182,18 @@ void SharedKvtmlFiles::sortDownloadedFiles()
         // take off the one we just did
         unsortedFiles.removeFirst();
     }
+    
+    QStringList khangmanFiles = KGlobal::dirs()->findAllResources( "data", 
+                                QString( "kvtml/*.txt" ) );
+    
+    // move khangman files into
+    while ( !khangmanFiles.isEmpty() ) {
+        KUrl fileUrl( KUrl::fromPath( khangmanFiles.first() ) );
+        KUrl destDir = KUrl::fromPath(KStandardDirs::locateLocal("appdata", "khangman/data/"));
+        // do this better with KStandardDirs stuff
+        KIO::move( fileUrl, destDir);
+        khangmanFiles.removeFirst();
+    }
 
     rescan();
 }
