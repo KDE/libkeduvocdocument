@@ -70,7 +70,7 @@ bool KEduVocPersonalPronoun::operator ==(const KEduVocPersonalPronoun& other) co
 {
     return d->m_personalpronouns == other.d->m_personalpronouns &&
         d->m_maleFemaleDifferent == other.d->m_maleFemaleDifferent &&
-        d->m_neuterExists == other.d->m_neuterExists;
+        d->m_neuterExists == other.d->m_neuterExists &&
         d->m_dualExists == other.d->m_dualExists;
 }
 
