@@ -58,13 +58,13 @@
 
 class KEduVocWordType::Private
 {
-
 public:
     struct subWordType
     {
         QString m_subTypeName;
         QString m_specialType;
         QString m_specialTypeExplanation;
+        bool operator== ( const subWordType& other );
     };
     struct wordType
     {
@@ -72,6 +72,7 @@ public:
         QString m_specialType;
         QString m_specialTypeExplanation;
         QList<subWordType> m_subWordTypeList;
+        bool operator== ( const wordType& other );
     };
 
     /// Map containing the word type name and its properties.
@@ -101,13 +102,13 @@ public:
 };
 
 const QString KEduVocWordType::Private::WORDTYPE_NOUN = QString( "noun" );
-const QString KEduVocWordType::Private::WORDTYPE_NOUN_MALE = QString( "noun:male" );
-const QString KEduVocWordType::Private::WORDTYPE_NOUN_FEMALE = QString( "noun:female" );
-const QString KEduVocWordType::Private::WORDTYPE_NOUN_NEUTRAL = QString( "noun:neutral" );
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_MALE = QString( "noun male" );
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_FEMALE = QString( "noun female" );
+const QString KEduVocWordType::Private::WORDTYPE_NOUN_NEUTRAL = QString( "noun neutral" );
 
 const QString KEduVocWordType::Private::WORDTYPE_VERB = QString( "verb" );
-const QString KEduVocWordType::Private::WORDTYPE_VERB_REGULAR = QString( "verb:regular" );
-const QString KEduVocWordType::Private::WORDTYPE_VERB_IRREGULAR = QString( "verb:irregular" );
+const QString KEduVocWordType::Private::WORDTYPE_VERB_REGULAR = QString( "verb regular" );
+const QString KEduVocWordType::Private::WORDTYPE_VERB_IRREGULAR = QString( "verb irregular" );
 
 const QString KEduVocWordType::Private::WORDTYPE_ADJECTIVE = QString( "adjective" );
 const QString KEduVocWordType::Private::WORDTYPE_ADVERB = QString( "adverb" );
@@ -126,27 +127,45 @@ const QString KEduVocWordType::Private::WORDTYPE_ADJECTIVE_EXPLANATION = QString
 const QString KEduVocWordType::Private::WORDTYPE_ADVERB_EXPLANATION = QString( "This holds the words of type adverb. You can rename it but not delete since the article training relies on it!" );
 
 
+bool KEduVocWordType::Private::wordType::operator ==(const wordType & other)
+{
+    return m_typeName == other.m_typeName &&
+        m_specialType == other.m_specialType &&
+        m_specialTypeExplanation == other.m_specialTypeExplanation &&
+        m_subWordTypeList == other.m_subWordTypeList;
+}
+
+bool KEduVocWordType::Private::subWordType::operator ==(const subWordType & other)
+{
+    return m_subTypeName == other.m_subTypeName &&
+        m_specialType == other.m_specialType &&
+        m_specialTypeExplanation == other.m_specialTypeExplanation;
+}
+
+bool KEduVocWordType::operator ==(const KEduVocWordType & other)
+{
+    return d->m_wordTypeList == other.d->m_wordTypeList;
+}
 
 KEduVocWordType::KEduVocWordType()
         : d( new Private )
 {}
-
-KEduVocWordType::KEduVocWordType( const KEduVocWordType & other )
-        : d( new Private )
-{
-    d->m_wordTypeList = other.d->m_wordTypeList;
-}
 
 KEduVocWordType::~KEduVocWordType()
 {
     delete d;
 }
 
-
 KEduVocWordType & KEduVocWordType::operator = ( const KEduVocWordType & other )
 {
     d->m_wordTypeList = other.d->m_wordTypeList;
     return *this;
+}
+
+KEduVocWordType::KEduVocWordType( const KEduVocWordType & other )
+        : d( new Private )
+{
+    d->m_wordTypeList = other.d->m_wordTypeList;
 }
 
 
@@ -301,25 +320,25 @@ bool KEduVocWordType::removeType( const QString & typeName )
 {
     // only if NOT special type
     int index = mainTypeIndex( typeName );
-    if ( d->m_wordTypeList[index].m_specialType.isEmpty() ) {
-        d->m_wordTypeList.removeAt( index );
-        return true;
+    if ( index < 0 ) {
+        return false;
     }
-    return false;
+    d->m_wordTypeList.removeAt( index );
+    return true;
 }
 
 bool KEduVocWordType::removeSubType( const QString & mainTypeName, const QString & typeName )
 {
-    kDebug() << " delete subtype: " << mainTypeName << "/" << typeName;
-    // only if NOT special type
     int mainIndex = mainTypeIndex( mainTypeName );
-    int subIndex = subTypeIndex( mainTypeName, typeName );
-    kDebug() << "Index: " << mainIndex << "/" << subIndex;
-    if ( d->m_wordTypeList[mainIndex].m_subWordTypeList[subIndex].m_specialType.isEmpty() ) {
-        d->m_wordTypeList[mainIndex].m_subWordTypeList.removeAt( subIndex );
-        return true;
+    if ( mainIndex < 0 ) {
+        return false;
     }
-    return false;
+    int subIndex = subTypeIndex( mainTypeName, typeName );
+    if ( subIndex < 0 ) {
+        return false;
+    }
+    d->m_wordTypeList[mainIndex].m_subWordTypeList.removeAt( subIndex );
+    return true;
 }
 
 int KEduVocWordType::subTypeIndex( const QString & mainTypeName, const QString & subTypeName ) const
@@ -337,20 +356,11 @@ int KEduVocWordType::subTypeIndex( const QString & mainTypeName, const QString &
     return -1;
 }
 
-void KEduVocWordType::printDebugWordTypes()
-{
-    foreach( Private::wordType wt, d->m_wordTypeList ) {
-        kDebug() << wt.m_typeName;
-        foreach( Private::subWordType swt, wt.m_subWordTypeList ) {
-            kDebug() << "    " << swt.m_subTypeName;
-        }
-    }
-}
-
 QString KEduVocWordType::specialType( const QString & typeName )
 {
     int index = mainTypeIndex( typeName );
     if ( index >= 0 ) {
+kDebug() << "special for " << typeName << ":" << d->m_wordTypeList[index].m_specialType;
         return d->m_wordTypeList[index].m_specialType;
     }
     return QString();
@@ -402,13 +412,25 @@ QString KEduVocWordType::specialTypeAdverb() const
     return d->WORDTYPE_ADVERB;
 }
 
-QString KEduVocWordType::typeOfSpecialType( const QString & specialType ) const
+void KEduVocWordType::setSpecialType(const QString & typeName, const QString & newSpecialType)
 {
-    for ( int i=0; i < d->m_wordTypeList.count(); i++ ) {
-        if ( d->m_wordTypeList.value( i ).m_specialType == specialType ) {
-            return d->m_wordTypeList.value( i ).m_typeName;
+    int mainIndex = mainTypeIndex( typeName );
+    if ( mainIndex >= 0 ) {
+        d->m_wordTypeList[mainIndex].m_specialType = newSpecialType;
+kDebug() << "set special type" << typeName << ": " << d->m_wordTypeList[mainIndex].m_specialType;
+    }
+
+}
+
+void KEduVocWordType::setSpecialSubType(const QString & mainTypeName, const QString & subTypeName, const QString & newSpecialType)
+{
+    int mainIndex = mainTypeIndex( mainTypeName );
+    if ( mainIndex >= 0 ) {
+        int subIndex = subTypeIndex( mainTypeName, subTypeName );
+        if ( subIndex >= 0 ) {
+            d->m_wordTypeList[mainIndex].m_subWordTypeList[subIndex].m_specialType = newSpecialType;
+kDebug() << "set special sub type" << subTypeName << ": " << d->m_wordTypeList[mainIndex].m_subWordTypeList[subIndex].m_specialType;
         }
     }
-    return QString();
 }
 

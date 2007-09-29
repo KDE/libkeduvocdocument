@@ -50,6 +50,7 @@ public:
 
     /** assignment operator */
     KEduVocWordType& operator= ( const KEduVocWordType& other );
+    bool operator== ( const KEduVocWordType& other );
 
     void createDefaultWordTypes();
 
@@ -121,6 +122,7 @@ public:
      * @return the special type or an empty string.
      */
     QString specialType( const QString& typeName );
+    void setSpecialType( const QString& typeName, const QString& newSpecialType );
     /**
      * Same as above for a subtype
      * @param typeName Main type name
@@ -128,10 +130,7 @@ public:
      * @return the special type or an empty string.
      */
     QString specialSubType( const QString& mainTypeName, const QString& subTypeName );
-
-    void printDebugWordTypes();
-
-    KDE_DEPRECATED QString typeOfSpecialType( const QString& specialType ) const;
+    void setSpecialSubType( const QString& mainTypeName, const QString& subTypeName, const QString& newSpecialType );
 
     QString specialTypeNoun() const;
     QString specialTypeNounMale() const;
