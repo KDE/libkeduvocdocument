@@ -58,9 +58,8 @@ public:
      * Create a new word type in the list of known types
      * @param typeName Name of the word type
      * @param specialType Name of the special type - this is used internally to identify which types are use for special queries - verb query needs special == "verb" for example.
-     * @param specialTypeExplanation An explanation which can be shown to the user. Since the type can be renamed if it's special, but not deleted this is necessary.
      */
-    void addType( const QString& typeName, const QString& specialType = QString(), const QString& specialTypeExplanation = QString() );
+    void addType( const QString& typeName, const QString& specialType = QString() );
 
 
     /**
@@ -68,9 +67,8 @@ public:
      * @param mainType The word type to which the subtype belongs.
      * @param typeName Sub type name
      * @param specialType See above
-     * @param specialTypeExplanation See above
      */
-    void addSubType( const QString& mainType, const QString& typeName, const QString& specialType = QString(), const QString& specialTypeExplanation = QString() );
+    void addSubType( const QString& mainType, const QString& typeName, const QString& specialType = QString() );
 
     /**
      * Get a list of all known main word types.

@@ -37,13 +37,6 @@ public:
         Dual,
         Plural
     };
-/*
-    enum DeclinationGender {
-        Undefined,
-        Masculine,
-        Feminine,
-        Neuter
-    };*/
 
     enum DeclinationCase {
         Nominative = 1,

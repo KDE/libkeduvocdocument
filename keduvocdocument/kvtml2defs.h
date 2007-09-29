@@ -58,13 +58,13 @@
 #define KVTML_2NDPERSON         "secondperson"
 #define KVTML_THIRD_MALE        "thirdpersonmale"
 #define KVTML_THIRD_FEMALE      "thirdpersonfemale"
-#define KVTML_THIRD_NEUTER_COMMON "thirdpersonneutercommon"
+#define KVTML_THIRD_NEUTRAL_COMMON "thirdpersonneutralcommon"
 
 // for the personal pronuns:
 // if this tag exists, in a conjugation male/female are different
 #define KVTML_THIRD_PERSON_MALE_FEMALE_DIFFERENT "malefemaledifferent"
-// if this tag exists conjugations even have a neuter form for the third person
-#define KVTML_THIRD_PERSON_NEUTER_EXISTS "neuterexists"
+// if this tag exists conjugations even have a neutral form for the third person
+#define KVTML_THIRD_PERSON_NEUTRAL_EXISTS "neutralexists"
 #define KVTML_DUAL_EXISTS        "dualexists"
 
 // word types
@@ -75,7 +75,16 @@
 #define KVTML_WORDTYPE              "wordtype"
 #define KVTML_TYPENAME              "typename"
 #define KVTML_SUBTYPENAME           "subtypename"
+
+// these are necessary to enable practices based on word types. users can give types arbitrary names, but these few are hardcoded.
 #define KVTML_SPECIALWORDTYPE       "specialwordtype"
+#define KVTML_SPECIALWORDTYPE_NOUN        "noun"
+#define KVTML_SPECIALWORDTYPE_NOUN_MALE   "male"
+#define KVTML_SPECIALWORDTYPE_NOUN_FEMALE "female"
+#define KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL "neutral"
+#define KVTML_SPECIALWORDTYPE_VERB        "verb"
+#define KVTML_SPECIALWORDTYPE_ADJECTIVE   "adjective"
+#define KVTML_SPECIALWORDTYPE_ADVERB      "adverb"
 
 #define KVTML_TENSES            "tenses"
 #define KVTML_TENSE             "tense"

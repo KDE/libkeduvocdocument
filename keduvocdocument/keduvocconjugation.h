@@ -43,13 +43,13 @@ public:
         NumberMAX
     };
 
-    // store third person neuter/common in the same sttr
+    // store third person neutral/common in the same sttr
     enum ConjugationPerson {
         First,
         Second,
         ThirdMale,
         ThirdFemale,
-        ThirdNeuterCommon,
+        ThirdNeutralCommon,
         PersonMAX
     };
 

@@ -238,11 +238,11 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
     }
 
     // neutral
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Neuter );
+    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Neutral );
     if ( !articleString.isEmpty() ) {
         definite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
     }
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Neuter );
+    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Neutral );
     if ( !articleString.isEmpty() ) {
         indefinite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
     }
@@ -271,35 +271,46 @@ bool KEduVocKvtml2Writer::writeTypes( QDomElement &typesElement )
         kDebug() << "Writing type: " << mainTypeName;
         QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_WORDTYPEDEFINITION );
         typeDefinitionElement.appendChild( newTextElement( KVTML_TYPENAME, mainTypeName ) );
-        if ( !wt.specialType( mainTypeName ).isEmpty() ) {
-            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, wt.specialType( mainTypeName ) ) );
+
+        QString specialType = wt.specialType( mainTypeName );
+        if ( !specialType.isEmpty() ) {
+            // get the NOT localized version for the doc
+            if ( specialType == m_doc->wordTypes().specialTypeNoun() ) {
+                specialType = KVTML_SPECIALWORDTYPE_NOUN;
+            }
+            if ( specialType == m_doc->wordTypes().specialTypeVerb()) {
+                specialType =  KVTML_SPECIALWORDTYPE_VERB;
+            }
+            if ( specialType == m_doc->wordTypes().specialTypeAdverb()) {
+                specialType = KVTML_SPECIALWORDTYPE_ADVERB;
+            }
+            if ( specialType ==  m_doc->wordTypes().specialTypeAdjective()) {
+                specialType = KVTML_SPECIALWORDTYPE_ADJECTIVE;
+            }
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, specialType ) );
         }
 
         // subtypes
         foreach( QString subTypeName, wt.subTypeNameList( mainTypeName ) ) {
             QDomElement subTypeDefinitionElement = m_domDoc.createElement( KVTML_SUBWORDTYPEDEFINITION );
             subTypeDefinitionElement.appendChild( newTextElement( KVTML_SUBTYPENAME, subTypeName ) );
-            if ( !wt.specialSubType( mainTypeName, subTypeName ).isEmpty() ) {
-                subTypeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, wt.specialSubType( mainTypeName, subTypeName ) ) );
+            QString specialSubType = wt.specialSubType( mainTypeName, subTypeName );
+            if ( !specialSubType.isEmpty() ) {
+                if ( specialSubType == m_doc->wordTypes().specialTypeNounMale() ) {
+                    specialSubType = KVTML_SPECIALWORDTYPE_NOUN_MALE;
+                }
+                if ( specialSubType == m_doc->wordTypes().specialTypeNounFemale() ) {
+                    specialSubType = KVTML_SPECIALWORDTYPE_NOUN_FEMALE;
+                }
+                if ( specialSubType == m_doc->wordTypes().specialTypeNounNeutral() ) {
+                    specialSubType = KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL;
+                }
+                subTypeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, specialSubType ) );
             }
             typeDefinitionElement.appendChild( subTypeDefinitionElement );
         }
         typesElement.appendChild( typeDefinitionElement );
     }
-
-
-
-
-
-    /*
-      foreach(QString type, m_doc->typeDescriptions())
-      {
-        if (!(type.isNull()) )
-        {
-          typesElement.appendChild(newTextElement(KVTML_WORDTYPE, type));
-        }
-      }*/
-
     return true;
 }
 
@@ -548,7 +559,7 @@ bool KEduVocKvtml2Writer::writeConjugation( QDomElement &conjugationElement,
         QString third_female = conjugation.conjugation(
             KEduVocConjugation::ThirdFemale, num );
         QString third_neutral = conjugation.conjugation(
-            KEduVocConjugation::ThirdNeuterCommon, num );
+            KEduVocConjugation::ThirdNeutralCommon, num );
 
         if ( !first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
                 !third_male.isEmpty() || !third_neutral.isEmpty() ) {
@@ -569,7 +580,7 @@ bool KEduVocKvtml2Writer::writeConjugation( QDomElement &conjugationElement,
             number.appendChild( newTextElement( KVTML_2NDPERSON, second ) );
             number.appendChild( newTextElement( KVTML_THIRD_MALE, third_male ) );
             number.appendChild( newTextElement( KVTML_THIRD_FEMALE, third_female ) );
-            number.appendChild( newTextElement( KVTML_THIRD_NEUTER_COMMON, third_neutral ) );
+            number.appendChild( newTextElement( KVTML_THIRD_NEUTRAL_COMMON, third_neutral ) );
 
             conjugationElement.appendChild( number );
         }
@@ -592,8 +603,8 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
     if ( pronoun.maleFemaleDifferent() ) {
         pronounElement.appendChild( m_domDoc.createElement( KVTML_THIRD_PERSON_MALE_FEMALE_DIFFERENT ) );
     }
-    if ( pronoun.neuterExists() ) {
-        pronounElement.appendChild( m_domDoc.createElement( KVTML_THIRD_PERSON_NEUTER_EXISTS ) );
+    if ( pronoun.neutralExists() ) {
+        pronounElement.appendChild( m_domDoc.createElement( KVTML_THIRD_PERSON_NEUTRAL_EXISTS ) );
     }
     if ( pronoun.dualExists() ) {
         pronounElement.appendChild( m_domDoc.createElement( KVTML_DUAL_EXISTS ) );
@@ -609,7 +620,7 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
         QString third_female = pronoun.personalPronoun(
             KEduVocConjugation::ThirdFemale, num );
         QString third_neutral = pronoun.personalPronoun(
-            KEduVocConjugation::ThirdNeuterCommon, num );
+            KEduVocConjugation::ThirdNeutralCommon, num );
 
         if ( !first.isEmpty() || !second.isEmpty() || !third_female.isEmpty() ||
                 !third_male.isEmpty() || !third_neutral.isEmpty() ) {
@@ -630,13 +641,13 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
             number.appendChild( newTextElement( KVTML_2NDPERSON, second ) );
             number.appendChild( newTextElement( KVTML_THIRD_MALE, third_male ) );
             number.appendChild( newTextElement( KVTML_THIRD_FEMALE, third_female ) );
-            number.appendChild( newTextElement( KVTML_THIRD_NEUTER_COMMON, third_neutral ) );
+            number.appendChild( newTextElement( KVTML_THIRD_NEUTRAL_COMMON, third_neutral ) );
 
             if ( pronoun.maleFemaleDifferent() ) {
                 number.appendChild( m_domDoc.createElement( KVTML_THIRD_PERSON_MALE_FEMALE_DIFFERENT ) );
             }
-            if ( pronoun.neuterExists() ) {
-                number.appendChild( m_domDoc.createElement( KVTML_THIRD_PERSON_NEUTER_EXISTS ) );
+            if ( pronoun.neutralExists() ) {
+                number.appendChild( m_domDoc.createElement( KVTML_THIRD_PERSON_NEUTRAL_EXISTS ) );
             }
             pronounElement.appendChild( number );
         }

@@ -550,56 +550,49 @@ bool KEduVocKvtml2Reader::readTypes( QDomElement &typesElement )
         // set type and specialtype
         mainTypeName =
             currentTypeElement.firstChildElement( KVTML_TYPENAME ).text();
-        m_doc->wordTypes().addType( mainTypeName,
-                                     currentTypeElement.firstChildElement( KVTML_SPECIALWORDTYPE ).text() );
+
+        QString specialType = currentTypeElement.firstChildElement( KVTML_SPECIALWORDTYPE ).text();
+        if ( !specialType.isEmpty() ) {
+            // get the localized version
+            if ( specialType == KVTML_SPECIALWORDTYPE_NOUN ) {
+                specialType = m_doc->wordTypes().specialTypeNoun();
+            }
+            if ( specialType == KVTML_SPECIALWORDTYPE_VERB ) {
+                specialType = m_doc->wordTypes().specialTypeVerb();
+            }
+            if ( specialType == KVTML_SPECIALWORDTYPE_ADVERB ) {
+                specialType = m_doc->wordTypes().specialTypeAdverb();
+            }
+            if ( specialType == KVTML_SPECIALWORDTYPE_ADJECTIVE ) {
+                specialType = m_doc->wordTypes().specialTypeAdjective();
+            }
+        }
+        m_doc->wordTypes().addType( mainTypeName, specialType );
 
         // iterate sub type elements <subwordtypedefinition>
-        QDomElement currentSubTypeElement =    currentTypeElement.firstChildElement( KVTML_SUBWORDTYPEDEFINITION );
+        QDomElement currentSubTypeElement = currentTypeElement.firstChildElement( KVTML_SUBWORDTYPEDEFINITION );
         while ( !currentSubTypeElement.isNull() ) {
+            QString specialSubType = currentSubTypeElement.firstChildElement( KVTML_SPECIALWORDTYPE ).text();
+            if ( !specialSubType.isEmpty() ) {
+                // get the localized version
+                if ( specialSubType == KVTML_SPECIALWORDTYPE_NOUN_MALE ) {
+                    specialSubType = m_doc->wordTypes().specialTypeNounMale();
+                }
+                if ( specialSubType == KVTML_SPECIALWORDTYPE_NOUN_FEMALE ) {
+                    specialSubType = m_doc->wordTypes().specialTypeNounFemale();
+                }
+                if ( specialSubType == KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) {
+                    specialSubType = m_doc->wordTypes().specialTypeNounNeutral();
+                }
+            }
             // set type and specialtype
             m_doc->wordTypes().addSubType( mainTypeName,
                                             currentSubTypeElement.firstChildElement( KVTML_SUBTYPENAME ).text(),
-                                            currentSubTypeElement.firstChildElement( KVTML_SPECIALWORDTYPE ).text() );
-
-
+                                            specialSubType );
             currentSubTypeElement = currentSubTypeElement.nextSiblingElement( KVTML_SUBWORDTYPEDEFINITION );
         }
-
-
-
-
-
         currentTypeElement = currentTypeElement.nextSiblingElement( KVTML_WORDTYPEDEFINITION );
     }
-
-
-    /*
-    for (int i = 0; i < typeNodes.count(); ++i)
-    {
-      QDomElement currentElement = typeNodes.item(i).toElement();
-      if (currentElement.parentNode() == typesElement)
-      {
-        m_doc->wordTypes().addType(currentElement.text());
-      }
-    }*/
-
-
-
-
-
-
-
-//   QDomNodeList typeNodes = typesElement.elementsByTagName(KVTML_WORDTYPEDEFINITION);
-//   for (int i = 0; i < typeNodes.count(); ++i)
-//   {
-//     QDomElement currentElement = typeNodes.item(i).toElement();
-//     if (currentElement.parentNode() == typesElement)
-//     {
-//       m_doc->wordTypes().addType(currentElement.text());
-//     }
-//   }
-
-//   m_doc->setTypeDescriptions(types);
     return true;
 }
 
@@ -796,9 +789,9 @@ bool KEduVocKvtml2Reader::readConjugationPerson(QDomElement & personElement, KEd
     conjugation.setConjugation( currentElement.text(),
         KEduVocConjugation::ThirdFemale, number );
 
-    currentElement = personElement.firstChildElement( KVTML_THIRD_NEUTER_COMMON );
+    currentElement = personElement.firstChildElement( KVTML_THIRD_NEUTRAL_COMMON );
     conjugation.setConjugation( currentElement.text(),
-        KEduVocConjugation::ThirdNeuterCommon, number );
+        KEduVocConjugation::ThirdNeutralCommon, number );
 }
 
 
@@ -806,8 +799,8 @@ bool KEduVocKvtml2Reader::readPersonalPronoun(QDomElement & pronounElement, KEdu
 {
     pronoun.setMaleFemaleDifferent(!pronounElement.firstChildElement(
         KVTML_THIRD_PERSON_MALE_FEMALE_DIFFERENT).isNull());
-    pronoun.setNeuterExists( !pronounElement.firstChildElement(
-        KVTML_THIRD_PERSON_NEUTER_EXISTS).isNull() );
+    pronoun.setNeutralExists( !pronounElement.firstChildElement(
+        KVTML_THIRD_PERSON_NEUTRAL_EXISTS).isNull() );
     pronoun.setDualExists( !pronounElement.firstChildElement(
         KVTML_DUAL_EXISTS).isNull() );
 
@@ -846,9 +839,9 @@ bool KEduVocKvtml2Reader::readPersonalPronounChild(QDomElement & personElement, 
     pronoun.setPersonalPronoun( currentElement.text(),
         KEduVocConjugation::ThirdFemale, number );
 
-    currentElement = personElement.firstChildElement( KVTML_THIRD_NEUTER_COMMON );
+    currentElement = personElement.firstChildElement( KVTML_THIRD_NEUTRAL_COMMON );
     pronoun.setPersonalPronoun( currentElement.text(),
-        KEduVocConjugation::ThirdNeuterCommon, number );
+        KEduVocConjugation::ThirdNeutralCommon, number );
 }
 
 

@@ -50,7 +50,7 @@ public:
     enum ArticleGender {
         Masculine,
         Feminine,
-        Neuter,
+        Neutral,
         GenderMAX
     };
 

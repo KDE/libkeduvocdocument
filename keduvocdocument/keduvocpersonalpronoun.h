@@ -44,8 +44,8 @@ public:
     bool maleFemaleDifferent() const;
     void setMaleFemaleDifferent(bool different);
 
-    bool neuterExists() const;
-    void setNeuterExists(bool exists);
+    bool neutralExists() const;
+    void setNeutralExists(bool exists);
 
     bool dualExists() const;
     void setDualExists(bool exists);

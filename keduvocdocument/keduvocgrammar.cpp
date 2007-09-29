@@ -150,11 +150,11 @@ KEduVocArticle::KEduVocArticle( const QString &fem_def, const QString &fem_indef
 {
     setArticle( mal_def, Singular, Definite, Masculine );
     setArticle( fem_def, Singular, Definite, Feminine );
-    setArticle( neu_def, Singular, Definite, Neuter );
+    setArticle( neu_def, Singular, Definite, Neutral );
 
     setArticle( mal_indef, Singular, Indefinite, Masculine );
     setArticle( fem_indef, Singular, Indefinite, Feminine );
-    setArticle( neu_indef, Singular, Indefinite, Neuter );
+    setArticle( neu_indef, Singular, Indefinite, Neutral );
 }
 
 KEduVocArticle::~KEduVocArticle()

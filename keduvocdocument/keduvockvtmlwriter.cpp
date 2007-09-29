@@ -383,8 +383,8 @@ bool KEduVocKvtmlWriter::writeArticle( QDomElement &domElementParent )
             domElementEntry.appendChild( domElementMI );
         }
 
-        // neuter
-        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Neuter );
+        // neutral
+        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Neutral );
         if ( !articleString.isEmpty() ) {
             QDomElement domElementND = m_domDoc.createElement( KV_ART_ND );
             QDomText domTextND = m_domDoc.createTextNode( articleString );
@@ -392,7 +392,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomElement &domElementParent )
             domElementND.appendChild( domTextND );
             domElementEntry.appendChild( domElementND );
         }
-        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Neuter );
+        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Neutral );
         if ( !articleString.isEmpty() ) {
             QDomElement domElementNI = m_domDoc.createElement( KV_ART_NI );
             QDomText domTextNI = m_domDoc.createTextNode( articleString );

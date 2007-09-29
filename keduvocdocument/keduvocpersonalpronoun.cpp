@@ -22,7 +22,7 @@ public:
     Private();
 
     bool m_maleFemaleDifferent;
-    bool m_neuterExists;
+    bool m_neutralExists;
     bool m_dualExists;
     QMap<int, QString> m_personalpronouns;
 };
@@ -31,7 +31,7 @@ public:
 KEduVocPersonalPronoun::Private::Private()
 {
     m_maleFemaleDifferent = false;
-    m_neuterExists = false;
+    m_neutralExists = false;
     m_dualExists = false;
 }
 
@@ -44,7 +44,7 @@ KEduVocPersonalPronoun::KEduVocPersonalPronoun( const KEduVocPersonalPronoun& ot
         : d( new Private )
 {
     d->m_maleFemaleDifferent = other.d->m_maleFemaleDifferent;
-    d->m_neuterExists = other.d->m_neuterExists;
+    d->m_neutralExists = other.d->m_neutralExists;
     d->m_personalpronouns = other.d->m_personalpronouns;
     d->m_dualExists = other.d->m_dualExists;
 }
@@ -59,7 +59,7 @@ KEduVocPersonalPronoun::~KEduVocPersonalPronoun()
 KEduVocPersonalPronoun& KEduVocPersonalPronoun::operator = ( const KEduVocPersonalPronoun& other )
 {
     d->m_maleFemaleDifferent = other.d->m_maleFemaleDifferent;
-    d->m_neuterExists = other.d->m_neuterExists;
+    d->m_neutralExists = other.d->m_neutralExists;
     d->m_personalpronouns = other.d->m_personalpronouns;
     d->m_dualExists = other.d->m_dualExists;
     return *this;
@@ -70,7 +70,7 @@ bool KEduVocPersonalPronoun::operator ==(const KEduVocPersonalPronoun& other) co
 {
     return d->m_personalpronouns == other.d->m_personalpronouns &&
         d->m_maleFemaleDifferent == other.d->m_maleFemaleDifferent &&
-        d->m_neuterExists == other.d->m_neuterExists &&
+        d->m_neutralExists == other.d->m_neutralExists &&
         d->m_dualExists == other.d->m_dualExists;
 }
 
@@ -105,14 +105,14 @@ void KEduVocPersonalPronoun::setMaleFemaleDifferent(bool different)
     d->m_maleFemaleDifferent = different;
 }
 
-bool KEduVocPersonalPronoun::neuterExists() const
+bool KEduVocPersonalPronoun::neutralExists() const
 {
-    return d->m_neuterExists;
+    return d->m_neutralExists;
 }
 
-void KEduVocPersonalPronoun::setNeuterExists(bool exists)
+void KEduVocPersonalPronoun::setNeutralExists(bool exists)
 {
-    d->m_neuterExists = exists;
+    d->m_neutralExists = exists;
 }
 
 bool KEduVocPersonalPronoun::dualExists() const
