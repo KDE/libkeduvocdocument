@@ -64,11 +64,11 @@ void LeitnerSystemView::LeitnerSystemViewPrivate::drawSystem( QPainter* p )
     //draw the boxes' icons
     for ( int i = 0; i < m_leitnerSystem->getNumberOfBoxes(); i++ ) {
         if ( i == m_highlightedBox ) {
-            //p->drawPixmap(12 + i * 64 + i*10, m_imageY, KGlobal::iconLoader()->loadIcon("leitnerbox", K3Icon::Panel));
+            //p->drawPixmap(12 + i * 64 + i*10, m_imageY, KGlobal::iconLoader()->loadIcon("leitnerbox", KIconLoader::Panel));
             p->drawRect( 12 + i * 64 + i*10, m_imageY,64,64 );
             p->fillRect( 12 + i * 64 + i*10, m_imageY,64,64, QBrush( Qt::red ) );
         } else { //for each box 74 = 64(pixmap) + 10(distance between two boxes)
-            //p->drawPixmap(12 + i * 74, m_imageY, KGlobal::iconLoader()->loadIcon("leitnerbox", K3Icon::Panel));
+            //p->drawPixmap(12 + i * 74, m_imageY, KGlobal::iconLoader()->loadIcon("leitnerbox", KIconLoader::Panel));
             p->drawRect( 12 + i * 64 + i*10, m_imageY,64,64 );
         }
     }
