@@ -652,4 +652,5 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
             pronounElement.appendChild( number );
         }
     }
+    return true;
 }

@@ -795,6 +795,7 @@ bool KEduVocKvtml2Reader::readConjugationPerson(QDomElement & personElement, KEd
     currentElement = personElement.firstChildElement( KVTML_THIRD_NEUTRAL_COMMON );
     conjugation.setConjugation( currentElement.text(),
         KEduVocConjugation::ThirdNeutralCommon, number );
+    return true;
 }
 
 
@@ -821,6 +822,7 @@ bool KEduVocKvtml2Reader::readPersonalPronoun(QDomElement & pronounElement, KEdu
     if ( !personElement.isNull() ) {
         readPersonalPronounChild( personElement, pronoun, KEduVocConjugation::Plural );
     }
+    return true;
 }
 
 
@@ -845,6 +847,7 @@ bool KEduVocKvtml2Reader::readPersonalPronounChild(QDomElement & personElement, 
     currentElement = personElement.firstChildElement( KVTML_THIRD_NEUTRAL_COMMON );
     pronoun.setPersonalPronoun( currentElement.text(),
         KEduVocConjugation::ThirdNeutralCommon, number );
+    return true;
 }
 
 

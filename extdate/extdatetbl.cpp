@@ -213,8 +213,6 @@ ExtDateTable::paintCell(QPainter *painter, int row, int col)
          ( daynum == 6 && d->calendar->calendarName() == "gregorian" ) )
           normalday=false;
 
-			QBrush brushTitle();
- 			QBrush brushInvertTitle(palette().brush( QPalette::Base ) );
 			QColor titleColor(isEnabled()?( KGlobalSettings::activeTitleColor() ):( KGlobalSettings::inactiveTitleColor() ) );
 			QColor textColor(isEnabled()?( KGlobalSettings::activeTextColor() ):( KGlobalSettings::inactiveTextColor() ) );
       if (!normalday)
