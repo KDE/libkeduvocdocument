@@ -24,6 +24,7 @@
 #include "keduvocwordtype.h"
 
 #include <KLocale>
+#include <kdebug.h>
 
 // #define QM_VERB           "v"    // go
 // #define   QM_VERB_IRR     "ir"
