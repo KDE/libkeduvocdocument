@@ -96,12 +96,25 @@ QString KEduVocConjugation::conjugation(ConjugationPerson person, ConjugationNum
 
 void KEduVocConjugation::setConjugation(const QString & conjugation, ConjugationPerson person, ConjugationNumber number)
 {
-    d->m_conjugations[indexOf(person, number)] = conjugation;
+    if ( !conjugation.isEmpty() ) {
+        d->m_conjugations[indexOf(person, number)] = conjugation;
+    } else {
+        // if we received an empty string, remove the element.
+        if ( d->m_conjugations.contains(indexOf(person, number)) ) {
+            d->m_conjugations.remove(indexOf(person, number));
+        }
+    }
 }
 
 
 int KEduVocConjugation::indexOf(ConjugationPerson person, ConjugationNumber number) const
 {
     return person + PersonMAX * number;
+}
+
+
+bool KEduVocConjugation::isEmpty()
+{
+    return d->m_conjugations.count() == 0;
 }
 

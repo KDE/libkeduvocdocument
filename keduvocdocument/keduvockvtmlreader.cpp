@@ -604,8 +604,8 @@ bool KEduVocKvtmlReader::readPersonalPronouns( QDomElement &domElementParent, KE
 
     const KEduVocConjugation::ConjugationNumber numP = KEduVocConjugation::Plural;
 
-    pronouns.setPersonalPronoun( pers1_sing, KEduVocConjugation::First, numP );
-    pronouns.setPersonalPronoun( pers2_sing, KEduVocConjugation::Second, numP );
+    pronouns.setPersonalPronoun( pers1_plur, KEduVocConjugation::First, numP );
+    pronouns.setPersonalPronoun( pers2_plur, KEduVocConjugation::Second, numP );
     if ( p3_common ) {
         pronouns.setPersonalPronoun( pers3_f_plur, KEduVocConjugation::ThirdNeutralCommon, numP );
     } else  {

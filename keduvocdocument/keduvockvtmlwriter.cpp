@@ -411,7 +411,8 @@ bool KEduVocKvtmlWriter::writeArticle( QDomElement &domElementParent )
 
 bool KEduVocKvtmlWriter::writeType( QDomElement &domElementParent )
 {
-    /** @todo port to new type handling
+    /** @todo port to new type handling */
+    /*
       if (m_doc->typeDescriptions().count() == 0)
         return true;
 

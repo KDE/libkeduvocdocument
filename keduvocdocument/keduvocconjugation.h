@@ -69,6 +69,8 @@ public:
     QString conjugation(ConjugationPerson person, ConjugationNumber number) const;
     void setConjugation(const QString& conjugation, ConjugationPerson person, ConjugationNumber number);
 
+    bool isEmpty();
+
 private:
     class Private;
     Private* const d;
