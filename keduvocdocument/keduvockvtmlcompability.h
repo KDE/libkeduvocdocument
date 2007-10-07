@@ -21,17 +21,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KEDUVOCKVTML1COMPABILITY_P_H
-#define KEDUVOCKVTML1COMPABILITY_P_H
+#ifndef KEDUVOCKVTMLCOMPABILITY_H
+#define KEDUVOCKVTMLCOMPABILITY_H
 
+#include <KDE/KLocalizedString>
 #include <QtCore/QString>
 #include <QtCore/QMap>
 #include <QtCore/QSet>
-
-#include <KLocalizedString>
-
-
-
 
 
 // internal types, indented are subtypes
@@ -171,6 +167,4 @@ private:
     static const QString KVTML_1_SEPERATOR;
 };
 
-
-
-#endif // KEDUVOCKVTML1COMPABILITY_P_H
+#endif // KEDUVOCKVTMLCOMPABILITY_H

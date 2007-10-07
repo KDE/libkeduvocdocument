@@ -1024,7 +1024,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
             // it's from a lesson that hasn't been added yet
             // so make sure this lesson is in the document
             kDebug() << "Warning: lesson > m_doc->lessonCount() in readExpression.";
-            m_doc->appendLesson( i18nc("A generic name for a new lesson and its number.", "Lesson %1" ), lesson );
+            m_doc->appendLesson( i18nc("A generic name for a new lesson and its number.", "Lesson %1", lesson ));
         }
     }
 
@@ -1235,8 +1235,6 @@ bool KEduVocKvtmlReader::addLanguage( int languageId, const QString& locale)
     }
     return true;
 }
-
-
 
 
 #include "keduvockvtmlreader.moc"

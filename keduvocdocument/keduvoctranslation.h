@@ -21,7 +21,7 @@
 #include "keduvocgrammar.h"
 #include "keduvocconjugation.h"
 #include "keduvocmultiplechoice.h"
-#include <KUrl>
+#include <KDE/KUrl>
 #include <QtCore/QString>
 
 
@@ -211,7 +211,7 @@ public:
     QStringList conjugationTenses() const;
 
     /**
-     * Bad, only compability. Deprecated.
+     * Bad, only compatibility. Deprecated.
      * @return
      */
     QMap <QString, KEduVocConjugation> conjugations() const;
