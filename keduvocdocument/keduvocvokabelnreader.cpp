@@ -48,7 +48,7 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
     m_doc->setAuthor( "http://www.vokabeln.de" );
 
     QTextStream inputStream( m_inputFile );
-    inputStream.setCodec( "ISO-8851-1" );
+    inputStream.setCodec( "ISO-8859-1" );
     inputStream.setAutoDetectUnicode( false );
     inputStream.seek( 0 );
 
@@ -120,7 +120,7 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         words = expression.split( "\"," );
         original = words[0].mid( 1 );
         translation = words[1].mid( 1 );
-        lesson = words[2].toInt();
+        lesson = words[2].toInt() - 1;
 
         KEduVocExpression kve;
         kve.setTranslation( 0, original );
