@@ -1215,7 +1215,11 @@ bool KEduVocKvtmlReader::addLanguage( int languageId, const QString& locale)
         if ( !locale.isEmpty() ) {      // no definition in first entry
             m_doc->identifier(languageId).setLocale(locale);
 
-            QString languageName = KGlobal::locale()->languageCodeToName(locale);
+            QString languageName;
+            if (KGlobal::locale()) {
+                // when using from qt-only apps this would crash (converter)
+                languageName = KGlobal::locale()->languageCodeToName(locale);
+            }
             if ( languageName.isEmpty() ) {
                 languageName = locale;
             }
