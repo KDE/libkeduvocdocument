@@ -52,40 +52,53 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
     inputStream.setAutoDetectUnicode( false );
     inputStream.seek( 0 );
 
-    QString title,
-    lang1,
-    lang2,
-    expression,
-    original,
-    translation,
-    lessonDescr,
-    temp;
+    QString title;
+    QString lang1;
+    QString lang2;
+    QString expression;
+    QString original;
+    QString translation;
+    QString lessonDescr;
+    QString temp;
+    QString comment;
 
-    int     i,
-    wordCount,
-    lesson;
+    int i;
+    int wordCount;
+    int lesson;
 
     int lines = 10000;
 
-    QStringList titles,
-    languages,
-    words;
+    QStringList titles;
+    QStringList languages;
+    QStringList words;
 
-    bool keepGoing = true;
+    temp = inputStream.readLine();
 
-    while ( keepGoing ) {
-        temp = inputStream.readLine();
-        keepGoing = !( temp.indexOf( "\"," ) > 0 );
-        title.append( temp );
-        if ( keepGoing )
-            title.append( " " );
+    if ( temp.startsWith ( QChar::fromLatin1 ( '"' ) ) ) {
+        while ( temp != QChar::fromLatin1('0') ) {
+            if ( title.isEmpty() ) {
+                title = temp;
+            } else {
+                comment.append( temp.append('\n') );
+            }
+            temp = inputStream.readLine();
+        }
     }
 
-    titles = title.split( "\"," );
-    m_doc->setTitle( titles[0].mid( 1 ) );
+    // 1 line header
+    if (comment.isEmpty()) {
+        titles = title.split( "\"," );
+        m_doc->setTitle(titles[0].mid(1));
+    }
+    // longer header
+    else {
+        titles = comment.split( "\"," );
+        m_doc->setDocumentComment(titles[0]);
+        m_doc->setTitle(title.mid(1));
+    }
+
     wordCount = titles[1].section( ',', 0, 0 ).toInt();
 
-    inputStream.readLine();
     inputStream.readLine();
 
     lang1 = inputStream.readLine();
@@ -98,23 +111,25 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
     m_doc->identifier(1).setLocale( languages[1].mid( 1 ) );
     m_doc->identifier(1).setName( languages[1].mid( 1 ) );
 
-    keepGoing = true;
-    while ( keepGoing )
-        keepGoing = !( inputStream.readLine().indexOf( "8. Lernhilfe" ) > 0 ); //DO NOT translate
+    while ( !temp.contains("8. Lernhilfe") ) {
+        temp = inputStream.readLine(); //DO NOT translate
+    }
 
-    for ( i = 0; i <= 14; i++ )
+    for ( i = 0; i <= 14; i++ ) {
         inputStream.readLine();
+    }
 
     for ( i = 0; i < wordCount - 1; i++ ) {
         int c = 0;
-        expression.resize( 0 );
+        expression.clear();
 
         while ( c < 2 ) {
             temp = inputStream.readLine();
             c+= temp.count( "\",", Qt::CaseSensitive );
             expression.append( temp );
-            if ( c < 2 )
+            if ( c < 2 ) {
                 expression.append( " " );
+            }
         }
 
         words = expression.split( "\"," );
@@ -127,7 +142,6 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         kve.setTranslation( 1, translation );
         kve.translation( 1 ).gradeFrom( 0 ).setGrade( 0 );
         kve.translation( 0 ).gradeFrom( 1 ).setGrade( 0 );
-        /// @todo lesson might need a -1. I have no specs or documents to verify.
         kve.setLesson( lesson );
 
         m_doc->appendEntry( &kve );

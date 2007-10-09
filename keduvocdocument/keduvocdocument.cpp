@@ -189,7 +189,42 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileNa
         line2 = ts.readLine();
     }
 
+    /*
+     * Vokabeln.de files:
+    The header seems to be something like this:
+
+    "Name
+    Lang1 - Lang2",123,234,456
+    0
+
+    or something longer:
+
+    "Name
+    Lang1 - Lang2
+    [..]
+    Blah, blah, blah...",123,234,456
+    0
+    */
+
+    QString tmp;
+
+    if ( line1.startsWith(QChar::fromLatin1('"'))) {
+        ts.seek(0);
+        tmp = ts.readLine();
+        // There shouldn't be headers longer than 10 lines.
+        for ( int x=0; x < 10; x++) {
+            if (tmp.contains( "\"," )) {
+                tmp = ts.readLine();
+                if (tmp.endsWith('0')) {
+                    f->close();
+                    return Vokabeln;
+                }
+            }
+            tmp = ts.readLine();
+        }
+    }
     f->close();
+
     if ( line1.startsWith(QString::fromLatin1("<?xml")) ) {
         if ( line2.indexOf( "pauker", 0 ) >  0 ) {
             return Pauker;
@@ -203,18 +238,6 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileNa
 
     if ( line1 == WQL_IDENT ) {
         return Wql;
-    }
-
-    /*
-    Vokabeln.de files:
-    The header seems to be something like this:
-    "Name
-    Lang1 - Lang2",123,234,456
-    */
-    if ( line1.startsWith(QChar::fromLatin1('"')) &&
-        ((line1.contains(QRegExp( "\",[0-9]" ))) ||
-        (line2.contains(QRegExp( "\",[0-9]" ))))) {
-        return Vokabeln;
     }
 
     return Csv;
@@ -973,7 +996,7 @@ void KEduVocDocument::setLicense( const QString & s )
 
 void KEduVocDocument::setDocumentComment( const QString & s )
 {
-    d->m_comment = s.simplified();
+    d->m_comment = s.trimmed();
 }
 
 
