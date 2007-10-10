@@ -177,6 +177,7 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileNa
     QIODevice * f = KFilterDev::deviceForFile( fileName );
     if ( !f->open( QIODevice::ReadOnly ) ) {
         kDebug() << "Warning, could not open QIODevice for file: " << fileName;
+        delete f;
         return Csv;
     }
 
@@ -217,6 +218,7 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileNa
                 tmp = ts.readLine();
                 if (tmp.endsWith('0')) {
                     f->close();
+                    delete f;
                     return Vokabeln;
                 }
             }
@@ -224,6 +226,8 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileNa
         }
     }
     f->close();
+    delete f;
+
 
     if ( line1.startsWith(QString::fromLatin1("<?xml")) ) {
         if ( line2.indexOf( "pauker", 0 ) >  0 ) {
@@ -347,6 +351,7 @@ int KEduVocDocument::open( const KUrl& url )
         }
 
         f->close();
+        delete f;
         KIO::NetAccess::removeTempFile( temporaryFile );
     }
 
