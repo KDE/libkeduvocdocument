@@ -71,11 +71,11 @@ public:
 
     bool isEmpty();
 
+    int indexOf(ConjugationPerson person, ConjugationNumber number) const;
+
 private:
     class Private;
     Private* const d;
-
-    int indexOf(ConjugationPerson person, ConjugationNumber number) const;
 };
 
 
