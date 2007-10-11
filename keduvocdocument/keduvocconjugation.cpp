@@ -81,7 +81,6 @@ bool KEduVocConjugation::operator ==(const KEduVocConjugation& other) const
         d->m_thirdCommonSingular == other.d->m_thirdCommonSingular &&
         d->m_thirdCommonDual == other.d->m_thirdCommonDual &&
         d->m_thirdCommonPlural == other.d->m_thirdCommonPlural;
-    ;
 }
 
 
