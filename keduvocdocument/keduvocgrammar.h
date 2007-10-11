@@ -98,6 +98,8 @@ public:
 
     void setArticle(const QString& article, ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
 
+    bool isArticle(const QString& article) const;
+
 private:
     int indexOf(ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
 
