@@ -67,11 +67,12 @@ public:
     bool operator == ( const KEduVocConjugation& a ) const;
 
     QString conjugation(ConjugationPerson person, ConjugationNumber number) const;
+    QString conjugation(int index) const;
     void setConjugation(const QString& conjugation, ConjugationPerson person, ConjugationNumber number);
 
     bool isEmpty();
 
-    int indexOf(ConjugationPerson person, ConjugationNumber number) const;
+    static int indexOf(ConjugationPerson person, ConjugationNumber number);
 
 private:
     class Private;

@@ -85,13 +85,18 @@ bool KEduVocConjugation::operator ==(const KEduVocConjugation& other) const
 }
 
 
-QString KEduVocConjugation::conjugation(ConjugationPerson person, ConjugationNumber number) const
+QString KEduVocConjugation::conjugation(int index) const
 {
-    int index = indexOf(person, number);
     if ( d->m_conjugations.contains(index) ) {
         return d->m_conjugations.value(index);
     }
     return QString();
+}
+
+
+QString KEduVocConjugation::conjugation(ConjugationPerson person, ConjugationNumber number) const
+{
+    return conjugation(indexOf(person, number));
 }
 
 void KEduVocConjugation::setConjugation(const QString & conjugation, ConjugationPerson person, ConjugationNumber number)
@@ -107,7 +112,7 @@ void KEduVocConjugation::setConjugation(const QString & conjugation, Conjugation
 }
 
 
-int KEduVocConjugation::indexOf(ConjugationPerson person, ConjugationNumber number) const
+int KEduVocConjugation::indexOf(ConjugationPerson person, ConjugationNumber number)
 {
     return person + PersonMAX * number;
 }
