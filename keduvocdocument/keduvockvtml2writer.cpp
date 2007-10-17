@@ -392,7 +392,9 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     }
 
     // <comment></comment>
-    translationElement.appendChild( newTextElement( KVTML_COMMENT, translation.comment() ) );
+    if ( !translation.comment().isEmpty() ) {
+        translationElement.appendChild( newTextElement( KVTML_COMMENT, translation.comment() ) );
+    }
 
     // <pronunciation></pronunciation>
     if ( !translation.pronunciation().isEmpty() ) {
