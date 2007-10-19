@@ -26,16 +26,7 @@ set(keduvocdocument_LIB_SRCS
    keduvocvokabelnreader.cpp
    keduvocwqlreader.cpp
    keduvocxdxfreader.cpp
-   leitnerbox.cpp
-   leitnersystem.cpp
-   leitnersystemview.cpp
-   sharedkvtmlfiles.cpp
-   prefleitner.cpp )
-
-
-kde4_add_ui_files(keduvocdocument_LIB_SRCS
-   prefleitnerbase.ui
-)
+   sharedkvtmlfiles.cpp )
 
 kde4_add_library(keduvocdocument SHARED ${keduvocdocument_LIB_SRCS})
 
@@ -63,10 +54,7 @@ install(FILES
    keduvocmultiplechoice.h
    keduvoctranslation.h
    keduvocwordtype.h
-   leitnerbox.h
-   leitnersystem.h
-   leitnersystemview.h
    sharedkvtmlfiles.h
-   prefleitner.h DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu
+   DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu
 )
 

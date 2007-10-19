@@ -113,18 +113,6 @@ public:
 
     QList<int> translationIndices() const;
 
-    /** sets the box of the Leitner system which actually contains the expression
-     *
-     * @param box              the box's name
-     */
-    void setLeitnerBox( const QString & box );
-
-    /** returns the name of the Leitner system's box actually containing the expression
-     *
-     * @return                 the box's name
-     */
-    QString leitnerBox() const;
-
     KEduVocExpression& operator= ( const KEduVocExpression &expression );
     bool operator== ( const KEduVocExpression &expression ) const;
 

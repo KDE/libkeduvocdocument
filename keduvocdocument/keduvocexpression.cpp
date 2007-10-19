@@ -36,7 +36,6 @@ public:
 
     KEduVocExpression* q;
 
-    QString m_leitnerBox;
     int m_sortIndex;
     int m_lesson;
     bool m_active;
@@ -60,7 +59,6 @@ bool KEduVocExpression::KEduVocExpressionPrivate::operator== ( const KEduVocExpr
 {
     return
         m_translations == p.m_translations &&
-        m_leitnerBox == p.m_leitnerBox &&
         m_lesson == p.m_lesson &&
         m_sortIndex == p.m_sortIndex &&
         m_active == p.m_active;
@@ -122,17 +120,6 @@ int KEduVocExpression::lesson() const
 void KEduVocExpression::setLesson( int l )
 {
     d->m_lesson = l;
-}
-
-QString KEduVocExpression::leitnerBox() const
-{
-    return d->m_leitnerBox;
-}
-
-
-void KEduVocExpression::setLeitnerBox( const QString& box )
-{
-    d->m_leitnerBox = box;
 }
 
 

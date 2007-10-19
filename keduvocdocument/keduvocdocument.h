@@ -34,7 +34,6 @@
 class QStringList;
 class KEduVocExpression;
 class KEduVocLesson;
-class LeitnerSystem;
 class KEduVocWordType;
 
 /**
@@ -482,12 +481,6 @@ public:
      * @param delimiter        the delimiter to use
      */
     void setCsvDelimiter( const QString &delimiter );
-
-    bool leitnerSystemActive() const;
-    void setLeitnerSystemActive( bool yes );
-    void createStandardLeitnerSystem();
-    void setLeitnerSystem( LeitnerSystem* system );
-    LeitnerSystem* leitnerSystem();
 
     static FileType detectFileType( const QString &fileName );
 

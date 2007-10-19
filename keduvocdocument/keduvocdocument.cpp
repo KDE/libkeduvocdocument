@@ -41,7 +41,6 @@
 #include "keduvocpaukerreader.h"
 #include "keduvocvokabelnreader.h"
 #include "keduvocxdxfreader.h"
-#include "leitnersystem.h"
 
 #define WQL_IDENT      "WordQuiz"
 
@@ -98,9 +97,6 @@ public:
     QList<KEduVocLesson>      m_lessons;
 
     KEduVocWordType           m_wordTypes;
-
-    LeitnerSystem*            m_leitnerSystem;
-    bool                      m_activeLeitnerSystem;
 };
 
 KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
@@ -126,8 +122,6 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_version = "";
     m_generator = "";
     m_csvDelimiter = QString( '\t' );
-    m_activeLeitnerSystem = false;
-    m_leitnerSystem = NULL;
 }
 
 
@@ -794,63 +788,6 @@ void KEduVocDocument::removeIdentifier( int index )
 bool KEduVocDocument::isModified() const
 {
     return d->m_dirty;
-}
-
-
-bool KEduVocDocument::leitnerSystemActive() const
-{
-    return d->m_activeLeitnerSystem;
-}
-
-void KEduVocDocument::setLeitnerSystemActive( bool yes )
-{
-    if ( yes ) {
-        if ( d->m_leitnerSystem == 0 )
-            createStandardLeitnerSystem(); //if nothing is loaded yet
-
-        d->m_activeLeitnerSystem = true;
-    } else if ( !yes )
-        d->m_activeLeitnerSystem = false;
-}
-
-void KEduVocDocument::createStandardLeitnerSystem()
-{
-    LeitnerSystem* tmpSystem = new LeitnerSystem();
-    QString name = "Standard";
-
-    tmpSystem->setSystemName( name );
-    tmpSystem->insertBox( "Box 1" );
-    tmpSystem->insertBox( "Box 2" );
-    tmpSystem->insertBox( "Box 3" );
-    tmpSystem->insertBox( "Box 4" );
-    tmpSystem->insertBox( "Box 5" );
-
-    tmpSystem->setCorrectBox( "Box 1", "Box 2" );
-    tmpSystem->setWrongBox( "Box 1", "Box 1" );
-
-    tmpSystem->setCorrectBox( "Box 2", "Box 3" );
-    tmpSystem->setWrongBox( "Box 2", "Box 1" );
-
-    tmpSystem->setCorrectBox( "Box 3", "Box 4" );
-    tmpSystem->setWrongBox( "Box 3", "Box 1" );
-
-    tmpSystem->setCorrectBox( "Box 4", "Box 5" );
-    tmpSystem->setWrongBox( "Box 4", "Box 1" );
-
-    tmpSystem->setCorrectBox( "Box 5", "Box 1" );
-    tmpSystem->setWrongBox( "Box 5", "Box 1" );
-
-    d->m_leitnerSystem = tmpSystem;
-}
-
-void KEduVocDocument::setLeitnerSystem( LeitnerSystem* system )
-{
-    d->m_leitnerSystem = system;
-}
-
-LeitnerSystem* KEduVocDocument::leitnerSystem()
-{
-    return d->m_leitnerSystem;
 }
 
 
