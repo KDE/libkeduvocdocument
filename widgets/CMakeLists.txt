@@ -16,7 +16,7 @@ kde4_add_plugin(kdeeduwidgets ${kdeeduwidgets_PART_SRCS})
 
 
 
-target_link_libraries(kdeeduwidgets ${KDE4_KIO_LIBS} extdate)
+target_link_libraries(kdeeduwidgets ${KDE4_KDEUI_LIBS} extdate)
 
 install(TARGETS kdeeduwidgets DESTINATION ${PLUGIN_INSTALL_DIR}/plugins/designer )
 
