@@ -19,9 +19,9 @@ class KEduVocGrade::KEduVocGradePrivate
 {
 public:
     grade_t m_grade;
-    count_t m_queryCount;
+    count_t m_totalPracticeCount;
     count_t m_badCount;
-    QDateTime m_queryDate;
+    QDateTime m_practiceDate;
 };
 
 KEduVocGrade::KEduVocGrade()
@@ -34,9 +34,9 @@ KEduVocGrade::KEduVocGrade( const KEduVocGrade &other )
         :d( new KEduVocGradePrivate )
 {
     setGrade( other.grade() );
-    setQueryCount( other.queryCount() );
+    setPracticeCount( other.practiceCount() );
     setBadCount( other.badCount() );
-    setQueryDate( other.queryDate() );
+    setPracticeDate( other.practiceDate() );
 }
 
 KEduVocGrade::~KEduVocGrade()
@@ -47,12 +47,12 @@ KEduVocGrade::~KEduVocGrade()
 void KEduVocGrade::resetGrades()
 {
     d->m_grade = KV_NORM_GRADE;
-    d->m_queryCount = 0;
+    d->m_totalPracticeCount = 0;
     d->m_badCount = 0;
 
     QDateTime dt;
     dt.setTime_t( 0 );
-    d->m_queryDate = dt;
+    d->m_practiceDate = dt;
 }
 
 
@@ -86,15 +86,15 @@ void KEduVocGrade::decGrade()
 }
 
 
-count_t KEduVocGrade::queryCount()  const
+count_t KEduVocGrade::practiceCount()  const
 {
-    return d->m_queryCount;
+    return d->m_totalPracticeCount;
 }
 
 
-void KEduVocGrade::incQueryCount()
+void KEduVocGrade::incPracticeCount()
 {
-    setQueryCount( queryCount() + 1 );
+    setPracticeCount( practiceCount() + 1 );
 }
 
 
@@ -104,9 +104,9 @@ void KEduVocGrade::incBadCount()
 }
 
 
-void KEduVocGrade::setQueryCount( count_t count )
+void KEduVocGrade::setPracticeCount( count_t count )
 {
-    d->m_queryCount = count;
+    d->m_totalPracticeCount = count;
 }
 
 
@@ -122,23 +122,23 @@ void KEduVocGrade::setBadCount( count_t count )
 }
 
 
-QDateTime KEduVocGrade::queryDate() const
+QDateTime KEduVocGrade::practiceDate() const
 {
-    return d->m_queryDate;
+    return d->m_practiceDate;
 }
 
 
-void KEduVocGrade::setQueryDate( const QDateTime & date )
+void KEduVocGrade::setPracticeDate( const QDateTime & date )
 {
-    d->m_queryDate = date;
+    d->m_practiceDate = date;
 }
 
 KEduVocGrade & KEduVocGrade::operator =(const KEduVocGrade & other)
 {
     d->m_grade = other.d->m_grade;
-    d->m_queryCount = other.d->m_queryCount;
+    d->m_totalPracticeCount = other.d->m_totalPracticeCount;
     d->m_badCount = other.d->m_badCount;
-    d->m_queryDate = other.d->m_queryDate;
+    d->m_practiceDate = other.d->m_practiceDate;
 
     return *this;
 }
@@ -146,7 +146,7 @@ KEduVocGrade & KEduVocGrade::operator =(const KEduVocGrade & other)
 bool KEduVocGrade::operator ==(const KEduVocGrade & other) const
 {
     return d->m_grade == other.d->m_grade &&
-        d->m_queryCount == other.d->m_queryCount &&
+        d->m_totalPracticeCount == other.d->m_totalPracticeCount &&
         d->m_badCount == other.d->m_badCount &&
-        d->m_queryDate == other.d->m_queryDate;
+        d->m_practiceDate == other.d->m_practiceDate;
 }

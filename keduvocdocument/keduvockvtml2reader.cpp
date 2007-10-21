@@ -706,7 +706,7 @@ bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpressio
     currentElement = gradeElement.firstChildElement( KVTML_COUNT );
     if ( !currentElement.isNull() ) {
         int value = currentElement.text().toInt();
-        expr.translation( index ).gradeFrom( id ).setQueryCount( value );
+        expr.translation( index ).gradeFrom( id ).setPracticeCount( value );
     }
 
     currentElement = gradeElement.firstChildElement( KVTML_ERRORCOUNT );
@@ -720,13 +720,12 @@ bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpressio
         QString dateString = currentElement.text();
         if ( !dateString.isEmpty() ) {
             QDateTime value = QDateTime::fromString( dateString, Qt::ISODate );
-            expr.translation( index ).gradeFrom( id ).setQueryDate( value );
+            expr.translation( index ).gradeFrom( id ).setPracticeDate( value );
         }
     }
 
     return true;
 }
-
 
 
 bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocConjugation &conjugation )

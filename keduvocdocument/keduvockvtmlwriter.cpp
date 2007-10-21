@@ -207,14 +207,14 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
             if ( entry->translation( trans ).gradeFrom( 0 ).grade() != 0 || entry->translation( 0 ).gradeFrom( trans ).grade() != 0 )
                 domElementTranslation.setAttribute( KV_GRADE, QString::number( entry->translation( trans ).gradeFrom( 0 ).grade() ) + ';' + QString::number( entry->translation( 0 ).gradeFrom( trans ).grade() ) );
 
-            if ( entry->translation( trans ).gradeFrom( 0 ).queryCount() != 0 || entry->translation( 0 ).gradeFrom( trans ).queryCount() != 0 )
-                domElementTranslation.setAttribute( KV_COUNT, QString::number( entry->translation( trans ).gradeFrom( 0 ).queryCount() ) + ';' + QString::number( entry->translation( 0 ).gradeFrom( trans ).queryCount() ) );
+            if ( entry->translation( trans ).gradeFrom( 0 ).practiceCount() != 0 || entry->translation( 0 ).gradeFrom( trans ).practiceCount() != 0 )
+                domElementTranslation.setAttribute( KV_COUNT, QString::number( entry->translation( trans ).gradeFrom( 0 ).practiceCount() ) + ';' + QString::number( entry->translation( 0 ).gradeFrom( trans ).practiceCount() ) );
 
             if ( entry->translation( trans ).gradeFrom( 0 ).badCount() != 0 || entry->translation( 0 ).gradeFrom( trans ).badCount() != 0 )
                 domElementTranslation.setAttribute( KV_BAD, QString::number( entry->translation( trans ).gradeFrom( 0 ).badCount() ) + ';' + QString::number( entry->translation( 0 ).gradeFrom( trans ).badCount() ) );
 
-            if ( entry->translation( trans ).gradeFrom( 0 ).queryDate().toTime_t() != 0 || entry->translation( 0 ).gradeFrom( trans ).queryDate().toTime_t() != 0 )
-                domElementTranslation.setAttribute( KV_DATE, QString::number( entry->translation( trans ).gradeFrom( 0 ).queryDate().toTime_t() ) + ';' + QString::number( entry->translation( 0 ).gradeFrom( trans ).queryDate().toTime_t() ) );
+            if ( entry->translation( trans ).gradeFrom( 0 ).practiceDate().toTime_t() != 0 || entry->translation( 0 ).gradeFrom( trans ).practiceDate().toTime_t() != 0 )
+                domElementTranslation.setAttribute( KV_DATE, QString::number( entry->translation( trans ).gradeFrom( 0 ).practiceDate().toTime_t() ) + ';' + QString::number( entry->translation( 0 ).gradeFrom( trans ).practiceDate().toTime_t() ) );
 
             if ( !entry->translation( trans ).comment().isEmpty() )
                 domElementTranslation.setAttribute( KV_REMARK, entry->translation( trans ).comment() );

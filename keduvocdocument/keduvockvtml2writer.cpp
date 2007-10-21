@@ -442,20 +442,20 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     // grades
     for ( int i = 0; i < m_doc->identifierCount(); ++i ) {
         KEduVocGrade thisGrade = translation.gradeFrom( i );
-        if ( thisGrade.queryCount() > 0 ) {
+        if ( thisGrade.practiceCount() > 0 ) {
             QDomElement gradeElement = m_domDoc.createElement( KVTML_GRADE );
             gradeElement.setAttribute( KVTML_FROMID, QString::number( i ) );
             //<currentgrade>2</currentgrade>
             gradeElement.appendChild( newTextElement( KVTML_CURRENTGRADE, QString::number( thisGrade.grade() ) ) );
 
             //<count>6</count>
-            gradeElement.appendChild( newTextElement( KVTML_COUNT, QString::number( thisGrade.queryCount() ) ) );
+            gradeElement.appendChild( newTextElement( KVTML_COUNT, QString::number( thisGrade.practiceCount() ) ) );
 
             //<errorcount>1</errorcount>
             gradeElement.appendChild( newTextElement( KVTML_ERRORCOUNT, QString::number( thisGrade.badCount() ) ) );
 
             //<date>949757271</date>
-            gradeElement.appendChild( newTextElement( KVTML_DATE,  thisGrade.queryDate().toString( Qt::ISODate ) ) );
+            gradeElement.appendChild( newTextElement( KVTML_DATE,  thisGrade.practiceDate().toString( Qt::ISODate ) ) );
 
             translationElement.appendChild( gradeElement );
         }

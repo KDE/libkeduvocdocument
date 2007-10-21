@@ -1185,12 +1185,12 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         if ( i != 0 ) {
             expr.translation( i ).gradeFrom( 0 ).setGrade( grade );
             expr.translation( 0 ).gradeFrom( i ).setGrade( r_grade );
-            expr.translation( i ).gradeFrom( 0 ).setQueryCount( qcount );
-            expr.translation( 0 ).gradeFrom( i ).setQueryCount( r_qcount );
+            expr.translation( i ).gradeFrom( 0 ).setPracticeCount( qcount );
+            expr.translation( 0 ).gradeFrom( i ).setPracticeCount( r_qcount );
             expr.translation( i ).gradeFrom( 0 ).setBadCount( bcount );
             expr.translation( 0 ).gradeFrom( i ).setBadCount( r_bcount );
-            expr.translation( i ).gradeFrom( 0 ).setQueryDate( qdate );
-            expr.translation( 0 ).gradeFrom( i ).setQueryDate( r_qdate );
+            expr.translation( i ).gradeFrom( 0 ).setPracticeDate( qdate );
+            expr.translation( 0 ).gradeFrom( i ).setPracticeDate( r_qdate );
         }
 
         // Next translation

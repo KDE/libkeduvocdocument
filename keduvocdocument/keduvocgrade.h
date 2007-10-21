@@ -16,11 +16,15 @@
 #ifndef KEDUVOCGRADE_H
 #define KEDUVOCGRADE_H
 
+#include "libkeduvocdocument_export.h"
+#include <QtCore/QDateTime>
+
+
 #define KV_MAX_GRADE       7
 #define KV_MIN_GRADE       0
 
-#define KV_NORM_GRADE      0       // not queried yet
-#define KV_NORM_TEXT       I18N_NOOP("Not Queried Yet")
+#define KV_NORM_GRADE      0       // not practiced yet
+#define KV_NORM_TEXT       I18N_NOOP("Not Practiced Yet")
 
 #define KV_LEV1_GRADE      1
 #define KV_LEV1_TEXT       I18N_NOOP("Level 1")
@@ -43,9 +47,6 @@
 #define KV_LEV7_GRADE      7
 #define KV_LEV7_TEXT       I18N_NOOP("Level 7")
 
-#include "libkeduvocdocument_export.h"
-
-#include <QtCore/QDateTime>
 
 typedef unsigned short grade_t;
 typedef unsigned short count_t;
@@ -85,15 +86,15 @@ public:
     bool operator== ( const KEduVocGrade &other ) const;
 
 
-    /** returns query count as int
-    * @returns query count
+    /** returns how often this entry has been practiced as int
+    * @returns total count
     */
-    count_t queryCount() const;
+    count_t practiceCount() const;
 
-    /** set query count as int
+    /** set how often this entry has been practiced as int
     * @param count the new count
     */
-    void setQueryCount( count_t count );
+    void setPracticeCount( count_t count );
 
     /** returns bad query count as int
     * @returns bad query count
@@ -109,7 +110,7 @@ public:
     void incBadCount();
 
     /** increment query count of given translation by 1 */
-    void incQueryCount();
+    void incPracticeCount();
 
 
     /**
@@ -122,26 +123,25 @@ public:
     */
     void setGrade( grade_t grade );
 
-    /** returns grade of given translation as int
+    /** returns grade as int
     * @returns number of knowlegde: 0=known, x=numbers not knows
     */
     grade_t grade() const;
 
-    /** increments grade of given translation */
+    /** increments grade */
     void incGrade();
 
-    /** decrements grade of given translation */
+    /** decrements grade */
     void decGrade();
 
-    /** returns last query date of given translation as int
+    /** returns last practice date as int
     */
-    QDateTime queryDate() const;
-
+    QDateTime practiceDate() const;
 
     /** Set last query date
     * @param date             the new date
     */
-    void setQueryDate( const QDateTime & date );
+    void setPracticeDate( const QDateTime & date );
 
 private:
     class KEduVocGradePrivate;
