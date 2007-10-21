@@ -146,7 +146,7 @@ void ExtDatePicker::init( const ExtDate &dt )
   d->selectWeek = new KComboBox(this);
   d->selectWeek->setEditable(false);  // read only week selection
   d->todayButton = new QToolButton(this);
-  d->todayButton->setIcon(KIcon("calendar-today"));
+  d->todayButton->setIcon(KIcon("go-jump-today"));
 
   yearForward->setToolTip(i18n("Next year"));
   yearBackward->setToolTip(i18n("Previous year"));
