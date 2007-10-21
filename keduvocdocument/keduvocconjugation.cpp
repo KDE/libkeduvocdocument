@@ -29,21 +29,10 @@
 class KEduVocConjugation::Private
 {
 public:
-    Private();
-
-    bool m_thirdCommonSingular;
-    bool m_thirdCommonDual;
-    bool m_thirdCommonPlural;
+    KEduVocGrade m_grade;
     QMap<int, QString> m_conjugations;
 };
 
-
-KEduVocConjugation::Private::Private()
-{
-    m_thirdCommonSingular = false;
-    m_thirdCommonDual = false;
-    m_thirdCommonPlural = false;
-}
 
 KEduVocConjugation::KEduVocConjugation()
         : d( new Private )
@@ -53,9 +42,7 @@ KEduVocConjugation::KEduVocConjugation()
 KEduVocConjugation::KEduVocConjugation( const KEduVocConjugation& other )
         : d( new Private )
 {
-    d->m_thirdCommonSingular = other.d->m_thirdCommonSingular;
-    d->m_thirdCommonDual = other.d->m_thirdCommonDual;
-    d->m_thirdCommonPlural = other.d->m_thirdCommonPlural;
+    d->m_grade = other.d->m_grade;
     d->m_conjugations = other.d->m_conjugations;
 }
 
@@ -68,9 +55,7 @@ KEduVocConjugation::~KEduVocConjugation()
 
 KEduVocConjugation& KEduVocConjugation::operator = ( const KEduVocConjugation& other )
 {
-    d->m_thirdCommonSingular = other.d->m_thirdCommonSingular;
-    d->m_thirdCommonDual = other.d->m_thirdCommonDual;
-    d->m_thirdCommonPlural = other.d->m_thirdCommonPlural;
+    d->m_grade = other.d->m_grade;
     d->m_conjugations = other.d->m_conjugations;
     return *this;
 }
@@ -78,9 +63,7 @@ KEduVocConjugation& KEduVocConjugation::operator = ( const KEduVocConjugation& o
 bool KEduVocConjugation::operator ==(const KEduVocConjugation& other) const
 {
     return d->m_conjugations == other.d->m_conjugations &&
-        d->m_thirdCommonSingular == other.d->m_thirdCommonSingular &&
-        d->m_thirdCommonDual == other.d->m_thirdCommonDual &&
-        d->m_thirdCommonPlural == other.d->m_thirdCommonPlural;
+           d->m_grade == other.d->m_grade;
 }
 
 
@@ -120,5 +103,11 @@ int KEduVocConjugation::indexOf(ConjugationPerson person, ConjugationNumber numb
 bool KEduVocConjugation::isEmpty()
 {
     return d->m_conjugations.count() == 0;
+}
+
+
+KEduVocGrade & KEduVocConjugation::grade()
+{
+    return d->m_grade;
 }
 

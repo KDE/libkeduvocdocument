@@ -26,6 +26,7 @@
 #define KEDUVOCCONJUGATION_H
 
 #include "libkeduvocdocument_export.h"
+#include "keduvocgrade.h"
 
 #include <QtCore/QStringList>
 
@@ -71,6 +72,8 @@ public:
     void setConjugation(const QString& conjugation, ConjugationPerson person, ConjugationNumber number);
 
     bool isEmpty();
+
+    KEduVocGrade &grade();
 
     static int indexOf(ConjugationPerson person, ConjugationNumber number);
 
