@@ -87,12 +87,12 @@ void KEduVocDocumentValidatorTest::testLessons()
     QCOMPARE(indexLesson1, 0);
     QCOMPARE(doc.lessonCount(), 1);
     QCOMPARE(doc.lesson(indexLesson1).name(), lesson1);
-    QVERIFY(doc.lesson(indexLesson1).inQuery());
+    QVERIFY(doc.lesson(indexLesson1).inPractice());
 
     int indexLesson2 = doc.appendLesson(lesson2, false);
     QCOMPARE(indexLesson2, 1);
     QCOMPARE(doc.lessonCount(), 2);
-    QVERIFY(!doc.lesson(indexLesson2).inQuery());
+    QVERIFY(!doc.lesson(indexLesson2).inPractice());
 
     int indexLesson3 = doc.appendLesson(lesson3, false);
     QCOMPARE(indexLesson3, 2);
