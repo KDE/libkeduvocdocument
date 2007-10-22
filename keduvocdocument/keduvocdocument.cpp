@@ -448,8 +448,8 @@ void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers 
 
         QStringList new_tenses = docToMerge->tenseDescriptions();
 
-        QList<int> old_in_query = lessonsInQuery();
-        QList<int> new_in_query = docToMerge->lessonsInQuery();
+        QList<int> old_in_query = lessonsInPractice();
+        QList<int> new_in_query = docToMerge->lessonsInPractice();
 
         QStringList new_usages = docToMerge->usageDescriptions();
 
@@ -460,7 +460,7 @@ void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers 
 
         for (int i = 0; i < new_in_query.count(); i++)
           old_in_query.append(new_in_query[i] + lesson_offset);
-        setLessonsInQuery(old_in_query);
+        setLessonsInPractice(old_in_query);
 
         int types_offset = d->m_typeDescriptions.count();
         for (int i = 0; i < new_types.count(); i++) {
@@ -835,11 +835,11 @@ kDebug() << "appendIdentifier: " << i << id.name() << id.locale();
 }
 
 
-int KEduVocDocument::appendLesson( const QString &lessonName, bool inQuery )
+int KEduVocDocument::appendLesson( const QString &lessonName, bool inPractice )
 {
     KEduVocLesson lesson;
     lesson.setName( lessonName );
-    lesson.setInQuery( inQuery );
+    lesson.setInPractice( inPractice );
     d->m_lessons.append( lesson );
     return d->m_lessons.count() - 1;
 }

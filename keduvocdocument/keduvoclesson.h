@@ -76,8 +76,8 @@ public:
      */
     void decrementEntriesAbove( int entryid );
 
-    bool inQuery();
-    void setInQuery( bool inQuery );
+    bool inPractice();
+    void setInPractice( bool inPractice );
 
     /** equality operator */
     bool operator==(const KEduVocLesson &other);

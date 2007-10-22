@@ -182,7 +182,7 @@ bool KEduVocKvtml2Writer::writeLessons( QDomElement &lessonsElement )
         thisLessonElement.appendChild( newTextElement( KVTML_NAME, m_doc->lesson(lessonId).name() ) );
 
         // add a inquery tag
-        if ( m_doc->lesson(lessonId).inQuery() ) {
+        if ( m_doc->lesson(lessonId).inPractice() ) {
             thisLessonElement.appendChild( newTextElement( KVTML_QUERY, KVTML_TRUE ) );
         }
 

@@ -280,9 +280,9 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
 //     if ( !currentElement.isNull() ) {
 //         // set the inquery information
 //         if ( currentElement.text() == KVTML_TRUE ) {
-//             expr.setInQuery( true );
+//             expr.setInPractice( true );
 //         } else {
-//             expr.setInQuery( false );
+//             expr.setInPractice( false );
 //         }
 //     }
 
@@ -449,7 +449,7 @@ bool KEduVocKvtml2Reader::readLesson( QDomElement &lessonElement )
 
     //<query>true</query>
     currentElement = lessonElement.firstChildElement( KVTML_QUERY );
-    m_doc->lesson(lessonId).setInQuery(currentElement.text() == KVTML_TRUE);
+    m_doc->lesson(lessonId).setInPractice(currentElement.text() == KVTML_TRUE);
 
     //<current>true</current>
     currentElement = lessonElement.firstChildElement( KVTML_CURRENT );

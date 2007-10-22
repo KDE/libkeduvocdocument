@@ -308,7 +308,7 @@ bool KEduVocKvtmlWriter::writeLesson( QDomElement &domElementParent )
         if ( m_doc->currentLesson() == i ) {
             domElementDesc.setAttribute( KV_LESS_CURR, 1 );
         }
-        if ( m_doc->lesson(i).inQuery() ) {
+        if ( m_doc->lesson(i).inPractice() ) {
             domElementDesc.setAttribute( KV_LESS_QUERY, 1 );
         }
         domElementDesc.appendChild( domTextDesc );

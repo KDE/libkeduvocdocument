@@ -28,7 +28,7 @@ class KEduVocLesson::Private
 public:
     QSet<int> m_entries;
     QString m_name;
-    bool m_inQuery;
+    bool m_inPractice;
 };
 
 KEduVocLesson::KEduVocLesson()
@@ -40,7 +40,7 @@ KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
 {
     d->m_entries = other.d->m_entries;
     d->m_name = other.d->m_name;
-    d->m_inQuery = other.d->m_inQuery;
+    d->m_inPractice = other.d->m_inPractice;
 }
 
 KEduVocLesson::~KEduVocLesson()
@@ -52,7 +52,7 @@ KEduVocLesson& KEduVocLesson::operator= ( const KEduVocLesson &other )
 {
     d->m_entries = other.d->m_entries;
     d->m_name = other.d->m_name;
-    d->m_inQuery = other.d->m_inQuery;
+    d->m_inPractice = other.d->m_inPractice;
     return *this;
 }
 
@@ -60,7 +60,7 @@ bool KEduVocLesson::operator==(const KEduVocLesson &other)
 {
     return d->m_entries == other.d->m_entries &&
         d->m_name == other.d->m_name &&
-        d->m_inQuery == other.d->m_inQuery;;
+        d->m_inPractice == other.d->m_inPractice;;
 }
 
 void KEduVocLesson::setName( const QString &name )
@@ -131,12 +131,12 @@ void KEduVocLesson::decrementEntriesAbove( int entryid )
     d->m_entries = entries.toSet();
 }
 
-bool KEduVocLesson::inQuery()
+bool KEduVocLesson::inPractice()
 {
-    return d->m_inQuery;
+    return d->m_inPractice;
 }
 
-void KEduVocLesson::setInQuery(bool inQuery)
+void KEduVocLesson::setInPractice(bool inPractice)
 {
-    d->m_inQuery = inQuery;
+    d->m_inPractice = inPractice;
 }
