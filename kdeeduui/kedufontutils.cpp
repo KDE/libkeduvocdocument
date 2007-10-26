@@ -7,7 +7,7 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 
-#include "fontutils.h"
+#include "kedufontutils.h"
 
 #include <qpainter.h>
 
@@ -32,3 +32,4 @@ int fontUtils::fontSize(QPainter &p, const QString &s1, int w, int h)
 
     return size;
 }
+

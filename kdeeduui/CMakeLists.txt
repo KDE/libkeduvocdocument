@@ -5,6 +5,7 @@
 
 set(kdeeduui_LIB_SRCS
    kdeeduglossary.cpp
+   kedufontutils.cpp
 )
 
 
@@ -24,5 +25,5 @@ install(TARGETS kdeeduui
 
 install(FILES
    libkdeedu_ui_export.h
-   kdeeduglossary.h DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu
+   kdeeduglossary.h kedufontutils.h DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu
 )
