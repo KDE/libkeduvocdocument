@@ -207,59 +207,63 @@ bool KEduVocKvtml2Writer::writeLessons( QDomElement &lessonsElement )
 
 bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article )
 {
-    ///@todo: this is ugly as hell and writes only singular
-
-    QDomElement singular = m_domDoc.createElement( KVTML_SINGULAR );
-
-    QDomElement definite = m_domDoc.createElement( KVTML_DEFINITE );
-    QDomElement indefinite = m_domDoc.createElement( KVTML_INDEFINITE );
+    QDomElement number;
     QString def;
     QString indef;
 
-    // male
-    QString articleString;
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Masculine );
-    if ( !articleString.isEmpty() ) {
-        definite.appendChild( newTextElement( KVTML_MALE, articleString ) );
-    }
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Masculine );
-    if ( !articleString.isEmpty() ) {
-        indefinite.appendChild( newTextElement( KVTML_MALE, articleString ) );
-    }
+    for( int i= KEduVocArticle::Singular; i <= KEduVocArticle::Plural; ++i)
+    {
+        QDomElement definite = m_domDoc.createElement( KVTML_DEFINITE );
+        QDomElement indefinite = m_domDoc.createElement( KVTML_INDEFINITE );
 
-    // female
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Feminine );
-    if ( !articleString.isEmpty() ) {
-        definite.appendChild( newTextElement( KVTML_FEMALE, articleString ) );
-    }
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Feminine );
-    if ( !articleString.isEmpty() ) {
-        indefinite.appendChild( newTextElement( KVTML_FEMALE, articleString ) );
-    }
+        if(i=KEduVocArticle::Singular) {
+            number = m_domDoc.createElement( KVTML_SINGULAR );
+        } else if(i=KEduVocArticle::Plural) {
+            number = m_domDoc.createElement( KVTML_PLURAL);
+        } else if(i=KEduVocArticle::Dual) {
+            number = m_domDoc.createElement( KVTML_DUAL );
+        }
 
-    // neutral
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Neutral );
-    if ( !articleString.isEmpty() ) {
-        definite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
-    }
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Neutral );
-    if ( !articleString.isEmpty() ) {
-        indefinite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
-    }
+        QString articleString;
+        articleString = m_doc->identifier(article).article().article( KEduVocArticle::ArticleNumber(i), KEduVocArticle::Definite, KEduVocArticle::Masculine );
+        if ( !articleString.isEmpty() ) {
+            definite.appendChild( newTextElement( KVTML_MALE, articleString ) );
+        }
+        articleString = m_doc->identifier(article).article().article(KEduVocArticle::ArticleNumber(i), KEduVocArticle::Indefinite, KEduVocArticle::Masculine );
+        if ( !articleString.isEmpty() ) {
+            indefinite.appendChild( newTextElement( KVTML_MALE, articleString ) );
+        }
+
+        // female
+        articleString = m_doc->identifier(article).article().article( KEduVocArticle::ArticleNumber(i), KEduVocArticle::Definite, KEduVocArticle::Feminine );
+        if ( !articleString.isEmpty() ) {
+            definite.appendChild( newTextElement( KVTML_FEMALE, articleString ) );
+        }
+        articleString = m_doc->identifier(article).article().article( KEduVocArticle::ArticleNumber(i), KEduVocArticle::Indefinite, KEduVocArticle::Feminine );
+        if ( !articleString.isEmpty() ) {
+            indefinite.appendChild( newTextElement( KVTML_FEMALE, articleString ) );
+        }
+
+        // neutral
+        articleString = m_doc->identifier(article).article().article( KEduVocArticle::ArticleNumber(i), KEduVocArticle::Definite, KEduVocArticle::Neutral );
+        if ( !articleString.isEmpty() ) {
+            definite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
+        }
+        articleString = m_doc->identifier(article).article().article( KEduVocArticle::ArticleNumber(i), KEduVocArticle::Indefinite, KEduVocArticle::Neutral );
+        if ( !articleString.isEmpty() ) {
+            indefinite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
+        }
 
 
-
-
-    if ( definite.hasChildNodes() ) {
-        singular.appendChild( definite );
-    }
-
-    if ( indefinite.hasChildNodes() ) {
-        singular.appendChild( indefinite );
-    }
-
-    if ( singular.hasChildNodes() ) {
-        articleElement.appendChild( singular );
+        if ( definite.hasChildNodes() ) {
+            number.appendChild( definite );
+        }
+        if ( indefinite.hasChildNodes() ) {
+            number.appendChild( indefinite );
+        }
+        if ( number.hasChildNodes() ) {
+            articleElement.appendChild( number );
+        }
     }
     return true;
 }
