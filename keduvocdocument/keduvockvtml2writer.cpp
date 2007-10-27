@@ -216,13 +216,17 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
         QDomElement definite = m_domDoc.createElement( KVTML_DEFINITE );
         QDomElement indefinite = m_domDoc.createElement( KVTML_INDEFINITE );
 
-        if(i=KEduVocArticle::Singular) {
+        switch(i) {
+        case KEduVocArticle::Singular:
             number = m_domDoc.createElement( KVTML_SINGULAR );
-        } else if(i=KEduVocArticle::Plural) {
+            break;
+        case KEduVocArticle::Plural:
             number = m_domDoc.createElement( KVTML_PLURAL);
-        } else if(i=KEduVocArticle::Dual) {
+            break;
+        case KEduVocArticle::Dual:
             number = m_domDoc.createElement( KVTML_DUAL );
-        }
+            break;
+	}
 
         QString articleString;
         articleString = m_doc->identifier(article).article().article( KEduVocArticle::ArticleNumber(i), KEduVocArticle::Definite, KEduVocArticle::Masculine );
