@@ -63,9 +63,7 @@ The easiest way to use the stylesheet is to include it in the .kvtml file:
 
 			<xsl:for-each select="entryid">
 				<xsl:variable name="id" select="."/>
-				<xsl:for-each select="/kvtml/entries/entry[@id=$id]">
-					<xsl:apply-templates select="."/>
-				</xsl:for-each>
+				<xsl:apply-templates select="/kvtml/entries/entry[@id=$id]"/>
 			</xsl:for-each>	
 		</table>
 	</xsl:template>
