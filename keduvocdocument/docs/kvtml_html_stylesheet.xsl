@@ -13,7 +13,7 @@
 Copyright 2007: Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
 The easiest way to use the stylesheet is to include it in the .kvtml file:
- <?xml-stylesheet type="text/xsl" href="kvtml_html_style.xsl"?>
+<?xml-stylesheet type="text/xsl" href="kvtml_html_stylesheet.xsl.xsl"?>
 
  -->
 
@@ -53,7 +53,7 @@ The easiest way to use the stylesheet is to include it in the .kvtml file:
 	</xsl:template>
  
 	<xsl:template match="lesson">
-		<xsl:value-of select="name"/>
+		<h3>Lesson: <xsl:value-of select="name"/></h3>
 		<table border="1">
 			<tr languageheader="true">
 				<xsl:apply-templates select="/kvtml/identifiers"/>
