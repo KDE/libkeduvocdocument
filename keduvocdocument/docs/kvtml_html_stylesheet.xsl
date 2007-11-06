@@ -13,7 +13,7 @@
 Copyright 2007: Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
 The easiest way to use the stylesheet is to include it in the .kvtml file:
- <?xml-stylesheet type="text/xsl" href="kvtml_style.xsl"?>
+ <?xml-stylesheet type="text/xsl" href="kvtml_html_style.xsl"?>
 
  -->
 
@@ -44,19 +44,24 @@ The easiest way to use the stylesheet is to include it in the .kvtml file:
           <td><xsl:value-of select="name"/></td>
         </xsl:for-each>
      </tr>
-      <xsl:for-each select="kvtml/entries/entry">
-      <tr>
-        <xsl:for-each select="translation">
-          <td><xsl:value-of select="text"/></td>
-        </xsl:for-each>
-      </tr>
-      </xsl:for-each>
+     <xsl:apply-templates select="kvtml/entries/entry"/>
    </table>
 
  </body>
  </html>
 </xsl:template>
 
+  <xsl:template match="entry">
+    <tr>
+      <xsl:apply-templates select="translation"/>
+    </tr>
+  </xsl:template>
+
+  <xsl:template match="translation">
+    <td>
+      <xsl:value-of select="text"/>
+    </td>
+  </xsl:template>
 
 </xsl:stylesheet>
 
