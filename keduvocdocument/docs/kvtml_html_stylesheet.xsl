@@ -25,7 +25,7 @@ The easiest way to use the stylesheet is to include it in the .kvtml file:
 		td, table {
 			border: solid 1px black;
 			border-collapse: collapse;
-			width: 50%;
+			width: <xsl:value-of select="100 div count(/kvtml/identifiers/identifier)"/>%;
 		}
 		tr[languageheader] {
 			color: black;
