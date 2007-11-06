@@ -32,7 +32,9 @@ The easiest way to use the stylesheet is to include it in the .kvtml file:
 			font-size: 130%;
 			background-color: lightblue;
 		}
-	
+		.comment {
+			color: blue;
+		}
 	</style>
 	
 	<head>
@@ -77,9 +79,16 @@ The easiest way to use the stylesheet is to include it in the .kvtml file:
 	</xsl:template>
 	
 	<xsl:template match="translation">
-		<td><xsl:value-of select="text"/></td>
+		<td><xsl:value-of select="text"/>
+			<xsl:apply-templates select="comment"/>
+		</td>
 	</xsl:template>
 
+	<xsl:template match="comment">
+		<span class="comment">
+			<br/><xsl:value-of select="."/>
+		</span>
+	</xsl:template>
 </xsl:stylesheet>
 
 
