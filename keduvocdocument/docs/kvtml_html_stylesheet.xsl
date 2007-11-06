@@ -25,6 +25,7 @@ The easiest way to use the stylesheet is to include it in the .kvtml file:
 		td, table {
 			border: solid 1px black;
 			border-collapse: collapse;
+			width: 50%;
 		}
 		tr[languageheader] {
 			color: black;
