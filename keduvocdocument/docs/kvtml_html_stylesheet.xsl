@@ -19,49 +19,67 @@ The easiest way to use the stylesheet is to include it in the .kvtml file:
 
 <xsl:output method="html" indent="yes" doctype-public="-//W3C//DTD HTML 3.2 Final//EN"/>
 
-<xsl:template match="/">
+	<xsl:template match="/">
+	<html>
+	<style type="text/css">
+		td, table {
+			border: solid 1px black;
+			border-collapse: collapse;
+		}
+		tr[languageheader] {
+			color: black;
+			font-size: 130%;
+			background-color: lightblue;
+		}
+	
+	</style>
+	
+	<head>
+		<title><xsl:value-of select="kvtml/information/title"/></title>
+	</head>
+	
+	<body><xsl:apply-templates select="kvtml" /></body>
+	</html>
+	</xsl:template>
 
- <html>
- <style type="text/css">
-  tr[languageheader] {
-	color: black;
-	font-size: 130%;
-	background-color: lightblue
-	}
- </style>
+	<xsl:template match="kvtml">
+		<h2><xsl:value-of select="information/title"/></h2>
+		<xsl:apply-templates select="lessons"/>
+	</xsl:template>
 
- <head>
-  <title>
-    <xsl:value-of select="kvtml/information/title"/>
-  </title>
- </head>
 
- <body>
-   <h2><xsl:value-of select="kvtml/information/title"/></h2>
-   <table border="1">
-     <tr languageheader="true">
-        <xsl:for-each select="kvtml/identifiers/identifier">
-          <td><xsl:value-of select="name"/></td>
-        </xsl:for-each>
-     </tr>
-     <xsl:apply-templates select="kvtml/entries/entry"/>
-   </table>
+	<xsl:template match="lessons">
+		<xsl:apply-templates select="lesson"/>
+	</xsl:template>
+ 
+	<xsl:template match="lesson">
+		<xsl:value-of select="name"/>
+		<table border="1">
+			<tr languageheader="true">
+				<xsl:apply-templates select="/kvtml/identifiers"/>
+			</tr>
+			<xsl:apply-templates select="entries/entry"/>
 
- </body>
- </html>
-</xsl:template>
-
-  <xsl:template match="entry">
-    <tr>
-      <xsl:apply-templates select="translation"/>
-    </tr>
-  </xsl:template>
-
-  <xsl:template match="translation">
-    <td>
-      <xsl:value-of select="text"/>
-    </td>
-  </xsl:template>
+			<xsl:for-each select="entryid">
+				<xsl:variable name="id" select="."/>
+				<xsl:for-each select="/kvtml/entries/entry[@id=$id]">
+					<xsl:apply-templates select="."/>
+				</xsl:for-each>
+			</xsl:for-each>	
+		</table>
+	</xsl:template>
+	
+	<xsl:template match="identifiers/identifier">
+		<td><xsl:value-of select="name"/></td>
+	</xsl:template>
+	
+	<xsl:template match="entry">
+		<tr><xsl:apply-templates select="translation"/></tr>
+	</xsl:template>
+	
+	<xsl:template match="translation">
+		<td><xsl:value-of select="text"/></td>
+	</xsl:template>
 
 </xsl:stylesheet>
 
