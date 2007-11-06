@@ -29,7 +29,7 @@ The easiest way to use the stylesheet is to include it in the .kvtml file:
 		}
 		tr[languageheader] {
 			color: black;
-			font-size: 130%;
+			font-size: 1.5em;
 			background-color: lightblue;
 		}
 		.comment {
@@ -52,11 +52,16 @@ The easiest way to use the stylesheet is to include it in the .kvtml file:
 
 
 	<xsl:template match="lessons">
+		<xsl:for-each select="lesson">
+			<a href="#{name}"><xsl:value-of select="name"/></a>
+			<br/>
+		</xsl:for-each>
+
 		<xsl:apply-templates select="lesson"/>
 	</xsl:template>
  
 	<xsl:template match="lesson">
-		<h3>Lesson: <xsl:value-of select="name"/></h3>
+		<h3>Lesson: <a name="{name}"><xsl:value-of select="name"/></a></h3>
 		<table border="1">
 			<tr languageheader="true">
 				<xsl:apply-templates select="/kvtml/identifiers"/>
