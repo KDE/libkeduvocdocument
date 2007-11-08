@@ -22,10 +22,6 @@ kde4_add_library(extdate SHARED ${extdate_LIB_SRCS})
 target_link_libraries(extdate  ${KDE4_KDEUI_LIBS} ${QT_QT3SUPPORT_LIBRARY})
 
 set_target_properties(extdate PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-install(TARGETS extdate 
-        RUNTIME DESTINATION ${BIN_INSTALL_DIR}
-        LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-        ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
-)
+install(TARGETS extdate  DESTINATION ${LIB_INSTALL_DIR})
 
 
