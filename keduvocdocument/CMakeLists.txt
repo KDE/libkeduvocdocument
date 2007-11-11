@@ -33,11 +33,7 @@ kde4_add_library(keduvocdocument SHARED ${keduvocdocument_LIB_SRCS})
 target_link_libraries(keduvocdocument  ${KDE4_KIO_LIBS} ${QT_QTXML_LIBRARY})
 
 set_target_properties(keduvocdocument PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-install(TARGETS keduvocdocument 
-        RUNTIME DESTINATION ${BIN_INSTALL_DIR}
-        LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-        ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
-)
+install(TARGETS keduvocdocument  DESTINATION ${LIB_INSTALL_DIR})
 
 
 ########### install files ###############

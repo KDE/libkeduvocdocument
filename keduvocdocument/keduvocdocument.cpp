@@ -826,8 +826,8 @@ kDebug() << "appendIdentifier: " << i << id.name() << id.locale();
     }
 
     if ( i > 0 ) {
-        for (int i = 0; i < entryCount(); i++) {
-            entry(i)->translation(i).setType(entry(i)->translation(0).type());
+        for (int j = 0; j < entryCount(); j++) {
+            entry(j)->translation(i).setType(entry(j)->translation(0).type());
         }
     }
 

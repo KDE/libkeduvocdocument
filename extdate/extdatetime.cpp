@@ -204,11 +204,43 @@ int ExtDate::daysInYear() const
 
 int ExtDate::weekNumber( int *yearNum ) const
 {
-	// the year and week number are those of the next Sunday.
-	ExtDate a_date( jd() - dayOfWeek() + 7);
-	if ( yearNum )
-		*yearNum = a_date.year();
-	return 1 + int( a_date.dayOfYear()/7 );
+  //ISO 8601:
+  //Week 1 is the week containing the first Thursday of the year.
+  ExtDate day1( year(), 1, 1 ); //First day of the year
+  
+  if ( day1.dayOfWeek() > 4 ) { 
+    //Jan 1 is after Thursday, so it's in the previous year's last week.
+    //Set day1 to be the following Monday, which is the start of week 1
+    day1 = day1.addDays( 7 - day1.dayOfWeek() + 1 );
+  } else {
+    //Jan 1 is before Friday, so it is in Week 1.
+    //Set day1 to be the preceding Monday
+    day1 = day1.addDays( 1 - day1.dayOfWeek() );
+  }
+
+  //Is the target date prior to day1?  If so, the target is in the 
+  //last week of the previous year.
+  if ( day1.daysTo( *this ) < 0 ) {
+    if ( yearNum ) *yearNum = year() - 1;
+
+    //The last week of the year always contains Dec 28th (ISO 8601)
+    ExtDate lastDec28( year()-1, 12, 28 );
+    return lastDec28.weekNumber();
+  }
+
+  //If the target date is after Dec 28th, it's possible that it is in 
+  //Week 1 of the following year.
+  ExtDate dec28( year(), 12, 28 );
+  if ( dayOfYear() > dec28.dayOfYear() && dayOfWeek() < 4 ) {
+    if ( yearNum ) *yearNum = year() + 1;
+    return 1;
+  }
+
+  //If we reach here, the week number will be in this year.
+  int week = 1 + int( day1.daysTo( *this )/7 );
+
+  if ( yearNum ) *yearNum = year();
+  return week;
 }
 
 #ifndef QT_NO_TEXTDATE

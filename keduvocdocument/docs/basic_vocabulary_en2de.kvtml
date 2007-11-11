@@ -1,0 +1,1352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kvtml PUBLIC "kvtml2.dtd" "http://edu.kde.org/kanagram/kvtml2.dtd">
+<?xml-stylesheet type="text/xsl" href="kvtml_html_stylesheet.xsl"?>
+<kvtml version="2.0" >
+  <information>
+    <generator>Parley</generator>
+    <title>basic vocabulary German-English</title>
+    <author>Markus Büchele, Norbert Behrendt</author>
+    <license>GPL</license>
+  </information>
+  <identifiers>
+    <identifier id="0" >
+      <name>English</name>
+      <locale>en</locale>
+      <personalpronouns>
+        <malefemaledifferent/>
+      </personalpronouns>
+    </identifier>
+    <identifier id="1" >
+      <name>German</name>
+      <locale>de</locale>
+      <personalpronouns>
+        <malefemaledifferent/>
+      </personalpronouns>
+    </identifier>
+  </identifiers>
+  <wordtypedefinitions>
+    <wordtypedefinition>
+      <typename>Noun</typename>
+      <specialwordtype>noun</specialwordtype>
+      <subwordtypedefinition>
+        <subtypename>Male</subtypename>
+        <specialwordtype>male</specialwordtype>
+      </subwordtypedefinition>
+      <subwordtypedefinition>
+        <subtypename>Female</subtypename>
+        <specialwordtype>female</specialwordtype>
+      </subwordtypedefinition>
+      <subwordtypedefinition>
+        <subtypename>Neutral</subtypename>
+        <specialwordtype>neutral</specialwordtype>
+      </subwordtypedefinition>
+    </wordtypedefinition>
+    <wordtypedefinition>
+      <typename>Verb</typename>
+      <specialwordtype>verb</specialwordtype>
+      <subwordtypedefinition>
+        <subtypename>Regular</subtypename>
+      </subwordtypedefinition>
+      <subwordtypedefinition>
+        <subtypename>Irregular</subtypename>
+      </subwordtypedefinition>
+    </wordtypedefinition>
+    <wordtypedefinition>
+      <typename>Adjective</typename>
+      <specialwordtype>adjective</specialwordtype>
+    </wordtypedefinition>
+    <wordtypedefinition>
+      <typename>Adverb</typename>
+      <specialwordtype>adverb</specialwordtype>
+    </wordtypedefinition>
+    <wordtypedefinition>
+      <typename>Question</typename>
+    </wordtypedefinition>
+    <wordtypedefinition>
+      <typename>Name</typename>
+    </wordtypedefinition>
+    <wordtypedefinition>
+      <typename>Article</typename>
+      <subwordtypedefinition>
+        <subtypename>Definite</subtypename>
+      </subwordtypedefinition>
+      <subwordtypedefinition>
+        <subtypename>Indefinite</subtypename>
+      </subwordtypedefinition>
+    </wordtypedefinition>
+    <wordtypedefinition>
+      <typename>Pronoun</typename>
+      <subwordtypedefinition>
+        <subtypename>Possessive</subtypename>
+      </subwordtypedefinition>
+      <subwordtypedefinition>
+        <subtypename>Personal</subtypename>
+      </subwordtypedefinition>
+    </wordtypedefinition>
+    <wordtypedefinition>
+      <typename>Phrase</typename>
+    </wordtypedefinition>
+    <wordtypedefinition>
+      <typename>Numeral</typename>
+      <subwordtypedefinition>
+        <subtypename>Ordinal</subtypename>
+      </subwordtypedefinition>
+      <subwordtypedefinition>
+        <subtypename>Cardinal</subtypename>
+      </subwordtypedefinition>
+    </wordtypedefinition>
+    <wordtypedefinition>
+      <typename>Conjunction</typename>
+    </wordtypedefinition>
+    <wordtypedefinition>
+      <typename>Preposition</typename>
+    </wordtypedefinition>
+  </wordtypedefinitions>
+  <tenses>
+    <tense></tense>
+    <tense>Past Progressive</tense>
+    <tense>Simple Past</tense>
+    <tense>will future</tense>
+    <tense>going to future</tense>
+    <tense>Present Perfect</tense>
+    <tense>Present Progressive</tense>
+    <tense>Plusquamperfekt</tense>
+    <tense>Simple Present</tense>
+  </tenses>
+  <entries>
+    <entry id="0" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>also</text>
+      </translation>
+      <translation id="1" >
+        <text>auch, außerdem</text>
+      </translation>
+    </entry>
+    <entry id="1" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>although</text>
+      </translation>
+      <translation id="1" >
+        <text>obwohl</text>
+      </translation>
+    </entry>
+    <entry id="2" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>and</text>
+      </translation>
+      <translation id="1" >
+        <text>und</text>
+      </translation>
+    </entry>
+    <entry id="3" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>because</text>
+      </translation>
+      <translation id="1" >
+        <text>weil</text>
+      </translation>
+    </entry>
+    <entry id="4" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>besides</text>
+      </translation>
+      <translation id="1" >
+        <text>außerdem</text>
+      </translation>
+    </entry>
+    <entry id="5" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>but</text>
+      </translation>
+      <translation id="1" >
+        <text>aber, sondern</text>
+      </translation>
+    </entry>
+    <entry id="6" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>despite</text>
+      </translation>
+      <translation id="1" >
+        <text>trotz</text>
+      </translation>
+    </entry>
+    <entry id="7" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>either ... or</text>
+      </translation>
+      <translation id="1" >
+        <text>entweder ... oder</text>
+      </translation>
+    </entry>
+    <entry id="8" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>however</text>
+      </translation>
+      <translation id="1" >
+        <text>jedoch, aber</text>
+      </translation>
+    </entry>
+    <entry id="9" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>if</text>
+      </translation>
+      <translation id="1" >
+        <text>wenn, ob</text>
+      </translation>
+    </entry>
+    <entry id="10" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>instead of</text>
+      </translation>
+      <translation id="1" >
+        <text>anstatt</text>
+      </translation>
+    </entry>
+    <entry id="11" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>like</text>
+      </translation>
+      <translation id="1" >
+        <text>wie</text>
+      </translation>
+    </entry>
+    <entry id="12" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>neither ... nor</text>
+      </translation>
+      <translation id="1" >
+        <text>weder ... noch</text>
+      </translation>
+    </entry>
+    <entry id="13" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>not yet</text>
+      </translation>
+      <translation id="1" >
+        <text>noch nicht</text>
+      </translation>
+    </entry>
+    <entry id="14" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>or</text>
+      </translation>
+      <translation id="1" >
+        <text>oder</text>
+      </translation>
+    </entry>
+    <entry id="15" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>such as</text>
+      </translation>
+      <translation id="1" >
+        <text>wie zum Beispiel</text>
+      </translation>
+    </entry>
+    <entry id="16" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>than</text>
+      </translation>
+      <translation id="1" >
+        <text>als</text>
+      </translation>
+    </entry>
+    <entry id="17" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>therefore</text>
+      </translation>
+      <translation id="1" >
+        <text>deshalb, daher</text>
+      </translation>
+    </entry>
+    <entry id="18" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>though</text>
+      </translation>
+      <translation id="1" >
+        <text>obwohl, trotzdem</text>
+      </translation>
+    </entry>
+    <entry id="19" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>unless</text>
+      </translation>
+      <translation id="1" >
+        <text>wenn nicht, es sei denn</text>
+      </translation>
+    </entry>
+    <entry id="20" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>until</text>
+      </translation>
+      <translation id="1" >
+        <text>bis</text>
+      </translation>
+    </entry>
+    <entry id="21" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>when</text>
+      </translation>
+      <translation id="1" >
+        <text>wann, als</text>
+      </translation>
+    </entry>
+    <entry id="22" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>whether</text>
+      </translation>
+      <translation id="1" >
+        <text>ob</text>
+      </translation>
+    </entry>
+    <entry id="23" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>black</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+        <comparison>
+          <absolute>black</absolute>
+          <comparative>blacker</comparative>
+          <superlative>the blackest</superlative>
+        </comparison>
+      </translation>
+      <translation id="1" >
+        <text>schwarz</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+      </translation>
+    </entry>
+    <entry id="24" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>blue</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+        <comparison>
+          <absolute>blue</absolute>
+          <comparative>bluer</comparative>
+          <superlative>the bluest</superlative>
+        </comparison>
+      </translation>
+      <translation id="1" >
+        <text>blau</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+      </translation>
+    </entry>
+    <entry id="25" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>brown</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+        <comparison>
+          <absolute>brown</absolute>
+          <comparative>browner</comparative>
+          <superlative>the brownest</superlative>
+        </comparison>
+      </translation>
+      <translation id="1" >
+        <text>braun</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+      </translation>
+    </entry>
+    <entry id="26" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>eight</text>
+      </translation>
+      <translation id="1" >
+        <text>acht</text>
+      </translation>
+    </entry>
+    <entry id="27" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>five</text>
+      </translation>
+      <translation id="1" >
+        <text>fünf</text>
+      </translation>
+    </entry>
+    <entry id="28" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>four</text>
+      </translation>
+      <translation id="1" >
+        <text>vier</text>
+      </translation>
+    </entry>
+    <entry id="29" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>green</text>
+      </translation>
+      <translation id="1" >
+        <text>grün</text>
+      </translation>
+    </entry>
+    <entry id="30" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>grey</text>
+      </translation>
+      <translation id="1" >
+        <text>grau</text>
+      </translation>
+    </entry>
+    <entry id="31" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>hundred</text>
+      </translation>
+      <translation id="1" >
+        <text>hundert</text>
+      </translation>
+    </entry>
+    <entry id="32" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>million</text>
+      </translation>
+      <translation id="1" >
+        <text>die Million</text>
+      </translation>
+    </entry>
+    <entry id="33" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>nine</text>
+      </translation>
+      <translation id="1" >
+        <text>neun</text>
+      </translation>
+    </entry>
+    <entry id="34" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>one</text>
+      </translation>
+      <translation id="1" >
+        <text>eins</text>
+      </translation>
+    </entry>
+    <entry id="35" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>red</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+        <comparison>
+          <absolute>red</absolute>
+          <comparative>redder</comparative>
+          <superlative>the reddest</superlative>
+        </comparison>
+      </translation>
+      <translation id="1" >
+        <text>rot</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+      </translation>
+    </entry>
+    <entry id="36" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>seven</text>
+      </translation>
+      <translation id="1" >
+        <text>sieben</text>
+      </translation>
+    </entry>
+    <entry id="37" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>six</text>
+      </translation>
+      <translation id="1" >
+        <text>sechs</text>
+      </translation>
+    </entry>
+    <entry id="38" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>ten</text>
+      </translation>
+      <translation id="1" >
+        <text>zehn</text>
+      </translation>
+    </entry>
+    <entry id="39" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>thousand</text>
+      </translation>
+      <translation id="1" >
+        <text>tausend</text>
+      </translation>
+    </entry>
+    <entry id="40" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>three</text>
+      </translation>
+      <translation id="1" >
+        <text>drei</text>
+      </translation>
+    </entry>
+    <entry id="41" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>two</text>
+      </translation>
+      <translation id="1" >
+        <text>zwei</text>
+      </translation>
+    </entry>
+    <entry id="42" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>white</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+        <comparison>
+          <absolute>white</absolute>
+          <comparative>whiter</comparative>
+          <superlative>the whitest</superlative>
+        </comparison>
+      </translation>
+      <translation id="1" >
+        <text>weiß</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+      </translation>
+    </entry>
+    <entry id="43" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>yellow</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+        <comparison>
+          <absolute>yellow</absolute>
+          <comparative>yellower</comparative>
+          <superlative>the yellowest</superlative>
+        </comparison>
+      </translation>
+      <translation id="1" >
+        <text>gelb</text>
+        <wordtype>
+          <typename>Adjective</typename>
+        </wordtype>
+      </translation>
+    </entry>
+    <entry id="44" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>about</text>
+      </translation>
+      <translation id="1" >
+        <text>über, etwa</text>
+      </translation>
+    </entry>
+    <entry id="45" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>above</text>
+      </translation>
+      <translation id="1" >
+        <text>über, oben</text>
+      </translation>
+    </entry>
+    <entry id="46" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>according to</text>
+      </translation>
+      <translation id="1" >
+        <text>laut, nach</text>
+      </translation>
+    </entry>
+    <entry id="47" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>across</text>
+      </translation>
+      <translation id="1" >
+        <text>über, hinüber, durch</text>
+      </translation>
+    </entry>
+    <entry id="48" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>after</text>
+      </translation>
+      <translation id="1" >
+        <text>nach, nachdem</text>
+      </translation>
+    </entry>
+    <entry id="49" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>against</text>
+      </translation>
+      <translation id="1" >
+        <text>gegen</text>
+      </translation>
+    </entry>
+    <entry id="50" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>ago</text>
+      </translation>
+      <translation id="1" >
+        <text>vor</text>
+      </translation>
+    </entry>
+    <entry id="51" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>among</text>
+      </translation>
+      <translation id="1" >
+        <text>unter</text>
+      </translation>
+    </entry>
+    <entry id="52" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>at</text>
+      </translation>
+      <translation id="1" >
+        <text>an, bei</text>
+      </translation>
+    </entry>
+    <entry id="53" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>because of</text>
+      </translation>
+      <translation id="1" >
+        <text>wegen</text>
+      </translation>
+    </entry>
+    <entry id="54" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>behind</text>
+      </translation>
+      <translation id="1" >
+        <text>hinter, hinten</text>
+      </translation>
+    </entry>
+    <entry id="55" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>between</text>
+      </translation>
+      <translation id="1" >
+        <text>zwischen</text>
+      </translation>
+    </entry>
+    <entry id="56" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>by</text>
+      </translation>
+      <translation id="1" >
+        <text>bei, von, durch</text>
+      </translation>
+    </entry>
+    <entry id="57" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>close to</text>
+      </translation>
+      <translation id="1" >
+        <text>in der Nähe, nahe</text>
+      </translation>
+    </entry>
+    <entry id="58" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>due to</text>
+      </translation>
+      <translation id="1" >
+        <text>wegen</text>
+      </translation>
+    </entry>
+    <entry id="59" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>during</text>
+      </translation>
+      <translation id="1" >
+        <text>während</text>
+      </translation>
+    </entry>
+    <entry id="60" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>except</text>
+      </translation>
+      <translation id="1" >
+        <text>außer</text>
+      </translation>
+    </entry>
+    <entry id="61" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>for</text>
+      </translation>
+      <translation id="1" >
+        <text>für, seit</text>
+      </translation>
+    </entry>
+    <entry id="62" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>from</text>
+      </translation>
+      <translation id="1" >
+        <text>von</text>
+      </translation>
+    </entry>
+    <entry id="63" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>in</text>
+      </translation>
+      <translation id="1" >
+        <text>in</text>
+      </translation>
+    </entry>
+    <entry id="64" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>in front of</text>
+      </translation>
+      <translation id="1" >
+        <text>vor</text>
+      </translation>
+    </entry>
+    <entry id="65" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>into</text>
+      </translation>
+      <translation id="1" >
+        <text>in ... hinein</text>
+      </translation>
+    </entry>
+    <entry id="66" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>near</text>
+      </translation>
+      <translation id="1" >
+        <text>nahe</text>
+      </translation>
+    </entry>
+    <entry id="67" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>next to</text>
+      </translation>
+      <translation id="1" >
+        <text>neben</text>
+      </translation>
+    </entry>
+    <entry id="68" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>of</text>
+      </translation>
+      <translation id="1" >
+        <text>von</text>
+      </translation>
+    </entry>
+    <entry id="69" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>on</text>
+      </translation>
+      <translation id="1" >
+        <text>an, auf</text>
+      </translation>
+    </entry>
+    <entry id="70" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>on top of</text>
+      </translation>
+      <translation id="1" >
+        <text>oben auf</text>
+      </translation>
+    </entry>
+    <entry id="71" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>since</text>
+      </translation>
+      <translation id="1" >
+        <text>seit</text>
+      </translation>
+    </entry>
+    <entry id="72" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>through</text>
+      </translation>
+      <translation id="1" >
+        <text>durch</text>
+      </translation>
+    </entry>
+    <entry id="73" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>to</text>
+      </translation>
+      <translation id="1" >
+        <text>zu, nach</text>
+      </translation>
+    </entry>
+    <entry id="74" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>toward</text>
+      </translation>
+      <translation id="1" >
+        <text>auf ... zu</text>
+      </translation>
+    </entry>
+    <entry id="75" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>under</text>
+      </translation>
+      <translation id="1" >
+        <text>unter</text>
+      </translation>
+    </entry>
+    <entry id="76" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>up</text>
+      </translation>
+      <translation id="1" >
+        <text>oben, hinauf</text>
+      </translation>
+    </entry>
+    <entry id="77" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>up to</text>
+      </translation>
+      <translation id="1" >
+        <text>bis</text>
+      </translation>
+    </entry>
+    <entry id="78" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>with</text>
+      </translation>
+      <translation id="1" >
+        <text>mit</text>
+      </translation>
+    </entry>
+    <entry id="79" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>without</text>
+      </translation>
+      <translation id="1" >
+        <text>ohne</text>
+      </translation>
+    </entry>
+    <entry id="80" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>bed</text>
+      </translation>
+      <translation id="1" >
+        <text>das Bett</text>
+      </translation>
+    </entry>
+    <entry id="81" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>bread</text>
+      </translation>
+      <translation id="1" >
+        <text>das Brot</text>
+      </translation>
+    </entry>
+    <entry id="82" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>no</text>
+      </translation>
+      <translation id="1" >
+        <text>nein</text>
+      </translation>
+    </entry>
+    <entry id="83" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>please</text>
+      </translation>
+      <translation id="1" >
+        <text>bitte</text>
+      </translation>
+    </entry>
+    <entry id="84" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>sorry</text>
+      </translation>
+      <translation id="1" >
+        <text>Entschuldigung</text>
+      </translation>
+    </entry>
+    <entry id="85" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>thank you</text>
+      </translation>
+      <translation id="1" >
+        <text>danke</text>
+      </translation>
+    </entry>
+    <entry id="86" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>to be</text>
+      </translation>
+      <translation id="1" >
+        <text>sein</text>
+      </translation>
+    </entry>
+    <entry id="87" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>to do</text>
+      </translation>
+      <translation id="1" >
+        <text>tun, machen</text>
+      </translation>
+    </entry>
+    <entry id="88" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>to have</text>
+      </translation>
+      <translation id="1" >
+        <text>haben</text>
+      </translation>
+    </entry>
+    <entry id="89" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>water</text>
+      </translation>
+      <translation id="1" >
+        <text>das Wasser</text>
+      </translation>
+    </entry>
+    <entry id="90" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>yes</text>
+      </translation>
+      <translation id="1" >
+        <text>ja</text>
+      </translation>
+    </entry>
+    <entry id="91" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>autumn</text>
+      </translation>
+      <translation id="1" >
+        <text>der Herbst</text>
+      </translation>
+    </entry>
+    <entry id="92" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>century</text>
+      </translation>
+      <translation id="1" >
+        <text>das Jahrhundert</text>
+      </translation>
+    </entry>
+    <entry id="93" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>day</text>
+      </translation>
+      <translation id="1" >
+        <text>der Tag</text>
+      </translation>
+    </entry>
+    <entry id="94" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>east</text>
+      </translation>
+      <translation id="1" >
+        <text>der Osten, östlich</text>
+      </translation>
+    </entry>
+    <entry id="95" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>hour</text>
+      </translation>
+      <translation id="1" >
+        <text>die Stunde</text>
+      </translation>
+    </entry>
+    <entry id="96" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>inch</text>
+      </translation>
+      <translation id="1" >
+        <text>der Zoll (Längenmaß)</text>
+      </translation>
+    </entry>
+    <entry id="97" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>kilometre</text>
+      </translation>
+      <translation id="1" >
+        <text>der Kilometer</text>
+      </translation>
+    </entry>
+    <entry id="98" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>left</text>
+      </translation>
+      <translation id="1" >
+        <text>links</text>
+      </translation>
+    </entry>
+    <entry id="99" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>metre</text>
+      </translation>
+      <translation id="1" >
+        <text>der Meter</text>
+      </translation>
+    </entry>
+    <entry id="100" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>mile</text>
+      </translation>
+      <translation id="1" >
+        <text>die Meile</text>
+      </translation>
+    </entry>
+    <entry id="101" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>minute</text>
+      </translation>
+      <translation id="1" >
+        <text>die Minute</text>
+      </translation>
+    </entry>
+    <entry id="102" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>month</text>
+      </translation>
+      <translation id="1" >
+        <text>der Monat</text>
+      </translation>
+    </entry>
+    <entry id="103" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>north</text>
+      </translation>
+      <translation id="1" >
+        <text>der Norden, nördlich</text>
+      </translation>
+    </entry>
+    <entry id="104" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>right</text>
+      </translation>
+      <translation id="1" >
+        <text>das Recht, rechts, richtig</text>
+      </translation>
+    </entry>
+    <entry id="105" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>season</text>
+      </translation>
+      <translation id="1" >
+        <text>die Jahreszeit, die Saison</text>
+      </translation>
+    </entry>
+    <entry id="106" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>south</text>
+      </translation>
+      <translation id="1" >
+        <text>der Süden, südlich</text>
+      </translation>
+    </entry>
+    <entry id="107" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>spring</text>
+      </translation>
+      <translation id="1" >
+        <text>der Frühling</text>
+      </translation>
+    </entry>
+    <entry id="108" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>square</text>
+      </translation>
+      <translation id="1" >
+        <text>das Quadrat, der Platz</text>
+      </translation>
+    </entry>
+    <entry id="109" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>summer</text>
+      </translation>
+      <translation id="1" >
+        <text>der Sommer</text>
+      </translation>
+    </entry>
+    <entry id="110" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>triangle</text>
+      </translation>
+      <translation id="1" >
+        <text>das Dreieck</text>
+      </translation>
+    </entry>
+    <entry id="111" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>week</text>
+      </translation>
+      <translation id="1" >
+        <text>die Woche</text>
+      </translation>
+    </entry>
+    <entry id="112" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>west</text>
+      </translation>
+      <translation id="1" >
+        <text>der Westen, westlich</text>
+      </translation>
+    </entry>
+    <entry id="113" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>winter</text>
+      </translation>
+      <translation id="1" >
+        <text>der Winter</text>
+      </translation>
+    </entry>
+    <entry id="114" >
+      <inactive>false</inactive>
+      <translation id="0" >
+        <text>year</text>
+      </translation>
+      <translation id="1" >
+        <text>das Jahr</text>
+      </translation>
+    </entry>
+  </entries>
+  <lessons>
+    <lesson>
+      <name>time and space</name>
+      <entryid>91</entryid>
+      <entryid>92</entryid>
+      <entryid>93</entryid>
+      <entryid>94</entryid>
+      <entryid>95</entryid>
+      <entryid>96</entryid>
+      <entryid>97</entryid>
+      <entryid>98</entryid>
+      <entryid>99</entryid>
+      <entryid>100</entryid>
+      <entryid>101</entryid>
+      <entryid>102</entryid>
+      <entryid>103</entryid>
+      <entryid>104</entryid>
+      <entryid>105</entryid>
+      <entryid>106</entryid>
+      <entryid>107</entryid>
+      <entryid>108</entryid>
+      <entryid>109</entryid>
+      <entryid>110</entryid>
+      <entryid>111</entryid>
+      <entryid>112</entryid>
+      <entryid>113</entryid>
+      <entryid>114</entryid>
+    </lesson>
+    <lesson>
+      <name>survival training</name>
+      <entryid>80</entryid>
+      <entryid>81</entryid>
+      <entryid>82</entryid>
+      <entryid>83</entryid>
+      <entryid>84</entryid>
+      <entryid>85</entryid>
+      <entryid>86</entryid>
+      <entryid>87</entryid>
+      <entryid>88</entryid>
+      <entryid>89</entryid>
+      <entryid>90</entryid>
+    </lesson>
+    <lesson>
+      <name>numbers and colours</name>
+      <entryid>23</entryid>
+      <entryid>24</entryid>
+      <entryid>25</entryid>
+      <entryid>26</entryid>
+      <entryid>27</entryid>
+      <entryid>28</entryid>
+      <entryid>29</entryid>
+      <entryid>30</entryid>
+      <entryid>31</entryid>
+      <entryid>32</entryid>
+      <entryid>33</entryid>
+      <entryid>34</entryid>
+      <entryid>35</entryid>
+      <entryid>36</entryid>
+      <entryid>37</entryid>
+      <entryid>38</entryid>
+      <entryid>39</entryid>
+      <entryid>40</entryid>
+      <entryid>41</entryid>
+      <entryid>42</entryid>
+      <entryid>43</entryid>
+    </lesson>
+    <lesson>
+      <name>conjunctions</name>
+      <entryid>0</entryid>
+      <entryid>1</entryid>
+      <entryid>2</entryid>
+      <entryid>3</entryid>
+      <entryid>4</entryid>
+      <entryid>5</entryid>
+      <entryid>6</entryid>
+      <entryid>7</entryid>
+      <entryid>8</entryid>
+      <entryid>9</entryid>
+      <entryid>10</entryid>
+      <entryid>11</entryid>
+      <entryid>12</entryid>
+      <entryid>13</entryid>
+      <entryid>14</entryid>
+      <entryid>15</entryid>
+      <entryid>16</entryid>
+      <entryid>17</entryid>
+      <entryid>18</entryid>
+      <entryid>19</entryid>
+      <entryid>20</entryid>
+      <entryid>21</entryid>
+      <entryid>22</entryid>
+    </lesson>
+    <lesson>
+      <name>prepositions</name>
+      <current>true</current>
+      <entryid>44</entryid>
+      <entryid>45</entryid>
+      <entryid>46</entryid>
+      <entryid>47</entryid>
+      <entryid>48</entryid>
+      <entryid>49</entryid>
+      <entryid>50</entryid>
+      <entryid>51</entryid>
+      <entryid>52</entryid>
+      <entryid>53</entryid>
+      <entryid>54</entryid>
+      <entryid>55</entryid>
+      <entryid>56</entryid>
+      <entryid>57</entryid>
+      <entryid>58</entryid>
+      <entryid>59</entryid>
+      <entryid>60</entryid>
+      <entryid>61</entryid>
+      <entryid>62</entryid>
+      <entryid>63</entryid>
+      <entryid>64</entryid>
+      <entryid>65</entryid>
+      <entryid>66</entryid>
+      <entryid>67</entryid>
+      <entryid>68</entryid>
+      <entryid>69</entryid>
+      <entryid>70</entryid>
+      <entryid>71</entryid>
+      <entryid>72</entryid>
+      <entryid>73</entryid>
+      <entryid>74</entryid>
+      <entryid>75</entryid>
+      <entryid>76</entryid>
+      <entryid>77</entryid>
+      <entryid>78</entryid>
+      <entryid>79</entryid>
+    </lesson>
+  </lessons>
+</kvtml>
