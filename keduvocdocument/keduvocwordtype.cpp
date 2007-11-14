@@ -363,3 +363,8 @@ void KEduVocWordType::setSpecialSubType(const QString & mainTypeName, const QStr
     }
 }
 
+void KEduVocWordType::clear()
+{
+    d->m_wordTypeList.clear();
+}
+

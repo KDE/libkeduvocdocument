@@ -89,9 +89,8 @@ void SharedKvtmlFilesPrivate::rescan()
         }
     }
 
-
+    KEduVocDocument *doc = new KEduVocDocument();
     for ( int i = 0; i < this->m_fileList.size(); ++i ) {
-        KEduVocDocument *doc = new KEduVocDocument();
 
         // open the file
         doc->open( KUrl::fromPath( this->m_fileList[i] ) );
@@ -101,8 +100,8 @@ void SharedKvtmlFilesPrivate::rescan()
 
         // add it's comment to the comment list
         this->m_commentList.append( doc->documentComment() );
-        delete doc;
     }
+    delete doc;
 }
 
 void SharedKvtmlFiles::rescan()
