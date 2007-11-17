@@ -38,9 +38,9 @@ int main( int argc, char ** argv )
 {
     KAboutData about( "kvtml-converter", 0, ki18n( "Kvtml-Converter" ), "0.1", ki18n( "kvtml file converter" ), KAboutData::License_GPL, ki18n( "© 2007 Jeremy Whiting" ) );
     KCmdLineOptions options;
-    options.add( "f <format>");
-    options.add( "+infile" );
-    options.add( "+outfile" );
+    options.add( "f <format>", ki18n("file format to write out (kvtml1, kvtml2, or csv)"));
+    options.add( "+infile", ki18n( "file to read in" ) );
+    options.add( "+outfile", ki18n( "file to write to" ) );
 
     KCmdLineArgs::init( argc, argv, &about );
     KCmdLineArgs::addCmdLineOptions( options );
@@ -60,11 +60,19 @@ int main( int argc, char ** argv )
             {
                 document.saveAs( outfile, KEduVocDocument::Kvtml1, "converter" );
             }
+            else if (arguments->getOption("f") == "csv")
+            {
+                document.saveAs( outfile, KEduVocDocument::Csv, "converter" );
+            }
             else
             {
                 document.saveAs( outfile, KEduVocDocument::Kvtml, "converter" );
             }
         }
+    }
+    else
+    {
+        arguments->usage();
     }
 
     arguments->clear();
