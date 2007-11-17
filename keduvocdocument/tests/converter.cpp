@@ -36,8 +36,9 @@
 
 int main( int argc, char ** argv )
 {
-    KAboutData about( "converter", 0, ki18n( "Converter" ), "0.1", ki18n( "kvtml file converter" ), KAboutData::License_GPL, ki18n( "ÃÂ© 2007 Jeremy Whiting" ) );
+    KAboutData about( "kvtml-converter", 0, ki18n( "Kvtml-Converter" ), "0.1", ki18n( "kvtml file converter" ), KAboutData::License_GPL, ki18n( "© 2007 Jeremy Whiting" ) );
     KCmdLineOptions options;
+    options.add( "f <format>");
     options.add( "+infile" );
     options.add( "+outfile" );
 
@@ -55,7 +56,14 @@ int main( int argc, char ** argv )
             kDebug() << "Reading " << infile;
             document.open( infile );
             kDebug() << "Writing to " << outfile;
-            document.saveAs( outfile, KEduVocDocument::Kvtml, "converter" );
+            if (arguments->getOption("f") == "kvtml1")
+            {
+                document.saveAs( outfile, KEduVocDocument::Kvtml1, "converter" );
+            }
+            else
+            {
+                document.saveAs( outfile, KEduVocDocument::Kvtml, "converter" );
+            }
         }
     }
 
