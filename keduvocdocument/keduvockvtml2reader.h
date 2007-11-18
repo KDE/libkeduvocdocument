@@ -108,7 +108,7 @@ private:
     /** read a translation
      * @param translationElement QDomElement for the translation to read
      */
-    bool readTranslation( QDomElement &translationElement, KEduVocExpression &expr, int index );
+    bool readTranslation( QDomElement &translationElement, KEduVocExpression *expr, int index );
 
     /** read a comparison
      * @param comparisonElement comparison group element
@@ -127,18 +127,32 @@ private:
      * @param expr expression element to add grades to
      * @param index index of the current translation
      */
-    bool readGrade( QDomElement &gradeElement, KEduVocExpression &expr, int index );
+    bool readGrade( QDomElement &gradeElement, KEduVocExpression *expr, int index );
+
+    /**
+     * Read <lesson> tags.
+     * @param parentLesson 
+     * @param lessonElement 
+     * @return 
+     */
+    bool readChildLessons( KEduVocLesson* parentLesson, QDomElement &lessonElement );
 
     /** read a lesson, and append it to the document
      * @param lessonElement element to read from
      */
-    bool readLesson( QDomElement &lessonElement );
+    bool readLesson( KEduVocLesson* parentLesson, QDomElement &lessonElement );
+
+    void printLesson( KEduVocLesson* lesson );
 
     /** pre-opened QIODevice to read from */
     QIODevice *m_inputFile;
 
     /** KEduVocDocument to read to */
     KEduVocDocument *m_doc;
+
+    /** because we read the entries first, we store them here temporarily.
+     * later we read the lessons and put the entries there based on the key (their id) */
+    QMap<int, KEduVocExpression*> m_allEntries;
 
     /** error message */
     QString m_errorMessage;

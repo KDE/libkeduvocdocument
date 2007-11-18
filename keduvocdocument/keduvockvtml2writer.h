@@ -27,6 +27,8 @@
 #include "keduvocpersonalpronoun.h"
 
 class KEduVocDocument;
+class KEduVocExpression;
+class KEduVocLesson;
 
 /**
 * @brief Class to write kvtml2 data files from KEduVocDocument
@@ -92,9 +94,10 @@ public:
     bool writeTranslation( QDomElement &translationElement, KEduVocTranslation &translation );
 
     /** write the lesson group
+     * @param parentLesson the parent lesson of the current lesson
      * @param lessonsElement QDomElement lessons to write to
      */
-    bool writeLessons( QDomElement &lessonsElement );
+    bool writeLessons( KEduVocLesson *parentLesson, QDomElement &lessonsElement );
 
     /** write a comparison
      * @param comparisonElement QDomElement comparison to write to
@@ -115,6 +118,8 @@ private:
 
     QFile *m_outputFile;
     KEduVocDocument *m_doc;
+
+    QList<KEduVocExpression*>  m_allEntries;
 
     QDomDocument m_domDoc;
 };

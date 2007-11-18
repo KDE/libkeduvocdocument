@@ -36,10 +36,8 @@ public:
 
     KEduVocExpression* q;
 
-    int m_sortIndex;
-    int m_lesson;
+    QList<KEduVocLesson*> m_lessons;
     bool m_active;
-    int m_sizeHint;
 
     QMap <int, KEduVocTranslation> m_translations;
 };
@@ -49,9 +47,6 @@ void KEduVocExpression::KEduVocExpressionPrivate::init()
 {
     m_translations.clear();
     m_active = true;
-    m_lesson = -1;
-    m_sortIndex = 0;
-    m_sizeHint = 0;
 }
 
 
@@ -59,8 +54,7 @@ bool KEduVocExpression::KEduVocExpressionPrivate::operator== ( const KEduVocExpr
 {
     return
         m_translations == p.m_translations &&
-        m_lesson == p.m_lesson &&
-        m_sortIndex == p.m_sortIndex &&
+        m_lessons == p.m_lessons &&
         m_active == p.m_active;
 }
 
@@ -69,28 +63,29 @@ KEduVocExpression::KEduVocExpression()
         : d( new KEduVocExpressionPrivate( this ) )
 {}
 
-KEduVocExpression::KEduVocExpression( const QString & expression, int lesson )
+KEduVocExpression::KEduVocExpression( KEduVocLesson* lesson,  const QString & expression )
         : d( new KEduVocExpressionPrivate( this ) )
 {
-    d->m_lesson = lesson;
+    d->m_lessons.append(lesson);
     setTranslation( 0, expression.simplified() );
 }
 
-KEduVocExpression::KEduVocExpression( const QStringList & translations, int lesson )
+KEduVocExpression::KEduVocExpression( KEduVocLesson* lesson, const QStringList & translations)
         : d( new KEduVocExpressionPrivate( this ) )
 {
-    d->m_lesson = lesson;
+    d->m_lessons.append(lesson);
     foreach ( QString translation, translations ) {
         setTranslation(d->m_translations.count(), translation);
     }
 }
 
-KEduVocExpression::KEduVocExpression( const KEduVocExpression &expression )
-        : d( new KEduVocExpressionPrivate( *expression.d ) )
-{}
 
 KEduVocExpression::~KEduVocExpression()
 {
+///@todo probably infinite loop when a parent lesson decides to delete it :)
+//     foreach(KEduVocLesson * lesson, d->m_lessons) {
+//         lesson->removeEntry(this);
+//     }
     delete d;
 }
 
@@ -98,6 +93,13 @@ KEduVocExpression::~KEduVocExpression()
 void KEduVocExpression::removeTranslation( int index )
 {
     d->m_translations.remove( index );
+
+    for ( int j = index; j < d->m_translations.count(); j++ ) {
+        translation(j) = translation(j+1);
+    }
+    kDebug() << "Checkme - removing last tranlation ?!!?";
+    ///@todo - no idea if this works
+    d->m_translations.remove(d->m_translations.count() - 1);
 }
 
 
@@ -111,15 +113,9 @@ void KEduVocExpression::setTranslation( int index, const QString & expr )
 }
 
 
-int KEduVocExpression::lesson() const
+QList<KEduVocLesson*> KEduVocExpression::lessons() const
 {
-    return d->m_lesson;
-}
-
-
-void KEduVocExpression::setLesson( int l )
-{
-    d->m_lesson = l;
+    return d->m_lessons;
 }
 
 
@@ -134,15 +130,6 @@ void KEduVocExpression::setActive( bool flag )
     d->m_active = flag;
 }
 
-int KEduVocExpression::sizeHint() const
-{
-    return d->m_sizeHint;
-}
-
-void KEduVocExpression::setSizeHint( int sizeHint )
-{
-    d->m_sizeHint = sizeHint;
-}
 
 void KEduVocExpression::resetGrades( int index )
 {
@@ -180,5 +167,15 @@ KEduVocTranslation& KEduVocExpression::translation( int index ) const
 QList< int > KEduVocExpression::translationIndices() const
 {
     return d->m_translations.keys();
+}
+
+void KEduVocExpression::addLesson(KEduVocLesson * l)
+{
+    d->m_lessons.append(l);
+}
+
+void KEduVocExpression::removeLesson(KEduVocLesson * l)
+{
+    d->m_lessons.removeAt(d->m_lessons.indexOf(l));
 }
 

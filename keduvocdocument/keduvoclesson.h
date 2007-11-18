@@ -26,12 +26,25 @@
 #include <QtCore/QList>
 #include <QtCore/QString>
 
+class KEduVocExpression;
+
 /** class to store information about a lesson */
 class KEDUVOCDOCUMENT_EXPORT KEduVocLesson
 {
+
 public:
-    /** default constructor */
-    explicit KEduVocLesson();
+     /** default constructor */
+     explicit KEduVocLesson(const QString& name, KEduVocLesson *parent = 0);
+
+     void appendChildLesson(KEduVocLesson *child);
+
+     QList<KEduVocLesson *> childLessons();
+     KEduVocLesson *childLesson(int row);
+     int childLessonCount() const;
+
+     int row() const;
+     KEduVocLesson *parent();
+
 
     /** copy constructor for d-pointer safe copying */
     KEduVocLesson( const KEduVocLesson &other );
@@ -50,31 +63,31 @@ public:
     /** get the lesson name */
     QString name();
 
+    KEduVocExpression* entry(int row);
+
     /** get a list of all entries in the lesson */
-    QList<int> entries();
-    
+    QList < KEduVocExpression* > entries();
+
+    /** get a list of all entries in the lesson and its child lessons */
+    QList < KEduVocExpression* > entriesRecursive();
+
     /** get the number of entries in the lesson */
     int entryCount();
 
     /** add an entry to the lesson
      * @param entryid id of the entry to add
      */
-    void addEntry( int entryid );
+    void addEntry(KEduVocExpression* entry);
 
     /** remove an entry from the lesson
      * @param entryid id of the entry to remove
      */
-    void removeEntry( int entryid );
-    
-    /** increments all entryids > entryid, because their entryid has been incremented
-     * @param entryid       id of the entry that was inserted
-     */
-    void incrementEntriesAbove( int entryid );
-    
-    /** decrements all etryids > entryid, because their entryid has been decremented
-     * @param entryid       id of the entry that was removed
-     */
-    void decrementEntriesAbove( int entryid );
+    void removeEntry(KEduVocExpression* entry);
+
+
+    void removeTranslation(int translation);
+
+    //void resetGrades()?
 
     bool inPractice();
     void setInPractice( bool inPractice );

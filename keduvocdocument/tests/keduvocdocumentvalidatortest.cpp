@@ -79,13 +79,16 @@ void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
 void KEduVocDocumentValidatorTest::testLessons()
 {
     QString lesson1 = QString::fromLatin1( "Lesson 1" );
+    QString lesson1child1 = QString::fromLatin1( "Lesson 1.1" );
+    QString lesson1child2 = QString::fromLatin1( "Lesson 1.2" );
     QString lesson2 = QString::fromLatin1( "Lesson 2" );
     QString lesson3 = QString::fromLatin1( "Lesson 3" );
 
     KEduVocDocument doc;
-    int indexLesson1 = doc.appendLesson(lesson1, true);
-    QCOMPARE(indexLesson1, 0);
-    QCOMPARE(doc.lessonCount(), 1);
+    doc.lesson()->appendChildLesson(new KEduVocLesson(lesson1, doc.lesson()));
+    QCOMPARE(doc.lesson()->childLessonCount(), 1);
+
+    /*
     QCOMPARE(doc.lesson(indexLesson1).name(), lesson1);
     QVERIFY(doc.lesson(indexLesson1).inPractice());
 
@@ -103,7 +106,7 @@ void KEduVocDocumentValidatorTest::testLessons()
     QVERIFY(removed);
     QCOMPARE(doc.lesson(2).name(), lesson3);
 
-    doc.appendLesson(lesson2, true);
+    doc.appendLesson(lesson2, true); */
 // Not yet implemented:
 //     doc.moveLesson(2, 1);
 //     QCOMPARE(doc.lesson(2), lesson2);

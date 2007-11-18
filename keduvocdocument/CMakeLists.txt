@@ -3,9 +3,7 @@ add_subdirectory(tests)
 ########### next target ###############
 
 set(keduvocdocument_LIB_SRCS
-   keduvoccsvreader.cpp
-   keduvoccsvwriter.cpp
-   keduvocdocument.cpp
+keduvocdocument.cpp
    keduvocidentifier.cpp
    keduvocexpression.cpp
    keduvoctranslation.cpp
@@ -15,17 +13,19 @@ set(keduvocdocument_LIB_SRCS
    keduvocconjugation.cpp
    keduvocpersonalpronoun.cpp
    keduvocdeclination.cpp
-   keduvocwordtype.cpp
-   keduvockvtmlreader.cpp
-   keduvockvtml2reader.cpp
-   keduvockvtmlwriter.cpp
-   keduvockvtml2writer.cpp
-   keduvockvtmlcompability.cpp
    keduvocmultiplechoice.cpp
-   keduvocpaukerreader.cpp
-   keduvocvokabelnreader.cpp
-   keduvocwqlreader.cpp
-   keduvocxdxfreader.cpp
+   keduvocwordtype.cpp
+   keduvockvtmlcompability.cpp
+   #keduvockvtmlreader.cpp
+   keduvockvtml2reader.cpp
+   #keduvockvtmlwriter.cpp
+   keduvockvtml2writer.cpp
+   #keduvoccsvreader.cpp
+   #keduvoccsvwriter.cpp
+   #keduvocpaukerreader.cpp
+   #keduvocvokabelnreader.cpp
+   #keduvocwqlreader.cpp
+   #keduvocxdxfreader.cpp
    sharedkvtmlfiles.cpp )
 
 kde4_add_library(keduvocdocument SHARED ${keduvocdocument_LIB_SRCS})

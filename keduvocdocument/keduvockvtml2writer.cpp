@@ -70,13 +70,6 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
         domElementKvtml.appendChild( currentElement );
     }
 
-    // usages
-    currentElement = m_domDoc.createElement( KVTML_USAGES );
-    writeUsages( currentElement );
-    if ( currentElement.hasChildNodes() ) {
-        domElementKvtml.appendChild( currentElement );
-    }
-
     // entries
     currentElement = m_domDoc.createElement( KVTML_ENTRIES );
     if ( !writeEntries( currentElement ) ) {
@@ -87,7 +80,7 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
 
     // lessons
     currentElement = m_domDoc.createElement( KVTML_LESSONS );
-    writeLessons( currentElement );
+    writeLessons( m_doc->lesson(), currentElement );
     if ( currentElement.hasChildNodes() ) {
         domElementKvtml.appendChild( currentElement );
     }
@@ -172,35 +165,32 @@ bool KEduVocKvtml2Writer::writeIdentifiers( QDomElement &identifiersElement )
     return true;
 }
 
-bool KEduVocKvtml2Writer::writeLessons( QDomElement &lessonsElement )
+bool KEduVocKvtml2Writer::writeLessons( KEduVocLesson *parentLesson, QDomElement &lessonsElement )
 {
-    for( int lessonId = 0; lessonId < m_doc->lessonCount(); lessonId++ ) {
+    // iterate over child lessons.
+    // the first time this is called with the root lesson which does not have a <lesson> entry.
+    for( int i = 0; i < parentLesson->childLessonCount(); i++ ) {
+        KEduVocLesson *lesson = parentLesson->childLesson(i);
         // make lesson element
         QDomElement thisLessonElement = m_domDoc.createElement( KVTML_LESSON );
 
         // add a name
-        thisLessonElement.appendChild( newTextElement( KVTML_NAME, m_doc->lesson(lessonId).name() ) );
+        thisLessonElement.appendChild( newTextElement( KVTML_NAME, lesson->name() ) );
 
         // add a inquery tag
-        if ( m_doc->lesson(lessonId).inPractice() ) {
+        if ( lesson->inPractice() ) {
             thisLessonElement.appendChild( newTextElement( KVTML_QUERY, KVTML_TRUE ) );
         }
 
-        // add a current tag
-        if ( lessonId == m_doc->currentLesson() ) {
-            thisLessonElement.appendChild( newTextElement( KVTML_CURRENT, KVTML_TRUE ) );
-        }
+        // child lessons
+        writeLessons(lesson, thisLessonElement);
 
-        // TODO: add the entryids...
-        for ( int i = 0; i < m_doc->entryCount(); ++i ) {
-            if ( m_doc->entry( i )->lesson() == lessonId ) {
-                thisLessonElement.appendChild( newTextElement( KVTML_ENTRYID, QString::number( i ) ) );
-            }
+        // child entries
+        foreach(KEduVocExpression *entry, lesson->entries()) {
+            thisLessonElement.appendChild( newTextElement( KVTML_ENTRYID, QString::number( m_allEntries.indexOf(entry) ) ) );
         }
-
         lessonsElement.appendChild( thisLessonElement );
     }
-
     return true;
 }
 
@@ -334,21 +324,13 @@ bool KEduVocKvtml2Writer::writeTenses( QDomElement &tensesElement )
     return true;
 }
 
-
-bool KEduVocKvtml2Writer::writeUsages( QDomElement &usagesElement )
-{
-    foreach( QString usage, m_doc->usages() ) {
-        usagesElement.appendChild( newTextElement( KVTML_USAGE, usage ) );
-    }
-
-    return true;
-}
-
 bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
 {
+    m_allEntries = m_doc->lesson()->entriesRecursive();
+
     // loop through entries
-    for ( int i = 0; i < m_doc->entryCount(); ++i ) {
-        KEduVocExpression *thisEntry = m_doc->entry( i );
+    for ( int i = 0; i < m_allEntries.count(); ++i ) {
+        KEduVocExpression *thisEntry = m_allEntries.value(i);
 
         // write entry tag
         QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
@@ -362,11 +344,6 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
 // kvtml 1 relic no longer used
 //         // write inquery
 //         entryElement.appendChild( newTextElement( KVTML_INQUERY, thisEntry->isInQuery() ? KVTML_TRUE : KVTML_FALSE ) );
-
-        // write sizehint
-        if ( thisEntry->sizeHint() > 0 ) {
-            entryElement.appendChild( newTextElement( KVTML_SIZEHINT, QString::number( thisEntry->sizeHint() ) ) );
-        }
 
         // loop through translations
         foreach( int trans, thisEntry->translationIndices() ) {

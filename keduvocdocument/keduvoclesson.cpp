@@ -20,20 +20,42 @@
 
 #include "keduvoclesson.h"
 
-#include <QSet>
+#include "keduvocexpression.h"
+
+#include <QList>
 
 /** private class to store information about a lesson */
 class KEduVocLesson::Private
 {
 public:
-    QSet<int> m_entries;
+    ~Private();
+
+    // properties for this lesson
     QString m_name;
     bool m_inPractice;
+
+    // other lessons in the tree
+    KEduVocLesson *m_parentLesson;
+    QList<KEduVocLesson*> m_childLessons;
+
+    // entries
+    QList<KEduVocExpression*> m_entries;
 };
 
-KEduVocLesson::KEduVocLesson()
+KEduVocLesson::Private::~ Private()
+{
+    qDeleteAll(m_childLessons);
+
+    ///@todo delete children here???? is this a 1:1 mapping?
+    qDeleteAll(m_entries);
+}
+
+KEduVocLesson::KEduVocLesson(const QString& name, KEduVocLesson *parent)
         : d( new Private )
-{}
+{
+    d->m_parentLesson = parent;
+    d->m_name = name;
+}
 
 KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
         : d( new Private )
@@ -47,6 +69,30 @@ KEduVocLesson::~KEduVocLesson()
 {
     delete d;
 }
+
+void KEduVocLesson::appendChildLesson(KEduVocLesson * child)
+{
+    d->m_childLessons.append(child);
+}
+
+KEduVocLesson * KEduVocLesson::childLesson(int row)
+{
+    return d->m_childLessons.value(row);
+}
+
+int KEduVocLesson::childLessonCount() const
+{
+    return d->m_childLessons.count();
+}
+
+int KEduVocLesson::row() const
+{
+    if (d->m_parentLesson) {
+        return d->m_parentLesson->d->m_childLessons.indexOf(const_cast<KEduVocLesson*>(this));
+    }
+    return 0;
+}
+
 
 KEduVocLesson& KEduVocLesson::operator= ( const KEduVocLesson &other )
 {
@@ -73,9 +119,9 @@ QString KEduVocLesson::name()
     return d->m_name;
 }
 
-QList<int> KEduVocLesson::entries()
+QList<KEduVocExpression*> KEduVocLesson::entries()
 {
-    return d->m_entries.toList();
+    return d->m_entries;
 }
 
 int KEduVocLesson::entryCount()
@@ -83,53 +129,18 @@ int KEduVocLesson::entryCount()
     return d->m_entries.count();
 }
 
-void KEduVocLesson::addEntry( int entryid )
+void KEduVocLesson::addEntry(KEduVocExpression* entry)
 {
-    d->m_entries.insert( entryid );
+    d->m_entries.append( entry );
+    entry->addLesson(this);
 }
 
-void KEduVocLesson::removeEntry( int entryid )
+void KEduVocLesson::removeEntry(KEduVocExpression* entry)
 {
-    d->m_entries.remove( entryid );
+    d->m_entries.removeAt( d->m_entries.indexOf(entry) );
+    entry->removeLesson(this);
 }
 
-void KEduVocLesson::incrementEntriesAbove( int entryid )
-{
-    QList<int> entries = d->m_entries.toList();
-    
-    // increment all entry id's above entryid
-    for (int i = 0; i < entries.size(); ++i) {
-        if (entries[i] >= entryid) {
-            entries[i] = entries[i] + 1;
-        }
-    }
-    
-    // then put the new list into the set
-    d->m_entries = entries.toSet();
-}
-    
-void KEduVocLesson::decrementEntriesAbove( int entryid )
-{
-    QList<int> entries = d->m_entries.toList();
-    
-    // increment all entry id's above entryid
-    int i = 0;
-    while (i < entries.size()) {
-        if (entries[i] == entryid) {
-            entries.removeAt(i);
-        }
-        else if (entries[i] > entryid) {
-            entries[i] = entries[i] - 1;
-            ++i;
-        }
-        else {
-            ++i;
-        }
-    }
-    
-    // then put the new list into the set
-    d->m_entries = entries.toSet();
-}
 
 bool KEduVocLesson::inPractice()
 {
@@ -140,3 +151,42 @@ void KEduVocLesson::setInPractice(bool inPractice)
 {
     d->m_inPractice = inPractice;
 }
+
+void KEduVocLesson::removeTranslation(int translation)
+{
+    foreach(KEduVocLesson *childLesson, d->m_childLessons) {
+        childLesson->removeTranslation(translation);
+    }
+
+    foreach(KEduVocExpression *entry, d->m_entries ) {
+        entry->removeTranslation( translation );
+    }
+}
+
+QList< KEduVocExpression * > KEduVocLesson::entriesRecursive()
+{
+    QList< KEduVocExpression * > entryList = entries();
+    foreach(KEduVocLesson *childLesson, d->m_childLessons) {
+        foreach(KEduVocExpression *childEntry, childLesson->entriesRecursive()) {
+            if(!entryList.contains(childEntry)) {
+                entryList.append(childEntry);
+            }
+        }
+    }
+}
+
+QList< KEduVocLesson * > KEduVocLesson::childLessons()
+{
+    return d->m_childLessons;
+}
+
+KEduVocExpression * KEduVocLesson::entry(int row)
+{
+    return d->m_entries.value(row);
+}
+
+KEduVocLesson * KEduVocLesson::parent()
+{
+    return d->m_parentLesson;
+}
+

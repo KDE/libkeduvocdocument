@@ -55,7 +55,10 @@ public:
     KEduVocDocumentPrivate( KEduVocDocument* qq )
             : q( qq )
     {
+kDebug() << "Creating new Document - init:";
+        m_rootLesson = 0;
         init();
+kDebug() << "Creating new Document - init done";
     }
 
     ~KEduVocDocumentPrivate();
@@ -77,11 +80,11 @@ public:
     QString                   m_generator;
     QString                   m_queryorg;
     QString                   m_querytrans;
-    QList<KEduVocExpression>  m_vocabulary;
 
     QStringList               m_tenseDescriptions;
     QSet<QString>             m_usages;
-    QString                   m_title;
+// use the name of the root lesson as title
+//     QString                   m_title;
     QString                   m_author;
     QString                   m_license;
     QString                   m_comment;
@@ -93,8 +96,7 @@ public:
       */
     QString                   m_category;
 
-    // A map is too error prone. Lesson order is very important.
-    QList<KEduVocLesson>      m_lessons;
+    KEduVocLesson * m_rootLesson;
 
     KEduVocWordType           m_wordTypes;
 };
@@ -105,29 +107,35 @@ KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
 
 void KEduVocDocument::KEduVocDocumentPrivate::init()
 {
-    m_lessons.clear();
+    if ( m_rootLesson ) {
+        delete m_rootLesson;
+    }
+kDebug() << "create root lesson";
+    m_rootLesson = new KEduVocLesson(i18n("Document"));
+kDebug() << "create root lesson done";
     m_tenseDescriptions.clear();
     m_identifiers.clear();
     m_extraSizeHints.clear();
     m_sizeHints.clear();
-    m_vocabulary.clear();
     m_dirty = false;
     m_currentLesson = 0;
     m_queryorg = "";
     m_querytrans = "";
     m_url.setFileName( i18n( "Untitled" ) );
-    m_title = "";
     m_author = "";
     m_comment = "";
     m_version = "";
     m_generator = "";
     m_csvDelimiter = QString( '\t' );
+kDebug() << "init done";
 }
 
 
 KEduVocDocument::KEduVocDocument( QObject *parent )
         : QObject( parent ), d( new KEduVocDocumentPrivate( this ) )
-{}
+{
+    kDebug() << "constructor done";
+}
 
 
 KEduVocDocument::~KEduVocDocument()
@@ -140,29 +148,6 @@ void KEduVocDocument::setModified( bool dirty )
 {
     d->m_dirty = dirty;
     emit docModified( d->m_dirty );
-}
-
-
-void KEduVocDocument::appendEntry( KEduVocExpression *expression )
-{
-    insertEntry(expression, d->m_vocabulary.count());
-}
-
-
-void KEduVocDocument::insertEntry( KEduVocExpression *expression, int index )
-{
-    d->m_vocabulary.insert( index, *expression );
-
-    // now we need to go fix the entryids that are greater than index in the lessons
-    for (int i = 0; i < d->m_lessons.size(); ++i)
-    {
-        d->m_lessons[i].incrementEntriesAbove(index);
-    }
-    // if the expression is added and the lesson already exists (not at doc loading time, but added later) make sure it ends up in the lesson as well.
-    if ( expression->lesson() >= 0 && expression->lesson() < d->m_lessons.count() ) {
-        d->m_lessons[expression->lesson()].addEntry(index);
-    }
-    setModified();
 }
 
 
@@ -244,6 +229,7 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileNa
 
 int KEduVocDocument::open( const KUrl& url )
 {
+kDebug() << "open";
     d->init();
     if ( !url.isEmpty() ) {
         d->m_url = url;
@@ -272,7 +258,8 @@ int KEduVocDocument::open( const KUrl& url )
                 }
             }
             break;
-
+///@todo port me
+/*
             case Wql: {
                 kDebug() << "Reading WordQuiz (WQL) document...";
                 KEduVocWqlReader wqlReader( f );
@@ -325,7 +312,7 @@ int KEduVocDocument::open( const KUrl& url )
                     errorMessage = i18n( "Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString() );
                 }
             }
-            break;
+            break;*/
 
             default: {
                 kDebug() << "Reading KVTML document (fallback)...";
@@ -347,22 +334,6 @@ int KEduVocDocument::open( const KUrl& url )
         f->close();
         delete f;
         KIO::NetAccess::removeTempFile( temporaryFile );
-    }
-
-    // Additional cleanup: Put entries without a lesson into a default lesson.
-    int defaultLessonNumber = appendLesson(i18n("Default Lesson"));
-    // now make sure we don't have any orphan entries (lesson -1)
-    for (int i = 0; i < entryCount(); ++i)
-    {
-        if (entry(i)->lesson() == -1)
-        {
-            entry(i)->setLesson(defaultLessonNumber);
-            lesson(defaultLessonNumber).addEntry(i);
-        }
-    }
-    if (lesson(defaultLessonNumber).entries().size() == 0)
-    {
-        removeLesson(defaultLessonNumber, DeleteEmptyLesson);
     }
 
     if ( !read ) {
@@ -403,17 +374,18 @@ int KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gene
             saved = kvtmlWriter.writeDoc( this, generator );
         }
         break;
-        case Kvtml1: {
-            // write old version 1 file
-            KEduVocKvtmlWriter kvtmlWriter( &f );
-            saved = kvtmlWriter.writeDoc( this, generator );
-        }
-        break;
-        case Csv: {
-            KEduVocCsvWriter csvWriter( &f );
-            saved = csvWriter.writeDoc( this, generator );
-        }
-        break;
+        ///@todo port me
+//         case Kvtml1: {
+//             // write old version 1 file
+//             KEduVocKvtmlWriter kvtmlWriter( &f );
+//             saved = kvtmlWriter.writeDoc( this, generator );
+//         }
+//         break;
+//         case Csv: {
+//             KEduVocCsvWriter csvWriter( &f );
+//             saved = csvWriter.writeDoc( this, generator );
+//         }
+//         break;
         default: {
             kError() << "kvcotrainDoc::saveAs(): unknown filetype" << endl;
         }
@@ -647,38 +619,6 @@ void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers 
 }
 
 
-KEduVocExpression *KEduVocDocument::entry( int index )
-{
-    if ( index < 0 || index >= d->m_vocabulary.size() )
-        return 0;
-    else
-        return &d->m_vocabulary[index];
-}
-
-
-void KEduVocDocument::removeEntry( int index )
-{
-    if ( index >= 0 && index < d->m_vocabulary.size() ) {
-        d->m_vocabulary.removeAt( index );
-    }
-
-    // now we need to go fix the entryids that are greater than index in the lessons
-    for (int i = 0; i < d->m_lessons.size(); ++i)
-    {
-        d->m_lessons[i].decrementEntriesAbove(index);
-    }
-}
-
-
-int KEduVocDocument::indexOfIdentifier( const QString& name ) const
-{
-    for ( int i=0; i < d->m_identifiers.count(); i++ ) {
-        if ( d->m_identifiers.value(i).name() == name ) {
-            return i;
-        }
-    }
-    return -1;
-}
 
 
 KEduVocIdentifier& KEduVocDocument::identifier( int index )
@@ -729,58 +669,11 @@ void KEduVocDocument::setTenseDescriptions( const QStringList &names )
 }
 
 
-int KEduVocDocument::sizeHint( int idx ) const
-{
-    if ( idx < 0 ) {
-        idx = -idx;
-        if ( idx >= d->m_extraSizeHints.size() )
-            return 80; // make a good guess about column size
-        else {
-//      cout << "gsh " << idx << "  " << extraSizehints[idx] << endl;
-            return d->m_extraSizeHints[idx];
-        }
-    } else {
-        if ( idx >= d->m_sizeHints.size() )
-            return 150; // make a good guess about column size
-        else {
-//      cout << "gsh " << idx << "  " << sizehints[idx] << endl;
-            return d->m_sizeHints[idx];
-        }
-    }
-}
-
-
-void KEduVocDocument::setSizeHint( int idx, const int width )
-{
-//  cout << "ssh " << idx << "  " << width << endl;
-    if ( idx < 0 ) {
-        idx = -idx;
-        if ( idx >= d->m_extraSizeHints.size() ) {
-            for ( int i = d->m_extraSizeHints.size(); i <= idx; i++ )
-                d->m_extraSizeHints.append( 80 );
-        }
-        d->m_extraSizeHints[idx] = width;
-
-    } else {
-        if ( idx >= d->m_sizeHints.size() ) {
-            for ( int i = d->m_sizeHints.size(); i <= idx; i++ )
-                d->m_sizeHints.append( 150 );
-        }
-        d->m_sizeHints[idx] = width;
-    }
-}
-
-
 void KEduVocDocument::removeIdentifier( int index )
 {
     if ( index < d->m_identifiers.size() && index >= 0 ) {
         d->m_identifiers.removeAt( index );
-        for ( int i = 0; i < d->m_vocabulary.count(); i++ ) {
-            d->m_vocabulary[i].removeTranslation( index );
-            for ( int j = index; j < d->m_identifiers.size(); j++ ) {
-                d->m_vocabulary[i].translation(j) = d->m_vocabulary[i].translation(j+1);
-            }
-        }
+        d->m_rootLesson->removeTranslation( index );
     }
 }
 
@@ -791,20 +684,7 @@ bool KEduVocDocument::isModified() const
 }
 
 
-int KEduVocDocument::entryCount() const
-{
-    return d->m_vocabulary.count();
-}
 
-
-void KEduVocDocument::resetEntry( int index, int lesson )
-{
-    for ( int i = 0; i < d->m_vocabulary.count(); i++ )
-        if ( /*lesson == 0 ||*/ lesson == d->m_vocabulary[i].lesson() ) {
-            // index is the translation number whose grades are reset
-            d->m_vocabulary[i].resetGrades( index );
-        }
-}
 
 
 int KEduVocDocument::identifierCount() const
@@ -825,33 +705,15 @@ kDebug() << "appendIdentifier: " << i << id.name() << id.locale();
         }
     }
 
-    if ( i > 0 ) {
-        for (int j = 0; j < entryCount(); j++) {
-            entry(j)->translation(i).setType(entry(j)->translation(0).type());
-        }
-    }
 
     return i;
 }
 
 
-int KEduVocDocument::appendLesson( const QString &lessonName, bool inPractice )
-{
-    KEduVocLesson lesson;
-    lesson.setName( lessonName );
-    lesson.setInPractice( inPractice );
-    d->m_lessons.append( lesson );
-    return d->m_lessons.count() - 1;
-}
 
-QList<KEduVocLesson> & KEduVocDocument::lessons() const
+KEduVocLesson * KEduVocDocument::lesson()
 {
-    return d->m_lessons;
-}
-
-KEduVocLesson & KEduVocDocument::lesson( int index )
-{
-    return d->m_lessons[index];
+    return d->m_rootLesson;
 }
 
 
@@ -869,10 +731,10 @@ void KEduVocDocument::setUrl( const KUrl& url )
 
 QString KEduVocDocument::title() const
 {
-    if ( d->m_title.isEmpty() )
+    if ( d->m_rootLesson->name().isEmpty() )
         return d->m_url.fileName();
     else
-        return d->m_title;
+        return d->m_rootLesson->name();
 }
 
 
@@ -920,7 +782,7 @@ void KEduVocDocument::setQueryIdentifier( const QString &org, const QString &tra
 
 void KEduVocDocument::setTitle( const QString & title )
 {
-    d->m_title = title.simplified();
+    d->m_rootLesson->setName(title.simplified());
 }
 
 
@@ -966,103 +828,6 @@ void KEduVocDocument::setVersion( const QString & vers )
 }
 
 
-int KEduVocDocument::currentLesson() const
-{
-    return d->m_currentLesson;
-}
-
-
-void KEduVocDocument::setCurrentLesson( int lesson )
-{
-    d->m_currentLesson = lesson;
-}
-
-
-QStringList KEduVocDocument::lessonNames() const
-{
-    QStringList descriptions;
-    foreach ( KEduVocLesson lesson, d->m_lessons ) {
-        descriptions.append(lesson.name());
-    }
-    return descriptions;
-}
-
-int KEduVocDocument::lessonCount() const
-{
-    return d->m_lessons.count();
-}
-
-bool KEduVocDocument::removeLesson( int lessonIndex, int deleteMode )
-{
-    if (deleteMode == DeleteEmptyLesson) {
-        if (d->m_lessons[lessonIndex].entryCount() > 0) {
-            return false; // stop if there are vocabs left in the lesson
-        }
-    }
-    else if (deleteMode == DeleteEntriesAndLesson) {
-        while (d->m_lessons[lessonIndex].entryCount() > 0) {
-            // get the next entryid
-            int entry = d->m_lessons[lessonIndex].entries()[0];
-            // take it out of this lesson
-            d->m_lessons[lessonIndex].removeEntry(entry);
-            // delete the entry from the document
-            removeEntry(entry);
-        }
-    }
-
-    // for all above this lesson number - reduce lesson by one.
-    for ( int ent = 0; ent < entryCount(); ent++ ) {
-        if ( entry( ent )->lesson() > lessonIndex ) {
-            entry( ent )->setLesson( entry( ent )->lesson()-1 );
-        }
-    } // reduce lesson
-
-    // finally just remove the lesson
-    d->m_lessons.removeAt(lessonIndex);
-
-    return true;
-}
-
-
-//void KEduVocDocument::setLessonDescriptions(const QStringList &names)
-//{
-//  d->m_lessonDescriptions = names;
-//}
-
-//void KEduVocDocument::moveLesson(int from, int to)
-//{
-/////@todo move in query as well!
-//  // still counting from 1
-//  d->m_lessonDescriptions.move(from -1, to -1);
-
-//  /*
-//  to > from?
-//    lesson >= from && lesson < to: lesson++
-//  to < from?
-//    lesson >= to && lesson < from: lesson++
-//  */
-//  for (int ent = 0; ent < entryCount(); ent++) {
-//    // put from directly to to
-//    if (entry(ent)->lesson() == from) {
-//      entry(ent)->setLesson(to);
-//    }
-//    else
-//    {
-//      if(to > from)
-//      {
-//        if(entry(ent)->lesson() >= from && entry(ent)->lesson() < to)
-//          entry(ent)->setLesson(entry(ent)->lesson()-1);
-//      }
-//      else
-//      {
-//        if(entry(ent)->lesson() >= to && entry(ent)->lesson() < from)
-//          entry(ent)->setLesson(entry(ent)->lesson()+1);
-//      }
-//    }
-//  }
-//}
-
-
 QString KEduVocDocument::csvDelimiter() const
 {
     return d->m_csvDelimiter;
@@ -1106,74 +871,6 @@ public:
     int idx;
     KEduVocExpression *exp;
 };
-
-typedef QList<ExpRef> ExpRefList;
-
-int KEduVocDocument::cleanUp()
-{
-    int count = 0;
-    KEduVocExpression *kve1, *kve2;
-    ExpRefList shadow;
-    QList<int> to_delete;
-
-    for ( int i = 0; i < d->m_vocabulary.count(); i++ ) {
-        shadow.append( ExpRef( entry( i ), i ) );
-    }
-    qStableSort( shadow.begin(), shadow.end() );
-
-    int ent_no = 0;
-    int ent_percent = d->m_vocabulary.size() / 100;
-    float f_ent_percent = d->m_vocabulary.size() / 100.0;
-    emit progressChanged( this, 0 );
-
-    for ( int i = shadow.size() - 1; i > 0; i-- ) {
-        kve1 = shadow[i].exp;
-        kve2 = shadow[i - 1].exp;
-
-        ent_no++;
-        if ( ent_percent != 0 && ( ent_no % ent_percent ) == 0 ) {
-            emit progressChanged( this, ( int )(( ent_no / f_ent_percent ) / 2.0 ) );
-        }
-
-        bool equal = true;
-        for ( int l = 0; equal && l < identifierCount(); l++ ) {
-            if ( kve1->translation( l ).text() != kve2->translation( l ).text() ) {
-                equal = false;
-            }
-        }
-
-        if ( equal ) {
-            to_delete.append( shadow[i - 1].idx );
-            count++;
-        }
-    }
-
-    // removing might take very long
-    ent_no = 0;
-    ent_percent = to_delete.size() / 100;
-    f_ent_percent = to_delete.size() / 100.0;
-    emit progressChanged( this, 0 );
-
-    qStableSort( to_delete.begin(), to_delete.end() );
-
-    for ( int i = ( int ) to_delete.count() - 1; i >= 0; i-- ) {
-        ent_no++;
-        if ( ent_percent != 0 && ( ent_no % ent_percent ) == 0 )
-            emit progressChanged( this, ( int )( 50 + ent_no / f_ent_percent / 2.0 ) );
-        removeEntry( to_delete[i] );
-        setModified();
-    }
-
-    return count;
-}
-
-
-void KEduVocDocument::shuffle()
-{
-    KRandomSequence rs;
-    rs.randomize( d->m_vocabulary );
-    setModified();
-}
 
 
 QString KEduVocDocument::pattern( FileDialogMode mode )
@@ -1238,50 +935,6 @@ QString KEduVocDocument::errorDescription( int errorCode )
 KEduVocWordType& KEduVocDocument::wordTypes()
 {
     return d->m_wordTypes;
-}
-
-
-QStringList KEduVocDocument::usages() const
-{
-    return d->m_usages.values();
-}
-
-
-void KEduVocDocument::addUsage( const QString &usage )
-{
-    d->m_usages.insert( usage );
-}
-
-
-void KEduVocDocument::renameUsage( const QString &oldName, const QString &newName )
-{
-    if ( d->m_usages.contains( oldName ) ) {
-        d->m_usages.remove( oldName );
-        d->m_usages.insert( newName );
-    } else {
-        return;
-    }
-
-    for ( int i = 0; i < d->m_vocabulary.count(); i++ ) {
-        foreach( int translationIndex, d->m_vocabulary[i].translationIndices() ) {
-            if ( d->m_vocabulary[i].translation( translationIndex ).usages().contains( oldName ) ) {
-                d->m_vocabulary[i].translation( translationIndex ).usages().remove( oldName );
-                d->m_vocabulary[i].translation( translationIndex ).usages().insert( newName );
-            }
-        }
-    }
-}
-
-
-void KEduVocDocument::removeUsage( const QString &name )
-{
-    d->m_usages.remove( name );
-
-    for ( int i = 0; i < d->m_vocabulary.count(); i++ ) {
-        foreach( int translationIndex, d->m_vocabulary[i].translationIndices() ) {
-            d->m_vocabulary[i].translation( translationIndex ).usages().remove( name );
-        }
-    }
 }
 
 
