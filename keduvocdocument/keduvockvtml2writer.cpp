@@ -80,7 +80,7 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
 
     // lessons
     currentElement = m_domDoc.createElement( KVTML_LESSONS );
-    writeLessons( m_doc->lesson()->childLesson(KEduVocLesson::EntryLessonRoot), currentElement );
+    writeLessons( m_doc->lesson(), currentElement );
     if ( currentElement.hasChildNodes() ) {
         domElementKvtml.appendChild( currentElement );
     }

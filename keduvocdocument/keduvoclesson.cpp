@@ -55,6 +55,7 @@ KEduVocLesson::KEduVocLesson(const QString& name, KEduVocLesson *parent)
 {
     d->m_parentLesson = parent;
     d->m_name = name;
+    d->m_inPractice = false;
 }
 
 KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )

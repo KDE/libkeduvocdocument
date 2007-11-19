@@ -142,8 +142,6 @@ private:
      */
     bool readLesson( KEduVocLesson* parentLesson, QDomElement &lessonElement );
 
-    void printLesson( KEduVocLesson* lesson );
-
     /** pre-opened QIODevice to read from */
     QIODevice *m_inputFile;
 

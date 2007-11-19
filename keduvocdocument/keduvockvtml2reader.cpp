@@ -184,21 +184,14 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
 
     groupElement = domElementParent.firstChildElement( KVTML_LESSONS );
     if ( !groupElement.isNull() ) {
-        readChildLessons(m_doc->lesson()->childLesson(KEduVocLesson::EntryLessonRoot), groupElement);
+        readChildLessons(m_doc->lesson(), groupElement);
     }
 
     ///@todo create dynamic lessons (word type)
 
     return true;
 }
-void KEduVocKvtml2Reader::printLesson( KEduVocLesson* lesson )
-{
-    kDebug() << "Lesson" << lesson->name();
-    foreach ( KEduVocLesson* child, lesson->childLessons() ) {
-        printLesson(child);
-    }
 
-}
 
 bool KEduVocKvtml2Reader::readIdentifier( QDomElement &identifierElement )
 {
@@ -437,8 +430,6 @@ bool KEduVocKvtml2Reader::readLesson( KEduVocLesson* parentLesson, QDomElement &
     KEduVocLesson * lesson = new KEduVocLesson(currentElement.text(), parentLesson);
     parentLesson->appendChildLesson( lesson );
 
-    kDebug() << "readLesson" << lesson->name();
-
     readChildLessons( lesson, lessonElement );
 
     //<query>true</query>
@@ -552,6 +543,9 @@ bool KEduVocKvtml2Reader::readTypes( QDomElement &typesElement )
         }
         m_doc->wordTypes().addType( mainTypeName, specialType );
 
+        KEduVocLesson * wordTypeLesson = new KEduVocLesson(mainTypeName, m_doc->wordTypeLesson());
+        m_doc->wordTypeLesson()->appendChildLesson(wordTypeLesson);
+
         // iterate sub type elements <subwordtypedefinition>
         QDomElement currentSubTypeElement = currentTypeElement.firstChildElement( KVTML_SUBWORDTYPEDEFINITION );
         while ( !currentSubTypeElement.isNull() ) {
@@ -568,11 +562,16 @@ bool KEduVocKvtml2Reader::readTypes( QDomElement &typesElement )
                     specialSubType = m_doc->wordTypes().specialTypeNounNeutral();
                 }
             }
+
+            QString subTypeName = currentSubTypeElement.firstChildElement( KVTML_SUBTYPENAME ).text();
             // set type and specialtype
-            m_doc->wordTypes().addSubType( mainTypeName,
-                                            currentSubTypeElement.firstChildElement( KVTML_SUBTYPENAME ).text(),
+            m_doc->wordTypes().addSubType( mainTypeName, subTypeName,
                                             specialSubType );
             currentSubTypeElement = currentSubTypeElement.nextSiblingElement( KVTML_SUBWORDTYPEDEFINITION );
+
+            KEduVocLesson * subWordTypeLesson = new KEduVocLesson(subTypeName, wordTypeLesson);
+            wordTypeLesson->appendChildLesson(subWordTypeLesson);
+
         }
         currentTypeElement = currentTypeElement.nextSiblingElement( KVTML_WORDTYPEDEFINITION );
     }

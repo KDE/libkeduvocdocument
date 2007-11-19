@@ -55,10 +55,8 @@ public:
     KEduVocDocumentPrivate( KEduVocDocument* qq )
             : q( qq )
     {
-kDebug() << "Creating new Document - init:";
         m_rootLesson = 0;
         init();
-kDebug() << "Creating new Document - init done";
     }
 
     ~KEduVocDocumentPrivate();
@@ -97,7 +95,8 @@ kDebug() << "Creating new Document - init done";
     QString                   m_category;
 
     KEduVocLesson * m_rootLesson;
-
+    KEduVocLesson * m_wordTypeLesson;
+    
     KEduVocWordType           m_wordTypes;
 };
 
@@ -111,11 +110,10 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
         delete m_rootLesson;
     }
     m_rootLesson = new KEduVocLesson("root");
-    // child lessons for m_rootLesson have to be according to enum RootLessonChildren in KEduVocLesson
-    // the first child lesson contains the normal hierachy of lessons
-    m_rootLesson->appendChildLesson(new KEduVocLesson(i18n( "Untitled" ), m_rootLesson));
-    // the second lesson contains words sorted by word type
-    m_rootLesson->appendChildLesson(new KEduVocLesson(i18n( "Word type" ), m_rootLesson));
+    if ( m_wordTypeLesson ) {
+        delete m_wordTypeLesson;
+    }
+    m_wordTypeLesson = new KEduVocLesson(i18n( "Word types" ));
 
     m_tenseDescriptions.clear();
     m_identifiers.clear();
@@ -720,6 +718,12 @@ KEduVocLesson * KEduVocDocument::lesson()
 }
 
 
+KEduVocLesson * KEduVocDocument::wordTypeLesson()
+{
+    return d->m_wordTypeLesson;
+}
+
+
 KUrl KEduVocDocument::url() const
 {
     return d->m_url;
@@ -734,16 +738,16 @@ void KEduVocDocument::setUrl( const KUrl& url )
 
 QString KEduVocDocument::title() const
 {
-    if ( d->m_rootLesson->childLesson(KEduVocLesson::EntryLessonRoot)->name().isEmpty() )
+    if ( d->m_rootLesson->name().isEmpty() )
         return d->m_url.fileName();
     else
-        return d->m_rootLesson->childLesson(KEduVocLesson::EntryLessonRoot)->name();
+        return d->m_rootLesson->name();
 }
 
 
 void KEduVocDocument::setTitle( const QString & title )
 {
-    d->m_rootLesson->childLesson(KEduVocLesson::EntryLessonRoot)->setName(title.simplified());
+    d->m_rootLesson->setName(title.simplified());
 }
 
 

@@ -22,6 +22,7 @@
 
 #include "keduvocgrade.h"
 // #include "keduvocdeclination.h"
+#include "keduvoclesson.h"
 
 class KEduVocTranslation::KEduVocTranslationPrivate
 {
@@ -33,6 +34,11 @@ public:
     QString m_type;
     /// Subtype of a word: male/female or regular/irregular...
     QString m_subType;
+
+    /// Type of a word noun, verb, adjective etc
+    KEduVocLesson* m_wordType;
+
+
     /// A comment giving additional information.
     QString m_comment;
     /// A hint, to make guessing the word easier.

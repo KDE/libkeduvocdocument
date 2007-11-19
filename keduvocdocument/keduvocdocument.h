@@ -340,6 +340,8 @@ public:
      */
     KEduVocLesson * lesson();
 
+    KEduVocLesson * wordTypeLesson();
+
     // *** file format specific methods ***
 
     /**
