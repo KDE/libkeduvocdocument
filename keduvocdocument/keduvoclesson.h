@@ -33,6 +33,12 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocLesson
 {
 
 public:
+    // children of the root lesson
+    enum RootLessonChildren {
+        EntryLessonRoot,
+        WordTypes
+    };
+
      /** default constructor */
      explicit KEduVocLesson(const QString& name, KEduVocLesson *parent = 0);
 

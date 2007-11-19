@@ -110,9 +110,13 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     if ( m_rootLesson ) {
         delete m_rootLesson;
     }
-kDebug() << "create root lesson";
-    m_rootLesson = new KEduVocLesson(i18n("Document"));
-kDebug() << "create root lesson done";
+    m_rootLesson = new KEduVocLesson("root");
+    // child lessons for m_rootLesson have to be according to enum RootLessonChildren in KEduVocLesson
+    // the first child lesson contains the normal hierachy of lessons
+    m_rootLesson->appendChildLesson(new KEduVocLesson(i18n( "Untitled" ), m_rootLesson));
+    // the second lesson contains words sorted by word type
+    m_rootLesson->appendChildLesson(new KEduVocLesson(i18n( "Word type" ), m_rootLesson));
+
     m_tenseDescriptions.clear();
     m_identifiers.clear();
     m_extraSizeHints.clear();
@@ -127,7 +131,6 @@ kDebug() << "create root lesson done";
     m_version = "";
     m_generator = "";
     m_csvDelimiter = QString( '\t' );
-kDebug() << "init done";
 }
 
 
@@ -731,10 +734,16 @@ void KEduVocDocument::setUrl( const KUrl& url )
 
 QString KEduVocDocument::title() const
 {
-    if ( d->m_rootLesson->name().isEmpty() )
+    if ( d->m_rootLesson->childLesson(KEduVocLesson::EntryLessonRoot)->name().isEmpty() )
         return d->m_url.fileName();
     else
-        return d->m_rootLesson->name();
+        return d->m_rootLesson->childLesson(KEduVocLesson::EntryLessonRoot)->name();
+}
+
+
+void KEduVocDocument::setTitle( const QString & title )
+{
+    d->m_rootLesson->childLesson(KEduVocLesson::EntryLessonRoot)->setName(title.simplified());
 }
 
 
@@ -777,12 +786,6 @@ void KEduVocDocument::setQueryIdentifier( const QString &org, const QString &tra
 {
     d->m_queryorg = org;
     d->m_querytrans = trans;
-}
-
-
-void KEduVocDocument::setTitle( const QString & title )
-{
-    d->m_rootLesson->setName(title.simplified());
 }
 
 

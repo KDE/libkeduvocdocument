@@ -184,12 +184,10 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
 
     groupElement = domElementParent.firstChildElement( KVTML_LESSONS );
     if ( !groupElement.isNull() ) {
-        readChildLessons(m_doc->lesson(), groupElement);
+        readChildLessons(m_doc->lesson()->childLesson(KEduVocLesson::EntryLessonRoot), groupElement);
     }
 
-
-    kDebug() << "Lessons:";
-    printLesson(m_doc->lesson());
+    ///@todo create dynamic lessons (word type)
 
     return true;
 }
