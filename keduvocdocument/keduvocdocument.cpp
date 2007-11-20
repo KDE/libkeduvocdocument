@@ -56,6 +56,7 @@ public:
             : q( qq )
     {
         m_rootLesson = 0;
+        m_wordTypeLesson = 0;
         init();
     }
 
@@ -96,7 +97,7 @@ public:
 
     KEduVocLesson * m_rootLesson;
     KEduVocLesson * m_wordTypeLesson;
-    
+
     KEduVocWordType           m_wordTypes;
 };
 
