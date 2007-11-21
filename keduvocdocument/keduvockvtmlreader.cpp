@@ -224,7 +224,7 @@ bool KEduVocKvtmlReader::readLesson( QDomElement &domElementParent )
     for ( int i = 0; i < entryList.count(); ++i ) {
         currentElement = entryList.item( i ).toElement();
         if ( currentElement.parentNode() == domElementParent ) {
-            int no;
+            int no = -1;
 
             attribute = currentElement.attributeNode( KV_LESS_NO );
             if ( !attribute.isNull() ) {
@@ -233,7 +233,7 @@ bool KEduVocKvtmlReader::readLesson( QDomElement &domElementParent )
 
             attribute = currentElement.attributeNode( KV_LESS_CURR );
             if ( !attribute.isNull() ) {
-                if ( attribute.value().toInt() != 0 ) {
+                if ( no != -1 && attribute.value().toInt() != 0 ) {
                     m_doc->setCurrentLesson( no );
                 }
             }
