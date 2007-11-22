@@ -31,21 +31,32 @@ class KEduVocExpression;
 /** class to store information about a lesson */
 class KEDUVOCDOCUMENT_EXPORT KEduVocLesson
 {
-
 public:
-     /** default constructor */
-     explicit KEduVocLesson(const QString& name, KEduVocLesson *parent = 0);
+    enum EnumContainerType{
+        LessonContainer,
+        LeitnerContainer,
+        WordTypeContainer,
+        WordTypeNounContainer,
+        WordTypeNounMaleContainer,
+        WordTypeNounFemaleContainer,
+        WordTypeNounNeutralContainer,
+        WordTypeVerbContainer,
+        WordTypeAdjectiveContainer,
+        WordTypeAdverbContainer
+    };
 
-     void appendChildLesson(KEduVocLesson *child);
+    /** default constructor */
+    explicit KEduVocLesson(const QString& name, KEduVocLesson *parent = 0);
 
-     QList<KEduVocLesson *> childLessons();
-     KEduVocLesson *childLesson(int row);
-     KEduVocLesson *childLesson(const QString& name);
-     int childLessonCount() const;
+    void appendChildLesson(KEduVocLesson *child);
 
-     int row() const;
-     KEduVocLesson *parent();
+    QList<KEduVocLesson *> childLessons();
+    KEduVocLesson *childLesson(int row);
+    KEduVocLesson *childLesson(const QString& name);
+    int childLessonCount() const;
 
+    int row() const;
+    KEduVocLesson *parent();
 
     /** copy constructor for d-pointer safe copying */
     KEduVocLesson( const KEduVocLesson &other );
@@ -95,6 +106,20 @@ public:
 
     /** equality operator */
     bool operator==(const KEduVocLesson &other);
+
+
+    /**
+     * The type of this container. @see EnumContainerType
+     * @return 
+     */
+    KEduVocLesson::EnumContainerType containerType();
+
+    /**
+     * Set the type of container.
+     * For convenience by default this is taken over from the parent, so no need to set.
+     * @param type the new type
+     */
+    void setContainerType(KEduVocLesson::EnumContainerType type);
 
 private:
     class Private;

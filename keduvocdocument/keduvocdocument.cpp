@@ -113,10 +113,12 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
         delete m_lessonContainer;
     }
     m_lessonContainer = new KEduVocLesson("root");
+    m_lessonContainer->setContainerType(KEduVocLesson::LessonContainer);
     if ( m_wordTypeContainer ) {
         delete m_wordTypeContainer;
     }
     m_wordTypeContainer = new KEduVocLesson(i18n( "Word types" ));
+    m_wordTypeContainer->setContainerType(KEduVocLesson::WordTypeContainer);
 
     m_tenseDescriptions.clear();
     m_identifiers.clear();

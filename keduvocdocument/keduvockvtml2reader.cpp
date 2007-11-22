@@ -161,7 +161,7 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
 
     groupElement = domElementParent.firstChildElement( KVTML_WORDTYPEDEFINITIONS );
     if ( !groupElement.isNull() ) {
-        readTypes( groupElement );
+        readWordTypes( groupElement );
     }
 
     groupElement = domElementParent.firstChildElement( KVTML_TENSES );
@@ -263,15 +263,6 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
         }
     }
 
-//     currentElement = entryElement.firstChildElement( KVTML_INQUERY );
-//     if ( !currentElement.isNull() ) {
-//         // set the inquery information
-//         if ( currentElement.text() == KVTML_TRUE ) {
-//             expr->setInPractice( true );
-//         } else {
-//             expr->setInPractice( false );
-//         }
-//     }
 
     // read translation children
     QDomNodeList translationList = entryElement.elementsByTagName( KVTML_TRANSLATION );
@@ -312,6 +303,8 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     if ( !currentElement.isNull() ) {
         QDomElement typeElement = currentElement.firstChildElement( KVTML_TYPENAME );
 
+
+
 QString wordTypeString = typeElement.text();
 typeElement = currentElement.firstChildElement( KVTML_SUBTYPENAME );
 QString childWordTypeString = typeElement.text();
@@ -321,8 +314,10 @@ if(!childWordTypeString.isEmpty()) {
     typeLesson = typeLesson->childLesson(childWordTypeString);
 }
 
-
+if ( typeLesson ) {
 expr->translation(index)->setWordType(typeLesson);
+}
+
     }
 
     //<pronunciation></pronunciation>
@@ -518,63 +513,74 @@ bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifi
 }
 
 
-bool KEduVocKvtml2Reader::readTypes( QDomElement &typesElement )
+bool KEduVocKvtml2Reader::readWordTypes( QDomElement &typesElement )
 {
     QString mainTypeName;
 
-    QDomElement currentTypeElement =    typesElement.firstChildElement( KVTML_WORDTYPEDEFINITION );
+    QDomElement currentTypeElement = typesElement.firstChildElement( KVTML_WORDTYPEDEFINITION );
     // go over <wordtypedefinition> elements
     while ( !currentTypeElement.isNull() ) {
         // set type and specialtype
         mainTypeName =
             currentTypeElement.firstChildElement( KVTML_TYPENAME ).text();
 
+        KEduVocLesson * wordTypeContainer = new KEduVocLesson(mainTypeName, m_doc->wordTypeContainer());
+        m_doc->wordTypeContainer()->appendChildLesson(wordTypeContainer);
+
+
         QString specialType = currentTypeElement.firstChildElement( KVTML_SPECIALWORDTYPE ).text();
         if ( !specialType.isEmpty() ) {
             // get the localized version
             if ( specialType == KVTML_SPECIALWORDTYPE_NOUN ) {
                 specialType = m_doc->wordTypes().specialTypeNoun();
+                wordTypeContainer->setContainerType(KEduVocLesson::WordTypeNounContainer);
             }
             if ( specialType == KVTML_SPECIALWORDTYPE_VERB ) {
                 specialType = m_doc->wordTypes().specialTypeVerb();
+                wordTypeContainer->setContainerType(KEduVocLesson::WordTypeVerbContainer);
             }
             if ( specialType == KVTML_SPECIALWORDTYPE_ADVERB ) {
                 specialType = m_doc->wordTypes().specialTypeAdverb();
+                wordTypeContainer->setContainerType(KEduVocLesson::WordTypeAdverbContainer);
             }
             if ( specialType == KVTML_SPECIALWORDTYPE_ADJECTIVE ) {
                 specialType = m_doc->wordTypes().specialTypeAdjective();
+                wordTypeContainer->setContainerType(KEduVocLesson::WordTypeAdjectiveContainer);
             }
         }
         m_doc->wordTypes().addType( mainTypeName, specialType );
 
-        KEduVocLesson * wordTypeContainer = new KEduVocLesson(mainTypeName, m_doc->wordTypeContainer());
-        m_doc->wordTypeContainer()->appendChildLesson(wordTypeContainer);
 
         // iterate sub type elements <subwordtypedefinition>
         QDomElement currentSubTypeElement = currentTypeElement.firstChildElement( KVTML_SUBWORDTYPEDEFINITION );
         while ( !currentSubTypeElement.isNull() ) {
             QString specialSubType = currentSubTypeElement.firstChildElement( KVTML_SPECIALWORDTYPE ).text();
+
+            QString subTypeName = currentSubTypeElement.firstChildElement( KVTML_SUBTYPENAME ).text();
+            KEduVocLesson * subWordTypeContainer = new KEduVocLesson(subTypeName, wordTypeContainer);
+            wordTypeContainer->appendChildLesson(subWordTypeContainer);
+
             if ( !specialSubType.isEmpty() ) {
                 // get the localized version
                 if ( specialSubType == KVTML_SPECIALWORDTYPE_NOUN_MALE ) {
                     specialSubType = m_doc->wordTypes().specialTypeNounMale();
+                    subWordTypeContainer->setContainerType(KEduVocLesson::WordTypeNounMaleContainer);
                 }
                 if ( specialSubType == KVTML_SPECIALWORDTYPE_NOUN_FEMALE ) {
                     specialSubType = m_doc->wordTypes().specialTypeNounFemale();
+                    subWordTypeContainer->setContainerType(KEduVocLesson::WordTypeNounFemaleContainer);
                 }
                 if ( specialSubType == KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) {
                     specialSubType = m_doc->wordTypes().specialTypeNounNeutral();
+                    subWordTypeContainer->setContainerType(KEduVocLesson::WordTypeNounNeutralContainer);
                 }
             }
 
-            QString subTypeName = currentSubTypeElement.firstChildElement( KVTML_SUBTYPENAME ).text();
             // set type and specialtype
             m_doc->wordTypes().addSubType( mainTypeName, subTypeName,
                                             specialSubType );
             currentSubTypeElement = currentSubTypeElement.nextSiblingElement( KVTML_SUBWORDTYPEDEFINITION );
 
-            KEduVocLesson * subWordTypeLesson = new KEduVocLesson(subTypeName, wordTypeContainer);
-            wordTypeContainer->appendChildLesson(subWordTypeLesson);
 
         }
         currentTypeElement = currentTypeElement.nextSiblingElement( KVTML_WORDTYPEDEFINITION );

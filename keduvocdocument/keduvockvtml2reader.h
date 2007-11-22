@@ -88,7 +88,7 @@ private:
     /** read the types
      * @param typesElement QDomElement for the types group
      */
-    bool readTypes( QDomElement &typesElement );
+    bool readWordTypes( QDomElement &typesElement );
 
     /** read the tenses
      * @param tensesElement QDomElement for the tenses group

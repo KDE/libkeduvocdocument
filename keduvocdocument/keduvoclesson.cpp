@@ -40,6 +40,8 @@ public:
 
     // entries
     QList<KEduVocExpression*> m_entries;
+
+    EnumContainerType m_type;
 };
 
 KEduVocLesson::Private::~ Private()
@@ -56,6 +58,11 @@ KEduVocLesson::KEduVocLesson(const QString& name, KEduVocLesson *parent)
     d->m_parentLesson = parent;
     d->m_name = name;
     d->m_inPractice = false;
+    if(parent) {
+        d->m_type = parent->containerType();
+    } else {
+        d->m_type = LessonContainer;
+    }
 }
 
 KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
@@ -195,9 +202,19 @@ KEduVocLesson * KEduVocLesson::childLesson(const QString & name)
 {
     for(int i = 0; i<d->m_childLessons.count(); i++){
         if(d->m_childLessons.value(i)->name() == name) {
-            return d->m_childLessons.value(i);
+            return d->m_childLessons[i];
         }
     }
     return 0;
+}
+
+void KEduVocLesson::setContainerType(KEduVocLesson::EnumContainerType type)
+{
+    d->m_type = type;
+}
+
+KEduVocLesson::EnumContainerType KEduVocLesson::containerType()
+{
+    return d->m_type;
 }
 

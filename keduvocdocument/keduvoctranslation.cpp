@@ -372,6 +372,8 @@ void KEduVocTranslation::setWordType(KEduVocLesson * wordType)
     if ( d->m_wordType ) {
         d->m_wordType->removeEntry(d->m_entry);
     }
-    
+    if ( wordType ) {
+        wordType->addEntry(d->m_entry);
+    }
 }
 
