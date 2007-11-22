@@ -300,67 +300,73 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
 {
     QDomElement currentElement = translationElement.firstChildElement( KVTML_TEXT );
     if ( !currentElement.isNull() ) {
-        expr->translation( index ).setText( currentElement.text() );
+        expr->translation(index)->setText( currentElement.text() );
     }
 
     currentElement = translationElement.firstChildElement( KVTML_COMMENT );
     if ( !currentElement.isNull() ) {
-        expr->translation( index ).setComment( currentElement.text() );
+        expr->translation(index)->setComment( currentElement.text() );
     }
 
     currentElement = translationElement.firstChildElement( KVTML_WORDTYPE );
     if ( !currentElement.isNull() ) {
         QDomElement typeElement = currentElement.firstChildElement( KVTML_TYPENAME );
-        expr->translation( index ).setType( typeElement.text() );
-        // read subtype if the type is not empty
-        typeElement = currentElement.firstChildElement( KVTML_SUBTYPENAME );
-        if ( !typeElement.isNull() ) {
-            expr->translation( index ).setSubType( typeElement.text() );
-        }
+
+QString wordTypeString = typeElement.text();
+typeElement = currentElement.firstChildElement( KVTML_SUBTYPENAME );
+QString childWordTypeString = typeElement.text();
+
+KEduVocLesson* typeLesson = m_doc->wordTypeLesson()->childLesson(wordTypeString);
+if(!childWordTypeString.isEmpty()) {
+    typeLesson = typeLesson->childLesson(childWordTypeString);
+}
+
+
+expr->translation(index)->setWordType(typeLesson);
     }
 
     //<pronunciation></pronunciation>
     currentElement = translationElement.firstChildElement( KVTML_PRONUNCIATION );
     if ( !currentElement.isNull() ) {
-        expr->translation( index ).setPronunciation( currentElement.text() );
+        expr->translation(index)->setPronunciation( currentElement.text() );
     }
 
     //<falsefriend fromid="1"></falsefriend>
     currentElement = translationElement.firstChildElement( KVTML_FALSEFRIEND );
     if ( !currentElement.isNull() ) {
         int fromid = currentElement.attribute( KVTML_FROMID ).toInt();
-        expr->translation( index ).setFalseFriend( fromid, currentElement.text() );
+        expr->translation(index)->setFalseFriend( fromid, currentElement.text() );
     }
 
     //<antonym></antonym>
     currentElement = translationElement.firstChildElement( KVTML_ANTONYM );
     if ( !currentElement.isNull() ) {
-        expr->translation( index ).setAntonym( currentElement.text() );
+        expr->translation(index)->setAntonym( currentElement.text() );
     }
 
     //<synonym></synonym>
     currentElement = translationElement.firstChildElement( KVTML_SYNONYM );
     if ( !currentElement.isNull() ) {
-        expr->translation( index ).setSynonym( currentElement.text() );
+        expr->translation(index)->setSynonym( currentElement.text() );
     }
 
     //<example></example>
     currentElement = translationElement.firstChildElement( KVTML_EXAMPLE );
     if ( !currentElement.isNull() ) {
-        expr->translation( index ).setExample( currentElement.text() );
+        expr->translation(index)->setExample( currentElement.text() );
     }
 
     //<usage></usage> can be as often as there are usage labels
     currentElement = translationElement.firstChildElement( KVTML_USAGE );
     while ( !currentElement.isNull() ) {
-        expr->translation( index ).usages().insert( currentElement.text() );
+        expr->translation(index)->usages().insert( currentElement.text() );
         currentElement = currentElement.nextSiblingElement( KVTML_USAGE );
     }
 
     //<paraphrase></paraphrase>
     currentElement = translationElement.firstChildElement( KVTML_PARAPHRASE );
     if ( !currentElement.isNull() ) {
-        expr->translation( index ).setParaphrase( currentElement.text() );
+        expr->translation(index)->setParaphrase( currentElement.text() );
     }
 
     // conjugations
@@ -371,7 +377,7 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
         QDomElement tenseElement = currentElement.firstChildElement( KVTML_TENSE );
         QString tense = tenseElement.text();
 
-        readConjugation( currentElement, expr->translation(index).conjugation(tense) );
+        readConjugation( currentElement, expr->translation(index)->conjugation(tense) );
         currentElement = currentElement.nextSiblingElement( KVTML_CONJUGATION );
     }
 
@@ -388,25 +394,25 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     if ( !currentElement.isNull() ) {
         KEduVocComparison comparison;
         readComparison( currentElement, comparison );
-        expr->translation( index ).setComparison( comparison );
+        expr->translation(index)->setComparison( comparison );
     }
 
     // multiple choice
     currentElement = translationElement.firstChildElement( KVTML_MULTIPLECHOICE );
     if ( !currentElement.isNull() ) {
-        readMultipleChoice( currentElement, expr->translation( index ) );
+        readMultipleChoice( currentElement, expr->translation(index) );
     }
 
     // image
     currentElement = translationElement.firstChildElement( KVTML_IMAGE );
     if ( !currentElement.isNull() ) {
-        expr->translation( index ).setImageUrl( KUrl( m_doc->url(), currentElement.text() ) );
+        expr->translation(index)->setImageUrl( KUrl( m_doc->url(), currentElement.text() ) );
     }
 
     // sound
     currentElement = translationElement.firstChildElement( KVTML_SOUND );
     if ( !currentElement.isNull() ) {
-        expr->translation( index ).setSoundUrl( KUrl( m_doc->url(), currentElement.text() ) );
+        expr->translation(index)->setSoundUrl( KUrl( m_doc->url(), currentElement.text() ) );
     }
 
     return true;
@@ -641,7 +647,7 @@ bool KEduVocKvtml2Reader::readComparison( QDomElement &domElementParent, KEduVoc
 }
 
 
-bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation &translation )
+bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation )
 /*
  <multiplechoice>
    <choice>good</choice>
@@ -659,7 +665,7 @@ bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement
     {
         currentElement = choiceNodes.item( i ).toElement();
         if ( currentElement.parentNode() == multipleChoiceElement ) {
-            translation.multipleChoice().append( currentElement.text() );
+            translation->multipleChoice().append( currentElement.text() );
         }
     }
     return true;
@@ -677,19 +683,19 @@ bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpressio
     QDomElement currentElement = gradeElement.firstChildElement( KVTML_CURRENTGRADE );
     if ( !currentElement.isNull() ) {
         int value = currentElement.text().toInt();
-        expr->translation( index ).gradeFrom( id ).setGrade( value );
+        expr->translation(index)->gradeFrom( id ).setGrade( value );
     }
 
     currentElement = gradeElement.firstChildElement( KVTML_COUNT );
     if ( !currentElement.isNull() ) {
         int value = currentElement.text().toInt();
-        expr->translation( index ).gradeFrom( id ).setPracticeCount( value );
+        expr->translation(index)->gradeFrom( id ).setPracticeCount( value );
     }
 
     currentElement = gradeElement.firstChildElement( KVTML_ERRORCOUNT );
     if ( !currentElement.isNull() ) {
         int value = currentElement.text().toInt();
-        expr->translation( index ).gradeFrom( id ).setBadCount( value );
+        expr->translation(index)->gradeFrom( id ).setBadCount( value );
     }
 
     currentElement = gradeElement.firstChildElement( KVTML_DATE );
@@ -697,7 +703,7 @@ bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpressio
         QString dateString = currentElement.text();
         if ( !dateString.isEmpty() ) {
             QDateTime value = QDateTime::fromString( dateString, Qt::ISODate );
-            expr->translation( index ).gradeFrom( id ).setPracticeDate( value );
+            expr->translation(index)->gradeFrom( id ).setPracticeDate( value );
         }
     }
 

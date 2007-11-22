@@ -867,8 +867,8 @@ public:
         int cmp;
         foreach( int i, exp->translationIndices() ) {
 
-            s1 = exp->translation( i ).text();
-            s2 = y.exp->translation( i ).text();
+            s1 = exp->translation( i )->text();
+            s2 = y.exp->translation( i )->text();
             cmp = QString::compare( s1.toUpper(), s2.toUpper() );
             if ( cmp != 0 )
                 return cmp < 0;

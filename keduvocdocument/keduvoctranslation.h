@@ -24,8 +24,9 @@
 #include <KDE/KUrl>
 #include <QtCore/QString>
 
-
+class KEduVocExpression;
 class KEduVocGrade;
+class KEduVocLesson;
 
 /**
  @author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
@@ -36,13 +37,13 @@ public:
     /**
      * Default constructor for an empty translation.
      */
-    KEduVocTranslation();
+    KEduVocTranslation(KEduVocExpression* entry);
 
     /**
         * Constructor
         * @param translation is used as translation
         */
-    KEduVocTranslation( const QString &translation );
+    KEduVocTranslation(KEduVocExpression* entry, const QString &translation );
 
     /** copy constructor for d-pointer safet */
     KEduVocTranslation( const KEduVocTranslation &other );
@@ -162,27 +163,17 @@ public:
      */
     QString irregularPlural() const;
 
-    /** returns type of this expression
+    /** returns the word type of this expression
     *
     * @return                 type or "" if no type available
     */
-    QString type() const;
+    KEduVocLesson* wordType() const;
 
-    /** sets type of this expression
+    /** sets the word type of this expression
     * @param type             type of this expression ("" = none)
     */
-    void setType( const QString &type );
+    void setWordType( KEduVocLesson* wordType );
 
-    /** returns subtype of this expression
-    *
-    * @return                 type or "" if no type available
-    */
-    QString subType() const;
-
-    /** sets subtype of this expression
-    * @param type             type of this expression ("" = none)
-    */
-    void setSubType( const QString &type );
 
     /** reset the grades for this translation */
     void resetGrades();

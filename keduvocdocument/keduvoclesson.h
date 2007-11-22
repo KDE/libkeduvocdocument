@@ -40,6 +40,7 @@ public:
 
      QList<KEduVocLesson *> childLessons();
      KEduVocLesson *childLesson(int row);
+     KEduVocLesson *childLesson(const QString& name);
      int childLessonCount() const;
 
      int row() const;

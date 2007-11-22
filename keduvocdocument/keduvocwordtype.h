@@ -140,8 +140,6 @@ public:
     QString specialTypeAdverb() const;
 
 private:
-
-
     QString mainTypeName( int index ) const;
     int mainTypeIndex( const QString& name ) const;
     int subTypeIndex( const QString& mainTypeName, const QString& subTypeName ) const;

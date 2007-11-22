@@ -91,7 +91,7 @@ public:
      * @param translationElement QDomElement translation to write to, with id pre-set
      * @param translation object to write
      */
-    bool writeTranslation( QDomElement &translationElement, KEduVocTranslation &translation );
+    bool writeTranslation( QDomElement &translationElement, KEduVocTranslation* translation );
 
     /** write the lesson group
      * @param parentLesson the parent lesson of the current lesson
@@ -110,7 +110,7 @@ public:
      * @param multipleChoiceElement QDomElement multiplechoice to write to
      * @returns success
      */
-    bool writeMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation &translation );
+    bool writeMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation );
 
 private:
     QDomElement newTextElement( const QString &elementName, const QString &text );

@@ -22,6 +22,7 @@
 
 #include <QtCore/QDateTime>
 
+#include "keduvoclesson.h"
 #include "keduvocgrammar.h"
 #include "keduvocmultiplechoice.h"
 #include "keduvoctranslation.h"
@@ -78,13 +79,7 @@ public:
     int sizeHint() const;
     void setSizeHint( int sizeHint );
 
-    /** returns this translation
-     *
-     * @return                 expression or "" if no translation available
-     */
-    QString translationString( int index ) const;
-
-    void setTranslation( int index, const KEduVocTranslation & translation );
+    void setTranslation( int index, KEduVocTranslation* translation );
     /**
      * Add a translation to this expression
      * @param index            number of translation = the identifier
@@ -102,11 +97,11 @@ public:
 
 
     /**
-     * Get a mutable reference to the translation
+     * Get a pointer to the translation
      * @param index of the language identifier
      * @return the translation
      */
-    KEduVocTranslation & translation( int index ) const;
+    KEduVocTranslation* translation( int index );
 
     QList<int> translationIndices() const;
 

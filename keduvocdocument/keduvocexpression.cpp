@@ -27,10 +27,9 @@ public:
     KEduVocExpressionPrivate( KEduVocExpression* qq )
             : q( qq )
     {
-        init();
+        m_active = true;
     }
-
-    void init();
+    ~KEduVocExpressionPrivate();
 
     bool operator== ( const KEduVocExpressionPrivate &p ) const;
 
@@ -39,14 +38,13 @@ public:
     QList<KEduVocLesson*> m_lessons;
     bool m_active;
 
-    QMap <int, KEduVocTranslation> m_translations;
+    QMap <int, KEduVocTranslation*> m_translations;
 };
 
 
-void KEduVocExpression::KEduVocExpressionPrivate::init()
+KEduVocExpression::KEduVocExpressionPrivate::~ KEduVocExpressionPrivate()
 {
-    m_translations.clear();
-    m_active = true;
+    qDeleteAll(m_translations);
 }
 
 
@@ -90,13 +88,11 @@ KEduVocExpression::~KEduVocExpression()
 
 void KEduVocExpression::removeTranslation( int index )
 {
-    d->m_translations.remove( index );
+    delete d->m_translations.take(index);
 
     for ( int j = index; j < d->m_translations.count(); j++ ) {
-        translation(j) = translation(j+1);
+        d->m_translations[j] = d->m_translations.value(j+1);
     }
-    kDebug() << "Checkme - removing last tranlation ?!!?";
-    ///@todo - no idea if this works
     d->m_translations.remove(d->m_translations.count() - 1);
 }
 
@@ -107,7 +103,7 @@ void KEduVocExpression::setTranslation( int index, const QString & expr )
         return;
     }
 
-    d->m_translations[index] = expr.simplified();
+    d->m_translations[index] = new KEduVocTranslation(this, expr.simplified());
 }
 
 
@@ -132,15 +128,15 @@ void KEduVocExpression::setActive( bool flag )
 void KEduVocExpression::resetGrades( int index )
 {
     if ( index == -1 ) { // clear grades for all languages
-        foreach( KEduVocTranslation trans, d->m_translations ) {
-            trans.resetGrades();
+        foreach( KEduVocTranslation* trans, d->m_translations ) {
+            trans->resetGrades();
         }
         return;
     }
 
     // only language index
     if ( d->m_translations.contains( index ) ) {
-        d->m_translations[index].resetGrades();
+        d->m_translations[index]->resetGrades();
     }
 }
 
@@ -157,9 +153,12 @@ bool KEduVocExpression::operator== ( const KEduVocExpression &expression ) const
     return ( *d == *expression.d );
 }
 
-KEduVocTranslation& KEduVocExpression::translation( int index ) const
+KEduVocTranslation* KEduVocExpression::translation( int index )
 {
-    return d->m_translations[index];
+    if(d->m_translations.contains(index)) {
+        return d->m_translations[index];
+    }
+    d->m_translations[index] = new KEduVocTranslation(this);
 }
 
 QList< int > KEduVocExpression::translationIndices() const
@@ -176,4 +175,5 @@ void KEduVocExpression::removeLesson(KEduVocLesson * l)
 {
     d->m_lessons.removeAt(d->m_lessons.indexOf(l));
 }
+
 

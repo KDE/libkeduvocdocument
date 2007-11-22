@@ -191,3 +191,13 @@ KEduVocLesson * KEduVocLesson::parent()
     return d->m_parentLesson;
 }
 
+KEduVocLesson * KEduVocLesson::childLesson(const QString & name)
+{
+    for(int i = 0; i<d->m_childLessons.count(); i++){
+        if(d->m_childLessons.value(i)->name() == name) {
+            return d->m_childLessons.value(i);
+        }
+    }
+    return 0;
+}
+
