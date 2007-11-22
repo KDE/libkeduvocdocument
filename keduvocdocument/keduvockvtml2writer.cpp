@@ -366,10 +366,10 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
         translationElement.appendChild( wordTypeElement );
         //<typename>noun</typename>
 
-        if(translation->wordType()->parent() == m_doc->wordTypeLesson()) {
+        if(translation->wordType()->parent() == m_doc->wordTypeContainer()) {
             wordTypeElement.appendChild( newTextElement( KVTML_TYPENAME, translation->wordType()->name() ) );
         } else {
-            if(translation->wordType()->parent()->parent() == m_doc->wordTypeLesson()) {
+            if(translation->wordType()->parent()->parent() == m_doc->wordTypeContainer()) {
                 wordTypeElement.appendChild( newTextElement( KVTML_TYPENAME, translation->wordType()->parent()->name() ) );
             // <subwordtype>male</subwordtype>
                 wordTypeElement.appendChild( newTextElement( KVTML_SUBTYPENAME, translation->wordType()->name() ) );

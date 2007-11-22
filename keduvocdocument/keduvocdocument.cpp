@@ -55,8 +55,9 @@ public:
     KEduVocDocumentPrivate( KEduVocDocument* qq )
             : q( qq )
     {
-        m_rootLesson = 0;
-        m_wordTypeLesson = 0;
+        m_lessonContainer = 0;
+        m_wordTypeContainer = 0;
+        m_leitnerContainer = 0;
         init();
     }
 
@@ -95,8 +96,9 @@ public:
       */
     QString                   m_category;
 
-    KEduVocLesson * m_rootLesson;
-    KEduVocLesson * m_wordTypeLesson;
+    KEduVocLesson * m_lessonContainer;
+    KEduVocLesson * m_wordTypeContainer;
+    KEduVocLesson * m_leitnerContainer;
 
     KEduVocWordType           m_wordTypes;
 };
@@ -107,14 +109,14 @@ KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
 
 void KEduVocDocument::KEduVocDocumentPrivate::init()
 {
-    if ( m_rootLesson ) {
-        delete m_rootLesson;
+    if ( m_lessonContainer ) {
+        delete m_lessonContainer;
     }
-    m_rootLesson = new KEduVocLesson("root");
-    if ( m_wordTypeLesson ) {
-        delete m_wordTypeLesson;
+    m_lessonContainer = new KEduVocLesson("root");
+    if ( m_wordTypeContainer ) {
+        delete m_wordTypeContainer;
     }
-    m_wordTypeLesson = new KEduVocLesson(i18n( "Word types" ));
+    m_wordTypeContainer = new KEduVocLesson(i18n( "Word types" ));
 
     m_tenseDescriptions.clear();
     m_identifiers.clear();
@@ -675,7 +677,7 @@ void KEduVocDocument::removeIdentifier( int index )
 {
     if ( index < d->m_identifiers.size() && index >= 0 ) {
         d->m_identifiers.removeAt( index );
-        d->m_rootLesson->removeTranslation( index );
+        d->m_lessonContainer->removeTranslation( index );
     }
 }
 
@@ -715,13 +717,17 @@ kDebug() << "appendIdentifier: " << i << id.name() << id.locale();
 
 KEduVocLesson * KEduVocDocument::lesson()
 {
-    return d->m_rootLesson;
+    return d->m_lessonContainer;
 }
 
-
-KEduVocLesson * KEduVocDocument::wordTypeLesson()
+KEduVocLesson * KEduVocDocument::wordTypeContainer()
 {
-    return d->m_wordTypeLesson;
+    return d->m_wordTypeContainer;
+}
+
+KEduVocLesson * KEduVocDocument::leitnerContainer()
+{
+    return d->m_leitnerContainer;
 }
 
 
@@ -739,16 +745,16 @@ void KEduVocDocument::setUrl( const KUrl& url )
 
 QString KEduVocDocument::title() const
 {
-    if ( d->m_rootLesson->name().isEmpty() )
+    if ( d->m_lessonContainer->name().isEmpty() )
         return d->m_url.fileName();
     else
-        return d->m_rootLesson->name();
+        return d->m_lessonContainer->name();
 }
 
 
 void KEduVocDocument::setTitle( const QString & title )
 {
-    d->m_rootLesson->setName(title.simplified());
+    d->m_lessonContainer->setName(title.simplified());
 }
 
 
