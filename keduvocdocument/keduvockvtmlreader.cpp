@@ -737,7 +737,7 @@ bool KEduVocKvtmlReader::readComparison( QDomElement &domElementParent, KEduVocC
 }
 
 
-bool KEduVocKvtmlReader::readMultipleChoice( QDomElement &domElementParent, KEduVocMultipleChoice &mc )
+bool KEduVocKvtmlReader::readMultipleChoice( QDomElement &domElementParent, KEduVocTranslation &translation )
 /*
  <multiplechoice>
    <mc1>good</mc1>

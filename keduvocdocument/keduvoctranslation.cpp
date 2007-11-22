@@ -60,7 +60,7 @@ public:
     /// Usages give a context (eg. this word is usually used in [biology])
     QSet<QString> m_usages;
     /// When creating multiple choice tests, these are possible answers. (otherwise other words are added randomly)
-    KEduVocMultipleChoice m_multipleChoice;
+    QStringList m_multipleChoice;
 
     /// Conjugations of a word (I go, you go, he goes... boring in english)
     QMap <QString, KEduVocConjugation> m_conjugations;
@@ -282,13 +282,13 @@ KEduVocComparison & KEduVocTranslation::comparison()
 }
 
 
-void KEduVocTranslation::setMultipleChoice( const KEduVocMultipleChoice &mc )
-{
-    d->m_multipleChoice = mc;
-}
+// void KEduVocTranslation::setMultipleChoice( const QStringList &mc )
+// {
+//     d->m_multipleChoice = mc;
+// }
 
 
-KEduVocMultipleChoice & KEduVocTranslation::multipleChoice()
+QStringList & KEduVocTranslation::multipleChoice()
 {
     return d->m_multipleChoice;
 }

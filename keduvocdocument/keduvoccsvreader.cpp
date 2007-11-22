@@ -31,6 +31,7 @@
 #include <klocale.h>
 
 #include "keduvocdocument.h"
+#include "keduvoclesson.h"
 #include "keduvocexpression.h"
 
 KEduVocCsvReader::KEduVocCsvReader( QIODevice *file )
@@ -54,13 +55,17 @@ bool KEduVocCsvReader::readDoc( KEduVocDocument *doc )
 
     int languageCount = 0;
 
+    KEduVocLesson* lesson = new KEduVocLesson( i18n("Vocabulary"), m_doc->lesson());
+    m_doc->lesson()->appendChildLesson(lesson);
+
     while ( !inputStream.atEnd() ) {
         QString s = inputStream.readLine();
 
         if ( !s.simplified().isEmpty() ) {
             KEduVocExpression expression( s.split(separator) );
-            languageCount = qMax( languageCount, expression.translationIndices().count() );
-            m_doc->appendEntry( &expression );
+            languageCount = qMax( languageCount,
+                expression.translationIndices().count() );
+            lesson->addEntry( &expression );
         }
     }
 

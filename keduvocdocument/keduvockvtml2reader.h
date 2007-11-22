@@ -120,7 +120,7 @@ private:
      * @param multipleChoiceElement element to read from
      * @param mc KEduVocMultipleChoice object to read to
      */
-    bool readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocMultipleChoice &mc );
+    bool readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation &translation );
 
     /** read a grade
      * @param gradeElement element to read from

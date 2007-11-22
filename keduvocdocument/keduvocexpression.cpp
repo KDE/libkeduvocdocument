@@ -63,17 +63,15 @@ KEduVocExpression::KEduVocExpression()
         : d( new KEduVocExpressionPrivate( this ) )
 {}
 
-KEduVocExpression::KEduVocExpression( KEduVocLesson* lesson,  const QString & expression )
+KEduVocExpression::KEduVocExpression( const QString & expression )
         : d( new KEduVocExpressionPrivate( this ) )
 {
-    d->m_lessons.append(lesson);
     setTranslation( 0, expression.simplified() );
 }
 
-KEduVocExpression::KEduVocExpression( KEduVocLesson* lesson, const QStringList & translations)
+KEduVocExpression::KEduVocExpression( const QStringList & translations)
         : d( new KEduVocExpressionPrivate( this ) )
 {
-    d->m_lessons.append(lesson);
     foreach ( QString translation, translations ) {
         setTranslation(d->m_translations.count(), translation);
     }

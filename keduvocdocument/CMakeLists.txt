@@ -13,16 +13,16 @@ keduvocdocument.cpp
    keduvocconjugation.cpp
    keduvocpersonalpronoun.cpp
    keduvocdeclination.cpp
-   keduvocmultiplechoice.cpp
+   #keduvocmultiplechoice.cpp
    keduvocwordtype.cpp
    keduvockvtmlcompability.cpp
    #keduvockvtmlreader.cpp
    keduvockvtml2reader.cpp
    #keduvockvtmlwriter.cpp
    keduvockvtml2writer.cpp
-   #keduvoccsvreader.cpp
-   #keduvoccsvwriter.cpp
-   #keduvocpaukerreader.cpp
+   keduvoccsvreader.cpp
+   keduvoccsvwriter.cpp
+   keduvocpaukerreader.cpp
    #keduvocvokabelnreader.cpp
    #keduvocwqlreader.cpp
    #keduvocxdxfreader.cpp

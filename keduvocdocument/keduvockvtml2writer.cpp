@@ -463,7 +463,7 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     // multiplechoice
     if ( !translation.multipleChoice().isEmpty() ) {
         QDomElement multipleChoiceElement = m_domDoc.createElement( KVTML_MULTIPLECHOICE );
-        writeMultipleChoice( multipleChoiceElement, translation.multipleChoice() );
+        writeMultipleChoice( multipleChoiceElement, translation );
         translationElement.appendChild( multipleChoiceElement );
     }
 
@@ -511,7 +511,7 @@ bool KEduVocKvtml2Writer::writeComparison( QDomElement &comparisonElement, const
 }
 
 
-bool KEduVocKvtml2Writer::writeMultipleChoice( QDomElement &multipleChoiceElement, const KEduVocMultipleChoice &mc )
+bool KEduVocKvtml2Writer::writeMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation &translation )
 /*
  <multiplechoice>
    <choice>good</choice>
@@ -522,11 +522,9 @@ bool KEduVocKvtml2Writer::writeMultipleChoice( QDomElement &multipleChoiceElemen
  </multiplechoice>
 */
 {
-    QStringList choices = mc.choices();
-    for ( int i = 0; i < choices.size(); ++i ) {
-        multipleChoiceElement.appendChild( newTextElement( KVTML_CHOICE, choices[i] ) );
+    foreach ( QString choice, translation.multipleChoice() ) {
+        multipleChoiceElement.appendChild( newTextElement( KVTML_CHOICE, choice ) );
     }
-
     return true;
 }
 

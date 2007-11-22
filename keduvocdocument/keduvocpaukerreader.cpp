@@ -21,6 +21,7 @@
 #include <KLocale>
 
 #include "keduvocexpression.h"
+#include "keduvoclesson.h"
 #include "keduvocdocument.h"
 
 KEduVocPaukerReader::KEduVocPaukerReader( KEduVocDocument * doc )
@@ -126,9 +127,11 @@ void KEduVocPaukerReader::readCard()
         }
     }
 
-    KEduVocExpression expr = KEduVocExpression( front );
-    expr.setTranslation( 1, back );
-    m_doc->appendEntry( &expr );
+    KEduVocLesson* lesson = new KEduVocLesson(i18n("Vocabulary"), m_doc->lesson());
+    m_doc->lesson()->appendChildLesson(lesson);
+
+    KEduVocExpression* expr = new KEduVocExpression( QStringList() << front << back);
+    lesson->addEntry( expr );
 }
 
 

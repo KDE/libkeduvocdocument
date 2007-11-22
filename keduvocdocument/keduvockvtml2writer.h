@@ -110,10 +110,9 @@ public:
      * @param multipleChoiceElement QDomElement multiplechoice to write to
      * @returns success
      */
-    bool writeMultipleChoice( QDomElement &multipleChoiceElement, const KEduVocMultipleChoice &mc );
+    bool writeMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation &translation );
 
 private:
-
     QDomElement newTextElement( const QString &elementName, const QString &text );
 
     QFile *m_outputFile;

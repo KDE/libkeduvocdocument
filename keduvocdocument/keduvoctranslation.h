@@ -20,7 +20,7 @@
 #include "libkeduvocdocument_export.h"
 #include "keduvocgrammar.h"
 #include "keduvocconjugation.h"
-#include "keduvocmultiplechoice.h"
+// #include "keduvocmultiplechoice.h"
 #include <KDE/KUrl>
 #include <QtCore/QString>
 
@@ -227,12 +227,12 @@ public:
 
     /** returns multiple choice if available
       */
-    KEduVocMultipleChoice & multipleChoice();
+    QStringList & multipleChoice();
 
     /** sets multiple choice
      * @param mc               multiple choice block
       */
-    void setMultipleChoice( const KEduVocMultipleChoice &mc );
+//     void setMultipleChoice( const QStringList &mc );
 
     /** get the sound url for this translation if it exists */
     KUrl soundUrl();

@@ -394,9 +394,7 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     // multiple choice
     currentElement = translationElement.firstChildElement( KVTML_MULTIPLECHOICE );
     if ( !currentElement.isNull() ) {
-        KEduVocMultipleChoice mc;
-        readMultipleChoice( currentElement, mc );
-        expr->translation( index ).setMultipleChoice( mc );
+        readMultipleChoice( currentElement, expr->translation( index ) );
     }
 
     // image
@@ -643,7 +641,7 @@ bool KEduVocKvtml2Reader::readComparison( QDomElement &domElementParent, KEduVoc
 }
 
 
-bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocMultipleChoice &mc )
+bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation &translation )
 /*
  <multiplechoice>
    <choice>good</choice>
@@ -656,15 +654,12 @@ bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement
 
 {
     QDomElement currentElement;
-    QString s;
-    mc.clear();
-
     QDomNodeList choiceNodes = multipleChoiceElement.elementsByTagName( KVTML_CHOICE );
     for ( int i = 0; i < choiceNodes.count(); ++i )
     {
         currentElement = choiceNodes.item( i ).toElement();
         if ( currentElement.parentNode() == multipleChoiceElement ) {
-            mc.appendChoice( currentElement.text() );
+            translation.multipleChoice().append( currentElement.text() );
         }
     }
     return true;

@@ -45,7 +45,7 @@ public:
      * @param expression       translation
      * @param lesson           lesson number
      */
-    explicit KEduVocExpression( KEduVocLesson* lesson, const QString & expression );
+    explicit KEduVocExpression( const QString & expression );
 
     /** Constructor for a vocabulary expression with an original and one or more translations
      *
@@ -53,7 +53,7 @@ public:
      * @param separator        expression will be split into an original and one or more translations using separator
      * @param lesson           lesson number, 0 for none
      */
-    explicit KEduVocExpression( KEduVocLesson* lesson, const QStringList & translations );
+    explicit KEduVocExpression( const QStringList & translations );
 
     ~KEduVocExpression();
 
