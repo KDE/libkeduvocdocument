@@ -377,3 +377,4 @@ void KEduVocTranslation::setWordType(KEduVocLesson * wordType)
     }
 }
 
+
