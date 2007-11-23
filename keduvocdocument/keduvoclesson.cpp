@@ -181,6 +181,7 @@ QList< KEduVocExpression * > KEduVocLesson::entriesRecursive()
             }
         }
     }
+    return entryList;
 }
 
 QList< KEduVocLesson * > KEduVocLesson::childLessons()
