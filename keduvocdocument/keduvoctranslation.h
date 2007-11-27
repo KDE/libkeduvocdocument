@@ -209,14 +209,13 @@ public:
      */
     QMap <QString, KEduVocConjugation> conjugations() const;
 
-    /** returns comparison if available
+    /**
+     * Comparison forms of adjectives/adverbs.
      */
-    KEduVocComparison & comparison();
-
-    /** sets comparison
-     * @param comparison       comparison block
-     */
-    void setComparison( const KEduVocComparison & comparison );
+    QString comparative() const;
+    void setComparative(const QString& comparative);
+    QString superlative() const;
+    void setSuperlative(const QString& superlative);
 
     /** returns multiple choice if available
       */

@@ -28,7 +28,7 @@
 
 #include <QtCore/QMap>
 #include <KDebug>
-
+/*
 class KEduVocComparison::Private
 {
 public:
@@ -117,7 +117,7 @@ QString KEduVocComparison::l3() const
 {
     return d->ls3;
 }
-
+*/
 
 
 

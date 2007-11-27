@@ -459,9 +459,9 @@ kDebug() << "write tranlation:" << translation->text();
     }
 
     // comparison
-    if ( !translation->comparison().isEmpty() ) {
+    if ( !(translation->comparative().isEmpty() || translation->comparative().isEmpty())) {
         QDomElement comparisonElement = m_domDoc.createElement( KVTML_COMPARISON );
-        writeComparison( comparisonElement, translation->comparison() );
+        writeComparison( comparisonElement, translation );
         translationElement.appendChild( comparisonElement );
     }
 
@@ -499,7 +499,7 @@ kDebug() << "write tranlation:" << translation->text();
     return true;
 }
 
-bool KEduVocKvtml2Writer::writeComparison( QDomElement &comparisonElement, const KEduVocComparison &comparison )
+bool KEduVocKvtml2Writer::writeComparison( QDomElement &comparisonElement, KEduVocTranslation* translation )
 /*
  <comparison>
    <absolute>good</absolute>
@@ -508,9 +508,8 @@ bool KEduVocKvtml2Writer::writeComparison( QDomElement &comparisonElement, const
  </comparison>
 */
 {
-    comparisonElement.appendChild( newTextElement( KVTML_ABSOLUTE, comparison.l1() ) );
-    comparisonElement.appendChild( newTextElement( KVTML_COMPARATIVE, comparison.l2() ) );
-    comparisonElement.appendChild( newTextElement( KVTML_SUPERLATIVE, comparison.l3() ) );
+    comparisonElement.appendChild( newTextElement( KVTML_COMPARATIVE, translation->comparative() ) );
+    comparisonElement.appendChild( newTextElement( KVTML_SUPERLATIVE, translation->superlative() ) );
 
     return true;
 }

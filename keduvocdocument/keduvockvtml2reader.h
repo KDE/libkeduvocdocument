@@ -126,7 +126,7 @@ private:
      * @param comparisonElement comparison group element
      * @param comp comparison object to read into
      */
-    bool readComparison( QDomElement &comparisonElement, KEduVocComparison &comp );
+    bool readComparison( QDomElement &comparisonElement, KEduVocTranslation *translation );
 
     /** read a multiple choice group
      * @param multipleChoiceElement element to read from

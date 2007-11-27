@@ -104,7 +104,7 @@ public:
      * @param comparison object to write
      * @returns success
      */
-    bool writeComparison( QDomElement &comparisonElement, const KEduVocComparison &comparison );
+    bool writeComparison( QDomElement &comparisonElement, KEduVocTranslation *translation );
 
     /** write multiple choice choices
      * @param multipleChoiceElement QDomElement multiplechoice to write to

@@ -495,7 +495,7 @@ bool KEduVocKvtmlWriter::writeUsage( QDomElement &domElementParent )
 }
 
 
-bool KEduVocKvtmlWriter::writeComparison( QDomElement &domElementParent, const KEduVocComparison &comp )
+bool KEduVocKvtmlWriter::writeComparison( QDomElement &domElementParent, const KEduVocTranslation* translation )
 /*
  <comparison>
    <l1>good</l1>
@@ -504,8 +504,9 @@ bool KEduVocKvtmlWriter::writeComparison( QDomElement &domElementParent, const K
  </comparison>
 */
 {
-    if ( comp.isEmpty() )
+    if ( translation.comparison().isEmpty() && translation.superlative().isEmpty() ) {
         return true;
+    }
 
     QDomElement domElementComparison = m_domDoc.createElement( KV_COMPARISON_GRP );
 

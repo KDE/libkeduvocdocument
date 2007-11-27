@@ -62,7 +62,7 @@ public:
     bool readType( QDomElement &domElementParent );
     bool readTense( QDomElement &domElementParent );
     bool readUsage( QDomElement &domElementParent );
-    bool readComparison( QDomElement &domElementParent, KEduVocComparison &comp );
+    bool readComparison( QDomElement &domElementParent, KEduVocTranslation* translation );
     bool readMultipleChoice( QDomElement &domElementParent, KEduVocMultipleChoice &mc );
     bool readExpressionChildAttributes( QDomElement &domElementExpressionChild,
                                         QString &lang,

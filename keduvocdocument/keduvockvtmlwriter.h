@@ -57,7 +57,7 @@ private:
     bool writeConjugHeader( QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug );
     bool writeConjug( QDomElement &domElementParent, const KEduVocConjugation &curr_conjug, const QString &type );
     bool writeConjugEntry( QDomElement &domElementParent, KEduVocTranslation &translation  );
-    bool writeComparison( QDomElement &domElementParent, const KEduVocComparison &comp );
+    bool writeComparison( QDomElement &domElementParent, KEduVocTranslation* translation );
     bool writeMultipleChoice( QDomElement &domElementParent, const KEduVocMultipleChoice &mc );
 
     QDomElement newTextElement( const QString &elementName, const QString &text );

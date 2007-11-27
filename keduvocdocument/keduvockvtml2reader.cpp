@@ -382,9 +382,7 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     // comparisons
     currentElement = translationElement.firstChildElement( KVTML_COMPARISON );
     if ( !currentElement.isNull() ) {
-        KEduVocComparison comparison;
-        readComparison( currentElement, comparison );
-        expr->translation(index)->setComparison( comparison );
+        readComparison( currentElement, expr->translation(index) );
     }
 
     // multiple choice
@@ -611,10 +609,9 @@ bool KEduVocKvtml2Reader::readUsages( QDomElement &usagesElement )
 }*/
 
 
-bool KEduVocKvtml2Reader::readComparison( QDomElement &domElementParent, KEduVocComparison &comp )
+bool KEduVocKvtml2Reader::readComparison( QDomElement &domElementParent, KEduVocTranslation* translation )
 /*
  <comparison>
-   <absolute>good</absolute>
    <comparative>better</comparative>
    <superlative>best</superlative>
  </comparison>
@@ -622,21 +619,16 @@ bool KEduVocKvtml2Reader::readComparison( QDomElement &domElementParent, KEduVoc
 {
     QDomElement currentElement;
 
-    currentElement = domElementParent.firstChildElement( KVTML_ABSOLUTE );
-    if ( !currentElement.isNull() ) {
-        comp.setL1( currentElement.text() );
-    }
-
     currentElement = domElementParent.firstChildElement( KVTML_COMPARATIVE );
     if ( !currentElement.isNull() )
     {
-        comp.setL2( currentElement.text() );
+        translation->setComparative( currentElement.text() );
     }
 
     currentElement = domElementParent.firstChildElement( KVTML_SUPERLATIVE );
     if ( !currentElement.isNull() )
     {
-        comp.setL3( currentElement.text() );
+        translation->setSuperlative( currentElement.text() );
     }
     return true;
 }

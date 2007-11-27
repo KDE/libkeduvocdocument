@@ -62,8 +62,9 @@ public:
 
     /// Conjugations of a word (I go, you go, he goes... boring in english)
     QMap <QString, KEduVocConjugation> m_conjugations;
-    /// The comparison forms of adjectives and adverbs: fast, faster, fastest
-    KEduVocComparison m_comparison;
+    /// The comparison forms of adjectives and adverbs: (fast), faster, fastest
+    QString m_comparative;
+    QString m_superlative;
 
     KEduVocDeclination* m_declination;
 
@@ -107,7 +108,8 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
     d->m_antonym = other.d->m_antonym;
     d->m_pronunciation = other.d->m_pronunciation;
     d->m_conjugations = other.d->m_conjugations;
-    d->m_comparison = other.d->m_comparison;
+    d->m_comparative = other.d->m_comparative;
+    d->m_superlative = other.d->m_superlative;
     d->m_multipleChoice = other.d->m_multipleChoice;
     d->m_grades = other.d->m_grades;
     d->m_falseFriends = other.d->m_falseFriends;
@@ -135,7 +137,8 @@ bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) 
            d->m_pronunciation == translation.d->m_pronunciation &&
            d->m_imageUrl == translation.d->m_imageUrl &&
            d->m_soundUrl == translation.d->m_soundUrl &&
-           d->m_comparison == translation.d->m_comparison &&
+           d->m_comparative == translation.d->m_comparative &&
+           d->m_superlative == translation.d->m_superlative &&
            d->m_multipleChoice == translation.d->m_multipleChoice &&
            d->m_falseFriends == translation.d->m_falseFriends &&
            d->m_conjugations == translation.d->m_conjugations &&
@@ -157,7 +160,8 @@ KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation &
     d->m_pronunciation = translation.d->m_pronunciation;
     d->m_imageUrl = translation.d->m_imageUrl;
     d->m_soundUrl = translation.d->m_soundUrl;
-    d->m_comparison = translation.d->m_comparison;
+    d->m_comparative = translation.d->m_comparative;
+    d->m_superlative = translation.d->m_superlative;
     d->m_multipleChoice = translation.d->m_multipleChoice;
     d->m_falseFriends = translation.d->m_falseFriends;
     d->m_grades == translation.d->m_grades;
@@ -274,24 +278,6 @@ KEduVocConjugation& KEduVocTranslation::conjugation( const QString& tense )
 }
 
 
-void KEduVocTranslation::setComparison( const KEduVocComparison &con )
-{
-    d->m_comparison = con;
-}
-
-
-KEduVocComparison & KEduVocTranslation::comparison()
-{
-    return d->m_comparison;
-}
-
-
-// void KEduVocTranslation::setMultipleChoice( const QStringList &mc )
-// {
-//     d->m_multipleChoice = mc;
-// }
-
-
 QStringList & KEduVocTranslation::multipleChoice()
 {
     return d->m_multipleChoice;
@@ -380,5 +366,25 @@ void KEduVocTranslation::setWordType(KEduVocWordType * wordType)
 KEduVocExpression * KEduVocTranslation::entry()
 {
     return d->m_entry;
+}
+
+QString KEduVocTranslation::comparative() const
+{
+    return d->m_comparative;
+}
+
+void KEduVocTranslation::setComparative(const QString & comparative)
+{
+    d->m_comparative = comparative;
+}
+
+QString KEduVocTranslation::superlative() const
+{
+    return d->m_superlative;
+}
+
+void KEduVocTranslation::setSuperlative(const QString & superlative)
+{
+    d->m_superlative = superlative;
 }
 
