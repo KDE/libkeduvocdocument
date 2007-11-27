@@ -7,6 +7,7 @@ keduvocdocument.cpp
    keduvocidentifier.cpp
    keduvocexpression.cpp
    keduvoctranslation.cpp
+   keduvoccontainer.cpp
    keduvoclesson.cpp
    keduvocgrade.cpp
    keduvocgrammar.cpp

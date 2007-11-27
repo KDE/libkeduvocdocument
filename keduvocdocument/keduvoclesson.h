@@ -1,12 +1,8 @@
 /***************************************************************************
-              manage lessons
-    -----------------------------------------------------------------------
 
-    begin        : August 11, 2007
+    Copyright 2007 Jeremy Whiting <jeremywhiting@scitools.com>
+    Copyright 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
-    copyright    : (C) 2007 Jeremy Whiting <jeremywhiting@scitools.com>
-
-    -----------------------------------------------------------------------
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,45 +19,29 @@
 
 #include "libkeduvocdocument_export.h"
 
+#include "keduvoccontainer.h"
+
 #include <QtCore/QList>
 #include <QtCore/QString>
 
 class KEduVocExpression;
 
 /** class to store information about a lesson */
-class KEDUVOCDOCUMENT_EXPORT KEduVocLesson
+class KEDUVOCDOCUMENT_EXPORT KEduVocLesson :public KEduVocContainer
 {
 public:
-    enum EnumContainerType{
-        LessonContainer,
-        LeitnerContainer,
-        WordTypeContainer,
-        WordTypeNounContainer,
-        WordTypeNounMaleContainer,
-        WordTypeNounFemaleContainer,
-        WordTypeNounNeutralContainer,
-        WordTypeVerbContainer,
-        WordTypeAdjectiveContainer,
-        WordTypeAdverbContainer
-    };
-
     /** default constructor */
     explicit KEduVocLesson(const QString& name, KEduVocLesson *parent = 0);
 
-    void appendChildLesson(KEduVocLesson *child);
+//     void appendChildLesson(KEduVocLesson *child);
 
-    QList<KEduVocLesson *> childLessons();
-    KEduVocLesson *childLesson(int row);
-    /**
-     * Find a child lesson, creates a new lesson it if it does not exist!
-     * @param name 
-     * @return 
-     */
-    KEduVocLesson *childLesson(const QString& name);
-    int childLessonCount() const;
+//     QList<KEduVocLesson *> childLessons();
+//     KEduVocLesson *childLesson(int row);
 
-    int row() const;
-    KEduVocLesson *parent();
+//     int childLessonCount() const;
+
+//     int row() const;
+//     KEduVocLesson *parent();
 
     /** copy constructor for d-pointer safe copying */
     KEduVocLesson( const KEduVocLesson &other );
@@ -72,21 +52,11 @@ public:
     /** assignment operator */
     KEduVocLesson& operator= ( const KEduVocLesson& );
 
-    /** set the lesson name
-     * @param name text to set for the name
-     */
-    void setName( const QString &name );
-
-    /** get the lesson name */
-    QString name();
 
     KEduVocExpression* entry(int row);
 
     /** get a list of all entries in the lesson */
     QList < KEduVocExpression* > entries();
-
-    /** get a list of all entries in the lesson and its child lessons */
-    QList < KEduVocExpression* > entriesRecursive();
 
     /** get the number of entries in the lesson */
     int entryCount();
@@ -100,31 +70,6 @@ public:
      * @param entryid id of the entry to remove
      */
     void removeEntry(KEduVocExpression* entry);
-
-
-    void removeTranslation(int translation);
-
-    //void resetGrades()?
-
-    bool inPractice();
-    void setInPractice( bool inPractice );
-
-    /** equality operator */
-    bool operator==(const KEduVocLesson &other);
-
-
-    /**
-     * The type of this container. @see EnumContainerType
-     * @return 
-     */
-    KEduVocLesson::EnumContainerType containerType();
-
-    /**
-     * Set the type of container.
-     * For convenience by default this is taken over from the parent, so no need to set.
-     * @param type the new type
-     */
-    void setContainerType(KEduVocLesson::EnumContainerType type);
 
 private:
     class Private;

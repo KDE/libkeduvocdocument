@@ -116,6 +116,7 @@ private:
      */
     void addLesson( KEduVocLesson * l );
     void removeLesson( KEduVocLesson * l );
+
     friend class KEduVocLesson;
 };
 

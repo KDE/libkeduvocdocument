@@ -128,7 +128,7 @@ void KEduVocPaukerReader::readCard()
     }
 
     KEduVocLesson* lesson = new KEduVocLesson(i18n("Vocabulary"), m_doc->lesson());
-    m_doc->lesson()->appendChildLesson(lesson);
+    m_doc->lesson()->appendChildContainer(lesson);
 
     KEduVocExpression* expr = new KEduVocExpression( QStringList() << front << back);
     lesson->addEntry( expr );

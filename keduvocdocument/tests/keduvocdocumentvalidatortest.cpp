@@ -85,8 +85,8 @@ void KEduVocDocumentValidatorTest::testLessons()
     QString lesson3 = QString::fromLatin1( "Lesson 3" );
 
     KEduVocDocument doc;
-    doc.lesson()->appendChildLesson(new KEduVocLesson(lesson1, doc.lesson()));
-    QCOMPARE(doc.lesson()->childLessonCount(), 1);
+    doc.lesson()->appendChildContainer(new KEduVocLesson(lesson1, doc.lesson()));
+    QCOMPARE(doc.lesson()->childContainerCount(), 1);
 
     /*
     QCOMPARE(doc.lesson(indexLesson1).name(), lesson1);

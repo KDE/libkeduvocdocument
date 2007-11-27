@@ -200,7 +200,7 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
 
     if (defaultLesson->entryCount() > 0)
     {
-        m_doc->lesson()->appendChildLesson(defaultLesson);
+        m_doc->lesson()->appendChildContainer(defaultLesson);
     } else {
         delete defaultLesson;
     }
@@ -423,7 +423,7 @@ bool KEduVocKvtml2Reader::readLesson( KEduVocLesson* parentLesson, QDomElement &
     //<name>Lesson name</name>
     QDomElement currentElement = lessonElement.firstChildElement( KVTML_NAME );
     KEduVocLesson * lesson = new KEduVocLesson(currentElement.text(), parentLesson);
-    parentLesson->appendChildLesson( lesson );
+    parentLesson->appendChildContainer( lesson );
 
     readChildLessons( lesson, lessonElement );
 
@@ -528,7 +528,7 @@ bool KEduVocKvtml2Reader::readWordType( KEduVocLesson* parentContainer, QDomElem
         typeElement.firstChildElement( KVTML_NAME ).text();
 
     KEduVocLesson * wordTypeContainer = new KEduVocLesson(typeName, parentContainer);
-    parentContainer->appendChildLesson(wordTypeContainer);
+    parentContainer->appendChildContainer(wordTypeContainer);
 
     QString specialType = typeElement.firstChildElement( KVTML_SPECIALWORDTYPE ).text();
     if ( !specialType.isEmpty() ) {

@@ -169,8 +169,8 @@ bool KEduVocKvtml2Writer::writeLessons( KEduVocLesson *parentLesson, QDomElement
 {
     // iterate over child lessons.
     // the first time this is called with the root lesson which does not have a <lesson> entry.
-    for( int i = 0; i < parentLesson->childLessonCount(); i++ ) {
-        KEduVocLesson *lesson = parentLesson->childLesson(i);
+    for( int i = 0; i < parentLesson->childContainerCount(); i++ ) {
+        KEduVocLesson *lesson = static_cast<KEduVocLesson*>(parentLesson->childContainer(i));
         // make lesson element
         QDomElement thisLessonElement = m_domDoc.createElement( KVTML_CONTAINER );
 
@@ -267,7 +267,9 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
 
 bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocLesson* parentContainer )
 {
-    foreach( KEduVocLesson* wordType, parentContainer->childLessons() ) {
+    foreach( KEduVocContainer* container, parentContainer->childContainers() ) {
+        KEduVocLesson* wordType = static_cast<KEduVocLesson*>(container);
+
         kDebug() << "Writing type: " << wordType->name();
 
         QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_CONTAINER );

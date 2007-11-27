@@ -56,7 +56,7 @@ bool KEduVocCsvReader::readDoc( KEduVocDocument *doc )
     int languageCount = 0;
 
     KEduVocLesson* lesson = new KEduVocLesson( i18n("Vocabulary"), m_doc->lesson());
-    m_doc->lesson()->appendChildLesson(lesson);
+    m_doc->lesson()->appendChildContainer(lesson);
 
     while ( !inputStream.atEnd() ) {
         QString s = inputStream.readLine();
