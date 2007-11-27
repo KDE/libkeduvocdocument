@@ -56,13 +56,6 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
     writeIdentifiers( currentElement );
     domElementKvtml.appendChild( currentElement );
 
-    // types
-    currentElement = m_domDoc.createElement( KVTML_WORDTYPEDEFINITIONS );
-    writeTypes( currentElement, m_doc->wordTypeContainer() );
-    if ( currentElement.hasChildNodes() ) {
-        domElementKvtml.appendChild( currentElement );
-    }
-
     // tenses
     currentElement = m_domDoc.createElement( KVTML_TENSES );
     writeTenses( currentElement );
@@ -83,6 +76,13 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
     writeLessons( m_doc->lesson(), currentElement );
     if ( currentElement.hasChildNodes() ) {
         domElementKvtml.appendChild( currentElement );
+    }
+
+    // types
+    currentElement = m_domDoc.createElement( KVTML_WORDTYPES );
+    writeWordTypes( currentElement, m_doc->wordTypeContainer() );
+    if ( currentElement.hasChildNodes() ) {
+        domElementKvtml.appendChild( m_wordTypeElement );
     }
 
     m_domDoc.appendChild( domElementKvtml );
@@ -172,14 +172,14 @@ bool KEduVocKvtml2Writer::writeLessons( KEduVocLesson *parentLesson, QDomElement
     for( int i = 0; i < parentLesson->childLessonCount(); i++ ) {
         KEduVocLesson *lesson = parentLesson->childLesson(i);
         // make lesson element
-        QDomElement thisLessonElement = m_domDoc.createElement( KVTML_LESSON );
+        QDomElement thisLessonElement = m_domDoc.createElement( KVTML_CONTAINER );
 
         // add a name
         thisLessonElement.appendChild( newTextElement( KVTML_NAME, lesson->name() ) );
 
         // add a inquery tag
         if ( lesson->inPractice() ) {
-            thisLessonElement.appendChild( newTextElement( KVTML_QUERY, KVTML_TRUE ) );
+            thisLessonElement.appendChild( newTextElement( KVTML_INPRACTICE, KVTML_TRUE ) );
         }
 
         // child lessons
@@ -187,7 +187,9 @@ bool KEduVocKvtml2Writer::writeLessons( KEduVocLesson *parentLesson, QDomElement
 
         // child entries
         foreach(KEduVocExpression *entry, lesson->entries()) {
-            thisLessonElement.appendChild( newTextElement( KVTML_ENTRYID, QString::number( m_allEntries.indexOf(entry) ) ) );
+            QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
+            entryElement.setAttribute( KVTML_ID, QString::number(m_allEntries.indexOf(entry)) );
+            thisLessonElement.appendChild(entryElement);
         }
         lessonsElement.appendChild( thisLessonElement );
     }
@@ -262,13 +264,14 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
     return true;
 }
 
-bool KEduVocKvtml2Writer::writeTypes( QDomElement &typesElement, KEduVocLesson* parentContainer )
+
+bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocLesson* parentContainer )
 {
     foreach( KEduVocLesson* wordType, parentContainer->childLessons() ) {
         kDebug() << "Writing type: " << wordType->name();
 
-        QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_WORDTYPEDEFINITION );
-        typeDefinitionElement.appendChild( newTextElement( KVTML_TYPENAME, wordType->name() ) );
+        QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_CONTAINER );
+        typeDefinitionElement.appendChild( newTextElement( KVTML_NAME, wordType->name() ) );
 
         switch (wordType->containerType()) {
         case KEduVocLesson::WordTypeNounContainer:
@@ -297,7 +300,29 @@ bool KEduVocKvtml2Writer::writeTypes( QDomElement &typesElement, KEduVocLesson* 
             break;
         }
 
-        writeTypes( typeDefinitionElement, wordType );
+
+// child entries
+
+        // child entries
+        foreach(KEduVocExpression *entry, wordType->entries()) {
+            QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
+            entryElement.setAttribute( KVTML_ID, QString::number(m_allEntries.indexOf(entry)) );
+
+            for(int translation = 0; translation<m_doc->identifierCount(); translation++) {
+                if (entry->translation(translation)->wordType()== wordType) {
+                    // create <element id="123">
+                    entryElement.setAttribute( KVTML_ID, QString::number(translation) );
+                    // create <translation id="123">
+                    QDomElement translationElement = m_domDoc.createElement( KVTML_TRANSLATION );
+                    translationElement.setAttribute( KVTML_ID, QString::number(translation) );
+                    // append both
+                    entryElement.appendChild(translationElement);
+                }
+            }
+            typeDefinitionElement.appendChild( entryElement );
+        }
+
+        writeWordTypes( typeDefinitionElement, wordType );
 
         typesElement.appendChild( typeDefinitionElement );
     }
@@ -331,7 +356,7 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
         entryElement.setAttribute( KVTML_ID, QString::number( i ) );
 
         // write inactive
-        entryElement.appendChild( newTextElement( KVTML_INACTIVE, thisEntry->isActive() ? KVTML_FALSE : KVTML_TRUE ) );
+        entryElement.appendChild( newTextElement( KVTML_DEACTIVATED, thisEntry->isActive() ? KVTML_FALSE : KVTML_TRUE ) );
 
         // loop through translations
         foreach( int trans, thisEntry->translationIndices() ) {
@@ -347,19 +372,12 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
     return true;
 }
 
+
 bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEduVocTranslation* translation )
 {
     // <text>Kniebeugen</text>
     translationElement.appendChild( newTextElement( KVTML_TEXT, translation->text() ) );
 kDebug() << "write tranlation:" << translation->text();
-    // <wordtype></wordtype>
-    if ( translation->wordType() ) {
-kDebug() << "word type" << translation->wordType()->name();
-        QDomElement wordTypeElement = m_domDoc.createElement( KVTML_WORDTYPE );
-        translationElement.appendChild( wordTypeElement );
-        //<typename>noun</typename>
-        wordTypeElement.appendChild( newTextElement( KVTML_TYPENAME, translation->wordType()->name() ) );
-    }
 
     // <comment></comment>
     if ( !translation->comment().isEmpty() ) {
@@ -624,3 +642,4 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
     }
     return true;
 }
+

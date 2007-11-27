@@ -85,10 +85,21 @@ private:
     bool readConjugation( QDomElement &conjugElement, KEduVocConjugation &conjugation );
     bool readConjugationPerson( QDomElement &personElement, KEduVocConjugation &conjugation, KEduVocConjugation::ConjugationNumber number );
 
-    /** read the types
-     * @param typesElement QDomElement for the types group
+    /**
+     * Read an individual word type
+     * @param parentContainer 
+     * @param typesElement 
+     * @return 
      */
-    bool readWordTypes( QDomElement &typesElement );
+    bool readWordType( KEduVocLesson* parentContainer, QDomElement &typesElement );
+
+    /**
+     * Read all <container> tags within a word type definition.
+     * @param parentContainer 
+     * @param lessonElement 
+     * @return 
+     */
+    bool readChildWordTypes( KEduVocLesson* parentContainer, QDomElement &lessonElement );
 
     /** read the tenses
      * @param tensesElement QDomElement for the tenses group

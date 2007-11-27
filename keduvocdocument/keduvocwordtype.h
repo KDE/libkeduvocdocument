@@ -139,6 +139,8 @@ public:
     QString specialTypeAdjective() const;
     QString specialTypeAdverb() const;
 
+    void clear();
+
 private:
     QString mainTypeName( int index ) const;
     int mainTypeIndex( const QString& name ) const;

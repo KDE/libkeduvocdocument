@@ -122,6 +122,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
 
     m_tenseDescriptions.clear();
     m_identifiers.clear();
+    m_wordTypes.clear();
     m_extraSizeHints.clear();
     m_sizeHints.clear();
     m_dirty = false;
@@ -134,6 +135,9 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_version = "";
     m_generator = "";
     m_csvDelimiter = QString( '\t' );
+    m_usages.clear();
+    m_license.clear();
+    m_category.clear();
 }
 
 

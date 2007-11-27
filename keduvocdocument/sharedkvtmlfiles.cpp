@@ -91,6 +91,7 @@ void SharedKvtmlFilesPrivate::rescan()
 
     KEduVocDocument *doc = new KEduVocDocument();
     for ( int i = 0; i < this->m_fileList.size(); ++i ) {
+
         // open the file
         doc->open( KUrl::fromPath( this->m_fileList[i] ) );
 
@@ -100,7 +101,6 @@ void SharedKvtmlFilesPrivate::rescan()
         // add it's comment to the comment list
         this->m_commentList.append( doc->documentComment() );
     }
-    // plug a memory leak
     delete doc;
 }
 
@@ -167,7 +167,7 @@ void SharedKvtmlFiles::sortDownloadedFiles()
         doc.open( fileUrl );
 
         if (doc.identifierCount() == 1) {
-            QString locale = doc.identifier( 0 ).name();
+            QString locale = doc.identifier( 0 ).locale();
 
             // make sure the locale sub-folder exists
             KUrl pathUrl( fileUrl );

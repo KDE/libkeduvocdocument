@@ -1,4 +1,4 @@
-﻿<!ELEMENT kvtml         (information, identifiers, wordtypedefinitions?, usages?, entries, tenses?, lessons?)     >
+<!ELEMENT kvtml         (information, identifiers, wordtypedefinitions?, usages?, entries, tenses?, lessons?)     >
 <!ATTLIST kvtml version    CDATA  #REQUIRED>
 
 <!ELEMENT information    (generator?, title, author?, license?, comment?, category?) >
@@ -31,34 +31,31 @@
 <!ELEMENT secondperson   (#PCDATA) >
 <!ELEMENT thirdperson    (common|(male, female, neutral)) >
 
-<!ELEMENT wordtypedefinitions (wordtypedefinition*) >
-<!ELEMENT wordtypedefinition (typename, specialwordtype?, subwordtypedefinition*) >
-<!ELEMENT subwordtypedefinition (subtypename, specialwordtype?) >
-<!ELEMENT specialwordtype    (#PCDATA) >
-<!ELEMENT subtypename        (#PCDATA) >
-<!ELEMENT typename           (#PCDATA) >
-
 <!ELEMENT tenses         (tense*) >
 <!ELEMENT tense          (#PCDATA) >
 
 <!ELEMENT usages         (usage*) >
 <!ELEMENT usage          (#PCDATA) >
 
-<!ELEMENT lessons        (lesson*) >
-<!ELEMENT lesson         (name, query?, current?, entryid*) >
-<!ELEMENT query          (#PCDATA) >
-<!ELEMENT current        (#PCDATA) >
-<!ELEMENT entryid        (#PCDATA) >
+<!ELEMENT lessons        (container*) >
+<!ELEMENT wordtypes      (container*) >
+<!ELEMENT leitnerboxes   (container*) >
+
+<!ELEMENT container      (name, containertype?, inPractice?, image?, containerentry*) >
+<!ELEMENT containertype  (lesson|leitnerbox|wordtype|wordtype-noun|wordtype-noun-male|wordtype-noun-female|wordtype-noun-neutral|wordtype-verb|wordtype-adjective|wordtype-adverb) >
+<!ELEMENT inPractice                (#PCDATA) >
+<!ELEMENT containerentry            (containertranslation*) >
+<!ATTLIST containerentry id         CDATA  #REQUIRED>
+<!ELEMENT containertranslation>
+<!ATTLIST containertranslation id   CDATA  #REQUIRED>
 
 <!ELEMENT entries        (entry*) >
-<!ELEMENT entry          (inactive?, inquery?, sizehint?, translation*) >
+<!ELEMENT entry          (inactive?, sizehint?, translation*) >
 <!ATTLIST entry id       CDATA  #REQUIRED>
 <!ELEMENT inactive       (#PCDATA) >
-<!ELEMENT inquery        (#PCDATA) >
 
-<!ELEMENT translation    (text, wordtype?, inquery?, comment?, pronunciation?, falsefriend?, antonym?, synonym?, example?, usage*, paraphrase?, comparison?, conjugation*, grade?, image?, multiplechoice?, sound?) >
+<!ELEMENT translation    (text, inquery?, comment?, pronunciation?, falsefriend?, antonym?, synonym?, example?, usage*, paraphrase?, comparison?, conjugation*, grade?, image?, multiplechoice?, sound?) >
 <!ATTLIST translation id  CDATA #REQUIRED >
-<!ELEMENT wordtype       (typename?|(typename, subtypename?)) >
 <!ELEMENT text           (#PCDATA) >
 <!ELEMENT pronunciation  (#PCDATA) >
 <!ELEMENT falsefriend    (#PCDATA) >
