@@ -68,7 +68,7 @@ public:
     /** write types
      * @param typesElement QDomElement types to write to
      */
-    bool writeTypes( QDomElement &typesElement );
+    bool writeWordTypes( QDomElement &typesElement );
 
     /** write tenses
      * @param tensesElement QDomElement tenses to write to
@@ -115,6 +115,8 @@ private:
 
     QFile *m_outputFile;
     KEduVocDocument *m_doc;
+
+    QDomElement m_wordTypeElement;
 
     QDomDocument m_domDoc;
 };

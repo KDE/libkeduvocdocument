@@ -67,24 +67,28 @@
 #define KVTML_THIRD_PERSON_NEUTRAL_EXISTS "neutralexists"
 #define KVTML_DUAL_EXISTS        "dualexists"
 
-// word types
-#define KVTML_WORDTYPEDEFINITIONS   "wordtypedefinitions"
-#define KVTML_WORDTYPEDEFINITION    "wordtypedefinition"
-#define KVTML_SUBWORDTYPEDEFINITION   "subwordtypedefinition"
+// word types, lessons and leitner boxes are vocabulary containers.
+// each is allowed to have as many child containers as desired.
+// for KDE 4.0 Parley will only allow a depth of wordtype cildren of two,
+// leitner is not implemented at all.
+// it is assumed that one container only has children of the same type.
+// containers may have an image associated to represent them visually.
+#define KVTML_WORDTYPES         "wordtypes"
+#define KVTML_LESSONS           "lessons"
+#define KVTML_LEITNERBOXES      "leitnerboxes"
+#define KVTML_CONTAINER         "container"
+#define KVTML_INPRACTICE        "inpractice"
 
-#define KVTML_WORDTYPE              "wordtype"
-#define KVTML_TYPENAME              "typename"
-#define KVTML_SUBTYPENAME           "subtypename"
-
-// these are necessary to enable practices based on word types. users can give types arbitrary names, but these few are hardcoded.
+// these are necessary to enable practices based on word types. users can give types arbitrary names, but these few are hardcoded. special container types
 #define KVTML_SPECIALWORDTYPE       "specialwordtype"
 #define KVTML_SPECIALWORDTYPE_NOUN        "noun"
-#define KVTML_SPECIALWORDTYPE_NOUN_MALE   "male"
-#define KVTML_SPECIALWORDTYPE_NOUN_FEMALE "female"
-#define KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL "neutral"
+#define KVTML_SPECIALWORDTYPE_NOUN_MALE   "noun/male"
+#define KVTML_SPECIALWORDTYPE_NOUN_FEMALE "noun/female"
+#define KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL "noun/neutral"
 #define KVTML_SPECIALWORDTYPE_VERB        "verb"
 #define KVTML_SPECIALWORDTYPE_ADJECTIVE   "adjective"
 #define KVTML_SPECIALWORDTYPE_ADVERB      "adverb"
+
 
 #define KVTML_TENSES            "tenses"
 #define KVTML_TENSE             "tense"
@@ -92,16 +96,11 @@
 #define KVTML_USAGES            "usages"
 #define KVTML_USAGE             "usage"
 
-#define KVTML_LESSONS           "lessons"
-#define KVTML_LESSON            "lesson"
-#define KVTML_QUERY             "query"
 #define KVTML_CURRENT           "current"
-#define KVTML_ENTRYID           "entryid"
 
 #define KVTML_ENTRIES           "entries"
 #define KVTML_ENTRY             "entry"
-#define KVTML_INACTIVE          "inactive"
-#define KVTML_INQUERY           "inquery"
+#define KVTML_DEACTIVATED       "deactivated"
 
 #define KVTML_TRANSLATION       "translation"
 #define KVTML_TEXT              "text"

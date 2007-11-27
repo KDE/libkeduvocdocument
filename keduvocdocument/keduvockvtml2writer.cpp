@@ -56,13 +56,6 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
     writeIdentifiers( currentElement );
     domElementKvtml.appendChild( currentElement );
 
-    // types
-    currentElement = m_domDoc.createElement( KVTML_WORDTYPEDEFINITIONS );
-    writeTypes( currentElement );
-    if ( currentElement.hasChildNodes() ) {
-        domElementKvtml.appendChild( currentElement );
-    }
-
     // tenses
     currentElement = m_domDoc.createElement( KVTML_TENSES );
     writeTenses( currentElement );
@@ -90,6 +83,13 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
     writeLessons( currentElement );
     if ( currentElement.hasChildNodes() ) {
         domElementKvtml.appendChild( currentElement );
+    }
+
+    // types
+    m_wordTypeElement = m_domDoc.createElement( KVTML_WORDTYPES );
+    writeWordTypes( m_wordTypeElement );
+    if ( m_wordTypeElement.hasChildNodes() ) {
+        domElementKvtml.appendChild( m_wordTypeElement );
     }
 
     m_domDoc.appendChild( domElementKvtml );
@@ -176,14 +176,14 @@ bool KEduVocKvtml2Writer::writeLessons( QDomElement &lessonsElement )
 {
     for( int lessonId = 0; lessonId < m_doc->lessonCount(); lessonId++ ) {
         // make lesson element
-        QDomElement thisLessonElement = m_domDoc.createElement( KVTML_LESSON );
+        QDomElement thisLessonElement = m_domDoc.createElement( KVTML_CONTAINER );
 
         // add a name
         thisLessonElement.appendChild( newTextElement( KVTML_NAME, m_doc->lesson(lessonId).name() ) );
 
         // add a inquery tag
         if ( m_doc->lesson(lessonId).inPractice() ) {
-            thisLessonElement.appendChild( newTextElement( KVTML_QUERY, KVTML_TRUE ) );
+            thisLessonElement.appendChild( newTextElement( KVTML_INPRACTICE, KVTML_TRUE ) );
         }
 
         // add a current tag
@@ -191,10 +191,11 @@ bool KEduVocKvtml2Writer::writeLessons( QDomElement &lessonsElement )
             thisLessonElement.appendChild( newTextElement( KVTML_CURRENT, KVTML_TRUE ) );
         }
 
-        // TODO: add the entryids...
         for ( int i = 0; i < m_doc->entryCount(); ++i ) {
-            if ( m_doc->entry( i )->lesson() == lessonId ) {
-                thisLessonElement.appendChild( newTextElement( KVTML_ENTRYID, QString::number( i ) ) );
+            if ( m_doc->entry(i)->lesson() == lessonId ) {
+                QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
+                entryElement.setAttribute( KVTML_ID, QString::number( i ) );
+                thisLessonElement.appendChild(entryElement);
             }
         }
 
@@ -264,13 +265,13 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
     return true;
 }
 
-bool KEduVocKvtml2Writer::writeTypes( QDomElement &typesElement )
+bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement )
 {
     KEduVocWordType wt = m_doc->wordTypes();
     foreach( QString mainTypeName, wt.typeNameList() ) {
         kDebug() << "Writing type: " << mainTypeName;
-        QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_WORDTYPEDEFINITION );
-        typeDefinitionElement.appendChild( newTextElement( KVTML_TYPENAME, mainTypeName ) );
+        QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_CONTAINER );
+        typeDefinitionElement.appendChild( newTextElement( KVTML_NAME, mainTypeName ) );
 
         QString specialType = wt.specialType( mainTypeName );
         if ( !specialType.isEmpty() ) {
@@ -290,10 +291,34 @@ bool KEduVocKvtml2Writer::writeTypes( QDomElement &typesElement )
             typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, specialType ) );
         }
 
+        // go through the entries - this is pretty inefficient but will change when the
+        // container class is used for word types.
+        for(int i = 0; i<m_doc->entryCount(); i++) {
+            QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
+            for(int translation = 0; translation<m_doc->identifierCount(); translation++) {
+                // if it has a subtype, add there
+                if(m_doc->entry(i)->translation(translation).subType().isEmpty()) {
+                    if (m_doc->entry(i)->translation(translation).type()== mainTypeName) {
+                        // create <element id="123">
+                        entryElement.setAttribute( KVTML_ID, QString::number( i ) );
+                        // create <translation id="123">
+                        QDomElement translationElement = m_domDoc.createElement( KVTML_TRANSLATION );
+                        translationElement.setAttribute( KVTML_ID, QString::number(translation) );
+                        // append both
+                        entryElement.appendChild(translationElement);
+                    }
+                }
+            }
+            if (entryElement.hasChildNodes()) {
+                typeDefinitionElement.appendChild(entryElement);
+            }
+        }
+
+
         // subtypes
         foreach( QString subTypeName, wt.subTypeNameList( mainTypeName ) ) {
-            QDomElement subTypeDefinitionElement = m_domDoc.createElement( KVTML_SUBWORDTYPEDEFINITION );
-            subTypeDefinitionElement.appendChild( newTextElement( KVTML_SUBTYPENAME, subTypeName ) );
+            QDomElement subTypeDefinitionElement = m_domDoc.createElement( KVTML_CONTAINER );
+            subTypeDefinitionElement.appendChild( newTextElement( KVTML_NAME, subTypeName ) );
             QString specialSubType = wt.specialSubType( mainTypeName, subTypeName );
             if ( !specialSubType.isEmpty() ) {
                 if ( specialSubType == m_doc->wordTypes().specialTypeNounMale() ) {
@@ -308,6 +333,29 @@ bool KEduVocKvtml2Writer::writeTypes( QDomElement &typesElement )
                 subTypeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, specialSubType ) );
             }
             typeDefinitionElement.appendChild( subTypeDefinitionElement );
+
+            // go through the entries - this is pretty inefficient but will change when the
+            // container class is used for word types.
+            for(int i = 0; i<m_doc->entryCount(); i++) {
+                QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
+                for(int translation = 0; translation<m_doc->identifierCount(); translation++) {
+                    // if it has a subtype, add there
+                    if(m_doc->entry(i)->translation(translation).subType() == subTypeName) {
+                        if (m_doc->entry(i)->translation(translation).type()== mainTypeName) {
+                            // create <element id="123">
+                            entryElement.setAttribute( KVTML_ID, QString::number( i ) );
+                            // create <translation id="123">
+                            QDomElement translationElement = m_domDoc.createElement( KVTML_TRANSLATION );
+                            translationElement.setAttribute( KVTML_ID, QString::number(translation) );
+                            // append both
+                            entryElement.appendChild(translationElement);
+                        }
+                    }
+                }
+                if (entryElement.hasChildNodes()) {
+                    subTypeDefinitionElement.appendChild(entryElement);
+                }
+            }
         }
         typesElement.appendChild( typeDefinitionElement );
     }
@@ -349,7 +397,7 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
         entryElement.setAttribute( KVTML_ID, QString::number( i ) );
 
         // write inactive
-        entryElement.appendChild( newTextElement( KVTML_INACTIVE, thisEntry->isActive() ? KVTML_FALSE : KVTML_TRUE ) );
+        entryElement.appendChild( newTextElement( KVTML_DEACTIVATED, thisEntry->isActive() ? KVTML_FALSE : KVTML_TRUE ) );
 
 // kvtml 1 relic no longer used
 //         // write inquery
@@ -374,22 +422,11 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
     return true;
 }
 
+
 bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEduVocTranslation &translation )
 {
     // <text>Kniebeugen</text>
     translationElement.appendChild( newTextElement( KVTML_TEXT, translation.text() ) );
-
-    // <wordtype></wordtype>
-    if ( !translation.type().isEmpty() ) {
-        QDomElement wordTypeElement = m_domDoc.createElement( KVTML_WORDTYPE );
-        translationElement.appendChild( wordTypeElement );
-        //<typename>noun</typename>
-        wordTypeElement.appendChild( newTextElement( KVTML_TYPENAME, translation.type() ) );
-        // <subwordtype>male</subwordtype>
-        if ( !translation.subType().isEmpty() ) {
-            wordTypeElement.appendChild( newTextElement( KVTML_SUBTYPENAME, translation.subType() ) );
-        }
-    }
 
     // <comment></comment>
     if ( !translation.comment().isEmpty() ) {
@@ -656,3 +693,4 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
     }
     return true;
 }
+
