@@ -140,7 +140,9 @@ int KEduVocLesson::entryCount()
 void KEduVocLesson::addEntry(KEduVocExpression* entry)
 {
     d->m_entries.append( entry );
-    entry->addLesson(this);
+    if(d->m_type == LessonContainer) {
+        entry->addLesson(this);
+    }
 }
 
 void KEduVocLesson::removeEntry(KEduVocExpression* entry)
@@ -206,7 +208,10 @@ KEduVocLesson * KEduVocLesson::childLesson(const QString & name)
             return d->m_childLessons[i];
         }
     }
-    return 0;
+
+    KEduVocLesson* newLesson = new KEduVocLesson(name, this);
+    appendChildLesson(newLesson);
+    return newLesson;
 }
 
 void KEduVocLesson::setContainerType(KEduVocLesson::EnumContainerType type)

@@ -52,6 +52,11 @@ public:
 
     QList<KEduVocLesson *> childLessons();
     KEduVocLesson *childLesson(int row);
+    /**
+     * Find a child lesson, creates a new lesson it if it does not exist!
+     * @param name 
+     * @return 
+     */
     KEduVocLesson *childLesson(const QString& name);
     int childLessonCount() const;
 

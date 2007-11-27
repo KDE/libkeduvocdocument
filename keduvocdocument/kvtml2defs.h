@@ -70,18 +70,16 @@
 // word types
 #define KVTML_WORDTYPEDEFINITIONS   "wordtypedefinitions"
 #define KVTML_WORDTYPEDEFINITION    "wordtypedefinition"
-#define KVTML_SUBWORDTYPEDEFINITION   "subwordtypedefinition"
 
 #define KVTML_WORDTYPE              "wordtype"
 #define KVTML_TYPENAME              "typename"
-#define KVTML_SUBTYPENAME           "subtypename"
 
 // these are necessary to enable practices based on word types. users can give types arbitrary names, but these few are hardcoded.
 #define KVTML_SPECIALWORDTYPE       "specialwordtype"
 #define KVTML_SPECIALWORDTYPE_NOUN        "noun"
-#define KVTML_SPECIALWORDTYPE_NOUN_MALE   "male"
-#define KVTML_SPECIALWORDTYPE_NOUN_FEMALE "female"
-#define KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL "neutral"
+#define KVTML_SPECIALWORDTYPE_NOUN_MALE   "noun/male"
+#define KVTML_SPECIALWORDTYPE_NOUN_FEMALE "noun/female"
+#define KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL "noun/neutral"
 #define KVTML_SPECIALWORDTYPE_VERB        "verb"
 #define KVTML_SPECIALWORDTYPE_ADJECTIVE   "adjective"
 #define KVTML_SPECIALWORDTYPE_ADVERB      "adverb"

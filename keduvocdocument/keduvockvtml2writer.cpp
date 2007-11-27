@@ -58,7 +58,7 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
 
     // types
     currentElement = m_domDoc.createElement( KVTML_WORDTYPEDEFINITIONS );
-    writeTypes( currentElement );
+    writeTypes( currentElement, m_doc->wordTypeContainer() );
     if ( currentElement.hasChildNodes() ) {
         domElementKvtml.appendChild( currentElement );
     }
@@ -262,51 +262,43 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
     return true;
 }
 
-bool KEduVocKvtml2Writer::writeTypes( QDomElement &typesElement )
+bool KEduVocKvtml2Writer::writeTypes( QDomElement &typesElement, KEduVocLesson* parentContainer )
 {
-    KEduVocWordType wt = m_doc->wordTypes();
-    foreach( QString mainTypeName, wt.typeNameList() ) {
-        kDebug() << "Writing type: " << mainTypeName;
+    foreach( KEduVocLesson* wordType, parentContainer->childLessons() ) {
+        kDebug() << "Writing type: " << wordType->name();
+
         QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_WORDTYPEDEFINITION );
-        typeDefinitionElement.appendChild( newTextElement( KVTML_TYPENAME, mainTypeName ) );
+        typeDefinitionElement.appendChild( newTextElement( KVTML_TYPENAME, wordType->name() ) );
 
-        QString specialType = wt.specialType( mainTypeName );
-        if ( !specialType.isEmpty() ) {
-            // get the NOT localized version for the doc
-            if ( specialType == m_doc->wordTypes().specialTypeNoun() ) {
-                specialType = KVTML_SPECIALWORDTYPE_NOUN;
-            }
-            if ( specialType == m_doc->wordTypes().specialTypeVerb()) {
-                specialType =  KVTML_SPECIALWORDTYPE_VERB;
-            }
-            if ( specialType == m_doc->wordTypes().specialTypeAdverb()) {
-                specialType = KVTML_SPECIALWORDTYPE_ADVERB;
-            }
-            if ( specialType ==  m_doc->wordTypes().specialTypeAdjective()) {
-                specialType = KVTML_SPECIALWORDTYPE_ADJECTIVE;
-            }
-            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, specialType ) );
+        switch (wordType->containerType()) {
+        case KEduVocLesson::WordTypeNounContainer:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN ) );
+            break;
+        case KEduVocLesson::WordTypeNounMaleContainer:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_MALE ) );
+            break;
+        case KEduVocLesson::WordTypeNounFemaleContainer:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_FEMALE ) );
+            break;
+        case KEduVocLesson::WordTypeNounNeutralContainer:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) );
+            break;
+        case KEduVocLesson::WordTypeVerbContainer:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_VERB ) );
+            break;
+        case KEduVocLesson::WordTypeAdjectiveContainer:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_ADJECTIVE ) );
+            break;
+        case KEduVocLesson::WordTypeAdverbContainer:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_ADVERB ) );
+            break;
+        default:
+            // no special type, no tag
+            break;
         }
 
-        // subtypes
-        foreach( QString subTypeName, wt.subTypeNameList( mainTypeName ) ) {
-            QDomElement subTypeDefinitionElement = m_domDoc.createElement( KVTML_SUBWORDTYPEDEFINITION );
-            subTypeDefinitionElement.appendChild( newTextElement( KVTML_SUBTYPENAME, subTypeName ) );
-            QString specialSubType = wt.specialSubType( mainTypeName, subTypeName );
-            if ( !specialSubType.isEmpty() ) {
-                if ( specialSubType == m_doc->wordTypes().specialTypeNounMale() ) {
-                    specialSubType = KVTML_SPECIALWORDTYPE_NOUN_MALE;
-                }
-                if ( specialSubType == m_doc->wordTypes().specialTypeNounFemale() ) {
-                    specialSubType = KVTML_SPECIALWORDTYPE_NOUN_FEMALE;
-                }
-                if ( specialSubType == m_doc->wordTypes().specialTypeNounNeutral() ) {
-                    specialSubType = KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL;
-                }
-                subTypeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, specialSubType ) );
-            }
-            typeDefinitionElement.appendChild( subTypeDefinitionElement );
-        }
+        writeTypes( typeDefinitionElement, wordType );
+
         typesElement.appendChild( typeDefinitionElement );
     }
     return true;
@@ -359,22 +351,14 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
 {
     // <text>Kniebeugen</text>
     translationElement.appendChild( newTextElement( KVTML_TEXT, translation->text() ) );
-
+kDebug() << "write tranlation:" << translation->text();
     // <wordtype></wordtype>
     if ( translation->wordType() ) {
+kDebug() << "word type" << translation->wordType()->name();
         QDomElement wordTypeElement = m_domDoc.createElement( KVTML_WORDTYPE );
         translationElement.appendChild( wordTypeElement );
         //<typename>noun</typename>
-
-        if(translation->wordType()->parent() == m_doc->wordTypeContainer()) {
-            wordTypeElement.appendChild( newTextElement( KVTML_TYPENAME, translation->wordType()->name() ) );
-        } else {
-            if(translation->wordType()->parent()->parent() == m_doc->wordTypeContainer()) {
-                wordTypeElement.appendChild( newTextElement( KVTML_TYPENAME, translation->wordType()->parent()->name() ) );
-            // <subwordtype>male</subwordtype>
-                wordTypeElement.appendChild( newTextElement( KVTML_SUBTYPENAME, translation->wordType()->name() ) );
-            }
-        }
+        wordTypeElement.appendChild( newTextElement( KVTML_TYPENAME, translation->wordType()->name() ) );
     }
 
     // <comment></comment>
