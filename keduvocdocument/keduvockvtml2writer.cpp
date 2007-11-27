@@ -396,12 +396,10 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
         // add id
         entryElement.setAttribute( KVTML_ID, QString::number( i ) );
 
-        // write inactive
-        entryElement.appendChild( newTextElement( KVTML_DEACTIVATED, thisEntry->isActive() ? KVTML_FALSE : KVTML_TRUE ) );
-
-// kvtml 1 relic no longer used
-//         // write inquery
-//         entryElement.appendChild( newTextElement( KVTML_INQUERY, thisEntry->isInQuery() ? KVTML_TRUE : KVTML_FALSE ) );
+        // write deactivated
+        if(!thisEntry->isActive()) {
+            entryElement.appendChild( newTextElement( KVTML_DEACTIVATED, KVTML_TRUE ) );
+        }
 
         // write sizehint
         if ( thisEntry->sizeHint() > 0 ) {
