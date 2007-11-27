@@ -22,7 +22,7 @@
 
 #include "keduvocgrade.h"
 #include "keduvocdeclination.h"
-#include "keduvoclesson.h"
+#include "keduvocwordtype.h"
 
 class KEduVocTranslation::KEduVocTranslationPrivate
 {
@@ -35,7 +35,7 @@ public:
     QString m_translation;
 
     /// Type of a word noun, verb, adjective etc
-    KEduVocLesson* m_wordType;
+    KEduVocWordType* m_wordType;
 
     /// A comment giving additional information.
     QString m_comment;
@@ -97,7 +97,6 @@ KEduVocTranslation::KEduVocTranslation(KEduVocExpression* entry, const QString &
 
 KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( new KEduVocTranslationPrivate(other.d->m_entry) )
 {
-//     d->m_entry = other.d->m_entry;
     d->m_translation = other.d->m_translation;
     d->m_wordType = other.d->m_wordType;
     d->m_usages = other.d->m_usages;
@@ -362,19 +361,24 @@ void KEduVocTranslation::setImageUrl(const KUrl &url)
     d->m_imageUrl = url;
 }
 
-KEduVocLesson * KEduVocTranslation::wordType() const
+KEduVocWordType * KEduVocTranslation::wordType() const
 {
     return d->m_wordType;
 }
 
-void KEduVocTranslation::setWordType(KEduVocLesson * wordType)
+void KEduVocTranslation::setWordType(KEduVocWordType * wordType)
 {
     if ( d->m_wordType ) {
-        d->m_wordType->removeEntry(d->m_entry);
+        d->m_wordType->removeTranslation(this);
     }
     if ( wordType ) {
-        wordType->addEntry(d->m_entry);
+        wordType->addTranslation(this);
         d->m_wordType = wordType;
     }
+}
+
+KEduVocExpression * KEduVocTranslation::entry()
+{
+    return d->m_entry;
 }
 

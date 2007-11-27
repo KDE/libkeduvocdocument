@@ -265,10 +265,10 @@ bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article
 }
 
 
-bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocLesson* parentContainer )
+bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocWordType* parentContainer )
 {
     foreach( KEduVocContainer* container, parentContainer->childContainers() ) {
-        KEduVocLesson* wordType = static_cast<KEduVocLesson*>(container);
+        KEduVocWordType* wordType = static_cast<KEduVocWordType*>(container);
 
         kDebug() << "Writing type: " << wordType->name();
 

@@ -21,9 +21,6 @@
 
 #include "keduvoccontainer.h"
 
-#include <QtCore/QList>
-#include <QtCore/QString>
-
 class KEduVocExpression;
 
 /** class to store information about a lesson */

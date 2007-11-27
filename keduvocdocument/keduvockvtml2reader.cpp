@@ -511,7 +511,7 @@ bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifi
 }
 
 
-bool KEduVocKvtml2Reader::readChildWordTypes( KEduVocLesson* parentContainer, QDomElement &lessonElement )
+bool KEduVocKvtml2Reader::readChildWordTypes(KEduVocWordType* parentContainer, QDomElement &lessonElement)
 {
     QDomElement currentElement = lessonElement.firstChildElement( KVTML_CONTAINER );
     while ( !currentElement.isNull() ) {
@@ -521,13 +521,13 @@ bool KEduVocKvtml2Reader::readChildWordTypes( KEduVocLesson* parentContainer, QD
     return true;
 }
 
-bool KEduVocKvtml2Reader::readWordType( KEduVocLesson* parentContainer, QDomElement &typeElement )
+bool KEduVocKvtml2Reader::readWordType( KEduVocWordType* parentContainer, QDomElement &typeElement )
 {
     // set type and specialtype
     QString typeName =
         typeElement.firstChildElement( KVTML_NAME ).text();
 
-    KEduVocLesson * wordTypeContainer = new KEduVocLesson(typeName, parentContainer);
+    KEduVocWordType * wordTypeContainer = new KEduVocWordType(typeName, parentContainer);
     parentContainer->appendChildContainer(wordTypeContainer);
 
     QString specialType = typeElement.firstChildElement( KVTML_SPECIALWORDTYPE ).text();

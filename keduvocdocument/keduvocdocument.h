@@ -340,7 +340,7 @@ public:
      */
     KEduVocLesson * lesson();
 
-    KEduVocLesson * wordTypeContainer();
+    KEduVocWordType * wordTypeContainer();
 
     KEduVocLesson * leitnerContainer();
 

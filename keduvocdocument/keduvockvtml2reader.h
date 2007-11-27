@@ -26,6 +26,7 @@
 
 class QIODevice;
 class KEduVocDocument;
+class KEduVocWordType;
 
 /**
 * @brief class to read kvtml2 data files into keduvocdocument
@@ -91,7 +92,7 @@ private:
      * @param typesElement 
      * @return 
      */
-    bool readWordType( KEduVocLesson* parentContainer, QDomElement &typesElement );
+    bool readWordType( KEduVocWordType* parentContainer, QDomElement &typesElement );
 
     /**
      * Read all <container> tags within a word type definition.
@@ -99,7 +100,7 @@ private:
      * @param lessonElement 
      * @return 
      */
-    bool readChildWordTypes( KEduVocLesson* parentContainer, QDomElement &lessonElement );
+    bool readChildWordTypes( KEduVocWordType* parentContainer, QDomElement &lessonElement );
 
     /** read the tenses
      * @param tensesElement QDomElement for the tenses group

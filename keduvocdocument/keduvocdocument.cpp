@@ -97,10 +97,9 @@ public:
     QString                   m_category;
 
     KEduVocLesson * m_lessonContainer;
-    KEduVocLesson * m_wordTypeContainer;
+    KEduVocWordType * m_wordTypeContainer;
     KEduVocLesson * m_leitnerContainer;
 
-    KEduVocWordType           m_wordTypes;
 };
 
 KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
@@ -117,12 +116,10 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     if ( m_wordTypeContainer ) {
         delete m_wordTypeContainer;
     }
-    m_wordTypeContainer = new KEduVocLesson(i18n( "Word types" ));
-    m_wordTypeContainer->setContainerType(KEduVocLesson::WordTypeContainer);
+    m_wordTypeContainer = new KEduVocWordType(i18n( "Word types" ));
 
     m_tenseDescriptions.clear();
     m_identifiers.clear();
-    m_wordTypes.clear();
     m_extraSizeHints.clear();
     m_sizeHints.clear();
     m_dirty = false;
@@ -726,7 +723,7 @@ KEduVocLesson * KEduVocDocument::lesson()
     return d->m_lessonContainer;
 }
 
-KEduVocLesson * KEduVocDocument::wordTypeContainer()
+KEduVocWordType * KEduVocDocument::wordTypeContainer()
 {
     return d->m_wordTypeContainer;
 }
@@ -952,10 +949,5 @@ QString KEduVocDocument::errorDescription( int errorCode )
     }
 }
 
-KEduVocWordType& KEduVocDocument::wordTypes()
-{
-    return d->m_wordTypes;
-}
-
-
 #include "keduvocdocument.moc"
+

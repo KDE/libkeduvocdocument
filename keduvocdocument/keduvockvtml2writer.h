@@ -70,7 +70,7 @@ public:
     /** write types
      * @param typesElement QDomElement types to write to
      */
-    bool writeWordTypes( QDomElement &typesElement, KEduVocLesson* parentContainer );
+    bool writeWordTypes( QDomElement &typesElement, KEduVocWordType* parentContainer );
 
     /** write tenses
      * @param tensesElement QDomElement tenses to write to

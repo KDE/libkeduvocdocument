@@ -50,7 +50,7 @@ KEduVocContainer::KEduVocContainer(const QString& name, EnumContainerType type, 
 {
     d->m_parentContainer = parent;
     d->m_name = name;
-    d->m_inPractice = false;
+    d->m_inPractice = true;
     d->m_type = type;
 }
 
@@ -186,6 +186,20 @@ KUrl KEduVocContainer::imageUrl()
 void KEduVocContainer::setImageUrl(const KUrl &url)
 {
     d->m_imageUrl = url;
+}
+
+KEduVocContainer * KEduVocContainer::childOfType(KEduVocContainer::EnumContainerType type)
+{
+    if(containerType()==type) {
+        return this;
+    }
+    foreach(KEduVocContainer* child, childContainers()) {
+        KEduVocContainer* result = child->childOfType(type);
+        if(result) {
+            return result;
+        }
+    }
+    return 0;
 }
 
 

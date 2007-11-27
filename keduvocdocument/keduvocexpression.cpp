@@ -159,6 +159,7 @@ KEduVocTranslation* KEduVocExpression::translation( int index )
         return d->m_translations[index];
     }
     d->m_translations[index] = new KEduVocTranslation(this);
+    return d->m_translations[index];
 }
 
 QList< int > KEduVocExpression::translationIndices() const

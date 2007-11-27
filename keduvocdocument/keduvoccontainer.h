@@ -62,13 +62,13 @@ public:
     int childContainerCount() const;
 
     int row() const;
-    KEduVocContainer *parent();
+    virtual KEduVocContainer *parent();
 
     /** copy constructor for d-pointer safe copying */
     KEduVocContainer( const KEduVocContainer &other );
 
     /** destructor */
-    ~KEduVocContainer();
+    virtual ~KEduVocContainer();
 
     /** assignment operator */
     KEduVocContainer& operator= ( const KEduVocContainer& );
@@ -83,6 +83,8 @@ public:
 
     /** get a list of all entries in the container */
     virtual QList < KEduVocExpression* > entries() =0;
+    virtual int entryCount() =0;
+    virtual KEduVocExpression* entry(int row) =0;
 
     /** get a list of all entries in the container and its child containers */
     QList < KEduVocExpression* > entriesRecursive();
@@ -111,6 +113,8 @@ public:
      * @param type the new type
      */
     void setContainerType(KEduVocContainer::EnumContainerType type);
+
+    KEduVocContainer* childOfType(KEduVocContainer::EnumContainerType type);
 
     /** get the image url for this container if it exists */
     KUrl imageUrl();

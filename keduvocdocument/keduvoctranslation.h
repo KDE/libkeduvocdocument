@@ -26,7 +26,7 @@
 
 class KEduVocExpression;
 class KEduVocGrade;
-class KEduVocLesson;
+class KEduVocWordType;
 
 /**
  @author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
@@ -52,6 +52,8 @@ public:
      * Destructor
      */
     ~KEduVocTranslation();
+
+    KEduVocExpression* entry();
 
     /**
      * The translation as string (the word itself)
@@ -167,12 +169,12 @@ public:
     *
     * @return                 type or "" if no type available
     */
-    KEduVocLesson* wordType() const;
+    KEduVocWordType* wordType() const;
 
     /** sets the word type of this expression
     * @param type             type of this expression ("" = none)
     */
-    void setWordType( KEduVocLesson* wordType );
+    void setWordType( KEduVocWordType* wordType );
 
 
     /** reset the grades for this translation */
