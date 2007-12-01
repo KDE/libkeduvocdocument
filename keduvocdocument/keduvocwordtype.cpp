@@ -118,27 +118,31 @@ KEduVocWordType::KEduVocWordType( const KEduVocWordType & other )
 void KEduVocWordType::createDefaultWordTypes()
 {
     // first the special types
-    addType(  d->WORDTYPE_SPECIAL_NOUN, d->WORDTYPE_SPECIAL_NOUN );
+    QString noun = i18nc( "@item:inlistbox The grammatical type of a word", "Noun" );
+    addType( noun , d->WORDTYPE_SPECIAL_NOUN );
 
-    addSubType( d->WORDTYPE_SPECIAL_NOUN,
-        d->WORDTYPE_SPECIAL_NOUN_MALE, d->WORDTYPE_SPECIAL_NOUN_MALE );
+    addSubType( noun, i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Male" ),
+         d->WORDTYPE_SPECIAL_NOUN_MALE );
 
-    addSubType( d->WORDTYPE_SPECIAL_NOUN,
-        d->WORDTYPE_SPECIAL_NOUN_FEMALE, d->WORDTYPE_SPECIAL_NOUN_FEMALE );
+    addSubType( noun, i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Female" ),
+        d->WORDTYPE_SPECIAL_NOUN_FEMALE );
 
-    addSubType( d->WORDTYPE_SPECIAL_NOUN,
-        d->WORDTYPE_SPECIAL_NOUN_NEUTRAL, d->WORDTYPE_SPECIAL_NOUN_NEUTRAL );
+    addSubType( noun, i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Neutral" ),
+        d->WORDTYPE_SPECIAL_NOUN_NEUTRAL );
 
-    addType( d->WORDTYPE_SPECIAL_VERB, d->WORDTYPE_SPECIAL_VERB );
 
-    addSubType( d->WORDTYPE_SPECIAL_VERB,
+    QString verb = i18nc( "@item:inlistbox The grammatical type of a word", "Verb" );
+
+    addType( verb, d->WORDTYPE_SPECIAL_VERB );
+
+    addSubType( verb,
         i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with regular conjugation","Regular" ) );
 
-    addSubType( d->WORDTYPE_SPECIAL_VERB,
+    addSubType( verb,
         i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with irregular conjugation","Irregular" ) );
 
-    addType( d->WORDTYPE_SPECIAL_ADJECTIVE, d->WORDTYPE_SPECIAL_ADJECTIVE );
-    addType( d->WORDTYPE_SPECIAL_ADVERB, d->WORDTYPE_SPECIAL_ADVERB );
+    addType( i18nc( "@item:inlistbox The grammatical type of a word", "Adjective" ), d->WORDTYPE_SPECIAL_ADJECTIVE );
+    addType( i18nc( "@item:inlistbox The grammatical type of a word", "Adverb" ), d->WORDTYPE_SPECIAL_ADVERB );
 
     addType( i18nc( "@item:inlistbox The grammatical type of an entry", "Question" ) );
     addType( i18nc( "@item:inlistbox The grammatical type of a word", "Name" ) );
