@@ -174,7 +174,7 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileNa
 {
     QIODevice * f = KFilterDev::deviceForFile( fileName );
     if ( !f->open( QIODevice::ReadOnly ) ) {
-        kDebug() << "Warning, could not open QIODevice for file: " << fileName;
+        kDebug(1100) << "Warning, could not open QIODevice for file: " << fileName;
         delete f;
         return Csv;
     }
@@ -268,7 +268,7 @@ int KEduVocDocument::open( const KUrl& url )
 
         switch ( ft ) {
             case Kvtml: {
-                kDebug() << "Reading KVTML document...";
+                kDebug(1100) << "Reading KVTML document...";
                 KEduVocKvtml2Reader kvtmlReader( f );
                 read = kvtmlReader.readDoc( this );
                 if ( !read ) {
@@ -278,7 +278,7 @@ int KEduVocDocument::open( const KUrl& url )
             break;
 
             case Wql: {
-                kDebug() << "Reading WordQuiz (WQL) document...";
+                kDebug(1100) << "Reading WordQuiz (WQL) document...";
                 KEduVocWqlReader wqlReader( f );
                 d->m_url.setFileName( i18n( "Untitled" ) );
                 read = wqlReader.readDoc( this );
@@ -289,7 +289,7 @@ int KEduVocDocument::open( const KUrl& url )
             break;
 
             case Pauker: {
-                kDebug() << "Reading Pauker document...";
+                kDebug(1100) << "Reading Pauker document...";
                 KEduVocPaukerReader paukerReader( this );
                 d->m_url.setFileName( i18n( "Untitled" ) );
                 read = paukerReader.read( f );
@@ -300,7 +300,7 @@ int KEduVocDocument::open( const KUrl& url )
             break;
 
             case Vokabeln: {
-                kDebug() << "Reading Vokabeln document...";
+                kDebug(1100) << "Reading Vokabeln document...";
                 KEduVocVokabelnReader vokabelnReader( f );
                 d->m_url.setFileName( i18n( "Untitled" ) );
                 read = vokabelnReader.readDoc( this );
@@ -311,7 +311,7 @@ int KEduVocDocument::open( const KUrl& url )
             break;
 
             case Csv: {
-                kDebug() << "Reading CVS document...";
+                kDebug(1100) << "Reading CVS document...";
                 KEduVocCsvReader csvReader( f );
                 read = csvReader.readDoc( this );
                 if ( !read ) {
@@ -321,7 +321,7 @@ int KEduVocDocument::open( const KUrl& url )
             break;
 
             case Xdxf: {
-                kDebug() << "Reading XDXF document...";
+                kDebug(1100) << "Reading XDXF document...";
                 KEduVocXdxfReader xdxfReader( this );
                 d->m_url.setFileName( i18n( "Untitled" ) );
                 read = xdxfReader.read( f );
@@ -332,7 +332,7 @@ int KEduVocDocument::open( const KUrl& url )
             break;
 
             default: {
-                kDebug() << "Reading KVTML document (fallback)...";
+                kDebug(1100) << "Reading KVTML document (fallback)...";
                 KEduVocKvtml2Reader kvtmlReader( f );
                 read = kvtmlReader.readDoc( this );
                 if ( !read ) {
@@ -438,7 +438,7 @@ int KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gene
 
 void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers )
 {
-    kDebug() << "Merging of docs is not implemented"; /// @todo IMPLEMENT ME
+    kDebug(1100) << "Merging of docs is not implemented"; /// @todo IMPLEMENT ME
     // This code was really horribly broken.
     // Now with the new classes we could attempt to reactivate it.
     // A rewrite might be easier.
@@ -819,7 +819,7 @@ int KEduVocDocument::identifierCount() const
 int KEduVocDocument::appendIdentifier( const KEduVocIdentifier& id )
 {
     int i = d->m_identifiers.size();
-kDebug() << "appendIdentifier: " << i << id.name() << id.locale();
+//kDebug(1100) << "appendIdentifier: " << i << id.name() << id.locale();
     d->m_identifiers.append( id );
     if ( id.name().isEmpty() ) {
         if ( i == 0 ) {
