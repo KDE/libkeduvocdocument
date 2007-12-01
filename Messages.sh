@@ -7,7 +7,7 @@ find libscience -maxdepth 1 -name \*.cpp >>list_libkdeedu
 echo "<?xml version=\"1.0\" ?><tmp>" >element_tiny.xml
 cat libscience/data/elements.xml | grep 'bo:name' >>element_tiny.xml
 echo "</tmp>" >>element_tiny.xml
-$EXTRACTATTR --attr=label,value element_tiny.xml >rc.cpp
+$EXTRACTATTR --attr=label,value element_tiny.xml >>rc.cpp
 $EXTRACTRC --tag-group=none --tag=scalar element_tiny.xml >>rc.cpp
 echo 'rc.cpp' >>list_libkdeedu
 
