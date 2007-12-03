@@ -187,3 +187,8 @@ bool KEduVocArticle::isArticle(const QString & article) const
     return d->m_articles.values().contains(article);
 }
 
+bool KEduVocArticle::isEmpty()
+{
+    return d->m_articles.isEmpty();
+}
+
