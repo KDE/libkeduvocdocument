@@ -803,11 +803,9 @@ int KEduVocDocument::entryCount() const
 
 void KEduVocDocument::resetEntry( int index, int lesson )
 {
-    for ( int i = 0; i < d->m_vocabulary.count(); i++ )
-        if ( /*lesson == 0 ||*/ lesson == d->m_vocabulary[i].lesson() ) {
-            // index is the translation number whose grades are reset
-            d->m_vocabulary[i].resetGrades( index );
-        }
+    foreach(int entry, this->lesson(lesson).entries()) {
+        d->m_vocabulary[entry].resetGrades( index );
+    }
 }
 
 

@@ -147,8 +147,8 @@ void KEduVocExpression::setSizeHint( int sizeHint )
 void KEduVocExpression::resetGrades( int index )
 {
     if ( index == -1 ) { // clear grades for all languages
-        foreach( KEduVocTranslation trans, d->m_translations ) {
-            trans.resetGrades();
+        foreach( int trans, d->m_translations.keys() ) {
+            d->m_translations[trans].resetGrades();
         }
         return;
     }
