@@ -644,7 +644,6 @@ bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement
    <choice>best 3</choice>
  </multiplechoice>
 */
-
 {
     QDomElement currentElement;
     QDomNodeList choiceNodes = multipleChoiceElement.elementsByTagName( KVTML_CHOICE );
