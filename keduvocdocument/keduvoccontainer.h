@@ -47,10 +47,10 @@ public:
     explicit KEduVocContainer(const QString& name, EnumContainerType type = LessonContainer, KEduVocContainer *parent = 0);
 
     void appendChildContainer(KEduVocContainer *child);
+    void removeChildContainer(int row);
+    KEduVocContainer *childContainer(int row);
 
     QList<KEduVocContainer *> childContainers();
-
-    KEduVocContainer *childContainer(int row);
 
     /**
      * Find a child container

@@ -18,6 +18,7 @@
 
 #include "keduvocexpression.h"
 
+#include <KDebug>
 #include <QList>
 
 /** private class to store information about a lesson */
@@ -75,6 +76,14 @@ KEduVocContainer * KEduVocContainer::childContainer(int row)
 {
     return d->m_childContainers.value(row);
 }
+
+
+void KEduVocContainer::removeChildContainer(int row)
+{
+    kDebug() << "Delete of container - check entry deletion!";
+    delete d->m_childContainers.takeAt(row);
+}
+
 
 int KEduVocContainer::childContainerCount() const
 {
