@@ -11,7 +11,7 @@
 
 #include <qpainter.h>
 
-int fontUtils::fontSize(QPainter &p, const QString &s1, int w, int h)
+int fontUtils::fontSize(QPainter &p, const QString &s1, int w, int h, Flags flags)
 {
     int size;
     QRect aux1;
@@ -24,7 +24,9 @@ int fontUtils::fontSize(QPainter &p, const QString &s1, int w, int h)
         QFont f = p.font();
         f.setPointSize(size);
         p.setFont(f);
-        aux1 = p.boundingRect(QRect(0, 0, w, h), Qt::TextWordWrap | Qt::AlignCenter, s1);
+        int qtFlags = Qt::AlignCenter | Qt::TextWordWrap;
+        if (flags & DoNotAllowWordWrap) qtFlags = qtFlags & ~Qt::TextWordWrap;
+        aux1 = p.boundingRect(QRect(0, 0, w, h), qtFlags, s1);
         if (aux1.width() == 0 || aux1.height() == 0) return -1;
         else if (aux1.width() > w || aux1.height() > h) size = qMin(w * size / aux1.width(), h * size / aux1.height());
         else done = true;

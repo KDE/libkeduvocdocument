@@ -100,6 +100,8 @@ public:
 
     bool isArticle(const QString& article) const;
 
+    bool isEmpty();
+
 private:
     int indexOf(ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
 

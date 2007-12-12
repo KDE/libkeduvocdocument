@@ -17,7 +17,13 @@ class QString;
 
 namespace fontUtils
 {
-	int KDEEDUUI_EXPORT fontSize(QPainter &p, const QString &s1, int w, int h);
+	enum Flags
+	{
+		NoFlags = 1,
+		DoNotAllowWordWrap = 2
+	};
+
+	int KDEEDUUI_EXPORT fontSize(QPainter &p, const QString &s1, int w, int h, Flags flags = NoFlags);
 }
 
 #endif

@@ -357,8 +357,10 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
         // add id
         entryElement.setAttribute( KVTML_ID, QString::number( i ) );
 
-        // write inactive
-        entryElement.appendChild( newTextElement( KVTML_DEACTIVATED, thisEntry->isActive() ? KVTML_FALSE : KVTML_TRUE ) );
+        // write deactivated
+        if(!thisEntry->isActive()) {
+            entryElement.appendChild( newTextElement( KVTML_DEACTIVATED, KVTML_TRUE ) );
+        }
 
         // loop through translations
         foreach( int trans, thisEntry->translationIndices() ) {
