@@ -223,7 +223,10 @@ void KEduVocWordType::addType( const QString & typeName, const QString & special
 void KEduVocWordType::addSubType( const QString & mainType, const QString & typeName, const QString & specialType )
 {
     int mt = mainTypeIndex( mainType );
-
+    if ( subTypeNameList(mainType).contains( typeName ) ) {
+        kDebug() << "Attempting to add type \"" << typeName << "\" twice.";
+        return;
+    }
     d->m_wordTypeList[mt].m_subWordTypeList.append( Private::subWordType() );
 
     d->m_wordTypeList[mt].m_subWordTypeList[d->m_wordTypeList[mt].m_subWordTypeList.count()-1].m_subTypeName = typeName;
