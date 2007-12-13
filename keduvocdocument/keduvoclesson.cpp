@@ -36,7 +36,7 @@ KEduVocLesson::Private::~ Private()
     qDeleteAll(m_entries);
 }
 
-KEduVocLesson::KEduVocLesson(const QString& name, KEduVocLesson *parent)
+KEduVocLesson::KEduVocLesson(const QString& name, KEduVocContainer *parent)
         : d( new Private ), KEduVocContainer(name, LessonContainer, parent)
 {
 }
