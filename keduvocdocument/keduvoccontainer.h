@@ -30,7 +30,9 @@ class KEduVocExpression;
 class KEDUVOCDOCUMENT_EXPORT KEduVocContainer
 {
 public:
+    /// @todo let wordtype have only one type and the actual types in a different function
     enum EnumContainerType{
+        Container,
         LessonContainer,
         LeitnerContainer,
         WordTypeContainer,
