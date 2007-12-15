@@ -203,23 +203,11 @@ void KEduVocContainer::setImageUrl(const KUrl &url)
     d->m_imageUrl = url;
 }
 
-KEduVocContainer * KEduVocContainer::childOfType(KEduVocContainer::EnumContainerType type)
-{
-    if(containerType()==type) {
-        return this;
-    }
-    foreach(KEduVocContainer* child, childContainers()) {
-        KEduVocContainer* result = child->childOfType(type);
-        if(result) {
-            return result;
-        }
-    }
-    return 0;
-}
 
 void KEduVocContainer::insertChildContainer(int row, KEduVocContainer * child)
 {
     d->m_childContainers.insert(row, child);
+    child->d->m_parentContainer = this;
 }
 
 

@@ -60,6 +60,8 @@ public:
     KEduVocWordType::EnumWordType wordType() const;
 
 
+//     KEduVocContainer* childOfType(KEduVocContainer::EnumContainerType type);
+
     KEduVocTranslation * translation(int row);
 
     /** get a list of all entries in the lesson */

@@ -111,7 +111,6 @@ public:
      */
     void setContainerType(KEduVocContainer::EnumContainerType type);
 
-    KEduVocContainer* childOfType(KEduVocContainer::EnumContainerType type);
 
     /** get the image url for this container if it exists */
     KUrl imageUrl();
