@@ -60,6 +60,8 @@ KEduVocContainer::KEduVocContainer( const KEduVocContainer &other )
 {
     d->m_name = other.d->m_name;
     d->m_inPractice = other.d->m_inPractice;
+    d->m_type = other.d->m_type;
+    d->m_parentContainer = other.d->m_parentContainer;
 }
 
 KEduVocContainer::~KEduVocContainer()
