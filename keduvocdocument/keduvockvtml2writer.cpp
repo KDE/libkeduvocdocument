@@ -275,26 +275,26 @@ bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocWord
         QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_CONTAINER );
         typeDefinitionElement.appendChild( newTextElement( KVTML_NAME, wordType->name() ) );
 
-        switch (wordType->containerType()) {
-        case KEduVocLesson::WordTypeNounContainer:
+        switch (wordType->wordType()) {
+        case KEduVocWordType::Noun:
             typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN ) );
             break;
-        case KEduVocLesson::WordTypeNounMaleContainer:
+        case KEduVocWordType::NounMale:
             typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_MALE ) );
             break;
-        case KEduVocLesson::WordTypeNounFemaleContainer:
+        case KEduVocWordType::NounFemale:
             typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_FEMALE ) );
             break;
-        case KEduVocLesson::WordTypeNounNeutralContainer:
+        case KEduVocWordType::NounNeutral:
             typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) );
             break;
-        case KEduVocLesson::WordTypeVerbContainer:
+        case KEduVocWordType::Verb:
             typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_VERB ) );
             break;
-        case KEduVocLesson::WordTypeAdjectiveContainer:
+        case KEduVocWordType::Adjective:
             typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_ADJECTIVE ) );
             break;
-        case KEduVocLesson::WordTypeAdverbContainer:
+        case KEduVocWordType::Adverb:
             typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_ADVERB ) );
             break;
         default:

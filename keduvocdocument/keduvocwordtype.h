@@ -31,6 +31,19 @@ class KEduVocTranslation;
 class KEDUVOCDOCUMENT_EXPORT KEduVocWordType :public KEduVocContainer
 {
 public:
+
+    enum EnumWordType {
+        General,
+        Noun,
+        NounMale,
+        NounFemale,
+        NounNeutral,
+        Verb,
+        Adjective,
+        Adverb
+    };
+
+
     /** default constructor */
     explicit KEduVocWordType(const QString& name, KEduVocWordType *parent = 0);
 
@@ -42,6 +55,10 @@ public:
 
     /** assignment operator */
     KEduVocWordType& operator= ( const KEduVocWordType& );
+
+    void setWordType(EnumWordType type);
+    KEduVocWordType::EnumWordType wordType() const;
+
 
     KEduVocTranslation * translation(int row);
 

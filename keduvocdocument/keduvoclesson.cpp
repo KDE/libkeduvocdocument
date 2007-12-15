@@ -37,7 +37,7 @@ KEduVocLesson::Private::~ Private()
 }
 
 KEduVocLesson::KEduVocLesson(const QString& name, KEduVocContainer *parent)
-        : d( new Private ), KEduVocContainer(name, LessonContainer, parent)
+        : d( new Private ), KEduVocContainer(name, Lesson, parent)
 {
 }
 

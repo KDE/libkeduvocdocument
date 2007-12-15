@@ -70,6 +70,7 @@ KEduVocContainer::~KEduVocContainer()
 void KEduVocContainer::appendChildContainer(KEduVocContainer * child)
 {
     d->m_childContainers.append(child);
+    child->d->m_parentContainer = this;
 }
 
 KEduVocContainer * KEduVocContainer::childContainer(int row)
@@ -78,10 +79,15 @@ KEduVocContainer * KEduVocContainer::childContainer(int row)
 }
 
 
-void KEduVocContainer::removeChildContainer(int row)
+void KEduVocContainer::deleteChildContainer(int row)
 {
     kDebug() << "Delete of container - check entry deletion!";
     delete d->m_childContainers.takeAt(row);
+}
+
+void KEduVocContainer::removeChildContainer(int row)
+{
+    d->m_childContainers.removeAt(row);
 }
 
 
@@ -210,5 +216,11 @@ KEduVocContainer * KEduVocContainer::childOfType(KEduVocContainer::EnumContainer
     }
     return 0;
 }
+
+void KEduVocContainer::insertChildContainer(int row, KEduVocContainer * child)
+{
+    d->m_childContainers.insert(row, child);
+}
+
 
 

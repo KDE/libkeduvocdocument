@@ -24,14 +24,16 @@
 class KEduVocWordType::Private
 {
 public:
+    EnumWordType m_wordType;
     // entries
     QList<KEduVocTranslation*> m_translations;
 };
 
 
 KEduVocWordType::KEduVocWordType(const QString& name, KEduVocWordType *parent)
-        : d( new Private ), KEduVocContainer(name, WordTypeContainer, parent)
+        : d( new Private ), KEduVocContainer(name, WordType, parent)
 {
+    d->m_wordType = General;
 }
 
 KEduVocWordType::KEduVocWordType( const KEduVocWordType &other )
@@ -87,6 +89,16 @@ KEduVocTranslation * KEduVocWordType::translation(int row)
 KEduVocExpression * KEduVocWordType::entry(int row)
 {
     return entries().value(row);
+}
+
+void KEduVocWordType::setWordType(EnumWordType type)
+{
+    d->m_wordType = type;
+}
+
+KEduVocWordType::EnumWordType KEduVocWordType::wordType() const
+{
+    return d->m_wordType;
 }
 
 

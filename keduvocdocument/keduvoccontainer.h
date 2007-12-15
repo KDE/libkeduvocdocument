@@ -33,22 +33,17 @@ public:
     /// @todo let wordtype have only one type and the actual types in a different function
     enum EnumContainerType{
         Container,
-        LessonContainer,
-        LeitnerContainer,
-        WordTypeContainer,
-        WordTypeNounContainer,
-        WordTypeNounMaleContainer,
-        WordTypeNounFemaleContainer,
-        WordTypeNounNeutralContainer,
-        WordTypeVerbContainer,
-        WordTypeAdjectiveContainer,
-        WordTypeAdverbContainer
+        Lesson,
+        WordType,
+        Leitner
     };
 
     /** default constructor */
-    explicit KEduVocContainer(const QString& name, EnumContainerType type = LessonContainer, KEduVocContainer *parent = 0);
+    explicit KEduVocContainer(const QString& name, EnumContainerType type, KEduVocContainer *parent = 0);
 
     void appendChildContainer(KEduVocContainer *child);
+    void insertChildContainer(int row, KEduVocContainer *child);
+    void deleteChildContainer(int row);
     void removeChildContainer(int row);
     KEduVocContainer *childContainer(int row);
 

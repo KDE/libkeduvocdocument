@@ -532,25 +532,25 @@ bool KEduVocKvtml2Reader::readWordType( KEduVocWordType* parentContainer, QDomEl
     if ( !specialType.isEmpty() ) {
         // get the localized version
         if ( specialType == KVTML_SPECIALWORDTYPE_NOUN ) {
-            wordTypeContainer->setContainerType(KEduVocLesson::WordTypeNounContainer);
+            wordTypeContainer->setWordType(KEduVocWordType::Noun);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_VERB ) {
-            wordTypeContainer->setContainerType(KEduVocLesson::WordTypeVerbContainer);
+            wordTypeContainer->setWordType(KEduVocWordType::Verb);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_ADVERB ) {
-            wordTypeContainer->setContainerType(KEduVocLesson::WordTypeAdverbContainer);
+            wordTypeContainer->setWordType(KEduVocWordType::Adverb);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_ADJECTIVE ) {
-            wordTypeContainer->setContainerType(KEduVocLesson::WordTypeAdjectiveContainer);
+            wordTypeContainer->setWordType(KEduVocWordType::Adjective);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_NOUN_MALE ) {
-            wordTypeContainer->setContainerType(KEduVocLesson::WordTypeNounMaleContainer);
+            wordTypeContainer->setWordType(KEduVocWordType::NounMale);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_NOUN_FEMALE ) {
-            wordTypeContainer->setContainerType(KEduVocLesson::WordTypeNounFemaleContainer);
+            wordTypeContainer->setWordType(KEduVocWordType::NounFemale);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) {
-            wordTypeContainer->setContainerType(KEduVocLesson::WordTypeNounNeutralContainer);
+            wordTypeContainer->setWordType(KEduVocWordType::NounNeutral);
         }
     } // special type
 

@@ -83,8 +83,8 @@ public:
 
     QStringList               m_tenseDescriptions;
     QSet<QString>             m_usages;
-// use the name of the root lesson as title
-//     QString                   m_title;
+
+    QString                   m_title;
     QString                   m_author;
     QString                   m_license;
     QString                   m_comment;
@@ -112,7 +112,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
         delete m_lessonContainer;
     }
     m_lessonContainer = new KEduVocLesson("root");
-    m_lessonContainer->setContainerType(KEduVocLesson::LessonContainer);
+    m_lessonContainer->setContainerType(KEduVocLesson::Lesson);
     if ( m_wordTypeContainer ) {
         delete m_wordTypeContainer;
     }
@@ -128,6 +128,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_querytrans = "";
     m_url.setFileName( i18n( "Untitled" ) );
     m_author = "";
+    m_title = "";
     m_comment = "";
     m_version = "";
     m_generator = "";
@@ -748,13 +749,13 @@ QString KEduVocDocument::title() const
     if ( d->m_lessonContainer->name().isEmpty() )
         return d->m_url.fileName();
     else
-        return d->m_lessonContainer->name();
+        return d->m_title;
 }
 
 
 void KEduVocDocument::setTitle( const QString & title )
 {
-    d->m_lessonContainer->setName(title.simplified());
+    d->m_title = title;
 }
 
 
