@@ -24,22 +24,16 @@
 class KEduVocLesson::Private
 {
 public:
-    ~Private();
-
     // entries
     QList<KEduVocExpression*> m_entries;
 };
 
-KEduVocLesson::Private::~ Private()
-{
-    ///@todo delete children here???? is this a 1:1 mapping?
-    qDeleteAll(m_entries);
-}
 
 KEduVocLesson::KEduVocLesson(const QString& name, KEduVocContainer *parent)
         : d( new Private ), KEduVocContainer(name, Lesson, parent)
 {
 }
+
 
 KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
         : d( new Private ), KEduVocContainer(other)
@@ -47,8 +41,15 @@ KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
     d->m_entries = other.d->m_entries;
 }
 
+
 KEduVocLesson::~KEduVocLesson()
 {
+    foreach (KEduVocExpression* entry, d->m_entries) {
+        entry->removeLesson(this);
+        if (entry->lessons().count() == 0) {
+            delete entry;
+        }
+    }
     delete d;
 }
 

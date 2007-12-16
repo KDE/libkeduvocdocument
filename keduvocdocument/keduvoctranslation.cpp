@@ -119,6 +119,9 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
 
 KEduVocTranslation::~KEduVocTranslation()
 {
+    if (d->m_wordType) {
+        d->m_wordType->removeTranslation(this);
+    }
     delete d;
 }
 
