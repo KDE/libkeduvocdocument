@@ -413,6 +413,7 @@ bool KEduVocKvtml2Reader::readChildLessons( KEduVocLesson* parentLesson, QDomEle
         readLesson(parentLesson, currentElement);
         currentElement = currentElement.nextSiblingElement( KVTML_CONTAINER );
     }
+    return true;
 }
 
 
