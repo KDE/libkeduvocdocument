@@ -756,6 +756,7 @@ QString KEduVocDocument::title() const
 void KEduVocDocument::setTitle( const QString & title )
 {
     d->m_title = title;
+    d->m_lessonContainer->setName(title);
 }
 
 
