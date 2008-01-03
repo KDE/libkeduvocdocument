@@ -111,7 +111,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     if ( m_lessonContainer ) {
         delete m_lessonContainer;
     }
-    m_lessonContainer = new KEduVocLesson("root");
+    m_lessonContainer = new KEduVocLesson(i18nc("The top level lesson which contains all other lessons of the document.", "Document Lesson"));
     m_lessonContainer->setContainerType(KEduVocLesson::Lesson);
     if ( m_wordTypeContainer ) {
         delete m_wordTypeContainer;
