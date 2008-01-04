@@ -60,7 +60,7 @@ public:
     KEduVocWordType::EnumWordType wordType() const;
 
 
-//     KEduVocContainer* childOfType(KEduVocContainer::EnumContainerType type);
+    KEduVocWordType* childOfType(KEduVocWordType::EnumWordType type);
 
     KEduVocTranslation * translation(int row);
 
@@ -71,8 +71,6 @@ public:
 
     /** get the number of entries in the lesson */
     int entryCount();
-
-//     KEduVocWordType *parent();
 
 private:
     class Private;

@@ -101,17 +101,16 @@ KEduVocWordType::EnumWordType KEduVocWordType::wordType() const
     return d->m_wordType;
 }
 
-///@todo provide a function to find a certain word type container... used for "make this a noun" buttons
-// KEduVocContainer * KEduVocContainer::childOfType(KEduVocContainer::EnumContainerType type)
-// {
-//     if(containerType()==type) {
-//         return this;
-//     }
-//     foreach(KEduVocContainer* child, childContainers()) {
-//         KEduVocContainer* result = child->childOfType(type);
-//         if(result) {
-//             return result;
-//         }
-//     }
-//     return 0;
-// }
+KEduVocWordType* KEduVocWordType::childOfType(KEduVocWordType::EnumWordType type)
+{
+    if(wordType()==type) {
+        return this;
+    }
+    foreach(KEduVocContainer* child, childContainers()) {
+        KEduVocWordType* result = static_cast<KEduVocWordType*>(child)->childOfType(type);
+        if(result) {
+            return result;
+        }
+    }
+    return 0;
+}
