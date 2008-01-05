@@ -102,12 +102,12 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
     s = inputStream.readLine();
     p = s.indexOf( "=", 0 );
     s = s.right( s.length() - ( p + 1 ) );
-    m_doc->setSizeHint( 0, s.toInt() );
+//     m_doc->setSizeHint( 0, s.toInt() );
 
     s = inputStream.readLine();
     p = s.indexOf( "=", 0 );
     s = s.right( s.length() - ( p + 1 ) );
-    m_doc->setSizeHint( 1, s.toInt() );
+//     m_doc->setSizeHint( 1, s.toInt() );
 
     /* TODO
       s = inputStream.readLine();
@@ -163,7 +163,7 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
 
         KEduVocExpression expr = KEduVocExpression( s );
         expr.setTranslation( 1, b );
-        m_doc->appendEntry( &expr );
+        m_doc->lesson()->appendEntry( &expr );
     }
     return true;
 }

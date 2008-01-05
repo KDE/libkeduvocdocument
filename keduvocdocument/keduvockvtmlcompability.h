@@ -67,6 +67,7 @@
 
 #define UL_USER_USAGE  "#"   // designates number of user type
 
+class KEduVocWordType;
 
 /**
   * @file contains defines and constants necessary for reading kvtml files prior to KDE4. kvtml version 1.
@@ -80,43 +81,13 @@ public:
      */
     KEduVocKvtmlCompability();
 
-    /**
-     * In old kvtml documents usages could be added. When parsing the doc,
-     * we need those too. They map "#1" to something meaningful.
-     * Add them in order!
-     * @param usage the old user defined usage.
-     */
-    void addUserdefinedUsage( const QString& usage );
-
-    /**
-     * This "translates" the old usage string found in the files to the
-     * real word/meaning. It will also consider the user defined usages.
-     * Use this method for usages.
-     * @param oldUsage string e.g. "biol:anat:#1"
-     * @return full set e.g. {"biology", "anatomy", "user defined 1"}
-     */
-    QSet<QString> usageFromKvtml1( const QString& oldUsage ) const;
-
-    /**
-     * Return set of all available usages. Since the doc also needs them.
-     * @return usage set
-     */
-    QSet<QString> documentUsages() const;
-
     ///// TYPES
     /**
      * Get the type from an old type definition
      * @param typeSubtypeString the old string containing everything
-     * @return new main type
+     * @return type
      */
-    QString mainTypeFromOldFormat( const QString& typeSubtypeString ) const;
-
-    /**
-     * Get the subtype from an old type definition
-     * @param typeSubtypeString the old string containing everything
-     * @return new sub type
-     */
-    QString subTypeFromOldFormat( const QString& typeSubtypeString ) const;
+    KEduVocWordType* typeFromOldFormat(KEduVocWordType* parent, const QString & typeSubtypeString ) const;
 
     /**
      * To write old docs: convert a nice new type to the ugly old style.
@@ -132,27 +103,16 @@ public:
     QStringList documentTenses() const;
     QString oldTense( const QString& tense );
 
+    void setupWordTypes(KEduVocWordType* parent);
+
 private:
-    /**
-     * This gives a map of old abbreviations used in the files and their meaning.
-     * [biol] == biology and so on...
-     * @return the map
-     */
-    static QMap< QString, QString > usageMap();
-
-    /// Map to store usages. Initialized with preset values by the constructor. Later user defined usages can be added.
-    QMap< QString, QString > m_usages;
-
-
-    /// only order was decisive, we have to keep count.
-    int m_userdefinedUsageCounter;
-
 
 //////////// TYPES /////////////////
     void initOldTypeLists();
 
     QMap<QString, QString> m_oldMainTypeNames;
     QMap<QString, QString> m_oldSubTypeNames;
+    int m_userdefinedTypeCounter;
 
 ///////////TENSES/CONJUGATIONS///////
     void initOldTenses();

@@ -20,12 +20,12 @@
 #include "libkeduvocdocument_export.h"
 #include "keduvocgrammar.h"
 #include "keduvocconjugation.h"
-#include "keduvocmultiplechoice.h"
 #include <KDE/KUrl>
 #include <QtCore/QString>
 
-
+class KEduVocExpression;
 class KEduVocGrade;
+class KEduVocWordType;
 
 /**
  @author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
@@ -36,13 +36,13 @@ public:
     /**
      * Default constructor for an empty translation.
      */
-    KEduVocTranslation();
+    KEduVocTranslation(KEduVocExpression* entry);
 
     /**
         * Constructor
         * @param translation is used as translation
         */
-    KEduVocTranslation( const QString &translation );
+    KEduVocTranslation(KEduVocExpression* entry, const QString &translation );
 
     /** copy constructor for d-pointer safet */
     KEduVocTranslation( const KEduVocTranslation &other );
@@ -51,6 +51,8 @@ public:
      * Destructor
      */
     ~KEduVocTranslation();
+
+    KEduVocExpression* entry();
 
     /**
      * The translation as string (the word itself)
@@ -162,27 +164,17 @@ public:
      */
     QString irregularPlural() const;
 
-    /** returns type of this expression
+    /** returns the word type of this expression
     *
     * @return                 type or "" if no type available
     */
-    QString type() const;
+    KEduVocWordType* wordType() const;
 
-    /** sets type of this expression
+    /** sets the word type of this expression
     * @param type             type of this expression ("" = none)
     */
-    void setType( const QString &type );
+    void setWordType( KEduVocWordType* wordType );
 
-    /** returns subtype of this expression
-    *
-    * @return                 type or "" if no type available
-    */
-    QString subType() const;
-
-    /** sets subtype of this expression
-    * @param type             type of this expression ("" = none)
-    */
-    void setSubType( const QString &type );
 
     /** reset the grades for this translation */
     void resetGrades();
@@ -216,23 +208,22 @@ public:
      */
     QMap <QString, KEduVocConjugation> conjugations() const;
 
-    /** returns comparison if available
+    /**
+     * Comparison forms of adjectives/adverbs.
      */
-    KEduVocComparison & comparison();
-
-    /** sets comparison
-     * @param comparison       comparison block
-     */
-    void setComparison( const KEduVocComparison & comparison );
+    QString comparative() const;
+    void setComparative(const QString& comparative);
+    QString superlative() const;
+    void setSuperlative(const QString& superlative);
 
     /** returns multiple choice if available
       */
-    KEduVocMultipleChoice & multipleChoice();
+    QStringList & multipleChoice();
 
     /** sets multiple choice
      * @param mc               multiple choice block
       */
-    void setMultipleChoice( const KEduVocMultipleChoice &mc );
+//     void setMultipleChoice( const QStringList &mc );
 
     /** get the sound url for this translation if it exists */
     KUrl soundUrl();

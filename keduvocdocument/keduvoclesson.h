@@ -1,12 +1,8 @@
 /***************************************************************************
-              manage lessons
-    -----------------------------------------------------------------------
 
-    begin        : August 11, 2007
+    Copyright 2007 Jeremy Whiting <jeremywhiting@scitools.com>
+    Copyright 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
-    copyright    : (C) 2007 Jeremy Whiting <jeremywhiting@scitools.com>
-
-    -----------------------------------------------------------------------
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,15 +19,26 @@
 
 #include "libkeduvocdocument_export.h"
 
-#include <QtCore/QList>
-#include <QtCore/QString>
+#include "keduvoccontainer.h"
+
+class KEduVocExpression;
 
 /** class to store information about a lesson */
-class KEDUVOCDOCUMENT_EXPORT KEduVocLesson
+class KEDUVOCDOCUMENT_EXPORT KEduVocLesson :public KEduVocContainer
 {
 public:
     /** default constructor */
-    explicit KEduVocLesson();
+    explicit KEduVocLesson(const QString& name, KEduVocContainer *parent = 0);
+
+//     void appendChildLesson(KEduVocLesson *child);
+
+//     QList<KEduVocLesson *> childLessons();
+//     KEduVocLesson *childLesson(int row);
+
+//     int childLessonCount() const;
+
+//     int row() const;
+//     KEduVocLesson *parent();
 
     /** copy constructor for d-pointer safe copying */
     KEduVocLesson( const KEduVocLesson &other );
@@ -42,45 +49,36 @@ public:
     /** assignment operator */
     KEduVocLesson& operator= ( const KEduVocLesson& );
 
-    /** set the lesson name
-     * @param name text to set for the name
-     */
-    void setName( const QString &name );
 
-    /** get the lesson name */
-    QString name();
+    KEduVocExpression* entry(int row);
 
     /** get a list of all entries in the lesson */
-    QList<int> entries();
-    
+    QList < KEduVocExpression* > entries();
+
     /** get the number of entries in the lesson */
     int entryCount();
 
-    /** add an entry to the lesson
+    /** append an entry to the lesson
      * @param entryid id of the entry to add
      */
-    void addEntry( int entryid );
+    void appendEntry(KEduVocExpression* entry);
+
+    /**
+     * insert an entry at a specific position
+     * @param index 
+     * @param entry 
+     */
+    void insertEntry(int index, KEduVocExpression* entry);
+
+    /**
+     * shuffle the order of the entries in the lesson
+     */
+    void randomizeEntries();
 
     /** remove an entry from the lesson
      * @param entryid id of the entry to remove
      */
-    void removeEntry( int entryid );
-    
-    /** increments all entryids > entryid, because their entryid has been incremented
-     * @param entryid       id of the entry that was inserted
-     */
-    void incrementEntriesAbove( int entryid );
-    
-    /** decrements all etryids > entryid, because their entryid has been decremented
-     * @param entryid       id of the entry that was removed
-     */
-    void decrementEntriesAbove( int entryid );
-
-    bool inPractice();
-    void setInPractice( bool inPractice );
-
-    /** equality operator */
-    bool operator==(const KEduVocLesson &other);
+    void removeEntry(KEduVocExpression* entry);
 
 private:
     class Private;

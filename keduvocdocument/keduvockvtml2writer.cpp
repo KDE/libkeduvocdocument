@@ -63,13 +63,6 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
         domElementKvtml.appendChild( currentElement );
     }
 
-    // usages
-    currentElement = m_domDoc.createElement( KVTML_USAGES );
-    writeUsages( currentElement );
-    if ( currentElement.hasChildNodes() ) {
-        domElementKvtml.appendChild( currentElement );
-    }
-
     // entries
     currentElement = m_domDoc.createElement( KVTML_ENTRIES );
     if ( !writeEntries( currentElement ) ) {
@@ -80,15 +73,15 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
 
     // lessons
     currentElement = m_domDoc.createElement( KVTML_LESSONS );
-    writeLessons( currentElement );
+    writeLessons( m_doc->lesson(), currentElement );
     if ( currentElement.hasChildNodes() ) {
         domElementKvtml.appendChild( currentElement );
     }
 
     // types
-    m_wordTypeElement = m_domDoc.createElement( KVTML_WORDTYPES );
-    writeWordTypes( m_wordTypeElement );
-    if ( m_wordTypeElement.hasChildNodes() ) {
+    currentElement = m_domDoc.createElement( KVTML_WORDTYPES );
+    writeWordTypes( currentElement, m_doc->wordTypeContainer() );
+    if ( currentElement.hasChildNodes() ) {
         domElementKvtml.appendChild( m_wordTypeElement );
     }
 
@@ -172,191 +165,167 @@ bool KEduVocKvtml2Writer::writeIdentifiers( QDomElement &identifiersElement )
     return true;
 }
 
-bool KEduVocKvtml2Writer::writeLessons( QDomElement &lessonsElement )
+bool KEduVocKvtml2Writer::writeLessons( KEduVocLesson *parentLesson, QDomElement &lessonsElement )
 {
-    for( int lessonId = 0; lessonId < m_doc->lessonCount(); lessonId++ ) {
+    // iterate over child lessons.
+    // the first time this is called with the root lesson which does not have a <lesson> entry.
+    for( int i = 0; i < parentLesson->childContainerCount(); i++ ) {
+        KEduVocLesson *lesson = static_cast<KEduVocLesson*>(parentLesson->childContainer(i));
         // make lesson element
         QDomElement thisLessonElement = m_domDoc.createElement( KVTML_CONTAINER );
 
         // add a name
-        thisLessonElement.appendChild( newTextElement( KVTML_NAME, m_doc->lesson(lessonId).name() ) );
+        thisLessonElement.appendChild( newTextElement( KVTML_NAME, lesson->name() ) );
 
         // add a inquery tag
-        if ( m_doc->lesson(lessonId).inPractice() ) {
+        if ( lesson->inPractice() ) {
             thisLessonElement.appendChild( newTextElement( KVTML_INPRACTICE, KVTML_TRUE ) );
         }
 
-        // add a current tag
-        if ( lessonId == m_doc->currentLesson() ) {
-            thisLessonElement.appendChild( newTextElement( KVTML_CURRENT, KVTML_TRUE ) );
-        }
+        // child lessons
+        writeLessons(lesson, thisLessonElement);
 
-        for ( int i = 0; i < m_doc->entryCount(); ++i ) {
-            if ( m_doc->entry(i)->lesson() == lessonId ) {
-                QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
-                entryElement.setAttribute( KVTML_ID, QString::number( i ) );
-                thisLessonElement.appendChild(entryElement);
-            }
+        // child entries
+        foreach(KEduVocExpression *entry, lesson->entries()) {
+            QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
+            entryElement.setAttribute( KVTML_ID, QString::number(m_allEntries.indexOf(entry)) );
+            thisLessonElement.appendChild(entryElement);
         }
-
         lessonsElement.appendChild( thisLessonElement );
     }
-
     return true;
 }
 
 
 bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int article )
 {
-    ///@todo: this is ugly as hell and writes only singular
-
-    QDomElement singular = m_domDoc.createElement( KVTML_SINGULAR );
-
-    QDomElement definite = m_domDoc.createElement( KVTML_DEFINITE );
-    QDomElement indefinite = m_domDoc.createElement( KVTML_INDEFINITE );
+    QDomElement number;
     QString def;
     QString indef;
 
-    // male
-    QString articleString;
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Masculine );
-    if ( !articleString.isEmpty() ) {
-        definite.appendChild( newTextElement( KVTML_MALE, articleString ) );
-    }
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Masculine );
-    if ( !articleString.isEmpty() ) {
-        indefinite.appendChild( newTextElement( KVTML_MALE, articleString ) );
-    }
+    for( int i= KEduVocArticle::Singular; i <= KEduVocArticle::Plural; ++i)
+    {
+        QDomElement definite = m_domDoc.createElement( KVTML_DEFINITE );
+        QDomElement indefinite = m_domDoc.createElement( KVTML_INDEFINITE );
 
-    // female
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Feminine );
-    if ( !articleString.isEmpty() ) {
-        definite.appendChild( newTextElement( KVTML_FEMALE, articleString ) );
-    }
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Feminine );
-    if ( !articleString.isEmpty() ) {
-        indefinite.appendChild( newTextElement( KVTML_FEMALE, articleString ) );
-    }
+        switch(i) {
+        case KEduVocArticle::Singular:
+            number = m_domDoc.createElement( KVTML_SINGULAR );
+            break;
+        case KEduVocArticle::Plural:
+            number = m_domDoc.createElement( KVTML_PLURAL);
+            break;
+        case KEduVocArticle::Dual:
+            number = m_domDoc.createElement( KVTML_DUAL );
+            break;
+	}
 
-    // neutral
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Neutral );
-    if ( !articleString.isEmpty() ) {
-        definite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
-    }
-    articleString = m_doc->identifier(article).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Neutral );
-    if ( !articleString.isEmpty() ) {
-        indefinite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
-    }
+        QString articleString;
+        articleString = m_doc->identifier(article).article().article( KEduVocArticle::ArticleNumber(i), KEduVocArticle::Definite, KEduVocArticle::Masculine );
+        if ( !articleString.isEmpty() ) {
+            definite.appendChild( newTextElement( KVTML_MALE, articleString ) );
+        }
+        articleString = m_doc->identifier(article).article().article(KEduVocArticle::ArticleNumber(i), KEduVocArticle::Indefinite, KEduVocArticle::Masculine );
+        if ( !articleString.isEmpty() ) {
+            indefinite.appendChild( newTextElement( KVTML_MALE, articleString ) );
+        }
+
+        // female
+        articleString = m_doc->identifier(article).article().article( KEduVocArticle::ArticleNumber(i), KEduVocArticle::Definite, KEduVocArticle::Feminine );
+        if ( !articleString.isEmpty() ) {
+            definite.appendChild( newTextElement( KVTML_FEMALE, articleString ) );
+        }
+        articleString = m_doc->identifier(article).article().article( KEduVocArticle::ArticleNumber(i), KEduVocArticle::Indefinite, KEduVocArticle::Feminine );
+        if ( !articleString.isEmpty() ) {
+            indefinite.appendChild( newTextElement( KVTML_FEMALE, articleString ) );
+        }
+
+        // neutral
+        articleString = m_doc->identifier(article).article().article( KEduVocArticle::ArticleNumber(i), KEduVocArticle::Definite, KEduVocArticle::Neutral );
+        if ( !articleString.isEmpty() ) {
+            definite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
+        }
+        articleString = m_doc->identifier(article).article().article( KEduVocArticle::ArticleNumber(i), KEduVocArticle::Indefinite, KEduVocArticle::Neutral );
+        if ( !articleString.isEmpty() ) {
+            indefinite.appendChild( newTextElement( KVTML_NEUTRAL, articleString ) );
+        }
 
 
-
-
-    if ( definite.hasChildNodes() ) {
-        singular.appendChild( definite );
-    }
-
-    if ( indefinite.hasChildNodes() ) {
-        singular.appendChild( indefinite );
-    }
-
-    if ( singular.hasChildNodes() ) {
-        articleElement.appendChild( singular );
+        if ( definite.hasChildNodes() ) {
+            number.appendChild( definite );
+        }
+        if ( indefinite.hasChildNodes() ) {
+            number.appendChild( indefinite );
+        }
+        if ( number.hasChildNodes() ) {
+            articleElement.appendChild( number );
+        }
     }
     return true;
 }
 
-bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement )
+
+bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocWordType* parentContainer )
 {
-    KEduVocWordType wt = m_doc->wordTypes();
-    foreach( QString mainTypeName, wt.typeNameList() ) {
-        kDebug() << "Writing type: " << mainTypeName;
+    foreach( KEduVocContainer* container, parentContainer->childContainers() ) {
+        KEduVocWordType* wordType = static_cast<KEduVocWordType*>(container);
+
+        kDebug() << "Writing type: " << wordType->name();
+
         QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_CONTAINER );
-        typeDefinitionElement.appendChild( newTextElement( KVTML_NAME, mainTypeName ) );
+        typeDefinitionElement.appendChild( newTextElement( KVTML_NAME, wordType->name() ) );
 
-        QString specialType = wt.specialType( mainTypeName );
-        if ( !specialType.isEmpty() ) {
-            // get the NOT localized version for the doc
-            if ( specialType == m_doc->wordTypes().specialTypeNoun() ) {
-                specialType = KVTML_SPECIALWORDTYPE_NOUN;
-            }
-            if ( specialType == m_doc->wordTypes().specialTypeVerb()) {
-                specialType =  KVTML_SPECIALWORDTYPE_VERB;
-            }
-            if ( specialType == m_doc->wordTypes().specialTypeAdverb()) {
-                specialType = KVTML_SPECIALWORDTYPE_ADVERB;
-            }
-            if ( specialType ==  m_doc->wordTypes().specialTypeAdjective()) {
-                specialType = KVTML_SPECIALWORDTYPE_ADJECTIVE;
-            }
-            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, specialType ) );
+        switch (wordType->wordType()) {
+        case KEduVocWordType::Noun:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN ) );
+            break;
+        case KEduVocWordType::NounMale:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_MALE ) );
+            break;
+        case KEduVocWordType::NounFemale:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_FEMALE ) );
+            break;
+        case KEduVocWordType::NounNeutral:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) );
+            break;
+        case KEduVocWordType::Verb:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_VERB ) );
+            break;
+        case KEduVocWordType::Adjective:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_ADJECTIVE ) );
+            break;
+        case KEduVocWordType::Adverb:
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_ADVERB ) );
+            break;
+        default:
+            // no special type, no tag
+            break;
         }
 
-        // go through the entries - this is pretty inefficient but will change when the
-        // container class is used for word types.
-        for(int i = 0; i<m_doc->entryCount(); i++) {
+
+// child entries
+
+        // child entries
+        foreach(KEduVocExpression *entry, wordType->entries()) {
             QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
+            entryElement.setAttribute( KVTML_ID, QString::number(m_allEntries.indexOf(entry)) );
+
             for(int translation = 0; translation<m_doc->identifierCount(); translation++) {
-                // if it has a subtype, add there
-                if(m_doc->entry(i)->translation(translation).subType().isEmpty()) {
-                    if (m_doc->entry(i)->translation(translation).type()== mainTypeName) {
-                        // create <element id="123">
-                        entryElement.setAttribute( KVTML_ID, QString::number( i ) );
-                        // create <translation id="123">
-                        QDomElement translationElement = m_domDoc.createElement( KVTML_TRANSLATION );
-                        translationElement.setAttribute( KVTML_ID, QString::number(translation) );
-                        // append both
-                        entryElement.appendChild(translationElement);
-                    }
+                if (entry->translation(translation)->wordType()== wordType) {
+                    // create <element id="123">
+                    entryElement.setAttribute( KVTML_ID, QString::number(translation) );
+                    // create <translation id="123">
+                    QDomElement translationElement = m_domDoc.createElement( KVTML_TRANSLATION );
+                    translationElement.setAttribute( KVTML_ID, QString::number(translation) );
+                    // append both
+                    entryElement.appendChild(translationElement);
                 }
             }
-            if (entryElement.hasChildNodes()) {
-                typeDefinitionElement.appendChild(entryElement);
-            }
+            typeDefinitionElement.appendChild( entryElement );
         }
 
+        writeWordTypes( typeDefinitionElement, wordType );
 
-        // subtypes
-        foreach( QString subTypeName, wt.subTypeNameList( mainTypeName ) ) {
-            QDomElement subTypeDefinitionElement = m_domDoc.createElement( KVTML_CONTAINER );
-            subTypeDefinitionElement.appendChild( newTextElement( KVTML_NAME, subTypeName ) );
-            QString specialSubType = wt.specialSubType( mainTypeName, subTypeName );
-            if ( !specialSubType.isEmpty() ) {
-                if ( specialSubType == m_doc->wordTypes().specialTypeNounMale() ) {
-                    specialSubType = KVTML_SPECIALWORDTYPE_NOUN_MALE;
-                }
-                if ( specialSubType == m_doc->wordTypes().specialTypeNounFemale() ) {
-                    specialSubType = KVTML_SPECIALWORDTYPE_NOUN_FEMALE;
-                }
-                if ( specialSubType == m_doc->wordTypes().specialTypeNounNeutral() ) {
-                    specialSubType = KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL;
-                }
-                subTypeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, specialSubType ) );
-            }
-            typeDefinitionElement.appendChild( subTypeDefinitionElement );
-
-            // go through the entries - this is pretty inefficient but will change when the
-            // container class is used for word types.
-            for(int i = 0; i<m_doc->entryCount(); i++) {
-                QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
-                for(int translation = 0; translation<m_doc->identifierCount(); translation++) {
-                    // if it has a subtype, add there
-                    if(m_doc->entry(i)->translation(translation).subType() == subTypeName) {
-                        if (m_doc->entry(i)->translation(translation).type()== mainTypeName) {
-                            // create <element id="123">
-                            entryElement.setAttribute( KVTML_ID, QString::number( i ) );
-                            // create <translation id="123">
-                            QDomElement translationElement = m_domDoc.createElement( KVTML_TRANSLATION );
-                            translationElement.setAttribute( KVTML_ID, QString::number(translation) );
-                            // append both
-                            entryElement.appendChild(translationElement);
-                        }
-                    }
-                }
-                if (entryElement.hasChildNodes()) {
-                    subTypeDefinitionElement.appendChild(entryElement);
-                }
-            }
-        }
         typesElement.appendChild( typeDefinitionElement );
     }
     return true;
@@ -374,21 +343,13 @@ bool KEduVocKvtml2Writer::writeTenses( QDomElement &tensesElement )
     return true;
 }
 
-
-bool KEduVocKvtml2Writer::writeUsages( QDomElement &usagesElement )
-{
-    foreach( QString usage, m_doc->usages() ) {
-        usagesElement.appendChild( newTextElement( KVTML_USAGE, usage ) );
-    }
-
-    return true;
-}
-
 bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
 {
+    m_allEntries = m_doc->lesson()->entriesRecursive();
+
     // loop through entries
-    for ( int i = 0; i < m_doc->entryCount(); ++i ) {
-        KEduVocExpression *thisEntry = m_doc->entry( i );
+    for ( int i = 0; i < m_allEntries.count(); ++i ) {
+        KEduVocExpression *thisEntry = m_allEntries.value(i);
 
         // write entry tag
         QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
@@ -399,11 +360,6 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
         // write deactivated
         if(!thisEntry->isActive()) {
             entryElement.appendChild( newTextElement( KVTML_DEACTIVATED, KVTML_TRUE ) );
-        }
-
-        // write sizehint
-        if ( thisEntry->sizeHint() > 0 ) {
-            entryElement.appendChild( newTextElement( KVTML_SIZEHINT, QString::number( thisEntry->sizeHint() ) ) );
         }
 
         // loop through translations
@@ -421,26 +377,27 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
 }
 
 
-bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEduVocTranslation &translation )
+bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEduVocTranslation* translation )
 {
     // <text>Kniebeugen</text>
-    translationElement.appendChild( newTextElement( KVTML_TEXT, translation.text() ) );
+    translationElement.appendChild( newTextElement( KVTML_TEXT, translation->text() ) );
+kDebug() << "write tranlation:" << translation->text();
 
     // <comment></comment>
-    if ( !translation.comment().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_COMMENT, translation.comment() ) );
+    if ( !translation->comment().isEmpty() ) {
+        translationElement.appendChild( newTextElement( KVTML_COMMENT, translation->comment() ) );
     }
 
     // <pronunciation></pronunciation>
-    if ( !translation.pronunciation().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_PRONUNCIATION, translation.pronunciation() ) );
+    if ( !translation->pronunciation().isEmpty() ) {
+        translationElement.appendChild( newTextElement( KVTML_PRONUNCIATION, translation->pronunciation() ) );
     }
 
     // <falsefriend fromid="0"></falsefriend>
     // loop through the identifiers
     for ( int i = 0; i < m_doc->identifierCount(); ++i ) {
         // see if this identifier has a falsefriend in this translation
-        QString thisFriend = translation.falseFriend( i );
+        QString thisFriend = translation->falseFriend( i );
         if ( !thisFriend.isEmpty() ) {
             // if so, create it, and set the fromid to i
             QDomElement thisFriendElement = newTextElement( KVTML_FALSEFRIEND, thisFriend );
@@ -450,33 +407,33 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     }
 
     // <antonym></antonym>
-    if ( !translation.antonym().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_ANTONYM, translation.antonym() ) );
+    if ( !translation->antonym().isEmpty() ) {
+        translationElement.appendChild( newTextElement( KVTML_ANTONYM, translation->antonym() ) );
     }
 
     // <synonym></synonym>
-    if ( !translation.synonym().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_SYNONYM, translation.synonym() ) );
+    if ( !translation->synonym().isEmpty() ) {
+        translationElement.appendChild( newTextElement( KVTML_SYNONYM, translation->synonym() ) );
     }
 
     // <example></example>
-    if ( !translation.example().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_EXAMPLE, translation.example() ) );
+    if ( !translation->example().isEmpty() ) {
+        translationElement.appendChild( newTextElement( KVTML_EXAMPLE, translation->example() ) );
     }
 
     // <usage></usage>
-    foreach( QString usage, translation.usages() ) {
+    foreach( QString usage, translation->usages() ) {
         translationElement.appendChild( newTextElement( KVTML_USAGE, usage ) );
     }
 
     // <paraphrase></paraphrase>
-    if ( !translation.paraphrase().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_PARAPHRASE, translation.paraphrase() ) );
+    if ( !translation->paraphrase().isEmpty() ) {
+        translationElement.appendChild( newTextElement( KVTML_PARAPHRASE, translation->paraphrase() ) );
     }
 
     // grades
     for ( int i = 0; i < m_doc->identifierCount(); ++i ) {
-        KEduVocGrade thisGrade = translation.gradeFrom( i );
+        KEduVocGrade thisGrade = translation->gradeFrom( i );
         if ( thisGrade.practiceCount() > 0 ) {
             QDomElement gradeElement = m_domDoc.createElement( KVTML_GRADE );
             gradeElement.setAttribute( KVTML_FROMID, QString::number( i ) );
@@ -497,46 +454,46 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     }
 
     // conjugation
-    foreach ( QString tense, translation.conjugationTenses() ) {
+    foreach ( QString tense, translation->conjugationTenses() ) {
         QDomElement thisElement = m_domDoc.createElement( KVTML_CONJUGATION );
-        writeConjugation( thisElement, translation.conjugation(tense), tense );
+        writeConjugation( thisElement, translation->conjugation(tense), tense );
         translationElement.appendChild( thisElement );
     }
 
     // comparison
-    if ( !translation.comparison().isEmpty() ) {
+    if ( !(translation->comparative().isEmpty() || translation->comparative().isEmpty())) {
         QDomElement comparisonElement = m_domDoc.createElement( KVTML_COMPARISON );
-        writeComparison( comparisonElement, translation.comparison() );
+        writeComparison( comparisonElement, translation );
         translationElement.appendChild( comparisonElement );
     }
 
     // multiplechoice
-    if ( !translation.multipleChoice().isEmpty() ) {
+    if ( !translation->multipleChoice().isEmpty() ) {
         QDomElement multipleChoiceElement = m_domDoc.createElement( KVTML_MULTIPLECHOICE );
-        writeMultipleChoice( multipleChoiceElement, translation.multipleChoice() );
+        writeMultipleChoice( multipleChoiceElement, translation );
         translationElement.appendChild( multipleChoiceElement );
     }
 
     // image
-    if ( !translation.imageUrl().isEmpty() ) {
+    if ( !translation->imageUrl().isEmpty() ) {
         QString urlString;
-        if ( translation.imageUrl().url().startsWith(m_doc->url().upUrl().url()) ) {
+        if ( translation->imageUrl().url().startsWith(m_doc->url().upUrl().url()) ) {
             // try to save as relative url
-            urlString = KUrl::relativeUrl( m_doc->url() , translation.imageUrl() );
+            urlString = KUrl::relativeUrl( m_doc->url() , translation->imageUrl() );
         } else {
-            urlString =  translation.imageUrl().url();
+            urlString =  translation->imageUrl().url();
         }
         translationElement.appendChild( newTextElement( KVTML_IMAGE, urlString ) );
     }
 
     // sound
-    if ( !translation.soundUrl().isEmpty() ) {
+    if ( !translation->soundUrl().isEmpty() ) {
         QString urlString;
-        if ( translation.soundUrl().url().startsWith(m_doc->url().upUrl().url()) ) {
+        if ( translation->soundUrl().url().startsWith(m_doc->url().upUrl().url()) ) {
             // try to save as relative url
-            urlString = KUrl::relativeUrl( m_doc->url() , translation.soundUrl() );
+            urlString = KUrl::relativeUrl( m_doc->url() , translation->soundUrl() );
         } else {
-            urlString =  translation.soundUrl().url();
+            urlString =  translation->soundUrl().url();
         }
         translationElement.appendChild( newTextElement( KVTML_SOUND, urlString ) );
     }
@@ -544,7 +501,7 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     return true;
 }
 
-bool KEduVocKvtml2Writer::writeComparison( QDomElement &comparisonElement, const KEduVocComparison &comparison )
+bool KEduVocKvtml2Writer::writeComparison( QDomElement &comparisonElement, KEduVocTranslation* translation )
 /*
  <comparison>
    <absolute>good</absolute>
@@ -553,15 +510,14 @@ bool KEduVocKvtml2Writer::writeComparison( QDomElement &comparisonElement, const
  </comparison>
 */
 {
-    comparisonElement.appendChild( newTextElement( KVTML_ABSOLUTE, comparison.l1() ) );
-    comparisonElement.appendChild( newTextElement( KVTML_COMPARATIVE, comparison.l2() ) );
-    comparisonElement.appendChild( newTextElement( KVTML_SUPERLATIVE, comparison.l3() ) );
+    comparisonElement.appendChild( newTextElement( KVTML_COMPARATIVE, translation->comparative() ) );
+    comparisonElement.appendChild( newTextElement( KVTML_SUPERLATIVE, translation->superlative() ) );
 
     return true;
 }
 
 
-bool KEduVocKvtml2Writer::writeMultipleChoice( QDomElement &multipleChoiceElement, const KEduVocMultipleChoice &mc )
+bool KEduVocKvtml2Writer::writeMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation )
 /*
  <multiplechoice>
    <choice>good</choice>
@@ -572,11 +528,9 @@ bool KEduVocKvtml2Writer::writeMultipleChoice( QDomElement &multipleChoiceElemen
  </multiplechoice>
 */
 {
-    QStringList choices = mc.choices();
-    for ( int i = 0; i < choices.size(); ++i ) {
-        multipleChoiceElement.appendChild( newTextElement( KVTML_CHOICE, choices[i] ) );
+    foreach ( QString choice, translation->multipleChoice() ) {
+        multipleChoiceElement.appendChild( newTextElement( KVTML_CHOICE, choice ) );
     }
-
     return true;
 }
 

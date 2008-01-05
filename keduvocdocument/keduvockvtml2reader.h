@@ -26,6 +26,7 @@
 
 class QIODevice;
 class KEduVocDocument;
+class KEduVocWordType;
 
 /**
 * @brief class to read kvtml2 data files into keduvocdocument
@@ -88,7 +89,15 @@ private:
     /** read the types
      * @param typesElement QDomElement for the types group
      */
-    bool readWordTypes( QDomElement &typesElement );
+    bool readWordType( KEduVocWordType* parentContainer, QDomElement &typesElement );
+
+    /**
+     * Read all <container> tags within a word type definition.
+     * @param parentContainer 
+     * @param lessonElement 
+     * @return 
+     */
+    bool readChildWordTypes( KEduVocWordType* parentContainer, QDomElement &lessonElement );
 
     /** read the tenses
      * @param tensesElement QDomElement for the tenses group
@@ -108,37 +117,49 @@ private:
     /** read a translation
      * @param translationElement QDomElement for the translation to read
      */
-    bool readTranslation( QDomElement &translationElement, KEduVocExpression &expr, int index );
+    bool readTranslation( QDomElement &translationElement, KEduVocExpression *expr, int index );
 
     /** read a comparison
      * @param comparisonElement comparison group element
      * @param comp comparison object to read into
      */
-    bool readComparison( QDomElement &comparisonElement, KEduVocComparison &comp );
+    bool readComparison( QDomElement &comparisonElement, KEduVocTranslation *translation );
 
     /** read a multiple choice group
      * @param multipleChoiceElement element to read from
      * @param mc KEduVocMultipleChoice object to read to
      */
-    bool readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocMultipleChoice &mc );
+    bool readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation );
 
     /** read a grade
      * @param gradeElement element to read from
      * @param expr expression element to add grades to
      * @param index index of the current translation
      */
-    bool readGrade( QDomElement &gradeElement, KEduVocExpression &expr, int index );
+    bool readGrade( QDomElement &gradeElement, KEduVocExpression *expr, int index );
+
+    /**
+     * Read <lesson> tags.
+     * @param parentLesson 
+     * @param lessonElement 
+     * @return 
+     */
+    bool readChildLessons( KEduVocLesson* parentLesson, QDomElement &lessonElement );
 
     /** read a lesson, and append it to the document
      * @param lessonElement element to read from
      */
-    bool readLesson( QDomElement &lessonElement );
+    bool readLesson( KEduVocLesson* parentLesson, QDomElement &lessonElement );
 
     /** pre-opened QIODevice to read from */
     QIODevice *m_inputFile;
 
     /** KEduVocDocument to read to */
     KEduVocDocument *m_doc;
+
+    /** because we read the entries first, we store them here temporarily.
+     * later we read the lessons and put the entries there based on the key (their id) */
+    QMap<int, KEduVocExpression*> m_allEntries;
 
     /** error message */
     QString m_errorMessage;

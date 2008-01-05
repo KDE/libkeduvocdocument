@@ -23,6 +23,7 @@
 #include <KLocale>
 
 #include "keduvocdocument.h"
+#include "keduvoclesson.h"
 #include "keduvocexpression.h"
 
 KEduVocCsvWriter::KEduVocCsvWriter( QFile *file )
@@ -52,8 +53,8 @@ bool KEduVocCsvWriter::writeDoc( KEduVocDocument *doc, const QString &generator 
     int idCount = m_doc->identifierCount();
     QString currentRow;
 
-    for ( int e = 0; e < m_doc->entryCount(); e++ ) {
-        expression = m_doc->entry( e );
+    for ( int e = 0; e < m_doc->lesson()->entriesRecursive().count(); e++ ) {
+        expression = m_doc->lesson()->entriesRecursive().value( e );
         currentRow = "";
         bool sep = false;
 
@@ -63,7 +64,7 @@ bool KEduVocCsvWriter::writeDoc( KEduVocDocument *doc, const QString &generator 
             else
                 currentRow += separator;
 
-            currentRow += expression->translation( i ).text();
+            currentRow += expression->translation( i )->text();
         }
 
         if ( !currentRow.isEmpty() )

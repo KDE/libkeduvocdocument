@@ -3,12 +3,11 @@ add_subdirectory(tests)
 ########### next target ###############
 
 set(keduvocdocument_LIB_SRCS
-   keduvoccsvreader.cpp
-   keduvoccsvwriter.cpp
-   keduvocdocument.cpp
+keduvocdocument.cpp
    keduvocidentifier.cpp
    keduvocexpression.cpp
    keduvoctranslation.cpp
+   keduvoccontainer.cpp
    keduvoclesson.cpp
    keduvocgrade.cpp
    keduvocgrammar.cpp
@@ -16,12 +15,13 @@ set(keduvocdocument_LIB_SRCS
    keduvocpersonalpronoun.cpp
    keduvocdeclination.cpp
    keduvocwordtype.cpp
+   keduvockvtmlcompability.cpp
    keduvockvtmlreader.cpp
    keduvockvtml2reader.cpp
-   keduvockvtmlwriter.cpp
+   #keduvockvtmlwriter.cpp
    keduvockvtml2writer.cpp
-   keduvockvtmlcompability.cpp
-   keduvocmultiplechoice.cpp
+   keduvoccsvreader.cpp
+   keduvoccsvwriter.cpp
    keduvocpaukerreader.cpp
    keduvocvokabelnreader.cpp
    keduvocwqlreader.cpp

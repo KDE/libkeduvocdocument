@@ -195,64 +195,6 @@ public:
     /** @returns the version of the loaded file */
     QString version() const;
 
-
-    // *** entry methods ***
-
-    /**
-     * Appends a new expression to the end of the vocabulary
-     *
-     * @param expression      expression to append
-     */
-    void appendEntry( KEduVocExpression *expression );
-
-    /**
-     * Inserts a new expression at position @p index
-     *
-     * @param expression      expression to insert
-     * @param index           index of entry
-     */
-    void insertEntry( KEduVocExpression *expression, int index );
-
-    /**
-     * Removes an expression from the document
-     *
-     * @param index           index of expression
-     */
-    void removeEntry( int index );
-
-    /**
-     * Shuffles vocabulary in a random order
-     */
-    void shuffle();
-
-    /**
-     * Removes duplicate entries (original plus all translations)
-     *
-     * @returns                 number of removed entries
-     */
-    int cleanUp();
-
-    /**
-     * @returns the number of entries
-     */
-    int entryCount() const;
-
-    /**
-     * Returns the recommended size
-     *
-     * @param index            number of expr, -1 = lesson
-     * @returns                width of column
-     */
-    int sizeHint( int index ) const;
-
-    /**
-     * Sets the recommended size
-     *
-     * @param index            number of expr, -1 = lesson
-     * @param width            width of column
-     */
-    void setSizeHint( int index, const int width );
-
     // *** identifier methods ***
 
     /**
@@ -299,16 +241,6 @@ public:
      */
     int indexOfIdentifier( const QString &name ) const;
 
-    // *** type methods ***
-
-    /**
-     * Returns the type handling class. See KEduVocWordType.
-     *
-     * @returns the KEduVocWordType* type handling class
-     */
-    KEduVocWordType& wordTypes();
-
-
     // *** tense methods ***
 
     /**
@@ -337,58 +269,8 @@ public:
      */
     QStringList tenseDescriptions() const;
 
-    // *** usage methods ***
-
-    /**
-     * Gets the descriptions of the usages.
-     * Usages are context information in a dictionary you may find [biol.]
-     * [am.] and the like to hint at the context in which the word is usually used.
-     */
-    QStringList usages() const;
-
-    /**
-     * Adds a usage label to the doc.
-     *
-     * @param usage    name of the usage
-     */
-    void addUsage( const QString &usage );
-
-    /**
-     * Rename a usage label.
-     * Actually changes the label in the vocabulary as well.
-     *
-     * @param oldName    old name of the usage label
-     * @param newName    new name of the usage label
-     */
-    void renameUsage( const QString &oldName, const QString &newName );
-
-    /**
-     * Remove a usage label.
-     * Also removes the label from all translations.
-     *
-     * @param name    new name of the usage label
-     */
-    void removeUsage( const QString &name );
 
     // *** grade methods ***
-
-    /**
-     * Sets grades to KV_NORM_GRADE, counts to 0 ...
-     *
-     * @param index    index of language 0..x, -1 = all
-     * @param lesson   lesson id, if this is 0 all lesson are affected,
-     *                 otherwise only matching numbers
-     */
-    void resetEntry( int index = -1, int lesson = 0 );
-
-    /**
-     * Returns pointer to expression object @p index
-     *
-     * @param index     index of desired entry
-     * @returns         pointer to object or NULL if index out of range
-     */
-    KEduVocExpression *entry( int index );
-
 
     /**
      * Retrieves the identifiers for the current query
@@ -410,60 +292,14 @@ public:
 
     // *** lesson methods ***
 
-    /**
-     * @returns the current lesson index
+    /** get the lesson root object
+     * @returns a pointer to the lesson object
      */
-    int currentLesson() const;
+    KEduVocLesson * lesson();
 
-    /**
-     * Sets current lesson index
-     * @param lesson    index of lesson
-     */
-    void setCurrentLesson( int lesson );
+    KEduVocWordType * wordTypeContainer();
 
-    /** get a lesson object
-     * @returns a pointer to the lesson object at the specified index
-     * NOTE: this will create one if it doesn't exist
-     */
-    KEduVocLesson & lesson( int index );
-
-    /** get all lesson objects
-     * @returns a map of pointers to lesson objects
-     */
-    QList<KEduVocLesson> & lessons() const;
-
-    /**
-     * @returns                the number of lessons defined
-     */
-    int lessonCount() const;
-
-    /**
-     * Append a new lesson to the list of lessons.
-     * @param lessonName name for the new lesson
-     * @returns the index of the new lesson
-     */
-    int appendLesson( const QString &lessonName, bool inQuery=true );
-
-    /**
-     * Delete a lesson.
-     * @param lessonIndex which lesson
-     * @param deleteMode either KEduVocDocument::DeleteEmptyLesson (delete only if empty) or KEduVocDocument::DeleteEntriesAndLesson (delete including vocabulary in that lesson)
-     * @returns if the deletion was successful. If there are vocabularies in the lesson, but DeleteEmptyLesson, this will return false and not delete the lesson.
-     */
-    bool removeLesson( int lessonIndex, int deleteMode );
-
-    /** DEPRECATED
-     * All lesson descriptions as stringlist.
-     * @returns a list of defined lessons
-     */
-    KDE_DEPRECATED QStringList lessonNames() const;
-
-    /** @todo implement this?
-     * Moves the lesson at index position from to index position to.
-     * @param from the lesson to be moved
-     * @param to the new position
-     */
-    void moveLesson(int from, int to);
+    KEduVocLesson * leitnerContainer();
 
     // *** file format specific methods ***
 

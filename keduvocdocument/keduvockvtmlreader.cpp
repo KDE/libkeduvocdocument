@@ -158,7 +158,8 @@ bool KEduVocKvtmlReader::readBody( QDomElement &domElementParent )
     }
 
     // initialize the list of predefined types
-    m_doc->wordTypes().createDefaultWordTypes();
+    m_compability.setupWordTypes(m_doc->wordTypeContainer());
+
     currentElement = domElementParent.firstChildElement( KV_TYPE_GRP );
     if ( !currentElement.isNull() ) {
         result = readType( currentElement );
@@ -169,13 +170,6 @@ bool KEduVocKvtmlReader::readBody( QDomElement &domElementParent )
     currentElement = domElementParent.firstChildElement( KV_TENSE_GRP );
     if ( !currentElement.isNull() ) {
         result = readTense( currentElement );
-        if ( !result )
-            return false;
-    }
-
-    currentElement = domElementParent.firstChildElement( KV_USAGE_GRP );
-    if ( !currentElement.isNull() ) {
-        result = readUsage( currentElement );
         if ( !result )
             return false;
     }
@@ -205,13 +199,6 @@ bool KEduVocKvtmlReader::readLesson( QDomElement &domElementParent )
     QDomAttr attribute;
     QDomElement currentElement;
 
-    //-------------------------------------------------------------------------
-    // Attributes
-    //-------------------------------------------------------------------------
-
-    attribute = domElementParent.attributeNode( KV_SIZEHINT );
-    if ( !attribute.isNull() )
-        m_doc->setSizeHint( -1, attribute.value().toInt() );
 
     //-------------------------------------------------------------------------
     // Children
@@ -231,13 +218,6 @@ bool KEduVocKvtmlReader::readLesson( QDomElement &domElementParent )
                 no = attribute.value().toInt();
             }
 
-            attribute = currentElement.attributeNode( KV_LESS_CURR );
-            if ( !attribute.isNull() ) {
-                if ( no != -1 && attribute.value().toInt() != 0 ) {
-                    m_doc->setCurrentLesson( no );
-                }
-            }
-
             bool inQuery = false;
             attribute = currentElement.attributeNode( KV_LESS_QUERY );
             if ( !attribute.isNull() ) {
@@ -245,8 +225,10 @@ bool KEduVocKvtmlReader::readLesson( QDomElement &domElementParent )
             }
 
             s = currentElement.text();
-            int index = m_doc->appendLesson( s, inQuery );
-            if ( index != no-1 ) {
+            KEduVocLesson* lesson = new KEduVocLesson(s, m_doc->lesson());
+            lesson->setInPractice(inQuery);
+            m_doc->lesson()->appendChildContainer( lesson );
+            if ( m_doc->lesson()->childContainerCount() != no-1 ) {
                 kDebug() << "Warning! Lesson order may be confused. Are all lessons in order in the file?";
             }
         }
@@ -352,7 +334,7 @@ bool KEduVocKvtmlReader::readArticle( QDomElement &domElementParent )
 }
 
 
-bool KEduVocKvtmlReader::readTranslationConjugations( QDomElement &domElementParent, KEduVocTranslation &translation ) {
+bool KEduVocKvtmlReader::readTranslationConjugations( QDomElement &domElementParent, KEduVocTranslation* translation ) {
 
     QString tense;
 
@@ -366,7 +348,7 @@ bool KEduVocKvtmlReader::readTranslationConjugations( QDomElement &domElementPar
         tense = m_compability.tenseFromKvtml1( oldShortTense );
         KEduVocConjugation conjugation;
         readConjugation(domElementConjugChild, conjugation);
-        translation.setConjugation(tense, conjugation);
+        translation->setConjugation(tense, conjugation);
 
         domElementConjugChild = domElementConjugChild.nextSiblingElement( KV_CON_TYPE );
     } // while -> next tense, count++
@@ -639,7 +621,8 @@ bool KEduVocKvtmlReader::readType( QDomElement &domElementParent )
 
             kDebug() << "Adding old self defined type: " << currentElement.text();
             // add the type to the list of available types
-            m_doc->wordTypes().addType( currentElement.text() );
+            KEduVocWordType* type = new KEduVocWordType(currentElement.text(), m_doc->wordTypeContainer());
+            m_doc->wordTypeContainer()->appendChildContainer( type );
 
             // from this the #1 are transformed to something sensible again
             m_oldSelfDefinedTypes.append( currentElement.text() );
@@ -669,75 +652,28 @@ bool KEduVocKvtmlReader::readTense( QDomElement &domElementParent )
 }
 
 
-bool KEduVocKvtmlReader::readUsage( QDomElement &domElementParent )
-{
-    // get user defined usages
-
-    QDomElement currentElement;
-
-    QDomNodeList entryList = domElementParent.elementsByTagName( KV_USAGE_DESC );
-    if ( entryList.length() <= 0 ) {
-        return false;
-    }
-
-
-    for ( int i = 0; i < entryList.count(); ++i ) {
-        currentElement = entryList.item( i ).toElement();
-        if ( currentElement.parentNode() == domElementParent ) {
-            m_compability.addUserdefinedUsage( currentElement.text() );
-        }
-    }
-
-    foreach( QString usage, m_compability.documentUsages() ) {
-        m_doc->addUsage( usage );
-    }
-
-    return true;
-}
-
-
-bool KEduVocKvtmlReader::readComparison( QDomElement &domElementParent, KEduVocComparison &comp )
+bool KEduVocKvtmlReader::readComparison( QDomElement &domElementParent, KEduVocTranslation * translation )
 /*
  <comparison>
-   <l1>good</l1>
+   <l1>good</l1> --- this one is dead as it always has to be the word itself
    <l2>better</l2>
    <l3>best</l3>
  </comparison>
 */
 {
-    QString s;
-    comp.clear();
-
     QDomElement currentElement;
 
-    currentElement = domElementParent.firstChildElement( KV_COMP_L1 );
-    if ( !currentElement.isNull() ) {
-        s = currentElement.text();
-        if ( s.isNull() )
-            s = "";
-        comp.setL1( s );
-    }
-
     currentElement = domElementParent.firstChildElement( KV_COMP_L2 );
-    if ( !currentElement.isNull() ) {
-        s = currentElement.text();
-        if ( s.isNull() )
-            s = "";
-        comp.setL2( s );
-    }
+    translation->setComparative(currentElement.text());
 
     currentElement = domElementParent.firstChildElement( KV_COMP_L3 );
-    if ( !currentElement.isNull() ) {
-        s = currentElement.text();
-        if ( s.isNull() )
-            s = "";
-        comp.setL3( s );
-    }
+    translation->setSuperlative(currentElement.text());
+
     return true;
 }
 
 
-bool KEduVocKvtmlReader::readMultipleChoice( QDomElement &domElementParent, KEduVocMultipleChoice &mc )
+bool KEduVocKvtmlReader::readMultipleChoice( QDomElement &domElementParent, KEduVocTranslation* translation )
 /*
  <multiplechoice>
    <mc1>good</mc1>
@@ -749,39 +685,31 @@ bool KEduVocKvtmlReader::readMultipleChoice( QDomElement &domElementParent, KEdu
 */
 
 {
-    QString s;
-    mc.clear();
-
     QDomElement currentElement;
 
     currentElement = domElementParent.firstChildElement( KV_MC_1 );
     if ( !currentElement.isNull() ) {
-        s = currentElement.text();
-        mc.appendChoice( s );
+        translation->multipleChoice().append( currentElement.text() );
     }
 
     currentElement = domElementParent.firstChildElement( KV_MC_2 );
     if ( !currentElement.isNull() ) {
-        s = currentElement.text();
-        mc.appendChoice( s );
+        translation->multipleChoice().append( currentElement.text() );
     }
 
     currentElement = domElementParent.firstChildElement( KV_MC_3 );
     if ( !currentElement.isNull() ) {
-        s = currentElement.text();
-        mc.appendChoice( s );
+        translation->multipleChoice().append( currentElement.text() );
     }
 
     currentElement = domElementParent.firstChildElement( KV_MC_4 );
     if ( !currentElement.isNull() ) {
-        s = currentElement.text();
-        mc.appendChoice( s );
+        translation->multipleChoice().append( currentElement.text() );
     }
 
     currentElement = domElementParent.firstChildElement( KV_MC_5 );
     if ( !currentElement.isNull() ) {
-        s = currentElement.text();
-        mc.appendChoice( s );
+        translation->multipleChoice().append( currentElement.text() );
     }
 
     return true;
@@ -799,7 +727,6 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
         QString &pronunciation,
         int &width,
         QString &type,
-        QString &subType,
         QString &faux_ami_f,
         QString &faux_ami_t,
         QString &synonym,
@@ -899,35 +826,6 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
     if ( !attribute.isNull() )
         example = attribute.value();
 
-///@todo usages
-
-    attribute = domElementExpressionChild.attributeNode( KV_USAGE );
-    if ( !attribute.isNull() ) {
-        kDebug() << "Read usages: " << attribute.value();
-        usages = m_compability.usageFromKvtml1( attribute.value() );
-
-        /*
-        usage = attribute.value();
-
-        if (usage.length() != 0 && usage.left(1) == UL_USER_USAGE)
-        {
-          int num = qMin(usage.mid (1, 40).toInt(), 1000); // paranioa check
-          if (num > m_doc->usageDescriptions().count())
-          {
-            // description missing ?
-            QStringList sl = m_doc->usageDescriptions();
-            QString s;
-            for (int i = m_doc->usageDescriptions().count(); i < num; i++)
-            {
-              s.setNum(i + 1);
-              s.prepend("#");  // invent descr according to number
-              sl.append(s);
-            }
-            m_doc->setUsageDescriptions(sl);
-          }
-        }*/
-    }
-
     paraphrase = "";
     attribute = domElementExpressionChild.attributeNode( KV_PARAPHRASE );
     if ( !attribute.isNull() )
@@ -941,21 +839,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
     // this is all done by reference - so we have to care about "type" :(
     attribute = domElementExpressionChild.attributeNode( KV_EXPRTYPE );
     if ( !attribute.isNull() ) {
-        QString oldType = attribute.value();
-        if ( oldType.length() >= 2 && type.left( 1 ) == QM_USER_TYPE ) {
-            // they started counting at 1
-            int selfDefinedTypeIndex = oldType.right( type.count()-1 ).toInt() -1;
-            // append invented types (do we not trust our own writer?)
-            if ( selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count() ) {
-                while ( selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count() ) {
-                    m_oldSelfDefinedTypes.append( i18n( "User defined word type %1", m_oldSelfDefinedTypes.count() - 1 ) );
-                }
-            }
-            type = m_oldSelfDefinedTypes.value( selfDefinedTypeIndex );
-        } else {
-            type = m_compability.mainTypeFromOldFormat( oldType );
-            subType = m_compability.subTypeFromOldFormat( oldType );
-        } // not user defined - preset types
+        type = attribute.value();
     }
 
     pronunciation = "";
@@ -991,10 +875,8 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
     QString                   q_org;
     QString                   q_trans;
     QString                   query_id;
-    int                       lesson = - 1;
     int                       width;
     QString                   type;
-    QString                   subType;
     QString                   faux_ami_f;
     QString                   faux_ami_t;
     QString                   synonym;
@@ -1003,13 +885,11 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
     QSet<QString>             usage;
     QString                   paraphrase;
 
-    KEduVocComparison         comparison;
-    KEduVocMultipleChoice     mc;
-    KEduVocExpression         expr;
-
     QDomAttr                  attribute;
     QDomElement               currentElement;
     QDomElement               currentChild;
+
+    int lessonNumber = -1;
 
     //-------------------------------------------------------------------------
     // Attributes
@@ -1018,13 +898,15 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
     attribute = domElementParent.attributeNode( KV_LESS_MEMBER );
     if ( !attribute.isNull() ) {
         // we start conting from 0 in new documents
-        lesson = attribute.value().toInt() - 1;
-        if ( lesson > m_doc->lessonCount() ) {
+        lessonNumber = attribute.value().toInt() - 1;
+        if ( lessonNumber > m_doc->lesson()->childContainerCount() ) {
             ///@todo can this happen? does it need a while loop?
             // it's from a lesson that hasn't been added yet
             // so make sure this lesson is in the document
             kDebug() << "Warning: lesson > m_doc->lessonCount() in readExpression.";
-            m_doc->appendLesson( i18nc("A generic name for a new lesson and its number.", "Lesson %1", lesson ));
+
+            KEduVocLesson* lesson = new KEduVocLesson(i18nc("A generic name for a new lesson and its number.", "Lesson %1", lessonNumber ), m_doc->lesson());
+            m_doc->lesson()->appendChildContainer(lesson);
         }
     }
 
@@ -1043,23 +925,12 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
     // this is all done by reference - so we have to care about "type" :(
     attribute = domElementParent.attributeNode( KV_EXPRTYPE );
     if ( !attribute.isNull() ) {
-        QString oldType = attribute.value();
-
-        if ( oldType.length() >= 2 && type.left( 1 ) == QM_USER_TYPE ) {
-            // they started counting at 1
-            int selfDefinedTypeIndex = oldType.right( type.count()-1 ).toInt() -1;
-            // append invented types (do we not trust our own writer?)
-            if ( selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count() ) {
-                while ( selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count() ) {
-                    m_oldSelfDefinedTypes.append( i18n( "User defined word type %1", m_oldSelfDefinedTypes.count() - 1 ) );
-                }
-            }
-            type = m_oldSelfDefinedTypes.value( selfDefinedTypeIndex );
-        } else {
-            type = m_compability.mainTypeFromOldFormat( oldType );
-            subType = m_compability.subTypeFromOldFormat( oldType );
-        } // not user defined - preset types
+        type = attribute.value();
     }
+
+
+
+
 
 
     //-------------------------------------------------------------------------
@@ -1078,6 +949,8 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         return false;
     }
 
+    KEduVocExpression* entry;
+
     while ( !currentElement.isNull() ) {
 
         //-----------
@@ -1086,27 +959,17 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
 
         // read attributes - the order of the query grades is interchanged!
         if ( i == 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
-                pronunciation, width, type, subType, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase ) )
+                pronunciation, width, type, faux_ami_t, faux_ami_f, synonym, example, antonym, usage, paraphrase ) ) {
             return false;
-
-        if ( i != 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
-                pronunciation, width, type, subType, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase ) )
-            return false;
-
-        if ( m_doc->entryCount() == 0 ) {
-            // only accept in first entry
-            if ( width >= 0 )
-                m_doc->setSizeHint( i, width );
-
-            if ( query_id == KV_O )
-                q_org = lang;
-
-            if ( query_id == KV_T )
-
-                q_trans = lang;
         }
 
-        if ( m_doc->entryCount() == 0 ) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
+        if ( i != 0 && !readExpressionChildAttributes( currentElement, lang, grade, r_grade, qcount, r_qcount, qdate, r_qdate, remark, bcount, r_bcount, query_id,
+                pronunciation, width, type, faux_ami_f, faux_ami_t, synonym, example, antonym, usage, paraphrase ) ) {
+            return false;
+        }
+
+
+        if ( m_doc->lesson()->entriesRecursive().count() == 0 ) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
 
             // new translation
             if (!addLanguage(i, lang)) {
@@ -1116,92 +979,81 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         //---------
         // Children
 
-        currentChild = currentElement.firstChildElement( KV_COMPARISON_GRP );
-        if ( !currentChild.isNull() ) {
-            comparison.clear();
-            if ( !readComparison( currentChild, comparison ) )
-                return false;
-        }
-
-        currentChild = currentElement.firstChildElement( KV_MULTIPLECHOICE_GRP );
-        if ( !currentChild.isNull() ) {
-            mc.clear();
-            if ( !readMultipleChoice( currentChild, mc ) )
-                return false;
-        }
-
         textstr = currentElement.lastChild().toText().data();
 
         if ( i == 0 ) {
-            expr = KEduVocExpression( textstr, lesson );
-            expr.setActive( active );
+            entry = new KEduVocExpression( textstr );
+            entry->setActive( active );
+            if ( lessonNumber != -1 ) {
+                static_cast<KEduVocLesson*>(m_doc->lesson()->childContainer(lessonNumber))->appendEntry(entry);
+            } else {
+                m_doc->lesson()->appendEntry(entry);
+            }
         } else {
-            expr.setTranslation( i, textstr );
+            entry->setTranslation( i, textstr );
         }
 
         // better make sure, translation(i) already exists...
         currentChild = currentElement.firstChildElement( KV_CONJUG_GRP );
         if ( !currentChild.isNull() ) {
-            if ( !readTranslationConjugations( currentChild, expr.translation(i) ) ) {
+            if ( !readTranslationConjugations( currentChild, entry->translation(i) ) ) {
                 return false;
             }
         }
 
-        if ( !comparison.isEmpty() ) {
-            expr.translation( i ).setComparison( comparison );
-            comparison.clear();
-        }
-        if ( !mc.isEmpty() ) {
-            expr.translation( i ).setMultipleChoice( mc );
-            mc.clear();
-        }
-
-        if ( !type.isEmpty() ) {
-            expr.translation( i ).setType( type );
-            if ( !subType.isEmpty() ) {
-                expr.translation( i ).setSubType( subType );
+        currentChild = currentElement.firstChildElement( KV_MULTIPLECHOICE_GRP );
+        if ( !currentChild.isNull() ) {
+            if ( !readMultipleChoice( currentChild, entry->translation(i) ) ) {
+                return false;
             }
         }
 
+        currentChild = currentElement.firstChildElement( KV_COMPARISON_GRP );
+        if ( !currentChild.isNull() ) {
+            if ( !readComparison( currentChild, entry->translation(i) ) ) {
+                return false;
+            }
+        }
+
+        if ( !type.isEmpty() ) {
+            KEduVocWordType* wordType = m_compability.typeFromOldFormat(m_doc->wordTypeContainer(), type);
+            entry->translation(i)->setWordType(wordType);
+        }
+
         if ( !remark.isEmpty() )
-            expr.translation( i ).setComment( remark );
+            entry->translation( i )->setComment( remark );
         if ( !pronunciation.isEmpty() )
-            expr.translation( i ).setPronunciation( pronunciation );
+            entry->translation( i )->setPronunciation( pronunciation );
         if ( !faux_ami_f.isEmpty() )
-            expr.translation( i ).setFalseFriend( 0, faux_ami_f );
+            entry->translation( i )->setFalseFriend( 0, faux_ami_f );
         if ( !faux_ami_t.isEmpty() )
-            expr.translation( 0 ).setFalseFriend( i, faux_ami_t );
+            entry->translation( 0 )->setFalseFriend( i, faux_ami_t );
         if ( !synonym.isEmpty() )
-            expr.translation( i ).setSynonym( synonym );
+            entry->translation( i )->setSynonym( synonym );
         if ( !example.isEmpty() )
-            expr.translation( i ).setExample( example );
+            entry->translation( i )->setExample( example );
         if ( !usage.isEmpty() )
-            expr.translation( i ).setUsages( usage );
+            entry->translation( i )->setUsages( usage );
         if ( !paraphrase.isEmpty() )
-            expr.translation( i ).setParaphrase( paraphrase );
+            entry->translation( i )->setParaphrase( paraphrase );
         if ( !antonym.isEmpty() )
-            expr.translation( i ).setAntonym( antonym );
+            entry->translation( i )->setAntonym( antonym );
 
         if ( i != 0 ) {
-            expr.translation( i ).gradeFrom( 0 ).setGrade( grade );
-            expr.translation( 0 ).gradeFrom( i ).setGrade( r_grade );
-            expr.translation( i ).gradeFrom( 0 ).setPracticeCount( qcount );
-            expr.translation( 0 ).gradeFrom( i ).setPracticeCount( r_qcount );
-            expr.translation( i ).gradeFrom( 0 ).setBadCount( bcount );
-            expr.translation( 0 ).gradeFrom( i ).setBadCount( r_bcount );
-            expr.translation( i ).gradeFrom( 0 ).setPracticeDate( qdate );
-            expr.translation( 0 ).gradeFrom( i ).setPracticeDate( r_qdate );
+            entry->translation( i )->gradeFrom( 0 ).setGrade( grade );
+            entry->translation( 0 )->gradeFrom( i ).setGrade( r_grade );
+            entry->translation( i )->gradeFrom( 0 ).setPracticeCount( qcount );
+            entry->translation( 0 )->gradeFrom( i ).setPracticeCount( r_qcount );
+            entry->translation( i )->gradeFrom( 0 ).setBadCount( bcount );
+            entry->translation( 0 )->gradeFrom( i ).setBadCount( r_bcount );
+            entry->translation( i )->gradeFrom( 0 ).setPracticeDate( qdate );
+            entry->translation( 0 )->gradeFrom( i ).setPracticeDate( r_qdate );
         }
 
         // Next translation
         currentElement = currentElement.nextSiblingElement( KV_TRANS );
         i++;
     }
-
-//     if ( m_doc->entryCount() == 0 ) {
-//         m_doc->setQueryIdentifier( q_org, q_trans );
-//     }
-    m_doc->appendEntry( &expr );
 
     return true;
 }

@@ -164,11 +164,6 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
         readTenses( groupElement );
     }
 
-    groupElement = domElementParent.firstChildElement( KVTML_USAGES );
-    if ( !groupElement.isNull() ) {
-        readUsages( groupElement );
-    }
-
     groupElement = domElementParent.firstChildElement( KVTML_ENTRIES );
     if ( !groupElement.isNull() ) {
         QDomNodeList entryList = groupElement.elementsByTagName( KVTML_ENTRY );
@@ -184,36 +179,35 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
 
     groupElement = domElementParent.firstChildElement( KVTML_WORDTYPES );
     if ( !groupElement.isNull() ) {
-        readWordTypes( groupElement );
+        readChildWordTypes( m_doc->wordTypeContainer(), groupElement );
     }
 
     groupElement = domElementParent.firstChildElement( KVTML_LESSONS );
     if ( !groupElement.isNull() ) {
-        QDomNodeList entryList = groupElement.elementsByTagName( KVTML_CONTAINER );
-        for ( int i = 0; i < entryList.count(); ++i ) {
-            currentElement = entryList.item( i ).toElement();
-            if ( currentElement.parentNode() == groupElement ) {
-                result = readLesson( currentElement );
-                if ( !result )
-                    return false;
-            }
-        }
+        readChildLessons(m_doc->lesson(), groupElement);
+    }
 
-        ///@todo past 4.0: remove reading "lesson" it was only for compability with documents created during the beta for KDE 4.0
-        entryList = groupElement.elementsByTagName( "lesson" );
-        for ( int i = 0; i < entryList.count(); ++i ) {
-            currentElement = entryList.item( i ).toElement();
-            if ( currentElement.parentNode() == groupElement ) {
-                result = readLesson( currentElement );
-                if ( !result )
-                    return false;
-            }
+    // Additional cleanup: Put orphaned entries without a lesson into a default lesson.
+    KEduVocLesson *defaultLesson = new KEduVocLesson(i18n("Default Lesson"), m_doc->lesson());
+
+    // now make sure we don't have any orphan entries
+    foreach (KEduVocExpression * entry, m_allEntries.values()) {
+        if (entry->lessons().count() == 0)
+        {
+            defaultLesson->appendEntry(entry);
         }
-        // end @todo
+    }
+
+    if (defaultLesson->entryCount() > 0)
+    {
+        m_doc->lesson()->appendChildContainer(defaultLesson);
+    } else {
+        delete defaultLesson;
     }
 
     return true;
 }
+
 
 bool KEduVocKvtml2Reader::readIdentifier( QDomElement &identifierElement )
 {
@@ -263,7 +257,7 @@ bool KEduVocKvtml2Reader::readIdentifier( QDomElement &identifierElement )
 
 bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
 {
-    KEduVocExpression expr;
+    KEduVocExpression *expr = new KEduVocExpression;
     QDomElement currentElement;
     bool result = true;
 
@@ -279,27 +273,12 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
     if ( !currentElement.isNull() ) {
         // set the active state of the expression
         if ( currentElement.text() == KVTML_TRUE ) {
-            expr.setActive( false );
+            expr->setActive( false );
         } else {
-            expr.setActive( true );
+            expr->setActive( true );
         }
     }
 
-//     currentElement = entryElement.firstChildElement( KVTML_INQUERY );
-//     if ( !currentElement.isNull() ) {
-//         // set the inquery information
-//         if ( currentElement.text() == KVTML_TRUE ) {
-//             expr.setInPractice( true );
-//         } else {
-//             expr.setInPractice( false );
-//         }
-//     }
-
-    currentElement = entryElement.firstChildElement( KVTML_SIZEHINT );
-    if ( !currentElement.isNull() ) {
-        // set the sizehint
-        expr.setSizeHint( currentElement.text().toInt() );
-    }
 
     // read translation children
     QDomNodeList translationList = entryElement.elementsByTagName( KVTML_TRANSLATION );
@@ -319,65 +298,65 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
 
     // TODO: probably should insert at id position with a check to see if it exists
     // may be useful for detecting corrupt documents
-    m_doc->insertEntry( &expr, id );
+    m_allEntries[id] = expr;
     return result;
 }
 
 bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
-        KEduVocExpression &expr, int index )
+        KEduVocExpression *expr, int index )
 {
     QDomElement currentElement = translationElement.firstChildElement( KVTML_TEXT );
     if ( !currentElement.isNull() ) {
-        expr.translation( index ).setText( currentElement.text() );
+        expr->translation(index)->setText( currentElement.text() );
     }
 
     currentElement = translationElement.firstChildElement( KVTML_COMMENT );
     if ( !currentElement.isNull() ) {
-        expr.translation( index ).setComment( currentElement.text() );
+        expr->translation(index)->setComment( currentElement.text() );
     }
 
     //<pronunciation></pronunciation>
     currentElement = translationElement.firstChildElement( KVTML_PRONUNCIATION );
     if ( !currentElement.isNull() ) {
-        expr.translation( index ).setPronunciation( currentElement.text() );
+        expr->translation(index)->setPronunciation( currentElement.text() );
     }
 
     //<falsefriend fromid="1"></falsefriend>
     currentElement = translationElement.firstChildElement( KVTML_FALSEFRIEND );
     if ( !currentElement.isNull() ) {
         int fromid = currentElement.attribute( KVTML_FROMID ).toInt();
-        expr.translation( index ).setFalseFriend( fromid, currentElement.text() );
+        expr->translation(index)->setFalseFriend( fromid, currentElement.text() );
     }
 
     //<antonym></antonym>
     currentElement = translationElement.firstChildElement( KVTML_ANTONYM );
     if ( !currentElement.isNull() ) {
-        expr.translation( index ).setAntonym( currentElement.text() );
+        expr->translation(index)->setAntonym( currentElement.text() );
     }
 
     //<synonym></synonym>
     currentElement = translationElement.firstChildElement( KVTML_SYNONYM );
     if ( !currentElement.isNull() ) {
-        expr.translation( index ).setSynonym( currentElement.text() );
+        expr->translation(index)->setSynonym( currentElement.text() );
     }
 
     //<example></example>
     currentElement = translationElement.firstChildElement( KVTML_EXAMPLE );
     if ( !currentElement.isNull() ) {
-        expr.translation( index ).setExample( currentElement.text() );
+        expr->translation(index)->setExample( currentElement.text() );
     }
 
     //<usage></usage> can be as often as there are usage labels
     currentElement = translationElement.firstChildElement( KVTML_USAGE );
     while ( !currentElement.isNull() ) {
-        expr.translation( index ).usages().insert( currentElement.text() );
+        expr->translation(index)->usages().insert( currentElement.text() );
         currentElement = currentElement.nextSiblingElement( KVTML_USAGE );
     }
 
     //<paraphrase></paraphrase>
     currentElement = translationElement.firstChildElement( KVTML_PARAPHRASE );
     if ( !currentElement.isNull() ) {
-        expr.translation( index ).setParaphrase( currentElement.text() );
+        expr->translation(index)->setParaphrase( currentElement.text() );
     }
 
     // conjugations
@@ -388,7 +367,7 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
         QDomElement tenseElement = currentElement.firstChildElement( KVTML_TENSE );
         QString tense = tenseElement.text();
 
-        readConjugation( currentElement, expr.translation(index).conjugation(tense) );
+        readConjugation( currentElement, expr->translation(index)->conjugation(tense) );
         currentElement = currentElement.nextSiblingElement( KVTML_CONJUGATION );
     }
 
@@ -403,84 +382,64 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     // comparisons
     currentElement = translationElement.firstChildElement( KVTML_COMPARISON );
     if ( !currentElement.isNull() ) {
-        KEduVocComparison comparison;
-        readComparison( currentElement, comparison );
-        expr.translation( index ).setComparison( comparison );
+        readComparison( currentElement, expr->translation(index) );
     }
 
     // multiple choice
     currentElement = translationElement.firstChildElement( KVTML_MULTIPLECHOICE );
     if ( !currentElement.isNull() ) {
-        KEduVocMultipleChoice mc;
-        readMultipleChoice( currentElement, mc );
-        expr.translation( index ).setMultipleChoice( mc );
+        readMultipleChoice( currentElement, expr->translation(index) );
     }
 
     // image
     currentElement = translationElement.firstChildElement( KVTML_IMAGE );
     if ( !currentElement.isNull() ) {
-        expr.translation( index ).setImageUrl( KUrl( m_doc->url(), currentElement.text() ) );
+        expr->translation(index)->setImageUrl( KUrl( m_doc->url(), currentElement.text() ) );
     }
 
     // sound
     currentElement = translationElement.firstChildElement( KVTML_SOUND );
     if ( !currentElement.isNull() ) {
-        expr.translation( index ).setSoundUrl( KUrl( m_doc->url(), currentElement.text() ) );
+        expr->translation(index)->setSoundUrl( KUrl( m_doc->url(), currentElement.text() ) );
     }
 
     return true;
 }
 
-bool KEduVocKvtml2Reader::readLesson( QDomElement &lessonElement )
+bool KEduVocKvtml2Reader::readChildLessons( KEduVocLesson* parentLesson, QDomElement &lessonElement )
 {
-    // NOTE: currently this puts an identifier into the last lesson it is in, once support for multiple lessons
-    // is in the entry class, all lessons that include an entry will be in there
-    int lessonId;
+    QDomElement currentElement = lessonElement.firstChildElement( KVTML_CONTAINER );
+    while ( !currentElement.isNull() ) {
+        readLesson(parentLesson, currentElement);
+        currentElement = currentElement.nextSiblingElement( KVTML_CONTAINER );
+    }
+    return true;
+}
+
+
+bool KEduVocKvtml2Reader::readLesson( KEduVocLesson* parentLesson, QDomElement &lessonElement )
+{
     //<name>Lesson name</name>
     QDomElement currentElement = lessonElement.firstChildElement( KVTML_NAME );
-    if ( !currentElement.isNull() ) {
-        lessonId = m_doc->appendLesson( currentElement.text() );
-    } else {
-        m_errorMessage = i18n( "each lesson must have a name" );
-        return false;
-    }
+    KEduVocLesson * lesson = new KEduVocLesson(currentElement.text(), parentLesson);
+    parentLesson->appendChildContainer( lesson );
+
+    readChildLessons( lesson, lessonElement );
 
     //<query>true</query>
     currentElement = lessonElement.firstChildElement( KVTML_INPRACTICE );
-    m_doc->lesson(lessonId).setInPractice(currentElement.text() == KVTML_TRUE);
-
-    //<current>true</current>
-    currentElement = lessonElement.firstChildElement( KVTML_CURRENT );
-    if ( !currentElement.isNull() ) {
-        if ( currentElement.text() == KVTML_TRUE ) {
-            m_doc->setCurrentLesson( lessonId );
-        }
-    }
+    lesson->setInPractice(currentElement.text() == KVTML_TRUE);
 
     //<entry id="123"/>
     currentElement = lessonElement.firstChildElement( KVTML_ENTRY );
     while ( !currentElement.isNull() ) {
         bool result = false;
-        int id = currentElement.attribute( KVTML_ID ).toInt( &result );
+        int entryId = currentElement.attribute( KVTML_ID ).toInt( &result );
         if(result) {
-            m_doc->entry(id)->setLesson(lessonId);
-            m_doc->lesson(lessonId).addEntry(id);
+            lesson->appendEntry( m_allEntries[entryId] );
         }
         currentElement = currentElement.nextSiblingElement( KVTML_ENTRY );
     }
-
-    ///@todo remove this after 4.0 release. it provides compability with some documents written with kvtml2 prior to the 4.0 release during the beta phase.
-    //<entryid>0</entryid>
-    currentElement = lessonElement.firstChildElement( "entryid" );
-    while ( !currentElement.isNull() ) {
-        kWarning() << "Found old style lesson definition. Please save this file to update it and notify the creator of it.";
-        int entryId = currentElement.text().toInt();
-        m_doc->entry( entryId )->setLesson( lessonId );
-        m_doc->lesson( lessonId ).addEntry( entryId );
-        currentElement = currentElement.nextSiblingElement( "entryid" );
-    }
-    // end @todo
-
     return true;
 }
 
@@ -551,96 +510,69 @@ bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifi
 }
 
 
-bool KEduVocKvtml2Reader::readWordTypes( QDomElement &typesElement )
+bool KEduVocKvtml2Reader::readChildWordTypes(KEduVocWordType* parentContainer, QDomElement &lessonElement)
 {
-    QString mainTypeName;
-
-    QDomElement currentTypeElement = typesElement.firstChildElement( KVTML_CONTAINER );
-    // go over <wordtypedefinition> elements
-    while ( !currentTypeElement.isNull() ) {
-        // set type and specialtype
-        mainTypeName =
-            currentTypeElement.firstChildElement( KVTML_NAME ).text();
-
-        QString specialType = currentTypeElement.firstChildElement( KVTML_SPECIALWORDTYPE ).text();
-        if ( !specialType.isEmpty() ) {
-            // get the localized version
-            if ( specialType == KVTML_SPECIALWORDTYPE_NOUN ) {
-                specialType = m_doc->wordTypes().specialTypeNoun();
-            }
-            if ( specialType == KVTML_SPECIALWORDTYPE_VERB ) {
-                specialType = m_doc->wordTypes().specialTypeVerb();
-            }
-            if ( specialType == KVTML_SPECIALWORDTYPE_ADVERB ) {
-                specialType = m_doc->wordTypes().specialTypeAdverb();
-            }
-            if ( specialType == KVTML_SPECIALWORDTYPE_ADJECTIVE ) {
-                specialType = m_doc->wordTypes().specialTypeAdjective();
-            }
-        }
-        m_doc->wordTypes().addType( mainTypeName, specialType );
-        kDebug() << "Add word type:" << mainTypeName << "special:" << specialType;
-
-        // set word types to entries:
-        // <entry id="123"><translation id="0"/><translation id="2"/><...></entry>
-        QDomElement entryElement = currentTypeElement.firstChildElement( KVTML_ENTRY );
-        while ( !entryElement.isNull() ) {
-            // read <entry id="123"></entryid>
-            int entryId = entryElement.attribute( KVTML_ID ).toInt();
-            QDomElement translationElement = entryElement.firstChildElement( KVTML_TRANSLATION );
-            while( !translationElement.isNull() ) {
-                // <translation id="234"/>
-                int translationId = translationElement.attribute( KVTML_ID ).toInt();
-                m_doc->entry(entryId)->translation(translationId).setType( mainTypeName );
-                translationElement = translationElement.nextSiblingElement( KVTML_TRANSLATION );
-            }
-            entryElement = entryElement.nextSiblingElement( KVTML_ENTRY );
-        }
-
-        // iterate sub type elements <container>
-        QDomElement currentSubTypeElement = currentTypeElement.firstChildElement( KVTML_CONTAINER );
-        while ( !currentSubTypeElement.isNull() ) {
-            QString specialSubType = currentSubTypeElement.firstChildElement( KVTML_SPECIALWORDTYPE ).text();
-            if ( !specialSubType.isEmpty() ) {
-                // get the localized version
-                if ( specialSubType == KVTML_SPECIALWORDTYPE_NOUN_MALE ) {
-                    specialSubType = m_doc->wordTypes().specialTypeNounMale();
-                }
-                if ( specialSubType == KVTML_SPECIALWORDTYPE_NOUN_FEMALE ) {
-                    specialSubType = m_doc->wordTypes().specialTypeNounFemale();
-                }
-                if ( specialSubType == KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) {
-                    specialSubType = m_doc->wordTypes().specialTypeNounNeutral();
-                }
-            }
-
-            QString subTypeName = currentSubTypeElement.firstChildElement( KVTML_NAME ).text();
-            // set type and specialtype
-            m_doc->wordTypes().addSubType( mainTypeName, subTypeName, specialSubType );
-
-            // set word types to entries:
-            // <entry id="123"><translation id="0"/><translation id="2"/><...></entry>
-            entryElement = currentSubTypeElement.firstChildElement( KVTML_ENTRY );
-            while ( !entryElement.isNull() ) {
-                // read <entry id="123"></entryid>
-                int entryId = entryElement.attribute( KVTML_ID ).toInt();
-                QDomElement translationElement = entryElement.firstChildElement( KVTML_TRANSLATION );
-                while( !translationElement.isNull() ) {
-                    // <translation id="234"/>
-                    int translationId = translationElement.attribute( KVTML_ID ).toInt();
-                    // set the main type again, usually the entry will only be in the deepest container in the hierachy
-                    m_doc->entry(entryId)->translation(translationId).setType( mainTypeName );
-                    m_doc->entry(entryId)->translation(translationId).setSubType( subTypeName );
-                    translationElement = translationElement.nextSiblingElement( KVTML_TRANSLATION );
-                }
-                entryElement = entryElement.nextSiblingElement( KVTML_ENTRY );
-            }
-            // next sub word type
-            currentSubTypeElement = currentSubTypeElement.nextSiblingElement( KVTML_CONTAINER );
-        }
-        // next main word type
-        currentTypeElement = currentTypeElement.nextSiblingElement( KVTML_CONTAINER );
+    QDomElement currentElement = lessonElement.firstChildElement( KVTML_CONTAINER );
+    while ( !currentElement.isNull() ) {
+        readWordType(parentContainer, currentElement);
+        currentElement = currentElement.nextSiblingElement( KVTML_CONTAINER );
     }
+    return true;
+}
+
+bool KEduVocKvtml2Reader::readWordType( KEduVocWordType* parentContainer, QDomElement &typeElement )
+{
+    // set type and specialtype
+    QString typeName =
+        typeElement.firstChildElement( KVTML_NAME ).text();
+
+    KEduVocWordType * wordTypeContainer = new KEduVocWordType(typeName, parentContainer);
+    parentContainer->appendChildContainer(wordTypeContainer);
+
+    QString specialType = typeElement.firstChildElement( KVTML_SPECIALWORDTYPE ).text();
+    if ( !specialType.isEmpty() ) {
+        // get the localized version
+        if ( specialType == KVTML_SPECIALWORDTYPE_NOUN ) {
+            wordTypeContainer->setWordType(KEduVocWordType::Noun);
+        }
+        if ( specialType == KVTML_SPECIALWORDTYPE_VERB ) {
+            wordTypeContainer->setWordType(KEduVocWordType::Verb);
+        }
+        if ( specialType == KVTML_SPECIALWORDTYPE_ADVERB ) {
+            wordTypeContainer->setWordType(KEduVocWordType::Adverb);
+        }
+        if ( specialType == KVTML_SPECIALWORDTYPE_ADJECTIVE ) {
+            wordTypeContainer->setWordType(KEduVocWordType::Adjective);
+        }
+        if ( specialType == KVTML_SPECIALWORDTYPE_NOUN_MALE ) {
+            wordTypeContainer->setWordType(KEduVocWordType::NounMale);
+        }
+        if ( specialType == KVTML_SPECIALWORDTYPE_NOUN_FEMALE ) {
+            wordTypeContainer->setWordType(KEduVocWordType::NounFemale);
+        }
+        if ( specialType == KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) {
+            wordTypeContainer->setWordType(KEduVocWordType::NounNeutral);
+        }
+    } // special type
+
+
+    // read entries
+    QDomElement entryElement = typeElement.firstChildElement( KVTML_ENTRY );
+    while ( !entryElement.isNull() ) {
+        // read <entry id="123"></entryid>
+        int entryId = entryElement.attribute( KVTML_ID ).toInt();
+        QDomElement translationElement = entryElement.firstChildElement( KVTML_TRANSLATION );
+        while( !translationElement.isNull() ) {
+            // <translation id="234"/>
+            int translationId = translationElement.attribute( KVTML_ID ).toInt();
+            m_allEntries.value(entryId)->translation(translationId)->setWordType(wordTypeContainer);
+            translationElement = translationElement.nextSiblingElement( KVTML_TRANSLATION );
+        }
+        entryElement = entryElement.nextSiblingElement( KVTML_ENTRY );
+    }
+
+    readChildWordTypes(wordTypeContainer, typeElement);
+
     return true;
 }
 
@@ -661,7 +593,7 @@ bool KEduVocKvtml2Reader::readTenses( QDomElement &tensesElement )
     return true;
 }
 
-
+/*
 bool KEduVocKvtml2Reader::readUsages( QDomElement &usagesElement )
 {
     QStringList usages;
@@ -675,13 +607,12 @@ bool KEduVocKvtml2Reader::readUsages( QDomElement &usagesElement )
     }
 
     return true;
-}
+}*/
 
 
-bool KEduVocKvtml2Reader::readComparison( QDomElement &domElementParent, KEduVocComparison &comp )
+bool KEduVocKvtml2Reader::readComparison( QDomElement &domElementParent, KEduVocTranslation* translation )
 /*
  <comparison>
-   <absolute>good</absolute>
    <comparative>better</comparative>
    <superlative>best</superlative>
  </comparison>
@@ -689,27 +620,22 @@ bool KEduVocKvtml2Reader::readComparison( QDomElement &domElementParent, KEduVoc
 {
     QDomElement currentElement;
 
-    currentElement = domElementParent.firstChildElement( KVTML_ABSOLUTE );
-    if ( !currentElement.isNull() ) {
-        comp.setL1( currentElement.text() );
-    }
-
     currentElement = domElementParent.firstChildElement( KVTML_COMPARATIVE );
     if ( !currentElement.isNull() )
     {
-        comp.setL2( currentElement.text() );
+        translation->setComparative( currentElement.text() );
     }
 
     currentElement = domElementParent.firstChildElement( KVTML_SUPERLATIVE );
     if ( !currentElement.isNull() )
     {
-        comp.setL3( currentElement.text() );
+        translation->setSuperlative( currentElement.text() );
     }
     return true;
 }
 
 
-bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocMultipleChoice &mc )
+bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation )
 /*
  <multiplechoice>
    <choice>good</choice>
@@ -719,24 +645,20 @@ bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement
    <choice>best 3</choice>
  </multiplechoice>
 */
-
 {
     QDomElement currentElement;
-    QString s;
-    mc.clear();
-
     QDomNodeList choiceNodes = multipleChoiceElement.elementsByTagName( KVTML_CHOICE );
     for ( int i = 0; i < choiceNodes.count(); ++i )
     {
         currentElement = choiceNodes.item( i ).toElement();
         if ( currentElement.parentNode() == multipleChoiceElement ) {
-            mc.appendChoice( currentElement.text() );
+            translation->multipleChoice().append( currentElement.text() );
         }
     }
     return true;
 }
 
-bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpression &expr, int index )
+bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpression *expr, int index )
 {
     bool result = true;
     int id = gradeElement.attribute( KVTML_FROMID ).toInt( &result );
@@ -748,19 +670,19 @@ bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpressio
     QDomElement currentElement = gradeElement.firstChildElement( KVTML_CURRENTGRADE );
     if ( !currentElement.isNull() ) {
         int value = currentElement.text().toInt();
-        expr.translation( index ).gradeFrom( id ).setGrade( value );
+        expr->translation(index)->gradeFrom( id ).setGrade( value );
     }
 
     currentElement = gradeElement.firstChildElement( KVTML_COUNT );
     if ( !currentElement.isNull() ) {
         int value = currentElement.text().toInt();
-        expr.translation( index ).gradeFrom( id ).setPracticeCount( value );
+        expr->translation(index)->gradeFrom( id ).setPracticeCount( value );
     }
 
     currentElement = gradeElement.firstChildElement( KVTML_ERRORCOUNT );
     if ( !currentElement.isNull() ) {
         int value = currentElement.text().toInt();
-        expr.translation( index ).gradeFrom( id ).setBadCount( value );
+        expr->translation(index)->gradeFrom( id ).setBadCount( value );
     }
 
     currentElement = gradeElement.firstChildElement( KVTML_DATE );
@@ -768,7 +690,7 @@ bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpressio
         QString dateString = currentElement.text();
         if ( !dateString.isEmpty() ) {
             QDateTime value = QDateTime::fromString( dateString, Qt::ISODate );
-            expr.translation( index ).gradeFrom( id ).setPracticeDate( value );
+            expr->translation(index)->gradeFrom( id ).setPracticeDate( value );
         }
     }
 

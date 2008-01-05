@@ -1,12 +1,8 @@
 /***************************************************************************
-              manage lessons
-    -----------------------------------------------------------------------
 
-    begin        : August 11, 2007
+    Copyright 2007 Jeremy Whiting <jeremywhiting@scitools.com>
+    Copyright 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
-    copyright    : (C) 2007 Jeremy Whiting <jeremywhiting@scitools.com>
-
-    -----------------------------------------------------------------------
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,62 +16,48 @@
 
 #include "keduvoclesson.h"
 
-#include <QSet>
+#include "keduvocexpression.h"
+
+#include <KRandomSequence>
+#include <QList>
 
 /** private class to store information about a lesson */
 class KEduVocLesson::Private
 {
 public:
-    QSet<int> m_entries;
-    QString m_name;
-    bool m_inPractice;
+    // entries
+    QList<KEduVocExpression*> m_entries;
 };
 
-KEduVocLesson::KEduVocLesson()
-        : d( new Private )
-{}
+
+KEduVocLesson::KEduVocLesson(const QString& name, KEduVocContainer *parent)
+        : d( new Private ), KEduVocContainer(name, Lesson, parent)
+{
+}
+
 
 KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
-        : d( new Private )
+        : d( new Private ), KEduVocContainer(other)
 {
     d->m_entries = other.d->m_entries;
-    d->m_name = other.d->m_name;
-    d->m_inPractice = other.d->m_inPractice;
 }
+
 
 KEduVocLesson::~KEduVocLesson()
 {
+    foreach (KEduVocExpression* entry, d->m_entries) {
+        entry->removeLesson(this);
+        if (entry->lessons().count() == 0) {
+            delete entry;
+        }
+    }
     delete d;
 }
 
-KEduVocLesson& KEduVocLesson::operator= ( const KEduVocLesson &other )
-{
-    d->m_entries = other.d->m_entries;
-    d->m_name = other.d->m_name;
-    d->m_inPractice = other.d->m_inPractice;
-    return *this;
-}
 
-bool KEduVocLesson::operator==(const KEduVocLesson &other)
+QList<KEduVocExpression*> KEduVocLesson::entries()
 {
-    return d->m_entries == other.d->m_entries &&
-        d->m_name == other.d->m_name &&
-        d->m_inPractice == other.d->m_inPractice;;
-}
-
-void KEduVocLesson::setName( const QString &name )
-{
-    d->m_name = name;
-}
-
-QString KEduVocLesson::name()
-{
-    return d->m_name;
-}
-
-QList<int> KEduVocLesson::entries()
-{
-    return d->m_entries.toList();
+    return d->m_entries;
 }
 
 int KEduVocLesson::entryCount()
@@ -83,60 +65,32 @@ int KEduVocLesson::entryCount()
     return d->m_entries.count();
 }
 
-void KEduVocLesson::addEntry( int entryid )
+void KEduVocLesson::appendEntry(KEduVocExpression* entry)
 {
-    d->m_entries.insert( entryid );
+    d->m_entries.append( entry );
+    entry->addLesson(this);
 }
 
-void KEduVocLesson::removeEntry( int entryid )
+void KEduVocLesson::insertEntry(int index, KEduVocExpression * entry)
 {
-    d->m_entries.remove( entryid );
+    d->m_entries.insert( index, entry );
+    entry->addLesson(this);
 }
 
-void KEduVocLesson::incrementEntriesAbove( int entryid )
+void KEduVocLesson::removeEntry(KEduVocExpression* entry)
 {
-    QList<int> entries = d->m_entries.toList();
-    
-    // increment all entry id's above entryid
-    for (int i = 0; i < entries.size(); ++i) {
-        if (entries[i] >= entryid) {
-            entries[i] = entries[i] + 1;
-        }
-    }
-    
-    // then put the new list into the set
-    d->m_entries = entries.toSet();
-}
-    
-void KEduVocLesson::decrementEntriesAbove( int entryid )
-{
-    QList<int> entries = d->m_entries.toList();
-    
-    // increment all entry id's above entryid
-    int i = 0;
-    while (i < entries.size()) {
-        if (entries[i] == entryid) {
-            entries.removeAt(i);
-        }
-        else if (entries[i] > entryid) {
-            entries[i] = entries[i] - 1;
-            ++i;
-        }
-        else {
-            ++i;
-        }
-    }
-    
-    // then put the new list into the set
-    d->m_entries = entries.toSet();
+    d->m_entries.removeAt( d->m_entries.indexOf(entry) );
+    entry->removeLesson(this);
 }
 
-bool KEduVocLesson::inPractice()
+KEduVocExpression * KEduVocLesson::entry(int row)
 {
-    return d->m_inPractice;
+    return d->m_entries.value(row);
 }
 
-void KEduVocLesson::setInPractice(bool inPractice)
+void KEduVocLesson::randomizeEntries()
 {
-    d->m_inPractice = inPractice;
+    KRandomSequence randomSequence(QDateTime::currentDateTime().toTime_t());
+    randomSequence.randomize( d->m_entries );
 }
+

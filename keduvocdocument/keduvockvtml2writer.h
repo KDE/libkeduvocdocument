@@ -27,6 +27,8 @@
 #include "keduvocpersonalpronoun.h"
 
 class KEduVocDocument;
+class KEduVocExpression;
+class KEduVocLesson;
 
 /**
 * @brief Class to write kvtml2 data files from KEduVocDocument
@@ -68,7 +70,7 @@ public:
     /** write types
      * @param typesElement QDomElement types to write to
      */
-    bool writeWordTypes( QDomElement &typesElement );
+    bool writeWordTypes( QDomElement &typesElement, KEduVocWordType* parentContainer );
 
     /** write tenses
      * @param tensesElement QDomElement tenses to write to
@@ -89,33 +91,35 @@ public:
      * @param translationElement QDomElement translation to write to, with id pre-set
      * @param translation object to write
      */
-    bool writeTranslation( QDomElement &translationElement, KEduVocTranslation &translation );
+    bool writeTranslation( QDomElement &translationElement, KEduVocTranslation* translation );
 
     /** write the lesson group
+     * @param parentLesson the parent lesson of the current lesson
      * @param lessonsElement QDomElement lessons to write to
      */
-    bool writeLessons( QDomElement &lessonsElement );
+    bool writeLessons( KEduVocLesson *parentLesson, QDomElement &lessonsElement );
 
     /** write a comparison
      * @param comparisonElement QDomElement comparison to write to
      * @param comparison object to write
      * @returns success
      */
-    bool writeComparison( QDomElement &comparisonElement, const KEduVocComparison &comparison );
+    bool writeComparison( QDomElement &comparisonElement, KEduVocTranslation *translation );
 
     /** write multiple choice choices
      * @param multipleChoiceElement QDomElement multiplechoice to write to
      * @returns success
      */
-    bool writeMultipleChoice( QDomElement &multipleChoiceElement, const KEduVocMultipleChoice &mc );
+    bool writeMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation );
 
 private:
-
     QDomElement newTextElement( const QString &elementName, const QString &text );
 
     QFile *m_outputFile;
     KEduVocDocument *m_doc;
 
+    ///@todo which of the following is in use?
+    QList<KEduVocExpression*>  m_allEntries;
     QDomElement m_wordTypeElement;
 
     QDomDocument m_domDoc;
