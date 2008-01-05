@@ -243,6 +243,8 @@ void KEduVocKvtmlCompability::setupWordTypes(KEduVocWordType * parent)
         parent->appendChildContainer(wordType);
         m_userdefinedTypeCounter++;
     }
+    static_cast<KEduVocWordType*>(parent->childContainer(4))->setWordType(KEduVocWordType::Adjective);
+    static_cast<KEduVocWordType*>(parent->childContainer(5))->setWordType(KEduVocWordType::Adverb);
 
     KEduVocWordType* numeral = static_cast<KEduVocWordType*>(parent->childContainer(8));
     KEduVocWordType* wordType = new KEduVocWordType(
@@ -259,18 +261,26 @@ void KEduVocKvtmlCompability::setupWordTypes(KEduVocWordType * parent)
     article->appendChildContainer(wordType);
 
     KEduVocWordType* verb = static_cast<KEduVocWordType*>(parent->childContainer(0));
+    verb->setWordType(KEduVocWordType::Verb);
     wordType = new KEduVocWordType(i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with regular conjugation","Regular" ), verb);
+    wordType->setWordType(KEduVocWordType::Verb);
     verb->appendChildContainer(wordType);
     wordType = new KEduVocWordType(i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with irregular conjugation","Irregular" ), verb);
     verb->appendChildContainer(wordType);
+    wordType->setWordType(KEduVocWordType::Verb);
 
     KEduVocWordType* noun = static_cast<KEduVocWordType*>(parent->childContainer(1));
+    noun->setWordType(KEduVocWordType::Noun);
     wordType = new KEduVocWordType(i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Male" ), noun);
     noun->appendChildContainer(wordType);
+    wordType->setWordType(KEduVocWordType::NounMale);
     wordType = new KEduVocWordType(i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Female" ), noun);
     noun->appendChildContainer(wordType);
+    wordType->setWordType(KEduVocWordType::NounFemale);
     wordType = new KEduVocWordType(i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Neutral" ), noun);
     noun->appendChildContainer(wordType);
+    wordType->setWordType(KEduVocWordType::NounNeutral);
+
 
     KEduVocWordType* pronoun = static_cast<KEduVocWordType*>(parent->childContainer(6));
     wordType = new KEduVocWordType(i18nc( "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, his, her...)", "Possessive" ), pronoun);
