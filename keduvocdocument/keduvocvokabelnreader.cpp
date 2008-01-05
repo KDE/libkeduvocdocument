@@ -58,13 +58,12 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
     QString expression;
     QString original;
     QString translation;
-    QString lessonDescr;
     QString temp;
     QString comment;
 
     int i;
     int wordCount;
-    int lesson;
+    int lessonNumber;
 
     int lines = 10000;
 
@@ -119,6 +118,7 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         inputStream.readLine();
     }
 
+
     for ( i = 0; i < wordCount - 1; i++ ) {
         int c = 0;
         expression.clear();
@@ -135,16 +135,18 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         words = expression.split( "\"," );
         original = words[0].mid( 1 );
         translation = words[1].mid( 1 );
-        lesson = words[2].toInt() - 1;
+        lessonNumber = words[2].toInt() - 1;
 
-        KEduVocExpression kve;
-        kve.setTranslation( 0, original );
-        kve.setTranslation( 1, translation );
-        kve.translation( 1 ).gradeFrom( 0 ).setGrade( 0 );
-        kve.translation( 0 ).gradeFrom( 1 ).setGrade( 0 );
-        kve.setLesson( lesson );
+        while(m_doc->lesson()->childContainerCount() < lessonNumber) {
+            KEduVocLesson* lesson = new KEduVocLesson(i18n("Lesson %1", lessonNumber), m_doc->lesson());
+            m_doc->lesson()->appendChildContainer(lesson);
+        }
 
-        m_doc->appendEntry( &kve );
+        KEduVocExpression* kve = new KEduVocExpression;
+        kve->setTranslation( 0, original );
+        kve->setTranslation( 1, translation );
+
+        static_cast<KEduVocLesson*>(m_doc->lesson()->childContainer(lessonNumber))->addEntry(kve);
 
         inputStream.readLine();
         inputStream.readLine();
@@ -155,12 +157,12 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
     inputStream.readLine();
 
     for ( int i = 0; !inputStream.atEnd() && i < lines; i++ ) {
-        lessonDescr = inputStream.readLine();
+        QString lessonDescr = inputStream.readLine();
         lessonDescr = lessonDescr.mid( 1, lessonDescr.length() - 2 );
-        if ( !lessonDescr.isEmpty() )
-            m_doc->appendLesson( lessonDescr );
-        else
+        m_doc->lesson()->childContainer(i)->setName(lessonDescr);
+        if ( lessonDescr.isEmpty() ) {
             break;
+        }
         inputStream.readLine();
     }
 

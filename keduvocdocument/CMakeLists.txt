@@ -14,7 +14,6 @@ keduvocdocument.cpp
    keduvocconjugation.cpp
    keduvocpersonalpronoun.cpp
    keduvocdeclination.cpp
-   #keduvocmultiplechoice.cpp
    keduvocwordtype.cpp
    keduvockvtmlcompability.cpp
    #keduvockvtmlreader.cpp
@@ -24,9 +23,9 @@ keduvocdocument.cpp
    keduvoccsvreader.cpp
    keduvoccsvwriter.cpp
    keduvocpaukerreader.cpp
-   #keduvocvokabelnreader.cpp
-   #keduvocwqlreader.cpp
-   #keduvocxdxfreader.cpp
+   keduvocvokabelnreader.cpp
+   keduvocwqlreader.cpp
+   keduvocxdxfreader.cpp
    sharedkvtmlfiles.cpp )
 
 kde4_add_library(keduvocdocument SHARED ${keduvocdocument_LIB_SRCS})

@@ -205,13 +205,6 @@ bool KEduVocKvtmlReader::readLesson( QDomElement &domElementParent )
     QDomAttr attribute;
     QDomElement currentElement;
 
-    //-------------------------------------------------------------------------
-    // Attributes
-    //-------------------------------------------------------------------------
-
-    attribute = domElementParent.attributeNode( KV_SIZEHINT );
-    if ( !attribute.isNull() )
-        m_doc->setSizeHint( -1, attribute.value().toInt() );
 
     //-------------------------------------------------------------------------
     // Children

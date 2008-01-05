@@ -115,5 +115,5 @@ void KEduVocXdxfReader::readEntry()
 
     KEduVocExpression expr = KEduVocExpression( front );
     expr.setTranslation( 1, back );
-    m_doc->appendEntry( &expr );
+    m_doc->lesson()->addEntry( &expr );
 }

@@ -20,7 +20,6 @@
 #include "libkeduvocdocument_export.h"
 #include "keduvocgrammar.h"
 #include "keduvocconjugation.h"
-// #include "keduvocmultiplechoice.h"
 #include <KDE/KUrl>
 #include <QtCore/QString>
 
