@@ -241,16 +241,6 @@ public:
      */
     int indexOfIdentifier( const QString &name ) const;
 
-    // *** type methods ***
-
-    /**
-     * Returns the type handling class. See KEduVocWordType.
-     *
-     * @returns the KEduVocWordType* type handling class
-     */
-    KEduVocWordType& wordTypes();
-
-
     // *** tense methods ***
 
     /**
@@ -279,41 +269,8 @@ public:
      */
     QStringList tenseDescriptions() const;
 
-    // *** usage methods ***
-
-    /**
-     * Gets the descriptions of the usages.
-     * Usages are context information in a dictionary you may find [biol.]
-     * [am.] and the like to hint at the context in which the word is usually used.
-     */
-    QStringList usages() const;
-
-    /**
-     * Adds a usage label to the doc.
-     *
-     * @param usage    name of the usage
-     */
-    void addUsage( const QString &usage );
-
-    /**
-     * Rename a usage label.
-     * Actually changes the label in the vocabulary as well.
-     *
-     * @param oldName    old name of the usage label
-     * @param newName    new name of the usage label
-     */
-    void renameUsage( const QString &oldName, const QString &newName );
-
-    /**
-     * Remove a usage label.
-     * Also removes the label from all translations.
-     *
-     * @param name    new name of the usage label
-     */
-    void removeUsage( const QString &name );
 
     // *** grade methods ***
-
 
     /**
      * Retrieves the identifiers for the current query

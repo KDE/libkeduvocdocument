@@ -23,6 +23,7 @@
 
 #include "keduvockvtmlcompability.h"
 
+#include "keduvocwordtype.h"
 #include <KDebug>
 
 const QString KEduVocKvtmlCompability::KVTML_1_USER_DEFINED = QString( "#" );
@@ -31,98 +32,17 @@ const QString KEduVocKvtmlCompability::KVTML_1_SEPERATOR = QString( ":" );
 
 KEduVocKvtmlCompability::KEduVocKvtmlCompability()
 {
-    m_usages = usageMap();
-    m_userdefinedUsageCounter = 0;
     m_userdefinedTenseCounter = 0;
+    m_userdefinedTypeCounter = 0;
 
     initOldTypeLists();
     initOldTenses();
 }
 
 
-QSet<QString> KEduVocKvtmlCompability::usageFromKvtml1( const QString & oldUsage ) const
-{
-    QSet<QString> usages;
-    foreach( QString usage , oldUsage.split( KVTML_1_SEPERATOR, QString::SkipEmptyParts ) ) {
-        usages.insert( m_usages[usage] );
-    }
-    return usages;
-}
-
-
-QMap< QString, QString > KEduVocKvtmlCompability::usageMap()
-{
-    QMap< QString, QString > usages;
-
-    usages["Am"    ] = i18nc("usage label - context in which a word is used", "Americanism" );
-    usages["abbr"  ] = i18nc("usage label - context in which a word is used", "abbreviation" );
-    usages["anat"  ] = i18nc("usage label - context in which a word is used", "anatomy" );
-    usages["astr"  ] = i18nc("usage label - context in which a word is used", "astronomy" );
-    usages["biol"  ] = i18nc("usage label - context in which a word is used", "biology" );
-    usages["bs"    ] = i18nc("usage label - context in which a word is used", "bad sense" );
-    usages["contp" ] = i18nc("usage label - context in which a word is used", "contemptuously" );
-    usages["eccl"  ] = i18nc("usage label - context in which a word is used", "ecclesiastical" );
-    usages["fig"   ] = i18nc("usage label - context in which a word is used", "figuratively" );
-    usages["geol"  ] = i18nc("usage label - context in which a word is used", "geology" );
-    usages["hist"  ] = i18nc("usage label - context in which a word is used", "historical" );
-    usages["icht"  ] = i18nc("usage label - context in which a word is used", "ichthyology" );
-    usages["ifm"   ] = i18nc("usage label - context in which a word is used", "informal" );
-    usages["iro"   ] = i18nc("usage label - context in which a word is used", "ironic" );
-    usages["irr"   ] = i18nc("usage label - context in which a word is used", "irregular" );
-    usages["lit"   ] = i18nc("usage label - context in which a word is used", "literary" );
-    usages["metal" ] = i18nc("usage label - context in which a word is used", "metallurgy" );
-    usages["meteo" ] = i18nc("usage label - context in which a word is used", "meteorology" );
-    usages["miner" ] = i18nc("usage label - context in which a word is used", "mineralogy" );
-    usages["mot"   ] = i18nc("usage label - context in which a word is used", "motoring" );
-    usages["mount" ] = i18nc("usage label - context in which a word is used", "mountaineering" );
-    usages["myth"  ] = i18nc("usage label - context in which a word is used", "mythology" );
-    usages["npr"   ] = i18nc("usage label - context in which a word is used", "proper name" );
-    usages["opt"   ] = i18nc("usage label - context in which a word is used", "optics" );
-    usages["orn"   ] = i18nc("usage label - context in which a word is used", "ornithology" );
-    usages["os"    ] = i18nc("usage label - context in which a word is used", "oneself" );
-    usages["p"     ] = i18nc("usage label - context in which a word is used", "person" );
-    usages["parl"  ] = i18nc("usage label - context in which a word is used", "parliamentary" );
-    usages["pharm" ] = i18nc("usage label - context in which a word is used", "pharmacy" );
-    usages["phls"  ] = i18nc("usage label - context in which a word is used", "philosophy" );
-    usages["phot"  ] = i18nc("usage label - context in which a word is used", "photography" );
-    usages["phys"  ] = i18nc("usage label - context in which a word is used", "physics" );
-    usages["physio"] = i18nc("usage label - context in which a word is used", "physiology" );
-    usages["pl"    ] = i18nc("usage label - context in which a word is used", "plural" );
-    usages["poet"  ] = i18nc("usage label - context in which a word is used", "poetry" );
-    usages["pol"   ] = i18nc("usage label - context in which a word is used", "politics" );
-    usages["prov"  ] = i18nc("usage label - context in which a word is used", "provincialism" );
-    usages["psych" ] = i18nc("usage label - context in which a word is used", "psychology" );
-    usages["rhet"  ] = i18nc("usage label - context in which a word is used", "rhetoric" );
-    usages["surv"  ] = i18nc("usage label - context in which a word is used", "surveying" );
-    usages["telg"  ] = i18nc("usage label - context in which a word is used", "telegraphy" );
-    usages["telph" ] = i18nc("usage label - context in which a word is used", "telephony" );
-    usages["thea"  ] = i18nc("usage label - context in which a word is used", "theater" );
-    usages["typo"  ] = i18nc("usage label - context in which a word is used", "typography" );
-    usages["univ"  ] = i18nc("usage label - context in which a word is used", "university" );
-    usages["vet"   ] = i18nc("usage label - context in which a word is used", "veterinary medicine" );
-    usages["zoo"   ] = i18nc("usage label - context in which a word is used", "zoology" );
-
-    return usages;
-}
-
-void KEduVocKvtmlCompability::addUserdefinedUsage( const QString & usage )
-{
-    // start counting at 1 !!!
-    m_userdefinedUsageCounter++;
-    m_usages[KVTML_1_USER_DEFINED + QString::number( m_userdefinedUsageCounter )] = usage;
-}
-
-QSet< QString > KEduVocKvtmlCompability::documentUsages() const
-{
-    return QSet<QString>::fromList( m_usages.values() );
-}
-
-
-
 ////////////////// TYPES /////////////////////////////////////////
 void KEduVocKvtmlCompability::initOldTypeLists()
 {
-
     m_oldMainTypeNames.clear();
     m_oldMainTypeNames.insert( "v", i18nc( "@item:inlistbox The grammatical type of a word", "Verb" ) );
     m_oldMainTypeNames.insert( "n", i18nc( "@item:inlistbox The grammatical type of a word", "Noun" ) );
@@ -153,15 +73,26 @@ void KEduVocKvtmlCompability::initOldTypeLists()
 }
 
 
-QString KEduVocKvtmlCompability::mainTypeFromOldFormat( const QString & typeSubtypeString ) const
+KEduVocWordType* KEduVocKvtmlCompability::typeFromOldFormat(KEduVocWordType* parent, const QString & typeSubtypeString ) const
 {
+    // check if it's user defined
+    if ( typeSubtypeString.length() >= 2 && typeSubtypeString.left( 1 ) == QM_USER_TYPE ) {
+        // they started counting at 1, we need to know which index we are dealing with:
+        int selfDefinedTypeIndex = typeSubtypeString.right( typeSubtypeString.count()-1 ).toInt() -1;
+        return static_cast<KEduVocWordType*>(parent->childContainer(selfDefinedTypeIndex));
+    }
+
+    // assume the parent is set up to contain the old types correctly
     QString mainType;
+    QString subType;
     int i;
 
-    if (( i = typeSubtypeString.indexOf( KVTML_1_SEPERATOR ) ) >= 0 )
+    if (( i = typeSubtypeString.indexOf( KVTML_1_SEPERATOR ) ) >= 0 ) {
         mainType = typeSubtypeString.left( i );
-    else
+        subType = typeSubtypeString.right( i+1 );
+    } else {
         mainType = typeSubtypeString;
+    }
 
     // convert from pre-0.5 versions (I guess we can just leave that in here.
     // I seriously doubt that any such documents exist...
@@ -173,45 +104,72 @@ QString KEduVocKvtmlCompability::mainTypeFromOldFormat( const QString & typeSubt
         mainType = QM_NAME;
     }
 
-    QString wt = m_oldMainTypeNames.value( mainType );
-    if ( wt == QString() ) {
+    QString typeName = m_oldMainTypeNames.value( mainType );
+    if ( typeName == QString() ) {
         kDebug() << "Unknown old maintype: " << typeSubtypeString;
-        return typeSubtypeString;
+        return 0;
     }
-    return wt;
+
+    QString subTypeName = m_oldSubTypeNames.value( subType );
+
+    foreach (KEduVocContainer* wordType, parent->childContainers()) {
+        if (wordType->name() == typeName) {
+            if (subType.isEmpty()) {
+                return static_cast<KEduVocWordType*>(wordType);
+            } else {
+                foreach (KEduVocContainer* subWordType, wordType->childContainers()) {
+                    if (subWordType->name() == subTypeName) {
+                        return static_cast<KEduVocWordType*>(subWordType);
+                    }
+                }
+            }
+        }
+    }
+
+    return 0;
 }
 
 
-QString KEduVocKvtmlCompability::subTypeFromOldFormat( const QString & typeSubtypeString ) const
-{
-    int i;
-    QString t = typeSubtypeString;
-    if (( i = t.indexOf( KVTML_1_SEPERATOR ) ) >= 0 ) {
-        t.remove( 0, i+1 );
-    } else {
-        return QString();
-    }
 
-    QString wt = m_oldSubTypeNames.value( t );
-    if ( wt == QString() ) {
-        kDebug() << "Unknown old maintype: " << typeSubtypeString;
-        return typeSubtypeString;
-    }
-    return wt;
-}
 
-QString KEduVocKvtmlCompability::oldType( const QString & mainType, const QString & subType ) const
-{
-    QString oldType;
-    QString oldSubType;
-    oldType = m_oldMainTypeNames.key( mainType );
-    oldSubType = m_oldSubTypeNames.key( subType );
-    if ( !oldSubType.isEmpty() ) {
-        return oldType + KVTML_1_SEPERATOR + oldSubType;
-    }
-    return oldType;
 
-}
+
+/*
+if ( type.length() >= 2 && type.left( 1 ) == QM_USER_TYPE ) {
+                // they started counting at 1, we need to know which index we are dealing with:
+                int selfDefinedTypeIndex = type.right( type.count()-1 ).toInt() -1;
+
+                // append invented types (do we not trust our own writer?)
+                if ( selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count() ) {
+                    while ( selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count() ) {
+                        m_oldSelfDefinedTypes.append( i18n( "User defined word type %1", m_oldSelfDefinedTypes.count() - 1 ) );
+                    }
+                }
+                type = m_oldSelfDefinedTypes.value( selfDefinedTypeIndex );
+            } else {
+                type = m_compability.mainTypeFromOldFormat( oldType );
+                subType = m_compability.subTypeFromOldFormat( oldType );
+            } // not user defined - preset types
+
+
+if ( oldType.length() >= 2 && type.left( 1 ) == QM_USER_TYPE ) {
+            // they started counting at 1
+            int selfDefinedTypeIndex = oldType.right( type.count()-1 ).toInt() -1;
+            // append invented types (do we not trust our own writer?)
+            if ( selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count() ) {
+                while ( selfDefinedTypeIndex >= m_oldSelfDefinedTypes.count() ) {
+                    m_oldSelfDefinedTypes.append( i18n( "User defined word type %1", m_oldSelfDefinedTypes.count() - 1 ) );
+                }
+            }
+            type = m_oldSelfDefinedTypes.value( selfDefinedTypeIndex );
+        } else {
+            type = m_compability.mainTypeFromOldFormat( oldType );
+            subType = m_compability.subTypeFromOldFormat( oldType );
+        } // not user defined - preset types
+    }
+*/
+
+
 
 void KEduVocKvtmlCompability::initOldTenses()
 {
@@ -262,3 +220,40 @@ QString KEduVocKvtmlCompability::oldTense(const QString & tense)
     }
     return m_oldTenses.key(tense);
 }
+
+void KEduVocKvtmlCompability::setupWordTypes(KEduVocWordType * parent)
+{
+    QStringList wordTypeNames;
+    wordTypeNames
+        << i18nc( "The grammatical type of a word", "Verb" )
+        << i18nc( "The grammatical type of a word", "Noun" )
+        << i18nc( "The grammatical type of a word", "Name" )
+        << i18nc( "The grammatical type of a word", "Article" )
+        << i18nc( "The grammatical type of a word", "Adjective" )
+        << i18nc( "The grammatical type of a word", "Adverb" )
+        << i18nc( "The grammatical type of a word", "Pronoun" )
+        << i18nc( "The grammatical type of an entry", "Phrase" )
+        << i18nc( "The grammatical type of a word", "Numeral" )
+        << i18nc( "The grammatical type of a word", "Conjunction" )
+        << i18nc( "The grammatical type of a word", "Preposition" )
+        << i18nc( "The grammatical type of an entry", "Question" );
+
+    foreach (QString typeName, wordTypeNames) {
+        KEduVocWordType* wordType = new KEduVocWordType(typeName, parent);
+        parent->appendChildContainer(wordType);
+        m_userdefinedTypeCounter++;
+    }
+/*
+    m_oldSubTypeNames.insert( "ord", i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  (one, two, three, ...)","Ordinal" ) );
+    m_oldSubTypeNames.insert( "crd", i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal (first, second, third, ...)","Cardinal" ) );
+    m_oldSubTypeNames.insert( "def", i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (the)","Definite" ) );
+    m_oldSubTypeNames.insert( "ind", i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (a)","Indefinite" ) );
+    m_oldSubTypeNames.insert( "re", i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with regular conjugation","Regular" ) );
+    m_oldSubTypeNames.insert( "ir", i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with irregular conjugation","Irregular" ) );
+    m_oldSubTypeNames.insert( "pos", i18nc( "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, his, her...)", "Possessive" ) );
+    m_oldSubTypeNames.insert( "per", i18nc( "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, he...)", "Personal" ) );
+    m_oldSubTypeNames.insert( "m", i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Male" ) );
+    m_oldSubTypeNames.insert( "f", i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Female" ) );
+    m_oldSubTypeNames.insert( "s", i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Neutral" ) );*/
+}
+

@@ -16,7 +16,7 @@ keduvocdocument.cpp
    keduvocdeclination.cpp
    keduvocwordtype.cpp
    keduvockvtmlcompability.cpp
-   #keduvockvtmlreader.cpp
+   keduvockvtmlreader.cpp
    keduvockvtml2reader.cpp
    #keduvockvtmlwriter.cpp
    keduvockvtml2writer.cpp

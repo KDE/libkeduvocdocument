@@ -77,15 +77,6 @@ KEduVocTranslation * KEduVocWordType::translation(int row)
     return d->m_translations.value(row);
 }
 
-// KEduVocWordType * KEduVocWordType::parent()
-// {
-//     if(KEduVocContainer::parent()) {
-//         ///@todo check if it is a word type container?
-//         return static_cast<KEduVocWordType*>(KEduVocContainer::parent());
-//     }
-//     return 0;
-// }
-
 KEduVocExpression * KEduVocWordType::entry(int row)
 {
     return entries().value(row);

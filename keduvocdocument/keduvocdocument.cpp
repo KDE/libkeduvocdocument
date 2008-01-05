@@ -73,7 +73,6 @@ public:
     // save these to document
     QList<KEduVocIdentifier>  m_identifiers;
 
-    int                       m_currentLesson;
     QList<int>                m_extraSizeHints;
     QList<int>                m_sizeHints;
 
@@ -123,7 +122,6 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_extraSizeHints.clear();
     m_sizeHints.clear();
     m_dirty = false;
-    m_currentLesson = 0;
     m_queryorg = "";
     m_querytrans = "";
     m_url.setFileName( i18n( "Untitled" ) );
@@ -266,8 +264,7 @@ kDebug() << "open";
                 }
             }
             break;
-///@todo port me
-/*
+
             case Wql: {
                 kDebug(1100) << "Reading WordQuiz (WQL) document...";
                 KEduVocWqlReader wqlReader( f );
@@ -320,7 +317,7 @@ kDebug() << "open";
                     errorMessage = i18n( "Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString() );
                 }
             }
-            break;*/
+            break;
 
             default: {
                 kDebug(1100) << "Reading KVTML document (fallback)...";

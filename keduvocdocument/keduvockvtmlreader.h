@@ -58,12 +58,12 @@ public:
     bool readArticle( QDomElement &domElementParent );
     bool readPersonalPronouns( QDomElement &domElementParent, KEduVocPersonalPronoun& pronouns );
     bool readConjugation( QDomElement &domElementParent, KEduVocConjugation &conjugation );
-    bool readTranslationConjugations( QDomElement &domElementParent, KEduVocTranslation &translation );
+    bool readTranslationConjugations( QDomElement &domElementParent, KEduVocTranslation* translation );
     bool readType( QDomElement &domElementParent );
     bool readTense( QDomElement &domElementParent );
     bool readUsage( QDomElement &domElementParent );
     bool readComparison( QDomElement &domElementParent, KEduVocTranslation* translation );
-    bool readMultipleChoice( QDomElement &domElementParent, KEduVocMultipleChoice &mc );
+    bool readMultipleChoice( QDomElement &domElementParent, KEduVocTranslation* translation );
     bool readExpressionChildAttributes( QDomElement &domElementExpressionChild,
                                         QString &lang,
                                         grade_t &grade, grade_t &rev_grade,
@@ -75,7 +75,6 @@ public:
                                         QString &pronunciation,
                                         int &width,
                                         QString &type,
-                                        QString &subType,
                                         QString &faux_ami_f,
                                         QString &faux_ami_t,
                                         QString &synonym,

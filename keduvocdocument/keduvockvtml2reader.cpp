@@ -58,21 +58,21 @@ bool KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
         m_errorMessage = i18n( "This is not a KDE Vocabulary document." );
         return false;
     }
-///@todo port me
-//     if ( domElementKvtml.attribute( KVTML_VERSION ).toFloat() < 2.0 ) {
-//         // read the file with the old format
-//
-//         // first reset the file to the beginning
-//         m_inputFile->seek( 0 );
-//         KEduVocKvtmlReader oldFormat( m_inputFile );
-//
-//         // get the return value
-//         bool retval = oldFormat.readDoc( doc );
-//
-//         // pass the errormessage up
-//         m_errorMessage = oldFormat.errorMessage();
-//         return retval;
-//     }
+
+    if ( domElementKvtml.attribute( KVTML_VERSION ).toFloat() < 2.0 ) {
+        // read the file with the old format
+
+        // first reset the file to the beginning
+        m_inputFile->seek( 0 );
+        KEduVocKvtmlReader oldFormat( m_inputFile );
+
+        // get the return value
+        bool retval = oldFormat.readDoc( doc );
+
+        // pass the errormessage up
+        m_errorMessage = oldFormat.errorMessage();
+        return retval;
+    }
 
     //-------------------------------------------------------------------------
     // Information
