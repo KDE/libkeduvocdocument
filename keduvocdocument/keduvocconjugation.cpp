@@ -111,3 +111,8 @@ KEduVocGrade & KEduVocConjugation::grade()
     return d->m_grade;
 }
 
+QList< int > KEduVocConjugation::keys()
+{
+    return d->m_conjugations.keys();
+}
+

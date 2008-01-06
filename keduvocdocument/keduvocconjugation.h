@@ -71,6 +71,8 @@ public:
     QString conjugation(int index) const;
     void setConjugation(const QString& conjugation, ConjugationPerson person, ConjugationNumber number);
 
+    QList<int> keys();
+
     bool isEmpty();
 
     KEduVocGrade &grade();
