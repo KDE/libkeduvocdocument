@@ -334,8 +334,8 @@ bool KEduVocKvtmlReader::readArticle( QDomElement &domElementParent )
 }
 
 
-bool KEduVocKvtmlReader::readTranslationConjugations( QDomElement &domElementParent, KEduVocTranslation* translation ) {
-
+bool KEduVocKvtmlReader::readTranslationConjugations( QDomElement &domElementParent, KEduVocTranslation* translation )
+{
     QString tense;
 
     QDomElement domElementConjugChild = domElementParent.firstChildElement(KV_CON_TYPE);
