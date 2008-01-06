@@ -77,12 +77,11 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
     if ( currentElement.hasChildNodes() ) {
         domElementKvtml.appendChild( currentElement );
     }
-kDebug() << "Write word types.";
+
     // types
     currentElement = m_domDoc.createElement( KVTML_WORDTYPES );
     writeWordTypes( currentElement, m_doc->wordTypeContainer() );
     if ( currentElement.hasChildNodes() ) {
-kDebug() << "Write word types (has child nodes).";
         domElementKvtml.appendChild( currentElement );
     }
 
@@ -271,8 +270,6 @@ bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocWord
     foreach( KEduVocContainer* container, parentContainer->childContainers() ) {
         KEduVocWordType* wordType = static_cast<KEduVocWordType*>(container);
 
-        kDebug() << "Writing type: " << wordType->name();
-
         QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_CONTAINER );
         typeDefinitionElement.appendChild( newTextElement( KVTML_NAME, wordType->name() ) );
 
@@ -310,13 +307,10 @@ bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocWord
         foreach(KEduVocExpression *entry, wordType->entries()) {
             QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
             entryElement.setAttribute( KVTML_ID, QString::number(m_allEntries.indexOf(entry)) );
-
             for(int translation = 0; translation<m_doc->identifierCount(); translation++) {
                 if (entry->translation(translation)->wordType()== wordType) {
-                    // create <element id="123">
-                    entryElement.setAttribute( KVTML_ID, QString::number(translation) );
-                    // create <translation id="123">
                     QDomElement translationElement = m_domDoc.createElement( KVTML_TRANSLATION );
+                    // create <translation id="123">
                     translationElement.setAttribute( KVTML_ID, QString::number(translation) );
                     // append both
                     entryElement.appendChild(translationElement);
