@@ -120,18 +120,6 @@ public:
     */
     QString example() const;
 
-
-    /** sets usages this expression
-    * @param usage            usage labels of this index
-    */
-    void setUsages( const QSet<QString> & usage );
-
-
-    /** returns usages of this expression
-    * @return                 usages
-    */
-    QSet<QString>& usages();
-
     /** sets paraphrase of this expression
     * @param expression       paraphrase of this index
     */

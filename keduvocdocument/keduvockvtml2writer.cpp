@@ -416,11 +416,6 @@ kDebug() << "write tranlation:" << translation->text();
         translationElement.appendChild( newTextElement( KVTML_EXAMPLE, translation->example() ) );
     }
 
-    // <usage></usage>
-    foreach( const QString &usage, translation->usages() ) {
-        translationElement.appendChild( newTextElement( KVTML_USAGE, usage ) );
-    }
-
     // <paraphrase></paraphrase>
     if ( !translation->paraphrase().isEmpty() ) {
         translationElement.appendChild( newTextElement( KVTML_PARAPHRASE, translation->paraphrase() ) );

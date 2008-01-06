@@ -55,8 +55,7 @@ public:
     KUrl m_imageUrl;
     /// Sound url
     KUrl m_soundUrl;
-    /// Usages give a context (eg. this word is usually used in [biology])
-    QSet<QString> m_usages;
+
     /// When creating multiple choice tests, these are possible answers. (otherwise other words are added randomly)
     QStringList m_multipleChoice;
 
@@ -100,7 +99,6 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
 {
     d->m_translation = other.d->m_translation;
     d->m_wordType = other.d->m_wordType;
-    d->m_usages = other.d->m_usages;
     d->m_comment = other.d->m_comment;
     d->m_paraphrase = other.d->m_paraphrase;
     d->m_synonym = other.d->m_synonym;
@@ -131,7 +129,6 @@ bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) 
     return d->m_entry == translation.d->m_entry &&
            d->m_translation == translation.d->m_translation &&
            d->m_wordType == translation.d->m_wordType &&
-           d->m_usages == translation.d->m_usages &&
            d->m_comment == translation.d->m_comment &&
            d->m_paraphrase == translation.d->m_paraphrase &&
            d->m_synonym == translation.d->m_synonym &&
@@ -154,7 +151,6 @@ KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation &
     d->m_entry = translation.d->m_entry;
     d->m_translation = translation.d->m_translation;
     d->m_wordType = translation.d->m_wordType;
-    d->m_usages = translation.d->m_usages;
     d->m_comment = translation.d->m_comment;
     d->m_paraphrase = translation.d->m_paraphrase;
     d->m_synonym = translation.d->m_synonym;
@@ -230,18 +226,6 @@ void KEduVocTranslation::setExample( const QString & expr )
 QString KEduVocTranslation::example() const
 {
     return d->m_example;
-}
-
-
-void KEduVocTranslation::setUsages( const QSet<QString> & usages )
-{
-    d->m_usages = usages;
-}
-
-
-QSet<QString>& KEduVocTranslation::usages()
-{
-    return d->m_usages;
 }
 
 

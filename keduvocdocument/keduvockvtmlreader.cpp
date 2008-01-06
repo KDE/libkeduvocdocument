@@ -1027,8 +1027,6 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
             entry->translation( i )->setSynonym( synonym );
         if ( !example.isEmpty() )
             entry->translation( i )->setExample( example );
-        if ( !usage.isEmpty() )
-            entry->translation( i )->setUsages( usage );
         if ( !paraphrase.isEmpty() )
             entry->translation( i )->setParaphrase( paraphrase );
         if ( !antonym.isEmpty() )

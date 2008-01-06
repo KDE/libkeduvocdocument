@@ -346,13 +346,6 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
         expr->translation(index)->setExample( currentElement.text() );
     }
 
-    //<usage></usage> can be as often as there are usage labels
-    currentElement = translationElement.firstChildElement( KVTML_USAGE );
-    while ( !currentElement.isNull() ) {
-        expr->translation(index)->usages().insert( currentElement.text() );
-        currentElement = currentElement.nextSiblingElement( KVTML_USAGE );
-    }
-
     //<paraphrase></paraphrase>
     currentElement = translationElement.firstChildElement( KVTML_PARAPHRASE );
     if ( !currentElement.isNull() ) {
