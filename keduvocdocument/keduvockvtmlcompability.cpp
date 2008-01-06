@@ -198,7 +198,7 @@ QString KEduVocKvtmlCompability::tenseFromKvtml1(const QString & oldTense)
     // in case the document got chaged, at least make up something as tense
     if (!m_oldTenses.keys().contains(oldTense)) {
         m_oldTenses[oldTense] = oldTense;
-        kDebug() << "Warning, tense not found in document!";
+        kDebug() << "Warning, tense " << oldTense << " not found in document!";
     }
     m_tenses.insert(m_oldTenses.value(oldTense));
     return m_oldTenses.value(oldTense);

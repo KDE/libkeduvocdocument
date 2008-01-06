@@ -637,17 +637,12 @@ bool KEduVocKvtmlReader::readTense( QDomElement &domElementParent )
 {
     QDomElement currentElement;
 
-    QDomNodeList entryList = domElementParent.elementsByTagName( KV_TENSE_DESC );
-    if ( entryList.length() <= 0 )
-        return false;
-
-    for ( int i = 0; i < entryList.count(); ++i ) {
-        currentElement = entryList.item( i ).toElement();
-        if ( currentElement.parentNode() == domElementParent ) {
-            m_compability.addUserdefinedTense( currentElement.text() );
-        }
+    currentElement = domElementParent.firstChildElement( KV_TENSE_DESC );
+    while ( !currentElement.isNull() ) {
+        kDebug() << "Reading user defined tense description: " << currentElement.text();
+        m_compability.addUserdefinedTense( currentElement.text() );
+        currentElement = currentElement.nextSiblingElement( KV_TENSE_DESC );
     }
-
     return true;
 }
 

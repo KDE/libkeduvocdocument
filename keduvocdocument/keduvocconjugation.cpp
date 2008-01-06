@@ -83,12 +83,18 @@ QString KEduVocConjugation::conjugation(ConjugationPerson person, ConjugationNum
 
 void KEduVocConjugation::setConjugation(const QString & conjugation, ConjugationPerson person, ConjugationNumber number)
 {
+    setConjugation(conjugation, indexOf(person, number));
+}
+
+
+void KEduVocConjugation::setConjugation(const QString & conjugation, int index)
+{
     if ( !conjugation.isEmpty() ) {
-        d->m_conjugations[indexOf(person, number)] = conjugation;
+        d->m_conjugations[index] = conjugation;
     } else {
         // if we received an empty string, remove the element.
-        if ( d->m_conjugations.contains(indexOf(person, number)) ) {
-            d->m_conjugations.remove(indexOf(person, number));
+        if ( d->m_conjugations.contains(index) ) {
+            d->m_conjugations.remove(index);
         }
     }
 }
@@ -115,4 +121,6 @@ QList< int > KEduVocConjugation::keys()
 {
     return d->m_conjugations.keys();
 }
+
+
 

@@ -70,6 +70,7 @@ public:
     QString conjugation(ConjugationPerson person, ConjugationNumber number) const;
     QString conjugation(int index) const;
     void setConjugation(const QString& conjugation, ConjugationPerson person, ConjugationNumber number);
+    void setConjugation(const QString& conjugation, int index);
 
     QList<int> keys();
 
