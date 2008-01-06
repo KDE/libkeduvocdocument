@@ -77,12 +77,13 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
     if ( currentElement.hasChildNodes() ) {
         domElementKvtml.appendChild( currentElement );
     }
-
+kDebug() << "Write word types.";
     // types
     currentElement = m_domDoc.createElement( KVTML_WORDTYPES );
     writeWordTypes( currentElement, m_doc->wordTypeContainer() );
     if ( currentElement.hasChildNodes() ) {
-        domElementKvtml.appendChild( m_wordTypeElement );
+kDebug() << "Write word types (has child nodes).";
+        domElementKvtml.appendChild( currentElement );
     }
 
     m_domDoc.appendChild( domElementKvtml );

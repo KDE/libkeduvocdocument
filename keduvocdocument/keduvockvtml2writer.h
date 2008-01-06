@@ -118,9 +118,7 @@ private:
     QFile *m_outputFile;
     KEduVocDocument *m_doc;
 
-    ///@todo which of the following is in use?
     QList<KEduVocExpression*>  m_allEntries;
-    QDomElement m_wordTypeElement;
 
     QDomDocument m_domDoc;
 };
