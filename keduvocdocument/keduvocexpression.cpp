@@ -70,7 +70,7 @@ KEduVocExpression::KEduVocExpression( const QString & expression )
 KEduVocExpression::KEduVocExpression( const QStringList & translations)
         : d( new KEduVocExpressionPrivate( this ) )
 {
-    foreach ( QString translation, translations ) {
+    foreach ( const QString &translation, translations ) {
         setTranslation(d->m_translations.count(), translation);
     }
 }

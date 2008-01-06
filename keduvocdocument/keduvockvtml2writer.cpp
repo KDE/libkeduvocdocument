@@ -329,7 +329,7 @@ bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocWord
 
 bool KEduVocKvtml2Writer::writeTenses( QDomElement &tensesElement )
 {
-    foreach( QString tense, m_doc->tenseDescriptions() ) {
+    foreach( const QString &tense, m_doc->tenseDescriptions() ) {
         if ( !( tense.isNull() ) ) {
             tensesElement.appendChild( newTextElement( KVTML_TENSE, tense ) );
         }
@@ -417,7 +417,7 @@ kDebug() << "write tranlation:" << translation->text();
     }
 
     // <usage></usage>
-    foreach( QString usage, translation->usages() ) {
+    foreach( const QString &usage, translation->usages() ) {
         translationElement.appendChild( newTextElement( KVTML_USAGE, usage ) );
     }
 
@@ -449,7 +449,7 @@ kDebug() << "write tranlation:" << translation->text();
     }
 
     // conjugation
-    foreach ( QString tense, translation->conjugationTenses() ) {
+    foreach ( const QString &tense, translation->conjugationTenses() ) {
         QDomElement thisElement = m_domDoc.createElement( KVTML_CONJUGATION );
         writeConjugation( thisElement, translation->conjugation(tense), tense );
         translationElement.appendChild( thisElement );
@@ -523,7 +523,7 @@ bool KEduVocKvtml2Writer::writeMultipleChoice( QDomElement &multipleChoiceElemen
  </multiplechoice>
 */
 {
-    foreach ( QString choice, translation->multipleChoice() ) {
+    foreach ( const QString &choice, translation->multipleChoice() ) {
         multipleChoiceElement.appendChild( newTextElement( KVTML_CHOICE, choice ) );
     }
     return true;

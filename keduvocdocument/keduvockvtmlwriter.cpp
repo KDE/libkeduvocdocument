@@ -419,7 +419,7 @@ bool KEduVocKvtmlWriter::writeType( QDomElement &domElementParent )
       QDomElement domElementType = m_domDoc.createElement(KV_TYPE_GRP);
       int count = 1;
 
-      foreach(QString type, m_doc->typeDescriptions())
+      foreach(const QString &type, m_doc->typeDescriptions())
       {
         if (!(type.isNull()) )
         {
@@ -447,7 +447,7 @@ bool KEduVocKvtmlWriter::writeTense( QDomElement &domElementParent )
     QDomElement domElementTense = m_domDoc.createElement( KV_TENSE_GRP );
     int count = 1;
 
-    foreach( QString tense, m_doc->tenseDescriptions() ) {
+    foreach( const QString &tense, m_doc->tenseDescriptions() ) {
         if ( !( tense.isNull() ) ) {
             QDomElement domElementDesc = m_domDoc.createElement( KV_TENSE_DESC );
             QDomText domTextDesc = m_domDoc.createTextNode( tense );
@@ -475,7 +475,7 @@ bool KEduVocKvtmlWriter::writeUsage( QDomElement &domElementParent )
       QDomElement domElementUsage = m_domDoc.createElement(KV_USAGE_GRP);
       int count = 1;
 
-      foreach(QString usage, m_doc->usageDescriptions())
+      foreach(const QString &usage, m_doc->usageDescriptions())
       {
         if (!(usage.isNull()))
         {
@@ -668,7 +668,7 @@ bool KEduVocKvtmlWriter::writeConjugEntry( QDomElement &domElementParent, KEduVo
 //     curr_conjug.cleanUp();
     QDomElement domElementConjug = m_domDoc.createElement( KV_CONJUG_GRP );
 
-    foreach ( QString tense, translation.conjugationTenses() ) {
+    foreach ( const QString &tense, translation.conjugationTenses() ) {
         QDomElement domElementType = m_domDoc.createElement( KV_CON_TYPE );
 
         domElementType.setAttribute( KV_CON_NAME, m_compability.oldTense(tense) );

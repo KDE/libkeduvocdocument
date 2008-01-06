@@ -238,7 +238,7 @@ void KEduVocKvtmlCompability::setupWordTypes(KEduVocWordType * parent)
         << i18nc( "The grammatical type of a word", "Preposition" )
         << i18nc( "The grammatical type of an entry", "Question" );
 
-    foreach (QString typeName, wordTypeNames) {
+    foreach (const QString &typeName, wordTypeNames) {
         KEduVocWordType* wordType = new KEduVocWordType(typeName, parent);
         parent->appendChildContainer(wordType);
         m_userdefinedTypeCounter++;

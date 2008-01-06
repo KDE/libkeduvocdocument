@@ -45,7 +45,7 @@ KEduVocMultipleChoice::KEduVocMultipleChoice( const KEduVocMultipleChoice &other
 KEduVocMultipleChoice::KEduVocMultipleChoice( const QStringList &choices )
         : d( new KEduVocMultipleChoicePrivate )
 {
-    foreach ( QString choice, choices ) {
+    foreach ( const QString &choice, choices ) {
         // use appendChoice to check for empty entries
         appendChoice(choice);
     }
