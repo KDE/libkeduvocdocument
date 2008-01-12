@@ -48,8 +48,11 @@ KEduVocWordType::~KEduVocWordType()
 }
 
 
-QList<KEduVocExpression*> KEduVocWordType::entries()
+QList<KEduVocExpression*> KEduVocWordType::entries(EnumEntriesRecursive recursive)
 {
+    if (recursive == Recursive) {
+        return entriesRecursive();
+    }
     QSet<KEduVocExpression*> entries;
     foreach(KEduVocTranslation* translation, d->m_translations) {
         entries.insert(translation->entry());
@@ -57,8 +60,11 @@ QList<KEduVocExpression*> KEduVocWordType::entries()
     return entries.toList();
 }
 
-int KEduVocWordType::entryCount()
+int KEduVocWordType::entryCount(EnumEntriesRecursive recursive)
 {
+    if (recursive == Recursive) {
+        return entriesRecursive().count();
+    }
     return entries().count();
 }
 

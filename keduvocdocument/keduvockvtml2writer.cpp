@@ -340,7 +340,7 @@ bool KEduVocKvtml2Writer::writeTenses( QDomElement &tensesElement )
 
 bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
 {
-    m_allEntries = m_doc->lesson()->entriesRecursive();
+    m_allEntries = m_doc->lesson()->entries(KEduVocLesson::Recursive);
 
     // loop through entries
     for ( int i = 0; i < m_allEntries.count(); ++i ) {

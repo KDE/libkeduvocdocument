@@ -53,8 +53,8 @@ bool KEduVocCsvWriter::writeDoc( KEduVocDocument *doc, const QString &generator 
     int idCount = m_doc->identifierCount();
     QString currentRow;
 
-    for ( int e = 0; e < m_doc->lesson()->entriesRecursive().count(); e++ ) {
-        expression = m_doc->lesson()->entriesRecursive().value( e );
+    for ( int e = 0; e < m_doc->lesson()->entryCount(KEduVocLesson::Recursive); e++ ) {
+        expression = m_doc->lesson()->entries(KEduVocLesson::Recursive).value( e );
         currentRow = "";
         bool sep = false;
 

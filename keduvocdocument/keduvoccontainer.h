@@ -38,6 +38,11 @@ public:
         Leitner
     };
 
+    enum EnumEntriesRecursive{
+        NotRecursive = 0,
+        Recursive = 1
+    };
+
     /** default constructor */
     explicit KEduVocContainer(const QString& name, EnumContainerType type, KEduVocContainer *parent = 0);
 
@@ -79,12 +84,9 @@ public:
     QString name();
 
     /** get a list of all entries in the container */
-    virtual QList < KEduVocExpression* > entries() =0;
-    virtual int entryCount() =0;
+    virtual QList < KEduVocExpression* > entries(EnumEntriesRecursive recursive = NotRecursive) =0;
+    virtual int entryCount(EnumEntriesRecursive recursive = NotRecursive) =0;
     virtual KEduVocExpression* entry(int row) =0;
-
-    /** get a list of all entries in the container and its child containers */
-    QList < KEduVocExpression* > entriesRecursive();
 
     /**
      * Removes a translation. This has to be called when a language is removed from a document.
@@ -119,6 +121,9 @@ public:
      * @param url               url of the image
      */
     void setImageUrl(const KUrl &url);
+
+protected:
+    QList< KEduVocExpression * > entriesRecursive();
 
 private:
     class Private;

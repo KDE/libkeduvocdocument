@@ -964,7 +964,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         }
 
 
-        if ( m_doc->lesson()->entriesRecursive().count() == 0 ) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
+        if ( m_doc->lesson()->entries(KEduVocLesson::Recursive).count() == 0 ) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
 
             // new translation
             if (!addLanguage(i, lang)) {

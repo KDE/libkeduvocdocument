@@ -56,21 +56,43 @@ public:
     /** assignment operator */
     KEduVocWordType& operator= ( const KEduVocWordType& );
 
+    /**
+     * Internally (different from the name) the class can have one of the preset word types. These are used to determine special properties (verbs have conjugations available for example).
+     * @param type 
+     */
     void setWordType(EnumWordType type);
+
+    /**
+     * Return the meta word type for this class.
+     * @return 
+     */
     KEduVocWordType::EnumWordType wordType() const;
 
-
+    /**
+     * Return a child class (or this class) that is of the specified type. Returns 0 if no class of that type is found.
+     * @param type 
+     * @return 
+     */
     KEduVocWordType* childOfType(KEduVocWordType::EnumWordType type);
 
+    /**
+     * The word type class does keep track of individual translations, because for one entry, the translations can have different word types (eg. genders of nouns tend to be different in different langues).
+     * @param row 
+     * @return 
+     */
     KEduVocTranslation * translation(int row);
 
-    /** get a list of all entries in the lesson */
-    QList < KEduVocExpression* > entries();
+    /**
+     * get a list of all entries in the lesson
+     * @param recursive include entries in sublessons
+     * @return 
+     */
+    QList < KEduVocExpression* > entries(EnumEntriesRecursive recursive = NotRecursive);
 
     KEduVocExpression* entry(int row);
 
     /** get the number of entries in the lesson */
-    int entryCount();
+    int entryCount(EnumEntriesRecursive recursive = NotRecursive);
 
 private:
     class Private;

@@ -55,13 +55,19 @@ KEduVocLesson::~KEduVocLesson()
 }
 
 
-QList<KEduVocExpression*> KEduVocLesson::entries()
+QList<KEduVocExpression*> KEduVocLesson::entries(EnumEntriesRecursive recursive)
 {
+    if (recursive == Recursive) {
+        return entriesRecursive();
+    }
     return d->m_entries;
 }
 
-int KEduVocLesson::entryCount()
+int KEduVocLesson::entryCount(EnumEntriesRecursive recursive)
 {
+    if (recursive == Recursive) {
+        return entriesRecursive().count();
+    }
     return d->m_entries.count();
 }
 

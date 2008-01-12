@@ -53,10 +53,10 @@ public:
     KEduVocExpression* entry(int row);
 
     /** get a list of all entries in the lesson */
-    QList < KEduVocExpression* > entries();
+    QList < KEduVocExpression* > entries(EnumEntriesRecursive recursive = NotRecursive);
 
     /** get the number of entries in the lesson */
-    int entryCount();
+    int entryCount(EnumEntriesRecursive recursive = NotRecursive);
 
     /** append an entry to the lesson
      * @param entryid id of the entry to add
