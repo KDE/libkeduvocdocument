@@ -80,11 +80,15 @@ void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
 
 KEduVocTranslation * KEduVocWordType::translation(int row)
 {
+
     return d->m_translations.value(row);
 }
 
-KEduVocExpression * KEduVocWordType::entry(int row)
+KEduVocExpression * KEduVocWordType::entry(int row, EnumEntriesRecursive recursive)
 {
+    if (recursive == Recursive) {
+        return entriesRecursive().value(row);
+    }
     return entries().value(row);
 }
 

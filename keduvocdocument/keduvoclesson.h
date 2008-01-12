@@ -50,7 +50,7 @@ public:
     KEduVocLesson& operator= ( const KEduVocLesson& );
 
 
-    KEduVocExpression* entry(int row);
+    KEduVocExpression* entry(int row, EnumEntriesRecursive recursive = NotRecursive);
 
     /** get a list of all entries in the lesson */
     QList < KEduVocExpression* > entries(EnumEntriesRecursive recursive = NotRecursive);

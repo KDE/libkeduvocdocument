@@ -89,7 +89,7 @@ public:
      */
     QList < KEduVocExpression* > entries(EnumEntriesRecursive recursive = NotRecursive);
 
-    KEduVocExpression* entry(int row);
+    KEduVocExpression* entry(int row, EnumEntriesRecursive recursive = NotRecursive);
 
     /** get the number of entries in the lesson */
     int entryCount(EnumEntriesRecursive recursive = NotRecursive);

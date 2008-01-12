@@ -153,7 +153,7 @@ void KEduVocContainer::removeTranslation(int translation)
 
 QList< KEduVocExpression * > KEduVocContainer::entriesRecursive()
 {
-    QList< KEduVocExpression * > entryList = entries();
+    QList< KEduVocExpression * > entryList = entries(NotRecursive);
     foreach(KEduVocContainer *childContainer, d->m_childContainers) {
         foreach(KEduVocExpression *childEntry, childContainer->entriesRecursive()) {
             if(!entryList.contains(childEntry)) {

@@ -89,8 +89,11 @@ void KEduVocLesson::removeEntry(KEduVocExpression* entry)
     entry->removeLesson(this);
 }
 
-KEduVocExpression * KEduVocLesson::entry(int row)
+KEduVocExpression * KEduVocLesson::entry(int row, EnumEntriesRecursive recursive)
 {
+    if (recursive == Recursive) {
+        return entriesRecursive().value(row);
+    }
     return d->m_entries.value(row);
 }
 

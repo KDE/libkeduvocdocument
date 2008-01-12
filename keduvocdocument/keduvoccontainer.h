@@ -86,7 +86,7 @@ public:
     /** get a list of all entries in the container */
     virtual QList < KEduVocExpression* > entries(EnumEntriesRecursive recursive = NotRecursive) =0;
     virtual int entryCount(EnumEntriesRecursive recursive = NotRecursive) =0;
-    virtual KEduVocExpression* entry(int row) =0;
+    virtual KEduVocExpression* entry(int row, EnumEntriesRecursive recursive = NotRecursive) =0;
 
     /**
      * Removes a translation. This has to be called when a language is removed from a document.
