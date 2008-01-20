@@ -24,7 +24,7 @@
 <!ELEMENT male           (#PCDATA) >
 <!ELEMENT female         (#PCDATA) >
 <!ELEMENT neutral        (#PCDATA) >
-<!ELEMENT personalpronouns (singular?, plural?, tense?) >
+<!ELEMENT personalpronouns (singular?, dual?, plural?, tense?) >
 <!ELEMENT singular       (firstperson, secondperson, thirdperson) >
 <!ELEMENT plural         (firstperson, secondperson, thirdperson) >
 <!ELEMENT firstperson    (#PCDATA) >
@@ -34,19 +34,17 @@
 <!ELEMENT tenses         (tense*) >
 <!ELEMENT tense          (#PCDATA) >
 
-<!ELEMENT usages         (usage*) >
-<!ELEMENT usage          (#PCDATA) >
-
 <!ELEMENT lessons        (container*) >
 <!ELEMENT wordtypes      (container*) >
 <!ELEMENT leitnerboxes   (container*) >
 
-<!ELEMENT container      (name, containertype?, inPractice?, image?, containerentry*) >
-<!ELEMENT containertype  (lesson|leitnerbox|wordtype|wordtype-noun|wordtype-noun-male|wordtype-noun-female|wordtype-noun-neutral|wordtype-verb|wordtype-adjective|wordtype-adverb) >
-<!ELEMENT inPractice                (#PCDATA) >
+<!ELEMENT container      (name, specialwordtype?, inpractice?, image?, container*, containerentry*) >
+<!ELEMENT specialwordtype  (#PCDATA) >
+<!--ELEMENT specialwordtype  (noun|noun/male|noun/female|noun/neutral|verb|adjective|adverb) -->
+<!ELEMENT inpractice                (#PCDATA) >
 <!ELEMENT containerentry            (containertranslation*) >
 <!ATTLIST containerentry id         CDATA  #REQUIRED>
-<!ELEMENT containertranslation>
+<!ELEMENT containertranslation      EMPTY>
 <!ATTLIST containertranslation id   CDATA  #REQUIRED>
 
 <!ELEMENT entries        (entry*) >
@@ -65,7 +63,7 @@
 <!ELEMENT example        (#PCDATA) >
 <!ELEMENT paraphrase     (#PCDATA) >
 
-<!ELEMENT conjugation    (tense, singular?, plural?) >
+<!ELEMENT conjugation    (tense, singular?, dual?, plural?) >
 
 <!ELEMENT comparison     (absolute, comparative, superlative) >
 <!ELEMENT absolute       (#PCDATA) >
