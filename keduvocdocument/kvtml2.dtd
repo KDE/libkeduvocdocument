@@ -1,4 +1,4 @@
-<!ELEMENT kvtml         (information, identifiers, wordtypedefinitions?, usages?, entries, tenses?, lessons?)     >
+<!ELEMENT kvtml         (information, identifiers, tenses?, entries, tenses?, lessons?, wordtypes?)     >
 <!ATTLIST kvtml version    CDATA  #REQUIRED>
 
 <!ELEMENT information    (generator?, title, author?, license?, comment?, category?) >
@@ -25,11 +25,15 @@
 <!ELEMENT female         (#PCDATA) >
 <!ELEMENT neutral        (#PCDATA) >
 <!ELEMENT personalpronouns (singular?, dual?, plural?, tense?) >
-<!ELEMENT singular       (firstperson, secondperson, thirdperson) >
-<!ELEMENT plural         (firstperson, secondperson, thirdperson) >
-<!ELEMENT firstperson    (#PCDATA) >
-<!ELEMENT secondperson   (#PCDATA) >
-<!ELEMENT thirdperson    (common|(male, female, neutral)) >
+<!ELEMENT singular       (firstperson?, secondperson?, thirdpersonmale?, thirdpersonfemale?, thirdpersonneutralcommon?) >
+<!ELEMENT dual           (firstperson?, secondperson?, thirdpersonmale?, thirdpersonfemale?, thirdpersonneutralcommon?) >
+<!ELEMENT plural         (firstperson?, secondperson?, thirdpersonmale?, thirdpersonfemale?, thirdpersonneutralcommon?) >
+<!ELEMENT firstperson              (#PCDATA) >
+<!ELEMENT secondperson             (#PCDATA) >
+<!ELEMENT thirdpersonmale          (#PCDATA) >
+<!ELEMENT thirdpersonfemale        (#PCDATA) >
+<!ELEMENT thirdpersonneutralcommon (#PCDATA) >
+
 
 <!ELEMENT tenses         (tense*) >
 <!ELEMENT tense          (#PCDATA) >
@@ -48,11 +52,11 @@
 <!ATTLIST containertranslation id   CDATA  #REQUIRED>
 
 <!ELEMENT entries        (entry*) >
-<!ELEMENT entry          (inactive?, sizehint?, translation*) >
+<!ELEMENT entry          (deactivated?, sizehint?, translation*) >
 <!ATTLIST entry id       CDATA  #REQUIRED>
-<!ELEMENT inactive       (#PCDATA) >
+<!ELEMENT deactivated    (#PCDATA) >
 
-<!ELEMENT translation    (text, inquery?, comment?, pronunciation?, falsefriend?, antonym?, synonym?, example?, usage*, paraphrase?, comparison?, conjugation*, grade?, image?, multiplechoice?, sound?) >
+<!ELEMENT translation    (text?, comment?, pronunciation?, falsefriend?, antonym?, synonym?, example?, paraphrase?, comparison?, conjugation*, grade?, image?, multiplechoice?, sound?) >
 <!ATTLIST translation id  CDATA #REQUIRED >
 <!ELEMENT text           (#PCDATA) >
 <!ELEMENT pronunciation  (#PCDATA) >
