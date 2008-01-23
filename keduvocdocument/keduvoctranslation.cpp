@@ -1,7 +1,8 @@
 /***************************************************************************
                         Vocabulary Expression Translation for KDE Edu
     -----------------------------------------------------------------------
-    copyright      :(C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+
+    Copyright 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,6 +29,8 @@ class KEduVocTranslation::KEduVocTranslationPrivate
 {
 public:
     KEduVocTranslationPrivate(KEduVocExpression* parent);
+
+    ~KEduVocTranslationPrivate();
 
     KEduVocExpression* m_entry;
 
@@ -61,6 +64,7 @@ public:
 
     /// Conjugations of a word (I go, you go, he goes... boring in english)
     QMap <QString, KEduVocConjugation> m_conjugations;
+
     /// The comparison forms of adjectives and adverbs: (fast), faster, fastest
     QString m_comparative;
     QString m_superlative;
@@ -84,6 +88,12 @@ KEduVocTranslation::KEduVocTranslationPrivate::KEduVocTranslationPrivate(KEduVoc
     m_entry = parent;
     m_wordType = 0;
     m_declination = 0;
+}
+
+
+KEduVocTranslation::KEduVocTranslationPrivate::~ KEduVocTranslationPrivate()
+{
+    delete m_declination;
 }
 
 KEduVocTranslation::KEduVocTranslation(KEduVocExpression* entry) : d( new KEduVocTranslationPrivate(entry) )
@@ -113,6 +123,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
     d->m_falseFriends = other.d->m_falseFriends;
     d->m_imageUrl = other.d->m_imageUrl;
     d->m_soundUrl = other.d->m_soundUrl;
+    /// @todo add declinations
 }
 
 KEduVocTranslation::~KEduVocTranslation()
@@ -374,4 +385,5 @@ void KEduVocTranslation::setSuperlative(const QString & superlative)
 {
     d->m_superlative = superlative;
 }
+
 

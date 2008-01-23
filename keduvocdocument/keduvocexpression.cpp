@@ -4,6 +4,7 @@
     copyright      : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
 
                      (C) 2005-2007 Peter Hedlund <peter.hedlund@kdemail.net>
+    Copyright 2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -24,16 +25,15 @@
 class KEduVocExpression::KEduVocExpressionPrivate
 {
 public:
-    KEduVocExpressionPrivate( KEduVocExpression* qq )
-            : q( qq )
+    KEduVocExpressionPrivate()
     {
         m_active = true;
     }
     ~KEduVocExpressionPrivate();
 
-    bool operator== ( const KEduVocExpressionPrivate &p ) const;
+    KEduVocExpressionPrivate(const KEduVocExpressionPrivate &other);
 
-    KEduVocExpression* q;
+    bool operator== ( const KEduVocExpressionPrivate &p ) const;
 
     QList<KEduVocLesson*> m_lessons;
     bool m_active;
@@ -42,9 +42,20 @@ public:
 };
 
 
-KEduVocExpression::KEduVocExpressionPrivate::~ KEduVocExpressionPrivate()
+KEduVocExpression::KEduVocExpressionPrivate::~KEduVocExpressionPrivate()
 {
     qDeleteAll(m_translations);
+}
+
+
+KEduVocExpression::KEduVocExpressionPrivate::KEduVocExpressionPrivate(const KEduVocExpressionPrivate & other)
+{
+    m_active = other.m_active;
+    m_lessons = other.m_lessons;
+
+    foreach (int key, other.m_translations.keys()) {
+        m_translations[key] = new KEduVocTranslation(*other.m_translations.value(key));
+    }
 }
 
 
@@ -58,17 +69,17 @@ bool KEduVocExpression::KEduVocExpressionPrivate::operator== ( const KEduVocExpr
 
 
 KEduVocExpression::KEduVocExpression()
-        : d( new KEduVocExpressionPrivate( this ) )
+        : d( new KEduVocExpressionPrivate )
 {}
 
 KEduVocExpression::KEduVocExpression( const QString & expression )
-        : d( new KEduVocExpressionPrivate( this ) )
+        : d( new KEduVocExpressionPrivate )
 {
     setTranslation( 0, expression.simplified() );
 }
 
 KEduVocExpression::KEduVocExpression( const QStringList & translations)
-        : d( new KEduVocExpressionPrivate( this ) )
+        : d( new KEduVocExpressionPrivate )
 {
     foreach ( const QString &translation, translations ) {
         setTranslation(d->m_translations.count(), translation);
@@ -76,12 +87,16 @@ KEduVocExpression::KEduVocExpression( const QStringList & translations)
 }
 
 
+KEduVocExpression::KEduVocExpression(const KEduVocExpression & other)
+    : d(new KEduVocExpressionPrivate(*other.d))
+{}
+
+
 KEduVocExpression::~KEduVocExpression()
 {
-///@todo probably infinite loop when a parent lesson decides to delete it :)
-//     foreach(KEduVocLesson * lesson, d->m_lessons) {
-//         lesson->removeEntry(this);
-//     }
+    foreach(KEduVocLesson * lesson, d->m_lessons) {
+        lesson->removeEntry(this);
+    }
     delete d;
 }
 
@@ -176,5 +191,6 @@ void KEduVocExpression::removeLesson(KEduVocLesson * l)
 {
     d->m_lessons.removeAt(d->m_lessons.indexOf(l));
 }
+
 
 

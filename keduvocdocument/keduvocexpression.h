@@ -4,6 +4,7 @@
     copyright            : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
 
                            (C) 2005-2007 Peter Hedlund <peter.hedlund@kdemail.net>
+    Copyright 2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -55,6 +56,8 @@ public:
      * @param lesson           lesson number, 0 for none
      */
     explicit KEduVocExpression( const QStringList & translations );
+
+    KEduVocExpression(const KEduVocExpression& other);
 
     ~KEduVocExpression();
 
