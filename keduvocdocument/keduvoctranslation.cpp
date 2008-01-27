@@ -128,9 +128,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
 
 KEduVocTranslation::~KEduVocTranslation()
 {
-    if (d->m_wordType) {
-        d->m_wordType->removeTranslation(this);
-    }
+    setWordType(0);
     delete d;
 }
 
@@ -357,8 +355,8 @@ void KEduVocTranslation::setWordType(KEduVocWordType * wordType)
     }
     if ( wordType ) {
         wordType->addTranslation(this);
-        d->m_wordType = wordType;
     }
+    d->m_wordType = wordType;
 }
 
 KEduVocExpression * KEduVocTranslation::entry()

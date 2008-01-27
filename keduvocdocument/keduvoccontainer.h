@@ -125,6 +125,11 @@ public:
 protected:
     QList< KEduVocExpression * > entriesRecursive();
 
+    /**
+     * The cache of entries in this lessons child lessons.
+     */
+    void resetChildLessonEntries();
+
 private:
     class Private;
     Private * const d;

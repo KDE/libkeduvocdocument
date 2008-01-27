@@ -1,5 +1,5 @@
 /*
- Copyright 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+ Copyright 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -17,12 +17,14 @@
  USA
 */
 
-#include "../keduvocdocument.h"
-#include "../keduvoclesson.h"
-#include "../keduvocexpression.h"
-#include "../keduvoctranslation.h"
-#include "../keduvocconjugation.h"
-#include "../keduvocdeclination.h"
+#include "keduvocdocument.h"
+#include "keduvoclesson.h"
+#include "keduvocexpression.h"
+#include "keduvoctranslation.h"
+#include "keduvocconjugation.h"
+#include "keduvocdeclination.h"
+#include "keduvocwordtype.h"
+
 
 #include <KTemporaryFile>
 
@@ -39,6 +41,7 @@ class KEduVocDocumentValidatorTest
 private slots:
     void testDocumentAboutInfo();
     void testLessons();
+    void testWordTypes();
 };
 
 void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
@@ -110,6 +113,56 @@ void KEduVocDocumentValidatorTest::testLessons()
 // Not yet implemented:
 //     doc.moveLesson(2, 1);
 //     QCOMPARE(doc.lesson(2), lesson2);
+}
+
+
+void KEduVocDocumentValidatorTest::testWordTypes()
+{
+    KEduVocDocument doc;
+    // create doc - has no word types yet
+    QCOMPARE(doc.wordTypeContainer()->childContainerCount(), 0);
+
+    KEduVocWordType *noun;
+    KEduVocWordType *nounMale;
+    KEduVocWordType *nounFemale;
+    KEduVocWordType *verb;
+
+    noun = new KEduVocWordType("Noun", doc.wordTypeContainer());
+    doc.wordTypeContainer()->appendChildContainer(noun);
+    QCOMPARE(doc.wordTypeContainer()->childContainerCount(), 1);
+    nounMale = new KEduVocWordType("Male", noun);
+    noun->appendChildContainer(nounMale);
+    nounFemale = new KEduVocWordType("Female", noun);
+    noun->appendChildContainer(nounFemale);
+    verb = new KEduVocWordType("Verb", doc.wordTypeContainer());
+    doc.wordTypeContainer()->appendChildContainer(verb);
+    QCOMPARE(doc.wordTypeContainer()->childContainerCount(), 2);
+    QCOMPARE(doc.wordTypeContainer()->childContainer(0)->childContainerCount(), 2);
+
+    // create some entries
+    for(int i = 0; i < 20; i++) {
+        KEduVocExpression *e =
+            new KEduVocExpression(QStringList() << QString("lang1 %1").arg(i) << QString("lang2 %1").arg(i));
+        doc.lesson()->appendEntry(e);
+        e->translation(0)->setWordType(noun);
+        e->translation(1)->setWordType(noun);
+    }
+    QCOMPARE(doc.lesson()->entryCount(), 20);
+    QCOMPARE(noun->entryCount(), 20);
+    doc.lesson()->entry(0)->translation(0)->setWordType(verb);
+    // translation 1 is still noun, so it needs to be in both now
+    QCOMPARE(noun->entryCount(), 20);
+    QCOMPARE(verb->entryCount(), 1);
+    doc.lesson()->entry(0)->translation(1)->setWordType(verb);
+    QCOMPARE(noun->entryCount(), 19);
+    QCOMPARE(verb->entryCount(), 1);
+
+    // delete word type
+    doc.wordTypeContainer()->deleteChildContainer(1);
+    // the word type is set to 0 when removed
+    QVERIFY(doc.lesson()->entry(0)->translation(0)->wordType() == 0);
+    QVERIFY(doc.lesson()->entry(0)->translation(1)->wordType() == 0);
+    QCOMPARE(doc.wordTypeContainer()->childContainerCount(), 1);
 }
 
 QTEST_KDEMAIN_CORE( KEduVocDocumentValidatorTest )

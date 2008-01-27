@@ -33,9 +33,11 @@ public:
 
     // other lessons in the tree
     KEduVocContainer *m_parentContainer;
-    QList<KEduVocContainer*> m_childContainers;
+    QList < KEduVocContainer * > m_childContainers;
 
     EnumContainerType m_type;
+
+    QSet < KEduVocExpression* > m_childLessonEntries;
 
     /// Image url
     KUrl m_imageUrl;
@@ -73,6 +75,8 @@ void KEduVocContainer::appendChildContainer(KEduVocContainer * child)
 {
     d->m_childContainers.append(child);
     child->d->m_parentContainer = this;
+
+    d->m_childLessonEntries.unite(child->entries(Recursive).toSet());
 }
 
 KEduVocContainer * KEduVocContainer::childContainer(int row)
@@ -85,6 +89,8 @@ void KEduVocContainer::deleteChildContainer(int row)
 {
     kDebug() << "Delete of container - check entry deletion!";
     delete d->m_childContainers.takeAt(row);
+
+    resetChildLessonEntries();
 }
 
 void KEduVocContainer::removeChildContainer(int row)
@@ -149,6 +155,9 @@ void KEduVocContainer::removeTranslation(int translation)
     foreach(KEduVocExpression *entry, entries() ) {
         entry->removeTranslation( translation );
     }
+    if (parent()) {
+        parent()->resetChildLessonEntries();
+    }
 }
 
 QList< KEduVocExpression * > KEduVocContainer::entriesRecursive()
@@ -212,5 +221,11 @@ void KEduVocContainer::insertChildContainer(int row, KEduVocContainer * child)
     child->d->m_parentContainer = this;
 }
 
-
+void KEduVocContainer::resetChildLessonEntries()
+{
+    d->m_childLessonEntries.clear();
+    foreach(KEduVocContainer *childContainer, d->m_childContainers) {
+        d->m_childLessonEntries.unite(childContainer->entries(Recursive).toSet());
+    }
+}
 

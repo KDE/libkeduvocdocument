@@ -18,6 +18,8 @@
 
 #include "keduvocexpression.h"
 
+#include <KDebug>
+
 #include <QtCore/QList>
 #include <QtCore/QSet>
 
@@ -29,24 +31,25 @@ public:
     QList<KEduVocTranslation*> m_translations;
 };
 
-
 KEduVocWordType::KEduVocWordType(const QString& name, KEduVocWordType *parent)
         : d( new Private ), KEduVocContainer(name, WordType, parent)
 {
     d->m_wordType = General;
 }
 
-KEduVocWordType::KEduVocWordType( const KEduVocWordType &other )
-        : d( new Private ), KEduVocContainer(other)
-{
-    d->m_translations = other.d->m_translations;
-}
+// KEduVocWordType::KEduVocWordType( const KEduVocWordType &other )
+//         : d( new Private ), KEduVocContainer(other)
+// {
+//     d->m_translations = other.d->m_translations;
+// }
 
 KEduVocWordType::~KEduVocWordType()
 {
+    foreach(KEduVocTranslation* translation, d->m_translations) {
+        translation->setWordType(0);
+    }
     delete d;
 }
-
 
 QList<KEduVocExpression*> KEduVocWordType::entries(EnumEntriesRecursive recursive)
 {
@@ -75,7 +78,7 @@ void KEduVocWordType::addTranslation(KEduVocTranslation* translation)
 
 void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
 {
-    d->m_translations.removeAt( d->m_translations.indexOf(translation) );
+    d->m_translations.removeAt( d->m_translations.indexOf(translation));
 }
 
 KEduVocTranslation * KEduVocWordType::translation(int row)
@@ -115,3 +118,4 @@ KEduVocWordType* KEduVocWordType::childOfType(KEduVocWordType::EnumWordType type
     }
     return 0;
 }
+
