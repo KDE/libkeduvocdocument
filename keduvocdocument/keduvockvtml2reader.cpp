@@ -257,7 +257,6 @@ bool KEduVocKvtml2Reader::readIdentifier( QDomElement &identifierElement )
 
 bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
 {
-    KEduVocExpression *expr = new KEduVocExpression;
     QDomElement currentElement;
     bool result = true;
 
@@ -267,6 +266,8 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
         m_errorMessage = i18n( "entry missing id" );
         return false;
     }
+
+    KEduVocExpression *expr = new KEduVocExpression;
 
     // read info tags: inactive, inquery, and sizehint
     currentElement = entryElement.firstChildElement( KVTML_DEACTIVATED );
