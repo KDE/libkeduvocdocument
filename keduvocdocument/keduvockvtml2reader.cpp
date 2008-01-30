@@ -284,6 +284,7 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
     // read translation children
     QDomNodeList translationList = entryElement.elementsByTagName( KVTML_TRANSLATION );
     if ( translationList.length() <= 0 ) {
+        delete expr;
         m_errorMessage = i18n( "no translations found" );
         return false; // at least one translation is required
     }
