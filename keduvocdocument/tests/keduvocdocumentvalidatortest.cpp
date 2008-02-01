@@ -90,29 +90,19 @@ void KEduVocDocumentValidatorTest::testLessons()
     KEduVocDocument doc;
     doc.lesson()->appendChildContainer(new KEduVocLesson(lesson1, doc.lesson()));
     QCOMPARE(doc.lesson()->childContainerCount(), 1);
+    QCOMPARE(doc.lesson()->childContainer(0)->containerType(), KEduVocContainer::Lesson);
+    QCOMPARE(doc.lesson()->childContainer(0)->parent(), doc.lesson());
+    QCOMPARE(doc.lesson()->childContainer(0)->name(), lesson1);
 
-    /*
-    QCOMPARE(doc.lesson(indexLesson1).name(), lesson1);
-    QVERIFY(doc.lesson(indexLesson1).inPractice());
+    doc.lesson()->appendChildContainer(new KEduVocLesson(lesson2, doc.lesson()));
+    doc.lesson()->appendChildContainer(new KEduVocLesson(lesson3, doc.lesson()));
+    QCOMPARE(doc.lesson()->childContainerCount(), 3);
 
-    int indexLesson2 = doc.appendLesson(lesson2, false);
-    QCOMPARE(indexLesson2, 1);
-    QCOMPARE(doc.lessonCount(), 2);
-    QVERIFY(!doc.lesson(indexLesson2).inPractice());
+    doc.lesson()->childContainer(0)->appendChildContainer(new KEduVocLesson(lesson1child1, doc.lesson()->childContainer(0)));
+    doc.lesson()->childContainer(0)->appendChildContainer(new KEduVocLesson(lesson1child2, doc.lesson()->childContainer(0)));
+    QCOMPARE(doc.lesson()->childContainer(0)->childContainerCount(), 2);
 
-    int indexLesson3 = doc.appendLesson(lesson3, false);
-    QCOMPARE(indexLesson3, 2);
-    QCOMPARE(doc.lessonCount(), 3);
 
-    bool removed = doc.removeLesson(indexLesson2, KEduVocDocument::DeleteEmptyLesson); // only remove if empty
-    QCOMPARE(doc.lessonCount(), 2);
-    QVERIFY(removed);
-    QCOMPARE(doc.lesson(2).name(), lesson3);
-
-    doc.appendLesson(lesson2, true); */
-// Not yet implemented:
-//     doc.moveLesson(2, 1);
-//     QCOMPARE(doc.lesson(2), lesson2);
 }
 
 
