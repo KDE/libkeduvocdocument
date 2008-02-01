@@ -47,10 +47,6 @@ public:
     /** default constructor */
     explicit KEduVocWordType(const QString& name, KEduVocWordType *parent = 0);
 
-    /* copy constructor for d-pointer safe copying */
-    // makes no sense to copy - entries only have one word type
-//     KEduVocWordType( const KEduVocWordType &other );
-
     /** destructor */
     ~KEduVocWordType();
 

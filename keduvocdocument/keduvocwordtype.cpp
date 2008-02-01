@@ -37,12 +37,6 @@ KEduVocWordType::KEduVocWordType(const QString& name, KEduVocWordType *parent)
     d->m_wordType = General;
 }
 
-// KEduVocWordType::KEduVocWordType( const KEduVocWordType &other )
-//         : d( new Private ), KEduVocContainer(other)
-// {
-//     d->m_translations = other.d->m_translations;
-// }
-
 KEduVocWordType::~KEduVocWordType()
 {
     foreach(KEduVocTranslation* translation, d->m_translations) {
