@@ -47,6 +47,8 @@ install(FILES
    keduvocgrammar.h
    keduvocconjugation.h
    keduvoclesson.h
+   keduvoccontainer.h
+   keduvocwordtype.h
    keduvocmultiplechoice.h
    keduvoctranslation.h
    keduvocwordtype.h
