@@ -50,6 +50,7 @@ install(FILES
    keduvocmultiplechoice.h
    keduvoctranslation.h
    keduvocwordtype.h
+   keduvocpersonalpronoun.h
    sharedkvtmlfiles.h
    DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu
 )
