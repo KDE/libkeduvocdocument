@@ -53,37 +53,49 @@ typedef unsigned short count_t;
 
 
 /**
-Contains grading information (query date, bad count) for one language with respect to another.
-
+ * A text in vocabulary documents. Associated with it are grade and date information.
+ * This should be used instead of strings for all things that can be tested and thus get a grade.
  @author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
-class KEDUVOCDOCUMENT_EXPORT KEduVocGrade
+class KEDUVOCDOCUMENT_EXPORT KEduVocText
 {
 public:
     /** default constructor */
-    KEduVocGrade();
+    KEduVocText(const QString& text = QString());
 
     /** copy constructor
      * provides safe copy of d pointer
      * @param other object to copy from
      */
-    KEduVocGrade( const KEduVocGrade &other );
+    KEduVocText( const KEduVocText &other );
 
     /** default destructor */
-    ~KEduVocGrade();
+    ~KEduVocText();
+
+    /**
+     * The translation as string (the word itself)
+     * @return the translation
+     */
+    QString text() const;
+
+    /**
+     * Sets the translation
+     * @param expr
+     */
+    void setText( const QString & expr );
 
     /**
      * Equal operator to copy grades.
      * @param other grades copied
      * @return reference to the new grades
      */
-    KEduVocGrade& operator= ( const KEduVocGrade &other );
+    KEduVocText& operator= ( const KEduVocText &other );
     /**
      * Compare two sets of grades.
      * @param other
      * @return true if equal
      */
-    bool operator== ( const KEduVocGrade &other ) const;
+    bool operator== ( const KEduVocText &other ) const;
 
 
     /** returns how often this entry has been practiced as int
@@ -111,7 +123,6 @@ public:
 
     /** increment query count of given translation by 1 */
     void incPracticeCount();
-
 
     /**
      * Clears grading and date information.
@@ -144,8 +155,8 @@ public:
     void setPracticeDate( const QDateTime & date );
 
 private:
-    class KEduVocGradePrivate;
-    KEduVocGradePrivate * const d;
+    class KEduVocTextPrivate;
+    KEduVocTextPrivate * const d;
 };
 
 #endif

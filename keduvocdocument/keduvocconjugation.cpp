@@ -29,7 +29,6 @@
 class KEduVocConjugation::Private
 {
 public:
-    KEduVocGrade m_grade;
     QMap<int, QString> m_conjugations;
 };
 
@@ -42,7 +41,6 @@ KEduVocConjugation::KEduVocConjugation()
 KEduVocConjugation::KEduVocConjugation( const KEduVocConjugation& other )
         : d( new Private )
 {
-    d->m_grade = other.d->m_grade;
     d->m_conjugations = other.d->m_conjugations;
 }
 
@@ -55,15 +53,13 @@ KEduVocConjugation::~KEduVocConjugation()
 
 KEduVocConjugation& KEduVocConjugation::operator = ( const KEduVocConjugation& other )
 {
-    d->m_grade = other.d->m_grade;
     d->m_conjugations = other.d->m_conjugations;
     return *this;
 }
 
 bool KEduVocConjugation::operator ==(const KEduVocConjugation& other) const
 {
-    return d->m_conjugations == other.d->m_conjugations &&
-           d->m_grade == other.d->m_grade;
+    return d->m_conjugations == other.d->m_conjugations;
 }
 
 
@@ -109,12 +105,6 @@ int KEduVocConjugation::indexOf(ConjugationPerson person, ConjugationNumber numb
 bool KEduVocConjugation::isEmpty()
 {
     return d->m_conjugations.count() == 0;
-}
-
-
-KEduVocGrade & KEduVocConjugation::grade()
-{
-    return d->m_grade;
 }
 
 QList< int > KEduVocConjugation::keys()

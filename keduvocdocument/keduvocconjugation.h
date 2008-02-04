@@ -76,8 +76,6 @@ public:
 
     bool isEmpty();
 
-    KEduVocGrade &grade();
-
     static int indexOf(ConjugationPerson person, ConjugationNumber number);
 
 private:

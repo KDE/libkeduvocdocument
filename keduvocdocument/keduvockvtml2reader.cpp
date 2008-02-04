@@ -656,7 +656,6 @@ bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement
 bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpression *expr, int index )
 {
     bool result = true;
-    int id = gradeElement.attribute( KVTML_FROMID ).toInt( &result );
     if ( !result ) {
         m_errorMessage = i18n( "identifier missing id" );
         return false;
@@ -665,19 +664,19 @@ bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpressio
     QDomElement currentElement = gradeElement.firstChildElement( KVTML_CURRENTGRADE );
     if ( !currentElement.isNull() ) {
         int value = currentElement.text().toInt();
-        expr->translation(index)->gradeFrom( id ).setGrade( value );
+        expr->translation(index)->setGrade( value );
     }
 
     currentElement = gradeElement.firstChildElement( KVTML_COUNT );
     if ( !currentElement.isNull() ) {
         int value = currentElement.text().toInt();
-        expr->translation(index)->gradeFrom( id ).setPracticeCount( value );
+        expr->translation(index)->setPracticeCount( value );
     }
 
     currentElement = gradeElement.firstChildElement( KVTML_ERRORCOUNT );
     if ( !currentElement.isNull() ) {
         int value = currentElement.text().toInt();
-        expr->translation(index)->gradeFrom( id ).setBadCount( value );
+        expr->translation(index)->setBadCount( value );
     }
 
     currentElement = gradeElement.firstChildElement( KVTML_DATE );
@@ -685,7 +684,7 @@ bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpressio
         QString dateString = currentElement.text();
         if ( !dateString.isEmpty() ) {
             QDateTime value = QDateTime::fromString( dateString, Qt::ISODate );
-            expr->translation(index)->gradeFrom( id ).setPracticeDate( value );
+            expr->translation(index)->setPracticeDate( value );
         }
     }
 

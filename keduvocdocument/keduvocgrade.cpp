@@ -15,36 +15,51 @@
 
 #include "keduvocgrade.h"
 
-class KEduVocGrade::KEduVocGradePrivate
+class KEduVocText::KEduVocTextPrivate
 {
 public:
+    /// This is the word itself. The vocabulary. This is what it is all about.
+    QString m_text;
+
     grade_t m_grade;
     count_t m_totalPracticeCount;
     count_t m_badCount;
     QDateTime m_practiceDate;
 };
 
-KEduVocGrade::KEduVocGrade()
-        :d( new KEduVocGradePrivate )
+KEduVocText::KEduVocText(const QString& text)
+        :d( new KEduVocTextPrivate )
 {
+    d->m_text = text;
     resetGrades();
 }
 
-KEduVocGrade::KEduVocGrade( const KEduVocGrade &other )
-        :d( new KEduVocGradePrivate )
+KEduVocText::KEduVocText( const KEduVocText &other )
+        :d( new KEduVocTextPrivate )
 {
+    d->m_text = other.d->m_text;
     setGrade( other.grade() );
     setPracticeCount( other.practiceCount() );
     setBadCount( other.badCount() );
     setPracticeDate( other.practiceDate() );
 }
 
-KEduVocGrade::~KEduVocGrade()
+KEduVocText::~KEduVocText()
 {
     delete d;
 }
 
-void KEduVocGrade::resetGrades()
+QString KEduVocText::text() const
+{
+    return d->m_text;
+}
+
+void KEduVocText::setText( const QString & expr )
+{
+    d->m_text = expr.simplified();
+}
+
+void KEduVocText::resetGrades()
 {
     d->m_grade = KV_NORM_GRADE;
     d->m_totalPracticeCount = 0;
@@ -56,13 +71,13 @@ void KEduVocGrade::resetGrades()
 }
 
 
-grade_t KEduVocGrade::grade() const
+grade_t KEduVocText::grade() const
 {
     return d->m_grade;
 }
 
 
-void KEduVocGrade::setGrade( grade_t grade )
+void KEduVocText::setGrade( grade_t grade )
 {
     if ( grade > KV_MAX_GRADE ) {
         grade = KV_MAX_GRADE;
@@ -71,13 +86,13 @@ void KEduVocGrade::setGrade( grade_t grade )
 }
 
 
-void KEduVocGrade::incGrade()
+void KEduVocText::incGrade()
 {
     setGrade( grade() + 1 );
 }
 
 
-void KEduVocGrade::decGrade()
+void KEduVocText::decGrade()
 {
     if ( grade() == KV_MIN_GRADE ) {
         return;
@@ -86,54 +101,54 @@ void KEduVocGrade::decGrade()
 }
 
 
-count_t KEduVocGrade::practiceCount()  const
+count_t KEduVocText::practiceCount()  const
 {
     return d->m_totalPracticeCount;
 }
 
 
-void KEduVocGrade::incPracticeCount()
+void KEduVocText::incPracticeCount()
 {
     setPracticeCount( practiceCount() + 1 );
 }
 
 
-void KEduVocGrade::incBadCount()
+void KEduVocText::incBadCount()
 {
     setBadCount( badCount() + 1 );
 }
 
 
-void KEduVocGrade::setPracticeCount( count_t count )
+void KEduVocText::setPracticeCount( count_t count )
 {
     d->m_totalPracticeCount = count;
 }
 
 
-count_t KEduVocGrade::badCount() const
+count_t KEduVocText::badCount() const
 {
     return d->m_badCount;
 }
 
 
-void KEduVocGrade::setBadCount( count_t count )
+void KEduVocText::setBadCount( count_t count )
 {
     d->m_badCount = count;
 }
 
 
-QDateTime KEduVocGrade::practiceDate() const
+QDateTime KEduVocText::practiceDate() const
 {
     return d->m_practiceDate;
 }
 
 
-void KEduVocGrade::setPracticeDate( const QDateTime & date )
+void KEduVocText::setPracticeDate( const QDateTime & date )
 {
     d->m_practiceDate = date;
 }
 
-KEduVocGrade & KEduVocGrade::operator =(const KEduVocGrade & other)
+KEduVocText & KEduVocText::operator =(const KEduVocText & other)
 {
     d->m_grade = other.d->m_grade;
     d->m_totalPracticeCount = other.d->m_totalPracticeCount;
@@ -143,7 +158,7 @@ KEduVocGrade & KEduVocGrade::operator =(const KEduVocGrade & other)
     return *this;
 }
 
-bool KEduVocGrade::operator ==(const KEduVocGrade & other) const
+bool KEduVocText::operator ==(const KEduVocText & other) const
 {
     return d->m_grade == other.d->m_grade &&
         d->m_totalPracticeCount == other.d->m_totalPracticeCount &&

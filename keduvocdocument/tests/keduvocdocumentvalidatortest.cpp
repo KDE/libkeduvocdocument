@@ -42,6 +42,7 @@ private slots:
     void testDocumentAboutInfo();
     void testLessons();
     void testWordTypes();
+    void testTranslations();
 };
 
 void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
@@ -153,6 +154,21 @@ void KEduVocDocumentValidatorTest::testWordTypes()
     QVERIFY(doc.lesson()->entry(0)->translation(0)->wordType() == 0);
     QVERIFY(doc.lesson()->entry(0)->translation(1)->wordType() == 0);
     QCOMPARE(doc.wordTypeContainer()->childContainerCount(), 1);
+}
+
+void KEduVocDocumentValidatorTest::testTranslations()
+{
+    KEduVocTranslation *trans1 = new KEduVocTranslation(0, QString("My word"));
+    QCOMPARE(trans1->text(), QString("My word"));
+
+    // copy ctor
+    KEduVocTranslation *trans2 = new KEduVocTranslation(*trans1);
+    QCOMPARE(trans2->text(), QString("My word"));
+
+    // operator =
+    KEduVocTranslation *trans3 = new KEduVocTranslation(0);
+    trans3 = trans1;
+    QCOMPARE(trans3->text(), QString("My word"));
 }
 
 QTEST_KDEMAIN_CORE( KEduVocDocumentValidatorTest )

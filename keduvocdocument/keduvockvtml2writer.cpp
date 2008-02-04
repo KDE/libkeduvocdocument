@@ -422,25 +422,22 @@ kDebug() << "write tranlation:" << translation->text();
     }
 
     // grades
-    for ( int i = 0; i < m_doc->identifierCount(); ++i ) {
-        KEduVocGrade thisGrade = translation->gradeFrom( i );
-        if ( thisGrade.practiceCount() > 0 ) {
-            QDomElement gradeElement = m_domDoc.createElement( KVTML_GRADE );
-            gradeElement.setAttribute( KVTML_FROMID, QString::number( i ) );
-            //<currentgrade>2</currentgrade>
-            gradeElement.appendChild( newTextElement( KVTML_CURRENTGRADE, QString::number( thisGrade.grade() ) ) );
+    if ( translation->practiceCount() > 0 ) {
+        QDomElement gradeElement = m_domDoc.createElement( KVTML_GRADE );
 
-            //<count>6</count>
-            gradeElement.appendChild( newTextElement( KVTML_COUNT, QString::number( thisGrade.practiceCount() ) ) );
+        //<currentgrade>2</currentgrade>
+        gradeElement.appendChild( newTextElement( KVTML_CURRENTGRADE, QString::number( translation->grade() ) ) );
 
-            //<errorcount>1</errorcount>
-            gradeElement.appendChild( newTextElement( KVTML_ERRORCOUNT, QString::number( thisGrade.badCount() ) ) );
+        //<count>6</count>
+        gradeElement.appendChild( newTextElement( KVTML_COUNT, QString::number( translation->practiceCount() ) ) );
 
-            //<date>949757271</date>
-            gradeElement.appendChild( newTextElement( KVTML_DATE,  thisGrade.practiceDate().toString( Qt::ISODate ) ) );
+        //<errorcount>1</errorcount>
+        gradeElement.appendChild( newTextElement( KVTML_ERRORCOUNT, QString::number( translation->badCount() ) ) );
 
-            translationElement.appendChild( gradeElement );
-        }
+        //<date>949757271</date>
+        gradeElement.appendChild( newTextElement( KVTML_DATE,  translation->practiceDate().toString( Qt::ISODate ) ) );
+
+        translationElement.appendChild( gradeElement );
     }
 
     // conjugation

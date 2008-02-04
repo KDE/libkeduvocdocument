@@ -24,13 +24,14 @@
 #include <QtCore/QString>
 
 class KEduVocExpression;
-class KEduVocGrade;
+class KEduVocString;
 class KEduVocWordType;
 
 /**
  @author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
 class KEDUVOCDOCUMENT_EXPORT KEduVocTranslation
+    :public KEduVocText
 {
 public:
     /**
@@ -53,18 +54,6 @@ public:
     ~KEduVocTranslation();
 
     KEduVocExpression* entry();
-
-    /**
-     * The translation as string (the word itself)
-     * @return the translation
-     */
-    QString text() const;
-
-    /**
-     * Sets the translation
-     * @param expr
-     */
-    void setText( const QString & expr );
 
 
     /** sets the pronunciation of this expression
@@ -162,16 +151,6 @@ public:
     * @param type             type of this expression ("" = none)
     */
     void setWordType( KEduVocWordType* wordType );
-
-
-    /** reset the grades for this translation */
-    void resetGrades();
-
-    /** get the gradeobject from given identifier
-    * @param indexFrom which identifier to get the grade from
-    * @returns the grade object
-    */
-    KEduVocGrade & gradeFrom( int indexFrom );
 
     /** returns a conjugation if available
     */

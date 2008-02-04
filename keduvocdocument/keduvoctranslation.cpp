@@ -34,9 +34,6 @@ public:
 
     KEduVocExpression* m_entry;
 
-    /// This is the word itself. The vocabulary. This is what it is all about.
-    QString m_translation;
-
     /// Type of a word noun, verb, adjective etc
     KEduVocWordType* m_wordType;
 
@@ -71,13 +68,6 @@ public:
 
     KEduVocDeclination* m_declination;
 
-    // Here come all int indexFrom grades. (If you want, imagine the TO grades as int indexFrom of the other translation. That is where they belong. )
-    // User is asked to give THIS here as answer, than the grades go here.
-    // User answers, this is the source, grades go to the other translation.
-    // Grades go to the translation the user has to type/choose/whatever.
-    // not all have to be supplied
-    QMap<int, KEduVocGrade> m_grades;
-
     /// One false friend string per other language
     QMap<int, QString> m_falseFriends;
 };
@@ -102,12 +92,13 @@ KEduVocTranslation::KEduVocTranslation(KEduVocExpression* entry) : d( new KEduVo
 
 KEduVocTranslation::KEduVocTranslation(KEduVocExpression* entry, const QString &translation ) : d( new KEduVocTranslationPrivate(entry) )
 {
-    d->m_translation = translation.simplified();
+    setText(translation.simplified());
 }
 
-KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( new KEduVocTranslationPrivate(other.d->m_entry) )
+KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
+    : d( new KEduVocTranslationPrivate(other.d->m_entry) ),
+         KEduVocText(other)
 {
-    d->m_translation = other.d->m_translation;
     d->m_wordType = other.d->m_wordType;
     d->m_comment = other.d->m_comment;
     d->m_paraphrase = other.d->m_paraphrase;
@@ -119,7 +110,6 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other ) : d( n
     d->m_comparative = other.d->m_comparative;
     d->m_superlative = other.d->m_superlative;
     d->m_multipleChoice = other.d->m_multipleChoice;
-    d->m_grades = other.d->m_grades;
     d->m_falseFriends = other.d->m_falseFriends;
     d->m_imageUrl = other.d->m_imageUrl;
     d->m_soundUrl = other.d->m_soundUrl;
@@ -132,12 +122,9 @@ KEduVocTranslation::~KEduVocTranslation()
     delete d;
 }
 
-
 bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) const
 {
-    return d->m_entry == translation.d->m_entry &&
-           d->m_translation == translation.d->m_translation &&
-           d->m_wordType == translation.d->m_wordType &&
+    return d->m_wordType == translation.d->m_wordType &&
            d->m_comment == translation.d->m_comment &&
            d->m_paraphrase == translation.d->m_paraphrase &&
            d->m_synonym == translation.d->m_synonym &&
@@ -150,15 +137,13 @@ bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) 
            d->m_superlative == translation.d->m_superlative &&
            d->m_multipleChoice == translation.d->m_multipleChoice &&
            d->m_falseFriends == translation.d->m_falseFriends &&
-           d->m_conjugations == translation.d->m_conjugations &&
-           d->m_grades == translation.d->m_grades;
+           d->m_conjugations == translation.d->m_conjugations;
 }
-
 
 KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation & translation )
 {
+    KEduVocText::operator=(translation);
     d->m_entry = translation.d->m_entry;
-    d->m_translation = translation.d->m_translation;
     d->m_wordType = translation.d->m_wordType;
     d->m_comment = translation.d->m_comment;
     d->m_paraphrase = translation.d->m_paraphrase;
@@ -172,21 +157,8 @@ KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation &
     d->m_superlative = translation.d->m_superlative;
     d->m_multipleChoice = translation.d->m_multipleChoice;
     d->m_falseFriends = translation.d->m_falseFriends;
-    d->m_grades == translation.d->m_grades;
     d->m_conjugations = translation.d->m_conjugations;
     return *this;
-}
-
-
-QString KEduVocTranslation::text() const
-{
-    return d->m_translation;
-}
-
-
-void KEduVocTranslation::setText( const QString & expr )
-{
-    d->m_translation = expr.simplified();
 }
 
 
@@ -289,16 +261,6 @@ QString KEduVocTranslation::pronunciation() const
 void KEduVocTranslation::setPronunciation( const QString & expr )
 {
     d->m_pronunciation = expr.simplified();
-}
-
-void KEduVocTranslation::resetGrades()
-{
-    d->m_grades.clear();
-}
-
-KEduVocGrade& KEduVocTranslation::gradeFrom( int indexFrom )
-{
-    return d->m_grades[indexFrom];
 }
 
 QStringList KEduVocTranslation::conjugationTenses() const

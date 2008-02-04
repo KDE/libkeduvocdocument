@@ -1033,14 +1033,14 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
             entry->translation( i )->setAntonym( antonym );
 
         if ( i != 0 ) {
-            entry->translation( i )->gradeFrom( 0 ).setGrade( grade );
-            entry->translation( 0 )->gradeFrom( i ).setGrade( r_grade );
-            entry->translation( i )->gradeFrom( 0 ).setPracticeCount( qcount );
-            entry->translation( 0 )->gradeFrom( i ).setPracticeCount( r_qcount );
-            entry->translation( i )->gradeFrom( 0 ).setBadCount( bcount );
-            entry->translation( 0 )->gradeFrom( i ).setBadCount( r_bcount );
-            entry->translation( i )->gradeFrom( 0 ).setPracticeDate( qdate );
-            entry->translation( 0 )->gradeFrom( i ).setPracticeDate( r_qdate );
+            entry->translation( i )->setGrade( grade );
+            entry->translation( 0 )->setGrade( r_grade );
+            entry->translation( i )->setPracticeCount( qcount );
+            entry->translation( 0 )->setPracticeCount( r_qcount );
+            entry->translation( i )->setBadCount( bcount );
+            entry->translation( 0 )->setBadCount( r_bcount );
+            entry->translation( i )->setPracticeDate( qdate );
+            entry->translation( 0 )->setPracticeDate( r_qdate );
         }
 
         // Next translation
