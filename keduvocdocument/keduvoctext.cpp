@@ -1,7 +1,5 @@
 /***************************************************************************
-                        Vocabulary Expression Grades for KDE Edu
-    -----------------------------------------------------------------------
-    copyright      :(C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+    Copyright 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -13,7 +11,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "keduvocgrade.h"
+#include "keduvoctext.h"
 
 class KEduVocText::KEduVocTextPrivate
 {

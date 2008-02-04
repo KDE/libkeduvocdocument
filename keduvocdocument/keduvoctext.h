@@ -1,7 +1,5 @@
 /***************************************************************************
-                        Vocabulary Expression Grades for KDE Edu
-    -----------------------------------------------------------------------
-    copyright      :(C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+    Copyright 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -13,8 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KEDUVOCGRADE_H
-#define KEDUVOCGRADE_H
+#ifndef KEDUVOCTEXT_H
+#define KEDUVOCTEXT_H
 
 #include "libkeduvocdocument_export.h"
 #include <QtCore/QDateTime>

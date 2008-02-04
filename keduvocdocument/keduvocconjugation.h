@@ -26,7 +26,7 @@
 #define KEDUVOCCONJUGATION_H
 
 #include "libkeduvocdocument_export.h"
-#include "keduvocgrade.h"
+#include "keduvoctext.h"
 
 #include <QtCore/QStringList>
 

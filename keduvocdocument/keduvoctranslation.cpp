@@ -21,7 +21,6 @@
 
 #include <KDebug>
 
-#include "keduvocgrade.h"
 #include "keduvocdeclination.h"
 #include "keduvocwordtype.h"
 

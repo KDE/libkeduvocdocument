@@ -9,7 +9,7 @@ keduvocdocument.cpp
    keduvoctranslation.cpp
    keduvoccontainer.cpp
    keduvoclesson.cpp
-   keduvocgrade.cpp
+   keduvoctext.cpp
    keduvocgrammar.cpp
    keduvocconjugation.cpp
    keduvocpersonalpronoun.cpp
@@ -43,7 +43,7 @@ install(FILES
    keduvocdocument.h
    keduvocidentifier.h
    keduvocexpression.h
-   keduvocgrade.h
+   keduvoctext.h
    keduvocgrammar.h
    keduvocconjugation.h
    keduvoclesson.h
