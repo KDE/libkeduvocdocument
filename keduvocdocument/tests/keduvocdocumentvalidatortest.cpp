@@ -167,8 +167,13 @@ void KEduVocDocumentValidatorTest::testTranslations()
 
     // operator =
     KEduVocTranslation *trans3 = new KEduVocTranslation(0);
-    trans3 = trans1;
+    trans3 = new KEduVocTranslation(*trans1);
     QCOMPARE(trans3->text(), QString("My word"));
+
+    QCOMPARE((int)trans1->grade(), 0);
+    trans1->incGrade();
+    QCOMPARE((int)trans1->grade(), 1);
+    QCOMPARE((int)trans3->grade(), 0);
 }
 
 QTEST_KDEMAIN_CORE( KEduVocDocumentValidatorTest )

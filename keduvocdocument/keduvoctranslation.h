@@ -56,7 +56,6 @@ public:
 
     KEduVocExpression* entry();
 
-
     /** sets the pronunciation of this expression
     * @param expression       pronunciation of this index
     */
