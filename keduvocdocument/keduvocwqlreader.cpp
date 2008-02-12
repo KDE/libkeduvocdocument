@@ -1,7 +1,7 @@
 /***************************************************************************
                      read a KEduVocDocument from a WQL file
     -----------------------------------------------------------------------
-    copyright     : (C) 2004, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
+    copyright     : (C) 2004, 2007, 2008 Peter Hedlund <peter.hedlund@kdemail.net>
                     (C) 2005 Eric Pignet
                     (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
@@ -22,7 +22,7 @@
 #include <QIODevice>
 #include <QFont>
 
-#include <klocale.h>
+#include <KLocale>
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
@@ -138,6 +138,10 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
     while ( !inputStream.atEnd() && inputStream.readLine() != "[Vocabulary]" );
     if ( inputStream.atEnd() )
         return false;
+
+    KEduVocLesson* lesson = new KEduVocLesson( i18n("Vocabulary"), m_doc->lesson());
+    m_doc->lesson()->appendChildContainer(lesson);
+
     s = inputStream.readLine();
     p = s.indexOf( "   [", 0 );
     s = s.left( p );
@@ -157,13 +161,12 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
         //int h = r.toInt();
         s = s.left( p );
         s = s.simplified();
-
         QString b;
         b = inputStream.readLine();
 
-        KEduVocExpression expr = KEduVocExpression( s );
-        expr.setTranslation( 1, b );
-        m_doc->lesson()->appendEntry( &expr );
+        KEduVocExpression * expr = new KEduVocExpression( s );
+        expr->setTranslation( 1, b );
+        lesson->appendEntry( expr );
     }
     return true;
 }
