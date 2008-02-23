@@ -70,11 +70,6 @@ public:
      */
     void insertEntry(int index, KEduVocExpression* entry);
 
-    /**
-     * shuffle the order of the entries in the lesson
-     */
-    void randomizeEntries();
-
     /** remove an entry from the lesson
      * @param entryid id of the entry to remove
      */

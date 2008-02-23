@@ -54,7 +54,6 @@ KEduVocLesson::~KEduVocLesson()
     delete d;
 }
 
-
 QList<KEduVocExpression*> KEduVocLesson::entries(EnumEntriesRecursive recursive)
 {
     if (recursive == Recursive) {
@@ -73,20 +72,26 @@ int KEduVocLesson::entryCount(EnumEntriesRecursive recursive)
 
 void KEduVocLesson::appendEntry(KEduVocExpression* entry)
 {
+    Q_ASSERT(entry);
     d->m_entries.append( entry );
     entry->addLesson(this);
+    invalidateChildLessonEntries();
 }
 
 void KEduVocLesson::insertEntry(int index, KEduVocExpression * entry)
 {
     d->m_entries.insert( index, entry );
     entry->addLesson(this);
+    invalidateChildLessonEntries();
 }
 
 void KEduVocLesson::removeEntry(KEduVocExpression* entry)
 {
-    d->m_entries.removeAt( d->m_entries.indexOf(entry) );
-    entry->removeLesson(this);
+    if (entry) {
+        d->m_entries.removeAt( d->m_entries.indexOf(entry) );
+        entry->removeLesson(this);
+        invalidateChildLessonEntries();
+    }
 }
 
 KEduVocExpression * KEduVocLesson::entry(int row, EnumEntriesRecursive recursive)
@@ -97,9 +102,4 @@ KEduVocExpression * KEduVocLesson::entry(int row, EnumEntriesRecursive recursive
     return d->m_entries.value(row);
 }
 
-void KEduVocLesson::randomizeEntries()
-{
-    KRandomSequence randomSequence(QDateTime::currentDateTime().toTime_t());
-    randomSequence.randomize( d->m_entries );
-}
 

@@ -51,7 +51,7 @@ public:
     ~KEduVocWordType();
 
     /** assignment operator */
-    KEduVocWordType& operator= ( const KEduVocWordType& );
+//     KEduVocWordType& operator= ( const KEduVocWordType& );
 
     /**
      * Internally (different from the name) the class can have one of the preset word types. These are used to determine special properties (verbs have conjugations available for example).

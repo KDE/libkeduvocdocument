@@ -68,11 +68,13 @@ int KEduVocWordType::entryCount(EnumEntriesRecursive recursive)
 void KEduVocWordType::addTranslation(KEduVocTranslation* translation)
 {
     d->m_translations.append( translation );
+    invalidateChildLessonEntries();
 }
 
 void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
 {
     d->m_translations.removeAt( d->m_translations.indexOf(translation));
+    invalidateChildLessonEntries();
 }
 
 KEduVocTranslation * KEduVocWordType::translation(int row)
