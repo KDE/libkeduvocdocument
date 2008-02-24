@@ -123,7 +123,8 @@ KEduVocTranslation::~KEduVocTranslation()
 
 bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) const
 {
-    return d->m_wordType == translation.d->m_wordType &&
+    return KEduVocText::operator==(translation) &&
+           d->m_wordType == translation.d->m_wordType &&
            d->m_comment == translation.d->m_comment &&
            d->m_paraphrase == translation.d->m_paraphrase &&
            d->m_synonym == translation.d->m_synonym &&
