@@ -20,8 +20,12 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+
 #include "keduvocdeclension.h"
 
+#include "kvtml2defs.h"
+#include "keduvockvtml2writer.h"
+#include <QtXml/QDomDocument>
 #include <QtCore/QMap>
 
 class KEduVocDeclension::Private
@@ -70,5 +74,15 @@ int KEduVocDeclension::indexOf(DeclensionNumber number, DeclensionCase decCase)
 bool KEduVocDeclension::isEmpty()
 {
     return d->m_declensions.isEmpty();
+}
+
+void KEduVocDeclension::toXML(QDomElement & parent)
+{
+    if (isEmpty()) {
+        return;
+    }
+    QDomDocument domDoc = parent.ownerDocument();
+    QDomElement gradeElement = domDoc.createElement( KVTML_DECLENSION );
+
 }
 

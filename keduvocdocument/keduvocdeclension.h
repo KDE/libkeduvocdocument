@@ -23,6 +23,8 @@
 #ifndef KEDUVOCDECLENSION_H
 #define KEDUVOCDECLENSION_H
 
+#include "libkeduvocdocument_export.h"
+
 #include "keduvoctext.h"
 
 /**
@@ -48,7 +50,6 @@ public:
         Vocative,
         DeclensionCaseMAX
     };
-
 
     /**
      * The constructor without arguments
@@ -92,6 +93,8 @@ public:
     void setDeclension(const KEduVocText& declension, DeclensionNumber number, DeclensionCase decCase);
 
     bool isEmpty();
+
+    void toXML(QDomElement& parent);
 
 private:
     int indexOf(DeclensionNumber number, DeclensionCase decCase);
