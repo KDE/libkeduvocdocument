@@ -76,5 +76,3 @@ bool KEduVocDeclension::isEmpty()
     return d->m_declensions.isEmpty();
 }
 
-
-

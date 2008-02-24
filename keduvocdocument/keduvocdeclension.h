@@ -20,8 +20,8 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#ifndef KEDUVOCDECLINATION_H
-#define KEDUVOCDECLINATION_H
+#ifndef KEDUVOCDECLENSION_H
+#define KEDUVOCDECLENSION_H
 
 #include <QtCore/QString>
 
