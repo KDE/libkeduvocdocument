@@ -112,6 +112,8 @@ public:
      */
     bool writeMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation );
 
+    static void appendTextElement( QDomElement &parent, const QString &elementName, const QString &text );
+
 private:
     QDomElement newTextElement( const QString &elementName, const QString &text );
 

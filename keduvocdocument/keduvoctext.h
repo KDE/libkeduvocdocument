@@ -49,6 +49,7 @@
 typedef unsigned short grade_t;
 typedef unsigned short count_t;
 
+class QDomElement;
 
 /**
  * A text in vocabulary documents. Associated with it are grade and date information.
@@ -151,6 +152,8 @@ public:
     * @param date             the new date
     */
     void setPracticeDate( const QDateTime & date );
+
+    void toXML(QDomElement& parent);
 
 private:
     class KEduVocTextPrivate;

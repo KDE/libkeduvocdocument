@@ -373,9 +373,10 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
 
 bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEduVocTranslation* translation )
 {
-    // <text>Kniebeugen</text>
-    translationElement.appendChild( newTextElement( KVTML_TEXT, translation->text() ) );
-kDebug() << "write tranlation:" << translation->text();
+    // so far only for KEduVocWord - text and grades
+    translation->toXML(translationElement);
+
+    ///@todo move into translation->toXML()
 
     // <comment></comment>
     if ( !translation->comment().isEmpty() ) {
@@ -418,25 +419,6 @@ kDebug() << "write tranlation:" << translation->text();
     // <paraphrase></paraphrase>
     if ( !translation->paraphrase().isEmpty() ) {
         translationElement.appendChild( newTextElement( KVTML_PARAPHRASE, translation->paraphrase() ) );
-    }
-
-    // grades
-    if ( translation->practiceCount() > 0 ) {
-        QDomElement gradeElement = m_domDoc.createElement( KVTML_GRADE );
-
-        //<currentgrade>2</currentgrade>
-        gradeElement.appendChild( newTextElement( KVTML_CURRENTGRADE, QString::number( translation->grade() ) ) );
-
-        //<count>6</count>
-        gradeElement.appendChild( newTextElement( KVTML_COUNT, QString::number( translation->practiceCount() ) ) );
-
-        //<errorcount>1</errorcount>
-        gradeElement.appendChild( newTextElement( KVTML_ERRORCOUNT, QString::number( translation->badCount() ) ) );
-
-        //<date>949757271</date>
-        gradeElement.appendChild( newTextElement( KVTML_DATE,  translation->practiceDate().toString( Qt::ISODate ) ) );
-
-        translationElement.appendChild( gradeElement );
     }
 
     // conjugation
@@ -630,5 +612,14 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
         }
     }
     return true;
+}
+
+void KEduVocKvtml2Writer::appendTextElement(QDomElement & parent, const QString & elementName, const QString & text)
+{
+    QDomDocument domDoc = parent.ownerDocument();
+    QDomElement element = domDoc.createElement( elementName );
+    parent.appendChild( element );
+    QDomText textNode = domDoc.createTextNode( text );
+    element.appendChild( textNode );
 }
 

@@ -12,6 +12,9 @@
  ***************************************************************************/
 
 #include "keduvoctext.h"
+#include "kvtml2defs.h"
+#include "keduvockvtml2writer.h"
+#include <QtXml/QDomDocument>
 
 class KEduVocText::KEduVocTextPrivate
 {
@@ -162,4 +165,31 @@ bool KEduVocText::operator ==(const KEduVocText & other) const
         d->m_totalPracticeCount == other.d->m_totalPracticeCount &&
         d->m_badCount == other.d->m_badCount &&
         d->m_practiceDate == other.d->m_practiceDate;
+}
+
+void KEduVocText::toXML(QDomElement& parent)
+{
+    QDomDocument domDoc = parent.ownerDocument();
+
+    // the text
+    KEduVocKvtml2Writer::appendTextElement( parent, KVTML_TEXT, text() );
+
+    // grades
+    if ( practiceCount() > 0 ) {
+        QDomElement gradeElement = domDoc.createElement( KVTML_GRADE );
+
+            //<currentgrade>2</currentgrade>
+        KEduVocKvtml2Writer::appendTextElement( gradeElement, KVTML_CURRENTGRADE, QString::number( grade() ) );
+
+            //<count>6</count>
+        KEduVocKvtml2Writer::appendTextElement( gradeElement, KVTML_COUNT, QString::number( practiceCount() ) );
+
+            //<errorcount>1</errorcount>
+        KEduVocKvtml2Writer::appendTextElement( gradeElement, KVTML_ERRORCOUNT, QString::number( badCount() ) );
+
+            //<date>949757271</date>
+        KEduVocKvtml2Writer::appendTextElement( gradeElement, KVTML_DATE,  practiceDate().toString( Qt::ISODate ) );
+
+        parent.appendChild( gradeElement );
+    }
 }
