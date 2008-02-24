@@ -27,7 +27,7 @@
 class KEduVocDeclension::Private
 {
 public:
-    QMap<int, QString> m_declensions;
+    QMap<int, KEduVocText> m_declensions;
 };
 
 KEduVocDeclension::KEduVocDeclension()
@@ -52,16 +52,12 @@ KEduVocDeclension::~KEduVocDeclension()
     delete d;
 }
 
-QString KEduVocDeclension::declension(DeclensionNumber number, DeclensionCase decCase)
+KEduVocText& KEduVocDeclension::declension(DeclensionNumber number, DeclensionCase decCase)
 {
-    if ( d->m_declensions.contains(indexOf(number, decCase)) ) {
-        return d->m_declensions.value(indexOf(number, decCase));
-    } else {
-        return QString();
-    }
+    return d->m_declensions[indexOf(number, decCase)];
 }
 
-void KEduVocDeclension::setDeclension(const QString & declension, DeclensionNumber number, DeclensionCase decCase)
+void KEduVocDeclension::setDeclension(const KEduVocText & declension, DeclensionNumber number, DeclensionCase decCase)
 {
     d->m_declensions[indexOf(number, decCase)] = declension;
 }

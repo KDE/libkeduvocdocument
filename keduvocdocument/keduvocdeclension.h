@@ -23,7 +23,7 @@
 #ifndef KEDUVOCDECLENSION_H
 #define KEDUVOCDECLENSION_H
 
-#include <QtCore/QString>
+#include "keduvoctext.h"
 
 /**
 A declension contains all forms that a NOUN possibly can have.
@@ -81,7 +81,7 @@ public:
      * @param decCase
      * @return
      */
-    QString declension(DeclensionNumber number, DeclensionCase decCase);
+    KEduVocText& declension(DeclensionNumber number, DeclensionCase decCase);
 
     /**
      * Set a declension
@@ -89,7 +89,7 @@ public:
      * @param number
      * @param decCase
      */
-    void setDeclension(const QString& declension, DeclensionNumber number, DeclensionCase decCase);
+    void setDeclension(const KEduVocText& declension, DeclensionNumber number, DeclensionCase decCase);
 
     bool isEmpty();
 
