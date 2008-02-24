@@ -93,10 +93,25 @@ void KEduVocDeclension::toXML(QDomElement & parent)
         return;
     }
     QDomDocument domDoc = parent.ownerDocument();
-    QDomElement gradeElement = domDoc.createElement( KVTML_DECLENSION );
-    parent.appendChild(gradeElement);
+    QDomElement declensionElement = domDoc.createElement( KVTML_DECLENSION );
 
-    ///@todo write contents
+    for ( KEduVocDeclension::DeclensionNumber num = KEduVocDeclension::Singular; num <= KEduVocDeclension::Plural; num = KEduVocDeclension::DeclensionNumber(num +1) ) {
+        QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
+        for ( KEduVocDeclension::DeclensionCase dcase = KEduVocDeclension::Nominative; dcase < KEduVocDeclension::DeclensionCaseMAX; dcase = KEduVocDeclension::DeclensionCase(dcase +1) ) {
+            QDomElement caseElement = domDoc.createElement( KVTML_DECLENSION_CASE[dcase] );
+            declension(num, dcase).toXML(caseElement);
+
+            if (caseElement.hasChildNodes()) {
+                numberElement.appendChild(caseElement);
+            }
+        }
+        if (numberElement.hasChildNodes()) {
+            declensionElement.appendChild(numberElement);
+        }
+    }
+    if (declensionElement.hasChildNodes()) {
+        parent.appendChild(declensionElement);
+    }
 }
 
 

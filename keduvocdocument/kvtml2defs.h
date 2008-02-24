@@ -44,6 +44,19 @@
 
 // declension
 #define KVTML_DECLENSION       "declension"
+static const QString KVTML_DECLENSION_CASE[] = {
+    "nominative",
+    "genitive",
+    "dative",
+    "accusative",
+    "ablative",
+    "locative",
+    "vocative" };
+
+static const QString KVTML_GRAMMATICAL_NUMBER[] = {
+    "singular",
+    "dual",
+    "plural" };
 
 // conjugation and personal pronouns
 #define KVTML_CONJUGATION       "conjugation"

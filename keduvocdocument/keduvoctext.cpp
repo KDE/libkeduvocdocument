@@ -173,6 +173,9 @@ bool KEduVocText::operator ==(const KEduVocText & other) const
 void KEduVocText::toXML(QDomElement& parent)
 {
     QDomDocument domDoc = parent.ownerDocument();
+    if (text().isEmpty()) {
+        return;
+    }
 
     // the text
     KEduVocKvtml2Writer::appendTextElement( parent, KVTML_TEXT, text() );

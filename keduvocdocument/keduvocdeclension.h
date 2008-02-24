@@ -35,13 +35,13 @@ A declension contains all forms that a NOUN possibly can have.
 class KEDUVOCDOCUMENT_EXPORT KEduVocDeclension{
 public:
     enum DeclensionNumber {
-        Singular = 1,
+        Singular = 0,
         Dual,
         Plural
     };
 
     enum DeclensionCase {
-        Nominative = 1,
+        Nominative = 0,
         Genitive,
         Dative,
         Accusative,
