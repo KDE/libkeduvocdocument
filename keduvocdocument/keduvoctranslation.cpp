@@ -388,6 +388,8 @@ void KEduVocTranslation::fromKVTML2(QDomElement & parent)
 {
     KEduVocText::fromKVTML2(parent);
 
+    setDeclension(KEduVocDeclension::fromKVTML2(parent));
+
     setComment( parent.firstChildElement( KVTML_COMMENT ).text() );
 
     setPronunciation( parent.firstChildElement( KVTML_PRONUNCIATION ).text() );

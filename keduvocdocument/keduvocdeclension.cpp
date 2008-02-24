@@ -114,5 +114,31 @@ void KEduVocDeclension::toKVTML2(QDomElement & parent)
     }
 }
 
+KEduVocDeclension* KEduVocDeclension::fromKVTML2(QDomElement & parent)
+{
+    QDomElement declensionElement = parent.firstChildElement( KVTML_DECLENSION );
+    // we don't create empty objects, if neccessary, create later on demand.
+    if (declensionElement.isNull()) {
+        return 0;
+    }
+
+    KEduVocDeclension* declension = new KEduVocDeclension;
+
+    for ( KEduVocDeclension::DeclensionNumber num = KEduVocDeclension::Singular; num <= KEduVocDeclension::Plural; num = KEduVocDeclension::DeclensionNumber(num +1) ) {
+        QDomElement numberElement = declensionElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[num] );
+        if (!numberElement.isNull()) {
+            for ( KEduVocDeclension::DeclensionCase dcase = KEduVocDeclension::Nominative; dcase < KEduVocDeclension::DeclensionCaseMAX; dcase = KEduVocDeclension::DeclensionCase(dcase +1) ) {
+                QDomElement caseElement = numberElement.firstChildElement( KVTML_DECLENSION_CASE[dcase] );
+                if (!caseElement.isNull()) {
+                    KEduVocText text;
+                    text.fromKVTML2(caseElement);
+                    declension->setDeclension(text, num, dcase);
+                }
+            }
+        }
+    }
+    return declension;
+}
+
 
 

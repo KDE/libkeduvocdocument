@@ -97,8 +97,15 @@ public:
 
     bool isEmpty();
 
-    void fromKVTML2(QDomElement& parent);
+
     void toKVTML2(QDomElement& parent);
+
+    /**
+     * Reads a declension from xml, returns 0 if it is empty
+     * @param parent 
+     * @return 
+     */
+    static KEduVocDeclension* fromKVTML2(QDomElement& parent);
 
     static int indexOf(DeclensionNumber number, DeclensionCase decCase);
 
