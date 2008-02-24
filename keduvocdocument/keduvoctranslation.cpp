@@ -345,4 +345,27 @@ void KEduVocTranslation::setSuperlative(const QString & superlative)
     d->m_superlative = superlative;
 }
 
+KEduVocDeclension * KEduVocTranslation::declension()
+{
+    return d->m_declension;
+}
+
+void KEduVocTranslation::setDeclension(KEduVocDeclension * declension)
+{
+    // remove the old declension object
+    delete d->m_declension;
+    d->m_declension = declension;
+}
+
+void KEduVocTranslation::toXML(QDomElement & parent)
+{
+    kDebug() << "Write translation xml.";
+    KEduVocText::toXML(parent);
+    if (d->m_declension) {
+//         d->m_declension->toXML(parent);
+    }
+}
+
+
+
 

@@ -27,6 +27,7 @@
 class KEduVocExpression;
 class KEduVocString;
 class KEduVocWordType;
+class KEduVocDeclension;
 
 /**
  @author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
@@ -162,6 +163,19 @@ public:
     void setConjugation( const QString& tense, const KEduVocConjugation & conjugation );
 
     /**
+     * Returns a pointer to the declension object of this translation.
+     * Returns 0 if no declension object exists!
+     * @return the declension
+     */
+    KEduVocDeclension* declension();
+
+    /**
+     * Set a new declension for a translation
+     * @param declension
+     */
+    void setDeclension(KEduVocDeclension* declension);
+
+    /**
      * Bad, only used for tense entry page, will be deleted later. Deprecated.
      * @param conjugation
      */
@@ -220,6 +234,8 @@ public:
      * @return true if equal
      */
     bool operator== ( const KEduVocTranslation &translation ) const;
+
+    void toXML(QDomElement& parent);
 
 private:
     class KEduVocTranslationPrivate;

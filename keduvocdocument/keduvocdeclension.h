@@ -94,7 +94,7 @@ public:
 
     bool isEmpty();
 
-    void toXML(QDomElement& parent);
+//     void toXML(QDomElement& parent);
 
 private:
     int indexOf(DeclensionNumber number, DeclensionCase decCase);

@@ -22,10 +22,11 @@
  ***************************************************************************/
 
 #include "keduvocdeclension.h"
-
+/*
 #include "kvtml2defs.h"
 #include "keduvockvtml2writer.h"
 #include <QtXml/QDomDocument>
+*/
 #include <QtCore/QMap>
 
 class KEduVocDeclension::Private
@@ -76,13 +77,13 @@ bool KEduVocDeclension::isEmpty()
     return d->m_declensions.isEmpty();
 }
 
-void KEduVocDeclension::toXML(QDomElement & parent)
-{
-    if (isEmpty()) {
-        return;
-    }
-    QDomDocument domDoc = parent.ownerDocument();
-    QDomElement gradeElement = domDoc.createElement( KVTML_DECLENSION );
-
-}
+// void KEduVocDeclension::toXML(QDomElement & parent)
+// {
+//     if (isEmpty()) {
+//         return;
+//     }
+//     QDomDocument domDoc = parent.ownerDocument();
+//     QDomElement gradeElement = domDoc.createElement( KVTML_DECLENSION );
+// 
+// }
 
