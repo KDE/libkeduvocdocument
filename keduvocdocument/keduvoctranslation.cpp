@@ -362,10 +362,7 @@ void KEduVocTranslation::toXML(QDomElement & parent)
     kDebug() << "Write translation xml.";
     KEduVocText::toXML(parent);
     if (d->m_declension) {
-//         d->m_declension->toXML(parent);
+        d->m_declension->toXML(parent);
     }
 }
-
-
-
 

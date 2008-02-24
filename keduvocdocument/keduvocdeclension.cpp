@@ -22,11 +22,11 @@
  ***************************************************************************/
 
 #include "keduvocdeclension.h"
-/*
+
 #include "kvtml2defs.h"
 #include "keduvockvtml2writer.h"
 #include <QtXml/QDomDocument>
-*/
+
 #include <QtCore/QMap>
 
 class KEduVocDeclension::Private
@@ -59,12 +59,22 @@ KEduVocDeclension::~KEduVocDeclension()
 
 KEduVocText& KEduVocDeclension::declension(DeclensionNumber number, DeclensionCase decCase)
 {
-    return d->m_declensions[indexOf(number, decCase)];
+    return declension(indexOf(number, decCase));
+}
+
+KEduVocText & KEduVocDeclension::declension(int index)
+{
+    return d->m_declensions[index];
+}
+
+void KEduVocDeclension::setDeclension(const KEduVocText & declension, int index)
+{
+    d->m_declensions[index] = declension;
 }
 
 void KEduVocDeclension::setDeclension(const KEduVocText & declension, DeclensionNumber number, DeclensionCase decCase)
 {
-    d->m_declensions[indexOf(number, decCase)] = declension;
+    setDeclension(declension, indexOf(number, decCase));
 }
 
 int KEduVocDeclension::indexOf(DeclensionNumber number, DeclensionCase decCase)
@@ -77,13 +87,17 @@ bool KEduVocDeclension::isEmpty()
     return d->m_declensions.isEmpty();
 }
 
-// void KEduVocDeclension::toXML(QDomElement & parent)
-// {
-//     if (isEmpty()) {
-//         return;
-//     }
-//     QDomDocument domDoc = parent.ownerDocument();
-//     QDomElement gradeElement = domDoc.createElement( KVTML_DECLENSION );
-// 
-// }
+void KEduVocDeclension::toXML(QDomElement & parent)
+{
+    if (isEmpty()) {
+        return;
+    }
+    QDomDocument domDoc = parent.ownerDocument();
+    QDomElement gradeElement = domDoc.createElement( KVTML_DECLENSION );
+    parent.appendChild(gradeElement);
+
+    ///@todo write contents
+}
+
+
 

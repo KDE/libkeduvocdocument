@@ -83,6 +83,7 @@ public:
      * @return
      */
     KEduVocText& declension(DeclensionNumber number, DeclensionCase decCase);
+    KEduVocText& declension(int index);
 
     /**
      * Set a declension
@@ -92,13 +93,15 @@ public:
      */
     void setDeclension(const KEduVocText& declension, DeclensionNumber number, DeclensionCase decCase);
 
+    void setDeclension(const KEduVocText& declension, int index);
+
     bool isEmpty();
 
-//     void toXML(QDomElement& parent);
+    void toXML(QDomElement& parent);
+
+    static int indexOf(DeclensionNumber number, DeclensionCase decCase);
 
 private:
-    int indexOf(DeclensionNumber number, DeclensionCase decCase);
-
     class Private;
     Private * const d;
 };

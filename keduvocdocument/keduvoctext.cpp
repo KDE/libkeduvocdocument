@@ -151,6 +151,7 @@ void KEduVocText::setPracticeDate( const QDateTime & date )
 
 KEduVocText & KEduVocText::operator =(const KEduVocText & other)
 {
+    d->m_text = other.d->m_text;
     d->m_grade = other.d->m_grade;
     d->m_totalPracticeCount = other.d->m_totalPracticeCount;
     d->m_badCount = other.d->m_badCount;
@@ -161,7 +162,9 @@ KEduVocText & KEduVocText::operator =(const KEduVocText & other)
 
 bool KEduVocText::operator ==(const KEduVocText & other) const
 {
-    return d->m_grade == other.d->m_grade &&
+    return
+        d->m_text == other.d->m_text &&
+        d->m_grade == other.d->m_grade &&
         d->m_totalPracticeCount == other.d->m_totalPracticeCount &&
         d->m_badCount == other.d->m_badCount &&
         d->m_practiceDate == other.d->m_practiceDate;
