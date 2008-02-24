@@ -97,7 +97,8 @@ public:
 
     bool isEmpty();
 
-    void toXML(QDomElement& parent);
+    void fromKVTML2(QDomElement& parent);
+    void toKVTML2(QDomElement& parent);
 
     static int indexOf(DeclensionNumber number, DeclensionCase decCase);
 

@@ -170,7 +170,7 @@ bool KEduVocText::operator ==(const KEduVocText & other) const
         d->m_practiceDate == other.d->m_practiceDate;
 }
 
-void KEduVocText::toXML(QDomElement& parent)
+void KEduVocText::toKVTML2(QDomElement& parent)
 {
     QDomDocument domDoc = parent.ownerDocument();
     if (text().isEmpty()) {
@@ -198,4 +198,9 @@ void KEduVocText::toXML(QDomElement& parent)
 
         parent.appendChild( gradeElement );
     }
+}
+
+void KEduVocText::fromKVTML2(QDomElement & parent)
+{
+    setText( parent.firstChildElement( KVTML_TEXT ).text() );
 }

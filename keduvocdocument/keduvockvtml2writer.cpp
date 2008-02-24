@@ -374,7 +374,7 @@ bool KEduVocKvtml2Writer::writeEntries( QDomElement &entriesElement )
 bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEduVocTranslation* translation )
 {
     // so far only for KEduVocWord - text and grades
-    translation->toXML(translationElement);
+    translation->toKVTML2(translationElement);
 
     ///@todo move into translation->toXML()
 

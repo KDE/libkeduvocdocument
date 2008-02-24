@@ -95,8 +95,8 @@ KEduVocTranslation::KEduVocTranslation(KEduVocExpression* entry, const QString &
 }
 
 KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
-    : d( new KEduVocTranslationPrivate(other.d->m_entry) ),
-         KEduVocText(other)
+    : KEduVocText(other),
+    d( new KEduVocTranslationPrivate(other.d->m_entry) )
 {
     d->m_wordType = other.d->m_wordType;
     d->m_comment = other.d->m_comment;
@@ -358,12 +358,12 @@ void KEduVocTranslation::setDeclension(KEduVocDeclension * declension)
     d->m_declension = declension;
 }
 
-void KEduVocTranslation::toXML(QDomElement & parent)
+void KEduVocTranslation::toKVTML2(QDomElement & parent)
 {
     kDebug() << "Write translation xml.";
-    KEduVocText::toXML(parent);
+    KEduVocText::toKVTML2(parent);
     if (d->m_declension) {
-        d->m_declension->toXML(parent);
+        d->m_declension->toKVTML2(parent);
     }
 }
 

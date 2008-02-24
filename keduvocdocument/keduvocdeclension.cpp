@@ -87,7 +87,7 @@ bool KEduVocDeclension::isEmpty()
     return d->m_declensions.isEmpty();
 }
 
-void KEduVocDeclension::toXML(QDomElement & parent)
+void KEduVocDeclension::toKVTML2(QDomElement & parent)
 {
     if (isEmpty()) {
         return;
@@ -99,7 +99,7 @@ void KEduVocDeclension::toXML(QDomElement & parent)
         QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
         for ( KEduVocDeclension::DeclensionCase dcase = KEduVocDeclension::Nominative; dcase < KEduVocDeclension::DeclensionCaseMAX; dcase = KEduVocDeclension::DeclensionCase(dcase +1) ) {
             QDomElement caseElement = domDoc.createElement( KVTML_DECLENSION_CASE[dcase] );
-            declension(num, dcase).toXML(caseElement);
+            declension(num, dcase).toKVTML2(caseElement);
 
             if (caseElement.hasChildNodes()) {
                 numberElement.appendChild(caseElement);

@@ -235,7 +235,8 @@ public:
      */
     bool operator== ( const KEduVocTranslation &translation ) const;
 
-    void toXML(QDomElement& parent);
+//     void fromKVTML2(QDomElement& parent);
+    void toKVTML2(QDomElement& parent);
 
 private:
     class KEduVocTranslationPrivate;

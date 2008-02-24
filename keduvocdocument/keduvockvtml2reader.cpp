@@ -307,12 +307,9 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
 bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
         KEduVocExpression *expr, int index )
 {
-    QDomElement currentElement = translationElement.firstChildElement( KVTML_TEXT );
-    if ( !currentElement.isNull() ) {
-        expr->translation(index)->setText( currentElement.text() );
-    }
+    expr->translation(index)->fromKVTML2(translationElement);
 
-    currentElement = translationElement.firstChildElement( KVTML_COMMENT );
+    QDomElement currentElement = translationElement.firstChildElement( KVTML_COMMENT );
     if ( !currentElement.isNull() ) {
         expr->translation(index)->setComment( currentElement.text() );
     }
