@@ -42,6 +42,9 @@
 #define KVTML_DEFINITE          "definite"
 #define KVTML_INDEFINITE        "indefinite"
 
+// declension
+#define KVTML_DECLENSION       "declension"
+
 // conjugation and personal pronouns
 #define KVTML_CONJUGATION       "conjugation"
 #define KVTML_CONJUGATIONTYPE   "conjugationtype"
