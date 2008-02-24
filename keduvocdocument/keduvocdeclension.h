@@ -1,6 +1,6 @@
 /***************************************************************************
 
-    C++ Interface: keduvocdeclination
+    C++ Interface: keduvocdeclension
 
     -----------------------------------------------------------------------
 
@@ -26,19 +26,19 @@
 #include <QtCore/QString>
 
 /**
-A declination contains all forms that a NOUN possibly can have.
+A declension contains all forms that a NOUN possibly can have.
 
 	@author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
-class KEduVocDeclination{
+class KEduVocDeclension{
 public:
-    enum DeclinationNumber {
+    enum DeclensionNumber {
         Singular = 1,
         Dual,
         Plural
     };
 
-    enum DeclinationCase {
+    enum DeclensionCase {
         Nominative = 1,
         Genitive,
         Dative,
@@ -46,34 +46,34 @@ public:
         Ablative,
         Locative,
         Vocative,
-        DeclinationCaseMAX
+        DeclensionCaseMAX
     };
 
 
     /**
      * The constructor without arguments
      */
-    explicit KEduVocDeclination();
+    explicit KEduVocDeclension();
 
     /** copy constructor
      * @param other comparison object to copy
      */
-    KEduVocDeclination( const KEduVocDeclination &other );
+    KEduVocDeclension( const KEduVocDeclension &other );
 
-    ~KEduVocDeclination();
+    ~KEduVocDeclension();
 
     /** equality operator
      * @param a object to compare to
      * @returns true if comparisons are the same, false otherwise
      */
 //     will probably not be necessary
-//     bool operator == ( const KEduVocDeclination& a ) const;
+//     bool operator == ( const KEduVocDeclension& a ) const;
 
     /** assignment operator for d-pointer copying
      * @param other object to copy from
      * @returns reference to this object
      */
-    KEduVocDeclination& operator= ( const KEduVocDeclination& other );
+    KEduVocDeclension& operator= ( const KEduVocDeclension& other );
 
     /**
      * The grammatical number, there is singular and plural for english, some languages have dual for exactly two items.
@@ -81,20 +81,20 @@ public:
      * @param decCase
      * @return
      */
-    QString declination(DeclinationNumber number, DeclinationCase decCase);
+    QString declension(DeclensionNumber number, DeclensionCase decCase);
 
     /**
-     * Set a declination
+     * Set a declension
      * @param
      * @param number
      * @param decCase
      */
-    void setDeclination(const QString& declination, DeclinationNumber number, DeclinationCase decCase);
+    void setDeclension(const QString& declension, DeclensionNumber number, DeclensionCase decCase);
 
     bool isEmpty();
 
 private:
-    int indexOf(DeclinationNumber number, DeclinationCase decCase);
+    int indexOf(DeclensionNumber number, DeclensionCase decCase);
 
     class Private;
     Private * const d;

@@ -13,7 +13,7 @@ keduvocdocument.cpp
    keduvocgrammar.cpp
    keduvocconjugation.cpp
    keduvocpersonalpronoun.cpp
-   keduvocdeclination.cpp
+   keduvocdeclension.cpp
    keduvocwordtype.cpp
    keduvockvtmlcompability.cpp
    keduvockvtmlreader.cpp

@@ -21,7 +21,7 @@
 
 #include <KDebug>
 
-#include "keduvocdeclination.h"
+#include "keduvocdeclension.h"
 #include "keduvocwordtype.h"
 
 class KEduVocTranslation::KEduVocTranslationPrivate
@@ -65,7 +65,7 @@ public:
     QString m_comparative;
     QString m_superlative;
 
-    KEduVocDeclination* m_declination;
+    KEduVocDeclension* m_declension;
 
     /// One false friend string per other language
     QMap<int, QString> m_falseFriends;
@@ -76,13 +76,13 @@ KEduVocTranslation::KEduVocTranslationPrivate::KEduVocTranslationPrivate(KEduVoc
 {
     m_entry = parent;
     m_wordType = 0;
-    m_declination = 0;
+    m_declension = 0;
 }
 
 
 KEduVocTranslation::KEduVocTranslationPrivate::~ KEduVocTranslationPrivate()
 {
-    delete m_declination;
+    delete m_declension;
 }
 
 KEduVocTranslation::KEduVocTranslation(KEduVocExpression* entry) : d( new KEduVocTranslationPrivate(entry) )
@@ -112,7 +112,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
     d->m_falseFriends = other.d->m_falseFriends;
     d->m_imageUrl = other.d->m_imageUrl;
     d->m_soundUrl = other.d->m_soundUrl;
-    /// @todo add declinations
+    /// @todo add declensions
 }
 
 KEduVocTranslation::~KEduVocTranslation()

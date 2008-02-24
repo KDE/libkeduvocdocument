@@ -22,7 +22,7 @@
 #include "keduvocexpression.h"
 #include "keduvoctranslation.h"
 #include "keduvocconjugation.h"
-#include "keduvocdeclination.h"
+#include "keduvocdeclension.h"
 #include "keduvocwordtype.h"
 
 

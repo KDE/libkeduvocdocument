@@ -1,6 +1,6 @@
 /***************************************************************************
 
-    C++ Implementation: keduvocdeclination
+    C++ Implementation: keduvocdeclension
 
     -----------------------------------------------------------------------
 
@@ -20,60 +20,60 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "keduvocdeclination.h"
+#include "keduvocdeclension.h"
 
 #include <QtCore/QMap>
 
-class KEduVocDeclination::Private
+class KEduVocDeclension::Private
 {
 public:
-    QMap<int, QString> m_declinations;
+    QMap<int, QString> m_declensions;
 };
 
-KEduVocDeclination::KEduVocDeclination()
+KEduVocDeclension::KEduVocDeclension()
     :d (new Private)
 {
 }
 
-KEduVocDeclination::KEduVocDeclination(const KEduVocDeclination & other)
+KEduVocDeclension::KEduVocDeclension(const KEduVocDeclension & other)
     :d (new Private)
 {
-    d->m_declinations = other.d->m_declinations;
+    d->m_declensions = other.d->m_declensions;
 }
 
-KEduVocDeclination & KEduVocDeclination::operator =(const KEduVocDeclination & other)
+KEduVocDeclension & KEduVocDeclension::operator =(const KEduVocDeclension & other)
 {
-    d->m_declinations = other.d->m_declinations;
+    d->m_declensions = other.d->m_declensions;
     return *this;
 }
 
-KEduVocDeclination::~KEduVocDeclination()
+KEduVocDeclension::~KEduVocDeclension()
 {
     delete d;
 }
 
-QString KEduVocDeclination::declination(DeclinationNumber number, DeclinationCase decCase)
+QString KEduVocDeclension::declension(DeclensionNumber number, DeclensionCase decCase)
 {
-    if ( d->m_declinations.contains(indexOf(number, decCase)) ) {
-        return d->m_declinations.value(indexOf(number, decCase));
+    if ( d->m_declensions.contains(indexOf(number, decCase)) ) {
+        return d->m_declensions.value(indexOf(number, decCase));
     } else {
         return QString();
     }
 }
 
-void KEduVocDeclination::setDeclination(const QString & declination, DeclinationNumber number, DeclinationCase decCase)
+void KEduVocDeclension::setDeclension(const QString & declension, DeclensionNumber number, DeclensionCase decCase)
 {
-    d->m_declinations[indexOf(number, decCase)] = declination;
+    d->m_declensions[indexOf(number, decCase)] = declension;
 }
 
-int KEduVocDeclination::indexOf(DeclinationNumber number, DeclinationCase decCase)
+int KEduVocDeclension::indexOf(DeclensionNumber number, DeclensionCase decCase)
 {
-    return number * DeclinationCaseMAX + decCase;
+    return number * DeclensionCaseMAX + decCase;
 }
 
-bool KEduVocDeclination::isEmpty()
+bool KEduVocDeclension::isEmpty()
 {
-    return d->m_declinations.isEmpty();
+    return d->m_declensions.isEmpty();
 }
 
 
