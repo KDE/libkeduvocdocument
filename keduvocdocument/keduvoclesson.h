@@ -49,7 +49,6 @@ public:
     /** assignment operator */
     KEduVocLesson& operator= ( const KEduVocLesson& );
 
-
     KEduVocExpression* entry(int row, EnumEntriesRecursive recursive = NotRecursive);
 
     /** get a list of all entries in the lesson */

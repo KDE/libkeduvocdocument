@@ -309,46 +309,11 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
 {
     expr->translation(index)->fromKVTML2(translationElement);
 
-    QDomElement currentElement = translationElement.firstChildElement( KVTML_COMMENT );
-    if ( !currentElement.isNull() ) {
-        expr->translation(index)->setComment( currentElement.text() );
-    }
-
-    //<pronunciation></pronunciation>
-    currentElement = translationElement.firstChildElement( KVTML_PRONUNCIATION );
-    if ( !currentElement.isNull() ) {
-        expr->translation(index)->setPronunciation( currentElement.text() );
-    }
-
     //<falsefriend fromid="1"></falsefriend>
-    currentElement = translationElement.firstChildElement( KVTML_FALSEFRIEND );
+    QDomElement currentElement = translationElement.firstChildElement( KVTML_FALSEFRIEND );
     if ( !currentElement.isNull() ) {
         int fromid = currentElement.attribute( KVTML_FROMID ).toInt();
         expr->translation(index)->setFalseFriend( fromid, currentElement.text() );
-    }
-
-    //<antonym></antonym>
-    currentElement = translationElement.firstChildElement( KVTML_ANTONYM );
-    if ( !currentElement.isNull() ) {
-        expr->translation(index)->setAntonym( currentElement.text() );
-    }
-
-    //<synonym></synonym>
-    currentElement = translationElement.firstChildElement( KVTML_SYNONYM );
-    if ( !currentElement.isNull() ) {
-        expr->translation(index)->setSynonym( currentElement.text() );
-    }
-
-    //<example></example>
-    currentElement = translationElement.firstChildElement( KVTML_EXAMPLE );
-    if ( !currentElement.isNull() ) {
-        expr->translation(index)->setExample( currentElement.text() );
-    }
-
-    //<paraphrase></paraphrase>
-    currentElement = translationElement.firstChildElement( KVTML_PARAPHRASE );
-    if ( !currentElement.isNull() ) {
-        expr->translation(index)->setParaphrase( currentElement.text() );
     }
 
     // conjugations
@@ -361,14 +326,6 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
 
         readConjugation( currentElement, expr->translation(index)->conjugation(tense) );
         currentElement = currentElement.nextSiblingElement( KVTML_CONJUGATION );
-    }
-
-    // grade elements
-    currentElement = translationElement.firstChildElement( KVTML_GRADE );
-    while ( !currentElement.isNull() ) {
-        // TODO: read grade
-        readGrade( currentElement, expr, index );
-        currentElement = currentElement.nextSiblingElement( KVTML_GRADE );
     }
 
     // comparisons
@@ -649,45 +606,6 @@ bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement
     }
     return true;
 }
-
-bool KEduVocKvtml2Reader::readGrade( QDomElement &gradeElement, KEduVocExpression *expr, int index )
-{
-    bool result = true;
-    if ( !result ) {
-        m_errorMessage = i18n( "identifier missing id" );
-        return false;
-    }
-
-    QDomElement currentElement = gradeElement.firstChildElement( KVTML_CURRENTGRADE );
-    if ( !currentElement.isNull() ) {
-        int value = currentElement.text().toInt();
-        expr->translation(index)->setGrade( value );
-    }
-
-    currentElement = gradeElement.firstChildElement( KVTML_COUNT );
-    if ( !currentElement.isNull() ) {
-        int value = currentElement.text().toInt();
-        expr->translation(index)->setPracticeCount( value );
-    }
-
-    currentElement = gradeElement.firstChildElement( KVTML_ERRORCOUNT );
-    if ( !currentElement.isNull() ) {
-        int value = currentElement.text().toInt();
-        expr->translation(index)->setBadCount( value );
-    }
-
-    currentElement = gradeElement.firstChildElement( KVTML_DATE );
-    if ( !currentElement.isNull() ) {
-        QString dateString = currentElement.text();
-        if ( !dateString.isEmpty() ) {
-            QDateTime value = QDateTime::fromString( dateString, Qt::ISODate );
-            expr->translation(index)->setPracticeDate( value );
-        }
-    }
-
-    return true;
-}
-
 
 bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocConjugation &conjugation )
 /*

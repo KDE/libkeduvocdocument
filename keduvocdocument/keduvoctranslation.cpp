@@ -384,3 +384,25 @@ void KEduVocTranslation::toKVTML2(QDomElement & parent)
     KEduVocKvtml2Writer::appendTextElement( parent, KVTML_PARAPHRASE, paraphrase() );
 }
 
+void KEduVocTranslation::fromKVTML2(QDomElement & parent)
+{
+    KEduVocText::fromKVTML2(parent);
+
+    setComment( parent.firstChildElement( KVTML_COMMENT ).text() );
+
+    setPronunciation( parent.firstChildElement( KVTML_PRONUNCIATION ).text() );
+
+    //<antonym></antonym>
+    setAntonym( parent.firstChildElement( KVTML_ANTONYM ).text() );
+
+    //<synonym></synonym>
+    setSynonym( parent.firstChildElement( KVTML_SYNONYM ).text() );
+
+    //<example></example>
+    setExample( parent.firstChildElement( KVTML_EXAMPLE ).text() );
+
+    //<paraphrase></paraphrase>
+    setParaphrase( parent.firstChildElement( KVTML_PARAPHRASE ).text() );
+
+}
+

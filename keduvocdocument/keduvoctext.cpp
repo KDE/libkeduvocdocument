@@ -203,4 +203,21 @@ void KEduVocText::toKVTML2(QDomElement& parent)
 void KEduVocText::fromKVTML2(QDomElement & parent)
 {
     setText( parent.firstChildElement( KVTML_TEXT ).text() );
+
+    // grade element
+    parent.firstChildElement() = parent.firstChildElement( KVTML_GRADE );
+    if ( !parent.firstChildElement().isNull() ) {
+
+        setGrade( parent.firstChildElement(KVTML_CURRENTGRADE).text().toInt() );
+
+        setPracticeCount( parent.firstChildElement(KVTML_COUNT).text().toInt() );
+
+        setBadCount( parent.firstChildElement(KVTML_ERRORCOUNT).text().toInt() );
+
+        QString dateString = parent.firstChildElement(KVTML_DATE).text();
+        if ( !dateString.isEmpty() ) {
+            QDateTime value = QDateTime::fromString( dateString, Qt::ISODate );
+            setPracticeDate( value );
+        }
+    }
 }
