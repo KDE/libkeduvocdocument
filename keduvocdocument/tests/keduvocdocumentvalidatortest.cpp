@@ -43,6 +43,7 @@ private slots:
     void testLessons();
     void testWordTypes();
     void testTranslations();
+    void testDeclensions();
 };
 
 void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
@@ -175,6 +176,16 @@ void KEduVocDocumentValidatorTest::testTranslations()
     QCOMPARE((int)trans1->grade(), 1);
     QCOMPARE((int)trans3->grade(), 0);
 }
+
+void KEduVocDocumentValidatorTest::testDeclensions()
+{
+    KEduVocTranslation translation(0);
+    QVERIFY(translation.declension() == 0);
+    KEduVocDeclension* declension = new KEduVocDeclension;
+    translation.setDeclension(declension);
+    QCOMPARE(translation.declension(), declension);
+}
+
 
 QTEST_KDEMAIN_CORE( KEduVocDocumentValidatorTest )
 
