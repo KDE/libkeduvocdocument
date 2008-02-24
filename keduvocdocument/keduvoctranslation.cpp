@@ -17,12 +17,12 @@
 
 #include "keduvoctranslation.h"
 
-#include <QtCore/QMap>
-
-#include <KDebug>
-
 #include "keduvocdeclension.h"
 #include "keduvocwordtype.h"
+#include "kvtml2defs.h"
+#include "keduvockvtml2writer.h"
+#include <KDebug>
+#include <QtCore/QMap>
 
 class KEduVocTranslation::KEduVocTranslationPrivate
 {
@@ -360,10 +360,27 @@ void KEduVocTranslation::setDeclension(KEduVocDeclension * declension)
 
 void KEduVocTranslation::toKVTML2(QDomElement & parent)
 {
-    kDebug() << "Write translation xml.";
     KEduVocText::toKVTML2(parent);
     if (d->m_declension) {
         d->m_declension->toKVTML2(parent);
     }
+
+    // <comment>
+    KEduVocKvtml2Writer::appendTextElement( parent, KVTML_COMMENT, comment() );
+
+    // <pronunciation>
+    KEduVocKvtml2Writer::appendTextElement( parent, KVTML_PRONUNCIATION, pronunciation() );
+
+    // <antonym>
+    KEduVocKvtml2Writer::appendTextElement( parent, KVTML_ANTONYM, antonym() );
+
+    // <synonym>
+    KEduVocKvtml2Writer::appendTextElement( parent, KVTML_SYNONYM, synonym() );
+
+    // <example>
+    KEduVocKvtml2Writer::appendTextElement( parent, KVTML_EXAMPLE, example() );
+
+    // <paraphrase>
+    KEduVocKvtml2Writer::appendTextElement( parent, KVTML_PARAPHRASE, paraphrase() );
 }
 

@@ -376,18 +376,6 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     // so far only for KEduVocWord - text and grades
     translation->toKVTML2(translationElement);
 
-    ///@todo move into translation->toXML()
-
-    // <comment></comment>
-    if ( !translation->comment().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_COMMENT, translation->comment() ) );
-    }
-
-    // <pronunciation></pronunciation>
-    if ( !translation->pronunciation().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_PRONUNCIATION, translation->pronunciation() ) );
-    }
-
     // <falsefriend fromid="0"></falsefriend>
     // loop through the identifiers
     for ( int i = 0; i < m_doc->identifierCount(); ++i ) {
@@ -399,26 +387,6 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
             thisFriendElement.setAttribute( KVTML_FROMID, QString::number( i ) );
             translationElement.appendChild( thisFriendElement );
         }
-    }
-
-    // <antonym></antonym>
-    if ( !translation->antonym().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_ANTONYM, translation->antonym() ) );
-    }
-
-    // <synonym></synonym>
-    if ( !translation->synonym().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_SYNONYM, translation->synonym() ) );
-    }
-
-    // <example></example>
-    if ( !translation->example().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_EXAMPLE, translation->example() ) );
-    }
-
-    // <paraphrase></paraphrase>
-    if ( !translation->paraphrase().isEmpty() ) {
-        translationElement.appendChild( newTextElement( KVTML_PARAPHRASE, translation->paraphrase() ) );
     }
 
     // conjugation
@@ -616,6 +584,11 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
 
 void KEduVocKvtml2Writer::appendTextElement(QDomElement & parent, const QString & elementName, const QString & text)
 {
+    // empty will never be written
+    if (text.isEmpty()) {
+        return;
+    }
+
     QDomDocument domDoc = parent.ownerDocument();
     QDomElement element = domDoc.createElement( elementName );
     parent.appendChild( element );

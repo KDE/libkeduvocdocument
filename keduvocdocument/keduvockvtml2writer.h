@@ -112,6 +112,13 @@ public:
      */
     bool writeMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation );
 
+    /**
+     * Helper function, appends a new element AND a text child to @p parent
+     * Only appends if @p text is NOT empty.
+     * @param parent 
+     * @param elementName 
+     * @param text 
+     */
     static void appendTextElement( QDomElement &parent, const QString &elementName, const QString &text );
 
 private:
