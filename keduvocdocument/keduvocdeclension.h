@@ -32,7 +32,7 @@ A declension contains all forms that a NOUN possibly can have.
 
 	@author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
-class KEduVocDeclension{
+class KEDUVOCDOCUMENT_EXPORT KEduVocDeclension{
 public:
     enum DeclensionNumber {
         Singular = 1,
