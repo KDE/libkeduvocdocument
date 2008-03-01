@@ -118,7 +118,10 @@ void KEduVocExpression::setTranslation( int index, const QString & expr )
         return;
     }
 
-    d->m_translations[index] = new KEduVocTranslation(this, expr.simplified());
+    if (!d->m_translations.contains(index)) {
+        d->m_translations[index] = new KEduVocTranslation(this);
+    }
+    d->m_translations[index]->setText(expr.simplified());
 }
 
 
