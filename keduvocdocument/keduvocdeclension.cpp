@@ -117,7 +117,7 @@ void KEduVocDeclension::toKVTML2(QDomElement & parent)
 KEduVocDeclension* KEduVocDeclension::fromKVTML2(QDomElement & parent)
 {
     QDomElement declensionElement = parent.firstChildElement( KVTML_DECLENSION );
-    // we don't create empty objects, if neccessary, create later on demand.
+    // we don't create empty objects, if necessary, create later on demand.
     if (declensionElement.isNull()) {
         return 0;
     }
