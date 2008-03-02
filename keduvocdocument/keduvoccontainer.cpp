@@ -229,3 +229,17 @@ void KEduVocContainer::invalidateChildLessonEntries()
     }
 }
 
+double KEduVocContainer::averageGrade(int translation)
+{
+    // grades range from 0..7 right now
+    int sum = 0;
+    foreach (KEduVocExpression *entry, entries(NotRecursive)) {
+        sum += entry->translation(translation)->grade();
+        kDebug() << entry->translation(translation)->text() <<
+                entry->translation(translation)->grade();
+    }
+kDebug() << "translation: " << translation << "sum: " << sum;
+    // make that a percentage
+    return (sum * 100.0/7.0)/entryCount(NotRecursive);
+}
+

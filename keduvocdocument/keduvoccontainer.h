@@ -122,6 +122,8 @@ public:
      */
     void setImageUrl(const KUrl &url);
 
+    double averageGrade(int translation);
+
 protected:
     QList< KEduVocExpression * > entriesRecursive();
 
