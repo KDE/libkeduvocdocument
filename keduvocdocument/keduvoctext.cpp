@@ -14,6 +14,8 @@
 #include "keduvoctext.h"
 #include "kvtml2defs.h"
 #include "keduvockvtml2writer.h"
+
+#include <KDE/KDebug>
 #include <QtXml/QDomDocument>
 
 class KEduVocText::KEduVocTextPrivate
@@ -205,16 +207,16 @@ void KEduVocText::fromKVTML2(QDomElement & parent)
     setText( parent.firstChildElement( KVTML_TEXT ).text() );
 
     // grade element
-    parent.firstChildElement() = parent.firstChildElement( KVTML_GRADE );
-    if ( !parent.firstChildElement().isNull() ) {
+    const QDomElement& gradeElement = parent.firstChildElement( KVTML_GRADE );
+    if ( !gradeElement.isNull() ) {
 
-        setGrade( parent.firstChildElement(KVTML_CURRENTGRADE).text().toInt() );
+        setGrade( gradeElement.firstChildElement(KVTML_CURRENTGRADE).text().toInt() );
 
-        setPracticeCount( parent.firstChildElement(KVTML_COUNT).text().toInt() );
+        setPracticeCount( gradeElement.firstChildElement(KVTML_COUNT).text().toInt() );
 
-        setBadCount( parent.firstChildElement(KVTML_ERRORCOUNT).text().toInt() );
+        setBadCount( gradeElement.firstChildElement(KVTML_ERRORCOUNT).text().toInt() );
 
-        QString dateString = parent.firstChildElement(KVTML_DATE).text();
+        QString dateString = gradeElement.firstChildElement(KVTML_DATE).text();
         if ( !dateString.isEmpty() ) {
             QDateTime value = QDateTime::fromString( dateString, Qt::ISODate );
             setPracticeDate( value );

@@ -131,13 +131,6 @@ private:
      */
     bool readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation );
 
-    /** read a grade
-     * @param gradeElement element to read from
-     * @param expr expression element to add grades to
-     * @param index index of the current translation
-     */
-    bool readGrade( QDomElement &gradeElement, KEduVocExpression *expr, int index );
-
     /**
      * Read <lesson> tags.
      * @param parentLesson 
