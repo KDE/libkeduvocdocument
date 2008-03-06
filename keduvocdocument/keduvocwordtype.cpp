@@ -50,6 +50,8 @@ QList<KEduVocExpression*> KEduVocWordType::entries(EnumEntriesRecursive recursiv
     if (recursive == Recursive) {
         return entriesRecursive();
     }
+    /// FIXME this is recalculated every time, very inefficient!
+    /// cache entries here, only update on dirty
     QSet<KEduVocExpression*> entries;
     foreach(KEduVocTranslation* translation, d->m_translations) {
         entries.insert(translation->entry());
