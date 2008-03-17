@@ -47,8 +47,7 @@ public:
         Accusative,
         Ablative,
         Locative,
-        Vocative,
-        DeclensionCaseMAX
+        Vocative
     };
 
     /**
@@ -98,6 +97,10 @@ public:
     bool isEmpty();
 
 
+    /**
+     * Create xml for this declension
+     * @param parent 
+     */
     void toKVTML2(QDomElement& parent);
 
     /**

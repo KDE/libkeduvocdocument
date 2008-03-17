@@ -79,13 +79,17 @@ QString KEduVocArticle::article(ArticleNumber number, ArticleDefiniteness defini
 
 void KEduVocArticle::setArticle(const QString & article, ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender)
 {
-    kDebug() << article << "#" << number << "def" << definite << "indef"  << gender << "index" << indexOf(number, definite, gender);
-    d->m_articles[indexOf(number, definite, gender)] = article;
+    setArticle(article, indexOf(number, definite, gender));
+}
+
+void KEduVocArticle::setArticle(const QString & article, int index)
+{
+    d->m_articles[index] = article;
 }
 
 int KEduVocArticle::indexOf(ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender)
 {
-    return number + (definite * NumberMAX) + (gender * NumberMAX * DefinitenessMAX);
+    return number + (definite * (Plural+1)) + (gender * (Plural+1) * (Indefinite+1));
 }
 
 bool KEduVocArticle::isArticle(const QString & article) const
@@ -97,4 +101,6 @@ bool KEduVocArticle::isEmpty()
 {
     return d->m_articles.isEmpty();
 }
+
+
 

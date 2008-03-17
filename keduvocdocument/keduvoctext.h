@@ -153,6 +153,12 @@ public:
     */
     void setPracticeDate( const QDateTime & date );
 
+    /**
+     * If the string inside is empty this returns true.
+     * @return 
+     */
+    bool isEmpty();
+
     void fromKVTML2(QDomElement& parent);
     void toKVTML2(QDomElement& parent);
 

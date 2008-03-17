@@ -58,14 +58,6 @@ public:
      */
     bool writeArticle( QDomElement &articleElement, int article );
 
-    /** write conjugation
-     * @param conjugationElement QDomElement conjugation or personalpronouns to write to
-     * @param conjugation object to write
-     * @param type conjugation type
-     */
-    bool writeConjugation( QDomElement &conjugationElement, const KEduVocConjugation &conjugation,
-                           const QString &tense );
-
     bool writePersonalPronoun( QDomElement &pronounElement, const KEduVocPersonalPronoun &pronoun);
     /** write types
      * @param typesElement QDomElement types to write to

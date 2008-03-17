@@ -32,6 +32,7 @@
 
 #include <qobject.h>
 #include <qvalidator.h>
+#include <QtXml/QDomDocument>
 
 class KEduVocDocumentValidatorTest
   : public QObject
@@ -43,6 +44,7 @@ private slots:
     void testLessons();
     void testWordTypes();
     void testTranslations();
+    void testConjugations();
     void testDeclensions();
 };
 
@@ -186,6 +188,24 @@ void KEduVocDocumentValidatorTest::testDeclensions()
     QCOMPARE(translation.declension(), declension);
 }
 
+void KEduVocDocumentValidatorTest::testConjugations()
+{
+    KEduVocConjugation conjugation;
+    conjugation.setConjugation(KEduVocText("first-singular"), KEduVocConjugation::First, KEduVocConjugation::Singular);
+    QCOMPARE(conjugation.conjugation(KEduVocConjugation::First, KEduVocConjugation::Singular).text(), QString("first-singular"));
+
+    QDomDocument doc = QDomDocument("test doc");
+    QDomElement root = doc.createElement( "kvtml" );
+    doc.appendChild(root);
+    conjugation.toKVTML2(root, "tense");
+
+    qDebug() << root.text();
+
+    KEduVocConjugation *con2 = KEduVocConjugation::fromKVTML2(root);
+
+    QCOMPARE(conjugation.conjugation(KEduVocConjugation::First, KEduVocConjugation::Singular).text(), con2->conjugation(KEduVocConjugation::First, KEduVocConjugation::Singular).text());
+    delete con2;
+}
 
 QTEST_KDEMAIN_CORE( KEduVocDocumentValidatorTest )
 

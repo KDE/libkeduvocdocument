@@ -79,7 +79,7 @@ void KEduVocDeclension::setDeclension(const KEduVocText & declension, Declension
 
 int KEduVocDeclension::indexOf(DeclensionNumber number, DeclensionCase decCase)
 {
-    return number * DeclensionCaseMAX + decCase;
+    return number * (Vocative+1) + decCase;
 }
 
 bool KEduVocDeclension::isEmpty()
@@ -97,7 +97,7 @@ void KEduVocDeclension::toKVTML2(QDomElement & parent)
 
     for ( KEduVocDeclension::DeclensionNumber num = KEduVocDeclension::Singular; num <= KEduVocDeclension::Plural; num = KEduVocDeclension::DeclensionNumber(num +1) ) {
         QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
-        for ( KEduVocDeclension::DeclensionCase dcase = KEduVocDeclension::Nominative; dcase < KEduVocDeclension::DeclensionCaseMAX; dcase = KEduVocDeclension::DeclensionCase(dcase +1) ) {
+        for ( KEduVocDeclension::DeclensionCase dcase = KEduVocDeclension::Nominative; dcase < (KEduVocDeclension::Vocative+1); dcase = KEduVocDeclension::DeclensionCase(dcase +1) ) {
             QDomElement caseElement = domDoc.createElement( KVTML_DECLENSION_CASE[dcase] );
             declension(num, dcase).toKVTML2(caseElement);
 
@@ -127,7 +127,7 @@ KEduVocDeclension* KEduVocDeclension::fromKVTML2(QDomElement & parent)
     for ( KEduVocDeclension::DeclensionNumber num = KEduVocDeclension::Singular; num <= KEduVocDeclension::Plural; num = KEduVocDeclension::DeclensionNumber(num +1) ) {
         QDomElement numberElement = declensionElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[num] );
         if (!numberElement.isNull()) {
-            for ( KEduVocDeclension::DeclensionCase dcase = KEduVocDeclension::Nominative; dcase < KEduVocDeclension::DeclensionCaseMAX; dcase = KEduVocDeclension::DeclensionCase(dcase +1) ) {
+            for ( KEduVocDeclension::DeclensionCase dcase = KEduVocDeclension::Nominative; dcase <= KEduVocDeclension::Vocative; dcase = DeclensionCase(dcase +1) ) {
                 QDomElement caseElement = numberElement.firstChildElement( KVTML_DECLENSION_CASE[dcase] );
                 if (!caseElement.isNull()) {
                     KEduVocText text;

@@ -92,7 +92,7 @@ void KEduVocPersonalPronoun::setPersonalPronoun(const QString & personalpronoun,
 
 int KEduVocPersonalPronoun::indexOf(KEduVocConjugation::ConjugationPerson person, KEduVocConjugation::ConjugationNumber number) const
 {
-    return person + KEduVocConjugation::PersonMAX * number;
+    return person + (KEduVocConjugation::ThirdNeutralCommon+1) * number;
 }
 
 bool KEduVocPersonalPronoun::maleFemaleDifferent() const

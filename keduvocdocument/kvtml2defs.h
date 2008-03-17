@@ -39,11 +39,13 @@
 
 // articles
 #define KVTML_ARTICLE           "article"
-#define KVTML_DEFINITE          "definite"
-#define KVTML_INDEFINITE        "indefinite"
 
-// declension
+// conjugation, declension and personal pronouns
+#define KVTML_CONJUGATION       "conjugation"
+#define KVTML_CONJUGATIONTYPE   "conjugationtype"
+#define KVTML_PERSONALPRONOUNS  "personalpronouns"
 #define KVTML_DECLENSION       "declension"
+
 static const QString KVTML_DECLENSION_CASE[] = {
     "nominative",
     "genitive",
@@ -51,30 +53,34 @@ static const QString KVTML_DECLENSION_CASE[] = {
     "accusative",
     "ablative",
     "locative",
-    "vocative" };
+    "vocative"
+};
 
 static const QString KVTML_GRAMMATICAL_NUMBER[] = {
     "singular",
-    "dual",
-    "plural" };
+    "dual", // dual is the case where there's a special form for exactly two
+    "plural"
+};
 
-// conjugation and personal pronouns
-#define KVTML_CONJUGATION       "conjugation"
-#define KVTML_CONJUGATIONTYPE   "conjugationtype"
-#define KVTML_PERSONALPRONOUNS  "personalpronouns"
+static const QString KVTML_GRAMMATICAL_GENDER[] = {
+    "male",
+    "female",
+    "neutral"
+};
 
-#define KVTML_MALE              "male"
-#define KVTML_FEMALE            "female"
-#define KVTML_NEUTRAL           "neutral"
-#define KVTML_SINGULAR          "singular"
-// dual is the case where there's a special form for exactly two
-#define KVTML_DUAL              "dual"
-#define KVTML_PLURAL            "plural"
-#define KVTML_1STPERSON         "firstperson"
-#define KVTML_2NDPERSON         "secondperson"
-#define KVTML_THIRD_MALE        "thirdpersonmale"
-#define KVTML_THIRD_FEMALE      "thirdpersonfemale"
-#define KVTML_THIRD_NEUTRAL_COMMON "thirdpersonneutralcommon"
+static const QString KVTML_GRAMMATICAL_PERSON[] = {
+    "firstperson",
+    "secondperson",
+    "thirdpersonmale",
+    "thirdpersonfemale",
+    "thirdpersonneutralcommon"
+};
+
+static const QString KVTML_GRAMMATICAL_DEFINITENESS[] = {
+    "definite",
+    "indefinite"
+};
+
 
 // for the personal pronuns:
 // if this tag exists, in a conjugation male/female are different

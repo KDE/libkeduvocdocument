@@ -40,8 +40,7 @@ public:
     enum ConjugationNumber {
         Singular,
         Dual,
-        Plural,
-        NumberMAX
+        Plural
     };
 
     // store third person neutral/common in the same sttr
@@ -50,8 +49,7 @@ public:
         Second,
         ThirdMale,
         ThirdFemale,
-        ThirdNeutralCommon,
-        PersonMAX
+        ThirdNeutralCommon
     };
 
 
@@ -67,14 +65,27 @@ public:
     KEduVocConjugation& operator = ( const KEduVocConjugation& a );
     bool operator == ( const KEduVocConjugation& a ) const;
 
-    QString conjugation(ConjugationPerson person, ConjugationNumber number) const;
-    QString conjugation(int index) const;
-    void setConjugation(const QString& conjugation, ConjugationPerson person, ConjugationNumber number);
-    void setConjugation(const QString& conjugation, int index);
+    KEduVocText& conjugation(ConjugationPerson person, ConjugationNumber number);
+    KEduVocText& conjugation(int index);
+    void setConjugation(const KEduVocText& conjugation, ConjugationPerson person, ConjugationNumber number);
+    void setConjugation(const KEduVocText& conjugation, int index);
 
     QList<int> keys();
 
     bool isEmpty();
+
+    /**
+     * Create xml for this declension
+     * @param parent
+     */
+    void toKVTML2(QDomElement& parent, const QString &tense);
+
+    /**
+     * Reads a declension from xml, returns 0 if it is empty
+     * @param parent
+     * @return
+     */
+    static KEduVocConjugation* fromKVTML2(QDomElement& parent);
 
     static int indexOf(ConjugationPerson person, ConjugationNumber number);
 

@@ -223,3 +223,8 @@ void KEduVocText::fromKVTML2(QDomElement & parent)
         }
     }
 }
+
+bool KEduVocText::isEmpty()
+{
+    return d->m_text.isEmpty();
+}

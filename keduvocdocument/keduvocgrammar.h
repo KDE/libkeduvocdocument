@@ -43,21 +43,18 @@ public:
     enum ArticleNumber {
         Singular,
         Dual,
-        Plural,
-        NumberMAX
+        Plural
     };
 
     enum ArticleGender {
         Masculine,
         Feminine,
-        Neutral,
-        GenderMAX
+        Neutral
     };
 
     enum ArticleDefiniteness {
         Definite,
-        Indefinite,
-        DefinitenessMAX
+        Indefinite
     };
 
 
@@ -87,7 +84,6 @@ public:
      */
     ~KEduVocArticle();
 
-
     /**
      * assignment operator for d-pointer copying
      */
@@ -98,12 +94,13 @@ public:
 
     void setArticle(const QString& article, ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
 
+    void setArticle(const QString& article, int index);
+
     bool isArticle(const QString& article) const;
 
     bool isEmpty();
 
-private:
-    int indexOf(ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
+    static int indexOf(ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
 
     class Private;
     Private * const d;

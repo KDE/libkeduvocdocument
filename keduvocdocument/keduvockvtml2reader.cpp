@@ -307,6 +307,7 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
 bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
         KEduVocExpression *expr, int index )
 {
+    // read the text, grade, declension and conjugation
     expr->translation(index)->fromKVTML2(translationElement);
 
     //<falsefriend fromid="1"></falsefriend>
@@ -314,18 +315,6 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     if ( !currentElement.isNull() ) {
         int fromid = currentElement.attribute( KVTML_FROMID ).toInt();
         expr->translation(index)->setFalseFriend( fromid, currentElement.text() );
-    }
-
-    // conjugations
-    currentElement = translationElement.firstChildElement( KVTML_CONJUGATION );
-    while ( !currentElement.isNull() ) {
-        // read any conjugations (NOTE: this will overwrite any conjugations of the same type for this
-        // translation, as the type is used as the key
-        QDomElement tenseElement = currentElement.firstChildElement( KVTML_TENSE );
-        QString tense = tenseElement.text();
-
-        readConjugation( currentElement, expr->translation(index)->conjugation(tense) );
-        currentElement = currentElement.nextSiblingElement( KVTML_CONJUGATION );
     }
 
     // comparisons
@@ -396,64 +385,42 @@ bool KEduVocKvtml2Reader::readLesson( KEduVocLesson* parentLesson, QDomElement &
 bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifierNum )
 /*
  <article>
-  <definite>
-    <male>der</male>
-    <female>die</female>
-    <neutral>das</neutral>
-  </definite>
-  <indefinite>
-    <male>ein</male>
-    <female>eine</female>
-    <neutral>ein</neutral>
-  </indefinite>
+  <singlular>
+    <definite>
+        <male>der</male>
+        <female>die</female>
+        <neutral>das</neutral>
+    </definite>
+    <indefinite>
+        <male>ein</male>
+        <female>eine</female>
+        <neutral>ein</neutral>
+    </indefinite>
+  </singular>
+  <dual>
+  </dual>
  </article>
 */
 {
-    QString fem_def = "";
-    QString mal_def = "";
-    QString nat_def = "";
-    QString fem_indef = "";
-    QString mal_indef = "";
-    QString nat_indef = "";
-
-    QDomElement currentElement = articleElement.firstChildElement( KVTML_SINGULAR ).firstChildElement( KVTML_DEFINITE );
-    if ( !currentElement.isNull() )
-    {
-        QDomElement subElement = currentElement.firstChildElement( KVTML_MALE );
-        if ( !subElement.isNull() ) {
-            mal_def = subElement.text();
-        }
-
-        subElement = currentElement.firstChildElement( KVTML_FEMALE );
-        if ( !subElement.isNull() ) {
-            fem_def = subElement.text();
-        }
-
-        subElement = currentElement.firstChildElement( KVTML_NEUTRAL );
-        if ( !subElement.isNull() ) {
-            nat_def = subElement.text();
+    // singular
+    for ( KEduVocArticle::ArticleNumber num = KEduVocArticle::Singular; num <= KEduVocArticle::Plural; num = KEduVocArticle::ArticleNumber(num+1) ) {
+        QDomElement numberElement = articleElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[num] );
+        if (!numberElement.isNull()) {
+            // definite
+            for ( KEduVocArticle::ArticleDefiniteness def = KEduVocArticle::Definite; def <= KEduVocArticle::Indefinite; def = KEduVocArticle::ArticleDefiniteness(def+1) ) {
+                QDomElement defElement = numberElement.firstChildElement( KVTML_GRAMMATICAL_DEFINITENESS[def] );
+                if (!defElement.isNull()) {
+                    // male
+                    for ( KEduVocArticle::ArticleGender gen = KEduVocArticle::Masculine; gen <= KEduVocArticle::Neutral; gen = KEduVocArticle::ArticleGender(gen+1) ) {
+                        QDomElement genderElement = defElement.firstChildElement( KVTML_GRAMMATICAL_GENDER[gen] );
+                        if (!genderElement.isNull()) {
+                            m_doc->identifier(identifierNum).article().setArticle( genderElement.text(), KEduVocArticle::indexOf(num, def, gen) );
+                        }
+                    }
+                }
+            }
         }
     }
-
-    currentElement = articleElement.firstChildElement( KVTML_SINGULAR ).firstChildElement( KVTML_INDEFINITE );
-    if ( !currentElement.isNull() )
-    {
-        QDomElement subElement = currentElement.firstChildElement( KVTML_MALE );
-        if ( !subElement.isNull() ) {
-            mal_indef = subElement.text();
-        }
-
-        subElement = currentElement.firstChildElement( KVTML_FEMALE );
-        if ( !subElement.isNull() ) {
-            fem_indef = subElement.text();
-        }
-
-        subElement = currentElement.firstChildElement( KVTML_NEUTRAL );
-        if ( !subElement.isNull() ) {
-            nat_indef = subElement.text();
-        }
-    }
-    m_doc->identifier(identifierNum).setArticle( KEduVocArticle( fem_def, fem_indef, mal_def, mal_indef, nat_def, nat_indef ) );
 
     return true;
 }
@@ -607,75 +574,6 @@ bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement
     return true;
 }
 
-bool KEduVocKvtml2Reader::readConjugation( QDomElement &conjugElement, KEduVocConjugation &conjugation )
-/*
- <conjugation>
-  <tense>Futurepastperfekt:)</tense>
-  <singular>
-    <firstperson></firstperson>
-    <secondperson></secondperson>
-    <thirdperson>
-      <male></male>
-      <female></female>
-      <neutral></neutral>
-    </thirdperson>
-  </singular>
-  <plural>
-    <firstperson></firstperson>
-    <secondperson></secondperson>
-    <thirdsperson>
-      <common></common>
-    </third person>
-  </plural>
- </conjugation>
-*/
-{
-    QDomElement personElement = conjugElement.firstChildElement( KVTML_SINGULAR );
-    if ( !personElement.isNull() )
-    {
-        readConjugationPerson( personElement, conjugation, KEduVocConjugation::Singular );
-    }
-
-    personElement = conjugElement.firstChildElement( KVTML_DUAL );
-    if ( !personElement.isNull() )
-    {
-        readConjugationPerson( personElement, conjugation, KEduVocConjugation::Dual );
-    }
-
-    personElement = conjugElement.firstChildElement( KVTML_PLURAL );
-    if ( !personElement.isNull() )
-    {
-        readConjugationPerson( personElement, conjugation, KEduVocConjugation::Plural );
-    }
-
-    return true;
-}
-
-
-bool KEduVocKvtml2Reader::readConjugationPerson(QDomElement & personElement, KEduVocConjugation & conjugation, KEduVocConjugation::ConjugationNumber number)
-{
-    QDomElement currentElement = personElement.firstChildElement( KVTML_1STPERSON );
-    conjugation.setConjugation( currentElement.text(),
-        KEduVocConjugation::First, number );
-
-    currentElement = personElement.firstChildElement( KVTML_2NDPERSON );
-    conjugation.setConjugation( currentElement.text(),
-        KEduVocConjugation::Second, number );
-
-    currentElement = personElement.firstChildElement( KVTML_THIRD_MALE );
-    conjugation.setConjugation( currentElement.text(),
-        KEduVocConjugation::ThirdMale, number );
-
-    currentElement = personElement.firstChildElement( KVTML_THIRD_FEMALE );
-    conjugation.setConjugation( currentElement.text(),
-        KEduVocConjugation::ThirdFemale, number );
-
-    currentElement = personElement.firstChildElement( KVTML_THIRD_NEUTRAL_COMMON );
-    conjugation.setConjugation( currentElement.text(),
-        KEduVocConjugation::ThirdNeutralCommon, number );
-    return true;
-}
-
 
 bool KEduVocKvtml2Reader::readPersonalPronoun(QDomElement & pronounElement, KEduVocPersonalPronoun & pronoun)
 {
@@ -686,17 +584,17 @@ bool KEduVocKvtml2Reader::readPersonalPronoun(QDomElement & pronounElement, KEdu
     pronoun.setDualExists( !pronounElement.firstChildElement(
         KVTML_DUAL_EXISTS).isNull() );
 
-    QDomElement personElement = pronounElement.firstChildElement( KVTML_SINGULAR );
+    QDomElement personElement = pronounElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[0] );
     if ( !personElement.isNull() ) {
         readPersonalPronounChild( personElement, pronoun, KEduVocConjugation::Singular );
     }
 
-    personElement = pronounElement.firstChildElement( KVTML_DUAL );
+    personElement = pronounElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[1] );
     if ( !personElement.isNull() ) {
         readPersonalPronounChild( personElement, pronoun, KEduVocConjugation::Dual );
     }
 
-    personElement = pronounElement.firstChildElement( KVTML_PLURAL );
+    personElement = pronounElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[2] );
     if ( !personElement.isNull() ) {
         readPersonalPronounChild( personElement, pronoun, KEduVocConjugation::Plural );
     }
@@ -706,25 +604,11 @@ bool KEduVocKvtml2Reader::readPersonalPronoun(QDomElement & pronounElement, KEdu
 
 bool KEduVocKvtml2Reader::readPersonalPronounChild(QDomElement & personElement, KEduVocPersonalPronoun & pronoun, KEduVocConjugation::ConjugationNumber number)
 {
-    QDomElement currentElement = personElement.firstChildElement( KVTML_1STPERSON );
-    pronoun.setPersonalPronoun( currentElement.text(),
-        KEduVocConjugation::First, number );
+    for (int person = KEduVocConjugation::First; person <= KEduVocConjugation::ThirdNeutralCommon; person++) {
+        QDomElement currentElement = personElement.firstChildElement( KVTML_GRAMMATICAL_PERSON[person] );
+        pronoun.setPersonalPronoun( currentElement.text(), KEduVocConjugation::ConjugationPerson(person), number );
+    }
 
-    currentElement = personElement.firstChildElement( KVTML_2NDPERSON );
-    pronoun.setPersonalPronoun( currentElement.text(),
-        KEduVocConjugation::Second, number );
-
-    currentElement = personElement.firstChildElement( KVTML_THIRD_MALE );
-    pronoun.setPersonalPronoun( currentElement.text(),
-        KEduVocConjugation::ThirdMale, number );
-
-    currentElement = personElement.firstChildElement( KVTML_THIRD_FEMALE );
-    pronoun.setPersonalPronoun( currentElement.text(),
-        KEduVocConjugation::ThirdFemale, number );
-
-    currentElement = personElement.firstChildElement( KVTML_THIRD_NEUTRAL_COMMON );
-    pronoun.setPersonalPronoun( currentElement.text(),
-        KEduVocConjugation::ThirdNeutralCommon, number );
     return true;
 }
 

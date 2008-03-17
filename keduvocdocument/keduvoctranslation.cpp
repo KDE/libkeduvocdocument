@@ -360,9 +360,21 @@ void KEduVocTranslation::setDeclension(KEduVocDeclension * declension)
 
 void KEduVocTranslation::toKVTML2(QDomElement & parent)
 {
+    // text and grade
     KEduVocText::toKVTML2(parent);
+
+    // declension
     if (d->m_declension) {
         d->m_declension->toKVTML2(parent);
+    }
+
+    // conjugation
+    QDomElement conjugationElement = parent.ownerDocument().createElement( KVTML_CONJUGATION );
+    foreach ( const QString &tense, conjugationTenses() ) {
+        conjugation(tense).toKVTML2(conjugationElement, tense);
+    }
+    if (conjugationElement.hasChildNodes()) {
+        parent.appendChild( conjugationElement );
     }
 
     // <comment>
@@ -405,6 +417,18 @@ void KEduVocTranslation::fromKVTML2(QDomElement & parent)
 
     //<paraphrase></paraphrase>
     setParaphrase( parent.firstChildElement( KVTML_PARAPHRASE ).text() );
+
+
+    // conjugations
+    QDomElement conjugationElement = parent.firstChildElement( KVTML_CONJUGATION );
+    while ( !conjugationElement.isNull() ) {
+        QDomElement tenseElement = conjugationElement.firstChildElement( KVTML_TENSE );
+        QString tense = tenseElement.text();
+        KEduVocConjugation *conjugation = KEduVocConjugation::fromKVTML2(conjugationElement);
+        setConjugation(tense, *conjugation);
+        delete conjugation;
+        conjugationElement = conjugationElement.nextSiblingElement( KVTML_CONJUGATION );
+    }
 
 }
 
