@@ -10,7 +10,7 @@ keduvocdocument.cpp
    keduvoccontainer.cpp
    keduvoclesson.cpp
    keduvoctext.cpp
-   keduvocgrammar.cpp
+   keduvocarticle.cpp
    keduvocconjugation.cpp
    keduvocpersonalpronoun.cpp
    keduvocdeclension.cpp
@@ -44,7 +44,7 @@ install(FILES
    keduvocidentifier.h
    keduvocexpression.h
    keduvoctext.h
-   keduvocgrammar.h
+   keduvocarticle.h
    keduvocconjugation.h
    keduvoclesson.h
    keduvoccontainer.h

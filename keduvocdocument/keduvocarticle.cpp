@@ -1,17 +1,8 @@
 /***************************************************************************
 
-             manage grammar parts (articles, conjugation)
-
-    -----------------------------------------------------------------------
-
-    begin     : Sat Nov 27 09:50:53 MET 1999
-
-    copyright : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
-
-                (C) 2004, 2005, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
-                (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
-
-    -----------------------------------------------------------------------
+    Copyright 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
+    Copyright 2004, 2005, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
+    Copyright 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
  ***************************************************************************/
 
@@ -24,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "keduvocgrammar.h"
+#include "keduvocarticle.h"
 
 #include <QtCore/QMap>
 #include <KDebug>

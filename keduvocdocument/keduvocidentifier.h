@@ -26,7 +26,7 @@
 #include "libkeduvocdocument_export.h"
 
 #include "keduvocpersonalpronoun.h"
-#include "keduvocgrammar.h"
+#include "keduvocarticle.h"
 
 #include <QtCore/QList>
 #include <QtCore/QString>

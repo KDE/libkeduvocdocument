@@ -22,7 +22,7 @@
 #include "libkeduvocdocument_export.h"
 
 #include "keduvocidentifier.h"
-#include "keduvocgrammar.h"
+#include "keduvocarticle.h"
 #include "keduvocconjugation.h"
 
 #include <QtCore/QObject>

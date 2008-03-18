@@ -24,7 +24,7 @@
 #include <QtCore/QDateTime>
 
 #include "keduvoclesson.h"
-#include "keduvocgrammar.h"
+#include "keduvocarticle.h"
 #include "keduvocmultiplechoice.h"
 #include "keduvoctranslation.h"
 

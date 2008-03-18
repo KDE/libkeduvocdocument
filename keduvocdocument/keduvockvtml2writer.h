@@ -21,7 +21,7 @@
 #include <QtCore/QList>
 #include <QtCore/QFile>
 
-#include "keduvocgrammar.h"
+#include "keduvocarticle.h"
 #include "keduvocmultiplechoice.h"
 #include "keduvoctranslation.h"
 #include "keduvocpersonalpronoun.h"

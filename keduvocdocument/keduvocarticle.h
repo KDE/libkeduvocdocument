@@ -1,17 +1,8 @@
 /***************************************************************************
 
-              manage grammar parts (articles, conjugation)
-
-    -----------------------------------------------------------------------
-
-    begin        : Sat Nov 27 09:50:53 MET 1999
-
-    copyright    : (C) 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
-
-                   (C) 2005, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
-                   (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
-
-    -----------------------------------------------------------------------
+    Copyright 1999-2001 Ewald Arnold <kvoctrain@ewald-arnold.de>
+    Copyright 2005, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
+    Copyright 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
  ***************************************************************************/
 
@@ -24,8 +15,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef KEDUVOCGRAMMAR_H
-#define KEDUVOCGRAMMAR_H
+#ifndef KEDUVOCARTICLE_H
+#define KEDUVOCARTICLE_H
 
 #include "libkeduvocdocument_export.h"
 
@@ -107,4 +98,4 @@ public:
 };
 
 
-#endif // KEDUVOCGRAMMAR_H
+#endif

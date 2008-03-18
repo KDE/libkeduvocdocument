@@ -21,7 +21,7 @@
 
 #include "keduvocexpression.h"
 #include "keduvocpersonalpronoun.h"
-#include "keduvocgrammar.h"
+#include "keduvocarticle.h"
 #include "keduvocmultiplechoice.h"
 
 class QIODevice;

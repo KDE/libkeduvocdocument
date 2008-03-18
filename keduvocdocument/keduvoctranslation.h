@@ -18,7 +18,7 @@
 #define KEDUVOCTRANSLATION_H
 
 #include "libkeduvocdocument_export.h"
-#include "keduvocgrammar.h"
+#include "keduvocarticle.h"
 #include "keduvocconjugation.h"
 #include "keduvoctext.h"
 #include <KDE/KUrl>

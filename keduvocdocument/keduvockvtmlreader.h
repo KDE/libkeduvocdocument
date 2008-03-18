@@ -25,7 +25,7 @@
 
 
 #include "keduvocexpression.h"
-#include "keduvocgrammar.h"
+#include "keduvocarticle.h"
 #include "keduvocmultiplechoice.h"
 #include "keduvockvtmlcompability.h"
 #include "keduvocpersonalpronoun.h"
