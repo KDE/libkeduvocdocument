@@ -388,32 +388,55 @@ bool KEduVocKvtml2Reader::readLesson( KEduVocLesson* parentLesson, QDomElement &
 
 bool KEduVocKvtml2Reader::readSynonymsAntonymsFalseFriends( QDomElement &rootElement )
 {
-    // synonyms
-    QDomElement pairElement = rootElement.firstChildElement( KVTML_SYNONYM );
-    // pair
-    pairElement = pairElement.firstChildElement( KVTML_PAIR );
-    while ( !pairElement.isNull() ) {
-        //<entry id="123"/>
-        QDomElement entryElement = pairElement.firstChildElement( KVTML_ENTRY );
-        int firstEntryId = entryElement.attribute( KVTML_ID ).toInt();
+    QDomElement pairElement;
+    for(int type = KEduVocTranslation::Synonym; type <= KEduVocTranslation::FalseFriend; type++) {
+        switch (type) {
+        case KEduVocTranslation::Synonym:
+            pairElement= rootElement.firstChildElement( KVTML_SYNONYM );
+            break;
+        case KEduVocTranslation::Antonym:
+            pairElement= rootElement.firstChildElement( KVTML_ANTONYM );
+            break;
+        case KEduVocTranslation::FalseFriend:
+            pairElement= rootElement.firstChildElement( KVTML_FALSEFRIEND );
+            break;
+        }
+        // pair
+        pairElement = pairElement.firstChildElement( KVTML_PAIR );
+        while ( !pairElement.isNull() ) {
+            //<entry id="123"/>
+            QDomElement entryElement = pairElement.firstChildElement( KVTML_ENTRY );
+            int firstEntryId = entryElement.attribute( KVTML_ID ).toInt();
 
-        QDomElement translationElement = entryElement.firstChildElement( KVTML_TRANSLATION );
-        int firstTranslationId = translationElement.attribute( KVTML_ID ).toInt();
+            QDomElement translationElement = entryElement.firstChildElement( KVTML_TRANSLATION );
+            int firstTranslationId = translationElement.attribute( KVTML_ID ).toInt();
 
-        // second entry
-        entryElement = entryElement.nextSiblingElement( KVTML_ENTRY );
-        int secondEntryId = entryElement.attribute( KVTML_ID ).toInt();
-        translationElement = entryElement.firstChildElement( KVTML_TRANSLATION );
-        int secondTranslationId = translationElement.attribute( KVTML_ID ).toInt();
+            // second entry
+            entryElement = entryElement.nextSiblingElement( KVTML_ENTRY );
+            int secondEntryId = entryElement.attribute( KVTML_ID ).toInt();
+            translationElement = entryElement.firstChildElement( KVTML_TRANSLATION );
+            int secondTranslationId = translationElement.attribute( KVTML_ID ).toInt();
 
-        // pair them up
-        KEduVocTranslation *first = m_allEntries[firstEntryId]->translation(firstTranslationId);
-        KEduVocTranslation *second = m_allEntries[secondEntryId]->translation(secondTranslationId);
+            // pair them up
+            KEduVocTranslation *first = m_allEntries[firstEntryId]->translation(firstTranslationId);
+            KEduVocTranslation *second = m_allEntries[secondEntryId]->translation(secondTranslationId);
 
-        first->addSynonym(second);
-        second->addSynonym(first);
-
-        pairElement = pairElement.nextSiblingElement( KVTML_PAIR );
+            switch (type) {
+            case KEduVocTranslation::Synonym:
+                first->addSynonym(second);
+                second->addSynonym(first);
+                break;
+            case KEduVocTranslation::Antonym:
+                first->addAntonym(second);
+                second->addAntonym(first);
+                break;
+            case KEduVocTranslation::FalseFriend:
+                first->addFalseFriend(second);
+                second->addFalseFriend(first);
+                break;
+            }
+            pairElement = pairElement.nextSiblingElement( KVTML_PAIR );
+        }
     }
     return true;
 }

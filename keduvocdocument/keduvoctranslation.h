@@ -36,6 +36,12 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocTranslation
     :public KEduVocText
 {
 public:
+    enum Related {
+        Synonym,
+        Antonym,
+        FalseFriend
+    };
+
     /**
      * Default constructor for an empty translation.
      */
