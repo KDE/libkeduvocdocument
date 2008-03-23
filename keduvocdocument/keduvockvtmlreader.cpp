@@ -964,13 +964,6 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         }
 
 
-        if ( m_doc->lesson()->entries(KEduVocLesson::Recursive).count() == 0 ) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
-
-            // new translation
-            if (!addLanguage(i, lang)) {
-                return false;
-            }
-        }
         //---------
         // Children
 
@@ -986,6 +979,13 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
             }
         } else {
             entry->setTranslation( i, textstr );
+        }
+
+        if ( m_doc->lesson()->entries(KEduVocLesson::Recursive).count() == 1 ) { // this is because in kvtml the languages are saved in the FIRST ENTRY ONLY.
+            // new translation
+            if (!addLanguage(i, lang)) {
+                return false;
+            }
         }
 
         // better make sure, translation(i) already exists...
