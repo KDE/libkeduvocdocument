@@ -42,12 +42,8 @@ public:
     QString m_hint;
     /// Paraphrase
     QString m_paraphrase;
-    /// A synonyme for a word: sick and ill, student and pupil
-    QString m_synonym;
     /// An example
     QString m_example;
-    /// An antonym - the opposite: hot - cold
-    QString m_antonym;
     /// Pronunciation
     QString m_pronunciation;
     /// Image url
@@ -67,8 +63,13 @@ public:
 
     KEduVocDeclension* m_declension;
 
-    /// One false friend string per other language
-    QMap<int, QString> m_falseFriends;
+    // connections to other translations
+    /// Synonyms for a word: sick and ill, student and pupil
+    QList< KEduVocTranslation* > m_synonyms;
+    /// An antonym - the opposite: hot - cold
+    QList< KEduVocTranslation* > m_antonyms;
+    /// List of false friends
+    QList< KEduVocTranslation* > m_falseFriends;
 };
 
 
@@ -101,18 +102,20 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
     d->m_wordType = other.d->m_wordType;
     d->m_comment = other.d->m_comment;
     d->m_paraphrase = other.d->m_paraphrase;
-    d->m_synonym = other.d->m_synonym;
     d->m_example = other.d->m_example;
-    d->m_antonym = other.d->m_antonym;
     d->m_pronunciation = other.d->m_pronunciation;
     d->m_conjugations = other.d->m_conjugations;
     d->m_comparative = other.d->m_comparative;
     d->m_superlative = other.d->m_superlative;
     d->m_multipleChoice = other.d->m_multipleChoice;
-    d->m_falseFriends = other.d->m_falseFriends;
     d->m_imageUrl = other.d->m_imageUrl;
     d->m_soundUrl = other.d->m_soundUrl;
-    /// @todo add declensions
+    d->m_synonyms = other.d->m_synonyms;
+    d->m_antonyms = other.d->m_antonyms;
+    d->m_falseFriends = other.d->m_falseFriends;
+    if (other.d->m_declension) {
+        d->m_declension = new KEduVocDeclension(*other.d->m_declension);
+    }
 }
 
 KEduVocTranslation::~KEduVocTranslation()
@@ -124,20 +127,21 @@ KEduVocTranslation::~KEduVocTranslation()
 bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) const
 {
     return KEduVocText::operator==(translation) &&
-           d->m_wordType == translation.d->m_wordType &&
-           d->m_comment == translation.d->m_comment &&
-           d->m_paraphrase == translation.d->m_paraphrase &&
-           d->m_synonym == translation.d->m_synonym &&
-           d->m_example == translation.d->m_example &&
-           d->m_antonym == translation.d->m_antonym &&
-           d->m_pronunciation == translation.d->m_pronunciation &&
-           d->m_imageUrl == translation.d->m_imageUrl &&
-           d->m_soundUrl == translation.d->m_soundUrl &&
-           d->m_comparative == translation.d->m_comparative &&
-           d->m_superlative == translation.d->m_superlative &&
-           d->m_multipleChoice == translation.d->m_multipleChoice &&
-           d->m_falseFriends == translation.d->m_falseFriends &&
-           d->m_conjugations == translation.d->m_conjugations;
+        d->m_wordType == translation.d->m_wordType &&
+        d->m_comment == translation.d->m_comment &&
+        d->m_paraphrase == translation.d->m_paraphrase &&
+        d->m_example == translation.d->m_example &&
+        d->m_pronunciation == translation.d->m_pronunciation &&
+        d->m_imageUrl == translation.d->m_imageUrl &&
+        d->m_soundUrl == translation.d->m_soundUrl &&
+        d->m_comparative == translation.d->m_comparative &&
+        d->m_superlative == translation.d->m_superlative &&
+        d->m_multipleChoice == translation.d->m_multipleChoice &&
+        d->m_synonyms == translation.d->m_synonyms &&
+        d->m_antonyms == translation.d->m_antonyms &&
+        d->m_falseFriends == translation.d->m_falseFriends &&
+        d->m_conjugations == translation.d->m_conjugations;
+           /// @todo check and include declensions d->m_declension == translation.d->m_declension;
 }
 
 KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation & translation )
@@ -147,9 +151,7 @@ KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation &
     d->m_wordType = translation.d->m_wordType;
     d->m_comment = translation.d->m_comment;
     d->m_paraphrase = translation.d->m_paraphrase;
-    d->m_synonym = translation.d->m_synonym;
     d->m_example = translation.d->m_example;
-    d->m_antonym = translation.d->m_antonym;
     d->m_pronunciation = translation.d->m_pronunciation;
     d->m_imageUrl = translation.d->m_imageUrl;
     d->m_soundUrl = translation.d->m_soundUrl;
@@ -157,7 +159,12 @@ KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation &
     d->m_superlative = translation.d->m_superlative;
     d->m_multipleChoice = translation.d->m_multipleChoice;
     d->m_falseFriends = translation.d->m_falseFriends;
+    d->m_synonyms = translation.d->m_synonyms;
+    d->m_antonyms = translation.d->m_antonyms;
     d->m_conjugations = translation.d->m_conjugations;
+    if (translation.d->m_declension) {
+        d->m_declension = new KEduVocDeclension(*translation.d->m_declension);
+    }
     return *this;
 }
 
@@ -174,27 +181,39 @@ void KEduVocTranslation::setComment( const QString & expr )
 }
 
 
-void KEduVocTranslation::setFalseFriend( int indexFrom, const QString & expr )
+void KEduVocTranslation::addFalseFriend( KEduVocTranslation* falseFriend )
 {
-    d->m_falseFriends[indexFrom] = expr.simplified();
+    d->m_falseFriends.append(falseFriend);
 }
 
 
-QString KEduVocTranslation::falseFriend( int indexFrom ) const
+QList< KEduVocTranslation* > KEduVocTranslation::falseFriends() const
 {
-    return d->m_falseFriends.value( indexFrom );
+    return d->m_falseFriends;
 }
 
 
-void KEduVocTranslation::setSynonym( const QString & expr )
+void KEduVocTranslation::addSynonym( KEduVocTranslation* synonym )
 {
-    d->m_synonym = expr.simplified();
+    d->m_synonyms.append(synonym);
 }
 
 
-QString KEduVocTranslation::synonym() const
+QList<KEduVocTranslation*> KEduVocTranslation::synonyms() const
 {
-    return d->m_synonym;
+    return d->m_synonyms;
+}
+
+
+void KEduVocTranslation::addAntonym( KEduVocTranslation* antonym )
+{
+    d->m_antonyms.append(antonym);
+}
+
+
+QList<KEduVocTranslation*> KEduVocTranslation::antonyms() const
+{
+    return d->m_antonyms;
 }
 
 
@@ -219,18 +238,6 @@ void KEduVocTranslation::setParaphrase( const QString & expr )
 QString KEduVocTranslation::paraphrase() const
 {
     return d->m_paraphrase;
-}
-
-
-void KEduVocTranslation::setAntonym( const QString & expr )
-{
-    d->m_antonym = expr.simplified();
-}
-
-
-QString KEduVocTranslation::antonym() const
-{
-    return d->m_antonym;
 }
 
 
@@ -383,17 +390,14 @@ void KEduVocTranslation::toKVTML2(QDomElement & parent)
     // <pronunciation>
     KEduVocKvtml2Writer::appendTextElement( parent, KVTML_PRONUNCIATION, pronunciation() );
 
-    // <antonym>
-    KEduVocKvtml2Writer::appendTextElement( parent, KVTML_ANTONYM, antonym() );
-
-    // <synonym>
-    KEduVocKvtml2Writer::appendTextElement( parent, KVTML_SYNONYM, synonym() );
-
     // <example>
     KEduVocKvtml2Writer::appendTextElement( parent, KVTML_EXAMPLE, example() );
 
     // <paraphrase>
     KEduVocKvtml2Writer::appendTextElement( parent, KVTML_PARAPHRASE, paraphrase() );
+
+    ///@todo synonyms, antonyms
+    ///@todo false friends
 }
 
 void KEduVocTranslation::fromKVTML2(QDomElement & parent)
@@ -406,18 +410,11 @@ void KEduVocTranslation::fromKVTML2(QDomElement & parent)
 
     setPronunciation( parent.firstChildElement( KVTML_PRONUNCIATION ).text() );
 
-    //<antonym></antonym>
-    setAntonym( parent.firstChildElement( KVTML_ANTONYM ).text() );
-
-    //<synonym></synonym>
-    setSynonym( parent.firstChildElement( KVTML_SYNONYM ).text() );
-
     //<example></example>
     setExample( parent.firstChildElement( KVTML_EXAMPLE ).text() );
 
     //<paraphrase></paraphrase>
     setParaphrase( parent.firstChildElement( KVTML_PARAPHRASE ).text() );
-
 
     // conjugations
     QDomElement conjugationElement = parent.firstChildElement( KVTML_CONJUGATION );
@@ -430,5 +427,7 @@ void KEduVocTranslation::fromKVTML2(QDomElement & parent)
         conjugationElement = conjugationElement.nextSiblingElement( KVTML_CONJUGATION );
     }
 
+    ///@todo synonyms, antonym
+    ///@todo false friends
 }
 

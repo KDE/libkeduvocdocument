@@ -337,18 +337,19 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     // so far only for KEduVocWord - text and grades
     translation->toKVTML2(translationElement);
 
+    ///@todo write false friends
     // <falsefriend fromid="0"></falsefriend>
     // loop through the identifiers
-    for ( int i = 0; i < m_doc->identifierCount(); ++i ) {
-        // see if this identifier has a falsefriend in this translation
-        QString thisFriend = translation->falseFriend( i );
-        if ( !thisFriend.isEmpty() ) {
-            // if so, create it, and set the fromid to i
-            QDomElement thisFriendElement = newTextElement( KVTML_FALSEFRIEND, thisFriend );
-            thisFriendElement.setAttribute( KVTML_FROMID, QString::number( i ) );
-            translationElement.appendChild( thisFriendElement );
-        }
-    }
+//     for ( int i = 0; i < m_doc->identifierCount(); ++i ) {
+//         // see if this identifier has a falsefriend in this translation
+//         QString thisFriend = translation->falseFriend( i );
+//         if ( !thisFriend.isEmpty() ) {
+//             // if so, create it, and set the fromid to i
+//             QDomElement thisFriendElement = newTextElement( KVTML_FALSEFRIEND, thisFriend );
+//             thisFriendElement.setAttribute( KVTML_FROMID, QString::number( i ) );
+//             translationElement.appendChild( thisFriendElement );
+//         }
+//     }
 
     // comparison
     if ( !(translation->comparative().isEmpty() || translation->comparative().isEmpty())) {

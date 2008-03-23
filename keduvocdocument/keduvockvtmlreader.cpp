@@ -1019,18 +1019,22 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
             entry->translation( i )->setComment( remark );
         if ( !pronunciation.isEmpty() )
             entry->translation( i )->setPronunciation( pronunciation );
-        if ( !faux_ami_f.isEmpty() )
-            entry->translation( i )->setFalseFriend( 0, faux_ami_f );
-        if ( !faux_ami_t.isEmpty() )
-            entry->translation( 0 )->setFalseFriend( i, faux_ami_t );
-        if ( !synonym.isEmpty() )
-            entry->translation( i )->setSynonym( synonym );
+
+        ///@todo include false friends from kvtml-1 again?
+//         if ( !faux_ami_f.isEmpty() )
+//             entry->translation( i )->setFalseFriend( 0, faux_ami_f );
+//         if ( !faux_ami_t.isEmpty() )
+//             entry->translation( 0 )->setFalseFriend( i, faux_ami_t );
+        ///@todo include synonyms from kvtml-1 again?
+//         if ( !synonym.isEmpty() )
+//             entry->translation( i )->setSynonym( synonym );
+//         if ( !antonym.isEmpty() )
+//             entry->translation( i )->setAntonym( antonym );
+
         if ( !example.isEmpty() )
             entry->translation( i )->setExample( example );
         if ( !paraphrase.isEmpty() )
             entry->translation( i )->setParaphrase( paraphrase );
-        if ( !antonym.isEmpty() )
-            entry->translation( i )->setAntonym( antonym );
 
         if ( i != 0 ) {
             entry->translation( i )->setGrade( grade );

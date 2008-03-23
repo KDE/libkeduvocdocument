@@ -77,29 +77,6 @@ public:
     */
     void setComment( const QString & expr );
 
-    /** sets false friend of this expression
-    * @param indexFrom        index of original translation
-    * @param expression       false friend of this index
-    */
-    void setFalseFriend( int indexFrom, const QString & expression );
-
-    /**
-    * returns false friend of this expression
-    * @param indexFrom index of original translation
-    * @return false friend or "" if no string available
-    */
-    QString falseFriend( int indexFrom ) const;
-
-    /** sets synonym this expression
-    * @param expression       synonym of this index
-    */
-    void setSynonym( const QString & expression );
-
-    /** returns synonym of this expression
-    * @return                 synonym or "" if no string available
-    */
-    QString synonym() const;
-
     /** sets example this expression
     * @param expression       example of this index
     */
@@ -220,6 +197,42 @@ public:
      * @param url               url of the image
      */
     void setImageUrl(const KUrl &url);
+
+    /**
+     * add a false friend
+     * @param falseFriend false friend of this index
+     */
+    void addFalseFriend( KEduVocTranslation* falseFriend );
+
+    /**
+     * returns false friends of this expression
+     * @return list of false friends
+     */
+    QList<KEduVocTranslation*> falseFriends() const;
+
+    /**
+     * add a synonym
+     * @param synonym
+     */
+    void addSynonym( KEduVocTranslation* synonym );
+
+    /**
+     * returns synonyms of this expression
+     * @return synonyms
+     */
+    QList<KEduVocTranslation*> synonyms() const;
+
+    /**
+     * add a antonym
+     * @param antonym
+         */
+    void addAntonym( KEduVocTranslation* antonym );
+
+    /**
+     * returns antonyms of this expression
+     * @return antonyms
+     */
+    QList<KEduVocTranslation*> antonyms() const;
 
     /**
      * Equal operator to assing a translation to another one.
