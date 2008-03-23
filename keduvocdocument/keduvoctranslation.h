@@ -223,6 +223,12 @@ public:
     void addSynonym( KEduVocTranslation* synonym );
 
     /**
+     * remove a synonym
+     * @param synonym
+     */
+    void removeSynonym( KEduVocTranslation* synonym );
+
+    /**
      * returns synonyms of this expression
      * @return synonyms
      */

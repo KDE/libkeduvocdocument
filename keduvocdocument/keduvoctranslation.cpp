@@ -198,6 +198,10 @@ void KEduVocTranslation::addSynonym( KEduVocTranslation* synonym )
     d->m_synonyms.append(synonym);
 }
 
+void KEduVocTranslation::removeSynonym(KEduVocTranslation * synonym)
+{
+    d->m_synonyms.removeAt(d->m_synonyms.indexOf(synonym));
+}
 
 QList<KEduVocTranslation*> KEduVocTranslation::synonyms() const
 {
