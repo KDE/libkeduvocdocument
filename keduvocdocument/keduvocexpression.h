@@ -90,14 +90,11 @@ public:
      */
     void setTranslation( int index, const QString &expression );
 
-//     void setTranslation( const QString &identifier, const QString & expression );
-
     /** removes a translation
      *
      * @param index            number of translation 1..x
      */
     void removeTranslation( int index );
-
 
     /**
      * Get a pointer to the translation

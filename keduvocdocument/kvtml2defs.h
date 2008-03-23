@@ -128,10 +128,12 @@ static const QString KVTML_GRAMMATICAL_DEFINITENESS[] = {
 #define KVTML_TRANSLATION       "translation"
 #define KVTML_TEXT              "text"
 #define KVTML_PRONUNCIATION     "pronunciation"
+
+#define KVTML_PAIR              "pair"
 #define KVTML_FALSEFRIEND       "falsefriend"
-#define KVTML_FROMID            "fromid"
 #define KVTML_ANTONYM           "antonym"
 #define KVTML_SYNONYM           "synonym"
+
 #define KVTML_EXAMPLE           "example"
 #define KVTML_PARAPHRASE        "paraphrase"
 

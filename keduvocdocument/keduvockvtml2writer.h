@@ -2,7 +2,7 @@
                      export a KEduVocDocument to a KVTML file
     -----------------------------------------------------------------------
     copyright       : (C) 2007 Jeremy Whiting <jeremy@scitools.com>
-                      (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+                      (C) 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -41,6 +41,16 @@ public:
 
     bool writeDoc( KEduVocDocument *doc, const QString &generator );
 
+    /**
+     * Helper function, appends a new element AND a text child to @p parent
+     * Only appends if @p text is NOT empty.
+     * @param parent
+     * @param elementName
+     * @param text
+     */
+    static void appendTextElement( QDomElement &parent, const QString &elementName, const QString &text );
+
+private:
     /** write information entries
      * @param informationElement QDomElement information to write to
      * @param generator text describing generator
@@ -69,11 +79,6 @@ public:
      */
     bool writeTenses( QDomElement &tensesElement );
 
-    /** write usages
-     * @param usagesElement QDomElement usages to write to
-     */
-    bool writeUsages( QDomElement &usagesElement );
-
     /** write entries
      * @param entriesElement QDomElement entries to write to
      */
@@ -85,12 +90,23 @@ public:
      */
     bool writeTranslation( QDomElement &translationElement, KEduVocTranslation* translation );
 
+    /**
+     * Used to write synonym, antonym and false friend lists
+     * @param typesElement 
+     * @param parentContainer 
+     * @return 
+     */
+    bool writeRelated( QDomElement &parentElement, QList<KEduVocTranslation*> relatedList );
+
     /** write the lesson group
      * @param parentLesson the parent lesson of the current lesson
      * @param lessonsElement QDomElement lessons to write to
      */
     bool writeLessons( KEduVocLesson *parentLesson, QDomElement &lessonsElement );
 
+    
+    void writeSynonymAntonymFalseFriend(QDomElement & parentElement);
+            
     /** write a comparison
      * @param comparisonElement QDomElement comparison to write to
      * @param comparison object to write
@@ -104,22 +120,15 @@ public:
      */
     bool writeMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation );
 
-    /**
-     * Helper function, appends a new element AND a text child to @p parent
-     * Only appends if @p text is NOT empty.
-     * @param parent 
-     * @param elementName 
-     * @param text 
-     */
-    static void appendTextElement( QDomElement &parent, const QString &elementName, const QString &text );
-
-private:
     QDomElement newTextElement( const QString &elementName, const QString &text );
 
     QFile *m_outputFile;
     KEduVocDocument *m_doc;
 
     QList<KEduVocExpression*>  m_allEntries;
+    QList<KEduVocTranslation*> m_synonyms;
+    QList<KEduVocTranslation*> m_antonyms;
+    QList<KEduVocTranslation*> m_falseFriends;
 
     QDomDocument m_domDoc;
 };

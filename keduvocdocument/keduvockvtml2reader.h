@@ -2,6 +2,7 @@
                      read a KEduVocDocument from a KVTML2 file
     -----------------------------------------------------------------------
     copyright      : (C) 2007 Jeremy Whiting <jeremy@scitools.com>
+    Copyright 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
