@@ -232,8 +232,8 @@ kDebug() << "writing list of synonyms: " << m_synonyms.count();
                 relatedElement.appendChild(entryElement);
 
 
-                entryElement = m_domDoc.createElement( KVTML_ENTRY );
-                entryElement.setAttribute( KVTML_ID, QString::number(m_allEntries.indexOf(synonym->entry())) );
+                QDomElement partnerElement = m_domDoc.createElement( KVTML_ENTRY );
+                partnerElement.setAttribute( KVTML_ID, QString::number(m_allEntries.indexOf(synonym->entry())) );
 
                 // find out which id that is
                 foreach(int index, synonym->entry()->translationIndices()) {
@@ -241,15 +241,15 @@ kDebug() << "writing list of synonyms: " << m_synonyms.count();
                         // create <translation id="123">
                         QDomElement translationElement = m_domDoc.createElement( KVTML_TRANSLATION );
                         translationElement.setAttribute( KVTML_ID, QString::number(index) );
-                        entryElement.appendChild(translationElement);
+                        partnerElement.appendChild(translationElement);
                         break;
                     }
                 }
-                relatedElement.appendChild( entryElement );
+                relatedElement.appendChild( partnerElement );
             }
-            if (relatedElement.hasChildNodes()) {
-                synonymElement.appendChild( relatedElement );
-            }
+        }
+        if (relatedElement.hasChildNodes()) {
+            synonymElement.appendChild( relatedElement );
         }
     }
     if (synonymElement.hasChildNodes()) {

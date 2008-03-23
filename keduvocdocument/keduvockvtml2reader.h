@@ -145,6 +145,8 @@ private:
      */
     bool readLesson( KEduVocLesson* parentLesson, QDomElement &lessonElement );
 
+    bool readSynonymsAntonymsFalseFriends( QDomElement &rootElement );
+
     /** pre-opened QIODevice to read from */
     QIODevice *m_inputFile;
 
