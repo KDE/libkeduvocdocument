@@ -186,6 +186,10 @@ void KEduVocTranslation::addFalseFriend( KEduVocTranslation* falseFriend )
     d->m_falseFriends.append(falseFriend);
 }
 
+void KEduVocTranslation::removeFalseFriend(KEduVocTranslation * falseFriend)
+{
+    d->m_falseFriends.removeAt(d->m_falseFriends.indexOf(falseFriend));
+}
 
 QList< KEduVocTranslation* > KEduVocTranslation::falseFriends() const
 {
@@ -208,18 +212,20 @@ QList<KEduVocTranslation*> KEduVocTranslation::synonyms() const
     return d->m_synonyms;
 }
 
-
 void KEduVocTranslation::addAntonym( KEduVocTranslation* antonym )
 {
     d->m_antonyms.append(antonym);
 }
-
 
 QList<KEduVocTranslation*> KEduVocTranslation::antonyms() const
 {
     return d->m_antonyms;
 }
 
+void KEduVocTranslation::removeAntonym(KEduVocTranslation * antonym)
+{
+    d->m_antonyms.removeAt(d->m_antonyms.indexOf(antonym));
+}
 
 void KEduVocTranslation::setExample( const QString & expr )
 {

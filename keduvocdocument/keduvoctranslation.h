@@ -211,6 +211,12 @@ public:
     void addFalseFriend( KEduVocTranslation* falseFriend );
 
     /**
+     * remove a false friend
+     * @param falseFriend false friend of this index
+     */
+    void removeFalseFriend( KEduVocTranslation* falseFriend );
+
+    /**
      * returns false friends of this expression
      * @return list of false friends
      */
@@ -239,6 +245,12 @@ public:
      * @param antonym
          */
     void addAntonym( KEduVocTranslation* antonym );
+
+    /**
+     * remove a antonym
+     * @param antonym
+     */
+    void removeAntonym( KEduVocTranslation* antonym );
 
     /**
      * returns antonyms of this expression
