@@ -238,11 +238,8 @@ void KEduVocKvtml2Writer::writeSynonymAntonymFalseFriend(QDomElement & parentEle
                 }
             }
 
-
             QDomElement relatedElement;
-
             QList <KEduVocTranslation*> list;
-
             switch (type) {
             case KEduVocTranslation::Synonym:
                 list = translation->synonyms();
