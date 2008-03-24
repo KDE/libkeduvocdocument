@@ -386,11 +386,11 @@ int KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gene
 //             saved = kvtmlWriter.writeDoc( this, generator );
 //         }
 //         break;
-//         case Csv: {
-//             KEduVocCsvWriter csvWriter( &f );
-//             saved = csvWriter.writeDoc( this, generator );
-//         }
-//         break;
+        case Csv: {
+            KEduVocCsvWriter csvWriter( &f );
+            saved = csvWriter.writeDoc( this, generator );
+        }
+        break;
         default: {
             kError() << "kvcotrainDoc::saveAs(): unknown filetype" << endl;
         }
