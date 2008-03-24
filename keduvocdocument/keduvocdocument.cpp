@@ -235,11 +235,14 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileNa
 
 int KEduVocDocument::open( const KUrl& url )
 {
-kDebug() << "open";
+    // save csv delimiter to preserve it in case this is a csv document
+    QString csv = d->m_csvDelimiter;
+    // clear all other properties
     d->init();
     if ( !url.isEmpty() ) {
         d->m_url = url;
     }
+    d->m_csvDelimiter = csv;
 
     bool read = false;
     QString errorMessage = i18n( "<qt>Cannot open file<br /><b>%1</b></qt>", url.path() );
