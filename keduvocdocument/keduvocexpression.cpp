@@ -28,6 +28,7 @@ public:
     KEduVocExpressionPrivate()
     {
         m_active = true;
+        m_lesson = 0;
     }
     ~KEduVocExpressionPrivate();
 
@@ -35,7 +36,7 @@ public:
 
     bool operator== ( const KEduVocExpressionPrivate &p ) const;
 
-    QList<KEduVocLesson*> m_lessons;
+    KEduVocLesson* m_lesson;
     bool m_active;
 
     QMap <int, KEduVocTranslation*> m_translations;
@@ -51,7 +52,6 @@ KEduVocExpression::KEduVocExpressionPrivate::~KEduVocExpressionPrivate()
 KEduVocExpression::KEduVocExpressionPrivate::KEduVocExpressionPrivate(const KEduVocExpressionPrivate & other)
 {
     m_active = other.m_active;
-    m_lessons = other.m_lessons;
 
     foreach (int key, other.m_translations.keys()) {
         m_translations[key] = new KEduVocTranslation(*other.m_translations.value(key));
@@ -63,7 +63,7 @@ bool KEduVocExpression::KEduVocExpressionPrivate::operator== ( const KEduVocExpr
 {
     return
         m_translations == p.m_translations &&
-        m_lessons == p.m_lessons &&
+        m_lesson == p.m_lesson &&
         m_active == p.m_active;
 }
 
@@ -89,14 +89,16 @@ KEduVocExpression::KEduVocExpression( const QStringList & translations)
 
 KEduVocExpression::KEduVocExpression(const KEduVocExpression & other)
     : d(new KEduVocExpressionPrivate(*other.d))
-{}
+{
+    if (other.lesson()) {
+        other.lesson()->appendEntry(this);
+    }
+}
 
 
 KEduVocExpression::~KEduVocExpression()
 {
-    foreach(KEduVocLesson * lesson, d->m_lessons) {
-        lesson->removeEntry(this);
-    }
+    d->m_lesson->removeEntry(this);
     delete d;
 }
 
@@ -125,9 +127,9 @@ void KEduVocExpression::setTranslation( int index, const QString & expr )
 }
 
 
-QList<KEduVocLesson*> KEduVocExpression::lessons() const
+KEduVocLesson* KEduVocExpression::lesson() const
 {
-    return d->m_lessons;
+    return d->m_lesson;
 }
 
 
@@ -185,15 +187,11 @@ QList< int > KEduVocExpression::translationIndices() const
     return d->m_translations.keys();
 }
 
-void KEduVocExpression::addLesson(KEduVocLesson * l)
+void KEduVocExpression::setLesson(KEduVocLesson * l)
 {
-    d->m_lessons.append(l);
+    if (d->m_lesson) {
+        d->m_lesson->removeEntry(this);
+    }
+    d->m_lesson = l;
 }
-
-void KEduVocExpression::removeLesson(KEduVocLesson * l)
-{
-    d->m_lessons.removeAt(d->m_lessons.indexOf(l));
-}
-
-
 

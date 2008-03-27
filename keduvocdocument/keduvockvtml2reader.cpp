@@ -194,7 +194,7 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
 
     // now make sure we don't have any orphan entries
     foreach (KEduVocExpression * entry, m_allEntries.values()) {
-        if (entry->lessons().count() == 0)
+        if (!entry->lesson())
         {
             defaultLesson->appendEntry(entry);
         }

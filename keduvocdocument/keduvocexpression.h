@@ -61,9 +61,9 @@ public:
 
     ~KEduVocExpression();
 
-    /** returns index of lesson (-1 = none)
+    /** return the lesson
      */
-    QList<KEduVocLesson *> lessons() const;
+    KEduVocLesson * lesson() const;
 
 
     /** reset all grades of the entry
@@ -114,8 +114,7 @@ private:
 
     /** only called by lesson to add itself to the lesson list
      */
-    void addLesson( KEduVocLesson * l );
-    void removeLesson( KEduVocLesson * l );
+    void setLesson( KEduVocLesson * l );
 
     friend class KEduVocLesson;
 };

@@ -45,12 +45,7 @@ KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
 
 KEduVocLesson::~KEduVocLesson()
 {
-    foreach (KEduVocExpression* entry, d->m_entries) {
-        entry->removeLesson(this);
-        if (entry->lessons().count() == 0) {
-            delete entry;
-        }
-    }
+    qDeleteAll(d->m_entries);
     delete d;
 }
 
@@ -74,14 +69,14 @@ void KEduVocLesson::appendEntry(KEduVocExpression* entry)
 {
     Q_ASSERT(entry);
     d->m_entries.append( entry );
-    entry->addLesson(this);
+    entry->setLesson(this);
     invalidateChildLessonEntries();
 }
 
 void KEduVocLesson::insertEntry(int index, KEduVocExpression * entry)
 {
     d->m_entries.insert( index, entry );
-    entry->addLesson(this);
+    entry->setLesson(this);
     invalidateChildLessonEntries();
 }
 
@@ -89,7 +84,7 @@ void KEduVocLesson::removeEntry(KEduVocExpression* entry)
 {
     if (entry) {
         d->m_entries.removeAt( d->m_entries.indexOf(entry) );
-        entry->removeLesson(this);
+        entry->setLesson(0);
         invalidateChildLessonEntries();
     }
 }
