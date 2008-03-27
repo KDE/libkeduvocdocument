@@ -33,6 +33,7 @@ public:
     ~KEduVocExpressionPrivate();
 
     KEduVocExpressionPrivate(const KEduVocExpressionPrivate &other);
+    KEduVocExpressionPrivate& operator= (const KEduVocExpressionPrivate &other);
 
     bool operator== ( const KEduVocExpressionPrivate &p ) const;
 
@@ -58,6 +59,15 @@ KEduVocExpression::KEduVocExpressionPrivate::KEduVocExpressionPrivate(const KEdu
     }
 }
 
+KEduVocExpression::KEduVocExpressionPrivate & KEduVocExpression::KEduVocExpressionPrivate::operator =(const KEduVocExpressionPrivate & other)
+{
+    m_active = other.m_active;
+
+    foreach (int key, other.m_translations.keys()) {
+        m_translations[key] = new KEduVocTranslation(*other.m_translations.value(key));
+    }
+    return *this;
+}
 
 bool KEduVocExpression::KEduVocExpressionPrivate::operator== ( const KEduVocExpression::KEduVocExpressionPrivate &p ) const
 {
@@ -90,6 +100,7 @@ KEduVocExpression::KEduVocExpression( const QStringList & translations)
 KEduVocExpression::KEduVocExpression(const KEduVocExpression & other)
     : d(new KEduVocExpressionPrivate(*other.d))
 {
+    d->m_lesson = 0;
     if (other.lesson()) {
         other.lesson()->appendEntry(this);
     }
@@ -194,4 +205,5 @@ void KEduVocExpression::setLesson(KEduVocLesson * l)
     }
     d->m_lesson = l;
 }
+
 

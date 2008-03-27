@@ -67,14 +67,12 @@ int KEduVocLesson::entryCount(EnumEntriesRecursive recursive)
 
 void KEduVocLesson::appendEntry(KEduVocExpression* entry)
 {
-    Q_ASSERT(entry);
-    d->m_entries.append( entry );
-    entry->setLesson(this);
-    invalidateChildLessonEntries();
+    insertEntry(d->m_entries.size(), entry);
 }
 
 void KEduVocLesson::insertEntry(int index, KEduVocExpression * entry)
 {
+    Q_ASSERT(entry);
     d->m_entries.insert( index, entry );
     entry->setLesson(this);
     invalidateChildLessonEntries();
@@ -82,11 +80,9 @@ void KEduVocLesson::insertEntry(int index, KEduVocExpression * entry)
 
 void KEduVocLesson::removeEntry(KEduVocExpression* entry)
 {
-    if (entry) {
-        d->m_entries.removeAt( d->m_entries.indexOf(entry) );
-        entry->setLesson(0);
-        invalidateChildLessonEntries();
-    }
+    Q_ASSERT(entry);
+    d->m_entries.removeAt( d->m_entries.indexOf(entry) );
+    invalidateChildLessonEntries();
 }
 
 KEduVocExpression * KEduVocLesson::entry(int row, EnumEntriesRecursive recursive)
