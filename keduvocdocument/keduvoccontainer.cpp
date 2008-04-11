@@ -211,12 +211,13 @@ void KEduVocContainer::insertChildContainer(int row, KEduVocContainer * child)
 
 void KEduVocContainer::updateChildLessonEntries()
 {
-    QSet < KEduVocExpression* > entriesRecursive = entries().toSet();
+    QList < KEduVocExpression* > entriesRecursive = entries();
 
-    foreach(KEduVocContainer *childContainer, d->m_childContainers) {
-        entriesRecursive.unite(childContainer->entries(Recursive).toSet());
-    }
-    d->m_childLessonEntries = entriesRecursive.toList();
+    foreach(KEduVocContainer *childContainer, d->m_childContainers)
+        foreach(KEduVocExpression * expr, childContainer->entries(Recursive))
+            entriesRecursive.append(expr);
+
+    d->m_childLessonEntries = entriesRecursive;
     d->m_childLessonEntriesValid = true;
 }
 
