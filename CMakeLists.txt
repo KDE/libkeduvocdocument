@@ -1,6 +1,6 @@
 project(libkdeedu)
 
-add_subdirectory(keduvocdocument)
-add_subdirectory(kdeeduui)
-add_subdirectory(libscience)
-#add_subdirectory(widgets)
+macro_optional_add_subdirectory(keduvocdocument)
+macro_optional_add_subdirectory(kdeeduui)
+macro_optional_add_subdirectory(libscience)
+#macro_optional_add_subdirectory(widgets)
