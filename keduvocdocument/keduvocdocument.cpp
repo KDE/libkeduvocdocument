@@ -413,6 +413,13 @@ int KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gene
     return 0;
 }
 
+QByteArray KEduVocDocument::toByteArray(const QString &generator)
+{
+    // no file needed
+    KEduVocKvtml2Writer kvtmlWriter(0);
+    return kvtmlWriter.toByteArray( this, generator );
+}
+
 void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers )
 {
     kDebug(1100) << "Merging of docs is not implemented"; /// @todo IMPLEMENT ME
@@ -783,7 +790,6 @@ QString KEduVocDocument::license() const
 {
     return d->m_license;
 }
-
 
 QString KEduVocDocument::documentComment() const
 {

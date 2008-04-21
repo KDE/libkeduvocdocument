@@ -117,6 +117,8 @@ public:
      */
     int saveAs( const KUrl & url, FileType ft, const QString & generator );
 
+    QByteArray toByteArray(const QString &generator);
+
     /**
      * Merges data from another document
      *
