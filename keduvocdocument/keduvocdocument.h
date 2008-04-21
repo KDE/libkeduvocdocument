@@ -159,6 +159,13 @@ public:
     /** @returns the author of the file */
     QString author() const;
 
+    /** set the author contact info
+     * @param contact email/contact info to set */
+    void setAuthorContact( const QString & authorContact );
+
+    /** @returns the author contact information */
+    QString authorContact() const;
+
     /** set the license of the file
      * @param license license to set */
     void setLicense( const QString & license );

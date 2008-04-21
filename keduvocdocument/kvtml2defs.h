@@ -26,6 +26,7 @@
 #define KVTML_GENERATOR         "generator"
 #define KVTML_TITLE             "title"
 #define KVTML_AUTHOR            "author"
+#define KVTML_AUTHORCONTACT     "contact"
 #define KVTML_LICENSE           "license"
 #define KVTML_COMMENT           "comment"
 #define KVTML_CATEGORY          "category"

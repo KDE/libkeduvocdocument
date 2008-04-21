@@ -112,6 +112,11 @@ bool KEduVocKvtml2Writer::writeInformation( QDomElement &informationElement, con
         informationElement.appendChild( newTextElement( KVTML_AUTHOR, m_doc->author() ) );
     }
 
+    // author contact (mail/homepage)
+    if ( !m_doc->authorContact().isEmpty() ) {
+        informationElement.appendChild( newTextElement( KVTML_AUTHORCONTACT, m_doc->authorContact() ) );
+    }
+
     // license
     if ( !m_doc->license().isEmpty() ) {
         informationElement.appendChild( newTextElement( KVTML_LICENSE, m_doc->license() ) );

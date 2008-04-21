@@ -114,6 +114,11 @@ bool KEduVocKvtml2Reader::readInformation( QDomElement &informationElement )
         m_doc->setAuthor( currentElement.text() );
     }
 
+    currentElement = informationElement.firstChildElement( KVTML_AUTHORCONTACT );
+    if ( !currentElement.isNull() ) {
+        m_doc->setAuthorContact( currentElement.text() );
+    }
+
     // read the license
     currentElement = informationElement.firstChildElement( KVTML_LICENSE );
     if ( !currentElement.isNull() ) {
