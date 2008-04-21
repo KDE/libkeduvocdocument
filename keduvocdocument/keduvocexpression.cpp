@@ -109,7 +109,9 @@ KEduVocExpression::KEduVocExpression(const KEduVocExpression & other)
 
 KEduVocExpression::~KEduVocExpression()
 {
-    d->m_lesson->removeEntry(this);
+    if (d->m_lesson) {
+        d->m_lesson->removeEntry(this);
+    }
     delete d;
 }
 
