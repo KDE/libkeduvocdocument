@@ -33,8 +33,25 @@ KEduVocKvtml2Writer::KEduVocKvtml2Writer( QFile *file )
     m_outputFile = file;
 }
 
-
 bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generator )
+{
+    if (createXmlDocument(doc, generator)) {
+        QTextStream ts( m_outputFile );
+        m_domDoc.save( ts, 2 );
+        return true;
+    }
+    return false;
+}
+
+QByteArray KEduVocKvtml2Writer::toByteArray(KEduVocDocument * doc, const QString & generator)
+{
+    if (createXmlDocument(doc, generator)) {
+        return m_domDoc.toByteArray();
+    }
+    return QByteArray();
+}
+
+bool KEduVocKvtml2Writer::createXmlDocument( KEduVocDocument *doc, const QString &generator )
 {
     m_doc = doc;
 
@@ -88,9 +105,6 @@ bool KEduVocKvtml2Writer::writeDoc( KEduVocDocument *doc, const QString &generat
 
     m_domDoc.appendChild( domElementKvtml );
 
-    QTextStream ts( m_outputFile );
-    m_domDoc.save( ts, 2 );
-
     return true;
 }
 
@@ -110,6 +124,11 @@ bool KEduVocKvtml2Writer::writeInformation( QDomElement &informationElement, con
     // author
     if ( !m_doc->author().isEmpty() ) {
         informationElement.appendChild( newTextElement( KVTML_AUTHOR, m_doc->author() ) );
+    }
+
+    // author contact (mail/homepage)
+    if ( !m_doc->authorContact().isEmpty() ) {
+        informationElement.appendChild( newTextElement( KVTML_AUTHORCONTACT, m_doc->authorContact() ) );
     }
 
     // license
@@ -599,4 +618,5 @@ void KEduVocKvtml2Writer::appendTextElement(QDomElement & parent, const QString 
     QDomText textNode = domDoc.createTextNode( text );
     element.appendChild( textNode );
 }
+
 

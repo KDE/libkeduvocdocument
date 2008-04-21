@@ -41,6 +41,8 @@ public:
 
     bool writeDoc( KEduVocDocument *doc, const QString &generator );
 
+    QByteArray toByteArray( KEduVocDocument *doc, const QString &generator );
+
     /**
      * Helper function, appends a new element AND a text child to @p parent
      * Only appends if @p text is NOT empty.
@@ -51,6 +53,9 @@ public:
     static void appendTextElement( QDomElement &parent, const QString &elementName, const QString &text );
 
 private:
+
+    bool createXmlDocument( KEduVocDocument *doc, const QString &generator );
+
     /** write information entries
      * @param informationElement QDomElement information to write to
      * @param generator text describing generator

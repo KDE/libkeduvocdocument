@@ -85,6 +85,7 @@ public:
 
     QString                   m_title;
     QString                   m_author;
+    QString                   m_authorContact;
     QString                   m_license;
     QString                   m_comment;
     QString                   m_version;
@@ -410,6 +411,13 @@ int KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gene
     d->m_url = tmp;
     setModified( false );
     return 0;
+}
+
+QByteArray KEduVocDocument::toByteArray(const QString &generator)
+{
+    // no file needed
+    KEduVocKvtml2Writer kvtmlWriter(0);
+    return kvtmlWriter.toByteArray( this, generator );
 }
 
 void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers )
@@ -746,12 +754,11 @@ void KEduVocDocument::setUrl( const KUrl& url )
 
 QString KEduVocDocument::title() const
 {
-    if ( d->m_lessonContainer->name().isEmpty() )
+    if ( d->m_title.isEmpty() )
         return d->m_url.fileName();
     else
         return d->m_title;
 }
-
 
 void KEduVocDocument::setTitle( const QString & title )
 {
@@ -759,18 +766,30 @@ void KEduVocDocument::setTitle( const QString & title )
     d->m_lessonContainer->setName(title);
 }
 
-
 QString KEduVocDocument::author() const
 {
     return d->m_author;
 }
 
+void KEduVocDocument::setAuthor( const QString & s )
+{
+    d->m_author = s.simplified();
+}
+
+QString KEduVocDocument::authorContact() const
+{
+    return d->m_authorContact;
+}
+
+void KEduVocDocument::setAuthorContact( const QString & s )
+{
+    d->m_authorContact = s.simplified();
+}
 
 QString KEduVocDocument::license() const
 {
     return d->m_license;
 }
-
 
 QString KEduVocDocument::documentComment() const
 {
@@ -802,10 +821,7 @@ void KEduVocDocument::setQueryIdentifier( const QString &org, const QString &tra
 }
 
 
-void KEduVocDocument::setAuthor( const QString & s )
-{
-    d->m_author = s.simplified();
-}
+
 
 
 void KEduVocDocument::setLicense( const QString & s )
