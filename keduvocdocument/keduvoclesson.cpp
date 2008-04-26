@@ -31,13 +31,13 @@ public:
 
 
 KEduVocLesson::KEduVocLesson(const QString& name, KEduVocContainer *parent)
-        : d( new Private ), KEduVocContainer(name, Lesson, parent)
+        : KEduVocContainer(name, Lesson, parent), d( new Private )
 {
 }
 
 
 KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
-        : d( new Private ), KEduVocContainer(other)
+        : KEduVocContainer(other), d( new Private )
 {
     d->m_entries = other.d->m_entries;
 }

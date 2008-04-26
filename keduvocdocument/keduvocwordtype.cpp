@@ -32,7 +32,7 @@ public:
 };
 
 KEduVocWordType::KEduVocWordType(const QString& name, KEduVocWordType *parent)
-        : d( new Private ), KEduVocContainer(name, WordType, parent)
+        : KEduVocContainer(name, WordType, parent), d( new Private )
 {
     d->m_wordType = General;
 }
