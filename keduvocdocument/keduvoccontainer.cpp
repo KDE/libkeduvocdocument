@@ -214,7 +214,6 @@ void KEduVocContainer::insertChildContainer(int row, KEduVocContainer * child)
 
 void KEduVocContainer::updateChildLessonEntries()
 {
-    kDebug() << "updateChildLessonEntries: " << name();
     QList < KEduVocExpression* > entriesRecursive = entries();
 
     foreach(KEduVocContainer *childContainer, d->m_childContainers)
@@ -227,7 +226,6 @@ void KEduVocContainer::updateChildLessonEntries()
 
 void KEduVocContainer::invalidateChildLessonEntries()
 {
-    kDebug() << "invalidateChildLessonEntries: " << name();
     d->m_childLessonEntriesValid = false;
     // propagate to parent
     if (d->m_parentContainer) {
