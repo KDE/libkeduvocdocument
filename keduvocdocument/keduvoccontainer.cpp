@@ -238,8 +238,6 @@ double KEduVocContainer::averageGrade(int translation)
     int sum = 0;
     foreach (KEduVocExpression *entry, entries(NotRecursive)) {
         sum += entry->translation(translation)->grade();
-        kDebug() << entry->translation(translation)->text() <<
-                entry->translation(translation)->grade();
     }
     // make that a percentage
     return (sum * 100.0/7.0)/entryCount(NotRecursive);
