@@ -66,6 +66,7 @@ KEduVocContainer::KEduVocContainer( const KEduVocContainer &other )
     d->m_inPractice = other.d->m_inPractice;
     d->m_type = other.d->m_type;
     d->m_parentContainer = other.d->m_parentContainer;
+    d->m_childLessonEntriesValid = false;
 }
 
 KEduVocContainer::~KEduVocContainer()
@@ -164,7 +165,9 @@ void KEduVocContainer::removeTranslation(int translation)
 
 QList< KEduVocExpression * > KEduVocContainer::entriesRecursive()
 {
+//     kDebug() << "entriesRecursive: " << name();
     if (!d->m_childLessonEntriesValid) {
+        kDebug() << "entriesRecursive: update: " << name();
         updateChildLessonEntries();
     }
     return d->m_childLessonEntries;
@@ -211,6 +214,7 @@ void KEduVocContainer::insertChildContainer(int row, KEduVocContainer * child)
 
 void KEduVocContainer::updateChildLessonEntries()
 {
+    kDebug() << "updateChildLessonEntries: " << name();
     QList < KEduVocExpression* > entriesRecursive = entries();
 
     foreach(KEduVocContainer *childContainer, d->m_childContainers)
@@ -223,6 +227,7 @@ void KEduVocContainer::updateChildLessonEntries()
 
 void KEduVocContainer::invalidateChildLessonEntries()
 {
+    kDebug() << "invalidateChildLessonEntries: " << name();
     d->m_childLessonEntriesValid = false;
     // propagate to parent
     if (d->m_parentContainer) {
