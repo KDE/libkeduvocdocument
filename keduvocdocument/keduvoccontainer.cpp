@@ -167,7 +167,6 @@ QList< KEduVocExpression * > KEduVocContainer::entriesRecursive()
 {
 //     kDebug() << "entriesRecursive: " << name();
     if (!d->m_childLessonEntriesValid) {
-        kDebug() << "entriesRecursive: update: " << name();
         updateChildLessonEntries();
     }
     return d->m_childLessonEntries;
