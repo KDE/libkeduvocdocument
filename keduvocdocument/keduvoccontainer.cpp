@@ -243,3 +243,14 @@ double KEduVocContainer::averageGrade(int translation)
     return (sum * 100.0/7.0)/entryCount(NotRecursive);
 }
 
+int KEduVocContainer::expressionsOfGrade(int translation, grade_t grade)
+{
+    int sum = 0;
+    foreach (KEduVocExpression *entry, entries(NotRecursive)) {
+        if (entry->translation(translation)->grade() == grade) {
+            sum++;
+        }
+    }
+    return sum;
+}
+

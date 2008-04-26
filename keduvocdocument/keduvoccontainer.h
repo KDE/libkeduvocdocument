@@ -19,10 +19,10 @@
 
 #include "libkeduvocdocument_export.h"
 
-#include <KDE/KUrl>
+#include "keduvoctext.h"
 
+#include <KDE/KUrl>
 #include <QtCore/QList>
-#include <QtCore/QString>
 
 class KEduVocExpression;
 
@@ -123,6 +123,8 @@ public:
     void setImageUrl(const KUrl &url);
 
     double averageGrade(int translation);
+
+    int expressionsOfGrade(int translation, grade_t grade);
 
 protected:
     QList< KEduVocExpression * > entriesRecursive();
