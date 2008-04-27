@@ -27,7 +27,9 @@ class KEduVocWordType::Private
 {
 public:
     EnumWordType m_wordType;
-    // entries
+    // cache the entries
+    QList<KEduVocExpression*> m_expressions;
+    // list of translations
     QList<KEduVocTranslation*> m_translations;
 };
 
@@ -50,13 +52,8 @@ QList<KEduVocExpression*> KEduVocWordType::entries(EnumEntriesRecursive recursiv
     if (recursive == Recursive) {
         return entriesRecursive();
     }
-    /// FIXME this is recalculated every time, very inefficient!
-    /// cache entries here, only update on dirty
-    QSet<KEduVocExpression*> entries;
-    foreach(KEduVocTranslation* translation, d->m_translations) {
-        entries.insert(translation->entry());
-    }
-    return entries.toList();
+
+    return d->m_expressions;
 }
 
 int KEduVocWordType::entryCount(EnumEntriesRecursive recursive)
@@ -64,11 +61,22 @@ int KEduVocWordType::entryCount(EnumEntriesRecursive recursive)
     if (recursive == Recursive) {
         return entriesRecursive().count();
     }
-    return entries().count();
+    return d->m_expressions.count();
 }
 
 void KEduVocWordType::addTranslation(KEduVocTranslation* translation)
 {
+    // add to expression - if not already there because another translation of the same word is there.
+    bool found = false;
+    foreach(int i, translation->entry()->translationIndices()) {
+        if (translation->entry()->translation(i)->wordType() == this) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        d->m_expressions.append(translation->entry());
+    }
     d->m_translations.append( translation );
     invalidateChildLessonEntries();
 }
@@ -76,6 +84,19 @@ void KEduVocWordType::addTranslation(KEduVocTranslation* translation)
 void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
 {
     d->m_translations.removeAt( d->m_translations.indexOf(translation));
+
+    // remove from cache
+    bool found = false;
+    foreach(int i, translation->entry()->translationIndices()) {
+        if (translation->entry()->translation(i)->wordType() == this) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        d->m_expressions.removeAt(d->m_expressions.indexOf(translation->entry()));
+    }
+
     invalidateChildLessonEntries();
 }
 

@@ -66,6 +66,7 @@ KEduVocContainer::KEduVocContainer( const KEduVocContainer &other )
     d->m_inPractice = other.d->m_inPractice;
     d->m_type = other.d->m_type;
     d->m_parentContainer = other.d->m_parentContainer;
+    d->m_childLessonEntriesValid = false;
 }
 
 KEduVocContainer::~KEduVocContainer()
@@ -164,6 +165,7 @@ void KEduVocContainer::removeTranslation(int translation)
 
 QList< KEduVocExpression * > KEduVocContainer::entriesRecursive()
 {
+//     kDebug() << "entriesRecursive: " << name();
     if (!d->m_childLessonEntriesValid) {
         updateChildLessonEntries();
     }
@@ -236,10 +238,19 @@ double KEduVocContainer::averageGrade(int translation)
     int sum = 0;
     foreach (KEduVocExpression *entry, entries(NotRecursive)) {
         sum += entry->translation(translation)->grade();
-        kDebug() << entry->translation(translation)->text() <<
-                entry->translation(translation)->grade();
     }
     // make that a percentage
     return (sum * 100.0/7.0)/entryCount(NotRecursive);
+}
+
+int KEduVocContainer::expressionsOfGrade(int translation, grade_t grade)
+{
+    int sum = 0;
+    foreach (KEduVocExpression *entry, entries(NotRecursive)) {
+        if (entry->translation(translation)->grade() == grade) {
+            sum++;
+        }
+    }
+    return sum;
 }
 

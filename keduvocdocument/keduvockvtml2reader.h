@@ -79,14 +79,6 @@ private:
 
     bool readPersonalPronounChild(QDomElement & personElement, KEduVocPersonalPronoun & pronoun, KEduVocConjugation::ConjugationNumber number);
 
-
-    /** read in a conjugation
-     * @param conjugElement QDomElement for the conjugation group
-     * @param curr_conjug conjugation object to populate
-     */
-    bool readConjugation( QDomElement &conjugElement, KEduVocConjugation &conjugation );
-    bool readConjugationPerson( QDomElement &personElement, KEduVocConjugation &conjugation, KEduVocConjugation::ConjugationNumber number );
-
     /** read the types
      * @param typesElement QDomElement for the types group
      */

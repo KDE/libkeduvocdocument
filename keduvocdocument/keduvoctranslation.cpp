@@ -386,11 +386,9 @@ void KEduVocTranslation::toKVTML2(QDomElement & parent)
     }
 
     // conjugation
-    QDomElement conjugationElement = parent.ownerDocument().createElement( KVTML_CONJUGATION );
     foreach ( const QString &tense, conjugationTenses() ) {
+        QDomElement conjugationElement = parent.ownerDocument().createElement( KVTML_CONJUGATION );
         conjugation(tense).toKVTML2(conjugationElement, tense);
-    }
-    if (conjugationElement.hasChildNodes()) {
         parent.appendChild( conjugationElement );
     }
 
