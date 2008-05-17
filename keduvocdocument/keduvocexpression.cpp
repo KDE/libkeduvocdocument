@@ -43,29 +43,22 @@ public:
     QMap <int, KEduVocTranslation*> m_translations;
 };
 
-
 KEduVocExpression::KEduVocExpressionPrivate::~KEduVocExpressionPrivate()
 {
     qDeleteAll(m_translations);
 }
 
-
 KEduVocExpression::KEduVocExpressionPrivate::KEduVocExpressionPrivate(const KEduVocExpressionPrivate & other)
 {
     m_active = other.m_active;
-
-    foreach (int key, other.m_translations.keys()) {
-        m_translations[key] = new KEduVocTranslation(*other.m_translations.value(key));
-    }
+    m_lesson = 0;
 }
 
 KEduVocExpression::KEduVocExpressionPrivate & KEduVocExpression::KEduVocExpressionPrivate::operator =(const KEduVocExpressionPrivate & other)
 {
     m_active = other.m_active;
+    m_lesson = 0;
 
-    foreach (int key, other.m_translations.keys()) {
-        m_translations[key] = new KEduVocTranslation(*other.m_translations.value(key));
-    }
     return *this;
 }
 
@@ -100,21 +93,28 @@ KEduVocExpression::KEduVocExpression( const QStringList & translations)
 KEduVocExpression::KEduVocExpression(const KEduVocExpression & other)
     : d(new KEduVocExpressionPrivate(*other.d))
 {
-    d->m_lesson = 0;
-    if (other.lesson()) {
-        other.lesson()->appendEntry(this);
+    foreach (int key, other.d->m_translations.keys()) {
+        d->m_translations[key] = new KEduVocTranslation(*other.d->m_translations.value(key));
+        d->m_translations[key]->setEntry(this);
     }
 }
 
+KEduVocExpression& KEduVocExpression::operator= ( const KEduVocExpression &other )
+{
+    *d = *other.d;
+    foreach (int key, other.d->m_translations.keys()) {
+        d->m_translations[key] = new KEduVocTranslation(*other.d->m_translations.value(key));
+        kDebug() << "copy translation: " << other.d->m_translations.value(key)->text();
+        d->m_translations[key]->setEntry(this);
+    }
+    return *this;
+}
 
 KEduVocExpression::~KEduVocExpression()
 {
-    if (d->m_lesson) {
-        d->m_lesson->removeEntry(this);
-    }
+    setLesson(0);
     delete d;
 }
-
 
 void KEduVocExpression::removeTranslation( int index )
 {
@@ -173,14 +173,6 @@ void KEduVocExpression::resetGrades( int index )
     }
 }
 
-
-KEduVocExpression& KEduVocExpression::operator= ( const KEduVocExpression &expression )
-{
-    *d = *expression.d;
-    return *this;
-}
-
-
 bool KEduVocExpression::operator== ( const KEduVocExpression &expression ) const
 {
     return ( *d == *expression.d );
@@ -188,10 +180,18 @@ bool KEduVocExpression::operator== ( const KEduVocExpression &expression ) const
 
 KEduVocTranslation* KEduVocExpression::translation( int index )
 {
-    if(d->m_translations.contains(index)) {
+    if(translationIndices().contains(index)) {
         return d->m_translations[index];
     }
     d->m_translations[index] = new KEduVocTranslation(this);
+    return d->m_translations[index];
+}
+
+KEduVocTranslation * KEduVocExpression::translation(int index) const
+{
+    if(d->m_translations.contains(index)) {
+        return 0;
+    }
     return d->m_translations[index];
 }
 

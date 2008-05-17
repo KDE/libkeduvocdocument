@@ -19,6 +19,7 @@
 #include "keduvocexpression.h"
 
 #include <KRandomSequence>
+#include <KDebug>
 #include <QList>
 
 /** private class to store information about a lesson */
@@ -81,6 +82,10 @@ void KEduVocLesson::insertEntry(int index, KEduVocExpression * entry)
 void KEduVocLesson::removeEntry(KEduVocExpression* entry)
 {
     Q_ASSERT(entry);
+    if (d->m_entries.indexOf(entry) == -1) {
+        kDebug() << "attempting to remove entry from lesson that does not contain it!";
+        return;
+    }
     d->m_entries.removeAt( d->m_entries.indexOf(entry) );
     invalidateChildLessonEntries();
 }

@@ -53,7 +53,7 @@ public:
         */
     KEduVocTranslation(KEduVocExpression* entry, const QString &translation );
 
-    /** copy constructor for d-pointer safet */
+    /** copy constructor for d-pointer safety */
     KEduVocTranslation( const KEduVocTranslation &other );
 
     /**
@@ -278,6 +278,10 @@ public:
 private:
     class KEduVocTranslationPrivate;
     KEduVocTranslationPrivate* const d;
+
+    // for the copy constructor
+    void setEntry(KEduVocExpression* entry);
+    friend class KEduVocExpression;
 };
 
 #endif

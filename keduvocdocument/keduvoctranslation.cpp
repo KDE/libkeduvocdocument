@@ -97,9 +97,12 @@ KEduVocTranslation::KEduVocTranslation(KEduVocExpression* entry, const QString &
 
 KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
     : KEduVocText(other),
-    d( new KEduVocTranslationPrivate(other.d->m_entry) )
+    // set the entry to 0, the translation will be put into a copied entry by the expression copy constructor
+    d( new KEduVocTranslationPrivate(0) )
 {
-    d->m_wordType = other.d->m_wordType;
+    // beter no word type copy as this is pointer copying
+    // will not work as this is not added to the word type container!
+//  d->m_wordType = other.d->m_wordType;
     d->m_comment = other.d->m_comment;
     d->m_paraphrase = other.d->m_paraphrase;
     d->m_example = other.d->m_example;
@@ -110,9 +113,10 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
     d->m_multipleChoice = other.d->m_multipleChoice;
     d->m_imageUrl = other.d->m_imageUrl;
     d->m_soundUrl = other.d->m_soundUrl;
-    d->m_synonyms = other.d->m_synonyms;
-    d->m_antonyms = other.d->m_antonyms;
-    d->m_falseFriends = other.d->m_falseFriends;
+//  no copies of the following for now. we don't know enough to also add this as synonym/etc
+//  d->m_synonyms = other.d->m_synonyms;
+//  d->m_antonyms = other.d->m_antonyms;
+//  d->m_falseFriends = other.d->m_falseFriends;
     if (other.d->m_declension) {
         d->m_declension = new KEduVocDeclension(*other.d->m_declension);
     }
@@ -437,5 +441,10 @@ void KEduVocTranslation::fromKVTML2(QDomElement & parent)
 
     ///@todo synonyms, antonym
     ///@todo false friends
+}
+
+void KEduVocTranslation::setEntry(KEduVocExpression * entry)
+{
+    d->m_entry = entry;
 }
 

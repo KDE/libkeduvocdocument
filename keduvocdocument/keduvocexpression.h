@@ -102,6 +102,7 @@ public:
      * @return the translation
      */
     KEduVocTranslation* translation( int index );
+    KEduVocTranslation* translation( int index ) const;
 
     QList<int> translationIndices() const;
 
