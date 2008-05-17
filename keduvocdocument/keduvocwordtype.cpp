@@ -83,7 +83,17 @@ void KEduVocWordType::addTranslation(KEduVocTranslation* translation)
 
 void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
 {
-    d->m_translations.removeAt( d->m_translations.indexOf(translation));
+kDebug() << "Remove Translation from wt";
+
+    d->m_translations.removeAt( d->m_translations.indexOf(translation) );
+
+    // no lesson found - this entry is being deleted. remove all its siblings.
+    if (!translation->entry()->lesson()) {
+        int index = d->m_expressions.indexOf(translation->entry());
+        if (index != -1) {
+            d->m_expressions.removeAt(index);
+        }
+    }
 
     // remove from cache
     bool found = false;

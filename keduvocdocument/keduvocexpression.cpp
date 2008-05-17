@@ -93,10 +93,8 @@ KEduVocExpression::KEduVocExpression( const QStringList & translations)
 KEduVocExpression::KEduVocExpression(const KEduVocExpression & other)
     : d(new KEduVocExpressionPrivate(*other.d))
 {
-    kDebug() << "Expression copy constructor";
     foreach (int key, other.d->m_translations.keys()) {
         d->m_translations[key] = new KEduVocTranslation(*other.d->m_translations.value(key));
-        kDebug() << "copy translation: " << other.d->m_translations.value(key)->text();
         d->m_translations[key]->setEntry(this);
     }
 }
@@ -117,7 +115,6 @@ KEduVocExpression::~KEduVocExpression()
     setLesson(0);
     delete d;
 }
-
 
 void KEduVocExpression::removeTranslation( int index )
 {
@@ -183,7 +180,7 @@ bool KEduVocExpression::operator== ( const KEduVocExpression &expression ) const
 
 KEduVocTranslation* KEduVocExpression::translation( int index )
 {
-    if(d->m_translations.contains(index)) {
+    if(translationIndices().contains(index)) {
         return d->m_translations[index];
     }
     d->m_translations[index] = new KEduVocTranslation(this);
