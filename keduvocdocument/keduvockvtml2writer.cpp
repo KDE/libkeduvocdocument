@@ -597,10 +597,14 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
     for ( int num = KEduVocConjugation::Singular; num <= KEduVocConjugation::Plural; num++ ) {
         QDomElement numberElement = m_domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
         for ( int person = KEduVocConjugation::First; person <= KEduVocConjugation::ThirdNeutralCommon; person++ ) {
-
-            numberElement.appendChild( newTextElement( KVTML_GRAMMATICAL_PERSON[person], pronoun.personalPronoun(KEduVocConjugation::ConjugationPerson(person), KEduVocConjugation::ConjugationNumber(num))) );
+            QString pronounString = pronoun.personalPronoun(KEduVocConjugation::ConjugationPerson(person), KEduVocConjugation::ConjugationNumber(num));
+            if (!pronounString.isEmpty()) {
+                numberElement.appendChild( newTextElement( KVTML_GRAMMATICAL_PERSON[person], pronounString ));
+            }
         }
-        pronounElement.appendChild( numberElement );
+        if (numberElement.hasChildNodes()) {
+            pronounElement.appendChild( numberElement );
+        }
     }
     return true;
 }
