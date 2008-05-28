@@ -663,7 +663,7 @@ QString KEduVocDocument::tenseName( int index ) const
 }
 
 
-void KEduVocDocument::setTenseName( int idx, QString &id )
+void KEduVocDocument::setTenseName( int idx, const QString &id )
 {
     if ( idx >= d->m_tenseDescriptions.size() )
         for ( int i = d->m_tenseDescriptions.size(); i <= idx; i++ )

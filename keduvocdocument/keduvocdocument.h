@@ -258,7 +258,7 @@ public:
      * @param index            number of tense
      * @param str              name of tense
      */
-    void setTenseName( int index, QString &str );
+    void setTenseName( int index, const QString &str );
 
     /**
      * Returns the tense string
