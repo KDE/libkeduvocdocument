@@ -1,0 +1,10 @@
+Things to improve in KEduVocDocument
+------------------------------------
+
+ * Check if all copy constructors are ok or disable copies
+
+Binary incompatible:
+ * Tenses should be per language as different languages have a different set of tenses
+
+
+
