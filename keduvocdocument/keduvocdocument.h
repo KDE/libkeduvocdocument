@@ -253,12 +253,11 @@ public:
     // *** tense methods ***
 
     /**
-     * Sets the tense string
-     *
+     * Set the name of a tense
      * @param index            number of tense
-     * @param str              name of tense
+     * @param tense            name of tense
      */
-    void setTenseName( int index, const QString &str );
+    void setTenseName( int index, const QString &tense );
 
     /**
      * Returns the tense string

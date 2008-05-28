@@ -662,14 +662,15 @@ QString KEduVocDocument::tenseName( int index ) const
         return d->m_tenseDescriptions[index];
 }
 
-
-void KEduVocDocument::setTenseName( int idx, const QString &id )
+void KEduVocDocument::setTenseName(int index, const QString & tense)
 {
-    if ( idx >= d->m_tenseDescriptions.size() )
-        for ( int i = d->m_tenseDescriptions.size(); i <= idx; i++ )
+    if ( index >= d->m_tenseDescriptions.size() ) {
+        for ( int i = d->m_tenseDescriptions.size(); i <= index; i++ ) {
             d->m_tenseDescriptions.append( "" );
+        }
+    }
 
-    d->m_tenseDescriptions[idx] = id;
+    d->m_tenseDescriptions[index] = tense;
 }
 
 
