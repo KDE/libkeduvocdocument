@@ -59,8 +59,8 @@ void KEduVocKvtmlCompability::initOldTypeLists()
 
 
     m_oldSubTypeNames.clear();
-    m_oldSubTypeNames.insert( "ord", i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  (one, two, three, ...)","Ordinal" ) );
-    m_oldSubTypeNames.insert( "crd", i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal (first, second, third, ...)","Cardinal" ) );
+    m_oldSubTypeNames.insert( "ord", i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  (first, second, third, ...)","Ordinal" ) );
+    m_oldSubTypeNames.insert( "crd", i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal (one, two, three, ...)","Cardinal" ) );
     m_oldSubTypeNames.insert( "def", i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (the)","Definite" ) );
     m_oldSubTypeNames.insert( "ind", i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (a)","Indefinite" ) );
     m_oldSubTypeNames.insert( "re", i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with regular conjugation","Regular" ) );
@@ -248,10 +248,10 @@ void KEduVocKvtmlCompability::setupWordTypes(KEduVocWordType * parent)
 
     KEduVocWordType* numeral = static_cast<KEduVocWordType*>(parent->childContainer(8));
     KEduVocWordType* wordType = new KEduVocWordType(
-        i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  (one, two, three, ...)","Ordinal" ), numeral);
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  (first, second, third, ...)","Ordinal" ), numeral);
     numeral->appendChildContainer(wordType);
     wordType = new KEduVocWordType(
-        i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal (first, second, third, ...)","Cardinal" ), numeral);
+        i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal (one, two, three, ...)","Cardinal" ), numeral);
     numeral->appendChildContainer(wordType);
 
     KEduVocWordType* article = static_cast<KEduVocWordType*>(parent->childContainer(3));
