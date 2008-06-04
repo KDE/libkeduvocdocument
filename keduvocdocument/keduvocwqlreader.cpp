@@ -60,7 +60,7 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
 
     m_errorMessage = i18n( "Error while reading file" );
 
-    while ( !inputStream.atEnd() && inputStream.readLine() != "[Font Info]" );
+    while ( !inputStream.atEnd() && inputStream.readLine() != "[Font Info]" ) ;
     if ( inputStream.atEnd() )
         return false;
     s = inputStream.readLine();
@@ -94,7 +94,7 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
       p = s.find("=", 0);
       m_specialCharacters = s.right(s.length() - (p + 1));
     */
-    while ( !inputStream.atEnd() && inputStream.readLine() != "[Grid Info]" );
+    while ( !inputStream.atEnd() && inputStream.readLine() != "[Grid Info]" ) ;
     if ( inputStream.atEnd() )
         return false;
     inputStream.readLine(); //skip value for width of row headers
@@ -135,7 +135,7 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
       s = s.right(s.length() - (p + 1));
       m_bottomRight =s.toInt(0, 10) - 1 ;
     */
-    while ( !inputStream.atEnd() && inputStream.readLine() != "[Vocabulary]" );
+    while ( !inputStream.atEnd() && inputStream.readLine() != "[Vocabulary]" ) ;
     if ( inputStream.atEnd() )
         return false;
 

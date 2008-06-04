@@ -504,7 +504,7 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
 
 
     // synonym, antonym, false friend
-    // add to the list if it has any, write later since we want them seperate
+    // add to the list if it has any, write later since we want them separate
     if (!translation->synonyms().isEmpty()) {
         m_synonyms.append(translation);
     }
