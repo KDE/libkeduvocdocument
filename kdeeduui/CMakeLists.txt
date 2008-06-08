@@ -21,5 +21,5 @@ install(TARGETS kdeeduui  ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
    libkdeedu_ui_export.h
-   kdeeduglossary.h kedufontutils.h DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu
+   kdeeduglossary.h kedufontutils.h DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu  COMPONENT Devel
 )
