@@ -26,7 +26,7 @@
 
 class KEduVocExpression;
 
-/** class to store information about a lesson */
+/** class to store information about a container - that can be a lesson or word types */
 class KEDUVOCDOCUMENT_EXPORT KEduVocContainer
 {
 public:
@@ -51,6 +51,14 @@ public:
     void deleteChildContainer(int row);
     void removeChildContainer(int row);
     KEduVocContainer *childContainer(int row);
+
+    /**
+     * Retrieve a child container by its name
+     * Returns 0 if no container is found
+     * @param name container name
+     * @return the child container
+     */
+    KEduVocContainer *childContainer(const QString& name);
 
     QList<KEduVocContainer *> childContainers();
 

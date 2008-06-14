@@ -88,6 +88,17 @@ KEduVocContainer * KEduVocContainer::childContainer(int row)
 }
 
 
+KEduVocContainer * KEduVocContainer::childContainer(const QString & name)
+{
+    foreach (KEduVocContainer *container, d->m_childContainers) {
+        if (container->name() == name) {
+            return container;
+        }
+    }
+    return 0;
+}
+
+
 void KEduVocContainer::deleteChildContainer(int row)
 {
     kDebug() << "Delete of container - check entry deletion!";
