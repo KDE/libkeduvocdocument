@@ -265,3 +265,10 @@ int KEduVocContainer::expressionsOfGrade(int translation, grade_t grade)
     return sum;
 }
 
+void KEduVocContainer::resetGrades(int translation, EnumEntriesRecursive recursive)
+{
+    foreach (KEduVocExpression *entry, entries(recursive)) {
+        entry->resetGrades(translation);
+    }
+}
+
