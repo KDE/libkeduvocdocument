@@ -125,6 +125,15 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
 KEduVocTranslation::~KEduVocTranslation()
 {
     setWordType(0);
+    foreach (KEduVocTranslation *synonym, d->m_synonyms) {
+        synonym->removeSynonym(this);
+    }
+    foreach (KEduVocTranslation *antonym, d->m_antonyms) {
+        antonym->removeAntonym(this);
+    }
+    foreach (KEduVocTranslation *falseFriend, d->m_falseFriends) {
+        falseFriend->removeFalseFriend(this);
+    }
     delete d;
 }
 
