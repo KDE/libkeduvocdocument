@@ -104,7 +104,6 @@ KEduVocExpression& KEduVocExpression::operator= ( const KEduVocExpression &other
     *d = *other.d;
     foreach (int key, other.d->m_translations.keys()) {
         d->m_translations[key] = new KEduVocTranslation(*other.d->m_translations.value(key));
-        kDebug() << "copy translation: " << other.d->m_translations.value(key)->text();
         d->m_translations[key]->setEntry(this);
     }
     return *this;
