@@ -27,6 +27,7 @@
 class KEduVocExpression;
 class KEduVocString;
 class KEduVocWordType;
+class KEduVocLesson;
 class KEduVocDeclension;
 
 /**
@@ -136,8 +137,21 @@ public:
     */
     void setWordType( KEduVocWordType* wordType );
 
-    /** returns a conjugation if available
-    */
+    /** returns the leitner box of this translation
+     * @return the box
+     */
+    KEduVocLesson* leitnerBox() const;
+
+    /** sets the leitner box of this translation
+     * @param leitnerBox the box
+     */
+    void setLeitnerBox( KEduVocLesson* leitnerBox );
+
+    /**
+     * returns a conjugation if available
+     * @param tense tense of the requested conjugation
+     * @return the conjugation
+     */
     KEduVocConjugation& conjugation( const QString& tense );
 
     /** adds conjugations or replaces them, if they exist.

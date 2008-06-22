@@ -83,8 +83,6 @@ void KEduVocWordType::addTranslation(KEduVocTranslation* translation)
 
 void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
 {
-kDebug() << "Remove Translation from wt";
-
     d->m_translations.removeAt( d->m_translations.indexOf(translation) );
 
     // no lesson found - this entry is being deleted. remove all its siblings.

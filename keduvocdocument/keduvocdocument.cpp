@@ -104,6 +104,9 @@ public:
 
 KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
 {
+    delete m_lessonContainer;
+    delete m_wordTypeContainer;
+    delete m_leitnerContainer;
 }
 
 void KEduVocDocument::KEduVocDocumentPrivate::init()
@@ -117,6 +120,21 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
         delete m_wordTypeContainer;
     }
     m_wordTypeContainer = new KEduVocWordType(i18n( "Word types" ));
+
+    if ( m_leitnerContainer ) {
+        delete m_leitnerContainer;
+    }
+    m_leitnerContainer = new KEduVocLesson(i18n( "Leitner Box" ));
+
+///test
+    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 7 (best)"), m_leitnerContainer));
+    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 6"), m_leitnerContainer));
+    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 5"), m_leitnerContainer));
+    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 4"), m_leitnerContainer));
+    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 3"), m_leitnerContainer));
+    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 2"), m_leitnerContainer));
+    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 1 (lowest)"), m_leitnerContainer));
+
 
     m_tenseDescriptions.clear();
     m_identifiers.clear();
@@ -723,8 +741,6 @@ int KEduVocDocument::appendIdentifier( const KEduVocIdentifier& id )
     return i;
 }
 
-
-
 KEduVocLesson * KEduVocDocument::lesson()
 {
     return d->m_lessonContainer;
@@ -740,18 +756,15 @@ KEduVocLesson * KEduVocDocument::leitnerContainer()
     return d->m_leitnerContainer;
 }
 
-
 KUrl KEduVocDocument::url() const
 {
     return d->m_url;
 }
 
-
 void KEduVocDocument::setUrl( const KUrl& url )
 {
     d->m_url = url;
 }
-
 
 QString KEduVocDocument::title() const
 {
@@ -814,96 +827,51 @@ void KEduVocDocument::queryIdentifier( QString &org, QString &trans ) const
     trans = d->m_querytrans;
 }
 
-
 void KEduVocDocument::setQueryIdentifier( const QString &org, const QString &trans )
 {
     d->m_queryorg = org;
     d->m_querytrans = trans;
 }
 
-
-
-
-
 void KEduVocDocument::setLicense( const QString & s )
 {
     d->m_license = s.simplified();
 }
-
 
 void KEduVocDocument::setDocumentComment( const QString & s )
 {
     d->m_comment = s.trimmed();
 }
 
-
 void KEduVocDocument::setGenerator( const QString & generator )
 {
     d->m_generator = generator;
 }
-
 
 QString KEduVocDocument::generator() const
 {
     return d->m_generator;
 }
 
-
 QString KEduVocDocument::version() const
 {
     return d->m_version;
 }
-
 
 void KEduVocDocument::setVersion( const QString & vers )
 {
     d->m_version = vers;
 }
 
-
 QString KEduVocDocument::csvDelimiter() const
 {
     return d->m_csvDelimiter;
 }
 
-
 void KEduVocDocument::setCsvDelimiter( const QString &delimiter )
 {
     d->m_csvDelimiter = delimiter;
 }
-
-
-class ExpRef
-{
-
-public:
-    ExpRef()
-    {}
-    ExpRef( KEduVocExpression *_exp, int _idx )
-    {
-        idx    = _idx;
-        exp    = _exp;
-    }
-
-    bool operator< ( const ExpRef& y ) const
-    {
-        QString s1;
-        QString s2;
-        int cmp;
-        foreach( int i, exp->translationIndices() ) {
-
-            s1 = exp->translation( i )->text();
-            s2 = y.exp->translation( i )->text();
-            cmp = QString::compare( s1.toUpper(), s2.toUpper() );
-            if ( cmp != 0 )
-                return cmp < 0;
-        }
-        return cmp < 0;
-    }
-
-    int idx;
-    KEduVocExpression *exp;
-};
 
 
 QString KEduVocDocument::pattern( FileDialogMode mode )
