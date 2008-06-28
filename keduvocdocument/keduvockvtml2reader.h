@@ -85,6 +85,17 @@ private:
     bool readWordType( KEduVocWordType* parentContainer, QDomElement &typesElement );
 
     /**
+     * Read a leitner box container.
+     * This is a grading system where the vocabulary are kept in boxes and promoted/demoted during the learning.
+     * Be aware that leitner boxes are a list only and no sub boxes will ever be read or written.
+     * While reusing the lesson class is quite easy for this a proper subclass of KEduVocContainer would be the better solution.
+     * @param parentContainer the parent to append the new leitner container to
+     * @param leitnerElement the element in the dom
+     * @return success
+     */
+    bool readLeitner( KEduVocLeitnerBox* parentContainer, QDomElement &leitnerElement );
+
+    /**
      * Read all <container> tags within a word type definition.
      * @param parentContainer 
      * @param lessonElement 

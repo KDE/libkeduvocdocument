@@ -1,0 +1,117 @@
+/***************************************************************************
+    Copyright 2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+
+#include "keduvocleitnerbox.h"
+
+#include "keduvocexpression.h"
+
+#include <KDebug>
+
+#include <QtCore/QSet>
+
+class KEduVocLeitnerBox::Private
+{
+public:
+    // cache the entries
+    QList<KEduVocExpression*> m_expressions;
+    // list of translations
+    QList<KEduVocTranslation*> m_translations;
+};
+
+KEduVocLeitnerBox::KEduVocLeitnerBox(const QString& name, KEduVocLeitnerBox *parent)
+        : KEduVocContainer(name, Leitner, parent), d( new Private )
+{
+}
+
+KEduVocLeitnerBox::~KEduVocLeitnerBox()
+{
+    foreach(KEduVocTranslation* translation, d->m_translations) {
+        translation->setLeitnerBox(0);
+    }
+    delete d;
+}
+
+QList<KEduVocExpression*> KEduVocLeitnerBox::entries(EnumEntriesRecursive recursive)
+{
+    if (recursive == Recursive) {
+        return entriesRecursive();
+    }
+
+    return d->m_expressions;
+}
+
+int KEduVocLeitnerBox::entryCount(EnumEntriesRecursive recursive)
+{
+    if (recursive == Recursive) {
+        return entriesRecursive().count();
+    }
+    return d->m_expressions.count();
+}
+
+void KEduVocLeitnerBox::addTranslation(KEduVocTranslation* translation)
+{
+    // add to expression - if not already there because another translation of the same word is there.
+    bool found = false;
+    foreach(int i, translation->entry()->translationIndices()) {
+        if (translation->entry()->translation(i)->leitnerBox() == this) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        d->m_expressions.append(translation->entry());
+    }
+    d->m_translations.append( translation );
+    invalidateChildLessonEntries();
+}
+
+void KEduVocLeitnerBox::removeTranslation(KEduVocTranslation* translation)
+{
+    d->m_translations.removeAt( d->m_translations.indexOf(translation) );
+
+    // no lesson found - this entry is being deleted. remove all its siblings.
+    if (!translation->entry()->lesson()) {
+        int index = d->m_expressions.indexOf(translation->entry());
+        if (index != -1) {
+            d->m_expressions.removeAt(index);
+        }
+    }
+
+    // remove from cache
+    bool found = false;
+    foreach(int i, translation->entry()->translationIndices()) {
+        if (translation->entry()->translation(i)->leitnerBox() == this) {
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        d->m_expressions.removeAt(d->m_expressions.indexOf(translation->entry()));
+    }
+
+    invalidateChildLessonEntries();
+}
+
+KEduVocTranslation * KEduVocLeitnerBox::translation(int row)
+{
+    return d->m_translations.value(row);
+}
+
+KEduVocExpression * KEduVocLeitnerBox::entry(int row, EnumEntriesRecursive recursive)
+{
+    if (recursive == Recursive) {
+        return entriesRecursive().value(row);
+    }
+    return entries().value(row);
+}
+

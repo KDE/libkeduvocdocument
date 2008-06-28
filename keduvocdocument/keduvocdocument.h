@@ -35,6 +35,7 @@ class QStringList;
 class KEduVocExpression;
 class KEduVocLesson;
 class KEduVocWordType;
+class KEduVocLeitnerBox;
 
 /**
  * This class contains the expressions of your vocabulary
@@ -307,7 +308,7 @@ public:
 
     KEduVocWordType * wordTypeContainer();
 
-    KEduVocLesson * leitnerContainer();
+    KEduVocLeitnerBox * leitnerContainer();
 
     // *** file format specific methods ***
 

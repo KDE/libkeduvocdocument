@@ -27,7 +27,7 @@
 class KEduVocExpression;
 class KEduVocString;
 class KEduVocWordType;
-class KEduVocLesson;
+class KEduVocLeitnerBox;
 class KEduVocDeclension;
 
 /**
@@ -140,12 +140,12 @@ public:
     /** returns the leitner box of this translation
      * @return the box
      */
-    KEduVocLesson* leitnerBox() const;
+    KEduVocLeitnerBox* leitnerBox() const;
 
     /** sets the leitner box of this translation
      * @param leitnerBox the box
      */
-    void setLeitnerBox( KEduVocLesson* leitnerBox );
+    void setLeitnerBox( KEduVocLeitnerBox* leitnerBox );
 
     /**
      * returns a conjugation if available

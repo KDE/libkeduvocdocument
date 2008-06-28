@@ -31,6 +31,7 @@
 
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"
+#include "keduvocleitnerbox.h"
 #include "keduvocwordtype.h"
 #include "keduvockvtmlwriter.h"
 #include "keduvockvtml2writer.h"
@@ -98,8 +99,7 @@ public:
 
     KEduVocLesson * m_lessonContainer;
     KEduVocWordType * m_wordTypeContainer;
-    KEduVocLesson * m_leitnerContainer;
-
+    KEduVocLeitnerBox * m_leitnerContainer;
 };
 
 KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
@@ -124,7 +124,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     if ( m_leitnerContainer ) {
         delete m_leitnerContainer;
     }
-    m_leitnerContainer = new KEduVocLesson(i18n( "Leitner Box" ));
+    m_leitnerContainer = new KEduVocLeitnerBox(i18n( "Leitner Box" ));
 
 ///test
     m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 7 (best)"), m_leitnerContainer));
@@ -751,7 +751,7 @@ KEduVocWordType * KEduVocDocument::wordTypeContainer()
     return d->m_wordTypeContainer;
 }
 
-KEduVocLesson * KEduVocDocument::leitnerContainer()
+KEduVocLeitnerBox * KEduVocDocument::leitnerContainer()
 {
     return d->m_leitnerContainer;
 }
