@@ -29,6 +29,7 @@
 class KEduVocDocument;
 class KEduVocExpression;
 class KEduVocLesson;
+class KEduVocLeitnerBox;
 
 /**
 * @brief Class to write kvtml2 data files from KEduVocDocument
@@ -78,6 +79,14 @@ private:
      * @param typesElement QDomElement types to write to
      */
     bool writeWordTypes( QDomElement &typesElement, KEduVocWordType* parentContainer );
+
+    /**
+     * write the leitner boxes @see KEduVocLeitnerBox
+     * @param leitnerParentElement parent dom element
+     * @param parentContainer parent of the KEduVocLeitnerBoxes to write
+     * @return success
+     */
+    bool writeLeitnerBoxes( QDomElement &leitnerParentElement, KEduVocLeitnerBox* parentContainer );
 
     /** write tenses
      * @param tensesElement QDomElement tenses to write to

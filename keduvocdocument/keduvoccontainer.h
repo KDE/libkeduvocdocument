@@ -29,8 +29,9 @@ class KEduVocExpression;
 /** class to store information about a container - that can be a lesson or word types */
 class KEDUVOCDOCUMENT_EXPORT KEduVocContainer
 {
+    // make this a template?
+
 public:
-    /// @todo let wordtype have only one type and the actual types in a different function
     enum EnumContainerType{
         Container,
         Lesson,

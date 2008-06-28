@@ -31,6 +31,8 @@ public:
 KEduVocLeitnerBox::KEduVocLeitnerBox(const QString& name, KEduVocLeitnerBox *parent)
         : KEduVocContainer(name, Leitner, parent), d( new Private )
 {
+    // only one top level and children, this is only a list
+    Q_ASSERT(!parent || !parent->parent());
 }
 
 KEduVocLeitnerBox::~KEduVocLeitnerBox()
@@ -43,18 +45,13 @@ KEduVocLeitnerBox::~KEduVocLeitnerBox()
 
 QList<KEduVocExpression*> KEduVocLeitnerBox::entries(EnumEntriesRecursive recursive)
 {
-    if (recursive == Recursive) {
-        return entriesRecursive();
-    }
-
+    Q_UNUSED(recursive)
     return d->m_expressions;
 }
 
 int KEduVocLeitnerBox::entryCount(EnumEntriesRecursive recursive)
 {
-    if (recursive == Recursive) {
-        return entriesRecursive().count();
-    }
+    Q_UNUSED(recursive)
     return d->m_expressions.count();
 }
 
@@ -109,9 +106,7 @@ KEduVocTranslation * KEduVocLeitnerBox::translation(int row)
 
 KEduVocExpression * KEduVocLeitnerBox::entry(int row, EnumEntriesRecursive recursive)
 {
-    if (recursive == Recursive) {
-        return entriesRecursive().value(row);
-    }
+    Q_UNUSED(recursive)
     return entries().value(row);
 }
 
