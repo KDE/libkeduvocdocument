@@ -74,7 +74,8 @@ void KEduVocLeitnerBox::addTranslation(KEduVocTranslation* translation)
 
 void KEduVocLeitnerBox::removeTranslation(KEduVocTranslation* translation)
 {
-    d->m_translations.removeAt( d->m_translations.indexOf(translation) );
+    int index = d->m_translations.indexOf(translation);
+    d->m_translations.removeAt(index);
 
     // no lesson found - this entry is being deleted. remove all its siblings.
     if (!translation->entry()->lesson()) {

@@ -126,16 +126,6 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     }
     m_leitnerContainer = new KEduVocLeitnerBox(i18n( "Leitner Box" ));
 
-///test
-    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 7 (best)"), m_leitnerContainer));
-    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 6"), m_leitnerContainer));
-    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 5"), m_leitnerContainer));
-    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 4"), m_leitnerContainer));
-    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 3"), m_leitnerContainer));
-    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 2"), m_leitnerContainer));
-    m_leitnerContainer->appendChildContainer(new KEduVocLesson(i18n("Box 1 (lowest)"), m_leitnerContainer));
-
-
     m_tenseDescriptions.clear();
     m_identifiers.clear();
     m_extraSizeHints.clear();
