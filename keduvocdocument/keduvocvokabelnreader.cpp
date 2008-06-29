@@ -136,6 +136,11 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         translation = words[1].mid( 1 );
         lessonNumber = words[2].toInt() - 1;
 
+        // fallback if it's not read correctly
+        if (lessonNumber < 0) {
+            lessonNumber = 0;
+        }
+
         while(m_doc->lesson()->childContainerCount() < lessonNumber) {
             KEduVocLesson* lesson = new KEduVocLesson(i18n("Lesson %1", lessonNumber), m_doc->lesson());
             m_doc->lesson()->appendChildContainer(lesson);
