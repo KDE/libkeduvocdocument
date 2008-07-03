@@ -130,6 +130,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
 KEduVocTranslation::~KEduVocTranslation()
 {
     setWordType(0);
+    setLeitnerBox(0);
     foreach (KEduVocTranslation *synonym, d->m_synonyms) {
         synonym->removeSynonym(this);
     }
