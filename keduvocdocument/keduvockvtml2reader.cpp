@@ -27,6 +27,7 @@
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"
+#include "keduvocleitnerbox.h"
 #include "keduvocwordtype.h"
 #include "kvtml2defs.h"
 #include "keduvockvtmlreader.h"
@@ -187,6 +188,11 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
     groupElement = domElementParent.firstChildElement( KVTML_WORDTYPES );
     if ( !groupElement.isNull() ) {
         readChildWordTypes( m_doc->wordTypeContainer(), groupElement );
+    }
+
+    groupElement = domElementParent.firstChildElement( KVTML_LEITNERBOXES );
+    if ( !groupElement.isNull() ) {
+        readLeitner( m_doc->leitnerContainer(), groupElement );
     }
 
     groupElement = domElementParent.firstChildElement( KVTML_LESSONS );
@@ -363,7 +369,6 @@ bool KEduVocKvtml2Reader::readChildLessons( KEduVocLesson* parentLesson, QDomEle
     return true;
 }
 
-
 bool KEduVocKvtml2Reader::readLesson( KEduVocLesson* parentLesson, QDomElement &lessonElement )
 {
     //<name>Lesson name</name>
@@ -389,7 +394,6 @@ bool KEduVocKvtml2Reader::readLesson( KEduVocLesson* parentLesson, QDomElement &
     }
     return true;
 }
-
 
 bool KEduVocKvtml2Reader::readSynonymsAntonymsFalseFriends( QDomElement &rootElement )
 {
@@ -500,6 +504,35 @@ bool KEduVocKvtml2Reader::readChildWordTypes(KEduVocWordType* parentContainer, Q
     return true;
 }
 
+bool KEduVocKvtml2Reader::readLeitner( KEduVocLeitnerBox* parentContainer, QDomElement &leitnerParentElement )
+{
+    QDomElement leitnerElement = leitnerParentElement.firstChildElement( KVTML_CONTAINER );
+    while ( !leitnerElement.isNull() ) {
+        QString name = leitnerElement.firstChildElement( KVTML_NAME ).text();
+
+        KEduVocLeitnerBox * leitner = new KEduVocLeitnerBox(name, parentContainer);
+        parentContainer->appendChildContainer(leitner);
+        // for leitner we only allow a flat list, no sub boxes.
+
+        // read entries
+        QDomElement entryElement = leitnerElement.firstChildElement( KVTML_ENTRY );
+        while ( !entryElement.isNull() ) {
+            // read <entry id="123"></entryid>
+            int entryId = entryElement.attribute( KVTML_ID ).toInt();
+            QDomElement translationElement = entryElement.firstChildElement( KVTML_TRANSLATION );
+            while( !translationElement.isNull() ) {
+                // <translation id="234"/>
+                int translationId = translationElement.attribute( KVTML_ID ).toInt();
+                m_allEntries.value(entryId)->translation(translationId)->setLeitnerBox(leitner);
+                translationElement = translationElement.nextSiblingElement( KVTML_TRANSLATION );
+            }
+            entryElement = entryElement.nextSiblingElement( KVTML_ENTRY );
+        }
+        leitnerElement = leitnerElement.nextSiblingElement( KVTML_CONTAINER );
+    }
+    return true;
+}
+
 bool KEduVocKvtml2Reader::readWordType( KEduVocWordType* parentContainer, QDomElement &typeElement )
 {
     // set type and specialtype
@@ -555,7 +588,6 @@ bool KEduVocKvtml2Reader::readWordType( KEduVocWordType* parentContainer, QDomEl
 
     return true;
 }
-
 
 bool KEduVocKvtml2Reader::readTenses( QDomElement &tensesElement )
 {

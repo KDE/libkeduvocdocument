@@ -9,6 +9,7 @@ keduvocdocument.cpp
    keduvoctranslation.cpp
    keduvoccontainer.cpp
    keduvoclesson.cpp
+   keduvocleitnerbox.cpp
    keduvoctext.cpp
    keduvocarticle.cpp
    keduvocconjugation.cpp
@@ -47,6 +48,7 @@ install(FILES
    keduvocarticle.h
    keduvocconjugation.h
    keduvoclesson.h
+   keduvocleitnerbox.h
    keduvoccontainer.h
    keduvocwordtype.h
    keduvocmultiplechoice.h

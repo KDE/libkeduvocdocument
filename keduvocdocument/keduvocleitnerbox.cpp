@@ -1,8 +1,5 @@
 /***************************************************************************
-
-    Copyright 2007 Jeremy Whiting <jeremywhiting@scitools.com>
-    Copyright 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
-
+    Copyright 2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
 /***************************************************************************
@@ -14,62 +11,56 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "keduvocwordtype.h"
+#include "keduvocleitnerbox.h"
 
 #include "keduvocexpression.h"
 
 #include <KDebug>
 
-#include <QtCore/QList>
 #include <QtCore/QSet>
 
-class KEduVocWordType::Private
+class KEduVocLeitnerBox::Private
 {
 public:
-    EnumWordType m_wordType;
     // cache the entries
     QList<KEduVocExpression*> m_expressions;
     // list of translations
     QList<KEduVocTranslation*> m_translations;
 };
 
-KEduVocWordType::KEduVocWordType(const QString& name, KEduVocWordType *parent)
-        : KEduVocContainer(name, WordType, parent), d( new Private )
+KEduVocLeitnerBox::KEduVocLeitnerBox(const QString& name, KEduVocLeitnerBox *parent)
+        : KEduVocContainer(name, Leitner, parent), d( new Private )
 {
-    d->m_wordType = General;
+    // only one top level and children, this is only a list
+    Q_ASSERT(!parent || !parent->parent());
 }
 
-KEduVocWordType::~KEduVocWordType()
+KEduVocLeitnerBox::~KEduVocLeitnerBox()
 {
     foreach(KEduVocTranslation* translation, d->m_translations) {
-        translation->setWordType(0);
+        translation->setLeitnerBox(0);
     }
     delete d;
 }
 
-QList<KEduVocExpression*> KEduVocWordType::entries(EnumEntriesRecursive recursive)
+QList<KEduVocExpression*> KEduVocLeitnerBox::entries(EnumEntriesRecursive recursive)
 {
-    if (recursive == Recursive) {
-        return entriesRecursive();
-    }
-
+    Q_UNUSED(recursive)
     return d->m_expressions;
 }
 
-int KEduVocWordType::entryCount(EnumEntriesRecursive recursive)
+int KEduVocLeitnerBox::entryCount(EnumEntriesRecursive recursive)
 {
-    if (recursive == Recursive) {
-        return entriesRecursive().count();
-    }
+    Q_UNUSED(recursive)
     return d->m_expressions.count();
 }
 
-void KEduVocWordType::addTranslation(KEduVocTranslation* translation)
+void KEduVocLeitnerBox::addTranslation(KEduVocTranslation* translation)
 {
     // add to expression - if not already there because another translation of the same word is there.
     bool found = false;
     foreach(int i, translation->entry()->translationIndices()) {
-        if (translation->entry()->translation(i)->wordType() == this) {
+        if (translation->entry()->translation(i)->leitnerBox() == this) {
             found = true;
             break;
         }
@@ -81,9 +72,10 @@ void KEduVocWordType::addTranslation(KEduVocTranslation* translation)
     invalidateChildLessonEntries();
 }
 
-void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
+void KEduVocLeitnerBox::removeTranslation(KEduVocTranslation* translation)
 {
-    d->m_translations.removeAt( d->m_translations.indexOf(translation) );
+    int index = d->m_translations.indexOf(translation);
+    d->m_translations.removeAt(index);
 
     // no lesson found - this entry is being deleted. remove all its siblings.
     if (!translation->entry()->lesson()) {
@@ -96,7 +88,7 @@ void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
     // remove from cache
     bool found = false;
     foreach(int i, translation->entry()->translationIndices()) {
-        if (translation->entry()->translation(i)->wordType() == this) {
+        if (translation->entry()->translation(i)->leitnerBox() == this) {
             found = true;
             break;
         }
@@ -108,41 +100,14 @@ void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
     invalidateChildLessonEntries();
 }
 
-KEduVocTranslation * KEduVocWordType::translation(int row)
+KEduVocTranslation * KEduVocLeitnerBox::translation(int row)
 {
-
     return d->m_translations.value(row);
 }
 
-KEduVocExpression * KEduVocWordType::entry(int row, EnumEntriesRecursive recursive)
+KEduVocExpression * KEduVocLeitnerBox::entry(int row, EnumEntriesRecursive recursive)
 {
-    if (recursive == Recursive) {
-        return entriesRecursive().value(row);
-    }
+    Q_UNUSED(recursive)
     return entries().value(row);
-}
-
-void KEduVocWordType::setWordType(EnumWordType type)
-{
-    d->m_wordType = type;
-}
-
-KEduVocWordType::EnumWordType KEduVocWordType::wordType() const
-{
-    return d->m_wordType;
-}
-
-KEduVocWordType* KEduVocWordType::childOfType(KEduVocWordType::EnumWordType type)
-{
-    if(wordType()==type) {
-        return this;
-    }
-    foreach(KEduVocContainer* child, childContainers()) {
-        KEduVocWordType* result = static_cast<KEduVocWordType*>(child)->childOfType(type);
-        if(result) {
-            return result;
-        }
-    }
-    return 0;
 }
 

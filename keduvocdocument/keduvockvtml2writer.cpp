@@ -24,6 +24,7 @@
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"
+#include "keduvocleitnerbox.h"
 #include "keduvocwordtype.h"
 #include "kvtml2defs.h"
 
@@ -97,6 +98,13 @@ bool KEduVocKvtml2Writer::createXmlDocument( KEduVocDocument *doc, const QString
     // types
     currentElement = m_domDoc.createElement( KVTML_WORDTYPES );
     writeWordTypes( currentElement, m_doc->wordTypeContainer() );
+    if ( currentElement.hasChildNodes() ) {
+        domElementKvtml.appendChild( currentElement );
+    }
+
+    // leitner boxes
+    currentElement = m_domDoc.createElement( KVTML_LEITNERBOXES );
+    writeLeitnerBoxes( currentElement, m_doc->leitnerContainer() );
     if ( currentElement.hasChildNodes() ) {
         domElementKvtml.appendChild( currentElement );
     }
@@ -413,6 +421,34 @@ bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocWord
     return true;
 }
 
+bool KEduVocKvtml2Writer::writeLeitnerBoxes( QDomElement &leitnerParentElement, KEduVocLeitnerBox* parentContainer )
+{
+    foreach( KEduVocContainer* container, parentContainer->childContainers() ) {
+        KEduVocLeitnerBox* leitnerBox = static_cast<KEduVocLeitnerBox*>(container);
+
+        QDomElement containerElement = m_domDoc.createElement( KVTML_CONTAINER );
+        containerElement.appendChild( newTextElement( KVTML_NAME, leitnerBox->name() ) );
+
+        // child entries
+        foreach(KEduVocExpression *entry, leitnerBox->entries()) {
+            QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
+            entryElement.setAttribute( KVTML_ID, QString::number(m_allEntries.indexOf(entry)) );
+            for(int translation = 0; translation<m_doc->identifierCount(); translation++) {
+                if (entry->translation(translation)->leitnerBox()== leitnerBox) {
+                    QDomElement translationElement = m_domDoc.createElement( KVTML_TRANSLATION );
+                    // create <translation id="123">
+                    translationElement.setAttribute( KVTML_ID, QString::number(translation) );
+                    // append both
+                    entryElement.appendChild(translationElement);
+                }
+            }
+            containerElement.appendChild( entryElement );
+        }
+
+        leitnerParentElement.appendChild( containerElement );
+    }
+    return true;
+}
 
 bool KEduVocKvtml2Writer::writeTenses( QDomElement &tensesElement )
 {

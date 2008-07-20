@@ -19,6 +19,7 @@
 
 #include "keduvocdeclension.h"
 #include "keduvocwordtype.h"
+#include "keduvocleitnerbox.h"
 #include "kvtml2defs.h"
 #include "keduvockvtml2writer.h"
 #include <KDebug>
@@ -35,6 +36,9 @@ public:
 
     /// Type of a word noun, verb, adjective etc
     KEduVocWordType* m_wordType;
+
+    /// Leitner box of the translation.
+    KEduVocLeitnerBox* m_leitnerBox;
 
     /// A comment giving additional information.
     QString m_comment;
@@ -72,11 +76,11 @@ public:
     QList< KEduVocTranslation* > m_falseFriends;
 };
 
-
 KEduVocTranslation::KEduVocTranslationPrivate::KEduVocTranslationPrivate(KEduVocExpression* parent)
 {
     m_entry = parent;
     m_wordType = 0;
+    m_leitnerBox = 0;
     m_declension = 0;
 }
 
@@ -103,6 +107,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
     // beter no word type copy as this is pointer copying
     // will not work as this is not added to the word type container!
 //  d->m_wordType = other.d->m_wordType;
+//  d->m_leitnerBox = translation.d->m_leitnerBox;
     d->m_comment = other.d->m_comment;
     d->m_paraphrase = other.d->m_paraphrase;
     d->m_example = other.d->m_example;
@@ -125,6 +130,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
 KEduVocTranslation::~KEduVocTranslation()
 {
     setWordType(0);
+    setLeitnerBox(0);
     foreach (KEduVocTranslation *synonym, d->m_synonyms) {
         synonym->removeSynonym(this);
     }
@@ -141,6 +147,7 @@ bool KEduVocTranslation::operator == ( const KEduVocTranslation & translation ) 
 {
     return KEduVocText::operator==(translation) &&
         d->m_wordType == translation.d->m_wordType &&
+        d->m_leitnerBox == translation.d->m_leitnerBox &&
         d->m_comment == translation.d->m_comment &&
         d->m_paraphrase == translation.d->m_paraphrase &&
         d->m_example == translation.d->m_example &&
@@ -161,7 +168,8 @@ KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation &
 {
     KEduVocText::operator=(translation);
     d->m_entry = translation.d->m_entry;
-    d->m_wordType = translation.d->m_wordType;
+//     d->m_wordType = translation.d->m_wordType;
+//     d->m_leitnerBox = translation.d->m_leitnerBox;
     d->m_comment = translation.d->m_comment;
     d->m_paraphrase = translation.d->m_paraphrase;
     d->m_example = translation.d->m_example;
@@ -351,6 +359,22 @@ void KEduVocTranslation::setWordType(KEduVocWordType * wordType)
     d->m_wordType = wordType;
 }
 
+KEduVocLeitnerBox * KEduVocTranslation::leitnerBox() const
+{
+    return d->m_leitnerBox;
+}
+
+void KEduVocTranslation::setLeitnerBox(KEduVocLeitnerBox * leitnerBox)
+{
+    if ( d->m_leitnerBox ) {
+        d->m_leitnerBox->removeTranslation(this);
+    }
+    if ( leitnerBox ) {
+        leitnerBox->addTranslation(this);
+    }
+    d->m_leitnerBox = leitnerBox;
+}
+
 KEduVocExpression * KEduVocTranslation::entry()
 {
     return d->m_entry;
@@ -456,4 +480,6 @@ void KEduVocTranslation::setEntry(KEduVocExpression * entry)
 {
     d->m_entry = entry;
 }
+
+
 

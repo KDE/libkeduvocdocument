@@ -31,6 +31,7 @@
 
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"
+#include "keduvocleitnerbox.h"
 #include "keduvocwordtype.h"
 #include "keduvockvtmlwriter.h"
 #include "keduvockvtml2writer.h"
@@ -98,12 +99,14 @@ public:
 
     KEduVocLesson * m_lessonContainer;
     KEduVocWordType * m_wordTypeContainer;
-    KEduVocLesson * m_leitnerContainer;
-
+    KEduVocLeitnerBox * m_leitnerContainer;
 };
 
 KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
 {
+    delete m_lessonContainer;
+    delete m_wordTypeContainer;
+    delete m_leitnerContainer;
 }
 
 void KEduVocDocument::KEduVocDocumentPrivate::init()
@@ -113,6 +116,11 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_lessonContainer->setContainerType(KEduVocLesson::Lesson);
     delete m_wordTypeContainer;
     m_wordTypeContainer = new KEduVocWordType(i18n( "Word types" ));
+
+    if ( m_leitnerContainer ) {
+        delete m_leitnerContainer;
+    }
+    m_leitnerContainer = new KEduVocLeitnerBox(i18n( "Leitner Box" ));
 
     m_tenseDescriptions.clear();
     m_identifiers.clear();
@@ -723,8 +731,6 @@ int KEduVocDocument::appendIdentifier( const KEduVocIdentifier& id )
     return i;
 }
 
-
-
 KEduVocLesson * KEduVocDocument::lesson()
 {
     return d->m_lessonContainer;
@@ -735,23 +741,20 @@ KEduVocWordType * KEduVocDocument::wordTypeContainer()
     return d->m_wordTypeContainer;
 }
 
-KEduVocLesson * KEduVocDocument::leitnerContainer()
+KEduVocLeitnerBox * KEduVocDocument::leitnerContainer()
 {
     return d->m_leitnerContainer;
 }
-
 
 KUrl KEduVocDocument::url() const
 {
     return d->m_url;
 }
 
-
 void KEduVocDocument::setUrl( const KUrl& url )
 {
     d->m_url = url;
 }
-
 
 QString KEduVocDocument::title() const
 {
@@ -814,96 +817,51 @@ void KEduVocDocument::queryIdentifier( QString &org, QString &trans ) const
     trans = d->m_querytrans;
 }
 
-
 void KEduVocDocument::setQueryIdentifier( const QString &org, const QString &trans )
 {
     d->m_queryorg = org;
     d->m_querytrans = trans;
 }
 
-
-
-
-
 void KEduVocDocument::setLicense( const QString & s )
 {
     d->m_license = s.simplified();
 }
-
 
 void KEduVocDocument::setDocumentComment( const QString & s )
 {
     d->m_comment = s.trimmed();
 }
 
-
 void KEduVocDocument::setGenerator( const QString & generator )
 {
     d->m_generator = generator;
 }
-
 
 QString KEduVocDocument::generator() const
 {
     return d->m_generator;
 }
 
-
 QString KEduVocDocument::version() const
 {
     return d->m_version;
 }
-
 
 void KEduVocDocument::setVersion( const QString & vers )
 {
     d->m_version = vers;
 }
 
-
 QString KEduVocDocument::csvDelimiter() const
 {
     return d->m_csvDelimiter;
 }
 
-
 void KEduVocDocument::setCsvDelimiter( const QString &delimiter )
 {
     d->m_csvDelimiter = delimiter;
 }
-
-
-class ExpRef
-{
-
-public:
-    ExpRef()
-    {}
-    ExpRef( KEduVocExpression *_exp, int _idx )
-    {
-        idx    = _idx;
-        exp    = _exp;
-    }
-
-    bool operator< ( const ExpRef& y ) const
-    {
-        QString s1;
-        QString s2;
-        int cmp;
-        foreach( int i, exp->translationIndices() ) {
-
-            s1 = exp->translation( i )->text();
-            s2 = y.exp->translation( i )->text();
-            cmp = QString::compare( s1.toUpper(), s2.toUpper() );
-            if ( cmp != 0 )
-                return cmp < 0;
-        }
-        return cmp < 0;
-    }
-
-    int idx;
-    KEduVocExpression *exp;
-};
 
 
 QString KEduVocDocument::pattern( FileDialogMode mode )

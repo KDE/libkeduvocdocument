@@ -102,7 +102,6 @@ static const QString KVTML_GRAMMATICAL_DEFINITENESS[] = {
 #define KVTML_CONTAINER         "container"
 #define KVTML_INPRACTICE        "inpractice"
 
-
 // these are necessary to enable practices based on word types. users can give types arbitrary names, but these few are hardcoded. special container types
 #define KVTML_SPECIALWORDTYPE       "specialwordtype"
 #define KVTML_SPECIALWORDTYPE_NOUN        "noun"
