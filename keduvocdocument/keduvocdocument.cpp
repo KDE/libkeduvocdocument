@@ -108,14 +108,10 @@ KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
 
 void KEduVocDocument::KEduVocDocumentPrivate::init()
 {
-    if ( m_lessonContainer ) {
-        delete m_lessonContainer;
-    }
+    delete m_lessonContainer;
     m_lessonContainer = new KEduVocLesson(i18nc("The top level lesson which contains all other lessons of the document.", "Document Lesson"));
     m_lessonContainer->setContainerType(KEduVocLesson::Lesson);
-    if ( m_wordTypeContainer ) {
-        delete m_wordTypeContainer;
-    }
+    delete m_wordTypeContainer;
     m_wordTypeContainer = new KEduVocWordType(i18n( "Word types" ));
 
     m_tenseDescriptions.clear();
@@ -253,6 +249,7 @@ int KEduVocDocument::open( const KUrl& url )
 
         if ( !f->open( QIODevice::ReadOnly ) ) {
             kError() << errorMessage;
+            delete f;
             return FileCannotRead;
         }
 
@@ -337,6 +334,7 @@ int KEduVocDocument::open( const KUrl& url )
             QString msg = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)", url.path(), errorMessage );
             kError() << msg << i18n( "Error Opening File" );
             ///@todo make the readers return int, pass on the error message properly
+            delete f;
             return FileReaderFailed;
         }
 
