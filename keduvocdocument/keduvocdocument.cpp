@@ -430,6 +430,8 @@ QByteArray KEduVocDocument::toByteArray(const QString &generator)
 
 void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers )
 {
+    Q_UNUSED(docToMerge)
+    Q_UNUSED(matchIdentifiers)
     kDebug(1100) << "Merging of docs is not implemented"; /// @todo IMPLEMENT ME
     // This code was really horribly broken.
     // Now with the new classes we could attempt to reactivate it.
