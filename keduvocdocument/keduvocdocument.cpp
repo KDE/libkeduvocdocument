@@ -661,6 +661,7 @@ void KEduVocDocument::setIdentifier( int idx, const KEduVocIdentifier &id )
     if ( idx >= 0 && idx < d->m_identifiers.size() ) {
         d->m_identifiers[idx] = id;
     }
+    setModified(true);
 }
 
 
@@ -681,6 +682,7 @@ void KEduVocDocument::setTenseName(int index, const QString & tense)
     }
 
     d->m_tenseDescriptions[index] = tense;
+    setModified(true);
 }
 
 
@@ -693,6 +695,7 @@ QStringList KEduVocDocument::tenseDescriptions() const
 void KEduVocDocument::setTenseDescriptions( const QStringList &names )
 {
     d->m_tenseDescriptions = names;
+    setModified(true);
 }
 
 
@@ -770,6 +773,7 @@ void KEduVocDocument::setTitle( const QString & title )
 {
     d->m_title = title;
     d->m_lessonContainer->setName(title);
+    setModified(true);
 }
 
 QString KEduVocDocument::author() const
@@ -780,6 +784,7 @@ QString KEduVocDocument::author() const
 void KEduVocDocument::setAuthor( const QString & s )
 {
     d->m_author = s.simplified();
+    setModified(true);
 }
 
 QString KEduVocDocument::authorContact() const
@@ -790,6 +795,7 @@ QString KEduVocDocument::authorContact() const
 void KEduVocDocument::setAuthorContact( const QString & s )
 {
     d->m_authorContact = s.simplified();
+    setModified(true);
 }
 
 QString KEduVocDocument::license() const
@@ -805,6 +811,7 @@ QString KEduVocDocument::documentComment() const
 void KEduVocDocument::setCategory( const QString & category )
 {
     d->m_category = category;
+    setModified(true);
 }
 
 QString KEduVocDocument::category() const
@@ -823,21 +830,25 @@ void KEduVocDocument::setQueryIdentifier( const QString &org, const QString &tra
 {
     d->m_queryorg = org;
     d->m_querytrans = trans;
+    setModified(true);
 }
 
 void KEduVocDocument::setLicense( const QString & s )
 {
     d->m_license = s.simplified();
+    setModified(true);
 }
 
 void KEduVocDocument::setDocumentComment( const QString & s )
 {
     d->m_comment = s.trimmed();
+    setModified(true);
 }
 
 void KEduVocDocument::setGenerator( const QString & generator )
 {
     d->m_generator = generator;
+    setModified(true);
 }
 
 QString KEduVocDocument::generator() const
@@ -853,6 +864,7 @@ QString KEduVocDocument::version() const
 void KEduVocDocument::setVersion( const QString & vers )
 {
     d->m_version = vers;
+    setModified(true);
 }
 
 QString KEduVocDocument::csvDelimiter() const
@@ -863,6 +875,7 @@ QString KEduVocDocument::csvDelimiter() const
 void KEduVocDocument::setCsvDelimiter( const QString &delimiter )
 {
     d->m_csvDelimiter = delimiter;
+    setModified(true);
 }
 
 
