@@ -347,7 +347,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomElement &domElementParent )
 
         QString articleString;
         // female
-        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Feminine );
+        articleString = m_doc->identifier(i).article().article( KEduVocWordFlag::Singular, KEduVocWordFlag::Definite, KEduVocWordFlag::Feminine );
         if ( !articleString.isEmpty() ) {
             QDomElement domElementFD = m_domDoc.createElement( KV_ART_FD );
             QDomText domTextFD = m_domDoc.createTextNode( articleString );
@@ -355,7 +355,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomElement &domElementParent )
             domElementFD.appendChild( domTextFD );
             domElementEntry.appendChild( domElementFD );
         }
-        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Feminine );
+        articleString = m_doc->identifier(i).article().article( KEduVocWordFlag::Singular, KEduVocWordFlag::Indefinite, KEduVocWordFlag::Feminine );
         if ( !articleString.isEmpty() ) {
             QDomElement domElementFI = m_domDoc.createElement( KV_ART_FI );
             QDomText domTextFI = m_domDoc.createTextNode( articleString );
@@ -366,7 +366,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomElement &domElementParent )
 
 
         // male
-        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Masculine );
+        articleString = m_doc->identifier(i).article().article( KEduVocWordFlag::Singular, KEduVocWordFlag::Definite, KEduVocWordFlag::Masculine );
         if ( !articleString.isEmpty() ) {
             QDomElement domElementMD = m_domDoc.createElement( KV_ART_MD );
             QDomText domTextMD = m_domDoc.createTextNode( articleString );
@@ -374,7 +374,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomElement &domElementParent )
             domElementMD.appendChild( domTextMD );
             domElementEntry.appendChild( domElementMD );
         }
-        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Masculine );
+        articleString = m_doc->identifier(i).article().article( KEduVocWordFlag::Singular, KEduVocWordFlag::Indefinite, KEduVocWordFlag::Masculine );
         if ( !articleString.isEmpty() ) {
             QDomElement domElementMI = m_domDoc.createElement( KV_ART_MI );
             QDomText domTextMI = m_domDoc.createTextNode( articleString );
@@ -384,7 +384,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomElement &domElementParent )
         }
 
         // neutral
-        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Definite, KEduVocArticle::Neutral );
+        articleString = m_doc->identifier(i).article().article( KEduVocWordFlag::Singular, KEduVocWordFlag::Definite, KEduVocWordFlag::Neutral );
         if ( !articleString.isEmpty() ) {
             QDomElement domElementND = m_domDoc.createElement( KV_ART_ND );
             QDomText domTextND = m_domDoc.createTextNode( articleString );
@@ -392,7 +392,7 @@ bool KEduVocKvtmlWriter::writeArticle( QDomElement &domElementParent )
             domElementND.appendChild( domTextND );
             domElementEntry.appendChild( domElementND );
         }
-        articleString = m_doc->identifier(i).article().article( KEduVocArticle::Singular, KEduVocArticle::Indefinite, KEduVocArticle::Neutral );
+        articleString = m_doc->identifier(i).article().article( KEduVocWordFlag::Singular, KEduVocWordFlag::Indefinite, KEduVocWordFlag::Neutral );
         if ( !articleString.isEmpty() ) {
             QDomElement domElementNI = m_domDoc.createElement( KV_ART_NI );
             QDomText domTextNI = m_domDoc.createTextNode( articleString );

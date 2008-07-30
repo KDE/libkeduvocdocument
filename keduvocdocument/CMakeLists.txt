@@ -27,7 +27,8 @@ keduvocdocument.cpp
    keduvocvokabelnreader.cpp
    keduvocwqlreader.cpp
    keduvocxdxfreader.cpp
-   sharedkvtmlfiles.cpp )
+   sharedkvtmlfiles.cpp
+    )
 
 kde4_add_library(keduvocdocument SHARED ${keduvocdocument_LIB_SRCS})
 

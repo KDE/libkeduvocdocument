@@ -26,8 +26,8 @@
 class KEduVocWordType::Private
 {
 public:
-    EnumWordType m_wordType;
-    // cache the entries
+    // bitvector of word type flags
+    KEduVocWordFlags m_flags;
     QList<KEduVocExpression*> m_expressions;
     // list of translations
     QList<KEduVocTranslation*> m_translations;
@@ -35,9 +35,7 @@ public:
 
 KEduVocWordType::KEduVocWordType(const QString& name, KEduVocWordType *parent)
         : KEduVocContainer(name, WordType, parent), d( new Private )
-{
-    d->m_wordType = General;
-}
+{}
 
 KEduVocWordType::~KEduVocWordType()
 {
@@ -122,23 +120,23 @@ KEduVocExpression * KEduVocWordType::entry(int row, EnumEntriesRecursive recursi
     return entries().value(row);
 }
 
-void KEduVocWordType::setWordType(EnumWordType type)
+KEduVocWordFlags KEduVocWordType::wordType() const
 {
-    d->m_wordType = type;
+    return d->m_flags;
 }
 
-KEduVocWordType::EnumWordType KEduVocWordType::wordType() const
+void KEduVocWordType::setWordType(KEduVocWordFlags flags)
 {
-    return d->m_wordType;
+    d->m_flags = flags;
 }
 
-KEduVocWordType* KEduVocWordType::childOfType(KEduVocWordType::EnumWordType type)
+KEduVocWordType* KEduVocWordType::childOfType(const KEduVocWordFlags& flags)
 {
-    if(wordType()==type) {
+    if(d->m_flags == flags) {
         return this;
     }
     foreach(KEduVocContainer* child, childContainers()) {
-        KEduVocWordType* result = static_cast<KEduVocWordType*>(child)->childOfType(type);
+        KEduVocWordType* result = static_cast<KEduVocWordType*>(child)->childOfType(flags);
         if(result) {
             return result;
         }

@@ -22,6 +22,9 @@
 
 #include <QtCore/QStringList>
 
+#include "keduvocwordflags.h"
+
+class KEduVocWordType;
 /**
  * Class representing the articles of a language
  *
@@ -31,22 +34,6 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocArticle
 {
 public:
 
-    enum ArticleNumber {
-        Singular,
-        Dual,
-        Plural
-    };
-
-    enum ArticleGender {
-        Masculine,
-        Feminine,
-        Neutral
-    };
-
-    enum ArticleDefiniteness {
-        Definite,
-        Indefinite
-    };
 
 
     /**
@@ -80,18 +67,13 @@ public:
      */
     KEduVocArticle &operator= ( const KEduVocArticle& other );
 
+    QString article(const KEduVocWordFlags&);
 
-    QString article(ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
-
-    void setArticle(const QString& article, ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
-
-    void setArticle(const QString& article, int index);
+    void setArticle(const QString& article, const KEduVocWordFlags&);
 
     bool isArticle(const QString& article) const;
 
     bool isEmpty();
-
-    static int indexOf(ArticleNumber number, ArticleDefiniteness definite, ArticleGender gender);
 
     class Private;
     Private * const d;

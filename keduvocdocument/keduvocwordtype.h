@@ -21,6 +21,8 @@
 
 #include "keduvoccontainer.h"
 
+#include "keduvocwordflags.h"
+
 #include <QtCore/QList>
 #include <QtCore/QString>
 
@@ -31,17 +33,6 @@ class KEduVocTranslation;
 class KEDUVOCDOCUMENT_EXPORT KEduVocWordType :public KEduVocContainer
 {
 public:
-
-    enum EnumWordType {
-        General,
-        Noun,
-        NounMale,
-        NounFemale,
-        NounNeutral,
-        Verb,
-        Adjective,
-        Adverb
-    };
 
 
     /** default constructor */
@@ -55,34 +46,34 @@ public:
 
     /**
      * Internally (different from the name) the class can have one of the preset word types. These are used to determine special properties (verbs have conjugations available for example).
-     * @param type 
+     * @param type
      */
-    void setWordType(EnumWordType type);
+    void setWordType(KEduVocWordFlags flags);
 
     /**
-     * Return the meta word type for this class.
-     * @return 
+     * Return the raw WordTypeFlags. Returns NoInformation if no flags are set.
+     * @return WordTypeFlags
      */
-    KEduVocWordType::EnumWordType wordType() const;
+     KEduVocWordFlags wordType() const;
 
     /**
      * Return a child class (or this class) that is of the specified type. Returns 0 if no class of that type is found.
-     * @param type 
-     * @return 
+     * @param type
+     * @return
      */
-    KEduVocWordType* childOfType(KEduVocWordType::EnumWordType type);
+    KEduVocWordType* childOfType(const KEduVocWordFlags& flags);
 
     /**
      * The word type class does keep track of individual translations, because for one entry, the translations can have different word types (eg. genders of nouns tend to be different in different langues).
-     * @param row 
-     * @return 
+     * @param row
+     * @return
      */
     KEduVocTranslation * translation(int row);
 
     /**
      * get a list of all entries in the lesson
      * @param recursive include entries in sublessons
-     * @return 
+     * @return
      */
     QList < KEduVocExpression* > entries(EnumEntriesRecursive recursive = NotRecursive);
 

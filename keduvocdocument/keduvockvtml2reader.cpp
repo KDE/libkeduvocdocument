@@ -470,19 +470,31 @@ bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifi
  </article>
 */
 {
-    // singular
-    for ( KEduVocArticle::ArticleNumber num = KEduVocArticle::Singular; num <= KEduVocArticle::Plural; num = KEduVocArticle::ArticleNumber(num+1) ) {
+    QMap<int, KEduVocWordFlag::Flags> numbers;
+    numbers[0] = KEduVocWordFlag::Singular;
+    numbers[1] = KEduVocWordFlag::Dual;
+    numbers[2] = KEduVocWordFlag::Plural;
+    QMap<int, KEduVocWordFlag::Flags> genders;
+    genders[0] = KEduVocWordFlag::Masculine;
+    genders[1] = KEduVocWordFlag::Feminine;
+    genders[2] = KEduVocWordFlag::Neuter;
+    QMap<int, KEduVocWordFlag::Flags> defs;
+    defs[0] = KEduVocWordFlag::Definite;
+    defs[1] = KEduVocWordFlag::Indefinite;
+
+
+    for ( int num = 0; num <= 2; ++num) {
         QDomElement numberElement = articleElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[num] );
         if (!numberElement.isNull()) {
             // definite
-            for ( KEduVocArticle::ArticleDefiniteness def = KEduVocArticle::Definite; def <= KEduVocArticle::Indefinite; def = KEduVocArticle::ArticleDefiniteness(def+1) ) {
+            for ( int def = 0; def <= 1; ++def ) {
                 QDomElement defElement = numberElement.firstChildElement( KVTML_GRAMMATICAL_DEFINITENESS[def] );
                 if (!defElement.isNull()) {
                     // male
-                    for ( KEduVocArticle::ArticleGender gen = KEduVocArticle::Masculine; gen <= KEduVocArticle::Neutral; gen = KEduVocArticle::ArticleGender(gen+1) ) {
+                    for ( int gen = 0; gen <= 2; ++gen ) {
                         QDomElement genderElement = defElement.firstChildElement( KVTML_GRAMMATICAL_GENDER[gen] );
                         if (!genderElement.isNull()) {
-                            m_doc->identifier(identifierNum).article().setArticle( genderElement.text(), KEduVocArticle::indexOf(num, def, gen) );
+                            m_doc->identifier(identifierNum).article().setArticle( genderElement.text(), numbers[num] | defs[def] | genders[gen]);
                         }
                     }
                 }
@@ -546,25 +558,25 @@ bool KEduVocKvtml2Reader::readWordType( KEduVocWordType* parentContainer, QDomEl
     if ( !specialType.isEmpty() ) {
         // get the localized version
         if ( specialType == KVTML_SPECIALWORDTYPE_NOUN ) {
-            wordTypeContainer->setWordType(KEduVocWordType::Noun);
+            wordTypeContainer->setWordType(KEduVocWordFlag::Noun);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_VERB ) {
-            wordTypeContainer->setWordType(KEduVocWordType::Verb);
+            wordTypeContainer->setWordType(KEduVocWordFlag::Verb);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_ADVERB ) {
-            wordTypeContainer->setWordType(KEduVocWordType::Adverb);
+            wordTypeContainer->setWordType(KEduVocWordFlag::Adverb);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_ADJECTIVE ) {
-            wordTypeContainer->setWordType(KEduVocWordType::Adjective);
+            wordTypeContainer->setWordType(KEduVocWordFlag::Adjective);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_NOUN_MALE ) {
-            wordTypeContainer->setWordType(KEduVocWordType::NounMale);
+            wordTypeContainer->setWordType(KEduVocWordFlag::Noun | KEduVocWordFlag::Masculine);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_NOUN_FEMALE ) {
-            wordTypeContainer->setWordType(KEduVocWordType::NounFemale);
+            wordTypeContainer->setWordType(KEduVocWordFlag::Noun | KEduVocWordFlag::Feminine);
         }
         if ( specialType == KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) {
-            wordTypeContainer->setWordType(KEduVocWordType::NounNeutral);
+            wordTypeContainer->setWordType(KEduVocWordFlag::Noun| KEduVocWordFlag::Neuter);
         }
     } // special type
 

@@ -334,16 +334,28 @@ bool KEduVocKvtml2Writer::writeRelated(QDomElement & parentElement, QList< KEduV
 bool KEduVocKvtml2Writer::writeArticle( QDomElement &articleElement, int language )
 {
     ///@todo only write if not empty
-    for (int num = KEduVocArticle::Singular; num <= KEduVocArticle::Plural; num++)
+    QMap<int, KEduVocWordFlag::Flags> numbers;
+    numbers[0] = KEduVocWordFlag::Singular;
+    numbers[1] = KEduVocWordFlag::Dual;
+    numbers[2] = KEduVocWordFlag::Plural;
+    QMap<int, KEduVocWordFlag::Flags> genders;
+    genders[0] = KEduVocWordFlag::Masculine;
+    genders[1] = KEduVocWordFlag::Feminine;
+    genders[2] = KEduVocWordFlag::Neuter;
+    QMap<int, KEduVocWordFlag::Flags> defs;
+    defs[0] = KEduVocWordFlag::Definite;
+    defs[1] = KEduVocWordFlag::Indefinite;
+
+    for (int num = 0; num <= 2; num++)
     {
         QDomElement numberElement = m_domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
 
-        for (int def = KEduVocArticle::Definite; def <= KEduVocArticle::Indefinite; def++) {
+        for (int def = 0; def <= 1; def++) {
             QDomElement defElement = m_domDoc.createElement( KVTML_GRAMMATICAL_DEFINITENESS[def] );
 
-            for (int gen = KEduVocArticle::Masculine; gen <= KEduVocArticle::Neutral; gen++)
+            for (int gen = 0; gen <= 2; gen++)
             {
-                QString articleString = m_doc->identifier(language).article().article( KEduVocArticle::ArticleNumber(num), KEduVocArticle::ArticleDefiniteness(def), KEduVocArticle::ArticleGender(gen) );
+                QString articleString = m_doc->identifier(language).article().article(numbers[num] | genders[gen] | defs[def]);
                 if ( !articleString.isEmpty() ) {
                     defElement.appendChild( newTextElement( KVTML_GRAMMATICAL_GENDER[gen], articleString ) );
                 }
@@ -368,32 +380,27 @@ bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocWord
         QDomElement typeDefinitionElement = m_domDoc.createElement( KVTML_CONTAINER );
         typeDefinitionElement.appendChild( newTextElement( KVTML_NAME, wordType->name() ) );
 
-        switch (wordType->wordType()) {
-        case KEduVocWordType::Noun:
-            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN ) );
-            break;
-        case KEduVocWordType::NounMale:
-            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_MALE ) );
-            break;
-        case KEduVocWordType::NounFemale:
-            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_FEMALE ) );
-            break;
-        case KEduVocWordType::NounNeutral:
-            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) );
-            break;
-        case KEduVocWordType::Verb:
-            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_VERB ) );
-            break;
-        case KEduVocWordType::Adjective:
-            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_ADJECTIVE ) );
-            break;
-        case KEduVocWordType::Adverb:
-            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_ADVERB ) );
-            break;
-        default:
-            // no special type, no tag
-            break;
+        if (wordType->wordType().testFlag(KEduVocWordFlag::Noun))
+        {
+            if (wordType->wordType().testFlag(KEduVocWordFlag::Masculine))
+                typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_MALE ) );
+
+            else if (wordType->wordType().testFlag(KEduVocWordFlag::Feminine))
+                typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_FEMALE ) );
+
+            else if (wordType->wordType().testFlag(KEduVocWordFlag::Neuter))
+                typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) );
+            else
+                typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_NOUN ) );
         }
+        else if (wordType->wordType().testFlag(KEduVocWordFlag::Verb))
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_VERB ) );
+
+        else if (wordType->wordType().testFlag(KEduVocWordFlag::Adjective))
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_ADJECTIVE ) );
+
+        else if (wordType->wordType().testFlag(KEduVocWordFlag::Adverb))
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_ADVERB ) );
 
 
 // child entries
