@@ -642,8 +642,10 @@ void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers 
     */
 }
 
-
-
+const KEduVocIdentifier& KEduVocDocument::identifier( int index ) const
+{
+    return const_cast<const KEduVocIdentifier&>(identifier(index));
+}
 
 KEduVocIdentifier& KEduVocDocument::identifier( int index )
 {
@@ -653,7 +655,6 @@ KEduVocIdentifier& KEduVocDocument::identifier( int index )
     return d->m_identifiers[index];
 }
 
-
 void KEduVocDocument::setIdentifier( int idx, const KEduVocIdentifier &id )
 {
     if ( idx >= 0 && idx < d->m_identifiers.size() ) {
@@ -661,7 +662,6 @@ void KEduVocDocument::setIdentifier( int idx, const KEduVocIdentifier &id )
     }
     setModified(true);
 }
-
 
 QString KEduVocDocument::tenseName( int index ) const
 {
@@ -695,7 +695,7 @@ void KEduVocDocument::setTenseDescriptions( const QStringList &names )
 }
 
 // works if const is removed
-int KEduVocDocument::indexOfIdentifier( const QString &name )
+int KEduVocDocument::indexOfIdentifier( const QString &name ) const
 {
     for (int i = 0; i < identifierCount(); i++)
         if (identifier(i).locale() == name)

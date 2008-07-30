@@ -237,6 +237,11 @@ public:
     KEduVocIdentifier& identifier( int index );
 
     /**
+     * Const overload of identifier(int);
+     */
+    const KEduVocIdentifier& identifier( int index ) const;
+
+    /**
      * Removes identifier and the according translations in all entries
      *
      * @param index            number of translation 0..x
@@ -250,8 +255,6 @@ public:
      * @returns                index of identifier, 0 = original, 1..n = translation, -1 = not found
      */
     int indexOfIdentifier( const QString &name ) const;
-
-    int indexOfIdentifier( const QString &name );
 
     // *** tense methods ***
 
