@@ -695,13 +695,13 @@ void KEduVocDocument::setTenseDescriptions( const QStringList &names )
 }
 
 // works if const is removed
-// int KEduVocDocument::indexOfIdentifier( const QString &name ) const
-// {
-//     for (int i = 0; i < identifierCount(); i++)
-//         if (identifier(i).locale() == name)
-//             return i;
-//     return -1;
-// }
+int KEduVocDocument::indexOfIdentifier( const QString &name )
+{
+    for (int i = 0; i < identifierCount(); i++)
+        if (identifier(i).locale() == name)
+            return i;
+    return -1;
+}
 
 
 void KEduVocDocument::removeIdentifier( int index )

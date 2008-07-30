@@ -251,6 +251,8 @@ public:
      */
     int indexOfIdentifier( const QString &name ) const;
 
+    int indexOfIdentifier( const QString &name );
+
     // *** tense methods ***
 
     /**
