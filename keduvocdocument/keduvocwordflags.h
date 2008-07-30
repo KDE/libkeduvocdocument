@@ -48,7 +48,7 @@ public:
         Irregular = 0x20000, // Irregular verb conjugation
         Phrase = 0x40000, // The 'word' is actually a phrase
         Definite = 0x80000, // The article is definite
-        Indefinite = 0x100000, // The article is indefinite
+        Indefinite = 0x100000 // The article is indefinite
     };
 
     static const Flags genders = (Flags)(Masculine | Feminine | Neuter);
@@ -56,8 +56,8 @@ public:
     static const Flags numbers = (Flags)(Singular | Plural | Dual);
 };
 
-Q_DECLARE_FLAGS(KEduVocWordFlags, KEduVocWordFlag::Flags);
-Q_DECLARE_OPERATORS_FOR_FLAGS(KEduVocWordFlags);
+Q_DECLARE_FLAGS(KEduVocWordFlags, KEduVocWordFlag::Flags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KEduVocWordFlags)
 
 
 #endif
