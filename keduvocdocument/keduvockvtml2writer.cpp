@@ -636,11 +636,25 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
         pronounElement.appendChild( m_domDoc.createElement( KVTML_DUAL_EXISTS ) );
     }
 
+
+    QMap<int, KEduVocWordFlag::Flags> numbers;
+    numbers[0] = KEduVocWordFlag::Singular;
+    numbers[1] = KEduVocWordFlag::Dual;
+    numbers[2] = KEduVocWordFlag::Plural;
+    QMap<int, KEduVocWordFlag::Flags> persons;
+    persons[0] = KEduVocWordFlag::First;
+    persons[1] = KEduVocWordFlag::Second;
+    persons[3] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Masculine);
+    persons[4] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Feminine);
+    persons[5] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Neuter);
+
+
+
     // the actual pronouns
-    for ( int num = KEduVocConjugation::Singular; num <= KEduVocConjugation::Plural; num++ ) {
+    for ( int num = 0; num <= 2; num++ ) {
         QDomElement numberElement = m_domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
-        for ( int person = KEduVocConjugation::First; person <= KEduVocConjugation::ThirdNeutralCommon; person++ ) {
-            QString pronounString = pronoun.personalPronoun(KEduVocConjugation::ConjugationPerson(person), KEduVocConjugation::ConjugationNumber(num));
+        for ( int person = 0; person <= 5; person++ ) {
+            QString pronounString = pronoun.personalPronoun(numbers[num] | persons[person]);
             if (!pronounString.isEmpty()) {
                 numberElement.appendChild( newTextElement( KVTML_GRAMMATICAL_PERSON[person], pronounString ));
             }

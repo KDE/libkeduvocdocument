@@ -24,7 +24,7 @@ public:
     bool m_maleFemaleDifferent;
     bool m_neutralExists;
     bool m_dualExists;
-    QMap<int, QString> m_personalpronouns;
+    QMap<KEduVocWordFlags, QString> m_personalpronouns;
 };
 
 
@@ -75,25 +75,16 @@ bool KEduVocPersonalPronoun::operator ==(const KEduVocPersonalPronoun& other) co
 }
 
 
-QString KEduVocPersonalPronoun::personalPronoun(KEduVocConjugation::ConjugationPerson person, KEduVocConjugation::ConjugationNumber number) const
+QString KEduVocPersonalPronoun::personalPronoun(KEduVocWordFlags flags) const
 {
-    int index = indexOf(person, number);
-    if ( d->m_personalpronouns.contains(index) ) {
-        return d->m_personalpronouns.value(index);
-    }
-    return QString();
+        return d->m_personalpronouns.value(flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers));
 }
 
-void KEduVocPersonalPronoun::setPersonalPronoun(const QString & personalpronoun, KEduVocConjugation::ConjugationPerson person, KEduVocConjugation::ConjugationNumber number)
+void KEduVocPersonalPronoun::setPersonalPronoun(const QString & personalpronoun, KEduVocWordFlags flags)
 {
-    d->m_personalpronouns[indexOf(person, number)] = personalpronoun;
+        d->m_personalpronouns[flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers)] = personalpronoun;
 }
 
-
-int KEduVocPersonalPronoun::indexOf(KEduVocConjugation::ConjugationPerson person, KEduVocConjugation::ConjugationNumber number) const
-{
-    return person + (KEduVocConjugation::ThirdNeutralCommon+1) * number;
-}
 
 bool KEduVocPersonalPronoun::maleFemaleDifferent() const
 {

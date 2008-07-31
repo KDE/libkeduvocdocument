@@ -26,6 +26,7 @@
 #include "libkeduvocdocument_export.h"
 
 #include "keduvoctext.h"
+#include "keduvocwordflags.h"
 
 /**
 A declension contains all forms that a NOUN possibly can have.
@@ -34,21 +35,6 @@ A declension contains all forms that a NOUN possibly can have.
 */
 class KEDUVOCDOCUMENT_EXPORT KEduVocDeclension{
 public:
-    enum DeclensionNumber {
-        Singular = 0,
-        Dual,
-        Plural
-    };
-
-    enum DeclensionCase {
-        Nominative = 0,
-        Genitive,
-        Dative,
-        Accusative,
-        Ablative,
-        Locative,
-        Vocative
-    };
 
     /**
      * The constructor without arguments
@@ -81,8 +67,7 @@ public:
      * @param decCase
      * @return
      */
-    KEduVocText& declension(DeclensionNumber number, DeclensionCase decCase);
-    KEduVocText& declension(int index);
+    KEduVocText& declension(KEduVocWordFlags flags);
 
     /**
      * Set a declension
@@ -90,27 +75,23 @@ public:
      * @param number
      * @param decCase
      */
-    void setDeclension(const KEduVocText& declension, DeclensionNumber number, DeclensionCase decCase);
-
-    void setDeclension(const KEduVocText& declension, int index);
+    void setDeclension(const KEduVocText& declension, KEduVocWordFlags flags);
 
     bool isEmpty();
 
 
     /**
      * Create xml for this declension
-     * @param parent 
+     * @param parent
      */
     void toKVTML2(QDomElement& parent);
 
     /**
      * Reads a declension from xml, returns 0 if it is empty
-     * @param parent 
-     * @return 
+     * @param parent
+     * @return
      */
     static KEduVocDeclension* fromKVTML2(QDomElement& parent);
-
-    static int indexOf(DeclensionNumber number, DeclensionCase decCase);
 
 private:
     class Private;

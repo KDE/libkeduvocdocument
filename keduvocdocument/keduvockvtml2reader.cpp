@@ -694,27 +694,36 @@ bool KEduVocKvtml2Reader::readPersonalPronoun(QDomElement & pronounElement, KEdu
 
     QDomElement personElement = pronounElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[0] );
     if ( !personElement.isNull() ) {
-        readPersonalPronounChild( personElement, pronoun, KEduVocConjugation::Singular );
+        readPersonalPronounChild( personElement, pronoun, KEduVocWordFlag::Singular );
     }
 
     personElement = pronounElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[1] );
     if ( !personElement.isNull() ) {
-        readPersonalPronounChild( personElement, pronoun, KEduVocConjugation::Dual );
+        readPersonalPronounChild( personElement, pronoun, KEduVocWordFlag::Dual );
     }
 
     personElement = pronounElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[2] );
     if ( !personElement.isNull() ) {
-        readPersonalPronounChild( personElement, pronoun, KEduVocConjugation::Plural );
+        readPersonalPronounChild( personElement, pronoun, KEduVocWordFlag::Plural );
     }
     return true;
 }
 
 
-bool KEduVocKvtml2Reader::readPersonalPronounChild(QDomElement & personElement, KEduVocPersonalPronoun & pronoun, KEduVocConjugation::ConjugationNumber number)
+bool KEduVocKvtml2Reader::readPersonalPronounChild(QDomElement & personElement, KEduVocPersonalPronoun & pronoun, KEduVocWordFlags number)
 {
-    for (int person = KEduVocConjugation::First; person <= KEduVocConjugation::ThirdNeutralCommon; person++) {
+    QMap<int, KEduVocWordFlag::Flags> persons;
+    persons[0] = KEduVocWordFlag::First;
+    persons[1] = KEduVocWordFlag::Second;
+    persons[3] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Masculine);
+    persons[4] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Feminine);
+    persons[5] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Neuter);
+
+
+
+    for (int person = 0; person <= 5; person++) {
         QDomElement currentElement = personElement.firstChildElement( KVTML_GRAMMATICAL_PERSON[person] );
-        pronoun.setPersonalPronoun( currentElement.text(), KEduVocConjugation::ConjugationPerson(person), number );
+        pronoun.setPersonalPronoun( currentElement.text(), persons[person] | number );
     }
 
     return true;

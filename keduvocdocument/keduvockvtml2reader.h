@@ -77,7 +77,7 @@ private:
 
     bool readPersonalPronoun( QDomElement &conjugElement, KEduVocPersonalPronoun &pronoun );
 
-    bool readPersonalPronounChild(QDomElement & personElement, KEduVocPersonalPronoun & pronoun, KEduVocConjugation::ConjugationNumber number);
+    bool readPersonalPronounChild(QDomElement & personElement, KEduVocPersonalPronoun &pronoun, KEduVocWordFlags flags);
 
     /** read the types
      * @param typesElement QDomElement for the types group
@@ -97,9 +97,9 @@ private:
 
     /**
      * Read all <container> tags within a word type definition.
-     * @param parentContainer 
-     * @param lessonElement 
-     * @return 
+     * @param parentContainer
+     * @param lessonElement
+     * @return
      */
     bool readChildWordTypes( KEduVocWordType* parentContainer, QDomElement &lessonElement );
 
@@ -137,9 +137,9 @@ private:
 
     /**
      * Read <lesson> tags.
-     * @param parentLesson 
-     * @param lessonElement 
-     * @return 
+     * @param parentLesson
+     * @param lessonElement
+     * @return
      */
     bool readChildLessons( KEduVocLesson* parentLesson, QDomElement &lessonElement );
 

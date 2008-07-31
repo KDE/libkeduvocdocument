@@ -458,34 +458,34 @@ bool KEduVocKvtmlReader::readConjugation( QDomElement &domElementParent, KEduVoc
     // type - the tense?
     // finally the person
 
-    const KEduVocConjugation::ConjugationNumber numS = KEduVocConjugation::Singular;
-    const KEduVocConjugation::ConjugationNumber numP = KEduVocConjugation::Plural;
+    const KEduVocWordFlags numS = KEduVocWordFlag::Singular;
+    const KEduVocWordFlags numP = KEduVocWordFlag::Plural;
 
-    conjugation.setConjugation( pers1_sing, KEduVocConjugation::First, numS);
-    conjugation.setConjugation( pers2_sing, KEduVocConjugation::Second, numS);
-    conjugation.setConjugation( pers1_plur, KEduVocConjugation::First, numP);
-    conjugation.setConjugation( pers2_plur, KEduVocConjugation::Second, numP);
+    conjugation.setConjugation( pers1_sing, KEduVocWordFlag::First | numS);
+    conjugation.setConjugation( pers2_sing, KEduVocWordFlag::Second | numS);
+    conjugation.setConjugation( pers1_plur, KEduVocWordFlag::First | numP);
+    conjugation.setConjugation( pers2_plur, KEduVocWordFlag::Second | numP);
 
     if ( s3_common ) {
-        conjugation.setConjugation( pers3_f_sing, KEduVocConjugation::ThirdNeutralCommon, KEduVocConjugation::Singular );
+        conjugation.setConjugation( pers3_f_sing, KEduVocWordFlag::Third | KEduVocWordFlag::Neuter | KEduVocWordFlag::Singular );
     } else  {
         conjugation.setConjugation( pers3_m_sing,
-            KEduVocConjugation::ThirdMale, KEduVocConjugation::Singular );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Masculine | KEduVocWordFlag::Singular );
         conjugation.setConjugation( pers3_f_sing,
-            KEduVocConjugation::ThirdFemale, KEduVocConjugation::Singular );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Feminine | KEduVocWordFlag::Singular );
         conjugation.setConjugation( pers3_n_sing,
-            KEduVocConjugation::ThirdNeutralCommon, KEduVocConjugation::Singular );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Neuter |  KEduVocWordFlag::Singular );
     }
 
     if ( p3_common ) {
-        conjugation.setConjugation( pers3_f_plur, KEduVocConjugation::ThirdNeutralCommon, KEduVocConjugation::Plural );
+        conjugation.setConjugation( pers3_f_plur, KEduVocWordFlag::Third | KEduVocWordFlag::Neuter | KEduVocWordFlag::Plural );
     } else  {
         conjugation.setConjugation( pers3_m_plur,
-            KEduVocConjugation::ThirdMale, KEduVocConjugation::Plural );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Masculine | KEduVocWordFlag::Plural );
         conjugation.setConjugation( pers3_f_plur,
-            KEduVocConjugation::ThirdFemale, KEduVocConjugation::Plural );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Feminine | KEduVocWordFlag::Plural );
         conjugation.setConjugation( pers3_n_plur,
-            KEduVocConjugation::ThirdNeutralCommon, KEduVocConjugation::Plural );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Neuter | KEduVocWordFlag::Plural );
     }
 
     return true;
@@ -566,37 +566,37 @@ bool KEduVocKvtmlReader::readPersonalPronouns( QDomElement &domElementParent, KE
     // type - the tense?
     // finally the person
 
-    const KEduVocConjugation::ConjugationNumber numS = KEduVocConjugation::Singular;
+    KEduVocWordFlags numS = KEduVocWordFlag::Singular;
     pronouns.setMaleFemaleDifferent(false);
-    pronouns.setPersonalPronoun( pers1_sing, KEduVocConjugation::First, numS );
-    pronouns.setPersonalPronoun( pers2_sing, KEduVocConjugation::Second, numS );
+    pronouns.setPersonalPronoun( pers1_sing, KEduVocWordFlag::First | numS );
+    pronouns.setPersonalPronoun( pers2_sing, KEduVocWordFlag::Second | numS );
 
     // used to have common in female
     if ( s3_common ) {
-        pronouns.setPersonalPronoun( pers3_f_sing, KEduVocConjugation::ThirdNeutralCommon, numS );
+        pronouns.setPersonalPronoun( pers3_f_sing, KEduVocWordFlag::Third | KEduVocWordFlag::Neuter | numS );
     } else  {
         pronouns.setPersonalPronoun( pers3_m_sing,
-            KEduVocConjugation::ThirdMale, numS );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Masculine | numS );
         pronouns.setPersonalPronoun( pers3_f_sing,
-            KEduVocConjugation::ThirdFemale, numS );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Feminine | numS );
         pronouns.setPersonalPronoun( pers3_n_sing,
-            KEduVocConjugation::ThirdNeutralCommon, numS );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Neuter | numS );
         pronouns.setMaleFemaleDifferent(true);
     }
 
-    const KEduVocConjugation::ConjugationNumber numP = KEduVocConjugation::Plural;
+    KEduVocWordFlags numP = KEduVocWordFlag::Plural;
 
-    pronouns.setPersonalPronoun( pers1_plur, KEduVocConjugation::First, numP );
-    pronouns.setPersonalPronoun( pers2_plur, KEduVocConjugation::Second, numP );
+    pronouns.setPersonalPronoun( pers1_plur, KEduVocWordFlag::First | numP );
+    pronouns.setPersonalPronoun( pers2_plur, KEduVocWordFlag::Second | numP );
     if ( p3_common ) {
-        pronouns.setPersonalPronoun( pers3_f_plur, KEduVocConjugation::ThirdNeutralCommon, numP );
+        pronouns.setPersonalPronoun( pers3_f_plur, KEduVocWordFlag::Third | KEduVocWordFlag::Neuter | numP );
     } else  {
         pronouns.setPersonalPronoun( pers3_m_plur,
-            KEduVocConjugation::ThirdMale, numP );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Masculine | numP );
         pronouns.setPersonalPronoun( pers3_f_plur,
-            KEduVocConjugation::ThirdFemale, numP );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Feminine | numP );
         pronouns.setPersonalPronoun( pers3_n_plur,
-            KEduVocConjugation::ThirdNeutralCommon, numP );
+            KEduVocWordFlag::Third | KEduVocWordFlag::Neuter | numP );
         pronouns.setMaleFemaleDifferent(true);
     }
 

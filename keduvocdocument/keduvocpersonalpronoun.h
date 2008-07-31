@@ -38,8 +38,8 @@ public:
     KEduVocPersonalPronoun& operator = ( const KEduVocPersonalPronoun& a );
     bool operator == ( const KEduVocPersonalPronoun& a ) const;
 
-    QString personalPronoun(KEduVocConjugation::ConjugationPerson person, KEduVocConjugation::ConjugationNumber number) const;
-    void setPersonalPronoun(const QString& conjugation, KEduVocConjugation::ConjugationPerson person, KEduVocConjugation::ConjugationNumber number);
+    QString personalPronoun(KEduVocWordFlags flags) const;
+    void setPersonalPronoun(const QString& conjugation, KEduVocWordFlags flags);
 
     bool maleFemaleDifferent() const;
     void setMaleFemaleDifferent(bool different);
@@ -53,7 +53,6 @@ private:
     class Private;
     Private* const d;
 
-    int indexOf(KEduVocConjugation::ConjugationPerson person, KEduVocConjugation::ConjugationNumber number) const;
 };
 
 

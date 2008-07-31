@@ -32,7 +32,7 @@
 class KEduVocDeclension::Private
 {
 public:
-    QMap<int, KEduVocText> m_declensions;
+    QMap<KEduVocWordFlags, KEduVocText> m_declensions;
 };
 
 KEduVocDeclension::KEduVocDeclension()
@@ -57,29 +57,14 @@ KEduVocDeclension::~KEduVocDeclension()
     delete d;
 }
 
-KEduVocText& KEduVocDeclension::declension(DeclensionNumber number, DeclensionCase decCase)
+KEduVocText& KEduVocDeclension::declension(KEduVocWordFlags flags)
 {
-    return declension(indexOf(number, decCase));
+    return d->m_declensions[flags];
 }
 
-KEduVocText & KEduVocDeclension::declension(int index)
+void KEduVocDeclension::setDeclension(const KEduVocText & declension, KEduVocWordFlags flags)
 {
-    return d->m_declensions[index];
-}
-
-void KEduVocDeclension::setDeclension(const KEduVocText & declension, int index)
-{
-    d->m_declensions[index] = declension;
-}
-
-void KEduVocDeclension::setDeclension(const KEduVocText & declension, DeclensionNumber number, DeclensionCase decCase)
-{
-    setDeclension(declension, indexOf(number, decCase));
-}
-
-int KEduVocDeclension::indexOf(DeclensionNumber number, DeclensionCase decCase)
-{
-    return number * (Vocative+1) + decCase;
+    d->m_declensions[flags] = declension;
 }
 
 bool KEduVocDeclension::isEmpty()
@@ -95,11 +80,27 @@ void KEduVocDeclension::toKVTML2(QDomElement & parent)
     QDomDocument domDoc = parent.ownerDocument();
     QDomElement declensionElement = domDoc.createElement( KVTML_DECLENSION );
 
-    for ( KEduVocDeclension::DeclensionNumber num = KEduVocDeclension::Singular; num <= KEduVocDeclension::Plural; num = KEduVocDeclension::DeclensionNumber(num +1) ) {
+    QMap<int, KEduVocWordFlags> numbers;
+    numbers[0] = KEduVocWordFlag::Singular;
+    numbers[1] = KEduVocWordFlag::Dual;
+    numbers[2] = KEduVocWordFlag::Plural;
+
+    QMap<int, KEduVocWordFlags> cases;
+    cases[0] = KEduVocWordFlag::Nominative;
+    cases[1] = KEduVocWordFlag::Genitive;
+    cases[2] = KEduVocWordFlag::Dative;
+    cases[3] = KEduVocWordFlag::Accusative;
+    cases[4] = KEduVocWordFlag::Ablative;
+    cases[5] = KEduVocWordFlag::Locative;
+    cases[6] = KEduVocWordFlag::Vocative;
+
+
+
+    for ( int num = 0; num <= 2; ++num) {
         QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
-        for ( KEduVocDeclension::DeclensionCase dcase = KEduVocDeclension::Nominative; dcase < (KEduVocDeclension::Vocative+1); dcase = KEduVocDeclension::DeclensionCase(dcase +1) ) {
+        for ( int dcase = 0; dcase <= 6; ++dcase ) {
             QDomElement caseElement = domDoc.createElement( KVTML_DECLENSION_CASE[dcase] );
-            declension(num, dcase).toKVTML2(caseElement);
+            declension(numbers[num] | cases[dcase]).toKVTML2(caseElement);
 
             if (caseElement.hasChildNodes()) {
                 numberElement.appendChild(caseElement);
@@ -122,17 +123,32 @@ KEduVocDeclension* KEduVocDeclension::fromKVTML2(QDomElement & parent)
         return 0;
     }
 
+
+    QMap<int, KEduVocWordFlags> numbers;
+    numbers[0] = KEduVocWordFlag::Singular;
+    numbers[1] = KEduVocWordFlag::Dual;
+    numbers[2] = KEduVocWordFlag::Plural;
+
+    QMap<int, KEduVocWordFlags> cases;
+    cases[0] = KEduVocWordFlag::Nominative;
+    cases[1] = KEduVocWordFlag::Genitive;
+    cases[2] = KEduVocWordFlag::Dative;
+    cases[3] = KEduVocWordFlag::Accusative;
+    cases[4] = KEduVocWordFlag::Ablative;
+    cases[5] = KEduVocWordFlag::Locative;
+    cases[6] = KEduVocWordFlag::Vocative;
+
     KEduVocDeclension* declension = new KEduVocDeclension;
 
-    for ( KEduVocDeclension::DeclensionNumber num = KEduVocDeclension::Singular; num <= KEduVocDeclension::Plural; num = KEduVocDeclension::DeclensionNumber(num +1) ) {
+    for ( int num = 0; num <= 2; ++num ) {
         QDomElement numberElement = declensionElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[num] );
         if (!numberElement.isNull()) {
-            for ( KEduVocDeclension::DeclensionCase dcase = KEduVocDeclension::Nominative; dcase <= KEduVocDeclension::Vocative; dcase = DeclensionCase(dcase +1) ) {
+            for ( int dcase = 0; dcase <= 6; ++dcase) {
                 QDomElement caseElement = numberElement.firstChildElement( KVTML_DECLENSION_CASE[dcase] );
                 if (!caseElement.isNull()) {
                     KEduVocText text;
                     text.fromKVTML2(caseElement);
-                    declension->setDeclension(text, num, dcase);
+                    declension->setDeclension(text, numbers[num] | cases[dcase]);
                 }
             }
         }

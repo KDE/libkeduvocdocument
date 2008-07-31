@@ -27,6 +27,7 @@
 
 #include "libkeduvocdocument_export.h"
 #include "keduvoctext.h"
+#include "keduvocwordflags.h"
 
 #include <QtCore/QStringList>
 
@@ -36,22 +37,6 @@
 class KEDUVOCDOCUMENT_EXPORT KEduVocConjugation
 {
 public:
-
-    enum ConjugationNumber {
-        Singular,
-        Dual,
-        Plural
-    };
-
-    // store third person neutral/common in the same sttr
-    enum ConjugationPerson {
-        First,
-        Second,
-        ThirdMale,
-        ThirdFemale,
-        ThirdNeutralCommon
-    };
-
 
     /**
      * The constructor
@@ -65,12 +50,10 @@ public:
     KEduVocConjugation& operator = ( const KEduVocConjugation& a );
     bool operator == ( const KEduVocConjugation& a ) const;
 
-    KEduVocText& conjugation(ConjugationPerson person, ConjugationNumber number);
-    KEduVocText& conjugation(int index);
-    void setConjugation(const KEduVocText& conjugation, ConjugationPerson person, ConjugationNumber number);
-    void setConjugation(const KEduVocText& conjugation, int index);
+    KEduVocText conjugation(KEduVocWordFlags flags);
+    void setConjugation(const KEduVocText& conjugation, KEduVocWordFlags flags);
 
-    QList<int> keys();
+    QList<KEduVocWordFlags> keys();
 
     bool isEmpty();
 
@@ -86,8 +69,6 @@ public:
      * @return
      */
     static KEduVocConjugation* fromKVTML2(QDomElement& parent);
-
-    static int indexOf(ConjugationPerson person, ConjugationNumber number);
 
 private:
     class Private;

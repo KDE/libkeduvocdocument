@@ -191,8 +191,8 @@ void KEduVocDocumentValidatorTest::testDeclensions()
 void KEduVocDocumentValidatorTest::testConjugations()
 {
     KEduVocConjugation conjugation;
-    conjugation.setConjugation(KEduVocText("first-singular"), KEduVocConjugation::First, KEduVocConjugation::Singular);
-    QCOMPARE(conjugation.conjugation(KEduVocConjugation::First, KEduVocConjugation::Singular).text(), QString("first-singular"));
+    conjugation.setConjugation(KEduVocText("first-singular"), KEduVocWordFlag::First, KEduVocWordFlag::Singular);
+    QCOMPARE(conjugation.conjugation(KEduVocWordFlag::First, KEduVocWordFlag::Singular).text(), QString("first-singular"));
 
     QDomDocument doc = QDomDocument("test doc");
     QDomElement root = doc.createElement( "kvtml" );
@@ -201,9 +201,9 @@ void KEduVocDocumentValidatorTest::testConjugations()
 
     qDebug() << root.text();
 
-    KEduVocConjugation *con2 = KEduVocConjugation::fromKVTML2(root);
+    KEduVocConjugation *con2 = KEduVocWordFlag::fromKVTML2(root);
 
-    QCOMPARE(conjugation.conjugation(KEduVocConjugation::First, KEduVocConjugation::Singular).text(), con2->conjugation(KEduVocConjugation::First, KEduVocConjugation::Singular).text());
+    QCOMPARE(conjugation.conjugation(KEduVocWordFlag::First, KEduVocWordFlag::Singular).text(), con2->conjugation(KEduVocWordFlag::First, KEduVocWordFlag::Singular).text());
     delete con2;
 }
 
