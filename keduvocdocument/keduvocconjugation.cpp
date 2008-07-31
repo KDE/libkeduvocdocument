@@ -66,9 +66,9 @@ bool KEduVocConjugation::operator ==(const KEduVocConjugation& other) const
 
 
 
-KEduVocText KEduVocConjugation::conjugation(KEduVocWordFlags flags)
+KEduVocText& KEduVocConjugation::conjugation(KEduVocWordFlags flags) const
 {
-    return d->m_conjugations.value(flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers | KEduVocWordFlag::genders));
+        return d->m_conjugations[flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers | KEduVocWordFlag::genders)];
 }
 
 void KEduVocConjugation::setConjugation(const KEduVocText& conjugation, KEduVocWordFlags flags)
@@ -166,9 +166,9 @@ void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
 
 
     /*
-    for ( KEduVocDeclension::DeclensionNumber num = KEduVocDeclension::Singular; num <= KEduVocDeclension::Plural; num = KEduVocDeclension::DeclensionNumber(num +1) ) {
+    for ( KEduVocWordFlag::DeclensionNumber num = KEduVocWordFlag::Singular; num <= KEduVocWordFlag::Plural; num = KEduVocWordFlag::DeclensionNumber(num +1) ) {
         QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
-        for ( KEduVocDeclension::DeclensionCase dcase = KEduVocDeclension::Nominative; dcase < KEduVocDeclension::DeclensionCaseMAX; dcase = KEduVocDeclension::DeclensionCase(dcase +1) ) {
+        for ( KEduVocWordFlag::DeclensionCase dcase = KEduVocWordFlag::Nominative; dcase < KEduVocWordFlag::DeclensionCaseMAX; dcase = KEduVocWordFlag::DeclensionCase(dcase +1) ) {
             QDomElement caseElement = domDoc.createElement( KVTML_DECLENSION_CASE[dcase] );
             declension(num, dcase).toKVTML2(caseElement);
 

@@ -50,7 +50,7 @@ public:
     KEduVocConjugation& operator = ( const KEduVocConjugation& a );
     bool operator == ( const KEduVocConjugation& a ) const;
 
-    KEduVocText conjugation(KEduVocWordFlags flags);
+    KEduVocText& conjugation(KEduVocWordFlags flags) const;
     void setConjugation(const KEduVocText& conjugation, KEduVocWordFlags flags);
 
     QList<KEduVocWordFlags> keys();
