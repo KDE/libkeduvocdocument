@@ -715,13 +715,13 @@ bool KEduVocKvtml2Reader::readPersonalPronounChild(QDomElement & personElement, 
     QMap<int, KEduVocWordFlag::Flags> persons;
     persons[0] = KEduVocWordFlag::First;
     persons[1] = KEduVocWordFlag::Second;
-    persons[3] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Masculine);
-    persons[4] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Feminine);
-    persons[5] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Neuter);
+    persons[2] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Masculine);
+    persons[3] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Feminine);
+    persons[4] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Neuter);
 
 
 
-    for (int person = 0; person <= 5; person++) {
+    for (int person = 0; person <= 4; person++) {
         QDomElement currentElement = personElement.firstChildElement( KVTML_GRAMMATICAL_PERSON[person] );
         pronoun.setPersonalPronoun( currentElement.text(), persons[person] | number );
     }
