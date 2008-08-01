@@ -644,7 +644,10 @@ void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers 
 
 const KEduVocIdentifier& KEduVocDocument::identifier( int index ) const
 {
-    return const_cast<const KEduVocIdentifier&>(identifier(index));
+    if ( index < 0 || index >= d->m_identifiers.size() ) {
+        kError() << " Error: Invalid identifier index: " << index;
+    }
+    return d->m_identifiers.value(index);
 }
 
 KEduVocIdentifier& KEduVocDocument::identifier( int index )
