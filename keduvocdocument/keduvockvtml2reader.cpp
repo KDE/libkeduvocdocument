@@ -721,7 +721,7 @@ bool KEduVocKvtml2Reader::readPersonalPronounChild(QDomElement & personElement, 
 
 
 
-    for (int person = 0; person <= 4; person++) {
+    for (int person = 0; person < 5; person++) {
         QDomElement currentElement = personElement.firstChildElement( KVTML_GRAMMATICAL_PERSON[person] );
         pronoun.setPersonalPronoun( currentElement.text(), persons[person] | number );
     }

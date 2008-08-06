@@ -101,9 +101,9 @@ void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
     QMap<int, KEduVocWordFlag::Flags> persons;
     persons[0] = KEduVocWordFlag::First;
     persons[1] = KEduVocWordFlag::Second;
-    persons[3] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Masculine);
-    persons[4] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Feminine);
-    persons[5] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Neuter);
+    persons[2] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Masculine);
+    persons[3] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Feminine);
+    persons[4] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Neuter);
 
     // write the tense tag
     QDomDocument domDoc = parent.ownerDocument();
@@ -113,7 +113,7 @@ void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
 
     for ( int num = 0; num <= 2; ++num) {
         QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
-        for ( int person = 0; person <= 5; ++person) {
+        for ( int person = 0; person < 5; ++person) {
             if (!conjugation(numbers[num] | persons[person]).isEmpty()) {
                 QDomElement personElement = domDoc.createElement( KVTML_GRAMMATICAL_PERSON[person] );
                 numberElement.appendChild(personElement);
@@ -199,9 +199,9 @@ KEduVocConjugation* KEduVocConjugation::fromKVTML2(QDomElement & parent)
     QMap<int, KEduVocWordFlag::Flags> persons;
     persons[0] = KEduVocWordFlag::First;
     persons[1] = KEduVocWordFlag::Second;
-    persons[3] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Masculine);
-    persons[4] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Feminine);
-    persons[5] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Neuter);
+    persons[2] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Masculine);
+    persons[3] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Feminine);
+    persons[4] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Neuter);
 
 
     KEduVocConjugation* conjugation = new KEduVocConjugation;
@@ -210,7 +210,7 @@ KEduVocConjugation* KEduVocConjugation::fromKVTML2(QDomElement & parent)
         QDomElement numberElement = parent.firstChildElement( KVTML_GRAMMATICAL_NUMBER[num] );
 
         if (numberElement.hasChildNodes()) {
-            for (int person = 0; person <= 5; person++) {
+            for (int person = 0; person < 5; person++) {
                 QDomElement personElement = numberElement.firstChildElement( KVTML_GRAMMATICAL_PERSON[person] );
                 if (!personElement.isNull()) {
                     KEduVocText text;
