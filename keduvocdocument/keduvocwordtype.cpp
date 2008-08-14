@@ -94,7 +94,7 @@ void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
     // remove from cache
     bool found = false;
     foreach(int i, translation->entry()->translationIndices()) {
-        if (translation->entry()->translation(i)->wordType() == this) {
+        if (translation->entry()->translation(i)->wordType() && translation->entry()->translation(i)->wordType() == this) {
             found = true;
             break;
         }
