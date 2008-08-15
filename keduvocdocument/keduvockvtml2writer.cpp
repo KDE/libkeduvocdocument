@@ -639,7 +639,7 @@ bool KEduVocKvtml2Writer::writePersonalPronoun(QDomElement & pronounElement, con
 
 
     // the actual pronouns
-    for ( int num = 0; num <= 2; num++ ) {
+    for ( int num = 0; num < 3; num++ ) {
         QDomElement numberElement = m_domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
         for ( int person = 0; person < 5; person++ ) {
             QString pronounString = pronoun.personalPronoun(numbers[num] | persons[person]);

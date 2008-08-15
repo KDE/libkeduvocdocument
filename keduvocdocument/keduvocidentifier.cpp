@@ -103,12 +103,12 @@ void KEduVocIdentifier::setArticle( const KEduVocArticle& articles )
     d->m_articles = articles;
 }
 
-KEduVocArticle KEduVocIdentifier::article() const
+KEduVocArticle& KEduVocIdentifier::article() const
 {
     return d->m_articles;
 }
 
-KEduVocPersonalPronoun KEduVocIdentifier::personalPronouns() const
+KEduVocPersonalPronoun& KEduVocIdentifier::personalPronouns() const
 {
     return d->m_personalPronouns;
 }

@@ -77,12 +77,12 @@ bool KEduVocPersonalPronoun::operator ==(const KEduVocPersonalPronoun& other) co
 
 QString KEduVocPersonalPronoun::personalPronoun(KEduVocWordFlags flags) const
 {
-        return d->m_personalpronouns.value(flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers));
+        return d->m_personalpronouns.value(flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers| KEduVocWordFlag::genders));
 }
 
 void KEduVocPersonalPronoun::setPersonalPronoun(const QString & personalpronoun, KEduVocWordFlags flags)
 {
-        d->m_personalpronouns[flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers)] = personalpronoun;
+        d->m_personalpronouns[flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers| KEduVocWordFlag::genders)] = personalpronoun;
 }
 
 

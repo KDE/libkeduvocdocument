@@ -79,7 +79,7 @@ public:
      * Articles (a, the in English, el, la,... in Spanish)
      * @returns articles
      */
-    KEduVocArticle article() const;
+    KEduVocArticle& article() const;
 
     /**
      * Sets the articles for this identifier
@@ -91,7 +91,7 @@ public:
      * Get the personal pronouns for this identifier
      * @returns a KEduVocPersonalPronoun containing the personal pronouns
      */
-    KEduVocPersonalPronoun personalPronouns() const;
+    KEduVocPersonalPronoun& personalPronouns() const;
 
     /**
      * Sets personal pronouns

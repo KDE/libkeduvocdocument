@@ -63,12 +63,12 @@ KEduVocArticle::~KEduVocArticle()
 
 QString KEduVocArticle::article(const KEduVocWordFlags& flags)
 {
-    return d->m_articles.value(flags);
+    return d->m_articles.value(flags & (KEduVocWordFlag::genders | KEduVocWordFlag::numbers | KEduVocWordFlag::Definite | KEduVocWordFlag::Indefinite));
 }
 
 void KEduVocArticle::setArticle(const QString & article, const KEduVocWordFlags& flags)
 {
-    d->m_articles[flags] = article;
+    d->m_articles[flags & (KEduVocWordFlag::genders | KEduVocWordFlag::numbers | KEduVocWordFlag::Definite | KEduVocWordFlag::Indefinite)] = article;
 }
 
 
@@ -79,7 +79,13 @@ bool KEduVocArticle::isArticle(const QString & article) const
 
 bool KEduVocArticle::isEmpty()
 {
-    return d->m_articles.isEmpty();
+    // we don't count empty strings as articles
+    foreach(QString s, d->m_articles.values())
+    {
+        if (!s.isEmpty())
+            return false;
+    }
+    return true;
 }
 
 

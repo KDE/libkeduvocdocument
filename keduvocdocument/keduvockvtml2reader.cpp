@@ -491,7 +491,6 @@ bool KEduVocKvtml2Reader::readArticle( QDomElement &articleElement, int identifi
     defs[0] = KEduVocWordFlag::Definite;
     defs[1] = KEduVocWordFlag::Indefinite;
 
-
     for ( int num = 0; num <= 2; ++num) {
         QDomElement numberElement = articleElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[num] );
         if (!numberElement.isNull()) {
