@@ -117,11 +117,13 @@ KEduVocExpression::~KEduVocExpression()
 
 void KEduVocExpression::removeTranslation( int index )
 {
-    // remove the index we delete
-    d->m_translations.remove(index);
+    int count = d->m_translations.count();
 
-    // shift all other indexes
-    for ( int j = index; j < d->m_translations.count() - 1; j++ ) {
+    // remove the index we delete
+    delete d->m_translations.take(index);
+
+    // shift all other indexes, +1 for the deleted
+    for (int j = index; j <  count-1; j++) {
         d->m_translations[j] = d->m_translations.take(j+1);
     }
 }
