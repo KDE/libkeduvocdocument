@@ -106,7 +106,7 @@ private:
     /** read the tenses
      * @param tensesElement QDomElement for the tenses group
      */
-    const QStringList& readTenses( QDomElement &tensesElement );
+    QStringList readTenses( QDomElement &tensesElement );
 
     /** read the usages
      * @param usagesElement QDomElement for the usages group

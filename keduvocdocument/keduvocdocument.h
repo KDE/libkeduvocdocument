@@ -256,22 +256,6 @@ public:
      */
     int indexOfIdentifier( const QString &name ) const;
 
-    // *** tense methods ***
-
-    /**
-     * Returns the tense string
-     *
-     * @param index            number of tense
-     * @returns                string
-     */
-    QString tenseName( int index ) const;
-
-    /**
-     * Gets the descriptions of the tenses
-     */
-    QStringList tenseDescriptions() const;
-
-
     // *** grade methods ***
 
     /**

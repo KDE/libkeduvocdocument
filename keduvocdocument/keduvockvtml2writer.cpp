@@ -181,7 +181,7 @@ bool KEduVocKvtml2Writer::writeIdentifiers( QDomElement &identifiersElement )
         }
 
         // tenses
-        foreach(const QString &tense, m_doc->tenseDescriptions() ) {
+        foreach(const QString &tense, m_doc->identifier(i).tenseList() ) {
             if ( !( tense.isNull() ) ) {
                 identifier.appendChild( newTextElement( KVTML_TENSE, tense ) );
             }

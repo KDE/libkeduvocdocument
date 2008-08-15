@@ -666,19 +666,6 @@ void KEduVocDocument::setIdentifier( int idx, const KEduVocIdentifier &id )
     setModified(true);
 }
 
-QString KEduVocDocument::tenseName( int index ) const
-{
-    if ( index >= d->m_tenseDescriptions.size() )
-        return "";
-    else
-        return d->m_tenseDescriptions[index];
-}
-
-QStringList KEduVocDocument::tenseDescriptions() const
-{
-    return d->m_tenseDescriptions;
-}
-
 // works if const is removed
 int KEduVocDocument::indexOfIdentifier( const QString &name ) const
 {

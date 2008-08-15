@@ -55,8 +55,9 @@ KEduVocIdentifier::~KEduVocIdentifier()
 }
 
 KEduVocIdentifier::KEduVocIdentifier( const KEduVocIdentifier &other )
-: d( new Private )
+: d( new Private( *other.d ) )
 {
+#if 0
     d->m_locale = other.d->m_locale;
     d->m_name = other.d->m_name;
     d->m_articles = other.d->m_articles;
@@ -64,6 +65,7 @@ KEduVocIdentifier::KEduVocIdentifier( const KEduVocIdentifier &other )
     d->m_comment = other.d->m_comment;
     d->m_tenses = other.d->m_tenses;
     d->m_type = other.d->m_type;
+#endif
 }
 
 KEduVocIdentifier& KEduVocIdentifier::operator= ( const KEduVocIdentifier &other )

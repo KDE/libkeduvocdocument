@@ -270,8 +270,9 @@ bool KEduVocKvtml2Reader::readIdentifier( QDomElement &identifierElement )
         m_doc->identifier(id).setPersonalPronouns( personalPronoun );
     }
 
-
     QStringList tenses = readTenses(identifierElement);
+kDebug() << tenses;
+
     m_doc->identifier(id).setTenseList(tenses);
 
     return result;
@@ -609,7 +610,7 @@ bool KEduVocKvtml2Reader::readWordType( KEduVocWordType* parentContainer, QDomEl
     return true;
 }
 
-const QStringList& KEduVocKvtml2Reader::readTenses( QDomElement &tensesElement )
+QStringList KEduVocKvtml2Reader::readTenses( QDomElement &tensesElement )
 {
     QStringList tenses;
 
