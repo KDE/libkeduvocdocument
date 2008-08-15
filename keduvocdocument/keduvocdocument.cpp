@@ -674,18 +674,6 @@ QString KEduVocDocument::tenseName( int index ) const
         return d->m_tenseDescriptions[index];
 }
 
-void KEduVocDocument::setTenseName(int index, const QString & tense)
-{
-    if ( index >= d->m_tenseDescriptions.size() ) {
-        for ( int i = d->m_tenseDescriptions.size(); i <= index; i++ ) {
-            d->m_tenseDescriptions.append( "" );
-        }
-    }
-
-    d->m_tenseDescriptions[index] = tense;
-    setModified(true);
-}
-
 QStringList KEduVocDocument::tenseDescriptions() const
 {
     return d->m_tenseDescriptions;
