@@ -145,9 +145,19 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
 {
     bool result = false;
 
+    QDomElement groupElement = domElementParent.firstChildElement( KVTML_IDENTIFIERS );
+
     QDomElement currentElement;
 
-    QDomElement groupElement = domElementParent.firstChildElement( KVTML_IDENTIFIERS );
+    // ensure backwards compability - in kde 4.1 and earlier tenses were direct properties of the document class.
+    // now they are moved into the individual identifiers
+    QStringList tensesCompability;
+    groupElement = groupElement.firstChildElement( KVTML_TENSES );
+    if ( !groupElement.isNull() ) {
+        tensesCompability = readTenses( groupElement );
+    }
+
+    groupElement = domElementParent.firstChildElement( KVTML_IDENTIFIERS );
     if ( !groupElement.isNull() ) {
         QDomNodeList entryList = groupElement.elementsByTagName( KVTML_IDENTIFIER );
         if ( entryList.length() <= 0 ) {
@@ -159,15 +169,14 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
             currentElement = entryList.item( i ).toElement();
             if ( currentElement.parentNode() == groupElement ) {
                 result = readIdentifier( currentElement );
-                if ( !result )
+                if ( !result ) {
                     return false;
+                }
+                if (!tensesCompability.isEmpty()) {
+                    m_doc->identifier(i).setTenseList(tensesCompability);
+                }
             }
         }
-    }
-
-    groupElement = domElementParent.firstChildElement( KVTML_TENSES );
-    if ( !groupElement.isNull() ) {
-        readTenses( groupElement );
     }
 
     groupElement = domElementParent.firstChildElement( KVTML_ENTRIES );
@@ -248,11 +257,6 @@ bool KEduVocKvtml2Reader::readIdentifier( QDomElement &identifierElement )
         // TODO: do something with the type
     }
 
-    currentElement = identifierElement.firstChildElement( KVTML_SIZEHINT );
-    if ( !currentElement.isNull() ) {
-        // TODO: do something with the sizehint
-    }
-
     // read sub-parts
     currentElement = identifierElement.firstChildElement( KVTML_ARTICLE );
     if ( !currentElement.isNull() ) {
@@ -265,6 +269,11 @@ bool KEduVocKvtml2Reader::readIdentifier( QDomElement &identifierElement )
         readPersonalPronoun( currentElement, personalPronoun );
         m_doc->identifier(id).setPersonalPronouns( personalPronoun );
     }
+
+
+    QStringList tenses = readTenses(identifierElement);
+    m_doc->identifier(id).setTenseList(tenses);
+
     return result;
 }
 
@@ -601,7 +610,7 @@ bool KEduVocKvtml2Reader::readWordType( KEduVocWordType* parentContainer, QDomEl
     return true;
 }
 
-bool KEduVocKvtml2Reader::readTenses( QDomElement &tensesElement )
+const QStringList& KEduVocKvtml2Reader::readTenses( QDomElement &tensesElement )
 {
     QStringList tenses;
 
@@ -613,26 +622,8 @@ bool KEduVocKvtml2Reader::readTenses( QDomElement &tensesElement )
         }
     }
 
-    m_doc->setTenseDescriptions( tenses );
-    return true;
+    return tenses;
 }
-
-/*
-bool KEduVocKvtml2Reader::readUsages( QDomElement &usagesElement )
-{
-    QStringList usages;
-
-    QDomNodeList usageNodes = usagesElement.elementsByTagName( KVTML_USAGE );
-    for ( int i = 0; i < usageNodes.count(); ++i ) {
-        QDomElement currentElement = usageNodes.item( i ).toElement();
-        if ( currentElement.parentNode() == usagesElement ) {
-            m_doc->addUsage( currentElement.text() );
-        }
-    }
-
-    return true;
-}*/
-
 
 bool KEduVocKvtml2Reader::readComparison( QDomElement &domElementParent, KEduVocTranslation* translation )
 /*

@@ -88,11 +88,6 @@ private:
      */
     bool writeLeitnerBoxes( QDomElement &leitnerParentElement, KEduVocLeitnerBox* parentContainer );
 
-    /** write tenses
-     * @param tensesElement QDomElement tenses to write to
-     */
-    bool writeTenses( QDomElement &tensesElement );
-
     /** write entries
      * @param entriesElement QDomElement entries to write to
      */

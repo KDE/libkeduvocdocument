@@ -73,13 +73,6 @@ bool KEduVocKvtml2Writer::createXmlDocument( KEduVocDocument *doc, const QString
     writeIdentifiers( currentElement );
     domElementKvtml.appendChild( currentElement );
 
-    // tenses
-    currentElement = m_domDoc.createElement( KVTML_TENSES );
-    writeTenses( currentElement );
-    if ( currentElement.hasChildNodes() ) {
-        domElementKvtml.appendChild( currentElement );
-    }
-
     // entries
     currentElement = m_domDoc.createElement( KVTML_ENTRIES );
     if ( !writeEntries( currentElement ) ) {
@@ -187,6 +180,12 @@ bool KEduVocKvtml2Writer::writeIdentifiers( QDomElement &identifiersElement )
             identifier.appendChild( personalpronouns );
         }
 
+        // tenses
+        foreach(const QString &tense, m_doc->tenseDescriptions() ) {
+            if ( !( tense.isNull() ) ) {
+                identifier.appendChild( newTextElement( KVTML_TENSE, tense ) );
+            }
+        }
         // add this identifier to the group
         identifiersElement.appendChild( identifier );
     }
@@ -454,17 +453,6 @@ bool KEduVocKvtml2Writer::writeLeitnerBoxes( QDomElement &leitnerParentElement, 
 
         leitnerParentElement.appendChild( containerElement );
     }
-    return true;
-}
-
-bool KEduVocKvtml2Writer::writeTenses( QDomElement &tensesElement )
-{
-    foreach( const QString &tense, m_doc->tenseDescriptions() ) {
-        if ( !( tense.isNull() ) ) {
-            tensesElement.appendChild( newTextElement( KVTML_TENSE, tense ) );
-        }
-    }
-
     return true;
 }
 
