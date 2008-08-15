@@ -46,6 +46,8 @@ private slots:
     void testTranslations();
     void testConjugations();
     void testDeclensions();
+    void testAddRemoveLanguage();
+
 };
 
 void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
@@ -206,6 +208,44 @@ void KEduVocDocumentValidatorTest::testConjugations()
     QCOMPARE(conjugation.conjugation(KEduVocWordFlag::First | KEduVocWordFlag::Singular).text(), con2->conjugation(KEduVocWordFlag::First | KEduVocWordFlag::Singular).text());
     delete con2;
 }
+
+void KEduVocDocumentValidatorTest::testAddRemoveLanguage()
+{
+    KEduVocDocument doc;
+    // create some initial languages
+    doc.appendIdentifier();
+    doc.appendIdentifier();
+    doc.appendIdentifier();
+    doc.appendIdentifier();
+    doc.identifier(0).setName("0");
+    doc.identifier(1).setName("1");
+    doc.identifier(2).setName("2");
+    doc.identifier(3).setName("3");
+
+    QCOMPARE(doc.identifierCount(), 4);
+    KEduVocLesson* lesson = new KEduVocLesson("lesson", doc.lesson());
+    doc.lesson()->appendChildContainer(lesson);
+    lesson->appendEntry(new KEduVocExpression);
+    lesson->entry(0)->setTranslation(0, "0");
+    lesson->entry(0)->setTranslation(1, "1");
+    lesson->entry(0)->setTranslation(2, "2");
+    lesson->entry(0)->setTranslation(3, "3");
+    QCOMPARE(lesson->entry(0)->translationIndices().size(), 4);
+
+    // throw away the second language
+    doc.removeIdentifier(1);
+
+    QCOMPARE(doc.identifierCount(), 3);
+    QCOMPARE(doc.identifier(0).name(), QString("0"));
+    QCOMPARE(doc.identifier(1).name(), QString("2"));
+    QCOMPARE(doc.identifier(2).name(), QString("3"));
+
+    QCOMPARE(lesson->entry(0)->translationIndices().size(), 3);
+    QCOMPARE(lesson->entry(0)->translation(0)->text(), QString("0"));
+    QCOMPARE(lesson->entry(0)->translation(1)->text(), QString("2"));
+    QCOMPARE(lesson->entry(0)->translation(2)->text(), QString("3"));
+}
+
 
 QTEST_KDEMAIN_CORE( KEduVocDocumentValidatorTest )
 
