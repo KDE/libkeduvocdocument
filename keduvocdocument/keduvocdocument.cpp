@@ -691,12 +691,6 @@ QStringList KEduVocDocument::tenseDescriptions() const
     return d->m_tenseDescriptions;
 }
 
-void KEduVocDocument::setTenseDescriptions( const QStringList &names )
-{
-    d->m_tenseDescriptions = names;
-    setModified(true);
-}
-
 // works if const is removed
 int KEduVocDocument::indexOfIdentifier( const QString &name ) const
 {
@@ -705,7 +699,6 @@ int KEduVocDocument::indexOfIdentifier( const QString &name ) const
             return i;
     return -1;
 }
-
 
 void KEduVocDocument::removeIdentifier( int index )
 {

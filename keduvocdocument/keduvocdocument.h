@@ -274,11 +274,6 @@ public:
     QString tenseName( int index ) const;
 
     /**
-     * Sets the description of the tenses
-     */
-    void setTenseDescriptions( const QStringList &names );
-
-    /**
      * Gets the descriptions of the tenses
      */
     QStringList tenseDescriptions() const;

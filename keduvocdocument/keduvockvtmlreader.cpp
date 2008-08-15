@@ -187,7 +187,9 @@ bool KEduVocKvtmlReader::readBody( QDomElement &domElementParent )
         }
     }
 
-    m_doc->setTenseDescriptions(m_compability.documentTenses());
+    for(int i = 0; i < m_doc->identifierCount(); i++) {
+        m_doc->identifier(i).setTenseList(m_compability.documentTenses());
+    }
 
     return true;
 }

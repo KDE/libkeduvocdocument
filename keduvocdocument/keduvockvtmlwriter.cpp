@@ -438,7 +438,7 @@ bool KEduVocKvtmlWriter::writeType( QDomElement &domElementParent )
     return true;
 }
 
-
+/*
 bool KEduVocKvtmlWriter::writeTense( QDomElement &domElementParent )
 {
     if ( m_doc->tenseDescriptions().count() == 0 )
@@ -462,7 +462,7 @@ bool KEduVocKvtmlWriter::writeTense( QDomElement &domElementParent )
     domElementParent.appendChild( domElementTense );
     return true;
 }
-
+*/
 
 bool KEduVocKvtmlWriter::writeUsage( QDomElement &domElementParent )
 {
