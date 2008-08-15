@@ -113,6 +113,10 @@ public:
      */
     void setTense(int tenseIndex, const QString& tense);
 
+    const QStringList& tenseList() const;
+
+    void setTenseList(const QStringList& tenses);
+
 private:
     class Private;
     Private * const d;

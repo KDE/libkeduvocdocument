@@ -134,3 +134,13 @@ void KEduVocIdentifier::setTense(int tenseIndex, const QString& tense)
     }
 }
 
+const QStringList& KEduVocIdentifier::tenseList() const
+{
+    return d->m_tenses;
+}
+
+void KEduVocIdentifier::setTenseList(const QStringList& tenses)
+{
+    d->m_tenses = tenses;
+}
+
