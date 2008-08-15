@@ -1,15 +1,5 @@
 /***************************************************************************
-
-    C++ Interface: keduvocidentifier
-
-    -----------------------------------------------------------------------
-
-    begin         : Mi Aug 29 2007
-
-    copyright     : (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
-
-    -----------------------------------------------------------------------
-
+    Copyright 2007-2008 Frederik Gladhorn <gladhorn@kde.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -35,8 +25,6 @@
 
 /**
 Class to store meta information about a language or any other category in the vocabulary.
-
- @author
 */
 class KEDUVOCDOCUMENT_EXPORT KEduVocIdentifier
 {
@@ -87,7 +75,6 @@ public:
      */
     void setLocale( const QString& name );
 
-
     /**
      * Articles (a, the in English, el, la,... in Spanish)
      * @returns articles
@@ -99,7 +86,6 @@ public:
      * @param art              article block
      */
     void setArticle( const KEduVocArticle& article );
-
 
     /**
      * Get the personal pronouns for this identifier
@@ -113,10 +99,23 @@ public:
      */
     void setPersonalPronouns( const KEduVocPersonalPronoun &pronouns );
 
+    /**
+     * Returns the name of tense number @p tenseIndex
+     * @param tenseIndex desired tense
+     * @return name of the tense
+     */
+    const QString& tense(int tenseIndex) const;
+
+    /**
+     * Sets the name of a tense for this language
+     * @param tenseIndex 
+     * @param tense 
+     */
+    void setTense(int tenseIndex, const QString& tense);
+
 private:
     class Private;
     Private * const d;
-
 };
 
 #endif

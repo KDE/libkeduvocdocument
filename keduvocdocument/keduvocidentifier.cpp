@@ -1,15 +1,5 @@
 /***************************************************************************
-
-    C++ Implementation: keduvocidentifier
-
-    -----------------------------------------------------------------------
-
-    begin         : Mi Aug 29 2007
-
-    copyright     : (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
-
-    -----------------------------------------------------------------------
-
+    Copyright 2007-2008 Frederik Gladhorn <gladhorn@kde.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -42,19 +32,15 @@ public:
     QString m_type;
 
     /** I, you, he, she, it... */
-    KEduVocPersonalPronoun  m_personalPronouns;
+    KEduVocPersonalPronoun m_personalPronouns;
 
     /** the for english ;)
        der, die, das ... in german */
-    KEduVocArticle      m_articles;
+    KEduVocArticle m_articles;
 
     /** Future, present and past... and many more */
-    QSet < QString >    m_tenses;
-
-    /** Size hint for the width of this column - has to go somewere. Here at least we have the headers... */
-    int m_sizeHint;
+    QStringList m_tenses;
 };
-
 
 KEduVocIdentifier::KEduVocIdentifier()
 : d( new Private )
@@ -63,12 +49,10 @@ KEduVocIdentifier::KEduVocIdentifier()
     d->m_locale = "en";
 }
 
-
 KEduVocIdentifier::~KEduVocIdentifier()
 {
     delete d;
 }
-
 
 KEduVocIdentifier::KEduVocIdentifier( const KEduVocIdentifier &other )
 : d( new Private )
@@ -78,11 +62,9 @@ KEduVocIdentifier::KEduVocIdentifier( const KEduVocIdentifier &other )
     d->m_articles = other.d->m_articles;
     d->m_personalPronouns = other.d->m_personalPronouns;
     d->m_comment = other.d->m_comment;
-    d->m_sizeHint = other.d->m_sizeHint;
     d->m_tenses = other.d->m_tenses;
     d->m_type = other.d->m_type;
 }
-
 
 KEduVocIdentifier& KEduVocIdentifier::operator= ( const KEduVocIdentifier &other )
 {
@@ -90,9 +72,11 @@ KEduVocIdentifier& KEduVocIdentifier::operator= ( const KEduVocIdentifier &other
     d->m_name = other.d->m_name;
     d->m_articles = other.d->m_articles;
     d->m_personalPronouns = other.d->m_personalPronouns;
+    d->m_comment = other.d->m_comment;
+    d->m_tenses = other.d->m_tenses;
+    d->m_type = other.d->m_type;
     return *this;
 }
-
 
 QString KEduVocIdentifier::name() const
 {
@@ -114,7 +98,6 @@ void KEduVocIdentifier::setLocale(const QString & locale)
     d->m_locale = locale;
 }
 
-
 void KEduVocIdentifier::setArticle( const KEduVocArticle& articles )
 {
     d->m_articles = articles;
@@ -134,3 +117,20 @@ void KEduVocIdentifier::setPersonalPronouns( const KEduVocPersonalPronoun & pron
 {
     d->m_personalPronouns = pronouns;
 }
+
+const QString& KEduVocIdentifier::tense(int tenseIndex) const
+{
+    Q_ASSERT(d->m_tenses.size() > tenseIndex);
+    return d->m_tenses.value(tenseIndex);
+}
+
+void KEduVocIdentifier::setTense(int tenseIndex, const QString& tense)
+{
+    Q_ASSERT(d->m_tenses.size() >= tenseIndex);
+    if (tenseIndex == d->m_tenses.size()) {
+        d->m_tenses.append(tense);
+    } else {
+        d->m_tenses[tenseIndex] = tense;
+    }
+}
+
