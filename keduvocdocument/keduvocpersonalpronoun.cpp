@@ -77,7 +77,14 @@ bool KEduVocPersonalPronoun::operator ==(const KEduVocPersonalPronoun& other) co
 
 QString KEduVocPersonalPronoun::personalPronoun(KEduVocWordFlags flags) const
 {
-        return d->m_personalpronouns.value(flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers| KEduVocWordFlag::genders));
+        QString p = d->m_personalpronouns.value(flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers| KEduVocWordFlag::genders));
+        if (p.isEmpty() && !(flags & KEduVocWordFlag::genders) && d->m_maleFemaleDifferent && d->m_neutralExists)
+        {
+            kDebug() << "initial flag lookup failed, added neuter gender flag";
+           flags |= KEduVocWordFlag::Neuter;
+           p = d->m_personalpronouns.value(flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers| KEduVocWordFlag::genders));
+        }
+        return p;
 }
 
 void KEduVocPersonalPronoun::setPersonalPronoun(const QString & personalpronoun, KEduVocWordFlags flags)
