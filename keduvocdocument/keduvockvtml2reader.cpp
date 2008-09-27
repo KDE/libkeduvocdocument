@@ -149,7 +149,7 @@ bool KEduVocKvtml2Reader::readGroups( QDomElement &domElementParent )
 
     QDomElement currentElement;
 
-    // ensure backwards compability - in kde 4.1 and earlier tenses were direct properties of the document class.
+    // ensure backwards compatibility - in kde 4.1 and earlier tenses were direct properties of the document class.
     // now they are moved into the individual identifiers
     QStringList tensesCompability;
     groupElement = groupElement.firstChildElement( KVTML_TENSES );
