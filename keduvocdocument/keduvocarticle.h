@@ -75,6 +75,7 @@ public:
 
     bool isEmpty();
 
+private:
     class Private;
     Private * const d;
 };
