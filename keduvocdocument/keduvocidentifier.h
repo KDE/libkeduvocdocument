@@ -104,7 +104,7 @@ public:
      * @param tenseIndex desired tense
      * @return name of the tense
      */
-    const QString& tense(int tenseIndex) const;
+    QString tense(int tenseIndex) const;
 
     /**
      * Sets the name of a tense for this language
@@ -113,7 +113,7 @@ public:
      */
     void setTense(int tenseIndex, const QString& tense);
 
-    const QStringList& tenseList() const;
+    QStringList tenseList() const;
 
     void setTenseList(const QStringList& tenses);
 

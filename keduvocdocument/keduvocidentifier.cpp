@@ -120,7 +120,7 @@ void KEduVocIdentifier::setPersonalPronouns( const KEduVocPersonalPronoun & pron
     d->m_personalPronouns = pronouns;
 }
 
-const QString& KEduVocIdentifier::tense(int tenseIndex) const
+QString KEduVocIdentifier::tense(int tenseIndex) const
 {
     Q_ASSERT(d->m_tenses.size() > tenseIndex);
     return d->m_tenses.value(tenseIndex);
@@ -136,7 +136,7 @@ void KEduVocIdentifier::setTense(int tenseIndex, const QString& tense)
     }
 }
 
-const QStringList& KEduVocIdentifier::tenseList() const
+QStringList KEduVocIdentifier::tenseList() const
 {
     return d->m_tenses;
 }

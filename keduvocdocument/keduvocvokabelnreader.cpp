@@ -119,12 +119,12 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         temp = inputStream.readLine(); //DO NOT translate
     }
 
-    for ( i = 0; i <= 14; i++ ) {
+    for ( i = 0; i <= 14; ++i ) {
         inputStream.readLine();
     }
 
 
-    for ( i = 0; i < wordCount - 1; i++ ) {
+    for ( i = 0; i < wordCount - 1; ++i ) {
         int c = 0;
         expression.clear();
 
