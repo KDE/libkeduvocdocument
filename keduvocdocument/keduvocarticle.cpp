@@ -80,7 +80,7 @@ bool KEduVocArticle::isArticle(const QString & article) const
 bool KEduVocArticle::isEmpty()
 {
     // we don't count empty strings as articles
-    foreach(const QString& s, d->m_articles.values())
+    foreach(const QString& s, d->m_articles)
     {
         if (!s.isEmpty())
             return false;
