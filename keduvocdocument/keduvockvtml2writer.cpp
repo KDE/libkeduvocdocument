@@ -56,7 +56,7 @@ bool KEduVocKvtml2Writer::createXmlDocument( KEduVocDocument *doc, const QString
 {
     m_doc = doc;
 
-    m_domDoc = QDomDocument( "kvtml PUBLIC \"kvtml2.dtd\" \"http://edu.kde.org/kanagram/kvtml2.dtd\"" );
+    m_domDoc = QDomDocument( "kvtml PUBLIC \"kvtml2.dtd\" \"http://edu.kde.org/kvtml/kvtml2.dtd\"" );
     m_domDoc.appendChild( m_domDoc.createProcessingInstruction( "xml", "version=\"1.0\" encoding=\"UTF-8\"" ) );
     QDomElement domElementKvtml = m_domDoc.createElement( "kvtml" );
     m_domDoc.appendChild( domElementKvtml );
