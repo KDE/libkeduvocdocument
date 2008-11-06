@@ -243,21 +243,21 @@ void KEduVocContainer::invalidateChildLessonEntries()
     }
 }
 
-double KEduVocContainer::averageGrade(int translation)
+double KEduVocContainer::averageGrade(int translation, EnumEntriesRecursive recursive)
 {
     // grades range from 0..7 right now
     int sum = 0;
-    foreach (KEduVocExpression *entry, entries(NotRecursive)) {
+    foreach (KEduVocExpression *entry, entries(recursive)) {
         sum += entry->translation(translation)->grade();
     }
     // make that a percentage
-    return (sum * 100.0/7.0)/entryCount(NotRecursive);
+    return (sum * 100.0/7.0)/entryCount(recursive);
 }
 
-int KEduVocContainer::expressionsOfGrade(int translation, grade_t grade)
+int KEduVocContainer::expressionsOfGrade(int translation, grade_t grade, EnumEntriesRecursive recursive)
 {
     int sum = 0;
-    foreach (KEduVocExpression *entry, entries(NotRecursive)) {
+    foreach (KEduVocExpression *entry, entries(recursive)) {
         if (entry->translation(translation)->grade() == grade) {
             sum++;
         }

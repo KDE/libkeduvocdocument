@@ -131,9 +131,9 @@ public:
      */
     void setImageUrl(const KUrl &url);
 
-    double averageGrade(int translation);
+    double averageGrade(int translation, EnumEntriesRecursive recursive);
 
-    int expressionsOfGrade(int translation, grade_t grade);
+    int expressionsOfGrade(int translation, grade_t grade, EnumEntriesRecursive recursive);
 
     /**
      * Remove grades from all entries of this lessons
