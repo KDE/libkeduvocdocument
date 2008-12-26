@@ -355,6 +355,7 @@ int KEduVocDocument::open( const KUrl& url )
         return FileReaderFailed;
     }
 
+    setModified(false);
     return 0;
 }
 
