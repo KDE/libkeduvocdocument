@@ -133,7 +133,7 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
             c+= temp.count( "\",", Qt::CaseSensitive );
             expression.append( temp );
             if ( c < 2 ) {
-                expression.append( " " );
+                expression.append( ' ' );
             }
         }
 

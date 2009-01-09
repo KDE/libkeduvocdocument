@@ -19,6 +19,7 @@
 
 #include "keduvockvtmlwriter.h"
 
+#include <QtCore/QLatin1String>
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
 
@@ -195,7 +196,7 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
                 s = m_doc->identifier( trans ).name().simplified();
                 if ( s.isEmpty() ) {
                     s.setNum( trans );
-                    s.prepend( "translation " );
+                    s.prepend( QLatin1String("translation ") );
                 }
                 domElementTranslation.setAttribute( KV_LANG, s );
                 if ( s == q_org )
@@ -631,7 +632,7 @@ bool KEduVocKvtmlWriter::writeConjugHeader( QDomElement &domElementParent, QList
         s = m_doc->identifier( ent ).name().simplified();
         if ( s.isEmpty() ) {
             s.setNum( ent );
-            s.prepend( "translation " );
+            s.prepend( QLatin1String("translation ") );
         }
 
         domElementEntry.setAttribute( KV_LANG, s );
@@ -811,7 +812,7 @@ bool KEduVocKvtmlWriter::writePersonalPronouns( QDomElement &domElementParent, Q
         s = m_doc->identifier( ent ).name().simplified();
         if ( s.isEmpty() ) {
             s.setNum( ent );
-            s.prepend( "translation " );
+            s.prepend( QLatin1String("translation ") );
         }
 
         domElementEntry.setAttribute( KV_LANG, s );
