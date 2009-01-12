@@ -142,6 +142,9 @@ bool KEduVocKvtml2Writer::writeInformation( QDomElement &informationElement, con
         informationElement.appendChild( newTextElement( KVTML_COMMENT, m_doc->documentComment() ) );
     }
 
+    QDate today = QDate::currentDate();
+    informationElement.appendChild( newTextElement( KVTML_DATE, today.toString(QLatin1String("yyyy-MM-dd")) ) );
+
     // category
     if ( !m_doc->category().isEmpty() ) {
         informationElement.appendChild( newTextElement( KVTML_CATEGORY, m_doc->category() ) );
