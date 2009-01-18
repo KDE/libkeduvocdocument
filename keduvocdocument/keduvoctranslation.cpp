@@ -24,7 +24,6 @@
 #include "keduvockvtml2writer.h"
 #include <KDebug>
 #include <QtCore/QMap>
-#include <assert.h>
 
 class KEduVocTranslation::KEduVocTranslationPrivate
 {
@@ -86,25 +85,19 @@ KEduVocTranslation::KEduVocTranslationPrivate::KEduVocTranslationPrivate(KEduVoc
 }
 
 
-KEduVocTranslation::KEduVocTranslationPrivate::~ KEduVocTranslationPrivate()
+KEduVocTranslation::KEduVocTranslationPrivate::~KEduVocTranslationPrivate()
 {
     delete m_declension;
 }
 
 KEduVocTranslation::KEduVocTranslation(KEduVocExpression* entry) : d( new KEduVocTranslationPrivate(entry) )
 {
-
-    assert(d);
-
 }
 
 
 KEduVocTranslation::KEduVocTranslation(KEduVocExpression* entry, const QString &translation ) : d( new KEduVocTranslationPrivate(entry) )
 {
     setText(translation.simplified());
-
-    assert(d);
-
 }
 
 KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
@@ -133,9 +126,6 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
     if (other.d->m_declension) {
         d->m_declension = new KEduVocDeclension(*other.d->m_declension);
     }
-
- assert(d);
-
 }
 
 KEduVocTranslation::~KEduVocTranslation()
@@ -197,8 +187,6 @@ KEduVocTranslation & KEduVocTranslation::operator = ( const KEduVocTranslation &
     if (translation.d->m_declension) {
         d->m_declension = new KEduVocDeclension(*translation.d->m_declension);
     }
-
-    assert(d);
 
     return *this;
 }
@@ -359,10 +347,11 @@ void KEduVocTranslation::setImageUrl(const KUrl &url)
 
 KEduVocWordType * KEduVocTranslation::wordType() const
 {
-    if (d)
+    if (d) {
         return d->m_wordType;
-    else
+    } else {
         return 0;
+    }
 }
 
 void KEduVocTranslation::setWordType(KEduVocWordType * wordType)
