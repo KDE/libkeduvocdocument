@@ -45,7 +45,10 @@ public:
 
 KEduVocExpression::KEduVocExpressionPrivate::~KEduVocExpressionPrivate()
 {
-    qDeleteAll(m_translations);
+    QMap <int, KEduVocTranslation*> translations = m_translations;
+    // empty the translations map, otherwise removal from word type will try to access them again when they don't exist any more
+    m_translations.clear();
+    qDeleteAll(translations);
 }
 
 KEduVocExpression::KEduVocExpressionPrivate::KEduVocExpressionPrivate(const KEduVocExpressionPrivate & other)

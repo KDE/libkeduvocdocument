@@ -91,7 +91,6 @@ void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
         }
     }
 
-    // TODO translation(i)'s d pointer can be null. How should we fix this?
     // remove from cache
     bool found = false;
     foreach(int i, translation->entry()->translationIndices()) {
