@@ -51,7 +51,7 @@ install(FILES
    keduvoclesson.h
    keduvocleitnerbox.h
    keduvoccontainer.h
-   keduvocwordtype.h
+   keduvocwordflags.h
    keduvocmultiplechoice.h
    keduvoctranslation.h
    keduvocwordtype.h

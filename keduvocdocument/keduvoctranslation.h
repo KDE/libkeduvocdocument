@@ -126,7 +126,8 @@ public:
      */
     QString irregularPlural() const;
 
-    /** returns the word type of this expression
+    /** returns the word type of this expression, you will get a 0 pointer
+    *   if wordtype isn't set for the translation
     *
     * @return                 type or "" if no type available
     */
