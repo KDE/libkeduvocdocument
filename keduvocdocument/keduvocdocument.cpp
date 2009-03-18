@@ -648,7 +648,7 @@ const KEduVocIdentifier& KEduVocDocument::identifier( int index ) const
     if ( index < 0 || index >= d->m_identifiers.size() ) {
         kError() << " Error: Invalid identifier index: " << index;
     }
-    return d->m_identifiers.value(index);
+    return d->m_identifiers[index];
 }
 
 KEduVocIdentifier& KEduVocDocument::identifier( int index )
