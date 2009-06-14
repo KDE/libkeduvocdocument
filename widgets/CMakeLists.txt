@@ -1,7 +1,4 @@
 
-include_directories(
-)
-
 
 ########### next target ###############
 
