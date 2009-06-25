@@ -303,14 +303,8 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
         }
     }
 
-
     // read translation children
     QDomNodeList translationList = entryElement.elementsByTagName( KVTML_TRANSLATION );
-    if ( translationList.length() <= 0 ) {
-        delete expr;
-        m_errorMessage = i18n( "no translations found" );
-        return false; // at least one translation is required
-    }
 
     for ( int i = 0; i < translationList.count(); ++i ) {
         currentElement = translationList.item( i ).toElement();
@@ -320,6 +314,13 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
                 return false;
         }
     }
+
+    if ( expr->translationIndices().size() == 0 ) {
+        kDebug() << "Found entry with no words in it." << id;
+        expr->setTranslation(0, QString());
+    }
+
+    Q_ASSERT(expr);
 
     // TODO: probably should insert at id position with a check to see if it exists
     // may be useful for detecting corrupt documents
@@ -398,7 +399,9 @@ bool KEduVocKvtml2Reader::readLesson( KEduVocLesson* parentLesson, QDomElement &
         bool result = false;
         int entryId = currentElement.attribute( KVTML_ID ).toInt( &result );
         if(result) {
-            lesson->appendEntry( m_allEntries[entryId] );
+            if (m_allEntries[entryId]) {
+                lesson->appendEntry( m_allEntries[entryId] );
+            }
         }
         currentElement = currentElement.nextSiblingElement( KVTML_ENTRY );
     }
