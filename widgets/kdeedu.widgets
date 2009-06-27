@@ -1,4 +1,0 @@
-[Global]
-PluginName=KDEEduWidgets
-Includes=kcomponentdata.h
-Init=new KComponentData("kdeeduwidgets");

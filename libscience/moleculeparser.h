@@ -164,7 +164,21 @@ class SCIENCE_EXPORT ElementCountMap
  *     cout << "Parse error\n";
  * @endcode
  *
+ * If a short form of a compound is specified, it will be expanded.
+ * Example :- EtOH -> (C2H5OH)
+ * @code
+ *   MoleculeParser  parser;
+ *   QString         chemical_formula = "EtOH";
+ *   double          weight;
+ *
+ *   if (parser.weight(chemical_formula, &weight))
+ *     cout << "Weight of " << chemical_formula << " = " << weight << ".\n";
+ *   else
+ *     cout << "Parse error\n";
+ * @endcode 
+ *
  * @author Inge Wallin
+ * @author Kashyap R Puranik
  */
 class SCIENCE_EXPORT MoleculeParser : public Parser {
 
@@ -207,7 +221,13 @@ public:
 							   ElementCountMap *_resultMap);
     bool      parseTerm(double          *_resultMass, 
 						ElementCountMap *_resultMap);
-
+	// This function expands the molecule string
+	// eg expandFormula(EtOH)	returns (C2H5)OH
+	QString	  expandFormula(const QString& _shortMolecularMass);
+	// This function expands a term
+	// eg expandTerm(Et) returns (C2H5)
+	QString   expandTerm(const QString& _group);
+	
 	QList<Element*> m_elementList;
 
     static const int  ELEMENT_TOKEN = 300;
