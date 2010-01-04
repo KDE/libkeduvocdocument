@@ -1,6 +1,6 @@
 /***************************************************************************
 
-    Copyright 2007 Jeremy Whiting <jeremywhiting@scitools.com>
+    Copyright 2007 Jeremy Whiting <jpwhiting@kde.org>
     Copyright 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 
  ***************************************************************************/

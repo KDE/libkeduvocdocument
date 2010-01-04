@@ -1,5 +1,5 @@
 /***************************************************************************
- * Copyright 2007      Jeremy Whiting <jeremy@scitools.com>                *
+ * Copyright 2007      Jeremy Whiting <jpwhiting@kde.org>                  *
  * Copyright 2007      Frederik Gladhorn <frederik.gladhorn@kdemail.net>   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *

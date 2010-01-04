@@ -1,7 +1,7 @@
 /***************************************************************************
                    Vocabulary Document for KDE Edu KVTML version 2
     -----------------------------------------------------------------------
-    copyright     : (C) 2007 Jeremy Whiting <jeremy@scitools.com>
+    copyright     : (C) 2007 Jeremy Whiting <jpwhiting@kde.org>
                     (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 

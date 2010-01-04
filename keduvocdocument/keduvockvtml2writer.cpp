@@ -1,7 +1,7 @@
 /***************************************************************************
                    export a KEduVocDocument to a KVTML file
     -----------------------------------------------------------------------
-    copyright           : (C) 2007 Jeremy Whiting <jeremy@scitools.com>
+    copyright           : (C) 2007 Jeremy Whiting <jpwhiting@kde.org>
                           (C) 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  ***************************************************************************/
 
