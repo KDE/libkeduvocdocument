@@ -224,7 +224,7 @@ public:
      * Sets the identifier of translation
      *
      * @param index            number of translation 0..x
-     * @param lang             thr language identifier: en=english, de=german, ...
+     * @param lang             the language identifier: en=english, de=german, ...
      */
     void setIdentifier( int index, const KEduVocIdentifier& lang );
 
@@ -242,7 +242,7 @@ public:
     const KEduVocIdentifier& identifier( int index ) const;
 
     /**
-     * Removes identifier and the according translations in all entries
+     * Removes identifier and the according translation in all entries
      *
      * @param index            number of translation 0..x
      */
