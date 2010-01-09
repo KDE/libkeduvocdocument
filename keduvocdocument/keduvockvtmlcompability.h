@@ -123,7 +123,7 @@ private:
 
     /// # defines user defined usage/word type/tense
     static const QString KVTML_1_USER_DEFINED;
-    /// : seperates usages/word types
+    /// : separates usages/word types
     static const QString KVTML_1_SEPERATOR;
 };
 
