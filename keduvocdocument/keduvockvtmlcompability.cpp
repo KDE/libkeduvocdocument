@@ -22,8 +22,9 @@
  ***************************************************************************/
 
 #include "keduvockvtmlcompability.h"
-
 #include "keduvocwordtype.h"
+
+#include <KLocale>
 #include <KDebug>
 
 const QString KEduVocKvtmlCompability::KVTML_1_USER_DEFINED = QString( "#" );

@@ -15,8 +15,6 @@
 
 #include "keduvocexpression.h"
 
-#include <KDebug>
-
 #include <QtCore/QSet>
 
 class KEduVocLeitnerBox::Private

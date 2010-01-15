@@ -65,8 +65,8 @@ public:
 
     /**
      * Find a child container
-     * @param name 
-     * @return 
+     * @param name
+     * @return
      */
 //     KEduVocContainer *childContainer(const QString& name);
 
@@ -99,7 +99,7 @@ public:
 
     /**
      * Removes a translation. This has to be called when a language is removed from a document.
-     * @param translation 
+     * @param translation
      */
     void removeTranslation(int translation);
 
@@ -111,7 +111,7 @@ public:
 
     /**
      * The type of this container. @see EnumContainerType
-     * @return 
+     * @return
      */
     KEduVocContainer::EnumContainerType containerType();
 

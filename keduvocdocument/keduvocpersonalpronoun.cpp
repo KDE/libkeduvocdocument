@@ -13,8 +13,8 @@
 
 #include "keduvocpersonalpronoun.h"
 #include "keduvoccommon_p.h"
-#include <KLocalizedString>
-#include <KDebug>
+
+#include <QtCore/QMap>
 
 class KEduVocPersonalPronoun::Private
 {
@@ -80,7 +80,7 @@ QString KEduVocPersonalPronoun::personalPronoun(KEduVocWordFlags flags) const
         QString p = d->m_personalpronouns.value(flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers| KEduVocWordFlag::genders));
         if (p.isEmpty() && !(flags & KEduVocWordFlag::genders) && d->m_maleFemaleDifferent && d->m_neutralExists)
         {
-            kDebug() << "initial flag lookup failed, added neuter gender flag";
+           //initial flag lookup failed, adding neuter gender flag
            flags |= KEduVocWordFlag::Neuter;
            p = d->m_personalpronouns.value(flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers| KEduVocWordFlag::genders));
         }

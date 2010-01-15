@@ -12,8 +12,6 @@
  ***************************************************************************/
 #include "keduvocidentifier.h"
 
-#include <KLocalizedString>
-
 class KEduVocIdentifier::Private
 {
 public:

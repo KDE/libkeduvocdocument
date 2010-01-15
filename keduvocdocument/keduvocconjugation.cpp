@@ -23,10 +23,10 @@
 
 #include "keduvocconjugation.h"
 #include "keduvoccommon_p.h"
+#include "keduvoctext.h"
 #include "kvtml2defs.h"
 
-#include <KLocalizedString>
-#include <KDebug>
+#include <QtCore/QMap>
 #include <QtXml/QDomDocument>
 
 class KEduVocConjugation::Private

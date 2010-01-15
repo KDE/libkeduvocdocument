@@ -24,7 +24,6 @@
  ***************************************************************************/
 
 #include "keduvocmultiplechoice.h"
-#include "kdebug.h"
 
 class KEduVocMultipleChoice::KEduVocMultipleChoicePrivate
 {
@@ -101,7 +100,6 @@ bool KEduVocMultipleChoice::operator== ( const KEduVocMultipleChoice &choice ) c
 void KEduVocMultipleChoice::appendChoice( const QString &s )
 {
     if ( !s.isEmpty() ) {
-        kDebug() << s;
         d->m_choices.append( s );
     }
 }

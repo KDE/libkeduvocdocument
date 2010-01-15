@@ -24,7 +24,6 @@
 #ifndef KEDUVOCKVTMLCOMPABILITY_H
 #define KEDUVOCKVTMLCOMPABILITY_H
 
-#include <KDE/KLocalizedString>
 #include <QtCore/QString>
 #include <QtCore/QMap>
 #include <QtCore/QSet>
