@@ -732,6 +732,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
         QSet<QString> &usages,
         QString &paraphrase )
 {
+    Q_UNUSED(usages)
     int pos;
     QDomAttr attribute;
 
@@ -946,7 +947,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         return false;
     }
 
-    KEduVocExpression* entry;
+    KEduVocExpression* entry = 0;
 
     while ( !currentElement.isNull() ) {
 
