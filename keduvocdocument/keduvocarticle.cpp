@@ -19,7 +19,6 @@
 #include "keduvocwordflags.h"
 
 #include <QtCore/QMap>
-#include <KDebug>
 
 class KEduVocArticle::Private
 {

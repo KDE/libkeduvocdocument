@@ -19,9 +19,6 @@
 
 #include "keduvocexpression.h"
 
-#include <KDebug>
-
-
 class KEduVocExpression::KEduVocExpressionPrivate
 {
 public:

@@ -22,7 +22,7 @@
 #include "keduvocleitnerbox.h"
 #include "kvtml2defs.h"
 #include "keduvockvtml2writer.h"
-#include <KDebug>
+
 #include <QtCore/QMap>
 
 class KEduVocTranslation::KEduVocTranslationPrivate

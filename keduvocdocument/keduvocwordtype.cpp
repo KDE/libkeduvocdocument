@@ -18,8 +18,6 @@
 
 #include "keduvocexpression.h"
 
-#include <KDebug>
-
 #include <QtCore/QList>
 #include <QtCore/QSet>
 

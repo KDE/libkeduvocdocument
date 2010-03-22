@@ -19,8 +19,6 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
 
-#include <KDebug>
-
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"
@@ -607,7 +605,6 @@ bool KEduVocKvtml2Writer::writeMultipleChoice( QDomElement &multipleChoiceElemen
 
 QDomElement KEduVocKvtml2Writer::newTextElement( const QString &elementName, const QString &text )
 {
-    kDebug() << "append: " << elementName << text;
     QDomElement retval = m_domDoc.createElement( elementName );
     QDomText textNode = m_domDoc.createTextNode( text );
     retval.appendChild( textNode );

@@ -271,7 +271,6 @@ bool KEduVocKvtml2Reader::readIdentifier( QDomElement &identifierElement )
     }
 
     QStringList tenses = readTenses(identifierElement);
-kDebug() << tenses;
 
     m_doc->identifier(id).setTenseList(tenses);
 
