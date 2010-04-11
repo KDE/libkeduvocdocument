@@ -251,21 +251,8 @@ void KEduVocKvtml2Writer::writeSynonymAntonymFalseFriend(QDomElement & parentEle
 
         while (!currentList.isEmpty()) {
             // after writing a translation, remove it from the list
-            KEduVocTranslation* translation = currentList.takeAt(0);
-
-            // fill the entry element but only add later if it is valid
-            QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
-            entryElement.setAttribute( KVTML_ID, QString::number(m_allEntries.indexOf(translation->entry())) );
-            // find out which id that is... silly
-            foreach(int index, translation->entry()->translationIndices()) {
-                if (translation->entry()->translation(index) == translation) {
-                    // create <translation id="123">
-                    QDomElement translationElement = m_domDoc.createElement( KVTML_TRANSLATION );
-                    translationElement.setAttribute( KVTML_ID, QString::number(index) );
-                    entryElement.appendChild(translationElement);
-                    break;
-                }
-            }
+            KEduVocTranslation* translation = currentList.takeFirst();
+	    
 
             QDomElement relatedElement;
             QList <KEduVocTranslation*> list;
@@ -284,13 +271,26 @@ void KEduVocKvtml2Writer::writeSynonymAntonymFalseFriend(QDomElement & parentEle
                 // if it is not in the list it has already been written and we can move on
                 if (currentList.contains(synonym)) {
                     relatedElement = m_domDoc.createElement( KVTML_PAIR );
-                    synonymElement.appendChild(relatedElement);
+
+		    // fill the entry element but only add later if it is valid
+		    QDomElement entryElement = m_domDoc.createElement( KVTML_ENTRY );
+		    entryElement.setAttribute( KVTML_ID, QString::number(m_allEntries.indexOf(translation->entry())) );
+		    // find out which id that is... silly
+		    foreach(int index, translation->entry()->translationIndices()) {
+			if (translation->entry()->translation(index) == translation) {
+			    // create <translation id="123">
+			    QDomElement translationElement = m_domDoc.createElement( KVTML_TRANSLATION );
+			    translationElement.setAttribute( KVTML_ID, QString::number(index) );
+			    entryElement.appendChild(translationElement);
+			    break;
+			}
+		    }
+		    
                     relatedElement.appendChild(entryElement);
 
 
                     QDomElement partnerElement = m_domDoc.createElement( KVTML_ENTRY );
                     partnerElement.setAttribute( KVTML_ID, QString::number(m_allEntries.indexOf(synonym->entry())) );
-
                     // find out which id that is
                     foreach(int index, synonym->entry()->translationIndices()) {
                         if (synonym->entry()->translation(index) == synonym) {
@@ -302,11 +302,10 @@ void KEduVocKvtml2Writer::writeSynonymAntonymFalseFriend(QDomElement & parentEle
                         }
                     }
                     relatedElement.appendChild( partnerElement );
+		    synonymElement.appendChild(relatedElement);
                 }
             }
-            if (relatedElement.hasChildNodes()) {
-                synonymElement.appendChild( relatedElement );
-            }
+            
         }
         if (synonymElement.hasChildNodes()) {
             parentElement.appendChild( synonymElement );
