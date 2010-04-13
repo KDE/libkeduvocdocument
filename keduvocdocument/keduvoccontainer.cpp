@@ -176,7 +176,6 @@ void KEduVocContainer::removeTranslation(int translation)
 
 QList< KEduVocExpression * > KEduVocContainer::entriesRecursive()
 {
-//     kDebug() << "entriesRecursive: " << name();
     if (!d->m_childLessonEntriesValid) {
         updateChildLessonEntries();
     }
