@@ -334,14 +334,6 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     expr->translation(index)->fromKVTML2(translationElement);
     QDomElement currentElement;
 
-    //<falsefriend fromid="1"></falsefriend>
-    /// @todo false friends
-//     currentElement = translationElement.firstChildElement( KVTML_FALSEFRIEND );
-//     if ( !currentElement.isNull() ) {
-//         int fromid = currentElement.attribute( KVTML_FROMID ).toInt();
-//         expr->translation(index)->setFalseFriend( fromid, currentElement.text() );
-//     }
-
     // comparisons
     currentElement = translationElement.firstChildElement( KVTML_COMPARISON );
     if ( !currentElement.isNull() ) {

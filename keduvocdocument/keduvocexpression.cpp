@@ -70,7 +70,6 @@ bool KEduVocExpression::KEduVocExpressionPrivate::operator== ( const KEduVocExpr
         m_active == p.m_active;
 }
 
-
 KEduVocExpression::KEduVocExpression()
         : d( new KEduVocExpressionPrivate )
 {}

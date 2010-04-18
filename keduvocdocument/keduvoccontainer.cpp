@@ -44,7 +44,7 @@ public:
     KUrl m_imageUrl;
 };
 
-KEduVocContainer::Private::~ Private()
+KEduVocContainer::Private::~Private()
 {
     qDeleteAll(m_childContainers);
 }

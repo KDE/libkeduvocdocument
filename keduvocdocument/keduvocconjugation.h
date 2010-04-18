@@ -76,6 +76,5 @@ private:
 };
 
 
-
 #endif // KEDUVOCCONJUGATION_H
 
