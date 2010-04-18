@@ -28,6 +28,7 @@
 
 #include <QtCore/QMap>
 #include <QtXml/QDomDocument>
+#include <kdebug.h>
 
 class KEduVocConjugation::Private
 {
@@ -105,11 +106,16 @@ void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
     persons[3] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Feminine);
     persons[4] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Neuter);
 
-    // write the tense tag
     QDomDocument domDoc = parent.ownerDocument();
-    QDomElement tenseElement = domDoc.createElement( KVTML_TENSE );
-    tenseElement.appendChild( domDoc.createTextNode(tense) );
-    parent.appendChild(tenseElement);
+
+    // write the tense tag
+    if (!tense.isEmpty()) {
+        QDomElement tenseElement = domDoc.createElement( KVTML_TENSE );
+        tenseElement.appendChild( domDoc.createTextNode(tense) );
+        parent.appendChild(tenseElement);
+    } else {
+        kDebug() << "Saving conjugation with empty tense";
+    }
 
     for ( int num = 0; num <= 2; ++num) {
         QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
