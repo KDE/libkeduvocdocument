@@ -91,7 +91,7 @@ void KEduVocText::setGrade( grade_t grade )
 
 void KEduVocText::incGrade()
 {
-    setGrade( grade() + 1 );
+    setGrade( qMax<grade_t>(grade(), KV_LEV1_GRADE ) + 1 );
 }
 
 
