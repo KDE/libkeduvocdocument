@@ -79,15 +79,13 @@ void KEduVocConjugation::setConjugation(const KEduVocText& conjugation, KEduVocW
 
 bool KEduVocConjugation::isEmpty()
 {
-    return d->m_conjugations.count() == 0;
+    return d->m_conjugations.isEmpty();
 }
 
 QList< KEduVocWordFlags > KEduVocConjugation::keys()
 {
     return d->m_conjugations.keys();
 }
-
-
 
 void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
 {
