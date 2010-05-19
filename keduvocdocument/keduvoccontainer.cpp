@@ -90,9 +90,14 @@ KEduVocContainer * KEduVocContainer::childContainer(int row)
 
 KEduVocContainer * KEduVocContainer::childContainer(const QString & name)
 {
+    if (d->m_name == name) {
+        return this;
+    }
+
     foreach (KEduVocContainer *container, d->m_childContainers) {
-        if (container->name() == name) {
-            return container;
+        KEduVocContainer *found = container->childContainer(name);
+        if (found) {
+            return found;
         }
     }
     return 0;
