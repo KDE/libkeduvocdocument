@@ -113,15 +113,7 @@ private:
      */
     bool writeLessons( KEduVocLesson *parentLesson, QDomElement &lessonsElement );
 
-    
     void writeSynonymAntonymFalseFriend(QDomElement & parentElement);
-            
-    /** write a comparison
-     * @param comparisonElement QDomElement comparison to write to
-     * @param comparison object to write
-     * @returns success
-     */
-    bool writeComparison( QDomElement &comparisonElement, KEduVocTranslation *translation );
 
     /** write multiple choice choices
      * @param multipleChoiceElement QDomElement multiplechoice to write to

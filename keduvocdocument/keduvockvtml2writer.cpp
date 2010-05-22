@@ -2,7 +2,7 @@
                    export a KEduVocDocument to a KVTML file
     -----------------------------------------------------------------------
     copyright           : (C) 2007 Jeremy Whiting <jpwhiting@kde.org>
-                          (C) 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+    Copyright 2007-2010 Frederik Gladhorn <gladhorn@kde.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -18,6 +18,8 @@
 
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
+
+#include <KDebug>
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
@@ -496,10 +498,24 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     translation->toKVTML2(translationElement);
 
     // comparison
-    if ( !(translation->comparative().isEmpty() || translation->comparative().isEmpty())) {
+    if ( !(translation->comparativeForm().text().isEmpty() || translation->superlativeForm().text().isEmpty())) {
+        kDebug() << "Write comp";
         QDomElement comparisonElement = m_domDoc.createElement( KVTML_COMPARISON );
-        writeComparison( comparisonElement, translation );
-        translationElement.appendChild( comparisonElement );
+        translationElement.appendChild(comparisonElement);
+
+        QDomElement comparativeElement = m_domDoc.createElement( KVTML_COMPARATIVE );
+        comparisonElement.appendChild(comparativeElement);
+        translation->comparativeForm().toKVTML2(comparativeElement);
+
+        QDomElement superlativeElement = m_domDoc.createElement( KVTML_SUPERLATIVE );
+        comparisonElement.appendChild(superlativeElement);
+        translation->superlativeForm().toKVTML2(superlativeElement);
+    }
+
+    if (translation->article().practiceCount() != 0) {
+        QDomElement articleElement = m_domDoc.createElement( KVTML_ARTICLE );
+        translationElement.appendChild(articleElement);
+        translation->comparativeForm().toKVTML2(articleElement);
     }
 
     // multiplechoice
@@ -563,27 +579,6 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
 //             translationElement.appendChild( thisFriendElement );
 //         }
 //     }
-
-
-
-
-
-
-bool KEduVocKvtml2Writer::writeComparison( QDomElement &comparisonElement, KEduVocTranslation* translation )
-/*
- <comparison>
-   <absolute>good</absolute>
-   <comparative>better</comparative>
-   <superlative>best</superlative>
- </comparison>
-*/
-{
-    comparisonElement.appendChild( newTextElement( KVTML_COMPARATIVE, translation->comparative() ) );
-    comparisonElement.appendChild( newTextElement( KVTML_SUPERLATIVE, translation->superlative() ) );
-
-    return true;
-}
-
 
 bool KEduVocKvtml2Writer::writeMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation )
 /*
