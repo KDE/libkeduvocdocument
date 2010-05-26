@@ -175,7 +175,7 @@ bool KEduVocText::operator ==(const KEduVocText & other) const
 void KEduVocText::toKVTML2(QDomElement& parent)
 {
     QDomDocument domDoc = parent.ownerDocument();
-    if (text().isEmpty()) {
+    if (d->m_text.isEmpty() && d->m_totalPracticeCount == 0) {
         return;
     }
 
@@ -183,7 +183,7 @@ void KEduVocText::toKVTML2(QDomElement& parent)
     KEduVocKvtml2Writer::appendTextElement( parent, KVTML_TEXT, text() );
 
     // grades
-    if ( practiceCount() > 0 ) {
+    if ( d->m_totalPracticeCount > 0 ) {
         QDomElement gradeElement = domDoc.createElement( KVTML_GRADE );
 
             //<currentgrade>2</currentgrade>
