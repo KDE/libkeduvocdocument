@@ -514,8 +514,8 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
 
     if (translation->article().practiceCount() != 0) {
         QDomElement articleElement = m_domDoc.createElement( KVTML_ARTICLE );
+        translation->article().toKVTML2(articleElement);
         translationElement.appendChild(articleElement);
-        translation->comparativeForm().toKVTML2(articleElement);
     }
 
     // multiplechoice
