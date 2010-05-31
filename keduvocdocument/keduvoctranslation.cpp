@@ -2,7 +2,7 @@
                         Vocabulary Expression Translation for KDE Edu
     -----------------------------------------------------------------------
 
-    Copyright 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+    Copyright 2007-2010 Frederik Gladhorn <gladhorn@kde.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -62,8 +62,11 @@ public:
     QMap <QString, KEduVocConjugation> m_conjugations;
 
     /// The comparison forms of adjectives and adverbs: (fast), faster, fastest
-    QString m_comparative;
-    QString m_superlative;
+    KEduVocText* m_comparative;
+    KEduVocText* m_superlative;
+
+    /// The grade of an article. The text part should not be used.
+    KEduVocText* m_articleGrade;
 
     KEduVocDeclension* m_declension;
 
@@ -82,6 +85,10 @@ KEduVocTranslation::KEduVocTranslationPrivate::KEduVocTranslationPrivate(KEduVoc
     m_wordType = 0;
     m_leitnerBox = 0;
     m_declension = 0;
+
+    m_comparative = 0;
+    m_superlative = 0;
+    m_articleGrade = 0;
 }
 
 
@@ -388,22 +395,87 @@ KEduVocExpression * KEduVocTranslation::entry()
 
 QString KEduVocTranslation::comparative() const
 {
-    return d->m_comparative;
+    if (d->m_comparative) {
+        return d->m_comparative->text();
+    }
+    return QString();
 }
 
 void KEduVocTranslation::setComparative(const QString & comparative)
 {
-    d->m_comparative = comparative;
+    if (!d->m_comparative) {
+        d->m_comparative = new KEduVocText(comparative);
+    } else {
+        d->m_comparative->setText(comparative);
+    }
 }
 
 QString KEduVocTranslation::superlative() const
 {
-    return d->m_superlative;
+    if (d->m_superlative) {
+        return d->m_superlative->text();
+    }
+    return QString();
 }
 
 void KEduVocTranslation::setSuperlative(const QString & superlative)
 {
-    d->m_superlative = superlative;
+    if (!d->m_superlative) {
+        d->m_superlative = new KEduVocText(superlative);
+    } else {
+        d->m_superlative->setText(superlative);
+    }
+}
+
+KEduVocText KEduVocTranslation::comparativeForm() const
+{
+    if (!d->m_comparative) {
+        return KEduVocText();
+    }
+    KEduVocText t(*(d->m_comparative));
+    return t;
+}
+
+void KEduVocTranslation::setComparativeForm(const KEduVocText& comparative)
+{
+    if (!d->m_comparative) {
+        d->m_comparative = new KEduVocText();
+    }
+    *(d->m_comparative) = comparative;
+}
+
+KEduVocText KEduVocTranslation::superlativeForm() const
+{
+    if (!d->m_superlative) {
+        return KEduVocText();
+    }
+    KEduVocText t(*d->m_superlative);
+    return t;
+}
+
+void KEduVocTranslation::setSuperlativeForm(const KEduVocText& superlative)
+{
+    if (!d->m_superlative) {
+        d->m_superlative = new KEduVocText();
+    }
+    *d->m_superlative = superlative;
+}
+
+KEduVocText KEduVocTranslation::article() const
+{
+    if (!d->m_articleGrade) {
+        return KEduVocText();
+    }
+    KEduVocText t(*d->m_articleGrade);
+    return t;
+}
+
+void KEduVocTranslation::setArticle(const KEduVocText& article)
+{
+    if (!d->m_articleGrade) {
+        d->m_articleGrade = new KEduVocText();
+    }
+    *d->m_articleGrade = article;
 }
 
 KEduVocDeclension * KEduVocTranslation::declension()

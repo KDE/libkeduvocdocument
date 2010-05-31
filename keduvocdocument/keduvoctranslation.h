@@ -18,7 +18,6 @@
 #define KEDUVOCTRANSLATION_H
 
 #include "libkeduvocdocument_export.h"
-#include "keduvocarticle.h"
 #include "keduvocconjugation.h"
 #include "keduvoctext.h"
 #include <KDE/KUrl>
@@ -82,7 +81,7 @@ public:
     /** sets comment of this expression
     * @param expr             comment of this index
     */
-    void setComment( const QString & expr );
+    void setComment( const QString& expr );
 
     /** sets example this expression
     * @param expression       example of this index
@@ -185,15 +184,24 @@ public:
      * Bad, only compatibility. Deprecated.
      * @return
      */
-    QMap <QString, KEduVocConjugation> conjugations() const;
+    KDE_DEPRECATED QMap <QString, KEduVocConjugation> conjugations() const;
 
     /**
      * Comparison forms of adjectives/adverbs.
      */
-    QString comparative() const;
-    void setComparative(const QString& comparative);
-    QString superlative() const;
-    void setSuperlative(const QString& superlative);
+    KDE_DEPRECATED QString comparative() const;
+    KDE_DEPRECATED void setComparative(const QString& comparative);
+    // TODO rename to comparative and remove the deprecated function
+    KEduVocText comparativeForm() const;
+    void setComparativeForm(const KEduVocText& comparative);
+
+    KDE_DEPRECATED QString superlative() const;
+    KDE_DEPRECATED void setSuperlative(const QString& superlative);
+    KEduVocText superlativeForm() const;
+    void setSuperlativeForm(const KEduVocText& superlative);
+
+    KEduVocText article() const;
+    void setArticle(const KEduVocText& article);
 
     /** returns multiple choice if available
       */

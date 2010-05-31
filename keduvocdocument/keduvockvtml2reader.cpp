@@ -5,7 +5,7 @@
 
                           (C) 2005 Eric Pignet <eric at erixpage.com>
                           (C) 2007 Peter Hedlund <peter.hedlund@kdemail.net>
-    Copyright 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+    Copyright 2007-2010 Frederik Gladhorn <gladhorn@kde.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -334,6 +334,14 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     expr->translation(index)->fromKVTML2(translationElement);
     QDomElement currentElement;
 
+    // article grade
+    currentElement = translationElement.firstChildElement( KVTML_ARTICLE );
+    if ( !currentElement.isNull() ) {
+        KEduVocText article;
+        article.fromKVTML2(currentElement);
+        expr->translation(index)->setArticle(article);
+    }
+
     // comparisons
     currentElement = translationElement.firstChildElement( KVTML_COMPARISON );
     if ( !currentElement.isNull() ) {
@@ -583,7 +591,6 @@ bool KEduVocKvtml2Reader::readWordType( KEduVocWordType* parentContainer, QDomEl
         }
     } // special type
 
-
     // read entries
     QDomElement entryElement = typeElement.firstChildElement( KVTML_ENTRY );
     while ( !entryElement.isNull() ) {
@@ -632,17 +639,30 @@ bool KEduVocKvtml2Reader::readComparison( QDomElement &domElementParent, KEduVoc
     currentElement = domElementParent.firstChildElement( KVTML_COMPARATIVE );
     if ( !currentElement.isNull() )
     {
-        translation->setComparative( currentElement.text() );
+        KEduVocText comparative;
+        comparative.fromKVTML2(currentElement);
+
+        // be compatible for KDE < 4.5
+        if (comparative.text().isEmpty()) {
+            comparative.setText(currentElement.text());
+        }
+        translation->setComparativeForm(comparative);
     }
 
     currentElement = domElementParent.firstChildElement( KVTML_SUPERLATIVE );
     if ( !currentElement.isNull() )
     {
-        translation->setSuperlative( currentElement.text() );
+        KEduVocText superlative;
+        superlative.fromKVTML2(currentElement);
+
+        // be compatible for KDE < 4.5
+        if (superlative.text().isEmpty()) {
+            superlative.setText(currentElement.text());
+        }
+        translation->setSuperlativeForm(superlative);
     }
     return true;
 }
-
 
 bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement, KEduVocTranslation* translation )
 /*
