@@ -70,4 +70,3 @@ install(FILES
     sharedkvtmlfiles.h
     DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu  COMPONENT Devel
 )
-
