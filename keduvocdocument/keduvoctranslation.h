@@ -63,92 +63,92 @@ public:
 
     KEduVocExpression* entry();
 
-    /** sets the pronunciation of this expression
+    /** Sets the pronunciation of this expression
     * @param expression       pronunciation of this index
     */
     void setPronunciation( const QString & expression );
 
-    /** returns the pronunciation of this expression
+    /** Returns the pronunciation of this expression
     * @return                 pronunciation or "" if none available
     */
     QString pronunciation() const;
 
-    /** returns comments of this expression
+    /** Returns comments of this expression
     * @return                 comment or "" if no comment available
     */
     QString comment() const;
 
-    /** sets comment of this expression
+    /** Sets comment of this expression
     * @param expr             comment of this index
     */
     void setComment( const QString& expr );
 
-    /** sets example this expression
+    /** Sets example this expression
     * @param expression       example of this index
     */
     void setExample( const QString & expression );
 
-    /** returns example of this expression
+    /** Returns example of this expression
     * @return                 example or "" if no string available
     */
     QString example() const;
 
-    /** sets paraphrase of this expression
+    /** Sets paraphrase of this expression
     * @param expression       paraphrase of this index
     */
     void setParaphrase( const QString & expression );
 
-    /** returns paraphrase of this expression
+    /** Returns paraphrase of this expression
     * @return                 paraphrase or "" if no string available
     */
     QString paraphrase() const;
 
-    /** sets antonym this expression
+    /** Sets antonym this expression
     * @param expression       antonym of this index
     */
     void setAntonym( const QString & expression );
 
-    /** returns antonym of this expression
+    /** Returns antonym of this expression
     * @return                 antonym or "" if no string available
     */
     QString antonym() const;
 
     /**
-     * Set a irregular plural form.
+     * Sets an irregular plural form.
      * @param plural plural of the word
      */
     void setIrregularPlural( const QString& plural );
 
     /**
-     * Get a irregular plural form.
+     * Gets an irregular plural form.
      * @return plural of the word
      */
     QString irregularPlural() const;
 
-    /** returns the word type of this expression, you will get a 0 pointer
-    *   if wordtype isn't set for the translation
+    /** Returns the word type of this expression, you will get a 0 pointer
+    *   if wordtype is not set for the translation
     *
     * @return                 type or "" if no type available
     */
     KEduVocWordType* wordType() const;
 
-    /** sets the word type of this expression
+    /** Sets the word type of this expression
     * @param type             type of this expression ("" = none)
     */
     void setWordType( KEduVocWordType* wordType );
 
-    /** returns the leitner box of this translation
+    /** Returns the leitner box of this translation
      * @return the box
      */
     KEduVocLeitnerBox* leitnerBox() const;
 
-    /** sets the leitner box of this translation
+    /** Sets the leitner box of this translation
      * @param leitnerBox the box
      */
     void setLeitnerBox( KEduVocLeitnerBox* leitnerBox );
 
     /**
-     * returns a conjugation if available
+     * Returns a conjugation if available
      * @param tense tense of the requested conjugation
      * @return the conjugation
      */
@@ -203,80 +203,80 @@ public:
     KEduVocText article() const;
     void setArticle(const KEduVocText& article);
 
-    /** returns multiple choice if available
+    /** Returns multiple choice if available
       */
     QStringList & multipleChoice();
 
-    /** sets multiple choice
+    /** Sets multiple choice
      * @param mc               multiple choice block
       */
 //     void setMultipleChoice( const QStringList &mc );
 
-    /** get the sound url for this translation if it exists */
+    /** Get the sound url for this translation if it exists */
     KUrl soundUrl();
 
-    /** set the sound url for this translation
+    /** Set the sound url for this translation
      * @param url               url of the sound file */
     void setSoundUrl(const KUrl &url);
 
-    /** get the image url for this translation if it exists */
+    /** Get the image url for this translation if it exists */
     KUrl imageUrl();
 
-    /** set the image url for this translation
+    /** Set the image url for this translation
      * @param url               url of the image
      */
     void setImageUrl(const KUrl &url);
 
     /**
-     * add a false friend
+     * Add a false friend
      * @param falseFriend false friend of this index
      */
     void addFalseFriend( KEduVocTranslation* falseFriend );
 
     /**
-     * remove a false friend
+     * Remove a false friend
      * @param falseFriend false friend of this index
      */
     void removeFalseFriend( KEduVocTranslation* falseFriend );
 
     /**
-     * returns false friends of this expression
+     * Returns false friends of this expression
      * @return list of false friends
      */
     QList<KEduVocTranslation*> falseFriends() const;
 
     /**
-     * add a synonym
+     * Add a synonym
      * @param synonym
      */
     void addSynonym( KEduVocTranslation* synonym );
 
     /**
-     * remove a synonym
+     * Remove a synonym
      * @param synonym
      */
     void removeSynonym( KEduVocTranslation* synonym );
 
     /**
-     * returns synonyms of this expression
+     * Returns synonyms of this expression
      * @return synonyms
      */
     QList<KEduVocTranslation*> synonyms() const;
 
     /**
-     * add a antonym
+     * Add a antonym
      * @param antonym
          */
     void addAntonym( KEduVocTranslation* antonym );
 
     /**
-     * remove a antonym
+     * Remove a antonym
      * @param antonym
      */
     void removeAntonym( KEduVocTranslation* antonym );
 
     /**
-     * returns antonyms of this expression
+     * Returns antonyms of this expression
      * @return antonyms
      */
     QList<KEduVocTranslation*> antonyms() const;

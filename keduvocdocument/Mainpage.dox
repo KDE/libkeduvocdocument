@@ -13,7 +13,7 @@ Grammatical terms are part of KEduVocTranslation and also contained in:
  - KEduVocConjugation (conjugations and personal pronouns)
  - KEduVocWordType (word type management)
 
-Grammar is accesed by using an instance of KEduVocDocument.
+Grammar is accessed by using an instance of KEduVocDocument.
 
 Grades can be stored using the KEduVocGrade class (part of a KEduVocTranslation).
 

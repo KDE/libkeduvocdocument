@@ -148,42 +148,42 @@ public:
     KUrl url() const;
 
 
-    /** set the title of the file
+    /** Set the title of the file
      * @param title title to set */
     void setTitle( const QString & title );
 
     /** @returns the title of the file */
     QString title() const;
 
-    /** set the author of the file
+    /** Set the author of the file
      * @param author author to set */
     void setAuthor( const QString & author );
 
     /** @returns the author of the file */
     QString author() const;
 
-    /** set the author contact info
+    /** Set the author contact info
      * @param contact email/contact info to set */
     void setAuthorContact( const QString & authorContact );
 
     /** @returns the author contact information */
     QString authorContact() const;
 
-    /** set the license of the file
+    /** Set the license of the file
      * @param license license to set */
     void setLicense( const QString & license );
 
     /** @returns the license of the file */
     QString license() const;
 
-    /** set the comment of the file
+    /** Set the comment of the file
      * @param comment comment to set */
     void setDocumentComment( const QString & comment );
 
     /** @return the comment of the file */
     QString documentComment() const;
 
-    /** set the category of the file
+    /** Set the category of the file
      * @param category category to set */
     void setCategory( const QString & category );
 
@@ -278,7 +278,7 @@ public:
 
     // *** lesson methods ***
 
-    /** get the lesson root object
+    /** Get the lesson root object
      * @returns a pointer to the lesson object
      */
     KEduVocLesson * lesson();
