@@ -87,7 +87,7 @@ public:
     };
 
     /**
-     * Constructor for a KdeEdu vocabulary document
+     * Constructor for a KDEEdu vocabulary document
      *
      * @param parent calling object
      */

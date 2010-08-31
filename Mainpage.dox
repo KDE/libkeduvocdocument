@@ -10,6 +10,6 @@ ExtDate for KStars
 
 libscience for Kalzium containing chemical classes
 
-KEduVocDocument is a library for reading and writing vocabulary files used by KVocTrain, KAnagram, KHangman and KWordQuiz.
+KEduVocDocument is a library for reading and writing vocabulary files used by Parley, Kanagram, KHangman and KWordQuiz.
 
 */
