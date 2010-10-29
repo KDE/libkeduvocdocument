@@ -28,7 +28,15 @@ int fontUtils::fontSize(QPainter &p, const QString &s1, int w, int h, Flags flag
         if (flags & DoNotAllowWordWrap) qtFlags = qtFlags & ~Qt::TextWordWrap;
         aux1 = p.boundingRect(QRect(0, 0, w, h), qtFlags, s1);
         if (aux1.width() == 0 || aux1.height() == 0) return -1;
-        else if (aux1.width() > w || aux1.height() > h) size = qMin(w * size / aux1.width(), h * size / aux1.height());
+        else if (aux1.width() > w || aux1.height() > h) {
+            if (flags & DoNotAllowWordWrap || aux1.height() == p.fontMetrics().height()) {
+                size = qMin(w * size / aux1.width(), h * size / aux1.height());
+            } else {
+                // Word wrapping can completely change the
+                // layout of the text, so the above will not work.
+                size = size - 1;
+            }
+        }
         else done = true;
     }
 
