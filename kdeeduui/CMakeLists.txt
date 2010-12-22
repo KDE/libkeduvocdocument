@@ -14,7 +14,7 @@ kde4_add_library(kdeeduui SHARED ${kdeeduui_LIB_SRCS})
 target_link_libraries(kdeeduui ${KDE4_KHTML_LIBS} ${QT_QTXML_LIBRARY})
 
 set_target_properties(kdeeduui PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
-install(TARGETS kdeeduui  ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS kdeeduui EXPORT LibKdeEduTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 
 ########### install files ###############

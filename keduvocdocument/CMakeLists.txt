@@ -46,7 +46,7 @@ set_target_properties(keduvocdocument
 #    SOVERSION ${LIB_KEDUVOCDOCUMENT_SOVERSION}
 #)
 
-install(TARGETS keduvocdocument ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS keduvocdocument EXPORT LibKdeEduTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 
 ########### install files ###############
@@ -68,5 +68,7 @@ install(FILES
     keduvocwordtype.h
     keduvocpersonalpronoun.h
     sharedkvtmlfiles.h
+    keduvocdeclension.h
+    keduvockvtml2writer.h
     DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu  COMPONENT Devel
 )

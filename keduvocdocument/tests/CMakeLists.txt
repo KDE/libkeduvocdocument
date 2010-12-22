@@ -9,7 +9,7 @@ target_link_libraries(keduvocdocumentvalidatortest keduvocdocument
 # CONVERTER:
 
 
-include_directories( ${CMAKE_SOURCE_DIR}/libkdeedu/keduvocdocument/   )
+include_directories( .. )
 
 
 ########### next target ###############
