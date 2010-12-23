@@ -4,7 +4,6 @@ project(libkdeedu)
 
 add_subdirectory(keduvocdocument)
 add_subdirectory(kdeeduui)
-add_subdirectory(libscience)
 #add_subdirectory(widgets)
 add_subdirectory(qtmmlwidget)
 add_subdirectory(icons)
