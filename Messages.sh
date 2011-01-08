@@ -1,5 +1,4 @@
 #! /bin/sh
-find kdeeduui -maxdepth 1 -name \*.cpp >>list_libkdeedu
 find keduvocdocument -maxdepth 1 -name \*.cpp -o -name \*.h >>list_libkdeedu
 find libscience -maxdepth 1 -name \*.cpp >>list_libkdeedu
 
