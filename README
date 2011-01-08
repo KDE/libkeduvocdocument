@@ -12,12 +12,6 @@ Contains KEduVocDocument and its related class for reading from/writing to the
 KVTML format (and others too).
 Currently used by:  kanagram, khangman, klatin, kvoctrain, kwordquiz
 
-kdeeduui:
-Contains:
-- Glossary, GlossaryItem and GlossaryDialog, which can be useful to embed a
-  small glossary in an application
-Currently used by:  kalzium, kstars
-
 libscience:
 Contains some classes related to scientific data, like chemical Element's,
 spectra, temperature units and Isotope's.
