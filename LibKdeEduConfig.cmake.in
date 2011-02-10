@@ -1,0 +1,44 @@
+#########################################################################
+#
+# LibKdeEdu Configuration File
+#
+# This file sets various CMake Variables
+#
+# LIBKDEEDU_INCLUDE_DIR                - The Include Directory for all LIBKDEEDU libraries
+# LIBKDEEDU_KEDUVOCDOCUMENT_LIBRARIES  - the keduvocdocument library
+# LIBKDEEDU_KDEEDUUI_LIBRARIES         - the kdeeduui library
+#
+# Copyright 2008  Andreas Pakulat <apaku@gmx.de>
+# Copyright 2010  Niko Sams <niko.sams@gmail.com>
+# Redistribution and use is allowed according to the terms of the BSD license.
+######################################################################
+
+get_filename_component(_LIBKDEEDU_CURRENT_DIR  "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+if(NOT WIN32)
+# This is needed on non-win32 platforms, as lib-install-dir might be in a
+# totally different prefix than include-install-dir. So instead hardcode the
+# absolute path during buildtime
+set( LIBKDEEDU_INCLUDE_DIR "@INCLUDE_INSTALL_DIR@/libkdeedu" )
+
+else(NOT WIN32)
+
+set( LIBKDEEDU_INCLUDE_DIR "${_LIBKDEEDU_CURRENT_DIR}/../../../include/libkdeedu" )
+
+endif(NOT WIN32)
+
+if( NOT TARGET LibKdeEduImport__keduvocdocument )
+    include("${_LIBKDEEDU_CURRENT_DIR}/LibKdeEduTargets.cmake")
+endif( NOT TARGET LibKdeEduImport__keduvocdocument )
+
+macro( _libkdeedu_set_lib_vars _prefix _lib )
+  set( LIBKDEEDU_${_prefix}_LIBRARIES LibKdeEduImport__${_lib} )
+endmacro( _libkdeedu_set_lib_vars )
+
+_libkdeedu_set_lib_vars( KEDUVOCDOCUMENT keduvocdocument )
+_libkdeedu_set_lib_vars( KDEEDUUI kdeeduui )
+
+
+mark_as_advanced(
+    KEDUVOCDOCUMENT
+)
