@@ -37,6 +37,7 @@ endmacro( _libkdeedu_set_lib_vars )
 
 _libkdeedu_set_lib_vars( KEDUVOCDOCUMENT keduvocdocument )
 _libkdeedu_set_lib_vars( KDEEDUUI kdeeduui )
+_libkdeedu_set_lib_vars( QTMMLWIDGET qtmmlwidget )
 
 
 mark_as_advanced(
