@@ -1,0 +1,14 @@
+********  At the attention of packagers  *********
+
+KHangMan, Kanagram, Parley and KWordQuiz depend on /kdeedu/data/kvtml!
+
+Please do not ship Kanagram and KHangMan without those files, thanks!
+
+KHangMan and Kanagram depend on those files, Parley and KWordQuiz can use them.
+
+--------------------------------------
+Anne-Marie Mahfouf
+kdeedu module maintainer
+annma at kde dot org
+
+November 2008
