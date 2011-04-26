@@ -117,9 +117,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     delete m_wordTypeContainer;
     m_wordTypeContainer = new KEduVocWordType(i18n( "Word types" ));
 
-    if ( m_leitnerContainer ) {
-        delete m_leitnerContainer;
-    }
+    delete m_leitnerContainer;
     m_leitnerContainer = new KEduVocLeitnerBox(i18n( "Leitner Box" ));
 
     m_tenseDescriptions.clear();
