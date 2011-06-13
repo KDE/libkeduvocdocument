@@ -33,7 +33,7 @@
       <inquery>false</inquery>
       <translation id="0" >
         <text>drachma</text>
-        <comment>Greece</comment>
+        <comment>Greece (until 2002)</comment>
       </translation>
     </entry>
     <entry id="3" >
@@ -41,7 +41,7 @@
       <inquery>false</inquery>
       <translation id="0" >
         <text>euro</text>
-        <comment>12 European Union countries, etc.</comment>
+        <comment>17 European Union countries, etc.</comment>
       </translation>
     </entry>
     <entry id="4" >
@@ -65,7 +65,7 @@
       <inquery>false</inquery>
       <translation id="0" >
         <text>koruna</text>
-        <comment>Czech Republic, Slovakia</comment>
+        <comment>Czech Republic, Slovakia (until 2008)</comment>
       </translation>
     </entry>
     <entry id="7" >
@@ -105,7 +105,7 @@
       <inquery>false</inquery>
       <translation id="0" >
         <text>peseta</text>
-        <comment>Spain (until 1998)</comment>
+        <comment>Spain (until 2002)</comment>
       </translation>
     </entry>
     <entry id="12" >
@@ -121,7 +121,7 @@
       <inquery>false</inquery>
       <translation id="0" >
         <text>pound</text>
-        <comment>UK, Cyprus, Egypt, etc.</comment>
+        <comment>UK, Cyprus (until 2008), Egypt, etc.</comment>
       </translation>
     </entry>
     <entry id="14" >
