@@ -3625,7 +3625,7 @@ QString MmlNode::toStr() const
 
     return QString("%1 %2 mr=%3 pr=%4 dr=%5 ro=(%7, %8) str=%9")
 		.arg(spec->type_str)
-		.arg((unsigned long)this, 0, 16)
+		.arg((quintptr)this, 0, 16)
 		.arg(rectToStr(myRect()))
 		.arg(rectToStr(parentRect()))
 		.arg(rectToStr(deviceRect()))
