@@ -403,6 +403,9 @@ bool KEduVocKvtml2Writer::writeWordTypes( QDomElement &typesElement, KEduVocWord
         else if (wordType->wordType().testFlag(KEduVocWordFlag::Adverb))
             typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_ADVERB ) );
 
+        else if (wordType->wordType().testFlag(KEduVocWordFlag::Conjunction))
+            typeDefinitionElement.appendChild( newTextElement( KVTML_SPECIALWORDTYPE, KVTML_SPECIALWORDTYPE_CONJUNCTION ) );
+
 
 // child entries
 

@@ -111,6 +111,7 @@ static const QString KVTML_GRAMMATICAL_DEFINITENESS[] = {
 #define KVTML_SPECIALWORDTYPE_VERB        "verb"
 #define KVTML_SPECIALWORDTYPE_ADJECTIVE   "adjective"
 #define KVTML_SPECIALWORDTYPE_ADVERB      "adverb"
+#define KVTML_SPECIALWORDTYPE_CONJUNCTION "conjunction"
 
 
 #define KVTML_TENSES            "tenses"

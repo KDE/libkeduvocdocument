@@ -589,6 +589,9 @@ bool KEduVocKvtml2Reader::readWordType( KEduVocWordType* parentContainer, QDomEl
         if ( specialType == KVTML_SPECIALWORDTYPE_NOUN_NEUTRAL ) {
             wordTypeContainer->setWordType(KEduVocWordFlag::Noun| KEduVocWordFlag::Neuter);
         }
+        if ( specialType == KVTML_SPECIALWORDTYPE_CONJUNCTION ) {
+            wordTypeContainer->setWordType(KEduVocWordFlag::Conjunction);
+        }
     } // special type
 
     // read entries
