@@ -80,6 +80,11 @@ void KEduVocDeclension::toKVTML2(QDomElement & parent)
     QDomDocument domDoc = parent.ownerDocument();
     QDomElement declensionElement = domDoc.createElement( KVTML_DECLENSION );
 
+    QMap<int, KEduVocWordFlags> genders;
+    genders[0] = KEduVocWordFlag::Masculine;
+    genders[1] = KEduVocWordFlag::Feminine;
+    genders[2] = KEduVocWordFlag::Neuter;
+
     QMap<int, KEduVocWordFlags> numbers;
     numbers[0] = KEduVocWordFlag::Singular;
     numbers[1] = KEduVocWordFlag::Dual;
@@ -95,19 +100,25 @@ void KEduVocDeclension::toKVTML2(QDomElement & parent)
     cases[6] = KEduVocWordFlag::Vocative;
 
 
+    for ( int gen = 0; gen <= 2; ++gen)
+    {
+        QDomElement genderElement = domDoc.createElement( KVTML_GRAMMATICAL_GENDER[gen] );
+        for ( int num = 0; num <= 2; ++num) {
+            QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
+            for ( int dcase = 0; dcase <= 6; ++dcase ) {
+                QDomElement caseElement = domDoc.createElement( KVTML_DECLENSION_CASE[dcase] );
+                declension(genders[gen] | numbers[num] | cases[dcase]).toKVTML2(caseElement);
 
-    for ( int num = 0; num <= 2; ++num) {
-        QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
-        for ( int dcase = 0; dcase <= 6; ++dcase ) {
-            QDomElement caseElement = domDoc.createElement( KVTML_DECLENSION_CASE[dcase] );
-            declension(numbers[num] | cases[dcase]).toKVTML2(caseElement);
-
-            if (caseElement.hasChildNodes()) {
-                numberElement.appendChild(caseElement);
+                if (caseElement.hasChildNodes()) {
+                    numberElement.appendChild(caseElement);
+                }
+            }
+            if (numberElement.hasChildNodes()) {
+                genderElement.appendChild(numberElement);
             }
         }
-        if (numberElement.hasChildNodes()) {
-            declensionElement.appendChild(numberElement);
+        if (genderElement.hasChildNodes()) {
+            declensionElement.appendChild(genderElement);
         }
     }
     if (declensionElement.hasChildNodes()) {
@@ -124,6 +135,11 @@ KEduVocDeclension* KEduVocDeclension::fromKVTML2(QDomElement & parent)
     }
 
 
+    QMap<int, KEduVocWordFlags> genders;
+    genders[0] = KEduVocWordFlag::Masculine;
+    genders[1] = KEduVocWordFlag::Feminine;
+    genders[2] = KEduVocWordFlag::Neuter;
+
     QMap<int, KEduVocWordFlags> numbers;
     numbers[0] = KEduVocWordFlag::Singular;
     numbers[1] = KEduVocWordFlag::Dual;
@@ -138,17 +154,24 @@ KEduVocDeclension* KEduVocDeclension::fromKVTML2(QDomElement & parent)
     cases[5] = KEduVocWordFlag::Locative;
     cases[6] = KEduVocWordFlag::Vocative;
 
+
     KEduVocDeclension* declension = new KEduVocDeclension;
 
-    for ( int num = 0; num <= 2; ++num ) {
-        QDomElement numberElement = declensionElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[num] );
-        if (!numberElement.isNull()) {
-            for ( int dcase = 0; dcase <= 6; ++dcase) {
-                QDomElement caseElement = numberElement.firstChildElement( KVTML_DECLENSION_CASE[dcase] );
-                if (!caseElement.isNull()) {
-                    KEduVocText text;
-                    text.fromKVTML2(caseElement);
-                    declension->setDeclension(text, numbers[num] | cases[dcase]);
+    for ( int gen = 0; gen <= 2; ++gen ) {
+        QDomElement genderElement = declensionElement.firstChildElement( KVTML_GRAMMATICAL_GENDER[gen] );
+        if (!genderElement.isNull())
+        {
+            for ( int num = 0; num <= 2; ++num ) {
+                QDomElement numberElement = genderElement.firstChildElement( KVTML_GRAMMATICAL_NUMBER[num] );
+                if (!numberElement.isNull()) {
+                    for ( int dcase = 0; dcase <= 6; ++dcase) {
+                        QDomElement caseElement = numberElement.firstChildElement( KVTML_DECLENSION_CASE[dcase] );
+                        if (!caseElement.isNull()) {
+                            KEduVocText text;
+                            text.fromKVTML2(caseElement);
+                            declension->setDeclension(text, genders[gen] | numbers[num] | cases[dcase]);
+                        }
+                    }
                 }
             }
         }
