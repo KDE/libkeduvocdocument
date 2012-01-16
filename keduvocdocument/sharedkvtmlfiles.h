@@ -43,7 +43,7 @@ namespace SharedKvtmlFiles
      */
     KEDUVOCDOCUMENT_EXPORT QStringList titles( const QString &language = QString() );
 
-    /** get the list of document remarts found of a given language
+    /** get the list of document remarks found of a given language
      *@param language requested language QString() for all comments
      *@return a list of document remarks with words in language
      */
