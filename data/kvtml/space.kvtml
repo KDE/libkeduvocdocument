@@ -121,7 +121,7 @@
       <inquery>false</inquery>
       <translation id="0" >
         <text>meteor</text>
-        <comment>Meteoroid that burns up in the Earth's atmosphere</comment>
+        <comment>The visible track of a Meteoroid entering the Earth's atmosphere</comment>
       </translation>
     </entry>
     <entry id="14" >
