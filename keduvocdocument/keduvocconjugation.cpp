@@ -118,10 +118,12 @@ void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
     for ( int num = 0; num <= 2; ++num) {
         QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
         for ( int person = 0; person < 5; ++person) {
-            if (!conjugation(numbers[num] | persons[person]).isEmpty()) {
+            KEduVocWordFlags curFlags = numbers[num] | persons[person];
+
+            if (keys().contains(curFlags) && !conjugation(curFlags).isEmpty()) {
                 QDomElement personElement = domDoc.createElement( KVTML_GRAMMATICAL_PERSON[person] );
                 numberElement.appendChild(personElement);
-                conjugation(persons[person] | numbers[num]).toKVTML2(personElement);
+                conjugation(curFlags).toKVTML2(personElement);
             }
         }
         if (numberElement.hasChildNodes()) {

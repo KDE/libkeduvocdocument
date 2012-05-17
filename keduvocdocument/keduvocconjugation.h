@@ -50,7 +50,19 @@ public:
     KEduVocConjugation& operator = ( const KEduVocConjugation& a );
     bool operator == ( const KEduVocConjugation& a ) const;
 
+    /**
+     *  Returns an existing conjugation object. It is an error and leads to undefined behaviour
+     *  to call this method with flags which are not in the list returned by keys().
+     *
+     *  BCI: return a pointer instead of a reference.
+     *
+     *  @param  flags Flags obtained by a previous call to keys()
+     *  @return The existing conjugation object with the specified properties
+     */
     KEduVocText& conjugation(KEduVocWordFlags flags) const;
+    /**
+     *  Updates or creates the conjugation object for the given word flags.
+     */
     void setConjugation(const KEduVocText& conjugation, KEduVocWordFlags flags);
 
     QList<KEduVocWordFlags> keys();
