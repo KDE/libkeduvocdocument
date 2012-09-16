@@ -145,6 +145,7 @@ void KEduVocDocumentValidatorTest::testWordTypes()
     }
     QCOMPARE(doc.lesson()->entryCount(), 20);
     QCOMPARE(noun->entryCount(), 20);
+    QCOMPARE(verb->entryCount(), 0);
     doc.lesson()->entry(0)->translation(0)->setWordType(verb);
     // translation 1 is still noun, so it needs to be in both now
     QCOMPARE(noun->entryCount(), 20);
