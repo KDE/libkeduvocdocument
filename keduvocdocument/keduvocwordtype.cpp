@@ -89,10 +89,10 @@ void KEduVocWordType::removeTranslation(KEduVocTranslation* translation)
         }
     }
 
-    // remove from cache
+    // remove from cache if none of the translations use this word type (other than the one we are removing that should not be taken into account)
     bool found = false;
     foreach(int i, translation->entry()->translationIndices()) {
-        if (translation->entry()->translation(i)->wordType() && translation->entry()->translation(i)->wordType() == this) {
+        if (translation->entry()->translation(i)->wordType() && translation->entry()->translation(i)->wordType() == this && translation->entry()->translation(i) != translation) {
             found = true;
             break;
         }
