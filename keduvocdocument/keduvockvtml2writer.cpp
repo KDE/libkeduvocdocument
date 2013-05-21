@@ -531,7 +531,7 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     // image
     if ( !translation->imageUrl().isEmpty() ) {
         QString urlString;
-        if ( translation->imageUrl().url().startsWith(m_doc->url().upUrl().url()) ) {
+        if ( m_doc->url().upUrl().isParentOf( translation->imageUrl()) ) {
             // try to save as relative url
             urlString = KUrl::relativeUrl( m_doc->url() , translation->imageUrl() );
         } else {
@@ -543,7 +543,7 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     // sound
     if ( !translation->soundUrl().isEmpty() ) {
         QString urlString;
-        if ( translation->soundUrl().url().startsWith(m_doc->url().upUrl().url()) ) {
+        if ( m_doc->url().upUrl().isParentOf( translation->soundUrl()) ) {
             // try to save as relative url
             urlString = KUrl::relativeUrl( m_doc->url() , translation->soundUrl() );
         } else {
