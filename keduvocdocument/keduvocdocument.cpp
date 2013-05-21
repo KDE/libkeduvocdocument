@@ -379,7 +379,9 @@ int KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gene
         return FileCannotWrite;
     }
 
+    KUrl oldUrl = d->m_url;
     bool saved = false;
+    d->m_url = tmp;
 
     switch ( ft ) {
         case Kvtml: {
@@ -410,10 +412,10 @@ int KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gene
 
     if ( !saved ) {
         kError() << "Error Saving File" << tmp.path();
+        d->m_url = oldUrl;
         return FileWriterFailed;
     }
 
-    d->m_url = tmp;
     setModified( false );
     return 0;
 }
