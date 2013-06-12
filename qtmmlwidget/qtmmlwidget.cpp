@@ -5863,7 +5863,8 @@ const OperSpec *&OperSpecSearchResult::getForm(Mml::FormType f)
 */
 static const OperSpec *searchOperSpecData(const QString &name)
 {
-    const char *name_latin1 = name.toLatin1().data();
+    QByteArray name_latin1_array = name.toLatin1();
+    const char *name_latin1 = name_latin1_array.data();
 
     // binary search
     // establish invariant g_oper_spec_data[begin].name < name < g_oper_spec_data[end].name
@@ -5913,7 +5914,8 @@ static OperSpecSearchResult _mmlFindOperSpec(const QStringList &name_list, Mml::
 	if (spec == 0)
 	    continue;
 
-    	const char *name_latin1 = name.toLatin1().data();
+	QByteArray name_latin1_array = name.toLatin1();
+	const char *name_latin1 = name_latin1_array.data();
 
     	// backtrack to the first instance of name
 	while (spec > g_oper_spec_data && qstrcmp((spec - 1)->name, name_latin1) == 0)
