@@ -6,7 +6,7 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Widgets Qml Quick Xml Svg OpenGL PrintSupport Test Xml)
-find_package(KF5 5.0.0 REQUIRED NO_MODULE COMPONENTS GuiAddons KDE4Support I18n ConfigWidgets DBusAddons Service Completion KIO)
+find_package(KF5 5.0.0 REQUIRED NO_MODULE COMPONENTS GuiAddons KDE4Support I18n ConfigWidgets DBusAddons Service Archive KIO)
 
 #add_definitions( -Wall -fprofile-arcs -ftest-coverage )
 

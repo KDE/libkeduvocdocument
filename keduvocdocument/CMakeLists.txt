@@ -40,6 +40,7 @@ target_link_libraries(KEduVocDocument
     Qt5::Xml
   PRIVATE
     KF5::KDE4Support
+    KF5::Archive
     Qt5::Widgets
 )
 
