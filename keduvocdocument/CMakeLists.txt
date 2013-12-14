@@ -1,3 +1,4 @@
+add_subdirectory(autotests)
 add_subdirectory(tests)
 
 ########### next target ###############
