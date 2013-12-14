@@ -17,11 +17,13 @@
 #ifndef KEDUVOCTRANSLATION_H
 #define KEDUVOCTRANSLATION_H
 
-#include "libkeduvocdocument_export.h"
+#include "keduvocdocument_export.h"
 #include "keduvocconjugation.h"
 #include "keduvoctext.h"
 #include <KDE/KUrl>
 #include <QtCore/QString>
+
+#include <kdemacros.h>
 
 class KEduVocExpression;
 class KEduVocString;

@@ -19,7 +19,7 @@
 #ifndef KEDUVOCDOCUMENT_H
 #define KEDUVOCDOCUMENT_H
 
-#include "libkeduvocdocument_export.h"
+#include "keduvocdocument_export.h"
 
 #include "keduvocidentifier.h"
 #include "keduvocarticle.h"

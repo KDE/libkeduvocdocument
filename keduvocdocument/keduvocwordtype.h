@@ -17,7 +17,7 @@
 #ifndef KEDUVOCWORDTYPE_H
 #define KEDUVOCWORDTYPE_H
 
-#include "libkeduvocdocument_export.h"
+#include "keduvocdocument_export.h"
 
 #include "keduvoccontainer.h"
 

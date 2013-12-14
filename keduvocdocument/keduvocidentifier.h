@@ -13,7 +13,7 @@
 #ifndef KEDUVOCIDENTIFIER_H
 #define KEDUVOCIDENTIFIER_H
 
-#include "libkeduvocdocument_export.h"
+#include "keduvocdocument_export.h"
 
 #include "keduvocpersonalpronoun.h"
 #include "keduvocarticle.h"

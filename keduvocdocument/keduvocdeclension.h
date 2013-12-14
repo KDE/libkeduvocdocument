@@ -23,7 +23,7 @@
 #ifndef KEDUVOCDECLENSION_H
 #define KEDUVOCDECLENSION_H
 
-#include "libkeduvocdocument_export.h"
+#include "keduvocdocument_export.h"
 
 #include "keduvoctext.h"
 #include "keduvocwordflags.h"

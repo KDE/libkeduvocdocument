@@ -17,7 +17,7 @@
 #ifndef KEDUVOCCONTAINER_H
 #define KEDUVOCCONTAINER_H
 
-#include "libkeduvocdocument_export.h"
+#include "keduvocdocument_export.h"
 
 #include "keduvoctext.h"
 

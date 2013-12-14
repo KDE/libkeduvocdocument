@@ -40,8 +40,7 @@ set(keduvocdocument_LIB_SRCS
 )
 
 add_library(KEduVocDocument SHARED ${keduvocdocument_LIB_SRCS})
-# vHanda: ?
-# generate_export_header(KEduVocDocument BASE_NAME KEduVocDocument)
+generate_export_header(KEduVocDocument BASE_NAME KEduVocDocument)
 # vHanda: Add library alias?
 
 target_link_libraries(KEduVocDocument
@@ -74,7 +73,6 @@ install(TARGETS KEduVocDocument EXPORT LibKdeEduTargets ${INSTALL_TARGETS_DEFAUL
 ########### install files ###############
 
 install(FILES
-    libkeduvocdocument_export.h
     keduvocdocument.h
     keduvocidentifier.h
     keduvocexpression.h
@@ -92,5 +90,7 @@ install(FILES
     sharedkvtmlfiles.h
     keduvocdeclension.h
     keduvockvtml2writer.h
+
+    ${CMAKE_CURRENT_BINARY_DIR}/keduvocdocument_export.h
     DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu  COMPONENT Devel
 )

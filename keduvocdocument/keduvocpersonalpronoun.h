@@ -15,7 +15,7 @@
 #ifndef KEDUVOCPERSONALPRONOUN_H
 #define KEDUVOCPERSONALPRONOUN_H
 
-#include "libkeduvocdocument_export.h"
+#include "keduvocdocument_export.h"
 #include "keduvocconjugation.h"
 #include <QtCore/QStringList>
 

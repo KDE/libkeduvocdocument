@@ -18,11 +18,12 @@
 #ifndef KEDUVOCARTICLE_H
 #define KEDUVOCARTICLE_H
 
-#include "libkeduvocdocument_export.h"
+#include "keduvocdocument_export.h"
 
 #include <QtCore/QStringList>
 
 #include "keduvocwordflags.h"
+#include "kdemacros.h"
 
 class KEduVocWordType;
 /**

@@ -17,7 +17,7 @@
 #ifndef KEDUVOCLESSON_H
 #define KEDUVOCLESSON_H
 
-#include "libkeduvocdocument_export.h"
+#include "keduvocdocument_export.h"
 
 #include "keduvoccontainer.h"
 
