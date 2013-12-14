@@ -249,5 +249,3 @@ void KEduVocDocumentValidatorTest::testAddRemoveLanguage()
 
 
 QTEST_KDEMAIN_CORE( KEduVocDocumentValidatorTest )
-
-#include "keduvocdocumentvalidatortest.moc"

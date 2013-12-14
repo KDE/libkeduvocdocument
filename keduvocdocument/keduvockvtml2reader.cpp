@@ -736,6 +736,3 @@ bool KEduVocKvtml2Reader::readPersonalPronounChild(QDomElement & personElement, 
 
     return true;
 }
-
-
-#include "keduvockvtml2reader.moc"

@@ -34,9 +34,11 @@
 #include <KDebug>
 #include <KUrl>
 
+#include <k4aboutdata.h>
+
 int main( int argc, char ** argv )
 {
-    KAboutData about( "kvtml-converter", 0, ki18n( "Kvtml-Converter" ), "0.1", ki18n( "kvtml file converter" ), KAboutData::License_GPL, ki18n( "© 2007 Jeremy Whiting" ) );
+    K4AboutData about( "kvtml-converter", 0, ki18n( "Kvtml-Converter" ), "0.1", ki18n( "kvtml file converter" ), K4AboutData::License_GPL, ki18n( "© 2007 Jeremy Whiting" ) );
     KCmdLineOptions options;
     options.add( "f <format>", ki18n("file format to write out (kvtml1, kvtml2, or csv)"));
     options.add( "+infile", ki18n( "file to read in" ) );

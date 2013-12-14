@@ -44,12 +44,12 @@
 ** 
 ****************************************************************************/
 
-#include <QtGui/QApplication>
-#include <QtCore/QString>
-#include <QtCore/QMap>
-#include <QtGui/QDesktopWidget>
-#include <QtGui/QPainter>
-#include <QtGui/QPaintEvent>
+#include <QApplication>
+#include <QString>
+#include <QMap>
+#include <QDesktopWidget>
+#include <QPainter>
+#include <QPaintEvent>
 
 #include "qtmmlwidget.h"
 

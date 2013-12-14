@@ -914,6 +914,3 @@ QString KEduVocDocument::errorDescription( int errorCode )
         return i18n("Unknown error.");
     }
 }
-
-#include "keduvocdocument.moc"
-

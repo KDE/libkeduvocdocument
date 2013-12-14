@@ -1091,6 +1091,3 @@ bool KEduVocKvtmlReader::addLanguage( int languageId, const QString& locale)
     }
     return true;
 }
-
-
-#include "keduvockvtmlreader.moc"
