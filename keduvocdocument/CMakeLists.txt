@@ -2,6 +2,16 @@ add_subdirectory(tests)
 
 ########### next target ###############
 
+include(ECMSetupVersion)
+
+ecm_setup_version(5.0.0 VARIABLE_PREFIX KDEEDU
+                        VERSION_HEADER "${CMAKE_BINARY_DIR}/keduvocdocument/keduvocdocument_version.h"
+                        PACKAGE_VERSION_FILE "${CMAKE_BINARY_DIR}/KEduVocDocumentVersion.cmake")
+
+include_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
+
 set(keduvocdocument_LIB_SRCS
     keduvocdocument.cpp
     keduvocidentifier.cpp
@@ -46,8 +56,8 @@ target_link_libraries(KEduVocDocument
 
 # vHanda: Add Export Name?
 set_target_properties(KEduVocDocument
-    PROPERTIES VERSION ${GENERIC_LIB_VERSION}
-               SOVERSION ${GENERIC_LIB_SOVERSION}
+    PROPERTIES VERSION   ${KDEEDU_VERSION_STRING}
+               SOVERSION ${KDEEDU_SOVERSION}
 )
 
 # if we want to set our own version instead of following kde generic
