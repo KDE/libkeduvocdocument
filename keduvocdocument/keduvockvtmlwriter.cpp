@@ -23,7 +23,7 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
 
-#include <KDebug>
+#include <QDebug>
 
 #include "keduvocdocument.h"
 #include "keduvocgrade.h"
@@ -103,7 +103,7 @@ bool KEduVocKvtmlWriter::writeDoc( KEduVocDocument *doc, const QString &generato
             int lm = entry->lesson();
             if ( lm > m_doc->lessonCount() ) {
                 // should not be
-                kError() << "index of lesson member too high: " << lm << endl;
+                qCritical() << "index of lesson member too high: " << lm << endl;
                 lm = 0;
             }
             domElementExpression.setAttribute( KV_LESS_MEMBER, lm );
@@ -776,7 +776,7 @@ bool KEduVocKvtmlWriter::writeConjug( QDomElement &domElementParent, const KEduV
     }
 
     return true; */
-    kDebug() << "Implement me!";
+    qDebug() << "Implement me!";
     return false;
 }
 

@@ -31,7 +31,7 @@
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KCmdLineOptions>
-#include <KDebug>
+#include <QDebug>
 #include <KUrl>
 
 #include <k4aboutdata.h>
@@ -55,9 +55,9 @@ int main( int argc, char ** argv )
             KUrl outfile( arguments->url( 1 ) );
 
             KEduVocDocument document;
-            kDebug() << "Reading " << infile;
+            qDebug() << "Reading " << infile;
             document.open( infile );
-            kDebug() << "Writing to " << outfile;
+            qDebug() << "Writing to " << outfile;
             if (arguments->getOption("f") == "kvtml1")
             {
                 document.saveAs( outfile, KEduVocDocument::Kvtml1, "converter" );

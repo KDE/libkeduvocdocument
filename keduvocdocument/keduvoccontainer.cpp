@@ -18,7 +18,7 @@
 
 #include "keduvocexpression.h"
 
-#include <KDebug>
+#include <QDebug>
 #include <QList>
 
 /** private class to store information about a lesson */
@@ -106,7 +106,7 @@ KEduVocContainer * KEduVocContainer::childContainer(const QString & name)
 
 void KEduVocContainer::deleteChildContainer(int row)
 {
-    kDebug() << "Delete of container - check entry deletion!";
+    qDebug() << "Delete of container - check entry deletion!";
     delete d->m_childContainers.takeAt(row);
 
     invalidateChildLessonEntries();

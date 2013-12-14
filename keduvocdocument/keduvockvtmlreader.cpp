@@ -23,7 +23,7 @@
 #include <QtCore/QList>
 #include <QtCore/QIODevice>
 
-#include <kdebug.h>
+#include <QDebug>
 #include <klocale.h>
 #include <kglobal.h>
 
@@ -38,7 +38,7 @@ KEduVocKvtmlReader::KEduVocKvtmlReader( QIODevice *file )
     // the file must be already open
     m_inputFile = file;
     m_errorMessage = "";
-    kDebug() << "KEduVocKvtmlReader for kvtml version 1 files started.";
+    qDebug() << "KEduVocKvtmlReader for kvtml version 1 files started.";
 }
 
 
@@ -231,7 +231,7 @@ bool KEduVocKvtmlReader::readLesson( QDomElement &domElementParent )
             lesson->setInPractice(inQuery);
             m_doc->lesson()->appendChildContainer( lesson );
             if ( m_doc->lesson()->childContainerCount() != no-1 ) {
-                kDebug() << "Warning! Lesson order may be confused. Are all lessons in order in the file?";
+                qDebug() << "Warning! Lesson order may be confused. Are all lessons in order in the file?";
             }
         }
     }
@@ -266,7 +266,7 @@ bool KEduVocKvtmlReader::readArticle( QDomElement &domElementParent )
 
     for ( int i = 0; i < entryList.count(); ++i ) {
 
-//kDebug() << "KEduVocKvtmlReader::readArticle() read " << entryList.count() << " articles. ";
+//qDebug() << "KEduVocKvtmlReader::readArticle() read " << entryList.count() << " articles. ";
         currentElement = entryList.item( i ).toElement();
         if ( currentElement.parentNode() == domElementParent ) {
             QString lang;
@@ -621,7 +621,7 @@ bool KEduVocKvtmlReader::readType( QDomElement &domElementParent )
             // We need to even add empty elements since the old system relied on
             // the order. So "type1" "" "type2" should be just like that.
 
-            kDebug() << "Adding old self defined type: " << currentElement.text();
+            qDebug() << "Adding old self defined type: " << currentElement.text();
             // add the type to the list of available types
             KEduVocWordType* type = new KEduVocWordType(currentElement.text(), m_doc->wordTypeContainer());
             m_doc->wordTypeContainer()->appendChildContainer( type );
@@ -641,7 +641,7 @@ bool KEduVocKvtmlReader::readTense( QDomElement &domElementParent )
 
     currentElement = domElementParent.firstChildElement( KV_TENSE_DESC );
     while ( !currentElement.isNull() ) {
-        kDebug() << "Reading user defined tense description: " << currentElement.text();
+        qDebug() << "Reading user defined tense description: " << currentElement.text();
         m_compability.addUserdefinedTense( currentElement.text() );
         currentElement = currentElement.nextSiblingElement( KV_TENSE_DESC );
     }
@@ -901,7 +901,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
             ///@todo can this happen? does it need a while loop?
             // it's from a lesson that hasn't been added yet
             // so make sure this lesson is in the document
-            kDebug() << "Warning: lesson > m_doc->lessonCount() in readExpression.";
+            qDebug() << "Warning: lesson > m_doc->lessonCount() in readExpression.";
 
             KEduVocLesson* lesson = new KEduVocLesson(i18nc("A generic name for a new lesson and its number.", "Lesson %1", lessonNumber ), m_doc->lesson());
             m_doc->lesson()->appendChildContainer(lesson);
@@ -1077,7 +1077,7 @@ bool KEduVocKvtmlReader::addLanguage( int languageId, const QString& locale)
             }
 
             m_doc->identifier(languageId).setName(languageName);
-            kDebug() << "addLanguage( " << languageId << ", " << locale << "): " << languageName;
+            qDebug() << "addLanguage( " << languageId << ", " << locale << "): " << languageName;
 
         }
     } else {

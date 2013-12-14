@@ -27,7 +27,7 @@
 #include <QIODevice>
 
 #include <klocale.h>
-#include <kdebug.h>
+#include <QDebug>
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
@@ -42,7 +42,7 @@ KEduVocVokabelnReader::KEduVocVokabelnReader( QIODevice *file )
 
 bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
 {
-    kDebug() << "Reading vokabeln.de document...";
+    qDebug() << "Reading vokabeln.de document...";
     m_doc = doc;
 
     m_doc->setAuthor( "http://www.vokabeln.de" );
@@ -107,13 +107,13 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
     QString language = languages[0].mid( 1 );
     m_doc->identifier(0).setLocale(language);
     m_doc->identifier(0).setName(language);
-    kDebug() << "First language: " << language;
+    qDebug() << "First language: " << language;
 
     m_doc->appendIdentifier();
     language = languages[1].mid( 1 );
     m_doc->identifier(1).setLocale(language);
     m_doc->identifier(1).setName(language);
-    kDebug() << "Second language: " << language;
+    qDebug() << "Second language: " << language;
 
     while ( !temp.contains("8. Lernhilfe") ) {
         temp = inputStream.readLine(); //DO NOT translate
@@ -142,18 +142,18 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         translation = words[1].mid( 1 );
         lessonNumber = words[2].toInt() - 1;
 
-        kDebug() << "Reading entry: " << original << " - " << translation << " Lesson: " << lessonNumber;
+        qDebug() << "Reading entry: " << original << " - " << translation << " Lesson: " << lessonNumber;
 
         // fallback if it's not read correctly
         if (lessonNumber < 0) {
-            kDebug() << "Warning, invalid lesson found!";
+            qDebug() << "Warning, invalid lesson found!";
             lessonNumber = 0;
         }
 
         while(m_doc->lesson()->childContainerCount() <= lessonNumber) {
             KEduVocLesson* lesson = new KEduVocLesson(i18n("Lesson %1", lessonNumber), m_doc->lesson());
             m_doc->lesson()->appendChildContainer(lesson);
-            kDebug() << "Created lesson " << lessonNumber;
+            qDebug() << "Created lesson " << lessonNumber;
         }
 
         KEduVocExpression* kve = new KEduVocExpression;

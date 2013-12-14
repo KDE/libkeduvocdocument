@@ -33,7 +33,7 @@
 #include "keduvockvtmlreader.h"
 #include "keduvoccommon_p.h"
 
-#include <KDebug>
+#include <QDebug>
 
 KEduVocKvtml2Reader::KEduVocKvtml2Reader( QIODevice *file )
         : m_inputFile( file )
@@ -315,7 +315,7 @@ bool KEduVocKvtml2Reader::readEntry( QDomElement &entryElement )
     }
 
     if ( expr->translationIndices().size() == 0 ) {
-        kDebug() << "Found entry with no words in it." << id;
+        qDebug() << "Found entry with no words in it." << id;
         expr->setTranslation(0, QString());
     }
 

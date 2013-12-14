@@ -28,7 +28,7 @@
 
 #include <QtCore/QMap>
 #include <QtXml/QDomDocument>
-#include <kdebug.h>
+#include <QDebug>
 
 class KEduVocConjugation::Private
 {
@@ -112,7 +112,7 @@ void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
         tenseElement.appendChild( domDoc.createTextNode(tense) );
         parent.appendChild(tenseElement);
     } else {
-        kDebug() << "Saving conjugation with empty tense";
+        qDebug() << "Saving conjugation with empty tense";
     }
 
     for ( int num = 0; num <= 2; ++num) {

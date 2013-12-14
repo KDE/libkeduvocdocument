@@ -19,7 +19,7 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
 
-#include <KDebug>
+#include <QDebug>
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
@@ -502,7 +502,7 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
 
     // comparison
     if ( !(translation->comparativeForm().text().isEmpty() || translation->superlativeForm().text().isEmpty())) {
-        kDebug() << "Write comp";
+        qDebug() << "Write comp";
         QDomElement comparisonElement = m_domDoc.createElement( KVTML_COMPARISON );
         translationElement.appendChild(comparisonElement);
 
