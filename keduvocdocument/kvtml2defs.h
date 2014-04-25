@@ -151,10 +151,12 @@ static const QString KVTML_GRAMMATICAL_DEFINITENESS[] = {
 
 #define KVTML_GRADE             "grade"
 #define KVTML_FROMID            "fromid"
+#define KVTML_PREGRADE          "pregrade"
 #define KVTML_CURRENTGRADE      "currentgrade"
 #define KVTML_COUNT             "count"
 #define KVTML_ERRORCOUNT        "errorcount"
 #define KVTML_DATE              "date"
+#define KVTML_INTERVAL          "interval"
 
 #define KVTML_TRUE              "true"
 #define KVTML_FALSE             "false"
