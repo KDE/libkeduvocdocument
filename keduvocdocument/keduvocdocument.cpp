@@ -69,7 +69,7 @@ public:
     KEduVocDocument* q;
 
     bool                      m_dirty;
-    KUrl                      m_url;
+    QUrl                      m_url;
 
     // save these to document
     QList<KEduVocIdentifier>  m_identifiers;
@@ -127,7 +127,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_dirty = false;
     m_queryorg = "";
     m_querytrans = "";
-    m_url.setFileName( i18n( "Untitled" ) );
+    m_url.setPath( i18n( "Untitled" ) );
     m_author = "";
     m_title = "";
     m_comment = "";
@@ -236,7 +236,7 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileNa
 }
 
 
-int KEduVocDocument::open( const KUrl& url )
+int KEduVocDocument::open( const QUrl& url )
 {
     // save csv delimiter to preserve it in case this is a csv document
     QString csv = d->m_csvDelimiter;
@@ -275,7 +275,7 @@ int KEduVocDocument::open( const KUrl& url )
             case Wql: {
                 qDebug() << "Reading WordQuiz (WQL) document...";
                 KEduVocWqlReader wqlReader( f );
-                d->m_url.setFileName( i18n( "Untitled" ) );
+                d->m_url.setPath( i18n( "Untitled" ) );
                 read = wqlReader.readDoc( this );
                 if ( !read ) {
                     errorMessage = wqlReader.errorMessage();
@@ -286,7 +286,7 @@ int KEduVocDocument::open( const KUrl& url )
             case Pauker: {
                 qDebug() << "Reading Pauker document...";
                 KEduVocPaukerReader paukerReader( this );
-                d->m_url.setFileName( i18n( "Untitled" ) );
+                d->m_url.setPath( i18n( "Untitled" ) );
                 read = paukerReader.read( f );
                 if ( !read ) {
                     errorMessage = i18n( "Parse error at line %1, column %2:\n%3", paukerReader.lineNumber(), paukerReader.columnNumber(), paukerReader.errorString() );
@@ -297,7 +297,7 @@ int KEduVocDocument::open( const KUrl& url )
             case Vokabeln: {
                 qDebug() << "Reading Vokabeln document...";
                 KEduVocVokabelnReader vokabelnReader( f );
-                d->m_url.setFileName( i18n( "Untitled" ) );
+                d->m_url.setPath( i18n( "Untitled" ) );
                 read = vokabelnReader.readDoc( this );
                 if ( !read ) {
                     errorMessage = vokabelnReader.errorMessage();
@@ -318,7 +318,7 @@ int KEduVocDocument::open( const KUrl& url )
             case Xdxf: {
                 qDebug() << "Reading XDXF document...";
                 KEduVocXdxfReader xdxfReader( this );
-                d->m_url.setFileName( i18n( "Untitled" ) );
+                d->m_url.setPath( i18n( "Untitled" ) );
                 read = xdxfReader.read( f );
                 if ( !read ) {
                     errorMessage = i18n( "Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString() );
@@ -358,9 +358,9 @@ int KEduVocDocument::open( const KUrl& url )
 }
 
 
-int KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & generator )
+int KEduVocDocument::saveAs( const QUrl & url, FileType ft, const QString & generator )
 {
-    KUrl tmp( url );
+    QUrl tmp( url );
 
     if ( ft == Automatic ) {
         if ( tmp.path().right( strlen( "." KVTML_EXT ) ) == "." KVTML_EXT )
@@ -379,7 +379,7 @@ int KEduVocDocument::saveAs( const KUrl & url, FileType ft, const QString & gene
         return FileCannotWrite;
     }
 
-    KUrl oldUrl = d->m_url;
+    QUrl oldUrl = d->m_url;
     bool saved = false;
     d->m_url = tmp;
 
@@ -728,12 +728,12 @@ KEduVocLeitnerBox * KEduVocDocument::leitnerContainer()
     return d->m_leitnerContainer;
 }
 
-KUrl KEduVocDocument::url() const
+QUrl KEduVocDocument::url() const
 {
     return d->m_url;
 }
 
-void KEduVocDocument::setUrl( const KUrl& url )
+void KEduVocDocument::setUrl( const QUrl& url )
 {
     d->m_url = url;
 }

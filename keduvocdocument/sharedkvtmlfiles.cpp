@@ -93,7 +93,7 @@ void SharedKvtmlFilesPrivate::rescan()
     for ( int i = 0; i < this->m_fileList.size(); ++i ) {
 
         // open the file
-        doc->open( KUrl::fromPath( this->m_fileList[i] ) );
+        doc->open( QUrl::fromLocalFile( this->m_fileList[i] ) );
 
         // add it's title to the title list
         this->m_titleList.append( doc->title() );
@@ -161,7 +161,7 @@ void SharedKvtmlFiles::sortDownloadedFiles()
     KEduVocDocument doc;
 
     while ( !unsortedFiles.isEmpty() ) {
-        KUrl fileUrl( KUrl::fromPath( unsortedFiles.first() ) );
+        QUrl fileUrl( QUrl::fromLocalFile( unsortedFiles.first() ) );
         // find the file's locale
         // open the file
         doc.open( fileUrl );
@@ -170,9 +170,8 @@ void SharedKvtmlFiles::sortDownloadedFiles()
             QString locale = doc.identifier( 0 ).locale();
 
             // make sure the locale sub-folder exists
-            KUrl pathUrl( fileUrl );
-            pathUrl.setFileName( QString() );
-            pathUrl.addPath( locale );
+            QUrl pathUrl = QUrl( fileUrl );
+            pathUrl.setPath( locale );
             KIO::mkdir( pathUrl );
 
             // move the file into the locale sub-folder
@@ -182,14 +181,14 @@ void SharedKvtmlFiles::sortDownloadedFiles()
         // take off the one we just did
         unsortedFiles.removeFirst();
     }
-    
-    QStringList khangmanFiles = KGlobal::dirs()->findAllResources( "data", 
+
+    QStringList khangmanFiles = KGlobal::dirs()->findAllResources( "data",
                                 QString( "kvtml/*.txt" ) );
-    
+
     // move khangman files into
     while ( !khangmanFiles.isEmpty() ) {
-        KUrl fileUrl( KUrl::fromPath( khangmanFiles.first() ) );
-        KUrl destDir = KUrl::fromPath(KStandardDirs::locateLocal("appdata", "khangman/data/"));
+        QUrl fileUrl( QUrl::fromLocalFile( khangmanFiles.first() ) );
+        QUrl destDir = QUrl::fromLocalFile(KStandardDirs::locateLocal("appdata", "khangman/data/"));
         // do this better with KStandardDirs stuff
         KIO::move( fileUrl, destDir);
         khangmanFiles.removeFirst();

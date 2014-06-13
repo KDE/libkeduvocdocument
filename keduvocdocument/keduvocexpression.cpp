@@ -19,6 +19,8 @@
 
 #include "keduvocexpression.h"
 
+#include <QtCore/QMap>
+
 class KEduVocExpression::KEduVocExpressionPrivate
 {
 public:

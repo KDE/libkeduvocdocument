@@ -28,8 +28,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QList>
 #include <QtCore/QMap>
-
-#include <KDE/KUrl>
+#include <QUrl>
 
 class QStringList;
 class KEduVocExpression;
@@ -106,7 +105,7 @@ public:
      * @param url      url to file to open
      * @returns        ErrorCode
      */
-    int open( const KUrl& url );
+    int open( const QUrl& url );
 
     /**
      * Saves the data under the given name
@@ -116,7 +115,7 @@ public:
      * @param generator  the name of the application saving the document
      * @returns          ErrorCode
      */
-    int saveAs( const KUrl & url, FileType ft, const QString & generator );
+    int saveAs( const QUrl & url, FileType ft, const QString & generator );
 
     QByteArray toByteArray(const QString &generator);
 
@@ -142,10 +141,10 @@ public:
     /**
      * Sets the URL of the XML file
      */
-    void setUrl( const KUrl& url );
+    void setUrl( const QUrl& url );
 
     /** @returns the URL of the XML file */
-    KUrl url() const;
+    QUrl url() const;
 
 
     /** Set the title of the file

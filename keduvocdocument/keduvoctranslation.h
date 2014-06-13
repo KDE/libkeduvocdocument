@@ -20,7 +20,7 @@
 #include "keduvocdocument_export.h"
 #include "keduvocconjugation.h"
 #include "keduvoctext.h"
-#include <KDE/KUrl>
+#include <QUrl>
 #include <QtCore/QString>
 
 #include <kdemacros.h>
@@ -215,19 +215,19 @@ public:
 //     void setMultipleChoice( const QStringList &mc );
 
     /** Get the sound url for this translation if it exists */
-    KUrl soundUrl();
+    QUrl soundUrl();
 
     /** Set the sound url for this translation
      * @param url               url of the sound file */
-    void setSoundUrl(const KUrl &url);
+    void setSoundUrl(const QUrl &url);
 
     /** Get the image url for this translation if it exists */
-    KUrl imageUrl();
+    QUrl imageUrl();
 
     /** Set the image url for this translation
      * @param url               url of the image
      */
-    void setImageUrl(const KUrl &url);
+    void setImageUrl(const QUrl &url);
 
     /**
      * Add a false friend

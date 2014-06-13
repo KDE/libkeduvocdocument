@@ -27,6 +27,7 @@
 #include "keduvocleitnerbox.h"
 #include "keduvocwordtype.h"
 #include "kvtml2defs.h"
+#include <kio/global.h>
 
 KEduVocKvtml2Writer::KEduVocKvtml2Writer( QFile *file )
 {
@@ -252,7 +253,7 @@ void KEduVocKvtml2Writer::writeSynonymAntonymFalseFriend(QDomElement & parentEle
         while (!currentList.isEmpty()) {
             // after writing a translation, remove it from the list
             KEduVocTranslation* translation = currentList.takeFirst();
-	    
+
 
             QDomElement relatedElement;
             QList <KEduVocTranslation*> list;
@@ -285,7 +286,7 @@ void KEduVocKvtml2Writer::writeSynonymAntonymFalseFriend(QDomElement & parentEle
 			    break;
 			}
 		    }
-		    
+
                     relatedElement.appendChild(entryElement);
 
 
@@ -305,7 +306,7 @@ void KEduVocKvtml2Writer::writeSynonymAntonymFalseFriend(QDomElement & parentEle
 		    synonymElement.appendChild(relatedElement);
                 }
             }
-            
+
         }
         if (synonymElement.hasChildNodes()) {
             parentElement.appendChild( synonymElement );
@@ -531,9 +532,9 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     // image
     if ( !translation->imageUrl().isEmpty() ) {
         QString urlString;
-        if ( m_doc->url().upUrl().isParentOf( translation->imageUrl()) ) {
+        if ( KIO::upUrl(m_doc->url()).isParentOf( translation->imageUrl()) ) {
             // try to save as relative url
-            urlString = KUrl::relativeUrl( m_doc->url() , translation->imageUrl() );
+            urlString = m_doc->url().toString() + '/' + translation->imageUrl().toString();
         } else {
             urlString =  translation->imageUrl().url();
         }
@@ -543,9 +544,9 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     // sound
     if ( !translation->soundUrl().isEmpty() ) {
         QString urlString;
-        if ( m_doc->url().upUrl().isParentOf( translation->soundUrl()) ) {
+        if ( KIO::upUrl(m_doc->url().adjusted(QUrl::RemoveFilename)).isParentOf( translation->soundUrl()) ) {
             // try to save as relative url
-            urlString = KUrl::relativeUrl( m_doc->url() , translation->soundUrl() );
+            urlString = m_doc->url().toString(QUrl::RemoveFilename) + '/' + translation->soundUrl().toString();
         } else {
             urlString =  translation->soundUrl().url();
         }

@@ -357,13 +357,19 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     // image
     currentElement = translationElement.firstChildElement( KVTML_IMAGE );
     if ( !currentElement.isNull() ) {
-        expr->translation(index)->setImageUrl( KUrl( m_doc->url(), currentElement.text() ) );
+        if (QUrl::fromLocalFile(currentElement.text()).isRelative())
+            expr->translation(index)->setImageUrl( QUrl (m_doc->url().toString(QUrl::RemoveFilename) + '/' + currentElement.text() ) );
+        else
+            expr->translation(index)->setImageUrl( QUrl (currentElement.text() ) );
     }
 
     // sound
     currentElement = translationElement.firstChildElement( KVTML_SOUND );
     if ( !currentElement.isNull() ) {
-        expr->translation(index)->setSoundUrl( KUrl( m_doc->url(), currentElement.text() ) );
+        if (QUrl::fromLocalFile(currentElement.text()).isRelative())
+            expr->translation(index)->setSoundUrl( QUrl( m_doc->url().toString(QUrl::RemoveFilename) + '/' + currentElement.text() ) );
+        else
+            expr->translation(index)->setSoundUrl( QUrl( currentElement.text() ) );
     }
 
     return true;

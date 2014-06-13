@@ -41,7 +41,7 @@ public:
     bool m_childLessonEntriesValid;
 
     /// Image url
-    KUrl m_imageUrl;
+    QUrl m_imageUrl;
 };
 
 KEduVocContainer::Private::~Private()
@@ -208,12 +208,12 @@ KEduVocContainer::EnumContainerType KEduVocContainer::containerType()
 }
 
 
-KUrl KEduVocContainer::imageUrl()
+QUrl KEduVocContainer::imageUrl()
 {
     return d->m_imageUrl;
 }
 
-void KEduVocContainer::setImageUrl(const KUrl &url)
+void KEduVocContainer::setImageUrl(const QUrl &url)
 {
     d->m_imageUrl = url;
 }

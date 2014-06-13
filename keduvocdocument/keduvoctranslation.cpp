@@ -51,9 +51,9 @@ public:
     /// Pronunciation
     QString m_pronunciation;
     /// Image url
-    KUrl m_imageUrl;
+    QUrl m_imageUrl;
     /// Sound url
-    KUrl m_soundUrl;
+    QUrl m_soundUrl;
 
     /// When creating multiple choice tests, these are possible answers. (otherwise other words are added randomly)
     QStringList m_multipleChoice;
@@ -326,20 +326,20 @@ void KEduVocTranslation::setConjugations(const QMap< QString, KEduVocConjugation
 }
 
 /** get the sound url for this translation if it exists */
-KUrl KEduVocTranslation::soundUrl()
+QUrl KEduVocTranslation::soundUrl()
 {
     return d->m_soundUrl;
 }
 
 /** set the sound url for this translation
  * @param url               url of the sound file */
-void KEduVocTranslation::setSoundUrl(const KUrl &url)
+void KEduVocTranslation::setSoundUrl(const QUrl &url)
 {
     d->m_soundUrl = url;
 }
 
 /** get the image url for this translation if it exists */
-KUrl KEduVocTranslation::imageUrl()
+QUrl KEduVocTranslation::imageUrl()
 {
     return d->m_imageUrl;
 }
@@ -347,7 +347,7 @@ KUrl KEduVocTranslation::imageUrl()
 /** set the image url for this translation
  * @param url               url of the image
  */
-void KEduVocTranslation::setImageUrl(const KUrl &url)
+void KEduVocTranslation::setImageUrl(const QUrl &url)
 {
     d->m_imageUrl = url;
 }

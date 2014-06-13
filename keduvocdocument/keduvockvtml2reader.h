@@ -19,6 +19,7 @@
 
 #include <QtXml/QDomDocument>
 #include <QList>
+#include <QMap>
 
 #include "keduvocexpression.h"
 #include "keduvocpersonalpronoun.h"

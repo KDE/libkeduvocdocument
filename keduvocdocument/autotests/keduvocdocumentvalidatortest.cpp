@@ -26,7 +26,7 @@
 #include "keduvocwordtype.h"
 
 
-#include <KTemporaryFile>
+#include <QTemporaryFile>
 
 #include <qtest_kde.h>
 
@@ -52,10 +52,10 @@ private slots:
 
 void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
 {
-    KTemporaryFile temp;
+    QTemporaryFile temp;
     temp.setSuffix(".kvtml");
     temp.open();
-    KUrl fileName = KUrl(temp.fileName());
+    QUrl fileName = QUrl::fromLocalFile(temp.fileName());
     temp.close();
 
     const QString generator = QString::fromLatin1( "Validator Unit Tests" );

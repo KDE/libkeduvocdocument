@@ -32,7 +32,7 @@
 #include <KCmdLineArgs>
 #include <KCmdLineOptions>
 #include <QDebug>
-#include <KUrl>
+#include <QUrl>
 
 #include <k4aboutdata.h>
 
@@ -50,9 +50,9 @@ int main( int argc, char ** argv )
 
     KCmdLineArgs * arguments = KCmdLineArgs::parsedArgs();
     if ( arguments != NULL && arguments->count() > 0 ) {
-        KUrl infile( arguments->url( 0 ) );
+        QUrl infile = arguments->url( 0 );
         if ( arguments->count() > 1 ) {
-            KUrl outfile( arguments->url( 1 ) );
+            QUrl outfile = arguments->url( 1 );
 
             KEduVocDocument document;
             qDebug() << "Reading " << infile;

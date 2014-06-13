@@ -21,8 +21,8 @@
 
 #include "keduvoctext.h"
 
-#include <KDE/KUrl>
 #include <QtCore/QList>
+#include <QUrl>
 
 class KEduVocExpression;
 
@@ -124,12 +124,12 @@ public:
 
 
     /** get the image url for this container if it exists */
-    KUrl imageUrl();
+    QUrl imageUrl();
 
     /** set the image url for this container
      * @param url               url of the image
      */
-    void setImageUrl(const KUrl &url);
+    void setImageUrl(const QUrl &url);
 
     double averageGrade(int translation, EnumEntriesRecursive recursive);
 
