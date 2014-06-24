@@ -24,8 +24,8 @@
 #include <QtCore/QIODevice>
 
 #include <QDebug>
-#include <klocale.h>
-#include <kglobal.h>
+#include <QLocale>
+#include <klocalizedstring.h>
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"
@@ -1068,10 +1068,8 @@ bool KEduVocKvtmlReader::addLanguage( int languageId, const QString& locale)
             m_doc->identifier(languageId).setLocale(locale);
 
             QString languageName;
-            if (KGlobal::locale()) {
-                // when using from qt-only apps this would crash (converter)
-                languageName = KGlobal::locale()->languageCodeToName(locale);
-            }
+            // when using from qt-only apps this would crash (converter)
+            languageName = QLocale::languageToString(QLocale(locale).language());
             if ( languageName.isEmpty() ) {
                 languageName = locale;
             }
