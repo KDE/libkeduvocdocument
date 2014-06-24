@@ -25,8 +25,6 @@ include(KDEInstallDirs)
 
 add_subdirectory(keduvocdocument)
 add_subdirectory(data)
-#add_subdirectory(widgets)
-add_subdirectory(qtmmlwidget)
 add_subdirectory(icons)
 
 
