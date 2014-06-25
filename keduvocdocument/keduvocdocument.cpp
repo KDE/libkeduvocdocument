@@ -162,7 +162,7 @@ void KEduVocDocument::setModified( bool dirty )
 
 KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileName )
 {
-    QIODevice * f = KFilterDev::deviceForFile( fileName );
+    KFilterDev * f = new KFilterDev( fileName );
     if ( !f->open( QIODevice::ReadOnly ) ) {
         qDebug() << "Warning, could not open QIODevice for file: " << fileName;
         delete f;
@@ -251,7 +251,7 @@ int KEduVocDocument::open( const QUrl& url )
     QString errorMessage = i18n( "<qt>Cannot open file<br /><b>%1</b></qt>", url.path() );
     QString temporaryFile;
     if ( KIO::NetAccess::download( url, temporaryFile, 0 ) ) {
-        QIODevice * f = KFilterDev::deviceForFile( temporaryFile );
+        KFilterDev * f = new KFilterDev( temporaryFile );
 
         if ( !f->open( QIODevice::ReadOnly ) ) {
             qCritical() << errorMessage;
