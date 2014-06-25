@@ -20,11 +20,11 @@
 #include <kio/copyjob.h>
 #include <kio/job.h>
 #include <klocale.h>
-#include <kstandarddirs.h>
 
 #include <QDir>
 #include <QList>
 #include <QSet>
+#include <QStandardPaths>
 
 #include <kglobal.h>
 
@@ -68,24 +68,18 @@ void SharedKvtmlFilesPrivate::rescan()
 
     QStringList locales;
 
-    QStringList dataPaths = KGlobal::dirs()->findDirs( "data", "kvtml/" );
-    for ( int i = 0; i < dataPaths.size(); ++i ) {
-        locales += QDir( dataPaths[i] ).entryList( QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name );
-    }
-
-    // remove duplicates
-    locales = locales.toSet().toList();
-
-    for ( int i = 0; i < locales.size(); ++i ) {
-        // get all files for this language
-        QStringList thisLangFiles = KGlobal::dirs()->findAllResources( "data",
-                                    QString( "kvtml/%1/*.kvtml" ).arg( QDir( locales[i] ).dirName() ) );
-        // add them to the big list
-        this->m_fileList << thisLangFiles;
-
-        // then add them to their respective language maps
-        for ( int j = 0; j < thisLangFiles.size(); ++j ) {
-            this->m_filesByLang[locales[i]].append( thisLangFiles[j] );
+    // Get all kvtml paths
+    QStringList nameFilter;
+    nameFilter.append("*.kvtml");
+    QStringList dataPaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "kvtml", QStandardPaths::LocateDirectory);
+    Q_FOREACH (const QString &path, dataPaths) {
+        QStringList locales = QDir( path ).entryList( QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name );
+        Q_FOREACH (const QString &locale, locales) {
+            QStringList files = QDir( locale ).entryList(nameFilter, QDir::Files );
+            Q_FOREACH (const QString &filename, files) {
+                this->m_fileList << filename;
+                this->m_filesByLang[locale].append( filename );
+            }
         }
     }
 
@@ -155,8 +149,16 @@ QStringList SharedKvtmlFiles::comments( const QString &language )
 
 void SharedKvtmlFiles::sortDownloadedFiles()
 {
-    QStringList unsortedFiles = KGlobal::dirs()->findAllResources( "data",
-                                QString( "kvtml/*.kvtml" ) );
+    QStringList nameFilter;
+    nameFilter.append("*.kvtml");
+    QStringList dataPaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "kvtml", QStandardPaths::LocateDirectory);
+    QStringList unsortedFiles;
+    Q_FOREACH (const QString &path, dataPaths) {
+        QStringList files = QDir( path ).entryList(nameFilter, QDir::Files | QDir::NoDotAndDotDot );
+        Q_FOREACH (const QString &filename, files) {
+            unsortedFiles.append( path + '/' + filename);
+        }
+    }
 
     KEduVocDocument doc;
 
@@ -182,13 +184,19 @@ void SharedKvtmlFiles::sortDownloadedFiles()
         unsortedFiles.removeFirst();
     }
 
-    QStringList khangmanFiles = KGlobal::dirs()->findAllResources( "data",
-                                QString( "kvtml/*.txt" ) );
+    nameFilter = QStringList(QLatin1String("*.txt"));
+    QStringList khangmanFiles;
+    Q_FOREACH (const QString &path, dataPaths) {
+        QStringList files = QDir( path ).entryList(nameFilter, QDir::Files );
+        Q_FOREACH (const QString &filename, files) {
+            khangmanFiles.append( path + '/' + filename);
+        }
+    }
 
     // move khangman files into
     while ( !khangmanFiles.isEmpty() ) {
         QUrl fileUrl( QUrl::fromLocalFile( khangmanFiles.first() ) );
-        QUrl destDir = QUrl::fromLocalFile(KStandardDirs::locateLocal("appdata", "khangman/data/"));
+        QUrl destDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/khangman/data/");
         // do this better with KStandardDirs stuff
         KIO::move( fileUrl, destDir);
         khangmanFiles.removeFirst();
