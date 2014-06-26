@@ -1,21 +1,9 @@
 Contents of libkdeedu as of Feb 2006, and brief description of each module:
 
-extdate:
-Contains a reimplementation of QDate named ExtDate which eliminates the
-limitation on the year (1752-8000) imposed by QDate.  Also contains
-related reimplemented classes such as ExtDateTime, ExtDatePicker,
-ExtDateTimeEdit, and ExtCalendarSystem.
-Currently used by:  kstars
-
-kdeeducore:
+keduvocdocument:
 Contains KEduVocDocument and its related class for reading from/writing to the
 KVTML format (and others too).
-Currently used by:  kanagram, khangman, klatin, kvoctrain, kwordquiz
-
-libscience:
-Contains some classes related to scientific data, like chemical Element's,
-spectra, temperature units and Isotope's.
-Currently used by:  kalzium
+Currently used by:  kanagram, khangman, parley, kwordquiz
 
 ideas: stub directory, contains generic README and TODO files.
 
