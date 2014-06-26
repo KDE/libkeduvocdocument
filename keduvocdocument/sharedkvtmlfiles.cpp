@@ -75,7 +75,7 @@ void SharedKvtmlFilesPrivate::rescan()
     Q_FOREACH (const QString &path, dataPaths) {
         QStringList locales = QDir( path ).entryList( QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name );
         Q_FOREACH (const QString &locale, locales) {
-            QStringList files = QDir( locale ).entryList(nameFilter, QDir::Files );
+            QStringList files = QDir( path + '/' + locale ).entryList(nameFilter, QDir::Files );
             Q_FOREACH (const QString &filename, files) {
                 this->m_fileList << filename;
                 this->m_filesByLang[locale].append( filename );
