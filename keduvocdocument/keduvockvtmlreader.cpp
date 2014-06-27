@@ -25,7 +25,7 @@
 
 #include <QDebug>
 #include <QLocale>
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"

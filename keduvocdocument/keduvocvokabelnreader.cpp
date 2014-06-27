@@ -26,7 +26,7 @@
 
 #include <QIODevice>
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <QDebug>
 
 #include "keduvocdocument.h"

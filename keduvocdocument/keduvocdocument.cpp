@@ -22,10 +22,11 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QtAlgorithms>
 #include <QtCore/QIODevice>
+#include <QTemporaryFile>
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <QDebug>
-#include <kio/netaccess.h>
+#include <kio/filecopyjob.h>
 #include <krandomsequence.h>
 #include <kfilterdev.h>
 
@@ -249,105 +250,113 @@ int KEduVocDocument::open( const QUrl& url )
 
     bool read = false;
     QString errorMessage = i18n( "<qt>Cannot open file<br /><b>%1</b></qt>", url.path() );
-    QString temporaryFile;
-    if ( KIO::NetAccess::download( url, temporaryFile, 0 ) ) {
-        KFilterDev * f = new KFilterDev( temporaryFile );
-
-        if ( !f->open( QIODevice::ReadOnly ) ) {
-            qCritical() << errorMessage;
-            delete f;
-            return FileCannotRead;
-        }
-
-        FileType ft = detectFileType( temporaryFile );
-
-        switch ( ft ) {
-            case Kvtml: {
-                qDebug() << "Reading KVTML document...";
-                KEduVocKvtml2Reader kvtmlReader( f );
-                read = kvtmlReader.readDoc( this );
-                if ( !read ) {
-                    errorMessage = kvtmlReader.errorMessage();
-                }
-            }
-            break;
-
-            case Wql: {
-                qDebug() << "Reading WordQuiz (WQL) document...";
-                KEduVocWqlReader wqlReader( f );
-                d->m_url.setPath( i18n( "Untitled" ) );
-                read = wqlReader.readDoc( this );
-                if ( !read ) {
-                    errorMessage = wqlReader.errorMessage();
-                }
-            }
-            break;
-
-            case Pauker: {
-                qDebug() << "Reading Pauker document...";
-                KEduVocPaukerReader paukerReader( this );
-                d->m_url.setPath( i18n( "Untitled" ) );
-                read = paukerReader.read( f );
-                if ( !read ) {
-                    errorMessage = i18n( "Parse error at line %1, column %2:\n%3", paukerReader.lineNumber(), paukerReader.columnNumber(), paukerReader.errorString() );
-                }
-            }
-            break;
-
-            case Vokabeln: {
-                qDebug() << "Reading Vokabeln document...";
-                KEduVocVokabelnReader vokabelnReader( f );
-                d->m_url.setPath( i18n( "Untitled" ) );
-                read = vokabelnReader.readDoc( this );
-                if ( !read ) {
-                    errorMessage = vokabelnReader.errorMessage();
-                }
-            }
-            break;
-
-            case Csv: {
-                qDebug() << "Reading CVS document...";
-                KEduVocCsvReader csvReader( f );
-                read = csvReader.readDoc( this );
-                if ( !read ) {
-                    errorMessage = csvReader.errorMessage();
-                }
-            }
-            break;
-
-            case Xdxf: {
-                qDebug() << "Reading XDXF document...";
-                KEduVocXdxfReader xdxfReader( this );
-                d->m_url.setPath( i18n( "Untitled" ) );
-                read = xdxfReader.read( f );
-                if ( !read ) {
-                    errorMessage = i18n( "Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString() );
-                }
-            }
-            break;
-
-            default: {
-                qDebug() << "Reading KVTML document (fallback)...";
-                KEduVocKvtml2Reader kvtmlReader( f );
-                read = kvtmlReader.readDoc( this );
-                if ( !read ) {
-                    errorMessage = kvtmlReader.errorMessage();
-                }
+    QTemporaryFile tempFile;
+    QString fileName;
+    if (url.isLocalFile()) {
+        fileName = url.toLocalFile();
+    } else {
+        if (tempFile.open()) {
+            fileName = tempFile.fileName();
+            KIO::FileCopyJob *job = KIO::file_copy(url, tempFile.fileName());
+            if (!job->exec()) {
+                qCritical() << "Couldn't open document file " << url.toString();
+                return FileCannotRead;
             }
         }
-
-        if ( !read ) {
-            QString msg = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)", url.path(), errorMessage );
-            qCritical() << msg << i18n( "Error Opening File" );
-            ///@todo make the readers return int, pass on the error message properly
-            delete f;
-            return FileReaderFailed;
-        }
-
-        f->close();
-        delete f;
-        KIO::NetAccess::removeTempFile( temporaryFile );
     }
+
+    KFilterDev f( fileName );
+
+    if ( !f.open( QIODevice::ReadOnly ) ) {
+        qCritical() << errorMessage;
+        return FileCannotRead;
+    }
+
+    FileType ft = detectFileType( fileName );
+
+    switch ( ft ) {
+        case Kvtml: {
+            qDebug() << "Reading KVTML document...";
+            KEduVocKvtml2Reader kvtmlReader( &f );
+            read = kvtmlReader.readDoc( this );
+            if ( !read ) {
+                errorMessage = kvtmlReader.errorMessage();
+            }
+        }
+        break;
+
+        case Wql: {
+            qDebug() << "Reading WordQuiz (WQL) document...";
+            KEduVocWqlReader wqlReader( &f );
+            d->m_url.setPath( i18n( "Untitled" ) );
+            read = wqlReader.readDoc( this );
+            if ( !read ) {
+                errorMessage = wqlReader.errorMessage();
+            }
+        }
+        break;
+
+        case Pauker: {
+            qDebug() << "Reading Pauker document...";
+            KEduVocPaukerReader paukerReader( this );
+            d->m_url.setPath( i18n( "Untitled" ) );
+            read = paukerReader.read( &f );
+            if ( !read ) {
+                errorMessage = i18n( "Parse error at line %1, column %2:\n%3", paukerReader.lineNumber(), paukerReader.columnNumber(), paukerReader.errorString() );
+            }
+        }
+        break;
+
+        case Vokabeln: {
+            qDebug() << "Reading Vokabeln document...";
+            KEduVocVokabelnReader vokabelnReader( &f );
+            d->m_url.setPath( i18n( "Untitled" ) );
+            read = vokabelnReader.readDoc( this );
+            if ( !read ) {
+                errorMessage = vokabelnReader.errorMessage();
+            }
+        }
+        break;
+
+        case Csv: {
+            qDebug() << "Reading CVS document...";
+            KEduVocCsvReader csvReader( &f );
+            read = csvReader.readDoc( this );
+            if ( !read ) {
+                errorMessage = csvReader.errorMessage();
+            }
+        }
+        break;
+
+       case Xdxf: {
+           qDebug() << "Reading XDXF document...";
+           KEduVocXdxfReader xdxfReader( this );
+           d->m_url.setPath( i18n( "Untitled" ) );
+           read = xdxfReader.read( &f );
+           if ( !read ) {
+               errorMessage = i18n( "Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString() );
+           }
+        }
+        break;
+
+        default: {
+            qDebug() << "Reading KVTML document (fallback)...";
+            KEduVocKvtml2Reader kvtmlReader( &f );
+            read = kvtmlReader.readDoc( this );
+            if ( !read ) {
+                errorMessage = kvtmlReader.errorMessage();
+            }
+        }
+    }
+
+    if ( !read ) {
+        QString msg = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)", url.path(), errorMessage );
+        qCritical() << msg << i18n( "Error Opening File" );
+        ///@todo make the readers return int, pass on the error message properly
+        return FileReaderFailed;
+    }
+
+    f.close();
 
     if ( !read ) {
         return FileReaderFailed;

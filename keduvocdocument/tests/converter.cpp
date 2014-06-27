@@ -26,43 +26,47 @@
 
 #include "keduvocdocument.h"
 
-#include <QApplication>
+#include <KLocalizedString>
 
-#include <KAboutData>
-#include <KCmdLineArgs>
-#include <KCmdLineOptions>
+#include <QApplication>
 #include <QDebug>
 #include <QUrl>
-
-#include <k4aboutdata.h>
+#include <QCommandLineParser>
 
 int main( int argc, char ** argv )
 {
-    K4AboutData about( "kvtml-converter", 0, ki18n( "Kvtml-Converter" ), "0.1", ki18n( "kvtml file converter" ), K4AboutData::License_GPL, ki18n( "© 2007 Jeremy Whiting" ) );
-    KCmdLineOptions options;
-    options.add( "f <format>", ki18n("file format to write out (kvtml1, kvtml2, or csv)"));
-    options.add( "+infile", ki18n( "file to read in" ) );
-    options.add( "+outfile", ki18n( "file to write to" ) );
+    QCoreApplication::setApplicationName("kvtml-converter");
+    QCoreApplication::setApplicationVersion("0.2");
+    QCoreApplication::setOrganizationDomain("kde.org");
+    QCoreApplication app( argc, argv );
 
-    KCmdLineArgs::init( argc, argv, &about );
-    KCmdLineArgs::addCmdLineOptions( options );
-    QCoreApplication app( KCmdLineArgs::qtArgc(), KCmdLineArgs::qtArgv() );
+    QCommandLineParser parser;
+    parser.addHelpOption();
+    parser.addVersionOption();
+    QCommandLineOption formatOption(QStringList() << "f" << "format",
+            i18n("main", "file format to write out (kvtml1, kvtml2, or csv)."));
+    parser.addOption(formatOption);
+    parser.addPositionalArgument("infile", i18n("main", "File to read in."));
+    parser.addPositionalArgument("outfile", i18n("main", "File to write to."));
 
-    KCmdLineArgs * arguments = KCmdLineArgs::parsedArgs();
-    if ( arguments != NULL && arguments->count() > 0 ) {
-        QUrl infile = arguments->url( 0 );
-        if ( arguments->count() > 1 ) {
-            QUrl outfile = arguments->url( 1 );
+    parser.process(app);
+
+    QStringList files = parser.positionalArguments();
+
+    if ( files.count() > 0 ) {
+        QUrl infile = files.at( 0 );
+        if ( files.count() > 1 ) {
+            QUrl outfile = files.at( 1 );
 
             KEduVocDocument document;
             qDebug() << "Reading " << infile;
             document.open( infile );
             qDebug() << "Writing to " << outfile;
-            if (arguments->getOption("f") == "kvtml1")
+            if (parser.value("f") == "kvtml1")
             {
                 document.saveAs( outfile, KEduVocDocument::Kvtml1, "converter" );
             }
-            else if (arguments->getOption("f") == "csv")
+            else if (parser.value("f") == "csv")
             {
                 document.saveAs( outfile, KEduVocDocument::Csv, "converter" );
             }
@@ -74,10 +78,8 @@ int main( int argc, char ** argv )
     }
     else
     {
-        arguments->usage();
+        qDebug() << parser.helpText();
     }
-
-    arguments->clear();
 
     return 0;
 }

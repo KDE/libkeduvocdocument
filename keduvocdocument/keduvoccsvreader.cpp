@@ -28,7 +28,7 @@
 #include <QIODevice>
 #include <QTextStream>
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"

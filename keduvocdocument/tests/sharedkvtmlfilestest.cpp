@@ -27,24 +27,17 @@
 
 #include <QApplication>
 
-#include <KAboutData>
-#include <KCmdLineArgs>
-#include <KCmdLineOptions>
 #include <QDebug>
 #include <QUrl>
 
-#include <k4aboutdata.h>
 
 int main( int argc, char ** argv )
 {
-    K4AboutData about( "sharedkvtmlfiles-test", 0, ki18n( "KVTML Files Test" ), "0.1", ki18n( "kvtml files test" ), K4AboutData::License_GPL, ki18n( "© 2014 Jeremy Whiting" ) );
-    KCmdLineOptions options;
+    QCoreApplication::setApplicationName("sharedkvtmlfilestest");
+    QCoreApplication::setApplicationVersion("0.1");
+    QCoreApplication::setOrganizationDomain("kde.org");
+    QCoreApplication app( argc, argv );
 
-    KCmdLineArgs::init( argc, argv, &about );
-    KCmdLineArgs::addCmdLineOptions( options );
-    QCoreApplication app( KCmdLineArgs::qtArgc(), KCmdLineArgs::qtArgv() );
-
-    KCmdLineArgs * arguments = KCmdLineArgs::parsedArgs();
     QStringList languages = SharedKvtmlFiles::languages();
     Q_FOREACH (const QString &language, languages) {
         qDebug() << "Got language: " << language;

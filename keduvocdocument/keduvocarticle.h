@@ -23,7 +23,6 @@
 #include <QtCore/QStringList>
 
 #include "keduvocwordflags.h"
-#include "kdemacros.h"
 
 class KEduVocWordType;
 /**
@@ -56,7 +55,7 @@ public:
      * @param nat_def reference to a QString with the definite neutral article
      * @param nat_indef reference to a QString with the indefinite neutral article
      */
-    KDE_DEPRECATED KEduVocArticle( const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &nat_def, const QString &nat_indef );
+    KEDUVOCDOCUMENT_DEPRECATED KEduVocArticle( const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &nat_def, const QString &nat_indef );
 
     /**
      * default destructor, deletes the d pointer

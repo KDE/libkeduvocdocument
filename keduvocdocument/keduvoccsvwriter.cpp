@@ -20,7 +20,7 @@
 #include <QFile>
 #include <QTextStream>
 
-#include <KLocale>
+#include <KLocalizedString>
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"

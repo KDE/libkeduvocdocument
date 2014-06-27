@@ -19,14 +19,14 @@
 
 #include <kio/copyjob.h>
 #include <kio/job.h>
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QDir>
 #include <QList>
 #include <QSet>
 #include <QStandardPaths>
 
-#include <kglobal.h>
+#include <QDebug>
 
 class SharedKvtmlFilesPrivate
 {
@@ -57,7 +57,7 @@ public:
     QMap<QString, QStringList> m_filesByLang;
 };
 
-K_GLOBAL_STATIC( SharedKvtmlFilesPrivate, sharedKvtmlFilesPrivate )
+Q_GLOBAL_STATIC( SharedKvtmlFilesPrivate, sharedKvtmlFilesPrivate )
 
 void SharedKvtmlFilesPrivate::rescan()
 {
@@ -77,8 +77,9 @@ void SharedKvtmlFilesPrivate::rescan()
         Q_FOREACH (const QString &locale, locales) {
             QStringList files = QDir( path + '/' + locale ).entryList(nameFilter, QDir::Files );
             Q_FOREACH (const QString &filename, files) {
-                this->m_fileList << filename;
-                this->m_filesByLang[locale].append( filename );
+                QString filePath = path + '/' + locale + '/' + filename;
+                this->m_fileList << filePath;
+                this->m_filesByLang[locale].append( filePath );
             }
         }
     }

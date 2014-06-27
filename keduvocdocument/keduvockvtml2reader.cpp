@@ -23,7 +23,7 @@
 #include <QtCore/QList>
 #include <QtCore/QIODevice>
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"

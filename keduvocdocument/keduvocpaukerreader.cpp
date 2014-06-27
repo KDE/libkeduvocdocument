@@ -18,7 +18,7 @@
 
 #include <QIODevice>
 
-#include <KLocale>
+#include <KLocalizedString>
 
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"

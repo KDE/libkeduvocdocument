@@ -22,7 +22,7 @@
 #include <QIODevice>
 #include <QFont>
 
-#include <KLocale>
+#include <KLocalizedString>
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"

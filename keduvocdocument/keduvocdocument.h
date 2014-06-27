@@ -264,7 +264,7 @@ public:
      * @param org        identifier for original
      * @param trans      identifier for translation
      */
-    KDE_DEPRECATED void queryIdentifier( QString &org, QString &trans ) const;
+    KEDUVOCDOCUMENT_DEPRECATED void queryIdentifier( QString &org, QString &trans ) const;
 
     /**
      * Sets the identifiers for the current query
@@ -273,7 +273,7 @@ public:
      * @param org        identifier for original
      * @param trans      identifier for translation
      */
-    KDE_DEPRECATED void setQueryIdentifier( const QString &org, const QString &trans );
+    KEDUVOCDOCUMENT_DEPRECATED void setQueryIdentifier( const QString &org, const QString &trans );
 
     // *** lesson methods ***
 

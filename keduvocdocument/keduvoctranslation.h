@@ -23,8 +23,6 @@
 #include <QUrl>
 #include <QtCore/QString>
 
-#include <kdemacros.h>
-
 class KEduVocExpression;
 class KEduVocString;
 class KEduVocWordType;
@@ -186,19 +184,19 @@ public:
      * Bad, only compatibility. Deprecated.
      * @return
      */
-    KDE_DEPRECATED QMap <QString, KEduVocConjugation> conjugations() const;
+    KEDUVOCDOCUMENT_DEPRECATED QMap <QString, KEduVocConjugation> conjugations() const;
 
     /**
      * Comparison forms of adjectives/adverbs.
      */
-    KDE_DEPRECATED QString comparative() const;
-    KDE_DEPRECATED void setComparative(const QString& comparative);
+    KEDUVOCDOCUMENT_DEPRECATED QString comparative() const;
+    KEDUVOCDOCUMENT_DEPRECATED void setComparative(const QString& comparative);
     // TODO rename to comparative and remove the deprecated function
     KEduVocText comparativeForm() const;
     void setComparativeForm(const KEduVocText& comparative);
 
-    KDE_DEPRECATED QString superlative() const;
-    KDE_DEPRECATED void setSuperlative(const QString& superlative);
+    KEDUVOCDOCUMENT_DEPRECATED QString superlative() const;
+    KEDUVOCDOCUMENT_DEPRECATED void setSuperlative(const QString& superlative);
     KEduVocText superlativeForm() const;
     void setSuperlativeForm(const KEduVocText& superlative);
 
