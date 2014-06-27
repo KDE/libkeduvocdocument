@@ -22,6 +22,8 @@ remove_definitions(-DQT_NO_KEYWORDS)
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
 
 include(KDEInstallDirs)
+include(KDECompilerSettings)
+include(KDECMakeSettings)
 
 add_subdirectory(keduvocdocument)
 add_subdirectory(data)

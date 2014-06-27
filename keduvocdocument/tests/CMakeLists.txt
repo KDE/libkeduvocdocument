@@ -15,5 +15,5 @@ endmacro()
 
 keduvocdocument_executable_tests(
      sharedkvtmlfilestest
-#    converter
+     converter
 )
