@@ -249,13 +249,19 @@ void KEduVocContainer::invalidateChildLessonEntries()
 
 double KEduVocContainer::averageGrade(int translation, EnumEntriesRecursive recursive)
 {
-    // grades range from 0..7 right now
-    int sum = 0;
+    int sum = 0,  presum = 0,  count = 0;
     foreach (KEduVocExpression *entry, entries(recursive)) {
-        sum += entry->translation(translation)->grade();
+        KEduVocTranslation & trans( *entry->translation(translation) );
+        if ( !trans.isEmpty() ) {
+            ++count;
+            sum += trans.grade();
+            presum += trans.preGrade();
+        }
     }
     // make that a percentage
-    return (sum * 100.0/7.0)/entryCount(recursive);
+    // There are KV_MAX_GRADE grades from 0 -> 100 %
+    // There are KV_MAX_GRADE preGrades within the first grade.
+    return ((sum * 100.0 / KV_MAX_GRADE) + (presum * 100.0 / (KV_MAX_GRADE * KV_MAX_GRADE))) / count;
 }
 
 int KEduVocContainer::expressionsOfGrade(int translation, grade_t grade, EnumEntriesRecursive recursive)
@@ -275,4 +281,3 @@ void KEduVocContainer::resetGrades(int translation, EnumEntriesRecursive recursi
         entry->resetGrades(translation);
     }
 }
-

@@ -128,6 +128,15 @@ public:
      */
     void resetGrades();
 
+    /** sets the pregrade
+    * @param grade number of knowlegde: 0=known, x=numbers not knows
+    */
+    void setPreGrade( grade_t grade );
+
+    /** returns pregrade
+    */
+    grade_t preGrade() const;
+
     /** sets the grade
     * @param grade number of knowlegde: 0=known, x=numbers not knows
     */
@@ -152,6 +161,15 @@ public:
     * @param date             the new date
     */
     void setPracticeDate( const QDateTime & date );
+
+    /** returns interval until next practice is due
+    */
+    quint32 interval() const;
+
+    /** Set interval until next practice is due.
+    * @param interval   the new interval
+    */
+    void setInterval( quint32 interval );
 
     /**
      * If the string inside is empty this returns true.

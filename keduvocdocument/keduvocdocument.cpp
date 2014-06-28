@@ -29,6 +29,7 @@
 #include <kio/filecopyjob.h>
 #include <krandomsequence.h>
 #include <kfilterdev.h>
+#include <kautosavefile.h>
 
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"
@@ -60,6 +61,7 @@ public:
         m_lessonContainer = 0;
         m_wordTypeContainer = 0;
         m_leitnerContainer = 0;
+        m_autosave = new KAutoSaveFile;
         init();
     }
 
@@ -69,8 +71,13 @@ public:
 
     KEduVocDocument* q;
 
+    /** autosave file used to provide locking access to the underlying file
+     * Note: It is a pointer to allow locking a new file, saving results and
+     * then transfering the lock to m_autosave without risking loss of lock.
+     * See saveAs for clarification*/
+    KAutoSaveFile            *m_autosave;
+
     bool                      m_dirty;
-    QUrl                      m_url;
 
     // save these to document
     QList<KEduVocIdentifier>  m_identifiers;
@@ -101,6 +108,14 @@ public:
     KEduVocLesson * m_lessonContainer;
     KEduVocWordType * m_wordTypeContainer;
     KEduVocLeitnerBox * m_leitnerContainer;
+
+    /** Creates an autosave file for fpath in order to lock the file
+     *   @param autosave a reference to an allocated KAutosave
+     *   @param fpath File path to the file to be locked
+     *   @param flags Describes how to deal with locked file etc.
+     *   @return ErrorCode where NoError is success
+     *   */
+    KEduVocDocument::ErrorCode initializeKAutoSave(KAutoSaveFile &autosave,  QString const &fpath,  FileHandlingFlags flags) const;
 };
 
 KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
@@ -108,6 +123,9 @@ KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
     delete m_lessonContainer;
     delete m_wordTypeContainer;
     delete m_leitnerContainer;
+
+    m_autosave->releaseLock();
+    delete m_autosave;
 }
 
 void KEduVocDocument::KEduVocDocumentPrivate::init()
@@ -128,7 +146,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_dirty = false;
     m_queryorg = "";
     m_querytrans = "";
-    m_url.setPath( i18n( "Untitled" ) );
+    m_autosave->setManagedFile( i18n( "Untitled" ) );
     m_author = "";
     m_title = "";
     m_comment = "";
@@ -141,10 +159,35 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
 }
 
 
+KEduVocDocument::ErrorCode KEduVocDocument::KEduVocDocumentPrivate::initializeKAutoSave(KAutoSaveFile &autosave,  QString const & fpath,  FileHandlingFlags flags) const {
+
+    QList<KAutoSaveFile *> staleFiles = KAutoSaveFile::staleFiles( fpath );
+    if ( !staleFiles.isEmpty()) {
+        if ( flags & FileIgnoreLock ) {
+            foreach( KAutoSaveFile *f,  staleFiles ) {
+                f->open( QIODevice::ReadWrite );
+                f->remove();
+                delete f;
+            }
+        } else {
+            qCritical() << i18n( "Cannot lock file %1", fpath );
+            return FileLocked;
+        }
+    }
+
+    autosave.setManagedFile( fpath );
+    if ( !autosave.open( QIODevice::ReadWrite ) ) {
+        qCritical() << i18n( "Cannot lock file %1", autosave.fileName() );
+        return FileCannotLock;
+    }
+
+    return NoError;
+}
+
+
 KEduVocDocument::KEduVocDocument( QObject *parent )
         : QObject( parent ), d( new KEduVocDocumentPrivate( this ) )
 {
-    qDebug() << "constructor done";
 }
 
 
@@ -237,14 +280,14 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileNa
 }
 
 
-int KEduVocDocument::open( const QUrl& url )
+KEduVocDocument::ErrorCode KEduVocDocument::open( const QUrl& url, FileHandlingFlags flags)
 {
     // save csv delimiter to preserve it in case this is a csv document
     QString csv = d->m_csvDelimiter;
     // clear all other properties
     d->init();
     if ( !url.isEmpty() ) {
-        d->m_url = url;
+        setUrl( url );
     }
     d->m_csvDelimiter = csv;
 
@@ -264,6 +307,12 @@ int KEduVocDocument::open( const QUrl& url )
             }
         }
     }
+
+    ErrorCode autosaveError = d->initializeKAutoSave( *d->m_autosave,  fileName, flags );
+    if ( autosaveError != NoError) {
+        return autosaveError;
+    }
+
 
     KFilterDev f( fileName );
 
@@ -288,7 +337,7 @@ int KEduVocDocument::open( const QUrl& url )
         case Wql: {
             qDebug() << "Reading WordQuiz (WQL) document...";
             KEduVocWqlReader wqlReader( &f );
-            d->m_url.setPath( i18n( "Untitled" ) );
+            d->m_autosave->setManagedFile( i18n( "Untitled" ) );
             read = wqlReader.readDoc( this );
             if ( !read ) {
                 errorMessage = wqlReader.errorMessage();
@@ -299,7 +348,7 @@ int KEduVocDocument::open( const QUrl& url )
         case Pauker: {
             qDebug() << "Reading Pauker document...";
             KEduVocPaukerReader paukerReader( this );
-            d->m_url.setPath( i18n( "Untitled" ) );
+            d->m_autosave->setManagedFile( i18n( "Untitled" ) );
             read = paukerReader.read( &f );
             if ( !read ) {
                 errorMessage = i18n( "Parse error at line %1, column %2:\n%3", paukerReader.lineNumber(), paukerReader.columnNumber(), paukerReader.errorString() );
@@ -310,7 +359,7 @@ int KEduVocDocument::open( const QUrl& url )
         case Vokabeln: {
             qDebug() << "Reading Vokabeln document...";
             KEduVocVokabelnReader vokabelnReader( &f );
-            d->m_url.setPath( i18n( "Untitled" ) );
+            d->m_autosave->setManagedFile( i18n( "Untitled" ) );
             read = vokabelnReader.readDoc( this );
             if ( !read ) {
                 errorMessage = vokabelnReader.errorMessage();
@@ -331,7 +380,7 @@ int KEduVocDocument::open( const QUrl& url )
        case Xdxf: {
            qDebug() << "Reading XDXF document...";
            KEduVocXdxfReader xdxfReader( this );
-           d->m_url.setPath( i18n( "Untitled" ) );
+           d->m_autosave->setManagedFile( i18n( "Untitled" ) );
            read = xdxfReader.read( &f );
            if ( !read ) {
                errorMessage = i18n( "Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString() );
@@ -358,17 +407,17 @@ int KEduVocDocument::open( const QUrl& url )
 
     f.close();
 
-    if ( !read ) {
-        return FileReaderFailed;
-    }
-
     setModified(false);
-    return 0;
+    return NoError;
 }
 
+void KEduVocDocument::close() {
+    d->m_autosave->releaseLock();
+}
 
-int KEduVocDocument::saveAs( const QUrl & url, FileType ft, const QString & generator )
+KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType ft, FileHandlingFlags flags)
 {
+
     QUrl tmp( url );
 
     if ( ft == Automatic ) {
@@ -381,34 +430,57 @@ int KEduVocDocument::saveAs( const QUrl & url, FileType ft, const QString & gene
         }
     }
 
-    QFile f( tmp.path() );
+    QString errorMessage = i18n( "Cannot write to file %1", tmp.path() );
 
+    KAutoSaveFile *autosave;
+
+    //If we don't care about the lock always create a new one
+    //If we are changing files create a new lock
+    if ( ( flags & FileIgnoreLock )
+        || ( d->m_autosave->managedFile() != tmp.path() ) ) {
+
+        autosave = new KAutoSaveFile;
+        ErrorCode autosaveError = d->initializeKAutoSave( *autosave,  tmp.path(), flags );
+        if ( autosaveError != NoError) {
+            delete autosave;
+            return autosaveError;
+        }
+    }
+
+    //We care about the lock and we think we still have it.
+    else {
+         autosave = d->m_autosave;
+        //Is the lock still good?
+        if ( !autosave->exists( ) ) {
+            return FileCannotLock;
+        }
+    }
+
+    QFile f( tmp.path() );
     if ( !f.open( QIODevice::WriteOnly ) ) {
         qCritical() << i18n( "Cannot write to file %1", tmp.path() );
         return FileCannotWrite;
     }
 
-    QUrl oldUrl = d->m_url;
     bool saved = false;
-    d->m_url = tmp;
 
     switch ( ft ) {
         case Kvtml: {
             // write version 2 file
             KEduVocKvtml2Writer kvtmlWriter( &f );
-            saved = kvtmlWriter.writeDoc( this, generator );
+            saved = kvtmlWriter.writeDoc( this, d->m_generator );
         }
         break;
         ///@todo port me
 //         case Kvtml1: {
 //             // write old version 1 file
 //             KEduVocKvtmlWriter kvtmlWriter( &f );
-//             saved = kvtmlWriter.writeDoc( this, generator );
+//             saved = kvtmlWriter.writeDoc( this, d->m_generator );
 //         }
 //         break;
         case Csv: {
             KEduVocCsvWriter csvWriter( &f );
-            saved = csvWriter.writeDoc( this, generator );
+            saved = csvWriter.writeDoc( this, d->m_generator );
         }
         break;
         default: {
@@ -421,12 +493,22 @@ int KEduVocDocument::saveAs( const QUrl & url, FileType ft, const QString & gene
 
     if ( !saved ) {
         qCritical() << "Error Saving File" << tmp.path();
-        d->m_url = oldUrl;
+
+        if ( autosave != d->m_autosave ) {
+            delete autosave;
+        }
         return FileWriterFailed;
     }
 
+    if ( autosave != d->m_autosave ) {
+        //The order is important: release old lock, delete old locker and then claim new locker.
+        d->m_autosave->releaseLock();
+        delete d->m_autosave;
+        d->m_autosave = autosave;
+    }
+
     setModified( false );
-    return 0;
+    return NoError;
 }
 
 QByteArray KEduVocDocument::toByteArray(const QString &generator)
@@ -739,18 +821,18 @@ KEduVocLeitnerBox * KEduVocDocument::leitnerContainer()
 
 QUrl KEduVocDocument::url() const
 {
-    return d->m_url;
+    return d->m_autosave->managedFile();
 }
 
 void KEduVocDocument::setUrl( const QUrl& url )
 {
-    d->m_url = url;
+    d->m_autosave->setManagedFile(url);
 }
 
 QString KEduVocDocument::title() const
 {
     if ( d->m_title.isEmpty() )
-        return d->m_url.fileName();
+        return d->m_autosave->managedFile().fileName();
     else
         return d->m_title;
 }
@@ -918,6 +1000,10 @@ QString KEduVocDocument::errorDescription( int errorCode )
         return i18n("The file reader failed.");
     case FileDoesNotExist:
         return i18n("The file does not exist.");
+    case FileLocked:
+        return i18n("The file is locked by another process.");
+    case FileCannotLock:
+        return i18n("The lock file can't be created.");
     case Unknown:
     default:
         return i18n("Unknown error.");

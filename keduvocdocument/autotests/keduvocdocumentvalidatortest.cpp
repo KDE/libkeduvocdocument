@@ -73,6 +73,7 @@ void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
     doc.setTitle( title );
 
     doc.saveAs(fileName, KEduVocDocument::Kvtml, generator);
+    doc.close();
 
     KEduVocDocument docRead;
     docRead.open(fileName);

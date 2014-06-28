@@ -24,10 +24,12 @@ public:
     /// This is the word itself. The vocabulary. This is what it is all about.
     QString m_text;
 
+    grade_t m_preGrade;         // Before it gets to grade 1.
     grade_t m_grade;
     count_t m_totalPracticeCount;
     count_t m_badCount;
     QDateTime m_practiceDate;
+    quint32 m_interval;         // Interval in seconds until next training is due.
 };
 
 KEduVocText::KEduVocText(const QString& text)
@@ -38,13 +40,15 @@ KEduVocText::KEduVocText(const QString& text)
 }
 
 KEduVocText::KEduVocText( const KEduVocText &other )
-        :d( new KEduVocTextPrivate )
+    : d( new KEduVocTextPrivate )
 {
     d->m_text = other.d->m_text;
+    setPreGrade( other.preGrade() );
     setGrade( other.grade() );
     setPracticeCount( other.practiceCount() );
     setBadCount( other.badCount() );
     setPracticeDate( other.practiceDate() );
+    setInterval( other.interval() );
 }
 
 KEduVocText::~KEduVocText()
@@ -64,6 +68,7 @@ void KEduVocText::setText( const QString & expr )
 
 void KEduVocText::resetGrades()
 {
+    d->m_preGrade = KV_NORM_GRADE;
     d->m_grade = KV_NORM_GRADE;
     d->m_totalPracticeCount = 0;
     d->m_badCount = 0;
@@ -71,6 +76,22 @@ void KEduVocText::resetGrades()
     QDateTime dt;
     dt.setTime_t( 0 );
     d->m_practiceDate = dt;
+    d->m_interval = 0;
+}
+
+
+grade_t KEduVocText::preGrade() const
+{
+    return d->m_preGrade;
+}
+
+
+void KEduVocText::setPreGrade( grade_t grade )
+{
+    if ( grade > KV_MAX_GRADE ) {
+        grade = KV_MAX_GRADE;
+    }
+    d->m_preGrade = grade;
 }
 
 
@@ -151,6 +172,18 @@ void KEduVocText::setPracticeDate( const QDateTime & date )
     d->m_practiceDate = date;
 }
 
+quint32 KEduVocText::interval() const
+{
+    return d->m_interval;
+}
+
+
+void KEduVocText::setInterval( quint32 interval )
+{
+    d->m_interval = interval;
+}
+
+
 KEduVocText & KEduVocText::operator =(const KEduVocText & other)
 {
     d->m_text = other.d->m_text;
@@ -186,6 +219,9 @@ void KEduVocText::toKVTML2(QDomElement& parent)
     if ( d->m_totalPracticeCount > 0 ) {
         QDomElement gradeElement = domDoc.createElement( KVTML_GRADE );
 
+            //<pregrade>2</pregrade>
+        KEduVocKvtml2Writer::appendTextElement( gradeElement, KVTML_PREGRADE, QString::number( preGrade() ) );
+
             //<currentgrade>2</currentgrade>
         KEduVocKvtml2Writer::appendTextElement( gradeElement, KVTML_CURRENTGRADE, QString::number( grade() ) );
 
@@ -197,6 +233,10 @@ void KEduVocText::toKVTML2(QDomElement& parent)
 
             //<date>949757271</date>
         KEduVocKvtml2Writer::appendTextElement( gradeElement, KVTML_DATE,  practiceDate().toString( Qt::ISODate ) );
+
+            //<interval>300</interval>
+        KEduVocKvtml2Writer::appendTextElement( gradeElement, KVTML_INTERVAL,  QString::number(interval()) );
+
 
         parent.appendChild( gradeElement );
     }
@@ -210,6 +250,7 @@ void KEduVocText::fromKVTML2(QDomElement & parent)
     const QDomElement& gradeElement = parent.firstChildElement( KVTML_GRADE );
     if ( !gradeElement.isNull() ) {
 
+        setPreGrade( gradeElement.firstChildElement(KVTML_PREGRADE).text().toInt() );
         setGrade( gradeElement.firstChildElement(KVTML_CURRENTGRADE).text().toInt() );
 
         setPracticeCount( gradeElement.firstChildElement(KVTML_COUNT).text().toInt() );
@@ -221,6 +262,7 @@ void KEduVocText::fromKVTML2(QDomElement & parent)
             QDateTime value = QDateTime::fromString( dateString, Qt::ISODate );
             setPracticeDate( value );
         }
+        setInterval( gradeElement.firstChildElement(KVTML_INTERVAL).text().toInt() );
     }
 }
 

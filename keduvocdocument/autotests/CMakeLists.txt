@@ -18,4 +18,5 @@ endmacro()
 
 keduvocdocument_unit_tests(
 #    keduvocdocumentvalidatortest
+#    keduvocdocumentfilelockingtest
 )

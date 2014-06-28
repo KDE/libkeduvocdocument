@@ -50,7 +50,6 @@ target_link_libraries(KEduVocDocument
     KF5::KIOCore
     Qt5::Xml
   PRIVATE
-#    KF5::KDE4Support
     KF5::I18n
     KF5::Archive
     Qt5::Widgets

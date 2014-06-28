@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2007 by Jeremy Whiting <jeremy@scitools.com>            *
+ *   Copyright (C) 2007 by Jeremy Whiting <jpwhiting@kde.org>              *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -21,7 +21,7 @@
  * \brief kvtml document reader/writer
  * partly to test the document class, partly to convert
  * old kvtml files to the new format
- * @author Jeremy Whiting <jeremy@scitools.com>
+ * @author Jeremy Whiting <jpwhiting@kde.org>
  */
 
 #include "keduvocdocument.h"
@@ -64,15 +64,15 @@ int main( int argc, char ** argv )
             qDebug() << "Writing to " << outfile;
             if (parser.value("f") == "kvtml1")
             {
-                document.saveAs( outfile, KEduVocDocument::Kvtml1, "converter" );
+                document.saveAs( outfile, KEduVocDocument::Kvtml1 );
             }
             else if (parser.value("f") == "csv")
             {
-                document.saveAs( outfile, KEduVocDocument::Csv, "converter" );
+                document.saveAs( outfile, KEduVocDocument::Csv );
             }
             else
             {
-                document.saveAs( outfile, KEduVocDocument::Kvtml, "converter" );
+                document.saveAs( outfile, KEduVocDocument::Kvtml );
             }
         }
     }

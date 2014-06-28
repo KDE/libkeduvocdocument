@@ -68,7 +68,16 @@ public:
         FileWriterFailed,
         FileCannotRead,
         FileReaderFailed,
-        FileDoesNotExist
+        FileDoesNotExist,
+        FileLocked,       //*< An autosave file exists for this document
+        FileCannotLock  //*< Can't create an autosave file for this document
+    };
+
+    /// indicates file open/save status locking or readonly
+    enum FileHandlingFlags
+    {
+        FileDefaultHandling = 0x0, //*< Default status
+        FileIgnoreLock = 0x1       //*< Ignore the file lock
     };
 
     /// used as parameter for pattern
@@ -100,22 +109,39 @@ public:
     // *** whole document methods ***
 
     /**
-     * Open a document file
+     * Opens and locks a document file
+     *
+     * Note: This is intended to be preserve binary compatible with int open(const QUrl&)
+     *       When the API increments the major version number, then merge them
      *
      * @param url      url to file to open
+     * @param flags How to handle expected unusual conditions (i.e. locking)
      * @returns        ErrorCode
      */
-    int open( const QUrl& url );
+    ErrorCode open( const QUrl& url,  FileHandlingFlags flags = FileDefaultHandling);
+
+    /**
+     * Close a document file and release the lock on the file
+     *
+     */
+    void close();
 
     /**
      * Saves the data under the given name
      *
+     * @pre generator is set.
+     *
+     * Note: This is intended to be preserve binary compatible with
+     *       int saveAs(const QUrl&, FileType ft, const QString & generator );
+     *       When the API increments the major version number, then merge them
+     *
      * @param url        if url is empty (or NULL) actual name is preserved
      * @param ft         the filetype to be used when saving the document
      * @param generator  the name of the application saving the document
+     * @param flags How to handle expected unusual conditions (i.e. locking)
      * @returns          ErrorCode
      */
-    int saveAs( const QUrl & url, FileType ft, const QString & generator );
+    ErrorCode saveAs( const QUrl & url, FileType ft,  FileHandlingFlags flags  = FileDefaultHandling);
 
     QByteArray toByteArray(const QString &generator);
 
