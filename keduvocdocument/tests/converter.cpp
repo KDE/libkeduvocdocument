@@ -44,10 +44,10 @@ int main( int argc, char ** argv )
     parser.addHelpOption();
     parser.addVersionOption();
     QCommandLineOption formatOption(QStringList() << "f" << "format",
-            i18n("main", "file format to write out (kvtml1, kvtml2, or csv)."));
+            i18nc("main", "file format to write out (kvtml1, kvtml2, or csv)."));
     parser.addOption(formatOption);
-    parser.addPositionalArgument("infile", i18n("main", "File to read in."));
-    parser.addPositionalArgument("outfile", i18n("main", "File to write to."));
+    parser.addPositionalArgument("infile", i18nc("main", "File to read in."));
+    parser.addPositionalArgument("outfile", i18nc("main", "File to write to."));
 
     parser.process(app);
 
