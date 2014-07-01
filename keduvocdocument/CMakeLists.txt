@@ -60,6 +60,7 @@ set_target_properties(KEduVocDocument
     PROPERTIES VERSION   ${KDEEDU_VERSION_STRING}
                SOVERSION ${KDEEDU_SOVERSION}
 )
+target_include_directories(KEduVocDocument INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/libkdeedu>")
 
 # if we want to set our own version instead of following kde generic
 #set(LIB_KEDUVOCDOCUMENT_VERSION "5.0.0")
