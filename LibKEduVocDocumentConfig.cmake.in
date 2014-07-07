@@ -1,0 +1,43 @@
+#########################################################################
+#
+# LibKEduVocDocument Configuration File
+#
+# This file sets various CMake Variables
+#
+# LIBKEDUVOCDOCUMENT_INCLUDE_DIR                - The include directory 
+# LIBKEDUVOCDOCUMENT_LIBRARIES  		- The keduvocdocument library
+#
+# Copyright 2008  Andreas Pakulat <apaku@gmx.de>
+# Copyright 2010  Niko Sams <niko.sams@gmail.com>
+# Copyright 2014  Jeremy Whiting <jpwhiting@kde.org>
+# Redistribution and use is allowed according to the terms of the BSD license.
+######################################################################
+
+get_filename_component(_LIBKEDUVOCDOCUMENT_CURRENT_DIR  "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+if(NOT WIN32)
+# This is needed on non-win32 platforms, as lib-install-dir might be in a
+# totally different prefix than include-install-dir. So instead hardcode the
+# absolute path during buildtime
+set( LIBKEDUVOCDOCUMENT_INCLUDE_DIR "@INCLUDE_INSTALL_DIR@/libkeduvocdocument" )
+
+else(NOT WIN32)
+
+set( LIBKEDUVOCDOCUMENT_INCLUDE_DIR "${_LIBKEDUVOCDOCUMENT_CURRENT_DIR}/../../../include/libkeduvocdocument" )
+
+endif(NOT WIN32)
+
+if( NOT TARGET LibKEduVocDocumentImport__keduvocdocument )
+    include("${_LIBKDEEDU_CURRENT_DIR}/LibKEduVocDocumentTargets.cmake")
+endif( NOT TARGET LibKEduVocDocumentImport__keduvocdocument )
+
+macro( _libkeduvocdocument_set_lib_vars _prefix _lib )
+  set( LIBKEDUVOCDOCUMENT_LIBRARIES LibKEduVocDocumentImport__${_lib} )
+endmacro( _libkeduvocdocument_set_lib_vars )
+
+_libkeduvocdocument_set_lib_vars( KEDUVOCDOCUMENT keduvocdocument )
+
+
+mark_as_advanced(
+    KEDUVOCDOCUMENT
+)

@@ -89,7 +89,7 @@ set_target_properties(KEduVocDocument
     PROPERTIES VERSION   ${KDEEDU_VERSION_STRING}
                SOVERSION ${KDEEDU_SOVERSION}
 )
-target_include_directories(KEduVocDocument INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/libkdeedu>")
+target_include_directories(KEduVocDocument INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/libkeduvocdocument>")
 
 
 #Library for non-api unittests
@@ -115,7 +115,7 @@ target_link_libraries(keduvocdocument_static
 #    SOVERSION ${LIB_KEDUVOCDOCUMENT_SOVERSION}
 #)
 
-install(TARGETS KEduVocDocument EXPORT LibKdeEduTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KEduVocDocument EXPORT LibKEduVocDocumentTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 
 ########### install files ###############
@@ -123,5 +123,5 @@ install(TARGETS KEduVocDocument EXPORT LibKdeEduTargets ${INSTALL_TARGETS_DEFAUL
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/keduvocdocument_export.h
   ${KdeEdu_HEADERS}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu COMPONENT Devel
+  DESTINATION ${INCLUDE_INSTALL_DIR}/libkeduvocdocument COMPONENT Devel
 )

@@ -1,15 +1,5 @@
-/** @mainpage libkdeedu
+/** @mainpage libkeduvocdocument
 
-libkdeedu is a set of shared libraries used by the KDE Education Project applications.
-
-It consists of several parts:
-
-User interface parts: Glossary
-
-ExtDate for KStars
-
-libscience for Kalzium containing chemical classes
-
-KEduVocDocument is a library for reading and writing vocabulary files used by Parley, Kanagram, KHangman and KWordQuiz.
+libKEduVocDocument is a library for reading and writing vocabulary files used by Parley, Kanagram, KHangman and KWordQuiz.
 
 */

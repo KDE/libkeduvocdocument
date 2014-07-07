@@ -1,4 +1,4 @@
-project(LibKdeEdu)
+project(LibKEduVocDocument)
 cmake_minimum_required(VERSION 2.8.12)
 
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
@@ -30,18 +30,18 @@ add_subdirectory(keduvocdocument)
 add_subdirectory(data)
 
 
-configure_file( "${LibKdeEdu_SOURCE_DIR}/LibKdeEduConfig.cmake.in" "${LibKdeEdu_BINARY_DIR}/LibKdeEduConfig.cmake" @ONLY )
+configure_file( "${LibKEduVocDocument_SOURCE_DIR}/LibKEduVocDocumentConfig.cmake.in" "${LibKEduVocDocument_BINARY_DIR}/LibKEduVocDocumentConfig.cmake" @ONLY )
 
 if(KDE4_USE_COMMON_CMAKE_PACKAGE_CONFIG_DIR)
-    set(_LibKdeEdu_CONFIG_DEST "${LIB_INSTALL_DIR}/cmake/libkdeedu")
+    set(_LibKEduVocDocument_CONFIG_DEST "${LIB_INSTALL_DIR}/cmake/libkeduvocdocument")
 else(KDE4_USE_COMMON_CMAKE_PACKAGE_CONFIG_DIR)
-    set(_LibKdeEdu_CONFIG_DEST "${LIB_INSTALL_DIR}/libkdeedu")
+    set(_LibKEduVocDocument_CONFIG_DEST "${LIB_INSTALL_DIR}/libkeduvocdocument")
 endif(KDE4_USE_COMMON_CMAKE_PACKAGE_CONFIG_DIR)
 
 install( FILES
-        "${LibKdeEdu_BINARY_DIR}/LibKdeEduConfig.cmake"
-        DESTINATION "${_LibKdeEdu_CONFIG_DEST}" )
-install( EXPORT LibKdeEduTargets
-         DESTINATION "${_LibKdeEdu_CONFIG_DEST}"
-         NAMESPACE LibKdeEduImport__
-         FILE LibKdeEduTargets.cmake )
+        "${LibKEduVocDocument_BINARY_DIR}/LibKEduVocDocumentConfig.cmake"
+        DESTINATION "${_LibKEduVocDocument_CONFIG_DEST}" )
+install( EXPORT LibKEduVocDocumentTargets
+         DESTINATION "${_LibKEduVocDocument_CONFIG_DEST}"
+         NAMESPACE LibKEduVocDocumentImport__
+         FILE LibKEduVocDocumentTargets.cmake )

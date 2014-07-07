@@ -1,9 +1,7 @@
-Contents of libkdeedu as of Feb 2006, and brief description of each module:
+Contents of libkeduvocdocument as of July 2014, and brief description of each module:
 
 keduvocdocument:
 Contains KEduVocDocument and its related class for reading from/writing to the
 KVTML format (and others too).
 Currently used by:  kanagram, khangman, parley, kwordquiz
-
-ideas: stub directory, contains generic README and TODO files.
 
