@@ -28,7 +28,6 @@ include(GenerateExportHeader)
 
 add_subdirectory(keduvocdocument)
 add_subdirectory(data)
-add_subdirectory(icons)
 
 
 configure_file( "${LibKdeEdu_SOURCE_DIR}/LibKdeEduConfig.cmake.in" "${LibKdeEdu_BINARY_DIR}/LibKdeEduConfig.cmake" @ONLY )
