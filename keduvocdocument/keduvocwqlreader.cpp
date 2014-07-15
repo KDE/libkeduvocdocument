@@ -35,7 +35,7 @@ KEduVocWqlReader::KEduVocWqlReader( QIODevice *file )
 }
 
 
-bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
+KEduVocDocument::ErrorCode KEduVocWqlReader::readDoc( KEduVocDocument *doc )
 {
     m_doc = doc;
 
@@ -48,21 +48,21 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
     s=inputStream.readLine();
     if ( s != "WordQuiz" ) {
         m_errorMessage = i18n( "This does not appear to be a (K)WordQuiz file" );
-        return false;
+        return KEduVocDocument::FileTypeUnknown;
     }
     s = inputStream.readLine();
     s = s.left( 1 );
     int iFV = s.toInt( 0 );
     if ( iFV != 5 ) {
         m_errorMessage = i18n( "Only files created by WordQuiz 5.x or later can be opened" );
-        return false;
+        return KEduVocDocument::FileTypeUnknown;
     }
 
     m_errorMessage = i18n( "Error while reading file" );
 
     while ( !inputStream.atEnd() && inputStream.readLine() != "[Font Info]" ) ;
     if ( inputStream.atEnd() )
-        return false;
+        return KEduVocDocument::FileReaderFailed;
     s = inputStream.readLine();
     int p = s.indexOf( "=", 0 );
     QString fam = s.right( s.length() - ( p + 1 ) );
@@ -96,7 +96,7 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
     */
     while ( !inputStream.atEnd() && inputStream.readLine() != "[Grid Info]" ) ;
     if ( inputStream.atEnd() )
-        return false;
+        return KEduVocDocument::FileReaderFailed;
     inputStream.readLine(); //skip value for width of row headers
 
     s = inputStream.readLine();
@@ -137,7 +137,7 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
     */
     while ( !inputStream.atEnd() && inputStream.readLine() != "[Vocabulary]" ) ;
     if ( inputStream.atEnd() )
-        return false;
+        return KEduVocDocument::FileReaderFailed;
 
     KEduVocLesson* lesson = new KEduVocLesson( i18n("Vocabulary"), m_doc->lesson());
     m_doc->lesson()->appendChildContainer(lesson);
@@ -168,5 +168,5 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
         expr->setTranslation( 1, b );
         lesson->appendEntry( expr );
     }
-    return true;
+    return KEduVocDocument::NoError;
 }

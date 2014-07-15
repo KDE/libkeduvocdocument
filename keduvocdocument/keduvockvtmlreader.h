@@ -29,6 +29,7 @@
 #include "keduvocmultiplechoice.h"
 #include "keduvockvtmlcompability.h"
 #include "keduvocpersonalpronoun.h"
+#include "keduvocdocument.h"
 
 class QIODevice;
 class KEduVocDocument;
@@ -42,7 +43,7 @@ class KEduVocKvtmlReader : public QObject
 public:
     KEduVocKvtmlReader( QIODevice *file );
 
-    bool readDoc( KEduVocDocument *doc );
+    KEduVocDocument::ErrorCode readDoc( KEduVocDocument *doc );
 
     /**
      * Attempt to add a language/locale. Language/locale are set to the same value.

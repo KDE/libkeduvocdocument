@@ -40,7 +40,7 @@ KEduVocVokabelnReader::KEduVocVokabelnReader( QIODevice *file )
 }
 
 
-bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
+KEduVocDocument::ErrorCode KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
 {
     kDebug() << "Reading vokabeln.de document...";
     m_doc = doc;
@@ -180,5 +180,5 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         inputStream.readLine();
     }
 
-    return true;
+    return KEduVocDocument::NoError;
 }

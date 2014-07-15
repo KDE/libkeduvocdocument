@@ -23,6 +23,7 @@
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"
 #include "keduvocdocument.h"
+#include "kdebug.h"
 
 KEduVocPaukerReader::KEduVocPaukerReader( KEduVocDocument * doc )
 {
@@ -30,7 +31,7 @@ KEduVocPaukerReader::KEduVocPaukerReader( KEduVocDocument * doc )
 }
 
 
-bool KEduVocPaukerReader::read( QIODevice * device )
+KEduVocDocument::ErrorCode KEduVocPaukerReader::read( QIODevice * device )
 {
     setDevice( device );
 
@@ -41,11 +42,14 @@ bool KEduVocPaukerReader::read( QIODevice * device )
             if ( name() == "Lesson" )
                 readPauker();
             else
-                raiseError( i18n( "This is not a Pauker document" ) );
+            {
+                kWarning() << i18n( "This is not a Pauker document" ) ;
+                return KEduVocDocument::FileTypeUnknown;
+            }
         }
     }
 
-    return !error();
+    return error() ? KEduVocDocument::FileReaderFailed : KEduVocDocument::NoError;
 }
 
 

@@ -29,7 +29,7 @@ KEduVocXdxfReader::KEduVocXdxfReader( KEduVocDocument *doc )
 }
 
 
-bool KEduVocXdxfReader::read( QIODevice *device )
+KEduVocDocument::ErrorCode KEduVocXdxfReader::read( QIODevice *device )
 {
     setDevice( device );
 
@@ -44,7 +44,7 @@ bool KEduVocXdxfReader::read( QIODevice *device )
         }
     }
 
-    return !error();
+    return error() ? KEduVocDocument::FileReaderFailed : KEduVocDocument::NoError;
 }
 
 

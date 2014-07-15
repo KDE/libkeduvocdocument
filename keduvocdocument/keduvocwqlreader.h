@@ -19,6 +19,7 @@
 #define KEDUVOCWQLREADER_H
 
 #include <QString>
+#include "keduvocdocument.h"
 
 class QIODevice;
 class KEduVocDocument;
@@ -28,7 +29,7 @@ class KEduVocWqlReader
 public:
     KEduVocWqlReader( QIODevice *file );
 
-    bool readDoc( KEduVocDocument *doc );
+    KEduVocDocument::ErrorCode readDoc( KEduVocDocument *doc );
 
     QString errorMessage() const
     {

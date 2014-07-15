@@ -45,19 +45,19 @@ KEduVocKvtml2Reader::KEduVocKvtml2Reader( QIODevice *file )
 }
 
 
-bool KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
+KEduVocDocument::ErrorCode KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
 {
     m_doc = doc;
 
     QDomDocument domDoc( "KEduVocDocument" );
 
     if ( !domDoc.setContent( m_inputFile, &m_errorMessage ) )
-        return false;
+        return KEduVocDocument::InvalidXml;
 
     QDomElement domElementKvtml = domDoc.documentElement();
     if ( domElementKvtml.tagName() != KVTML_TAG ) {
         m_errorMessage = i18n( "This is not a KDE Vocabulary document." );
-        return false;
+        return KEduVocDocument::FileTypeUnknown;
     }
 
     if ( domElementKvtml.attribute( KVTML_VERSION ).toFloat() < 2.0 ) {
@@ -68,7 +68,7 @@ bool KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
         KEduVocKvtmlReader oldFormat( m_inputFile );
 
         // get the return value
-        bool retval = oldFormat.readDoc( doc );
+        KEduVocDocument::ErrorCode retval = oldFormat.readDoc( doc );
 
         // pass the errormessage up
         m_errorMessage = oldFormat.errorMessage();
@@ -82,12 +82,12 @@ bool KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
     QDomElement info = domElementKvtml.firstChildElement( KVTML_INFORMATION );
     if ( !info.isNull() ) {
         if ( !readInformation( info ) )
-            return false;
+            return KEduVocDocument::FileReaderFailed;
     }
 
     bool result = readGroups( domElementKvtml ); // read sub-groups
 
-    return result;
+    return result ? KEduVocDocument::NoError : KEduVocDocument::FileReaderFailed;
 }
 
 bool KEduVocKvtml2Reader::readInformation( QDomElement &informationElement )

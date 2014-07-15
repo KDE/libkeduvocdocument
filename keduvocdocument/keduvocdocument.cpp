@@ -295,7 +295,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
     }
     d->m_csvDelimiter = csv;
 
-    bool read = false;
+    KEduVocDocument::ErrorCode errStatus = Unknown;
     QString errorMessage = i18n( "<qt>Cannot open file<br /><b>%1</b></qt>", url.path() );
     QString temporaryFile;
     if ( KIO::NetAccess::download( url, temporaryFile, 0 ) ) {
@@ -317,8 +317,8 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
             case Kvtml: {
                 kDebug(1100) << "Reading KVTML document...";
                 KEduVocKvtml2Reader kvtmlReader( f );
-                read = kvtmlReader.readDoc( this );
-                if ( !read ) {
+                errStatus = kvtmlReader.readDoc( this );
+                if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = kvtmlReader.errorMessage();
                 }
             }
@@ -328,8 +328,8 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
                 kDebug(1100) << "Reading WordQuiz (WQL) document...";
                 KEduVocWqlReader wqlReader( f );
                 d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                read = wqlReader.readDoc( this );
-                if ( !read ) {
+                errStatus = wqlReader.readDoc( this );
+                if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = wqlReader.errorMessage();
                 }
             }
@@ -339,8 +339,8 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
                 kDebug(1100) << "Reading Pauker document...";
                 KEduVocPaukerReader paukerReader( this );
                 d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                read = paukerReader.read( f );
-                if ( !read ) {
+                errStatus = paukerReader.read( f );
+                if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = i18n( "Parse error at line %1, column %2:\n%3", paukerReader.lineNumber(), paukerReader.columnNumber(), paukerReader.errorString() );
                 }
             }
@@ -350,8 +350,8 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
                 kDebug(1100) << "Reading Vokabeln document...";
                 KEduVocVokabelnReader vokabelnReader( f );
                 d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                read = vokabelnReader.readDoc( this );
-                if ( !read ) {
+                errStatus = vokabelnReader.readDoc( this );
+                if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = vokabelnReader.errorMessage();
                 }
             }
@@ -360,8 +360,8 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
             case Csv: {
                 kDebug(1100) << "Reading CSV document...";
                 KEduVocCsvReader csvReader( f );
-                read = csvReader.readDoc( this );
-                if ( !read ) {
+                errStatus = csvReader.readDoc( this );
+                if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = csvReader.errorMessage();
                 }
             }
@@ -371,8 +371,8 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
                 kDebug(1100) << "Reading XDXF document...";
                 KEduVocXdxfReader xdxfReader( this );
                 d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                read = xdxfReader.read( f );
-                if ( !read ) {
+                errStatus = xdxfReader.read( f );
+                if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = i18n( "Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString() );
                 }
             }
@@ -381,14 +381,14 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
             default: {
                 kDebug(1100) << "Reading KVTML document (fallback)...";
                 KEduVocKvtml2Reader kvtmlReader( f );
-                read = kvtmlReader.readDoc( this );
-                if ( !read ) {
+                errStatus = kvtmlReader.readDoc( this );
+                if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = kvtmlReader.errorMessage();
                 }
             }
         }
 
-        if ( !read ) {
+        if ( errStatus != KEduVocDocument::NoError ) {
             QString msg = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)", url.path(), errorMessage );
             kError() << msg << i18n( "Error Opening File" );
             ///@todo make the readers return ErrorCode, pass on the error message properly
@@ -401,7 +401,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
         KIO::NetAccess::removeTempFile( temporaryFile );
     }
 
-    if ( !read ) {
+    if ( errStatus != KEduVocDocument::NoError ) {
         return FileReaderFailed;
     }
 
