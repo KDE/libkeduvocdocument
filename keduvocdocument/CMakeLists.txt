@@ -29,9 +29,12 @@ set(keduvocdocument_LIB_SRCS
     sharedkvtmlfiles.cpp
 )
 
+#Library for non-api unittests
+kde4_add_library(keduvocdocument_static STATIC ${keduvocdocument_LIB_SRCS})
+
 kde4_add_library(keduvocdocument SHARED ${keduvocdocument_LIB_SRCS})
 
-target_link_libraries(keduvocdocument  ${KDE4_KIO_LIBS} ${QT_QTXML_LIBRARY})
+target_link_libraries(keduvocdocument ${KDE4_KIO_LIBS} ${QT_QTXML_LIBRARY})
 
 set_target_properties(keduvocdocument
     PROPERTIES VERSION ${GENERIC_LIB_VERSION}
