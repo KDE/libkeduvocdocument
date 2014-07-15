@@ -18,6 +18,7 @@
 #define KEDUVOCXDXFREADER_H
 
 #include <QXmlStreamReader>
+#include "keduvocdocument.h"
 
 class QIODevice;
 class KEduVocDocument;
@@ -27,7 +28,7 @@ class KEduVocXdxfReader : public QXmlStreamReader
 public:
     KEduVocXdxfReader( KEduVocDocument *doc );
 
-    bool read( QIODevice *device );
+    KEduVocDocument::ErrorCode read( QIODevice *device );
 
 private:
     void readUnknownElement();

@@ -42,7 +42,7 @@ KEduVocCsvReader::KEduVocCsvReader( QIODevice *file )
 }
 
 
-bool KEduVocCsvReader::readDoc( KEduVocDocument *doc )
+KEduVocDocument::ErrorCode KEduVocCsvReader::readDoc( KEduVocDocument *doc )
 {
     m_doc = doc;
 
@@ -74,5 +74,5 @@ bool KEduVocCsvReader::readDoc( KEduVocDocument *doc )
         m_doc->appendIdentifier();
     }
 
-    return true;
+    return KEduVocDocument::NoError;
 }

@@ -42,7 +42,7 @@ KEduVocKvtmlReader::KEduVocKvtmlReader( QIODevice *file )
 }
 
 
-bool KEduVocKvtmlReader::readDoc( KEduVocDocument *doc )
+KEduVocDocument::ErrorCode KEduVocKvtmlReader::readDoc( KEduVocDocument *doc )
 {
     m_doc = doc;
     m_cols = 0;
@@ -51,12 +51,12 @@ bool KEduVocKvtmlReader::readDoc( KEduVocDocument *doc )
     QDomDocument domDoc( "KEduVocDocument" );
 
     if ( !domDoc.setContent( m_inputFile, &m_errorMessage ) )
-        return false;
+        return KEduVocDocument::InvalidXml;
 
     QDomElement domElementKvtml = domDoc.documentElement();
     if ( domElementKvtml.tagName() != KV_DOCTYPE ) {
         m_errorMessage = i18n( "This is not a KDE Vocabulary document." );
-        return false;
+        return KEduVocDocument::FileTypeUnknown;
     }
 
     //-------------------------------------------------------------------------
@@ -108,7 +108,7 @@ bool KEduVocKvtmlReader::readDoc( KEduVocDocument *doc )
 
     bool result = readBody( domElementKvtml ); // read vocabulary
 
-    return result;
+    return result ? KEduVocDocument::NoError : KEduVocDocument::FileReaderFailed;
 }
 
 

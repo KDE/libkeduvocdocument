@@ -24,6 +24,7 @@
 #include "keduvocpersonalpronoun.h"
 #include "keduvocarticle.h"
 #include "keduvocmultiplechoice.h"
+#include "keduvocdocument.h"
 
 class QIODevice;
 class KEduVocDocument;
@@ -45,7 +46,7 @@ public:
     /** read the document
      * @param doc document object to store the data in
      */
-    bool readDoc( KEduVocDocument *doc );
+    KEduVocDocument::ErrorCode readDoc( KEduVocDocument *doc );
 
     /** get the errormessage string
      * @returns the errormessage string
