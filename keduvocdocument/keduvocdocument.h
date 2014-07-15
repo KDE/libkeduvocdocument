@@ -61,17 +61,17 @@ public:
 
     /// the return code when opening/saving
     enum ErrorCode {
-        NoError = 0,
-        Unknown,
-        InvalidXml,
-        FileTypeUnknown,
-        FileCannotWrite,
-        FileWriterFailed,
-        FileCannotRead,
-        FileReaderFailed,
-        FileDoesNotExist,
-        FileLocked,       //*< An autosave file exists for this document
-        FileCannotLock  //*< Can't create an autosave file for this document
+        NoError = 0,         //*< no error
+        Unknown,             //*< unspecified error
+        InvalidXml,          //*< malformed xml or bad file formatting
+        FileTypeUnknown,     //*< unknown file type
+        FileCannotWrite,     //*< unwritable file
+        FileWriterFailed,    //*< file writer failed
+        FileCannotRead,      //*< unreadable file
+        FileReaderFailed,    //*< file reader failed
+        FileDoesNotExist,    //*< unknown file type
+        FileLocked,          //*< An autosave file exists for this document
+        FileCannotLock       //*< Can't create an autosave file for this document
     };
 
     /// indicates file open/save status locking or readonly
