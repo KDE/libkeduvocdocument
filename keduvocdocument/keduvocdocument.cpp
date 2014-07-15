@@ -850,6 +850,7 @@ QString KEduVocDocument::title() const
 void KEduVocDocument::setTitle( const QString & title )
 {
     d->m_title = title;
+    ///@todo decouple document title and root lesson title
     d->m_lessonContainer->setName(title);
     setModified(true);
 }

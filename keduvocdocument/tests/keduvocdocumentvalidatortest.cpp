@@ -88,6 +88,8 @@ void KEduVocDocumentValidatorTest::testDocumentAboutInfo()
 
 void KEduVocDocumentValidatorTest::testLessons()
 {
+    const QString title = QString::fromLatin1( "Validator Test Title" );
+    QString lesson0 = QString::fromLatin1( "Lesson Root" );
     QString lesson1 = QString::fromLatin1( "Lesson 1" );
     QString lesson1child1 = QString::fromLatin1( "Lesson 1.1" );
     QString lesson1child2 = QString::fromLatin1( "Lesson 1.2" );
@@ -96,10 +98,18 @@ void KEduVocDocumentValidatorTest::testLessons()
 
     KEduVocDocument doc;
     doc.lesson()->appendChildContainer(new KEduVocLesson(lesson1, doc.lesson()));
+    // Order here is significant as setTitle also sets the lesson name.
+    doc.lesson()->setName( lesson0 );
+    doc.setTitle( title );
     QCOMPARE(doc.lesson()->childContainerCount(), 1);
     QCOMPARE(doc.lesson()->childContainer(0)->containerType(), KEduVocContainer::Lesson);
     QCOMPARE(doc.lesson()->childContainer(0)->parent(), doc.lesson());
     QCOMPARE(doc.lesson()->childContainer(0)->name(), lesson1);
+
+    ///@todo decouple document and root lesson title
+    QEXPECT_FAIL("",  "Document and root lesson have the same name",  Continue);
+    QCOMPARE(doc.lesson()->name(), lesson0);
+    QCOMPARE( doc.title(), title );
 
     doc.lesson()->appendChildContainer(new KEduVocLesson(lesson2, doc.lesson()));
     doc.lesson()->appendChildContainer(new KEduVocLesson(lesson3, doc.lesson()));
