@@ -47,22 +47,24 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::readDoc( KEduVocDocument *doc )
     QString s = "";
     s=inputStream.readLine();
     if ( s != "WordQuiz" ) {
-        m_errorMessage = i18n( "This does not appear to be a (K)WordQuiz file" );
+        m_errorMessage = i18n( "This does not appear to be a (K)WordQuiz file: Missing First line \"WordQuiz\"");
         return KEduVocDocument::FileTypeUnknown;
     }
     s = inputStream.readLine();
     s = s.left( 1 );
     int iFV = s.toInt( 0 );
     if ( iFV != 5 ) {
-        m_errorMessage = i18n( "Only files created by WordQuiz 5.x or later can be opened" );
+        m_errorMessage = i18n( "Only files created by WordQuiz 5.x or later can be opened: Missing Second Line \"5\"" );
         return KEduVocDocument::FileTypeUnknown;
     }
 
     m_errorMessage = i18n( "Error while reading file" );
 
     while ( !inputStream.atEnd() && inputStream.readLine() != "[Font Info]" ) ;
-    if ( inputStream.atEnd() )
+    if ( inputStream.atEnd() ) {
+        m_errorMessage = i18n( "Error while reading file: Missing [Font Info]" );
         return KEduVocDocument::FileReaderFailed;
+    }
     s = inputStream.readLine();
     int p = s.indexOf( "=", 0 );
     QString fam = s.right( s.length() - ( p + 1 ) );
@@ -95,8 +97,10 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::readDoc( KEduVocDocument *doc )
       m_specialCharacters = s.right(s.length() - (p + 1));
     */
     while ( !inputStream.atEnd() && inputStream.readLine() != "[Grid Info]" ) ;
-    if ( inputStream.atEnd() )
+    if ( inputStream.atEnd() ) {
+        m_errorMessage = i18n( "Error while reading file: Missing [Grid Info]" );
         return KEduVocDocument::FileReaderFailed;
+    }
     inputStream.readLine(); //skip value for width of row headers
 
     s = inputStream.readLine();
@@ -136,8 +140,10 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::readDoc( KEduVocDocument *doc )
       m_bottomRight =s.toInt(0, 10) - 1 ;
     */
     while ( !inputStream.atEnd() && inputStream.readLine() != "[Vocabulary]" ) ;
-    if ( inputStream.atEnd() )
+    if ( inputStream.atEnd() ) {
+        m_errorMessage = i18n( "Error while reading file: Missing [Vocabulary]" );
         return KEduVocDocument::FileReaderFailed;
+    }
 
     KEduVocLesson* lesson = new KEduVocLesson( i18n("Vocabulary"), m_doc->lesson());
     m_doc->lesson()->appendChildContainer(lesson);
