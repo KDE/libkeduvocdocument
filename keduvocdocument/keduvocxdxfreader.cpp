@@ -78,6 +78,10 @@ void KEduVocXdxfReader::readXdxf()
         m_doc->identifier(1).setName( id2.toString().toLower() );
     }
 
+    //Jam it all into one lesson
+    KEduVocLesson* lesson = new KEduVocLesson(i18n("Lesson %1", 1), m_doc->lesson());
+    m_doc->lesson()->appendChildContainer(lesson);
+
     while ( !atEnd() ) {
         readNext();
 
@@ -107,13 +111,19 @@ void KEduVocXdxfReader::readEntry()
 
     while ( !( isEndElement() && name() == "ar" ) ) {
         readNext();
-        if ( isStartElement() && name() == "k" )
+        if ( isStartElement() && name() == "k" ) {
             front = readElementText();
-        else if ( isCharacters() || isEntityReference() )
+        }
+        else if ( isCharacters() || isEntityReference() ) {
             back.append( text().toString() );
+        }
     }
 
-    KEduVocExpression expr = KEduVocExpression( front );
-    expr.setTranslation( 1, back );
-    m_doc->lesson()->appendEntry( &expr );
+    KEduVocExpression * expr = new KEduVocExpression( front );
+    expr->setTranslation( 1, back );
+
+    KEduVocLesson * lesson ( dynamic_cast<KEduVocLesson*>(m_doc->lesson()->childContainer(0) ) );
+    if ( lesson ) {
+        lesson->appendEntry( expr );
+    }
 }
