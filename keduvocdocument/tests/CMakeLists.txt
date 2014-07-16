@@ -25,6 +25,7 @@ set(kvocdoc_api_unittests
 set(kvocdoc_unittests
   readerkvtml2test
   readerwordquiztest
+  readerpaukertest
 )
 
 #Helper Clases for unit tests
