@@ -17,15 +17,15 @@ set(keduvocdocument_LIB_SRCS
     keduvocdeclension.cpp
     keduvocwordtype.cpp
     keduvockvtmlcompability.cpp
-    keduvockvtmlreader.cpp
-    keduvockvtml2reader.cpp
+    readerwriters/keduvockvtmlreader.cpp
+    readerwriters/keduvockvtml2reader.cpp
     keduvockvtml2writer.cpp
-    keduvoccsvreader.cpp
+    readerwriters/keduvoccsvreader.cpp
     keduvoccsvwriter.cpp
-    keduvocpaukerreader.cpp
-    keduvocvokabelnreader.cpp
-    keduvocwqlreader.cpp
-    keduvocxdxfreader.cpp
+    readerwriters/keduvocpaukerreader.cpp
+    readerwriters/keduvocvokabelnreader.cpp
+    readerwriters/keduvocwqlreader.cpp
+    readerwriters/keduvocxdxfreader.cpp
     sharedkvtmlfiles.cpp
 )
 
