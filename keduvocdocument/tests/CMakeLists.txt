@@ -23,6 +23,7 @@ set(kvocdoc_api_unittests
 
 #Unit Tests linked to object behind the API wall
 set(kvocdoc_unittests
+  readerkvtml2test
 )
 
 #Helper Clases for unit tests
