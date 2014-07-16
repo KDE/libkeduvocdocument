@@ -26,6 +26,7 @@ set(kvocdoc_unittests
   readerkvtml2test
   readerwordquiztest
   readerpaukertest
+  readervokabelntest
 )
 
 #Helper Clases for unit tests
