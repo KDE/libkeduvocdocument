@@ -83,12 +83,14 @@ KEduVocDocument::ErrorCode KEduVocVokabelnReader::readDoc( KEduVocDocument *doc 
             }
 
             if ( inputStream.atEnd() ) {
+                m_errorMessage = i18n( "Error while reading file: Truncated header" );
                 return KEduVocDocument::FileReaderFailed;
             }
 
             temp = inputStream.readLine();
         }
     } else {
+        m_errorMessage = i18n( "Error while reading file: No title" );
         return KEduVocDocument::FileReaderFailed;
     }
 
@@ -115,6 +117,7 @@ KEduVocDocument::ErrorCode KEduVocVokabelnReader::readDoc( KEduVocDocument *doc 
     languages = lang1.split( "\"," );
 
     if ( languages.size() < 2 ) {
+        m_errorMessage = i18n( "Error while reading file: Didn't find two languages in %1", lang1 );
         return KEduVocDocument::FileReaderFailed;
     }
 
@@ -133,6 +136,7 @@ KEduVocDocument::ErrorCode KEduVocVokabelnReader::readDoc( KEduVocDocument *doc 
     QString section8Header( "8. Lernhilfe" ); //DO NOT translate
     while ( !temp.contains(section8Header) ) {
         if ( inputStream.atEnd() ) {
+            m_errorMessage = i18n( "Error while reading file: Missing \"%1\"", section8Header );
             return KEduVocDocument::FileReaderFailed;
         }
         temp = inputStream.readLine();
@@ -149,6 +153,7 @@ KEduVocDocument::ErrorCode KEduVocVokabelnReader::readDoc( KEduVocDocument *doc 
 
         while ( c < 2 ) {
             if ( inputStream.atEnd() ) {
+                m_errorMessage = i18n( "Error while reading file: Expecting something like \"dog\",\"Hund\",1" );
                 return KEduVocDocument::FileReaderFailed;
             }
             temp = inputStream.readLine();
