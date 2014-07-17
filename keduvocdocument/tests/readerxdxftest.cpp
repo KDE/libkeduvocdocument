@@ -83,8 +83,8 @@ void XdxfReaderTest::init() {
         QBuffer * buffer = new QBuffer( &array );                       \
         buffer->open( QIODevice::ReadOnly );                            \
         KEduVocDocument docRead;                                        \
-        KEduVocXdxfReader reader( &docRead );                           \
-        KEduVocDocument::ErrorCode actual(reader.read( buffer ) );      \
+        KEduVocXdxfReader reader;                                       \
+        KEduVocDocument::ErrorCode actual(reader.read( *buffer , docRead)); \
         if (verbose && actual != expected) {                            \
         }                                                               \
         QCOMPARE( int( actual ), int( expected ) );                     \

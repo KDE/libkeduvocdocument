@@ -20,18 +20,44 @@
 
 #include <QString>
 #include "keduvocdocument.h"
+#include "readerbase.h"
 
 class QIODevice;
 class KEduVocDocument;
 
-class KEduVocWqlReader
+/**Reader for WordQuiz files*/
+class KEduVocWqlReader : public ReaderBase
 {
 public:
-    KEduVocWqlReader( QIODevice *file );
+    /** constructor */
+    KEduVocWqlReader();
+    /**destructor*/
+    virtual ~KEduVocWqlReader(){};
 
-    KEduVocDocument::ErrorCode readDoc( KEduVocDocument *doc );
 
-    QString errorMessage() const
+    /** @brief Can this reader parse this file
+     *
+     Read a small portion of the header of the file
+     and decide if it is a suitable type.
+     @param file an device open for read
+     @return true if parsable
+     */
+    virtual bool isParsable( QIODevice & file);
+
+    /** @brief Can this reader parse this file
+     *
+     Read a small portion of the header of the file
+     and decide if it is a suitable type.
+     @param file an device open for read
+     @param doc document object to store the data in
+     @return true if parsable
+     */
+    virtual KEduVocDocument::ErrorCode read( QIODevice & file, KEduVocDocument & doc );
+
+    /** an error message.
+        @return the error message
+    */
+    virtual QString errorMessage() const
     {
         return m_errorMessage;
     }

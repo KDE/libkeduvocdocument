@@ -106,8 +106,8 @@ void PaukerReaderTest::init() {
         QBuffer * buffer = new QBuffer( &array );                       \
         buffer->open( QIODevice::ReadOnly );                            \
         KEduVocDocument docRead;                                        \
-        KEduVocPaukerReader reader( &docRead );                         \
-        KEduVocDocument::ErrorCode actual(reader.read( buffer ) );      \
+        KEduVocPaukerReader reader;                                     \
+        KEduVocDocument::ErrorCode actual(reader.read( *buffer, docRead ) ); \
         if (verbose && actual != expected) {                            \
         }                                                               \
         QCOMPARE( int( actual ), int( expected ) );                     \

@@ -207,9 +207,9 @@ XMLGenerator & XMLGenerator::addLocale(const int ii) {
 // Check that a parse returns errcode
 #define PARSE_EXPECT_CORE(gen, expected,  verbose)                      \
     do {                                                                \
-        KEduVocKvtml2Reader reader( gen.toQIODevice() );                \
+        KEduVocKvtml2Reader reader;                                     \
         KEduVocDocument docRead;                                        \
-        KEduVocDocument::ErrorCode actual(reader.readDoc( &docRead ) ); \
+        KEduVocDocument::ErrorCode actual(reader.read( *gen.toQIODevice(), docRead ) ); \
         if (verbose && actual != expected) {                            \
             kDebug() << gen.toString( 4 );                              \
             kDebug() << "Actual="<<int( actual );                       \

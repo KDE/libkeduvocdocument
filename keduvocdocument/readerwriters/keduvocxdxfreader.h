@@ -19,16 +19,38 @@
 
 #include <QXmlStreamReader>
 #include "keduvocdocument.h"
+#include "readerbase.h"
 
 class QIODevice;
 class KEduVocDocument;
 
-class KEduVocXdxfReader : public QXmlStreamReader
+/**Reader for the XDXF format*/
+class KEduVocXdxfReader : public ReaderBase, private QXmlStreamReader
 {
 public:
-    KEduVocXdxfReader( KEduVocDocument *doc );
+    /** constructor */
+    KEduVocXdxfReader( );
 
-    KEduVocDocument::ErrorCode read( QIODevice *device );
+    /**destructor*/
+    virtual ~KEduVocXdxfReader(){};
+
+    /** @brief Can this reader parse this file
+     *
+     Read a small portion of the header of the file
+     and decide if it is a suitable type.
+     @param file an device open for read
+     @return true if parsable
+     */
+    virtual bool isParsable( QIODevice & file);
+
+    /** Parse file and write into doc
+     @param file an open device
+     @param doc to be written
+     @return error status of the read.*/
+    virtual KEduVocDocument::ErrorCode read(QIODevice & file, KEduVocDocument & doc);
+
+    /** an error message.*/
+    virtual QString errorMessage() const;
 
 private:
     void readUnknownElement();

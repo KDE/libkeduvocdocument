@@ -19,16 +19,44 @@
 
 #include <QXmlStreamReader>
 #include "keduvocdocument.h"
+#include "readerbase.h"
 
 class QIODevice;
 class KEduVocDocument;
 
-class KEduVocPaukerReader : public QXmlStreamReader
+/** Reader for the Pauker format*/
+class KEduVocPaukerReader : public ReaderBase, private QXmlStreamReader
 {
 public:
-    KEduVocPaukerReader( KEduVocDocument *doc );
+    /** constructor */
+    KEduVocPaukerReader();
+    /**destructor*/
+    virtual ~KEduVocPaukerReader(){};
 
-    KEduVocDocument::ErrorCode read( QIODevice *device );
+
+    /** @brief Can this reader parse this file
+     *
+     Read a small portion of the header of the file
+     and decide if it is a suitable type.
+     @param file an device open for read
+     @return true if parsable
+     */
+    virtual bool isParsable( QIODevice & file);
+
+    /** @brief Can this reader parse this file
+     *
+     Read a small portion of the header of the file
+     and decide if it is a suitable type.
+     @param file an device open for read
+     @param doc document object to store the data in
+     @return true if parsable
+     */
+    virtual KEduVocDocument::ErrorCode read( QIODevice & file, KEduVocDocument & doc );
+
+    /** an error message.
+        @return the error message
+    */
+    virtual QString errorMessage() const;
 
 private:
     void readUnknownElement();

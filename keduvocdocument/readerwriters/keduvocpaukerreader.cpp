@@ -17,6 +17,7 @@
 #include "keduvocpaukerreader.h"
 
 #include <QIODevice>
+#include <QtCore/QTextStream>
 
 #include <KLocale>
 
@@ -25,14 +26,30 @@
 #include "keduvocdocument.h"
 #include "kdebug.h"
 
-KEduVocPaukerReader::KEduVocPaukerReader( KEduVocDocument * doc )
+KEduVocPaukerReader::KEduVocPaukerReader( )
 {
-    m_doc = doc;
 }
 
-
-KEduVocDocument::ErrorCode KEduVocPaukerReader::read( QIODevice * device )
+QString KEduVocPaukerReader::errorMessage() const
 {
+    return i18n( "Parse error at line %1, column %2:\n%3", lineNumber(), columnNumber(), errorString() );
+}
+
+bool KEduVocPaukerReader::isParsable( QIODevice & dev)
+{
+    QTextStream ts( &dev );
+    QString line1( ts.readLine() );
+    QString line2( ts.readLine() );
+
+    return ( ( line1.startsWith(QString::fromLatin1("<?xml")) )
+           && ( line2.indexOf( "pauker", 0 ) >  0 ) );
+}
+
+KEduVocDocument::ErrorCode KEduVocPaukerReader::read( QIODevice & devref ,  KEduVocDocument &doc)
+{
+    QIODevice *device( &devref );
+    m_doc = &doc;
+
     setDevice( device );
 
     while ( !atEnd() ) {

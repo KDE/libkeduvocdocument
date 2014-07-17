@@ -33,18 +33,28 @@
 #include "kvtmldefs.h"
 #include "keduvoccommon_p.h"
 
-KEduVocKvtmlReader::KEduVocKvtmlReader( QIODevice *file )
+KEduVocKvtmlReader::KEduVocKvtmlReader()
 {
-    // the file must be already open
-    m_inputFile = file;
     m_errorMessage = "";
     kDebug() << "KEduVocKvtmlReader for kvtml version 1 files started.";
 }
 
-
-KEduVocDocument::ErrorCode KEduVocKvtmlReader::readDoc( KEduVocDocument *doc )
+bool KEduVocKvtmlReader::isParsable( QIODevice & dev) const
 {
-    m_doc = doc;
+    QTextStream ts( &dev );
+    QString line1( ts.readLine() );
+    QString line2( ts.readLine() );
+
+    return  ( ( line1.startsWith(QString::fromLatin1("<?xml")) )
+              && ( line2.indexOf( KV_DOCTYPE, 0 ) >  0 ) );
+}
+
+KEduVocDocument::ErrorCode KEduVocKvtmlReader::read( QIODevice & devref ,  KEduVocDocument &doc)
+{
+    // the file must be already open
+    m_inputFile = &devref;
+
+    m_doc = &doc;
     m_cols = 0;
     m_lines = 0;
 
