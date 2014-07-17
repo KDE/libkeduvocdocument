@@ -18,6 +18,7 @@
 */
 
 #include "keduvocdocument.h"
+#include "readermanager.h"
 #include "keduvocpaukerreader.h"
 
 #include <kdebug.h>
@@ -74,25 +75,27 @@ private slots:
     void testParseInvalid();
 private :
     QString oneGoodDoc;
+    QString oneBadDoc;
 };
 
 void PaukerReaderTest::init() {
     oneGoodDoc =                                    \
-    "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \
-     <!--This is a lesson file for Pauker (http://pauker.sourceforge.net)--> \
-     <Lesson LessonFormat=\"1.7\"> \
-       <Description>Some Descrition</Description> \
-       <Batch> \
-         <Card> \
-           <FrontSide> \
-             <Text>Front text</Text> \
-           </FrontSide> \
-           <ReverseSide> \
-             <Text>Back Text</Text> \
-           </ReverseSide> \
-         </Card> \
-        </Batch> \
-      </Lesson>" ;
+    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n \
+     <!--This is a lesson file for Pauker (http://pauker.sourceforge.net)-->\n \
+     <Lesson LessonFormat=\"1.7\">\n \
+       <Description>Some Description</Description>\n \
+       <Batch>\n \
+         <Card>\n \
+           <FrontSide>\n \
+             <Text>Front text</Text>\n \
+           </FrontSide>\n \
+           <ReverseSide>\n \
+             <Text>Back Text</Text>\n \
+           </ReverseSide>\n \
+         </Card>\n \
+        </Batch>\n \
+      </Lesson>\n" ;
+    oneBadDoc = oneGoodDoc + "\ninvalid XML characters ";
     }
 
 
@@ -105,10 +108,11 @@ void PaukerReaderTest::init() {
         QByteArray array( instring.toLatin1() );                        \
         QBuffer * buffer = new QBuffer( &array );                       \
         buffer->open( QIODevice::ReadOnly );                            \
+        ReaderManager::ReaderPtr reader( ReaderManager::reader(*buffer ) ); \
         KEduVocDocument docRead;                                        \
-        KEduVocPaukerReader reader;                                     \
-        KEduVocDocument::ErrorCode actual(reader.read( *buffer, docRead ) ); \
+        KEduVocDocument::ErrorCode actual(reader->read(docRead ) );     \
         if (verbose && actual != expected) {                            \
+            kDebug() << instring;                                       \
         }                                                               \
         QCOMPARE( int( actual ), int( expected ) );                     \
     }  while ( 0 )
@@ -135,9 +139,7 @@ void PaukerReaderTest::testParseOneWord()
 
 void PaukerReaderTest::testParseInvalid()
 {
-    QString invalid = oneGoodDoc + "random error inducing text";
-
-    PARSE_EXPECT( invalid ,  KEduVocDocument::FileReaderFailed );
+    PARSE_EXPECT( oneBadDoc ,  KEduVocDocument::FileReaderFailed );
 }
 
 }

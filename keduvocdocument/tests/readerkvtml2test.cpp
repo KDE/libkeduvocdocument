@@ -18,6 +18,7 @@
 */
 
 #include "keduvocdocument.h"
+#include "readermanager.h"
 #include "keduvockvtml2reader.h"
 #include "kvtml2defs.h"
 
@@ -138,6 +139,7 @@ QIODevice * XMLGenerator::toQIODevice()
 {
     m_barray = this->toString(4).toLatin1();
     m_buffer = new QBuffer( & m_barray );
+    m_buffer->open( QIODevice::ReadOnly );
     return m_buffer;
 }
 
@@ -207,14 +209,14 @@ XMLGenerator & XMLGenerator::addLocale(const int ii) {
 // Check that a parse returns errcode
 #define PARSE_EXPECT_CORE(gen, expected,  verbose)                      \
     do {                                                                \
-        KEduVocKvtml2Reader reader;                                     \
+        ReaderManager::ReaderPtr reader( ReaderManager::reader(*gen.toQIODevice() ) ); \
         KEduVocDocument docRead;                                        \
-        KEduVocDocument::ErrorCode actual(reader.read( *gen.toQIODevice(), docRead ) ); \
+        KEduVocDocument::ErrorCode actual(reader->read(docRead ) );      \
         if (verbose && actual != expected) {                            \
             kDebug() << gen.toString( 4 );                              \
             kDebug() << "Actual="<<int( actual );                       \
         }                                                               \
-        QCOMPARE( int( actual ), int( expected ) ); \
+        QCOMPARE( int( actual ), int( expected ) );                     \
     }  while ( 0 )
 
 // Check that a parse returns errcode. This ignores the error.

@@ -23,7 +23,8 @@
 #include "keduvocexpression.h"
 #include "keduvocdocument.h"
 
-KEduVocXdxfReader::KEduVocXdxfReader( )
+KEduVocXdxfReader::KEduVocXdxfReader(QIODevice & dev)
+    :m_dev( dev )
 {
 }
 
@@ -32,21 +33,23 @@ QString KEduVocXdxfReader::errorMessage() const
     return i18n( "Parse error at line %1, column %2:\n%3", lineNumber(), columnNumber(), errorString() );
 }
 
-bool KEduVocXdxfReader::isParsable( QIODevice & dev)
+bool KEduVocXdxfReader::isParsable()
 {
-    QTextStream ts( &dev );
+    //@todo fix the xml isParsable to not expect lines as xml doesn't require lines
+    QTextStream ts( &m_dev );
     QString line1( ts.readLine() );
     QString line2( ts.readLine() );
 
+    m_dev.seek( 0 );
     return  ( ( line1.startsWith(QString::fromLatin1("<?xml")) )
     && ( line2.indexOf( "xdxf", 0 ) >  0 ) );
 }
 
 
 
-KEduVocDocument::ErrorCode KEduVocXdxfReader::read( QIODevice & devref ,  KEduVocDocument &doc)
+KEduVocDocument::ErrorCode KEduVocXdxfReader::read(KEduVocDocument &doc)
 {
-    QIODevice *device( &devref );
+    QIODevice *device( &m_dev );
     m_doc = &doc;
 
     setDevice( device );

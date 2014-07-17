@@ -18,6 +18,7 @@
 */
 
 #include "keduvocdocument.h"
+#include "readermanager.h"
 #include "keduvocwqlreader.h"
 #include <qobject.h>
 
@@ -141,12 +142,12 @@ WQLGenerator & WQLGenerator::minimalVocab() {
 // Check that a parse returns errcode
 #define PARSE_EXPECT_CORE(gen, expected,  verbose)                      \
     do {                                                                \
-        KEduVocWqlReader reader;                                        \
+        ReaderManager::ReaderPtr reader( ReaderManager::reader(*gen.toQIODevice() ) ); \
         KEduVocDocument docRead;                                        \
-        KEduVocDocument::ErrorCode actual(reader.read( *gen.toQIODevice(), docRead ) ); \
+        KEduVocDocument::ErrorCode actual(reader->read(docRead ) );     \
         if (verbose && actual != expected) {                            \
             kDebug() << gen.m_string;                                   \
-            kDebug() << reader.errorMessage();                          \
+            kDebug() << reader->errorMessage();                          \
         }                                                               \
         QCOMPARE( int( actual ), int( expected ) );                     \
     }  while ( 0 )

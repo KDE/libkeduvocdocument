@@ -24,12 +24,14 @@
 class QIODevice;
 class KEduVocDocument;
 
-/**Reader for the XDXF format*/
+/**@brief Reader for the XDXF format*/
 class KEduVocXdxfReader : public ReaderBase, private QXmlStreamReader
 {
 public:
-    /** constructor */
-    KEduVocXdxfReader( );
+    /** constructor
+        @param file an device open for read
+    */
+    explicit KEduVocXdxfReader(QIODevice & file);
 
     /**destructor*/
     virtual ~KEduVocXdxfReader(){};
@@ -38,26 +40,30 @@ public:
      *
      Read a small portion of the header of the file
      and decide if it is a suitable type.
-     @param file an device open for read
      @return true if parsable
      */
-    virtual bool isParsable( QIODevice & file);
+    virtual bool isParsable();
 
-    /** Parse file and write into doc
-     @param file an open device
+    /** @brief Parse file and write into doc
      @param doc to be written
      @return error status of the read.*/
-    virtual KEduVocDocument::ErrorCode read(QIODevice & file, KEduVocDocument & doc);
+    virtual KEduVocDocument::ErrorCode read(KEduVocDocument & doc);
 
-    /** an error message.*/
+    /** an error message.
+        @return the error message
+    */
     virtual QString errorMessage() const;
 
 private:
+    /** Skip unknown tags */
     void readUnknownElement();
+    /** Read xdxf tag  */
     void readXdxf();
+    /** Read ar tag which is the word pair with "<ar><k>key</k>text</ar>" format */
     void readEntry();
 
-    KEduVocDocument *m_doc;
+    KEduVocDocument *m_doc; ///< output doc
+    QIODevice & m_dev; ///< input device
 };
 
 #endif
