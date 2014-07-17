@@ -34,17 +34,18 @@
 #include "keduvoclesson.h"
 #include "keduvocexpression.h"
 
-KEduVocCsvReader::KEduVocCsvReader( QIODevice *file )
+KEduVocCsvReader::KEduVocCsvReader()
 {
-    // the file must be already open
-    m_inputFile = file;
     m_errorMessage = "";
 }
 
 
-KEduVocDocument::ErrorCode KEduVocCsvReader::readDoc( KEduVocDocument *doc )
+KEduVocDocument::ErrorCode KEduVocCsvReader::read( QIODevice & file,  KEduVocDocument & doc )
 {
-    m_doc = doc;
+    // the file must be already open
+    m_inputFile = &file;
+
+    m_doc = &doc;
 
     QString separator = m_doc->csvDelimiter();
 

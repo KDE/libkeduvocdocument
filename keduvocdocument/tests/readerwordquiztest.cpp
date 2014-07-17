@@ -141,9 +141,9 @@ WQLGenerator & WQLGenerator::minimalVocab() {
 // Check that a parse returns errcode
 #define PARSE_EXPECT_CORE(gen, expected,  verbose)                      \
     do {                                                                \
-        KEduVocWqlReader reader( gen.toQIODevice() );                   \
+        KEduVocWqlReader reader;                                        \
         KEduVocDocument docRead;                                        \
-        KEduVocDocument::ErrorCode actual(reader.readDoc( &docRead ) ); \
+        KEduVocDocument::ErrorCode actual(reader.read( *gen.toQIODevice(), docRead ) ); \
         if (verbose && actual != expected) {                            \
             kDebug() << gen.m_string;                                   \
             kDebug() << reader.errorMessage();                          \

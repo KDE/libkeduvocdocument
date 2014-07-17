@@ -32,18 +32,61 @@
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
 
-KEduVocVokabelnReader::KEduVocVokabelnReader( QIODevice *file )
+KEduVocVokabelnReader::KEduVocVokabelnReader( )
 {
-    // the file must be already open
-    m_inputFile = file;
     m_errorMessage = "";
 }
 
-
-KEduVocDocument::ErrorCode KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
+bool KEduVocVokabelnReader::isParsable( QIODevice & dev)
 {
+    QTextStream ts( &dev );
+    QString line1( ts.readLine() );
+    QString line2( ts.readLine() );
+    /*
+     * Vokabeln.de files:
+    The header seems to be something like this:
+
+    "Name
+    Lang1 - Lang2",123,234,456
+    0
+
+    or something longer:
+
+    "Name
+    Lang1 - Lang2
+    [..]
+    Blah, blah, blah...",123,234,456
+    0
+    */
+
+    QString tmp;
+    bool isgood = false;
+
+    if ( line1.startsWith(QChar::fromLatin1('"'))) {
+        ts.seek(0);
+        tmp = ts.readLine();
+        // There shouldn't be headers longer than 10 lines.
+        for ( int x=0; x < 10; x++) {
+            if (tmp.contains( "\"," )) {
+                tmp = ts.readLine();
+                if (tmp.endsWith('0')) {
+                    isgood = true;
+                }
+            }
+            tmp = ts.readLine();
+        }
+    }
+
+    return isgood;
+}
+
+KEduVocDocument::ErrorCode KEduVocVokabelnReader::read( QIODevice & file, KEduVocDocument & doc )
+{
+    // the file must be already open
+    m_inputFile = &file;
+
     kDebug() << "Reading vokabeln.de document...";
-    m_doc = doc;
+    m_doc = &doc;
 
     m_doc->setAuthor( "http://www.vokabeln.de" );
 

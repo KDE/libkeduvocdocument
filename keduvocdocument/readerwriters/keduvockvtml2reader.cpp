@@ -35,19 +35,27 @@
 
 #include <KDebug>
 
-KEduVocKvtml2Reader::KEduVocKvtml2Reader( QIODevice *file )
-        : m_inputFile( file )
+KEduVocKvtml2Reader::KEduVocKvtml2Reader()
+        : m_inputFile( 0 )
 {
-    // the file must be already open
-    if ( !m_inputFile->isOpen() ) {
-        m_errorMessage = i18n( "file must be opened first" );
-    }
 }
 
-
-KEduVocDocument::ErrorCode KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
+bool KEduVocKvtml2Reader::isParsable( QIODevice & dev)
 {
-    m_doc = doc;
+    QTextStream ts( &dev );
+    QString line1( ts.readLine() );
+    QString line2( ts.readLine() );
+
+    return  ( ( line1.startsWith(QString::fromLatin1("<?xml")) )
+              && ( line2.indexOf( KVTML_TAG, 0 ) >  0 ) );
+}
+
+KEduVocDocument::ErrorCode KEduVocKvtml2Reader::read( QIODevice & devref ,  KEduVocDocument &doc)
+{
+    // the file must be already open
+    m_inputFile = &devref;
+
+    m_doc = &doc;
 
     QDomDocument domDoc( "KEduVocDocument" );
 
@@ -65,10 +73,10 @@ KEduVocDocument::ErrorCode KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
 
         // first reset the file to the beginning
         m_inputFile->seek( 0 );
-        KEduVocKvtmlReader oldFormat( m_inputFile );
+        KEduVocKvtmlReader oldFormat;
 
         // get the return value
-        KEduVocDocument::ErrorCode retval = oldFormat.readDoc( doc );
+        KEduVocDocument::ErrorCode retval = oldFormat.read( devref,  doc );
 
         // pass the errormessage up
         m_errorMessage = oldFormat.errorMessage();

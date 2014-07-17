@@ -27,17 +27,24 @@
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
 
-KEduVocWqlReader::KEduVocWqlReader( QIODevice *file )
+KEduVocWqlReader::KEduVocWqlReader()
 {
-    // the file must be already open
-    m_inputFile = file;
     m_errorMessage = "";
 }
 
-
-KEduVocDocument::ErrorCode KEduVocWqlReader::readDoc( KEduVocDocument *doc )
+bool KEduVocWqlReader::isParsable( QIODevice & dev)
 {
-    m_doc = doc;
+    QTextStream ts( &dev );
+    QString line1( ts.readLine() );
+
+    return ( line1 == "WordQuiz" );
+}
+
+KEduVocDocument::ErrorCode KEduVocWqlReader::read( QIODevice & devref ,  KEduVocDocument &doc)
+{
+    // the file must be already open
+    m_inputFile = &devref;
+    m_doc = &doc;
 
     QTextStream inputStream( m_inputFile );
     inputStream.setCodec( "Windows-1252" ); //("ISO-8851-1");

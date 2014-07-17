@@ -30,20 +30,51 @@
 #include "keduvockvtmlcompability.h"
 #include "keduvocpersonalpronoun.h"
 #include "keduvocdocument.h"
+#include "readerbase.h"
 
 class QIODevice;
 class KEduVocDocument;
 
-/**
+/** Reader for KVTML 1.0
 @author Eric Pignet
 */
 class KEduVocKvtmlReader : public QObject
 {
     Q_OBJECT
 public:
-    KEduVocKvtmlReader( QIODevice *file );
+    /** constructor */
+    KEduVocKvtmlReader();
+    /**destructor*/
+    virtual ~KEduVocKvtmlReader(){};
 
-    KEduVocDocument::ErrorCode readDoc( KEduVocDocument *doc );
+
+    /** @brief Can this reader parse this file
+     *
+     Read a small portion of the header of the file
+     and decide if it is a suitable type.
+     @param file an device open for read
+     @return true if parsable
+     */
+    virtual bool isParsable( QIODevice & file) const;
+
+    /** @brief Can this reader parse this file
+     *
+     Read a small portion of the header of the file
+     and decide if it is a suitable type.
+     @param file an device open for read
+     @param doc document object to store the data in
+     @return true if parsable
+     */
+    virtual KEduVocDocument::ErrorCode read( QIODevice & file, KEduVocDocument & doc );
+
+    /** an error message.
+        @return the error message
+    */
+    virtual QString errorMessage() const
+    {
+        return m_errorMessage;
+    }
+
 
     /**
      * Attempt to add a language/locale. Language/locale are set to the same value.
@@ -84,11 +115,6 @@ public:
                                         QString &paraphrase );
     bool readExpression( QDomElement &domElementParent );
     bool readBody( QDomElement &domElementParent );
-
-    QString errorMessage() const
-    {
-        return m_errorMessage;
-    }
 
 private:
     QIODevice *m_inputFile;

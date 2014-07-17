@@ -316,8 +316,8 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
         switch ( ft ) {
             case Kvtml: {
                 kDebug(1100) << "Reading KVTML document...";
-                KEduVocKvtml2Reader kvtmlReader( f );
-                errStatus = kvtmlReader.readDoc( this );
+                KEduVocKvtml2Reader kvtmlReader;
+                errStatus = kvtmlReader.read( *f, *this );
                 if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = kvtmlReader.errorMessage();
                 }
@@ -326,9 +326,9 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
 
             case Wql: {
                 kDebug(1100) << "Reading WordQuiz (WQL) document...";
-                KEduVocWqlReader wqlReader( f );
+                KEduVocWqlReader wqlReader;
                 d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                errStatus = wqlReader.readDoc( this );
+                errStatus = wqlReader.read( *f,  *this );
                 if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = wqlReader.errorMessage();
                 }
@@ -337,20 +337,20 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
 
             case Pauker: {
                 kDebug(1100) << "Reading Pauker document...";
-                KEduVocPaukerReader paukerReader( this );
+                KEduVocPaukerReader paukerReader;
                 d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                errStatus = paukerReader.read( f );
+                errStatus = paukerReader.read( *f, *this);
                 if ( errStatus != KEduVocDocument::NoError ) {
-                    errorMessage = i18n( "Parse error at line %1, column %2:\n%3", paukerReader.lineNumber(), paukerReader.columnNumber(), paukerReader.errorString() );
+                    errorMessage = paukerReader.errorMessage();
                 }
             }
             break;
 
             case Vokabeln: {
                 kDebug(1100) << "Reading Vokabeln document...";
-                KEduVocVokabelnReader vokabelnReader( f );
+                KEduVocVokabelnReader vokabelnReader;
                 d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                errStatus = vokabelnReader.readDoc( this );
+                errStatus = vokabelnReader.read( *f,  *this );
                 if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = vokabelnReader.errorMessage();
                 }
@@ -359,8 +359,8 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
 
             case Csv: {
                 kDebug(1100) << "Reading CSV document...";
-                KEduVocCsvReader csvReader( f );
-                errStatus = csvReader.readDoc( this );
+                KEduVocCsvReader csvReader;
+                errStatus = csvReader.read( *f,  *this );
                 if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = csvReader.errorMessage();
                 }
@@ -369,19 +369,19 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
 
             case Xdxf: {
                 kDebug(1100) << "Reading XDXF document...";
-                KEduVocXdxfReader xdxfReader( this );
+                KEduVocXdxfReader xdxfReader;
                 d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                errStatus = xdxfReader.read( f );
+                errStatus = xdxfReader.read( *f, *this );
                 if ( errStatus != KEduVocDocument::NoError ) {
-                    errorMessage = i18n( "Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString() );
+                    errorMessage = xdxfReader.errorMessage();
                 }
             }
             break;
 
             default: {
                 kDebug(1100) << "Reading KVTML document (fallback)...";
-                KEduVocKvtml2Reader kvtmlReader( f );
-                errStatus = kvtmlReader.readDoc( this );
+                KEduVocKvtml2Reader kvtmlReader;
+                errStatus = kvtmlReader.read( *f, *this );
                 if ( errStatus != KEduVocDocument::NoError ) {
                     errorMessage = kvtmlReader.errorMessage();
                 }
