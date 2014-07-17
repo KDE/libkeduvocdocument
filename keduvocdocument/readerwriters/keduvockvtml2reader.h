@@ -40,7 +40,7 @@ class KEduVocKvtml2Reader : public QObject, public ReaderBase
     Q_OBJECT
 public:
     /** constructor */
-    KEduVocKvtml2Reader( );
+    explicit KEduVocKvtml2Reader( QIODevice & file );
     /**destructor*/
     virtual ~KEduVocKvtml2Reader(){};
 
@@ -49,20 +49,14 @@ public:
      *
      Read a small portion of the header of the file
      and decide if it is a suitable type.
-     @param file an device open for read
      @return true if parsable
      */
-    virtual bool isParsable( QIODevice & file);
+    virtual bool isParsable();
 
-    /** @brief Can this reader parse this file
-     *
-     Read a small portion of the header of the file
-     and decide if it is a suitable type.
-     @param file an device open for read
-     @param doc document object to store the data in
-     @return true if parsable
-     */
-    virtual KEduVocDocument::ErrorCode read( QIODevice & file, KEduVocDocument & doc );
+    /**  @brief Parse file and write into doc
+     @param doc to be written
+     @return error status of the read.*/
+    virtual KEduVocDocument::ErrorCode read(KEduVocDocument & doc );
 
     /** an error message.
         @return the error message

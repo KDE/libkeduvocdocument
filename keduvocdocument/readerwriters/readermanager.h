@@ -17,45 +17,36 @@
  USA
 */
 
-#ifndef READERBASE_H
-#define READERBASE_H
+#ifndef READERMANAGER_H
+#define READERMANAGER_H
 
 #include "keduvocdocument.h"
 
+#include <QSharedPointer>
 #include <kdebug.h>
 
-class QIODevice;
-class KEduVocDocument;
+class ReaderBase;
 
 /**
- * @brief a base class for readers of various lexicon formats
- *
+ * @brief manages the choice of readers.
+ * @details When ReaderManager goes out of scope it frees its reader.
  * */
-class ReaderBase
+class ReaderManager
 {
 public:
+    /** @brief  a QSharedPointer to the ReaderBase class.*/
+    typedef QSharedPointer<ReaderBase> ReaderPtr;
 
-    /**destructor*/
-    virtual ~ReaderBase(){};
-
-    /** @brief Can this reader parse the file
-     *
-     Read a small portion of the header of the file
-     and decide if it is a suitable type.
-     @return true if parsable
-     */
-    virtual bool isParsable() = 0;
-
-    /**  @brief Parse file and write into doc
-     @param doc to be written
-     @return error status of the read.*/
-    virtual KEduVocDocument::ErrorCode read(KEduVocDocument & doc) = 0;
-
-    /** an error message.
-        @return the error message
-    */
-    virtual QString errorMessage() const = 0;
+    /** @brief returns a reader that can read this device.
+        @details The device must be open for read and seekable.
+        The manager checks all the readers that are known.  If none of
+        them can parse this file/device it returns a BadReader.
+        @param device an open readable, non-sequential device.
+        @return a QSharedPointer<ReaderBase> for the device. */
+    static ReaderPtr reader(QIODevice & device);
 
 };
 
-#endif // READERBASE_H
+
+
+#endif // READERMANAGER_H

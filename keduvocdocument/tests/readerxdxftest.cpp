@@ -18,6 +18,7 @@
 */
 
 #include "keduvocdocument.h"
+#include "readermanager.h"
 #include "keduvocxdxfreader.h"
 
 #include <kdebug.h>
@@ -61,15 +62,15 @@ private :
 
 void XdxfReaderTest::init() {
     oneGoodDoc = \
-                 QString( "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" ) \
-                 + "<!DOCTYPE xdxf SYSTEM \"http://xdxf.sourceforge.net/xdxf_lousy.dtd\">" \
-                 + "<xdxf lang_from=\"GER\" lang_to=\"SPA\" format=\"visual\">" \
-                 + "<full_name>German Spanish</full_name>"              \
-                 + "<description>Description of German and Spanish</description>" \
-                 + ""                                                   \
-                 + "<ar><k>Hund</k>el perro</ar>"                       \
-                 + "<ar><k>Schwein</k>el cerdo</ar>"                    \
-                 + "</xdxf>";
+                 QString( "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" )
+                 + "<!DOCTYPE xdxf SYSTEM \"http://xdxf.sourceforge.net/xdxf_lousy.dtd\">\n"
+                 + "<xdxf lang_from=\"GER\" lang_to=\"SPA\" format=\"visual\">\net"
+                 + "<full_name>German Spanish</full_name>\n"
+                 + "<description>Description of German and Spanish</description>\n"
+                 + ""
+                 + "<ar><k>Hund</k>el perro</ar>\n"
+                 + "<ar><k>Schwein</k>el cerdo</ar>\n"
+                 + "</xdxf>\n";
     }
 
 
@@ -82,9 +83,9 @@ void XdxfReaderTest::init() {
         QByteArray array( instring.toLatin1() );                        \
         QBuffer * buffer = new QBuffer( &array );                       \
         buffer->open( QIODevice::ReadOnly );                            \
+        ReaderManager::ReaderPtr reader( ReaderManager::reader(*buffer ) ); \
         KEduVocDocument docRead;                                        \
-        KEduVocXdxfReader reader;                                       \
-        KEduVocDocument::ErrorCode actual(reader.read( *buffer , docRead)); \
+        KEduVocDocument::ErrorCode actual(reader->read(docRead ) );     \
         if (verbose && actual != expected) {                            \
         }                                                               \
         QCOMPARE( int( actual ), int( expected ) );                     \

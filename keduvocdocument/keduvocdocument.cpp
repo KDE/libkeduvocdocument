@@ -36,13 +36,9 @@
 #include "keduvocwordtype.h"
 #include "keduvockvtmlwriter.h"
 #include "keduvockvtml2writer.h"
-#include "readerwriters/keduvoccsvreader.h"
 #include "keduvoccsvwriter.h"
-#include "readerwriters/keduvockvtml2reader.h"
-#include "readerwriters/keduvocwqlreader.h"
-#include "readerwriters/keduvocpaukerreader.h"
-#include "readerwriters/keduvocvokabelnreader.h"
-#include "readerwriters/keduvocxdxfreader.h"
+#include "readerwriters/readermanager.h"
+#include "readerwriters/readerbase.h"
 
 #define WQL_IDENT      "WordQuiz"
 
@@ -311,82 +307,12 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
             return FileCannotRead;
         }
 
-        FileType ft = detectFileType( temporaryFile );
-
-        switch ( ft ) {
-            case Kvtml: {
-                kDebug(1100) << "Reading KVTML document...";
-                KEduVocKvtml2Reader kvtmlReader;
-                errStatus = kvtmlReader.read( *f, *this );
-                if ( errStatus != KEduVocDocument::NoError ) {
-                    errorMessage = kvtmlReader.errorMessage();
-                }
-            }
-            break;
-
-            case Wql: {
-                kDebug(1100) << "Reading WordQuiz (WQL) document...";
-                KEduVocWqlReader wqlReader;
-                d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                errStatus = wqlReader.read( *f,  *this );
-                if ( errStatus != KEduVocDocument::NoError ) {
-                    errorMessage = wqlReader.errorMessage();
-                }
-            }
-            break;
-
-            case Pauker: {
-                kDebug(1100) << "Reading Pauker document...";
-                KEduVocPaukerReader paukerReader;
-                d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                errStatus = paukerReader.read( *f, *this);
-                if ( errStatus != KEduVocDocument::NoError ) {
-                    errorMessage = paukerReader.errorMessage();
-                }
-            }
-            break;
-
-            case Vokabeln: {
-                kDebug(1100) << "Reading Vokabeln document...";
-                KEduVocVokabelnReader vokabelnReader;
-                d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                errStatus = vokabelnReader.read( *f,  *this );
-                if ( errStatus != KEduVocDocument::NoError ) {
-                    errorMessage = vokabelnReader.errorMessage();
-                }
-            }
-            break;
-
-            case Csv: {
-                kDebug(1100) << "Reading CSV document...";
-                KEduVocCsvReader csvReader;
-                errStatus = csvReader.read( *f,  *this );
-                if ( errStatus != KEduVocDocument::NoError ) {
-                    errorMessage = csvReader.errorMessage();
-                }
-            }
-            break;
-
-            case Xdxf: {
-                kDebug(1100) << "Reading XDXF document...";
-                KEduVocXdxfReader xdxfReader;
-                d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-                errStatus = xdxfReader.read( *f, *this );
-                if ( errStatus != KEduVocDocument::NoError ) {
-                    errorMessage = xdxfReader.errorMessage();
-                }
-            }
-            break;
-
-            default: {
-                kDebug(1100) << "Reading KVTML document (fallback)...";
-                KEduVocKvtml2Reader kvtmlReader;
-                errStatus = kvtmlReader.read( *f, *this );
-                if ( errStatus != KEduVocDocument::NoError ) {
-                    errorMessage = kvtmlReader.errorMessage();
-                }
-            }
+        ReaderManager::ReaderPtr reader( ReaderManager::reader( *f ) );
+        errStatus = reader->read( *this );
+        if ( errStatus != KEduVocDocument::NoError ) {
+            errorMessage = reader->errorMessage();
         }
+
 
         if ( errStatus != KEduVocDocument::NoError ) {
             QString msg = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)", url.path(), errorMessage );

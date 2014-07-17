@@ -35,15 +35,17 @@
 class QIODevice;
 class KEduVocDocument;
 
-/** Reader for KVTML 1.0
+/** @brief Reader for KVTML 1.0
 @author Eric Pignet
 */
 class KEduVocKvtmlReader : public QObject
 {
     Q_OBJECT
 public:
-    /** constructor */
-    KEduVocKvtmlReader();
+    /** constructor
+        @param file an open device
+    */
+    explicit KEduVocKvtmlReader(QIODevice & file);
     /**destructor*/
     virtual ~KEduVocKvtmlReader(){};
 
@@ -55,17 +57,12 @@ public:
      @param file an device open for read
      @return true if parsable
      */
-    virtual bool isParsable( QIODevice & file) const;
+    virtual bool isParsable();
 
-    /** @brief Can this reader parse this file
-     *
-     Read a small portion of the header of the file
-     and decide if it is a suitable type.
-     @param file an device open for read
-     @param doc document object to store the data in
-     @return true if parsable
-     */
-    virtual KEduVocDocument::ErrorCode read( QIODevice & file, KEduVocDocument & doc );
+    /**  @brief Parse file and write into doc
+     @param doc to be written
+     @return error status of the read.*/
+    virtual KEduVocDocument::ErrorCode read(KEduVocDocument & doc );
 
     /** an error message.
         @return the error message
@@ -117,9 +114,9 @@ public:
     bool readBody( QDomElement &domElementParent );
 
 private:
-    QIODevice *m_inputFile;
-    KEduVocDocument *m_doc;
-    QString m_errorMessage;
+    QIODevice *m_inputFile;  ///< input device
+    KEduVocDocument *m_doc;  ///< output doc
+    QString m_errorMessage;  ///< error message
     int m_cols;
     int m_lines;
     QStringList m_oldSelfDefinedTypes;

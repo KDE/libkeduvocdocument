@@ -25,31 +25,28 @@ class QIODevice;
 
 class KEduVocDocument;
 
-/** CSV Reader, the default reader*/
+/** @brief CSV Reader, the default reader*/
 class KEduVocCsvReader : public ReaderBase
 {
 public:
-    /** constructor */
-    KEduVocCsvReader();
+    /** constructor
+     @param dev to parse*/
+    explicit KEduVocCsvReader(QIODevice & dev);
     /** destructor */
     ~KEduVocCsvReader(){};
 
-    /**CSV can always parse a file
+    /** @brief CSV can always parse a file
      @return true if parsable
     */
-    virtual bool isParsable( QIODevice &) {
+    virtual bool isParsable()
+    {
         return true;
     }
 
-    /** @brief Can this reader parse this file
-     *
-     Read a small portion of the header of the file
-     and decide if it is a suitable type.
-     @param file an device open for read
-     @param doc document object to store the data in
-     @return true if parsable
-     */
-    virtual KEduVocDocument::ErrorCode read( QIODevice & file, KEduVocDocument & doc );
+    /**  @brief Parse file and write into doc
+     @param doc to be written
+     @return error status of the read.*/
+    virtual KEduVocDocument::ErrorCode read(KEduVocDocument & doc );
 
     /** an error message.
         @return the error message
@@ -60,9 +57,9 @@ public:
     }
 
 private:
-    QIODevice *m_inputFile;
-    KEduVocDocument *m_doc;
-    QString m_errorMessage;
+    QIODevice *m_inputFile;  ///< input device
+    KEduVocDocument *m_doc;  ///< output doc
+    QString m_errorMessage;  ///< error message
 };
 
 #endif

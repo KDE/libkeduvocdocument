@@ -32,14 +32,15 @@
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
 
-KEduVocVokabelnReader::KEduVocVokabelnReader( )
+KEduVocVokabelnReader::KEduVocVokabelnReader(QIODevice & file )
+    : m_inputFile( &file )
 {
     m_errorMessage = "";
 }
 
-bool KEduVocVokabelnReader::isParsable( QIODevice & dev)
+bool KEduVocVokabelnReader::isParsable()
 {
-    QTextStream ts( &dev );
+    QTextStream ts( m_inputFile );
     QString line1( ts.readLine() );
     QString line2( ts.readLine() );
     /*
@@ -71,20 +72,19 @@ bool KEduVocVokabelnReader::isParsable( QIODevice & dev)
                 tmp = ts.readLine();
                 if (tmp.endsWith('0')) {
                     isgood = true;
+                    break;
                 }
             }
             tmp = ts.readLine();
         }
     }
 
+    m_inputFile->seek( 0 );
     return isgood;
 }
 
-KEduVocDocument::ErrorCode KEduVocVokabelnReader::read( QIODevice & file, KEduVocDocument & doc )
+KEduVocDocument::ErrorCode KEduVocVokabelnReader::read(KEduVocDocument & doc )
 {
-    // the file must be already open
-    m_inputFile = &file;
-
     kDebug() << "Reading vokabeln.de document...";
     m_doc = &doc;
 

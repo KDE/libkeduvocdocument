@@ -17,15 +17,17 @@ set(keduvocdocument_LIB_SRCS
     keduvocdeclension.cpp
     keduvocwordtype.cpp
     keduvockvtmlcompability.cpp
+    keduvockvtml2writer.cpp
+    keduvoccsvwriter.cpp
+    readerwriters/failedreader.cpp
     readerwriters/keduvockvtmlreader.cpp
     readerwriters/keduvockvtml2reader.cpp
-    keduvockvtml2writer.cpp
     readerwriters/keduvoccsvreader.cpp
-    keduvoccsvwriter.cpp
     readerwriters/keduvocpaukerreader.cpp
     readerwriters/keduvocvokabelnreader.cpp
     readerwriters/keduvocwqlreader.cpp
     readerwriters/keduvocxdxfreader.cpp
+    readerwriters/readermanager.cpp
     sharedkvtmlfiles.cpp
 )
 

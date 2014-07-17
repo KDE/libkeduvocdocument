@@ -18,6 +18,7 @@
 */
 
 #include "keduvocdocument.h"
+#include "readermanager.h"
 #include "keduvocvokabelnreader.h"
 
 #include <kdebug.h>
@@ -56,6 +57,7 @@ private slots:
     void testParseInvalid();
 private :
     QString oneGoodDoc;
+    QString oneBadDoc;
 };
 
 void VokabelnReaderTest::init() {
@@ -86,7 +88,7 @@ void VokabelnReaderTest::init() {
         + "\"dog\",\"Hund\",1\n" \
         + "skip 1\n" \
         + "skip 2\n" \
-        + "\"cat\",\"Katze\",21\n" \
+        + "\"cat\",\"Katze\",2\n" \
         + "skip 1\n" \
         + "skip 2\n" \
         + "skip a\n" \
@@ -97,6 +99,13 @@ void VokabelnReaderTest::init() {
         + "\"Lesson Title B\"\n" \
         + "skip b\n" \
         + "\"Extra Lesson Title\"\n";
+
+    oneBadDoc =
+                QString( "\"A Title of S0me Sort\n" ) \
+        + "en - de\n" \
+        + "Still more text\",3,456,789\n" \
+        + "0\n" \
+        + "Skipped Line\n" ;
     }
 
 
@@ -109,10 +118,11 @@ void VokabelnReaderTest::init() {
         QByteArray array( instring.toLatin1() );                        \
         QBuffer * buffer = new QBuffer( &array );                       \
         buffer->open( QIODevice::ReadOnly );                            \
+        ReaderManager::ReaderPtr reader( ReaderManager::reader(*buffer ) ); \
         KEduVocDocument docRead;                                        \
-        KEduVocVokabelnReader reader;                                   \
-        KEduVocDocument::ErrorCode actual(reader.read( *buffer, docRead ) ); \
+        KEduVocDocument::ErrorCode actual(reader->read(docRead ) );     \
         if (verbose && actual != expected) {                            \
+            kDebug() << instring;                                       \
         }                                                               \
         QCOMPARE( int( actual ), int( expected ) );                     \
     }  while ( 0 )
@@ -139,9 +149,7 @@ void VokabelnReaderTest::testParseTwoWord()
 
 void VokabelnReaderTest::testParseInvalid()
 {
-    QString invalid = "First character is not a double quote " + oneGoodDoc;
-
-    PARSE_EXPECT( invalid ,  KEduVocDocument::FileReaderFailed );
+    PARSE_EXPECT( oneBadDoc ,  KEduVocDocument::FileReaderFailed );
 }
 
 }
