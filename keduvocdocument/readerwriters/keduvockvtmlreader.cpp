@@ -875,7 +875,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
     QString                   pronunciation;
     QDateTime                 qdate;
     QDateTime                 r_qdate;
-    bool                      inquery;
+    // bool                      inquery;
     bool                      active;
     QString                   lang;
     QString                   textstr;
@@ -918,10 +918,10 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
     }
 
     attribute = domElementParent.attributeNode( KV_SELECTED );
-    if ( !attribute.isNull() )
-        inquery = attribute.value() == "1" ? true : false;
-    else
-        inquery = false;
+    // if ( !attribute.isNull() )
+    //     inquery = attribute.value() == "1" ? true : false;
+    // else
+    //     inquery = false;
 
     attribute = domElementParent.attributeNode( KV_INACTIVE );
     if ( !attribute.isNull() )
