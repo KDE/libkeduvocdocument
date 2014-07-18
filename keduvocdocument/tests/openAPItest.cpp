@@ -69,19 +69,8 @@ void OpenAPITest::fileDoesntExistTest()
     KTemporaryFile tempfile;
     KEduVocDocument doc;
 
-
-    /*@todo Determine is KIO::SchedulerPrivate also fails in KF5
-     *
-     * 18:16:31 QDEBUG : OpenAPITest::fileDoesntExistTest() qttest(28779)/kio (Scheduler) KIO::SchedulerPrivate::checkSlaveOnHold: true
-     * 18:16:31 QDEBUG : OpenAPITest::fileDoesntExistTest() qttest(28779) KSharedUiServerProxy::KSharedUiServerProxy: The dbus name org.kde.JobViewServer is STILL NOT REGISTERED, even after starting kuiserver. Should not happen.
-     * 18:16:31 QWARN  : OpenAPITest::fileDoesntExistTest() QDBusObjectPath: invalid path ""
-     * 18:16:31 QFATAL : OpenAPITest::fileDoesntExistTest() QWidget: Cannot create a QWidget when no GUI is being used
-     * 18:16:31 FAIL!  : OpenAPITest::fileDoesntExistTest() Received a fatal error.
-     * */
-    // KEduVocDocument::ErrorCode errcode( doc.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling) );
-    //  QCOMPARE( int( errcode ),  int( KEduVocDocument::FileDoesNotExist ) );
-    QEXPECT_FAIL("", "Jenkins fails but local build OK",  Continue); // See above
-    QCOMPARE( false, true );
+    KEduVocDocument::ErrorCode errcode( doc.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling) );
+    QCOMPARE( int( errcode ),  int( KEduVocDocument::FileDoesNotExist ) );
 }
 
 void OpenAPITest::unreadableFileTest()
@@ -136,6 +125,6 @@ void OpenAPITest::goodTest()
 }
 
 
-QTEST_KDEMAIN_CORE( OpenAPITest )
+QTEST_KDEMAIN( OpenAPITest , GUI)
 
 #include "openapitest.moc"
