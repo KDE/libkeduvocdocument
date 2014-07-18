@@ -165,14 +165,14 @@ KEduVocDocument::ErrorCode KEduVocDocument::KEduVocDocumentPrivate::initializeKA
                 delete f;
             }
         } else {
-            kError() << i18n( "Cannot lock file %1", fpath );
+            kWarning() << i18n( "Cannot lock file %1", fpath );
             return FileLocked;
         }
     }
 
     autosave.setManagedFile( fpath );
     if ( !autosave.open( QIODevice::ReadWrite ) ) {
-        kError() << i18n( "Cannot lock file %1", autosave.fileName() );
+        kWarning() << i18n( "Cannot lock file %1", autosave.fileName() );
         return FileCannotLock;
     }
 
@@ -294,45 +294,40 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const KUrl& url,  FileHandling
     KEduVocDocument::ErrorCode errStatus = Unknown;
     QString errorMessage = i18n( "<qt>Cannot open file<br /><b>%1</b></qt>", url.path() );
     QString temporaryFile;
-    if ( KIO::NetAccess::download( url, temporaryFile, 0 ) ) {
-        ErrorCode autosaveError = d->initializeKAutoSave( *d->m_autosave,  temporaryFile, flags );
-        if ( autosaveError != NoError) {
-            return autosaveError;
-        }
+    if ( ! KIO::NetAccess::download( url, temporaryFile, 0 ) ) {
+        return FileDoesNotExist;
+    }
 
-        QIODevice * f = KFilterDev::deviceForFile( temporaryFile );
-        if ( !f->open( QIODevice::ReadOnly ) ) {
-            kError() << errorMessage;
-            delete f;
-            return FileCannotRead;
-        }
+    ErrorCode autosaveError = d->initializeKAutoSave( *d->m_autosave,  temporaryFile, flags );
+    if ( autosaveError != NoError) {
+        return autosaveError;
+    }
+
+    QIODevice * f = KFilterDev::deviceForFile( temporaryFile );
+    if ( f->open( QIODevice::ReadOnly ) ) {
 
         ReaderManager::ReaderPtr reader( ReaderManager::reader( *f ) );
         errStatus = reader->read( *this );
-        if ( errStatus != KEduVocDocument::NoError ) {
-            errorMessage = reader->errorMessage();
-        }
-
 
         if ( errStatus != KEduVocDocument::NoError ) {
-            QString msg = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)", url.path(), errorMessage );
-            kError() << msg << i18n( "Error Opening File" );
-            ///@todo make the readers return ErrorCode, pass on the error message properly
-            delete f;
-            return FileReaderFailed;
+            errorMessage = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)"
+                                , url.path(), reader->errorMessage() );
         }
-
-        f->close();
-        delete f;
-        KIO::NetAccess::removeTempFile( temporaryFile );
+    } else {
+        errStatus = FileCannotRead;
     }
 
-    if ( errStatus != KEduVocDocument::NoError ) {
-        return FileReaderFailed;
+    f->close();
+    delete f;
+    KIO::NetAccess::removeTempFile( temporaryFile );
+
+    if ( errStatus == KEduVocDocument::NoError ) {
+        setModified(false);
+    } else {
+        kWarning() << errorMessage;
     }
 
-    setModified(false);
-    return NoError;
+    return errStatus;
 }
 
 void KEduVocDocument::close() {

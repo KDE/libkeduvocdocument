@@ -19,6 +19,7 @@ set(keduvocdocument_LIB_SRCS
     keduvockvtmlcompability.cpp
     keduvockvtml2writer.cpp
     keduvoccsvwriter.cpp
+    readerwriters/dummyreader.cpp
     readerwriters/failedreader.cpp
     readerwriters/keduvockvtmlreader.cpp
     readerwriters/keduvockvtml2reader.cpp

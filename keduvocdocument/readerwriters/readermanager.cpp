@@ -22,6 +22,7 @@
 
 #include "readerwriters/readerbase.h"
 #include "readerwriters/failedreader.h"
+#include "readerwriters/dummyreader.h"
 
 #include "readerwriters/keduvoccsvreader.h"
 #include "readerwriters/keduvockvtml2reader.h"
@@ -31,7 +32,8 @@
 #include "readerwriters/keduvocxdxfreader.h"
 
 #include "kdebug.h"
-#include <QtCore/QIODevice> //
+
+#include <QtCore/QIODevice>
 
 ReaderManager::ReaderPtr ReaderManager::reader(QIODevice & dev)
 {
@@ -46,6 +48,12 @@ ReaderManager::ReaderPtr ReaderManager::reader(QIODevice & dev)
     }
 
     ReaderPtr reader;
+
+    reader = ReaderPtr( new DummyReader( dev ) );
+    if ( reader->isParsable() ) {
+       return reader;
+    }
+    dev.seek( 0 );
 
     reader = ReaderPtr( new KEduVocVokabelnReader( dev ) );
     if ( reader->isParsable() ) {
