@@ -20,6 +20,7 @@ set(unittest_LINK_LIBS
 set(kvocdoc_api_unittests
   keduvocdocumentvalidatortest
   keduvocdocumentfilelockingtest
+  openAPItest
 )
 
 #Unit Tests linked to object behind the API wall
