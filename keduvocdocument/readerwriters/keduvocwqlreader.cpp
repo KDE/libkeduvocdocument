@@ -85,10 +85,10 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
     s = inputStream.readLine();
     p = s.indexOf( "=", 0 );
     s = s.right( s.length() - ( p + 1 ) );
-    int b = 0;
-    if ( s == "1" ) {
-        b = QFont::Bold;
-    }
+    // int b = 0;
+    // if ( s == "1" ) {
+    //     b = QFont::Bold;
+    // }
 
     s = inputStream.readLine();
     p = s.indexOf( "=", 0 );
