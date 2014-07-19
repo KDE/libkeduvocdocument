@@ -38,47 +38,50 @@ class KEduVocWordType;
 class KEduVocLeitnerBox;
 
 /**
- * This class contains the expressions of your vocabulary
- * as well as other information about the vocabulary
+ * @brief The primary entry point to the hierarchy of objects describing vocabularies.
+ * @details This class contains the expressions of your vocabulary
+ * as well as other information about the vocabulary.
  */
 class KEDUVOCDOCUMENT_EXPORT KEduVocDocument : public QObject
 {
     Q_OBJECT
 public:
 
+    ///@todo in new API change enums to QFlags
+
     /// known vocabulary file types
     enum FileType {
-        KvdNone,
-        Automatic,
-        Kvtml,
-        Wql,
-        Pauker,
-        Vokabeln,
-        Xdxf,
-        Csv,
-        Kvtml1
+        KvdNone,      ///< handles nothing
+        Automatic,    ///< try to automatically determine file type
+        Kvtml,        ///< Kvtml 2.0
+        Wql,          ///< Word Quiz format
+        Pauker,       ///< Pauker format
+        Vokabeln,     ///< Vokabeln format
+        Xdxf,         ///< XDXF format @see https://github.com/soshial/xdxf_makedict/blob/master/format_standard/xdxf_strict.dtd
+        Csv,          ///< Command separated values
+        Kvtml1        ///< KVTML 1.0
     };
 
     /// the return code when opening/saving
     enum ErrorCode {
-        NoError = 0,         //*< no error
-        Unknown,             //*< unspecified error
-        InvalidXml,          //*< malformed xml or bad file formatting
-        FileTypeUnknown,     //*< unknown file type
-        FileCannotWrite,     //*< unwritable file
-        FileWriterFailed,    //*< file writer failed
-        FileCannotRead,      //*< unreadable file
-        FileReaderFailed,    //*< file reader failed
-        FileDoesNotExist,    //*< unknown file type
-        FileLocked,          //*< An autosave file exists for this document
-        FileCannotLock       //*< Can't create an autosave file for this document
+        NoError = 0,         ///< no error
+        Unknown,             ///< unspecified error
+        InvalidXml,          ///< malformed xml or bad file formatting
+        FileTypeUnknown,     ///< unknown file type
+        FileCannotWrite,     ///< unwritable file
+        FileWriterFailed,    ///< file writer failed
+        FileCannotRead,      ///< unreadable file
+        FileReaderFailed,    ///< file reader failed
+        FileDoesNotExist,    ///< unknown file type
+        FileLocked,          ///< An autosave file exists for this document
+        FileCannotLock       ///< Can't create an autosave file for this document
     };
 
     /// indicates file open/save status locking or readonly
     enum FileHandlingFlags
     {
-        FileDefaultHandling = 0x0, //*< Default status
-        FileIgnoreLock = 0x1       //*< Ignore the file lock
+        FileDefaultHandling = 0x0, ///< Default status
+        FileIgnoreLock = 0x1       ///< Ignore the file lock
     };
 
     /// used as parameter for pattern
@@ -107,7 +110,12 @@ public:
      */
     ~KEduVocDocument();
 
-    // *** whole document methods ***
+
+    /** @name Whole Document Methods
+     * Methods related to saving/loading and locating the document
+     * @nosubgrouping
+     */
+    ///@{
 
     /**
      * Opens and locks a document file
@@ -158,16 +166,19 @@ public:
      *
      * @param url        if url is empty (or NULL) actual name is preserved
      * @param ft         the filetype to be used when saving the document
-     * @param generator  the name of the application saving the document
      * @param flags How to handle expected unusual conditions (i.e. locking)
      * @returns          ErrorCode
      */
     ErrorCode saveAs( const KUrl & url, FileType ft,  FileHandlingFlags flags  /*= FileDefaultHandling*/);
 
+    /** @details  returns a QByteArray KVTML2 representation of this doc
+     * @param generator name of the application creating the QByteArray
+     * @return KVTML2 XML
+     * @todo in new API if this should be part of save*/
     QByteArray toByteArray(const QString &generator);
 
     /**
-     * Merges data from another document
+     * Merges data from another document (UNIMPLEMENTED)
      *
      * @param docToMerge       document containing the data to be merged
      * @param matchIdentifiers if true only entries having identifiers present in the
@@ -187,12 +198,21 @@ public:
 
     /**
      * Sets the URL of the XML file
+     * @param url URL
      */
     void setUrl( const KUrl& url );
 
     /** @returns the URL of the XML file */
     KUrl url() const;
 
+    ///@}
+
+
+
+    /** @name General Document Properties
+     *
+     */
+    ///@{
 
     /** Set the title of the file
      * @param title title to set */
@@ -209,7 +229,7 @@ public:
     QString author() const;
 
     /** Set the author contact info
-     * @param contact email/contact info to set */
+     * @param authorContact contact email/contact info to set */
     void setAuthorContact( const QString & authorContact );
 
     /** @returns the author contact information */
@@ -238,6 +258,7 @@ public:
 
     /**
      * Sets the generator of the file
+     * @param generator name of the application generating the file
      */
     void setGenerator( const QString & generator );
 
@@ -251,7 +272,14 @@ public:
     /** @returns the version of the loaded file */
     QString version() const;
 
-    // *** identifier methods ***
+    ///@}
+
+
+
+    /** @name Identifier Methods
+     *
+     */
+    ///@{
 
     /**
      * @returns the number of different identifiers (usually languages)
@@ -284,6 +312,8 @@ public:
 
     /**
      * Const overload of identifier(int);
+     * @param index of the identifier
+     * @return reference to the identifier
      */
     const KEduVocIdentifier& identifier( int index ) const;
 
@@ -297,12 +327,20 @@ public:
     /**
      * Determines the index of a given identifier
      *
-     * @param lang             identifier of language
+     * @param name             identifier of language
      * @returns                index of identifier, 0 = original, 1..n = translation, -1 = not found
      */
     int indexOfIdentifier( const QString &name ) const;
 
-    // *** grade methods ***
+
+    ///@}
+
+
+
+    /** @name Grade Methods
+     *
+     */
+    ///@{
 
     /**
      * Retrieves the identifiers for the current query
@@ -322,18 +360,39 @@ public:
      */
     KDE_DEPRECATED void setQueryIdentifier( const QString &org, const QString &trans );
 
-    // *** lesson methods ***
 
-    /** Get the lesson root object
+    ///@}
+
+
+
+    /** @name Lesson Methods
+     *
+     */
+    ///@{
+
+    /** @brief Get the lesson root object
      * @returns a pointer to the lesson object
      */
     KEduVocLesson * lesson();
 
+    /** @brief Returns the root word type object
+        @return poitner to the internal word type object */
     KEduVocWordType * wordTypeContainer();
 
+    /** @brief Returns the root Leitner container
+        @return poitner to the internal Leitner container object
+        @todo in new API determine if this is used */
     KEduVocLeitnerBox * leitnerContainer();
 
-    // *** file format specific methods ***
+
+    ///@}
+
+
+
+    /** @name File Format Specific Methods
+     *
+     */
+    ///@{
 
     /**
      * Returns the delimiter (separator) used for csv import and export.
@@ -350,11 +409,13 @@ public:
      */
     void setCsvDelimiter( const QString &delimiter );
 
-    /** Detects the file type
-     This was used internally, but is no longer used.
-    @param filename fileName
-    @return enum of filetype
-    */
+    ///@}
+
+    /**
+     * @details Detects the file type
+     * @param fileName filename
+     * @return enum of filetype
+     */
     static FileType detectFileType( const QString &fileName );
 
     /**
@@ -367,13 +428,23 @@ public:
      */
     static QString pattern( FileDialogMode mode );
 
+    /**
+     * @brief Returns a QString description of the errorCode
+     * @param errorCode the code
+     * @returns a user useful error string.
+     */
     static QString errorDescription( int errorCode );
 
 Q_SIGNALS:
+    /**
+     * @brief never used
+     * @param curr_percent
+     */
     void progressChanged( KEduVocDocument *, int curr_percent );
 
     /**
-     * Emitted when the document becomes modified or saved.
+     * @brief Emitted when the document becomes modified or saved.
+     * @param mod the current modified/dirty state
      * @returns state (true=modified)
      */
     void docModified( bool mod );
@@ -381,7 +452,7 @@ Q_SIGNALS:
 private:
     // The private data of this - see KEduVocDocument::Private, implemented in keduvocdocument.cpp
     class KEduVocDocumentPrivate;
-    KEduVocDocumentPrivate* const d;
+    KEduVocDocumentPrivate* const d;  ///< d pointer to private class
 
     Q_DISABLE_COPY( KEduVocDocument )
 };
