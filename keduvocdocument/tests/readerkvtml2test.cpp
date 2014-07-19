@@ -21,6 +21,7 @@
 #include "readermanager.h"
 #include "keduvockvtml2reader.h"
 #include "kvtml2defs.h"
+#include "readerTestHelpers.h"
 
 #include <kdebug.h>
 #include <qtest_kde.h>
@@ -109,6 +110,8 @@ public:
     QByteArray m_barray;
     QBuffer * m_buffer;
 
+    KEduVocDocument::FileType myType;
+
 };
 
 XMLGenerator::XMLGenerator()
@@ -126,6 +129,7 @@ XMLGenerator::XMLGenerator()
     , lang1name( "German" )
     , lang1loc( "de" )
     , m_buffer( 0 )
+    , myType( KEduVocDocument::Kvtml )
 
 {
 }
@@ -203,51 +207,20 @@ XMLGenerator & XMLGenerator::addLocale(const int ii) {
 }
 
 
-// These macros are to force the QCOMPARE/QVERIFY to be in the test function.
-// QCOMPARE must be in the test function.
-
-// Check that a parse returns errcode
-#define PARSE_EXPECT_CORE(gen, expected,  verbose)                      \
-    do {                                                                \
-        ReaderManager::ReaderPtr reader( ReaderManager::reader(*gen.toQIODevice() ) ); \
-        KEduVocDocument docRead;                                        \
-        KEduVocDocument::ErrorCode actual(reader->read(docRead ) );      \
-        if (verbose && actual != expected) {                            \
-            kDebug() << gen.toString( 4 );                              \
-            kDebug() << "Actual="<<int( actual );                       \
-        }                                                               \
-        QCOMPARE( int( actual ), int( expected ) );                     \
-    }  while ( 0 )
-
-// Check that a parse returns errcode. This ignores the error.
-#define PARSE_EXPECT(gen, expected)                                   \
-    do {                                                              \
-        PARSE_EXPECT_CORE( gen , expected , true);                    \
-    }  while ( 0 )
-
-// Check that a parse returns errcode. This ignores the error.
-#define PARSE_DONT_EXPECT(gen, expected)                                \
-    do {                                                                \
-        QEXPECT_FAIL("", " This is a known bug.", Continue);            \
-        PARSE_EXPECT_CORE( gen , expected ,  false);                    \
-    }  while ( 0 )
-
-
-
 void Kvtml2ReaderTest::testParseExpectedMinimalXMLAccordingToDTD()
 {
     XMLGenerator gen;
     gen.preamble().minimalInfo().minimalIds().minimalEntries();
 
     ///@todo Either Fix the DTD to agree with the code or fix the code to agree with the DTD
-    PARSE_DONT_EXPECT( gen ,  KEduVocDocument::NoError );
+    KVOCREADER_DONT_EXPECT( gen.toString(4),  KEduVocDocument::NoError, gen.myType );
 }
 void Kvtml2ReaderTest::testParseActualMinimalXML()
 {
     XMLGenerator gen;
     gen.preamble().minimalInfo().minimalIds().blankIdentifier(0).addLocale(0).minimalEntries();
 
-    PARSE_EXPECT( gen ,  KEduVocDocument::NoError );
+    KVOCREADER_EXPECT( gen.toString(4) ,  KEduVocDocument::NoError, gen.myType );
 }
 
 void Kvtml2ReaderTest::testParseMissingInformation()
@@ -255,7 +228,7 @@ void Kvtml2ReaderTest::testParseMissingInformation()
     XMLGenerator gen;
     gen.preamble().minimalIds().minimalEntries();
 
-    PARSE_EXPECT( gen ,  KEduVocDocument::FileReaderFailed );
+    KVOCREADER_EXPECT( gen.toString(4) ,  KEduVocDocument::FileReaderFailed, gen.myType );
 }
 void Kvtml2ReaderTest::testParseMissingIdentifiers()
 {
@@ -263,21 +236,21 @@ void Kvtml2ReaderTest::testParseMissingIdentifiers()
     gen.preamble().minimalInfo().minimalEntries();
 
     ///@todo Either Fix the DTD to agree with the code or fix the code to agree with the DTD
-    PARSE_DONT_EXPECT( gen ,  KEduVocDocument::FileReaderFailed );
+    KVOCREADER_DONT_EXPECT( gen.toString(4) ,  KEduVocDocument::FileReaderFailed, gen.myType );
 }
 void Kvtml2ReaderTest::testParseMissingEntries()
 {
     XMLGenerator gen;
     gen.preamble().minimalInfo().minimalIds();
 
-    PARSE_EXPECT( gen ,  KEduVocDocument::FileReaderFailed );
+    KVOCREADER_EXPECT( gen.toString(4) ,  KEduVocDocument::FileReaderFailed, gen.myType );
 }
 void Kvtml2ReaderTest::testParseMissingTitle()
 {
     XMLGenerator gen;
     gen.preamble().blankInfo().minimalIds().minimalEntries();
 
-    PARSE_EXPECT( gen ,  KEduVocDocument::FileReaderFailed );
+    KVOCREADER_EXPECT( gen.toString(4) ,  KEduVocDocument::FileReaderFailed, gen.myType );
 }
 
 void Kvtml2ReaderTest::testParseWithLocale()
@@ -285,7 +258,7 @@ void Kvtml2ReaderTest::testParseWithLocale()
     XMLGenerator gen;
     gen.preamble().blankInfo().minimalIds().minimalEntries().blankIdentifier(0).addLocale( 0 );
 
-    PARSE_EXPECT( gen ,  KEduVocDocument::NoError );
+    KVOCREADER_EXPECT( gen.toString(4) ,  KEduVocDocument::NoError, gen.myType );
 }
 
 void Kvtml2ReaderTest::testParseMissingLocale()
@@ -294,7 +267,7 @@ void Kvtml2ReaderTest::testParseMissingLocale()
     gen.preamble().blankInfo().minimalIds().minimalEntries().blankIdentifier(0);
 
     ///@todo Either Fix the DTD to agree with the code or fix the code to agree with the DTD
-    PARSE_DONT_EXPECT( gen ,  KEduVocDocument::FileReaderFailed );
+    KVOCREADER_DONT_EXPECT( gen.toString(4) ,  KEduVocDocument::FileReaderFailed, gen.myType );
 }
 
 

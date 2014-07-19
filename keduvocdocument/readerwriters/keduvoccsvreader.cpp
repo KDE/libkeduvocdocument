@@ -42,6 +42,10 @@ KEduVocCsvReader::KEduVocCsvReader( QIODevice & file )
     m_errorMessage = "";
 }
 
+KEduVocDocument::FileType KEduVocCsvReader::fileTypeHandled()
+{
+    return KEduVocDocument::Csv;
+}
 
 KEduVocDocument::ErrorCode KEduVocCsvReader::read(KEduVocDocument & doc )
 {

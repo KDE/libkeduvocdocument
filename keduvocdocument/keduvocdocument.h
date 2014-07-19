@@ -354,7 +354,6 @@ public:
      This was used internally, but is no longer used.
     @param filename fileName
     @return enum of filetype
-    @todo Check to see if it can be removed in new API
     */
     static FileType detectFileType( const QString &fileName );
 

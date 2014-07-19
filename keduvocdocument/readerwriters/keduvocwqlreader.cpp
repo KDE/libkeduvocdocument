@@ -42,6 +42,11 @@ bool KEduVocWqlReader::isParsable()
     return ( line1 == "WordQuiz" );
 }
 
+KEduVocDocument::FileType KEduVocWqlReader::fileTypeHandled()
+{
+    return KEduVocDocument::Wql;
+}
+
 KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
 {
     m_doc = &doc;

@@ -202,76 +202,14 @@ void KEduVocDocument::setModified( bool dirty )
 KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileName )
 {
     QIODevice * f = KFilterDev::deviceForFile( fileName );
-    if ( !f->open( QIODevice::ReadOnly ) ) {
-        kDebug(1100) << "Warning, could not open QIODevice for file: " << fileName;
-        delete f;
-        return Csv;
-    }
+    f->open( QIODevice::ReadOnly );
 
-    QTextStream ts( f );
-    QString line1;
-    QString line2;
+    ReaderManager::ReaderPtr reader( ReaderManager::reader( *f ) );
 
-    line1 = ts.readLine();
-    if ( !ts.atEnd() ) {
-        line2 = ts.readLine();
-    }
-
-    /*
-     * Vokabeln.de files:
-    The header seems to be something like this:
-
-    "Name
-    Lang1 - Lang2",123,234,456
-    0
-
-    or something longer:
-
-    "Name
-    Lang1 - Lang2
-    [..]
-    Blah, blah, blah...",123,234,456
-    0
-    */
-
-    QString tmp;
-
-    if ( line1.startsWith(QChar::fromLatin1('"'))) {
-        ts.seek(0);
-        tmp = ts.readLine();
-        // There shouldn't be headers longer than 10 lines.
-        for ( int x=0; x < 10; x++) {
-            if (tmp.contains( "\"," )) {
-                tmp = ts.readLine();
-                if (tmp.endsWith('0')) {
-                    f->close();
-                    delete f;
-                    return Vokabeln;
-                }
-            }
-            tmp = ts.readLine();
-        }
-    }
     f->close();
     delete f;
 
-
-    if ( line1.startsWith(QString::fromLatin1("<?xml")) ) {
-        if ( line2.indexOf( "pauker", 0 ) >  0 ) {
-            return Pauker;
-        }
-        if ( line2.indexOf( "xdxf", 0 ) >  0 ) {
-            return Xdxf;
-        } else {
-            return Kvtml;
-        }
-    }
-
-    if ( line1 == WQL_IDENT ) {
-        return Wql;
-    }
-
-    return Csv;
+    return reader->fileTypeHandled();
 }
 
 

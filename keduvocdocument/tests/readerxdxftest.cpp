@@ -21,6 +21,8 @@
 #include "readermanager.h"
 #include "keduvocxdxfreader.h"
 
+#include "readerTestHelpers.h"
+
 #include <kdebug.h>
 #include <qtest_kde.h>
 
@@ -58,6 +60,7 @@ private slots:
     void testParseInvalid();
 private :
     QString oneGoodDoc;
+    KEduVocDocument::FileType myType;
 };
 
 void XdxfReaderTest::init() {
@@ -71,51 +74,20 @@ void XdxfReaderTest::init() {
                  + "<ar><k>Hund</k>el perro</ar>\n"
                  + "<ar><k>Schwein</k>el cerdo</ar>\n"
                  + "</xdxf>\n";
-    }
-
-
-// These macros are to force the QCOMPARE/QVERIFY to be in the test function.
-// QCOMPARE must be in the test function.
-
-// Check that a parse returns errcode
-#define PARSE_EXPECT_CORE(instring, expected,  verbose)                 \
-    do {                                                                \
-        QByteArray array( instring.toLatin1() );                        \
-        QBuffer * buffer = new QBuffer( &array );                       \
-        buffer->open( QIODevice::ReadOnly );                            \
-        ReaderManager::ReaderPtr reader( ReaderManager::reader(*buffer ) ); \
-        KEduVocDocument docRead;                                        \
-        KEduVocDocument::ErrorCode actual(reader->read(docRead ) );     \
-        if (verbose && actual != expected) {                            \
-        }                                                               \
-        QCOMPARE( int( actual ), int( expected ) );                     \
-    }  while ( 0 )
-
-// Check that a parse returns errcode. This ignores the error.
-#define PARSE_EXPECT(gen, expected)                                   \
-    do {                                                              \
-        PARSE_EXPECT_CORE( gen , expected , true);                    \
-    }  while ( 0 )
-
-// Check that a parse returns errcode. This ignores the error.
-#define PARSE_DONT_EXPECT(gen, expected)                                \
-    do {                                                                \
-        QEXPECT_FAIL("", " This is a known bug.", Continue);            \
-        PARSE_EXPECT_CORE( gen , expected ,  false);                    \
-    }  while ( 0 )
-
+    myType = KEduVocDocument::Xdxf;
+}
 
 
 void XdxfReaderTest::testParseTwoWord()
 {
-    PARSE_EXPECT( oneGoodDoc ,  KEduVocDocument::NoError );
+    KVOCREADER_EXPECT( oneGoodDoc ,  KEduVocDocument::NoError ,  myType);
 }
 
 void XdxfReaderTest::testParseInvalid()
 {
     QString invalid = oneGoodDoc +" bad parse";
 
-    PARSE_EXPECT( invalid ,  KEduVocDocument::FileReaderFailed );
+    KVOCREADER_EXPECT( invalid ,  KEduVocDocument::FileReaderFailed ,  myType );
 }
 
 }

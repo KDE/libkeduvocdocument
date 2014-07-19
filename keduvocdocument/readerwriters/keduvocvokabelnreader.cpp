@@ -83,6 +83,11 @@ bool KEduVocVokabelnReader::isParsable()
     return isgood;
 }
 
+KEduVocDocument::FileType KEduVocVokabelnReader::fileTypeHandled()
+{
+    return KEduVocDocument::Vokabeln;
+}
+
 KEduVocDocument::ErrorCode KEduVocVokabelnReader::read(KEduVocDocument & doc )
 {
     kDebug() << "Reading vokabeln.de document...";

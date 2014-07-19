@@ -45,6 +45,11 @@ public:
      */
     virtual bool isParsable();
 
+    /** @brief returns the KEduVocDocument::FileType that this reader handles
+        @return KEduVocDocument::FileType handled
+     */
+    virtual KEduVocDocument::FileType fileTypeHandled();
+
     /** @brief Parse file and write into doc
      @param doc to be written
      @return error status of the read.*/

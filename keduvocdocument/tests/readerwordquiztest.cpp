@@ -20,8 +20,10 @@
 #include "keduvocdocument.h"
 #include "readermanager.h"
 #include "keduvocwqlreader.h"
-#include <qobject.h>
 
+#include "readerTestHelpers.h"
+
+#include <qobject.h>
 #include <kdebug.h>
 #include <qtest_kde.h>
 
@@ -85,6 +87,8 @@ public:
     QBuffer * m_buffer;
     QString m_string;
 
+    KEduVocDocument::FileType myType;
+
 };
 
 WQLGenerator::WQLGenerator()
@@ -98,6 +102,7 @@ WQLGenerator::WQLGenerator()
     , word0Right( "Hund" )
     , m_buffer( 0 )
     , m_string( "" )
+    , myType( KEduVocDocument::Wql )
 
 {
 }
@@ -106,14 +111,6 @@ WQLGenerator::~WQLGenerator()
     if ( m_buffer ) {
         delete m_buffer;
     }
-}
-
-QIODevice * WQLGenerator::toQIODevice()
-{
-    m_barray.append(  m_string );
-    m_buffer = new QBuffer( & m_barray );
-    m_buffer->open( QIODevice::ReadOnly );
-    return m_buffer;
 }
 
 WQLGenerator & WQLGenerator::preamble() {
@@ -136,43 +133,13 @@ WQLGenerator & WQLGenerator::minimalVocab() {
     return *this;
 }
 
-// These macros are to force the QCOMPARE/QVERIFY to be in the test function.
-// QCOMPARE must be in the test function.
-
-// Check that a parse returns errcode
-#define PARSE_EXPECT_CORE(gen, expected,  verbose)                      \
-    do {                                                                \
-        ReaderManager::ReaderPtr reader( ReaderManager::reader(*gen.toQIODevice() ) ); \
-        KEduVocDocument docRead;                                        \
-        KEduVocDocument::ErrorCode actual(reader->read(docRead ) );     \
-        if (verbose && actual != expected) {                            \
-            kDebug() << gen.m_string;                                   \
-            kDebug() << reader->errorMessage();                          \
-        }                                                               \
-        QCOMPARE( int( actual ), int( expected ) );                     \
-    }  while ( 0 )
-
-// Check that a parse returns errcode. This ignores the error.
-#define PARSE_EXPECT(gen, expected)                                   \
-    do {                                                              \
-        PARSE_EXPECT_CORE( gen , expected , true);                    \
-    }  while ( 0 )
-
-// Check that a parse returns errcode. This ignores the error.
-#define PARSE_DONT_EXPECT(gen, expected)                                \
-    do {                                                                \
-        QEXPECT_FAIL("", " This is a known bug.", Continue);            \
-        PARSE_EXPECT_CORE( gen , expected ,  false);                    \
-    }  while ( 0 )
-
-
 
 void WqlReaderTest::testParseMinimalWQL()
 {
     WQLGenerator gen;
     gen.preamble().minimalFontInfo().minimalGridInfo().minimalVocab();
 
-    PARSE_EXPECT( gen , KEduVocDocument::NoError );
+    KVOCREADER_EXPECT( gen.m_string , KEduVocDocument::NoError , gen.myType );
 }
 
 void WqlReaderTest::testParseMissingFontInfo()
@@ -180,7 +147,7 @@ void WqlReaderTest::testParseMissingFontInfo()
     WQLGenerator gen;
     gen.preamble();
 
-    PARSE_EXPECT( gen , KEduVocDocument::FileReaderFailed );
+    KVOCREADER_EXPECT( gen.m_string , KEduVocDocument::FileReaderFailed , gen.myType );
 }
 
 

@@ -35,16 +35,21 @@ class ReaderBase
 {
 public:
 
-    /**destructor*/
+    /** destructor */
     virtual ~ReaderBase(){};
 
     /** @brief Can this reader parse the file
      *
-     Read a small portion of the header of the file
-     and decide if it is a suitable type.
-     @return true if parsable
+     * Read a small portion of the header of the file
+     * and decide if it is a suitable type.
+     * @return true if parsable
      */
     virtual bool isParsable() = 0;
+
+    /** @brief returns the KEduVocDocument::FileType that this reader handles
+        @return KEduVocDocument::FileType handled
+     */
+    virtual KEduVocDocument::FileType fileTypeHandled() = 0;
 
     /**  @brief Parse file and write into doc
      @param doc to be written

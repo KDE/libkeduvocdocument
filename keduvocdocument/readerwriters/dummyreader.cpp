@@ -74,6 +74,11 @@ bool DummyReader::isParsable()
     return isparsable;
 }
 
+KEduVocDocument::FileType DummyReader::fileTypeHandled()
+{
+    return KEduVocDocument::KvdNone;
+}
+
 KEduVocDocument::ErrorCode DummyReader::read(KEduVocDocument &) {
     setDevice( &m_dev );
     if ( !atEnd() ) {

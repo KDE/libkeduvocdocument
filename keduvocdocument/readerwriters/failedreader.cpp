@@ -41,6 +41,11 @@ bool FailedReader::isParsable()
     return true;
 }
 
+KEduVocDocument::FileType FailedReader::fileTypeHandled()
+{
+    return KEduVocDocument::KvdNone;
+}
+
 KEduVocDocument::ErrorCode FailedReader::read(KEduVocDocument &) {
     return m_error;
 }

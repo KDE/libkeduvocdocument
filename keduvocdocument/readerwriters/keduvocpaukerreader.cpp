@@ -48,6 +48,11 @@ bool KEduVocPaukerReader::isParsable()
            && ( line2.indexOf( "pauker", 0 ) >  0 ) );
 }
 
+KEduVocDocument::FileType KEduVocPaukerReader::fileTypeHandled()
+{
+    return KEduVocDocument::Pauker;
+}
+
 KEduVocDocument::ErrorCode KEduVocPaukerReader::read( KEduVocDocument &doc)
 {
     m_doc = &doc;

@@ -45,7 +45,10 @@ bool KEduVocXdxfReader::isParsable()
     && ( line2.indexOf( "xdxf", 0 ) >  0 ) );
 }
 
-
+KEduVocDocument::FileType KEduVocXdxfReader::fileTypeHandled()
+{
+    return KEduVocDocument::Xdxf;
+}
 
 KEduVocDocument::ErrorCode KEduVocXdxfReader::read(KEduVocDocument &doc)
 {

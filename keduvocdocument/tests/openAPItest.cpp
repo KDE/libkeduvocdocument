@@ -24,7 +24,7 @@
 
 #include <qtest_kde.h>
 
-/** Unit tests to exercies each exit path of the KEdeVocDocment open() API.*/
+/** Unit tests to exercise each exit path of the KEdeVocDocment open() API.*/
 class OpenAPITest
   : public QObject
 {

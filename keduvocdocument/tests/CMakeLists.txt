@@ -34,7 +34,7 @@ set(kvocdoc_unittests
 
 #Helper Clases for unit tests
 set(kvocdoc_unittests_helpers
-
+  readerTestHelpers
 )
 
 macro(ADD_KVOCDOC_UNITTESTS staticOrAPILib)

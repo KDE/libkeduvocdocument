@@ -51,6 +51,11 @@ bool KEduVocKvtml2Reader::isParsable()
               && ( line2.indexOf( KVTML_TAG, 0 ) >  0 ) );
 }
 
+KEduVocDocument::FileType KEduVocKvtml2Reader::fileTypeHandled()
+{
+    return KEduVocDocument::Kvtml;
+}
+
 KEduVocDocument::ErrorCode KEduVocKvtml2Reader::read(KEduVocDocument &doc)
 {
     m_doc = &doc;
