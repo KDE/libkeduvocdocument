@@ -125,6 +125,6 @@ void OpenAPITest::goodTest()
 }
 
 
-QTEST_KDEMAIN( OpenAPITest , GUI)
+QTEST_KDEMAIN( OpenAPITest, GUI )
 
 #include "openapitest.moc"
