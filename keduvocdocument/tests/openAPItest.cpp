@@ -78,10 +78,8 @@ void OpenAPITest::fileDoesntExistTest()
      * 18:16:31 QFATAL : OpenAPITest::fileDoesntExistTest() QWidget: Cannot create a QWidget when no GUI is being used
      * 18:16:31 FAIL!  : OpenAPITest::fileDoesntExistTest() Received a fatal error.
      * */
-    // KEduVocDocument::ErrorCode errcode( doc.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling) );
-    //  QCOMPARE( int( errcode ),  int( KEduVocDocument::FileDoesNotExist ) );
-    QEXPECT_FAIL("", "Jenkins fails but local build OK",  Continue); // See above
-    QCOMPARE( false, true );
+    KEduVocDocument::ErrorCode errcode( doc.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling) );
+    QCOMPARE( int( errcode ),  int( KEduVocDocument::FileDoesNotExist ) );
 }
 
 void OpenAPITest::unreadableFileTest()
@@ -136,6 +134,6 @@ void OpenAPITest::goodTest()
 }
 
 
-QTEST_KDEMAIN_CORE( OpenAPITest )
+QTEST_KDEMAIN( OpenAPITest, GUI )
 
 #include "openapitest.moc"
