@@ -1,4 +1,3 @@
-
 add_subdirectory(autotests)
 add_subdirectory(tests)
 
@@ -41,6 +40,30 @@ set(keduvocdocument_LIB_SRCS
     sharedkvtmlfiles.cpp
 )
 
+include(ECMGenerateHeaders)
+ecm_generate_headers( KdeEdu_HEADERS
+  HEADER_NAMES
+    KEduVocDocument
+    KEduVocIdentifier
+    KEduVocExpression
+    KEduVocText
+    KEduVocArticle
+    KEduVocConjugation
+    KEduVocLesson
+    KEduVocLeitnerBox
+    KEduVocContainer
+    KEduVocWordFlags
+    KEduVocMultipleChoice
+    KEduVocTranslation
+    KEduVocWordtype
+    KEduVocPersonalPronoun
+    SharedKVTMLFiles
+    KEduVocDeclension
+    KEduVocKVTML2Writer
+
+    REQUIRED_HEADERS KdeEdu_HEADERS
+)
+
 add_library(KEduVocDocument SHARED ${keduvocdocument_LIB_SRCS})
 generate_export_header(KEduVocDocument BASE_NAME KEduVocDocument)
 # vHanda: Add library alias?
@@ -76,24 +99,7 @@ install(TARGETS KEduVocDocument EXPORT LibKdeEduTargets ${INSTALL_TARGETS_DEFAUL
 ########### install files ###############
 
 install(FILES
-    keduvocdocument.h
-    keduvocidentifier.h
-    keduvocexpression.h
-    keduvoctext.h
-    keduvocarticle.h
-    keduvocconjugation.h
-    keduvoclesson.h
-    keduvocleitnerbox.h
-    keduvoccontainer.h
-    keduvocwordflags.h
-    keduvocmultiplechoice.h
-    keduvoctranslation.h
-    keduvocwordtype.h
-    keduvocpersonalpronoun.h
-    sharedkvtmlfiles.h
-    keduvocdeclension.h
-    keduvockvtml2writer.h
-
-    ${CMAKE_CURRENT_BINARY_DIR}/keduvocdocument_export.h
-    DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu  COMPONENT Devel
+  ${CMAKE_CURRENT_BINARY_DIR}/keduvocdocument_export.h
+  ${KdeEdu_HEADERS}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/libkdeedu COMPONENT Devel
 )
