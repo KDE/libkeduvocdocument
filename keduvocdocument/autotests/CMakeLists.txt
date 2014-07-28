@@ -1,4 +1,6 @@
 include(ECMMarkAsTest)
+include(ECMAddTests)
+include(CTest)
 
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}/..
@@ -7,16 +9,25 @@ include_directories(
 
 find_package(Qt5 5.2.0 CONFIG REQUIRED Test)
 
-macro(KEDUVOCDOCUMENT_UNIT_TESTS)
+macro(KEDUVOCDOCUMENT_NON_GUI_UNIT_TESTS)
    foreach(_testname ${ARGN})
-      add_executable(${_testname} ${_testname}.cpp)
-      add_test(kdeedu-${_testname} ${_testname})
-      target_link_libraries(${_testname} KEduVocDocument KF5::CoreAddons KF5::KDE4Support Qt5::Test Qt5::Xml)
-      ecm_mark_as_test(${_testname})
+     ecm_add_test( ${_testname}
+       LINK_LIBRARIES KEduVocDocument KF5::CoreAddons Qt5::Test Qt5::Xml
+       TEST_NAME ${_testname}
+       )
    endforeach()
 endmacro()
 
-keduvocdocument_unit_tests(
-#    keduvocdocumentvalidatortest
-#    keduvocdocumentfilelockingtest
+macro(KEDUVOCDOCUMENT_GUI_UNIT_TESTS)
+   foreach(_testname ${ARGN})
+     ecm_add_test( ${_testname}
+       LINK_LIBRARIES KEduVocDocument KF5::CoreAddons Qt5::Test Qt5::Xml
+       TEST_NAME ${_testname}
+       GUI)
+   endforeach()
+endmacro()
+
+keduvocdocument_gui_unit_tests(
+  # keduvocdocumentvalidatortest
+  # keduvocdocumentfilelockingtest
 )
