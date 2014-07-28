@@ -18,27 +18,53 @@
 #define KEDUVOCCSVREADER_H
 
 #include <QString>
+#include "keduvocdocument.h"
+#include "readerbase.h"
 
 class QIODevice;
 
 class KEduVocDocument;
 
-class KEduVocCsvReader
+/** @brief CSV Reader, the default reader*/
+class KEduVocCsvReader : public ReaderBase
 {
 public:
-    KEduVocCsvReader( QIODevice *file );
+    /** constructor
+     @param dev to parse*/
+    explicit KEduVocCsvReader(QIODevice & dev);
+    /** destructor */
+    ~KEduVocCsvReader(){};
 
-    bool readDoc( KEduVocDocument *doc );
+    /** @brief CSV can always parse a file
+     @return true if parsable
+    */
+    virtual bool isParsable()
+    {
+        return true;
+    }
 
-    QString errorMessage() const
+    /** @brief returns the KEduVocDocument::FileType that this reader handles
+        @return KEduVocDocument::FileType handled
+     */
+    virtual KEduVocDocument::FileType fileTypeHandled();
+
+    /**  @brief Parse file and write into doc
+     @param doc to be written
+     @return error status of the read.*/
+    virtual KEduVocDocument::ErrorCode read(KEduVocDocument & doc );
+
+    /** an error message.
+        @return the error message
+     */
+    virtual QString errorMessage() const
     {
         return m_errorMessage;
     }
 
 private:
-    QIODevice *m_inputFile;
-    KEduVocDocument *m_doc;
-    QString m_errorMessage;
+    QIODevice *m_inputFile;  ///< input device
+    KEduVocDocument *m_doc;  ///< output doc
+    QString m_errorMessage;  ///< error message
 };
 
 #endif

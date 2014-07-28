@@ -18,13 +18,6 @@
 */
 
 #include "keduvocdocument.h"
-#include "keduvoclesson.h"
-#include "keduvocexpression.h"
-#include "keduvoctranslation.h"
-#include "keduvocconjugation.h"
-#include "keduvocdeclension.h"
-#include "keduvocwordtype.h"
-
 
 #include <KTemporaryFile>
 
@@ -289,6 +282,6 @@ void KEduVocDocumentFileLockingTest::testVocFileLockOpenStealWSaveAs()
 
 
 
-QTEST_KDEMAIN_CORE( KEduVocDocumentFileLockingTest )
+QTEST_MAIN( KEduVocDocumentFileLockingTest )
 
 #include "keduvocdocumentfilelockingtest.moc"

@@ -28,15 +28,18 @@ set(keduvocdocument_LIB_SRCS
     keduvocdeclension.cpp
     keduvocwordtype.cpp
     keduvockvtmlcompability.cpp
-    keduvockvtmlreader.cpp
-    keduvockvtml2reader.cpp
     keduvockvtml2writer.cpp
-    keduvoccsvreader.cpp
     keduvoccsvwriter.cpp
-    keduvocpaukerreader.cpp
-    keduvocvokabelnreader.cpp
-    keduvocwqlreader.cpp
-    keduvocxdxfreader.cpp
+    readerwriters/dummyreader.cpp
+    readerwriters/failedreader.cpp
+    readerwriters/keduvockvtmlreader.cpp
+    readerwriters/keduvockvtml2reader.cpp
+    readerwriters/keduvoccsvreader.cpp
+    readerwriters/keduvocpaukerreader.cpp
+    readerwriters/keduvocvokabelnreader.cpp
+    readerwriters/keduvocwqlreader.cpp
+    readerwriters/keduvocxdxfreader.cpp
+    readerwriters/readermanager.cpp
     sharedkvtmlfiles.cpp
 )
 
@@ -78,12 +81,29 @@ target_link_libraries(KEduVocDocument
     Qt5::Widgets
 )
 
+
 # vHanda: Add Export Name?
 set_target_properties(KEduVocDocument
     PROPERTIES VERSION   ${KDEEDU_VERSION_STRING}
                SOVERSION ${KDEEDU_SOVERSION}
 )
 target_include_directories(KEduVocDocument INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/libkdeedu>")
+
+
+#Library for non-api unittests
+add_library(keduvocdocument_static STATIC ${keduvocdocument_LIB_SRCS})
+
+target_link_libraries(keduvocdocument_static
+  PUBLIC
+    KF5::KIOCore
+    Qt5::Xml
+  PRIVATE
+    KF5::I18n
+    KF5::Archive
+    Qt5::Widgets
+)
+
+
 
 # if we want to set our own version instead of following kde generic
 #set(LIB_KEDUVOCDOCUMENT_VERSION "5.0.0")

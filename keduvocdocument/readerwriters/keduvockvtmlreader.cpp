@@ -33,30 +33,39 @@
 #include "kvtmldefs.h"
 #include "keduvoccommon_p.h"
 
-KEduVocKvtmlReader::KEduVocKvtmlReader( QIODevice *file )
+KEduVocKvtmlReader::KEduVocKvtmlReader(QIODevice & file)
+    : m_inputFile( &file )
 {
-    // the file must be already open
-    m_inputFile = file;
     m_errorMessage = "";
     qDebug() << "KEduVocKvtmlReader for kvtml version 1 files started.";
 }
 
-
-bool KEduVocKvtmlReader::readDoc( KEduVocDocument *doc )
+bool KEduVocKvtmlReader::isParsable()
 {
-    m_doc = doc;
+    QTextStream ts( m_inputFile );
+    QString line1( ts.readLine() );
+    QString line2( ts.readLine() );
+
+    m_inputFile->seek( 0 );
+    return  ( ( line1.startsWith(QString::fromLatin1("<?xml")) )
+              && ( line2.indexOf( KV_DOCTYPE, 0 ) >  0 ) );
+}
+
+KEduVocDocument::ErrorCode KEduVocKvtmlReader::read(KEduVocDocument &doc)
+{
+    m_doc = &doc;
     m_cols = 0;
     m_lines = 0;
 
     QDomDocument domDoc( "KEduVocDocument" );
 
     if ( !domDoc.setContent( m_inputFile, &m_errorMessage ) )
-        return false;
+        return KEduVocDocument::InvalidXml;
 
     QDomElement domElementKvtml = domDoc.documentElement();
     if ( domElementKvtml.tagName() != KV_DOCTYPE ) {
         m_errorMessage = i18n( "This is not a KDE Vocabulary document." );
-        return false;
+        return KEduVocDocument::FileTypeUnknown;
     }
 
     //-------------------------------------------------------------------------
@@ -108,7 +117,7 @@ bool KEduVocKvtmlReader::readDoc( KEduVocDocument *doc )
 
     bool result = readBody( domElementKvtml ); // read vocabulary
 
-    return result;
+    return result ? KEduVocDocument::NoError : KEduVocDocument::FileReaderFailed;
 }
 
 
@@ -866,7 +875,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
     QString                   pronunciation;
     QDateTime                 qdate;
     QDateTime                 r_qdate;
-    bool                      inquery;
+    // bool                      inquery;
     bool                      active;
     QString                   lang;
     QString                   textstr;
@@ -909,10 +918,10 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
     }
 
     attribute = domElementParent.attributeNode( KV_SELECTED );
-    if ( !attribute.isNull() )
-        inquery = attribute.value() == "1" ? true : false;
-    else
-        inquery = false;
+    // if ( !attribute.isNull() )
+    //     inquery = attribute.value() == "1" ? true : false;
+    // else
+    //     inquery = false;
 
     attribute = domElementParent.attributeNode( KV_INACTIVE );
     if ( !attribute.isNull() )

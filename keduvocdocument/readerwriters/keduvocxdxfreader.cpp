@@ -23,14 +23,38 @@
 #include "keduvocexpression.h"
 #include "keduvocdocument.h"
 
-KEduVocXdxfReader::KEduVocXdxfReader( KEduVocDocument *doc )
+KEduVocXdxfReader::KEduVocXdxfReader(QIODevice & dev)
+    :m_dev( dev )
 {
-    m_doc = doc;
 }
 
-
-bool KEduVocXdxfReader::read( QIODevice *device )
+QString KEduVocXdxfReader::errorMessage() const
 {
+    return i18n( "Parse error at line %1, column %2:\n%3", lineNumber(), columnNumber(), errorString() );
+}
+
+bool KEduVocXdxfReader::isParsable()
+{
+    //@todo fix the xml isParsable to not expect lines as xml doesn't require lines
+    QTextStream ts( &m_dev );
+    QString line1( ts.readLine() );
+    QString line2( ts.readLine() );
+
+    m_dev.seek( 0 );
+    return  ( ( line1.startsWith(QString::fromLatin1("<?xml")) )
+    && ( line2.indexOf( "xdxf", 0 ) >  0 ) );
+}
+
+KEduVocDocument::FileType KEduVocXdxfReader::fileTypeHandled()
+{
+    return KEduVocDocument::Xdxf;
+}
+
+KEduVocDocument::ErrorCode KEduVocXdxfReader::read(KEduVocDocument &doc)
+{
+    QIODevice *device( &m_dev );
+    m_doc = &doc;
+
     setDevice( device );
 
     while ( !atEnd() ) {
@@ -44,7 +68,7 @@ bool KEduVocXdxfReader::read( QIODevice *device )
         }
     }
 
-    return !error();
+    return error() ? KEduVocDocument::FileReaderFailed : KEduVocDocument::NoError;
 }
 
 
@@ -78,6 +102,10 @@ void KEduVocXdxfReader::readXdxf()
         m_doc->identifier(1).setName( id2.toString().toLower() );
     }
 
+    //Jam it all into one lesson
+    KEduVocLesson* lesson = new KEduVocLesson(i18n("Lesson %1", 1), m_doc->lesson());
+    m_doc->lesson()->appendChildContainer(lesson);
+
     while ( !atEnd() ) {
         readNext();
 
@@ -107,13 +135,19 @@ void KEduVocXdxfReader::readEntry()
 
     while ( !( isEndElement() && name() == "ar" ) ) {
         readNext();
-        if ( isStartElement() && name() == "k" )
+        if ( isStartElement() && name() == "k" ) {
             front = readElementText();
-        else if ( isCharacters() || isEntityReference() )
+        }
+        else if ( isCharacters() || isEntityReference() ) {
             back.append( text().toString() );
+        }
     }
 
-    KEduVocExpression expr = KEduVocExpression( front );
-    expr.setTranslation( 1, back );
-    m_doc->lesson()->appendEntry( &expr );
+    KEduVocExpression * expr = new KEduVocExpression( front );
+    expr->setTranslation( 1, back );
+
+    KEduVocLesson * lesson ( dynamic_cast<KEduVocLesson*>(m_doc->lesson()->childContainer(0) ) );
+    if ( lesson ) {
+        lesson->appendEntry( expr );
+    }
 }

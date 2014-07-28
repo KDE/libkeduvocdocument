@@ -19,26 +19,54 @@
 #define KEDUVOCVOKABELNREADER_H
 
 #include <QString>
+#include "keduvocdocument.h"
+#include "readerbase.h"
 
 class QIODevice;
 class KEduVocDocument;
 
-class KEduVocVokabelnReader
+/** @brief Vokabeln Reader*/
+class KEduVocVokabelnReader : public ReaderBase
 {
 public:
-    KEduVocVokabelnReader( QIODevice *file );
+    /** constructor
+        @param file an device open for read
+    */
+    explicit KEduVocVokabelnReader( QIODevice & file);
 
-    bool readDoc( KEduVocDocument *doc );
+    /**destructor*/
+    virtual ~KEduVocVokabelnReader(){};
 
-    QString errorMessage() const
+    /** @brief Can this reader parse this file
+     *
+     Read a small portion of the header of the file
+     and decide if it is a suitable type.
+     @return true if parsable
+     */
+    virtual bool isParsable();
+
+    /** @brief returns the KEduVocDocument::FileType that this reader handles
+        @return KEduVocDocument::FileType handled
+     */
+    virtual KEduVocDocument::FileType fileTypeHandled();
+
+    /** @brief Parse file and write into doc
+     @param doc to be written
+     @return error status of the read.*/
+    virtual KEduVocDocument::ErrorCode read(KEduVocDocument & doc);
+
+    /** an error message.
+        @return the error message
+    */
+    virtual QString errorMessage() const
     {
         return m_errorMessage;
     }
 
 private:
-    QIODevice *m_inputFile;
-    KEduVocDocument *m_doc;
-    QString m_errorMessage;
+    QIODevice *m_inputFile;  ///< input device
+    KEduVocDocument *m_doc;  ///< output doc
+    QString m_errorMessage;  ///< error message
 };
 
 #endif

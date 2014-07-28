@@ -32,18 +32,66 @@
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
 
-KEduVocVokabelnReader::KEduVocVokabelnReader( QIODevice *file )
+KEduVocVokabelnReader::KEduVocVokabelnReader(QIODevice & file )
+    : m_inputFile( &file )
 {
-    // the file must be already open
-    m_inputFile = file;
     m_errorMessage = "";
 }
 
+bool KEduVocVokabelnReader::isParsable()
+{
+    QTextStream ts( m_inputFile );
+    QString line1( ts.readLine() );
+    QString line2( ts.readLine() );
+    /*
+     * Vokabeln.de files:
+    The header seems to be something like this:
 
-bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
+    "Name
+    Lang1 - Lang2",123,234,456
+    0
+
+    or something longer:
+
+    "Name
+    Lang1 - Lang2
+    [..]
+    Blah, blah, blah...",123,234,456
+    0
+    */
+
+    QString tmp;
+    bool isgood = false;
+
+    if ( line1.startsWith(QChar::fromLatin1('"'))) {
+        ts.seek(0);
+        tmp = ts.readLine();
+        // There shouldn't be headers longer than 10 lines.
+        for ( int x=0; x < 10; x++) {
+            if (tmp.contains( "\"," )) {
+                tmp = ts.readLine();
+                if (tmp.endsWith('0')) {
+                    isgood = true;
+                    break;
+                }
+            }
+            tmp = ts.readLine();
+        }
+    }
+
+    m_inputFile->seek( 0 );
+    return isgood;
+}
+
+KEduVocDocument::FileType KEduVocVokabelnReader::fileTypeHandled()
+{
+    return KEduVocDocument::Vokabeln;
+}
+
+KEduVocDocument::ErrorCode KEduVocVokabelnReader::read(KEduVocDocument & doc )
 {
     qDebug() << "Reading vokabeln.de document...";
-    m_doc = doc;
+    m_doc = &doc;
 
     m_doc->setAuthor( "http://www.vokabeln.de" );
 
@@ -64,6 +112,7 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
     int i;
     int wordCount;
     int lessonNumber;
+    int maxLessonNumber = -1;
 
     int lines = 10000;
 
@@ -80,28 +129,45 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
             } else {
                 comment.append( temp.append('\n') );
             }
+
+            if ( inputStream.atEnd() ) {
+                m_errorMessage = i18n( "Error while reading file: Truncated header" );
+                return KEduVocDocument::FileReaderFailed;
+            }
+
             temp = inputStream.readLine();
         }
+    } else {
+        m_errorMessage = i18n( "Error while reading file: No title" );
+        return KEduVocDocument::FileReaderFailed;
     }
 
     // 1 line header
     if (comment.isEmpty()) {
         titles = title.split( "\"," );
         m_doc->setTitle(titles[0].mid(1));
+        qDebug() << "TitleA "<< m_doc->title();
     }
     // longer header
     else {
         titles = comment.split( "\"," );
         m_doc->setDocumentComment(titles[0]);
         m_doc->setTitle(title.mid(1));
+        qDebug() << "TitleB "<< m_doc->title();
     }
 
     wordCount = titles[1].section( ',', 0, 0 ).toInt();
+    qDebug() << "WordCount "<< wordCount;
 
     inputStream.readLine();
 
     lang1 = inputStream.readLine();
     languages = lang1.split( "\"," );
+
+    if ( languages.size() < 2 ) {
+        m_errorMessage = i18n( "Error while reading file: Didn't find two languages in %1", lang1 );
+        return KEduVocDocument::FileReaderFailed;
+    }
 
     m_doc->appendIdentifier();
     QString language = languages[0].mid( 1 );
@@ -115,8 +181,13 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
     m_doc->identifier(1).setName(language);
     qDebug() << "Second language: " << language;
 
-    while ( !temp.contains("8. Lernhilfe") ) {
-        temp = inputStream.readLine(); //DO NOT translate
+    QString section8Header( "8. Lernhilfe" ); //DO NOT translate
+    while ( !temp.contains(section8Header) ) {
+        if ( inputStream.atEnd() ) {
+            m_errorMessage = i18n( "Error while reading file: Missing \"%1\"", section8Header );
+            return KEduVocDocument::FileReaderFailed;
+        }
+        temp = inputStream.readLine();
     }
 
     for ( i = 0; i <= 14; ++i ) {
@@ -129,6 +200,10 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         expression.clear();
 
         while ( c < 2 ) {
+            if ( inputStream.atEnd() ) {
+                m_errorMessage = i18n( "Error while reading file: Expecting something like \"dog\",\"Hund\",1" );
+                return KEduVocDocument::FileReaderFailed;
+            }
             temp = inputStream.readLine();
             c+= temp.count( "\",", Qt::CaseSensitive );
             expression.append( temp );
@@ -141,6 +216,7 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
         original = words[0].mid( 1 );
         translation = words[1].mid( 1 );
         lessonNumber = words[2].toInt() - 1;
+        maxLessonNumber = qMax( lessonNumber,  maxLessonNumber );
 
         qDebug() << "Reading entry: " << original << " - " << translation << " Lesson: " << lessonNumber;
 
@@ -170,15 +246,18 @@ bool KEduVocVokabelnReader::readDoc( KEduVocDocument *doc )
     inputStream.readLine();
     inputStream.readLine();
 
-    for ( int i = 0; !inputStream.atEnd() && i < lines; i++ ) {
+    int ii = 0;
+    while ( !inputStream.atEnd() && ii < lines && ii <= maxLessonNumber ) {
         QString lessonDescr = inputStream.readLine();
+        qDebug() << "Found lesson description " << lessonDescr;
         lessonDescr = lessonDescr.mid( 1, lessonDescr.length() - 2 );
-        m_doc->lesson()->childContainer(i)->setName(lessonDescr);
+        m_doc->lesson()->childContainer(ii)->setName(lessonDescr);
         if ( lessonDescr.isEmpty() ) {
             break;
         }
         inputStream.readLine();
+        ++ii;
     }
 
-    return true;
+    return KEduVocDocument::NoError;
 }

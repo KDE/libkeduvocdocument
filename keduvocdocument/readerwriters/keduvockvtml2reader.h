@@ -25,6 +25,8 @@
 #include "keduvocpersonalpronoun.h"
 #include "keduvocarticle.h"
 #include "keduvocmultiplechoice.h"
+#include "keduvocdocument.h"
+#include "readerbase.h"
 
 class QIODevice;
 class KEduVocDocument;
@@ -34,24 +36,38 @@ class KEduVocWordType;
 * @brief class to read kvtml2 data files into keduvocdocument
 * @author Jeremy Whiting
 */
-class KEduVocKvtml2Reader : public QObject
+class KEduVocKvtml2Reader : public QObject, public ReaderBase
 {
     Q_OBJECT
 public:
-    /** default constructor
-     * @param file file to read from
-     */
-    KEduVocKvtml2Reader( QIODevice *file );
+    /** constructor */
+    explicit KEduVocKvtml2Reader( QIODevice & file );
+    /**destructor*/
+    virtual ~KEduVocKvtml2Reader(){};
 
-    /** read the document
-     * @param doc document object to store the data in
-     */
-    bool readDoc( KEduVocDocument *doc );
 
-    /** get the errormessage string
-     * @returns the errormessage string
+    /** @brief Can this reader parse this file
+     *
+     Read a small portion of the header of the file
+     and decide if it is a suitable type.
+     @return true if parsable
      */
-    QString errorMessage() const
+    virtual bool isParsable();
+
+    /** @brief returns the KEduVocDocument::FileType that this reader handles
+        @return KEduVocDocument::FileType handled
+     */
+    virtual KEduVocDocument::FileType fileTypeHandled();
+
+    /**  @brief Parse file and write into doc
+     @param doc to be written
+     @return error status of the read.*/
+    virtual KEduVocDocument::ErrorCode read(KEduVocDocument & doc );
+
+    /** an error message.
+        @return the error message
+    */
+    virtual QString errorMessage() const
     {
         return m_errorMessage;
     }

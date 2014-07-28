@@ -35,29 +35,40 @@
 
 #include <QDebug>
 
-KEduVocKvtml2Reader::KEduVocKvtml2Reader( QIODevice *file )
-        : m_inputFile( file )
+KEduVocKvtml2Reader::KEduVocKvtml2Reader(QIODevice & file)
+        : m_inputFile( &file )
 {
-    // the file must be already open
-    if ( !m_inputFile->isOpen() ) {
-        m_errorMessage = i18n( "file must be opened first" );
-    }
 }
 
-
-bool KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
+bool KEduVocKvtml2Reader::isParsable()
 {
-    m_doc = doc;
+    QTextStream ts( m_inputFile );
+    QString line1( ts.readLine() );
+    QString line2( ts.readLine() );
+
+    m_inputFile->seek( 0 );
+    return  ( ( line1.startsWith(QString::fromLatin1("<?xml")) )
+              && ( line2.indexOf( KVTML_TAG, 0 ) >  0 ) );
+}
+
+KEduVocDocument::FileType KEduVocKvtml2Reader::fileTypeHandled()
+{
+    return KEduVocDocument::Kvtml;
+}
+
+KEduVocDocument::ErrorCode KEduVocKvtml2Reader::read(KEduVocDocument &doc)
+{
+    m_doc = &doc;
 
     QDomDocument domDoc( "KEduVocDocument" );
 
     if ( !domDoc.setContent( m_inputFile, &m_errorMessage ) )
-        return false;
+        return KEduVocDocument::InvalidXml;
 
     QDomElement domElementKvtml = domDoc.documentElement();
     if ( domElementKvtml.tagName() != KVTML_TAG ) {
         m_errorMessage = i18n( "This is not a KDE Vocabulary document." );
-        return false;
+        return KEduVocDocument::FileTypeUnknown;
     }
 
     if ( domElementKvtml.attribute( KVTML_VERSION ).toFloat() < 2.0 ) {
@@ -65,10 +76,10 @@ bool KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
 
         // first reset the file to the beginning
         m_inputFile->seek( 0 );
-        KEduVocKvtmlReader oldFormat( m_inputFile );
+        KEduVocKvtmlReader oldFormat( *m_inputFile );
 
         // get the return value
-        bool retval = oldFormat.readDoc( doc );
+        KEduVocDocument::ErrorCode retval = oldFormat.read( doc );
 
         // pass the errormessage up
         m_errorMessage = oldFormat.errorMessage();
@@ -82,12 +93,12 @@ bool KEduVocKvtml2Reader::readDoc( KEduVocDocument *doc )
     QDomElement info = domElementKvtml.firstChildElement( KVTML_INFORMATION );
     if ( !info.isNull() ) {
         if ( !readInformation( info ) )
-            return false;
+            return KEduVocDocument::FileReaderFailed;
     }
 
     bool result = readGroups( domElementKvtml ); // read sub-groups
 
-    return result;
+    return result ? KEduVocDocument::NoError : KEduVocDocument::FileReaderFailed;
 }
 
 bool KEduVocKvtml2Reader::readInformation( QDomElement &informationElement )

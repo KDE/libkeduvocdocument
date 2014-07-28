@@ -37,13 +37,9 @@
 #include "keduvocwordtype.h"
 #include "keduvockvtmlwriter.h"
 #include "keduvockvtml2writer.h"
-#include "keduvoccsvreader.h"
 #include "keduvoccsvwriter.h"
-#include "keduvockvtml2reader.h"
-#include "keduvocwqlreader.h"
-#include "keduvocpaukerreader.h"
-#include "keduvocvokabelnreader.h"
-#include "keduvocxdxfreader.h"
+#include "readerwriters/readermanager.h"
+#include "readerwriters/readerbase.h"
 
 #define WQL_IDENT      "WordQuiz"
 
@@ -52,9 +48,11 @@
 #define TXT_EXT          "txt"
 #define WQL_EXT          "wql"
 
+/** @details Private Data class for KEduVocDocument */
 class KEduVocDocument::KEduVocDocumentPrivate
 {
 public:
+    /** constructor */
     KEduVocDocumentPrivate( KEduVocDocument* qq )
             : q( qq )
     {
@@ -65,11 +63,13 @@ public:
         init();
     }
 
+    /** destructor */
     ~KEduVocDocumentPrivate();
 
+    /** initializer */
     void init();
 
-    KEduVocDocument* q;
+    KEduVocDocument* q;                               ///< The Front End
 
     /** autosave file used to provide locking access to the underlying file
      * Note: It is a pointer to allow locking a new file, saving results and
@@ -77,36 +77,39 @@ public:
      * See saveAs for clarification*/
     KAutoSaveFile            *m_autosave;
 
-    bool                      m_dirty;
+    bool                      m_dirty;                ///<dirty bit
 
     // save these to document
-    QList<KEduVocIdentifier>  m_identifiers;
+    QList<KEduVocIdentifier>  m_identifiers;          ///<list of identifiers
 
-    QList<int>                m_extraSizeHints;
-    QList<int>                m_sizeHints;
+    QList<int>                m_extraSizeHints;       ///< unused
+    QList<int>                m_sizeHints;            ///< unused
 
-    QString                   m_generator;
-    QString                   m_queryorg;
-    QString                   m_querytrans;
+    QString                   m_generator;            ///< name of generating application
+    QString                   m_queryorg;             ///< unused
+    QString                   m_querytrans;           ///< unused
 
-    QStringList               m_tenseDescriptions;
-    QSet<QString>             m_usages;
+    QStringList               m_tenseDescriptions;    ///< unused. Was used in merge
+    QSet<QString>             m_usages;               ///< unused
 
-    QString                   m_title;
-    QString                   m_author;
-    QString                   m_authorContact;
-    QString                   m_license;
-    QString                   m_comment;
-    QString                   m_version;
-    QString                   m_csvDelimiter;
+    QString                   m_title;                ///< Document title
+    QString                   m_author;               ///< Document author
+    QString                   m_authorContact;        ///< Author contact information
+    QString                   m_license;              ///< Document license
+    QString                   m_comment;              ///< Document comment
+    QString                   m_version;              ///< Document version
+    QString                   m_csvDelimiter;         ///< CSV delimiter
 
     /** Categories that can later be used to sork kvtml files:
       * language, music, children, anatomy
       */
-    QString                   m_category;
+    QString                   m_category;            ///< Document category
 
-    KEduVocLesson * m_lessonContainer;
-    KEduVocWordType * m_wordTypeContainer;
+    KEduVocLesson * m_lessonContainer;               ///< Root lesson container
+    KEduVocWordType * m_wordTypeContainer;           ///< Root word types container
+    /** Root Leitner container
+     * (probably unused) This is not used in Parley
+     * */
     KEduVocLeitnerBox * m_leitnerContainer;
 
     /** Creates an autosave file for fpath in order to lock the file
@@ -170,14 +173,14 @@ KEduVocDocument::ErrorCode KEduVocDocument::KEduVocDocumentPrivate::initializeKA
                 delete f;
             }
         } else {
-            qCritical() << i18n( "Cannot lock file %1", fpath );
+            qWarning() << i18n( "Cannot lock file %1", fpath );
             return FileLocked;
         }
     }
 
     autosave.setManagedFile( fpath );
     if ( !autosave.open( QIODevice::ReadWrite ) ) {
-        qCritical() << i18n( "Cannot lock file %1", autosave.fileName() );
+        qWarning() << i18n( "Cannot lock file %1", autosave.fileName() );
         return FileCannotLock;
     }
 
@@ -206,77 +209,15 @@ void KEduVocDocument::setModified( bool dirty )
 
 KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileName )
 {
-    KFilterDev * f = new KFilterDev( fileName );
-    if ( !f->open( QIODevice::ReadOnly ) ) {
-        qDebug() << "Warning, could not open QIODevice for file: " << fileName;
-        delete f;
-        return Csv;
-    }
+    QIODevice * f = KFilterDev::deviceForFile( fileName );
+    f->open( QIODevice::ReadOnly );
 
-    QTextStream ts( f );
-    QString line1;
-    QString line2;
+    ReaderManager::ReaderPtr reader( ReaderManager::reader( *f ) );
 
-    line1 = ts.readLine();
-    if ( !ts.atEnd() ) {
-        line2 = ts.readLine();
-    }
-
-    /*
-     * Vokabeln.de files:
-    The header seems to be something like this:
-
-    "Name
-    Lang1 - Lang2",123,234,456
-    0
-
-    or something longer:
-
-    "Name
-    Lang1 - Lang2
-    [..]
-    Blah, blah, blah...",123,234,456
-    0
-    */
-
-    QString tmp;
-
-    if ( line1.startsWith(QChar::fromLatin1('"'))) {
-        ts.seek(0);
-        tmp = ts.readLine();
-        // There shouldn't be headers longer than 10 lines.
-        for ( int x=0; x < 10; x++) {
-            if (tmp.contains( "\"," )) {
-                tmp = ts.readLine();
-                if (tmp.endsWith('0')) {
-                    f->close();
-                    delete f;
-                    return Vokabeln;
-                }
-            }
-            tmp = ts.readLine();
-        }
-    }
     f->close();
     delete f;
 
-
-    if ( line1.startsWith(QString::fromLatin1("<?xml")) ) {
-        if ( line2.indexOf( "pauker", 0 ) >  0 ) {
-            return Pauker;
-        }
-        if ( line2.indexOf( "xdxf", 0 ) >  0 ) {
-            return Xdxf;
-        } else {
-            return Kvtml;
-        }
-    }
-
-    if ( line1 == WQL_IDENT ) {
-        return Wql;
-    }
-
-    return Csv;
+    return reader->fileTypeHandled();
 }
 
 
@@ -291,124 +232,56 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const QUrl& url, FileHandlingF
     }
     d->m_csvDelimiter = csv;
 
-    bool read = false;
+    KEduVocDocument::ErrorCode errStatus = Unknown;
     QString errorMessage = i18n( "<qt>Cannot open file<br /><b>%1</b></qt>", url.path() );
+
+    QString temporaryFile;
     QTemporaryFile tempFile;
-    QString fileName;
     if (url.isLocalFile()) {
-        fileName = url.toLocalFile();
+        temporaryFile = url.toLocalFile();
     } else {
-        if (tempFile.open()) {
-            fileName = tempFile.fileName();
-            KIO::FileCopyJob *job = KIO::file_copy(url, tempFile.fileName());
-            if (!job->exec()) {
-                qCritical() << "Couldn't open document file " << url.toString();
-                return FileCannotRead;
-            }
+        if (!tempFile.open()) {
+            qWarning() << i18n("Cannot open tempfile %1",  tempFile.fileName());
+            return Unknown;
         }
+        KIO::FileCopyJob *job = KIO::file_copy(url, tempFile.fileName());
+        if (!job->exec()) {
+            qWarning() << i18n("Cannot download %1",  url.toDisplayString());
+            return FileDoesNotExist;
+        }
+        temporaryFile = tempFile.fileName();
     }
 
-    ErrorCode autosaveError = d->initializeKAutoSave( *d->m_autosave,  fileName, flags );
+    ErrorCode autosaveError = d->initializeKAutoSave( *d->m_autosave,  temporaryFile, flags );
     if ( autosaveError != NoError) {
         return autosaveError;
     }
 
+    QIODevice * f = KFilterDev::deviceForFile( temporaryFile );
+    if ( f->open( QIODevice::ReadOnly ) ) {
 
-    KFilterDev f( fileName );
+        ReaderManager::ReaderPtr reader( ReaderManager::reader( *f ) );
+        errStatus = reader->read( *this );
 
-    if ( !f.open( QIODevice::ReadOnly ) ) {
-        qCritical() << errorMessage;
-        return FileCannotRead;
+        if ( errStatus != KEduVocDocument::NoError ) {
+            errorMessage = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)"
+                                , url.path(), reader->errorMessage() );
+        }
+    } else {
+        errStatus = FileCannotRead;
     }
 
-    FileType ft = detectFileType( fileName );
+    f->close();
+    delete f;
 
-    switch ( ft ) {
-        case Kvtml: {
-            qDebug() << "Reading KVTML document...";
-            KEduVocKvtml2Reader kvtmlReader( &f );
-            read = kvtmlReader.readDoc( this );
-            if ( !read ) {
-                errorMessage = kvtmlReader.errorMessage();
-            }
-        }
-        break;
-
-        case Wql: {
-            qDebug() << "Reading WordQuiz (WQL) document...";
-            KEduVocWqlReader wqlReader( &f );
-            d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-            read = wqlReader.readDoc( this );
-            if ( !read ) {
-                errorMessage = wqlReader.errorMessage();
-            }
-        }
-        break;
-
-        case Pauker: {
-            qDebug() << "Reading Pauker document...";
-            KEduVocPaukerReader paukerReader( this );
-            d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-            read = paukerReader.read( &f );
-            if ( !read ) {
-                errorMessage = i18n( "Parse error at line %1, column %2:\n%3", paukerReader.lineNumber(), paukerReader.columnNumber(), paukerReader.errorString() );
-            }
-        }
-        break;
-
-        case Vokabeln: {
-            qDebug() << "Reading Vokabeln document...";
-            KEduVocVokabelnReader vokabelnReader( &f );
-            d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-            read = vokabelnReader.readDoc( this );
-            if ( !read ) {
-                errorMessage = vokabelnReader.errorMessage();
-            }
-        }
-        break;
-
-        case Csv: {
-            qDebug() << "Reading CVS document...";
-            KEduVocCsvReader csvReader( &f );
-            read = csvReader.readDoc( this );
-            if ( !read ) {
-                errorMessage = csvReader.errorMessage();
-            }
-        }
-        break;
-
-       case Xdxf: {
-           qDebug() << "Reading XDXF document...";
-           KEduVocXdxfReader xdxfReader( this );
-           d->m_autosave->setManagedFile( i18n( "Untitled" ) );
-           read = xdxfReader.read( &f );
-           if ( !read ) {
-               errorMessage = i18n( "Parse error at line %1, column %2:\n%3", xdxfReader.lineNumber(), xdxfReader.columnNumber(), xdxfReader.errorString() );
-           }
-        }
-        break;
-
-        default: {
-            qDebug() << "Reading KVTML document (fallback)...";
-            KEduVocKvtml2Reader kvtmlReader( &f );
-            read = kvtmlReader.readDoc( this );
-            if ( !read ) {
-                errorMessage = kvtmlReader.errorMessage();
-            }
-        }
+    if ( errStatus == KEduVocDocument::NoError ) {
+        setModified(false);
+    } else {
+        qWarning() << errorMessage;
     }
 
-    if ( !read ) {
-        QString msg = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)", url.path(), errorMessage );
-        qCritical() << msg << i18n( "Error Opening File" );
-        ///@todo make the readers return int, pass on the error message properly
-        return FileReaderFailed;
-    }
+    return errStatus;
 
-    f.close();
-
-    setModified(false);
-    return NoError;
 }
 
 void KEduVocDocument::close() {
@@ -840,6 +713,7 @@ QString KEduVocDocument::title() const
 void KEduVocDocument::setTitle( const QString & title )
 {
     d->m_title = title;
+    ///@todo decouple document title and root lesson title
     d->m_lessonContainer->setName(title);
     setModified(true);
 }

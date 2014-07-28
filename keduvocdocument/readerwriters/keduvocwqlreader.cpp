@@ -27,17 +27,29 @@
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"
 
-KEduVocWqlReader::KEduVocWqlReader( QIODevice *file )
+KEduVocWqlReader::KEduVocWqlReader(QIODevice & file)
+    : m_inputFile( &file )
 {
-    // the file must be already open
-    m_inputFile = file;
     m_errorMessage = "";
 }
 
-
-bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
+bool KEduVocWqlReader::isParsable()
 {
-    m_doc = doc;
+    QTextStream ts( m_inputFile );
+    QString line1( ts.readLine() );
+
+    m_inputFile->seek( 0 );
+    return ( line1 == "WordQuiz" );
+}
+
+KEduVocDocument::FileType KEduVocWqlReader::fileTypeHandled()
+{
+    return KEduVocDocument::Wql;
+}
+
+KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
+{
+    m_doc = &doc;
 
     QTextStream inputStream( m_inputFile );
     inputStream.setCodec( "Windows-1252" ); //("ISO-8851-1");
@@ -47,22 +59,24 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
     QString s = "";
     s=inputStream.readLine();
     if ( s != "WordQuiz" ) {
-        m_errorMessage = i18n( "This does not appear to be a (K)WordQuiz file" );
-        return false;
+        m_errorMessage = i18n( "This does not appear to be a (K)WordQuiz file: Missing First line \"WordQuiz\"");
+        return KEduVocDocument::FileTypeUnknown;
     }
     s = inputStream.readLine();
     s = s.left( 1 );
     int iFV = s.toInt( 0 );
     if ( iFV != 5 ) {
-        m_errorMessage = i18n( "Only files created by WordQuiz 5.x or later can be opened" );
-        return false;
+        m_errorMessage = i18n( "Only files created by WordQuiz 5.x or later can be opened: Missing Second Line \"5\"" );
+        return KEduVocDocument::FileTypeUnknown;
     }
 
     m_errorMessage = i18n( "Error while reading file" );
 
     while ( !inputStream.atEnd() && inputStream.readLine() != "[Font Info]" ) ;
-    if ( inputStream.atEnd() )
-        return false;
+    if ( inputStream.atEnd() ) {
+        m_errorMessage = i18n( "Error while reading file: Missing [Font Info]" );
+        return KEduVocDocument::FileReaderFailed;
+    }
     s = inputStream.readLine();
     int p = s.indexOf( "=", 0 );
     QString fam = s.right( s.length() - ( p + 1 ) );
@@ -76,10 +90,10 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
     s = inputStream.readLine();
     p = s.indexOf( "=", 0 );
     s = s.right( s.length() - ( p + 1 ) );
-    int b = 0;
-    if ( s == "1" ) {
-        b = QFont::Bold;
-    }
+    // int b = 0;
+    // if ( s == "1" ) {
+    //     b = QFont::Bold;
+    // }
 
     s = inputStream.readLine();
     p = s.indexOf( "=", 0 );
@@ -95,8 +109,10 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
       m_specialCharacters = s.right(s.length() - (p + 1));
     */
     while ( !inputStream.atEnd() && inputStream.readLine() != "[Grid Info]" ) ;
-    if ( inputStream.atEnd() )
-        return false;
+    if ( inputStream.atEnd() ) {
+        m_errorMessage = i18n( "Error while reading file: Missing [Grid Info]" );
+        return KEduVocDocument::FileReaderFailed;
+    }
     inputStream.readLine(); //skip value for width of row headers
 
     s = inputStream.readLine();
@@ -136,8 +152,10 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
       m_bottomRight =s.toInt(0, 10) - 1 ;
     */
     while ( !inputStream.atEnd() && inputStream.readLine() != "[Vocabulary]" ) ;
-    if ( inputStream.atEnd() )
-        return false;
+    if ( inputStream.atEnd() ) {
+        m_errorMessage = i18n( "Error while reading file: Missing [Vocabulary]" );
+        return KEduVocDocument::FileReaderFailed;
+    }
 
     KEduVocLesson* lesson = new KEduVocLesson( i18n("Vocabulary"), m_doc->lesson());
     m_doc->lesson()->appendChildContainer(lesson);
@@ -168,5 +186,5 @@ bool KEduVocWqlReader::readDoc( KEduVocDocument *doc )
         expr->setTranslation( 1, b );
         lesson->appendEntry( expr );
     }
-    return true;
+    return KEduVocDocument::NoError;
 }
