@@ -29,7 +29,7 @@
 #include <kio/filecopyjob.h>
 #include <krandomsequence.h>
 #include <kfilterdev.h>
-#include <kautosavefile.h>
+#include "autosave/kautosavefile.h"
 
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"
@@ -48,6 +48,8 @@
 #define TXT_EXT          "txt"
 #define WQL_EXT          "wql"
 
+using namespace LexiAutoSave;
+
 /** @details Private Data class for KEduVocDocument */
 class KEduVocDocument::KEduVocDocumentPrivate
 {
@@ -59,7 +61,7 @@ public:
         m_lessonContainer = 0;
         m_wordTypeContainer = 0;
         m_leitnerContainer = 0;
-        m_autosave = new KAutoSaveFile;
+        m_autosave = new LexiAutoSave::KAutoSaveFile;
         init();
     }
 
@@ -75,7 +77,7 @@ public:
      * Note: It is a pointer to allow locking a new file, saving results and
      * then transfering the lock to m_autosave without risking loss of lock.
      * See saveAs for clarification*/
-    KAutoSaveFile            *m_autosave;
+    LexiAutoSave::KAutoSaveFile            *m_autosave;
 
     bool                      m_dirty;                ///<dirty bit
 

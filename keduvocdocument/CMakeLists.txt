@@ -30,6 +30,8 @@ set(keduvocdocument_LIB_SRCS
     keduvockvtmlcompability.cpp
     keduvockvtml2writer.cpp
     keduvoccsvwriter.cpp
+    autosave/kautosavefile.cpp
+    autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
     readerwriters/failedreader.cpp
     readerwriters/keduvockvtmlreader.cpp
