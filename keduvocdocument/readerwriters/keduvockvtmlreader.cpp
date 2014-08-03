@@ -18,6 +18,7 @@
  ***************************************************************************/
 
 #include "keduvockvtmlreader.h"
+#include "liblocalization.h"
 
 #include <QtCore/QTextStream>
 #include <QtCore/QList>
@@ -25,7 +26,6 @@
 
 #include <QDebug>
 #include <QLocale>
-#include <KLocalizedString>
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"

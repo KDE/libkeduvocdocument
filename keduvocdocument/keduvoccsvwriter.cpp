@@ -16,11 +16,10 @@
  ***************************************************************************/
 
 #include "keduvoccsvwriter.h"
+#include "liblocalization.h"
 
 #include <QFile>
 #include <QTextStream>
-
-#include <KLocalizedString>
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"
@@ -73,4 +72,3 @@ bool KEduVocCsvWriter::writeDoc( KEduVocDocument *doc, const QString &generator 
 
     return true;
 }
-

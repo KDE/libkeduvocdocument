@@ -24,11 +24,10 @@
  ***************************************************************************/
 
 #include "keduvoccsvreader.h"
+#include "liblocalization.h"
 
 #include <QIODevice>
 #include <QTextStream>
-
-#include <KLocalizedString>
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"

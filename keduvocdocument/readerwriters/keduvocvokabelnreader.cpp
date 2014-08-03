@@ -23,10 +23,10 @@
  ***************************************************************************/
 
 #include "keduvocvokabelnreader.h"
+#include "liblocalization.h"
 
 #include <QIODevice>
 
-#include <KLocalizedString>
 #include <QDebug>
 
 #include "keduvocdocument.h"

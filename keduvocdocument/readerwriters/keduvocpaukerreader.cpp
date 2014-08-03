@@ -15,11 +15,10 @@
  ***************************************************************************/
 
 #include "keduvocpaukerreader.h"
+#include "liblocalization.h"
 
 #include <QIODevice>
 #include <QtCore/QTextStream>
-
-#include <KLocalizedString>
 
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"

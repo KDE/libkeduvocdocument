@@ -17,12 +17,11 @@
  ***************************************************************************/
 
 #include "keduvocwqlreader.h"
+#include "liblocalization.h"
 
 #include <QTextStream>
 #include <QIODevice>
 #include <QFont>
-
-#include <KLocalizedString>
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"

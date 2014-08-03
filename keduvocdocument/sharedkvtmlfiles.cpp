@@ -16,10 +16,10 @@
 #include "sharedkvtmlfiles.h"
 
 #include "keduvocdocument.h"
+#include "liblocalization.h"
 
 #include <kio/copyjob.h>
 #include <kio/job.h>
-#include <KLocalizedString>
 
 #include <QDir>
 #include <QList>

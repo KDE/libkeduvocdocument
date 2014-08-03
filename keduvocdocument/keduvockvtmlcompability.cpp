@@ -23,8 +23,8 @@
 
 #include "keduvockvtmlcompability.h"
 #include "keduvocwordtype.h"
+#include "liblocalization.h"
 
-#include <KLocalizedString>
 #include <QDebug>
 
 const QString KEduVocKvtmlCompability::KVTML_1_USER_DEFINED = QString( "#" );
@@ -296,4 +296,3 @@ void KEduVocKvtmlCompability::setupWordTypes(KEduVocWordType * parent)
     wordType->setWordType(KEduVocWordFlag::Pronoun);
     pronoun->appendChildContainer(wordType);
 }
-
