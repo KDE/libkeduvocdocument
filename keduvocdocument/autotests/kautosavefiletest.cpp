@@ -24,12 +24,14 @@
 #include <QSet>
 
 #include <qtemporaryfile.h>
-#include <kautosavefile.h>
+#include <../autosave/kautosavefile.h>
 
 #include <QCoreApplication>
 #include <QtTest/QtTest>
 
 QTEST_MAIN(KAutoSaveFileTest)
+
+using namespace LexiAutoSave;
 
 void KAutoSaveFileTest::cleanupTestCase()
 {
