@@ -69,9 +69,15 @@ private Q_SLOTS:
     /** Check that autosave, kalock and lockfiles in inappropriate combinations are removed. */
     /* void test_housekeeping(); */
 
+
+    /* Implementation specific tests*/
+    /** Checks deletion of directory when last autosave is removed**/
+    void test_deleteDirectory();
+
     void cleanupTestCase();
 
 private:
+    QString mainappname, appname1, appname2;    ///< names of the fake applications
     QStringList filesToRemove;
 };
 

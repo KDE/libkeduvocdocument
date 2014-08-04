@@ -25,7 +25,12 @@
 #include <QString>
 #include <QUrl>
 #include <QFile>
+#include <QFileInfo>
+#include <QDir>
 #include <QTextStream>
+#include <QStandardPaths>
+
+#include <QDebug>
 
 namespace LexiAutoSave {
 
@@ -48,6 +53,16 @@ public:
      * @returns a list of the managed and autosave files.
      **/
     static QList< NamePair > findFilteredStales(const QUrl & file, const QString &appname);
+
+
+    /** @brief The directory of the locks for this @p appname
+     @return directory name **/
+    static QString lockDir(const QString & appname ) {
+        return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
+            + QString::fromLatin1("/stalefiles/")
+            + appname;
+    }
+
 
     /** Constructs the root template of the three filenames from the @p qurl
      * The .lock file will be used to lock the other two.
@@ -72,11 +87,14 @@ public:
     /** @return true if was locked  **/
     bool tryLock();
 
-    /** unlocks the lock **/
+    /** unlocks the lock
+     and deletes the directory if empty **/
     void unlock() {
         if( m_lock != NULL ) {
             delete m_lock;
             m_lock = NULL;
+            //this only succeeds it the directory is empty
+            QDir().rmdir(QFileInfo(autosaveRoot).absolutePath());
         }
     }
 
@@ -94,11 +112,15 @@ public:
     }
 
     /** Remove the kalock file
-     This must also be accompanied with removing the autosave file.**/
+     This must also be accompanied with removing the autosave file
+     and the directory if this is the last autosave file.
+    **/
     void unkalock()
     {
         QFile kalockFile(autosaveRoot + QString::fromLatin1(".kalock" ) );
         kalockFile.remove();
+        //this only succeeds it the directory is empty
+        QDir().rmdir(QFileInfo(kalockFile).absolutePath());
     }
 
     QUrl managedFile;             ///< url of the real file

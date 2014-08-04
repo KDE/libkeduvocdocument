@@ -25,7 +25,6 @@
 #include <QtCore/QCoreApplication>
 
 #include <QStringList>
-#include <QStandardPaths>
 #include <QTextStream>
 #include <QDebug>
 
@@ -112,14 +111,10 @@ QString KAutoSaveFilePrivate::fileNameTemplate(
         appName = QCoreApplication::instance()->applicationName();
     }
 
-    QString staleFilesDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
-                            + QString::fromLatin1("/stalefiles/")
-                            + appName;
-
     QString padding( QString::fromLatin1( "X" ) );
     padding.repeated( paddingLength() );
 
-    QString tempplate = staleFilesDir + QChar::fromLatin1('/')
+    QString tempplate = lockDir( appName ) + QChar::fromLatin1('/')
                         + name1 + name2 + ( isPadded ? padding : QString( ) );
 
     return tempplate;

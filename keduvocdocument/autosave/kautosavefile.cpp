@@ -169,8 +169,8 @@ void KAutoSaveFile::setManagedFile(const QUrl &filename)
     if ( ! filename.isEmpty() ) {
         if ( d->isLocked() ) {
             remove();
-            d->unlock();
             d->unkalock();
+            d->unlock();
         }
     }
 

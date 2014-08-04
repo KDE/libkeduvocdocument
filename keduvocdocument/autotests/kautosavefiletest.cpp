@@ -43,20 +43,23 @@ void KAutoSaveFileTest::cleanupTestCase()
 
 void KAutoSaveFileTest::initTestCase()
 {
+    mainappname = QLatin1String("kautosavetest" );
+    appname1 = QLatin1String("kautosavetest_app1" );
+    appname2 = QLatin1String("kautosavetest_app2" );
     init();
 }
 void KAutoSaveFileTest::init()
 {
-    QCoreApplication::instance()->setApplicationName(QLatin1String("qttest"));
-    Q_FOREACH( KAutoSaveFile * afile,  KAutoSaveFile::staleFiles(QUrl() , QLatin1String("qttest") )) {
+    QCoreApplication::instance()->setApplicationName(mainappname);
+    Q_FOREACH( KAutoSaveFile * afile,  KAutoSaveFile::staleFiles(QUrl() , mainappname )) {
         QVERIFY( afile->open(QIODevice::ReadWrite) );
         delete afile;
     }
-    Q_FOREACH( KAutoSaveFile * afile,  KAutoSaveFile::staleFiles(QUrl() , QLatin1String("qttestapp1") )) {
+    Q_FOREACH( KAutoSaveFile * afile,  KAutoSaveFile::staleFiles(QUrl() , appname1 )) {
         afile->open(QIODevice::ReadWrite);
         delete afile;
     }
-    Q_FOREACH( KAutoSaveFile * afile,  KAutoSaveFile::staleFiles(QUrl() , QLatin1String("qttestapp2") )) {
+    Q_FOREACH( KAutoSaveFile * afile,  KAutoSaveFile::staleFiles(QUrl() , appname2 )) {
         afile->open(QIODevice::ReadWrite);
         delete afile;
     }
@@ -152,8 +155,7 @@ void KAutoSaveFileTest::test_crossContaminateAppname()
 
 
     //App1
-    QString app1Name("qttestapp1");
-    QCoreApplication::setApplicationName(app1Name);
+    QCoreApplication::setApplicationName(appname1);
 
     // Create the autosave file lock
     KAutoSaveFile autoSaveApp1File1( file1Qurl );
@@ -161,27 +163,26 @@ void KAutoSaveFileTest::test_crossContaminateAppname()
     KAutoSaveFile autoSaveApp1File2( file2Qurl );
     QVERIFY(autoSaveApp1File2.open(QIODevice::ReadWrite));
 
-    QString app2Name( "qttestapp2" );
-    QCoreApplication::setApplicationName(app2Name);
+    QCoreApplication::setApplicationName(appname2);
 
     //App2 has nothing locked
     QCOMPARE( KAutoSaveFile::allStaleFiles().size() , 0 );
-    QCOMPARE( KAutoSaveFile::staleFiles(file1Qurl, app2Name).size() , 0 );
-    QCOMPARE( KAutoSaveFile::staleFiles(file2Qurl, app2Name).size() , 0 );
-    QCOMPARE( KAutoSaveFile::allStaleFiles(app2Name).size() , 0 );
-    QCOMPARE( KAutoSaveFile::allStaleFiles(app1Name).size() , 2 );
-    QCOMPARE( KAutoSaveFile::staleFiles(file2Qurl, app1Name).size() , 1 );
-    QCOMPARE( KAutoSaveFile::staleFiles(file1Qurl, app1Name).size() , 1 );
+    QCOMPARE( KAutoSaveFile::staleFiles(file1Qurl, appname2).size() , 0 );
+    QCOMPARE( KAutoSaveFile::staleFiles(file2Qurl, appname2).size() , 0 );
+    QCOMPARE( KAutoSaveFile::allStaleFiles(appname2).size() , 0 );
+    QCOMPARE( KAutoSaveFile::allStaleFiles(appname1).size() , 2 );
+    QCOMPARE( KAutoSaveFile::staleFiles(file2Qurl, appname1).size() , 1 );
+    QCOMPARE( KAutoSaveFile::staleFiles(file1Qurl, appname1).size() , 1 );
 
     // Create the autosave file lock
     KAutoSaveFile autoSaveApp2File1( file1Qurl );
     QVERIFY(autoSaveApp2File1.open(QIODevice::ReadWrite));
     QCOMPARE( KAutoSaveFile::staleFiles(file1Qurl).size() , 1 );
     QCOMPARE( KAutoSaveFile::staleFiles(file2Qurl).size() , 0 );
-    QCOMPARE( KAutoSaveFile::allStaleFiles(app2Name).size() , 1 );
-    QCOMPARE( KAutoSaveFile::staleFiles(file1Qurl, app1Name).size() , 1 );
-    QCOMPARE( KAutoSaveFile::staleFiles(file2Qurl, app1Name).size() , 1 );
-    QCOMPARE( KAutoSaveFile::allStaleFiles(app1Name).size() , 2 );
+    QCOMPARE( KAutoSaveFile::allStaleFiles(appname2).size() , 1 );
+    QCOMPARE( KAutoSaveFile::staleFiles(file1Qurl, appname1).size() , 1 );
+    QCOMPARE( KAutoSaveFile::staleFiles(file2Qurl, appname1).size() , 1 );
+    QCOMPARE( KAutoSaveFile::allStaleFiles(appname1).size() , 2 );
 
     QCoreApplication::setApplicationName(originalAppName);
 }
@@ -530,7 +531,8 @@ void KAutoSaveFileTest::test_locking()
 
     const QString fn = saveFile2->fileName();
     // It looks like $XDG_DATA_HOME/stalefiles/qttest/test.txtXXXfish_%2Fhome%2FremoteXXXXXXX
-    QVERIFY2(fn.contains(QLatin1String("stalefiles/qttest/test.txt")), qPrintable(fn));
+    QVERIFY2(fn.contains(QLatin1String("stalefiles/" ) + mainappname
+                         + QLatin1String("/test.txt")), qPrintable(fn));
     QVERIFY2(fn.contains(QLatin1String("fish_%2Fhome%2Fremote")), qPrintable(fn));
 
     QVERIFY(QFile::exists(saveFile.fileName()));
@@ -660,6 +662,29 @@ void KAutoSaveFileTest::test_exampleCode()
     Document doc1, doc2;
     doc1.exampleCodeWrapper( false);
     doc2.exampleCodeWrapper( true);
+}
+
+
+void KAutoSaveFileTest::test_deleteDirectory()
+{
+    QTemporaryFile file( "test_freeStaleOnDestroy" );
+    QVERIFY( file.open() );
+    QUrl fileQurl ( QUrl::fromLocalFile( file.fileName() ) );
+
+    // Create the autosave1 file lock
+    KAutoSaveFile * autoSave1 = new KAutoSaveFile( fileQurl );
+    QVERIFY(autoSave1->open(QIODevice::ReadWrite));
+
+    delete autoSave1;
+
+    //The last autosave is gone and so should be the directory.
+    QString staleFilesDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)
+                            + QString::fromLatin1("/stalefiles/")
+                            + mainappname;
+
+    QVERIFY2( ! QDir( staleFilesDir ).exists()
+              , "application directory in stalefiles still exists after last kautosave is deleted" );
+
 }
 
 // void KAutoSaveFileTest::test_housekeeping()
