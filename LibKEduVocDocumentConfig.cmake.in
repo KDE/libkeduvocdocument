@@ -28,7 +28,7 @@ set( LIBKEDUVOCDOCUMENT_INCLUDE_DIR "${_LIBKEDUVOCDOCUMENT_CURRENT_DIR}/../../..
 endif(NOT WIN32)
 
 if( NOT TARGET LibKEduVocDocumentImport__keduvocdocument )
-    include("${_LIBKDEEDU_CURRENT_DIR}/LibKEduVocDocumentTargets.cmake")
+    include("${_LIBKEDUVOCDOCUMENT_CURRENT_DIR}/LibKEduVocDocumentTargets.cmake")
 endif( NOT TARGET LibKEduVocDocumentImport__keduvocdocument )
 
 macro( _libkeduvocdocument_set_lib_vars _prefix _lib )
