@@ -129,6 +129,7 @@ KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
     delete m_wordTypeContainer;
     delete m_leitnerContainer;
 
+    m_autosave->remove();
     m_autosave->releaseLock();
     delete m_autosave;
 }

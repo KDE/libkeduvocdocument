@@ -91,16 +91,19 @@ void OpenAPITest::lockedFileFailureTest()
     TestDoc tempfile;
 
     KEduVocDocument doc;
-    KEduVocDocument::ErrorCode errcode( doc.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling) );
+    QCOMPARE(doc.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling), KEduVocDocument::NoError);
+    QCOMPARE(doc.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling), KEduVocDocument::NoError);
     KEduVocDocument doc2;
-    KEduVocDocument::ErrorCode errcode2( doc2.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling) );
+    QCOMPARE(doc2.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling), KEduVocDocument::FileLocked);
 
     KEduVocDocument doc3;
-    KEduVocDocument::ErrorCode errcode3( doc3.open(tempfile.fileName(), KEduVocDocument::FileIgnoreLock) );
+    QCOMPARE(doc3.open(tempfile.fileName(), KEduVocDocument::FileIgnoreLock), KEduVocDocument::NoError);
 
-    QCOMPARE( int( errcode ),  int( KEduVocDocument::NoError ) );
-    QCOMPARE( int( errcode2 ),  int( KEduVocDocument::FileLocked ) );
-    QCOMPARE( int( errcode3 ),  int( KEduVocDocument::NoError ) );
+    doc.close();
+    QCOMPARE(doc2.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling), KEduVocDocument::NoError);
+
+
+
 }
 
 void OpenAPITest::unknownFormatTest()
