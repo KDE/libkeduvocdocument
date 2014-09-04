@@ -174,7 +174,7 @@ void SharedKvtmlFiles::sortDownloadedFiles()
 
             // make sure the locale sub-folder exists
             QUrl pathUrl = QUrl( fileUrl );
-            pathUrl.setPath( locale );
+            pathUrl = QUrl( pathUrl.toString(QUrl::RemoveFilename) + '/' + locale );
             KIO::mkdir( pathUrl );
 
             // move the file into the locale sub-folder
