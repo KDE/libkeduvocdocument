@@ -27,8 +27,6 @@ include(KDECMakeSettings)
 include(GenerateExportHeader)
 
 add_subdirectory(keduvocdocument)
-add_subdirectory(data)
-
 
 configure_file( "${LibKEduVocDocument_SOURCE_DIR}/LibKEduVocDocumentConfig.cmake.in" "${LibKEduVocDocument_BINARY_DIR}/LibKEduVocDocumentConfig.cmake" @ONLY )
 
