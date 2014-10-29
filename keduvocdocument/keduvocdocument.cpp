@@ -847,14 +847,14 @@ QString KEduVocDocument::pattern( FileDialogMode mode )
     for ( int i = 0; filters[i].extensions; ++i ) {
         if (( mode == Reading && filters[i].reading ) ||
                 ( mode == Writing && filters[i].writing ) ) {
-            newfilters.append( QLatin1String( filters[i].extensions ) + '|' + i18n( filters[i].description ) );
+            newfilters.append( i18n( filters[i].description ) + " (" + QLatin1String( filters[i].extensions ) + ')' );
             allext.append( QLatin1String( filters[i].extensions ) );
         }
     }
     if ( mode == Reading ) {
         newfilters.prepend( allext.join( " " ) + '|' + i18n( "All supported documents" ) );
     }
-    return newfilters.join( "\n" );
+    return newfilters.join( ";;" );
 }
 
 QString KEduVocDocument::errorDescription( int errorCode )
