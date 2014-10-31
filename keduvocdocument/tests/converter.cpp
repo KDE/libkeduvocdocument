@@ -27,7 +27,7 @@
 #include "keduvocdocument.h"
 #include "liblocalization.h"
 
-#include <QApplication>
+#include <QCoreApplication>
 #include <QDebug>
 #include <QUrl>
 #include <QCommandLineParser>

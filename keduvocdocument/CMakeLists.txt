@@ -80,7 +80,6 @@ target_link_libraries(KEduVocDocument
   PRIVATE
     KF5::I18n
     KF5::Archive
-    Qt5::Widgets
 )
 
 
@@ -102,7 +101,6 @@ target_link_libraries(keduvocdocument_static
   PRIVATE
     KF5::I18n
     KF5::Archive
-    Qt5::Widgets
 )
 
 

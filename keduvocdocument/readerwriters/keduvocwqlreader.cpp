@@ -21,7 +21,6 @@
 
 #include <QTextStream>
 #include <QIODevice>
-#include <QFont>
 
 #include "keduvocdocument.h"
 #include "keduvocexpression.h"

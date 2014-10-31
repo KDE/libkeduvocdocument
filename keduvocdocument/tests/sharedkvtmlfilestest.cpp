@@ -25,7 +25,7 @@
 #include "keduvocdocument.h"
 #include "sharedkvtmlfiles.h"
 
-#include <QApplication>
+#include <QCoreApplication>
 
 #include <QDebug>
 #include <QUrl>

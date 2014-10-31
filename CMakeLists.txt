@@ -5,8 +5,8 @@ find_package(ECM 0.0.9 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Widgets Xml)
-find_package(KF5 4.96.0 REQUIRED COMPONENTS Config I18n Archive KIO)
+find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Xml)
+find_package(KF5 4.96.0 REQUIRED COMPONENTS I18n Archive KIO)
 
 #add_definitions( -Wall -fprofile-arcs -ftest-coverage )
 
