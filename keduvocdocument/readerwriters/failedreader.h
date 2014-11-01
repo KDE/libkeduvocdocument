@@ -24,7 +24,6 @@
 
 #include <qdebug.h>
 
-class QIODevice;
 
 /**
  * @brief A fallback reader when the device can't be read or no other reader can parse.

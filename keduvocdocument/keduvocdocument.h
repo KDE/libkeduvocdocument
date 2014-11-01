@@ -30,8 +30,6 @@
 #include <QtCore/QMap>
 #include <QUrl>
 
-class QStringList;
-class KEduVocExpression;
 class KEduVocLesson;
 class KEduVocWordType;
 class KEduVocLeitnerBox;

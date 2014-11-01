@@ -24,7 +24,6 @@
 
 #include <qdebug.h>
 
-class QIODevice;
 class KEduVocDocument;
 
 /**

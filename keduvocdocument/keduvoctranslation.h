@@ -24,7 +24,6 @@
 #include <QtCore/QString>
 
 class KEduVocExpression;
-class KEduVocString;
 class KEduVocWordType;
 class KEduVocLeitnerBox;
 class KEduVocDeclension;

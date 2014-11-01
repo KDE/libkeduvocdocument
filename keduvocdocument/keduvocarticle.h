@@ -24,7 +24,6 @@
 
 #include "keduvocwordflags.h"
 
-class KEduVocWordType;
 /**
  * Class representing the articles of a language
  *
