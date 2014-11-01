@@ -26,7 +26,6 @@
 
 #include <QStringList>
 #include <QTextStream>
-#include <QDebug>
 
 namespace LexiAutoSave {
 

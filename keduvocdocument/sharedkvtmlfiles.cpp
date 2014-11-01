@@ -22,11 +22,8 @@
 #include <kio/job.h>
 
 #include <QDir>
-#include <QList>
-#include <QSet>
 #include <QStandardPaths>
 
-#include <QDebug>
 
 class SharedKvtmlFilesPrivate
 {

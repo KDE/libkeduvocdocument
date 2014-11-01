@@ -30,7 +30,6 @@
 #include <QTextStream>
 #include <QStandardPaths>
 
-#include <QDebug>
 
 namespace LexiAutoSave {
 

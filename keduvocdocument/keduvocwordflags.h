@@ -14,7 +14,6 @@
 #ifndef KEDUVOCWORDFLAGS_H
 #define KEDUVOCWORDFLAGS_H
 
-#include <QFlags>
 
 class KEduVocWordFlag
 {

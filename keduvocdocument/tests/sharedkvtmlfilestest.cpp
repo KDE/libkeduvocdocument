@@ -28,7 +28,6 @@
 #include <QCoreApplication>
 
 #include <QDebug>
-#include <QUrl>
 
 
 int main( int argc, char ** argv )
