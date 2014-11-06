@@ -18,8 +18,8 @@
 */
 
 #include "failedreader.h"
-#include "liblocalization.h"
 
+#include <klocalizedstring.h>
 #include <QtCore/QIODevice>
 
 

@@ -20,6 +20,7 @@ remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
 remove_definitions(-DQT_NO_KEYWORDS)
 
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+add_definitions(-DTRANSLATION_DOMAIN=\"libkeduvocdocument\")
 
 include(KDEInstallDirs)
 include(KDECompilerSettings)

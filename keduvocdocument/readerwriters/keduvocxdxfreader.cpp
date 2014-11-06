@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 #include "keduvocxdxfreader.h"
-#include "liblocalization.h"
 
+#include <klocalizedstring.h>
 #include <QIODevice>
 
 #include "keduvocexpression.h"

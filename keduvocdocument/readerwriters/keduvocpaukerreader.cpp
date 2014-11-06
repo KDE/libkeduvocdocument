@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 #include "keduvocpaukerreader.h"
-#include "liblocalization.h"
 
+#include <klocalizedstring.h>
 #include <QIODevice>
 #include <QtCore/QTextStream>
 

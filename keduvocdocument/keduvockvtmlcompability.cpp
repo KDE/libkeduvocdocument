@@ -23,7 +23,8 @@
 
 #include "keduvockvtmlcompability.h"
 #include "keduvocwordtype.h"
-#include "liblocalization.h"
+
+#include <klocalizedstring.h>
 
 #include <QDebug>
 

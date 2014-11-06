@@ -17,7 +17,6 @@
  ***************************************************************************/
 
 #include "keduvocdocument.h"
-#include "liblocalization.h"
 
 #include <QtCore/QFileInfo>
 #include <QtCore/QTextStream>
@@ -29,6 +28,7 @@
 #include <kio/filecopyjob.h>
 #include <krandomsequence.h>
 #include <kfilterdev.h>
+#include <klocalizedstring.h>
 #include "autosave/kautosavefile.h"
 
 #include "keduvocexpression.h"

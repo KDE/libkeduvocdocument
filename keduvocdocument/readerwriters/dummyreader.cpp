@@ -18,8 +18,8 @@
 */
 
 #include "dummyreader.h"
-#include "liblocalization.h"
 
+#include <klocalizedstring.h>
 #include <qdebug.h>
 
 #include <QXmlStreamWriter>

@@ -16,8 +16,8 @@
 #include "sharedkvtmlfiles.h"
 
 #include "keduvocdocument.h"
-#include "liblocalization.h"
 
+#include <klocalizedstring.h>
 #include <kio/copyjob.h>
 #include <kio/job.h>
 

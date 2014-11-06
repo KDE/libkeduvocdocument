@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 #include "keduvockvtml2reader.h"
-#include "liblocalization.h"
 
+#include <klocalizedstring.h>
 #include <QtCore/QTextStream>
 #include <QtCore/QList>
 #include <QtCore/QIODevice>

@@ -23,8 +23,8 @@
  ***************************************************************************/
 
 #include "keduvocvokabelnreader.h"
-#include "liblocalization.h"
 
+#include <klocalizedstring.h>
 #include <QIODevice>
 
 #include <QDebug>
