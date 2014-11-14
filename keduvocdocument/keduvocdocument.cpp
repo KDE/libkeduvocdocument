@@ -308,7 +308,7 @@ void KEduVocDocument::close()
 KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType ft,
 						    FileHandlingFlags flags)
 {
-    if (!d->m_isReadOnly) {
+    if (d->m_isReadOnly) {
 	return FileIsReadOnly;
     }
 
