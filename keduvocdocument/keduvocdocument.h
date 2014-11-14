@@ -71,14 +71,16 @@ public:
         FileReaderFailed,    ///< file reader failed
         FileDoesNotExist,    ///< unknown file type
         FileLocked,          ///< An autosave file exists for this document
-        FileCannotLock       ///< Can't create an autosave file for this document
+        FileCannotLock,      ///< Can't create an autosave file for this document
+        FileIsReadOnly       ///< Can't save this file because it was opened read-only
     };
 
     /// indicates file open/save status locking or readonly
     enum FileHandlingFlags
     {
         FileDefaultHandling = 0x0, ///< Default status
-        FileIgnoreLock = 0x1       ///< Ignore the file lock
+        FileIgnoreLock = 0x1,      ///< Ignore the file lock
+	FileOpenReadOnly = 0x2	   ///< Open without any intention to change and save back later. This also implies FileIgnoreLock.
     };
 
     /// used as parameter for pattern

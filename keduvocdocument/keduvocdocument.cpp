@@ -79,10 +79,11 @@ public:
      * See saveAs for clarification*/
     LexiAutoSave::KAutoSaveFile            *m_autosave;
 
-    bool                      m_dirty;                ///<dirty bit
+    bool                      m_dirty;                ///< dirty bit
+    bool                      m_isReadOnly;	      ///< FileOpenReadOnly was used for opening
 
     // save these to document
-    QList<KEduVocIdentifier>  m_identifiers;          ///<list of identifiers
+    QList<KEduVocIdentifier>  m_identifiers;          ///< list of identifiers
 
     QList<int>                m_extraSizeHints;       ///< unused
     QList<int>                m_sizeHints;            ///< unused
@@ -120,7 +121,9 @@ public:
      *   @param flags Describes how to deal with locked file etc.
      *   @return ErrorCode where NoError is success
      *   */
-    KEduVocDocument::ErrorCode initializeKAutoSave(KAutoSaveFile &autosave,  QString const &fpath,  FileHandlingFlags flags) const;
+    KEduVocDocument::ErrorCode initializeKAutoSave(KAutoSaveFile &autosave,
+						   QString const &fpath,
+						   FileHandlingFlags flags) const;
 };
 
 KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
@@ -150,6 +153,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_extraSizeHints.clear();
     m_sizeHints.clear();
     m_dirty = false;
+    m_isReadOnly = false;
     m_queryorg = "";
     m_querytrans = "";
     m_autosave->setManagedFile( i18n( "Untitled" ) );
@@ -255,9 +259,17 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const QUrl& url, FileHandlingF
         temporaryFile = tempFile.fileName();
     }
 
-    ErrorCode autosaveError = d->initializeKAutoSave( *d->m_autosave,  temporaryFile, flags );
-    if ( autosaveError != NoError) {
-        return autosaveError;
+    if (flags & FileOpenReadOnly) {
+	d->m_isReadOnly = true;
+    }
+
+    ErrorCode autosaveError = NoError;
+
+    if (!d->m_isReadOnly) {
+	autosaveError = d->initializeKAutoSave( *d->m_autosave,  temporaryFile, flags );
+	if (autosaveError != NoError) {
+	    return autosaveError;
+	}
     }
 
     QIODevice * f = KFilterDev::deviceForFile( temporaryFile );
@@ -284,15 +296,21 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const QUrl& url, FileHandlingF
     }
 
     return errStatus;
-
 }
 
-void KEduVocDocument::close() {
-    d->m_autosave->releaseLock();
-}
-
-KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType ft, FileHandlingFlags flags)
+void KEduVocDocument::close()
 {
+    if (!d->m_isReadOnly) {
+	d->m_autosave->releaseLock();
+    }
+}
+
+KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType ft,
+						    FileHandlingFlags flags)
+{
+    if (!d->m_isReadOnly) {
+	return FileIsReadOnly;
+    }
 
     QUrl tmp( url );
 
