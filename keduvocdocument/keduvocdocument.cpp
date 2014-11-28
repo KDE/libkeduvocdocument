@@ -18,6 +18,7 @@
 
 #include "keduvocdocument.h"
 
+#include <QCoreApplication>
 #include <QtCore/QFileInfo>
 #include <QtCore/QTextStream>
 #include <QtCore/QtAlgorithms>
@@ -171,7 +172,8 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
 
 KEduVocDocument::ErrorCode KEduVocDocument::KEduVocDocumentPrivate::initializeKAutoSave(KAutoSaveFile &autosave,  QString const & fpath,  FileHandlingFlags flags) const {
 
-    QList<KAutoSaveFile *> staleFiles = KAutoSaveFile::staleFiles( fpath );
+    QList<KAutoSaveFile *> staleFiles = KAutoSaveFile::staleFiles( fpath,
+                                                                 QCoreApplication::instance()->applicationName());
     if ( !staleFiles.isEmpty()) {
         if ( flags & FileIgnoreLock ) {
             foreach( KAutoSaveFile *f,  staleFiles ) {
@@ -240,7 +242,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const QUrl& url, FileHandlingF
     d->m_csvDelimiter = csv;
 
     KEduVocDocument::ErrorCode errStatus = Unknown;
-    QString errorMessage = i18n( "<qt>Cannot open file<br /><b>%1</b></qt>", url.path() );
+    QString errorMessage = i18n( "<qt>Cannot open file<br /><b>%1</b></qt>", url.toDisplayString() );
 
     QString temporaryFile;
     QTemporaryFile tempFile;
@@ -280,7 +282,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const QUrl& url, FileHandlingF
 
         if ( errStatus != KEduVocDocument::NoError ) {
             errorMessage = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)"
-                                , url.path(), reader->errorMessage() );
+                                , url.toDisplayString(), reader->errorMessage() );
         }
     } else {
         errStatus = FileCannotRead;
@@ -309,7 +311,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType f
 						    FileHandlingFlags flags)
 {
     if (d->m_isReadOnly) {
-	return FileIsReadOnly;
+        return FileIsReadOnly;
     }
 
     QUrl tmp( url );
@@ -324,17 +326,17 @@ KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType f
         }
     }
 
-    QString errorMessage = i18n( "Cannot write to file %1", tmp.path() );
+    QString errorMessage = i18n( "Cannot write to file %1", tmp.toDisplayString() );
 
     KAutoSaveFile *autosave;
 
     //If we don't care about the lock always create a new one
     //If we are changing files create a new lock
     if ( ( flags & FileIgnoreLock )
-        || ( d->m_autosave->managedFile() != tmp.path() ) ) {
+        || ( d->m_autosave->managedFile() != tmp ) ) {
 
         autosave = new KAutoSaveFile;
-        ErrorCode autosaveError = d->initializeKAutoSave( *autosave,  tmp.path(), flags );
+        ErrorCode autosaveError = d->initializeKAutoSave( *autosave,  tmp.toDisplayString(), flags );
         if ( autosaveError != NoError) {
             delete autosave;
             return autosaveError;
@@ -350,9 +352,9 @@ KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType f
         }
     }
 
-    QFile f( tmp.path() );
+    QFile f( tmp.toDisplayString() );
     if ( !f.open( QIODevice::WriteOnly ) ) {
-        qCritical() << i18n( "Cannot write to file %1", tmp.path() );
+        qCritical() << i18n( "Cannot write to file %1", f.fileName() );
         return FileCannotWrite;
     }
 
@@ -386,7 +388,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType f
     f.close();
 
     if ( !saved ) {
-        qCritical() << "Error Saving File" << tmp.path();
+        qCritical() << "Error Saving File" << tmp.toDisplayString();
 
         if ( autosave != d->m_autosave ) {
             delete autosave;

@@ -24,6 +24,7 @@
 #include <QDir>
 #include <QStandardPaths>
 
+#include <QDebug>
 
 class SharedKvtmlFilesPrivate
 {
@@ -70,6 +71,7 @@ void SharedKvtmlFilesPrivate::rescan()
     nameFilter.append("*.kvtml");
     QStringList dataPaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "apps/kvtml", QStandardPaths::LocateDirectory);
     Q_FOREACH (const QString &path, dataPaths) {
+        qDebug() << "Checking path " << path << " for kvtml files";
         QStringList locales = QDir( path ).entryList( QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name );
         Q_FOREACH (const QString &locale, locales) {
             QStringList files = QDir( path + '/' + locale ).entryList(nameFilter, QDir::Files );

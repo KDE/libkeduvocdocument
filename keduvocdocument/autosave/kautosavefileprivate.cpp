@@ -89,7 +89,7 @@ QString KAutoSaveFilePrivate::fileNameTemplate(
     const QString protocol(encoded( file.scheme() ));
     QString name1(encoded( file.fileName() ) );
 
-    QString path(file.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path());
+    QString path(file.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).toDisplayString());
     QString pathEncoded( encoded( path ) );
 
     // Remove any part of the path to the right if it is longer than the max file size and
