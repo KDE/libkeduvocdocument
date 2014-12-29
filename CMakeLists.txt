@@ -31,11 +31,7 @@ add_subdirectory(keduvocdocument)
 
 configure_file( "${LibKEduVocDocument_SOURCE_DIR}/LibKEduVocDocumentConfig.cmake.in" "${LibKEduVocDocument_BINARY_DIR}/LibKEduVocDocumentConfig.cmake" @ONLY )
 
-if(KDE4_USE_COMMON_CMAKE_PACKAGE_CONFIG_DIR)
-    set(_LibKEduVocDocument_CONFIG_DEST "${LIB_INSTALL_DIR}/cmake/libkeduvocdocument")
-else(KDE4_USE_COMMON_CMAKE_PACKAGE_CONFIG_DIR)
-    set(_LibKEduVocDocument_CONFIG_DEST "${LIB_INSTALL_DIR}/libkeduvocdocument")
-endif(KDE4_USE_COMMON_CMAKE_PACKAGE_CONFIG_DIR)
+set(_LibKEduVocDocument_CONFIG_DEST "${LIB_INSTALL_DIR}/cmake/libkeduvocdocument")
 
 install( FILES
         "${LibKEduVocDocument_BINARY_DIR}/LibKEduVocDocumentConfig.cmake"
