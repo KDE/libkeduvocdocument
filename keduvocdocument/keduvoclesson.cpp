@@ -34,6 +34,13 @@ KEduVocLesson::KEduVocLesson(const QString& name, KEduVocContainer *parent)
 {
 }
 
+// Private constructor only used by KEduVocDocument when creating the top level lesson.
+KEduVocLesson::KEduVocLesson(const QString& name, KEduVocDocument *document)
+   : KEduVocContainer(name, Lesson, document)
+   , d(new Private)
+{
+}
+
 
 KEduVocLesson::KEduVocLesson( const KEduVocLesson &other )
         : KEduVocContainer(other), d( new Private )
@@ -47,6 +54,8 @@ KEduVocLesson::~KEduVocLesson()
     qDeleteAll(d->m_entries);
     delete d;
 }
+
+
 
 QList<KEduVocExpression*> KEduVocLesson::entries(EnumEntriesRecursive recursive)
 {

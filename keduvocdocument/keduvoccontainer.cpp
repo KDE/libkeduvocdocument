@@ -16,6 +16,7 @@
 
 #include "keduvoccontainer.h"
 
+#include "keduvocdocument.h"
 #include "keduvocexpression.h"
 
 #include <QDebug>
@@ -30,6 +31,11 @@ public:
     // properties for this lesson
     QString m_name;
     bool m_inPractice;
+
+    // The containing document.  This is only set for the top lesson, so to
+    // get to the document, you need to follow the parent pointer to the top
+    // container.
+    KEduVocDocument *m_document;
 
     // other lessons in the tree
     KEduVocContainer *m_parentContainer;
@@ -49,6 +55,23 @@ KEduVocContainer::Private::~Private()
     qDeleteAll(m_childContainers);
 }
 
+
+// This is a private constructor only used by KEduVocDocument when creating
+// the top level lesson.
+KEduVocContainer::KEduVocContainer(const QString& name, EnumContainerType type,
+				   KEduVocDocument *document)
+        : d( new Private )
+{
+    d->m_parentContainer = 0;
+    d->m_name = name;
+    d->m_inPractice = true;
+    d->m_type = type;
+    d->m_childLessonEntriesValid = false;
+
+    d->m_document = document;
+}
+
+
 KEduVocContainer::KEduVocContainer(const QString& name, EnumContainerType type, KEduVocContainer *parent)
         : d( new Private )
 {
@@ -57,6 +80,8 @@ KEduVocContainer::KEduVocContainer(const QString& name, EnumContainerType type, 
     d->m_inPractice = true;
     d->m_type = type;
     d->m_childLessonEntriesValid = false;
+
+    d->m_document = 0;
 }
 
 KEduVocContainer::KEduVocContainer( const KEduVocContainer &other )
@@ -72,6 +97,17 @@ KEduVocContainer::KEduVocContainer( const KEduVocContainer &other )
 KEduVocContainer::~KEduVocContainer()
 {
     delete d;
+}
+
+KEduVocDocument *KEduVocContainer::document() const
+{
+    KEduVocContainer *cont = (KEduVocContainer *)this;
+    while (cont->d->m_parentContainer) {
+	cont = cont->d->m_parentContainer;
+    }
+
+    Q_ASSERT(cont->d->m_document);
+    return cont->d->m_document;
 }
 
 void KEduVocContainer::appendChildContainer(KEduVocContainer * child)
@@ -280,4 +316,6 @@ void KEduVocContainer::resetGrades(int translation, EnumEntriesRecursive recursi
     foreach (KEduVocExpression *entry, entries(recursive)) {
         entry->resetGrades(translation);
     }
+
+    document()->setModified(true);
 }
