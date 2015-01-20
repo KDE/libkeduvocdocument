@@ -24,6 +24,7 @@
 #include <QtCore/QList>
 #include <QUrl>
 
+class KEduVocDocument;
 class KEduVocExpression;
 
 /** class to store information about a container - that can be a lesson or word types */
@@ -45,7 +46,8 @@ public:
     };
 
     /** default constructor */
-    explicit KEduVocContainer(const QString& name, EnumContainerType type, KEduVocContainer *parent = 0);
+    explicit KEduVocContainer(const QString& name, EnumContainerType type,
+			      KEduVocContainer *parent = 0);
 
     void appendChildContainer(KEduVocContainer *child);
     void insertChildContainer(int row, KEduVocContainer *child);
@@ -83,6 +85,9 @@ public:
 
     /** assignment operator */
     KEduVocContainer& operator= ( const KEduVocContainer& );
+
+    /** @return the containing KEduVocDocument */
+    KEduVocDocument *document() const;
 
     /** set the container name
      * @param name text to set for the name
@@ -155,6 +160,9 @@ protected:
      */
     void updateChildLessonEntries();
 
+    // Used by KEduVocLesson when the Document creates the top level lesson.
+    explicit KEduVocContainer(const QString& name, EnumContainerType type,
+			      KEduVocDocument *document);
 private:
     class Private;
     Private * const d;

@@ -75,6 +75,11 @@ public:
     void removeEntry(KEduVocExpression* entry);
 
 private:
+    friend class KEduVocDocument;
+    // This constructor is used by KEduVocDocument when creating the top level lesson.
+    explicit KEduVocLesson(const QString& name, KEduVocDocument *document);
+
+private:
     class Private;
     Private * const d;
 };
