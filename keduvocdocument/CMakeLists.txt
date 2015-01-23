@@ -93,6 +93,7 @@ target_include_directories(KEduVocDocument INTERFACE "$<INSTALL_INTERFACE:${INCL
 
 #Library for non-api unittests
 add_library(keduvocdocument_static STATIC ${keduvocdocument_LIB_SRCS})
+set_target_properties(keduvocdocument_static PROPERTIES COMPILE_FLAGS -DKEDUVOCDOCUMENT_STATIC_DEFINE)
 
 target_link_libraries(keduvocdocument_static
   PUBLIC

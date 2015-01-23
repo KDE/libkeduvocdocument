@@ -54,6 +54,16 @@ macro(KEDUVOCDOCUMENT_GUI_UNIT_TESTS staticOrAPILib)
    endforeach()
 endmacro()
 
+macro(KEDUVOCDOCUMENT_GUI_UNIT_TESTS_STATIC staticOrAPILib)
+   foreach(_testname ${ARGN})
+     ecm_add_test( ${_testname} ${kvocdoc_unittests_helpers}
+       LINK_LIBRARIES ${staticOrAPILib} KF5::CoreAddons KF5::KIOCore Qt5::Test Qt5::Xml
+       TEST_NAME ${_testname}
+       GUI)
+       set_target_properties(${_testname} PROPERTIES COMPILE_FLAGS -DKEDUVOCDOCUMENT_STATIC_DEFINE)
+   endforeach()
+endmacro()
+
 
 keduvocdocument_gui_unit_tests(keduvocdocument ${kvocdoc_api_unittests})
-keduvocdocument_gui_unit_tests(keduvocdocument_static ${kvocdoc_unittests})
+keduvocdocument_gui_unit_tests_static(keduvocdocument_static ${kvocdoc_unittests})

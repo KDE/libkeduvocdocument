@@ -27,7 +27,7 @@ The only change from the proposed patch is adding the namespace LexiAutoSave
 #ifndef LKAUTOSAVEFILE_H
 #define LKAUTOSAVEFILE_H
 
-#include <kcoreaddons_export.h>
+#include "keduvocdocument_export.h"
 
 #include <QtCore/QFile>
 #include <QtCore/QList>
@@ -139,7 +139,7 @@ class KAutoSaveFilePrivate;
  *
  * @author Jacob R Rideout <kde@jacobrideout.net>
  */
-class KCOREADDONS_EXPORT KAutoSaveFile : public QFile
+class KEDUVOCDOCUMENT_EXPORT KAutoSaveFile : public QFile
 {
     Q_OBJECT
 public:
