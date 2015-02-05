@@ -54,6 +54,13 @@ set(keduvocdocument_LIB_SRCS
     keduvocwordtype.h
     kvtml2defs.h
     kvtmldefs.h
+    #keduvoccontainermodel.cpp
+    #keduvoclessonmodel.cpp
+    #keduvocreadonlycontainermodel.cpp
+    keduvocvocabularymodel.cpp
+    #keduvocwordclassmodel.cpp
+    #keduvoccontainermimedata.cpp
+    #keduvocvocabularymimedata.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -99,6 +106,13 @@ ecm_generate_headers( KdeEdu_HEADERS
     SharedKVTMLFiles
     KEduVocDeclension
     KEduVocKVTML2Writer
+    #KEduVocContainerModel
+    #KEduVocLessonModel
+    #KEduVocReadOnlyContainerModel
+    KEduVocVocabularyModel
+    #KEduVocWordClassModel
+    #KEduVocContainerMimeData
+    #KEduVocVocabularyMimeData
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
@@ -132,6 +146,7 @@ set_target_properties(keduvocdocument_static PROPERTIES COMPILE_FLAGS -DKEDUVOCD
 target_link_libraries(keduvocdocument_static
   PUBLIC
     KF5::KIOCore
+    Qt${QT_MAJOR_VERSION}::Gui
     Qt${QT_MAJOR_VERSION}::Xml
   PRIVATE
     KF5::I18n
