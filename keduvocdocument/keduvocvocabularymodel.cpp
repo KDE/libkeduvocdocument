@@ -368,7 +368,7 @@ QStringList KEduVocVocabularyModel::mimeTypes() const
 
 QMimeData * KEduVocVocabularyModel::mimeData(const QModelIndexList & indexes) const
 {
-    VocabularyMimeData *mimeData = new VocabularyMimeData();
+    KEduVocVocabularyMimeData *mimeData = new KEduVocVocabularyMimeData();
     QModelIndexList sortedIndexes = indexes;
     qSort(sortedIndexes);
 
