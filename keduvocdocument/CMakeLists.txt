@@ -34,7 +34,7 @@ set(keduvocdocument_LIB_SRCS
     keduvoclessonmodel.cpp
     keduvocreadonlycontainermodel.cpp
     keduvocvocabularymodel.cpp
-    #keduvocwordclassmodel.cpp
+    keduvocwordclassmodel.cpp
     #keduvoccontainermimedata.cpp
     #keduvocvocabularymimedata.cpp
     autosave/kautosavefile.cpp
@@ -76,7 +76,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocLessonModel
     KEduVocReadOnlyContainerModel
     KEduVocVocabularyModel
-    #KEduVocWordClassModel
+    KEduVocWordClassModel
     #KEduVocContainerMimeData
     #KEduVocVocabularyMimeData
 
