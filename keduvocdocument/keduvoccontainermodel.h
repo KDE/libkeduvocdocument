@@ -42,6 +42,7 @@ public:
     };
 
     explicit KEduVocContainerModel(KEduVocContainer::EnumContainerType type, QObject *parent = 0);
+    ~KEduVocContainerModel();
 
     virtual QVariant data(const QModelIndex &index, int role) const;
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
@@ -76,6 +77,10 @@ signals:
      * emitted when the inPractice state or name of a lesson changed.
      */
     void documentModified();
+
+private:
+    class Private;
+    Private * const d;
 };
 
 

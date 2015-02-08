@@ -33,8 +33,14 @@
   */
 
 KEduVocContainerModel::KEduVocContainerModel(KEduVocContainer::EnumContainerType type, QObject * parent)
-: KEduVocReadonlyContainerModel(type, parent)
+    : KEduVocReadonlyContainerModel(type, parent)
+    , d(0)
 {
+}
+
+KEduVocContainerModel::~KEduVocContainerModel()
+{
+    delete d;
 }
 
 QModelIndex KEduVocContainerModel::appendContainer(const QModelIndex& parent, const QString & containerName)
