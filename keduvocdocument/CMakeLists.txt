@@ -54,7 +54,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocwordtype.h
     kvtml2defs.h
     kvtmldefs.h
-    #keduvoccontainermodel.cpp
+    keduvoccontainermodel.cpp
     #keduvoclessonmodel.cpp
     keduvocreadonlycontainermodel.cpp
     keduvocvocabularymodel.cpp
@@ -106,7 +106,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     SharedKVTMLFiles
     KEduVocDeclension
     KEduVocKVTML2Writer
-    #KEduVocContainerModel
+    KEduVocContainerModel
     #KEduVocLessonModel
     KEduVocReadOnlyContainerModel
     KEduVocVocabularyModel
