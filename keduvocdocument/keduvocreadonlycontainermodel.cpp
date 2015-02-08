@@ -59,6 +59,16 @@ KEduVocReadonlyContainerModel::~KEduVocReadonlyContainerModel()
     delete d;
 }
 
+KEduVocContainer::EnumContainerType KEduVocReadonlyContainerModel::getType() const
+{
+    return d->m_type;
+}
+
+KEduVocDocument* KEduVocReadonlyContainerModel::getDoc() const
+{
+    return d->m_doc;
+}
+
 void KEduVocReadonlyContainerModel::setDocument(KEduVocDocument * doc)
 {
     beginResetModel();

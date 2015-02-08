@@ -53,6 +53,10 @@ public:
 
     KEduVocContainer::EnumContainerType containerType();
 
+    // getter methods
+    KEduVocContainer::EnumContainerType getType() const;
+    KEduVocDocument* getDoc() const;
+
 public slots:
     /** Set the new source kvtml file
      * @param doc the new file */
