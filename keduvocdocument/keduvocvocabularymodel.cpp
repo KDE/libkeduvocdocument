@@ -18,6 +18,7 @@
 #include <keduvocwordtype.h>
 
 #include "keduvocvocabularymimedata.h"
+#include "keduvocdocument.h"
 
 #include <keduvocexpression.h>
 #include <KLocalizedString>
@@ -42,7 +43,6 @@ KEduVocVocabularyModel::Private::Private()
     m_container = 0;
     m_document = 0;
     m_lesson = 0;
-    m_recursive = 0;
 }
 
 KEduVocVocabularyModel::KEduVocVocabularyModel(bool show, QObject *parent)
@@ -62,10 +62,6 @@ KEduVocVocabularyModel::~KEduVocVocabularyModel()
 void KEduVocVocabularyModel::setDocument(KEduVocDocument * doc)
 {
     beginResetModel();
-
-    d->m_document = doc;
-    d->m_container = 0;
-    d->m_lesson = 0;
 
     if (d->m_document) {
         showContainer(d->m_document->lesson());
