@@ -27,7 +27,13 @@
 
 KEduVocLessonModel::KEduVocLessonModel(QObject * parent)
     : KEduVocContainerModel(KEduVocContainer::Lesson, parent)
+    , d(0)
 {
+}
+
+KEduVocLessonModel::~KEduVocLessonModel()
+{
+    delete d;
 }
 
 KEduVocContainer * KEduVocLessonModel::rootContainer() const
