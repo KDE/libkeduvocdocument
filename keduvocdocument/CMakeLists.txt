@@ -60,7 +60,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocvocabularymodel.cpp
     keduvocwordclassmodel.cpp
     keduvoccontainermimedata.cpp
-    #keduvocvocabularymimedata.cpp
+    keduvocvocabularymimedata.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -112,7 +112,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocVocabularyModel
     KEduVocWordClassModel
     KEduVocContainerMimeData
-    #KEduVocVocabularyMimeData
+    KEduVocVocabularyMimeData
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
