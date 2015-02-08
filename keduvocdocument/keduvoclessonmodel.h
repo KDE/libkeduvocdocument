@@ -33,6 +33,7 @@ public:
     };
 
     explicit KEduVocLessonModel(QObject *parent = 0);
+    ~KEduVocLessonModel();
 
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
@@ -49,6 +50,10 @@ public:
 
 protected:
     KEduVocContainer * rootContainer() const;
+
+private:
+    class Private;
+    Private * const d;
 };
 
 
