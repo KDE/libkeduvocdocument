@@ -34,7 +34,7 @@ set(keduvocdocument_LIB_SRCS
     keduvoccsvwriter.cpp
     #keduvoccontainermodel.cpp
     #keduvoclessonmodel.cpp
-    #keduvocreadonlycontainermodel.cpp
+    keduvocreadonlycontainermodel.cpp
     keduvocvocabularymodel.cpp
     #keduvocwordclassmodel.cpp
     #keduvoccontainermimedata.cpp
@@ -74,7 +74,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocKVTML2Writer
     #KEduVocContainerModel
     #KEduVocLessonModel
-    #KEduVocReadOnlyContainerModel
+    KEduVocReadOnlyContainerModel
     KEduVocVocabularyModel
     #KEduVocWordClassModel
     #KEduVocContainerMimeData
