@@ -21,8 +21,14 @@
 
 
 KEduVocWordClassModel::KEduVocWordClassModel(QObject * parent)
-: KEduVocContainerModel(KEduVocContainer::WordType, parent)
+    : KEduVocContainerModel(KEduVocContainer::WordType, parent)
+    , d(0)
 {
+}
+
+KEduVocWordClassModel::~KEduVocWordClassModel()
+{
+    delete d;
 }
 
 KEduVocContainer * KEduVocWordClassModel::rootContainer() const

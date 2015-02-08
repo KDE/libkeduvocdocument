@@ -27,6 +27,7 @@ class KEduVocWordClassModel : public KEduVocContainerModel
 
 public:
     explicit KEduVocWordClassModel(QObject *parent = 0);
+    ~KEduVocWordClassModel();
 
     // TODO implement this function
     QModelIndex appendWordClass(const QModelIndex& parent, const QString & wordTypeName = QString());
@@ -36,6 +37,10 @@ public:
 
 protected:
     KEduVocContainer * rootContainer() const;
+
+private:
+    class Private;
+    Private * const d;
 };
 
 
