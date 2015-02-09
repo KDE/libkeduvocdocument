@@ -104,7 +104,7 @@ QStringList KEduVocVocabularyMimeData::formats() const
     return QStringList() << "text/plain";
 }
 
-QList< VocabularyMimeData::MimeExpression > KEduVocVocabularyMimeData::expressionList() const
+QList< KEduVocVocabularyMimeData::MimeExpression > KEduVocVocabularyMimeData::expressionList() const
 {
-    return m_expressions;
+    return d->m_expressions;
 }
