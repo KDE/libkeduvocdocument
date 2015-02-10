@@ -18,6 +18,7 @@
 #include <keduvocexpression.h>
 #include <keduvoctranslation.h>
 #include <QAbstractTableModel>
+#include <QFont>
 
 class KEduVocDocument;
 class KEduVocLesson;
@@ -61,6 +62,8 @@ public:
     QVariant data(const QModelIndex&, int) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role);
     Qt::ItemFlags flags(const QModelIndex &index) const;
+
+    QFont font(int translation) const;
 
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
@@ -106,6 +109,8 @@ public slots:
     void setLesson(KEduVocLesson *lessonContainer);
 
     KEduVocLesson * lesson();
+
+    void setFont(QFont & font, int translation);
 
     KEduVocContainer::EnumEntriesRecursive recursive();
 
