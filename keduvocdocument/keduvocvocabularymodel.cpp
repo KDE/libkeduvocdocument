@@ -25,6 +25,8 @@
 #include <QDebug>
 #include <QPixmap>
 #include <QTextStream>
+#include <QFont>
+#include <QAbstractTableModel>
 
 class KEduVocVocabularyModel::Private
 {
@@ -36,6 +38,9 @@ public:
 
     KEduVocDocument *m_document;
     KEduVocContainer::EnumEntriesRecursive m_recursive;
+
+    // stores the font-type for each language as specified by the application
+    QVector<QFont> m_fontList;
 };
 
 KEduVocVocabularyModel::Private::Private()
@@ -128,6 +133,17 @@ int KEduVocVocabularyModel::columnCount(const QModelIndex &) const
     return d->m_document->identifierCount() * EntryColumnsMAX;
 }
 
+QFont KEduVocVocabularyModel::font(int translation) const
+{
+    return d->m_fontList[translation];
+}
+
+void KEduVocVocabularyModel::setFont(QFont & font, int translation)
+{
+        d->m_fontList[translation] = font;
+        emit dataChanged(createIndex(translation, translation), createIndex(translation, translation));
+}
+
 QVariant KEduVocVocabularyModel::data(const QModelIndex & index, int role) const
 {
     if (!d->m_document || !d->m_container) {
@@ -178,10 +194,9 @@ QVariant KEduVocVocabularyModel::data(const QModelIndex & index, int role) const
         break;
     case Qt::FontRole:
         if (entryColumn == Translation) {
-            QString locale = d->m_document->identifier(translationId).locale();
-            LanguageSettings ls(locale);
-            ls.load();
-            return ls.editorFont();
+            if( &(d->m_fontList.at( translationId )) )
+                return QVariant( d->m_fontList[translationId] );
+            return QVariant();
         }
         return QVariant();
     case LocaleRole:
