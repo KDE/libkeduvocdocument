@@ -40,3 +40,4 @@ install( EXPORT LibKEduVocDocumentTargets
          DESTINATION "${_LibKEduVocDocument_CONFIG_DEST}"
          NAMESPACE LibKEduVocDocumentImport__
          FILE LibKEduVocDocumentTargets.cmake )
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
