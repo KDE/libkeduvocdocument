@@ -51,11 +51,9 @@ public:
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     virtual int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
-    KEduVocContainer::EnumContainerType containerType();
-
     // getter methods
-    KEduVocContainer::EnumContainerType getType() const;
-    KEduVocDocument* getDoc() const;
+    KEduVocContainer::EnumContainerType containerType() const;
+    KEduVocDocument* document() const;
 
 public slots:
     /** Set the new source kvtml file
