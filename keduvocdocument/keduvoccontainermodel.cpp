@@ -54,7 +54,7 @@ QModelIndex KEduVocContainerModel::appendContainer(const QModelIndex& parent, co
 
     beginInsertRows(parent, parentContainer->childContainerCount(),
                     parentContainer->childContainerCount());
-    switch (getType()) {
+    switch (containerType()) {
         case (KEduVocContainer::Lesson):
             parentContainer->appendChildContainer(new KEduVocLesson(containerName, static_cast<KEduVocLesson*>(parentContainer)));
             break;
@@ -187,7 +187,7 @@ QVariant KEduVocContainerModel::headerData(int section, Qt::Orientation orientat
 int KEduVocContainerModel::columnCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
-    if (!getDoc()) {
+    if (!document()) {
         return FirstDataColumn;
     }
 
@@ -251,7 +251,7 @@ bool KEduVocContainerModel::dropMimeData(const QMimeData * data, Qt::DropAction 
     if (containerData) {
         foreach(KEduVocContainer * container, containerData->containerList()) {
             // no way to move a word type to a lesson for now
-            if (container->containerType() != getType()) {
+            if (container->containerType() != containerType()) {
                 return false;
             }
 
