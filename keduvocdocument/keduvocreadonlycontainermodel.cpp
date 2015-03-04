@@ -59,12 +59,12 @@ KEduVocReadonlyContainerModel::~KEduVocReadonlyContainerModel()
     delete d;
 }
 
-KEduVocContainer::EnumContainerType KEduVocReadonlyContainerModel::getType() const
+KEduVocContainer::EnumContainerType KEduVocReadonlyContainerModel::containerType() const
 {
     return d->m_type;
 }
 
-KEduVocDocument* KEduVocReadonlyContainerModel::getDoc() const
+KEduVocDocument* KEduVocReadonlyContainerModel::document() const
 {
     return d->m_doc;
 }
@@ -209,9 +209,4 @@ int KEduVocReadonlyContainerModel::columnCount(const QModelIndex & parent) const
     }
 
     return 1;
-}
-
-KEduVocContainer::EnumContainerType KEduVocReadonlyContainerModel::containerType()
-{
-    return d->m_type;
 }
