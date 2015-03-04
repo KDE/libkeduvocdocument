@@ -33,8 +33,8 @@ KEduVocWordClassModel::~KEduVocWordClassModel()
 
 KEduVocContainer * KEduVocWordClassModel::rootContainer() const
 {
-    if (getDoc()) {
+    if (document()) {
         return 0;
     }
-    return getDoc()->wordTypeContainer();
+    return document()->wordTypeContainer();
 }
