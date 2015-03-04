@@ -38,10 +38,10 @@ KEduVocLessonModel::~KEduVocLessonModel()
 
 KEduVocContainer * KEduVocLessonModel::rootContainer() const
 {
-    if (!getDoc()) {
+    if (!document()) {
         return 0;
     }
-    return getDoc()->lesson();
+    return document()->lesson();
 }
 
 Qt::ItemFlags KEduVocLessonModel::flags(const QModelIndex &index) const
@@ -78,7 +78,7 @@ bool KEduVocLessonModel::setData(const QModelIndex &index, const QVariant &value
     if (index.isValid() && !index.parent().isValid()) {
         if (index.column() == ContainerNameColumn && role == Qt::EditRole) {
             ///@todo decouple the root lesson and document title
-            getDoc()->setTitle(value.toString());
+            document()->setTitle(value.toString());
         }
     }
     return KEduVocContainerModel::setData(index, value, role);
