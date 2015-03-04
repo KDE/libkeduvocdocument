@@ -30,7 +30,7 @@
 /**
   * Model for the tree of containers (lessons, word types).
   */
-class KEduVocContainerModel : public KEduVocReadonlyContainerModel
+class KEDUVOCDOCUMENT_EXPORT KEduVocContainerModel : public KEduVocReadonlyContainerModel
 {
     Q_OBJECT
 

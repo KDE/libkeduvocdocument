@@ -23,7 +23,7 @@
 class KEduVocTranslation;
 
 
-class KEduVocVocabularyMimeData : public QMimeData
+class KEDUVOCDOCUMENT_EXPORT KEduVocVocabularyMimeData : public QMimeData
 {
     Q_OBJECT
 public:
