@@ -30,7 +30,7 @@
   * @see ContainerModel for its subclass that includes more options.
   */
 
-class KEduVocReadonlyContainerModel : public QAbstractItemModel
+class KEDUVOCDOCUMENT_EXPORT KEduVocReadonlyContainerModel : public QAbstractItemModel
 {
     Q_OBJECT
 

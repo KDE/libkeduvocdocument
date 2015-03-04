@@ -21,7 +21,7 @@
 /**
   * Model for the tree of lessons.
   */
-class KEduVocLessonModel : public KEduVocContainerModel
+class KEDUVOCDOCUMENT_EXPORT KEduVocLessonModel : public KEduVocContainerModel
 {
     Q_OBJECT
 

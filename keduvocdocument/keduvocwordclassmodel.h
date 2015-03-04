@@ -21,7 +21,7 @@
 /**
   * Model for the tree of word types.
   */
-class KEduVocWordClassModel : public KEduVocContainerModel
+class KEDUVOCDOCUMENT_EXPORT KEduVocWordClassModel : public KEduVocContainerModel
 {
     Q_OBJECT
 
