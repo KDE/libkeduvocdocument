@@ -27,7 +27,7 @@ class KEduVocLesson;
 /**
     @author Frederik Gladhorn <frederik.gladhorn@kdemail.net>
 */
-class KEduVocVocabularyModel : public QAbstractTableModel
+class KEDUVOCDOCUMENT_EXPORT KEduVocVocabularyModel : public QAbstractTableModel
 {
     Q_OBJECT
 public:
