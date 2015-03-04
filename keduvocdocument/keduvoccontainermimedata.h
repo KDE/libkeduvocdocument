@@ -23,7 +23,7 @@
 class KEduVocContainer;
 
 
-class KEduVocContainerMimeData : public QMimeData
+class KEDUVOCDOCUMENT_EXPORT KEduVocContainerMimeData : public QMimeData
 {
     Q_OBJECT
 public:
