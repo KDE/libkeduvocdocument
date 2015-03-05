@@ -32,10 +32,10 @@ public:
     KEduVocContainer::EnumContainerType m_type;
     KEduVocDocument *m_doc;
 
-    Private(KEduVocContainer::EnumContainerType & type);
+    Private(KEduVocContainer::EnumContainerType type);
 };
 
-KEduVocReadonlyContainerModel::Private::Private(KEduVocContainer::EnumContainerType & type)
+KEduVocReadonlyContainerModel::Private::Private(KEduVocContainer::EnumContainerType type)
     : m_type(type)
     , m_doc(0)
 {
@@ -47,7 +47,7 @@ KEduVocReadonlyContainerModel::Private::Private(KEduVocContainer::EnumContainerT
   */
 
 
-KEduVocReadonlyContainerModel::KEduVocReadonlyContainerModel(KEduVocContainer::EnumContainerType & type,
+KEduVocReadonlyContainerModel::KEduVocReadonlyContainerModel(KEduVocContainer::EnumContainerType type,
                                                              QObject * parent)
     : QAbstractItemModel( parent )
     , d( new Private( type ))
