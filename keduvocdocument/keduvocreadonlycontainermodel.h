@@ -35,7 +35,7 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocReadonlyContainerModel : public QAbstractIte
     Q_OBJECT
 
 public:
-    explicit KEduVocReadonlyContainerModel(KEduVocContainer::EnumContainerType & type, QObject *parent = 0);
+    explicit KEduVocReadonlyContainerModel(KEduVocContainer::EnumContainerType type, QObject *parent = 0);
 
     ~KEduVocReadonlyContainerModel();
 
