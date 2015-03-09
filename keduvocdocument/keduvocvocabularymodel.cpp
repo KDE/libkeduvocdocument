@@ -40,7 +40,7 @@ public:
     KEduVocContainer::EnumEntriesRecursive m_recursive;
 
     // stores the font-type for each language as specified by the application
-    QVector<QFont> m_fontList;
+    QHash<int, QFont> m_fontList;
 };
 
 KEduVocVocabularyModel::Private::Private()
@@ -66,6 +66,8 @@ KEduVocVocabularyModel::~KEduVocVocabularyModel()
 
 void KEduVocVocabularyModel::setDocument(KEduVocDocument * doc)
 {
+    d->m_document = doc;
+
     beginResetModel();
 
     if (d->m_document) {
@@ -194,9 +196,9 @@ QVariant KEduVocVocabularyModel::data(const QModelIndex & index, int role) const
         break;
     case Qt::FontRole:
         if (entryColumn == Translation) {
-            if( &(d->m_fontList.at( translationId )) )
+            if( d->m_fontList.contains(translationId) )
                 return QVariant( d->m_fontList[translationId] );
-            return QVariant();
+            return QFont();
         }
         return QVariant();
     case LocaleRole:
