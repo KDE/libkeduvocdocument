@@ -118,8 +118,6 @@ public slots:
      * Show the entries of child lessons in selected lessons
      * @param show
      */
-    void showEntriesOfSubcontainers(bool show);
-
     void setRecursive(bool show);
 
 private:

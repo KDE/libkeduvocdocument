@@ -412,13 +412,6 @@ void KEduVocVocabularyModel::setRecursive(bool show)
     endResetModel();
 }
 
-void KEduVocVocabularyModel::showEntriesOfSubcontainers(bool show)
-{
-    beginResetModel();
-    setRecursive(show);
-    endResetModel();
-}
-
 void KEduVocVocabularyModel::resetLanguages()
 {
     // play it save - this happens seldom enough to warrant a reload
