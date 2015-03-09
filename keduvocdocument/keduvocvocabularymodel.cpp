@@ -415,11 +415,7 @@ void KEduVocVocabularyModel::setRecursive(bool show)
 void KEduVocVocabularyModel::showEntriesOfSubcontainers(bool show)
 {
     beginResetModel();
-    if (show) {
-        setRecursive(KEduVocContainer::Recursive);
-    } else {
-        setRecursive(KEduVocContainer::NotRecursive);
-    }
+    setRecursive(show);
     endResetModel();
 }
 
