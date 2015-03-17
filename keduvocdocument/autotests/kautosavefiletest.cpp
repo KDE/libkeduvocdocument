@@ -533,7 +533,7 @@ void KAutoSaveFileTest::test_locking()
     // It looks like $XDG_DATA_HOME/stalefiles/qttest/test.txtXXXfish_%2Fhome%2FremoteXXXXXXX
     QVERIFY2(fn.contains(QLatin1String("stalefiles/" ) + mainappname
                          + QLatin1String("/test.txt")), qPrintable(fn));
-    QVERIFY2(fn.contains(QLatin1String("fish_%2Fhome%2Fremote")), qPrintable(fn));
+    QVERIFY2(fn.contains(QLatin1String("fish%3A%2F%2Fuser%40example.com%2Fhome%2Fremote")), qPrintable(fn));
 
     QVERIFY(QFile::exists(saveFile.fileName()));
     QVERIFY(QFile::exists(saveFile2->fileName()));
