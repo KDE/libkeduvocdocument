@@ -22,7 +22,7 @@
 #include "keduvoctext.h"
 #include <QUrl>
 #include <QtCore/QString>
-
+#include <QMap>
 class KEduVocExpression;
 class KEduVocWordType;
 class KEduVocLeitnerBox;

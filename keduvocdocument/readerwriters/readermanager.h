@@ -23,7 +23,7 @@
 #include "keduvocdocument.h"
 
 #include <QSharedPointer>
-
+#include <QIODevice>
 class ReaderBase;
 
 /**
