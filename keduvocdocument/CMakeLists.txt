@@ -75,10 +75,10 @@ generate_export_header(KEduVocDocument BASE_NAME KEduVocDocument)
 
 target_link_libraries(KEduVocDocument
   PUBLIC
-    KF5::KIOCore
     Qt5::Xml
   PRIVATE
     KF5::I18n
+    KF5::KIOCore
     KF5::Archive
 )
 
