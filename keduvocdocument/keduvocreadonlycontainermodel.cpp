@@ -18,8 +18,8 @@
 #include <KLocalizedString>
 #include <QDebug>
 
-#include "keduvoccontainermimedata.h"
-#include "keduvocvocabularymimedata.h"
+#include <keduvoccontainermimedata.h>
+#include <keduvocvocabularymimedata.h>
 
 #include <keduvocdocument.h>
 #include <keduvoclesson.h>

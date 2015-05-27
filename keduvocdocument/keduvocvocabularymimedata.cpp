@@ -16,8 +16,8 @@
 
 #include "keduvocvocabularymimedata.h"
 
-#include "keduvoctranslation.h"
-#include "keduvocwordtype.h"
+#include <keduvoctranslation.h>
+#include <keduvocwordtype.h>
 
 class KEduVocVocabularyMimeData::Private
 {

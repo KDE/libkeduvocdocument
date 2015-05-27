@@ -14,10 +14,10 @@
  ***************************************************************************/
 
 #include "keduvoccontainermodel.h"
-#include "keduvoccontainer.h"
+#include <keduvoccontainer.h>
 
-#include "keduvoccontainermimedata.h"
-#include "keduvocvocabularymimedata.h"
+#include <keduvoccontainermimedata.h>
+#include <keduvocvocabularymimedata.h>
 
 #include <keduvocdocument.h>
 #include <keduvoclesson.h>
