@@ -16,7 +16,7 @@
 #ifndef KEDUVOCWORDCLASSMODEL_H
 #define KEDUVOCWORDCLASSMODEL_H
 
-#include "keduvoccontainermodel.h"
+#include <keduvoccontainermodel.h>
 
 /**
   * Model for the tree of word types.

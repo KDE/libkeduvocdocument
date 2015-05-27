@@ -17,8 +17,8 @@
 #include <keduvoclesson.h>
 #include <keduvocwordtype.h>
 
-#include "keduvocvocabularymimedata.h"
-#include "keduvocdocument.h"
+#include <keduvocvocabularymimedata.h>
+#include <keduvocdocument.h>
 
 #include <keduvocexpression.h>
 #include <KLocalizedString>
