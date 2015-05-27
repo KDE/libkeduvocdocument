@@ -31,10 +31,10 @@ public:
     ~KEduVocWordClassModel();
 
     // TODO implement this function
-    QModelIndex appendWordClass(const QModelIndex& parent, const QString & wordTypeName = QString());
+    //QModelIndex appendWordClass(const QModelIndex& parent, const QString & wordTypeName = QString());
 
     // TODO implement this function
-    void deleteWordClass(const QModelIndex& wordTypeIndex);
+    //void deleteWordClass(const QModelIndex& wordTypeIndex);
 
 protected:
     KEduVocContainer * rootContainer() const;
