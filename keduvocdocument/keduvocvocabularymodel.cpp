@@ -143,8 +143,8 @@ QFont KEduVocVocabularyModel::font(int translation) const
 
 void KEduVocVocabularyModel::setFont(QFont & font, int translation)
 {
-        d->m_fontList[translation] = font;
-        emit dataChanged(createIndex(translation, translation), createIndex(translation, translation));
+    d->m_fontList[translation] = font;
+    emit dataChanged(createIndex(translation, translation), createIndex(translation, translation));
 }
 
 QVariant KEduVocVocabularyModel::data(const QModelIndex & index, int role) const
@@ -315,7 +315,7 @@ QString KEduVocVocabularyModel::columnTitle(KEduVocDocument *document, int trans
     case Pronunciation:
         return i18n("Pronunciation");
     case WordClass:
-        return i18n("Word Type");
+        return i18n("Word Class");
     case Synonym:
         return i18n("Synonym");
     case Antonym:
