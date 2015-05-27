@@ -16,7 +16,7 @@
 #ifndef KEDUVOCCONTAINERMODEL_H
 #define KEDUVOCCONTAINERMODEL_H
 
-#include "keduvocreadonlycontainermodel.h"
+#include <keduvocreadonlycontainermodel.h>
 
 #include <QAbstractItemModel>
 #include <QModelIndex>

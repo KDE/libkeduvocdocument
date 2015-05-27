@@ -16,7 +16,7 @@
 #ifndef KEDUVOCLESSONMODEL_H
 #define KEDUVOCLESSONMODEL_H
 
-#include "keduvoccontainermodel.h"
+#include <keduvoccontainermodel.h>
 
 /**
   * Model for the tree of lessons.
