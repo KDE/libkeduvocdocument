@@ -1,6 +1,7 @@
 /***************************************************************************
 
     Copyright 2008-2009 Frederik Gladhorn <gladhorn@kde.org>
+    Copyright 2015 Rahul Chowdhury <rahul.chowdhury@kdemail.net>
 
  ***************************************************************************/
 
