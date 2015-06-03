@@ -37,6 +37,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocwordclassmodel.cpp
     keduvoccontainermimedata.cpp
     keduvocvocabularymimedata.cpp
+    keduvocvocabularyfilter.cpp
     autosave/kautosavefile.cpp
     autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
@@ -79,6 +80,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocWordClassModel
     KEduVocContainerMimeData
     KEduVocVocabularyMimeData
+    KEduVocVocabularyFilter
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
