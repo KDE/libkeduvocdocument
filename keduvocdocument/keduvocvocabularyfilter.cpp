@@ -20,9 +20,6 @@ class KEduVocVocabularyFilter::Private
 {
 public:
     Private();
-    virtual void setSourceModel(QAbstractItemModel *model) {
-        Q_UNUSED(model)
-    }
 
     KEduVocVocabularyModel * m_model;
     QString m_filterString;
@@ -64,7 +61,7 @@ QModelIndex KEduVocVocabularyFilter::appendEntry(KEduVocExpression *expression)
 
 void KEduVocVocabularyFilter::setSourceModel(KEduVocVocabularyModel * model)
 {
-    d->setSourceModel(model);
+    QSortFilterProxyModel::setSourceModel(model);
     d->m_model = model;
 }
 
