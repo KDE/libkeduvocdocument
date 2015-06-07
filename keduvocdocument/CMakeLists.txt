@@ -38,6 +38,7 @@ set(keduvocdocument_LIB_SRCS
     keduvoccontainermimedata.cpp
     keduvocvocabularymimedata.cpp
     keduvocvocabularyfilter.cpp
+    keduvoctranslator.cpp
     autosave/kautosavefile.cpp
     autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
@@ -81,6 +82,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocContainerMimeData
     KEduVocVocabularyMimeData
     KEduVocVocabularyFilter
+    KEduVocTranslator
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
@@ -94,6 +96,7 @@ target_link_libraries(KEduVocDocument
     Qt5::Xml
     Qt5::Gui
     Qt5::Core
+    Qt5::Widgets
   PRIVATE
     KF5::I18n
     KF5::KIOCore
@@ -119,6 +122,7 @@ target_link_libraries(keduvocdocument_static
     Qt5::Xml
     Qt5::Core
     Qt5::Gui
+    Qt5::Widgets
   PRIVATE
     KF5::I18n
     KF5::Archive
