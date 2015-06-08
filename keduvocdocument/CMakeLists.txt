@@ -63,6 +63,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocvocabularymimedata.cpp
     keduvocvocabularyfilter.cpp
     keduvoctranslator.cpp
+    keduvocvocabularydelegate.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -117,6 +118,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocVocabularyMimeData
     KEduVocVocabularyFilter
     KEduVocTranslator
+    KEduVocVocabularyDelegate
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
@@ -128,6 +130,7 @@ generate_export_header(KEduVocDocument BASE_NAME KEduVocDocument)
 target_link_libraries(KEduVocDocument
   PUBLIC
     Qt${QT_MAJOR_VERSION}::Core
+    Qt${QT_MAJOR_VERSION}::DBus
     Qt${QT_MAJOR_VERSION}::Gui
     Qt${QT_MAJOR_VERSION}::Widgets
     Qt${QT_MAJOR_VERSION}::Xml
@@ -135,6 +138,7 @@ target_link_libraries(KEduVocDocument
     KF5::I18n
     KF5::KIOCore
     KF5::Archive
+    KF5::Completion
 )
 
 
@@ -154,12 +158,14 @@ target_link_libraries(keduvocdocument_static
   PUBLIC
     KF5::KIOCore
     Qt${QT_MAJOR_VERSION}::Core
+    Qt${QT_MAJOR_VERSION}::DBus
     Qt${QT_MAJOR_VERSION}::Gui
     Qt${QT_MAJOR_VERSION}::Widgets
     Qt${QT_MAJOR_VERSION}::Xml
   PRIVATE
     KF5::I18n
     KF5::Archive
+    KF5::Completion
 )
 
 

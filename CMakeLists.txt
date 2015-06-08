@@ -12,8 +12,8 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
 include(GenerateExportHeader)
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core Gui Widgets Xml)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n Archive KIO)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core DBus Gui Widgets Xml)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n Archive KIO Completion)
 
 #add_definitions( -Wall -fprofile-arcs -ftest-coverage )
 
