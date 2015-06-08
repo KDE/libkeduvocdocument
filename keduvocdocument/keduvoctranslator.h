@@ -155,7 +155,6 @@ namespace Scripting
         };
 
         /**
-         * @param editor Represents a Editor::EditorWindow object
          * @param doc Represents a KEduVococument object
          *      For example, when using this function in Parley, pass the doc value like this:
          *      m_editor->m_mainWindow->parleyDocument()->document()
@@ -164,8 +163,9 @@ namespace Scripting
          *      For example, when using this function in Parley, pass the vocabularyModel value like this:
          *      m_editor->m_vocabularyModel
          *      where m_editor is a EditorWindow object
+         * @param separator Represents Prefs::separator()
          */
-        KEduVocDocument( ::KEduVocDocument * doc, KEduVocVocabularyModel * vocabularyModel );
+        KEduVocDocument( ::KEduVocDocument * doc, KEduVocVocabularyModel * vocabularyModel, QString * separator );
 
         ~KEduVocDocument();
 
@@ -190,6 +190,16 @@ namespace Scripting
 
         //Returns the active lesson
         //KEduVocLesson* activeLesson();
+
+        QString separator()
+        {
+            return m_separator;
+        }
+
+        void setSeparator( QString* v )
+        {
+            m_separator = v;
+        }
 
     public Q_SLOTS:
 
@@ -353,6 +363,7 @@ namespace Scripting
         KEduVocTranslator* m_translator;
         ::KEduVocDocument* m_doc;
         KEduVocVocabularyModel * m_vocabularyModel;
+        QString * m_separator;
     };
 }
 
