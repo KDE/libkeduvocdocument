@@ -81,7 +81,7 @@ namespace Scripting
         }
         m_doc = new ::KEduVocDocument(this);
         emit documentChanged(m_doc);
-        m_doc->setCsvDelimiter(m_separator);
+        m_doc->setCsvDelimiter(*m_separator);
 
         bool isSuccess = false, isError = false;
 

@@ -191,7 +191,7 @@ namespace Scripting
         //Returns the active lesson
         //KEduVocLesson* activeLesson();
 
-        QString separator()
+        QString * separator()
         {
             return m_separator;
         }
