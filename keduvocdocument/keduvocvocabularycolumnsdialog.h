@@ -51,8 +51,9 @@ public:
 
     /**
      * @param visibleColumns Represents DocumentSettings::visibleColumns()
-     * Example usage: Use doc->url().url() for this parameter, where doc is the KEduVocDocument object passed to this function as @param doc
-     * Save the settings using DocumentSettings::save()
+     * Example usage:
+     *      DocumentSettings ds(doc->url().url());
+            KEduVocVocabularyColumnsDialog *dialog = new KEduVocVocabularyColumnsDialog(doc, ds.visibleColumns(), this);
      */
     KEduVocVocabularyColumnsDialog(KEduVocDocument *doc, QList <int> visibleColumns, QWidget *parent);
     ~KEduVocVocabularyColumnsDialog();
