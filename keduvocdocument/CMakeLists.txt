@@ -64,6 +64,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocvocabularyfilter.cpp
     keduvoctranslator.cpp
     keduvocvocabularydelegate.cpp
+    keduvocvocabularyheaderview.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -119,6 +120,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocVocabularyFilter
     KEduVocTranslator
     KEduVocVocabularyDelegate
+    KEduVocVocabularyHeaderView
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
