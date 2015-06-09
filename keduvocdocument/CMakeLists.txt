@@ -40,6 +40,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocvocabularyfilter.cpp
     keduvoctranslator.cpp
     keduvocvocabularydelegate.cpp
+    keduvocvocabularyheaderview.cpp
     autosave/kautosavefile.cpp
     autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
@@ -85,6 +86,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocVocabularyFilter
     KEduVocTranslator
     KEduVocVocabularyDelegate
+    KEduVocVocabularyHeaderView
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
