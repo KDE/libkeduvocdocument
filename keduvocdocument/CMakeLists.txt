@@ -42,6 +42,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocvocabularydelegate.cpp
     keduvocvocabularyheaderview.cpp
     keduvocvocabularycolumnsdialog.cpp
+    keduvoccontainerview.cpp
     autosave/kautosavefile.cpp
     autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
@@ -89,6 +90,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocVocabularyDelegate
     KEduVocVocabularyHeaderView
     KEduVocVocabularyColumnsDialog
+    KEduVocContainerView
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
