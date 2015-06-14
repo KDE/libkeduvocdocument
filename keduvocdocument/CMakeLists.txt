@@ -67,6 +67,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocvocabularyheaderview.cpp
     keduvocvocabularycolumnsdialog.cpp
     keduvoccontainerview.cpp
+    keduvocvocabularyview.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -125,6 +126,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocVocabularyHeaderView
     KEduVocVocabularyColumnsDialog
     KEduVocContainerView
+    KEduVocVocabularyView
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
@@ -146,6 +148,10 @@ target_link_libraries(KEduVocDocument
     KF5::Archive
     KF5::Completion
     KF5::WidgetsAddons
+    KF5::SonnetCore
+    KF5::SonnetUi
+    KF5::Notifications
+    KF5::XmlGui
 )
 
 
@@ -174,6 +180,10 @@ target_link_libraries(keduvocdocument_static
     KF5::Archive
     KF5::Completion
     KF5::WidgetsAddons
+    KF5::SonnetCore
+    KF5::SonnetUi
+    KF5::Notifications
+    KF5::XmlGui
 )
 
 
