@@ -45,6 +45,7 @@ set(keduvocdocument_LIB_SRCS
     keduvoccontainerview.cpp
     keduvocvocabularyview.cpp
     keduvocwordtypeview.cpp
+    keduvoclessonview.cpp
     autosave/kautosavefile.cpp
     autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
@@ -95,6 +96,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocContainerView
     KEduVocVocabularyView
     KEduVocWordTypeView
+    KEduVocLessonView
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
