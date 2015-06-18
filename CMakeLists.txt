@@ -5,7 +5,7 @@ find_package(ECM 1.3.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Xml Gui Widgets DBus Core)
+find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Xml Gui Widgets DBus Core Multimedia)
 find_package(KF5 5.3.0 REQUIRED COMPONENTS I18n Archive KIO Completion Sonnet Notifications XmlGui)
 
 #add_definitions( -Wall -fprofile-arcs -ftest-coverage )

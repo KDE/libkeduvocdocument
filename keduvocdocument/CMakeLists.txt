@@ -48,6 +48,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocvocabularyview.cpp
     keduvocwordtypeview.cpp
     keduvoclessonview.cpp
+    keduvocaudiowidget.cpp
     readerwriters/dummyreader.cpp
     readerwriters/failedreader.cpp
     readerwriters/keduvockvtmlreader.cpp
@@ -59,6 +60,10 @@ set(keduvocdocument_LIB_SRCS
     readerwriters/keduvocxdxfreader.cpp
     readerwriters/readermanager.cpp
     sharedkvtmlfiles.cpp
+)
+
+ki18n_wrap_ui(keduvocdocument_LIB_SRCS
+    keduvocaudiowidget.ui
 )
 
 include(ECMGenerateHeaders)
@@ -97,6 +102,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocVocabularyView
     KEduVocWordTypeView
     KEduVocLessonView
+    KEduVocAudioWidget
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
@@ -112,9 +118,13 @@ target_link_libraries(KEduVocDocument
     Qt5::Core
     Qt5::Widgets
     Qt5::DBus
+    Qt5::Multimedia
   PRIVATE
     KF5::I18n
     KF5::KIOCore
+    KF5::KIOFileWidgets
+    KF5::KIOWidgets
+    KF5::KIONTLM
     KF5::Archive
     KF5::Completion
     KF5::WidgetsAddons
@@ -145,8 +155,13 @@ target_link_libraries(keduvocdocument_static
     Qt5::Gui
     Qt5::Widgets
     Qt5::DBus
+    Qt5::Multimedia
   PRIVATE
     KF5::I18n
+    KF5::KIOCore
+    KF5::KIOFileWidgets
+    KF5::KIOWidgets
+    KF5::KIONTLM
     KF5::Archive
     KF5::Completion
     KF5::WidgetsAddons
