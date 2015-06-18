@@ -216,6 +216,11 @@ QList <int> KEduVocVocabularyView::visibleColumns()
     return d->m_visibleColumns;
 }
 
+void KEduVocVocabularyView::setVisibleColumns( QList <int> visibleColumns )
+{
+    d->m_visibleColumns = visibleColumns;
+}
+
 QByteArray KEduVocVocabularyView::state()
 {
     return d->m_state;
@@ -426,12 +431,12 @@ void KEduVocVocabularyView::setTranslator( KEduVocTranslator* translator )
     d->m_vocabularyDelegate->setTranslator( translator );
 }
 
-void KEduVocVocabularyView::slotShowVocabularyColumnsDialog( QList <int> visibleColumns, QByteArray state )
+void KEduVocVocabularyView::slotShowVocabularyColumnsDialog()
 {
     KEduVocVocabularyColumnsDialog *dialog = new KEduVocVocabularyColumnsDialog( d->m_doc, d->m_visibleColumns, this );
 
     if( dialog->exec() == QDialog::Accepted ) {
-        reset( visibleColumns, state );
+        reset( d->m_visibleColumns, d->m_state );
     }
 }
 

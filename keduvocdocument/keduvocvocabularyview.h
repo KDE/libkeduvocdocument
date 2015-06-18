@@ -49,6 +49,10 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocVocabularyView : public QTableView
 {
     Q_OBJECT
 public:
+    /**
+     * @param automaticTranslation corresponding to Prefs::automaticTranslation()
+     */
+
     KEduVocVocabularyView( QWidget *parent, KActionCollection* actionCollection, bool automaticTranslation );
     ~KEduVocVocabularyView();
 
@@ -69,6 +73,8 @@ public:
 
     /** Return Column Visibility for model */
     QList <int> visibleColumns();
+
+    void setVisibleColumns( QList <int> visibleColumns );
 
     QModelIndexList getSelectedIndexes() const;
 
@@ -105,8 +111,6 @@ public slots:
      * QByteArray state = documentGroup.readEntry("VocabularyColumns", QByteArray());
      * 
      * QByteArray saveState = foo.horizontalHeader()->saveState();
-     * KConfig parleyConfig("parleyrc");
-     * KConfigGroup documentGroup(&parleyConfig, "Document " + foo.document()->url().url());
      * documentGroup.writeEntry("VocabularyColumns", foo.horizontalHeader()->saveState());
      * 
      * Where foo is a KEduVocVocabularyView object
@@ -147,29 +151,8 @@ public slots:
 
     /**
      * Show the vocabulary columns dialog to enable or disable the columns in the view
-     * 
-     * @param visibleColumns corresponding to DocumentSettings::visibleColumns()
-     * Example Usage:
-     * DocumentSettings ds( foo.document()->url().url() );
-     * d s.load();
-     * visibleColumns = ds.visibleColumns();
-     * Where foo is a KEduVocVocabularyView object
-     * 
-     * @param state
-     * Example Usage (in Parley):
-     * 
-     * KConfig parleyConfig("parleyrc");
-     * KConfigGroup documentGroup(&parleyConfig, "Document " + foo.document()->url().url()); 
-     * QByteArray state = documentGroup.readEntry("VocabularyColumns", QByteArray());
-     * 
-     * QByteArray saveState = foo.horizontalHeader()->saveState();
-     * KConfig parleyConfig("parleyrc");
-     * KConfigGroup documentGroup(&parleyConfig, "Document " + foo.document()->url().url());
-     * documentGroup.writeEntry("VocabularyColumns", horizontalHeader()->saveState());
-     * 
-     * Where foo is a KEduVocVocabularyView object
      */
-    void slotShowVocabularyColumnsDialog( QList <int> visibleColumns, QByteArray state );
+    void slotShowVocabularyColumnsDialog();
 
 signals:
     void translationChanged( KEduVocExpression*, int );
