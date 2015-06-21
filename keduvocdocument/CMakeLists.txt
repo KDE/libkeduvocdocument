@@ -49,6 +49,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocwordtypeview.cpp
     keduvoclessonview.cpp
     keduvocaudiowidget.cpp
+    keduvocmultiplechoicewidget.cpp
     readerwriters/dummyreader.cpp
     readerwriters/failedreader.cpp
     readerwriters/keduvockvtmlreader.cpp
@@ -64,6 +65,7 @@ set(keduvocdocument_LIB_SRCS
 
 ki18n_wrap_ui(keduvocdocument_LIB_SRCS
     keduvocaudiowidget.ui
+    keduvocmultiplechoicewidget.ui
 )
 
 include(ECMGenerateHeaders)
@@ -103,6 +105,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocWordTypeView
     KEduVocLessonView
     KEduVocAudioWidget
+    KEduVocMultipleChoiceWidget
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
