@@ -72,6 +72,7 @@ set(keduvocdocument_LIB_SRCS
     keduvoclessonview.cpp
     keduvocaudiowidget.cpp
     keduvocmultiplechoicewidget.cpp
+    keduvoccomparisonwidget.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -100,6 +101,7 @@ set(keduvocdocument_LIB_SRCS
 ki18n_wrap_ui(keduvocdocument_LIB_SRCS
     keduvocaudiowidget.ui
     keduvocmultiplechoicewidget.ui
+    keduvoccomparisonwidget.ui
 )
 
 include(ECMGenerateHeaders)
@@ -140,6 +142,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocLessonView
     KEduVocAudioWidget
     KEduVocMultipleChoiceWidget
+    KEduVocComparisonWidget
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
