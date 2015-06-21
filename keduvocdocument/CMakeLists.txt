@@ -50,6 +50,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocmultiplechoicewidget.cpp
     keduvoccomparisonwidget.cpp
     keduvocdeclension.cpp
+    keduvocconjugation.cpp
     autosave/kautosavefile.cpp
     autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
@@ -70,6 +71,7 @@ ki18n_wrap_ui(keduvocdocument_LIB_SRCS
     keduvocmultiplechoicewidget.ui
     keduvoccomparisonwidget.ui
     keduvocdeclensionwidget.ui
+    keduvocconjugationwidget.ui
 )
 
 include(ECMGenerateHeaders)
@@ -112,6 +114,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocMultipleChoiceWidget
     KEduVocComparisonWidget
     KEduVocDeclensionWidget
+    KEduVocConjugationWidget
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
