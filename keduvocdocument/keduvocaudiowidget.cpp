@@ -44,6 +44,7 @@ KEduVocAudioWidget::Private::Private()
     m_currentTranslation = -1;
     m_player = 0;
     m_entry = 0;
+    m_ui = new Ui::KEduVocAudioWidget();
 }
 
 KEduVocAudioWidget::KEduVocAudioWidget( QWidget *parent )
