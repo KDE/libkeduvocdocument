@@ -54,6 +54,8 @@ set(keduvocdocument_LIB_SRCS
     keduvocdeclensionwidget.cpp
     keduvocconjugationwidget.cpp
     keduvocinflectionwidget.cpp
+    keduvocimagewidget.cpp
+    keduvocimagechooserwidget.cpp
     readerwriters/dummyreader.cpp
     readerwriters/failedreader.cpp
     readerwriters/keduvockvtmlreader.cpp
@@ -73,6 +75,7 @@ ki18n_wrap_ui(keduvocdocument_LIB_SRCS
     keduvoccomparisonwidget.ui
     keduvocdeclensionwidget.ui
     keduvocconjugationwidget.ui
+    keduvocimagechooserwidget.ui
 )
 
 include(ECMGenerateHeaders)
@@ -117,6 +120,8 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocDeclensionWidget
     KEduVocConjugationWidget
     KEduVocInflectionWidget
+    KEduVocImageWidget
+    KEduVocImageChooserWidget
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
