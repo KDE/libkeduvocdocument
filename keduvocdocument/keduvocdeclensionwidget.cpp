@@ -99,7 +99,7 @@ void KEduVocDeclensionWidget::setTranslation( KEduVocExpression * entry, int ide
     }
 
     d->m_entry = entry;
-    if( d.m_identifier != identifier ) {
+    if( d->m_identifier != identifier ) {
         d->m_identifier = identifier;
     }
 
