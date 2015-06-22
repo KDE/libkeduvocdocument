@@ -51,6 +51,7 @@ set(keduvocdocument_LIB_SRCS
     keduvoccomparisonwidget.cpp
     keduvocdeclension.cpp
     keduvocconjugation.cpp
+    keduvocinflectionwidget.cpp
     autosave/kautosavefile.cpp
     autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
@@ -115,6 +116,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocComparisonWidget
     KEduVocDeclensionWidget
     KEduVocConjugationWidget
+    KEduVocInflectionWidget
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
