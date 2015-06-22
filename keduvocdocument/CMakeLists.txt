@@ -75,6 +75,7 @@ set(keduvocdocument_LIB_SRCS
     keduvoccomparisonwidget.cpp
     keduvocdeclension.cpp
     keduvocconjugation.cpp
+    keduvocinflectionwidget.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -149,6 +150,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocComparisonWidget
     KEduVocDeclensionWidget
     KEduVocConjugationWidget
+    KEduVocInflectionWidget
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
