@@ -14,7 +14,6 @@
 #ifndef KEDUVOCCONJUGATIONWIDGET_H
 #define KEDUVOCCONJUGATIONWIDGET_H
 
-#include <keduvocwordflags.h>
 #include <keduvocdocument_export.h>
 
 #include <QWidget>
@@ -53,6 +52,11 @@ private:
     void updateVisiblePersons();
 
     void showWidgets( bool tenses, bool singular, bool dual, bool plural, bool maleVisible, bool femaleVisible, bool neuterVisible );
+
+    /**
+     * Fill the line edits
+     */
+    void updateEntries();
 };
 
 }
