@@ -73,8 +73,8 @@ set(keduvocdocument_LIB_SRCS
     keduvocaudiowidget.cpp
     keduvocmultiplechoicewidget.cpp
     keduvoccomparisonwidget.cpp
-    keduvocdeclension.cpp
-    keduvocconjugation.cpp
+    keduvocdeclensionwidget.cpp
+    keduvocconjugationwidget.cpp
     keduvocinflectionwidget.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h

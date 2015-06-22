@@ -28,11 +28,6 @@ class KEduVocConjugationWidget::Private
 public:
     Private();
 
-    /**
-     * Fill the line edits
-     */
-    void updateEntries();
-
     QString m_lastTenseSelection;
     int m_identifier;
     KEduVocExpression* m_entry;
@@ -189,7 +184,7 @@ void KEduVocConjugationWidget::slotNextTense()
 void KEduVocConjugationWidget::updateVisiblePersons()
 {
     if( d->m_identifier < 0 ) {
-        showWidgets( false, false, false, false, false, false, falsev);
+        showWidgets( false, false, false, false, false, false, false);
         return;
     }
 
