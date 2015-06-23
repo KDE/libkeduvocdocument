@@ -440,7 +440,7 @@ void KEduVocVocabularyView::slotShowVocabularyColumnsDialog()
     }
 }
 
-void KEduVocVocabularyView::checkSpelling( int language, QString spellCheck )
+void KEduVocVocabularyView::checkSpelling( int language )
 {
     if( !d->m_model->rowCount() ) {
         KMessageBox::information( this, i18n( "Nothing to spell check." ) );
@@ -461,7 +461,6 @@ void KEduVocVocabularyView::checkSpelling( int language, QString spellCheck )
         return;
     }
 
-    d->m_spellCheck = spellCheck;
     QString locale = d->m_doc->identifier( language ).locale();
     QString spellCode = d->m_spellCheck.isEmpty() ? locale : d->m_spellCheck;
     d->m_spellChecker->changeLanguage( spellCode );
