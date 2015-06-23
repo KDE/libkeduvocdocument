@@ -90,6 +90,13 @@ public:
 
     KEduVocDocument* document();
 
+    /**
+     * @param spellCheck corresponding to LanguageSettings::spellChecker
+     * Example Usage:
+     * QString locale = foo.document()->identifier( language ).locale();
+     * LanguageSettings settings(locale);
+     * QString spellCheck = settings.spellChecker();
+     */
     void setSpellCheck( QString spellCheck );
 
     QString spellCheck();
@@ -140,14 +147,7 @@ public slots:
 
     void setTranslator( KEduVocTranslator* translator );
 
-    /**
-     * @param spellCheck corresponding to LanguageSettings::spellChecker
-     * Example Usage:
-     * QString locale = foo.document()->identifier( language ).locale();
-     * LanguageSettings settings(locale);
-     * QString spellCheck = settings.spellChecker();
-     */
-    void checkSpelling( int language, QString spellCheck );
+    void checkSpelling( int language );
 
     /**
      * Show the vocabulary columns dialog to enable or disable the columns in the view
@@ -171,7 +171,7 @@ private:
 
     void selectIndex( const QModelIndex &index );
     // trap enter presses at the end of the document to add a new entry instead of moving to the first cell
-    
+
     /**
      * @param smartAppend corresponds to Prefs::smartAppend()
      */
