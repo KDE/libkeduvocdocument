@@ -55,6 +55,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocimagewidget.cpp
     keduvocimagechooserwidget.cpp
     keduvocsynonymwidget.cpp
+    keduvocsummarywordwidget.cpp
     autosave/kautosavefile.cpp
     autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
@@ -78,6 +79,7 @@ ki18n_wrap_ui(keduvocdocument_LIB_SRCS
     keduvocconjugationwidget.ui
     keduvocimagechooserwidget.ui
     keduvocsynonymwidget.ui
+    keduvocsummarywordwidget.ui
 )
 
 include(ECMGenerateHeaders)
@@ -125,6 +127,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocImageWidget
     KEduVocImageChooserWidget
     KEduVocSynonymWidget
+    KEduVocSummaryWordWidget
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
