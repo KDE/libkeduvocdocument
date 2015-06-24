@@ -80,6 +80,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocimagechooserwidget.cpp
     keduvocsynonymwidget.cpp
     keduvocsummarywordwidget.cpp
+    keduvoclatexrenderer.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -162,6 +163,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocImageChooserWidget
     KEduVocSynonymWidget
     KEduVocSummaryWordWidget
+    KEduVocLatexRenderer
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
