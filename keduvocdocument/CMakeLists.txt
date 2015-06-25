@@ -57,6 +57,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocsynonymwidget.cpp
     keduvocsummarywordwidget.cpp
     keduvoclatexrenderer.cpp
+    keduvoclatexwidget.cpp
     autosave/kautosavefile.cpp
     autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
@@ -81,6 +82,7 @@ ki18n_wrap_ui(keduvocdocument_LIB_SRCS
     keduvocimagechooserwidget.ui
     keduvocsynonymwidget.ui
     keduvocsummarywordwidget.ui
+    keduvoclatexwidget.ui
 )
 
 include(ECMGenerateHeaders)
@@ -130,6 +132,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocSynonymWidget
     KEduVocSummaryWordWidget
     KEduVocLatexRenderer
+    KEduVocLatexWidget
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
