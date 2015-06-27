@@ -96,7 +96,7 @@ namespace Scripting
      *
      *   @author Avgoustinos Kadis <avgoustinos.kadis@kdemail.net>
      */
-    class KEduVocDocument : public QObject
+    class KEDUVOCDOCUMENT_EXPORT KEduVocDocument : public QObject
     {
         Q_OBJECT
         /// Read-only property of the active document
@@ -165,7 +165,7 @@ namespace Scripting
          *      where m_editor is a EditorWindow object
          * @param separator Represents Prefs::separator()
          */
-        KEduVocDocument( ::KEduVocDocument * doc, KEduVocVocabularyModel * vocabularyModel, QString * separator );
+        KEduVocDocument( ::KEduVocDocument * doc, KEduVocVocabularyModel * vocabularyModel, QString separator );
 
         ~KEduVocDocument();
 
@@ -191,12 +191,12 @@ namespace Scripting
         //Returns the active lesson
         //KEduVocLesson* activeLesson();
 
-        QString * separator()
+        QString separator()
         {
             return m_separator;
         }
 
-        void setSeparator( QString* v )
+        void setSeparator( QString v )
         {
             m_separator = v;
         }
@@ -363,7 +363,7 @@ namespace Scripting
         KEduVocTranslator* m_translator;
         ::KEduVocDocument* m_doc;
         KEduVocVocabularyModel * m_vocabularyModel;
-        QString * m_separator;
+        QString m_separator;
     };
 }
 
