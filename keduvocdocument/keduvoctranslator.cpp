@@ -25,13 +25,13 @@
 
 namespace Scripting
 {
-    KEduVocDocument::KEduVocDocument( ::KEduVocDocument * doc, KEduVocVocabularyModel * vocabularyModel, QString * separator ) 
+    KEduVocDocument::KEduVocDocument( ::KEduVocDocument * doc, KEduVocVocabularyModel * vocabularyModel, QString separator ) 
         : QObject(), 
         m_translator( new KEduVocTranslator( this ) ),
         m_doc( new ::KEduVocDocument( doc ) ),
-        m_vocabularyModel( vocabularyModel ),
-        m_separator(separator)
+        m_vocabularyModel( vocabularyModel )
     {
+        m_separator = separator;
     }
 
     KEduVocDocument::~KEduVocDocument()
@@ -39,7 +39,6 @@ namespace Scripting
         delete m_translator;
         delete m_doc;
         delete m_vocabularyModel;
-        delete m_separator;
     }
 
     void KEduVocDocument::callTranslateWord(const QString & word, const QString& fromLanguage, const QString& toLanguage)
@@ -81,7 +80,7 @@ namespace Scripting
         }
         m_doc = new ::KEduVocDocument(this);
         emit documentChanged(m_doc);
-        m_doc->setCsvDelimiter(*m_separator);
+        m_doc->setCsvDelimiter(m_separator);
 
         bool isSuccess = false, isError = false;
 

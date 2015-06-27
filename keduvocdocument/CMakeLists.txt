@@ -60,6 +60,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocsummarywordwidget.cpp
     keduvoclatexrenderer.cpp
     keduvoclatexwidget.cpp
+    keduvocscript.cpp
     readerwriters/dummyreader.cpp
     readerwriters/failedreader.cpp
     readerwriters/keduvockvtmlreader.cpp
@@ -133,6 +134,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocSummaryWordWidget
     KEduVocLatexRenderer
     KEduVocLatexWidget
+    KEduVocScript
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
@@ -162,6 +164,8 @@ target_link_libraries(KEduVocDocument
     KF5::SonnetUi
     KF5::Notifications
     KF5::XmlGui
+    KF5::KrossCore
+    KF5::KrossUi
 )
 
 
@@ -199,6 +203,8 @@ target_link_libraries(keduvocdocument_static
     KF5::SonnetUi
     KF5::Notifications
     KF5::XmlGui
+    KF5::KrossCore
+    KF5::KrossUi
 )
 
 
