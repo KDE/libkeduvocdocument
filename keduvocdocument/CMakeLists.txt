@@ -84,6 +84,7 @@ set(keduvocdocument_LIB_SRCS
     keduvoclatexwidget.cpp
     keduvocscript.cpp
     keduvocdocumentproperties.cpp
+    keduvoclanguagepropertiespage.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -120,6 +121,7 @@ ki18n_wrap_ui(keduvocdocument_LIB_SRCS
     keduvocsummarywordwidget.ui
     keduvoclatexwidget.ui
     keduvocdocumentproperties.ui
+    keduvoclanguagepropertiespage.ui
 )
 
 include(ECMGenerateHeaders)
@@ -172,6 +174,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocLatexWidget
     KEduVocScript
     KEduVocDocumentProperties
+    KEduVocLanguagePropertiesPage
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
