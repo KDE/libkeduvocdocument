@@ -85,6 +85,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocscript.cpp
     keduvocdocumentproperties.cpp
     keduvoclanguagepropertiespage.cpp
+    keduvoclanguageproperties.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -175,6 +176,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocScript
     KEduVocDocumentProperties
     KEduVocLanguagePropertiesPage
+    KEduVocLanguageProperties
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
