@@ -61,6 +61,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocscript.cpp
     keduvocdocumentproperties.cpp
     keduvoclanguagepropertiespage.cpp
+    keduvoclanguageproperties.cpp
     autosave/kautosavefile.cpp
     autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
@@ -141,6 +142,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocScript
     KEduVocDocumentProperties
     KEduVocLanguagePropertiesPage
+    KEduVocLanguageProperties
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )

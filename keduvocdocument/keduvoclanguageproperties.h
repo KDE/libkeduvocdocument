@@ -11,47 +11,40 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef KEDUVOCLANGUAGEPROPERTIES_H
+#define KEDUVOCLANGUAGEPROPERTIES_H
 
-#ifndef KEDUVOCLANGUAGEPROPERTIESPAGE_H
-#define KEDUVOCLANGUAGEPROPERTIESPAGE_H
+#include <KPageDialog>
 
 #include <keduvocdocument_export.h>
-
-#include <QWidget>
-#include <QLineEdit>
+#include <keduvoclanguagepropertiespage.h>
 
 class KEduVocDocument;
+class KEduVocLanguagePropertiesPage;
 
-class KEDUVOCDOCUMENT_EXPORT KEduVocLanguagePropertiesPage : public QWidget
+class KEDUVOCDOCUMENT_EXPORT KEduVocLanguageProperties : public KPageDialog
 {
     Q_OBJECT
 public:
-    KEduVocLanguagePropertiesPage( KEduVocDocument *doc, int identifierIndex, QWidget *parent = 0 );
-    ~KEduVocLanguagePropertiesPage();
-
-    int languageIdentifierIndex();
-    void setLanguageIdentifierIndex( int newIndex );
-
-    QFont editorFont();
-    void setEditorFont( QFont editorFont );
-
-    QFont practiceFont();
-    void setPracticeFont( QFont practiceFont );
-
-    QString keyboardLayout();
-    void setKeyboardLayout( QString keyboardLayout );
-
-    QString spellChecker();
-    void setSpellChecker( QString spellChecker );
-
-    QLineEdit* identifierNameLineEdit();
+    KEduVocLanguageProperties( KEduVocDocument* doc, QWidget* parent );
+    ~KEduVocLanguageProperties();
 
 public slots:
-    void accept();
-    void downloadGrammar();
+    virtual void accept();
+
+    // connect these with the signals from KEduVocLanguagePropertiesPage
+    void loadLanguageSettings( QString locale );
+    void loadEditorFont( QString locale );
+    void loadPracticeFont( QString locale );
+    void loadKeyboardLayout( QString locale );
+    void loadSpellChecker( QString locale );
+    void saveEditorFont( QString locale, QFont font );
+    void savePracticeFont( QString locale, QFont font );
+    void saveKeyboardLayout( QString locale, QString keyboardLayout );
+    void saveSpellChecker( QString locale, QString spellChecker );
+    void storeSettings( QString locale );
 
 signals:
-    void nameChanged( const QString );
 
     /**
      * Sample corresponding slot for calling class :
@@ -66,54 +59,46 @@ signals:
     /**
      * Sample corresponding slot for calling class :
      * 
-     * void loadEditorFont( QString locale ) {
+     * void loadEditorFont( QString locale, KEduVocLanguagePropertiesPage* page ) {
      *     LanguageSettings settings( locale );
      *     settings.load();
-     *     languagePropertiesPage.setEditorFont( settings.editorFont() );
+     *     page->setEditorFont( settings.editorFont() );
      * }
-     * 
-     * Where languagePropertiesPage is a KEduVocLanguagePropertiesPage object
      */
-    void editorFontChanged( QString );
+    void editorFontChanged( QString, KEduVocLanguagePropertiesPage* );
 
     /**
      * Sample corresponding slot for calling class :
      * 
-     * void loadPracticeFont( QString locale ) {
+     * void loadPracticeFont( QString locale, KEduVocLanguagePropertiesPage* page ) {
      *     LanguageSettings settings( locale );
      *     settings.load();
-     *     languagePropertiesPage.setPracticeFont( settings.practiceFont() );
+     *     page->setPracticeFont( settings.practiceFont() );
      * }
-     * 
-     * Where languagePropertiesPage is a KEduVocLanguagePropertiesPage object
      */
-    void practiceFontChanged( QString );
+    void practiceFontChanged( QString, KEduVocLanguagePropertiesPage* );
 
     /**
      * Sample corresponding slot for calling class :
      * 
-     * void loadKeyboardLayout( QString locale ) {
+     * void loadKeyboardLayout( QString locale, KEduVocLanguagePropertiesPage* page ) {
      *     LanguageSettings settings( locale );
      *     settings.load();
-     *     languagePropertiesPage.setKeyboardLayout( settings.keyboardLayout() );
+     *     page->setKeyboardLayout( settings.keyboardLayout() );
      * }
-     * 
-     * Where languagePropertiesPage is a KEduVocLanguagePropertiesPage object
      */
-    void keyboardLayoutChanged( QString );
+    void keyboardLayoutChanged( QString, KEduVocLanguagePropertiesPage* );
 
     /**
      * Sample corresponding slot for calling class :
      * 
-     * void loadSpellChecker( QString locale ) {
+     * void loadSpellChecker( QString locale, KEduVocLanguagePropertiesPage* page ) {
      *     LanguageSettings settings( locale );
      *     settings.load();
-     *     languagePropertiesPage.setSpellChecker( settings.spellChecker() );
+     *     page->setSpellChecker( settings.spellChecker() );
      * }
-     * 
-     * Where languagePropertiesPage is a KEduVocLanguagePropertiesPage object
      */
-    void spellCheckerChanged( QString );
+    void spellCheckerChanged( QString, KEduVocLanguagePropertiesPage* );
 
     /**
      * Sample corresponding slot for calling class :
@@ -171,22 +156,12 @@ signals:
     void saveSettings( QString );
 
 private slots:
-    void localeChanged( const QString& );
-
-    // pronouns/conjugations
-    void updateCheckBoxes();
-
-    // tenses
-    void slotDeleteTense();
-    void slotNewTense();
-    void slotTenseChosen(int);
-    void slotModifyTense();
+    void slotAppendIdentifier();
+    void slotDeleteIdentifier();
+    void pageNameChanged( const QString& newName );
 
 private:
-    void updateListBox(int start);
-
-    // initialize widgets with contents
-    void loadGrammarFromDocument();
+    KPageWidgetItem* createPage( int identifierIndex );
 
     class Private;
     Private * const d;

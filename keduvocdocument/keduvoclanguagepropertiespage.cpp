@@ -180,6 +180,11 @@ void KEduVocLanguagePropertiesPage::setSpellChecker( QString spellChecker )
     d->m_spellChecker = spellChecker;
 }
 
+QLineEdit* KEduVocLanguagePropertiesPage::identifierNameLineEdit()
+{
+    return d->m_ui->identifierNameLineEdit;
+}
+
 /* TODO uncomment after adding ParleyDocument 
 namespace DocumentHelper
 {
