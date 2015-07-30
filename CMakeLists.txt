@@ -8,6 +8,22 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Xml Gui Widgets DBus Core Multimedia)
 find_package(KF5 5.3.0 REQUIRED COMPONENTS I18n Archive KIO Completion Sonnet Notifications XmlGui Kross NewStuff )
 
+find_package(LibXml2)
+set_package_properties(LibXml2 PROPERTIES
+                       URL "http://xmlsoft.org"
+                       TYPE OPTIONAL
+                       PURPOSE "Required to build HTML export."
+                      )
+include_directories(${LIBXML2_INCLUDE_DIR})
+
+find_package(LibXslt)
+set_package_properties(LibXslt PROPERTIES
+                       URL "http://xmlsoft.org/XSLT"
+                       TYPE OPTIONAL
+                       PURPOSE "Required to build HTML export for Parley."
+                      )
+include_directories(${LIBXSLT_INCLUDE_DIR})
+
 #add_definitions( -Wall -fprofile-arcs -ftest-coverage )
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}

@@ -63,6 +63,7 @@ set(keduvocdocument_LIB_SRCS
     keduvoclanguagepropertiespage.cpp
     keduvoclanguageproperties.cpp
     keduvoceditordocument.cpp
+    keduvocexportdialog.cpp
     autosave/kautosavefile.cpp
     autosave/kautosavefileprivate.cpp
     readerwriters/dummyreader.cpp
@@ -90,6 +91,7 @@ ki18n_wrap_ui(keduvocdocument_LIB_SRCS
     keduvoclatexwidget.ui
     keduvocdocumentproperties.ui
     keduvoclanguagepropertiespage.ui
+    keduvocexportdialog.ui
 )
 
 include(ECMGenerateHeaders)
@@ -145,6 +147,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocLanguagePropertiesPage
     KEduVocLanguageProperties
     KEduVocEditorDocument
+    KEduVocExportDialog
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
@@ -161,6 +164,8 @@ target_link_libraries(KEduVocDocument
     Qt5::Widgets
     Qt5::DBus
     Qt5::Multimedia
+    ${LIBXML2_LIBRARIES}
+    ${LIBXSLT_LIBRARIES}
   PRIVATE
     KF5::I18n
     KF5::KIOCore
@@ -201,6 +206,8 @@ target_link_libraries(keduvocdocument_static
     Qt5::Widgets
     Qt5::DBus
     Qt5::Multimedia
+    ${LIBXML2_LIBRARIES}
+    ${LIBXSLT_LIBRARIES}
   PRIVATE
     KF5::I18n
     KF5::KIOCore

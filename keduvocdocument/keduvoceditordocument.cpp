@@ -794,12 +794,12 @@ void KEduVocEditorDocument::uploadFile()
 
 void KEduVocEditorDocument::exportDialog()
 {
-    /**
 #ifdef HAVE_LIBXSLT
     KEduVocExportDialog dialog( d->m_doc, m_parent );
+    connect( dialog, &KEduVocExportDialog::saveEditorDocument, this, &KEduVocEditorDocument::saveAs );
     dialog.exec();
 #endif
-*/
+
 }
 
 
