@@ -64,6 +64,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocdocumentproperties.cpp
     keduvoclanguagepropertiespage.cpp
     keduvoclanguageproperties.cpp
+    keduvoceditordocument.cpp
     readerwriters/dummyreader.cpp
     readerwriters/failedreader.cpp
     readerwriters/keduvockvtmlreader.cpp
@@ -143,6 +144,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocDocumentProperties
     KEduVocLanguagePropertiesPage
     KEduVocLanguageProperties
+    KEduVocEditorDocument
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
@@ -174,6 +176,7 @@ target_link_libraries(KEduVocDocument
     KF5::XmlGui
     KF5::KrossCore
     KF5::KrossUi
+    KF5::NewStuff
 )
 
 
@@ -213,6 +216,7 @@ target_link_libraries(keduvocdocument_static
     KF5::XmlGui
     KF5::KrossCore
     KF5::KrossUi
+    KF5::NewStuff
 )
 
 
