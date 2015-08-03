@@ -1,0 +1,170 @@
+/***************************************************************************
+
+    Copyright 2008 Avgoustinos Kadis <avgoustinos.kadis@kdemail.net>
+
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+#ifndef KEDUVOCSCRIPTMANAGER_H
+#define KEDUVOCSCRIPTMANAGER_H
+
+#include <QStringList>
+#include <QWidget>
+#include <QAction>
+
+#include <keduvoctranslator.h>
+#include <keduvocscript.h>
+#include <keduvoceditordocument.h>
+#include <keduvocdocument_export.h>
+
+
+/**
+ * This class finds the scripts installed in the application directory and manages loading and unloading of the scripts. For each script an instance of Script class is created.
+ *
+ * @author Avgoustinos Kadis <avgoustinos.kadis@kdemail.net>
+*/
+class KEDUVOCDOCUMENT_EXPORT KEduVocScriptManager : public QObject
+{
+    Q_OBJECT
+
+public:
+
+    /**
+     * @param parent:  editor
+     * @param document:  editor->m_mainWindow->parleyDocument()
+     * @param vocabularyModel:  editor->m_vocabularyModel
+     * @param separator:  Prefs::separator()
+     * 
+     * Where 'editor' is an EditorWindow / KXmlGuiWindow object
+     */
+    KEduVocScriptManager( QWidget *parent, KEduVocEditorDocument* document, KEduVocVocabularyModel* vocabularyModel, QString separator );
+
+    ~KEduVocScriptManager();
+
+    /**
+     * Finds all the available desktop files in {PARLEY_DATA_FOLDER}/plugins
+     *
+     * @return The list of desktop filenames available for parley
+     */
+    static QStringList getDesktopFiles();
+
+    /**
+     * Returns a QMap (from from categories codenames to categories display label)
+     * to be used in KPluginSelector (ScriptDialog) for displaying the various
+     * categories
+     *
+     * @note this function is not used later on (categories are disabled)
+     *
+     * @return the QMap described above
+     */
+    static QMap<QString, QString> categories();
+
+    /**
+     * Parses the desktop @p desktopFile given and returns the value of "Script" entry.
+     *
+     * @param desktopFile The .desktop file that will get the value from
+     * @return The value of "Script" entry. Empty string of no "Script" entry is found
+     */
+    static QString getScriptEntry(QString desktopFile);
+
+    /**
+     * Returns the full path to the script name given in the @p desktopFile.
+     *
+     * @param desktopFile The desktop file for the parley plugin
+     * @return The full-path to the script
+     */
+    QString getScriptFileName(QString desktopFile);
+
+    /**
+     * Returns a list of filenames (full path) of enabled scripts
+     */
+    QStringList enabledScripts();
+
+    /**
+     * Modify the parleyrc configuration so it disables the @p dektopFile plugin.
+     * This function is to be used when the plugin is invalid (wrong script name,
+     * incorrect desktop file etc)
+     *
+     * @param desktopFile
+     */
+    void disablePlugin(QString desktopFile);
+
+    /**
+     * Loads (activates) all the available scripts and notifies the user if any
+     * script was not activated (due to errors in the script)
+     */
+    void loadScripts();
+
+    /**
+     * Adds a QObject as a module for the script
+     * @param obj The QObject to be added to the script
+     * @param name The name of the object as it will appear in the script
+     */
+    void addObject(QObject * obj, const QString & name);
+
+    /**
+     * Reloads all the scripts
+     */
+    void reloadScripts();
+
+    /**
+     * Add a QAction to the Scripts menu
+     * @param name The action name
+     * @param action QAction to be added
+     */
+    void addScriptAction(const QString & name, QAction * action);
+
+    /** returns the Translator object the Scripting::KEduVocDocument */
+    KEduVocTranslator * translator();
+
+signals:
+    /**
+     * Sample slot
+     * 
+     * void unplugAction( QString list )
+     * {
+     *     m_editor->unplugActionList( list );
+     * }
+     * 
+     * Where m_editor is EditorWindow object
+     */
+    void editorUnplugActionList( QString );
+
+    /**
+     * Sample slot
+     * 
+     * void plugAction( QString list, QList <QAction*> scriptActions )
+     * {
+     *     m_editor->plugActionList( list, scriptActions );
+     * }
+     * 
+     * Where m_editor is EditorWindow object
+     */
+    void editorPlugActionList( QString, QList <QAction*> );
+
+    /**
+     * Sample slot
+     * 
+     * void editorAddActionCollection( const QString& name, QAction* action )
+     * {
+     *     m_editor->actionCollection()->addAction( name, action );
+     * }
+     * 
+     * Where m_editor is EditorWindow object
+     */
+    void editorActionAdded( const QString&, QAction* );
+
+
+private:
+    class Private;
+    Private * const d;
+};
+
+#endif
