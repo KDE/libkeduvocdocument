@@ -64,10 +64,11 @@ private:
 };
 
 
-/*namespace Editor
+namespace Editor
 {
-    class EditorWindow;
-}*/
+    // TODO uncomment after adding EditorWindow
+    //class EditorWindow;
+}
 
 namespace Scripting
 {
