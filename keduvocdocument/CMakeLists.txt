@@ -89,6 +89,7 @@ set(keduvocdocument_LIB_SRCS
     keduvoceditordocument.cpp
     keduvocexportdialog.cpp
     keduvocscriptmanager.cpp
+    keduvocscriptdialog.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -184,6 +185,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocEditorDocument
     KEduVocExportDialog
     KEduVocScriptManager
+    KEduVocScriptDialog
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
@@ -218,6 +220,7 @@ target_link_libraries(KEduVocDocument
     KF5::KrossCore
     KF5::KrossUi
     KF5::NewStuff
+    KF5::KCMUtils
 )
 
 
@@ -236,6 +239,7 @@ set_target_properties(keduvocdocument_static PROPERTIES COMPILE_FLAGS -DKEDUVOCD
 target_link_libraries(keduvocdocument_static
   PUBLIC
     KF5::KIOCore
+    KF5::KCMUtils
     Qt${QT_MAJOR_VERSION}::Core
     Qt${QT_MAJOR_VERSION}::DBus
     Qt${QT_MAJOR_VERSION}::Gui
@@ -260,6 +264,7 @@ target_link_libraries(keduvocdocument_static
     KF5::KrossCore
     KF5::KrossUi
     KF5::NewStuff
+    KF5::KCMUtils
 )
 
 
