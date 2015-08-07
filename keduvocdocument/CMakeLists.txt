@@ -49,6 +49,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocwordtypeview.cpp
     keduvoclessonview.cpp
     keduvocaudiowidget.cpp
+    keduvocbrowserwidget.cpp
     keduvocmultiplechoicewidget.cpp
     keduvoccomparisonwidget.cpp
     keduvocdeclensionwidget.cpp
@@ -83,6 +84,7 @@ set(keduvocdocument_LIB_SRCS
 
 ki18n_wrap_ui(keduvocdocument_LIB_SRCS
     keduvocaudiowidget.ui
+    keduvocbrowserwidget.ui
     keduvocmultiplechoicewidget.ui
     keduvoccomparisonwidget.ui
     keduvocdeclensionwidget.ui
@@ -133,6 +135,7 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocWordTypeView
     KEduVocLessonView
     KEduVocAudioWidget
+    KEduVocBrowserWidget
     KEduVocMultipleChoiceWidget
     KEduVocComparisonWidget
     KEduVocDeclensionWidget
@@ -168,6 +171,7 @@ target_link_libraries(KEduVocDocument
     Qt5::Widgets
     Qt5::DBus
     Qt5::Multimedia
+    KF5::KHtml
     ${LIBXML2_LIBRARIES}
     ${LIBXSLT_LIBRARIES}
   PRIVATE
@@ -187,6 +191,7 @@ target_link_libraries(KEduVocDocument
     KF5::KrossUi
     KF5::NewStuff
     KF5::KCMUtils
+    KF5::KHtml
 )
 
 
@@ -206,6 +211,7 @@ target_link_libraries(keduvocdocument_static
   PUBLIC
     KF5::KIOCore
     KF5::KCMUtils
+    KF5::KHtml
     Qt5::Xml
     Qt5::Core
     Qt5::Gui
@@ -231,6 +237,7 @@ target_link_libraries(keduvocdocument_static
     KF5::KrossUi
     KF5::NewStuff
     KF5::KCMUtils
+    KF5::KHtml
 )
 
 
