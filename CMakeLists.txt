@@ -13,7 +13,7 @@ include(KDECMakeSettings)
 include(GenerateExportHeader)
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Core DBus Gui Multimedia Widgets Xml)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n Archive KIO Completion Sonnet Notifications XmlGui Kross NewStuff KCMUtils)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n Archive KIO Completion Sonnet Notifications XmlGui Kross NewStuff KCMUtils KHtml)
 
 find_package(LibXml2)
 set_package_properties(LibXml2 PROPERTIES

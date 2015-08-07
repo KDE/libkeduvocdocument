@@ -1,0 +1,48 @@
+<ui version="4.0" >
+ <class>KEduVocBrowserWidget</class>
+ <widget class="QWidget" name="KEduVocBrowserWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>514</width>
+    <height>535</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="QPushButton" name="showCurrentButton" >
+       <property name="text" >
+        <string>Lookup Current</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="KComboBox" name="providerComboBox" />
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QWidget" native="1" name="widget" />
+   </item>
+   <item>
+    <widget class="QCheckBox" name="followTableCheckBox" >
+     <property name="text" >
+      <string>Follow Table</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KComboBox</class>
+   <extends>QComboBox</extends>
+   <header>kcombobox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
