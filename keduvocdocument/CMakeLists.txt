@@ -91,6 +91,7 @@ set(keduvocdocument_LIB_SRCS
     keduvocexportdialog.cpp
     keduvocscriptmanager.cpp
     keduvocscriptdialog.cpp
+    keduvoceditor.cpp
     readerwriters/dummyreader.cpp
     readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
@@ -189,9 +190,13 @@ ecm_generate_headers( KdeEdu_HEADERS
     KEduVocExportDialog
     KEduVocScriptManager
     KEduVocScriptDialog
+    KEduVocEditor
 
     REQUIRED_HEADERS KdeEdu_HEADERS
 )
+
+qt5_add_dbus_adaptor(keduvocdocument_LIB_SRCS org.kde.keduvoceditor.xml
+                     keduvoceditor.h Editor::KEduVocEditorWindow)
 
 add_library(KEduVocDocument SHARED ${keduvocdocument_LIB_SRCS})
 generate_export_header(KEduVocDocument BASE_NAME KEduVocDocument)
@@ -236,7 +241,6 @@ set_target_properties(KEduVocDocument
 )
 target_include_directories(KEduVocDocument INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/libkeduvocdocument>")
 
-
 #Library for non-api unittests
 add_library(keduvocdocument_static STATIC ${keduvocdocument_LIB_SRCS})
 set_target_properties(keduvocdocument_static PROPERTIES COMPILE_FLAGS -DKEDUVOCDOCUMENT_STATIC_DEFINE)
@@ -273,8 +277,6 @@ target_link_libraries(keduvocdocument_static
     KF5::KCMUtils
     KF5::KHtml
 )
-
-
 
 # if we want to set our own version instead of following kde generic
 #set(LIB_KEDUVOCDOCUMENT_VERSION "5.0.0")
