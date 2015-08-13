@@ -91,7 +91,8 @@ namespace DocumentHelper
 {
 void fetchGrammar( KEduVocDocument* doc, int languageIndex )
 {
-    QString locale = doc->identifier( languageIndex ).locale();
+    //QString locale = doc->identifier( languageIndex ).locale();
+    QString locale = "en";
 
     QUrl location( QUrl::fromUserInput( QString( "http://edu.kde.org/parley/locale/" ) + locale + QString( ".kvtml" ) ) );
 
@@ -528,7 +529,7 @@ void KEduVocEditorDocument::saveAs( QUrl url )
 
     if( url.isEmpty() ) {
         url = QUrl::fromLocalFile( QFileDialog::getSaveFileName(
-            d->m_parent->parentWidget()
+            d->m_parent
             , i18n( "Save Vocabulary As" )
             , QString()
             , KEduVocDocument::pattern( KEduVocDocument::Writing ) )
