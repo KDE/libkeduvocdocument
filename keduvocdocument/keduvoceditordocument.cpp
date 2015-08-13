@@ -91,8 +91,8 @@ namespace DocumentHelper
 {
 void fetchGrammar( KEduVocDocument* doc, int languageIndex )
 {
-    //QString locale = doc->identifier( languageIndex ).locale();
-    QString locale = "en";
+    QString locale = doc->identifier( languageIndex ).locale();
+    //QString locale = "en";
 
     QUrl location( QUrl::fromUserInput( QString( "http://edu.kde.org/parley/locale/" ) + locale + QString( ".kvtml" ) ) );
 
