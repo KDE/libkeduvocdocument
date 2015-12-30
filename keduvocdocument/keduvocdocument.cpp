@@ -339,7 +339,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType f
         || ( d->m_autosave->managedFile() != tmp ) ) {
 
         autosave = new KAutoSaveFile;
-        ErrorCode autosaveError = d->initializeKAutoSave( *autosave,  tmp.toDisplayString(), flags );
+        ErrorCode autosaveError = d->initializeKAutoSave( *autosave, tmp.toLocalFile(), flags );
         if ( autosaveError != NoError) {
             delete autosave;
             return autosaveError;
@@ -355,7 +355,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType f
         }
     }
 
-    QFile f( tmp.toDisplayString() );
+    QFile f( tmp.toLocalFile() );
     if ( !f.open( QIODevice::WriteOnly ) ) {
         qCritical() << i18n( "Cannot write to file %1", f.fileName() );
         return FileCannotWrite;
