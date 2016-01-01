@@ -53,9 +53,9 @@ int main( int argc, char ** argv )
     QStringList files = parser.positionalArguments();
 
     if ( files.count() > 0 ) {
-        QUrl infile = files.at( 0 );
+        QUrl infile = QUrl::fromLocalFile(files.at( 0 ));
         if ( files.count() > 1 ) {
-            QUrl outfile = files.at( 1 );
+            QUrl outfile = QUrl::fromLocalFile(files.at( 1 ));
 
             KEduVocDocument document;
             qDebug() << "Reading " << infile;

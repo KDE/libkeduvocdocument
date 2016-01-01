@@ -159,7 +159,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_isReadOnly = false;
     m_queryorg = "";
     m_querytrans = "";
-    m_autosave->setManagedFile( i18n( "Untitled" ) );
+    m_autosave->setManagedFile( QUrl() );
     m_author = "";
     m_title = "";
     m_comment = "";
@@ -174,7 +174,7 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
 
 KEduVocDocument::ErrorCode KEduVocDocument::KEduVocDocumentPrivate::initializeKAutoSave(KAutoSaveFile &autosave,  QString const & fpath,  FileHandlingFlags flags) const {
 
-    QList<KAutoSaveFile *> staleFiles = KAutoSaveFile::staleFiles( fpath,
+    QList<KAutoSaveFile *> staleFiles = KAutoSaveFile::staleFiles( QUrl::fromLocalFile(fpath),
                                                                  QCoreApplication::instance()->applicationName());
     if ( !staleFiles.isEmpty()) {
         if ( flags & FileIgnoreLock ) {
@@ -189,7 +189,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::KEduVocDocumentPrivate::initializeKA
         }
     }
 
-    autosave.setManagedFile( fpath );
+    autosave.setManagedFile( QUrl::fromLocalFile(fpath) );
     if ( !autosave.open( QIODevice::ReadWrite ) ) {
         qWarning() << i18n( "Cannot lock file %1", autosave.fileName() );
         return FileCannotLock;
@@ -256,7 +256,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const QUrl& url, FileHandlingF
             qWarning() << i18n("Cannot open tempfile %1",  tempFile.fileName());
             return Unknown;
         }
-        KIO::FileCopyJob *job = KIO::file_copy(url, tempFile.fileName());
+        KIO::FileCopyJob *job = KIO::file_copy(url, QUrl::fromLocalFile(tempFile.fileName()));
         if (!job->exec()) {
             qWarning() << i18n("Cannot download %1",  url.toDisplayString());
             return FileDoesNotExist;
