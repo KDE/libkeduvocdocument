@@ -256,9 +256,9 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const QUrl& url, FileHandlingF
             qWarning() << i18n("Cannot open tempfile %1",  tempFile.fileName());
             return Unknown;
         }
-        KIO::FileCopyJob *job = KIO::file_copy(url, QUrl::fromLocalFile(tempFile.fileName()));
+        KIO::FileCopyJob *job = KIO::file_copy(url, QUrl::fromLocalFile(tempFile.fileName()), -1, KIO::Overwrite);
         if (!job->exec()) {
-            qWarning() << i18n("Cannot download %1",  url.toDisplayString());
+            qWarning() << i18n("Cannot download %1: %2",  url.toDisplayString(), job->errorString());
             return FileDoesNotExist;
         }
         temporaryFile = tempFile.fileName();
