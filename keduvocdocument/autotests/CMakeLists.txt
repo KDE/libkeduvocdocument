@@ -22,7 +22,6 @@ set(kvocdoc_api_unittests
 
 #Unit Tests linked to objects behind the API wall
 set(kvocdoc_unittests
-  kautosavefiletest
   readerkvtml2test
   readerwordquiztest
   readerpaukertest
