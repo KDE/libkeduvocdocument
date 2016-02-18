@@ -297,6 +297,9 @@ double KEduVocContainer::averageGrade(int translation, EnumEntriesRecursive recu
     // make that a percentage
     // There are KV_MAX_GRADE grades from 0 -> 100 %
     // There are KV_MAX_GRADE preGrades within the first grade.
+    if (count == 0) {
+        return 100.0;
+    }
     return ((sum * 100.0 / KV_MAX_GRADE) + (presum * 100.0 / (KV_MAX_GRADE * KV_MAX_GRADE))) / count;
 }
 
