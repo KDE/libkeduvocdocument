@@ -26,11 +26,10 @@
 #include "keduvocexpression.h"
 
 KEduVocCsvWriter::KEduVocCsvWriter( QFile *file )
+    : m_outputFile(file) // the file must be already open
+    , m_doc(nullptr)
 {
-    // the file must be already open
-    m_outputFile = file;
 }
-
 
 bool KEduVocCsvWriter::writeDoc( KEduVocDocument *doc, const QString &generator )
 {
