@@ -217,33 +217,32 @@ void KEduVocDocument::setModified( bool dirty )
 }
 
 
-KEduVocDocument::FileType KEduVocDocument::detectFileType( const QString &fileName )
+KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileName)
 {
-    QIODevice * f = KFilterDev::deviceForFile( fileName );
-    f->open( QIODevice::ReadOnly );
+    KFilterDev f(fileName);
+    f.open(QIODevice::ReadOnly);
 
-    ReaderManager::ReaderPtr reader( ReaderManager::reader( *f ) );
+    ReaderManager::ReaderPtr reader(ReaderManager::reader(f));
 
-    f->close();
-    delete f;
+    f.close();
 
     return reader->fileTypeHandled();
 }
 
 
-KEduVocDocument::ErrorCode KEduVocDocument::open( const QUrl& url, FileHandlingFlags flags)
+KEduVocDocument::ErrorCode KEduVocDocument::open(const QUrl &url, FileHandlingFlags flags)
 {
     // save csv delimiter to preserve it in case this is a csv document
     QString csv = d->m_csvDelimiter;
     // clear all other properties
     d->init();
-    if ( !url.isEmpty() ) {
-        setUrl( url );
+    if (!url.isEmpty()) {
+        setUrl(url);
     }
     d->m_csvDelimiter = csv;
 
     KEduVocDocument::ErrorCode errStatus = Unknown;
-    QString errorMessage = i18n( "<qt>Cannot open file<br /><b>%1</b></qt>", url.toDisplayString() );
+    QString errorMessage = i18n("<qt>Cannot open file<br /><b>%1</b></qt>", url.toDisplayString());
 
     QString temporaryFile;
     QTemporaryFile tempFile;
@@ -263,36 +262,35 @@ KEduVocDocument::ErrorCode KEduVocDocument::open( const QUrl& url, FileHandlingF
     }
 
     if (flags & FileOpenReadOnly) {
-	d->m_isReadOnly = true;
+        d->m_isReadOnly = true;
     }
 
     ErrorCode autosaveError = NoError;
 
     if (!d->m_isReadOnly) {
-	autosaveError = d->initializeKAutoSave( *d->m_autosave,  temporaryFile, flags );
-	if (autosaveError != NoError) {
-	    return autosaveError;
-	}
+        autosaveError = d->initializeKAutoSave(*d->m_autosave,  temporaryFile, flags);
+        if (autosaveError != NoError) {
+            return autosaveError;
+        }
     }
 
-    QIODevice * f = KFilterDev::deviceForFile( temporaryFile );
-    if ( f->open( QIODevice::ReadOnly ) ) {
+    KFilterDev f(temporaryFile);
+    if (f.open(QIODevice::ReadOnly)) {
 
-        ReaderManager::ReaderPtr reader( ReaderManager::reader( *f ) );
-        errStatus = reader->read( *this );
+        ReaderManager::ReaderPtr reader(ReaderManager::reader(f));
+        errStatus = reader->read(*this);
 
-        if ( errStatus != KEduVocDocument::NoError ) {
-            errorMessage = i18n( "Could not open or properly read \"%1\"\n(Error reported: %2)"
-                                , url.toDisplayString(), reader->errorMessage() );
+        if (errStatus != KEduVocDocument::NoError) {
+            errorMessage = i18n("Could not open or properly read \"%1\"\n(Error reported: %2)"
+                                , url.toDisplayString(), reader->errorMessage());
         }
     } else {
         errStatus = FileCannotRead;
     }
 
-    f->close();
-    delete f;
+    f.close();
 
-    if ( errStatus == KEduVocDocument::NoError ) {
+    if (errStatus == KEduVocDocument::NoError) {
         setModified(false);
     } else {
         qWarning() << errorMessage;

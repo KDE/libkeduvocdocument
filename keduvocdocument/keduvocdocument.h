@@ -126,7 +126,7 @@ public:
      * @param flags How to handle expected unusual conditions (i.e. locking)
      * @returns        ErrorCode
      */
-    ErrorCode open( const QUrl& url,  FileHandlingFlags flags = FileDefaultHandling);
+    ErrorCode open(const QUrl &url,  FileHandlingFlags flags = FileDefaultHandling);
 
     /**
      * Close a document file and release the lock on the file
@@ -395,7 +395,7 @@ public:
      * @param fileName filename
      * @return enum of filetype
      */
-    static FileType detectFileType( const QString &fileName );
+    static FileType detectFileType(const QString &fileName);
 
     /**
      * Create a string with the supported document types, that can be used

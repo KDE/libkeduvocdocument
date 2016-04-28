@@ -18,6 +18,7 @@ set(kvocdoc_api_unittests
   # keduvocdocumentvalidatortest
   # keduvocdocumentfilelockingtest
   # openAPItest
+  keduvocdocumenttest
 )
 
 #Unit Tests linked to objects behind the API wall
@@ -64,5 +65,5 @@ macro(KEDUVOCDOCUMENT_GUI_UNIT_TESTS_STATIC staticOrAPILib)
 endmacro()
 
 
-keduvocdocument_gui_unit_tests(keduvocdocument ${kvocdoc_api_unittests})
+keduvocdocument_non_gui_unit_tests(KEduVocDocument ${kvocdoc_api_unittests})
 keduvocdocument_gui_unit_tests_static(keduvocdocument_static ${kvocdoc_unittests})

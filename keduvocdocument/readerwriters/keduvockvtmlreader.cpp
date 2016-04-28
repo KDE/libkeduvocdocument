@@ -337,7 +337,32 @@ bool KEduVocKvtmlReader::readArticle( QDomElement &domElementParent )
                     nat_indef = "";
             }
 
-            m_doc->identifier(i).setArticle( KEduVocArticle( fem_def, fem_indef, mal_def, mal_indef, nat_def, nat_indef ) );
+            KEduVocArticle article;
+            article.setArticle(
+                mal_def,
+                KEduVocWordFlag::Singular | KEduVocWordFlag::Definite | KEduVocWordFlag::Masculine
+            );
+            article.setArticle(
+                fem_def,
+                KEduVocWordFlag::Singular | KEduVocWordFlag::Definite | KEduVocWordFlag::Feminine
+            );
+            article.setArticle(
+                nat_def,
+                KEduVocWordFlag::Singular | KEduVocWordFlag::Definite | KEduVocWordFlag::Neuter
+            );
+            article.setArticle(
+                mal_indef,
+                KEduVocWordFlag::Singular | KEduVocWordFlag::Indefinite | KEduVocWordFlag::Masculine
+            );
+            article.setArticle(
+                fem_indef,
+                KEduVocWordFlag::Singular | KEduVocWordFlag::Indefinite | KEduVocWordFlag::Feminine
+            );
+            article.setArticle(
+                nat_indef,
+                KEduVocWordFlag::Singular | KEduVocWordFlag::Indefinite | KEduVocWordFlag::Neuter
+            );
+            m_doc->identifier(i).setArticle(article);
         }
     }
 
@@ -670,10 +695,10 @@ bool KEduVocKvtmlReader::readComparison( QDomElement &domElementParent, KEduVocT
     QDomElement currentElement;
 
     currentElement = domElementParent.firstChildElement( KV_COMP_L2 );
-    translation->setComparative(currentElement.text());
+    translation->setComparativeForm(currentElement.text());
 
     currentElement = domElementParent.firstChildElement( KV_COMP_L3 );
-    translation->setSuperlative(currentElement.text());
+    translation->setSuperlativeForm(currentElement.text());
 
     return true;
 }
