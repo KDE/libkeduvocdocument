@@ -19,6 +19,7 @@ set(kvocdoc_api_unittests
   # keduvocdocumentfilelockingtest
   # openAPItest
   keduvocdocumenttest
+  emptydocumenttest
 )
 
 #Unit Tests linked to objects behind the API wall
