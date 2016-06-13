@@ -147,11 +147,19 @@ public:
     void setLeitnerBox( KEduVocLeitnerBox* leitnerBox );
 
     /**
+     * This method is deprecated, please use @see getConjugation() @see setConjugation()
      * Returns a conjugation if available
      * @param tense tense of the requested conjugation
      * @return the conjugation
      */
-    KEduVocConjugation& conjugation( const QString& tense );
+    KEDUVOCDOCUMENT_DEPRECATED KEduVocConjugation& conjugation(const QString &tense);
+
+    /**
+     * Returns a conjugation if available
+     * @param tense tense of the requested conjugation
+     * @return the conjugation
+     */
+    KEduVocConjugation getConjugation(const QString &tense) const;
 
     /** adds conjugations or replaces them, if they exist.
     * @param conjugation      conjugation
@@ -202,14 +210,22 @@ public:
     KEduVocText article() const;
     void setArticle(const KEduVocText& article);
 
-    /** Returns multiple choice if available
-      */
-    QStringList & multipleChoice();
+    /**
+     * This method is deprecated, please use @see getMultipleChoice() @see setMultipleChoice()
+     * Returns multiple choice if available
+     */
+    KEDUVOCDOCUMENT_DEPRECATED QStringList& multipleChoice();
+
+    /**
+     * Returns multiple choice if available
+     * @return list of multiple choice answers
+     */
+    QStringList getMultipleChoice() const;
 
     /** Sets multiple choice
-     * @param mc               multiple choice block
-      */
-//     void setMultipleChoice( const QStringList &mc );
+     * @param choices               multiple choice block
+     */
+    void setMultipleChoice(const QStringList &choices);
 
     /** Get the sound url for this translation if it exists */
     QUrl soundUrl();

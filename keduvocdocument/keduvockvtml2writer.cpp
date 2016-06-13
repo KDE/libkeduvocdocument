@@ -523,7 +523,7 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     }
 
     // multiplechoice
-    if ( !translation->multipleChoice().isEmpty() ) {
+    if (!translation->getMultipleChoice().isEmpty()) {
         QDomElement multipleChoiceElement = m_domDoc.createElement( KVTML_MULTIPLECHOICE );
         writeMultipleChoice( multipleChoiceElement, translation );
         translationElement.appendChild( multipleChoiceElement );
@@ -595,7 +595,7 @@ bool KEduVocKvtml2Writer::writeMultipleChoice( QDomElement &multipleChoiceElemen
  </multiplechoice>
 */
 {
-    foreach ( const QString &choice, translation->multipleChoice() ) {
+    foreach (const QString &choice, translation->getMultipleChoice()) {
         multipleChoiceElement.appendChild( newTextElement( KVTML_CHOICE, choice ) );
     }
     return true;

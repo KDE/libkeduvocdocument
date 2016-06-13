@@ -287,15 +287,36 @@ void KEduVocTranslation::setConjugation( const QString& tense, const KEduVocConj
 }
 
 
-KEduVocConjugation& KEduVocTranslation::conjugation( const QString& tense )
+KEduVocConjugation& KEduVocTranslation::conjugation(const QString &tense)
 {
     return d->m_conjugations[tense];
 }
 
 
-QStringList & KEduVocTranslation::multipleChoice()
+KEduVocConjugation KEduVocTranslation::getConjugation(const QString &tense) const
+{
+    if (d->m_conjugations.contains(tense)) {
+        return d->m_conjugations[tense];
+    }
+    return KEduVocConjugation();
+}
+
+
+QStringList& KEduVocTranslation::multipleChoice()
 {
     return d->m_multipleChoice;
+}
+
+
+QStringList KEduVocTranslation::getMultipleChoice() const
+{
+    return d->m_multipleChoice;
+}
+
+
+void KEduVocTranslation::setMultipleChoice(const QStringList &choices)
+{
+    d->m_multipleChoice = choices;
 }
 
 
@@ -503,7 +524,7 @@ void KEduVocTranslation::toKVTML2(QDomElement & parent)
     // conjugation
     foreach ( const QString &tense, conjugationTenses() ) {
         QDomElement conjugationElement = parent.ownerDocument().createElement( KVTML_CONJUGATION );
-        conjugation(tense).toKVTML2(conjugationElement, tense);
+        getConjugation(tense).toKVTML2(conjugationElement, tense);
         if (conjugationElement.hasChildNodes()) {
             parent.appendChild( conjugationElement );
         }

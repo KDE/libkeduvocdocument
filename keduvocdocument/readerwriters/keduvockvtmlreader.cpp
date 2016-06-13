@@ -717,31 +717,34 @@ bool KEduVocKvtmlReader::readMultipleChoice( QDomElement &domElementParent, KEdu
 
 {
     QDomElement currentElement;
+    QStringList choices = translation->getMultipleChoice();
 
     currentElement = domElementParent.firstChildElement( KV_MC_1 );
     if ( !currentElement.isNull() ) {
-        translation->multipleChoice().append( currentElement.text() );
+        choices.append(currentElement.text());
     }
 
     currentElement = domElementParent.firstChildElement( KV_MC_2 );
     if ( !currentElement.isNull() ) {
-        translation->multipleChoice().append( currentElement.text() );
+        choices.append(currentElement.text());
     }
 
     currentElement = domElementParent.firstChildElement( KV_MC_3 );
     if ( !currentElement.isNull() ) {
-        translation->multipleChoice().append( currentElement.text() );
+        choices.append(currentElement.text());
     }
 
     currentElement = domElementParent.firstChildElement( KV_MC_4 );
     if ( !currentElement.isNull() ) {
-        translation->multipleChoice().append( currentElement.text() );
+        choices.append(currentElement.text());
     }
 
     currentElement = domElementParent.firstChildElement( KV_MC_5 );
     if ( !currentElement.isNull() ) {
-        translation->multipleChoice().append( currentElement.text() );
+        choices.append(currentElement.text());
     }
+
+    translation->setMultipleChoice(choices);
 
     return true;
 }

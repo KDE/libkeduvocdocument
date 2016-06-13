@@ -700,7 +700,9 @@ bool KEduVocKvtml2Reader::readMultipleChoice( QDomElement &multipleChoiceElement
     {
         currentElement = choiceNodes.item( i ).toElement();
         if ( currentElement.parentNode() == multipleChoiceElement ) {
-            translation->multipleChoice().append( currentElement.text() );
+            QStringList choices = translation->getMultipleChoice();
+            choices.append(currentElement.text());
+            translation->setMultipleChoice(choices);
         }
     }
     return true;
