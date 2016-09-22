@@ -88,13 +88,13 @@ public:
      * @param other grades copied
      * @return reference to the new grades
      */
-    KEduVocText& operator= ( const KEduVocText &other );
+    KEduVocText &operator=(const KEduVocText &other);
     /**
      * Compare two sets of grades.
      * @param other
      * @return true if equal
      */
-    bool operator== ( const KEduVocText &other ) const;
+    bool operator==(const KEduVocText &other) const;
 
 
     /** returns how often this entry has been practiced as int

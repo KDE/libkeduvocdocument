@@ -184,25 +184,29 @@ void KEduVocText::setInterval( quint32 interval )
 }
 
 
-KEduVocText & KEduVocText::operator =(const KEduVocText & other)
+KEduVocText &KEduVocText::operator=(const KEduVocText &other)
 {
     d->m_text = other.d->m_text;
+    d->m_preGrade = other.d->m_preGrade;
     d->m_grade = other.d->m_grade;
     d->m_totalPracticeCount = other.d->m_totalPracticeCount;
     d->m_badCount = other.d->m_badCount;
     d->m_practiceDate = other.d->m_practiceDate;
+    d->m_interval = other.d->m_interval;
 
     return *this;
 }
 
-bool KEduVocText::operator ==(const KEduVocText & other) const
+bool KEduVocText::operator==(const KEduVocText &other) const
 {
     return
         d->m_text == other.d->m_text &&
+        d->m_preGrade == other.d->m_preGrade &&
         d->m_grade == other.d->m_grade &&
         d->m_totalPracticeCount == other.d->m_totalPracticeCount &&
         d->m_badCount == other.d->m_badCount &&
-        d->m_practiceDate == other.d->m_practiceDate;
+        d->m_practiceDate == other.d->m_practiceDate &&
+        d->m_interval == other.d->m_interval;
 }
 
 void KEduVocText::toKVTML2(QDomElement& parent)

@@ -20,6 +20,7 @@ set(kvocdoc_api_unittests
   # openAPItest
   keduvocdocumenttest
   emptydocumenttest
+  keduvoctexttest
 )
 
 #Unit Tests linked to objects behind the API wall
