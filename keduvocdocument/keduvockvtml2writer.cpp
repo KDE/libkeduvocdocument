@@ -19,6 +19,7 @@
 #include <QtCore/QTextStream>
 #include <QtCore/QFile>
 
+#include <QDir>
 #include <QDebug>
 
 #include "keduvocdocument.h"
@@ -532,9 +533,13 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     // image
     if ( !translation->imageUrl().isEmpty() ) {
         QString urlString;
-        if ( KIO::upUrl(m_doc->url()).isParentOf( translation->imageUrl()) ) {
+        const QUrl docDirUrl = m_doc->url().adjusted(QUrl::RemoveFilename);
+        if ( docDirUrl.isParentOf( translation->imageUrl()) ) {
             // try to save as relative url
-            urlString = m_doc->url().toString() + '/' + translation->imageUrl().toString();
+            const QDir dir( docDirUrl.toLocalFile() );
+            urlString = QUrl::fromLocalFile(
+                dir.relativeFilePath( translation->imageUrl().toLocalFile() )
+            ).url();
         } else {
             urlString =  translation->imageUrl().url();
         }
@@ -544,11 +549,15 @@ bool KEduVocKvtml2Writer::writeTranslation( QDomElement &translationElement, KEd
     // sound
     if ( !translation->soundUrl().isEmpty() ) {
         QString urlString;
-        if ( KIO::upUrl(m_doc->url().adjusted(QUrl::RemoveFilename)).isParentOf( translation->soundUrl()) ) {
+        const QUrl docDirUrl = m_doc->url().adjusted(QUrl::RemoveFilename);
+        if ( docDirUrl.isParentOf( translation->soundUrl()) ) {
             // try to save as relative url
-            urlString = m_doc->url().toString(QUrl::RemoveFilename) + '/' + translation->soundUrl().toString();
+            const QDir dir( docDirUrl.toLocalFile() );
+            urlString = QUrl::fromLocalFile(
+                dir.relativeFilePath( translation->soundUrl().toLocalFile() )
+            ).url();
         } else {
-            urlString =  translation->soundUrl().url();
+            urlString = translation->soundUrl().url();
         }
         translationElement.appendChild( newTextElement( KVTML_SOUND, urlString ) );
     }
@@ -665,5 +674,3 @@ void KEduVocKvtml2Writer::appendTextElement(QDomElement & parent, const QString 
     QDomText textNode = domDoc.createTextNode( text );
     element.appendChild( textNode );
 }
-
-
