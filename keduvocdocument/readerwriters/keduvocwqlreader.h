@@ -43,22 +43,22 @@ public:
      and decide if it is a suitable type.
      @return true if parsable
      */
-    virtual bool isParsable();
+    bool isParsable() Q_DECL_OVERRIDE;
 
     /** @brief returns the KEduVocDocument::FileType that this reader handles
         @return KEduVocDocument::FileType handled
      */
-    virtual KEduVocDocument::FileType fileTypeHandled();
+    KEduVocDocument::FileType fileTypeHandled() Q_DECL_OVERRIDE;
 
     /**  @brief Parse file and write into doc
      @param doc to be written
      @return error status of the read.*/
-    virtual KEduVocDocument::ErrorCode read(KEduVocDocument & doc );
+    KEduVocDocument::ErrorCode read(KEduVocDocument & doc ) Q_DECL_OVERRIDE;
 
     /** an error message.
         @return the error message
     */
-    virtual QString errorMessage() const
+    QString errorMessage() const Q_DECL_OVERRIDE
     {
         return m_errorMessage;
     }

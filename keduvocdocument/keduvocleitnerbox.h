@@ -48,12 +48,12 @@ public:
      * get a list of all entries in the box
      * @return 
      */
-    QList < KEduVocExpression* > entries(EnumEntriesRecursive recursive = NotRecursive);
+    QList < KEduVocExpression* > entries(EnumEntriesRecursive recursive = NotRecursive) Q_DECL_OVERRIDE;
 
-    KEduVocExpression* entry(int row, EnumEntriesRecursive recursive = NotRecursive);
+    KEduVocExpression* entry(int row, EnumEntriesRecursive recursive = NotRecursive) Q_DECL_OVERRIDE;
 
     /** get the number of entries in the lesson */
-    int entryCount(EnumEntriesRecursive recursive = NotRecursive);
+    int entryCount(EnumEntriesRecursive recursive = NotRecursive) Q_DECL_OVERRIDE;
 
 private:
     class Private;
