@@ -70,6 +70,12 @@ private slots:
     void testParseWithLocale();
     /** Missing Locale*/
     void testParseMissingLocale();
+    /** Parsing Sound URL*/
+    void testParseSoundUrl();
+    void testParseSoundUrl_data();
+    /** Parsing Image URL*/
+    void testParseImageUrl();
+    void testParseImageUrl_data();
 
 private :
 
@@ -103,7 +109,13 @@ public:
 
     XMLGenerator & blankIdentifier(const int ii);
     XMLGenerator & addLocale(const int ii);
-
+    XMLGenerator &blankEntry(int entryId);
+    XMLGenerator &blankTranslation(int translationId);
+    XMLGenerator &addSoundUrl(const QString &soundUrl);
+    XMLGenerator &addImageUrl(const QString &soundUrl);
+    XMLGenerator &minimalLessons();
+    XMLGenerator &blankContainer();
+    XMLGenerator &addContainerEntry(int entryId);
 
     /** Convert to the QIODevice that the reader expects*/
     QIODevice * toQIODevice();
@@ -206,6 +218,60 @@ XMLGenerator & XMLGenerator::addLocale(const int ii) {
     return *this;
 }
 
+XMLGenerator &XMLGenerator::blankEntry(int entryId)
+{
+    QDomElement elem = this->createElement(KVTML_ENTRY);
+    elem.setAttribute("id", QString::number(entryId));
+    elementsByTagName(KVTML_ENTRIES).at(0).appendChild(elem);
+    return *this;
+}
+
+XMLGenerator &XMLGenerator::blankTranslation(int translationId)
+{
+    QDomElement elem = this->createElement(KVTML_TRANSLATION);
+    elem.setAttribute("id", QString::number(translationId));
+    elementsByTagName(KVTML_ENTRY).at(0).appendChild(elem);
+    return *this;
+}
+
+XMLGenerator &XMLGenerator::addSoundUrl(const QString &soundUrl)
+{
+    QDomElement elem = this->createElement(KVTML_SOUND);
+    elem.appendChild(this->createTextNode(soundUrl));
+    elementsByTagName(KVTML_TRANSLATION).at(0).appendChild(elem);
+    return *this;
+}
+
+XMLGenerator &XMLGenerator::addImageUrl(const QString &imageUrl)
+{
+    QDomElement elem = this->createElement(KVTML_IMAGE);
+    elem.appendChild(this->createTextNode(imageUrl));
+    elementsByTagName(KVTML_TRANSLATION).at(0).appendChild(elem);
+    return *this;
+}
+
+XMLGenerator &XMLGenerator::minimalLessons()
+{
+    QDomElement elem = this->createElement(KVTML_LESSONS);
+    elementsByTagName(KVTML_TAG).at(0).appendChild(elem);
+    return *this;
+}
+
+XMLGenerator &XMLGenerator::blankContainer()
+{
+    QDomElement elem = this->createElement(KVTML_CONTAINER);
+    elementsByTagName(KVTML_LESSONS).at(0).appendChild(elem);
+    return *this;
+}
+
+XMLGenerator &XMLGenerator::addContainerEntry(int entryId)
+{
+    QDomElement elem = this->createElement(KVTML_ENTRY);
+    elem.setAttribute("id", QString::number(entryId));
+    elementsByTagName(KVTML_CONTAINER).at(0).appendChild(elem);
+    return *this;
+}
+
 
 void Kvtml2ReaderTest::testParseExpectedMinimalXMLAccordingToDTD()
 {
@@ -270,6 +336,105 @@ void Kvtml2ReaderTest::testParseMissingLocale()
     KVOCREADER_DONT_EXPECT( gen.toString(4) ,  KEduVocDocument::FileReaderFailed, gen.myType );
 }
 
+void Kvtml2ReaderTest::testParseSoundUrl()
+{
+    QFETCH(QString, urlStoredInKvtmlFile);
+    QFETCH(QString, expectedParsedUrl);
+    QFETCH(QString, kvtmlFileUrl);
+
+    // Create a minimal KVTML doc with a sound url
+    XMLGenerator gen;
+    gen.minimalHeader().blankIdentifier(0).blankEntry(0).blankTranslation(0);
+    gen.addSoundUrl(urlStoredInKvtmlFile);
+    gen.minimalLessons().blankContainer().addContainerEntry(0);
+
+    // Parse KVTML doc with KEduVocDocument
+    QByteArray array(gen.toString(4).toLatin1());
+    QScopedPointer<QBuffer> buffer(new QBuffer(&array));
+    buffer->open(QIODevice::ReadOnly);
+    ReaderManager::ReaderPtr reader(ReaderManager::reader(*buffer));
+    KEduVocDocument testDoc;
+    testDoc.setUrl(QUrl(kvtmlFileUrl));
+    KEduVocDocument::ErrorCode errorCode(reader->read(testDoc));
+    if (errorCode != KEduVocDocument::NoError) {
+        QFAIL("Test document could not be filled from buffer.");
+    }
+
+    QUrl urlReadFromDoc = testDoc.lesson()->childContainer(0)->entry(0)->translation(0)->soundUrl();
+    QCOMPARE(urlReadFromDoc.toString(), expectedParsedUrl);
+}
+
+void Kvtml2ReaderTest::testParseSoundUrl_data()
+{
+    QTest::addColumn<QString>("urlStoredInKvtmlFile");
+    QTest::addColumn<QString>("expectedParsedUrl");
+    QTest::addColumn<QString>("kvtmlFileUrl");
+
+    QTest::newRow("Relative Path")
+    << "file:sounds/bar.mp3"                // Url stored in KVTML file
+    << "file:///home/foo/sounds/bar.mp3"    // Expected parsed url
+    << "file:///home/foo/bar.kvtml";        // KVTML file url
+
+    QTest::newRow("Absolute Path")
+    << "file:///data/sounds/bar.mp3"        // Url stored in KVTML file
+    << "file:///data/sounds/bar.mp3"        // Expected parsed url
+    << "file:///home/foo/bar.kvtml";        // KVTML file url
+
+    QTest::newRow("Remote Path")
+    << "http://example.com/sounds/bar.mp3"  // Url stored in KVTML file
+    << "http://example.com/sounds/bar.mp3"  // Expected parsed url
+    << "file:///home/foo/bar.kvtml";        // KVTML file url
+}
+
+void Kvtml2ReaderTest::testParseImageUrl()
+{
+    QFETCH(QString, urlStoredInKvtmlFile);
+    QFETCH(QString, expectedParsedUrl);
+    QFETCH(QString, kvtmlFileUrl);
+
+    // Create a minimal KVTML doc with a image url
+    XMLGenerator gen;
+    gen.minimalHeader().blankIdentifier(0).blankEntry(0).blankTranslation(0);
+    gen.addImageUrl(urlStoredInKvtmlFile);
+    gen.minimalLessons().blankContainer().addContainerEntry(0);
+
+    // Parse KVTML doc with KEduVocDocument
+    QByteArray array(gen.toString(4).toLatin1());
+    QScopedPointer<QBuffer> buffer(new QBuffer(&array));
+    buffer->open(QIODevice::ReadOnly);
+    ReaderManager::ReaderPtr reader(ReaderManager::reader(*buffer));
+    KEduVocDocument testDoc;
+    testDoc.setUrl(QUrl(kvtmlFileUrl));
+    KEduVocDocument::ErrorCode errorCode(reader->read(testDoc));
+    if (errorCode != KEduVocDocument::NoError) {
+        QFAIL("Test document could not be filled from buffer.");
+    }
+
+    QUrl urlReadFromDoc = testDoc.lesson()->childContainer(0)->entry(0)->translation(0)->imageUrl();
+    QCOMPARE(urlReadFromDoc.toString(), expectedParsedUrl);
+}
+
+void Kvtml2ReaderTest::testParseImageUrl_data()
+{
+    QTest::addColumn<QString>("urlStoredInKvtmlFile");
+    QTest::addColumn<QString>("expectedParsedUrl");
+    QTest::addColumn<QString>("kvtmlFileUrl");
+
+    QTest::newRow("Relative Path")
+    << "file:images/bar.png"                // Url stored in KVTML file
+    << "file:///home/foo/images/bar.png"    // Expected parsed url
+    << "file:///home/foo/bar.kvtml";        // KVTML file url
+
+    QTest::newRow("Absolute Path")
+    << "file:///data/images/bar.png"        // Url stored in KVTML file
+    << "file:///data/images/bar.png"        // Expected parsed url
+    << "file:///home/foo/bar.kvtml";        // KVTML file url
+
+    QTest::newRow("Remote Path")
+    << "http://example.com/images/bar.png"  // Url stored in KVTML file
+    << "http://example.com/images/bar.png"  // Expected parsed url
+    << "file:///home/foo/bar.kvtml";        // KVTML file url
+}
 
 
 }

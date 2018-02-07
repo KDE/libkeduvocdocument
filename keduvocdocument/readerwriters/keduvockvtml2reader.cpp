@@ -23,6 +23,7 @@
 #include <QTextStream>
 #include <QList>
 #include <QIODevice>
+#include <QDir>
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"
@@ -367,19 +368,21 @@ bool KEduVocKvtml2Reader::readTranslation( QDomElement &translationElement,
     // image
     currentElement = translationElement.firstChildElement( KVTML_IMAGE );
     if ( !currentElement.isNull() ) {
-        if (QUrl::fromLocalFile(currentElement.text()).isRelative())
-            expr->translation(index)->setImageUrl( QUrl (m_doc->url().toString(QUrl::RemoveFilename) + '/' + currentElement.text() ) );
-        else
-            expr->translation(index)->setImageUrl( QUrl (currentElement.text() ) );
+        QUrl imageUrl(currentElement.text());
+        if (imageUrl.isLocalFile() && QDir::isRelativePath(imageUrl.toLocalFile())) {
+            imageUrl = QUrl(m_doc->url().toString(QUrl::RemoveFilename) + imageUrl.toLocalFile());
+        }
+        expr->translation(index)->setImageUrl(imageUrl);
     }
 
     // sound
     currentElement = translationElement.firstChildElement( KVTML_SOUND );
     if ( !currentElement.isNull() ) {
-        if (QUrl::fromLocalFile(currentElement.text()).isRelative())
-            expr->translation(index)->setSoundUrl( QUrl( m_doc->url().toString(QUrl::RemoveFilename) + '/' + currentElement.text() ) );
-        else
-            expr->translation(index)->setSoundUrl( QUrl( currentElement.text() ) );
+        QUrl soundUrl(currentElement.text());
+        if (soundUrl.isLocalFile() && QDir::isRelativePath(soundUrl.toLocalFile())) {
+            soundUrl = QUrl(m_doc->url().toString(QUrl::RemoveFilename) + soundUrl.toLocalFile());
+        }
+        expr->translation(index)->setSoundUrl(soundUrl);
     }
 
     return true;
