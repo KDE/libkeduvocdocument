@@ -18,7 +18,7 @@
  ***************************************************************************/
 
 #ifndef KEDUVOCTEXTTEST_H
-#define KEDUVOCTEXTTESTH
+#define KEDUVOCTEXTTEST_H
 
 #include <QObject>
 
