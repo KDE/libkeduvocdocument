@@ -24,9 +24,9 @@
 #ifndef KEDUVOCKVTMLCOMPABILITY_H
 #define KEDUVOCKVTMLCOMPABILITY_H
 
-#include <QtCore/QString>
-#include <QtCore/QMap>
-#include <QtCore/QSet>
+#include <QString>
+#include <QMap>
+#include <QSet>
 
 
 // internal types, indented are subtypes
@@ -53,7 +53,7 @@
 // #define   QM_NUM_CARD     "crd"  // cardinal    one, two
 // #define QM_INFORMAL       "ifm"
 // #define QM_FIG            "fig"
-// #define QM_CON            "con"  // conjuncton  and, but
+// #define QM_CON            "con"  // conjunction  and, but
 // #define QM_PREP           "pre"  // preposition behind, between
 // #define QM_QUEST          "qu"   // question    who, what
 

@@ -21,8 +21,8 @@ public:
     QString m_locale;
 
     /**
-     * Let the user provide some additional informatioin about the language.
-     * This could be Traditional/Simplified for chinese to differentiate between them.
+     * Let the user provide some additional information about the language.
+     * This could be Traditional/Simplified for Chinese to differentiate between them.
      */
     QString m_comment;
 

@@ -18,7 +18,7 @@
 
 #include "keduvocdocument_export.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 /**
  *namespace and singleton class to scan groups of kvtml files

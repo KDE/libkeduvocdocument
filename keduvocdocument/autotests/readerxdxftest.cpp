@@ -23,7 +23,7 @@
 
 #include "readerTestHelpers.h"
 
-#include <qdebug.h>
+#include <QDebug>
 #include <QtTest>
 
 namespace XdxfReaderUnitTests

@@ -23,7 +23,7 @@
 #include <qdebug.h>
 
 #include <QXmlStreamWriter>
-#include <QtCore/QIODevice>
+#include <QIODevice>
 
 
 //@todo These static functions should be defined here.  Find the syntax bug.

@@ -25,9 +25,9 @@
 
 #include "kvtml2defs.h"
 #include "keduvockvtml2writer.h"
-#include <QtXml/QDomDocument>
+#include <QDomDocument>
 
-#include <QtCore/QMap>
+#include <QMap>
 
 class KEduVocDeclension::Private
 {

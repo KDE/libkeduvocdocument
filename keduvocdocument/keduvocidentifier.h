@@ -18,9 +18,9 @@
 #include "keduvocpersonalpronoun.h"
 #include "keduvocarticle.h"
 
-#include <QtCore/QList>
-#include <QtCore/QString>
-#include <QtCore/QSet>
+#include <QList>
+#include <QString>
+#include <QSet>
 
 
 /**

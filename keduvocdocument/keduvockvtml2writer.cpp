@@ -16,8 +16,8 @@
 
 #include "keduvockvtml2writer.h"
 
-#include <QtCore/QTextStream>
-#include <QtCore/QFile>
+#include <QTextStream>
+#include <QFile>
 
 #include <QDir>
 #include <QDebug>

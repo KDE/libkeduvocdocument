@@ -2,7 +2,7 @@
 
 KEduVocDocument is a library for reading and writing vocabulary files used by Parley, Kanagram, KHangMan and KWordQuiz.
  
-At this date no binary compability is guaranteed. Please update this lib when updating the applications mentioned above.
+At this date no binary compatibility is guaranteed. Please update this lib when updating the applications mentioned above.
 
 Important classes are:
  - KEduVocExpression to hold an abstract entry. It contains translations in KEduVocTranslation.
@@ -21,7 +21,7 @@ KEduVocDocument supports reading and writing of different file formats. KVTML (v
 
 Readers:
  - KEduVocKvtml2Reader the current default file format since KDE4
- - KEduVocKvtmlReader for compability (pre KDE4)
+ - KEduVocKvtmlReader for compatibility (pre KDE4)
  - KEduVocCsvReader Comma separated values (text files)
  - KEduVocPaukerReader Pauker file format
  - KEduVocVokabelnReader Vokabeln file format

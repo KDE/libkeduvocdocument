@@ -23,8 +23,8 @@
 
 #include "readerTestHelpers.h"
 
-#include <qobject.h>
-#include <qdebug.h>
+#include <QObject>
+#include <QDebug>
 #include <QtTest>
 
 namespace WordQuizReaderTests {
@@ -129,7 +129,7 @@ WQLGenerator & WQLGenerator::minimalGridInfo() {
 }
 
 WQLGenerator & WQLGenerator::minimalVocab() {
-    m_string += vocabTag + "\n" + word0Left + "[\n" + word0Right +"\n";
+    m_string += vocabTag + '\n' + word0Left + "[\n" + word0Right +'\n';
     return *this;
 }
 

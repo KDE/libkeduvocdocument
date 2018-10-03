@@ -21,7 +21,7 @@
 
 #include "keduvoctext.h"
 
-#include <QtCore/QList>
+#include <QList>
 #include <QUrl>
 
 class KEduVocDocument;
@@ -112,7 +112,7 @@ public:
     void setInPractice( bool inPractice );
 
     /** equality operator */
-    bool operator==(const KEduVocContainer &other);
+    bool operator==(const KEduVocContainer &other) const;
 
     /**
      * The type of this container. @see EnumContainerType

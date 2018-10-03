@@ -23,7 +23,7 @@
 
 #include "readerTestHelpers.h"
 
-#include <qdebug.h>
+#include <QDebug>
 #include <QtTest>
 
 namespace PaukerReaderUnitTests
@@ -41,7 +41,7 @@ namespace PaukerReaderUnitTests
  <?xml version="1.0" encoding="UTF-8"?>
  <!--This is a lesson file for Pauker (http://pauker.sourceforge.net)-->
  <Lesson LessonFormat="1.7">
-   <Description>Some Descrition</Description>
+   <Description>Some Description</Description>
    <Batch>
      <Card>
        <FrontSide>

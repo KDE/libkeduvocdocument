@@ -92,7 +92,7 @@ static const QString KVTML_GRAMMATICAL_DEFINITENESS[] = {
 
 // word types, lessons and leitner boxes are vocabulary containers.
 // each is allowed to have as many child containers as desired.
-// for KDE 4.0 Parley will only allow a depth of wordtype cildren of two,
+// for KDE 4.0 Parley will only allow a depth of wordtype children of two,
 // leitner is not implemented at all.
 // it is assumed that one container only has children of the same type.
 // containers may have an image associated to represent them visually.

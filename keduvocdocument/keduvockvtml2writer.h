@@ -17,9 +17,9 @@
 #ifndef KEDUVOCKVTML2WRITER_H
 #define KEDUVOCKVTML2WRITER_H
 
-#include <QtXml/QDomDocument>
-#include <QtCore/QList>
-#include <QtCore/QFile>
+#include <QDomDocument>
+#include <QList>
+#include <QFile>
 
 #include "keduvocarticle.h"
 #include "keduvocmultiplechoice.h"
@@ -38,7 +38,7 @@ class KEduVocLeitnerBox;
 class KEduVocKvtml2Writer
 {
 public:
-    KEduVocKvtml2Writer( QFile *file );
+    explicit KEduVocKvtml2Writer( QFile *file );
 
     bool writeDoc( KEduVocDocument *doc, const QString &generator );
 

@@ -29,14 +29,14 @@
 
 #include "keduvocdocument_export.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 class KEDUVOCDOCUMENT_EXPORT KEduVocMultipleChoice
 {
 public:
     KEduVocMultipleChoice();
     KEduVocMultipleChoice( const KEduVocMultipleChoice &other );
-    KEduVocMultipleChoice( const QStringList &choices );
+    explicit KEduVocMultipleChoice( const QStringList &choices );
 
     ~KEduVocMultipleChoice();
 

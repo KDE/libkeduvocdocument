@@ -21,7 +21,7 @@
 #include "keduvocconjugation.h"
 #include "keduvoctext.h"
 #include <QUrl>
-#include <QtCore/QString>
+#include <QString>
 #include <QMap>
 class KEduVocExpression;
 class KEduVocWordType;
@@ -297,7 +297,7 @@ public:
     QList<KEduVocTranslation*> antonyms() const;
 
     /**
-     * Equal operator to assing a translation to another one.
+     * Equal operator to assign a translation to another one.
      * @param translation translation to be copied
      * @return reference to the new translation
      */

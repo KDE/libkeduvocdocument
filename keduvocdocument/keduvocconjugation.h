@@ -29,7 +29,7 @@
 #include "keduvoctext.h"
 #include "keduvocwordflags.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 /**
  * The conjugation of a verb
@@ -51,7 +51,7 @@ public:
     bool operator == ( const KEduVocConjugation& a ) const;
 
     /**
-     *  Returns an existing conjugation object. It is an error and leads to undefined behaviour
+     *  Returns an existing conjugation object. It is an error and leads to undefined behavior
      *  to call this method with flags which are not in the list returned by keys().
      *
      *  BCI: return a pointer instead of a reference.

@@ -31,9 +31,9 @@
 #include "readerwriters/keduvocvokabelnreader.h"
 #include "readerwriters/keduvocxdxfreader.h"
 
-#include "qdebug.h"
+#include <QDebug>
 
-#include <QtCore/QIODevice>
+#include <QIODevice>
 
 ReaderManager::ReaderPtr ReaderManager::reader(QIODevice & dev)
 {

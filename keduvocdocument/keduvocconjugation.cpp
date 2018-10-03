@@ -26,8 +26,8 @@
 #include "keduvoctext.h"
 #include "kvtml2defs.h"
 
-#include <QtCore/QMap>
-#include <QtXml/QDomDocument>
+#include <QMap>
+#include <QDomDocument>
 #include <QDebug>
 
 class KEduVocConjugation::Private

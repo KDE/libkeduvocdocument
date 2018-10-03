@@ -30,9 +30,9 @@
 
 #include <qtest_kde.h>
 
-#include <qobject.h>
-#include <qvalidator.h>
-#include <QtXml/QDomDocument>
+#include <QObject>
+#include <QValidator>
+#include <QDomDocument>
 
 class KEduVocDocumentValidatorTest
   : public QObject

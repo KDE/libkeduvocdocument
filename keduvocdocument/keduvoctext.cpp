@@ -16,7 +16,7 @@
 #include "kvtml2defs.h"
 #include "keduvockvtml2writer.h"
 
-#include <QtXml/QDomDocument>
+#include <QDomDocument>
 
 class KEduVocText::KEduVocTextPrivate
 {

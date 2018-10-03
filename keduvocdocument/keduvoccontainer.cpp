@@ -176,7 +176,7 @@ KEduVocContainer& KEduVocContainer::operator= ( const KEduVocContainer &other )
     return *this;
 }
 
-bool KEduVocContainer::operator==(const KEduVocContainer &other)
+bool KEduVocContainer::operator==(const KEduVocContainer &other) const
 {
     return  d->m_name == other.d->m_name &&
             d->m_inPractice == other.d->m_inPractice

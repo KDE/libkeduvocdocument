@@ -18,8 +18,8 @@
 
 #include "keduvoccontainer.h"
 
-#include <QtCore/QList>
-#include <QtCore/QString>
+#include <QList>
+#include <QString>
 
 class KEduVocExpression;
 class KEduVocTranslation;

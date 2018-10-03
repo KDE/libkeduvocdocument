@@ -23,7 +23,7 @@
 #include "kvtml2defs.h"
 #include "readerTestHelpers.h"
 
-#include <qdebug.h>
+#include <QDebug>
 #include <QtTest>
 
 namespace Kvtml2ReaderUnitTests

@@ -17,7 +17,7 @@
 
 #include "keduvocdocument_export.h"
 #include "keduvocconjugation.h"
-#include <QtCore/QStringList>
+#include <QStringList>
 
 /**
  * The conjugation of a verb

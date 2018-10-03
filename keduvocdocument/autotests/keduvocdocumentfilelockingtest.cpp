@@ -23,9 +23,9 @@
 
 #include <qtest_kde.h>
 
-#include <qobject.h>
-#include <qvalidator.h>
-#include <QtXml/QDomDocument>
+#include <QObject>
+#include <QValidator>
+#include <QDomDocument>
 
 /** Unit tests to verify that 2 kvocdocs can't access a single file at the same time.*/
 class KEduVocDocumentFileLockingTest

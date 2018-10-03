@@ -23,8 +23,8 @@
 
 #include "keduvocwordflags.h"
 
-#include <QtCore/QList>
-#include <QtCore/QString>
+#include <QList>
+#include <QString>
 
 class KEduVocExpression;
 class KEduVocTranslation;
@@ -64,7 +64,7 @@ public:
     KEduVocWordType* childOfType(const KEduVocWordFlags& flags);
 
     /**
-     * The word type class does keep track of individual translations, because for one entry, the translations can have different word types (eg. genders of nouns tend to be different in different langues).
+     * The word type class does keep track of individual translations, because for one entry, the translations can have different word types (eg. genders of nouns tend to be different in different languages).
      * @param row
      * @return
      */

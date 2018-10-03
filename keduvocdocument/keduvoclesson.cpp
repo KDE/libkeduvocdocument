@@ -18,7 +18,7 @@
 
 #include "keduvocexpression.h"
 
-#include <QtCore/QList>
+#include <QList>
 
 /** private class to store information about a lesson */
 class KEduVocLesson::Private

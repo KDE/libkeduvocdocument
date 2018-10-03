@@ -15,7 +15,7 @@
 #define KEDUVOCTEXT_H
 
 #include "keduvocdocument_export.h"
-#include <QtCore/QDateTime>
+#include <QDateTime>
 
 
 #define KV_MAX_GRADE       7
@@ -129,7 +129,7 @@ public:
     void resetGrades();
 
     /** sets the pregrade
-    * @param grade number of knowlegde: 0=known, x=numbers not knows
+    * @param grade number of knowledge: 0=known, x=numbers not knows
     */
     void setPreGrade( grade_t grade );
 
@@ -138,12 +138,12 @@ public:
     grade_t preGrade() const;
 
     /** sets the grade
-    * @param grade number of knowlegde: 0=known, x=numbers not knows
+    * @param grade number of knowledge: 0=known, x=numbers not knows
     */
     void setGrade( grade_t grade );
 
     /** returns grade as int
-    * @returns number of knowlegde: 0=known, x=numbers not knows
+    * @returns number of knowledge: 0=known, x=numbers not knows
     */
     grade_t grade() const;
 

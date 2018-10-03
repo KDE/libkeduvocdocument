@@ -25,9 +25,9 @@
 #include "keduvocarticle.h"
 #include "keduvocconjugation.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QList>
-#include <QtCore/QMap>
+#include <QObject>
+#include <QList>
+#include <QMap>
 #include <QUrl>
 
 class KEduVocLesson;

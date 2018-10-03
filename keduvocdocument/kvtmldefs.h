@@ -52,7 +52,7 @@ static const QLatin1String KV_TRANS( "t" );     // translated expression in spec
 #define KV_FAUX_AMI_F  "ff"        // false friend of this entry from org
 #define KV_FAUX_AMI_T  "tf"        // false friend of this entry to org
 #define KV_SYNONYM     "y"         // synonym (same meaning) of expr
-#define KV_ANTONYM     "a"         // antonym (oppositite) of expr
+#define KV_ANTONYM     "a"         // antonym (opposite) of expr
 #define KV_PRONUNCE    "p"         // how to pronounce this expression
 #define KV_SELECTED    "s"         // entry selected for queries
 #define KV_INACTIVE    "i"         // entry inactive (for queries)
@@ -170,7 +170,7 @@ static const QLatin1String KV_ART_ENTRY( "e" ); // article entry
 #define KV_MC_5        "mc5"           // choice 5
 
 /*
- <conjugation>        used in header for definiton of "prefix"
+ <conjugation>        used in header for definition of "prefix"
   <e l="de">          lang determines also lang order in entries !!
    <s1>I</s1>         which must NOT differ in subsequent <e>-tags
    <s2>you<2>

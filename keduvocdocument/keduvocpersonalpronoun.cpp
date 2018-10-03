@@ -14,7 +14,7 @@
 #include "keduvocpersonalpronoun.h"
 #include "keduvoccommon_p.h"
 
-#include <QtCore/QMap>
+#include <QMap>
 
 class KEduVocPersonalPronoun::Private
 {

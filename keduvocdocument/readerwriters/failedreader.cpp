@@ -20,7 +20,7 @@
 #include "failedreader.h"
 
 #include <klocalizedstring.h>
-#include <QtCore/QIODevice>
+#include <QIODevice>
 
 
 FailedReader::FailedReader(KEduVocDocument::ErrorCode inerror, const QString & msg)

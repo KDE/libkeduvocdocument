@@ -59,7 +59,7 @@ public:
 
     /** constructor
      @param dev device to parse*/
-    DummyReader(QIODevice &dev);
+    explicit DummyReader(QIODevice &dev);
     /**destructor*/
     virtual ~DummyReader(){};
 

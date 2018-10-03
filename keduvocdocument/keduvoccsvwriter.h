@@ -25,7 +25,7 @@ class KEduVocDocument;
 class KEduVocCsvWriter
 {
 public:
-    KEduVocCsvWriter( QFile *file );
+    explicit KEduVocCsvWriter( QFile *file );
 
     bool writeDoc( KEduVocDocument *doc, const QString &generator );
 

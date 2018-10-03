@@ -20,7 +20,7 @@
 
 #include "keduvocdocument_export.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 #include "keduvocwordflags.h"
 

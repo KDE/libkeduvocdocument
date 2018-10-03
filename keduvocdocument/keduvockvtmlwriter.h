@@ -20,9 +20,9 @@
 #ifndef KEDUVOCKVTMLWRITER_H
 #define KEDUVOCKVTMLWRITER_H
 
-#include <QtXml/QDomDocument>
-#include <QtCore/QList>
-#include <QtCore/QFile>
+#include <QDomDocument>
+#include <QList>
+#include <QFile>
 
 #include "keduvocarticle.h"
 #include "keduvocpersonalpronoun.h"
@@ -39,7 +39,7 @@ class KEduVocDocument;
 class KEduVocKvtmlWriter
 {
 public:
-    KEduVocKvtmlWriter( QFile *file );
+    explicit KEduVocKvtmlWriter( QFile *file );
 
     bool writeDoc( KEduVocDocument *doc, const QString &generator );
 

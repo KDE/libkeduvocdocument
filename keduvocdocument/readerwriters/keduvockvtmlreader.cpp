@@ -20,9 +20,9 @@
 #include "keduvockvtmlreader.h"
 
 #include <klocalizedstring.h>
-#include <QtCore/QTextStream>
-#include <QtCore/QList>
-#include <QtCore/QIODevice>
+#include <QTextStream>
+#include <QList>
+#include <QIODevice>
 
 #include <QDebug>
 #include <QLocale>
@@ -393,7 +393,7 @@ bool KEduVocKvtmlReader::readTranslationConjugations( QDomElement &domElementPar
 
 bool KEduVocKvtmlReader::readConjugation( QDomElement &domElementParent, KEduVocConjugation& conjugation )
 /*
- <conjugation>        used in header for definiton of "prefix"
+ <conjugation>        used in header for definition of "prefix"
   <e l="de">          lang determines also lang order in entries !!
    <s1>I</s1>         which must NOT differ
    <s2>you<2>
@@ -932,7 +932,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
 
     attribute = domElementParent.attributeNode( KV_LESS_MEMBER );
     if ( !attribute.isNull() ) {
-        // we start conting from 0 in new documents
+        // we start counting from 0 in new documents
         lessonNumber = attribute.value().toInt() - 1;
         if ( lessonNumber > m_doc->lesson()->childContainerCount() ) {
             ///@todo can this happen? does it need a while loop?

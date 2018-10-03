@@ -17,7 +17,7 @@
 #ifndef KEDUVOCKVTML2READER_H
 #define KEDUVOCKVTML2READER_H
 
-#include <QtXml/QDomDocument>
+#include <QDomDocument>
 #include <QMap>
 
 #include "keduvocexpression.h"

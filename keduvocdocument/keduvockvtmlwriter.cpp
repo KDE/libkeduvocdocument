@@ -19,9 +19,9 @@
 
 #include "keduvockvtmlwriter.h"
 
-#include <QtCore/QLatin1String>
-#include <QtCore/QTextStream>
-#include <QtCore/QFile>
+#include <QLatin1String>
+#include <QTextStream>
+#include <QFile>
 
 #include <QDebug>
 
@@ -604,7 +604,7 @@ bool KEduVocKvtmlWriter::writeMultipleChoice( QDomElement &domElementParent, con
 bool KEduVocKvtmlWriter::writeConjugHeader( QDomElement &domElementParent, QList<KEduVocConjugation> &curr_conjug )
 {
     /*
-     <conjugation>    used in header for definiton of "prefix"
+     <conjugation>    used in header for definition of "prefix"
       <e l="de">      lang determines also lang order in entries !!
        <s1>I</s1>     which must NOT differ
        <s2>you<2>
@@ -783,7 +783,7 @@ bool KEduVocKvtmlWriter::writeConjug( QDomElement &domElementParent, const KEduV
 bool KEduVocKvtmlWriter::writePersonalPronouns( QDomElement &domElementParent, QList<KEduVocPersonalPronoun> &curr_conjug )
 {
     /*
-     <conjugation>    used in header for definiton of "prefix"
+     <conjugation>    used in header for definition of "prefix"
       <e l="de">      lang determines also lang order in entries !!
        <s1>I</s1>     which must NOT differ
        <s2>you<2>

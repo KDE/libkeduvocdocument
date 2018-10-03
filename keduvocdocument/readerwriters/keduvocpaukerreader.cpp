@@ -18,12 +18,12 @@
 
 #include <klocalizedstring.h>
 #include <QIODevice>
-#include <QtCore/QTextStream>
+#include <QTextStream>
 
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"
 #include "keduvocdocument.h"
-#include "qdebug.h"
+#include <QDebug>
 
 KEduVocPaukerReader::KEduVocPaukerReader( QIODevice & dev )
     :m_dev( dev )

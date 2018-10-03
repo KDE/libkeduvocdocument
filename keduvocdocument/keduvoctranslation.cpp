@@ -23,7 +23,7 @@
 #include "kvtml2defs.h"
 #include "keduvockvtml2writer.h"
 
-#include <QtCore/QMap>
+#include <QMap>
 
 class KEduVocTranslation::KEduVocTranslationPrivate
 {
@@ -112,7 +112,7 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
     // set the entry to 0, the translation will be put into a copied entry by the expression copy constructor
     d( new KEduVocTranslationPrivate(0) )
 {
-    // beter no word type copy as this is pointer copying
+    // better no word type copy as this is pointer copying
     // will not work as this is not added to the word type container!
 //  d->m_wordType = other.d->m_wordType;
 //  d->m_leitnerBox = translation.d->m_leitnerBox;

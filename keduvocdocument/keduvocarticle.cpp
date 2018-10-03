@@ -18,7 +18,7 @@
 #include "keduvocarticle.h"
 #include "keduvocwordflags.h"
 
-#include <QtCore/QMap>
+#include <QMap>
 
 class KEduVocArticle::Private
 {

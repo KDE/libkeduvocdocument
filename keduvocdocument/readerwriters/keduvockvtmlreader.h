@@ -20,8 +20,8 @@
 #ifndef KEDUVOCKVTMLREADER_H
 #define KEDUVOCKVTMLREADER_H
 
-#include <QtXml/QDomDocument>
-#include <QtCore/QList>
+#include <QDomDocument>
+#include <QList>
 
 
 #include "keduvocexpression.h"
@@ -76,7 +76,7 @@ public:
     /**
      * Attempt to add a language/locale. Language/locale are set to the same value.
      * No error if already there with the same value.
-     * @param languageId idenifier number
+     * @param languageId identifier number
      * @param language name
      * @return true if successful
      */

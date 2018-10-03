@@ -20,9 +20,9 @@
 #include "keduvockvtml2reader.h"
 
 #include <klocalizedstring.h>
-#include <QtCore/QTextStream>
-#include <QtCore/QList>
-#include <QtCore/QIODevice>
+#include <QTextStream>
+#include <QList>
+#include <QIODevice>
 
 #include "keduvocdocument.h"
 #include "keduvoclesson.h"
