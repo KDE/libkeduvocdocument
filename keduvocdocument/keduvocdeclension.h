@@ -63,8 +63,7 @@ public:
 
     /**
      * The grammatical number, there is singular and plural for english, some languages have dual for exactly two items.
-     * @param gender
-     * @param decCase
+     * @param flags
      * @return
      */
     KEduVocText& declension(KEduVocWordFlags flags);

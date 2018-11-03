@@ -58,7 +58,7 @@ public:
     int entryCount(EnumEntriesRecursive recursive = NotRecursive) Q_DECL_OVERRIDE;
 
     /** append an entry to the lesson
-     * @param entryid id of the entry to add
+     * @param entry the id of the entry to add
      */
     void appendEntry(KEduVocExpression* entry);
 
@@ -70,7 +70,7 @@ public:
     void insertEntry(int index, KEduVocExpression* entry);
 
     /** remove an entry from the lesson
-     * @param entryid id of the entry to remove
+     * @param entry the id of the entry to remove
      */
     void removeEntry(KEduVocExpression* entry);
 

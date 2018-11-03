@@ -45,15 +45,12 @@ public:
     /** Constructor for a vocabulary expression with one translation
      *
      * @param expression       translation
-     * @param lesson           lesson number
      */
     explicit KEduVocExpression( const QString & expression );
 
     /** Constructor for a vocabulary expression with an original and one or more translations
      *
-     * @param expression       expression
-     * @param separator        expression will be split into an original and one or more translations using separator
-     * @param lesson           lesson number, 0 for none
+     * @param translations      translations
      */
     explicit KEduVocExpression( const QStringList & translations );
 

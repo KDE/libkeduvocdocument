@@ -72,6 +72,7 @@ public:
     /**
      * Create xml for this declension
      * @param parent
+     * @param tense
      */
     void toKVTML2(QDomElement& parent, const QString &tense);
 

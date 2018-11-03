@@ -48,6 +48,7 @@ public:
 
     /**
         * Constructor
+        * @param entry
         * @param translation is used as translation
         */
     KEduVocTranslation(KEduVocExpression* entry, const QString &translation );
@@ -132,7 +133,7 @@ public:
     KEduVocWordType* wordType() const;
 
     /** Sets the word type of this expression
-    * @param type             type of this expression ("" = none)
+    * @param wordType             type of this expression ("" = none)
     */
     void setWordType( KEduVocWordType* wordType );
 
@@ -162,6 +163,7 @@ public:
     KEduVocConjugation getConjugation(const QString &tense) const;
 
     /** adds conjugations or replaces them, if they exist.
+    * @param tense            tense
     * @param conjugation      conjugation
     */
     void setConjugation( const QString& tense, const KEduVocConjugation & conjugation );
@@ -181,7 +183,7 @@ public:
 
     /**
      * Bad, only used for tense entry page, will be deleted later. Deprecated.
-     * @param conjugation
+     * @param conjugations
      */
     void setConjugations( const QMap<QString, KEduVocConjugation>& conjugations );
 

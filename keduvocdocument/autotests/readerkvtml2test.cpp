@@ -30,7 +30,8 @@ namespace Kvtml2ReaderUnitTests
 {
 
 /**
- * @file Unit Tests of parsing of KVTML 2.0 XML strings
+ * @file readerkvtml2test.cpp
+ * Unit Tests of parsing of KVTML 2.0 XML strings
  *
  * Each test creates a QString of XML
  * reads, parses and verifies the parse.  The portions of the

@@ -46,7 +46,7 @@ public:
 
     /**
      * Internally (different from the name) the class can have one of the preset word types. These are used to determine special properties (verbs have conjugations available for example).
-     * @param type
+     * @param flags
      */
     void setWordType(KEduVocWordFlags flags);
 
@@ -58,7 +58,7 @@ public:
 
     /**
      * Return a child class (or this class) that is of the specified type. Returns 0 if no class of that type is found.
-     * @param type
+     * @param flags
      * @return
      */
     KEduVocWordType* childOfType(const KEduVocWordFlags& flags);

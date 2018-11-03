@@ -83,6 +83,7 @@ public:
     ///// TYPES
     /**
      * Get the type from an old type definition
+     * @param parent the parent word type
      * @param typeSubtypeString the old string containing everything
      * @return type
      */

@@ -83,7 +83,7 @@ public:
 
     /**
      * Sets the articles for this identifier
-     * @param art              article block
+     * @param article              article block
      */
     void setArticle( const KEduVocArticle& article );
 
