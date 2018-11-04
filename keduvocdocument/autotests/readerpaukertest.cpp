@@ -30,7 +30,8 @@ namespace PaukerReaderUnitTests
 {
 
 /**
- * @file Unit Tests of parsing of Pauker strings
+ * @file readerpaukertest.cpp
+ * Unit Tests of parsing of Pauker strings
  *
  * Each test creates a QString of Pauker format
  * reads, parses and verifies the parse.  The portions of the

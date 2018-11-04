@@ -69,7 +69,8 @@
 class KEduVocWordType;
 
 /**
-  * @file contains defines and constants necessary for reading kvtml files prior to KDE4. kvtml version 1.
+  * @file keduvockvtmlcompability.h
+  * contains defines and constants necessary for reading kvtml files prior to KDE4. kvtml version 1.
   */
 class KEduVocKvtmlCompability
 {

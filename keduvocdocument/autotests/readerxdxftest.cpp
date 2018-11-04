@@ -30,7 +30,8 @@ namespace XdxfReaderUnitTests
 {
 
 /**
- * @file Unit Tests of parsing of Xdxf strings
+ * @file readerxdxftest.cpp
+ * Unit Tests of parsing of Xdxf strings
  *
  * Each test creates a QString of Xdxf format
  * reads, parses and verifies the parse.  The portions of the

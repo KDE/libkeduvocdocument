@@ -30,7 +30,8 @@
 namespace WordQuizReaderTests {
 
 /**
- * @file Unit Tests of parsing of WordQuiz WQL Files
+ * @file readerwordquiztest.cpp
+ * Unit Tests of parsing of WordQuiz WQL Files
  *
  * Each test creates a QString in WQL format
  * */

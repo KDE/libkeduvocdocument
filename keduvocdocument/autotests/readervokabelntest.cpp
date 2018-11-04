@@ -30,7 +30,8 @@ namespace VokabelnReaderUnitTests
 {
 
 /**
- * @file Unit Tests of parsing of Vokabeln strings
+ * @file readervokabelntest.cpp
+ * Unit Tests of parsing of Vokabeln strings
  *
  * Each test creates a QString of Vokabeln format
  * reads, parses and verifies the parse.  The portions of the
