@@ -70,9 +70,8 @@ public:
 
     /**
      * Set a declension
-     * @param
-     * @param number
-     * @param decCase
+     * @param declension
+     * @param flags
      */
     void setDeclension(const KEduVocText& declension, KEduVocWordFlags flags);
 

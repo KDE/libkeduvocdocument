@@ -54,7 +54,6 @@ public:
      *
      Read a small portion of the header of the file
      and decide if it is a suitable type.
-     @param file an device open for read
      @return true if parsable
      */
     virtual bool isParsable();
