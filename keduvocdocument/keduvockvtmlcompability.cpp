@@ -28,8 +28,8 @@
 
 #include <QDebug>
 
-const QString KEduVocKvtmlCompability::KVTML_1_USER_DEFINED = QString( "#" );
-const QString KEduVocKvtmlCompability::KVTML_1_SEPERATOR = QString( ":" );
+const QString KEduVocKvtmlCompability::KVTML_1_USER_DEFINED = QStringLiteral( "#" );
+const QString KEduVocKvtmlCompability::KVTML_1_SEPERATOR = QStringLiteral( ":" );
 
 
 KEduVocKvtmlCompability::KEduVocKvtmlCompability()
@@ -46,32 +46,32 @@ KEduVocKvtmlCompability::KEduVocKvtmlCompability()
 void KEduVocKvtmlCompability::initOldTypeLists()
 {
     m_oldMainTypeNames.clear();
-    m_oldMainTypeNames.insert( "v", i18nc( "@item:inlistbox The grammatical type of a word", "Verb" ) );
-    m_oldMainTypeNames.insert( "n", i18nc( "@item:inlistbox The grammatical type of a word", "Noun" ) );
-    m_oldMainTypeNames.insert( "nm", i18nc( "@item:inlistbox The grammatical type of a word", "Name" ) );
-    m_oldMainTypeNames.insert( "ar", i18nc( "@item:inlistbox The grammatical type of a word", "Article" ) );
-    m_oldMainTypeNames.insert( "aj", i18nc( "@item:inlistbox The grammatical type of a word", "Adjective" ) );
-    m_oldMainTypeNames.insert( "av", i18nc( "@item:inlistbox The grammatical type of a word", "Adverb" ) );
-    m_oldMainTypeNames.insert( "pr", i18nc( "@item:inlistbox The grammatical type of a word", "Pronoun" ) );
-    m_oldMainTypeNames.insert( "ph", i18nc( "@item:inlistbox The grammatical type of an entry", "Phrase" ) );
-    m_oldMainTypeNames.insert( "num", i18nc( "@item:inlistbox The grammatical type of a word", "Numeral" ) );
-    m_oldMainTypeNames.insert( "con", i18nc( "@item:inlistbox The grammatical type of a word", "Conjunction" ) );
-    m_oldMainTypeNames.insert( "pre", i18nc( "@item:inlistbox The grammatical type of a word", "Preposition" ) );
-    m_oldMainTypeNames.insert( "qu", i18nc( "@item:inlistbox The grammatical type of an entry", "Question" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("v"), i18nc( "@item:inlistbox The grammatical type of a word", "Verb" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("n"), i18nc( "@item:inlistbox The grammatical type of a word", "Noun" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("nm"), i18nc( "@item:inlistbox The grammatical type of a word", "Name" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("ar"), i18nc( "@item:inlistbox The grammatical type of a word", "Article" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("aj"), i18nc( "@item:inlistbox The grammatical type of a word", "Adjective" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("av"), i18nc( "@item:inlistbox The grammatical type of a word", "Adverb" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("pr"), i18nc( "@item:inlistbox The grammatical type of a word", "Pronoun" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("ph"), i18nc( "@item:inlistbox The grammatical type of an entry", "Phrase" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("num"), i18nc( "@item:inlistbox The grammatical type of a word", "Numeral" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("con"), i18nc( "@item:inlistbox The grammatical type of a word", "Conjunction" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("pre"), i18nc( "@item:inlistbox The grammatical type of a word", "Preposition" ) );
+    m_oldMainTypeNames.insert( QStringLiteral("qu"), i18nc( "@item:inlistbox The grammatical type of an entry", "Question" ) );
 
 
     m_oldSubTypeNames.clear();
-    m_oldSubTypeNames.insert( "ord", i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  (first, second, third, ...)","Ordinal" ) );
-    m_oldSubTypeNames.insert( "crd", i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal (one, two, three, ...)","Cardinal" ) );
-    m_oldSubTypeNames.insert( "def", i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (the)","Definite" ) );
-    m_oldSubTypeNames.insert( "ind", i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (a)","Indefinite" ) );
-    m_oldSubTypeNames.insert( "re", i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with regular conjugation","Regular" ) );
-    m_oldSubTypeNames.insert( "ir", i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with irregular conjugation","Irregular" ) );
-    m_oldSubTypeNames.insert( "pos", i18nc( "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, his, her...)", "Possessive" ) );
-    m_oldSubTypeNames.insert( "per", i18nc( "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, he...)", "Personal" ) );
-    m_oldSubTypeNames.insert( "m", i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Male" ) );
-    m_oldSubTypeNames.insert( "f", i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Female" ) );
-    m_oldSubTypeNames.insert( "s", i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Neutral" ) );
+    m_oldSubTypeNames.insert( QStringLiteral("ord"), i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  (first, second, third, ...)","Ordinal" ) );
+    m_oldSubTypeNames.insert( QStringLiteral("crd"), i18nc( "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal (one, two, three, ...)","Cardinal" ) );
+    m_oldSubTypeNames.insert( QStringLiteral("def"), i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (the)","Definite" ) );
+    m_oldSubTypeNames.insert( QStringLiteral("ind"), i18nc( "@item:inlistbox A subtype of the grammatical word type: Article (a)","Indefinite" ) );
+    m_oldSubTypeNames.insert( QStringLiteral("re"), i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with regular conjugation","Regular" ) );
+    m_oldSubTypeNames.insert( QStringLiteral("ir"), i18nc( "@item:inlistbox A subtype of the grammatical word type: Verb with irregular conjugation","Irregular" ) );
+    m_oldSubTypeNames.insert( QStringLiteral("pos"), i18nc( "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, his, her...)", "Possessive" ) );
+    m_oldSubTypeNames.insert( QStringLiteral("per"), i18nc( "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, he...)", "Personal" ) );
+    m_oldSubTypeNames.insert( QStringLiteral("m"), i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Male" ) );
+    m_oldSubTypeNames.insert( QStringLiteral("f"), i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Female" ) );
+    m_oldSubTypeNames.insert( QStringLiteral("s"), i18nc( "@item:inlistbox A subtype of the grammatical word type: Noun", "Neutral" ) );
 }
 
 
@@ -80,7 +80,7 @@ KEduVocWordType* KEduVocKvtmlCompability::typeFromOldFormat(KEduVocWordType* par
     // check if it's user defined
     if ( typeSubtypeString.length() >= 2 && typeSubtypeString.left( 1 ) == QM_USER_TYPE ) {
         // they started counting at 1, we need to know which index we are dealing with:
-        int selfDefinedTypeIndex = typeSubtypeString.right( typeSubtypeString.count()-1 ).toInt() -1;
+        int selfDefinedTypeIndex = typeSubtypeString.rightRef( typeSubtypeString.count()-1 ).toInt() -1;
         return static_cast<KEduVocWordType*>(parent->childContainer(selfDefinedTypeIndex));
     }
 
@@ -98,11 +98,11 @@ KEduVocWordType* KEduVocKvtmlCompability::typeFromOldFormat(KEduVocWordType* par
 
     // convert from pre-0.5 versions (I guess we can just leave that in here.
     // I seriously doubt that any such documents exist...
-    if ( mainType == "1" ) {
+    if ( mainType == QLatin1String("1") ) {
         mainType = QM_VERB;
-    } else if ( mainType == "2" ) {
+    } else if ( mainType == QLatin1String("2") ) {
         mainType = QM_NOUN;
-    } else if ( mainType == "3" ) {
+    } else if ( mainType == QLatin1String("3") ) {
         mainType = QM_NAME;
     }
 
@@ -175,13 +175,13 @@ if ( oldType.length() >= 2 && type.left( 1 ) == QM_USER_TYPE ) {
 
 void KEduVocKvtmlCompability::initOldTenses()
 {
-    m_oldTenses["PrSi"] = i18n( "Simple Present" );
-    m_oldTenses["PrPr"] = i18n( "Present Progressive" );
-    m_oldTenses["PrPe"] = i18n( "Present Perfect" );
-    m_oldTenses["PaSi"] = i18n( "Simple Past" );
-    m_oldTenses["PaPr"] = i18n( "Past Progressive" );
-    m_oldTenses["PaPa"] = i18n( "Past Participle" );
-    m_oldTenses["FuSi"] = i18n( "Future" );
+    m_oldTenses[QStringLiteral("PrSi")] = i18n( "Simple Present" );
+    m_oldTenses[QStringLiteral("PrPr")] = i18n( "Present Progressive" );
+    m_oldTenses[QStringLiteral("PrPe")] = i18n( "Present Perfect" );
+    m_oldTenses[QStringLiteral("PaSi")] = i18n( "Simple Past" );
+    m_oldTenses[QStringLiteral("PaPr")] = i18n( "Past Progressive" );
+    m_oldTenses[QStringLiteral("PaPa")] = i18n( "Past Participle" );
+    m_oldTenses[QStringLiteral("FuSi")] = i18n( "Future" );
 }
 
 

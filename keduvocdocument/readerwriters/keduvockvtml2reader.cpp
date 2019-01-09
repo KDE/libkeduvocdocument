@@ -47,7 +47,7 @@ bool KEduVocKvtml2Reader::isParsable()
     QString line2( ts.readLine() );
 
     m_inputFile->seek( 0 );
-    return  ( ( line1.startsWith(QString::fromLatin1("<?xml")) )
+    return  ( ( line1.startsWith(QLatin1String("<?xml")) )
               && ( line2.indexOf( KVTML_TAG, 0 ) >  0 ) );
 }
 
@@ -60,7 +60,7 @@ KEduVocDocument::ErrorCode KEduVocKvtml2Reader::read(KEduVocDocument &doc)
 {
     m_doc = &doc;
 
-    QDomDocument domDoc( "KEduVocDocument" );
+    QDomDocument domDoc( QStringLiteral("KEduVocDocument") );
 
     if ( !domDoc.setContent( m_inputFile, &m_errorMessage ) )
         return KEduVocDocument::InvalidXml;

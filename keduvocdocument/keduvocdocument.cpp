@@ -152,14 +152,14 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_sizeHints.clear();
     m_dirty = false;
     m_isReadOnly = false;
-    m_queryorg = "";
-    m_querytrans = "";
+    m_queryorg = QLatin1String("");
+    m_querytrans = QLatin1String("");
     m_autosave->setManagedFile( QUrl() );
-    m_author = "";
-    m_title = "";
-    m_comment = "";
-    m_version = "";
-    m_generator = "";
+    m_author = QLatin1String("");
+    m_title = QLatin1String("");
+    m_comment = QLatin1String("");
+    m_version = QLatin1String("");
+    m_generator = QLatin1String("");
     m_csvDelimiter = QString( '\t' );
     m_usages.clear();
     m_license.clear();
@@ -868,9 +868,9 @@ QString KEduVocDocument::pattern( FileDialogMode mode )
         }
     }
     if ( mode == Reading ) {
-        newfilters.prepend( allext.join( " " ) + '|' + i18n( "All supported documents" ) );
+        newfilters.prepend( allext.join( QStringLiteral(" ") ) + '|' + i18n( "All supported documents" ) );
     }
-    return newfilters.join( ";;" );
+    return newfilters.join( QStringLiteral(";;") );
 }
 
 QString KEduVocDocument::errorDescription( int errorCode )

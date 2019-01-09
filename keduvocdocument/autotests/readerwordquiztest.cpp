@@ -93,16 +93,16 @@ public:
 };
 
 WQLGenerator::WQLGenerator()
-    : headerText( "WordQuiz\n5\n")
-    , fontTag( "[Font Info]" )
-    , gridTag( "[Grid Info]" )
-    , vocabTag( "[Vocabulary]" )
-    , lang0loc( "en" )
-    , lang1loc( "de" )
-    , word0Left( "dog" )
-    , word0Right( "Hund" )
+    : headerText( QStringLiteral("WordQuiz\n5\n"))
+    , fontTag( QStringLiteral("[Font Info]") )
+    , gridTag( QStringLiteral("[Grid Info]") )
+    , vocabTag( QStringLiteral("[Vocabulary]") )
+    , lang0loc( QStringLiteral("en") )
+    , lang1loc( QStringLiteral("de") )
+    , word0Left( QStringLiteral("dog") )
+    , word0Right( QStringLiteral("Hund") )
     , m_buffer( 0 )
-    , m_string( "" )
+    , m_string( QLatin1String("") )
     , myType( KEduVocDocument::Wql )
 
 {

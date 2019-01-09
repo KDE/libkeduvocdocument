@@ -84,7 +84,7 @@ private :
 
 void PaukerReaderTest::init() {
     oneGoodDoc =                                    \
-    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n \
+    QStringLiteral("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n \
      <!--This is a lesson file for Pauker (http://pauker.sourceforge.net)-->\n \
      <Lesson LessonFormat=\"1.7\">\n \
        <Description>Some Description</Description>\n \
@@ -98,7 +98,7 @@ void PaukerReaderTest::init() {
            </ReverseSide>\n \
          </Card>\n \
         </Batch>\n \
-      </Lesson>\n" ;
+      </Lesson>\n") ;
     oneBadDoc = oneGoodDoc + "\ninvalid XML characters ";
 
     myType = KEduVocDocument::Pauker;

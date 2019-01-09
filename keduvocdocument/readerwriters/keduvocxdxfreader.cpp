@@ -40,8 +40,8 @@ bool KEduVocXdxfReader::isParsable()
     QString line2( ts.readLine() );
 
     m_dev.seek( 0 );
-    return  ( ( line1.startsWith(QString::fromLatin1("<?xml")) )
-    && ( line2.indexOf( "xdxf", 0 ) >  0 ) );
+    return  ( ( line1.startsWith(QLatin1String("<?xml")) )
+    && ( line2.indexOf( QLatin1String("xdxf"), 0 ) >  0 ) );
 }
 
 KEduVocDocument::FileType KEduVocXdxfReader::fileTypeHandled()
@@ -88,13 +88,13 @@ void KEduVocXdxfReader::readUnknownElement()
 void KEduVocXdxfReader::readXdxf()
 {
     ///The language attributes are required and should be ISO 639-2 codes, but you never know...
-    QStringRef id1 = attributes().value( "lang_from" );
+    QStringRef id1 = attributes().value( QStringLiteral("lang_from") );
     m_doc->appendIdentifier();
     if ( !id1.isNull() ) {
         m_doc->identifier(0).setLocale( id1.toString().toLower() );
         m_doc->identifier(0).setName( id1.toString().toLower() );
     }
-    QStringRef id2 = attributes().value( "lang_to" );
+    QStringRef id2 = attributes().value( QStringLiteral("lang_to") );
     m_doc->appendIdentifier();
     if ( !id2.isNull() ) {
         m_doc->identifier(1).setLocale( id2.toString().toLower() );
@@ -123,7 +123,7 @@ void KEduVocXdxfReader::readXdxf()
         }
     }
 
-    m_doc->setAuthor( "http://xdxf.sf.net" );
+    m_doc->setAuthor( QStringLiteral("http://xdxf.sf.net") );
 }
 
 

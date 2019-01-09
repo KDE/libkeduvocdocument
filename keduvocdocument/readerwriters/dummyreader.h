@@ -42,7 +42,7 @@ public:
         @param msg the message to return
         @return string of the file that will generate the error */
     static QString makeDummyString(KEduVocDocument::ErrorCode error
-                                   , const QString & msg = "Dummy Reader Error")
+                                   , const QString & msg = QStringLiteral("Dummy Reader Error"))
     //Note: This should be defined in the cpp file, but I was having linker problems
     {
         QString out;
@@ -93,7 +93,7 @@ private :
     static QString mTag()
     //Note: This should be defined in the cpp file, but I was having linker problems
     {
-        return QString( "kvocdocdummyreadertestelement" );
+        return QStringLiteral( "kvocdocdummyreadertestelement" );
     }
 
     /**

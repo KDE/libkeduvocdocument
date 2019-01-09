@@ -28,7 +28,7 @@
 KEduVocWqlReader::KEduVocWqlReader(QIODevice & file)
     : m_inputFile( &file )
 {
-    m_errorMessage = "";
+    m_errorMessage = QLatin1String("");
 }
 
 bool KEduVocWqlReader::isParsable()
@@ -37,7 +37,7 @@ bool KEduVocWqlReader::isParsable()
     QString line1( ts.readLine() );
 
     m_inputFile->seek( 0 );
-    return ( line1 == "WordQuiz" );
+    return ( line1 == QLatin1String("WordQuiz") );
 }
 
 KEduVocDocument::FileType KEduVocWqlReader::fileTypeHandled()
@@ -54,9 +54,9 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
     inputStream.setAutoDetectUnicode( false );
     inputStream.seek( 0 );
 
-    QString s = "";
+    QString s = QLatin1String("");
     s=inputStream.readLine();
-    if ( s != "WordQuiz" ) {
+    if ( s != QLatin1String("WordQuiz") ) {
         m_errorMessage = i18n( "This does not appear to be a (K)WordQuiz file: Missing First line \"WordQuiz\"");
         return KEduVocDocument::FileTypeUnknown;
     }
@@ -70,23 +70,23 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
 
     m_errorMessage = i18n( "Error while reading file" );
 
-    while ( !inputStream.atEnd() && inputStream.readLine() != "[Font Info]" ) ;
+    while ( !inputStream.atEnd() && inputStream.readLine() != QLatin1String("[Font Info]") ) ;
     if ( inputStream.atEnd() ) {
         m_errorMessage = i18n( "Error while reading file: Missing [Font Info]" );
         return KEduVocDocument::FileReaderFailed;
     }
     s = inputStream.readLine();
-    int p = s.indexOf( "=", 0 );
+    int p = s.indexOf( QLatin1String("="), 0 );
     QString fam = s.right( s.length() - ( p + 1 ) );
     fam = fam.mid( 1, fam.length() - 2 );
 
     s = inputStream.readLine();
-    p = s.indexOf( "=", 0 );
+    p = s.indexOf( QLatin1String("="), 0 );
     s = s.right( s.length() - ( p + 1 ) );
     //int ps = s.toInt(0);
 
     s = inputStream.readLine();
-    p = s.indexOf( "=", 0 );
+    p = s.indexOf( QLatin1String("="), 0 );
     s = s.right( s.length() - ( p + 1 ) );
     // int b = 0;
     // if ( s == "1" ) {
@@ -94,7 +94,7 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
     // }
 
     s = inputStream.readLine();
-    p = s.indexOf( "=", 0 );
+    p = s.indexOf( QLatin1String("="), 0 );
     s = s.right( s.length() - ( p + 1 ) );
     //bool it = (s == "1");
 
@@ -106,7 +106,7 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
       p = s.find("=", 0);
       m_specialCharacters = s.right(s.length() - (p + 1));
     */
-    while ( !inputStream.atEnd() && inputStream.readLine() != "[Grid Info]" ) ;
+    while ( !inputStream.atEnd() && inputStream.readLine() != QLatin1String("[Grid Info]") ) ;
     if ( inputStream.atEnd() ) {
         m_errorMessage = i18n( "Error while reading file: Missing [Grid Info]" );
         return KEduVocDocument::FileReaderFailed;
@@ -114,12 +114,12 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
     inputStream.readLine(); //skip value for width of row headers
 
     s = inputStream.readLine();
-    p = s.indexOf( "=", 0 );
+    p = s.indexOf( QLatin1String("="), 0 );
     s = s.right( s.length() - ( p + 1 ) );
 //     m_doc->setSizeHint( 0, s.toInt() );
 
     s = inputStream.readLine();
-    p = s.indexOf( "=", 0 );
+    p = s.indexOf( QLatin1String("="), 0 );
     s = s.right( s.length() - ( p + 1 ) );
 //     m_doc->setSizeHint( 1, s.toInt() );
 
@@ -149,7 +149,7 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
       s = s.right(s.length() - (p + 1));
       m_bottomRight =s.toInt(0, 10) - 1 ;
     */
-    while ( !inputStream.atEnd() && inputStream.readLine() != "[Vocabulary]" ) ;
+    while ( !inputStream.atEnd() && inputStream.readLine() != QLatin1String("[Vocabulary]") ) ;
     if ( inputStream.atEnd() ) {
         m_errorMessage = i18n( "Error while reading file: Missing [Vocabulary]" );
         return KEduVocDocument::FileReaderFailed;
@@ -159,7 +159,7 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
     m_doc->lesson()->appendChildContainer(lesson);
 
     s = inputStream.readLine();
-    p = s.indexOf( "   [", 0 );
+    p = s.indexOf( QLatin1String("   ["), 0 );
     s = s.left( p );
     s = s.simplified();
     m_doc->appendIdentifier();
@@ -172,7 +172,7 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
 
     while ( !s.isNull() ) {
         s = inputStream.readLine();
-        p = s.indexOf( "[", 0 );
+        p = s.indexOf( QLatin1String("["), 0 );
         //QString r = s.mid(p + 1, 10);
         //int h = r.toInt();
         s = s.left( p );

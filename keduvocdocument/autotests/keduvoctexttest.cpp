@@ -35,7 +35,7 @@ void KEduVocTextTest::testAssignmentOperator()
 
     QCOMPARE(isEqual(t1, t2), true);
 
-    t1.setText("foo");
+    t1.setText(QStringLiteral("foo"));
     QCOMPARE(isEqual(t1, t2), false);
     t2 = t1;
     QCOMPARE(isEqual(t1, t2), true);
@@ -82,9 +82,9 @@ void KEduVocTextTest::testEqualToOperator()
 
     QCOMPARE(t1 == t2, true);
 
-    t1.setText("foo");
+    t1.setText(QStringLiteral("foo"));
     QCOMPARE(t1 == t2, false);
-    t2.setText("foo");
+    t2.setText(QStringLiteral("foo"));
     QCOMPARE(t1 == t2, true);
 
     t1.setPreGrade(1);

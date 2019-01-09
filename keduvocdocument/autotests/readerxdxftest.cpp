@@ -66,7 +66,7 @@ private :
 
 void XdxfReaderTest::init() {
     oneGoodDoc = \
-                 QString( "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" )
+                 QStringLiteral( "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" )
                  + "<!DOCTYPE xdxf SYSTEM \"http://xdxf.sourceforge.net/xdxf_lousy.dtd\">\n"
                  + "<xdxf lang_from=\"GER\" lang_to=\"SPA\" format=\"visual\">\net"
                  + "<full_name>German Spanish</full_name>\n"

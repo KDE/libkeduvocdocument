@@ -58,12 +58,12 @@ bool KEduVocKvtml2Writer::createXmlDocument( KEduVocDocument *doc, const QString
 {
     m_doc = doc;
 
-    m_domDoc = QDomDocument( "kvtml PUBLIC \"kvtml2.dtd\" \"http://edu.kde.org/kvtml/kvtml2.dtd\"" );
-    m_domDoc.appendChild( m_domDoc.createProcessingInstruction( "xml", "version=\"1.0\" encoding=\"UTF-8\"" ) );
-    QDomElement domElementKvtml = m_domDoc.createElement( "kvtml" );
+    m_domDoc = QDomDocument( QStringLiteral("kvtml PUBLIC \"kvtml2.dtd\" \"http://edu.kde.org/kvtml/kvtml2.dtd\"") );
+    m_domDoc.appendChild( m_domDoc.createProcessingInstruction( QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"") ) );
+    QDomElement domElementKvtml = m_domDoc.createElement( QStringLiteral("kvtml") );
     m_domDoc.appendChild( domElementKvtml );
 
-    domElementKvtml.setAttribute( KVTML_VERSION, ( QString ) "2.0" );
+    domElementKvtml.setAttribute( KVTML_VERSION, ( QString ) QStringLiteral("2.0") );
 
     // information group
     QDomElement currentElement = m_domDoc.createElement( KVTML_INFORMATION );
@@ -145,7 +145,7 @@ bool KEduVocKvtml2Writer::writeInformation( QDomElement &informationElement, con
     }
 
     QDate today = QDate::currentDate();
-    informationElement.appendChild( newTextElement( KVTML_DATE, today.toString(QLatin1String("yyyy-MM-dd")) ) );
+    informationElement.appendChild( newTextElement( KVTML_DATE, today.toString(QStringLiteral("yyyy-MM-dd")) ) );
 
     // category
     if ( !m_doc->category().isEmpty() ) {

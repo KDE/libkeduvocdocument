@@ -44,7 +44,7 @@ KEduVocIdentifier::KEduVocIdentifier()
 : d( new Private )
 {
     ///@todo maybe the user locale would be more appropriate
-    d->m_locale = "en";
+    d->m_locale = QStringLiteral("en");
 }
 
 KEduVocIdentifier::~KEduVocIdentifier()

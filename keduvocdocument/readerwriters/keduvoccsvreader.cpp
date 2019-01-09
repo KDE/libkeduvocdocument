@@ -38,7 +38,7 @@ KEduVocCsvReader::KEduVocCsvReader( QIODevice & file )
     // the file must be already open
     m_inputFile = &file;
 
-    m_errorMessage = "";
+    m_errorMessage = QLatin1String("");
 }
 
 KEduVocDocument::FileType KEduVocCsvReader::fileTypeHandled()

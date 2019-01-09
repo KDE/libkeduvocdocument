@@ -66,7 +66,7 @@ private :
 
 void VokabelnReaderTest::init() {
     oneGoodDoc =
-        QString( "\"A Title of S0me Sort\n" ) \
+        QStringLiteral( "\"A Title of S0me Sort\n" ) \
         + "en - de\n" \
         + "Still more text\",3,456,789\n" \
         + "0\n" \
@@ -105,7 +105,7 @@ void VokabelnReaderTest::init() {
         + "\"Extra Lesson Title\"\n";
 
     oneBadDoc =
-                QString( "\"A Title of S0me Sort\n" ) \
+                QStringLiteral( "\"A Title of S0me Sort\n" ) \
         + "en - de\n" \
         + "Still more text\",3,456,789\n" \
         + "0\n" \

@@ -43,8 +43,8 @@ bool KEduVocPaukerReader::isParsable()
     QString line2( ts.readLine() );
 
     m_dev.seek( 0 );
-    return ( ( line1.startsWith(QString::fromLatin1("<?xml")) )
-           && ( line2.indexOf( "pauker", 0 ) >  0 ) );
+    return ( ( line1.startsWith(QLatin1String("<?xml")) )
+           && ( line2.indexOf( QLatin1String("pauker"), 0 ) >  0 ) );
 }
 
 KEduVocDocument::FileType KEduVocPaukerReader::fileTypeHandled()
@@ -92,7 +92,7 @@ void KEduVocPaukerReader::readUnknownElement()
 
 void KEduVocPaukerReader::readPauker()
 {
-    m_doc->setAuthor( "http://pauker.sf.net" );
+    m_doc->setAuthor( QStringLiteral("http://pauker.sf.net") );
     ///Pauker does not provide any column titles
     m_doc->appendIdentifier();
     m_doc->appendIdentifier();

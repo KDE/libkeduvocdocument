@@ -129,18 +129,18 @@ public:
 
 XMLGenerator::XMLGenerator()
     : QDomDocument()
-    , generator( "Parse KVTML2 Unit Tests")
-    , author( "Parse KVTML2 Test Author" )
-    , license( "test license" )
-    , comment( "comment" )
-    , date( "2014-01-01" )
-    , category( "test document" )
-    , title( "Parse KVTML2 Test Title" )
+    , generator( QStringLiteral("Parse KVTML2 Unit Tests"))
+    , author( QStringLiteral("Parse KVTML2 Test Author") )
+    , license( QStringLiteral("test license") )
+    , comment( QStringLiteral("comment") )
+    , date( QStringLiteral("2014-01-01") )
+    , category( QStringLiteral("test document") )
+    , title( QStringLiteral("Parse KVTML2 Test Title") )
 
-    , lang0name( "English" )
-    , lang0loc( "en" )
-    , lang1name( "German" )
-    , lang1loc( "de" )
+    , lang0name( QStringLiteral("English") )
+    , lang0loc( QStringLiteral("en") )
+    , lang1name( QStringLiteral("German") )
+    , lang1loc( QStringLiteral("de") )
     , m_buffer( 0 )
     , myType( KEduVocDocument::Kvtml )
 
@@ -161,12 +161,12 @@ QIODevice * XMLGenerator::toQIODevice()
 }
 
 XMLGenerator & XMLGenerator::preamble() {
-    this -> setContent( QString( "<!DOCTYPE kvtml PUBLIC \"kvtml2.dtd\" \"http://edu.kde.org/kvtml/kvtml2.dtd\">\n" ) , true, 0, 0, 0);
-    this->appendChild( this->createProcessingInstruction( "xml", "version=\"1.0\" encoding=\"UTF-8\"" ) );
+    this -> setContent( QStringLiteral( "<!DOCTYPE kvtml PUBLIC \"kvtml2.dtd\" \"http://edu.kde.org/kvtml/kvtml2.dtd\">\n" ) , true, 0, 0, 0);
+    this->appendChild( this->createProcessingInstruction( QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"") ) );
 
     QDomElement domElementKvtml = this->createElement( KVTML_TAG );
     this->appendChild( domElementKvtml );
-    domElementKvtml.setAttribute( KVTML_VERSION, ( QString ) "2.0" );
+    domElementKvtml.setAttribute( KVTML_VERSION, ( QString ) QStringLiteral("2.0") );
 
     return *this;
 }
@@ -207,7 +207,7 @@ XMLGenerator & XMLGenerator::minimalHeader() {
 XMLGenerator & XMLGenerator::blankIdentifier(const int ii) {
     QDomElement id = this->createElement( KVTML_IDENTIFIER );
     QString str;
-    id.setAttribute("id", str.setNum( ii ) );
+    id.setAttribute(QStringLiteral("id"), str.setNum( ii ) );
     elementsByTagName(KVTML_IDENTIFIERS).at( 0 ).appendChild( id );
     return *this;
 }
@@ -222,7 +222,7 @@ XMLGenerator & XMLGenerator::addLocale(const int ii) {
 XMLGenerator &XMLGenerator::blankEntry(int entryId)
 {
     QDomElement elem = this->createElement(KVTML_ENTRY);
-    elem.setAttribute("id", QString::number(entryId));
+    elem.setAttribute(QStringLiteral("id"), QString::number(entryId));
     elementsByTagName(KVTML_ENTRIES).at(0).appendChild(elem);
     return *this;
 }
@@ -230,7 +230,7 @@ XMLGenerator &XMLGenerator::blankEntry(int entryId)
 XMLGenerator &XMLGenerator::blankTranslation(int translationId)
 {
     QDomElement elem = this->createElement(KVTML_TRANSLATION);
-    elem.setAttribute("id", QString::number(translationId));
+    elem.setAttribute(QStringLiteral("id"), QString::number(translationId));
     elementsByTagName(KVTML_ENTRY).at(0).appendChild(elem);
     return *this;
 }
@@ -268,7 +268,7 @@ XMLGenerator &XMLGenerator::blankContainer()
 XMLGenerator &XMLGenerator::addContainerEntry(int entryId)
 {
     QDomElement elem = this->createElement(KVTML_ENTRY);
-    elem.setAttribute("id", QString::number(entryId));
+    elem.setAttribute(QStringLiteral("id"), QString::number(entryId));
     elementsByTagName(KVTML_CONTAINER).at(0).appendChild(elem);
     return *this;
 }

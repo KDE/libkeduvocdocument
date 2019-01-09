@@ -36,7 +36,7 @@
 KEduVocKvtmlReader::KEduVocKvtmlReader(QIODevice & file)
     : m_inputFile( &file )
 {
-    m_errorMessage = "";
+    m_errorMessage = QLatin1String("");
     qDebug() << "KEduVocKvtmlReader for kvtml version 1 files started.";
 }
 
@@ -47,7 +47,7 @@ bool KEduVocKvtmlReader::isParsable()
     QString line2( ts.readLine() );
 
     m_inputFile->seek( 0 );
-    return  ( ( line1.startsWith(QString::fromLatin1("<?xml")) )
+    return  ( ( line1.startsWith(QLatin1String("<?xml")) )
               && ( line2.indexOf( KV_DOCTYPE, 0 ) >  0 ) );
 }
 
@@ -57,7 +57,7 @@ KEduVocDocument::ErrorCode KEduVocKvtmlReader::read(KEduVocDocument &doc)
     m_cols = 0;
     m_lines = 0;
 
-    QDomDocument domDoc( "KEduVocDocument" );
+    QDomDocument domDoc( QStringLiteral("KEduVocDocument") );
 
     if ( !domDoc.setContent( m_inputFile, &m_errorMessage ) )
         return KEduVocDocument::InvalidXml;
@@ -288,53 +288,53 @@ bool KEduVocKvtmlReader::readArticle( QDomElement &domElementParent )
             //---------
             // Children
 
-            QString fem_def = "";
-            QString mal_def = "";
-            QString nat_def = "";
-            QString fem_indef = "";
-            QString mal_indef = "";
-            QString nat_indef = "";
+            QString fem_def = QLatin1String("");
+            QString mal_def = QLatin1String("");
+            QString nat_def = QLatin1String("");
+            QString fem_indef = QLatin1String("");
+            QString mal_indef = QLatin1String("");
+            QString nat_indef = QLatin1String("");
 
             article = currentElement.firstChildElement( KV_ART_FD );
             if ( !article.isNull() ) {
                 fem_def = article.text();
                 if ( fem_def.isNull() )
-                    fem_def = "";
+                    fem_def = QLatin1String("");
             }
 
             article = currentElement.firstChildElement( KV_ART_FI );
             if ( !article.isNull() ) {
                 fem_indef = article.text();
                 if ( fem_indef.isNull() )
-                    fem_indef = "";
+                    fem_indef = QLatin1String("");
             }
 
             article = currentElement.firstChildElement( KV_ART_MD );
             if ( !article.isNull() ) {
                 mal_def = article.text();
                 if ( mal_def.isNull() )
-                    mal_def = "";
+                    mal_def = QLatin1String("");
             }
 
             article = currentElement.firstChildElement( KV_ART_MI );
             if ( !article.isNull() ) {
                 mal_indef = article.text();
                 if ( mal_indef.isNull() )
-                    mal_indef = "";
+                    mal_indef = QLatin1String("");
             }
 
             article = currentElement.firstChildElement( KV_ART_ND );
             if ( !article.isNull() ) {
                 nat_def = article.text();
                 if ( nat_def.isNull() )
-                    nat_def = "";
+                    nat_def = QLatin1String("");
             }
 
             article = currentElement.firstChildElement( KV_ART_NI );
             if ( !article.isNull() ) {
                 nat_indef = article.text();
                 if ( nat_indef.isNull() )
-                    nat_indef = "";
+                    nat_indef = QLatin1String("");
             }
 
             KEduVocArticle article;
@@ -773,7 +773,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
     int pos;
     QDomAttr attribute;
 
-    lang = "";
+    lang = QLatin1String("");
     attribute = domElementExpressionChild.attributeNode( KV_LANG );
     if ( !attribute.isNull() )
         lang = attribute.value();
@@ -789,8 +789,8 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
     if ( !attribute.isNull() ) {
         QString s = attribute.value();
         if (( pos = s.indexOf( ';' ) ) >= 1 ) {
-            grade = s.left( pos ).toInt();
-            rev_grade = s.mid( pos + 1, s.length() ).toInt();
+            grade = s.leftRef( pos ).toInt();
+            rev_grade = s.midRef( pos + 1, s.length() ).toInt();
         } else
             grade = s.toInt();
     }
@@ -801,8 +801,8 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
     if ( !attribute.isNull() ) {
         QString s = attribute.value();
         if (( pos = s.indexOf( ';' ) ) >= 1 ) {
-            count = s.left( pos ).toInt();
-            rev_count = s.mid( pos + 1, s.length() ).toInt();
+            count = s.leftRef( pos ).toInt();
+            rev_count = s.midRef( pos + 1, s.length() ).toInt();
         } else
             count = s.toInt();
     }
@@ -813,8 +813,8 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
     if ( !attribute.isNull() ) {
         QString s = attribute.value();
         if (( pos = s.indexOf( ';' ) ) >= 1 ) {
-            bcount = s.left( pos ).toInt();
-            rev_bcount = s.mid( pos + 1, s.length() ).toInt();
+            bcount = s.leftRef( pos ).toInt();
+            rev_bcount = s.midRef( pos + 1, s.length() ).toInt();
         } else
             bcount = s.toInt();
     }
@@ -825,8 +825,8 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
     if ( !attribute.isNull() ) {
         QString s = attribute.value();
         if (( pos = s.indexOf( ';' ) ) >= 1 ) {
-            date.setTime_t( s.left( pos ).toInt() );
-            rev_date.setTime_t( s.mid( pos + 1, s.length() ).toInt() );
+            date.setTime_t( s.leftRef( pos ).toInt() );
+            rev_date.setTime_t( s.midRef( pos + 1, s.length() ).toInt() );
         } else
             date.setTime_t( s.toInt() );
     }
@@ -836,37 +836,37 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
         //this format is deprecated and ignored.
     }
 
-    remark = "";
+    remark = QLatin1String("");
     attribute = domElementExpressionChild.attributeNode( KV_REMARK );
     if ( !attribute.isNull() )
         remark = attribute.value();
 
-    faux_ami_f = "";
+    faux_ami_f = QLatin1String("");
     attribute = domElementExpressionChild.attributeNode( KV_FAUX_AMI_F );
     if ( !attribute.isNull() )
         faux_ami_f = attribute.value();
 
-    faux_ami_t = "";
+    faux_ami_t = QLatin1String("");
     attribute = domElementExpressionChild.attributeNode( KV_FAUX_AMI_T );
     if ( !attribute.isNull() )
         faux_ami_t = attribute.value();
 
-    synonym = "";
+    synonym = QLatin1String("");
     attribute = domElementExpressionChild.attributeNode( KV_SYNONYM );
     if ( !attribute.isNull() )
         synonym = attribute.value();
 
-    example = "";
+    example = QLatin1String("");
     attribute = domElementExpressionChild.attributeNode( KV_EXAMPLE );
     if ( !attribute.isNull() )
         example = attribute.value();
 
-    paraphrase = "";
+    paraphrase = QLatin1String("");
     attribute = domElementExpressionChild.attributeNode( KV_PARAPHRASE );
     if ( !attribute.isNull() )
         paraphrase = attribute.value();
 
-    antonym = "";
+    antonym = QLatin1String("");
     attribute = domElementExpressionChild.attributeNode( KV_ANTONYM );
     if ( !attribute.isNull() )
         antonym = attribute.value();
@@ -877,12 +877,12 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
         type = attribute.value();
     }
 
-    pronunciation = "";
+    pronunciation = QLatin1String("");
     attribute = domElementExpressionChild.attributeNode( KV_PRONUNCE );
     if ( !attribute.isNull() )
         pronunciation = attribute.value();
 
-    query_id = "";
+    query_id = QLatin1String("");
     attribute = domElementExpressionChild.attributeNode( KV_QUERY );
     if ( !attribute.isNull() )
         query_id = attribute.value();
@@ -953,7 +953,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
 
     attribute = domElementParent.attributeNode( KV_INACTIVE );
     if ( !attribute.isNull() )
-        active = attribute.value() == "1" ? false : true;
+        active = attribute.value() == QLatin1String("1") ? false : true;
     else
         active = true;
 
