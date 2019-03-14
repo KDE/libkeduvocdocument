@@ -11,7 +11,6 @@ find_package(KF5 5.3.0 REQUIRED COMPONENTS I18n Archive KIO)
 #add_definitions( -Wall -fprofile-arcs -ftest-coverage )
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR}
-    ${CMAKE_INSTALL_PREFIX}/include/KDE #FIXME
 )
 
 
