@@ -22,7 +22,7 @@
 
 #include "keduvocdocument.h"
 
-#include <qdebug.h>
+#include <QDebug>
 
 class KEduVocDocument;
 

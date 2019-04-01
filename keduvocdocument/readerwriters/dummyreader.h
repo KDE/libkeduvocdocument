@@ -24,7 +24,7 @@
 
 #include <QXmlStreamReader>
 
-#include <qdebug.h>
+#include <QDebug>
 
 class QIODevice;
 

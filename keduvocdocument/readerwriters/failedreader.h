@@ -22,7 +22,7 @@
 
 #include "readerbase.h"
 
-#include <qdebug.h>
+#include <QDebug>
 
 
 /**
