@@ -32,7 +32,7 @@ namespace ReaderTestHelpersUnitTest
     {
     public :
         /** Create the file, fix the suffix and instantiate it.*/
-        explicit TestDoc(QString str) {
+        explicit TestDoc(const QString &str) {
             this->open(QFile::WriteOnly );
             QTextStream out(this);
             out << str;
