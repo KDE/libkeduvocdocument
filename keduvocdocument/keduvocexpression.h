@@ -79,7 +79,6 @@ public:
     int sizeHint() const;
     void setSizeHint( int sizeHint );
 
-    void setTranslation( int index, KEduVocTranslation* translation );
     /**
      * Add a translation to this expression
      * @param index            number of translation = the identifier
