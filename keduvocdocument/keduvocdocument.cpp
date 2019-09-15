@@ -868,9 +868,9 @@ QString KEduVocDocument::pattern( FileDialogMode mode )
         }
     }
     if ( mode == Reading ) {
-        newfilters.prepend( allext.join( QStringLiteral(" ") ) + '|' + i18n( "All supported documents" ) );
+        newfilters.prepend( allext.join(QLatin1Char(' ') ) + '|' + i18n( "All supported documents" ) );
     }
-    return newfilters.join( QStringLiteral(";;") );
+    return newfilters.join(QLatin1String(";;") );
 }
 
 QString KEduVocDocument::errorDescription( int errorCode )

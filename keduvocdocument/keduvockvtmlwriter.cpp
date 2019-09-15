@@ -414,7 +414,7 @@ bool KEduVocKvtmlWriter::writeType( QDomElement &domElementParent )
 {
     /** @todo port to new type handling */
     /*
-      if (m_doc->typeDescriptions().count() == 0)
+      if (m_doc->typeDescriptions().isEmpty())
         return true;
 
       QDomElement domElementType = m_domDoc.createElement(KV_TYPE_GRP);
@@ -442,7 +442,7 @@ bool KEduVocKvtmlWriter::writeType( QDomElement &domElementParent )
 /*
 bool KEduVocKvtmlWriter::writeTense( QDomElement &domElementParent )
 {
-    if ( m_doc->tenseDescriptions().count() == 0 )
+    if ( m_doc->tenseDescriptions().isEmpty() )
         return true;
 
     QDomElement domElementTense = m_domDoc.createElement( KV_TENSE_GRP );
@@ -470,7 +470,7 @@ bool KEduVocKvtmlWriter::writeUsage( QDomElement &domElementParent )
 
 ///@todo usages
     /*
-      if (m_doc->usageDescriptions().count() == 0)
+      if (m_doc->usageDescriptions().isEmpty())
         return true;
 
       QDomElement domElementUsage = m_domDoc.createElement(KV_USAGE_GRP);

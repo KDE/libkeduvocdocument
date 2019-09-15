@@ -953,7 +953,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
 
     attribute = domElementParent.attributeNode( KV_INACTIVE );
     if ( !attribute.isNull() )
-        active = attribute.value() == QLatin1String("1") ? false : true;
+        active = attribute.value() == QLatin1Char('1') ? false : true;
     else
         active = true;
 

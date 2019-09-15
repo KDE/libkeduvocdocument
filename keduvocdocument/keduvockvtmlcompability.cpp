@@ -98,11 +98,11 @@ KEduVocWordType* KEduVocKvtmlCompability::typeFromOldFormat(KEduVocWordType* par
 
     // convert from pre-0.5 versions (I guess we can just leave that in here.
     // I seriously doubt that any such documents exist...
-    if ( mainType == QLatin1String("1") ) {
+    if ( mainType == QLatin1Char('1') ) {
         mainType = QM_VERB;
-    } else if ( mainType == QLatin1String("2") ) {
+    } else if ( mainType == QLatin1Char('2') ) {
         mainType = QM_NOUN;
-    } else if ( mainType == QLatin1String("3") ) {
+    } else if ( mainType == QLatin1Char('3') ) {
         mainType = QM_NAME;
     }
 

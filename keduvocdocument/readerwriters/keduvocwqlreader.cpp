@@ -76,17 +76,17 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
         return KEduVocDocument::FileReaderFailed;
     }
     s = inputStream.readLine();
-    int p = s.indexOf( QLatin1String("="), 0 );
+    int p = s.indexOf( QLatin1Char('='), 0 );
     QString fam = s.right( s.length() - ( p + 1 ) );
     fam = fam.mid( 1, fam.length() - 2 );
 
     s = inputStream.readLine();
-    p = s.indexOf( QLatin1String("="), 0 );
+    p = s.indexOf( QLatin1Char('='), 0 );
     s = s.right( s.length() - ( p + 1 ) );
     //int ps = s.toInt(0);
 
     s = inputStream.readLine();
-    p = s.indexOf( QLatin1String("="), 0 );
+    p = s.indexOf( QLatin1Char('='), 0 );
     s = s.right( s.length() - ( p + 1 ) );
     // int b = 0;
     // if ( s == "1" ) {
@@ -94,7 +94,7 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
     // }
 
     s = inputStream.readLine();
-    p = s.indexOf( QLatin1String("="), 0 );
+    p = s.indexOf( QLatin1Char('='), 0 );
     s = s.right( s.length() - ( p + 1 ) );
     //bool it = (s == "1");
 
@@ -114,12 +114,12 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
     inputStream.readLine(); //skip value for width of row headers
 
     s = inputStream.readLine();
-    p = s.indexOf( QLatin1String("="), 0 );
+    p = s.indexOf( QLatin1Char('='), 0 );
     s = s.right( s.length() - ( p + 1 ) );
 //     m_doc->setSizeHint( 0, s.toInt() );
 
     s = inputStream.readLine();
-    p = s.indexOf( QLatin1String("="), 0 );
+    p = s.indexOf( QLatin1Char('='), 0 );
     s = s.right( s.length() - ( p + 1 ) );
 //     m_doc->setSizeHint( 1, s.toInt() );
 
