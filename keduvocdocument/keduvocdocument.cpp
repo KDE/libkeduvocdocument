@@ -376,7 +376,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType f
         }
         break;
         default: {
-            qCritical() << "kvcotrainDoc::saveAs(): unknown filetype" << endl;
+            qCritical() << "kvcotrainDoc::saveAs(): unknown filetype";
         }
         break;
     } // switch
