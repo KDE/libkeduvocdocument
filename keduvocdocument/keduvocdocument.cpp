@@ -28,9 +28,9 @@
 #include <QDebug>
 #include <kio/filecopyjob.h>
 #include <krandomsequence.h>
-#include <kfilterdev.h>
-#include <klocalizedstring.h>
-#include <kautosavefile.h>
+#include <KFilterDev>
+#include <KLocalizedString>
+#include <KAutoSaveFile>
 
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"

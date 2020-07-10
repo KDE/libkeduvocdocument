@@ -19,7 +19,7 @@
 
 #include "failedreader.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <QIODevice>
 
 

@@ -25,7 +25,7 @@
 
 #include "keduvoccsvreader.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <QIODevice>
 #include <QTextStream>
 

@@ -24,7 +24,7 @@
 #include "keduvockvtmlcompability.h"
 #include "keduvocwordtype.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 
 #include <QDebug>
 

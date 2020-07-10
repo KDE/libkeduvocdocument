@@ -19,7 +19,7 @@
 
 #include "keduvockvtmlreader.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <QTextStream>
 #include <QList>
 #include <QIODevice>

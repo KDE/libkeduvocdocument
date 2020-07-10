@@ -17,7 +17,7 @@
 
 #include "keduvoccsvwriter.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <QFile>
 #include <QTextStream>
 

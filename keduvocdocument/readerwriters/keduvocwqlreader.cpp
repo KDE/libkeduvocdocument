@@ -18,7 +18,7 @@
 
 #include "keduvocwqlreader.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <QTextStream>
 #include <QIODevice>
 

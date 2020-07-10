@@ -16,7 +16,7 @@
 
 #include "keduvocxdxfreader.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <QIODevice>
 
 #include "keduvocexpression.h"

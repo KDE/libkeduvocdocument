@@ -19,7 +19,7 @@
 
 #include "dummyreader.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <QDebug>
 
 #include <QXmlStreamWriter>

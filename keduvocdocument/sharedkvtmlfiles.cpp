@@ -17,7 +17,7 @@
 
 #include "keduvocdocument.h"
 
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <kio/copyjob.h>
 #include <kio/job.h>
 
