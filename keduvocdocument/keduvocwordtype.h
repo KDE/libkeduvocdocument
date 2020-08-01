@@ -36,7 +36,7 @@ public:
 
 
     /** default constructor */
-    explicit KEduVocWordType(const QString& name, KEduVocWordType *parent = 0);
+    explicit KEduVocWordType(const QString& name, KEduVocWordType *parent = nullptr);
 
     /** destructor */
     ~KEduVocWordType();

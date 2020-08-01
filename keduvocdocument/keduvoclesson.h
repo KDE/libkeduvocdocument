@@ -28,7 +28,7 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocLesson :public KEduVocContainer
 {
 public:
     /** default constructor */
-    explicit KEduVocLesson(const QString& name, KEduVocContainer *parent = 0);
+    explicit KEduVocLesson(const QString& name, KEduVocContainer *parent = nullptr);
 
 //     void appendChildLesson(KEduVocLesson *child);
 

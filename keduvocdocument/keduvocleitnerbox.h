@@ -32,7 +32,7 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocLeitnerBox :public KEduVocContainer
 {
 public:
     /** default constructor */
-    explicit KEduVocLeitnerBox(const QString& name, KEduVocLeitnerBox *parent = 0);
+    explicit KEduVocLeitnerBox(const QString& name, KEduVocLeitnerBox *parent = nullptr);
 
     /** destructor */
     ~KEduVocLeitnerBox();

@@ -47,7 +47,7 @@ public:
 
     /** default constructor */
     explicit KEduVocContainer(const QString& name, EnumContainerType type,
-			      KEduVocContainer *parent = 0);
+                  KEduVocContainer *parent = nullptr);
 
     void appendChildContainer(KEduVocContainer *child);
     void insertChildContainer(int row, KEduVocContainer *child);
