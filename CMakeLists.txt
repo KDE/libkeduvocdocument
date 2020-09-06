@@ -33,6 +33,7 @@ configure_file( "${LibKEduVocDocument_SOURCE_DIR}/LibKEduVocDocumentConfig.cmake
 
 set(_LibKEduVocDocument_CONFIG_DEST "${LIB_INSTALL_DIR}/cmake/libkeduvocdocument")
 
+ki18n_install(po)
 install( FILES
         "${LibKEduVocDocument_BINARY_DIR}/LibKEduVocDocumentConfig.cmake"
         DESTINATION "${_LibKEduVocDocument_CONFIG_DEST}" )
