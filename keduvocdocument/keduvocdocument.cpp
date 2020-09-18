@@ -27,7 +27,6 @@
 
 #include <QDebug>
 #include <kio/filecopyjob.h>
-#include <krandomsequence.h>
 #include <KFilterDev>
 #include <KLocalizedString>
 #include <KAutoSaveFile>
