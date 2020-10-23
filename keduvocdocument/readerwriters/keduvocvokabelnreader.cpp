@@ -29,7 +29,6 @@
 
 #include <QDebug>
 
-#include "keduvocdocument.h"
 #include "keduvocexpression.h"
 
 KEduVocVokabelnReader::KEduVocVokabelnReader(QIODevice & file )

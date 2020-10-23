@@ -18,7 +18,6 @@
 
 #include "keduvocexpression.h"
 
-#include <QList>
 #include <QSet>
 
 class KEduVocWordType::Private

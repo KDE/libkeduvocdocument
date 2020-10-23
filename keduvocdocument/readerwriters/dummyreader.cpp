@@ -20,7 +20,6 @@
 #include "dummyreader.h"
 
 #include <KLocalizedString>
-#include <QDebug>
 
 #include <QXmlStreamWriter>
 #include <QIODevice>

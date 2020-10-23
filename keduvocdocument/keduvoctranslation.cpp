@@ -23,7 +23,6 @@
 #include "kvtml2defs.h"
 #include "keduvockvtml2writer.h"
 
-#include <QMap>
 
 class KEduVocTranslation::KEduVocTranslationPrivate
 {

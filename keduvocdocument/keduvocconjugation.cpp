@@ -23,7 +23,6 @@
 
 #include "keduvocconjugation.h"
 #include "keduvoccommon_p.h"
-#include "keduvoctext.h"
 #include "kvtml2defs.h"
 
 #include <QMap>

@@ -16,7 +16,6 @@
  ***************************************************************************/
 
 #include "keduvocarticle.h"
-#include "keduvocwordflags.h"
 
 #include <QMap>
 

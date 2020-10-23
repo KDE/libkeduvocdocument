@@ -18,7 +18,6 @@
 */
 
 #include "readermanager.h"
-#include "keduvocdocument.h"
 
 #include "readerwriters/readerbase.h"
 #include "readerwriters/failedreader.h"
@@ -33,7 +32,6 @@
 
 #include <QDebug>
 
-#include <QIODevice>
 
 ReaderManager::ReaderPtr ReaderManager::reader(QIODevice & dev)
 {

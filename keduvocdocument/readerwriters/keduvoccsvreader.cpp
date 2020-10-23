@@ -29,7 +29,6 @@
 #include <QIODevice>
 #include <QTextStream>
 
-#include "keduvocdocument.h"
 #include "keduvoclesson.h"
 #include "keduvocexpression.h"
 

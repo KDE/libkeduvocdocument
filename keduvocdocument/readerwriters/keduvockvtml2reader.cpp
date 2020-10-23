@@ -25,7 +25,6 @@
 #include <QIODevice>
 #include <QDir>
 
-#include "keduvocdocument.h"
 #include "keduvoclesson.h"
 #include "keduvocleitnerbox.h"
 #include "keduvocwordtype.h"

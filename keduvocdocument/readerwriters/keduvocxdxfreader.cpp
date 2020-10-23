@@ -20,7 +20,6 @@
 #include <QIODevice>
 
 #include "keduvocexpression.h"
-#include "keduvocdocument.h"
 
 KEduVocXdxfReader::KEduVocXdxfReader(QIODevice & dev)
     :m_dev( dev )

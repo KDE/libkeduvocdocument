@@ -22,7 +22,6 @@
 #include <QTextStream>
 #include <QIODevice>
 
-#include "keduvocdocument.h"
 #include "keduvocexpression.h"
 
 KEduVocWqlReader::KEduVocWqlReader(QIODevice & file)

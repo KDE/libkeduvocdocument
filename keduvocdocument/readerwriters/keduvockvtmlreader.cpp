@@ -21,13 +21,11 @@
 
 #include <KLocalizedString>
 #include <QTextStream>
-#include <QList>
 #include <QIODevice>
 
 #include <QDebug>
 #include <QLocale>
 
-#include "keduvocdocument.h"
 #include "keduvoclesson.h"
 #include "keduvocwordtype.h"
 #include "kvtmldefs.h"

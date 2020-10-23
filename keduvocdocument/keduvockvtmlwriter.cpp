@@ -21,7 +21,6 @@
 
 #include <QLatin1String>
 #include <QTextStream>
-#include <QFile>
 
 #include <QDebug>
 

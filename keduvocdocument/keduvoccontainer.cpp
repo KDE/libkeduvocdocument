@@ -20,7 +20,6 @@
 #include "keduvocexpression.h"
 
 #include <QDebug>
-#include <QList>
 
 /** private class to store information about a lesson */
 class KEduVocContainer::Private

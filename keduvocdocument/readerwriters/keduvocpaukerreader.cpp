@@ -22,7 +22,6 @@
 
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"
-#include "keduvocdocument.h"
 #include <QDebug>
 
 KEduVocPaukerReader::KEduVocPaukerReader( QIODevice & dev )
