@@ -25,7 +25,7 @@
 
 #include <QObject>
 #include <QDebug>
-#include <QtTest>
+#include <QTest>
 
 namespace WordQuizReaderTests {
 

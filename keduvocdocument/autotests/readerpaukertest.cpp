@@ -24,7 +24,7 @@
 #include "readerTestHelpers.h"
 
 #include <QDebug>
-#include <QtTest>
+#include <QTest>
 
 namespace PaukerReaderUnitTests
 {

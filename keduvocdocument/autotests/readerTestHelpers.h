@@ -22,6 +22,7 @@
 
 #include "keduvocdocument.h"
 #include <QTemporaryFile>
+#include <QBuffer>
 
 /** These are macros and functions common to all of the file reader tests*/
 namespace ReaderTestHelpersUnitTest
