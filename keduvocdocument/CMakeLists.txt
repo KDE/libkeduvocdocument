@@ -114,7 +114,7 @@ target_link_libraries(keduvocdocument_static
 #    SOVERSION ${LIB_KEDUVOCDOCUMENT_SOVERSION}
 #)
 
-install(TARGETS KEduVocDocument EXPORT LibKEduVocDocumentTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KEduVocDocument EXPORT LibKEduVocDocumentTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 
 ########### install files ###############
