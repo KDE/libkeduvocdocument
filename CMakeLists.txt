@@ -31,7 +31,7 @@ add_subdirectory(keduvocdocument)
 
 configure_file( "${LibKEduVocDocument_SOURCE_DIR}/LibKEduVocDocumentConfig.cmake.in" "${LibKEduVocDocument_BINARY_DIR}/LibKEduVocDocumentConfig.cmake" @ONLY )
 
-set(_LibKEduVocDocument_CONFIG_DEST "${LIB_INSTALL_DIR}/cmake/libkeduvocdocument")
+set(_LibKEduVocDocument_CONFIG_DEST "${KDE_INSTALL_LIBDIR}/cmake/libkeduvocdocument")
 
 ki18n_install(po)
 install( FILES
