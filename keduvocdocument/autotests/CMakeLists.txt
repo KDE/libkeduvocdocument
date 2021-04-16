@@ -18,23 +18,23 @@ set(kvocdoc_api_unittests
   # keduvocdocumentvalidatortest
   # keduvocdocumentfilelockingtest
   # openAPItest
-  keduvocdocumenttest
-  emptydocumenttest
-  keduvoctexttest
+  keduvocdocumenttest.cpp
+  emptydocumenttest.cpp
+  keduvoctexttest.cpp
 )
 
 #Unit Tests linked to objects behind the API wall
 set(kvocdoc_unittests
-  readerkvtml2test
-  readerwordquiztest
-  readerpaukertest
-  readervokabelntest
-  readerxdxftest
+  readerkvtml2test.cpp
+  readerwordquiztest.cpp
+  readerpaukertest.cpp
+  readervokabelntest.cpp
+  readerxdxftest.cpp
 )
 
 #Helper Clases for unit tests
 set(kvocdoc_unittests_helpers
-  readerTestHelpers
+  readerTestHelpers.h
 )
 
 
