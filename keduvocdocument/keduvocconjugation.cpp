@@ -1,25 +1,8 @@
-/***************************************************************************
-
-    C++ Implementation: keduvocconjugation
-
-    -----------------------------------------------------------------------
-
-    begin         : Di Aug 28 2007
-
-    copyright     : (C) 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
-
-    -----------------------------------------------------------------------
-
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+ * C++ Implementation: keduvocconjugation
+ * SPDX-FileCopyrightText: 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
+ * SPDX-License-Identifier: GPL-2.0-or-later
+*/
 
 #include "keduvocconjugation.h"
 #include "keduvoccommon_p.h"
@@ -169,7 +152,6 @@ void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
               }
     }*/
 
-
     /*
     for ( KEduVocWordFlag::DeclensionNumber num = KEduVocWordFlag::Singular; num <= KEduVocWordFlag::Plural; num = KEduVocWordFlag::DeclensionNumber(num +1) ) {
         QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
@@ -187,7 +169,6 @@ void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
     }
 
     */
-
 
 
 KEduVocConjugation* KEduVocConjugation::fromKVTML2(QDomElement & parent)

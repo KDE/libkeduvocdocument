@@ -7,9 +7,9 @@
 # LIBKEDUVOCDOCUMENT_INCLUDE_DIR                - The include directory 
 # LIBKEDUVOCDOCUMENT_LIBRARIES  		- The keduvocdocument library
 #
-# Copyright 2008  Andreas Pakulat <apaku@gmx.de>
-# Copyright 2010  Niko Sams <niko.sams@gmail.com>
-# Copyright 2014  Jeremy Whiting <jpwhiting@kde.org>
+# SPDX-FileCopyrightText: 2008 Andreas Pakulat <apaku@gmx.de>
+# SPDX-FileCopyrightText: 2010 Niko Sams <niko.sams@gmail.com>
+# SPDX-FileCopyrightText: 2014 Jeremy Whiting <jpwhiting@kde.org>
 # Redistribution and use is allowed according to the terms of the BSD license.
 ######################################################################
 

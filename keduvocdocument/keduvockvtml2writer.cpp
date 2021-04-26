@@ -1,19 +1,9 @@
-/***************************************************************************
-                   export a KEduVocDocument to a KVTML file
-    -----------------------------------------------------------------------
-    copyright           : (C) 2007 Jeremy Whiting <jpwhiting@kde.org>
-    Copyright 2007-2010 Frederik Gladhorn <gladhorn@kde.org>
- ***************************************************************************/
-
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-
+/*
+ * export a KEduVocDocument to a KVTML file
+ * SPDX-FileCopyrightText: 2007 Jeremy Whiting <jpwhiting@kde.org>
+ * SPDX-FileCopyrightText: 2007-2010 Frederik Gladhorn <gladhorn@kde.org>
+ * SPDX-License-Identifier: GPL-2.0-or-later
+*/
 #include "keduvockvtml2writer.h"
 
 #include <QTextStream>
