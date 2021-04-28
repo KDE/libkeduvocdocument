@@ -1,4 +1,4 @@
 build/
 libkeduvocdocument.kdev4
-
+CMakeLists.txt.user
 .cmake/
