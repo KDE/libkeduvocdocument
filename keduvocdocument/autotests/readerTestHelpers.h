@@ -52,9 +52,9 @@ namespace ReaderTestHelpersUnitTest
 #define KVOCREADER_EXPECT_CORE(str, eError, eType, isGood)              \
     do {                                                                \
         QByteArray array( str.toLatin1() );                             \
-        QBuffer * buffer = new QBuffer( &array );                       \
-        buffer->open( QIODevice::ReadOnly );                            \
-        ReaderManager::ReaderPtr reader( ReaderManager::reader(*buffer ) ); \
+        QBuffer buffer( &array );                       \
+        buffer.open( QIODevice::ReadOnly );                            \
+        ReaderManager::ReaderPtr reader( ReaderManager::reader(buffer ) ); \
         KEduVocDocument docRead;                                        \
         KEduVocDocument::ErrorCode actualError(reader->read(docRead ) ); \
         KEduVocDocument::FileType actualType(reader->fileTypeHandled() ); \
