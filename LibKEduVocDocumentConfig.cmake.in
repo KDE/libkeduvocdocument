@@ -10,7 +10,7 @@
 # SPDX-FileCopyrightText: 2008 Andreas Pakulat <apaku@gmx.de>
 # SPDX-FileCopyrightText: 2010 Niko Sams <niko.sams@gmail.com>
 # SPDX-FileCopyrightText: 2014 Jeremy Whiting <jpwhiting@kde.org>
-# Redistribution and use is allowed according to the terms of the BSD license.
+# SPDX-License-Identifier: BSD-1-Clause
 ######################################################################
 
 get_filename_component(_LIBKEDUVOCDOCUMENT_CURRENT_DIR  "${CMAKE_CURRENT_LIST_FILE}" PATH)
