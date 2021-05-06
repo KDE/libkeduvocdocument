@@ -2,3 +2,9 @@ build/
 libkeduvocdocument.kdev4
 CMakeLists.txt.user
 .cmake/
+/.clang-format
+/compile_commands.json
+.clangd
+.cache
+.idea
+/cmake-build*
