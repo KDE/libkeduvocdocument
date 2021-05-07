@@ -85,7 +85,7 @@ target_link_libraries(KEduVocDocument
 
 # vHanda: Add Export Name?
 set_target_properties(KEduVocDocument
-    PROPERTIES VERSION   ${KDEEDU_VERSION_STRING}
+    PROPERTIES VERSION   ${KDEEDU_VERSION}
                SOVERSION ${KDEEDU_SOVERSION}
 )
 target_include_directories(KEduVocDocument INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/libkeduvocdocument>")
