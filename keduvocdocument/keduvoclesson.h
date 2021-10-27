@@ -34,7 +34,7 @@ public:
     KEduVocLesson( const KEduVocLesson &other );
 
     /** destructor */
-    ~KEduVocLesson();
+    ~KEduVocLesson() override;
 
     /** assignment operator */
     KEduVocLesson& operator= ( const KEduVocLesson& );

@@ -23,7 +23,7 @@ public:
      @param dev to parse*/
     explicit KEduVocCsvReader(QIODevice & dev);
     /** destructor */
-    ~KEduVocCsvReader(){};
+    ~KEduVocCsvReader()override {};
 
     /** @brief CSV can always parse a file
      @return true if parsable

@@ -27,7 +27,7 @@ public:
                           , const QString & msg = QString());
 
     /**destructor*/
-    virtual ~FailedReader(){};
+    ~FailedReader()override {};
 
     /** @brief Can this reader parse this file
      *

@@ -96,7 +96,7 @@ public:
     /**
      * Destructor
      */
-    ~KEduVocDocument();
+    ~KEduVocDocument() override;
 
 
     /** @name Whole Document Methods

@@ -29,7 +29,7 @@ public:
     explicit KEduVocWordType(const QString& name, KEduVocWordType *parent = nullptr);
 
     /** destructor */
-    ~KEduVocWordType();
+    ~KEduVocWordType() override;
 
     /** assignment operator */
 //     KEduVocWordType& operator= ( const KEduVocWordType& );

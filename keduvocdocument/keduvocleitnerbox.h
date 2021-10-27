@@ -27,7 +27,7 @@ public:
     explicit KEduVocLeitnerBox(const QString& name, KEduVocLeitnerBox *parent = nullptr);
 
     /** destructor */
-    ~KEduVocLeitnerBox();
+    ~KEduVocLeitnerBox() override;
 
     /**
      * The leitner box class keeps track of individual translations, because for one entry, the translations can have different grades.

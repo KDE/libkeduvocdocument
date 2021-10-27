@@ -23,7 +23,7 @@ public:
     */
     explicit KEduVocPaukerReader( QIODevice & file);
     /**destructor*/
-    virtual ~KEduVocPaukerReader(){};
+    ~KEduVocPaukerReader()override {};
 
 
     /** @brief Can this reader parse this file

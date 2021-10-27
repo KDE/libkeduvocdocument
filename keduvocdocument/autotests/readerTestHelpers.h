@@ -26,7 +26,7 @@ namespace ReaderTestHelpersUnitTest
             this->close();
         }
         /** Destructor*/
-        ~TestDoc() {}
+        ~TestDoc() override {}
     };
 
 
