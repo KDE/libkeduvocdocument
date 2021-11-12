@@ -24,7 +24,6 @@
 #include "keduvoclesson.h"
 #include "keduvocleitnerbox.h"
 #include "keduvocwordtype.h"
-#include "keduvockvtmlwriter.h"
 #include "keduvockvtml2writer.h"
 #include "keduvoccsvwriter.h"
 #include "readerwriters/readermanager.h"
