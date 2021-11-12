@@ -16,33 +16,67 @@ include_directories(
 )
 
 set(keduvocdocument_LIB_SRCS
-    keduvocdocument.cpp
-    keduvocidentifier.cpp
-    keduvocexpression.cpp
-    keduvoctranslation.cpp
-    keduvoccontainer.cpp
-    keduvoclesson.cpp
-    keduvocleitnerbox.cpp
-    keduvoctext.cpp
     keduvocarticle.cpp
+    keduvocarticle.h
+    keduvoccommon_p.h
     keduvocconjugation.cpp
-    keduvocpersonalpronoun.cpp
-    keduvocdeclension.cpp
-    keduvocwordtype.cpp
-    keduvockvtmlcompability.cpp
-    keduvockvtml2writer.cpp
+    keduvocconjugation.h
+    keduvoccontainer.cpp
+    keduvoccontainer.h
     keduvoccsvwriter.cpp
+    keduvoccsvwriter.h
+    keduvocdeclension.cpp
+    keduvocdeclension.h
+    keduvocdocument.cpp
+    keduvocdocument.h
+    keduvocexpression.cpp
+    keduvocexpression.h
+    keduvocidentifier.cpp
+    keduvocidentifier.h
+    keduvockvtml2writer.cpp
+    keduvockvtml2writer.h
+    keduvockvtmlcompability.cpp
+    keduvockvtmlcompability.h
+    keduvocleitnerbox.cpp
+    keduvocleitnerbox.h
+    keduvoclesson.cpp
+    keduvoclesson.h
+    keduvocmultiplechoice.cpp
+    keduvocmultiplechoice.h
+    keduvocpersonalpronoun.cpp
+    keduvocpersonalpronoun.h
+    keduvoctext.cpp
+    keduvoctext.h
+    keduvoctranslation.cpp
+    keduvoctranslation.h
+    keduvocwordflags.h
+    keduvocwordtype.cpp
+    keduvocwordtype.h
+    kvtml2defs.h
+    kvtmldefs.h
     readerwriters/dummyreader.cpp
+    readerwriters/dummyreader.h
     readerwriters/failedreader.cpp
-    readerwriters/keduvockvtmlreader.cpp
-    readerwriters/keduvockvtml2reader.cpp
+    readerwriters/failedreader.h
     readerwriters/keduvoccsvreader.cpp
+    readerwriters/keduvoccsvreader.h
+    readerwriters/keduvockvtml2reader.cpp
+    readerwriters/keduvockvtml2reader.h
+    readerwriters/keduvockvtmlreader.cpp
+    readerwriters/keduvockvtmlreader.h
     readerwriters/keduvocpaukerreader.cpp
+    readerwriters/keduvocpaukerreader.h
     readerwriters/keduvocvokabelnreader.cpp
+    readerwriters/keduvocvokabelnreader.h
     readerwriters/keduvocwqlreader.cpp
+    readerwriters/keduvocwqlreader.h
     readerwriters/keduvocxdxfreader.cpp
+    readerwriters/keduvocxdxfreader.h
+    readerwriters/readerbase.h
     readerwriters/readermanager.cpp
+    readerwriters/readermanager.h
     sharedkvtmlfiles.cpp
+    sharedkvtmlfiles.h
 )
 
 include(ECMGenerateHeaders)
