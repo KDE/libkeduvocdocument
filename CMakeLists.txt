@@ -1,12 +1,15 @@
+cmake_minimum_required(VERSION 3.16)
 project(LibKEduVocDocument)
-cmake_minimum_required(VERSION 3.5)
 
-find_package(ECM 1.3.0 REQUIRED NO_MODULE)
+set(QT_MIN_VERSION "5.15.0")
+set(KF5_MIN_VERSION "5.82.0")
+
+find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-find_package(Qt5 5.2 REQUIRED NO_MODULE COMPONENTS Xml)
-find_package(KF5 5.3.0 REQUIRED COMPONENTS I18n Archive KIO)
+find_package(Qt5 ${QT_MIN_VERSION} REQUIRED NO_MODULE COMPONENTS Xml)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n Archive KIO)
 
 #add_definitions( -Wall -fprofile-arcs -ftest-coverage )
 
