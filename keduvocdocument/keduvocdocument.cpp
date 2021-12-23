@@ -44,9 +44,9 @@ public:
     KEduVocDocumentPrivate( KEduVocDocument* qq )
             : q( qq )
     {
-        m_lessonContainer = 0;
-        m_wordTypeContainer = 0;
-        m_leitnerContainer = 0;
+        m_lessonContainer = nullptr;
+        m_wordTypeContainer = nullptr;
+        m_leitnerContainer = nullptr;
         m_autosave = new KAutoSaveFile;
         init();
     }
@@ -197,7 +197,7 @@ KEduVocDocument::~KEduVocDocument()
 void KEduVocDocument::setModified( bool dirty )
 {
     d->m_dirty = dirty;
-    emit docModified( d->m_dirty );
+    Q_EMIT docModified( d->m_dirty );
 }
 
 
@@ -393,7 +393,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType f
 QByteArray KEduVocDocument::toByteArray(const QString &generator)
 {
     // no file needed
-    KEduVocKvtml2Writer kvtmlWriter(0);
+    KEduVocKvtml2Writer kvtmlWriter(nullptr);
     return kvtmlWriter.toByteArray( this, generator );
 }
 
@@ -843,7 +843,7 @@ QString KEduVocDocument::pattern( FileDialogMode mode )
                     { true, false, "*.xdxf", I18N_NOOP( "XML Dictionary Exchange Format" ) },
                     { true, true, "*.csv", I18N_NOOP( "Comma Separated Values (CSV)" ) },
                     // last is marker for the end, do not remove it
-                    { false, false, 0, 0 }
+                    { false, false, nullptr, nullptr }
                 };
     QStringList newfilters;
     QStringList allext;

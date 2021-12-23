@@ -51,7 +51,7 @@ KEduVocContainer::KEduVocContainer(const QString& name, EnumContainerType type,
 				   KEduVocDocument *document)
         : d( new Private )
 {
-    d->m_parentContainer = 0;
+    d->m_parentContainer = nullptr;
     d->m_name = name;
     d->m_inPractice = true;
     d->m_type = type;
@@ -70,7 +70,7 @@ KEduVocContainer::KEduVocContainer(const QString& name, EnumContainerType type, 
     d->m_type = type;
     d->m_childLessonEntriesValid = false;
 
-    d->m_document = 0;
+    d->m_document = nullptr;
 }
 
 KEduVocContainer::KEduVocContainer( const KEduVocContainer &other )
