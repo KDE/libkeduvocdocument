@@ -109,7 +109,7 @@ generate_export_header(KEduVocDocument BASE_NAME KEduVocDocument)
 
 target_link_libraries(KEduVocDocument
   PUBLIC
-    Qt5::Xml
+    Qt${QT_MAJOR_VERSION}::Xml
   PRIVATE
     KF5::I18n
     KF5::KIOCore
@@ -132,7 +132,7 @@ set_target_properties(keduvocdocument_static PROPERTIES COMPILE_FLAGS -DKEDUVOCD
 target_link_libraries(keduvocdocument_static
   PUBLIC
     KF5::KIOCore
-    Qt5::Xml
+    Qt${QT_MAJOR_VERSION}::Xml
   PRIVATE
     KF5::I18n
     KF5::Archive
