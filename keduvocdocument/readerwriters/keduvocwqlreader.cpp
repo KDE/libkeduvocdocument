@@ -39,7 +39,11 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
     m_doc = &doc;
 
     QTextStream inputStream( m_inputFile );
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0) //TODO fix in qt6!
     inputStream.setCodec( "Windows-1252" ); //("ISO-8851-1");
+#else
+    qWarning() << " Need to fix inputStream.setCodec( Windows-1252 );";
+#endif
     inputStream.setAutoDetectUnicode( false );
     inputStream.seek( 0 );
 

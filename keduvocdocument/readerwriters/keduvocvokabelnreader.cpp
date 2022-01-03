@@ -79,7 +79,11 @@ KEduVocDocument::ErrorCode KEduVocVokabelnReader::read(KEduVocDocument & doc )
     m_doc->setAuthor( QStringLiteral("http://www.vokabeln.de") );
 
     QTextStream inputStream( m_inputFile );
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0) //TODO fix in qt6!
     inputStream.setCodec( "ISO-8859-1" );
+#else
+    qWarning() << " Need to fix inputStream.setCodec( ISO-8859-1 );";
+#endif
     inputStream.setAutoDetectUnicode( false );
     inputStream.seek( 0 );
 
