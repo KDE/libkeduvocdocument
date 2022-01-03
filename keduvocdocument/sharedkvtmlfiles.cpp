@@ -186,7 +186,7 @@ void SharedKvtmlFiles::sortDownloadedFiles()
     // move khangman files into
     while ( !khangmanFiles.isEmpty() ) {
         QUrl fileUrl( QUrl::fromLocalFile( khangmanFiles.first() ) );
-        QUrl destDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::DataLocation) + "/khangman/data/");
+        QUrl destDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/khangman/data/");
         // do this better with KStandardDirs stuff
         KIO::move( fileUrl, destDir);
         khangmanFiles.removeFirst();

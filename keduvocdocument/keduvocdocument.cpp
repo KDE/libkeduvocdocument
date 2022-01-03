@@ -16,9 +16,10 @@
 
 #include <QDebug>
 #include <kio/filecopyjob.h>
-#include <KFilterDev>
+#include <KCompressionDevice>
 #include <KLocalizedString>
 #include <KAutoSaveFile>
+#include <KLazyLocalizedString>
 
 #include "keduvocexpression.h"
 #include "keduvoclesson.h"
@@ -203,7 +204,7 @@ void KEduVocDocument::setModified( bool dirty )
 
 KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileName)
 {
-    KFilterDev f(fileName);
+    KCompressionDevice f(fileName);
     f.open(QIODevice::ReadOnly);
 
     ReaderManager::ReaderPtr reader(ReaderManager::reader(f));
@@ -258,7 +259,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::open(const QUrl &url, FileHandlingFl
         }
     }
 
-    KFilterDev f(temporaryFile);
+    KCompressionDevice f(temporaryFile);
     if (f.open(QIODevice::ReadOnly)) {
 
         ReaderManager::ReaderPtr reader(ReaderManager::reader(f));
@@ -833,24 +834,24 @@ QString KEduVocDocument::pattern( FileDialogMode mode )
         bool reading;
         bool writing;
         const char* extensions;
-        const char* description;
+        const KLazyLocalizedString description;
     }
     filters[] = {
-                    { true, true, "*.kvtml", I18N_NOOP( "KDE Vocabulary Document" ) },
-                    { true, false, "*.wql", I18N_NOOP( "KWordQuiz Document" ) },
-                    { true, false, "*.xml.qz *.pau.gz", I18N_NOOP( "Pauker Lesson" ) },
-                    { true, false, "*.voc", I18N_NOOP( "Vokabeltrainer" ) },
-                    { true, false, "*.xdxf", I18N_NOOP( "XML Dictionary Exchange Format" ) },
-                    { true, true, "*.csv", I18N_NOOP( "Comma Separated Values (CSV)" ) },
+                    { true, true, "*.kvtml", kli18n( "KDE Vocabulary Document" ) },
+                    { true, false, "*.wql", kli18n( "KWordQuiz Document" ) },
+                    { true, false, "*.xml.qz *.pau.gz", kli18n( "Pauker Lesson" ) },
+                    { true, false, "*.voc", kli18n( "Vokabeltrainer" ) },
+                    { true, false, "*.xdxf", kli18n( "XML Dictionary Exchange Format" ) },
+                    { true, true, "*.csv", kli18n( "Comma Separated Values (CSV)" ) },
                     // last is marker for the end, do not remove it
-                    { false, false, nullptr, nullptr }
+                    { false, false, nullptr, KLazyLocalizedString() }
                 };
     QStringList newfilters;
     QStringList allext;
     for ( int i = 0; filters[i].extensions; ++i ) {
         if (( mode == Reading && filters[i].reading ) ||
                 ( mode == Writing && filters[i].writing ) ) {
-            newfilters.append( i18n( filters[i].description ) + " (" + QLatin1String( filters[i].extensions ) + ')' );
+            newfilters.append( KLocalizedString( filters[i].description ).toString() + " (" + QLatin1String( filters[i].extensions ) + ')' );
             allext.append( QLatin1String( filters[i].extensions ) );
         }
     }

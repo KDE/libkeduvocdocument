@@ -62,7 +62,11 @@ KEduVocWordType* KEduVocKvtmlCompability::typeFromOldFormat(KEduVocWordType* par
     // check if it's user defined
     if ( typeSubtypeString.length() >= 2 && typeSubtypeString.left( 1 ) == QM_USER_TYPE ) {
         // they started counting at 1, we need to know which index we are dealing with:
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         int selfDefinedTypeIndex = typeSubtypeString.rightRef( typeSubtypeString.count()-1 ).toInt() -1;
+#else
+        int selfDefinedTypeIndex = QStringView(typeSubtypeString).right( typeSubtypeString.count()-1 ).toInt() -1;
+#endif
         return static_cast<KEduVocWordType*>(parent->childContainer(selfDefinedTypeIndex));
     }
 
