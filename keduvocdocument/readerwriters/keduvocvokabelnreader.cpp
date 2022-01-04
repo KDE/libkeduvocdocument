@@ -85,7 +85,6 @@ KEduVocDocument::ErrorCode KEduVocVokabelnReader::read(KEduVocDocument & doc )
 
     QString title;
     QString lang1;
-    QString lang2;
     QString expression;
     QString original;
     QString translation;
