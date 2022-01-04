@@ -822,21 +822,21 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
             bcount = s.toInt();
     }
 
-    date.setTime_t( 0 );
-    rev_date.setTime_t( 0 );
+    date = QDateTime::fromSecsSinceEpoch(0);
+    rev_date = QDateTime::fromSecsSinceEpoch( 0 );
     attribute = domElementExpressionChild.attributeNode( KV_DATE );
     if ( !attribute.isNull() ) {
         QString s = attribute.value();
         if (( pos = s.indexOf( ';' ) ) >= 1 ) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            date.setTime_t( s.leftRef( pos ).toInt() );
+            date = QDateTime::fromSecsSinceEpoch( s.leftRef( pos ).toInt() );
             rev_date.setTime_t( s.midRef( pos + 1, s.length() ).toInt() );
 #else
-            date.setTime_t( QStringView(s).left( pos ).toInt() );
-            rev_date.setTime_t( QStringView(s).mid( pos + 1, s.length() ).toInt() );
+            date = QDateTime::fromSecsSinceEpoch( QStringView(s).left( pos ).toInt() );
+            rev_date = QDateTime::fromSecsSinceEpoch( QStringView(s).mid( pos + 1, s.length() ).toInt() );
 #endif
         } else
-            date.setTime_t( s.toInt() );
+            date= QDateTime::fromSecsSinceEpoch( s.toInt() );
     }
 
     attribute = domElementExpressionChild.attributeNode( KV_DATE2 );

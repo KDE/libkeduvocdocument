@@ -65,8 +65,7 @@ void KEduVocText::resetGrades()
     d->m_totalPracticeCount = 0;
     d->m_badCount = 0;
 
-    QDateTime dt;
-    dt.setTime_t( 0 );
+    const QDateTime dt = QDateTime::fromSecsSinceEpoch(0);
     d->m_practiceDate = dt;
     d->m_interval = 0;
 }

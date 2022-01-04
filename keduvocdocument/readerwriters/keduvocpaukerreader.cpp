@@ -51,7 +51,7 @@ KEduVocDocument::ErrorCode KEduVocPaukerReader::read( KEduVocDocument &doc)
         readNext();
 
         if ( isStartElement() ) {
-            if ( name() == "Lesson" )
+            if ( name() == QStringView(QStringLiteral("Lesson")) )
                 readPauker();
             else
             {
@@ -93,9 +93,9 @@ void KEduVocPaukerReader::readPauker()
             break;
 
         if ( isStartElement() ) {
-            if ( name() == "Description" )
+            if ( name() == QStringView(QStringLiteral("Description")) )
                 m_doc->setDocumentComment( readElementText() );
-            else if ( name() == "Batch" )
+            else if ( name() == QStringView(QStringLiteral("Batch")) )
                 readBatch();
             else
                 readUnknownElement();
@@ -113,7 +113,7 @@ void KEduVocPaukerReader::readBatch()
             break;
 
         if ( isStartElement() ) {
-            if ( name() == "Card" )
+            if ( name() == QStringView(QStringLiteral("Card")) )
                 readCard();
             else
                 readUnknownElement();
@@ -134,9 +134,9 @@ void KEduVocPaukerReader::readCard()
             break;
 
         if ( isStartElement() ) {
-            if ( name() == "FrontSide" )
+            if ( name() == QStringView(QStringLiteral("FrontSide")) )
                 front = readText();
-            else if ( name() == "ReverseSide" )
+            else if ( name() == QStringView(QStringLiteral("ReverseSide")) )
                 back = readText();
             else
                 readUnknownElement();
@@ -162,7 +162,7 @@ QString KEduVocPaukerReader::readText()
             break;
 
         if ( isStartElement() ) {
-            if ( name() == "Text" )
+            if ( name() == QStringView(QStringLiteral("Text")) )
                 result = readElementText();
             else
                 readUnknownElement();

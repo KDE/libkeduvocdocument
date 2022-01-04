@@ -49,7 +49,7 @@ KEduVocDocument::ErrorCode KEduVocXdxfReader::read(KEduVocDocument &doc)
         readNext();
 
         if ( isStartElement() ) {
-            if ( name() == "xdxf" )
+            if ( name() == QStringView(QStringLiteral("xdxf")) )
                 readXdxf();
             else
                 raiseError( i18n( "This is not a XDXF document" ) );
@@ -77,13 +77,23 @@ void KEduVocXdxfReader::readUnknownElement()
 void KEduVocXdxfReader::readXdxf()
 {
     ///The language attributes are required and should be ISO 639-2 codes, but you never know...
-    QStringRef id1 = attributes().value( QStringLiteral("lang_from") );
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QStringRef
+#else
+    QStringView
+#endif
+            id1 = attributes().value( QStringLiteral("lang_from") );
     m_doc->appendIdentifier();
     if ( !id1.isNull() ) {
         m_doc->identifier(0).setLocale( id1.toString().toLower() );
         m_doc->identifier(0).setName( id1.toString().toLower() );
     }
-    QStringRef id2 = attributes().value( QStringLiteral("lang_to") );
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QStringRef
+#else
+    QStringView
+#endif
+        id2 = attributes().value( QStringLiteral("lang_to") );
     m_doc->appendIdentifier();
     if ( !id2.isNull() ) {
         m_doc->identifier(1).setLocale( id2.toString().toLower() );
@@ -101,11 +111,11 @@ void KEduVocXdxfReader::readXdxf()
             break;
 
         if ( isStartElement() ) {
-            if ( name() == "description" )
+            if ( name() == QStringView(QStringLiteral("description")) )
                 m_doc->setDocumentComment( readElementText() );
-            else if ( name() == "full_name" )
+            else if ( name() == QStringView(QStringLiteral("full_name")) )
                 m_doc->setTitle( readElementText() );
-            else if ( name() == "ar" )
+            else if ( name() == QStringView(QStringLiteral("ar")) )
                 readEntry();
             else
                 readUnknownElement();
@@ -121,9 +131,9 @@ void KEduVocXdxfReader::readEntry()
     QString front;
     QString back;
 
-    while ( !( isEndElement() && name() == "ar" ) ) {
+    while ( !( isEndElement() && name() == QStringView(QStringLiteral("ar")) ) ) {
         readNext();
-        if ( isStartElement() && name() == "k" ) {
+        if ( isStartElement() && name() == QStringView(QStringLiteral("k")) ) {
             front = readElementText();
         }
         else if ( isCharacters() || isEntityReference() ) {
