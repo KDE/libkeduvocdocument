@@ -23,11 +23,11 @@ int main( int argc, char ** argv )
     QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
     QCoreApplication app( argc, argv );
 
-    QStringList languages = SharedKvtmlFiles::languages();
-    Q_FOREACH (const QString &language, languages) {
+    const QStringList languages = SharedKvtmlFiles::languages();
+    for (const QString &language : languages) {
         qDebug() << "Got language: " << language;
-        QStringList files = SharedKvtmlFiles::fileNames(language);
-        Q_FOREACH (const QString &file, files) {
+        const QStringList files = SharedKvtmlFiles::fileNames(language);
+        for (const QString &file : files) {
             qDebug() << "Got filename " << file;
         }
     }

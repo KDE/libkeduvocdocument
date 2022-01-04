@@ -56,9 +56,9 @@ public:
      */
     KEduVocArticle &operator= ( const KEduVocArticle& other );
 
-    QString article(const KEduVocWordFlags&);
+    QString article(KEduVocWordFlags );
 
-    void setArticle(const QString& article, const KEduVocWordFlags&);
+    void setArticle(const QString& article, KEduVocWordFlags );
 
     bool isArticle(const QString& article) const;
 

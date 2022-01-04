@@ -117,7 +117,7 @@ void KEduVocWordType::setWordType(KEduVocWordFlags flags)
     d->m_flags = flags;
 }
 
-KEduVocWordType* KEduVocWordType::childOfType(const KEduVocWordFlags& flags)
+KEduVocWordType* KEduVocWordType::childOfType(KEduVocWordFlags flags)
 {
     if(d->m_flags == flags) {
         return this;

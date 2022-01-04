@@ -51,7 +51,7 @@ public:
      * @param flags
      * @return
      */
-    KEduVocWordType* childOfType(const KEduVocWordFlags& flags);
+    KEduVocWordType* childOfType(KEduVocWordFlags flags);
 
     /**
      * The word type class does keep track of individual translations, because for one entry, the translations can have different word types (eg. genders of nouns tend to be different in different languages).

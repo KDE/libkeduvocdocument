@@ -49,12 +49,12 @@ KEduVocArticle::~KEduVocArticle()
 }
 
 
-QString KEduVocArticle::article(const KEduVocWordFlags& flags)
+QString KEduVocArticle::article(KEduVocWordFlags flags)
 {
     return d->m_articles.value(flags & (KEduVocWordFlag::genders | KEduVocWordFlag::numbers | KEduVocWordFlag::Definite | KEduVocWordFlag::Indefinite));
 }
 
-void KEduVocArticle::setArticle(const QString & article, const KEduVocWordFlags& flags)
+void KEduVocArticle::setArticle(const QString & article, KEduVocWordFlags flags)
 {
     d->m_articles[flags & (KEduVocWordFlag::genders | KEduVocWordFlag::numbers | KEduVocWordFlag::Definite | KEduVocWordFlag::Indefinite)] = article;
 }

@@ -59,13 +59,13 @@ void SharedKvtmlFilesPrivate::rescan()
     // Get all kvtml paths
     QStringList nameFilter;
     nameFilter.append(QStringLiteral("*.kvtml"));
-    QStringList dataPaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("apps/kvtml"), QStandardPaths::LocateDirectory);
-    Q_FOREACH (const QString &path, dataPaths) {
+    const QStringList dataPaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("apps/kvtml"), QStandardPaths::LocateDirectory);
+    for (const QString &path : dataPaths) {
         qDebug() << "Checking path " << path << " for kvtml files";
-        QStringList locales = QDir( path ).entryList( QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name );
-        Q_FOREACH (const QString &locale, locales) {
-            QStringList files = QDir( path + '/' + locale ).entryList(nameFilter, QDir::Files );
-            Q_FOREACH (const QString &filename, files) {
+        const QStringList locales = QDir( path ).entryList( QDir::Dirs | QDir::NoDotAndDotDot, QDir::Name );
+        for (const QString &locale : locales) {
+            const QStringList files = QDir( path + '/' + locale ).entryList(nameFilter, QDir::Files );
+            for (const QString &filename : files) {
                 QString filePath = path + '/' + locale + '/' + filename;
                 this->m_fileList << filePath;
                 this->m_filesByLang[locale].append( filePath );
@@ -141,11 +141,11 @@ void SharedKvtmlFiles::sortDownloadedFiles()
 {
     QStringList nameFilter;
     nameFilter.append(QStringLiteral("*.kvtml"));
-    QStringList dataPaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("apps/kvtml"), QStandardPaths::LocateDirectory);
+    const QStringList dataPaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("apps/kvtml"), QStandardPaths::LocateDirectory);
     QStringList unsortedFiles;
-    Q_FOREACH (const QString &path, dataPaths) {
-        QStringList files = QDir( path ).entryList(nameFilter, QDir::Files | QDir::NoDotAndDotDot );
-        Q_FOREACH (const QString &filename, files) {
+    for (const QString &path : dataPaths) {
+        const QStringList files = QDir( path ).entryList(nameFilter, QDir::Files | QDir::NoDotAndDotDot );
+        for (const QString &filename : files) {
             unsortedFiles.append( path + '/' + filename);
         }
     }
@@ -176,9 +176,9 @@ void SharedKvtmlFiles::sortDownloadedFiles()
 
     nameFilter = QStringList(QStringLiteral("*.txt"));
     QStringList khangmanFiles;
-    Q_FOREACH (const QString &path, dataPaths) {
-        QStringList files = QDir( path ).entryList(nameFilter, QDir::Files );
-        Q_FOREACH (const QString &filename, files) {
+    for (const QString &path : dataPaths) {
+        const QStringList files = QDir( path ).entryList(nameFilter, QDir::Files );
+        for (const QString &filename : files) {
             khangmanFiles.append( path + '/' + filename);
         }
     }
