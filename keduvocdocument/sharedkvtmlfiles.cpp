@@ -54,8 +54,6 @@ void SharedKvtmlFilesPrivate::rescan()
     this->m_filesByLang.clear();
     this->m_fileList.clear();
 
-    QStringList locales;
-
     // Get all kvtml paths
     QStringList nameFilter;
     nameFilter.append(QStringLiteral("*.kvtml"));
@@ -77,7 +75,7 @@ void SharedKvtmlFilesPrivate::rescan()
     for ( int i = 0; i < this->m_fileList.size(); ++i ) {
 
         // open the file
-        doc->open( QUrl::fromLocalFile( this->m_fileList[i] ) );
+        doc->open( QUrl::fromLocalFile( this->m_fileList[i] ),  KEduVocDocument::FileIgnoreLock );
 
         // add it's title to the title list
         this->m_titleList.append( doc->title() );
