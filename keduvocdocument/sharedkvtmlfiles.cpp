@@ -8,10 +8,9 @@
 #include "keduvocdocument.h"
 
 #include <KLocalizedString>
-#include <kio/copyjob.h>
-#include <kio/job.h>
 
 #include <QDir>
+#include <QFile>
 #include <QStandardPaths>
 
 #include <QDebug>
@@ -162,10 +161,19 @@ void SharedKvtmlFiles::sortDownloadedFiles()
             // make sure the locale sub-folder exists
             QUrl pathUrl = QUrl( fileUrl );
             pathUrl = QUrl( pathUrl.toString(QUrl::RemoveFilename) + '/' + locale );
-            KIO::mkdir( pathUrl );
+            QDir dir;
+            if (!dir.mkpath(pathUrl.toLocalFile())) {
+                // Unable to create destination path, so skip
+                continue;
+            }
+
+            pathUrl = QUrl( pathUrl.toString() + '/' + fileUrl.fileName());
 
             // move the file into the locale sub-folder
-            KIO::move( fileUrl, pathUrl );
+            bool moved = QFile(fileUrl.toLocalFile()).rename(pathUrl.toLocalFile());
+            if (!moved) {
+                qDebug() << "Unable to move " << fileUrl << " to " << pathUrl;
+            }
         }
 
         // take off the one we just did
@@ -184,9 +192,13 @@ void SharedKvtmlFiles::sortDownloadedFiles()
     // move khangman files into
     while ( !khangmanFiles.isEmpty() ) {
         QUrl fileUrl( QUrl::fromLocalFile( khangmanFiles.first() ) );
-        QUrl destDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/khangman/data/");
+        QUrl destUrl = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/khangman/data/" + fileUrl.fileName());
+
         // do this better with KStandardDirs stuff
-        KIO::move( fileUrl, destDir);
+        bool worked = QFile(fileUrl.toLocalFile()).rename(destUrl.toLocalFile());
+        if (!worked) {
+            qDebug() << "Unable to move " << fileUrl << " to " << destUrl;
+        }
         khangmanFiles.removeFirst();
     }
 
