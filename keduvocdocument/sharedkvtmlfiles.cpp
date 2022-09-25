@@ -192,7 +192,14 @@ void SharedKvtmlFiles::sortDownloadedFiles()
     // move khangman files into
     while ( !khangmanFiles.isEmpty() ) {
         QUrl fileUrl( QUrl::fromLocalFile( khangmanFiles.first() ) );
-        QUrl destUrl = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/khangman/data/" + fileUrl.fileName());
+        QUrl destDir = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/khangman/data/");
+        QUrl destUrl = QUrl::fromLocalFile(destDir.toString() + fileUrl.fileName());
+
+        QDir dir;
+        if (!dir.mkpath(destDir.toLocalFile())) {
+            // Unable to create destination path, so skip
+            continue;
+        }
 
         // do this better with KStandardDirs stuff
         bool worked = QFile(fileUrl.toLocalFile()).rename(destUrl.toLocalFile());
