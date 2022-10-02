@@ -1,0 +1,1195 @@
+# translation of libkdeedu.po to
+# Copyright (C) 2008 This_file_is_part_of_KDE
+# This file is distributed under the same license as the libkdeedu package.
+# ANI PETER|അനി പീറ്റര്‍ <peter.ani@gmail.com>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2008-07-22 22:48+0530\n"
+"Last-Translator: ANI PETER|അനി പീറ്റര്‍ <peter.ani@gmail.com>\n"
+"Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc-"
+"discuss@googlegroups.com>\n"
+"Language: ml\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "തലക്കെട്ടു്:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "രചയിതാവു്:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "ഏതു് തരം വാക്കുകള്‍"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, fuzzy, kde-format
+msgid "Cannot lock file %1"
+msgstr "%1 ഫയലിലേക്കു് സൂക്ഷിക്കുവാനായില്ല"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt><b>%1</b> ഫയല്‍ തുറക്കുവാനായില്ല</qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, fuzzy, kde-format
+msgid "Cannot open tempfile %1"
+msgstr "%1 ഫയലിലേക്കു് സൂക്ഷിക്കുവാനായില്ല"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, fuzzy, kde-format
+msgid "Cannot download %1: %2"
+msgstr "%1 ഫയലിലേക്കു് സൂക്ഷിക്കുവാനായില്ല"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"\"%1\" ലഭ്യമാക്കുവാനോ തുറക്കുവാനോ സാധ്യമായില്ല\n"
+"(പിശകു് രേഖപ്പെടുത്തിയിരിക്കുന്നു: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "%1 ഫയലിലേക്കു് സൂക്ഷിക്കുവാനായില്ല"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "യഥാര്‍ത്ഥമായതു്"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "തര്‍ജ്ജമ %1"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "കെ ഡി ഇ പദാവലി രേഖ"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "കെ വേര്‍ഡ് ക്വിസ് രേഖ"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "പൌക്കര്‍ പാഠം"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "Vokabeltrainer"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "എല്ലാം പിന്തുയുള്ള രേഖകള്‍"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "പിശകുകളൊന്നും ലഭ്യമായില്ല."
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "രേഖയില്‍ തെറ്റായ എക്സ്എംഎല്‍."
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "അപരിചിതമായ തരത്തിലുള്ള ഫയല്‍."
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "ഫയലിലേക്കു് ഡേറ്റാ സൂക്ഷിക്കുവാന്‍ സാധ്യമല്ല."
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "ഫയല്‍ ലഭ്യമാക്കുവാന്‍ സാധ്യമല്ല."
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "ഫയല്‍ നിലവിലില്ല."
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, fuzzy, kde-format
+msgid "The file is locked by another process."
+msgstr "ഫയല്‍ നിലവിലില്ല."
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "അപരിചിതമായ പിശകു്."
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "ക്രിയാപദം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "നാമപദം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "പേരു്"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "നാമവിശേഷണം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "ക്രിയാവിശേഷണം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "സര്‍‌വ്വനാമം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "വാക്യം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "അക്കം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "സംയോഗം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "ഉപസര്‍ഗ്ഗം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "ചോദ്യം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "പുരുഷന്‍"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "സ്ത്രീ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "ക്രിയാപദം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "നാമപദം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "പേരു്"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "നാമവിശേഷണം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "ക്രിയാവിശേഷണം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "സര്‍‌വ്വനാമം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "വാക്യം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "അക്കം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "സംയോഗം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "ഉപസര്‍ഗ്ഗം"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "ചോദ്യം"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "ഇതുവരെ അഭ്യാസം ചെയ്തിട്ടില്ല"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "നില 1"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "നില 2"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "നില 3"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "നില 4"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "നില 5"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "നില 6"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "നില 7"
+
+#~ msgid "Untitled"
+#~ msgstr "തലക്കെട്ടില്ലാത്ത"
+
+#~ msgid "Vocabulary"
+#~ msgstr "പദാവലി"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "വരി %1, നിര %2-ല്‍ പാഴ്സ് പിശകു്:\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "ഫയല്‍ തുറക്കുന്നതില്‍ പിശകു്"
+
+#~ msgid "file must be opened first"
+#~ msgstr "ഫയല്‍ ആദ്യം തുറക്കണം"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "ഇതൊരു കെ ഡി ഇ പദാവലി രേഖയല്ല."
+
+#~ msgid "Default Lesson"
+#~ msgstr "സഹജമായ പാഠം"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "പാഠം %1"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "യഥാര്‍ത്ഥ ഭാഷയുടെ ഡേറ്റാ ലഭ്യമല്ല"
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "ഇതൊരു പൌക്കര്‍ രേഖയല്ല"
+
+#~ msgid "Lesson %1"
+#~ msgstr "പാഠം %1"
+
+#~ msgid "Error while reading file"
+#~ msgstr "ഫയല്‍ ലഭ്യമാക്കുന്നതില്‍ പിശകു്"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "ഇതൊരു എക്സ് ഡി എക്സ് എഫ് രേഖയല്ല"
+
+#~ msgid "Glossary"
+#~ msgstr "ഗ്ലോസ്സറി"
+
+#~ msgid "&Search:"
+#~ msgstr "&തെരയുക:"
+
+#~ msgid "References"
+#~ msgstr "സൂചനകള്‍"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "'%1'-ലേക്കു് പോകുക"
+
+#, fuzzy
+#~ msgid "Transition Elements"
+#~ msgstr "തര്‍ജ്ജമ %1"
+
+#~ msgid "Dummy"
+#~ msgstr "ഡമ്മി"
+
+#~ msgid "Hydrogen"
+#~ msgstr "ഹൈഡ്രജന്‍"
+
+#~ msgid "Helium"
+#~ msgstr "ഹീലിയം"
+
+#~ msgid "Lithium"
+#~ msgstr "ലിഥിയം"
+
+#~ msgid "Beryllium"
+#~ msgstr "ബെറിലിയം"
+
+#~ msgid "Boron"
+#~ msgstr "ബോറോണ്‍"
+
+#~ msgid "Carbon"
+#~ msgstr "കാര്‍ബണ്‍"
+
+#~ msgid "Nitrogen"
+#~ msgstr "നൈട്രജന്‍"
+
+#~ msgid "Oxygen"
+#~ msgstr "ഓക്സിജന്‍"
+
+#~ msgid "Fluorine"
+#~ msgstr "ഫ്ലൂറിന്‍"
+
+#~ msgid "Neon"
+#~ msgstr "നിയോണ്‍"
+
+#~ msgid "Sodium"
+#~ msgstr "സോഡിയം"
+
+#~ msgid "Magnesium"
+#~ msgstr "മഗ്നീഷ്യം"
+
+#~ msgid "Aluminium"
+#~ msgstr "അലൂമീനിയം"
+
+#~ msgid "Silicon"
+#~ msgstr "സിലിക്കണ്‍"
+
+#~ msgid "Phosphorus"
+#~ msgstr "ഫോസ്ഫറസ്"
+
+#~ msgid "Sulfur"
+#~ msgstr "സള്‍ഫര്‍"
+
+#~ msgid "Chlorine"
+#~ msgstr "ക്ലോറിന്‍"
+
+#~ msgid "Argon"
+#~ msgstr "ആര്‍ഗണ്‍"
+
+#~ msgid "Potassium"
+#~ msgstr "പൊട്ടാസിയം"
+
+#~ msgid "Calcium"
+#~ msgstr "കാല്‍ശ്യം"
+
+#~ msgid "Scandium"
+#~ msgstr "സ്കാന്‍ഡിയം"
+
+#~ msgid "Titanium"
+#~ msgstr "ടൈറ്റാനിയം"
+
+#~ msgid "Vanadium"
+#~ msgstr "വനാഡിയം"
+
+#~ msgid "Chromium"
+#~ msgstr "ക്രോമിയം"
+
+#~ msgid "Manganese"
+#~ msgstr "മാന്‍ഗനീസ്"
+
+#~ msgid "Iron"
+#~ msgstr "ഇരുമ്പ്"
+
+#~ msgid "Cobalt"
+#~ msgstr "കോബാള്‍ട്ട്"
+
+#~ msgid "Nickel"
+#~ msgstr "നിക്കല്‍"
+
+#~ msgid "Copper"
+#~ msgstr "ചെമ്പ്"
+
+#~ msgid "Zinc"
+#~ msgstr "സിംക്"
+
+#~ msgid "Gallium"
+#~ msgstr "ഗാലിയം"
+
+#~ msgid "Germanium"
+#~ msgstr "ജര്‍മേനിയം"
+
+#~ msgid "Arsenic"
+#~ msgstr "ആര്‍സെനിക്"
+
+#~ msgid "Selenium"
+#~ msgstr "സെലേനിയം"
+
+#~ msgid "Bromine"
+#~ msgstr "ബ്രോമിന്‍"
+
+#~ msgid "Krypton"
+#~ msgstr "ക്രിപ്റ്റണ്‍"
+
+#~ msgid "Rubidium"
+#~ msgstr "റുബീഡിയം"
+
+#~ msgid "Strontium"
+#~ msgstr "സ്ട്രോണ്‍ടിയം"
+
+#~ msgid "Yttrium"
+#~ msgstr "യിട്രിയം"
+
+#~ msgid "Zirconium"
+#~ msgstr "സിര്‍ക്കോണിയം"
+
+#~ msgid "Niobium"
+#~ msgstr "നിയോബിയം"
+
+#~ msgid "Molybdenum"
+#~ msgstr "മൊളിബ്ഡെനം"
+
+#~ msgid "Technetium"
+#~ msgstr "ടെക്നേഷ്യം"
+
+#~ msgid "Ruthenium"
+#~ msgstr "റൂഥേനിയം"
+
+#~ msgid "Rhodium"
+#~ msgstr "റോഡിയം"
+
+#~ msgid "Palladium"
+#~ msgstr "പലാഡിയം"
+
+#~ msgid "Silver"
+#~ msgstr "വെള്ളി"
+
+#~ msgid "Cadmium"
+#~ msgstr "കാഡ്മിയം"
+
+#~ msgid "Indium"
+#~ msgstr "ഇന്‍ഡിയം"
+
+#~ msgid "Tin"
+#~ msgstr "ടിന്‍"
+
+#~ msgid "Antimony"
+#~ msgstr "ആന്റിമണി"
+
+#~ msgid "Tellurium"
+#~ msgstr "ടെല്ലേറിയം"
+
+#~ msgid "Iodine"
+#~ msgstr "അയൊഡിന്‍"
+
+#~ msgid "Xenon"
+#~ msgstr "ക്സിനണ്‍"
+
+#~ msgid "Caesium"
+#~ msgstr "കേഷ്യം"
+
+#~ msgid "Barium"
+#~ msgstr "ബാറിയം"
+
+#~ msgid "Lanthanum"
+#~ msgstr "ലാന്താനം"
+
+#~ msgid "Cerium"
+#~ msgstr "സിറിയം"
+
+#~ msgid "Praseodymium"
+#~ msgstr "പ്രാസോഡിമിയം"
+
+#~ msgid "Neodymium"
+#~ msgstr "നിയോഡിമിയം"
+
+#~ msgid "Promethium"
+#~ msgstr "പ്രോമീഥിയം"
+
+#~ msgid "Samarium"
+#~ msgstr "സാമാറിയം"
+
+#~ msgid "Europium"
+#~ msgstr "യൂറോപിയം"
+
+#~ msgid "Gadolinium"
+#~ msgstr "ഗഡോലിനിയം"
+
+#~ msgid "Terbium"
+#~ msgstr "ടെര്‍ബിയം"
+
+#~ msgid "Dysprosium"
+#~ msgstr "ഡിസ്പ്രോസിയം"
+
+#~ msgid "Holmium"
+#~ msgstr "ഹോള്‍മിയം"
+
+#~ msgid "Erbium"
+#~ msgstr "എര്‍ബിയം"
+
+#~ msgid "Thulium"
+#~ msgstr "ഥൂലിയം"
+
+#~ msgid "Ytterbium"
+#~ msgstr "യിട്ടര്‍ബിയം"
+
+#~ msgid "Lutetium"
+#~ msgstr "ലുടേടിയം"
+
+#~ msgid "Hafnium"
+#~ msgstr "ഹാഫ്നിയം"
+
+#~ msgid "Tantalum"
+#~ msgstr "ടാന്‍ടലം"
+
+#~ msgid "Tungsten"
+#~ msgstr "ടങ്സ്റ്റന്‍"
+
+#~ msgid "Rhenium"
+#~ msgstr "റീനിയം"
+
+#~ msgid "Osmium"
+#~ msgstr "ഓസ്മിയം"
+
+#~ msgid "Iridium"
+#~ msgstr "ഇറിഡിയം"
+
+#~ msgid "Platinum"
+#~ msgstr "പ്ലാറ്റിനം"
+
+#~ msgid "Gold"
+#~ msgstr "സ്വര്‍ണ്ണം"
+
+#~ msgid "Mercury"
+#~ msgstr "മെര്‍കുറി"
+
+#~ msgid "Thallium"
+#~ msgstr "ഥാലിയം"
+
+#~ msgid "Lead"
+#~ msgstr "ലെഡ്"
+
+#~ msgid "Bismuth"
+#~ msgstr "ബിസ്മത്"
+
+#~ msgid "Polonium"
+#~ msgstr "പോളോണിയം"
+
+#~ msgid "Astatine"
+#~ msgstr "അസ്റ്റാറ്റിന്‍"
+
+#~ msgid "Radon"
+#~ msgstr "റാഡണ്‍"
+
+#~ msgid "Francium"
+#~ msgstr "ഫ്രാന്‍സിയം"
+
+#~ msgid "Radium"
+#~ msgstr "റേഡിയം"
+
+#~ msgid "Actinium"
+#~ msgstr "ആക്ടീനിയം"
+
+#~ msgid "Thorium"
+#~ msgstr "ഥോറിയം"
+
+#~ msgid "Protactinium"
+#~ msgstr "പ്രാക്ടീനിയം"
+
+#~ msgid "Uranium"
+#~ msgstr "യുറേനിയം"
+
+#~ msgid "Neptunium"
+#~ msgstr "നെപ്ടൂണിയം"
+
+#~ msgid "Plutonium"
+#~ msgstr "പ്ലൂട്ടോണിയം"
+
+#~ msgid "Americium"
+#~ msgstr "അമേരിഷ്യം"
+
+#~ msgid "Curium"
+#~ msgstr "ക്യൂറിയം"
+
+#~ msgid "Berkelium"
+#~ msgstr "ബെര്‍ക്കെലിയം"
+
+#~ msgid "Californium"
+#~ msgstr "കാലിഫോര്‍ണിയം"
+
+#~ msgid "Einsteinium"
+#~ msgstr "എയിന്‍സ്റ്റേനിയന്‍"
+
+#~ msgid "Fermium"
+#~ msgstr "ഫെര്‍മിയം"
+
+#~ msgid "Mendelevium"
+#~ msgstr "മെന്‍ഡേലേവ്യം"
+
+#~ msgid "Nobelium"
+#~ msgstr "നോബീലിയം"
+
+#~ msgid "Lawrencium"
+#~ msgstr "ലോറെന്‍ഷ്യം"
+
+#~ msgid "Rutherfordium"
+#~ msgstr "റൂഥര്‍ഫോര്‍ഡിയം"
+
+#~ msgid "Dubnium"
+#~ msgstr "ഡുബ്നിയം"
+
+#~ msgid "Seaborgium"
+#~ msgstr "സീബോര്‍ഗിയം"
+
+#~ msgid "Bohrium"
+#~ msgstr "ബോറിയം"
+
+#~ msgid "Hassium"
+#~ msgstr "ഹാസിയം"
+
+#~ msgid "Meitnerium"
+#~ msgstr "മിറ്റ്നേറിയം"
+
+#~ msgid "Darmstadtium"
+#~ msgstr "ഡാമസ്റ്റാഡ്ടിയം"
+
+#~ msgid "Roentgenium"
+#~ msgstr "റോയെന്റ്ജീനിയം"
+
+#, fuzzy
+#~ msgid "Copernicium"
+#~ msgstr "സിറിയം"
+
+#~ msgid "Ununtrium"
+#~ msgstr "ഉന്‍ഉന്‍ട്രിയം"
+
+#~ msgid "Ununquadium"
+#~ msgstr "ഉന്‍ഉന്‍ക്വാഡിയം"
+
+#~ msgid "Ununpentium"
+#~ msgstr "ഉന്‍ഉന്‍പെന്റിയം"
+
+#~ msgid "Ununhexium"
+#~ msgstr "ഉന്‍ഉന്‍ഹെക്സിയം"
+
+#~ msgid "Ununseptium"
+#~ msgstr "ഉന്‍ഉന്‍സെപ്റ്റിയം"
+
+#~ msgid "Ununoctium"
+#~ msgstr "ഉന്‍ഉന്‍ഒക്ടിയം"
+
+#, fuzzy
+#~ msgid "Greek 'hydro' and 'gennao' for 'forms water'"
+#~ msgstr "വിദേശിയ്ക്കു് ഗ്രീക്കില്‍ 'ക്സെനസ്'"
+
+#~ msgid "The Greek word for the sun was 'helios'"
+#~ msgstr "സൂര്യന്റെ ഗ്രീക്ക് നാമം 'ഹീലിയോസ്'"
+
+#~ msgid "Greek 'lithos' means 'stone'"
+#~ msgstr "'കല്ലിനു്' ഗ്രീക്കില്‍ 'ലിഥോസ്' എന്നു് പറയുന്നു"
+
+#~ msgid "Greek 'beryllos' for 'light-green stone'"
+#~ msgstr "'ഇളം പച്ച കല്ലിനു്' ഗ്രീക്കില്‍ 'ബെറില്ലോസ്' എന്നു് പറയുന്നു"
+
+#~ msgid "Latin 'carboneum' for carbon"
+#~ msgstr "കാര്‍ബണിനു് ലാറ്റിനില്‍ 'കാര്‍ബോണിയം' എന്നു് പറയുന്നു"
+
+#, fuzzy
+#~ msgid "Latin 'nitrogenium' ('forms saltpeter')"
+#~ msgstr "വെള്ളിയ്ക്കു് ലാറ്റിനില്‍ 'അര്‍ജെന്റം' "
+
+#, fuzzy
+#~ msgid "Latin 'oxygenium' (forms acids)"
+#~ msgstr "വെള്ളിയ്ക്കു് ലാറ്റിനില്‍ 'അര്‍ജെന്റം' "
+
+#~ msgid "Greek 'neo'. meaning 'new'"
+#~ msgstr "'പുതിയതു്' എന്നതിനു് ഗ്രീക്കില്‍ 'നിയോ' എന്നു് പറയുന്നു"
+
+#~ msgid "Arabic 'natrun' for 'soda'"
+#~ msgstr "'സോഡാ'യ്ക്കു് അറബിക്കില്‍ 'നാട്രുണ്‍' എന്നു് പറയുന്നു"
+
+#, fuzzy
+#~ msgid "Named after the city of Magnesia"
+#~ msgstr "എര്‍ണികോ ഫെര്‍മി എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Latin 'alumen'"
+#~ msgstr "ലാറ്റിനില്‍ 'അല്യൂമെന്‍'"
+
+#~ msgid "Latin 'silex'"
+#~ msgstr "ലാറ്റിനില്‍ 'സിലെക്സ്'"
+
+#, fuzzy
+#~ msgid "Greek 'phosphoros' for 'carries light'"
+#~ msgstr "വിദേശിയ്ക്കു് ഗ്രീക്കില്‍ 'ക്സെനസ്'"
+
+#~ msgid "In sanskrit 'sweb' means 'to sleep'"
+#~ msgstr "സംസ്കൃതത്തില്‍ 'സ്വെബ്' എന്നതിനര്‍ത്ഥം 'ഉറങ്ങുക'"
+
+#, fuzzy
+#~ msgid "Greek 'chloros' for 'yellow-green'"
+#~ msgstr "'ഇളം പച്ച കല്ലിനു്' ഗ്രീക്കില്‍ 'ബെറില്ലോസ്' എന്നു് പറയുന്നു"
+
+#~ msgid "Greek 'aergon' for 'inactive'"
+#~ msgstr "'നിര്‍ജീവം' എന്നതിനു് ഗ്രീക്കില്‍ 'എയിര്‍ഗണ്‍'"
+
+#~ msgid "Arabic 'al qaliy' for potash"
+#~ msgstr "പൊട്ടാഷിനു് അറബിക്കില്‍ 'അല്‍ ഖാലിയ്'"
+
+#~ msgid "Latin 'calx' for 'lime'"
+#~ msgstr "'നാരങ്ങ' ലാറ്റിനില്‍ 'കാള്‍ക്സ്'"
+
+#~ msgid "Named because it was found in Scandinavia"
+#~ msgstr "സ്കാന്‍ഡിനേവിയയില്‍ കണ്ടുപിടിച്ചതിനാല്‍ പേരു് അങ്ങനെയിട്ടിരിക്കുന്നു"
+
+#~ msgid "'Vanadis' is another name for the Nordic goddess Freyja"
+#~ msgstr "നോര്‍ഡിക് ദേവി ഫ്രെയിജായുടെ മറ്റൊരു പേരു് 'വനാഡിസ്' എന്നാണു്"
+
+#~ msgid "Greek 'chroma' means 'color'"
+#~ msgstr "'നിറം' എന്നതിനു് ഗ്രീക്കില്‍ 'ക്രോമാ'"
+
+#~ msgid "Latin 'ferrum'"
+#~ msgstr "ലാറ്റിനില്‍ 'ഫെറം'"
+
+#, fuzzy
+#~ msgid "Greek 'cuprum' for Cypres"
+#~ msgstr "'ഭാരം' എന്നതിനു് ഗ്രീക്കില്‍ 'ബാരിസ്' എന്നു് പറയുന്നു"
+
+#~ msgid "'Gallia' is an old name for France"
+#~ msgstr "ഫ്രാന്‍സിന്റെ പഴയ പേരാണു് 'ഗല്ലിയാ'"
+
+#, fuzzy
+#~ msgid "Latin 'germania' is an old name for Germany"
+#~ msgstr "ഫ്രാന്‍സിന്റെ പഴയ പേരാണു് 'ഗല്ലിയാ'"
+
+#, fuzzy
+#~ msgid "Greek 'arsenikos' for 'male' or 'bold'"
+#~ msgstr "'ചന്ദ്രനു്' ഗ്രീക്കില്‍ 'സെലെനാ'"
+
+#~ msgid "Greek 'selena' for 'moon'"
+#~ msgstr "'ചന്ദ്രനു്' ഗ്രീക്കില്‍ 'സെലെനാ'"
+
+#, fuzzy
+#~ msgid "Greek 'bromos' for 'smells badly'"
+#~ msgstr "'ഭാരം' എന്നതിനു് ഗ്രീക്കില്‍ 'ബാരിസ്' എന്നു് പറയുന്നു"
+
+#, fuzzy
+#~ msgid "Greek 'kryptos' for 'hidden'"
+#~ msgstr "'ഭാരം' എന്നതിനു് ഗ്രീക്കില്‍ 'ബാരിസ്' എന്നു് പറയുന്നു"
+
+#~ msgid "Latin 'rubidus' for 'dark red'"
+#~ msgstr "'കടും ചുവപ്പിനു്' ലാറ്റിനില്‍ 'റൂബിഡസ്'"
+
+#, fuzzy
+#~ msgid "Named after the mineral Strontianit"
+#~ msgstr "ആല്‍ബേര്‍ട്ട് എയിന്‍സ്റ്റീന്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after the mineral zircon"
+#~ msgstr "നീല്‍സ് ബോര്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Greek 'technetos' for artificial"
+#~ msgstr "വിദേശിയ്ക്കു് ഗ്രീക്കില്‍ 'ക്സെനസ്'"
+
+#~ msgid "Ruthenia is the old name of Russia"
+#~ msgstr "റഷ്യയുടെ പഴയ പേരാണു് റുഥേന്യാ."
+
+#, fuzzy
+#~ msgid "Greek 'rhodeos' means 'red like a rose'"
+#~ msgstr "'കല്ലിനു്' ഗ്രീക്കില്‍ 'ലിഥോസ്' എന്നു് പറയുന്നു"
+
+#, fuzzy
+#~ msgid "Named after the asteroid Pallas"
+#~ msgstr "നീല്‍സ് ബോര്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Latin 'argentum' for silver"
+#~ msgstr "വെള്ളിയ്ക്കു് ലാറ്റിനില്‍ 'അര്‍ജെന്റം' "
+
+#~ msgid "Greek 'kadmia' ('Galmei' = Zinc carbonate)"
+#~ msgstr "ഗ്രീക്കില്‍ 'കാഡ്മിയാ' ('ഗാല്‍മേയി' = സിന്‍ക് കാര്‍ബോണേറ്റ്)"
+
+#~ msgid "Latin 'stannum' for tin"
+#~ msgstr "ടിനിനു് ലാറ്റിനില്‍ 'സ്റ്റാനം' എന്നു് പറയുന്നു"
+
+#, fuzzy
+#~ msgid "Greek 'ioeides' for 'violet'."
+#~ msgstr "'വയലറ്റിനു്' ഗ്രീക്കില്‍ 'അയോഡിസ്'"
+
+#~ msgid "Greek 'xenos' for 'foreigner'"
+#~ msgstr "വിദേശിയ്ക്കു് ഗ്രീക്കില്‍ 'ക്സെനസ്'"
+
+#, fuzzy
+#~ msgid "Latin 'caesius' for 'heaven blue'."
+#~ msgstr "'നാരങ്ങ' ലാറ്റിനില്‍ 'കാള്‍ക്സ്'"
+
+#~ msgid "Greek 'barys' for 'heavy'"
+#~ msgstr "'ഭാരം' എന്നതിനു് ഗ്രീക്കില്‍ 'ബാരിസ്' എന്നു് പറയുന്നു"
+
+#, fuzzy
+#~ msgid "Named after the planetoid Ceres"
+#~ msgstr "മേരീ ക്യൂറിയുടെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Greek 'prasinos didymos' for 'green twin'"
+#~ msgstr "'ഇളം പച്ച കല്ലിനു്' ഗ്രീക്കില്‍ 'ബെറില്ലോസ്' എന്നു് പറയുന്നു"
+
+#, fuzzy
+#~ msgid "Greek 'neos didymos' for 'new twin'"
+#~ msgstr "'വയലറ്റിനു്' ഗ്രീക്കില്‍ 'അയോഡിസ്'"
+
+#, fuzzy
+#~ msgid "Named after the mineral Samarskit"
+#~ msgstr "നീല്‍സ് ബോര്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after Europe"
+#~ msgstr "മേരീ ക്യൂറിയുടെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after the Finnish chemist Johan Gadolin"
+#~ msgstr "നീല്‍സ് ബോര്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after the Swedish town of Ytterby"
+#~ msgstr "എര്‍ണികോ ഫെര്‍മി എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after the old name of Scandinavia, 'Thule'."
+#~ msgstr "സ്കാന്‍ഡിനേവിയയില്‍ കണ്ടുപിടിച്ചതിനാല്‍ പേരു് അങ്ങനെയിട്ടിരിക്കുന്നു"
+
+#, fuzzy
+#~ msgid ""
+#~ "Like Terbium and Gadolinium, this is named after the Swedish town of "
+#~ "Ytterby."
+#~ msgstr "എര്‍ണികോ ഫെര്‍മി എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after the Roman name 'Lutetia' for Paris"
+#~ msgstr "ഏര്‍ണെസ്റ്റ് റൂഥര്‍ഫോര്‍ഡ് എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after the German river Rhine (latin 'Rhenium')."
+#~ msgstr "ഏര്‍ണെസ്റ്റ് റൂഥര്‍ഫോര്‍ഡ് എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Greek 'iris' for 'rainbow'"
+#~ msgstr "'മഴവില്ലിനു്' ഗ്രീക്കില്‍ 'ഐറിസ്'"
+
+#, fuzzy
+#~ msgid "Graeco-Latin 'hydrargyrum' for 'liquid silver'"
+#~ msgstr "വെള്ളിയ്ക്കു് ലാറ്റിനില്‍ 'അര്‍ജെന്റം' "
+
+#, fuzzy
+#~ msgid "Greek 'tallos' for 'young twig'"
+#~ msgstr "'നിര്‍ജീവം' എന്നതിനു് ഗ്രീക്കില്‍ 'എയിര്‍ഗണ്‍'"
+
+#~ msgid "Latin 'plumbum' for Lead"
+#~ msgstr "ലെഡിനു് ലാറ്റിനില്‍ 'പ്ലംബം'"
+
+#, fuzzy
+#~ msgid "Named after Poland to honor Marie Curie"
+#~ msgstr "മേരീ ക്യൂറിയുടെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Greek 'astator' for 'changing'"
+#~ msgstr "'ഭാരം' എന്നതിനു് ഗ്രീക്കില്‍ 'ബാരിസ്' എന്നു് പറയുന്നു"
+
+#, fuzzy
+#~ msgid "Named after the German god of thunder: Thor"
+#~ msgstr "ഏര്‍ണെസ്റ്റ് റൂഥര്‍ഫോര്‍ഡ് എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after the planet Neptune."
+#~ msgstr "ലിസ് മെയിറ്റ്നര്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after the planet Pluto."
+#~ msgstr "നീല്‍സ് ബോര്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after America."
+#~ msgstr "മേരീ ക്യൂറിയുടെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Named after Marie Curie."
+#~ msgstr "മേരീ ക്യൂറിയുടെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after the US-State of California."
+#~ msgstr "എര്‍ണികോ ഫെര്‍മി എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Named after the scientist Albert Einstein."
+#~ msgstr "ആല്‍ബേര്‍ട്ട് എയിന്‍സ്റ്റീന്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Named after the scientist Enrico Fermi."
+#~ msgstr "എര്‍ണികോ ഫെര്‍മി എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Named after the scientist D.I. Mendeleev."
+#~ msgstr "ഡി. ഐ. മെന്‍ഡലീവ് എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Named after the scientist Alfred Nobel."
+#~ msgstr "ആല്‍ഫ്രെഡ് നോബല്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Named after the scientist Ernest Orlando Lawrence."
+#~ msgstr "ഏര്‍ണെസ്റ്റ് ഒര്‍ലാന്‍ഡോ ലോറന്‍സ് എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Named after the scientist Ernest Rutherford"
+#~ msgstr "ഏര്‍ണെസ്റ്റ് റൂഥര്‍ഫോര്‍ഡ് എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#, fuzzy
+#~ msgid "Named after the science-town Dubna in Russia"
+#~ msgstr "ആല്‍ബേര്‍ട്ട് എയിന്‍സ്റ്റീന്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Named after the scientist G. Theodore Seaborg."
+#~ msgstr "ജി. ഥിയോഡോര്‍ സീബര്‍ഗ് എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Named after the scientist Niels Bohr."
+#~ msgstr "നീല്‍സ് ബോര്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Named after the scientist Lise Meitner."
+#~ msgstr "ലിസ് മെയിറ്റ്നര്‍ എന്ന ശാസ്ത്രജ്ഞന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgid "Named after Wilhelm Conrad Röntgen."
+#~ msgstr "വില്‍ഹെം കോണ്‍റാഡ് റോണ്‍ട്ജനിന്റെ ഓര്‍മ്മയ്ക്കായിട്ടിരിക്കുന്ന പേരു്."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "അനി പീറ്റര്‍"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "apeter@redhat.com"
+
+#~ msgid "Ununbium"
+#~ msgstr "ഉന്‍ഉന്‍ബിയം"
+
+#~ msgid "no translations found"
+#~ msgstr "തര്‍ജ്ജമകള്‍ ലഭ്യമല്ല"

@@ -1,0 +1,570 @@
+# translation of libkdeedu.po to Khmer
+# Auk Piseth <piseth_dv@khmeros.info>, 2006, 2007.
+# Eng Vannak <evannak@khmeros.info>, 2006, 2008.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2007, 2008, 2009.
+# Sok Sophea <sophea@khmeros.info>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2012-07-16 17:06+0700\n"
+"Last-Translator: Sok Sophea <sophea@khmeros.info>\n"
+"Language-Team: Khmer <>\n"
+"Language: km\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: WordForge 0.8 RC1\n"
+"X-Language: km-KH\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "ចំណងជើង ៖"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "អ្នក​និពន្ធ ៖"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "មេរៀន​ឯកសារ"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "ប្រភេទ​ពាក្យ"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr "ប្រអប់ Leitner"
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, fuzzy, kde-format
+#| msgid "Cannot write to file %1"
+msgid "Cannot lock file %1"
+msgstr "មិនអាច​សរសេរ​ឯកសារ %1 បានទេ"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>មិនអាច​បើក​ឯកសារ<br /><b>%1</b> បានទេ</qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, fuzzy, kde-format
+#| msgid "Cannot write to file %1"
+msgid "Cannot open tempfile %1"
+msgstr "មិនអាច​សរសេរ​ឯកសារ %1 បានទេ"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, fuzzy, kde-format
+#| msgid "Cannot write to file %1"
+msgid "Cannot download %1: %2"
+msgstr "មិនអាច​សរសេរ​ឯកសារ %1 បានទេ"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"មិនអាច​បើក​ ឬ​អាន​ឯកសារ \"%1\" ដោយ​ត្រឹមត្រុវ​បានទេ\n"
+"(កំហុស ៖ %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "មិនអាច​សរសេរ​ឯកសារ %1 បានទេ"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "ដើម​"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "ការ​បកប្រែ %1"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "​ឯកសារ​វាក្យស័ព្ទ KDE"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "ឯកសារ KWordQuiz"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "មេរៀន Pauker"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "Vokabeltrainer"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "ទ្រង់ទ្រាយ​ផ្លាស់ប្ដូរ​វចនានុក្រម XML"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr "តម្លៃ​ដែលបំបែក​ដោយ​សញ្ញា​ក្បៀស (CSV)"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "ឯកសារ​ដែល​គាំទ្រ​ទាំងអស់"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "រកមិនឃើញ​កំហុស​ទេ ។"
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "XML មិនត្រឹមត្រូវ​នៅ​ក្នុង​ឯកសារ ។"
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "មិនស្គាល់​ប្រភេទ​ឯកសារ ។"
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "ឯកសារ គឺ​មិនអាច​សរសេរ​បានទេ ។"
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr "បរាជ័យ​ក្នុង​ការ​សរសេរ​ឯកសារ ។"
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "ឯកសារ គឺ​មិនអាច​អានបាន​ទេ ។"
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr "បរាជ័យ​ក្នុងការ​អាន​ឯកសារ ។"
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "មិនមាន​ឯកសារទេ ។"
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, fuzzy, kde-format
+#| msgid "The file does not exist."
+msgid "The file is locked by another process."
+msgstr "មិនមាន​ឯកសារទេ ។"
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "មិន​ស្គាល់​កំហុស ។"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "កិរិយាសព្ទ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "នាម"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "ឈ្មោះ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "អត្ថបទ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "គុណនាម"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "គុណកិរិយា"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "សព្វនាម"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "ឃ្លា"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "លេខ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "ឈ្នាប់"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "ធ្នាក់"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "សំណួរ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "ចំនួន​រាប់"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "ចំនួន​លំដាប់"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "កំណត់"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "មិន​កំណត់"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr "ទៀងទាត់"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr "មិនទៀងទាត់"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "កម្មសិទ្ធិ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr "ផ្ទាល់​ខ្លួន"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "ប្រុស"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "ស្រី"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr "ឥតភេទ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "បច្ចុប្បន្នកាល​ធម្មតា"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "បច្ចុប្បន្នកាល​កំពុង​បន្ត"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "បច្ចុប្បន្នកាល​សម្បូរ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "អតីតកាល​ធម្មតា"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "អតីតកាល​កំពុង​បន្ត"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "កិរយាស័ព្ទ​ខ្ទង់ទី​ពីរ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "អនាគតកាល"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "កិរិយាស័ព្ទ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "នាម"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "ឈ្មោះ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "អត្ថបទ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "គុណនាម"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "គុណកិរិយា"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "សព្វនាម"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "ឃ្លា"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "លេខ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "ឈ្នាប់"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "ធ្នាក់"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "សំណួរ"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "មិនទាន់​បាន​អនុវត្ត​នៅឡើយទេ"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "កម្រិត ១"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "កម្រិត ២"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "កម្រិត ៣"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "កម្រិត ៤"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "កម្រិត ៥​"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "កម្រិត ៦​"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "កម្រិត ៧​"
+
+#~ msgid "Untitled"
+#~ msgstr "គ្មាន​ចំណងជើង"
+
+#~ msgid "Vocabulary"
+#~ msgstr "​ឯកសារ​វាក្យសព្ទ"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "កំហុស​ញែក​នៅ​បន្ទាត់​ទី %1 ជួរឈរ​ទី %2 ៖\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "កំហុស​ក្នុង​ការ​បើក​ឯកសារ"
+
+#~ msgid "file must be opened first"
+#~ msgstr "ឯកសារ​ត្រូវ​តែ​បើក​មុនគេ"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "នេះ​មិនមែន​ជា​ឯកសារ​វាក្យស័ព្ទ​របស់ KDE ទេ ។"
+
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "ធាតុ​កំណត់​អត្តសញ្ញា​បាត់​ពី​ស្លាក​កំណត់​អត្តសញ្ញាណ"
+
+#~ msgid "Default Lesson"
+#~ msgstr "មេរៀន​លំនាំដើម"
+
+#~ msgid "identifier missing id"
+#~ msgstr "កម្មវិធី​កំណត់​អត្តសញ្ញាណ​បាត់​លេខ​សម្គាល់"
+
+#~ msgid "entry missing id"
+#~ msgstr "ធាតុ​បាត់​លេខ​សម្គាល់"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "មេរៀន %1"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "ទិន្នន័យ​សម្រាប់​ការ​បាត់​ភាសា​ដើម"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "និយមន័យ​មិន​ច្បាស់​នៃ​កូដ​ភាសា"
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "នេះ​មិនមែន​ជា​ឯកសារ Pauker ទេ"
+
+#~ msgid "Lesson %1"
+#~ msgstr "មេរៀន %1"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "វា​មិនមែន​ជា​ឯកសារ (K)WordQuiz ទេ"
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr "អាចបើក​តែ​ឯកសារ​ដែល​បង្កើត​នៅ​ក្នុង WordQuiz កំណែ 5.x ឬ​ថ្មី​ជាង​នេះ​ប៉ុណ្ណោះ"
+
+#~ msgid "Error while reading file"
+#~ msgstr "មាន​កំហុស​នៅពេល​អាន​ឯកសារ"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "នេះ​មិនមែន​ជា​ឯកសារ XDXF ទេ"
+
+#~ msgid "Glossary"
+#~ msgstr "សទ្ទានុក្រម"
+
+#~ msgid "&Search:"
+#~ msgstr "ស្វែងរក ៖"
+
+#~ msgid "References"
+#~ msgstr "សេចក្ដី​យោង"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "ទៅកាន់ '%1'"

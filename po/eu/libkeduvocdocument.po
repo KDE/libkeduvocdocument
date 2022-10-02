@@ -1,0 +1,1395 @@
+# Translation for libkeduvocdocument.po to Euskara/Basque (eu).
+# Copyright (C) 2005-2021, This file is coyright:
+# This file is distributed under the same license as the libkeduvocdocument package.
+# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+#
+# Translators:
+# Ion Gaztañaga <igaztanaga@gmail.com>, 2005.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2009, 2021.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkeduvocdocument\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2021-08-06 13:31+0200\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 21.04.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "Izenburua:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "Egilea:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "Dokumentuaren ikasgaia"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "Hitz motak"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr "Leitner koadroa"
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, kde-format
+msgid "Cannot lock file %1"
+msgstr "Ezin du %1 fitxategia giltzatu"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>Ezin da fitxategi hau ireki:<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, kde-format
+msgid "Cannot open tempfile %1"
+msgstr "Ezin du %1 aldi baterako fitxategia ireki"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, kde-format
+msgid "Cannot download %1: %2"
+msgstr "Ezin du %1 zama-jaitsi: %2"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"Ezin izan da \"%1\" ireki edo ongi irakurri\n"
+"(itzulitako errorea: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "Ezin da %1 fitxategian idatzi"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "Jatorrizkoa"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "%1 itzulpena"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "KDEren hiztegiaren dokumentua"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "KWordQuiz dokumentua"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "Pauker ikasgaia"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "Vokabeltrainer"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "XML hiztegiak trukatzeko formatua"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr "Komaz bereiztutako balioak (CSV)"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "Onartutako dokumentu guztiak"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "Ez da errorerik aurkitu."
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "Baliogabeko XML dokumentuan."
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "Fitxategi mota ezezaguna."
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "Fitxategia ez da idazkorra."
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr "Huts egin du fitxategian idaztean."
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "Fitxategia ez da irakurkorra."
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr "Huts egin du fitxategia irakurtzean."
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "Fitxategia ez da existitzen."
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr "Fitxategia beste prozesu batek giltzatu du."
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr "Ezin du giltzatzeko fitxategia sortu."
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "Errore ezezaguna."
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "Aditza"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "Izena"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "Izena"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "Artikulua"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "Adjektiboa"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "Adberbioa"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Izenordaina"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Esaldia"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "Zenbatzailea"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Juntagailua"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "Preposizioa"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "Galdera"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "Ordinala"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "Kardinala"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "Mugatua"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "Mugagabea"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr "Erregularra"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr "Irregularra"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "Edutezkoa"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr "Pertsonala"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "Gizonezkoa"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "Emakumezkoa"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr "Neutrala"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "Burutu bakuna"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "Orainaldi iraunkorra"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "Oraingo burutua"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "Lehenaldi bakuna"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "Lehenaldi iraunkorra"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "Lehenaldiko partizipioa"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "Geroaldia"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "Aditza"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "Izena"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "Izena"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "Artikulua"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "Adjektiboa"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "Adberbioa"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Izenordaina"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Sintagma"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "Zenbatzailea"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Juntagailua"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "Preposizioa"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "Galdera"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "Oraindik hasiberria"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "1. maila"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "2. maila"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "3. maila"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "4. maila"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "5. maila"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "6. maila"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "7. maila"
+
+#~ msgid "Untitled"
+#~ msgstr "Izengabea"
+
+#~ msgid "Vocabulary"
+#~ msgstr "Hiztegia"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "Analisiaren errorea %1 lerroan, %2 zutabean:\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "Errorea fitxategia irekitzean"
+
+#~ msgid "file must be opened first"
+#~ msgstr "fitxategia zabaldu egin behar da aurrena"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "Hau ez da KDEren hiztegiaren dokumentu bat."
+
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "etiketa identifikatzaileen elementu identifikatzialea falta da"
+
+#~ msgid "Default Lesson"
+#~ msgstr "Ikasgai lehenetsia"
+
+#~ msgid "identifier missing id"
+#~ msgstr "identifikatzaileak id falta du"
+
+#~ msgid "entry missing id"
+#~ msgstr "sarrerak id falta du"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "%1 ikasgaia"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "Jatorrizko hizkuntzaren datuak falta dira"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "Hizkuntza kodearen zalantzazko definizioa"
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "Hau ez da Pauker dokumentu bat"
+
+#~ msgid "Lesson %1"
+#~ msgstr "%1. ikasgaia"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "Ez dirudi (K)WordQuiz fitxategia denik"
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr ""
+#~ "WordQuiz 5.x edo berriagoekin sortutako fitxategiak soilik ireki daitezke"
+
+#~ msgid "Error while reading file"
+#~ msgstr "Errorea fitxategia irakurtzean"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "Hau ez da XDXF dokumentua"
+
+#~ msgid "Glossary"
+#~ msgstr "Glosategia"
+
+#~ msgid "&Search:"
+#~ msgstr "&Bilatu:"
+
+#~ msgid "References"
+#~ msgstr "Erreferentziak"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "Joan '%1'-era"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "The name of the second, third ... language/column of vocabulary, if we "
+#~| "have to guess it."
+#~| msgid "Translation %1"
+#~ msgid "Transition Elements"
+#~ msgstr "%1 itzulpena"
+
+#~ msgid "Dummy"
+#~ msgstr "Probakoa"
+
+#~ msgid "Hydrogen"
+#~ msgstr "Hidrogeno"
+
+#~ msgid "Helium"
+#~ msgstr "Helio"
+
+#~ msgid "Lithium"
+#~ msgstr "Litio"
+
+#~ msgid "Beryllium"
+#~ msgstr "Berilio"
+
+#~ msgid "Boron"
+#~ msgstr "Boro"
+
+#~ msgid "Carbon"
+#~ msgstr "Karbono"
+
+#~ msgid "Nitrogen"
+#~ msgstr "Nitrogeno"
+
+#~ msgid "Oxygen"
+#~ msgstr "Oxigeno"
+
+#~ msgid "Fluorine"
+#~ msgstr "Fluor"
+
+#~ msgid "Neon"
+#~ msgstr "Neon"
+
+#~ msgid "Sodium"
+#~ msgstr "Sodio"
+
+#~ msgid "Magnesium"
+#~ msgstr "Magnesio"
+
+#~ msgid "Aluminium"
+#~ msgstr "Aluminio"
+
+#~ msgid "Silicon"
+#~ msgstr "Silizio"
+
+#~ msgid "Phosphorus"
+#~ msgstr "Fosforo"
+
+#~ msgid "Sulfur"
+#~ msgstr "Sufre"
+
+#~ msgid "Chlorine"
+#~ msgstr "Kloro"
+
+#~ msgid "Argon"
+#~ msgstr "Argon"
+
+#~ msgid "Potassium"
+#~ msgstr "Potasio"
+
+#~ msgid "Calcium"
+#~ msgstr "Kaltzio"
+
+#~ msgid "Scandium"
+#~ msgstr "Scandium"
+
+#~ msgid "Titanium"
+#~ msgstr "Titanio"
+
+#~ msgid "Vanadium"
+#~ msgstr "Banadio"
+
+#~ msgid "Chromium"
+#~ msgstr "Kromo"
+
+#~ msgid "Manganese"
+#~ msgstr "Manganeso"
+
+#~ msgid "Iron"
+#~ msgstr "Burdina"
+
+#~ msgid "Cobalt"
+#~ msgstr "kobalto"
+
+#~ msgid "Nickel"
+#~ msgstr "Nikel"
+
+#~ msgid "Copper"
+#~ msgstr "Kobre"
+
+#~ msgid "Zinc"
+#~ msgstr "Zink"
+
+#~ msgid "Gallium"
+#~ msgstr "Galio"
+
+#~ msgid "Germanium"
+#~ msgstr "Germanio"
+
+#~ msgid "Arsenic"
+#~ msgstr "Arseniko"
+
+#~ msgid "Selenium"
+#~ msgstr "Selenio"
+
+#~ msgid "Bromine"
+#~ msgstr "Bromo"
+
+#~ msgid "Krypton"
+#~ msgstr "Kripton"
+
+#~ msgid "Rubidium"
+#~ msgstr "Rubidio"
+
+#~ msgid "Strontium"
+#~ msgstr "Estrontzio"
+
+#~ msgid "Yttrium"
+#~ msgstr "Itrio"
+
+#~ msgid "Zirconium"
+#~ msgstr "Zirkonio"
+
+#~ msgid "Niobium"
+#~ msgstr "Niobidio"
+
+#~ msgid "Molybdenum"
+#~ msgstr "Molibdeno"
+
+#~ msgid "Technetium"
+#~ msgstr "Teknezio"
+
+#~ msgid "Ruthenium"
+#~ msgstr "Rutenio"
+
+#~ msgid "Rhodium"
+#~ msgstr "Rodio"
+
+#~ msgid "Palladium"
+#~ msgstr "Paladio"
+
+#~ msgid "Silver"
+#~ msgstr "Zilar"
+
+#~ msgid "Cadmium"
+#~ msgstr "Kadmio"
+
+#~ msgid "Indium"
+#~ msgstr "Indio"
+
+#~ msgid "Tin"
+#~ msgstr "Eztainu"
+
+#~ msgid "Antimony"
+#~ msgstr "Antimonio"
+
+#~ msgid "Tellurium"
+#~ msgstr "Telurio"
+
+#~ msgid "Iodine"
+#~ msgstr "Iodo"
+
+#~ msgid "Xenon"
+#~ msgstr "Xenon"
+
+#~ msgid "Caesium"
+#~ msgstr "Zesio"
+
+#~ msgid "Barium"
+#~ msgstr "Bario"
+
+#~ msgid "Lanthanum"
+#~ msgstr "Lantano"
+
+#~ msgid "Cerium"
+#~ msgstr "Zerio"
+
+#~ msgid "Praseodymium"
+#~ msgstr "Praseodimio"
+
+#~ msgid "Neodymium"
+#~ msgstr "Neodimio"
+
+#~ msgid "Promethium"
+#~ msgstr "Prometio"
+
+#~ msgid "Samarium"
+#~ msgstr "Samario"
+
+#~ msgid "Europium"
+#~ msgstr "Europio"
+
+#~ msgid "Gadolinium"
+#~ msgstr "Gadolinio"
+
+#~ msgid "Terbium"
+#~ msgstr "Terbio"
+
+#~ msgid "Dysprosium"
+#~ msgstr "Disprosio"
+
+#~ msgid "Holmium"
+#~ msgstr "Holmio"
+
+#~ msgid "Erbium"
+#~ msgstr "Erbio"
+
+#~ msgid "Thulium"
+#~ msgstr "Tulio"
+
+#~ msgid "Ytterbium"
+#~ msgstr "Iterbio"
+
+#~ msgid "Lutetium"
+#~ msgstr "Lutezio"
+
+#~ msgid "Hafnium"
+#~ msgstr "Hafnio"
+
+#~ msgid "Tantalum"
+#~ msgstr "Tantalo"
+
+#~ msgid "Tungsten"
+#~ msgstr "Wolfram"
+
+#~ msgid "Rhenium"
+#~ msgstr "Renio"
+
+#~ msgid "Osmium"
+#~ msgstr "Osmio"
+
+#~ msgid "Iridium"
+#~ msgstr "Iridio"
+
+#~ msgid "Platinum"
+#~ msgstr "Platino"
+
+#~ msgid "Gold"
+#~ msgstr "Urre"
+
+#~ msgid "Mercury"
+#~ msgstr "Merkurio"
+
+#~ msgid "Thallium"
+#~ msgstr "Talio"
+
+#~ msgid "Lead"
+#~ msgstr "Berun"
+
+#~ msgid "Bismuth"
+#~ msgstr "Bismuto"
+
+#~ msgid "Polonium"
+#~ msgstr "Polonio"
+
+#~ msgid "Astatine"
+#~ msgstr "Astato"
+
+#~ msgid "Radon"
+#~ msgstr "Radon"
+
+#~ msgid "Francium"
+#~ msgstr "Frantzio"
+
+#~ msgid "Radium"
+#~ msgstr "Radio"
+
+#~ msgid "Actinium"
+#~ msgstr "Aktinio"
+
+#~ msgid "Thorium"
+#~ msgstr "Torio"
+
+#~ msgid "Protactinium"
+#~ msgstr "Protaktinio"
+
+#~ msgid "Uranium"
+#~ msgstr "Uranio"
+
+#~ msgid "Neptunium"
+#~ msgstr "Neptunio"
+
+#~ msgid "Plutonium"
+#~ msgstr "Plutonio"
+
+#~ msgid "Americium"
+#~ msgstr "Amerizio"
+
+#~ msgid "Curium"
+#~ msgstr "Kurio"
+
+#~ msgid "Berkelium"
+#~ msgstr "Berkelio"
+
+#~ msgid "Californium"
+#~ msgstr "Kalifornio"
+
+#~ msgid "Einsteinium"
+#~ msgstr "Einstenio"
+
+#~ msgid "Fermium"
+#~ msgstr "Fermio"
+
+#~ msgid "Mendelevium"
+#~ msgstr "Mendelevio"
+
+#~ msgid "Nobelium"
+#~ msgstr "Nobelio"
+
+#~ msgid "Lawrencium"
+#~ msgstr "Laurentzio"
+
+#~ msgid "Rutherfordium"
+#~ msgstr "Rutherfordio"
+
+#~ msgid "Dubnium"
+#~ msgstr "Dubnio"
+
+#~ msgid "Seaborgium"
+#~ msgstr "Seaborgio"
+
+#~ msgid "Bohrium"
+#~ msgstr "Bohrio"
+
+#~ msgid "Hassium"
+#~ msgstr "Hasio"
+
+#~ msgid "Meitnerium"
+#~ msgstr "Meitnerio"
+
+#~ msgid "Darmstadtium"
+#~ msgstr "Darmstadtio"
+
+#~ msgid "Roentgenium"
+#~ msgstr "Roentgenioa"
+
+#, fuzzy
+#~| msgid "Cerium"
+#~ msgid "Copernicium"
+#~ msgstr "Zerio"
+
+#~ msgid "Ununtrium"
+#~ msgstr "Ununtrioa"
+
+#~ msgid "Ununquadium"
+#~ msgstr "Ununkuadioa"
+
+#~ msgid "Ununpentium"
+#~ msgstr "Ununpentioa"
+
+#~ msgid "Ununhexium"
+#~ msgstr "Ununhexioa"
+
+#~ msgid "Ununseptium"
+#~ msgstr "Ununseptioa"
+
+#~ msgid "Ununoctium"
+#~ msgstr "Ununoktioa"
+
+#~ msgid "Greek 'hydro' and 'gennao' for 'forms water'"
+#~ msgstr "'hydro' eta 'gennao' grekoak 'uraren formentzako'"
+
+#~ msgid "The Greek word for the sun was 'helios'"
+#~ msgstr "Eguzkiaren hitz grekoa 'helios' zen"
+
+#~ msgid "Greek 'lithos' means 'stone'"
+#~ msgstr "'lithos' hitz grekoak 'harria' esanahi du"
+
+#~ msgid "Greek 'beryllos' for 'light-green stone'"
+#~ msgstr "'beryllos' hitz grekoak 'argi berdedun harria' esanahi du"
+
+#~ msgid ""
+#~ "Boron means 'Bor(ax) + (carb)on'. It is found in borax and behaves a lot "
+#~ "like carbon"
+#~ msgstr ""
+#~ "Boroa hitza arabierako 'buraq' eta persierako 'burah' hitzetatik dator. "
+#~ "Borax-en aurkit daiteke eta karbonoaren antzeko portaera du."
+
+#~ msgid "Latin 'carboneum' for carbon"
+#~ msgstr "Karbonoa latineko 'carboneum' hitzetik dator"
+
+#~ msgid "Latin 'nitrogenium' ('forms saltpeter')"
+#~ msgstr "Latineko 'nitrogenium' (horma-nitroa sortzen ditu)"
+
+#~ msgid "Latin 'oxygenium' (forms acids)"
+#~ msgstr "Latineko 'oxygenium' (azidoak sortzen ditu)"
+
+#~ msgid "Latin 'fluere' ('floats')"
+#~ msgstr "Latineko 'fluere' (flotatzen duela)"
+
+#~ msgid "Greek 'neo'. meaning 'new'"
+#~ msgstr "Grekoko 'neo' ('berria' esanahi du)"
+
+#~ msgid "Arabic 'natrun' for 'soda'"
+#~ msgstr "Arabierako 'natrun' (soda)"
+
+#~ msgid "Named after the city of Magnesia"
+#~ msgstr "Magnesia hiriaren izenetik eratorria"
+
+#~ msgid "Latin 'alumen'"
+#~ msgstr "Latineko 'alumen'"
+
+#~ msgid "Latin 'silex'"
+#~ msgstr "Latineko 'silex'"
+
+#~ msgid "Greek 'phosphoros' for 'carries light'"
+#~ msgstr "Grekoko 'phosphoros' ('argi eramalea' esanahi du)"
+
+#~ msgid "In sanskrit 'sweb' means 'to sleep'"
+#~ msgstr "Sanskritoko'sweb' ('lo egin' esanahi du)"
+
+#~ msgid "Greek 'chloros' for 'yellow-green'"
+#~ msgstr "Grekoko 'chloros' ('berde-horia' esanahi du)"
+
+#~ msgid "Greek 'aergon' for 'inactive'"
+#~ msgstr "Grekoko 'aergon' ('inaktibo' esanahi du)"
+
+#~ msgid "Arabic 'al qaliy' for potash"
+#~ msgstr "Arabierako 'al qaliy' (potasa)"
+
+#~ msgid "Latin 'calx' for 'lime'"
+#~ msgstr "LAtineko 'calx' (karea)"
+
+#~ msgid "Named because it was found in Scandinavia"
+#~ msgstr "Eskandinavian aurkitu zelako izendatua"
+
+#~ msgid "The Titans were giants in Greek mythology"
+#~ msgstr "Titanak (Greziako mitologiako erraldoiak)"
+
+#~ msgid "'Vanadis' is another name for the Nordic goddess Freyja"
+#~ msgstr "'Vanadis' europa iparraldeko Freyja jainkosaren beste izena da"
+
+#~ msgid "Greek 'chroma' means 'color'"
+#~ msgstr "Grekoko 'chroma' ('kolorea' adierazi nahi du)"
+
+#~ msgid ""
+#~ "It was discovered near a town named Magnesia in black earth. Thus, it was "
+#~ "named 'magnesia nigra', or for short, Manganese."
+#~ msgstr ""
+#~ "Lur beltzetako Magnesia izeneko hiritik gertu aurkitu zen. Horrela, "
+#~ "'magnesia nigra' izendatu zen, edo era laburrean, Manganesoa."
+
+#~ msgid "Latin 'ferrum'"
+#~ msgstr "Latineko 'ferrum'"
+
+#~ msgid "Named after the German word 'Kobold' for 'goblin'"
+#~ msgstr "Alemaneko 'Kobold' hitzetik dator ('iratxoa' esanahi du)"
+
+#~ msgid "'Nickel' was the name of a mountain goblin"
+#~ msgstr "Mendiko iratxo baten izena zen 'Nickel'"
+
+#~ msgid "Greek 'cuprum' for Cypres"
+#~ msgstr "Grekoko 'cuprum' (altzifrea)"
+
+#, fuzzy
+#~| msgid "German 'zinking' for 'rough'. because zinc ore is very rough"
+#~ msgid "German 'zinking' for 'rough', because zinc ore is very rough"
+#~ msgstr ""
+#~ "Alemaneko 'zinking' ('zakarra' esanahi du), zink-aren mea oso zakarra "
+#~ "delako"
+
+#~ msgid "'Gallia' is an old name for France"
+#~ msgstr "'Gallia' frantziaren izen zahar bat da"
+
+#~ msgid "Latin 'germania' is an old name for Germany"
+#~ msgstr "Latineko 'germania' (Alemaniaren izen zahar bat)"
+
+#~ msgid "Greek 'arsenikos' for 'male' or 'bold'"
+#~ msgstr "Grekoko 'arsenikos' ('gizonezkoa' edo 'ausarta')"
+
+#~ msgid "Greek 'selena' for 'moon'"
+#~ msgstr "Grekoko 'selena' ('ilargia')"
+
+#~ msgid "Greek 'bromos' for 'smells badly'"
+#~ msgstr "Grekoko 'bromos' ('usain txarrekoa')"
+
+#~ msgid "Greek 'kryptos' for 'hidden'"
+#~ msgstr "Grekoko 'kryptos' ('eztutatuta')"
+
+#~ msgid "Latin 'rubidus' for 'dark red'"
+#~ msgstr "Latineko 'rubidus' ('gorri iluna')"
+
+#~ msgid "Named after the mineral Strontianit"
+#~ msgstr "Estrontzionita mineraletik dator izena"
+
+#~ msgid ""
+#~ "Named after the small town of Ytterby near Stockholm in Sweden. Terbium. "
+#~ "Ytterbium and Gadolinium are also named after this town."
+#~ msgstr ""
+#~ "Suediako Stockholm-etik gertu dagoen Ytterby hiriaren izenetik dator. "
+#~ "Terbioa. Iterbioa eta gadolinioa ere hiri honen izenetik datozte."
+
+#~ msgid "Named after the mineral zircon"
+#~ msgstr "Zircon mineralaren izenetik dator"
+
+#~ msgid "Named after Niobe, the daughter of the Greek god Tantalus."
+#~ msgstr "Niobe izenetik dator, greziako Tantalus jainkoaren alaba."
+
+#~ msgid ""
+#~ "This name has Greek roots. It means 'like Platinum' - it was difficult to "
+#~ "distinguish Molybdenum from Platinum."
+#~ msgstr ""
+#~ "Bere izenaren erroa grekotik dator. 'Platinoaren antzekoa' esanahi du, "
+#~ "eta oso zaila da molibdenoa platinotik desberdintzea."
+
+#~ msgid "Greek 'technetos' for artificial"
+#~ msgstr "Grekoko 'technetos' ('artifiziala')"
+
+#~ msgid "Ruthenia is the old name of Russia"
+#~ msgstr "Errusiaren izen zahar bat da ruthenia"
+
+#~ msgid "Greek 'rhodeos' means 'red like a rose'"
+#~ msgstr "Grekoko 'rhodeos' ('arrosa bezain gorria' esanahi du)"
+
+#~ msgid "Named after the asteroid Pallas"
+#~ msgstr "Pallas asteroidearen izenetik dator"
+
+#~ msgid "Latin 'argentum' for silver"
+#~ msgstr "Latineko 'argentum' ('zilarra')"
+
+#~ msgid "Greek 'kadmia' ('Galmei' = Zinc carbonate)"
+#~ msgstr "Grekoko 'kadmia' ('galmei' = zink karbonatoa)"
+
+#~ msgid "Named after 'Indigo' because of its blue spectrum"
+#~ msgstr "Indigo izenetik dator, duen espektro urdina dela eta"
+
+#~ msgid "Latin 'stannum' for tin"
+#~ msgstr "Latineko 'stannum' ('eztainua')"
+
+#~ msgid "Arabic 'anthos ammonos' for 'blossom of the god Ammon'"
+#~ msgstr "Arabierako 'anthos ammonos' (Ammon jainkoaren lorea)"
+
+#~ msgid "Latin 'tellus' or 'telluris' for 'Planet Earth'"
+#~ msgstr "Latineko 'tellus' edo 'telluris' ('lurra planeta')"
+
+#~ msgid "Greek 'ioeides' for 'violet'."
+#~ msgstr "Grekoko 'ioeides' ('morea')."
+
+#~ msgid "Greek 'xenos' for 'foreigner'"
+#~ msgstr "Grekoko 'xenos' ('atzerritarra')"
+
+#~ msgid "Latin 'caesius' for 'heaven blue'."
+#~ msgstr "Latineko 'caesius' ('zeru urdina'.)"
+
+#~ msgid "Greek 'barys' for 'heavy'"
+#~ msgstr "Grekoko 'barys' ('astuna')"
+
+#~ msgid ""
+#~ "Greek 'lanthanein' for 'hidden'. The Lanthanoids are also called the "
+#~ "'rare earth' elements."
+#~ msgstr ""
+#~ "Grekoko 'anthanein' ('ezkutatuta'). Lantanidoei ere 'lur arraroa' "
+#~ "elementuak ere deitzen zaie."
+
+#~ msgid "Named after the planetoid Ceres"
+#~ msgstr "Ceres planeta ipotxaren izenetik dator"
+
+#~ msgid "Greek 'prasinos didymos' for 'green twin'"
+#~ msgstr "Grekoko 'prasinos didymos' ('biki berdea')"
+
+#~ msgid "Greek 'neos didymos' for 'new twin'"
+#~ msgstr "Grekoko 'neos didymos' ('biki berria')"
+
+#~ msgid ""
+#~ "Named after the Greek Prometheus. Prometheus stole the fire from the gods "
+#~ "and gave it to mankind."
+#~ msgstr ""
+#~ "Greziako Prometheus izenetik dator. Prometeok jainkoei sua lapurtu zien "
+#~ "gizakiei emateko."
+
+#~ msgid "Named after the mineral Samarskit"
+#~ msgstr "Samarskita mineralaren izenetik dator"
+
+#~ msgid "Named after Europe"
+#~ msgstr "Europaren izenetik dator"
+
+#~ msgid "Named after the Finnish chemist Johan Gadolin"
+#~ msgstr "Finlandiako Johan Gadolin kimikoaren izenetik dator"
+
+#~ msgid "Named after the Swedish town of Ytterby"
+#~ msgstr "Suediako Ytterby hiriaren izenetik dator"
+
+#~ msgid "Greek 'dysprositor' for 'difficult to reach'"
+#~ msgstr "Grekoko 'dysprositor' ('iristeko zailtasuna')"
+
+#~ msgid "Latin 'holmia' for the old name of Stockholm"
+#~ msgstr "Latineko 'holmia' (Stockholm-ren izen zaharra)"
+
+#~ msgid ""
+#~ "Named ofter the Swedish town of Ytterby. Terbium and Ytterbium are also "
+#~ "named after this town."
+#~ msgstr ""
+#~ "Suediako Ytterby hiriaren izenetik dator. Terbioa eta iterbioa ere hiri "
+#~ "horren izenetik datoz."
+
+#~ msgid "Named after the old name of Scandinavia, 'Thule'."
+#~ msgstr "Eskandinaviaren izen zaharretik dator, 'Thule'."
+
+#~ msgid ""
+#~ "Like Terbium and Gadolinium, this is named after the Swedish town of "
+#~ "Ytterby."
+#~ msgstr ""
+#~ "Terbioa eta gadolinioa bezala, hau ere Suediako Ytterby hiriaren ienetik "
+#~ "dator."
+
+#~ msgid "Named after the Roman name 'Lutetia' for Paris"
+#~ msgstr "Erromatarrek Paris hiriari 'Lutetia' deitzetik dator"
+
+#~ msgid "'Hafnia' is the old name of Kopenhagen (Denmark)"
+#~ msgstr "Danimarkako Kopenhage hiriaren izen zaharra da 'Hafnia'"
+
+#~ msgid "Named after the Greek myth of Tantalos"
+#~ msgstr "Greziako Tantalos mitologiaren izenetik dator"
+
+#, fuzzy
+#~| msgid ""
+#~| "'Tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~| "symbol 'W') was Wolfram, named after a mineral."
+#~ msgid ""
+#~ "'tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~ "symbol 'W') was Wolfram, named after a mineral."
+#~ msgstr ""
+#~ "Suedieraz 'Tung sten'-ek 'harri astuna' esanahi du. Izen zaharra Wolfram "
+#~ "zen (eta ondorioz bere sinboloa W da), mineral baten izenetik etorriz."
+
+#, fuzzy
+#~| msgid "Named after the German river Rhine (Latin 'Rhenium'.)"
+#~ msgid "Named after the German river Rhine (latin 'Rhenium')."
+#~ msgstr "Alemaniako Rhin ibaiaren izenetik dator (latinez 'Rhenium')"
+
+#~ msgid "Greek for 'smell'. Its oxides smell strongly like radishes."
+#~ msgstr ""
+#~ "Grekoaren 'usaina'. Bere oxidoek usain indartsua dariote errefauek bezala."
+
+#~ msgid "Greek 'iris' for 'rainbow'"
+#~ msgstr "Grekoko 'iris' ('ostadarra')"
+
+#~ msgid "Spanish 'platina' means 'small silver'"
+#~ msgstr "Gaztelerako 'platina' ('zilar txikia' esnahi du)"
+
+#, fuzzy
+#~| msgid "Latin 'aurum'.  Named after Aurora, the goddess of sunrise."
+#~ msgid "Latin 'aurum'. Named after Aurora, the goddess of sunrise"
+#~ msgstr "Latineko 'aurum'. Goizargiaren Aurora jainkosaren izenetik dator."
+
+#~ msgid "Graeco-Latin 'hydrargyrum' for 'liquid silver'"
+#~ msgstr "Greko-latineko 'hydrargyrum' ('zilarrezko likidoa')"
+
+#~ msgid "Greek 'tallos' for 'young twig'"
+#~ msgstr "Grekoko 'tallos' ('adaska gaztea')"
+
+#~ msgid "Latin 'plumbum' for Lead"
+#~ msgstr "Latineko 'plumbum' ('beruna')"
+
+#~ msgid "The old name of Bismuth is 'Wismut', which stood for 'white mass'."
+#~ msgstr "Bismutoaren izen zaharra 'Wismut' da, eta 'masa zuria' esanahi du."
+
+#~ msgid "Named after Poland to honor Marie Curie"
+#~ msgstr "Polonia izenetik dator, Marie Curie-ren homenean"
+
+#~ msgid "Greek 'astator' for 'changing'"
+#~ msgstr "Grekoko 'astator' ('aldaketa')"
+
+#~ msgid ""
+#~ "Named after Radium. It ends with 'on' to make it clear that it is a noble "
+#~ "gas."
+#~ msgstr ""
+#~ "Radioaren izenetik dator. 'on' atzizkiarekin amaitzen da gas noblea dela "
+#~ "azpimarratzeko."
+
+#~ msgid "Named after France to honor Marguerite Perey"
+#~ msgstr "Frantzia izenetik dator, Marguerite Perey-ren ohorean"
+
+#~ msgid "Latin 'radius' for 'beam', as it is radioactive"
+#~ msgstr "Latineko 'radius' ('izpia'), bere erradioaktibitatea dela eta"
+
+#~ msgid "Greek 'aktis' for 'beam' - actinium is radioactive"
+#~ msgstr "Grekoko 'aktis' ('izpia') aktinioa erradioaktiboa da"
+
+#~ msgid "Named after the German god of thunder: Thor"
+#~ msgstr "Alemaniako Thor trumoiaren jainkoaren izenetik dator"
+
+#~ msgid ""
+#~ "Greek 'protos' for 'ancester'. Protactinium is before Actinium in the "
+#~ "periodic table."
+#~ msgstr ""
+#~ "Grekoko 'protos' ('arbasoa'). Taula periodikoan protaktinioa aktinioa "
+#~ "baino aurrerago dago"
+
+#~ msgid "Greek 'ouranos' for 'heaven'. Named after the planet Uranus."
+#~ msgstr "Grekoko 'ouranos' ('zerua'). Urano planetaren izenetik dator."
+
+#~ msgid "Named after the planet Neptune."
+#~ msgstr "Neptuno planetaren izenetik dator."
+
+#~ msgid "Named after the planet Pluto."
+#~ msgstr "Pluton planetaren izenetik dator."
+
+#~ msgid "Named after America."
+#~ msgstr "Amerika izenetik dator."
+
+#~ msgid "Named after Marie Curie."
+#~ msgstr "Marie Curie-ren izenetik dator."
+
+#~ msgid "Named after the town Berkeley where it was discovered."
+#~ msgstr "Aurkikuntza gertatu zen Berkeley hiriaren izenetik dator."
+
+#~ msgid "Named after the US-State of California."
+#~ msgstr "AEBtako Kalifornia estatuaren izenetik dator."
+
+#~ msgid "Named after the scientist Albert Einstein."
+#~ msgstr "Albert Einstein zientzilariaren izenetik dator."
+
+#~ msgid "Named after the scientist Enrico Fermi."
+#~ msgstr "Enrico Fermi zientzilariaren izenetik dator."
+
+#~ msgid "Named after the scientist D.I. Mendeleev."
+#~ msgstr "D.I. Mendeleev zientzilariaren izenetik dator."
+
+#~ msgid "Named after the scientist Alfred Nobel."
+#~ msgstr "Alfred Nobel zientzilariaren izenetik dator."
+
+#~ msgid "Named after the scientist Ernest Orlando Lawrence."
+#~ msgstr "Ernest Orlando Lawrence zientzilariaren izenetik dator."
+
+#~ msgid "Named after the scientist Ernest Rutherford"
+#~ msgstr "Ernest Rutherford zientzilariaren izenetik dator."
+
+#~ msgid "Named after the science-town Dubna in Russia"
+#~ msgstr "Errusiako Dubna zientzi-hiriaren ienetik dator."
+
+#~ msgid "Named after the scientist G. Theodore Seaborg."
+#~ msgstr "G. Theodore Seaborg zientzilariaren izenetik dator."
+
+#~ msgid "Named after the scientist Niels Bohr."
+#~ msgstr "Niels Bohr zientzilariaren izenetik dator."
+
+#~ msgid ""
+#~ "Latin 'hassia' for the German county Hessen. In Hessen a lot elements "
+#~ "have been discovered."
+#~ msgstr ""
+#~ "Latineko 'hassia' (Alemaniako Hessen konderria adierazteko). Hessen-en "
+#~ "hainbat elementu aurkitu ziren."
+
+#~ msgid "Named after the scientist Lise Meitner."
+#~ msgstr "Lise Meitner zientzilariaren izenetik dator."
+
+#~ msgid ""
+#~ "Named after the German city Darmstadt where many elements have been "
+#~ "discovered."
+#~ msgstr ""
+#~ "Alemaniako Darmstadt herriaren izenetik dator, hainbat elementu aurkitu "
+#~ "ziren lekua."
+
+#~ msgid "Named after Wilhelm Conrad Röntgen."
+#~ msgstr "Wilhelm Conrad Röntgen-en izenetik dator."
+
+#~ msgid ""
+#~ "Historically known as eka-mercury. Ununbium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Historikoki eka-mercury gisa da ezaguna. IUPAC-en aldi baterako elementu -"
+#~ "izen sistematikoa da Ununbioa."
+
+#~ msgid ""
+#~ "Historically known as eka-thallium. Ununtrium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Historikoki eka-thallium gisa da ezaguna. IUPAC-en aldi baterako elementu "
+#~ "-izen sistematikoa da Ununtrioa."
+
+#~ msgid ""
+#~ "Historically known as eka-lead. Ununquadium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Historikoki eka-lead gisa da ezaguna. IUPAC-en aldi baterako elementu -"
+#~ "izen sistematikoa da Ununkuadioa."
+
+#~ msgid ""
+#~ "Historically known as eka-bismuth. Ununpentium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Historikoki eka-bismuth gisa da ezaguna. IUPAC-en aldi baterako elementu -"
+#~ "izen sistematikoa da Ununpentioa."
+
+#~ msgid ""
+#~ "Historically known as eka-polonium. Ununhexium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Historikoki eka-polonium gisa da ezaguna. IUPAC-en aldi baterako elementu "
+#~ "-izen sistematikoa da Ununhexiuma."
+
+#~ msgid "Temporary symbol and name. Can also be referred to as eka-astatine."
+#~ msgstr ""
+#~ "Aldi baterako sinbolo eta izena. Eka-astatine gisa ere aipa daiteke."
+
+#~ msgid ""
+#~ "Historically known as eka-radon, eka-emanation before 1960. Ununoctium is "
+#~ "a temporary IUPAC systematic element name."
+#~ msgstr ""
+#~ "Historikoki eka-radon gisa da ezaguna (eka-emanation 1960 urterarte). "
+#~ "IUPAC-en aldi baterako elementu -izen sistematikoa da Ununoktioa."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Ion Gaztañaga, Iñigo Salvador Azurmendi"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "igaztanaga@gmail, xalba@euskalnet.net"
+
+#~ msgid "Ununbium"
+#~ msgstr "Ununbioa"
+
+#~ msgid "no translations found"
+#~ msgstr "ez dira itzulpenak aurkitu"

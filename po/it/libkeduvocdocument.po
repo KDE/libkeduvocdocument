@@ -1,0 +1,763 @@
+# translation of libkdeedu.po to Italian
+#
+# Pino Toscano <toscano.pino@tiscali.it>, 2005, 2006, 2007, 2008, 2009, 2010, 2014, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2016-07-24 09:43+0200\n"
+"Last-Translator: Pino Toscano <toscano.pino@tiscali.it>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "Titolo:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "Autore:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "Lezione del documento"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "Tipi di parola"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr "Mazzo di Leitner"
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, kde-format
+msgid "Cannot lock file %1"
+msgstr "Impossibile bloccare il file %1"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>Impossibile aprire il file<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, kde-format
+msgid "Cannot open tempfile %1"
+msgstr "Impossibile aprire il file temporaneo %1"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, kde-format
+msgid "Cannot download %1: %2"
+msgstr "Impossibile scaricare %1: %2"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"Non è possibile aprire o leggere \"%1\"\n"
+"(Errore segnalato: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "Impossibile scrivere il file %1"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "Originale"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "Traduzione %1"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "Documento di vocabolario KDE"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "Document KWordQuiz"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "Lezione Pauker"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "Vokabeltrainer"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "Formato di scambio dizionari XML (XDXF)"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr "Valori separati da virgola (CSV)"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "Tutti i documenti supportati"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "Nessun errore trovato."
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "XML non valido nel documento."
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "Tipo di file sconosciuto."
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "Non è possibile scrivere nel file."
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr "Scrittura del file non riuscita."
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "Il file non è leggibile."
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr "Il lettore file non è riuscito a leggere."
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "Il file non esiste."
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr "Il file è bloccato da un altro processo."
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr "Non è stato possibile creare il file di blocco."
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "Errore sconosciuto."
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "Verbo"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "Nome"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "Nome proprio"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "Articolo"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "Aggettivo"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "Avverbio"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Pronome"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Frase"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "Numerale"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Congiunzione"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "Preposizione"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "Domanda"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "Ordinale"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "Cardinale"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "Definito"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "Indefinito"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr "Regolare"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr "Irregolare"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "Possessivo"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr "Personale"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "Maschile"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "Femminile"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr "Neutro"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "Presente semplice"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "Presente progressivo"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "Passato prossimo"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "Passato semplice"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "Passato progressivo"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "Participio passato"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "Futuro"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "Verbo"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "Nome"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "Nome proprio"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "Articolo"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "Aggettivo"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "Avverbio"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Pronome"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Frase"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "Numerale"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Congiunzione"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "Preposizione"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "Domanda"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "Non ancora esercitato"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "Livello 1"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "Livello 2"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "Livello 3"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "Livello 4"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "Livello 5"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "Livello 6"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "Livello 7"
+
+#~ msgid "Untitled"
+#~ msgstr "Senza titolo"
+
+#~ msgid "Vocabulary"
+#~ msgstr "Vocabolario"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "Errore di analisi alla riga %1, colonna %2:\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "Errore durante l'apertura del file"
+
+#~ msgid "file must be opened first"
+#~ msgstr "il file deve essere prima aperto"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "Questo non è un documento di vocabolario KDE."
+
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "elementi «identifier» mancanti nel tag «identifiers»"
+
+#~ msgid "Default Lesson"
+#~ msgstr "Lezione predefinita"
+
+#~ msgid "identifier missing id"
+#~ msgstr "«id» mancante in «identifier»"
+
+#~ msgid "entry missing id"
+#~ msgstr "«id» mancante in «entry»"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "Lezione %1"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "Dati della lingua originale mancanti"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "Ambigua definizione di codice di lingua"
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "Questo non è un documento Pauker"
+
+#~ msgid "Lesson %1"
+#~ msgstr "Lezione %1"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "Questo non sembra essere un file di(K)WordQuiz"
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr ""
+#~ "Possono essere aperti file creati solo con WordQuiz 5.x o successivo"
+
+#~ msgid "Error while reading file"
+#~ msgstr "Errore durante la lettura del file"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "Questo non è un documento XDXF"
+
+#~ msgid "Glossary"
+#~ msgstr "Glossario"
+
+#~ msgid "&Search:"
+#~ msgstr "&Cerca:"
+
+#~ msgid "References"
+#~ msgstr "Riferimenti"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "Vai a «%1»"
+
+#~ msgid "no translations found"
+#~ msgstr "nessuna traduzione trovata"
+
+#~ msgid "User defined word type %1"
+#~ msgstr "Tipo di parola «%1» definito dall'utente"
+
+#~ msgid "each lesson must have a name"
+#~ msgstr "ogni lezione deve avere un nome"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "Americanism"
+#~ msgstr "Americanismo"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "abbreviation"
+#~ msgstr "abbreviazione"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "anatomy"
+#~ msgstr "anatomia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "astronomy"
+#~ msgstr "astronomia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "biology"
+#~ msgstr "biologia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "bad sense"
+#~ msgstr "senso negativo"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "contemptuously"
+#~ msgstr "sprezzante"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ecclesiastical"
+#~ msgstr "ecclesiastico"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "figuratively"
+#~ msgstr "figurato"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "geology"
+#~ msgstr "geologia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "historical"
+#~ msgstr "storico"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ichthyology"
+#~ msgstr "ittologia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "informal"
+#~ msgstr "informale"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ironic"
+#~ msgstr "ironico"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "irregular"
+#~ msgstr "irregolare"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "literary"
+#~ msgstr "letterario"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "metallurgy"
+#~ msgstr "metallurgia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "meteorology"
+#~ msgstr "meteorologia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "mineralogy"
+#~ msgstr "mineralogia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "motoring"
+#~ msgstr "motoristica"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "mountaineering"
+#~ msgstr "alpinismo"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "mythology"
+#~ msgstr "mitologia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "proper name"
+#~ msgstr "nome proprio"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "optics"
+#~ msgstr "ottica"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ornithology"
+#~ msgstr "ornitologia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "oneself"
+#~ msgstr "riflessivo"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "person"
+#~ msgstr "persona"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "parliamentary"
+#~ msgstr "parlamentare"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "pharmacy"
+#~ msgstr "farmacia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "philosophy"
+#~ msgstr "filosofia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "photography"
+#~ msgstr "fotografia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "physics"
+#~ msgstr "fisica"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "physiology"
+#~ msgstr "fisiologia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "plural"
+#~ msgstr "plurale"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "poetry"
+#~ msgstr "poesia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "politics"
+#~ msgstr "politica"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "provincialism"
+#~ msgstr "provincialismo"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "psychology"
+#~ msgstr "psicologia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "rhetoric"
+#~ msgstr "retorica"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "surveying"
+#~ msgstr "topografia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "telegraphy"
+#~ msgstr "telegrafia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "telephony"
+#~ msgstr "telefonia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "theater"
+#~ msgstr "teatro"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "typography"
+#~ msgstr "tipografia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "university"
+#~ msgstr "università"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "veterinary medicine"
+#~ msgstr "veterinaria"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "zoology"
+#~ msgstr "zoologia"
+
+#~ msgid "no lessons found in 'lessons' tag"
+#~ msgstr "nessuna lezione trovata nel tag «lessons»"

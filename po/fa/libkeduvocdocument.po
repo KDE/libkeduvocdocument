@@ -1,0 +1,1127 @@
+# translation of libkdeedu.po to Persian
+# MaryamSadat Razavi <razavi@itland.ir>, 2006.
+# Nazanin Kazemi <kazemi@itland.ir>, 2006, 2007.
+# Nasim Daniarzadeh <daniarzadeh@itland.ir>, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2007-09-06 13:35+0330\n"
+"Last-Translator: Nazanin Kazemi <kazemi@itland.ir>\n"
+"Language-Team: Persian <kde-i18n-fa@kde.org>\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, fuzzy, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "! عنوان:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, fuzzy, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "! نویسنده:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, fuzzy, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "درس Pauker"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, fuzzy, kde-format
+msgid "Cannot lock file %1"
+msgstr "<qt>نتوانست در پرونده <br /><b>%1</b> بنویسد</qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>نمی‌توان پرونده <br /><b>%1</b> را باز کرد</qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, fuzzy, kde-format
+msgid "Cannot open tempfile %1"
+msgstr "<qt>نتوانست در پرونده <br /><b>%1</b> بنویسد</qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, fuzzy, kde-format
+msgid "Cannot download %1: %2"
+msgstr "<qt>نتوانست در پرونده <br /><b>%1</b> بنویسد</qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"نتوانست »%1« را باز کند یا احتمالاً بخواند\n"
+")خطای گزارش‌شده: %2("
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, fuzzy, kde-format
+msgid "Cannot write to file %1"
+msgstr "<qt>نتوانست در پرونده <br /><b>%1</b> بنویسد</qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "اصلی"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "ترجمه %1"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "سند واژگان KDE"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "سند KWordQuiz"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "درس Pauker"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "قالب تبادل واژه‌نامه XML"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "همه اسناد پشتیبانی‌شده"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "The name of the first language/column of vocabulary, if we have to guess "
+#| "it."
+#| msgid "Original"
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "اصلی"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "The name of the first language/column of vocabulary, if we have to guess "
+#| "it."
+#| msgid "Original"
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "اصلی"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "حال ساده"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "حال استمراری"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "حال کامل"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "گذشته ساده"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "گذشته استمراری"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "گذشته مجهول"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "آینده"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, fuzzy, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "آوریل"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, fuzzy, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "اختصار"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:17
+#, fuzzy, kde-format
+msgid "Not Practiced Yet"
+msgstr "تاکنون پرس‌وجویی نشده "
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "سطح ۱"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "سطح ۲"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "سطح ۳"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "سطح ۴"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "سطح ۵"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "سطح ۶"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "سطح ۷"
+
+#~ msgid "Untitled"
+#~ msgstr "بدون عنوان"
+
+#, fuzzy
+#~ msgid "Vocabulary"
+#~ msgstr "سند واژگان KDE"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "خطای تجزیه در خط %1، ستون %2:\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "خطای باز کردن پرونده"
+
+#~ msgid "file must be opened first"
+#~ msgstr "ابتدا پرونده باید باز شود"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "این یک سند واژگان KDE نیست."
+
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "عناصر شناسه‌های مفقود از برچسب شناسه‌ها"
+
+#, fuzzy
+#~ msgid "Default Lesson"
+#~ msgstr "درس Pauker"
+
+#~ msgid "identifier missing id"
+#~ msgstr "شناسه فاقد id"
+
+#~ msgid "entry missing id"
+#~ msgstr "شناسه مفقود مدخل"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "فاقد داده برای زیان اصلی"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "تعریف مبهم کد زبان"
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "این یک سند Pauker نیست"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "به نظر نمی‌رسد یک پرونده (K)WordQuiz باشد"
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr "فقط پرونده‌های ایجادشده با WordQuiz 5.x یا بیشتر می‌توانند باز شوند"
+
+#~ msgid "Error while reading file"
+#~ msgstr "خطا هنگام خواندن پرونده"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "این یک سند XDXF نیست"
+
+#~ msgid "Glossary"
+#~ msgstr "واژه‌نامه"
+
+#~ msgid "&Search:"
+#~ msgstr "&جستجو:‌"
+
+#~ msgid "References"
+#~ msgstr "مراجع"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "برو به »%1«"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "The name of the second, third ... language/column of vocabulary, if we "
+#~| "have to guess it."
+#~| msgid "Translation %1"
+#~ msgid "Transition Elements"
+#~ msgstr "ترجمه %1"
+
+#, fuzzy
+#~ msgid "Chlorine"
+#~ msgstr "بستن"
+
+#, fuzzy
+#~ msgid "Mercury"
+#~ msgstr "فوریه"
+
+#~ msgid "no translations found"
+#~ msgstr "ترجمه‌ای یافت نشد"
+
+#, fuzzy
+#~| msgid "abbreviation"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "abbreviation"
+#~ msgstr "اختصار"
+
+#~ msgid "User defined word type %1"
+#~ msgstr "نوع واژه تعریف‌شده کاربر %1"
+
+#~ msgid "each lesson must have a name"
+#~ msgstr "هر درس باید نامی داشته باشد"
+
+#, fuzzy
+#~| msgid "Americanism"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "Americanism"
+#~ msgstr "انگلیسی امریکایی"
+
+#, fuzzy
+#~| msgid "anatomy"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "anatomy"
+#~ msgstr "کالبدشناسی"
+
+#, fuzzy
+#~| msgid "astronomy"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "astronomy"
+#~ msgstr "ستاره‌شناسی"
+
+#, fuzzy
+#~| msgid "biology"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "biology"
+#~ msgstr "زیست‌شناسی"
+
+#, fuzzy
+#~| msgid "geology"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "geology"
+#~ msgstr "زمین‌شناسی"
+
+#, fuzzy
+#~| msgid "historical"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "historical"
+#~ msgstr "تاریخی"
+
+#, fuzzy
+#~| msgid "ichthyology"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ichthyology"
+#~ msgstr "ماهی‌شناسی"
+
+#, fuzzy
+#~| msgid "February"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "literary"
+#~ msgstr "فوریه"
+
+#, fuzzy
+#~| msgid "geology"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "meteorology"
+#~ msgstr "زمین‌شناسی"
+
+#, fuzzy
+#~| msgid "ichthyology"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "mythology"
+#~ msgstr "ماهی‌شناسی"
+
+#, fuzzy
+#~| msgid "ichthyology"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ornithology"
+#~ msgstr "ماهی‌شناسی"
+
+#, fuzzy
+#~| msgid "biology"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "physiology"
+#~ msgstr "زیست‌شناسی"
+
+#, fuzzy
+#~| msgid "&Retry"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "poetry"
+#~ msgstr "&سعی مجدد‌"
+
+#, fuzzy
+#~| msgid "ichthyology"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "psychology"
+#~ msgstr "ماهی‌شناسی"
+
+#, fuzzy
+#~| msgid "historical"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "rhetoric"
+#~ msgstr "تاریخی"
+
+#, fuzzy
+#~| msgid "biology"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "zoology"
+#~ msgstr "زیست‌شناسی"
+
+#~ msgid "no lessons found in 'lessons' tag"
+#~ msgstr "درسی در برچسب »درسها« یافت نشد"
+
+#~ msgctxt "Monday"
+#~ msgid "Mon"
+#~ msgstr "دوشنبه"
+
+#~ msgctxt "Tuesday"
+#~ msgid "Tue"
+#~ msgstr "سه‌شنبه"
+
+#~ msgctxt "Wednesday"
+#~ msgid "Wed"
+#~ msgstr "چهارشنبه"
+
+#~ msgctxt "Thursday"
+#~ msgid "Thu"
+#~ msgstr "پنجشنبه"
+
+#~ msgctxt "Friday"
+#~ msgid "Fri"
+#~ msgstr "جمعه"
+
+#~ msgctxt "Saturday"
+#~ msgid "Sat"
+#~ msgstr "شنبه"
+
+#~ msgctxt "Sunday"
+#~ msgid "Sun"
+#~ msgstr "یکشنبه"
+
+#~ msgid "Monday"
+#~ msgstr "دوشنبه"
+
+#~ msgid "Tuesday"
+#~ msgstr "سه‌شنبه"
+
+#~ msgid "Wednesday"
+#~ msgstr "چهارشنبه"
+
+#~ msgid "Thursday"
+#~ msgstr "پنجشنبه"
+
+#~ msgid "Friday"
+#~ msgstr "جمعه"
+
+#~ msgid "Saturday"
+#~ msgstr "شنبه"
+
+#~ msgid "Sunday"
+#~ msgstr "یکشنبه"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jan"
+#~ msgstr "ژانویه"
+
+#~ msgctxt "Short month name"
+#~ msgid "Feb"
+#~ msgstr "فوریه"
+
+#~ msgctxt "Short month name"
+#~ msgid "Mar"
+#~ msgstr "مارس"
+
+#~ msgctxt "Short month name"
+#~ msgid "Apr"
+#~ msgstr "آوریل"
+
+#~ msgctxt "Short month name"
+#~ msgid "May"
+#~ msgstr "مه"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jun"
+#~ msgstr "ژوئن"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jul"
+#~ msgstr "ژوئیه"
+
+#~ msgctxt "Short month name"
+#~ msgid "Aug"
+#~ msgstr "اوت"
+
+#~ msgctxt "Short month name"
+#~ msgid "Sep"
+#~ msgstr "سپتامبر"
+
+#~ msgctxt "Short month name"
+#~ msgid "Oct"
+#~ msgstr "اکتبر"
+
+#~ msgctxt "Short month name"
+#~ msgid "Nov"
+#~ msgstr "نوامبر"
+
+#~ msgctxt "Short month name"
+#~ msgid "Dec"
+#~ msgstr "دسامبر"
+
+#~ msgctxt "Short day name"
+#~ msgid "Mon"
+#~ msgstr "دوشنبه"
+
+#~ msgctxt "Short day name"
+#~ msgid "Tue"
+#~ msgstr "سه‌شنبه"
+
+#~ msgctxt "Short day name"
+#~ msgid "Wed"
+#~ msgstr "چهارشنبه"
+
+#~ msgctxt "Short day name"
+#~ msgid "Thu"
+#~ msgstr "پنجشنبه"
+
+#~ msgctxt "Short day name"
+#~ msgid "Fri"
+#~ msgstr "جمعه"
+
+#~ msgctxt "Short day name"
+#~ msgid "Sat"
+#~ msgstr "شنبه"
+
+#~ msgctxt "Short day name"
+#~ msgid "Sun"
+#~ msgstr "یکشنبه"
+
+#~ msgctxt "Long month name"
+#~ msgid "January"
+#~ msgstr "ژانویه"
+
+#~ msgctxt "Long month name"
+#~ msgid "February"
+#~ msgstr "فوریه"
+
+#~ msgctxt "Long month name"
+#~ msgid "March"
+#~ msgstr "مارس"
+
+#~ msgctxt "Long month name"
+#~ msgid "April"
+#~ msgstr "آوریل"
+
+#~ msgctxt "Long month name"
+#~ msgid "May"
+#~ msgstr "مه"
+
+#~ msgctxt "Long month name"
+#~ msgid "June"
+#~ msgstr "ژوئن"
+
+#~ msgctxt "Long month name"
+#~ msgid "July"
+#~ msgstr "ژوئیه"
+
+#~ msgctxt "Long month name"
+#~ msgid "August"
+#~ msgstr "اوت"
+
+#~ msgctxt "Long month name"
+#~ msgid "September"
+#~ msgstr "سپتامبر"
+
+#~ msgctxt "Long month name"
+#~ msgid "October"
+#~ msgstr "اکتبر"
+
+#~ msgctxt "Long month name"
+#~ msgid "November"
+#~ msgstr "نوامبر"
+
+#~ msgctxt "Long month name"
+#~ msgid "December"
+#~ msgstr "دسامبر"
+
+#~ msgctxt "Long day name"
+#~ msgid "Monday"
+#~ msgstr "دوشنبه"
+
+#~ msgctxt "Long day name"
+#~ msgid "Tuesday"
+#~ msgstr "سه‌شنبه"
+
+#~ msgctxt "Long day name"
+#~ msgid "Wednesday"
+#~ msgstr "چهارشنبه"
+
+#~ msgctxt "Long day name"
+#~ msgid "Thursday"
+#~ msgstr "پنجشنبه"
+
+#~ msgctxt "Long day name"
+#~ msgid "Friday"
+#~ msgstr "جمعه"
+
+#~ msgctxt "Long day name"
+#~ msgid "Saturday"
+#~ msgstr "شنبه"
+
+#~ msgctxt "Long day name"
+#~ msgid "Sunday"
+#~ msgstr "یکشنبه"
+
+#~ msgctxt "January"
+#~ msgid "Jan"
+#~ msgstr "ژانویه"
+
+#~ msgctxt "February"
+#~ msgid "Feb"
+#~ msgstr "فوریه"
+
+#~ msgctxt "March"
+#~ msgid "Mar"
+#~ msgstr "مارس"
+
+#~ msgctxt "April"
+#~ msgid "Apr"
+#~ msgstr "آوریل"
+
+#~ msgctxt "May short"
+#~ msgid "May"
+#~ msgstr "مه"
+
+#~ msgctxt "June"
+#~ msgid "Jun"
+#~ msgstr "ژوئن"
+
+#~ msgctxt "July"
+#~ msgid "Jul"
+#~ msgstr "ژوئیه"
+
+#~ msgctxt "August"
+#~ msgid "Aug"
+#~ msgstr "اوت"
+
+#~ msgctxt "September"
+#~ msgid "Sep"
+#~ msgstr "سپتامبر"
+
+#~ msgctxt "October"
+#~ msgid "Oct"
+#~ msgstr "اکتبر"
+
+#~ msgctxt "November"
+#~ msgid "Nov"
+#~ msgstr "نوامبر"
+
+#~ msgctxt "December"
+#~ msgid "Dec"
+#~ msgstr "دسامبر"
+
+#~ msgid "January"
+#~ msgstr "ژانویه"
+
+#~ msgid "February"
+#~ msgstr "فوریه"
+
+#~ msgid "March"
+#~ msgstr "مارس"
+
+#~ msgctxt "May long"
+#~ msgid "May"
+#~ msgstr "مه"
+
+#~ msgid "June"
+#~ msgstr "ژوئن"
+
+#~ msgid "July"
+#~ msgstr "ژوئیه"
+
+#~ msgid "August"
+#~ msgstr "اوت"
+
+#~ msgid "September"
+#~ msgstr "سپتامبر"
+
+#~ msgid "October"
+#~ msgstr "اکتبر"
+
+#~ msgid "November"
+#~ msgstr "نوامبر"
+
+#~ msgid "December"
+#~ msgstr "دسامبر"
+
+#~ msgctxt "of January"
+#~ msgid "of Jan"
+#~ msgstr " ژانویه"
+
+#~ msgctxt "of February"
+#~ msgid "of Feb"
+#~ msgstr " فوریه"
+
+#~ msgctxt "of March"
+#~ msgid "of Mar"
+#~ msgstr " مارس"
+
+#~ msgctxt "of April"
+#~ msgid "of Apr"
+#~ msgstr " آوریل"
+
+#~ msgctxt "of May short"
+#~ msgid "of May"
+#~ msgstr " مه"
+
+#~ msgctxt "of June"
+#~ msgid "of Jun"
+#~ msgstr " ژوئن"
+
+#~ msgctxt "of July"
+#~ msgid "of Jul"
+#~ msgstr " ژوئیه"
+
+#~ msgctxt "of August"
+#~ msgid "of Aug"
+#~ msgstr " اوت"
+
+#~ msgctxt "of September"
+#~ msgid "of Sep"
+#~ msgstr " سپتامبر"
+
+#~ msgctxt "of October"
+#~ msgid "of Oct"
+#~ msgstr " اکتبر"
+
+#~ msgctxt "of November"
+#~ msgid "of Nov"
+#~ msgstr " نوامبر"
+
+#~ msgctxt "of December"
+#~ msgid "of Dec"
+#~ msgstr " دسامبر"
+
+#~ msgid "of January"
+#~ msgstr " ژانویه"
+
+#~ msgid "of February"
+#~ msgstr " فوریه"
+
+#~ msgid "of March"
+#~ msgstr " مارس"
+
+#~ msgid "of April"
+#~ msgstr " آوریل"
+
+#~ msgctxt "of May long"
+#~ msgid "of May"
+#~ msgstr " مه"
+
+#~ msgid "of June"
+#~ msgstr " ژوئن"
+
+#~ msgid "of July"
+#~ msgstr " ژوئیه"
+
+#~ msgid "of August"
+#~ msgstr " اوت"
+
+#~ msgid "of September"
+#~ msgstr " سپتامبر"
+
+#~ msgid "of October"
+#~ msgstr " اکتبر"
+
+#~ msgid "of November"
+#~ msgstr " نوامبر"
+
+#~ msgid "of December"
+#~ msgstr " دسامبر"
+
+#~ msgid "Week %1"
+#~ msgstr "هفته %1"
+
+#~ msgid "Next year"
+#~ msgstr "سال بعد"
+
+#~ msgid "Previous year"
+#~ msgstr "سال قبل"
+
+#~ msgid "Next month"
+#~ msgstr "ماه بعد"
+
+#~ msgid "Previous month"
+#~ msgstr "ماه قبل"
+
+#~ msgid "Select a week"
+#~ msgstr "برگزیدن یک هفته"
+
+#~ msgid "Select a month"
+#~ msgstr "برگزیدن یک ماه"
+
+#~ msgid "Select a year"
+#~ msgstr "برگزیدن یک سال"
+
+#~ msgid "Select the current day"
+#~ msgstr "برگزیدن روز جاری"
+
+#~ msgid "Close"
+#~ msgstr "بستن"
+
+#~ msgid "Text"
+#~ msgstr "متن"
+
+#~ msgid ""
+#~ "Could not save \"%1\"\n"
+#~ "Do you want to try again?"
+#~ msgstr ""
+#~ "نتوانست »%1« را ذخیره کند\n"
+#~ "می‌خواهید دوباره امتحان کنید؟"
+
+#~ msgid "Error Saving File"
+#~ msgstr "خطای ذخیره پرونده"
+
+#~ msgid "no entries found in 'entries' tag"
+#~ msgstr "مدخلی در برچسب »مدخلها« یافت نشد"
+
+#~ msgid "ambiguous definition of language code"
+#~ msgstr "تعریف مبهم کد زبان"
+
+#~ msgid "Front Side"
+#~ msgstr "سمت جلو"
+
+#~ msgid "Reverse Side"
+#~ msgstr "سمت معکوس"
+
+#~ msgctxt "@title:column one of the translation columns"
+#~ msgid "Translation"
+#~ msgstr "ترجمه"
+
+#~ msgid "April"
+#~ msgstr "آوریل"

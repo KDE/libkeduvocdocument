@@ -1,0 +1,1966 @@
+# translation of libkdeedu.po to Hindi
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Ravishankar Shrivastava <raviratlami@yahoo.com>, 2007.
+# Ravishankar Shrivastava <raviratlami@aol.in>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2009-02-24 22:24+0530\n"
+"Last-Translator: Ravishankar Shrivastava <raviratlami@aol.in>\n"
+"Language-Team: Hindi <kde-i18n-doc@lists.kde.org>\n"
+"Language: hne\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.2\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "सीर्सक:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "लेखकः"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "कागद सबक"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "सब्द किसिम"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr "लेटनर बाक्स"
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, fuzzy, kde-format
+#| msgid "Cannot write to file %1"
+msgid "Cannot lock file %1"
+msgstr "फाइल %1 मं लिख नइ सकिस"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>फाइल  खोले नइ जा सके<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, fuzzy, kde-format
+#| msgid "Cannot write to file %1"
+msgid "Cannot open tempfile %1"
+msgstr "फाइल %1 मं लिख नइ सकिस"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, fuzzy, kde-format
+#| msgid "Cannot write to file %1"
+msgid "Cannot download %1: %2"
+msgstr "फाइल %1 मं लिख नइ सकिस"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+" \"%1\" ल  खोलेया सही तरीके से पढ़ नइ सकिस\n"
+"(गलती रपट करिस: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "फाइल %1 मं लिख नइ सकिस"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "असली"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "अनुवाद %1"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "केडीई सब्दावली कागद"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "केवर्डक्विज कागद"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "पाकर सबक"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "वोकाबेलट्रेनर"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "एक्सएमएल सब्दकोस एक्सचेंज फार्मेट"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr "अल्पविराम से अलग करे मान (सीएसवी)"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "सब्बो समर्थित कागद"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "कोई गलती नइ मिलिस."
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "कागद मं अवैध एक्सएमएल."
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "अग्यात फाइल किसिम."
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "फाइल लिखे जइसन नइ हे."
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr "फाइल लेखक फेल."
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "फाइल पढ़े जइसन नइ हे."
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr "फाइल पाठक फेल."
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "फाइल मौजूद नइ हे."
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, fuzzy, kde-format
+#| msgid "The file does not exist."
+msgid "The file is locked by another process."
+msgstr "फाइल मौजूद नइ हे."
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "अग्यात गलती."
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "काम"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "संग्या"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "नाम"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "आलेख"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "काम विसेसन"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "कामिसेसन"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "सर्वनाम"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "वाक्यांस"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "अंक"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "कंजक्सन"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "पूर्वसर्ग"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "प्रस्न"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "ओर्डिनल"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "कार्डिनल"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "डेफिनिट"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "इंडेफिनिट"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr "नियमित"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr "अनियमित"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "पजेसिव"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr "निजी"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "पुरूस"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "स्त्री"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr "न्यूट्रल"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "सादा अभी हाल के"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "प्रजेंट प्रोग्रेसिव"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "प्रजेंट परफेक्ट"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "सिंपल पास्ट"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "पास्ट प्रोग्रेसिव"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "पास्ट पार्टिसिपल"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "भविस्य"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "काम"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "संग्या"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "नाम"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "आलेख"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "विसेसन"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "कामविसेसन"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "सर्वनाम"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "वाक्यांस"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "अंक"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "कंजक्सन"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "पूर्वसर्ग"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "प्रस्न"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "अभी तक अभ्यास नइ करे गे हे"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "स्तर 1"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "स्तर 2"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "स्तर 3"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "स्तर 4"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "स्तर ५"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "स्तर ६"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "स्तर ७"
+
+#~ msgid "Untitled"
+#~ msgstr "बिना सीर्सक"
+
+#~ msgid "Vocabulary"
+#~ msgstr "सब्दावली"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "लकीर %1 , खंभा %2 मं पारसिंग गलती:\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "फाइल खोले मं गलती"
+
+#~ msgid "file must be opened first"
+#~ msgstr "फाइल ल पहिली खुले होना चाही"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "ये केडीई वोकाबुलरी कागद नइ हे."
+
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "आइडेंटिफायर टैग से आइडेंटिफायर तत्व गंवा गे हे"
+
+#~ msgid "Default Lesson"
+#~ msgstr "डिफाल्ट सबक"
+
+#~ msgid "identifier missing id"
+#~ msgstr "आइडेंटिफायर मं आईडी नइ हे"
+
+#~ msgid "entry missing id"
+#~ msgstr "प्रविस्टि मं आईडी नइ हे"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "सबक %1"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "मूल भाखा बर डाटा गंवा गे हे"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "भाखा कोड के अस्पस्ट परिभासा "
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "ये पाकर कागद नइ हे"
+
+#~ msgid "Lesson %1"
+#~ msgstr "सबक %1"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "ये के-वर्ड-क्विज फाइल जइसन प्रतीत नइ होथे "
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr "सिरिफ वर्डक्विज ५.x या बाद के फाइल मन ल ही खोली जा सकथे "
+
+#~ msgid "Error while reading file"
+#~ msgstr "फ़ाइल पढते समय गलती होइस"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "ये एक्सडीएक्सएफ कागद नइ हे"
+
+#~ msgid "Glossary"
+#~ msgstr "सब्दसंग्रह"
+
+#~ msgid "&Search:"
+#~ msgstr "खोजव: (&S)"
+
+#~ msgid "References"
+#~ msgstr "सन्दर्भ"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "पर जाव '%1'"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "The name of the second, third ... language/column of vocabulary, if we "
+#~| "have to guess it."
+#~| msgid "Translation %1"
+#~ msgid "Transition Elements"
+#~ msgstr "अनुवाद %1"
+
+#~ msgid "Dummy"
+#~ msgstr "डमी"
+
+#~ msgid "Hydrogen"
+#~ msgstr "हाइड्रोजन"
+
+#~ msgid "Helium"
+#~ msgstr "हीलियम"
+
+#~ msgid "Lithium"
+#~ msgstr "लीथियम"
+
+#~ msgid "Beryllium"
+#~ msgstr "बेरीलियम"
+
+#~ msgid "Boron"
+#~ msgstr "बोरान"
+
+#~ msgid "Carbon"
+#~ msgstr "कार्बन"
+
+#~ msgid "Nitrogen"
+#~ msgstr "नाइट्रोजन"
+
+#~ msgid "Oxygen"
+#~ msgstr "आक्सीजन"
+
+#~ msgid "Fluorine"
+#~ msgstr "फ्लोरीन"
+
+#~ msgid "Neon"
+#~ msgstr "नियान"
+
+#~ msgid "Sodium"
+#~ msgstr "सोडियम"
+
+#~ msgid "Magnesium"
+#~ msgstr "मैग्नीसियम"
+
+#~ msgid "Aluminium"
+#~ msgstr "अल्यूमीनियम"
+
+#~ msgid "Silicon"
+#~ msgstr "सिलिकान"
+
+#~ msgid "Phosphorus"
+#~ msgstr "फास्फोरस"
+
+#~ msgid "Sulfur"
+#~ msgstr "सल्फर"
+
+#~ msgid "Chlorine"
+#~ msgstr "क्लोरीन"
+
+#~ msgid "Argon"
+#~ msgstr "ओर्गन"
+
+#~ msgid "Potassium"
+#~ msgstr "पोटेसियम"
+
+#~ msgid "Calcium"
+#~ msgstr "केल्सियम"
+
+#~ msgid "Scandium"
+#~ msgstr "स्कैन्डियम"
+
+#~ msgid "Titanium"
+#~ msgstr "टाइटेनियम"
+
+#~ msgid "Vanadium"
+#~ msgstr "वनेडियम"
+
+#~ msgid "Chromium"
+#~ msgstr "क्रोमियम"
+
+#~ msgid "Manganese"
+#~ msgstr "मैंगनीज"
+
+#~ msgid "Iron"
+#~ msgstr "लोहा"
+
+#~ msgid "Cobalt"
+#~ msgstr "कोबाल्ट"
+
+#~ msgid "Nickel"
+#~ msgstr "निकल"
+
+#~ msgid "Copper"
+#~ msgstr "तांबा"
+
+#~ msgid "Zinc"
+#~ msgstr "जिंक"
+
+#~ msgid "Gallium"
+#~ msgstr "गैलियम"
+
+#~ msgid "Germanium"
+#~ msgstr "जर्मेनियम"
+
+#~ msgid "Arsenic"
+#~ msgstr "ओर्सेनिक"
+
+#~ msgid "Selenium"
+#~ msgstr "सेलेनियम"
+
+#~ msgid "Bromine"
+#~ msgstr "ब्रोमीन"
+
+#~ msgid "Krypton"
+#~ msgstr "क्रिप्टान"
+
+#~ msgid "Rubidium"
+#~ msgstr "रूबीडियम"
+
+#~ msgid "Strontium"
+#~ msgstr "स्ट्रांसियम"
+
+#~ msgid "Yttrium"
+#~ msgstr "विट्रियम"
+
+#~ msgid "Zirconium"
+#~ msgstr "जिरकोनियम"
+
+#~ msgid "Niobium"
+#~ msgstr "नियोबियम"
+
+#~ msgid "Molybdenum"
+#~ msgstr "मालीब्डेनम"
+
+#~ msgid "Technetium"
+#~ msgstr "टेक्नेसियम"
+
+#~ msgid "Ruthenium"
+#~ msgstr "रुदेनियम"
+
+#~ msgid "Rhodium"
+#~ msgstr "रोडियम"
+
+#~ msgid "Palladium"
+#~ msgstr "पलेडियम"
+
+#~ msgid "Silver"
+#~ msgstr "चाँदी"
+
+#~ msgid "Cadmium"
+#~ msgstr "केडमियम"
+
+#~ msgid "Indium"
+#~ msgstr "इंडियम"
+
+#~ msgid "Tin"
+#~ msgstr "टिन"
+
+#~ msgid "Antimony"
+#~ msgstr "वटिमनी"
+
+#~ msgid "Tellurium"
+#~ msgstr "टेलूरियम"
+
+#~ msgid "Iodine"
+#~ msgstr "आयोडीन"
+
+#~ msgid "Xenon"
+#~ msgstr "जेनान"
+
+#~ msgid "Caesium"
+#~ msgstr "केसियम"
+
+#~ msgid "Barium"
+#~ msgstr "बेरियम"
+
+#~ msgid "Lanthanum"
+#~ msgstr "लैंथेनम"
+
+#~ msgid "Cerium"
+#~ msgstr "सीरियम"
+
+#~ msgid "Praseodymium"
+#~ msgstr "प्रसोडमियम"
+
+#~ msgid "Neodymium"
+#~ msgstr "नियोडमियम"
+
+#~ msgid "Promethium"
+#~ msgstr "प्रोमेथियम"
+
+#~ msgid "Samarium"
+#~ msgstr "समरियम"
+
+#~ msgid "Europium"
+#~ msgstr "यूरोपियम"
+
+#~ msgid "Gadolinium"
+#~ msgstr "गैडोलिनियम"
+
+#~ msgid "Terbium"
+#~ msgstr "टर्बियम"
+
+#~ msgid "Dysprosium"
+#~ msgstr "डायस्प्रोसियम"
+
+#~ msgid "Holmium"
+#~ msgstr "होलमियम"
+
+#~ msgid "Erbium"
+#~ msgstr "एरबियम"
+
+#~ msgid "Thulium"
+#~ msgstr "थूलियम"
+
+#~ msgid "Ytterbium"
+#~ msgstr "येटरबियम"
+
+#~ msgid "Lutetium"
+#~ msgstr "ल्यूटेसियम"
+
+#~ msgid "Hafnium"
+#~ msgstr "हाफनियम"
+
+#~ msgid "Tantalum"
+#~ msgstr "टैंटेलम"
+
+#~ msgid "Tungsten"
+#~ msgstr "टंग्सटन"
+
+#~ msgid "Rhenium"
+#~ msgstr "रेनियम"
+
+#~ msgid "Osmium"
+#~ msgstr "ओस्मियम"
+
+#~ msgid "Iridium"
+#~ msgstr "इरिडियम"
+
+#~ msgid "Platinum"
+#~ msgstr "प्लेटिनम"
+
+#~ msgid "Gold"
+#~ msgstr "सोना"
+
+#~ msgid "Mercury"
+#~ msgstr "मर्क्यूरी"
+
+#~ msgid "Thallium"
+#~ msgstr "थालियम"
+
+#~ msgid "Lead"
+#~ msgstr "सीसा लीड 3 - कैलिओप"
+
+#~ msgid "Bismuth"
+#~ msgstr "बिस्मथ"
+
+#~ msgid "Polonium"
+#~ msgstr "पोलोनियम"
+
+#~ msgid "Astatine"
+#~ msgstr "अस्टाटाइन"
+
+#~ msgid "Radon"
+#~ msgstr "राडोन"
+
+#~ msgid "Francium"
+#~ msgstr "फ्रांसियम"
+
+#~ msgid "Radium"
+#~ msgstr "रेडियम"
+
+#~ msgid "Actinium"
+#~ msgstr "एक्टीनियम"
+
+#~ msgid "Thorium"
+#~ msgstr "थोरियम"
+
+#~ msgid "Protactinium"
+#~ msgstr "प्रोटेक्टीनियम"
+
+#~ msgid "Uranium"
+#~ msgstr "यूरेनियम"
+
+#~ msgid "Neptunium"
+#~ msgstr "नेप्च्यूनियम"
+
+#~ msgid "Plutonium"
+#~ msgstr "प्लूटोनियम"
+
+#~ msgid "Americium"
+#~ msgstr "अमेरिसियम"
+
+#~ msgid "Curium"
+#~ msgstr "क्यूरियम"
+
+#~ msgid "Berkelium"
+#~ msgstr "बर्केलियम"
+
+#~ msgid "Californium"
+#~ msgstr "केलिफोर्नियम"
+
+#~ msgid "Einsteinium"
+#~ msgstr "आइंस्टीनियम"
+
+#~ msgid "Fermium"
+#~ msgstr "फर्मियम"
+
+#~ msgid "Mendelevium"
+#~ msgstr "मेंडेलेवियम"
+
+#~ msgid "Nobelium"
+#~ msgstr "नोबेलियम"
+
+#~ msgid "Lawrencium"
+#~ msgstr "लारेंसियम"
+
+#~ msgid "Rutherfordium"
+#~ msgstr "रदरफोर्डियम"
+
+#~ msgid "Dubnium"
+#~ msgstr "डब्नियम"
+
+#~ msgid "Seaborgium"
+#~ msgstr "सीबोर्जियम"
+
+#~ msgid "Bohrium"
+#~ msgstr "बोरियम"
+
+#~ msgid "Hassium"
+#~ msgstr "हासियम"
+
+#~ msgid "Meitnerium"
+#~ msgstr "मेटनेरियम"
+
+#~ msgid "Darmstadtium"
+#~ msgstr "डार्मस्टेडियम"
+
+#~ msgid "Roentgenium"
+#~ msgstr "रोंटजेनियम"
+
+#, fuzzy
+#~| msgid "Cerium"
+#~ msgid "Copernicium"
+#~ msgstr "सीरियम"
+
+#~ msgid "Ununtrium"
+#~ msgstr "उनुन्ट्रियम"
+
+#~ msgid "Ununquadium"
+#~ msgstr "उनुनक्वाडियम"
+
+#~ msgid "Ununpentium"
+#~ msgstr "उनुनपेंटियम"
+
+#~ msgid "Ununhexium"
+#~ msgstr "उनुनहेक्सियम"
+
+#~ msgid "Ununseptium"
+#~ msgstr "उनुनसेप्टियम"
+
+#~ msgid "Ununoctium"
+#~ msgstr "उनुनोक्टियम"
+
+#~ msgid "Greek 'hydro' and 'gennao' for 'forms water'"
+#~ msgstr "'फारम्स जल' बर यूनानी 'हाइड्रो' अउ 'गेनाओ'"
+
+#~ msgid "The Greek word for the sun was 'helios'"
+#~ msgstr "सुरुज बर यूनानी सब्द था 'हेलियस'"
+
+#~ msgid "Greek 'lithos' means 'stone'"
+#~ msgstr "यूनानी 'लिथोस' के मतलब हे 'पत्थर'"
+
+#~ msgid "Greek 'beryllos' for 'light-green stone'"
+#~ msgstr "यूनानी 'बेरिलोस', 'हल्का-हरा पत्थर'"
+
+#~ msgid ""
+#~ "Boron means 'Bor(ax) + (carb)on'. It is found in borax and behaves a lot "
+#~ "like carbon"
+#~ msgstr ""
+#~ "बोरान के मतलब हे 'बोर(एक्स) + (कार्ब)न'. ए बोरेक्स मं मिलथे  अउ ए कार्बन जइसन "
+#~ "व्यवहार करथे "
+
+#~ msgid "Latin 'nitrogenium' ('forms saltpeter')"
+#~ msgstr "लेटिन 'नाइट्रोजीनियम' ('फारम्स साल्टपीटर')"
+
+#~ msgid "Latin 'oxygenium' (forms acids)"
+#~ msgstr "लेटिन 'ओक्सीजीनियम' (अम्ल बनाथे )"
+
+#~ msgid "Latin 'fluere' ('floats')"
+#~ msgstr "लेटिन 'फ्लुएरे' ('फ्लोट्स')"
+
+#~ msgid "Greek 'neo'. meaning 'new'"
+#~ msgstr "यूनानी 'नियो'. मतलब 'नवा'"
+
+#~ msgid "Arabic 'natrun' for 'soda'"
+#~ msgstr "'सोडा' बर अरबी मं 'नेट्रन'"
+
+#~ msgid "Named after the city of Magnesia"
+#~ msgstr "मैगनीसिया सहर के नाम मं नामकरन करिस"
+
+#~ msgid "Latin 'alumen'"
+#~ msgstr "लेटिन 'अलुमेन'"
+
+#~ msgid "Latin 'silex'"
+#~ msgstr "लेटिन 'साइलेक्स'"
+
+#~ msgid "Greek 'phosphoros' for 'carries light'"
+#~ msgstr "'प्रकास ले जाना' के यूनानी मं 'फास्फोरस'"
+
+#~ msgid "In sanskrit 'sweb' means 'to sleep'"
+#~ msgstr "संस्कृत मं 'स्वेब' के मतलब हे 'सोने जाना'"
+
+#~ msgid "Greek 'chloros' for 'yellow-green'"
+#~ msgstr "'पीला-हरा' बर यूनानी मं 'क्लोरोस'"
+
+#~ msgid "Greek 'aergon' for 'inactive'"
+#~ msgstr "'अक्रिय' बर यूनानी मं 'अरगान'"
+
+#~ msgid "Arabic 'al qaliy' for potash"
+#~ msgstr "पोटास बर अरबी मं 'अल क्वालि'"
+
+#~ msgid "Latin 'calx' for 'lime'"
+#~ msgstr "'लाइम' बर लेटिन मं 'काल्क्स'"
+
+#~ msgid "Named because it was found in Scandinavia"
+#~ msgstr "काबर कि ए स्कैंडीनेविया मं मिलिस जेखर सेती ए नाम दे गिस"
+
+#~ msgid "The Titans were giants in Greek mythology"
+#~ msgstr "यूनानी पौरानिक कथाओं मं टाइटन राक्छस थे"
+
+#~ msgid "'Vanadis' is another name for the Nordic goddess Freyja"
+#~ msgstr "नार्दियाई देवी फ्रेयजा के दूसरा नाम हे 'वनादिस'"
+
+#, fuzzy
+#~ msgid ""
+#~ "It was discovered near a town named Magnesia in black earth. Thus, it was "
+#~ "named 'magnesia nigra', or for short, Manganese."
+#~ msgstr ""
+#~ "एला मैग्नीसिया नाम के सहर तिर के काली मिट्टी से खोजा गिस था. जेखर सेती एला नाम दे "
+#~ "गे था 'मैग्नीसिया निग्रा'. संक्छिप्त: मैंगनीज"
+
+#~ msgid "Latin 'ferrum'"
+#~ msgstr "लेटिन 'फेरम'"
+
+#~ msgid "Named after the German word 'Kobold' for 'goblin'"
+#~ msgstr "'गोबलिन' बर जर्मनी मं नाम 'कोबोल्द' मं नामकरन करिस"
+
+#~ msgid "'Nickel' was the name of a mountain goblin"
+#~ msgstr "पहाड़ गोबलिन के नाम था 'निकल'"
+
+#~ msgid "Greek 'cuprum' for Cypres"
+#~ msgstr "साइप्रस बर यूनानी मं 'क्यूप्रम'"
+
+#, fuzzy
+#~ msgid "German 'zinking' for 'rough', because zinc ore is very rough"
+#~ msgstr "'रफ' बर जर्मनी मं 'जिंकिंग'. काबर कि जिंक अयस्क बहुत ही रफ होथे "
+
+#~ msgid "'Gallia' is an old name for France"
+#~ msgstr "फ्रांस के जुन्ना नाम 'गैले' था"
+
+#~ msgid "Latin 'germania' is an old name for Germany"
+#~ msgstr "लेटिन मं जर्मनी के जुन्ना नाम 'जर्मेनिया' था"
+
+#~ msgid "Greek 'arsenikos' for 'male' or 'bold'"
+#~ msgstr "'मेल' या 'बोल्ड' बर यूनानी मं 'आर्सेनिकोस' "
+
+#~ msgid "Greek 'selena' for 'moon'"
+#~ msgstr "'चन्द्रमा' बर यूनानी मं 'सेलेना'"
+
+#~ msgid "Greek 'bromos' for 'smells badly'"
+#~ msgstr "'बदबूदार' बर यूनानी मं 'ब्रोमोस'"
+
+#~ msgid "Greek 'kryptos' for 'hidden'"
+#~ msgstr "यूनानी मं 'छुपा' बर 'क्रिप्टोस'"
+
+#~ msgid "Latin 'rubidus' for 'dark red'"
+#~ msgstr "लेटिन मं 'गहरा लाल' बर 'रुबिडस'"
+
+#~ msgid "Named after the mineral Strontianit"
+#~ msgstr "खनिज स्ट्रांसियनिट के नाम मं नामित"
+
+#~ msgid ""
+#~ "Named after the small town of Ytterby near Stockholm in Sweden. Terbium. "
+#~ "Ytterbium and Gadolinium are also named after this town."
+#~ msgstr ""
+#~ "स्वीडन मं स्टाकहोम तिर येटरबी नाम के एक छोटे से सहर के ऊपर नामित हे. टेरबियम, "
+#~ "येटेरबियम अउ गादोलिनियम के नाम घलोक एही सहर के ऊपर हे."
+
+#~ msgid "Named after the mineral zircon"
+#~ msgstr "खनिज जिरकोन के ऊपर नामकरन करिस"
+
+#, fuzzy
+#~ msgid "Named after Niobe, the daughter of the Greek god Tantalus."
+#~ msgstr "यूनानी देवता टेंटालस के टूरी निओब के ऊपर नाम रखे गिस."
+
+#~ msgid ""
+#~ "This name has Greek roots. It means 'like Platinum' - it was difficult to "
+#~ "distinguish Molybdenum from Platinum."
+#~ msgstr ""
+#~ "ये नाम ग्रीक (यूनान) से आय हे. एखर मतलब हे 'प्लेटिनम जइसन' - मालीब्डेनम ल प्लेटिनम से "
+#~ "अगल पहिचानना मुस्किल होथे ."
+
+#~ msgid "Greek 'technetos' for artificial"
+#~ msgstr "कृत्रिम बर यूनानी मं 'टेक्नेटोस'"
+
+#~ msgid "Ruthenia is the old name of Russia"
+#~ msgstr "रूस के जुन्ना नाम रुथेनिया था"
+
+#~ msgid "Greek 'rhodeos' means 'red like a rose'"
+#~ msgstr "यूनानी मं 'रोडोस' के मतलब होथे  'गुलाब के जइसन लाल'"
+
+#~ msgid "Named after the asteroid Pallas"
+#~ msgstr "छुद्र ग्रह पालस के ऊपर नाम रखे गिस"
+
+#~ msgid "Latin 'argentum' for silver"
+#~ msgstr "चांदी बर लेटिन मं 'अर्जेंटम'"
+
+#~ msgid "Greek 'kadmia' ('Galmei' = Zinc carbonate)"
+#~ msgstr "यूनानी 'कदमिया' (गलमेई = जिंक कार्बोनेट)"
+
+#~ msgid "Named after 'Indigo' because of its blue spectrum"
+#~ msgstr "एखर नीले स्पेक्ट्रम के कारन एखर नाम 'इंडिगो' रखे गिस"
+
+#~ msgid "Latin 'stannum' for tin"
+#~ msgstr "टिन बर लेटिन मं 'स्टेनम'"
+
+#~ msgid "Arabic 'anthos ammonos' for 'blossom of the god Ammon'"
+#~ msgstr "'अमोन देवता के पुस्प' बर अरबी 'वथोस एमोनोस'"
+
+#~ msgid "Latin 'tellus' or 'telluris' for 'Planet Earth'"
+#~ msgstr "'पृथ्वी' बर लेटिन मं 'टेलस' या 'टेलरिस'"
+
+#, fuzzy
+#~ msgid "Greek 'ioeides' for 'violet'."
+#~ msgstr "'बैंगनी' बर यूनानी मं 'आयोडेस'"
+
+#, fuzzy
+#~ msgid "Latin 'caesius' for 'heaven blue'."
+#~ msgstr "'हेवनब्लू' बर लेटिन मं 'केसियस'"
+
+#~ msgid "Greek 'barys' for 'heavy'"
+#~ msgstr "'भारी' बर यूनानी मं 'बेरीस'"
+
+#, fuzzy
+#~ msgid ""
+#~ "Greek 'lanthanein' for 'hidden'. The Lanthanoids are also called the "
+#~ "'rare earth' elements."
+#~ msgstr "'छुपाने' बर यूनानी 'लेंथेइन'. लेंथेनाइड ल 'रेयर अर्थ' घलोक कहा जाथे "
+
+#~ msgid "Named after the planetoid Ceres"
+#~ msgstr "प्लेनेटाइड सेरेस के ऊपर नाम रखे गिस"
+
+#~ msgid "Greek 'prasinos didymos' for 'green twin'"
+#~ msgstr "'हरियर जुड़वां' बर यूनानी मं 'प्रासिनोस डिडिमोस'"
+
+#~ msgid "Greek 'neos didymos' for 'new twin'"
+#~ msgstr "'नवा जुड़वां' बर यूनानी मं 'नियोस डिडिमोस'"
+
+#, fuzzy
+#~ msgid ""
+#~ "Named after the Greek Prometheus. Prometheus stole the fire from the gods "
+#~ "and gave it to mankind."
+#~ msgstr ""
+#~ "यूनानी प्रोमेथस के नाम मं रखे गे हे. प्रोमेथस हर देवताओं से आग ल चुरा ले अउ मनुस्यों ल दे दिस"
+
+#~ msgid "Named after the mineral Samarskit"
+#~ msgstr "समरस्कित खनिज के ऊपर नाम रखे गिस"
+
+#~ msgid "Named after Europe"
+#~ msgstr "यूरोप के ऊपर नाम रखे गिस"
+
+#~ msgid "Named after the Finnish chemist Johan Gadolin"
+#~ msgstr "फिनिसियाई रसायनग्य जोहान गैदोलिन के ऊपर नाम रखे गिस"
+
+#~ msgid "Named after the Swedish town of Ytterby"
+#~ msgstr "स्वीडिस सहर येटरबी के ऊपर नाम रखे गिस"
+
+#~ msgid "Greek 'dysprositor' for 'difficult to reach'"
+#~ msgstr "'पहुंचे मं कठिनाई' बर यूनानी मं 'डिस्प्रोसिटर'"
+
+#~ msgid "Latin 'holmia' for the old name of Stockholm"
+#~ msgstr "स्टाकहोम के लेटिन मं जुन्ना नाम 'होलमिया'"
+
+#~ msgid ""
+#~ "Named ofter the Swedish town of Ytterby. Terbium and Ytterbium are also "
+#~ "named after this town."
+#~ msgstr ""
+#~ "स्वीडन के सहर येटरबी के ऊपर नाम करन कर दे गे हे. येरबियम अउ येटरबियम घलोक एही सहर "
+#~ "के नाम मं रखे गिस."
+
+#, fuzzy
+#~ msgid "Named after the old name of Scandinavia, 'Thule'."
+#~ msgstr "स्कैंडिनेविया के जुन्ना नाम 'थुले' के ऊपर नाम रखे गिस"
+
+#, fuzzy
+#~ msgid ""
+#~ "Like Terbium and Gadolinium, this is named after the Swedish town of "
+#~ "Ytterby."
+#~ msgstr "टेरबियम अउ गेडोलिनियम जैसा. एखर नामकरन स्वीडन के येटरबी के ऊपर रखे गे हे."
+
+#~ msgid "Named after the Roman name 'Lutetia' for Paris"
+#~ msgstr "पेरिस के रोमन नाम 'लुटेटिया' के ऊपर रखे गिस"
+
+#~ msgid "'Hafnia' is the old name of Kopenhagen (Denmark)"
+#~ msgstr "कोपेनहेगेन (डेनमार्क) के जुन्ना नाम हे 'हाफनिया'"
+
+#~ msgid "Named after the Greek myth of Tantalos"
+#~ msgstr "टैंटलोस परिचय यूनानी पौरानिक कथा के ऊपर नाम रखे गिस"
+
+#, fuzzy
+#~ msgid ""
+#~ "'tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~ "symbol 'W') was Wolfram, named after a mineral."
+#~ msgstr ""
+#~ "स्वीडिस भाखा मं 'टंग स्टेन' के मतलब हे 'भारी पत्थर'. जुन्ना नाम (तथा एखर जइसन चिनहा "
+#~ "'W') वोल्फारम से ले गे हे, जऊन कि एक खनिज हे."
+
+#, fuzzy
+#~ msgid "Named after the German river Rhine (latin 'Rhenium')."
+#~ msgstr "जर्मनी के नदी राए (लेटिन मं 'रेनियम') के ऊपर नाम रखे गिस"
+
+#, fuzzy
+#~ msgid "Greek for 'smell'. Its oxides smell strongly like radishes."
+#~ msgstr "'गंध' बर यूनानी में. एखर ओक्साइड मूली के जइसन तेज गंध देथे "
+
+#~ msgid "Greek 'iris' for 'rainbow'"
+#~ msgstr "'इंद्रधनुस' बर यूनानी मं 'आइरिस'"
+
+#~ msgid "Spanish 'platina' means 'small silver'"
+#~ msgstr "स्पेन मं 'प्लेटिना' के मतलब हे 'छोटी नदी'"
+
+#, fuzzy
+#~ msgid "Latin 'aurum'. Named after Aurora, the goddess of sunrise"
+#~ msgstr "लेटिन मं 'ओरम'. सुरुजोदय के देवी ओरोरा के ऊपर नाम रखे गिस."
+
+#~ msgid "Graeco-Latin 'hydrargyrum' for 'liquid silver'"
+#~ msgstr "'द्रवीय चांदी' बर ग्रेको-लेटिन मं 'हाइड्रार्गायरम'"
+
+#~ msgid "Greek 'tallos' for 'young twig'"
+#~ msgstr "'यंग ट्विग' बर यूनानी मं 'टेलस'"
+
+#~ msgid "Latin 'plumbum' for Lead"
+#~ msgstr "लेड बर लेटिन मं 'प्लम्बम'"
+
+#, fuzzy
+#~ msgid "The old name of Bismuth is 'Wismut', which stood for 'white mass'."
+#~ msgstr "बिस्मथ के जुन्ना नाम 'विस्मट' था. एखर मतलब हे 'सफेद ढेला' "
+
+#~ msgid "Named after Poland to honor Marie Curie"
+#~ msgstr "मैरी क्यूरी गौरवान्वित करे बर पोलैंड के ऊपर नाम रखे गिस"
+
+#, fuzzy
+#~ msgid ""
+#~ "Named after Radium. It ends with 'on' to make it clear that it is a noble "
+#~ "gas."
+#~ msgstr ""
+#~ "रेडियम के ऊपर नाम रखे गिस. ए 'on' मं खतम होथे  ताकि एला नोबल गैस के रूप मं पहिचाना "
+#~ "जा सके."
+
+#~ msgid "Named after France to honor Marguerite Perey"
+#~ msgstr "मार्गरेट पेरे ल गौरवान्वित करे बर फ्रांस के ऊपर नाम रखे गिस"
+
+#~ msgid "Latin 'radius' for 'beam', as it is radioactive"
+#~ msgstr "'बीम' बर लेटिन मं 'रेडियस', काबर कि ए रेडियोएक्टिव हे"
+
+#~ msgid "Named after the German god of thunder: Thor"
+#~ msgstr "जर्मनी के तूफानों के देवता थार के ऊपर नाम रखे गिस."
+
+#~ msgid ""
+#~ "Greek 'protos' for 'ancester'. Protactinium is before Actinium in the "
+#~ "periodic table."
+#~ msgstr ""
+#~ "'एनसेस्टर' बर यूनानी 'प्रोटोस'. प्रोटाक्टिनियम, पीरियाडिक टेबल मं एक्टीनियम से "
+#~ "पहिली आथे . "
+
+#, fuzzy
+#~ msgid "Greek 'ouranos' for 'heaven'. Named after the planet Uranus."
+#~ msgstr "'स्वर्ग' बर यूनानी मं 'क्वारानोस'. यूरेनस ग्रह के ऊपर नाम रखे गिस"
+
+#~ msgid "Named after the planet Neptune."
+#~ msgstr "नेपच्यून के ऊपर नाम रखे गिस"
+
+#~ msgid "Named after the planet Pluto."
+#~ msgstr "ग्रह प्लूटो के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after America."
+#~ msgstr "अमेरिका के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after Marie Curie."
+#~ msgstr "मैरी क्यूरी के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after the town Berkeley where it was discovered."
+#~ msgstr "बर्कले सहर जहाँ एला खोजे गिस, के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after the US-State of California."
+#~ msgstr "अमरीकी राज्य कैलिफोर्निया के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after the scientist Albert Einstein."
+#~ msgstr "वैग्यानिक अल्बर्ट आइंस्टाए के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after the scientist Enrico Fermi."
+#~ msgstr "वैग्यानिक एनरिको फर्मी के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after the scientist D.I. Mendeleev."
+#~ msgstr "वैग्यानिक डी आई मैंडलीव के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after the scientist Alfred Nobel."
+#~ msgstr "वैग्यानिक अलफ्रेड नोबल के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after the scientist Ernest Orlando Lawrence."
+#~ msgstr "वैग्यानिक एरनेस्ट ओरलैंडो लारेंस के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after the scientist Ernest Rutherford"
+#~ msgstr "वैग्यानिक अरनेस्ट रदरफोर्ड के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after the science-town Dubna in Russia"
+#~ msgstr "रूस के वैग्यानिक-सहर डुबना के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after the scientist G. Theodore Seaborg."
+#~ msgstr "वैग्यानिक जी थियोडोर सीबोर्ग के ऊपर नाम रखे गिस."
+
+#~ msgid "Named after the scientist Niels Bohr."
+#~ msgstr "वैग्यानिक नील्ज बोर के ऊपर नाम रखे गिस."
+
+#~ msgid ""
+#~ "Latin 'hassia' for the German county Hessen. In Hessen a lot elements "
+#~ "have been discovered."
+#~ msgstr ""
+#~ "लेटिन 'हासिया' जर्मन काउन्टी हेसेन के नाम पर. हेसेन मं बहुत से तत्वों के खोज करे गे थी."
+
+#~ msgid "Named after the scientist Lise Meitner."
+#~ msgstr "वैग्यानिक नीज मेटनर के ऊपर नाम रखे गिस."
+
+#~ msgid ""
+#~ "Named after the German city Darmstadt where many elements have been "
+#~ "discovered."
+#~ msgstr "जर्मनी के सहर दार्मस्ताद के ऊपर नाम रखे गिस, जहाँ मं बहुत से तत्वों के खोज करे गे."
+
+#~ msgid "Named after Wilhelm Conrad Röntgen."
+#~ msgstr "वैग्यानिक विल्हेम कोनराड रोंटजन के ऊपर नाम रखे गिस."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "रविसंकर सिरीवास्तव, जी. करूनाकर"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "raviratlami@aol.in"
+
+#~ msgid "Ununbium"
+#~ msgstr "उनुन्बियम"
+
+#~ msgid "no translations found"
+#~ msgstr "कोई अनुवाद नइ मिलिस"
+
+#, fuzzy
+#~| msgid "Latin 'carboneum' for carbon"
+#~ msgid "from the Latin 'carbo' for coal."
+#~ msgstr "कार्बन बर लेटिन 'कारबोनियम'"
+
+#, fuzzy
+#~| msgid "Greek 'chroma' means 'color'"
+#~ msgid "from the Greek 'chroma' for color, paint."
+#~ msgstr "यूनानी मं 'क्रोमा' के मतलब हे 'रंग'"
+
+#, fuzzy
+#~| msgid "Latin 'carboneum' for carbon"
+#~ msgid "from the Latin 'ferrum' for iron."
+#~ msgstr "कार्बन बर लेटिन 'कारबोनियम'"
+
+#, fuzzy
+#~| msgid "Greek 'xenos' for 'foreigner'"
+#~ msgid "from the Greek 'xenos' for foreigner, stranger, strange."
+#~ msgstr "'विदेसी' बर यूनानी मं 'जेनस'"
+
+#, fuzzy
+#~| msgid "Greek 'astator' for 'changing'"
+#~ msgid "from the Greek 'astatos' for unsteady, changing"
+#~ msgstr "'चेंजिंग' बर यूनानी मं 'एस्टेटर'"
+
+#, fuzzy
+#~| msgid "Greek 'aktis' for 'beam' - actinium is radioactive"
+#~ msgid "from the Greek 'aktis' for ray; 'aktinoeides' for radiating."
+#~ msgstr "'बीम' बर यूनानी मं 'एक्टिस' - एक्टिनियम रेडियोएक्टिव हे"
+
+#, fuzzy
+#~| msgid ""
+#~| "Named after the German city Darmstadt where many elements have been "
+#~| "discovered."
+#~ msgid ""
+#~ "Named after the German State (Bundesland) Hessen the Latin name of which "
+#~ "is 'Hassia'; in Hessen, many elements have been discovered."
+#~ msgstr "जर्मनी के सहर दार्मस्ताद के ऊपर नाम रखे गिस, जहाँ मं बहुत से तत्वों के खोज करे गे."
+
+#~ msgid "User defined word type %1"
+#~ msgstr "कमइया परिभासित सब्द किसिम %1"
+
+#~ msgid "each lesson must have a name"
+#~ msgstr "हर एक पाठ बर एक नाम जरूरी हे"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "Americanism"
+#~ msgstr "अमेरिकनिज्म"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "abbreviation"
+#~ msgstr "संक्छिप्त"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "anatomy"
+#~ msgstr "सरीर-रचना विग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "astronomy"
+#~ msgstr "ज्योतिर्विग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "biology"
+#~ msgstr "जीवविग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "bad sense"
+#~ msgstr "खराब अनुभूति"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "contemptuously"
+#~ msgstr "कांटेम्पट्सली"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ecclesiastical"
+#~ msgstr "धर्मोपदेस"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "figuratively"
+#~ msgstr "आलंकारिक"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "geology"
+#~ msgstr "भूविग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "historical"
+#~ msgstr "ऐतिहासिक"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ichthyology"
+#~ msgstr "मत्स्यविग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "informal"
+#~ msgstr "अनौपचारिक"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ironic"
+#~ msgstr "व्यंग्यात्मक"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "irregular"
+#~ msgstr "अनियमित"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "literary"
+#~ msgstr "साहित्यिक"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "metallurgy"
+#~ msgstr "धातुकर्म"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "meteorology"
+#~ msgstr "मीटीरोलाजी"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "mineralogy"
+#~ msgstr "धातुविद्या"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "motoring"
+#~ msgstr "गतिविग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "mountaineering"
+#~ msgstr "पर्वतारोहन"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "mythology"
+#~ msgstr "पौरानिकी"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "proper name"
+#~ msgstr "प्रापर नाम"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "optics"
+#~ msgstr "प्रकासविग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ornithology"
+#~ msgstr "पक्छीविग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "oneself"
+#~ msgstr "ओनसेल्फ"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "person"
+#~ msgstr "मनखे"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "parliamentary"
+#~ msgstr "संसदीय"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "pharmacy"
+#~ msgstr "औसधिविग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "philosophy"
+#~ msgstr "दर्सनसास्त्र"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "photography"
+#~ msgstr "फोटोग्राफी"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "physics"
+#~ msgstr "भौतिकी"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "physiology"
+#~ msgstr "सरीर विग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "plural"
+#~ msgstr "बहुवचन"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "poetry"
+#~ msgstr "काव्य"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "politics"
+#~ msgstr "राजनीति"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "provincialism"
+#~ msgstr "प्रांतीय"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "psychology"
+#~ msgstr "मनोविग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "rhetoric"
+#~ msgstr "साहित्यविग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "surveying"
+#~ msgstr "सर्वेइंग"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "telegraphy"
+#~ msgstr "टेलिग्राफी"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "telephony"
+#~ msgstr "टेलिफोनी"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "theater"
+#~ msgstr "रंगसाला"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "typography"
+#~ msgstr "टंकनविग्यान"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "university"
+#~ msgstr "विस्वविद्यालय"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "veterinary medicine"
+#~ msgstr "वेटरनरी दवाइयाँ"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "zoology"
+#~ msgstr "जंतुविग्यान"
+
+#~ msgctxt "Monday"
+#~ msgid "Mon"
+#~ msgstr "सोम"
+
+#~ msgctxt "Tuesday"
+#~ msgid "Tue"
+#~ msgstr "मंगल"
+
+#~ msgctxt "Wednesday"
+#~ msgid "Wed"
+#~ msgstr "बुध"
+
+#~ msgctxt "Thursday"
+#~ msgid "Thu"
+#~ msgstr "गुरू"
+
+#~ msgctxt "Friday"
+#~ msgid "Fri"
+#~ msgstr "सुक्र"
+
+#~ msgctxt "Saturday"
+#~ msgid "Sat"
+#~ msgstr "सनि"
+
+#~ msgctxt "Sunday"
+#~ msgid "Sun"
+#~ msgstr "रवि"
+
+#~ msgid "Monday"
+#~ msgstr "सोमवार"
+
+#~ msgid "Tuesday"
+#~ msgstr "मंगलवार"
+
+#~ msgid "Wednesday"
+#~ msgstr "बुधवार"
+
+#~ msgid "Thursday"
+#~ msgstr "बिरसपतवार"
+
+#~ msgid "Friday"
+#~ msgstr "सुकरवार"
+
+#~ msgid "Saturday"
+#~ msgstr "सनिवार"
+
+#~ msgid "Sunday"
+#~ msgstr "इतवार"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jan"
+#~ msgstr "जन."
+
+#~ msgctxt "Short month name"
+#~ msgid "Feb"
+#~ msgstr "फर."
+
+#~ msgctxt "Short month name"
+#~ msgid "Mar"
+#~ msgstr "मार्च"
+
+#~ msgctxt "Short month name"
+#~ msgid "Apr"
+#~ msgstr "अपरे."
+
+#~ msgctxt "Short month name"
+#~ msgid "May"
+#~ msgstr "मई"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jun"
+#~ msgstr "जून"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jul"
+#~ msgstr "जु."
+
+#~ msgctxt "Short month name"
+#~ msgid "Aug"
+#~ msgstr "अग."
+
+#~ msgctxt "Short month name"
+#~ msgid "Sep"
+#~ msgstr "सित."
+
+#~ msgctxt "Short month name"
+#~ msgid "Oct"
+#~ msgstr "अक्तू."
+
+#~ msgctxt "Short month name"
+#~ msgid "Nov"
+#~ msgstr "नवं."
+
+#~ msgctxt "Short month name"
+#~ msgid "Dec"
+#~ msgstr "दिसं."
+
+#~ msgctxt "Short day name"
+#~ msgid "Mon"
+#~ msgstr "सोम"
+
+#~ msgctxt "Short day name"
+#~ msgid "Tue"
+#~ msgstr "मंगल"
+
+#~ msgctxt "Short day name"
+#~ msgid "Wed"
+#~ msgstr "बुध"
+
+#~ msgctxt "Short day name"
+#~ msgid "Thu"
+#~ msgstr "गुरू"
+
+#~ msgctxt "Short day name"
+#~ msgid "Fri"
+#~ msgstr "सुक्र"
+
+#~ msgctxt "Short day name"
+#~ msgid "Sat"
+#~ msgstr "सनि"
+
+#~ msgctxt "Short day name"
+#~ msgid "Sun"
+#~ msgstr "रवि"
+
+#~ msgctxt "Long month name"
+#~ msgid "January"
+#~ msgstr "जनवरी"
+
+#~ msgctxt "Long month name"
+#~ msgid "February"
+#~ msgstr "फरवरी"
+
+#~ msgctxt "Long month name"
+#~ msgid "March"
+#~ msgstr "मार्च"
+
+#~ msgctxt "Long month name"
+#~ msgid "April"
+#~ msgstr "अपरेल"
+
+#~ msgctxt "Long month name"
+#~ msgid "May"
+#~ msgstr "मई"
+
+#~ msgctxt "Long month name"
+#~ msgid "June"
+#~ msgstr "जून"
+
+#~ msgctxt "Long month name"
+#~ msgid "July"
+#~ msgstr "जुलाई"
+
+#~ msgctxt "Long month name"
+#~ msgid "August"
+#~ msgstr "अगस्त"
+
+#~ msgctxt "Long month name"
+#~ msgid "September"
+#~ msgstr "सितमबर"
+
+#~ msgctxt "Long month name"
+#~ msgid "October"
+#~ msgstr "अकटूबर"
+
+#~ msgctxt "Long month name"
+#~ msgid "November"
+#~ msgstr "नवम्बर"
+
+#~ msgctxt "Long month name"
+#~ msgid "December"
+#~ msgstr "दिसम्बर"
+
+#~ msgctxt "Long day name"
+#~ msgid "Monday"
+#~ msgstr "सोमवार"
+
+#~ msgctxt "Long day name"
+#~ msgid "Tuesday"
+#~ msgstr "मंगलवार"
+
+#~ msgctxt "Long day name"
+#~ msgid "Wednesday"
+#~ msgstr "बुधवार"
+
+#~ msgctxt "Long day name"
+#~ msgid "Thursday"
+#~ msgstr "बिरसपतवार"
+
+#~ msgctxt "Long day name"
+#~ msgid "Friday"
+#~ msgstr "सुकरवार"
+
+#~ msgctxt "Long day name"
+#~ msgid "Saturday"
+#~ msgstr "सनिवार"
+
+#~ msgctxt "Long day name"
+#~ msgid "Sunday"
+#~ msgstr "इतवार"
+
+#~ msgctxt "January"
+#~ msgid "Jan"
+#~ msgstr "जन."
+
+#~ msgctxt "February"
+#~ msgid "Feb"
+#~ msgstr "फर."
+
+#~ msgctxt "March"
+#~ msgid "Mar"
+#~ msgstr "मार्च"
+
+#~ msgctxt "April"
+#~ msgid "Apr"
+#~ msgstr "अपरे."
+
+#~ msgctxt "May short"
+#~ msgid "May"
+#~ msgstr "मई"
+
+#~ msgctxt "June"
+#~ msgid "Jun"
+#~ msgstr "जून"
+
+#~ msgctxt "July"
+#~ msgid "Jul"
+#~ msgstr "जु."
+
+#~ msgctxt "August"
+#~ msgid "Aug"
+#~ msgstr "अग."
+
+#~ msgctxt "September"
+#~ msgid "Sep"
+#~ msgstr "सित."
+
+#~ msgctxt "October"
+#~ msgid "Oct"
+#~ msgstr "अक्तू."
+
+#~ msgctxt "November"
+#~ msgid "Nov"
+#~ msgstr "नवं."
+
+#~ msgctxt "December"
+#~ msgid "Dec"
+#~ msgstr "दिसं."
+
+#~ msgid "January"
+#~ msgstr "जनवरी"
+
+#~ msgid "February"
+#~ msgstr "फरवरी"
+
+#~ msgid "March"
+#~ msgstr "मार्च"
+
+#~ msgid "April"
+#~ msgstr "अपरेल"
+
+#~ msgctxt "May long"
+#~ msgid "May"
+#~ msgstr "मई"
+
+#~ msgid "June"
+#~ msgstr "जून"
+
+#~ msgid "July"
+#~ msgstr "जुलाई"
+
+#~ msgid "August"
+#~ msgstr "अगस्त"
+
+#~ msgid "September"
+#~ msgstr "सितमबर"
+
+#~ msgid "October"
+#~ msgstr "अकटूबर"
+
+#~ msgid "November"
+#~ msgstr "नवम्बर"
+
+#~ msgid "December"
+#~ msgstr "दिसम्बर"
+
+#~ msgctxt "of January"
+#~ msgid "of Jan"
+#~ msgstr "जनवरी का"
+
+#~ msgctxt "of February"
+#~ msgid "of Feb"
+#~ msgstr "फरवरी का"
+
+#~ msgctxt "of March"
+#~ msgid "of Mar"
+#~ msgstr "मार्च का"
+
+#~ msgctxt "of April"
+#~ msgid "of Apr"
+#~ msgstr "अपरेल का"
+
+#~ msgctxt "of May short"
+#~ msgid "of May"
+#~ msgstr "मई का"
+
+#~ msgctxt "of June"
+#~ msgid "of Jun"
+#~ msgstr "जून का"
+
+#~ msgctxt "of July"
+#~ msgid "of Jul"
+#~ msgstr "जुलाई का"
+
+#~ msgctxt "of August"
+#~ msgid "of Aug"
+#~ msgstr "अग. का"
+
+#~ msgctxt "of September"
+#~ msgid "of Sep"
+#~ msgstr "सित. का"
+
+#~ msgctxt "of October"
+#~ msgid "of Oct"
+#~ msgstr "अक्तू. का"
+
+#~ msgctxt "of November"
+#~ msgid "of Nov"
+#~ msgstr "नवं. का"
+
+#~ msgctxt "of December"
+#~ msgid "of Dec"
+#~ msgstr "दिस. का"
+
+#~ msgid "of January"
+#~ msgstr "जनवरी का"
+
+#~ msgid "of February"
+#~ msgstr "फरवरी का"
+
+#~ msgid "of March"
+#~ msgstr "मार्च का"
+
+#~ msgid "of April"
+#~ msgstr "अपरेल का"
+
+#~ msgctxt "of May long"
+#~ msgid "of May"
+#~ msgstr "मई का"
+
+#~ msgid "of June"
+#~ msgstr "जून का"
+
+#~ msgid "of July"
+#~ msgstr "जुलाई का"
+
+#~ msgid "of August"
+#~ msgstr "अगस्त का"
+
+#~ msgid "of September"
+#~ msgstr "सितमबर का"
+
+#~ msgid "of October"
+#~ msgstr "अकटूबर का"
+
+#~ msgid "of November"
+#~ msgstr "नवंबर का"
+
+#~ msgid "of December"
+#~ msgstr "दिसम्बर का"
+
+#~ msgid "Week %1"
+#~ msgstr "हफ्ता %1"
+
+#~ msgid "Next year"
+#~ msgstr "अगला साल"
+
+#~ msgid "Previous year"
+#~ msgstr "पिछला साल "
+
+#~ msgid "Next month"
+#~ msgstr "अगला महिना"
+
+#~ msgid "Previous month"
+#~ msgstr "पिछला महिना"
+
+#~ msgid "Select a week"
+#~ msgstr "हफ्ता चुनव"
+
+#~ msgid "Select a month"
+#~ msgstr "महिना चुनव"
+
+#~ msgid "Select a year"
+#~ msgstr "साल चुनव"
+
+#~ msgid "Select the current day"
+#~ msgstr "अभी हाल के दिन चुनव"
+
+#~ msgid "Close"
+#~ msgstr "बंद करव"
+
+#~ msgid "no lessons found in 'lessons' tag"
+#~ msgstr "'सबक' टैग तिर कोनो सबक नइ मिलिस"

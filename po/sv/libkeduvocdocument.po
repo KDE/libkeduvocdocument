@@ -1,0 +1,1384 @@
+# translation of libkdeedu.po to Swedish
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2005, 2006, 2007, 2008, 2009, 2010, 2014, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2016-02-07 12:05+0100\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "Rubrik:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "Författare:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "Dokumentlektion"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "Ordklasser"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr "Leitnerruta"
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, kde-format
+msgid "Cannot lock file %1"
+msgstr "Kan inte låsa filen %1"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>Kan inte öppna filen<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, kde-format
+msgid "Cannot open tempfile %1"
+msgstr "Kan inte öppna tillfällig fil %1"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, kde-format
+msgid "Cannot download %1: %2"
+msgstr "Kan inte ladda ner %1: %2"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"Kunde inte öppna eller läsa \"%1\" på ett riktigt sätt.\n"
+"(Rapporterat fel: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "Kan inte skriva till filen %1"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "Original"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "Översättning %1"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "KDE-ordförrådsdokument"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "Kwordquiz-dokument"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "Pauker-lektion"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "Vokabeltrainer"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "XML-ordlisteutbytesformat"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr "Värden åtskilda av kommatecken (CSV)"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "Alla dokument som stöds"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "Inget fel hittades."
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "Felaktig XML i dokumentet."
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "Okänd filtyp."
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "Filen är inte skrivbar."
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr "Skrivning av fil misslyckades."
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "Filen är inte läsbar."
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr "Läsning av fil misslyckades."
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "Filen finns inte."
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr "Filen är låst av en annan process."
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr "Låsfilen kan inte skapas."
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "Okänt fel."
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "Verb"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "Substantiv"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "Namn"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "Artikel"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "Adjektiv"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "Adverb"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Pronomen"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Mening"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "Tal"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Konjunktion"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "Preposition"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "Fråga"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "Ordningstal"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "Grundtal"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "Bestämd artikel"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "Obestämd artikel"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr "Regelbundet verb"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr "Oregelbundet verb"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "Possessivt pronomen"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr "Personligt pronomen"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "Maskulinum"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "Femininum"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr "Neutrum"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "Enkel presens"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "Progressiv form"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "Perfekt"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "Imperfekt"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "Imperfekt progressiv form"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "Perfekt particip"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "Futurum"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "Verb"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "Substantiv"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "Namn"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "Artikel"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "Adjektiv"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "Adverb"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Pronomen"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Mening"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "Tal"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Konjunktion"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "Preposition"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "Fråga"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "Inte ännu övad"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "Nivå 1"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "Nivå 2"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "Nivå 3"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "Nivå 4"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "Nivå 5"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "Nivå 6"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "Nivå 7"
+
+#~ msgid "Untitled"
+#~ msgstr "Namnlös"
+
+#~ msgid "Vocabulary"
+#~ msgstr "Ordförråd"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "Tolkningsfel på rad %1, kolumn %2:\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "Fel vid försök att öppna fil"
+
+#~ msgid "file must be opened first"
+#~ msgstr "Filen måste först ha öppnats"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "Det här är inte ett KDE-ordförrådsdokument."
+
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "Saknar identifierarelement från identifierarnas taggar"
+
+#~ msgid "Default Lesson"
+#~ msgstr "Standardlektion"
+
+#~ msgid "identifier missing id"
+#~ msgstr "Identifierare saknar id"
+
+#~ msgid "entry missing id"
+#~ msgstr "Post saknar id"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "Lektion %1"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "Data för originalspråk saknas"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "Tvetydig definition av språkkod"
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "Det här är inte ett Pauker-dokument"
+
+#~ msgid "Lesson %1"
+#~ msgstr "Lektion %1"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "Det här verkar inte vara en (K)Wordquiz-fil"
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr "Bara filer skapade av Wordquiz 5.x eller senare kan öppnas"
+
+#~ msgid "Error while reading file"
+#~ msgstr "Fel när filen skulle läsas"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "Det här är inte ett XDXF-dokument"
+
+#~ msgid "Glossary"
+#~ msgstr "Ordlista"
+
+#~ msgid "&Search:"
+#~ msgstr "&Sök:"
+
+#~ msgid "References"
+#~ msgstr "Referenser"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "Gå till '%1'"
+
+#~ msgid "Classic Periodic Table"
+#~ msgstr "Klassiskt periodiskt system"
+
+#~ msgid "Long Periodic Table"
+#~ msgstr "Långt periodiskt system"
+
+#~ msgid "Short Periodic Table"
+#~ msgstr "Kort periodiskt system"
+
+#~ msgid "Transition Elements"
+#~ msgstr "Övergångsgrundämnen"
+
+#~ msgid "DZ Periodic Table"
+#~ msgstr "Tyska centralkommitténs periodiska system"
+
+#~ msgid "Dummy"
+#~ msgstr "Test"
+
+#~ msgid "Hydrogen"
+#~ msgstr "Väte"
+
+#~ msgid "Helium"
+#~ msgstr "Helium"
+
+#~ msgid "Lithium"
+#~ msgstr "Litium"
+
+#~ msgid "Beryllium"
+#~ msgstr "Beryllium"
+
+#~ msgid "Boron"
+#~ msgstr "Bor"
+
+#~ msgid "Carbon"
+#~ msgstr "Kol"
+
+#~ msgid "Nitrogen"
+#~ msgstr "Kväve"
+
+#~ msgid "Oxygen"
+#~ msgstr "Syre"
+
+#~ msgid "Fluorine"
+#~ msgstr "Fluor"
+
+#~ msgid "Neon"
+#~ msgstr "Neon"
+
+#~ msgid "Sodium"
+#~ msgstr "Natrium"
+
+#~ msgid "Magnesium"
+#~ msgstr "Magnesium"
+
+#~ msgid "Aluminium"
+#~ msgstr "Aluminium"
+
+#~ msgid "Silicon"
+#~ msgstr "Kisel"
+
+#~ msgid "Phosphorus"
+#~ msgstr "Fosfor"
+
+#~ msgid "Sulfur"
+#~ msgstr "Svavel"
+
+#~ msgid "Chlorine"
+#~ msgstr "Klor"
+
+#~ msgid "Argon"
+#~ msgstr "Argon"
+
+#~ msgid "Potassium"
+#~ msgstr "Kalium"
+
+#~ msgid "Calcium"
+#~ msgstr "Kalcium"
+
+#~ msgid "Scandium"
+#~ msgstr "Skandium"
+
+#~ msgid "Titanium"
+#~ msgstr "Titan"
+
+#~ msgid "Vanadium"
+#~ msgstr "Vanadin"
+
+#~ msgid "Chromium"
+#~ msgstr "Krom"
+
+#~ msgid "Manganese"
+#~ msgstr "Mangan"
+
+#~ msgid "Iron"
+#~ msgstr "Järn"
+
+#~ msgid "Cobalt"
+#~ msgstr "Kobolt"
+
+#~ msgid "Nickel"
+#~ msgstr "Nickel"
+
+#~ msgid "Copper"
+#~ msgstr "Koppar"
+
+#~ msgid "Zinc"
+#~ msgstr "Zink"
+
+#~ msgid "Gallium"
+#~ msgstr "Gallium"
+
+#~ msgid "Germanium"
+#~ msgstr "Germanium"
+
+#~ msgid "Arsenic"
+#~ msgstr "Arsenik"
+
+#~ msgid "Selenium"
+#~ msgstr "Selen"
+
+#~ msgid "Bromine"
+#~ msgstr "Brom"
+
+#~ msgid "Krypton"
+#~ msgstr "Krypton"
+
+#~ msgid "Rubidium"
+#~ msgstr "Rubidium"
+
+#~ msgid "Strontium"
+#~ msgstr "Strontium"
+
+#~ msgid "Yttrium"
+#~ msgstr "Yttrium"
+
+#~ msgid "Zirconium"
+#~ msgstr "Zirkonium"
+
+#~ msgid "Niobium"
+#~ msgstr "Niob"
+
+#~ msgid "Molybdenum"
+#~ msgstr "Molybden"
+
+#~ msgid "Technetium"
+#~ msgstr "Teknetium"
+
+#~ msgid "Ruthenium"
+#~ msgstr "Rutenium"
+
+#~ msgid "Rhodium"
+#~ msgstr "Rodium"
+
+#~ msgid "Palladium"
+#~ msgstr "Palladium"
+
+#~ msgid "Silver"
+#~ msgstr "Silver"
+
+#~ msgid "Cadmium"
+#~ msgstr "Kadmium"
+
+#~ msgid "Indium"
+#~ msgstr "Indium"
+
+#~ msgid "Tin"
+#~ msgstr "Tenn"
+
+#~ msgid "Antimony"
+#~ msgstr "Antimon"
+
+#~ msgid "Tellurium"
+#~ msgstr "Tellur"
+
+#~ msgid "Iodine"
+#~ msgstr "Jod"
+
+#~ msgid "Xenon"
+#~ msgstr "Xenon"
+
+#~ msgid "Caesium"
+#~ msgstr "Cesium"
+
+#~ msgid "Barium"
+#~ msgstr "Barium"
+
+#~ msgid "Lanthanum"
+#~ msgstr "Lantan"
+
+#~ msgid "Cerium"
+#~ msgstr "Cerium"
+
+#~ msgid "Praseodymium"
+#~ msgstr "Praseodym"
+
+#~ msgid "Neodymium"
+#~ msgstr "Neodym"
+
+#~ msgid "Promethium"
+#~ msgstr "Prometium"
+
+#~ msgid "Samarium"
+#~ msgstr "Samarium"
+
+#~ msgid "Europium"
+#~ msgstr "Europium"
+
+#~ msgid "Gadolinium"
+#~ msgstr "Gadolinium"
+
+#~ msgid "Terbium"
+#~ msgstr "Terbium"
+
+#~ msgid "Dysprosium"
+#~ msgstr "Dysprosium"
+
+#~ msgid "Holmium"
+#~ msgstr "Holmium"
+
+#~ msgid "Erbium"
+#~ msgstr "Erbium"
+
+#~ msgid "Thulium"
+#~ msgstr "Tulium"
+
+#~ msgid "Ytterbium"
+#~ msgstr "Ytterbium"
+
+#~ msgid "Lutetium"
+#~ msgstr "Lutetium"
+
+#~ msgid "Hafnium"
+#~ msgstr "Hafnium"
+
+#~ msgid "Tantalum"
+#~ msgstr "Tantal"
+
+#~ msgid "Tungsten"
+#~ msgstr "Wolfram"
+
+#~ msgid "Rhenium"
+#~ msgstr "Rhenium"
+
+#~ msgid "Osmium"
+#~ msgstr "Osmium"
+
+#~ msgid "Iridium"
+#~ msgstr "Iridium"
+
+#~ msgid "Platinum"
+#~ msgstr "Platina"
+
+#~ msgid "Gold"
+#~ msgstr "Guld"
+
+#~ msgid "Mercury"
+#~ msgstr "Kvicksilver"
+
+#~ msgid "Thallium"
+#~ msgstr "Tallium"
+
+#~ msgid "Lead"
+#~ msgstr "Bly"
+
+#~ msgid "Bismuth"
+#~ msgstr "Vismut"
+
+#~ msgid "Polonium"
+#~ msgstr "Polonium"
+
+#~ msgid "Astatine"
+#~ msgstr "Astat"
+
+#~ msgid "Radon"
+#~ msgstr "Radon"
+
+#~ msgid "Francium"
+#~ msgstr "Francium"
+
+#~ msgid "Radium"
+#~ msgstr "Radium"
+
+#~ msgid "Actinium"
+#~ msgstr "Aktinium"
+
+#~ msgid "Thorium"
+#~ msgstr "Torium"
+
+#~ msgid "Protactinium"
+#~ msgstr "Protaktinium"
+
+#~ msgid "Uranium"
+#~ msgstr "Uran"
+
+#~ msgid "Neptunium"
+#~ msgstr "Neptunium"
+
+#~ msgid "Plutonium"
+#~ msgstr "Plutonium"
+
+#~ msgid "Americium"
+#~ msgstr "Americium"
+
+#~ msgid "Curium"
+#~ msgstr "Curium"
+
+#~ msgid "Berkelium"
+#~ msgstr "Berkelium"
+
+#~ msgid "Californium"
+#~ msgstr "Californium"
+
+#~ msgid "Einsteinium"
+#~ msgstr "Einsteinium"
+
+#~ msgid "Fermium"
+#~ msgstr "Fermium"
+
+#~ msgid "Mendelevium"
+#~ msgstr "Mendelevium"
+
+#~ msgid "Nobelium"
+#~ msgstr "Nobelium"
+
+#~ msgid "Lawrencium"
+#~ msgstr "Lawrencium"
+
+#~ msgid "Rutherfordium"
+#~ msgstr "Rutherfordium"
+
+#~ msgid "Dubnium"
+#~ msgstr "Dubnium"
+
+#~ msgid "Seaborgium"
+#~ msgstr "Seaborgium"
+
+#~ msgid "Bohrium"
+#~ msgstr "Bohrium"
+
+#~ msgid "Hassium"
+#~ msgstr "Hassium"
+
+#~ msgid "Meitnerium"
+#~ msgstr "Meitnerium"
+
+#~ msgid "Darmstadtium"
+#~ msgstr "Darmstadtium"
+
+#~ msgid "Roentgenium"
+#~ msgstr "Röntgenium"
+
+#~ msgid "Copernicium"
+#~ msgstr "Copernicium"
+
+#~ msgid "Ununtrium"
+#~ msgstr "Ununtrium"
+
+#~ msgid "Ununquadium"
+#~ msgstr "Ununquadium"
+
+#~ msgid "Ununpentium"
+#~ msgstr "Ununpentium"
+
+#~ msgid "Ununhexium"
+#~ msgstr "Ununhexium"
+
+#~ msgid "Ununseptium"
+#~ msgstr "Ununseptium"
+
+#~ msgid "Ununoctium"
+#~ msgstr "Ununoctium"
+
+#~ msgid "Greek 'hydro' and 'gennao' for 'forms water'"
+#~ msgstr ""
+#~ "Det svenska namnet väte, för 'våt', myntades av Afzelius och Ekeberg 1795"
+
+#~ msgid "The Greek word for the sun was 'helios'"
+#~ msgstr "Det grekiska ordet för solen var 'helios'"
+
+#~ msgid "Greek 'lithos' means 'stone'"
+#~ msgstr "Grekiska 'lithos' betyder 'sten'"
+
+#~ msgid "Greek 'beryllos' for 'light-green stone'"
+#~ msgstr "Grekiska 'beryllos' för 'ljusgrön sten'"
+
+#~ msgid ""
+#~ "Boron means 'Bor(ax) + (carb)on'. It is found in borax and behaves a lot "
+#~ "like carbon"
+#~ msgstr ""
+#~ "Bor kommer från 'borax'. Det finns i borax och beter sig mycket likt kol."
+
+#~ msgid "Latin 'carboneum' for carbon"
+#~ msgstr "Latinska 'carboneum' för kol"
+
+#~ msgid "Latin 'nitrogenium' ('forms saltpeter')"
+#~ msgstr ""
+#~ "Det svenska namnet kväve föreslogs av Afzelius och Ekeberg år 1795 för "
+#~ "dess eld-kvävande egenskaper."
+
+#~ msgid "Latin 'oxygenium' (forms acids)"
+#~ msgstr ""
+#~ "Bildat av de svenska kemisterna Afzelius och Ekeberg 1795 till sur (och "
+#~ "syra)."
+
+#~ msgid "Latin 'fluere' ('floats')"
+#~ msgstr "Latinska 'fluere' ('flyter')"
+
+#~ msgid "Greek 'neo'. meaning 'new'"
+#~ msgstr "Grekiska 'neo', som betyder 'ny'"
+
+#~ msgid "Arabic 'natrun' for 'soda'"
+#~ msgstr "Arabiska 'natrun' för 'soda'"
+
+#~ msgid "Named after the city of Magnesia"
+#~ msgstr "Namngivet efter staden Magnesia."
+
+#~ msgid "Latin 'alumen'"
+#~ msgstr "Latinska 'alumen'"
+
+#~ msgid "Latin 'silex'"
+#~ msgstr "Myntat av Berzelius från kiseljord 1823"
+
+#~ msgid "Greek 'phosphoros' for 'carries light'"
+#~ msgstr "Grekiska 'phosphoros' för 'bär ljus'"
+
+#~ msgid "In sanskrit 'sweb' means 'to sleep'"
+#~ msgstr "På sanskrit betyder 'sweb' 'att sova'"
+
+#~ msgid "Greek 'chloros' for 'yellow-green'"
+#~ msgstr "Grekiska 'chloros' för 'gulgrön'"
+
+#~ msgid "Greek 'aergon' for 'inactive'"
+#~ msgstr "Grekiska 'aergon' för 'inaktiv'"
+
+#~ msgid "Arabic 'al qaliy' for potash"
+#~ msgstr "Arabiska 'al qaliy' för alkali"
+
+#~ msgid "Latin 'calx' for 'lime'"
+#~ msgstr "Latinska 'calx' for 'kalk'"
+
+#~ msgid "Named because it was found in Scandinavia"
+#~ msgstr "Namngivet eftersom det hittades i Skandinavien"
+
+#~ msgid "The Titans were giants in Greek mythology"
+#~ msgstr "Titaner var jättar i grekisk mytologi"
+
+#~ msgid "'Vanadis' is another name for the Nordic goddess Freyja"
+#~ msgstr "'Vanadis' är ett annat namn på den nordiska gudinnan Freja"
+
+#~ msgid "Greek 'chroma' means 'color'"
+#~ msgstr "Grekiska 'chroma' betyder 'färg'"
+
+#~ msgid ""
+#~ "It was discovered near a town named Magnesia in black earth. Thus, it was "
+#~ "named 'magnesia nigra', or for short, Manganese."
+#~ msgstr ""
+#~ "Det upptäcktes nära en stad som heter Magnesia i svart jord. Alltså "
+#~ "namngavs det 'magnesia nigra', eller kort Mangan."
+
+#~ msgid "Latin 'ferrum'"
+#~ msgstr "Lånat närmast från keltiska språket"
+
+#~ msgid "Named after the German word 'Kobold' for 'goblin'"
+#~ msgstr "Namngivet efter det tyska ordet 'Kobold' för 'bergsrå'"
+
+#~ msgid "'Nickel' was the name of a mountain goblin"
+#~ msgstr "'Nickel' var namnet på ett bergsrå"
+
+#~ msgid "Greek 'cuprum' for Cypres"
+#~ msgstr "Grekiska 'cuprum' for Cypern"
+
+#~ msgid "German 'zinking' for 'rough', because zinc ore is very rough"
+#~ msgstr "Tyska 'zinking' för 'grov', eftersom zinkmalm är mycket grov"
+
+#~ msgid "'Gallia' is an old name for France"
+#~ msgstr "'Gallia' är ett gammalt namn på Frankrike"
+
+#~ msgid "Latin 'germania' is an old name for Germany"
+#~ msgstr "Latinska 'germania' är ett gammalt namn på Tyskland"
+
+#~ msgid "Greek 'arsenikos' for 'male' or 'bold'"
+#~ msgstr "Grekiska 'arsenikos' för 'manlig' eller 'djärv'"
+
+#~ msgid "Greek 'selena' for 'moon'"
+#~ msgstr "Grekiska 'selena' för 'måne'"
+
+#~ msgid "Greek 'bromos' for 'smells badly'"
+#~ msgstr "Grekiska 'bromos' för 'luktar illa'"
+
+#~ msgid "Greek 'kryptos' for 'hidden'"
+#~ msgstr "Grekiska 'kryptos' för 'dold'"
+
+#~ msgid "Latin 'rubidus' for 'dark red'"
+#~ msgstr "Latinska 'rubidus' för 'mörkröd'"
+
+#~ msgid "Named after the mineral Strontianit"
+#~ msgstr "Namngivet efter mineralen Strontianit"
+
+#~ msgid ""
+#~ "Named after the small town of Ytterby near Stockholm in Sweden. Terbium. "
+#~ "Ytterbium and Gadolinium are also named after this town."
+#~ msgstr ""
+#~ "Namngivet efter den lilla staden Ytterby nära Stockholm i Sverige. "
+#~ "Terbium, Ytterbium och Gadolinium är också namngivna efter staden."
+
+#~ msgid "Named after the mineral zircon"
+#~ msgstr "Namngivet efter mineralen zirkon"
+
+#~ msgid "Named after Niobe, the daughter of the Greek god Tantalus."
+#~ msgstr "Namngivet efter Niobe, dotter till den grekiske guden Tantalus."
+
+#~ msgid ""
+#~ "This name has Greek roots. It means 'like Platinum' - it was difficult to "
+#~ "distinguish Molybdenum from Platinum."
+#~ msgstr ""
+#~ "Namnet har grekiska rötter. Det betyder 'likt Platina': det var svårt att "
+#~ "skilja Molybden från Platina."
+
+#~ msgid "Greek 'technetos' for artificial"
+#~ msgstr "Grekiska 'technetos' för konstgjort"
+
+#~ msgid "Ruthenia is the old name of Russia"
+#~ msgstr "Ruthenia är det gamla namnet på Ryssland"
+
+#~ msgid "Greek 'rhodeos' means 'red like a rose'"
+#~ msgstr "Grekiska 'rhodeos' betyder 'röd som en ros'"
+
+#~ msgid "Named after the asteroid Pallas"
+#~ msgstr "Namngivet efter asteroiden Pallas"
+
+#~ msgid "Latin 'argentum' for silver"
+#~ msgstr "Latinska 'argentum' för silver"
+
+#~ msgid "Greek 'kadmia' ('Galmei' = Zinc carbonate)"
+#~ msgstr "Grekiska 'kadmia' ('Galmei' = Zinckarbonat)"
+
+#~ msgid "Named after 'Indigo' because of its blue spectrum"
+#~ msgstr "Namngivet efter 'Indigo' på grund av dess blåa spektrum"
+
+#~ msgid "Latin 'stannum' for tin"
+#~ msgstr "Latinska 'stannum' för tenn"
+
+#~ msgid "Arabic 'anthos ammonos' for 'blossom of the god Ammon'"
+#~ msgstr "Arabiska 'anthos ammonos' för 'guden Ammons blomma'"
+
+#~ msgid "Latin 'tellus' or 'telluris' for 'Planet Earth'"
+#~ msgstr "Latinska 'tellus' eller 'telluris' för 'planeten Jorden'"
+
+#~ msgid "Greek 'ioeides' for 'violet'."
+#~ msgstr "Grekiska 'ioeides' för 'violett'."
+
+#~ msgid "Greek 'xenos' for 'foreigner'"
+#~ msgstr "Grekiska 'xenos' för 'främling'"
+
+#~ msgid "Latin 'caesius' for 'heaven blue'."
+#~ msgstr "Latinska 'caesius' för 'himmelsblått'."
+
+#~ msgid "Greek 'barys' for 'heavy'"
+#~ msgstr "Grekiska 'barys' för 'tungt'"
+
+#~ msgid ""
+#~ "Greek 'lanthanein' for 'hidden'. The Lanthanoids are also called the "
+#~ "'rare earth' elements."
+#~ msgstr ""
+#~ "Grekiska 'lanthanein' för 'dold'. Lantanoiderna kallas också 'sällsynta "
+#~ "jordartsmetaller'."
+
+#~ msgid "Named after the planetoid Ceres"
+#~ msgstr "Namngivet efter asteroiden Ceres"
+
+#~ msgid "Greek 'prasinos didymos' for 'green twin'"
+#~ msgstr "Grekiska 'prasinos didymos' för 'grön tvilling'"
+
+#~ msgid "Greek 'neos didymos' for 'new twin'"
+#~ msgstr "Grekiska 'neos didymos' för 'ny tvilling'"
+
+#~ msgid ""
+#~ "Named after the Greek Prometheus. Prometheus stole the fire from the gods "
+#~ "and gave it to mankind."
+#~ msgstr ""
+#~ "Namngivet efter greken Prometeus. Prometeus stal elden från gudarna och "
+#~ "gav den till människorna."
+
+#~ msgid "Named after the mineral Samarskit"
+#~ msgstr "Namngivet efter mineralen samarskit"
+
+#~ msgid "Named after Europe"
+#~ msgstr "Namngivet efter Europa"
+
+#~ msgid "Named after the Finnish chemist Johan Gadolin"
+#~ msgstr "Namngivet efter den finska kemisten Johan Gadolin"
+
+#~ msgid "Named after the Swedish town of Ytterby"
+#~ msgstr "Namngivet efter den svenska staden Ytterby"
+
+#~ msgid "Greek 'dysprositor' for 'difficult to reach'"
+#~ msgstr "Grekiska 'dysprositor' för 'svår att nå'"
+
+#~ msgid "Latin 'holmia' for the old name of Stockholm"
+#~ msgstr "Latinska 'holmia' för det gamla namnet på Stockholm"
+
+#~ msgid ""
+#~ "Named ofter the Swedish town of Ytterby. Terbium and Ytterbium are also "
+#~ "named after this town."
+#~ msgstr ""
+#~ "Namngivet efter den svenska staden Ytterby. Terbium och Ytterbium är "
+#~ "också namngivna efter staden."
+
+#~ msgid "Named after the old name of Scandinavia, 'Thule'."
+#~ msgstr "Namngivet efter det gamla namnet på Skandinavien, 'Thule'."
+
+#~ msgid ""
+#~ "Like Terbium and Gadolinium, this is named after the Swedish town of "
+#~ "Ytterby."
+#~ msgstr ""
+#~ "Som Terbium och Gadolinium, är det namngivet efter den svenska staden "
+#~ "Ytterby."
+
+#~ msgid "Named after the Roman name 'Lutetia' for Paris"
+#~ msgstr "Namngivet efter det romerska namnet 'Lutetia' för Paris"
+
+#~ msgid "'Hafnia' is the old name of Kopenhagen (Denmark)"
+#~ msgstr "'Hafnia' är det gamla namnet på Köpenhamn (Danmark)"
+
+#~ msgid "Named after the Greek myth of Tantalos"
+#~ msgstr "Namngivet efter den grekiska myten om Tantalus"
+
+#~ msgid ""
+#~ "'tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~ "symbol 'W') was Wolfram, named after a mineral."
+#~ msgstr ""
+#~ "Det gamla namnet (och därför symbolen 'W') var Wolfram, namngivet efter "
+#~ "ett mineral."
+
+#~ msgid "Named after the German river Rhine (latin 'Rhenium')."
+#~ msgstr "Namngivet efter den tyska floden Rhen (latinska 'Rhenium')."
+
+#~ msgid "Greek for 'smell'. Its oxides smell strongly like radishes."
+#~ msgstr "Grekiska för 'lukt'. Dess oxid luktar starkt av rädisor."
+
+#~ msgid "Greek 'iris' for 'rainbow'"
+#~ msgstr "Grekiska 'iris' för 'regnbåge'"
+
+#~ msgid "Spanish 'platina' means 'small silver'"
+#~ msgstr "Spanska 'platina' betyder 'litet silver'"
+
+#~ msgid "Latin 'aurum'. Named after Aurora, the goddess of sunrise"
+#~ msgstr "Latinska 'aurum'. Namngivet efter Aurora, soluppgångens gudinna"
+
+#~ msgid "Graeco-Latin 'hydrargyrum' for 'liquid silver'"
+#~ msgstr "Översättning av latinska 'argentum vivum' för 'levande silver'"
+
+#~ msgid "Greek 'tallos' for 'young twig'"
+#~ msgstr "Grekiska 'tallos' for 'späd kvist'"
+
+#~ msgid "Latin 'plumbum' for Lead"
+#~ msgstr "Latinska 'plumbum' för bly"
+
+#~ msgid "The old name of Bismuth is 'Wismut', which stood for 'white mass'."
+#~ msgstr ""
+#~ "Det gamla namnet på Vismut är 'Wismut', vilket stod för 'vit massa'."
+
+#~ msgid "Named after Poland to honor Marie Curie"
+#~ msgstr "Namngivet efter Polen för att hedra Marie Curie"
+
+#~ msgid "Greek 'astator' for 'changing'"
+#~ msgstr "Grekiska 'astator' för 'föränderligt'"
+
+#~ msgid ""
+#~ "Named after Radium. It ends with 'on' to make it clear that it is a noble "
+#~ "gas."
+#~ msgstr ""
+#~ "Namngivet efter Radium. Det slutar med 'on' för att klargöra att det är "
+#~ "en ädelgas."
+
+#~ msgid "Named after France to honor Marguerite Perey"
+#~ msgstr "Namngivet efter Frankrike för att hedra Marguerite Perey"
+
+#~ msgid "Latin 'radius' for 'beam', as it is radioactive"
+#~ msgstr "Latinska 'radius' för 'stråle', eftersom det är radioaktivt"
+
+#~ msgid "Greek 'aktis' for 'beam' - actinium is radioactive"
+#~ msgstr "Grekiska 'aktis' för 'stråle': Aktinium är radioaktivt"
+
+#~ msgid "Named after the German god of thunder: Thor"
+#~ msgstr "Namngivet efter åskguden Tor"
+
+#~ msgid ""
+#~ "Greek 'protos' for 'ancester'. Protactinium is before Actinium in the "
+#~ "periodic table."
+#~ msgstr ""
+#~ "Grekiska 'protos' för 'anfader'. Protaktinium kommer före Aktinium i det "
+#~ "periodiska systemet."
+
+#~ msgid "Greek 'ouranos' for 'heaven'. Named after the planet Uranus."
+#~ msgstr "Grekiska 'ouranos' för 'himlen'. Namngivet efter planeten Uranus."
+
+#~ msgid "Named after the planet Neptune."
+#~ msgstr "Namngivet efter planeten Neptunus."
+
+#~ msgid "Named after the planet Pluto."
+#~ msgstr "Namngivet efter planeten Pluto."
+
+#~ msgid "Named after America."
+#~ msgstr "Namngivet efter Amerika."
+
+#~ msgid "Named after Marie Curie."
+#~ msgstr "Namngivet efter Marie Curie."
+
+#~ msgid "Named after the town Berkeley where it was discovered."
+#~ msgstr "Namngivet efter staden Berkeley där det upptäcktes."
+
+#~ msgid "Named after the US-State of California."
+#~ msgstr "Namngivet efter delstaten Kalifornien i USA."
+
+#~ msgid "Named after the scientist Albert Einstein."
+#~ msgstr "Namngivet efter vetenskapsmannen Albert Einstein."
+
+#~ msgid "Named after the scientist Enrico Fermi."
+#~ msgstr "Namngivet efter vetenskapsmannen Enrico Fermi."
+
+#~ msgid "Named after the scientist D.I. Mendeleev."
+#~ msgstr "Namngivet efter vetenskapsmannen D. I. Mendelejev."
+
+#~ msgid "Named after the scientist Alfred Nobel."
+#~ msgstr "Namngivet efter vetenskapsmannen Alfred Nobel."
+
+#~ msgid "Named after the scientist Ernest Orlando Lawrence."
+#~ msgstr "Namngivet efter vetenskapsmannen Ernest Orlando Lawrence."
+
+#~ msgid "Named after the scientist Ernest Rutherford"
+#~ msgstr "Namngivet efter vetenskapsmannen Ernest Rutherford"
+
+#~ msgid "Named after the science-town Dubna in Russia"
+#~ msgstr "Namngivet efter vetenskapsstaden Dubna i Ryssland"
+
+#~ msgid "Named after the scientist G. Theodore Seaborg."
+#~ msgstr "Namngivet efter vetenskapsmannen G. Theodore Seaborg."
+
+#~ msgid "Named after the scientist Niels Bohr."
+#~ msgstr "Namngivet efter vetenskapsmannen Niels Bohr."
+
+#~ msgid ""
+#~ "Latin 'hassia' for the German county Hessen. In Hessen a lot elements "
+#~ "have been discovered."
+#~ msgstr ""
+#~ "Latin 'Hassia' för det tyska förbundslandet Hessen. Många grundämnen har "
+#~ "upptäckts i Hessen."
+
+#~ msgid "Named after the scientist Lise Meitner."
+#~ msgstr "Namngivet efter vetenskapskvinnan Lise Meitner."
+
+#~ msgid ""
+#~ "Named after the German city Darmstadt where many elements have been "
+#~ "discovered."
+#~ msgstr ""
+#~ "Namngivet efter den tyska staden Darmstadt där många grundämnen har "
+#~ "upptäckts."
+
+#~ msgid "Named after Wilhelm Conrad Röntgen."
+#~ msgstr "Namngivet efter Wilhelm Conrad Röntgen."
+
+#~ msgid ""
+#~ "Historically known as eka-mercury. Ununbium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Historiskt känt som eka-kvicksilver. Ununbium är ett tillfälligt "
+#~ "systematiskt IUPAC grundämnesnamn."
+
+#~ msgid ""
+#~ "Historically known as eka-thallium. Ununtrium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Historiskt känt som eka-tallium. Ununtrium är ett tillfälligt "
+#~ "systematiskt IUPAC grundämnesnamn."
+
+#~ msgid ""
+#~ "Historically known as eka-lead. Ununquadium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Historiskt känt som eka-bly. Ununquadium är ett tillfälligt systematiskt "
+#~ "IUPAC grundämnesnamn."
+
+#~ msgid ""
+#~ "Historically known as eka-bismuth. Ununpentium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Historiskt känt som eka-vismut. Ununpentium är ett tillfälligt "
+#~ "systematiskt IUPAC grundämnesnamn."
+
+#~ msgid ""
+#~ "Historically known as eka-polonium. Ununhexium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Historiskt känt som eka-polonium. Ununhexium är ett tillfälligt "
+#~ "systematiskt IUPAC grundämnesnamn."
+
+#~ msgid "Temporary symbol and name. Can also be referred to as eka-astatine."
+#~ msgstr "Tillfällig symbol och namn. Kan också kallas eka-astat."
+
+#~ msgid ""
+#~ "Historically known as eka-radon, eka-emanation before 1960. Ununoctium is "
+#~ "a temporary IUPAC systematic element name."
+#~ msgstr ""
+#~ "Historiskt känt som eka-radon, eka-niton innan 1960. Ununoctium är ett "
+#~ "tillfälligt systematiskt IUPAC grundämnesnamn."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Stefan Asserhäll"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "stefan.asserhall@bredband.net"
+
+#~ msgid "Ununbium"
+#~ msgstr "Ununbium"
+
+#~ msgid "no translations found"
+#~ msgstr "Någon översättning hittades inte"

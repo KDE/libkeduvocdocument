@@ -1,0 +1,1457 @@
+# translation of libkdeedu.po to Türkçe
+# translation of libkdeedu.po to
+#
+# Görkem Çetin <gorkem@gorkemcetin.com>, 2005.
+# Engin Çağatay <engincagatay@yahoo.com>, 2005.
+# Serdar Soytetir <tulliana@gmail.com>, 2008, 2009.
+# Volkan Gezer <volkangezer@gmail.com>, 2014.
+# Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
+# Emir SARI <emir_sari@icloud.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2022-04-26 11:06+0300\n"
+"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "Başlık:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "Yazar:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "Belge Dersi"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "Sözcük Türleri"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr "Leitner Kutusu"
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, kde-format
+msgid "Cannot lock file %1"
+msgstr "%1 dosyası kilitlenemedi"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt><b>%1</b><br /> dosysıa açılamad></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, kde-format
+msgid "Cannot open tempfile %1"
+msgstr "%1 geçici dosyası açılamadı"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, kde-format
+msgid "Cannot download %1: %2"
+msgstr "%1 indirilemedi: %2"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"\"%1\" dosyası açılamadı ya da tam olarak okunamadı\n"
+"(Bildirilen hata: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "%1 dosysınaa yazılamadı."
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "Özgün"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "Çeviri %1"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "KDE Sözcük Hazinesi Belgesi"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "KWordQuiz Belgesi"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "Pauker Dersi"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "Vokabeltrainer"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "XML Sözlük Takas Biçimi"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr "Virgülle Ayrılmış Değerler (CSV)"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "Desteklenen tüm belgeler"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "Hata yok."
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "Belge içerisinde geçersiz XML."
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "Bilinmeyen dosya türü."
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "Dosya yazılabilir değil."
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr "Dosya yazıcı başarısız oldu."
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "Dosya okunabilir değil."
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr "Dosya okuyucu başarısız oldu."
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "Dosya yok."
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr "Dosya başka bir süreç tarafından kilitlenmiş."
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr "Kilitleme dosyası oluşturulamadı."
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "Bilinmeyen hata."
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "Eylem"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "Ad"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "Ad"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "Nesne"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "Önad"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "Belirteç"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Adıl"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Söz"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "Rakam"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Bağlaç"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "İlgeç"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "Soru"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "Sırasal"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "Sayma"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "Belirli"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "Belirsiz"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr "Düzenli"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr "Düzensiz"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "İyelik"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr "Kişisel"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "Erkek"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "Dişi"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr "Nötr"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "Geniş Zaman"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "Şimdiki Zaman"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "Yakın Geçmiş Zaman"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "Geçmiş Zaman"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "Geçmişte Gerçekleşmekte olan Zaman"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "Edilgen Yapı"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "Gelecek"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "Yüklem"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "Ad"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "Ad"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "Nesne"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "Önad"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "Belirteç"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Adıl"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Deyiş"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "Rakam"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Bağlaç"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "Edat"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "Soru"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "Henüz Çalışılmadı"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "Düzey 1"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "Düzey 2"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "Düzey 3"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "Düzey 4"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "Düzey 5"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "Düzey 6"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "Düzey 7"
+
+#~ msgid "Untitled"
+#~ msgstr "İsimsiz"
+
+#~ msgid "Vocabulary"
+#~ msgstr "Sözcük Hazinesi"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "%1 satırı, %2 sütununda ayrıştırma hatası:\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "Dosya Açma Hatası"
+
+#~ msgid "file must be opened first"
+#~ msgstr "dosya önce açılmalıdır"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "Bu bir KDE Sözcük Hazinesi Belgesi değil."
+
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "tanımlayıcı etiketlerinden bazı tanımlayıcı ögeler kayıp"
+
+#~ msgid "Default Lesson"
+#~ msgstr "Öntanımlı Ders"
+
+#~ msgid "identifier missing id"
+#~ msgstr "kayıp tanımlayıcı kimliği"
+
+#~ msgid "entry missing id"
+#~ msgstr "kayıp girdi kimliği"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "Ders %1"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "Asıl dilin verileri yok"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "Belirsiz dil kodu açıklaması"
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "Bu bir Pauker belgesi değil"
+
+#~ msgid "Lesson %1"
+#~ msgstr "Ders %1"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "Bu dosya bir (K)WordQuiz dosyası değil"
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr ""
+#~ "Yalnızca WordQuiz 5.x ya da sonraki sürümler ile hazırlanmış dosyaları "
+#~ "açılabilir"
+
+#~ msgid "Error while reading file"
+#~ msgstr "Dosya okuma hatası"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "Bu bir XDXF belgesi değil"
+
+#~ msgid "Glossary"
+#~ msgstr "Sözlük"
+
+#~ msgid "&Search:"
+#~ msgstr "&Ara:"
+
+#~ msgid "References"
+#~ msgstr "Kaynaklar"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "'%1' ögesine git"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "The name of the second, third ... language/column of vocabulary, if we "
+#~| "have to guess it."
+#~| msgid "Translation %1"
+#~ msgid "Transition Elements"
+#~ msgstr "Çeviri %1"
+
+#~ msgid "Dummy"
+#~ msgstr "Sahte"
+
+#~ msgid "Hydrogen"
+#~ msgstr "Hidrojen"
+
+#~ msgid "Helium"
+#~ msgstr "Helyum"
+
+#~ msgid "Lithium"
+#~ msgstr "Lityum"
+
+#~ msgid "Beryllium"
+#~ msgstr "Berilyum"
+
+#~ msgid "Boron"
+#~ msgstr "Bor"
+
+#~ msgid "Carbon"
+#~ msgstr "Karbon"
+
+#~ msgid "Nitrogen"
+#~ msgstr "Azot"
+
+#~ msgid "Oxygen"
+#~ msgstr "Oksijen"
+
+#~ msgid "Fluorine"
+#~ msgstr "Fluor"
+
+#~ msgid "Neon"
+#~ msgstr "Neon"
+
+#~ msgid "Sodium"
+#~ msgstr "Sodyum"
+
+#~ msgid "Magnesium"
+#~ msgstr "Magnezyum"
+
+#~ msgid "Aluminium"
+#~ msgstr "Alüminyum"
+
+#~ msgid "Silicon"
+#~ msgstr "Silikon"
+
+#~ msgid "Phosphorus"
+#~ msgstr "Fosfor"
+
+#~ msgid "Sulfur"
+#~ msgstr "Kükürt"
+
+#~ msgid "Chlorine"
+#~ msgstr "Klor"
+
+#~ msgid "Argon"
+#~ msgstr "Argon"
+
+#~ msgid "Potassium"
+#~ msgstr "Potasyum"
+
+#~ msgid "Calcium"
+#~ msgstr "Kalsiyum"
+
+#~ msgid "Scandium"
+#~ msgstr "Skandiyum"
+
+#~ msgid "Titanium"
+#~ msgstr "Titanyum"
+
+#~ msgid "Vanadium"
+#~ msgstr "Vanadyum"
+
+#~ msgid "Chromium"
+#~ msgstr "Krom"
+
+#~ msgid "Manganese"
+#~ msgstr "Mangan"
+
+#~ msgid "Iron"
+#~ msgstr "Demir"
+
+#~ msgid "Cobalt"
+#~ msgstr "Kobalt"
+
+#~ msgid "Nickel"
+#~ msgstr "Nikel"
+
+#~ msgid "Copper"
+#~ msgstr "Bakır"
+
+#~ msgid "Zinc"
+#~ msgstr "Çinko"
+
+#~ msgid "Gallium"
+#~ msgstr "Galyum"
+
+#~ msgid "Germanium"
+#~ msgstr "Germanyum"
+
+#~ msgid "Arsenic"
+#~ msgstr "Arsenik"
+
+#~ msgid "Selenium"
+#~ msgstr "Selenyum"
+
+#~ msgid "Bromine"
+#~ msgstr "Brom"
+
+#~ msgid "Krypton"
+#~ msgstr "Kripton"
+
+#~ msgid "Rubidium"
+#~ msgstr "Rubidyum"
+
+#~ msgid "Strontium"
+#~ msgstr "Stronsiyum"
+
+#~ msgid "Yttrium"
+#~ msgstr "İtriyum"
+
+#~ msgid "Zirconium"
+#~ msgstr "Zirkonyum"
+
+#~ msgid "Niobium"
+#~ msgstr "Niyobyum"
+
+#~ msgid "Molybdenum"
+#~ msgstr "Molibden"
+
+#~ msgid "Technetium"
+#~ msgstr "Teknesyum"
+
+#~ msgid "Ruthenium"
+#~ msgstr "Rutenyum"
+
+#~ msgid "Rhodium"
+#~ msgstr "Rodyum"
+
+#~ msgid "Palladium"
+#~ msgstr "Paladyum"
+
+#~ msgid "Silver"
+#~ msgstr "Gümüş"
+
+#~ msgid "Cadmium"
+#~ msgstr "Kadmiyum"
+
+#~ msgid "Indium"
+#~ msgstr "İndiyum"
+
+#~ msgid "Tin"
+#~ msgstr "Kalay"
+
+#~ msgid "Antimony"
+#~ msgstr "Antimon"
+
+#~ msgid "Tellurium"
+#~ msgstr "Tellür"
+
+#~ msgid "Iodine"
+#~ msgstr "İyot"
+
+#~ msgid "Xenon"
+#~ msgstr "Ksenon"
+
+#~ msgid "Caesium"
+#~ msgstr "Sezyum"
+
+#~ msgid "Barium"
+#~ msgstr "Baryum"
+
+#~ msgid "Lanthanum"
+#~ msgstr "Lantan"
+
+#~ msgid "Cerium"
+#~ msgstr "Seryum"
+
+#~ msgid "Praseodymium"
+#~ msgstr "Praseodimyum"
+
+#~ msgid "Neodymium"
+#~ msgstr "Neodimyum"
+
+#~ msgid "Promethium"
+#~ msgstr "Prometyum"
+
+#~ msgid "Samarium"
+#~ msgstr "Samaryum"
+
+#~ msgid "Europium"
+#~ msgstr "Öropyum"
+
+#~ msgid "Gadolinium"
+#~ msgstr "Gadolinyum"
+
+#~ msgid "Terbium"
+#~ msgstr "Terbiyum"
+
+#~ msgid "Dysprosium"
+#~ msgstr "Disprosyum"
+
+#~ msgid "Holmium"
+#~ msgstr "Holmiyum"
+
+#~ msgid "Erbium"
+#~ msgstr "Erbiyum"
+
+#~ msgid "Thulium"
+#~ msgstr "Tulyum"
+
+#~ msgid "Ytterbium"
+#~ msgstr "İterbiyum"
+
+#~ msgid "Lutetium"
+#~ msgstr "Lutesyum"
+
+#~ msgid "Hafnium"
+#~ msgstr "Hafniyum"
+
+#~ msgid "Tantalum"
+#~ msgstr "Tantal"
+
+#~ msgid "Tungsten"
+#~ msgstr "Tungsten"
+
+#~ msgid "Rhenium"
+#~ msgstr "Renyum"
+
+#~ msgid "Osmium"
+#~ msgstr "Osmiyum"
+
+#~ msgid "Iridium"
+#~ msgstr "İridyum"
+
+#~ msgid "Platinum"
+#~ msgstr "Platin"
+
+#~ msgid "Gold"
+#~ msgstr "Altın"
+
+#~ msgid "Mercury"
+#~ msgstr "Civa"
+
+#~ msgid "Thallium"
+#~ msgstr "Talyum"
+
+#~ msgid "Lead"
+#~ msgstr "Kurşun"
+
+#~ msgid "Bismuth"
+#~ msgstr "Bizmut"
+
+#~ msgid "Polonium"
+#~ msgstr "Polonyum"
+
+#~ msgid "Astatine"
+#~ msgstr "Astatin"
+
+#~ msgid "Radon"
+#~ msgstr "Radon"
+
+#~ msgid "Francium"
+#~ msgstr "Fransiyum"
+
+#~ msgid "Radium"
+#~ msgstr "Radyum"
+
+#~ msgid "Actinium"
+#~ msgstr "Aktinyum"
+
+#~ msgid "Thorium"
+#~ msgstr "Toryum"
+
+#~ msgid "Protactinium"
+#~ msgstr "Protoaktinyum"
+
+#~ msgid "Uranium"
+#~ msgstr "Uranyum"
+
+#~ msgid "Neptunium"
+#~ msgstr "Neptünyum"
+
+#~ msgid "Plutonium"
+#~ msgstr "Plutonyum"
+
+#~ msgid "Americium"
+#~ msgstr "Amerikyum"
+
+#~ msgid "Curium"
+#~ msgstr "Küriyum"
+
+#~ msgid "Berkelium"
+#~ msgstr "Berkelyum"
+
+#~ msgid "Californium"
+#~ msgstr "Kaliforniyum"
+
+#~ msgid "Einsteinium"
+#~ msgstr "Einsteinyum"
+
+#~ msgid "Fermium"
+#~ msgstr "Fermiyum"
+
+#~ msgid "Mendelevium"
+#~ msgstr "Mendelevyum"
+
+#~ msgid "Nobelium"
+#~ msgstr "Nobelyum"
+
+#~ msgid "Lawrencium"
+#~ msgstr "Lawrensiyum"
+
+#~ msgid "Rutherfordium"
+#~ msgstr "Rutherfordiyum"
+
+#~ msgid "Dubnium"
+#~ msgstr "Dubniyum"
+
+#~ msgid "Seaborgium"
+#~ msgstr "Seaborgiyum"
+
+#~ msgid "Bohrium"
+#~ msgstr "Bohriyum"
+
+#~ msgid "Hassium"
+#~ msgstr "Hassiyum"
+
+#~ msgid "Meitnerium"
+#~ msgstr "Meitneriyum"
+
+#~ msgid "Darmstadtium"
+#~ msgstr "Darmstadium"
+
+#~ msgid "Roentgenium"
+#~ msgstr "Röntgenyum"
+
+#, fuzzy
+#~| msgid "Cerium"
+#~ msgid "Copernicium"
+#~ msgstr "Seryum"
+
+#~ msgid "Ununtrium"
+#~ msgstr "Ununtriyum"
+
+#~ msgid "Ununquadium"
+#~ msgstr "Ununkuadiyum"
+
+#~ msgid "Ununpentium"
+#~ msgstr "Ununpentiyum"
+
+#~ msgid "Ununhexium"
+#~ msgstr "Ununheksiyum"
+
+#~ msgid "Ununseptium"
+#~ msgstr "Ununseptiyum"
+
+#~ msgid "Ununoctium"
+#~ msgstr "Ununoktiyum"
+
+#~ msgid "Greek 'hydro' and 'gennao' for 'forms water'"
+#~ msgstr ""
+#~ "Yunanca 'hydro' ve 'gennao' kelimelerinin birleşmesinden, 'su oluşturan' "
+#~ "anlamında"
+
+#~ msgid "The Greek word for the sun was 'helios'"
+#~ msgstr "Yunanca güneşin ismi 'helios' tur"
+
+#~ msgid "Greek 'lithos' means 'stone'"
+#~ msgstr "Yunanca 'lithos' 'kaya' anlamına gelir"
+
+#~ msgid "Greek 'beryllos' for 'light-green stone'"
+#~ msgstr "'Açık yeşil taş' anlamında Yunanca 'beryllos'"
+
+#~ msgid ""
+#~ "Boron means 'Bor(ax) + (carb)on'. It is found in borax and behaves a lot "
+#~ "like carbon"
+#~ msgstr ""
+#~ "Bor, 'Bor(ax) + (karb)on' kelimelerinden türetilmiştir. Boraksta bulunur "
+#~ "ve karbona çok benzer davranış gösterir"
+
+#~ msgid "Latin 'carboneum' for carbon"
+#~ msgstr "Karbon için Latince 'carboneum'"
+
+#~ msgid "Latin 'nitrogenium' ('forms saltpeter')"
+#~ msgstr "Latince'de 'nitrogenium' ('güherçile oluşturan')"
+
+#~ msgid "Latin 'oxygenium' (forms acids)"
+#~ msgstr "Latince'de 'oxygenium' (asit oluşturan)"
+
+#~ msgid "Latin 'fluere' ('floats')"
+#~ msgstr "Latince'de 'fluere' ('yüzen')"
+
+#~ msgid "Greek 'neo'. meaning 'new'"
+#~ msgstr "Yunanca 'neo'. anlamı 'yeni'"
+
+#~ msgid "Arabic 'natrun' for 'soda'"
+#~ msgstr "Arapça'da 'natrun' ('soda')"
+
+#~ msgid "Named after the city of Magnesia"
+#~ msgstr "Magnesia şehrinin ardından isimlendirilmiştir"
+
+#~ msgid "Latin 'alumen'"
+#~ msgstr "Latince 'alumen'"
+
+#~ msgid "Latin 'silex'"
+#~ msgstr "Latince 'silex'"
+
+#~ msgid "Greek 'phosphoros' for 'carries light'"
+#~ msgstr "Yunanca 'phosphoros' ('ışık taşıyan')"
+
+#~ msgid "In sanskrit 'sweb' means 'to sleep'"
+#~ msgstr "Sanskrit dilinde 'sweb', 'uyumak' anlamına gelir"
+
+#~ msgid "Greek 'chloros' for 'yellow-green'"
+#~ msgstr "Yunanca 'chloros' ('yeşil-sarı')"
+
+#~ msgid "Greek 'aergon' for 'inactive'"
+#~ msgstr "Yunanca'da 'pasif' anlamındaki 'aergon'dan"
+
+#~ msgid "Arabic 'al qaliy' for potash"
+#~ msgstr "Arapça'da 'al qaliy' (potas için)"
+
+#~ msgid "Latin 'calx' for 'lime'"
+#~ msgstr "'kireç' için Latince 'calx'"
+
+#~ msgid "Named because it was found in Scandinavia"
+#~ msgstr "İskandinavya'da bulunduğu için bu şekilde adlandırılmıştır"
+
+#~ msgid "The Titans were giants in Greek mythology"
+#~ msgstr "Titanlar Yunan mitolojisinde devlerdir"
+
+#~ msgid "'Vanadis' is another name for the Nordic goddess Freyja"
+#~ msgstr "'Vanadis', Norveç tanrıçası Freyja'nın diğer adıdır"
+
+#~ msgid "Greek 'chroma' means 'color'"
+#~ msgstr "Yunanca'da 'chroma', 'renk' anlamına gelir"
+
+#~ msgid ""
+#~ "It was discovered near a town named Magnesia in black earth. Thus, it was "
+#~ "named 'magnesia nigra', or for short, Manganese."
+#~ msgstr ""
+#~ "Bu element, kara toprak içinde Magnesia isimli bir kasaba civarında "
+#~ "bulunmuştur. 'Magnesia karası' veya kısaca Mangan olarak "
+#~ "isimlendirilmiştir."
+
+#~ msgid "Latin 'ferrum'"
+#~ msgstr "Latince 'ferrum'"
+
+#~ msgid "Named after the German word 'Kobold' for 'goblin'"
+#~ msgstr "Almanca 'Kobold' ('cin') kelimesinden türetilmiştir"
+
+#~ msgid "'Nickel' was the name of a mountain goblin"
+#~ msgstr "'Nickel' bir dağ cininin ismidir"
+
+#~ msgid "Greek 'cuprum' for Cypres"
+#~ msgstr "Selvi ağacından esinlenerek 'cuprum' ismi verilmiştir"
+
+#~ msgid "German 'zinking' for 'rough', because zinc ore is very rough"
+#~ msgstr ""
+#~ "Almanca'da 'zinking' ('sert') anlamında, çünkü çinko madeni çok serttir"
+
+#~ msgid "'Gallia' is an old name for France"
+#~ msgstr "'Gallia' Fransa'nın eski bir adı"
+
+#~ msgid "Latin 'germania' is an old name for Germany"
+#~ msgstr "Latince 'germania' Almanya'nın eski adı"
+
+#~ msgid "Greek 'arsenikos' for 'male' or 'bold'"
+#~ msgstr "Yunanca'da 'erkek' veya 'cesur' anlamındaki 'arsenikos'tan"
+
+#~ msgid "Greek 'selena' for 'moon'"
+#~ msgstr "'Ay' için Latince 'selena'"
+
+#~ msgid "Greek 'bromos' for 'smells badly'"
+#~ msgstr "Yunanca 'kötü kokan' anlamındaki 'bromos'tan gelmektedir"
+
+#~ msgid "Greek 'kryptos' for 'hidden'"
+#~ msgstr "'Gizli' için Yunanca 'kryptos'"
+
+#~ msgid "Latin 'rubidus' for 'dark red'"
+#~ msgstr "'Koyu kırmızı' için Latince 'rubidus'"
+
+#~ msgid "Named after the mineral Strontianit"
+#~ msgstr "Strontianit mineralinden bu ismi almıştır"
+
+#~ msgid ""
+#~ "Named after the small town of Ytterby near Stockholm in Sweden. Terbium. "
+#~ "Ytterbium and Gadolinium are also named after this town."
+#~ msgstr ""
+#~ "Element, ismini İsveç'te Stockholm civarındaki Ytterby isimli küçük "
+#~ "kasabadan almıştır. Terbiyum, İterbiyum ve Gadolinyum elementleri de bu "
+#~ "kasabadan isimlerini almıştır."
+
+#~ msgid "Named after the mineral zircon"
+#~ msgstr "Zirkon mineralinden ismini almıştır"
+
+#~ msgid "Named after Niobe, the daughter of the Greek god Tantalus."
+#~ msgstr "Yunan tanrısı Tantalus'un kızı Niobe'den ismini almıştır."
+
+#~ msgid ""
+#~ "This name has Greek roots. It means 'like Platinum' - it was difficult to "
+#~ "distinguish Molybdenum from Platinum."
+#~ msgstr ""
+#~ "Bu isim köklerini Yunanca'dan almaktadır. 'Platin gibi' anlamına gelir - "
+#~ "Molibdeni Platinden ayırmak güç idi."
+
+#~ msgid "Greek 'technetos' for artificial"
+#~ msgstr "Yunanca 'yapay' anlamına gelen 'technetos' kelimesinden"
+
+#~ msgid "Ruthenia is the old name of Russia"
+#~ msgstr "Rusya'nın eski ismi olan Ruthenia'dan"
+
+#~ msgid "Greek 'rhodeos' means 'red like a rose'"
+#~ msgstr "Yunanca'da 'rhodeos', 'gül gibi kırmızı' anlamına gelir"
+
+#~ msgid "Named after the asteroid Pallas"
+#~ msgstr "Pallas isimli asteroidden ismini almıştır"
+
+#~ msgid "Latin 'argentum' for silver"
+#~ msgstr "Gümüş için Latince'de 'argentum' kelimesi kullanılır"
+
+#~ msgid "Greek 'kadmia' ('Galmei' = Zinc carbonate)"
+#~ msgstr "Yunanca'da 'kadmia' ('Galmei'=Çinko karbonat)"
+
+#~ msgid "Named after 'Indigo' because of its blue spectrum"
+#~ msgstr "Mavi tayfı nedeniyle 'indigo' kelimesinden türetilmiştir"
+
+#~ msgid "Latin 'stannum' for tin"
+#~ msgstr "Kalay için Latince 'stannum'"
+
+#~ msgid "Arabic 'anthos ammonos' for 'blossom of the god Ammon'"
+#~ msgstr "Arapça'da 'anthos ammonos' (Ammon tanrısının çiçek açması)"
+
+#~ msgid "Latin 'tellus' or 'telluris' for 'Planet Earth'"
+#~ msgstr ""
+#~ "Latince'de 'tellus' veya 'telluris', 'Dünya Gezegeni' anlamına gelir"
+
+#~ msgid "Greek 'ioeides' for 'violet'."
+#~ msgstr "Yunanca'da 'menekşe' anlamında 'ioeides'"
+
+#~ msgid "Greek 'xenos' for 'foreigner'"
+#~ msgstr "Yunanca 'yabancı' anlamında 'xenos'"
+
+#~ msgid "Latin 'caesius' for 'heaven blue'."
+#~ msgstr "Latince'de 'cennet mavisi' anlamında 'caesius'tan"
+
+#~ msgid "Greek 'barys' for 'heavy'"
+#~ msgstr "Yunanca'da 'ağır' anlamındaki 'barys'ten"
+
+#~ msgid ""
+#~ "Greek 'lanthanein' for 'hidden'. The Lanthanoids are also called the "
+#~ "'rare earth' elements."
+#~ msgstr ""
+#~ "Yunanca'da 'gizli' anlamındaki 'lanthanein' kelimesinden türetilmiştir. "
+#~ "Lantanoitlere 'nadir toprak' elementleri de denmektedir."
+
+#~ msgid "Named after the planetoid Ceres"
+#~ msgstr "Ceres isimli gezegencikten ismini almıştır"
+
+#~ msgid "Greek 'prasinos didymos' for 'green twin'"
+#~ msgstr "Yunanca'da 'yeşil ikiz' anlamındaki 'prasinos didymos' kelimesinden"
+
+#~ msgid "Greek 'neos didymos' for 'new twin'"
+#~ msgstr "Yunanca 'yeni ikiz' anlamında 'neos didymos' kelimesinden"
+
+#~ msgid ""
+#~ "Named after the Greek Prometheus. Prometheus stole the fire from the gods "
+#~ "and gave it to mankind."
+#~ msgstr ""
+#~ "Yunanca'daki Promotheus kelimesinden gelmektedir. Mitolojiye göre "
+#~ "Prometheus tanrılardan ateşi çalmış ve insanlığa bağışlamıştır."
+
+#~ msgid "Named after the mineral Samarskit"
+#~ msgstr "Samarskit isimli minerale atfen"
+
+#~ msgid "Named after Europe"
+#~ msgstr "Avrupa ismine atfen"
+
+#~ msgid "Named after the Finnish chemist Johan Gadolin"
+#~ msgstr "Fin kimyager Johan Gadolin'in hatırasına atfen bu isim verilmiştir"
+
+#~ msgid "Named after the Swedish town of Ytterby"
+#~ msgstr "İsveç'teki Ytterby kasabasından dolayı bu ismi almıştır"
+
+#~ msgid "Greek 'dysprositor' for 'difficult to reach'"
+#~ msgstr "'Ulaşılması güç' anlamındaki Yunanca 'dysprositor' kelimesinden"
+
+#~ msgid "Latin 'holmia' for the old name of Stockholm"
+#~ msgstr "Stockholm'ün eski ismi olan, Latince 'holmia'dan"
+
+#~ msgid ""
+#~ "Named ofter the Swedish town of Ytterby. Terbium and Ytterbium are also "
+#~ "named after this town."
+#~ msgstr ""
+#~ "İsveç'teki Ytterby kasabasından ismini almıştır. Terbiyum ve İterbiyum da "
+#~ "bu kasabadan isimlerini almıştır."
+
+#~ msgid "Named after the old name of Scandinavia, 'Thule'."
+#~ msgstr "İskandinavya'nın eski adı olan 'Thule'den bu ismi almıştır."
+
+#~ msgid ""
+#~ "Like Terbium and Gadolinium, this is named after the Swedish town of "
+#~ "Ytterby."
+#~ msgstr ""
+#~ "Terbiyum ve Gadolinyum gibi, İsveç'teki Ytterby kasabasından dolayı bu "
+#~ "ismi almıştır."
+
+#~ msgid "Named after the Roman name 'Lutetia' for Paris"
+#~ msgstr "Paris için Roma'lıların koyduğu 'Lutetia' isminden"
+
+#~ msgid "'Hafnia' is the old name of Kopenhagen (Denmark)"
+#~ msgstr "'Hafnia', Danimarka'nın başkenti Kopenhag'ın eski adıdır"
+
+#~ msgid "Named after the Greek myth of Tantalos"
+#~ msgstr "Tantalos isimli Yunan mit kahramanından ismini almıştır"
+
+#~ msgid ""
+#~ "'tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~ "symbol 'W') was Wolfram, named after a mineral."
+#~ msgstr ""
+#~ "'Tung sten', İsveççe'de 'ağır kaya' anlamına gelmektedir. Eski ismi (ve "
+#~ "sembolü olan 'W') Wolfram olup bir mineralden kaynaklanmaktadır."
+
+#~ msgid "Named after the German river Rhine (latin 'Rhenium')."
+#~ msgstr "Adı, Alman ırmağı Rhine'den gelir (Latince'de 'Rhenium')"
+
+#~ msgid "Greek for 'smell'. Its oxides smell strongly like radishes."
+#~ msgstr ""
+#~ "Almanca'da 'koku' kelimesinden gelmekte olup oksitleri turp gibi kuvvetli "
+#~ "koku yaymaktadır."
+
+#~ msgid "Greek 'iris' for 'rainbow'"
+#~ msgstr "Yunanca'da 'gökkuşağı' anlamında 'iris' kelimesinden"
+
+#~ msgid "Spanish 'platina' means 'small silver'"
+#~ msgstr "İspanyolca'da 'küçük gümüş' anlamındaki 'platina' kelimesinden"
+
+#~ msgid "Latin 'aurum'. Named after Aurora, the goddess of sunrise"
+#~ msgstr ""
+#~ "Latince'de 'aurum', güneş doğumunu simgeleyen Aurora isimli tanrıçadan "
+#~ "gelmektedir"
+
+#~ msgid "Graeco-Latin 'hydrargyrum' for 'liquid silver'"
+#~ msgstr ""
+#~ "'Sıvı gümüş' anlamındaki, Yunan-Latin kökenli 'hydrargyrum' kelimesinden "
+#~ "türetilmiştir"
+
+#~ msgid "Greek 'tallos' for 'young twig'"
+#~ msgstr "Yunanca'da 'tallos' ('genç sürgün')"
+
+#~ msgid "Latin 'plumbum' for Lead"
+#~ msgstr "Latince'de kurşun için 'plumbum'"
+
+#~ msgid "The old name of Bismuth is 'Wismut', which stood for 'white mass'."
+#~ msgstr ""
+#~ "Bizmutun eski ismi 'Wismut' olup 'beyaz kütle' anlamına gelmektedir."
+
+#~ msgid "Named after Poland to honor Marie Curie"
+#~ msgstr "Marie Curie'nin anısına Polonya'dan türetilmiştir"
+
+#~ msgid "Greek 'astator' for 'changing'"
+#~ msgstr "Yunanca'da 'astator' ('değişen')"
+
+#~ msgid ""
+#~ "Named after Radium. It ends with 'on' to make it clear that it is a noble "
+#~ "gas."
+#~ msgstr ""
+#~ "Radyum'dan gelir. Sonundaki 'on' eki, asal gaz olduğunu belirtmek içindir."
+
+#~ msgid "Named after France to honor Marguerite Perey"
+#~ msgstr "Marguerite Perey'in anısına, Fransa'tan türetilmiştir"
+
+#~ msgid "Latin 'radius' for 'beam', as it is radioactive"
+#~ msgstr ""
+#~ "'Işın' anlamına gelen, Latince 'radius'tan türetilmiştir, çünkü "
+#~ "radyoaktiftir"
+
+#~ msgid "Greek 'aktis' for 'beam' - actinium is radioactive"
+#~ msgstr ""
+#~ "Yunanca'da 'ışın' anlamına gelen 'aktis'ten türetilmiştir, çünkü aktinyum "
+#~ "radyoaktiftir"
+
+#~ msgid "Named after the German god of thunder: Thor"
+#~ msgstr "Alman yıldırım tanrısı Thor'dan bu ismi almıştır"
+
+#~ msgid ""
+#~ "Greek 'protos' for 'ancester'. Protactinium is before Actinium in the "
+#~ "periodic table."
+#~ msgstr ""
+#~ "Yunanca'da 'ata' anlamındaki 'protos' kelimesinden gelmektedir. "
+#~ "Protaktinyum, periyodik tabloda Aktinyum'dan önce gelir."
+
+#~ msgid "Greek 'ouranos' for 'heaven'. Named after the planet Uranus."
+#~ msgstr ""
+#~ "Yunanca'da 'cennet' anlamındaki 'ouranos'tan türetilmiştir. Uranüs "
+#~ "gezegeninden ismini alır."
+
+#~ msgid "Named after the planet Neptune."
+#~ msgstr "Neptün gezegeninden dolayı bu ismi almıştır."
+
+#~ msgid "Named after the planet Pluto."
+#~ msgstr "Pluto gezegeninden dolayı bu ismi almıştır."
+
+#~ msgid "Named after America."
+#~ msgstr "Amerikadan sonra isimlendirildi."
+
+#~ msgid "Named after Marie Curie."
+#~ msgstr "Marie Curie'nin anısına ithaf edilmiştir."
+
+#~ msgid "Named after the town Berkeley where it was discovered."
+#~ msgstr "Keşfedildiği Berkeley kasabasının anısına ithaf edilmiştir."
+
+#~ msgid "Named after the US-State of California."
+#~ msgstr ""
+#~ "Amerika Birleşik Devletleri'ndeki Kaliforniya eyaletinden bu ismi "
+#~ "almıştır."
+
+#~ msgid "Named after the scientist Albert Einstein."
+#~ msgstr "Bilim adamı Albert Einstein'den bu ismi almıştır."
+
+#~ msgid "Named after the scientist Enrico Fermi."
+#~ msgstr "Bilim adamı Enrico Fermi'nin anısına bu isim verilmiştir."
+
+#~ msgid "Named after the scientist D.I. Mendeleev."
+#~ msgstr "Bilimadamı D.I. Mendeleev'den sonra isimlendirildi."
+
+#~ msgid "Named after the scientist Alfred Nobel."
+#~ msgstr "Bilimadamı Alfred Nobel'den sonra isimlendirildi."
+
+#~ msgid "Named after the scientist Ernest Orlando Lawrence."
+#~ msgstr ""
+#~ "Ernest Orlando Lawrence isimli bilim adamının anısına ithaf edilmiştir."
+
+#~ msgid "Named after the scientist Ernest Rutherford"
+#~ msgstr "Bilimadamı Ernest Rutherford'tan sonra isimlendirildi."
+
+#~ msgid "Named after the science-town Dubna in Russia"
+#~ msgstr "Rusya'daki bilim şehri Dubna'dan esinlenilmiştir"
+
+#~ msgid "Named after the scientist G. Theodore Seaborg."
+#~ msgstr "Bilimadamı G. Theodore Seaborg'tan sonra isimlendirildi."
+
+#~ msgid "Named after the scientist Niels Bohr."
+#~ msgstr "Bilimadamı Niels Bohr'dan sonra isimlendirildi."
+
+#~ msgid ""
+#~ "Latin 'hassia' for the German county Hessen. In Hessen a lot elements "
+#~ "have been discovered."
+#~ msgstr ""
+#~ "Alman kasabası Hessen için Latince 'hassia'dan türetilmiştir. Hessen'de "
+#~ "birçok element keşfedilmiştir."
+
+#~ msgid "Named after the scientist Lise Meitner."
+#~ msgstr "Bilim kadını Lise Meitner'in anısına isimlendirilmiştir."
+
+#~ msgid ""
+#~ "Named after the German city Darmstadt where many elements have been "
+#~ "discovered."
+#~ msgstr ""
+#~ "Pek çok elementin keşfedildiği, Almanya'daki Darmstadt şehrine ithaf "
+#~ "edilmiştir."
+
+#~ msgid "Named after Wilhelm Conrad Röntgen."
+#~ msgstr "Wilhelm Conrad Röntgen'den sonra isimlendirildi."
+
+#~ msgid ""
+#~ "Historically known as eka-mercury. Ununbium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Tarihte eka-civa olarak bilinir. Ununbiyum, geçici olarak IUPAC "
+#~ "tarafından konan sistematik element ismidir."
+
+#~ msgid ""
+#~ "Historically known as eka-thallium. Ununtrium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Tarihte eka-talyum olarak bilinir. Ununtriyum, IUPAC tarafından konan "
+#~ "geçici sistematik element ismidir."
+
+#~ msgid ""
+#~ "Historically known as eka-lead. Ununquadium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Tarihte eka-kurşun olarak bilinir. Ununkuadiyum, IUPAC tarafından konan "
+#~ "geçici sistematik element ismidir."
+
+#~ msgid ""
+#~ "Historically known as eka-bismuth. Ununpentium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Tarihte eka-bizmut olarak bilinir. Ununpentiyum, IUPAC tarafından konan "
+#~ "geçici sistematik element ismidir."
+
+#~ msgid ""
+#~ "Historically known as eka-polonium. Ununhexium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Tarihte eka-polonyum olarak bilinir. Ununheksiyum, IUPAC tarafından konan "
+#~ "geçici sistematik element ismidir."
+
+#~ msgid "Temporary symbol and name. Can also be referred to as eka-astatine."
+#~ msgstr "Geçici simge ve isim. Eka-astatin olarak ta isimlendirilebilir."
+
+#~ msgid ""
+#~ "Historically known as eka-radon, eka-emanation before 1960. Ununoctium is "
+#~ "a temporary IUPAC systematic element name."
+#~ msgstr ""
+#~ "Tarihte eka-radon olarak bilinir, 1960'tan önce eka emanasyonu denirdi. "
+#~ "Ununoktiyum, IUPAC tarafından konan geçici sistematik element ismidir."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Serdar Soytetir"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "tulliana@gmail.com"
+
+#~ msgid "Ununbium"
+#~ msgstr "Ununbiyum"
+
+#~ msgid "no translations found"
+#~ msgstr "hiç çeviri bulunamadı"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "proper name"
+#~ msgstr "Engin Çağatay"
+
+#, fuzzy
+#~ msgid "March"
+#~ msgstr "Ara:"
+
+#~ msgid "Week %1"
+#~ msgstr "Hafta %1"
+
+#~ msgid "Next year"
+#~ msgstr "Sonraki yıl"
+
+#~ msgid "Previous year"
+#~ msgstr "Önceki yıl"
+
+#~ msgid "Next month"
+#~ msgstr "Sonraki ay"
+
+#~ msgid "Previous month"
+#~ msgstr "Önceki ay"
+
+#~ msgid "Select a week"
+#~ msgstr "Bir hafta seçin"
+
+#~ msgid "Select a month"
+#~ msgstr "Bir ay seçin"
+
+#~ msgid "Select a year"
+#~ msgstr "Bir yıl seçin"
+
+#~ msgid "Select the current day"
+#~ msgstr "Mevcut günü seçin"
+
+#~ msgid "(c) 2004, Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"
+
+#, fuzzy
+#~| msgid "(c) 2004, Jason Harris"
+#~ msgid "Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"
+
+#, fuzzy
+#~ msgid "(c) 2005, Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"
+
+#, fuzzy
+#~ msgid "(c) 2006, Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"

@@ -1,0 +1,2068 @@
+# translation of libkdeedu.po to
+# Language AR translations for PACKAGE package.
+# Automatically generated, 2007.
+# Khaled Hosny <khaledhosny@eglug.org>, 2007.
+# Youssef Chahibi <chahibi@gmail.com>, 2007.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2022-01-29 12:57+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 21.07.70\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "العنوان:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "المؤلّف:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "مستند الدروس"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "أنواع الكلمات"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr "صندوق ليتنر"
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, kde-format
+msgid "Cannot lock file %1"
+msgstr "تعذّر قفل الملفّ %1"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>تعذّر فتح الملفّ<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, kde-format
+msgid "Cannot open tempfile %1"
+msgstr "تعذّر فتح الملف المؤقت %1"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, kde-format
+msgid "Cannot download %1: %2"
+msgstr "تعذّر تنزيل  %1: %2"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"أو قراءة بشكل صحيح \"%1\"\n"
+"(الخطأ: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "تعذرت الكتابة إلى الملف %1"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "الأصلية"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "%1 ترجمة"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "مستند مفردات كدي"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "مستند اختبار الكلمات ك"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "درس بوكر "
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "مدرب المفردات"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "تنسيق تبادل قاموس XML"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr "فصولة بفواصل (CSV)"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "كل المستندات المدعومة"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "لا يوجد خطأ."
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "يوجد جزء XML غير صحيح في المستند."
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "نوع الملفّ مجهول."
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "الملف غير قابل للكتابة."
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr "فشل كاتب الملفّ."
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "الملف غير قابل للقراءة."
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr "فشل قارئ الملفّ."
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "الملف غير موجود."
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr "الملف مقفل بعملية أخرى."
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr "لا يمكن إنشاء ملف مقفل."
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "خطأ مجهول."
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "فعل"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "اسم"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "الاسم"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "تعريف/تنكير"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "صفة"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "ظرف"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "ضمير"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "عبارة"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "رقمي"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "الاقتران"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "حرف جر"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "سؤال"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "رقم ترتيبي"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "رقم كمي"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "مؤكّد"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "غير محدد"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr "منتظِم"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr "شاذ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "صيغة الملكية"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr "شخصية"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "ذكر"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "أنثى"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr "طبيعي"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "مضارع بسيط"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "مضارع  تقدّمي"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "مضارع تام"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "ماضي بسيط"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "ماضي تقدّمي"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "الماضي النعت الفعلي"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "المستقبل"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "فعل"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "نون"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "الاسم"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "تعريف/تنكير"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "صفة"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "ظرف"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "ضمير"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "عبارة"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "رقمي"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "الاقتران"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "حرف جر"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "سؤال"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "لم تمارس بعد"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "المستوى 1"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "المستوى 2"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "المستوى 3"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "المستوى 4"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "المستوى 5"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "المستوى 6"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "المستوى 7"
+
+#, fuzzy
+#~ msgid "Untitled"
+#~ msgstr "بدون عنوان"
+
+#, fuzzy
+#~ msgid "Vocabulary"
+#~ msgstr "كدي المفردات مستند"
+
+#, fuzzy
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr "يُعرْب :: تُعرب خطأ عند سطر عمود n 3"
+
+#, fuzzy
+#~ msgid "Error Opening File"
+#~ msgstr "خطأ الإفتتاح ملف"
+
+#, fuzzy
+#~ msgid "file must be opened first"
+#~ msgstr "ملفّ الأوّل"
+
+#, fuzzy
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "هذا هو ليس a كدي المفردات مستند."
+
+#, fuzzy
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "مفقود معرَف من بطاقة"
+
+#, fuzzy
+#~ msgid "Default Lesson"
+#~ msgstr "افتراضي الدرس"
+
+#, fuzzy
+#~ msgid "identifier missing id"
+#~ msgstr "معرَف مفقود هوية"
+
+#, fuzzy
+#~ msgid "entry missing id"
+#~ msgstr "خانة مفقود هوية"
+
+#, fuzzy
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "الدرس 1"
+
+#, fuzzy
+#~ msgid "Data for original language missing"
+#~ msgstr "البيانات لـ أصلي لغة مفقود"
+
+#, fuzzy
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "ملتبس تعريف من لغة رمز"
+
+#, fuzzy
+#~ msgid "This is not a Pauker document"
+#~ msgstr "هذا هو ليس a مستند"
+
+#, fuzzy
+#~ msgid "Lesson %1"
+#~ msgstr "الدرس 1"
+
+#, fuzzy
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "هذا ليس ظهور إلى a K ملفّ"
+
+#, fuzzy
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr "فقط ملفات أداء x أو"
+
+#, fuzzy
+#~ msgid "Error while reading file"
+#~ msgstr "خطأ بينما القراءة ملفّ"
+
+#, fuzzy
+#~ msgid "This is not a XDXF document"
+#~ msgstr "هذا هو ليس a مستند"
+
+#~ msgid "Glossary"
+#~ msgstr "المَسْرَد"
+
+#, fuzzy
+#~ msgid "&Search:"
+#~ msgstr "&بحث:"
+
+#~ msgid "References"
+#~ msgstr "مراجع"
+
+#, fuzzy
+#~ msgid "Go to '%1'"
+#~ msgstr "إذهب إلى"
+
+#, fuzzy
+#~ msgid "Transition Elements"
+#~ msgstr "الترجمة 1"
+
+#, fuzzy
+#~ msgid "Dummy"
+#~ msgstr "زائف"
+
+#, fuzzy
+#~ msgid "Hydrogen"
+#~ msgstr "هيدروجينHydrogenالهيدروجين"
+
+#, fuzzy
+#~ msgid "Helium"
+#~ msgstr "هيليوم"
+
+#, fuzzy
+#~ msgid "Lithium"
+#~ msgstr "ليثيوم"
+
+#, fuzzy
+#~ msgid "Beryllium"
+#~ msgstr "بريليوم"
+
+#, fuzzy
+#~ msgid "Boron"
+#~ msgstr "بورون"
+
+#, fuzzy
+#~ msgid "Carbon"
+#~ msgstr "كربون"
+
+#, fuzzy
+#~ msgid "Nitrogen"
+#~ msgstr "نيتروجين"
+
+#, fuzzy
+#~ msgid "Oxygen"
+#~ msgstr "أكسجين"
+
+#, fuzzy
+#~ msgid "Fluorine"
+#~ msgstr "فلور"
+
+#, fuzzy
+#~ msgid "Neon"
+#~ msgstr "نيون"
+
+#, fuzzy
+#~ msgid "Sodium"
+#~ msgstr "صوديوم"
+
+#, fuzzy
+#~ msgid "Magnesium"
+#~ msgstr "منجنيزوم"
+
+#, fuzzy
+#~ msgid "Aluminium"
+#~ msgstr "الألومنيوم"
+
+#, fuzzy
+#~ msgid "Silicon"
+#~ msgstr "سليكون"
+
+#, fuzzy
+#~ msgid "Phosphorus"
+#~ msgstr "فوسفور"
+
+#, fuzzy
+#~ msgid "Sulfur"
+#~ msgstr "الكبريت"
+
+#, fuzzy
+#~ msgid "Chlorine"
+#~ msgstr "كلور"
+
+#, fuzzy
+#~ msgid "Argon"
+#~ msgstr "أرجون"
+
+#, fuzzy
+#~ msgid "Potassium"
+#~ msgstr "بوتاسيوم"
+
+#, fuzzy
+#~ msgid "Calcium"
+#~ msgstr "كالسيوم"
+
+#, fuzzy
+#~ msgid "Scandium"
+#~ msgstr "سكانديوم"
+
+#, fuzzy
+#~ msgid "Titanium"
+#~ msgstr "تيتانيوم"
+
+#, fuzzy
+#~ msgid "Vanadium"
+#~ msgstr "فانيديوم"
+
+#, fuzzy
+#~ msgid "Chromium"
+#~ msgstr "كروم"
+
+#, fuzzy
+#~ msgid "Manganese"
+#~ msgstr "منجنيز"
+
+#, fuzzy
+#~ msgid "Iron"
+#~ msgstr "حديد"
+
+#, fuzzy
+#~ msgid "Cobalt"
+#~ msgstr "كوبالت"
+
+#, fuzzy
+#~ msgid "Nickel"
+#~ msgstr "نيكل"
+
+#, fuzzy
+#~ msgid "Copper"
+#~ msgstr "نحاس"
+
+#, fuzzy
+#~ msgid "Zinc"
+#~ msgstr "خارصين"
+
+#, fuzzy
+#~ msgid "Gallium"
+#~ msgstr "جاليوم"
+
+#, fuzzy
+#~ msgid "Germanium"
+#~ msgstr "جرمانيوم"
+
+#, fuzzy
+#~ msgid "Arsenic"
+#~ msgstr "زرنيخ"
+
+#, fuzzy
+#~ msgid "Selenium"
+#~ msgstr "سيلينيوم"
+
+#, fuzzy
+#~ msgid "Bromine"
+#~ msgstr "البروم"
+
+#, fuzzy
+#~ msgid "Krypton"
+#~ msgstr "كريبتون"
+
+#, fuzzy
+#~ msgid "Rubidium"
+#~ msgstr "روبيديوم"
+
+#, fuzzy
+#~ msgid "Strontium"
+#~ msgstr "السترونتيوم"
+
+#, fuzzy
+#~ msgid "Yttrium"
+#~ msgstr "يتريوم"
+
+#, fuzzy
+#~ msgid "Zirconium"
+#~ msgstr "زركونيوم"
+
+#, fuzzy
+#~ msgid "Niobium"
+#~ msgstr "نيوبيوم"
+
+#, fuzzy
+#~ msgid "Molybdenum"
+#~ msgstr "مولبيدن"
+
+#, fuzzy
+#~ msgid "Technetium"
+#~ msgstr "تكنيتيوم"
+
+#, fuzzy
+#~ msgid "Ruthenium"
+#~ msgstr "ئروثينيوم"
+
+#, fuzzy
+#~ msgid "Rhodium"
+#~ msgstr "روديوم"
+
+#, fuzzy
+#~ msgid "Palladium"
+#~ msgstr "بلاديوم"
+
+#, fuzzy
+#~ msgid "Silver"
+#~ msgstr "فضي"
+
+#, fuzzy
+#~ msgid "Cadmium"
+#~ msgstr "كاديوم"
+
+#, fuzzy
+#~ msgid "Indium"
+#~ msgstr "إنديوم"
+
+#, fuzzy
+#~ msgid "Tin"
+#~ msgstr "العلبة"
+
+#, fuzzy
+#~ msgid "Antimony"
+#~ msgstr "الأنتيمون"
+
+#, fuzzy
+#~ msgid "Tellurium"
+#~ msgstr "تيلوريوم"
+
+#, fuzzy
+#~ msgid "Iodine"
+#~ msgstr "يود"
+
+#, fuzzy
+#~ msgid "Xenon"
+#~ msgstr "زينون"
+
+#, fuzzy
+#~ msgid "Barium"
+#~ msgstr "باريوم"
+
+#, fuzzy
+#~ msgid "Lanthanum"
+#~ msgstr "لانثانوم"
+
+#, fuzzy
+#~ msgid "Cerium"
+#~ msgstr "سيريوم"
+
+#, fuzzy
+#~ msgid "Praseodymium"
+#~ msgstr "براسيوديميوم"
+
+#, fuzzy
+#~ msgid "Neodymium"
+#~ msgstr "نيوديميوم"
+
+#, fuzzy
+#~ msgid "Promethium"
+#~ msgstr "بروميثيوم"
+
+#, fuzzy
+#~ msgid "Samarium"
+#~ msgstr "ساماريوم"
+
+#, fuzzy
+#~ msgid "Europium"
+#~ msgstr "يوروبيوم"
+
+#, fuzzy
+#~ msgid "Gadolinium"
+#~ msgstr "جادولينيوم"
+
+#, fuzzy
+#~ msgid "Terbium"
+#~ msgstr "تريبيون"
+
+#, fuzzy
+#~ msgid "Dysprosium"
+#~ msgstr "الدّسبروزيوم (عنصر كيميائي)"
+
+#, fuzzy
+#~ msgid "Holmium"
+#~ msgstr "هولميوم"
+
+#, fuzzy
+#~ msgid "Erbium"
+#~ msgstr "إريبيوم"
+
+#, fuzzy
+#~ msgid "Thulium"
+#~ msgstr "ثوليوم"
+
+#, fuzzy
+#~ msgid "Ytterbium"
+#~ msgstr "يتربيون"
+
+#, fuzzy
+#~ msgid "Lutetium"
+#~ msgstr "لوتيسيوم"
+
+#, fuzzy
+#~ msgid "Hafnium"
+#~ msgstr "هفنيوم"
+
+#, fuzzy
+#~ msgid "Tantalum"
+#~ msgstr "تانتالم"
+
+#, fuzzy
+#~ msgid "Tungsten"
+#~ msgstr "تنجستن"
+
+#, fuzzy
+#~ msgid "Rhenium"
+#~ msgstr "رينيوم"
+
+#, fuzzy
+#~ msgid "Osmium"
+#~ msgstr "أوزميوم"
+
+#, fuzzy
+#~ msgid "Iridium"
+#~ msgstr "إريديوم"
+
+#, fuzzy
+#~ msgid "Platinum"
+#~ msgstr "بلاتينوم"
+
+#, fuzzy
+#~ msgid "Gold"
+#~ msgstr "ذهب"
+
+#, fuzzy
+#~| msgid "February"
+#~ msgid "Mercury"
+#~ msgstr "ماركوري"
+
+#, fuzzy
+#~ msgid "Thallium"
+#~ msgstr "ثاليوم"
+
+#, fuzzy
+#~ msgid "Lead"
+#~ msgstr "التقدم"
+
+#, fuzzy
+#~ msgid "Bismuth"
+#~ msgstr "بزموث"
+
+#, fuzzy
+#~ msgid "Polonium"
+#~ msgstr "بولونيوم"
+
+#, fuzzy
+#~ msgid "Astatine"
+#~ msgstr "الأستاتين"
+
+#, fuzzy
+#~ msgid "Radon"
+#~ msgstr "رادون"
+
+#, fuzzy
+#~ msgid "Francium"
+#~ msgstr "فرانسيوم"
+
+#, fuzzy
+#~ msgid "Radium"
+#~ msgstr "راديوم"
+
+#, fuzzy
+#~ msgid "Actinium"
+#~ msgstr "أكتينيوم"
+
+#, fuzzy
+#~ msgid "Thorium"
+#~ msgstr "ثوريوم"
+
+#, fuzzy
+#~ msgid "Protactinium"
+#~ msgstr "بروتكتتينيوم"
+
+#, fuzzy
+#~ msgid "Uranium"
+#~ msgstr "يورانيوم"
+
+#, fuzzy
+#~ msgid "Neptunium"
+#~ msgstr "نبتونيوم"
+
+#, fuzzy
+#~ msgid "Plutonium"
+#~ msgstr "بولتونيوم"
+
+#, fuzzy
+#~ msgid "Americium"
+#~ msgstr "أمريكيوم"
+
+#, fuzzy
+#~ msgid "Curium"
+#~ msgstr "كوريوم"
+
+#, fuzzy
+#~ msgid "Berkelium"
+#~ msgstr "بركليوم"
+
+#, fuzzy
+#~ msgid "Californium"
+#~ msgstr "كالفورنيوم"
+
+#, fuzzy
+#~ msgid "Einsteinium"
+#~ msgstr "أينشتانيوم"
+
+#, fuzzy
+#~ msgid "Fermium"
+#~ msgstr "فرميوم"
+
+#, fuzzy
+#~ msgid "Mendelevium"
+#~ msgstr "مندليفيوم"
+
+#, fuzzy
+#~ msgid "Nobelium"
+#~ msgstr "نوبليوم"
+
+#, fuzzy
+#~ msgid "Lawrencium"
+#~ msgstr "لورنسيوم"
+
+#, fuzzy
+#~ msgid "Copernicium"
+#~ msgstr "سيريوم"
+
+#, fuzzy
+#~ msgid "Ununseptium"
+#~ msgstr "لوتيسيوم"
+
+#, fuzzy
+#~ msgid "Greek 'hydro' and 'gennao' for 'forms water'"
+#~ msgstr "يوناني و لـ الجدي"
+
+#, fuzzy
+#~ msgid "The Greek word for the sun was 'helios'"
+#~ msgstr "الـ يوناني كلمة لـ"
+
+#, fuzzy
+#~ msgid "Greek 'lithos' means 'stone'"
+#~ msgstr "يوناني"
+
+#, fuzzy
+#~ msgid "Greek 'beryllos' for 'light-green stone'"
+#~ msgstr "يوناني لـ ضوء أخضر"
+
+#, fuzzy
+#~ msgid ""
+#~ "Boron means 'Bor(ax) + (carb)on'. It is found in borax and behaves a lot "
+#~ "like carbon"
+#~ msgstr "بورون يعمل itإيطالياهو هو موجود بوصة و a مثل"
+
+#, fuzzy
+#~ msgid "Latin 'carboneum' for carbon"
+#~ msgstr "لاتيني لـ"
+
+#, fuzzy
+#~ msgid "Latin 'nitrogenium' ('forms saltpeter')"
+#~ msgstr "لاتيني"
+
+#, fuzzy
+#~ msgid "Latin 'oxygenium' (forms acids)"
+#~ msgstr "لاتيني"
+
+#, fuzzy
+#~ msgid "Latin 'fluere' ('floats')"
+#~ msgstr "لاتيني"
+
+#, fuzzy
+#~ msgid "Greek 'neo'. meaning 'new'"
+#~ msgstr "يوناني جديد"
+
+#, fuzzy
+#~ msgid "Arabic 'natrun' for 'soda'"
+#~ msgstr "عربي لـ"
+
+#, fuzzy
+#~ msgid "Named after the city of Magnesia"
+#~ msgstr "مسمّى بعد من أكسيد المغنيسيوم"
+
+#, fuzzy
+#~ msgid "Latin 'alumen'"
+#~ msgstr "لاتيني"
+
+#, fuzzy
+#~ msgid "Latin 'silex'"
+#~ msgstr "لاتيني"
+
+#, fuzzy
+#~ msgid "Greek 'phosphoros' for 'carries light'"
+#~ msgstr "يوناني لـ ضوء"
+
+#, fuzzy
+#~ msgid "In sanskrit 'sweb' means 'to sleep'"
+#~ msgstr "داخل إلى النوم"
+
+#, fuzzy
+#~ msgid "Greek 'chloros' for 'yellow-green'"
+#~ msgstr "يوناني لـ أصفر أخضر"
+
+#, fuzzy
+#~ msgid "Greek 'aergon' for 'inactive'"
+#~ msgstr "يوناني لـ غير نشط"
+
+#, fuzzy
+#~ msgid "Arabic 'al qaliy' for potash"
+#~ msgstr "عربي لـ"
+
+#, fuzzy
+#~ msgid "Latin 'calx' for 'lime'"
+#~ msgstr "لاتيني لـ ليم"
+
+#, fuzzy
+#~ msgid "Named because it was found in Scandinavia"
+#~ msgstr "مسمّى الإيطالية موجود بوصة الإسكندنافيا"
+
+#, fuzzy
+#~ msgid "The Titans were giants in Greek mythology"
+#~ msgstr "الـ جبابرة بوصة يوناني"
+
+#, fuzzy
+#~ msgid "'Vanadis' is another name for the Nordic goddess Freyja"
+#~ msgstr "هو الاسم لـ شمالي"
+
+#, fuzzy
+#~ msgid "Greek 'chroma' means 'color'"
+#~ msgstr "يوناني"
+
+#, fuzzy
+#~ msgid ""
+#~ "It was discovered near a town named Magnesia in black earth. Thus, it was "
+#~ "named 'magnesia nigra', or for short, Manganese."
+#~ msgstr ""
+#~ "itإيطالياهو a مسمى أكسيد المغنيسيوم بوصة a أسود هكذا الإيطالية مسمى قصير "
+#~ "منجنيز"
+
+#, fuzzy
+#~ msgid "Latin 'ferrum'"
+#~ msgstr "لاتيني"
+
+#, fuzzy
+#~ msgid "Named after the German word 'Kobold' for 'goblin'"
+#~ msgstr "مسمّى بعد ألماني كلمة لـ"
+
+#, fuzzy
+#~ msgid "'Nickel' was the name of a mountain goblin"
+#~ msgstr "نيكل الاسم من a"
+
+#, fuzzy
+#~ msgid "Greek 'cuprum' for Cypres"
+#~ msgstr "يوناني لـ"
+
+#, fuzzy
+#~ msgid "German 'zinking' for 'rough', because zinc ore is very rough"
+#~ msgstr "ألماني لـ هو"
+
+#, fuzzy
+#~ msgid "'Gallia' is an old name for France"
+#~ msgstr "هو الاسم لـ فرنسا"
+
+#, fuzzy
+#~ msgid "Latin 'germania' is an old name for Germany"
+#~ msgstr "لاتيني هو الاسم لـ ألمانيا"
+
+#, fuzzy
+#~ msgid "Greek 'arsenikos' for 'male' or 'bold'"
+#~ msgstr "يوناني لـ أو سميك"
+
+#, fuzzy
+#~ msgid "Greek 'selena' for 'moon'"
+#~ msgstr "يوناني لـ"
+
+#, fuzzy
+#~ msgid "Greek 'bromos' for 'smells badly'"
+#~ msgstr "يوناني لـ"
+
+#, fuzzy
+#~ msgid "Greek 'kryptos' for 'hidden'"
+#~ msgstr "يوناني لـ مخفي"
+
+#, fuzzy
+#~ msgid "Latin 'rubidus' for 'dark red'"
+#~ msgstr "لاتيني لـ أحمر"
+
+#, fuzzy
+#~ msgid "Named after the mineral Strontianit"
+#~ msgstr "مسمّى بعد"
+
+#, fuzzy
+#~ msgid ""
+#~ "Named after the small town of Ytterby near Stockholm in Sweden. Terbium. "
+#~ "Ytterbium and Gadolinium are also named after this town."
+#~ msgstr ""
+#~ "مسمّى بعد صغير من استوكهولم بوصة السويد تريبيون يتربيون و جادولينيوم مسمى "
+#~ "بعد."
+
+#, fuzzy
+#~ msgid "Named after the mineral zircon"
+#~ msgstr "مسمّى بعد"
+
+#, fuzzy
+#~ msgid "Named after Niobe, the daughter of the Greek god Tantalus."
+#~ msgstr "مسمّى بعد نيوب من يوناني خزانة المشروبات"
+
+#, fuzzy
+#~ msgid ""
+#~ "This name has Greek roots. It means 'like Platinum' - it was difficult to "
+#~ "distinguish Molybdenum from Platinum."
+#~ msgstr ""
+#~ "هذا الاسم يوناني itإيطالياهو مثل بلاتينوم الإيطالية إلى مولبيدن من "
+#~ "بلاتينوم."
+
+#, fuzzy
+#~ msgid "Greek 'technetos' for artificial"
+#~ msgstr "يوناني لـ"
+
+#, fuzzy
+#~ msgid "Ruthenia is the old name of Russia"
+#~ msgstr "روثينيا هو الاسم من روسيا"
+
+#, fuzzy
+#~ msgid "Greek 'rhodeos' means 'red like a rose'"
+#~ msgstr "يوناني أحمر مثل a"
+
+#, fuzzy
+#~ msgid "Named after the asteroid Pallas"
+#~ msgstr "مسمّى بعد كويكب"
+
+#, fuzzy
+#~ msgid "Latin 'argentum' for silver"
+#~ msgstr "لاتيني لـ"
+
+#, fuzzy
+#~ msgid "Greek 'kadmia' ('Galmei' = Zinc carbonate)"
+#~ msgstr "يوناني خارصين"
+
+#, fuzzy
+#~ msgid "Named after 'Indigo' because of its blue spectrum"
+#~ msgstr "مسمّى بعد نيلي من أزرق"
+
+#, fuzzy
+#~ msgid "Latin 'stannum' for tin"
+#~ msgstr "لاتيني لـ"
+
+#, fuzzy
+#~ msgid "Arabic 'anthos ammonos' for 'blossom of the god Ammon'"
+#~ msgstr "عربي لـ من"
+
+#, fuzzy
+#~ msgid "Latin 'tellus' or 'telluris' for 'Planet Earth'"
+#~ msgstr "لاتيني أو لـ كوكب الأرض"
+
+#, fuzzy
+#~ msgid "Greek 'ioeides' for 'violet'."
+#~ msgstr "يوناني لـ"
+
+#, fuzzy
+#~ msgid "Greek 'xenos' for 'foreigner'"
+#~ msgstr "يوناني لـ"
+
+#, fuzzy
+#~ msgid "Latin 'caesius' for 'heaven blue'."
+#~ msgstr "لاتيني لـ"
+
+#, fuzzy
+#~ msgid "Greek 'barys' for 'heavy'"
+#~ msgstr "يوناني لـ"
+
+#, fuzzy
+#~ msgid ""
+#~ "Greek 'lanthanein' for 'hidden'. The Lanthanoids are also called the "
+#~ "'rare earth' elements."
+#~ msgstr "يوناني لـ مخفي الـ"
+
+#, fuzzy
+#~ msgid "Named after the planetoid Ceres"
+#~ msgstr "مسمّى بعد يشمّع"
+
+#, fuzzy
+#~ msgid "Greek 'prasinos didymos' for 'green twin'"
+#~ msgstr "يوناني لـ أخضر"
+
+#, fuzzy
+#~ msgid "Greek 'neos didymos' for 'new twin'"
+#~ msgstr "يوناني لـ جديد"
+
+#, fuzzy
+#~ msgid ""
+#~ "Named after the Greek Prometheus. Prometheus stole the fire from the gods "
+#~ "and gave it to mankind."
+#~ msgstr ""
+#~ "مسمّى بعد بروميثيوس - العملاق الذي سرق النّيران من أوليمبس و أعطاها "
+#~ "للبشريّة. الأساطير اليونانيّة  بروميثيوس - العملاق الذي سرق النّيران من "
+#~ "أوليمبس و أعطاها للبشريّة. الأساطير اليونانيّة  من و الإيطالية إلى"
+
+#, fuzzy
+#~ msgid "Named after the mineral Samarskit"
+#~ msgstr "مسمّى بعد"
+
+#, fuzzy
+#~ msgid "Named after Europe"
+#~ msgstr "مسمّى بعد أوروبا"
+
+#, fuzzy
+#~ msgid "Named after the Finnish chemist Johan Gadolin"
+#~ msgstr "مسمّى بعد الفنلندية"
+
+#, fuzzy
+#~ msgid "Named after the Swedish town of Ytterby"
+#~ msgstr "مسمّى بعد سويدي من"
+
+#, fuzzy
+#~ msgid "Greek 'dysprositor' for 'difficult to reach'"
+#~ msgstr "يوناني لـ إلى"
+
+#, fuzzy
+#~ msgid "Latin 'holmia' for the old name of Stockholm"
+#~ msgstr "لاتيني لـ الاسم من استوكهولم"
+
+#, fuzzy
+#~ msgid ""
+#~ "Named ofter the Swedish town of Ytterby. Terbium and Ytterbium are also "
+#~ "named after this town."
+#~ msgstr "مسمّى سويدي من تريبيون و يتربيون مسمى بعد."
+
+#, fuzzy
+#~ msgid "Named after the old name of Scandinavia, 'Thule'."
+#~ msgstr "مسمّى بعد الاسم من الإسكندنافيا Thule"
+
+#, fuzzy
+#~ msgid ""
+#~ "Like Terbium and Gadolinium, this is named after the Swedish town of "
+#~ "Ytterby."
+#~ msgstr "مثل تريبيون و جادولينيوم هو مسمى بعد سويدي من"
+
+#, fuzzy
+#~ msgid "Named after the Roman name 'Lutetia' for Paris"
+#~ msgstr "مسمّى بعد روماني الاسم لـ باريس"
+
+#, fuzzy
+#~ msgid "'Hafnia' is the old name of Kopenhagen (Denmark)"
+#~ msgstr "هو الاسم من الدنمارك"
+
+#, fuzzy
+#~ msgid "Named after the Greek myth of Tantalos"
+#~ msgstr "مسمّى بعد يوناني من"
+
+#, fuzzy
+#~ msgid ""
+#~ "'tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~ "symbol 'W') was Wolfram, named after a mineral."
+#~ msgstr "بوصة سويدي الـ الاسم و رمز W عنصر التّنجستين مسمى بعد a"
+
+#, fuzzy
+#~ msgid "Named after the German river Rhine (latin 'Rhenium')."
+#~ msgstr "مسمّى بعد ألماني الراين رينيوم"
+
+#, fuzzy
+#~ msgid "Greek for 'smell'. Its oxides smell strongly like radishes."
+#~ msgstr "يوناني لـ له مثل"
+
+#, fuzzy
+#~ msgid "Greek 'iris' for 'rainbow'"
+#~ msgstr "يوناني لـ قوس قزح"
+
+#, fuzzy
+#~ msgid "Spanish 'platina' means 'small silver'"
+#~ msgstr "اسباني صغير"
+
+#, fuzzy
+#~ msgid "Latin 'aurum'. Named after Aurora, the goddess of sunrise"
+#~ msgstr "لاتيني مسمى بعد أورورا من"
+
+#, fuzzy
+#~ msgid "Graeco-Latin 'hydrargyrum' for 'liquid silver'"
+#~ msgstr "لاتيني لـ"
+
+#, fuzzy
+#~ msgid "Greek 'tallos' for 'young twig'"
+#~ msgstr "يوناني لـ"
+
+#, fuzzy
+#~ msgid "Latin 'plumbum' for Lead"
+#~ msgstr "لاتيني لـ التقدم"
+
+#, fuzzy
+#~ msgid "The old name of Bismuth is 'Wismut', which stood for 'white mass'."
+#~ msgstr "الـ الاسم من بزموث هو هذا لـ أبيض"
+
+#, fuzzy
+#~ msgid "Named after Poland to honor Marie Curie"
+#~ msgstr "مسمّى بعد بولندا إلى ماري الكوري"
+
+#, fuzzy
+#~ msgid "Greek 'astator' for 'changing'"
+#~ msgstr "يوناني لـ"
+
+#, fuzzy
+#~ msgid ""
+#~ "Named after Radium. It ends with 'on' to make it clear that it is a noble "
+#~ "gas."
+#~ msgstr ""
+#~ "مسمّى بعد راديوم itإيطالياهو مع يعمل إلى make الإيطالية مسح الإيطالية هو a"
+
+#, fuzzy
+#~ msgid "Named after France to honor Marguerite Perey"
+#~ msgstr "مسمّى بعد فرنسا إلى زهر اللؤلؤ"
+
+#, fuzzy
+#~ msgid "Latin 'radius' for 'beam', as it is radioactive"
+#~ msgstr "لاتيني لـ الإيطالية هو"
+
+#, fuzzy
+#~ msgid "Greek 'aktis' for 'beam' - actinium is radioactive"
+#~ msgstr "لاتيني لـ الإيطالية هو"
+
+#, fuzzy
+#~ msgid "Named after the German god of thunder: Thor"
+#~ msgstr "مسمّى بعد ألماني من ثور"
+
+#, fuzzy
+#~ msgid ""
+#~ "Greek 'protos' for 'ancester'. Protactinium is before Actinium in the "
+#~ "periodic table."
+#~ msgstr "يوناني لـ بروتكتتينيوم هو قبل أكتينيوم بوصة جدول."
+
+#, fuzzy
+#~ msgid "Greek 'ouranos' for 'heaven'. Named after the planet Uranus."
+#~ msgstr "يوناني لـ مسمّى بعد كوكب أورانوس"
+
+#, fuzzy
+#~ msgid "Named after the planet Neptune."
+#~ msgstr "مسمّى بعد كوكب نبتون."
+
+#, fuzzy
+#~ msgid "Named after the planet Pluto."
+#~ msgstr "مسمّى بعد كوكب بلوتو."
+
+#, fuzzy
+#~ msgid "Named after America."
+#~ msgstr "مسمّى بعد أمريكا الشمالية."
+
+#, fuzzy
+#~ msgid "Named after Marie Curie."
+#~ msgstr "مسمّى بعد ماري الكوري."
+
+#, fuzzy
+#~ msgid "Named after the town Berkeley where it was discovered."
+#~ msgstr "مسمّى بعد بركلي الإيطالية."
+
+#, fuzzy
+#~ msgid "Named after the US-State of California."
+#~ msgstr "مسمّى بعد JO الحالة من كاليفورنيا."
+
+#, fuzzy
+#~ msgid "Named after the scientist Albert Einstein."
+#~ msgstr "مسمّى بعد ألبرت آينشتاين."
+
+#, fuzzy
+#~ msgid "Named after the scientist Enrico Fermi."
+#~ msgstr "مسمّى بعد إنريكو فرمي."
+
+#, fuzzy
+#~ msgid "Named after the scientist D.I. Mendeleev."
+#~ msgstr "مسمّى بعد D I."
+
+#, fuzzy
+#~ msgid "Named after the scientist Alfred Nobel."
+#~ msgstr "مسمّى بعد ألفريد نوبل."
+
+#, fuzzy
+#~ msgid "Named after the scientist Ernest Orlando Lawrence."
+#~ msgstr "مسمّى بعد إيرنست أورلاندو لورانس."
+
+#, fuzzy
+#~ msgid "Named after the scientist Ernest Rutherford"
+#~ msgstr "مسمّى بعد إيرنست روثرفورد"
+
+#, fuzzy
+#~ msgid "Named after the science-town Dubna in Russia"
+#~ msgstr "مسمّى بعد بوصة روسيا"
+
+#, fuzzy
+#~ msgid "Named after the scientist G. Theodore Seaborg."
+#~ msgstr "مسمّى بعد G ثيودور سيبورج - عالم كيمياء أمريكيّ."
+
+#, fuzzy
+#~ msgid "Named after the scientist Niels Bohr."
+#~ msgstr "مسمّى بعد بوهر."
+
+#, fuzzy
+#~ msgid ""
+#~ "Latin 'hassia' for the German county Hessen. In Hessen a lot elements "
+#~ "have been discovered."
+#~ msgstr "لاتيني لـ ألماني داخل a."
+
+#, fuzzy
+#~ msgid "Named after the scientist Lise Meitner."
+#~ msgstr "مسمّى بعد لايز."
+
+#, fuzzy
+#~ msgid ""
+#~ "Named after the German city Darmstadt where many elements have been "
+#~ "discovered."
+#~ msgstr "مسمّى بعد ألماني دارمشتاد."
+
+#, fuzzy
+#~ msgid "Named after Wilhelm Conrad Röntgen."
+#~ msgstr "مسمّى بعد ويلهيلم كونراد."
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "الاسم"
+
+#, fuzzy
+#~ msgid "no translations found"
+#~ msgstr "لا موجود"
+
+#, fuzzy
+#~ msgid "from the Latin 'carbo' for coal."
+#~ msgstr "لاتيني لـ"
+
+#, fuzzy
+#~ msgid "from the Greek 'chroma' for color, paint."
+#~ msgstr "يوناني اللّون"
+
+#, fuzzy
+#~ msgid "from the Latin 'ferrum' for iron."
+#~ msgstr "لاتيني لـ"
+
+#, fuzzy
+#~ msgid "from the Greek 'xenos' for foreigner, stranger, strange."
+#~ msgstr "يوناني لـ"
+
+#, fuzzy
+#~ msgid "from the Greek 'astatos' for unsteady, changing"
+#~ msgstr "يوناني لـ"
+
+#, fuzzy
+#~ msgid "from the Greek 'aktis' for ray; 'aktinoeides' for radiating."
+#~ msgstr "يوناني لـ هو"
+
+#, fuzzy
+#~ msgid ""
+#~ "Named after the German State (Bundesland) Hessen the Latin name of which "
+#~ "is 'Hassia'; in Hessen, many elements have been discovered."
+#~ msgstr "مسمّى بعد ألماني دارمشتاد."
+
+#, fuzzy
+#~ msgid "User defined word type %1"
+#~ msgstr "المستخدم كلمة نوع 1"
+
+#, fuzzy
+#~ msgid "each lesson must have a name"
+#~ msgstr "a الاسم"
+
+#, fuzzy
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "Americanism"
+#~ msgstr "الاصطلاح الأمريكيّ"
+
+#, fuzzy
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "irregular"
+#~ msgstr "غير عادي"
+
+#, fuzzy
+#~| msgid "February"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "literary"
+#~ msgstr "فبراير"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "proper name"
+#~ msgstr "الاسم"
+
+#, fuzzy
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "philosophy"
+#~ msgstr "فلسفة"
+
+#, fuzzy
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "telephony"
+#~ msgstr "هتفية"
+
+#, fuzzy
+#~ msgid "no lessons found in 'lessons' tag"
+#~ msgstr "لا موجود بوصة بطاقة"
+
+#, fuzzy
+#~ msgctxt "Monday"
+#~ msgid "Mon"
+#~ msgstr "الإثنين"
+
+#, fuzzy
+#~ msgctxt "Tuesday"
+#~ msgid "Tue"
+#~ msgstr "الثلاثاء"
+
+#, fuzzy
+#~ msgctxt "Wednesday"
+#~ msgid "Wed"
+#~ msgstr "الأربعاء"
+
+#, fuzzy
+#~ msgctxt "Thursday"
+#~ msgid "Thu"
+#~ msgstr "الخميس"
+
+#, fuzzy
+#~ msgctxt "Friday"
+#~ msgid "Fri"
+#~ msgstr "الجمعة"
+
+#, fuzzy
+#~ msgctxt "Saturday"
+#~ msgid "Sat"
+#~ msgstr "السبت"
+
+#, fuzzy
+#~ msgctxt "Sunday"
+#~ msgid "Sun"
+#~ msgstr "الأحد"
+
+#, fuzzy
+#~ msgid "Monday"
+#~ msgstr "الإثنين"
+
+#, fuzzy
+#~ msgid "Tuesday"
+#~ msgstr "الثّلاثاء"
+
+#, fuzzy
+#~ msgid "Wednesday"
+#~ msgstr "الأربعاء"
+
+#, fuzzy
+#~ msgid "Thursday"
+#~ msgstr "الخميس"
+
+#, fuzzy
+#~ msgid "Friday"
+#~ msgstr "الجمعة"
+
+#, fuzzy
+#~ msgid "Saturday"
+#~ msgstr "السبت"
+
+#, fuzzy
+#~ msgid "Sunday"
+#~ msgstr "الأحد"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "Jan"
+#~ msgstr "يناير"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "Feb"
+#~ msgstr "فبراير"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "Mar"
+#~ msgstr "مارس"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "Apr"
+#~ msgstr "أبريل"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "May"
+#~ msgstr "مايو"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "Jun"
+#~ msgstr "يونيو"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "Jul"
+#~ msgstr "يوليو"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "Aug"
+#~ msgstr "أغسطس"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "Sep"
+#~ msgstr "سبتمبر"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "Oct"
+#~ msgstr "أكتوبر"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "Nov"
+#~ msgstr "نوفمبر"
+
+#, fuzzy
+#~ msgctxt "Short month name"
+#~ msgid "Dec"
+#~ msgstr "ديسمبر"
+
+#, fuzzy
+#~ msgctxt "Short day name"
+#~ msgid "Mon"
+#~ msgstr "الإثنين"
+
+#, fuzzy
+#~ msgctxt "Short day name"
+#~ msgid "Tue"
+#~ msgstr "الثلاثاء"
+
+#, fuzzy
+#~ msgctxt "Short day name"
+#~ msgid "Wed"
+#~ msgstr "الأربعاء"
+
+#, fuzzy
+#~ msgctxt "Short day name"
+#~ msgid "Thu"
+#~ msgstr "الخميس"
+
+#, fuzzy
+#~ msgctxt "Short day name"
+#~ msgid "Fri"
+#~ msgstr "الجمعة"
+
+#, fuzzy
+#~ msgctxt "Short day name"
+#~ msgid "Sat"
+#~ msgstr "السبت"
+
+#, fuzzy
+#~ msgctxt "Short day name"
+#~ msgid "Sun"
+#~ msgstr "الأحد"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "January"
+#~ msgstr "يناير"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "February"
+#~ msgstr "فبراير"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "March"
+#~ msgstr "مارس"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "April"
+#~ msgstr "أبريل"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "May"
+#~ msgstr "مايو"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "June"
+#~ msgstr "يونيو"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "July"
+#~ msgstr "يوليو"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "August"
+#~ msgstr "أغسطس"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "September"
+#~ msgstr "سبتمبر"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "October"
+#~ msgstr "أكتوبر"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "November"
+#~ msgstr "نوفمبر"
+
+#, fuzzy
+#~ msgctxt "Long month name"
+#~ msgid "December"
+#~ msgstr "ديسمبر"
+
+#, fuzzy
+#~ msgctxt "Long day name"
+#~ msgid "Monday"
+#~ msgstr "الإثنين"
+
+#, fuzzy
+#~ msgctxt "Long day name"
+#~ msgid "Tuesday"
+#~ msgstr "الثّلاثاء"
+
+#, fuzzy
+#~ msgctxt "Long day name"
+#~ msgid "Wednesday"
+#~ msgstr "الأربعاء"
+
+#, fuzzy
+#~ msgctxt "Long day name"
+#~ msgid "Thursday"
+#~ msgstr "الخميس"
+
+#, fuzzy
+#~ msgctxt "Long day name"
+#~ msgid "Friday"
+#~ msgstr "الجمعة"
+
+#, fuzzy
+#~ msgctxt "Long day name"
+#~ msgid "Saturday"
+#~ msgstr "السبت"
+
+#, fuzzy
+#~ msgctxt "Long day name"
+#~ msgid "Sunday"
+#~ msgstr "الأحد"
+
+#, fuzzy
+#~ msgctxt "January"
+#~ msgid "Jan"
+#~ msgstr "يناير"
+
+#, fuzzy
+#~ msgctxt "February"
+#~ msgid "Feb"
+#~ msgstr "فبراير"
+
+#, fuzzy
+#~ msgctxt "March"
+#~ msgid "Mar"
+#~ msgstr "مارس"
+
+#, fuzzy
+#~ msgctxt "April"
+#~ msgid "Apr"
+#~ msgstr "أبريل"
+
+#, fuzzy
+#~ msgctxt "May short"
+#~ msgid "May"
+#~ msgstr "مايو"
+
+#, fuzzy
+#~ msgctxt "June"
+#~ msgid "Jun"
+#~ msgstr "يونيو"
+
+#, fuzzy
+#~ msgctxt "July"
+#~ msgid "Jul"
+#~ msgstr "يوليو"
+
+#, fuzzy
+#~ msgctxt "August"
+#~ msgid "Aug"
+#~ msgstr "أغسطس"
+
+#, fuzzy
+#~ msgctxt "September"
+#~ msgid "Sep"
+#~ msgstr "سبتمبر"
+
+#, fuzzy
+#~ msgctxt "October"
+#~ msgid "Oct"
+#~ msgstr "أكتوبر"
+
+#, fuzzy
+#~ msgctxt "November"
+#~ msgid "Nov"
+#~ msgstr "نوفمبر"
+
+#, fuzzy
+#~ msgctxt "December"
+#~ msgid "Dec"
+#~ msgstr "ديسمبر"
+
+#~ msgid "January"
+#~ msgstr "يناير"
+
+#~ msgid "February"
+#~ msgstr "فبراير"
+
+#~ msgid "March"
+#~ msgstr "مارس"
+
+#~ msgid "April"
+#~ msgstr "أبريل"
+
+#, fuzzy
+#~ msgctxt "May long"
+#~ msgid "May"
+#~ msgstr "مايو"
+
+#~ msgid "June"
+#~ msgstr "يونيو"
+
+#~ msgid "July"
+#~ msgstr "يوليو"
+
+#~ msgid "August"
+#~ msgstr "أغسطس"
+
+#~ msgid "September"
+#~ msgstr "سبتمبر"
+
+#~ msgid "October"
+#~ msgstr "أكتوبر"
+
+#~ msgid "November"
+#~ msgstr "نوفمبر"
+
+#~ msgid "December"
+#~ msgstr "ديسمبر"
+
+#, fuzzy
+#~ msgctxt "of January"
+#~ msgid "of Jan"
+#~ msgstr "من يناير"
+
+#, fuzzy
+#~ msgctxt "of February"
+#~ msgid "of Feb"
+#~ msgstr "من فبراير"
+
+#, fuzzy
+#~ msgctxt "of March"
+#~ msgid "of Mar"
+#~ msgstr "من مارس"
+
+#, fuzzy
+#~ msgctxt "of April"
+#~ msgid "of Apr"
+#~ msgstr "من أبريل"
+
+#, fuzzy
+#~ msgctxt "of May short"
+#~ msgid "of May"
+#~ msgstr "من مايو"
+
+#, fuzzy
+#~ msgctxt "of June"
+#~ msgid "of Jun"
+#~ msgstr "من يونيو"
+
+#, fuzzy
+#~ msgctxt "of July"
+#~ msgid "of Jul"
+#~ msgstr "من يوليو"
+
+#, fuzzy
+#~ msgctxt "of August"
+#~ msgid "of Aug"
+#~ msgstr "من أغسطس"
+
+#, fuzzy
+#~ msgctxt "of September"
+#~ msgid "of Sep"
+#~ msgstr "من سبتمبر"
+
+#, fuzzy
+#~ msgctxt "of October"
+#~ msgid "of Oct"
+#~ msgstr "من أكتوبر"
+
+#, fuzzy
+#~ msgctxt "of November"
+#~ msgid "of Nov"
+#~ msgstr "من نوفمبر"
+
+#, fuzzy
+#~ msgctxt "of December"
+#~ msgid "of Dec"
+#~ msgstr "من ديسمبر"
+
+#, fuzzy
+#~ msgid "of January"
+#~ msgstr "من يناير"
+
+#, fuzzy
+#~ msgid "of February"
+#~ msgstr "من فبراير"
+
+#, fuzzy
+#~ msgid "of March"
+#~ msgstr "من مارس"
+
+#, fuzzy
+#~ msgid "of April"
+#~ msgstr "من أبريل"
+
+#, fuzzy
+#~ msgctxt "of May long"
+#~ msgid "of May"
+#~ msgstr "من مايو"
+
+#, fuzzy
+#~ msgid "of June"
+#~ msgstr "من يونيو"
+
+#, fuzzy
+#~ msgid "of July"
+#~ msgstr "من يوليو"
+
+#, fuzzy
+#~ msgid "of August"
+#~ msgstr "من أغسطس"
+
+#, fuzzy
+#~ msgid "of September"
+#~ msgstr "من سبتمبر"
+
+#, fuzzy
+#~ msgid "of October"
+#~ msgstr "من أكتوبر"
+
+#, fuzzy
+#~ msgid "of November"
+#~ msgstr "من نوفمبر"
+
+#, fuzzy
+#~ msgid "of December"
+#~ msgstr "من ديسمبر"
+
+#~ msgid "Week %1"
+#~ msgstr "الأسبوع %1"
+
+#~ msgid "Next year"
+#~ msgstr "السنة التالية"
+
+#~ msgid "Previous year"
+#~ msgstr "السنة الماضية"
+
+#~ msgid "Next month"
+#~ msgstr "الشهر التالي"
+
+#~ msgid "Previous month"
+#~ msgstr "الشهر الماضي"
+
+#~ msgid "Select a week"
+#~ msgstr "انتقِ أسبوعاً"
+
+#~ msgid "Select a month"
+#~ msgstr "انتقِ شهراً"
+
+#~ msgid "Select a year"
+#~ msgstr "انتقِ سنة"
+
+#~ msgid "Select the current day"
+#~ msgstr "انتقِ اليوم الحالي"
+
+#, fuzzy
+#~ msgid "Close"
+#~ msgstr "إغلاق"

@@ -1,0 +1,991 @@
+# translation of libkdeedu.po to Belarusian
+# translation of libkdeedu.po to
+#
+# Aliaksandr Shumski <firestorm1983@mail.ru>, 2006.
+# Ihar Hrachyshka <ihar.hrachyshka@gmail.com>, 2006.
+# Darafei Praliaskouski <katziara@tut.by>, 2006.
+# Darafei Praliaskouski <komzpa@licei2.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2007-05-29 12:46+0300\n"
+"Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
+"Language-Team: Belarusian <i18n@mova.org>\n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n"
+"%100>=11 && n%100<=14 ? 2 : 3);\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr ""
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, fuzzy, kde-format
+#| msgid "<qt>Cannot write to file<br><b>%1</b></qt>"
+msgid "Cannot lock file %1"
+msgstr "<qt>Немагчыма запісаць у файл<br><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, fuzzy, kde-format
+#| msgid "<qt>Cannot open file<br><b>%1</b></qt>"
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>Немагчыма адкрыць файл<br><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, fuzzy, kde-format
+#| msgid "<qt>Cannot write to file<br><b>%1</b></qt>"
+msgid "Cannot open tempfile %1"
+msgstr "<qt>Немагчыма запісаць у файл<br><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, fuzzy, kde-format
+#| msgid "<qt>Cannot write to file<br><b>%1</b></qt>"
+msgid "Cannot download %1: %2"
+msgstr "<qt>Немагчыма запісаць у файл<br><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, fuzzy, kde-format
+#| msgid "<qt>Cannot write to file<br><b>%1</b></qt>"
+msgid "Cannot write to file %1"
+msgstr "<qt>Немагчыма запісаць у файл<br><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, fuzzy, kde-format
+#| msgid "Original"
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "Крыніца"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, fuzzy, kde-format
+#| msgid "Translation"
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "Пераклад"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, fuzzy, kde-format
+#| msgid "April"
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "Красавік"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, fuzzy, kde-format
+#| msgid "Original"
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "Крыніца"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, fuzzy, kde-format
+#| msgid "Original"
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "Крыніца"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, fuzzy, kde-format
+#| msgid "Present Progressive"
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "Present Progressive"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS"
+#| msgid "Your emails"
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "firestorm1983@mail.ru, ihar.hrachyshka@gmail.com, komzpa@licei2.com"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS"
+#| msgid "Your emails"
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "firestorm1983@mail.ru, ihar.hrachyshka@gmail.com, komzpa@licei2.com"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "Simple Present"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "Present Progressive"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "Present Perfect"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "Simple Past"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "Past Progressive"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "Past Participle"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "Future"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, fuzzy, kde-format
+#| msgid "April"
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "Красавік"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "Узровень 1"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "Узровень 2"
+
+#: keduvocdocument/keduvoctext.h:26
+#, fuzzy, kde-format
+#| msgid "Level 1"
+msgid "Level 3"
+msgstr "Узровень 1"
+
+#: keduvocdocument/keduvoctext.h:29
+#, fuzzy, kde-format
+#| msgid "Level 1"
+msgid "Level 4"
+msgstr "Узровень 1"
+
+#: keduvocdocument/keduvoctext.h:32
+#, fuzzy, kde-format
+#| msgid "Level 1"
+msgid "Level 5"
+msgstr "Узровень 1"
+
+#: keduvocdocument/keduvoctext.h:35
+#, fuzzy, kde-format
+#| msgid "Level 1"
+msgid "Level 6"
+msgstr "Узровень 1"
+
+#: keduvocdocument/keduvoctext.h:38
+#, fuzzy, kde-format
+#| msgid "Level 1"
+msgid "Level 7"
+msgstr "Узровень 1"
+
+#~ msgid "Untitled"
+#~ msgstr "Безназоўны"
+
+#, fuzzy
+#~| msgid "of January"
+#~ msgid "Vocabulary"
+#~ msgstr "студзеня"
+
+#, fuzzy
+#~| msgid "ambiguous definition of language code"
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "двухсэнсоўнае азначэнне моўнага коду"
+
+#~ msgid "Glossary"
+#~ msgstr "Гласарый"
+
+#~ msgid "&Search:"
+#~ msgstr "&Пошук:"
+
+#~ msgid "References"
+#~ msgstr "Спасылкі"
+
+#, fuzzy
+#~| msgid "Translation"
+#~ msgid "Transition Elements"
+#~ msgstr "Пераклад"
+
+#, fuzzy
+#~| msgid "Close"
+#~ msgid "Chlorine"
+#~ msgstr "Закрыць"
+
+#, fuzzy
+#~| msgid "February"
+#~ msgid "Mercury"
+#~ msgstr "Люты"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Aliaksandr Shumski, Ігар Грачышка, Дарафей Праляскоўскі"
+
+#, fuzzy
+#~| msgid "Translation"
+#~ msgid "no translations found"
+#~ msgstr "Пераклад"
+
+#, fuzzy
+#~| msgid "February"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "literary"
+#~ msgstr "Люты"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "proper name"
+#~ msgstr "Aliaksandr Shumski, Ігар Грачышка, Дарафей Праляскоўскі"
+
+#, fuzzy
+#~| msgid "&Retry"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "poetry"
+#~ msgstr "&Паўтарыць"
+
+#~ msgctxt "Monday"
+#~ msgid "Mon"
+#~ msgstr "Пан"
+
+#~ msgctxt "Tuesday"
+#~ msgid "Tue"
+#~ msgstr "Аўт"
+
+#~ msgctxt "Wednesday"
+#~ msgid "Wed"
+#~ msgstr "Сер"
+
+#~ msgctxt "Thursday"
+#~ msgid "Thu"
+#~ msgstr "Чац"
+
+#~ msgctxt "Friday"
+#~ msgid "Fri"
+#~ msgstr "Пят"
+
+#~ msgctxt "Saturday"
+#~ msgid "Sat"
+#~ msgstr "Суб"
+
+#~ msgctxt "Sunday"
+#~ msgid "Sun"
+#~ msgstr "Няд"
+
+#~ msgid "Monday"
+#~ msgstr "Панядзелак"
+
+#~ msgid "Tuesday"
+#~ msgstr "Аўторак"
+
+#~ msgid "Wednesday"
+#~ msgstr "Серада"
+
+#~ msgid "Thursday"
+#~ msgstr "Чацвер"
+
+#~ msgid "Friday"
+#~ msgstr "Пятніца"
+
+#~ msgid "Saturday"
+#~ msgstr "Субота"
+
+#~ msgid "Sunday"
+#~ msgstr "Нядзеля"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jan"
+#~ msgstr "Сту"
+
+#~ msgctxt "Short month name"
+#~ msgid "Feb"
+#~ msgstr "Лют"
+
+#~ msgctxt "Short month name"
+#~ msgid "Mar"
+#~ msgstr "Сак"
+
+#~ msgctxt "Short month name"
+#~ msgid "Apr"
+#~ msgstr "Кра"
+
+#~ msgctxt "Short month name"
+#~ msgid "May"
+#~ msgstr "Тра"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jun"
+#~ msgstr "Чэр"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jul"
+#~ msgstr "Ліп"
+
+#~ msgctxt "Short month name"
+#~ msgid "Aug"
+#~ msgstr "Жні"
+
+#~ msgctxt "Short month name"
+#~ msgid "Sep"
+#~ msgstr "Вер"
+
+#~ msgctxt "Short month name"
+#~ msgid "Oct"
+#~ msgstr "Кас"
+
+#~ msgctxt "Short month name"
+#~ msgid "Nov"
+#~ msgstr "Ліс"
+
+#~ msgctxt "Short month name"
+#~ msgid "Dec"
+#~ msgstr "Сне"
+
+#~ msgctxt "Short day name"
+#~ msgid "Mon"
+#~ msgstr "Пан"
+
+#~ msgctxt "Short day name"
+#~ msgid "Tue"
+#~ msgstr "Аўт"
+
+#~ msgctxt "Short day name"
+#~ msgid "Wed"
+#~ msgstr "Сер"
+
+#~ msgctxt "Short day name"
+#~ msgid "Thu"
+#~ msgstr "Чац"
+
+#~ msgctxt "Short day name"
+#~ msgid "Fri"
+#~ msgstr "Пят"
+
+#~ msgctxt "Short day name"
+#~ msgid "Sat"
+#~ msgstr "Суб"
+
+#~ msgctxt "Short day name"
+#~ msgid "Sun"
+#~ msgstr "Няд"
+
+#~ msgctxt "Long month name"
+#~ msgid "January"
+#~ msgstr "Студзень"
+
+#~ msgctxt "Long month name"
+#~ msgid "February"
+#~ msgstr "Люты"
+
+#~ msgctxt "Long month name"
+#~ msgid "March"
+#~ msgstr "Сакавік"
+
+#~ msgctxt "Long month name"
+#~ msgid "April"
+#~ msgstr "Красавік"
+
+#~ msgctxt "Long month name"
+#~ msgid "May"
+#~ msgstr "Травень"
+
+#~ msgctxt "Long month name"
+#~ msgid "June"
+#~ msgstr "Чэрвень"
+
+#~ msgctxt "Long month name"
+#~ msgid "July"
+#~ msgstr "Ліпень"
+
+#~ msgctxt "Long month name"
+#~ msgid "August"
+#~ msgstr "Жнівень"
+
+#~ msgctxt "Long month name"
+#~ msgid "September"
+#~ msgstr "Верасень"
+
+#~ msgctxt "Long month name"
+#~ msgid "October"
+#~ msgstr "Кастрычнік"
+
+#~ msgctxt "Long month name"
+#~ msgid "November"
+#~ msgstr "Лістапад"
+
+#~ msgctxt "Long month name"
+#~ msgid "December"
+#~ msgstr "Снежань"
+
+#~ msgctxt "Long day name"
+#~ msgid "Monday"
+#~ msgstr "Панядзелак"
+
+#~ msgctxt "Long day name"
+#~ msgid "Tuesday"
+#~ msgstr "Аўторак"
+
+#~ msgctxt "Long day name"
+#~ msgid "Wednesday"
+#~ msgstr "Серада"
+
+#~ msgctxt "Long day name"
+#~ msgid "Thursday"
+#~ msgstr "Чацвер"
+
+#~ msgctxt "Long day name"
+#~ msgid "Friday"
+#~ msgstr "Пятніца"
+
+#~ msgctxt "Long day name"
+#~ msgid "Saturday"
+#~ msgstr "Субота"
+
+#~ msgctxt "Long day name"
+#~ msgid "Sunday"
+#~ msgstr "Нядзеля"
+
+#~ msgctxt "January"
+#~ msgid "Jan"
+#~ msgstr "Сту"
+
+#~ msgctxt "February"
+#~ msgid "Feb"
+#~ msgstr "Лют"
+
+#~ msgctxt "March"
+#~ msgid "Mar"
+#~ msgstr "Сак"
+
+#~ msgctxt "April"
+#~ msgid "Apr"
+#~ msgstr "Кра"
+
+#~ msgctxt "May short"
+#~ msgid "May"
+#~ msgstr "Тра"
+
+#~ msgctxt "June"
+#~ msgid "Jun"
+#~ msgstr "Чэр"
+
+#~ msgctxt "July"
+#~ msgid "Jul"
+#~ msgstr "Ліп"
+
+#~ msgctxt "August"
+#~ msgid "Aug"
+#~ msgstr "Жні"
+
+#~ msgctxt "September"
+#~ msgid "Sep"
+#~ msgstr "Вер"
+
+#~ msgctxt "October"
+#~ msgid "Oct"
+#~ msgstr "Кас"
+
+#~ msgctxt "November"
+#~ msgid "Nov"
+#~ msgstr "Ліс"
+
+#~ msgctxt "December"
+#~ msgid "Dec"
+#~ msgstr "Сне"
+
+#~ msgid "January"
+#~ msgstr "Студзень"
+
+#~ msgid "February"
+#~ msgstr "Люты"
+
+#~ msgid "March"
+#~ msgstr "Сакавік"
+
+#~ msgid "April"
+#~ msgstr "Красавік"
+
+#~ msgctxt "May long"
+#~ msgid "May"
+#~ msgstr "Травень"
+
+#~ msgid "June"
+#~ msgstr "Чэрвень"
+
+#~ msgid "July"
+#~ msgstr "Ліпень"
+
+#~ msgid "August"
+#~ msgstr "Жнівень"
+
+#~ msgid "September"
+#~ msgstr "Верасень"
+
+#~ msgid "October"
+#~ msgstr "Кастрычнік"
+
+#~ msgid "November"
+#~ msgstr "Лістапад"
+
+#~ msgid "December"
+#~ msgstr "Снежань"
+
+#~ msgid "of February"
+#~ msgstr "лютага"
+
+#~ msgid "of March"
+#~ msgstr "сакавіка"
+
+#~ msgid "of April"
+#~ msgstr "красавіка"
+
+#~ msgctxt "of May long"
+#~ msgid "of May"
+#~ msgstr "мая"
+
+#~ msgid "of June"
+#~ msgstr "чэрвеня"
+
+#~ msgid "of July"
+#~ msgstr "ліпеня"
+
+#~ msgid "of August"
+#~ msgstr "жніўня"
+
+#~ msgid "of September"
+#~ msgstr "верасня"
+
+#~ msgid "of October"
+#~ msgstr "кастрычніка"
+
+#~ msgid "of November"
+#~ msgstr "лістапада"
+
+#~ msgid "of December"
+#~ msgstr "снежня"
+
+#~ msgid "Week %1"
+#~ msgstr "Тыдзень %1"
+
+#~ msgid "Next year"
+#~ msgstr "Наступны год"
+
+#~ msgid "Previous year"
+#~ msgstr "Папярэдні год"
+
+#~ msgid "Next month"
+#~ msgstr "Наступны месяц"
+
+#~ msgid "Previous month"
+#~ msgstr "Папярэдні месяц"
+
+#~ msgid "Select a week"
+#~ msgstr "Выбраць тыдзень"
+
+#~ msgid "Select a month"
+#~ msgstr "Выбраць месяц"
+
+#~ msgid "Select a year"
+#~ msgstr "Выбраць год"
+
+#~ msgid "Select the current day"
+#~ msgstr "Выбраць сённяшні дзень"
+
+#~ msgid "Close"
+#~ msgstr "Закрыць"
+
+#~ msgid "Text"
+#~ msgstr "Тэкст"
+
+#~ msgid ""
+#~ "Could not save \"%1\"\n"
+#~ "Do you want to try again?"
+#~ msgstr ""
+#~ "Немагчыма запісаць у \"%1\"\n"
+#~ "Хочаце паўтарыць?"
+
+#~ msgid "&Retry"
+#~ msgstr "&Паўтарыць"
+
+#~ msgid "ambiguous definition of language code"
+#~ msgstr "двухсэнсоўнае азначэнне моўнага коду"
+
+#, fuzzy
+#~| msgid "Translation"
+#~ msgctxt "@title:column one of the translation columns"
+#~ msgid "Translation"
+#~ msgstr "Пераклад"
+
+#~ msgid "<no lesson>"
+#~ msgstr "<няма практыкаванняў>"
+
+#~ msgid "ExtDatePicker test program"
+#~ msgstr "Тэставая праграма ExtDatePicker"
+
+#~ msgid "Compares KDatePicker and ExtDatePicker"
+#~ msgstr "Параўноўвае KDatePicker і ExtDatePicker"
+
+#~ msgid "Test ExtDatePicker"
+#~ msgstr "Праверка ExtDatePicker"
+
+#~ msgid "(c) 2004, Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"
+
+#, fuzzy
+#~| msgid "(c) 2004, Jason Harris"
+#~ msgid "Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"
+
+#~ msgid "ExtDateTimeEdit test program"
+#~ msgstr "Тэставая праграма ExtDatePicker"
+
+#~ msgid "Test ExtDateTimeEdit"
+#~ msgstr "Праверка ExtDatePicker"
+
+#~ msgid "(c) 2005, Jason Harris"
+#~ msgstr "(c) 2005, Jason Harris"
+
+#, fuzzy
+#~ msgid "KPlotWidget test program"
+#~ msgstr "Тэставая праграма ExtDatePicker"
+
+#, fuzzy
+#~ msgid "(c) 2006, Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"

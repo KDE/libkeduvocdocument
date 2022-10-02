@@ -1,0 +1,728 @@
+# translation of libkdeedu.po to Thai
+#
+# Sahachart Anukulkitch <drrider@gmail.com>, 2006.
+# Narachai Sakorn <narachai@gmail.com>, 2009.
+# Phuwanat Sakornsakolpat <narachai@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2010-12-12 02:25+0700\n"
+"Last-Translator: Phuwanat Sakornsakolpat <narachai@gmail.com>\n"
+"Language-Team: Thai <thai-l10n@googlegroups.com>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "หัวเรื่อง:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "ผู้เขียน:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "บทเรียนเอกสาร"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "ชนิดของคำ"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, kde-format
+msgid "Cannot lock file %1"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>ไม่สามารถเปิดแฟ้ม<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, fuzzy, kde-format
+#| msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgid "Cannot open tempfile %1"
+msgstr "<qt>ไม่สามารถเปิดแฟ้ม<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, fuzzy, kde-format
+#| msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgid "Cannot download %1: %2"
+msgstr "<qt>ไม่สามารถเปิดแฟ้ม<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "คำกริยา"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "คำนาม"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "ชื่อ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "คำนำหน้า"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "คำคุณศัพท์"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "คำวิเศษณ์"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "คำสรรพนาม"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "วลี"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "ตัวเลข"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "คำสันธาน"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "คำบุพบท"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "ประโยคคำถาม"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "ลำดับ"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "ตัวเลข"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "เจาะจง"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "ไม่เจาะจง"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "ผู้ชาย"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "ผู้หญิง"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "คำนำหน้า"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "คำคุณศัพท์"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "คำวิเศษณ์"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "คำสรรพนาม"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "วลี"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "ตัวเลข"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "คำสันธาน"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "คำบุพบท"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "คำถามม"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "ยังไม่ได้ฝึก"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "ระดับ 1"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "ระดับ 2"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "ระดับ 3"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "ระดับ 4"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "ระดับ 5"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "ระดับ 6"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "ระดับ 7"
+
+#~ msgid "Untitled"
+#~ msgstr "ไม่มีชื่อ"
+
+#~ msgid "Vocabulary"
+#~ msgstr "คำศัพท์"
+
+#~ msgid "file must be opened first"
+#~ msgstr "ต้องเปิดแฟ้มก่อน"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "นี่ไม่ใช่เอกสารคำศัพท์ของ KDE"
+
+#~ msgid "Default Lesson"
+#~ msgstr "บทเรียนปริยาย"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "บทเรียน %1"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "ข้อมูลของภาษาดั้งเดิมไม่ครบ"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "นิยามที่กำกวมของรหัสภาษา"
+
+#~ msgid "Lesson %1"
+#~ msgstr "บทเรียน %1"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "นี่อาจไม่ใช่แฟ้มของ (K)WordQuiz"
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr "สามารถเปิดได้ใช้เฉพาะแฟ้มที่สร้างโดย WordQuiz 5.x ขึ้นไป"
+
+#~ msgid "Error while reading file"
+#~ msgstr "ผิดพลาดขณะกำลังอ่านแฟ้ม"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "นี่ไม่ช่เอกสาร XDXF"
+
+#~ msgid "Glossary"
+#~ msgstr "อภิธานศัพท์"
+
+#~ msgid "&Search:"
+#~ msgstr "ค้น&หา:"
+
+#~ msgid "References"
+#~ msgstr "บรรณานุกรม"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "ไปยัง '%1'"
+
+#~ msgid "Hydrogen"
+#~ msgstr "ไฮโดรเจน"
+
+#~ msgid "Helium"
+#~ msgstr "ฮีเลียม"
+
+#~ msgid "Lithium"
+#~ msgstr "ลิเทียม"
+
+#~ msgid "Beryllium"
+#~ msgstr "เบริลเลียม"
+
+#~ msgid "Boron"
+#~ msgstr "โบรอน"
+
+#~ msgid "Carbon"
+#~ msgstr "คาร์บอน"
+
+#~ msgid "Nitrogen"
+#~ msgstr "ไนโตรเจน"
+
+#~ msgid "Oxygen"
+#~ msgstr "ออกซิเจน"
+
+#~ msgid "Fluorine"
+#~ msgstr "ฟลูออรีน"
+
+#~ msgid "Neon"
+#~ msgstr "นีออน"
+
+#~ msgid "Sodium"
+#~ msgstr "โซเดียม"
+
+#~ msgid "Magnesium"
+#~ msgstr "แมกนีเซียม"
+
+#~ msgid "Aluminium"
+#~ msgstr "อะลูมิเนียม"
+
+#~ msgid "Phosphorus"
+#~ msgstr "ฟอสฟอรัส"
+
+#~ msgid "Sulfur"
+#~ msgstr "กำมะถัน"
+
+#~ msgid "Chlorine"
+#~ msgstr "คลอรีน"
+
+#~ msgid "Argon"
+#~ msgstr "อาร์กอน"
+
+#~ msgid "Potassium"
+#~ msgstr "โพแทสเซียม"
+
+#~ msgid "Calcium"
+#~ msgstr "แคลเซียม"
+
+#~ msgid "Titanium"
+#~ msgstr "ไททาเนียม"
+
+#~ msgid "Chromium"
+#~ msgstr "โครเมียม"
+
+#~ msgid "Manganese"
+#~ msgstr "แมงกานีส"
+
+#~ msgid "Iron"
+#~ msgstr "เหล็ก"
+
+#~ msgid "Cobalt"
+#~ msgstr "โคบอลต์"
+
+#~ msgid "Nickel"
+#~ msgstr "นิกเกิล"
+
+#~ msgid "Copper"
+#~ msgstr "ทองแดง"
+
+#~ msgid "Zinc"
+#~ msgstr "สังกะสี"
+
+#~ msgid "Arsenic"
+#~ msgstr "สารหนู"
+
+#~ msgid "Bromine"
+#~ msgstr "โบรมีน"
+
+#~ msgid "Krypton"
+#~ msgstr "คริปตอน"
+
+#~ msgid "Silver"
+#~ msgstr "เงิน"
+
+#~ msgid "Cadmium"
+#~ msgstr "แคดเมียม"
+
+#~ msgid "Antimony"
+#~ msgstr "พลวง"
+
+#~ msgid "Iodine"
+#~ msgstr "ไอโอดีน"
+
+#~ msgid "Xenon"
+#~ msgstr "ซีนอน"
+
+#~ msgid "Caesium"
+#~ msgstr "ซีเซียม"
+
+#~ msgid "Barium"
+#~ msgstr "แบเรียม"
+
+#~ msgid "Cerium"
+#~ msgstr "ซีเรียม"
+
+#~ msgid "Europium"
+#~ msgstr "ยูโรเพียม"
+
+#~ msgid "Dysprosium"
+#~ msgstr "ดิสโพรเซียม"
+
+#~ msgid "Erbium"
+#~ msgstr "เออร์เบียม"
+
+#~ msgid "Tungsten"
+#~ msgstr "ทังสเตน"
+
+#~ msgid "Gold"
+#~ msgstr "ทองคำ"
+
+#~ msgid "Bismuth"
+#~ msgstr "บิสมัท"
+
+#~ msgid "Astatine"
+#~ msgstr "แอสทาทีน"
+
+#~ msgid "Actinium"
+#~ msgstr "แอกทิเนียม"
+
+#~ msgid "Uranium"
+#~ msgstr "ยูเรเนียม"
+
+#~ msgid "Plutonium"
+#~ msgstr "พลูโตเนียม"
+
+#~ msgid "Americium"
+#~ msgstr "อะเมริเซียม"
+
+#~ msgid "Curium"
+#~ msgstr "คูเรียม"
+
+#~ msgid "Berkelium"
+#~ msgstr "เบอร์คีเลียม"
+
+#~ msgid "Californium"
+#~ msgstr "แคลิฟอร์เนียม"
+
+#~ msgid "Einsteinium"
+#~ msgstr "ไอน์สไตเนียม"
+
+#~ msgid "Dubnium"
+#~ msgstr "ดุบเนียม"
+
+#~ msgid "Bohrium"
+#~ msgstr "โบห์เรียม"
+
+#~ msgid "Ununquadium"
+#~ msgstr "อูนอูนควอเดียม"
+
+#~ msgid "Ununpentium"
+#~ msgstr "อูนอูนเพนเทียม"
+
+#~ msgid "Ununhexium"
+#~ msgstr "อูนอูนเฮกเซียม"
+
+#~ msgid "Ununseptium"
+#~ msgstr "อูนอูนเซปเทียม"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "สหชาติ อนุกูลกิจ"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "drrider@gmail.com"

@@ -1,0 +1,1914 @@
+# KDE3 - kdeedu/libkdeedu.po Russian translation.
+# Copyright (C) 2005 KDE Russian translation team.
+# Andrey Cherepanov <sibskull@mail.ru>, 2005.
+# Nick Shaforostoff <shafff@ukr.net>, 2006.
+# Nick Shaforostoff <shaforostoff@kde.ru>, 2008.
+# Alexander Potashev <aspotashev@gmail.com>, 2009, 2010, 2011, 2018.
+# Alexander Lakhin <exclusion@gmail.com>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2018-05-17 20:26+0300\n"
+"Last-Translator: Alexander Potashev <aspotashev@gmail.com>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "Заголовок:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "Автор:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "Урок-контейнер"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "Части речи"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr "Коробка Лейтнера"
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, kde-format
+msgid "Cannot lock file %1"
+msgstr "Не удалось заблокировать файл %1"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>Не удалось открыть файл<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, kde-format
+msgid "Cannot open tempfile %1"
+msgstr "Не удалось открыть временный файл %1"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, kde-format
+msgid "Cannot download %1: %2"
+msgstr "Не удалось загрузить %1: %2"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"Не удалось открыть или прочитать «%1»\n"
+"(Ошибка: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "Ошибка записи в файл %1"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "Оригинал"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "Перевод (%1)"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "Словарь KDE"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "Документ KWordQuiz"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "Урок в формате Pauker"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "Vokabeltrainer"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "XML-формат обмена словарями"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr "Список значений через запятую (CSV)"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "Все поддерживаемые документы"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "Ошибок не найдено."
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "Недопустимый код XML в документе."
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "Неизвестный тип файла."
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "Файл недоступен для записи."
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr "Не удалось записать в файл."
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "Файл недоступен для чтения."
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr "Не удалось прочитать из файла."
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "Файл не существует."
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr "Файл заблокирован другим процессом."
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr "Не удалось создать файл блокировки."
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "Неизвестная ошибка."
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "Глагол"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "Существительное"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "Название"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "Артикль"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "Прилагательное"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "Наречие"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Местоимение"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Выражение"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "Числительное"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Союз"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "Предлог"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "Вопрос"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "Порядковое"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "Количественное"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "Определённый"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "Неопределённый"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr "Правильный"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr "Неправильный"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "Притяжательное"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr "Личное"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "Мужской"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "Женский"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr "Средний"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "Простое настоящее"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "Настоящее длящееся"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "Настоящее совершённое"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "Простое прошедшее"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "Прошедшее длящееся"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "Причастие прошедшего времени"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "Будущее"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "Глагол"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "Существительное"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "Название"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "Артикль"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "Прилагательное"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "Наречие"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Местоимение"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Выражение"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "Числительное"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Союз"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "Предлог"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "Вопрос"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "Ещё не изучалось"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "Уровень 1:"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "Уровень 2:"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "Уровень 3:"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "Уровень 4:"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "Уровень 5:"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "Уровень 6:"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "Уровень 7:"
+
+#~ msgid "Untitled"
+#~ msgstr "Безымянный"
+
+#~ msgid "Vocabulary"
+#~ msgstr "Лексика"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "Ошибка разбора в строке %1, столбце %2:\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "Ошибка открытия файла"
+
+#~ msgid "file must be opened first"
+#~ msgstr "файл должен быть открыт сначала"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "Этот файл не является словарём KDE."
+
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "в теге идентификаторов отсутствуют элементы"
+
+#~ msgid "Default Lesson"
+#~ msgstr "Урок по умолчанию"
+
+#~ msgid "identifier missing id"
+#~ msgstr "идентификатор без id"
+
+#~ msgid "entry missing id"
+#~ msgstr "запись без id"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "Урок %1"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "Отсутствуют данные для исходного языка"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "Неоднозначное определение кода языка"
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "Это не документ Pauker"
+
+#~ msgid "Lesson %1"
+#~ msgstr "Урок %1"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "Формат этого файла отличается от формата (K)WordQuiz"
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr ""
+#~ "Можно открыть только файлы, созданные в WordQuiz 5.x или более поздних "
+#~ "версиях"
+
+#~ msgid "Error while reading file"
+#~ msgstr "Ошибка чтения файла"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "Это не документ XDXF"
+
+#~ msgid "Glossary"
+#~ msgstr "Глоссарий"
+
+#~ msgid "&Search:"
+#~ msgstr "&Поиск:"
+
+#~ msgid "References"
+#~ msgstr "Ссылки"
+
+#, fuzzy
+#~ msgid "Go to '%1'"
+#~ msgstr "&Режим"
+
+#, fuzzy
+#~ msgid "Transition Elements"
+#~ msgstr "Перевод на %1"
+
+#~ msgid "Hydrogen"
+#~ msgstr "Водород"
+
+#~ msgid "Helium"
+#~ msgstr "Гелий"
+
+#~ msgid "Lithium"
+#~ msgstr "Литий"
+
+#~ msgid "Beryllium"
+#~ msgstr "Бериллий"
+
+#~ msgid "Boron"
+#~ msgstr "Бор"
+
+#~ msgid "Carbon"
+#~ msgstr "Углерод"
+
+#~ msgid "Nitrogen"
+#~ msgstr "Азот"
+
+#~ msgid "Oxygen"
+#~ msgstr "Кислород"
+
+#~ msgid "Fluorine"
+#~ msgstr "Фтор"
+
+#~ msgid "Neon"
+#~ msgstr "Неон"
+
+#~ msgid "Sodium"
+#~ msgstr "Натрий"
+
+#~ msgid "Magnesium"
+#~ msgstr "Магний"
+
+#~ msgid "Aluminium"
+#~ msgstr "Алюминий"
+
+#~ msgid "Silicon"
+#~ msgstr "Кремний"
+
+#~ msgid "Phosphorus"
+#~ msgstr "Фосфор"
+
+#~ msgid "Sulfur"
+#~ msgstr "Сера"
+
+#~ msgid "Chlorine"
+#~ msgstr "Хлор"
+
+#~ msgid "Argon"
+#~ msgstr "Аргон"
+
+#~ msgid "Potassium"
+#~ msgstr "Калий"
+
+#~ msgid "Calcium"
+#~ msgstr "Кальций"
+
+#~ msgid "Scandium"
+#~ msgstr "Скандий"
+
+#~ msgid "Titanium"
+#~ msgstr "Титан"
+
+#~ msgid "Vanadium"
+#~ msgstr "Ванадий"
+
+#~ msgid "Chromium"
+#~ msgstr "Хром"
+
+#~ msgid "Manganese"
+#~ msgstr "Марганец"
+
+#~ msgid "Iron"
+#~ msgstr "Железо"
+
+#~ msgid "Cobalt"
+#~ msgstr "Кобальт"
+
+#~ msgid "Nickel"
+#~ msgstr "Никель"
+
+#~ msgid "Copper"
+#~ msgstr "Медь"
+
+#~ msgid "Zinc"
+#~ msgstr "Цинк"
+
+#~ msgid "Gallium"
+#~ msgstr "Галлий"
+
+#~ msgid "Germanium"
+#~ msgstr "Германий"
+
+#~ msgid "Arsenic"
+#~ msgstr "Мышьяк"
+
+#~ msgid "Selenium"
+#~ msgstr "Селен"
+
+#~ msgid "Bromine"
+#~ msgstr "Бром"
+
+#~ msgid "Krypton"
+#~ msgstr "Криптон"
+
+#~ msgid "Rubidium"
+#~ msgstr "Рубидий"
+
+#~ msgid "Strontium"
+#~ msgstr "Стронций"
+
+#~ msgid "Yttrium"
+#~ msgstr "Иттрий"
+
+#~ msgid "Zirconium"
+#~ msgstr "Цирконий"
+
+#~ msgid "Niobium"
+#~ msgstr "Ниобий"
+
+#~ msgid "Molybdenum"
+#~ msgstr "Молибден"
+
+#~ msgid "Technetium"
+#~ msgstr "Технеций"
+
+#~ msgid "Ruthenium"
+#~ msgstr "Рутений"
+
+#~ msgid "Rhodium"
+#~ msgstr "Родий"
+
+#~ msgid "Palladium"
+#~ msgstr "Палладий"
+
+#~ msgid "Silver"
+#~ msgstr "Серебро"
+
+#~ msgid "Cadmium"
+#~ msgstr "Кадмий"
+
+#~ msgid "Indium"
+#~ msgstr "Индий"
+
+#~ msgid "Tin"
+#~ msgstr "Олово"
+
+#~ msgid "Antimony"
+#~ msgstr "Сурьма"
+
+#~ msgid "Tellurium"
+#~ msgstr "Теллур"
+
+#~ msgid "Iodine"
+#~ msgstr "Йод"
+
+#~ msgid "Xenon"
+#~ msgstr "Ксенон"
+
+#~ msgid "Caesium"
+#~ msgstr "Цезий"
+
+#~ msgid "Barium"
+#~ msgstr "Барий"
+
+#~ msgid "Lanthanum"
+#~ msgstr "Лантан"
+
+#~ msgid "Cerium"
+#~ msgstr "Церий"
+
+#~ msgid "Praseodymium"
+#~ msgstr "Празеодим"
+
+#~ msgid "Neodymium"
+#~ msgstr "Неодим"
+
+#~ msgid "Promethium"
+#~ msgstr "Прометий"
+
+#~ msgid "Samarium"
+#~ msgstr "Самарий"
+
+#~ msgid "Europium"
+#~ msgstr "Европий"
+
+#~ msgid "Gadolinium"
+#~ msgstr "Гадолиний"
+
+#~ msgid "Terbium"
+#~ msgstr "Тербий"
+
+#~ msgid "Dysprosium"
+#~ msgstr "Диспрозий"
+
+#~ msgid "Holmium"
+#~ msgstr "Гольмий"
+
+#~ msgid "Erbium"
+#~ msgstr "Эрбий"
+
+#~ msgid "Thulium"
+#~ msgstr "Тулий"
+
+#~ msgid "Ytterbium"
+#~ msgstr "Иттербий"
+
+#~ msgid "Lutetium"
+#~ msgstr "Лютеций"
+
+#~ msgid "Hafnium"
+#~ msgstr "Гафний"
+
+#~ msgid "Tantalum"
+#~ msgstr "Тантал"
+
+#~ msgid "Tungsten"
+#~ msgstr "Вольфрам"
+
+#~ msgid "Rhenium"
+#~ msgstr "Рений"
+
+#~ msgid "Osmium"
+#~ msgstr "Осмий"
+
+#~ msgid "Iridium"
+#~ msgstr "Иридий"
+
+#~ msgid "Platinum"
+#~ msgstr "Платина"
+
+#~ msgid "Gold"
+#~ msgstr "Золото"
+
+#~ msgid "Mercury"
+#~ msgstr "Ртуть"
+
+#~ msgid "Thallium"
+#~ msgstr "Таллий"
+
+#~ msgid "Lead"
+#~ msgstr "Свинец"
+
+#~ msgid "Bismuth"
+#~ msgstr "Висмут"
+
+#~ msgid "Polonium"
+#~ msgstr "Полоний"
+
+#~ msgid "Astatine"
+#~ msgstr "Астат"
+
+#~ msgid "Radon"
+#~ msgstr "Радон"
+
+#~ msgid "Francium"
+#~ msgstr "Франций"
+
+#~ msgid "Radium"
+#~ msgstr "Радий"
+
+#~ msgid "Actinium"
+#~ msgstr "Актиний"
+
+#~ msgid "Thorium"
+#~ msgstr "Торий"
+
+#~ msgid "Protactinium"
+#~ msgstr "Протактиний"
+
+#~ msgid "Uranium"
+#~ msgstr "Уран"
+
+#~ msgid "Neptunium"
+#~ msgstr "Нептуний"
+
+#~ msgid "Plutonium"
+#~ msgstr "Плутоний"
+
+#~ msgid "Americium"
+#~ msgstr "Америций"
+
+#~ msgid "Curium"
+#~ msgstr "Кюрий"
+
+#~ msgid "Berkelium"
+#~ msgstr "Берклий"
+
+#~ msgid "Californium"
+#~ msgstr "Калифорний"
+
+#~ msgid "Einsteinium"
+#~ msgstr "Эйнштейний"
+
+#~ msgid "Fermium"
+#~ msgstr "Фермий"
+
+#~ msgid "Mendelevium"
+#~ msgstr "Менделевий"
+
+#~ msgid "Nobelium"
+#~ msgstr "Нобелий"
+
+#~ msgid "Lawrencium"
+#~ msgstr "Лоуренсий"
+
+#~ msgid "Rutherfordium"
+#~ msgstr "Резерфордий"
+
+#~ msgid "Dubnium"
+#~ msgstr "Дубний"
+
+#~ msgid "Seaborgium"
+#~ msgstr "Сиборгий"
+
+#~ msgid "Bohrium"
+#~ msgstr "Борий"
+
+#~ msgid "Hassium"
+#~ msgstr "Хассий"
+
+#~ msgid "Meitnerium"
+#~ msgstr "Мейтнерий"
+
+#~ msgid "Darmstadtium"
+#~ msgstr "Дармштадтий"
+
+#~ msgid "Roentgenium"
+#~ msgstr "Рентгений"
+
+#, fuzzy
+#~| msgid "Cerium"
+#~ msgid "Copernicium"
+#~ msgstr "Церий"
+
+#~ msgid "Ununtrium"
+#~ msgstr "Унунтрий"
+
+#~ msgid "Ununquadium"
+#~ msgstr "Унунквадий"
+
+#~ msgid "Ununpentium"
+#~ msgstr "Унунпентий"
+
+#~ msgid "Ununhexium"
+#~ msgstr "Унунгексий"
+
+#~ msgid "Ununseptium"
+#~ msgstr "Унунсептий"
+
+#~ msgid "Ununoctium"
+#~ msgstr "Унуноктий"
+
+#~ msgid "Greek 'hydro' and 'gennao' for 'forms water'"
+#~ msgstr ""
+#~ "Название происходит от словосочетания греческих слов «hydro» и "
+#~ "«gennao» («образующий воду»)"
+
+#~ msgid "The Greek word for the sun was 'helios'"
+#~ msgstr "Название происходит от греческого слова «helios» (Солнце)"
+
+#~ msgid "Greek 'lithos' means 'stone'"
+#~ msgstr "Название происходит от греческого слова «lithos» («камень»)"
+
+#~ msgid "Greek 'beryllos' for 'light-green stone'"
+#~ msgstr ""
+#~ "Название происходит от греческого слова «beryllos» («светло-зелёный "
+#~ "камень»)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Boron means 'Bor(ax) + (carb)on'. It is found in borax and behaves a lot "
+#~ "like carbon"
+#~ msgstr ""
+#~ "Название происходит от слова «Boron» («Bor(ax) + (carb)on», бура и "
+#~ "уголь). Его находили в буре и он очень походил на уголь"
+
+#~ msgid "Latin 'carboneum' for carbon"
+#~ msgstr "Название происходит от латинского слова «carboneum» («уголь»)"
+
+#~ msgid "Latin 'nitrogenium' ('forms saltpeter')"
+#~ msgstr ""
+#~ "Название происходит от латинского слова «nitrogenium» («образующий "
+#~ "селитру»)"
+
+#~ msgid "Latin 'oxygenium' (forms acids)"
+#~ msgstr ""
+#~ "Название происходит от латинского слова «oxygenium» («образующий кислоту»)"
+
+#~ msgid "Latin 'fluere' ('floats')"
+#~ msgstr "Название происходит от латинского слова «fluere» («течь»)"
+
+#~ msgid "Greek 'neo'. meaning 'new'"
+#~ msgstr "Греческая приставка «neo» означает «новый»"
+
+#~ msgid "Arabic 'natrun' for 'soda'"
+#~ msgstr "Название происходит от арабского слова «natrun» («сода»)"
+
+#~ msgid "Named after the city of Magnesia"
+#~ msgstr "Назван в честь города Магнезии"
+
+#~ msgid "Latin 'alumen'"
+#~ msgstr "Название происходит от латинского слова «alumen»"
+
+#~ msgid "Latin 'silex'"
+#~ msgstr "Название происходит от латинского слова «silex»"
+
+#~ msgid "Greek 'phosphoros' for 'carries light'"
+#~ msgstr ""
+#~ "Название происходит от греческого слова «phosphoros» («несущий свет»)"
+
+#~ msgid "Greek 'chloros' for 'yellow-green'"
+#~ msgstr "Название происходит от греческого слова «chloros» («жёлто-зелёный»)"
+
+#~ msgid "Greek 'aergon' for 'inactive'"
+#~ msgstr "Название происходит от греческого слова «aergon» («неактивный»)"
+
+#~ msgid "Arabic 'al qaliy' for potash"
+#~ msgstr "Название происходит от арабского слова «al qaliy» («поташ»)"
+
+#~ msgid "Latin 'calx' for 'lime'"
+#~ msgstr "Название происходит от латинского слова «calx» («известь»)"
+
+#~ msgid "Named because it was found in Scandinavia"
+#~ msgstr "Назван в честь Скандинавии, где был впервые обнаружен"
+
+#~ msgid "The Titans were giants in Greek mythology"
+#~ msgstr "Назван в честь титанов - гигантов в греческой мифологии"
+
+#~ msgid "'Vanadis' is another name for the Nordic goddess Freyja"
+#~ msgstr ""
+#~ "Назван в честь скандинавской богини Фрейи, которую также называли Vanadis"
+
+#~ msgid "Greek 'chroma' means 'color'"
+#~ msgstr "Название происходит от греческого слова «chroma» («цвет»)"
+
+#, fuzzy
+#~| msgid ""
+#~| "It was discovered near a town named Magnesia in a black earth. Thus. it "
+#~| "was named 'magnesia nigra'. short: Manganese"
+#~ msgid ""
+#~ "It was discovered near a town named Magnesia in black earth. Thus, it was "
+#~ "named 'magnesia nigra', or for short, Manganese."
+#~ msgstr ""
+#~ "Обнаружен возле города Магнезии в чёрной земле, поэтому получил название "
+#~ "«magnesia nigra» или кратко: «Manganese»"
+
+#~ msgid "Latin 'ferrum'"
+#~ msgstr "Название происходит от латинского слова «ferrum»"
+
+#~ msgid "Named after the German word 'Kobold' for 'goblin'"
+#~ msgstr ""
+#~ "Название происходит от немецкого слова «Kobold» («кобольд; злой дух, "
+#~ "живущий в шахтах»)"
+
+#~ msgid "'Nickel' was the name of a mountain goblin"
+#~ msgstr "Название происходит от «Nickel» (название горного гоблина)"
+
+#~ msgid "Greek 'cuprum' for Cypres"
+#~ msgstr "Название происходит от греческого слова «cuprum» (Кипр)"
+
+#, fuzzy
+#~| msgid "German 'zinking' for 'rough'. because zinc ore is very rough"
+#~ msgid "German 'zinking' for 'rough', because zinc ore is very rough"
+#~ msgstr ""
+#~ "Название происходит от немецкого слова «zinking» («крупнозернистый»), "
+#~ "поскольку цинковая руда очень зернистая"
+
+#~ msgid "'Gallia' is an old name for France"
+#~ msgstr "Название происходит от «Gallia» - древнего названия Франции"
+
+#~ msgid "Latin 'germania' is an old name for Germany"
+#~ msgstr ""
+#~ "Название происходит от латинского слова «germania» - древнего названия "
+#~ "Германии"
+
+#~ msgid "Greek 'arsenikos' for 'male' or 'bold'"
+#~ msgstr "Название происходит от греческого слова «arsenikos» («мужчина»)"
+
+#~ msgid "Greek 'selena' for 'moon'"
+#~ msgstr "Название происходит от греческого слова «selena» (Луна)"
+
+#~ msgid "Greek 'bromos' for 'smells badly'"
+#~ msgstr "Название происходит от греческого слова «bromos» («дурно пахнущий»)"
+
+#~ msgid "Greek 'kryptos' for 'hidden'"
+#~ msgstr "Название происходит от греческого слова «kryptos» («скрытый»)"
+
+#~ msgid "Latin 'rubidus' for 'dark red'"
+#~ msgstr "Название происходит от латинского слова «rubidus» («тёмно-красный»)"
+
+#~ msgid "Named after the mineral Strontianit"
+#~ msgstr "Название происходит от минерала стронцианита"
+
+#~ msgid ""
+#~ "Named after the small town of Ytterby near Stockholm in Sweden. Terbium. "
+#~ "Ytterbium and Gadolinium are also named after this town."
+#~ msgstr ""
+#~ "Назван в честь маленького городка Иттерби близ Стокгольма в Швеции. "
+#~ "Иттербий и Гадолиний также названы в честь этого городка."
+
+#~ msgid "Named after the mineral zircon"
+#~ msgstr "Название происходит от минерала циркона"
+
+#, fuzzy
+#~| msgid "Named after Niobe. the daughter of the Greek god Tantalus"
+#~ msgid "Named after Niobe, the daughter of the Greek god Tantalus."
+#~ msgstr "Назван в честь Ниобы, дочери греческого бога Тантала"
+
+#~ msgid ""
+#~ "This name has Greek roots. It means 'like Platinum' - it was difficult to "
+#~ "distinguish Molybdenum from Platinum."
+#~ msgstr ""
+#~ "Название содержит греческие корни. Означает «похожий на платину», так как "
+#~ "в античную эпоху было сложно различить молибден и платину."
+
+#~ msgid "Greek 'technetos' for artificial"
+#~ msgstr "Название происходит от «technetos» («искусственный»)"
+
+#~ msgid "Ruthenia is the old name of Russia"
+#~ msgstr "Название происходит от «Ruthenia» - древнего названия России"
+
+#~ msgid "Greek 'rhodeos' means 'red like a rose'"
+#~ msgstr ""
+#~ "Название происходит от греческого слова «rhodeos» («красный как роза»)"
+
+#~ msgid "Named after the asteroid Pallas"
+#~ msgstr "Назван в честь астероида Паллада"
+
+#~ msgid "Latin 'argentum' for silver"
+#~ msgstr "Название происходит от латинского слова «agrentum» («серебро»)"
+
+#~ msgid "Greek 'kadmia' ('Galmei' = Zinc carbonate)"
+#~ msgstr ""
+#~ "Название происходит от греческого слова «kadmia» («Galmei» - карбонат "
+#~ "цинка)"
+
+#~ msgid "Named after 'Indigo' because of its blue spectrum"
+#~ msgstr "Получил название от цвета «индиго», поскольку имеет синий спектр"
+
+#~ msgid "Latin 'stannum' for tin"
+#~ msgstr "Название происходит от латинского слова «stannum» («олово»)"
+
+#~ msgid "Arabic 'anthos ammonos' for 'blossom of the god Ammon'"
+#~ msgstr ""
+#~ "Название происходит от арабского словосочетания «anthos ammonos» («цветок "
+#~ "бога Аммона»)"
+
+#~ msgid "Latin 'tellus' or 'telluris' for 'Planet Earth'"
+#~ msgstr ""
+#~ "Название происходит от латинского слова «tellus» или «telluris» («Земля»)"
+
+#, fuzzy
+#~| msgid "Greek 'ioeides' for 'violett'"
+#~ msgid "Greek 'ioeides' for 'violet'."
+#~ msgstr "Название происходит от греческого слова «ioeides» («фиолетовый»)"
+
+#~ msgid "Greek 'xenos' for 'foreigner'"
+#~ msgstr "Название происходит от греческого слова «xenos» («иностранец»)"
+
+#, fuzzy
+#~| msgid "Latin 'caesius' for 'heavenblue'"
+#~ msgid "Latin 'caesius' for 'heaven blue'."
+#~ msgstr ""
+#~ "Название происходит от латинского слова «caesius» («небесно-голубой»)"
+
+#~ msgid "Greek 'barys' for 'heavy'"
+#~ msgstr "Название происходит от греческого слова «barys» («тяжёлый»)"
+
+#, fuzzy
+#~| msgid ""
+#~| "Greek 'lanthanein' for 'hidden'. The Lanthanoids are also called the "
+#~| "'rare earth'"
+#~ msgid ""
+#~ "Greek 'lanthanein' for 'hidden'. The Lanthanoids are also called the "
+#~ "'rare earth' elements."
+#~ msgstr ""
+#~ "Название происходит от греческого слова «lanthanein» («скрытый»). "
+#~ "Лантаноиды также называют «редкоземельными элементами»"
+
+#~ msgid "Named after the planetoid Ceres"
+#~ msgstr "Назван в честь астероида Церера."
+
+#~ msgid "Greek 'prasinos didymos' for 'green twin'"
+#~ msgstr ""
+#~ "Название происходит от греческого слова «prasinos didymos» («светло-"
+#~ "зелёный близнец»)"
+
+#~ msgid "Greek 'neos didymos' for 'new twin'"
+#~ msgstr ""
+#~ "Название происходит от греческого слова «neos didymos» («новый близнец»)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Named after the Greek Prometheus. Prometheus stole the fire from the gods "
+#~ "and gave it to mankind."
+#~ msgstr ""
+#~ "Назван в честь древнегреческого мифического героя Прометея. Прометей "
+#~ "украл огонь у богов и передал его людям."
+
+#~ msgid "Named after the mineral Samarskit"
+#~ msgstr "Название происходит от минерала самарскита"
+
+#, fuzzy
+#~ msgid "Named after Europe"
+#~ msgstr "Назван в честь континента Европы"
+
+#~ msgid "Named after the Finnish chemist Johan Gadolin"
+#~ msgstr "Назван в честь финского химика Юхана Гадолина"
+
+#~ msgid "Named after the Swedish town of Ytterby"
+#~ msgstr "Назван в честь шведского городка Иттерби"
+
+#~ msgid "Greek 'dysprositor' for 'difficult to reach'"
+#~ msgstr ""
+#~ "Название происходит от греческого слова «dysprositor» («труднодоступный»)"
+
+#~ msgid "Latin 'holmia' for the old name of Stockholm"
+#~ msgstr ""
+#~ "Название происходит от латинского слова «holmia» (старого названия "
+#~ "Стокгольма)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Named ofter the Swedish town of Ytterby. Terbium and Ytterbium are also "
+#~ "named after this town."
+#~ msgstr ""
+#~ "Назван в честь шведского городка Иттерби. Тербий и Иттербий также названы "
+#~ "в честь этого городка."
+
+#, fuzzy
+#~| msgid "Named after the old name of Scandinavia. 'Thule'"
+#~ msgid "Named after the old name of Scandinavia, 'Thule'."
+#~ msgstr "Назван в честь древнего названия Скандинавии - Туле (Thule)"
+
+#, fuzzy
+#~| msgid ""
+#~| "Like Terbium and Gadolinium. this is named after the Swedish town of "
+#~| "Ytterby"
+#~ msgid ""
+#~ "Like Terbium and Gadolinium, this is named after the Swedish town of "
+#~ "Ytterby."
+#~ msgstr ""
+#~ "Назван в честь шведского городка Иттерби. Тербий и Гадолиний также "
+#~ "названы в честь этого городка."
+
+#~ msgid "Named after the Roman name 'Lutetia' for Paris"
+#~ msgstr "Назван в честь древнего латинского названия Парижа (Lutetia)"
+
+#~ msgid "'Hafnia' is the old name of Kopenhagen (Denmark)"
+#~ msgstr "Назван в честь старого названия Копенгагена (Hafnia)"
+
+#~ msgid "Named after the Greek myth of Tantalos"
+#~ msgstr "Назван в честь героя греческого мифа Тантала"
+
+#, fuzzy
+#~ msgid ""
+#~ "'tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~ "symbol 'W') was Wolfram, named after a mineral."
+#~ msgstr ""
+#~ "На шведском языке «tung sten» означает «тяжеловесный камень». Старое "
+#~ "название и символ «W» происходят от немецкого «Wolf Rahm» («волчья слюна»)"
+
+#, fuzzy
+#~| msgid "Named after the German river Rhine (latin 'Rhenium')"
+#~ msgid "Named after the German river Rhine (latin 'Rhenium')."
+#~ msgstr "Назван в честь Рейнской провинции («Rhenium» - лат.)"
+
+#, fuzzy
+#~| msgid "Greek for 'smell'. Its oxides smell strongly like radishes"
+#~ msgid "Greek for 'smell'. Its oxides smell strongly like radishes."
+#~ msgstr ""
+#~ "Название осмий дано в связи с тем, что растворение щелочного сплава "
+#~ "осмиридия в воде или кислоте сопровождается стойким запахом, похожим на "
+#~ "запах хлора или редьки, раздражающим горло (греч. - запах)"
+
+#~ msgid "Greek 'iris' for 'rainbow'"
+#~ msgstr "Название происходит от греческого слова «iris» («радуга»)"
+
+#~ msgid "Spanish 'platina' means 'small silver'"
+#~ msgstr "Название происходит от испанского слова «platina» («серебришко»)"
+
+#, fuzzy
+#~| msgid "Latin 'aurum'. named after Aurora. the goddess of sunrise"
+#~ msgid "Latin 'aurum'. Named after Aurora, the goddess of sunrise"
+#~ msgstr "Название происходит от латинского слова «aurum» («жёлтый»)"
+
+#~ msgid "Graeco-Latin 'hydrargyrum' for 'liquid silver'"
+#~ msgstr ""
+#~ "Название происходит от греко-латинского слова «hydrargyrum» («жидкое "
+#~ "серебро»)"
+
+#~ msgid "Greek 'tallos' for 'young twig'"
+#~ msgstr ""
+#~ "Название происходит от греческого слова «tallos» («молодая зелёная ветвь»)"
+
+#~ msgid "Latin 'plumbum' for Lead"
+#~ msgstr "Название происходит от латинского слова «plumbum» («свинец»)"
+
+#, fuzzy
+#~| msgid "The old name of Bismuth is 'Wismut'. This stood for 'white mass'"
+#~ msgid "The old name of Bismuth is 'Wismut', which stood for 'white mass'."
+#~ msgstr "Название происходит от слова «Wismut» («белая масса»)"
+
+#~ msgid "Named after Poland to honor Marie Curie"
+#~ msgstr ""
+#~ "Элемент назван в честь родины Марии Склодовской-Кюри — Польши (Polonia - "
+#~ "лат.)"
+
+#~ msgid "Greek 'astator' for 'changing'"
+#~ msgstr "Название происходит от греческого слова «astator» («неустойчивый»)"
+
+#, fuzzy
+#~| msgid ""
+#~| "Named after Radium. It ends with 'on' to make it clear that it is a "
+#~| "noble gas"
+#~ msgid ""
+#~ "Named after Radium. It ends with 'on' to make it clear that it is a noble "
+#~ "gas."
+#~ msgstr ""
+#~ "Слово «радон» является производным от слова «радий», поскольку радон "
+#~ "образуется при его радиоактивном распаде"
+
+#~ msgid "Named after France to honor Marguerite Perey"
+#~ msgstr "Элемент назван в честь родины Маргариты Пере — Франции"
+
+#~ msgid "Latin 'radius' for 'beam', as it is radioactive"
+#~ msgstr ""
+#~ "Название происходит от латинского слова «radius» («луч»), поскольку "
+#~ "элемент является радиоактивным"
+
+#~ msgid "Greek 'aktis' for 'beam' - actinium is radioactive"
+#~ msgstr ""
+#~ "Название происходит от греческого слова «aktis» («луч»), поскольку "
+#~ "элемент является радиоактивным"
+
+#~ msgid "Named after the German god of thunder: Thor"
+#~ msgstr "Назван в честь скандинавского бога грома Тора"
+
+#, fuzzy
+#~ msgid ""
+#~ "Greek 'protos' for 'ancester'. Protactinium is before Actinium in the "
+#~ "periodic table."
+#~ msgstr ""
+#~ "Название происходит от греческого слова «protos» («прародитель»). "
+#~ "Протактиний является исходным элементом в ряду образования актиния."
+
+#~ msgid "Greek 'ouranos' for 'heaven'. Named after the planet Uranus."
+#~ msgstr "Назван в честь планеты Уран."
+
+#~ msgid "Named after the planet Neptune."
+#~ msgstr "Назван в честь планеты Нептун."
+
+#~ msgid "Named after the planet Pluto."
+#~ msgstr "Назван в честь планеты Плутон."
+
+#~ msgid "Named after America."
+#~ msgstr "Назван в честь континента Америки."
+
+#~ msgid "Named after Marie Curie."
+#~ msgstr "Назван в честь супругов Кюри."
+
+#~ msgid "Named after the town Berkeley where it was discovered."
+#~ msgstr ""
+#~ "Назван в честь Калифорнийского университета в Беркли, где он был получен."
+
+#~ msgid "Named after the US-State of California."
+#~ msgstr "Назван в честь штата Калифорния в США."
+
+#~ msgid "Named after the scientist Albert Einstein."
+#~ msgstr "Назван в честь учёного Альберта Эйнштейна."
+
+#~ msgid "Named after the scientist Enrico Fermi."
+#~ msgstr "Назван в честь учёного Энрико Ферми."
+
+#~ msgid "Named after the scientist D.I. Mendeleev."
+#~ msgstr "Назван в честь учёного Д.И.Менделеева."
+
+#~ msgid "Named after the scientist Alfred Nobel."
+#~ msgstr "Назван в честь учёного Альфреда Нобеля."
+
+#~ msgid "Named after the scientist Ernest Orlando Lawrence."
+#~ msgstr "Назван в честь учёного Эрнеста Орландо Лоуренса."
+
+#~ msgid "Named after the scientist Ernest Rutherford"
+#~ msgstr "Назван в честь учёного Эрнеста Резерфорда"
+
+#~ msgid "Named after the science-town Dubna in Russia"
+#~ msgstr "Назван в честь российского города учёных Дубны"
+
+#~ msgid "Named after the scientist G. Theodore Seaborg."
+#~ msgstr "Назван в честь учёного Гленна Теодора Сиборга."
+
+#~ msgid "Named after the scientist Niels Bohr."
+#~ msgstr "Назван в честь учёного Нильса Бора."
+
+#, fuzzy
+#~ msgid ""
+#~ "Latin 'hassia' for the German county Hessen. In Hessen a lot elements "
+#~ "have been discovered."
+#~ msgstr ""
+#~ "Название происходит от латинского названия старинного немецкого княжества "
+#~ "Гессен, а затем великого герцогства Гессен-Дармштадт — Hassia, в котором "
+#~ "было открыто множество элементов."
+
+#~ msgid "Named after the scientist Lise Meitner."
+#~ msgstr "Назван в честь австрийского физика Лизы Мейтнер."
+
+#, fuzzy
+#~ msgid ""
+#~ "Named after the German city Darmstadt where many elements have been "
+#~ "discovered."
+#~ msgstr "Назван в честь немецкого города Дармштадта, в котором был открыт."
+
+#~ msgid "Named after Wilhelm Conrad Röntgen."
+#~ msgstr ""
+#~ "Назван в честь знаменитого немецкого физика, лауреата Нобелевской премии, "
+#~ "открывшего знаменитые лучи, Вильгельма Конрада Рентгена."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr ""
+#~ "Виталий Липатов,Николай Шафоростов,LOR Windowser,Григорий Мохин,Альберт "
+#~ "Валиев"
+
+#~ msgid "Ununbium"
+#~ msgstr "Унунбий"
+
+#, fuzzy
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "literary"
+#~ msgstr "Февраль"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "proper name"
+#~ msgstr "Черепанов Андрей"
+
+#, fuzzy
+#~ msgctxt "Monday"
+#~ msgid "Mon"
+#~ msgstr "ПН"
+
+#, fuzzy
+#~ msgctxt "Tuesday"
+#~ msgid "Tue"
+#~ msgstr "Вт"
+
+#, fuzzy
+#~ msgctxt "Wednesday"
+#~ msgid "Wed"
+#~ msgstr "Ср"
+
+#, fuzzy
+#~ msgctxt "Thursday"
+#~ msgid "Thu"
+#~ msgstr "Чт"
+
+#, fuzzy
+#~ msgctxt "Friday"
+#~ msgid "Fri"
+#~ msgstr "Пт"
+
+#, fuzzy
+#~ msgctxt "Saturday"
+#~ msgid "Sat"
+#~ msgstr "Сб"
+
+#, fuzzy
+#~ msgctxt "Sunday"
+#~ msgid "Sun"
+#~ msgstr "Вс"
+
+#, fuzzy
+#~ msgid "Monday"
+#~ msgstr "Понедельник"
+
+#, fuzzy
+#~ msgid "Tuesday"
+#~ msgstr "Вторник"
+
+#, fuzzy
+#~ msgid "Wednesday"
+#~ msgstr "Среда"
+
+#, fuzzy
+#~ msgid "Thursday"
+#~ msgstr "Четверг"
+
+#, fuzzy
+#~ msgid "Friday"
+#~ msgstr "Пятница"
+
+#, fuzzy
+#~ msgid "Saturday"
+#~ msgstr "Суббота"
+
+#, fuzzy
+#~ msgid "Sunday"
+#~ msgstr "Воскресенье"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jan"
+#~ msgstr "Янв"
+
+#~ msgctxt "Short month name"
+#~ msgid "Feb"
+#~ msgstr "Фев"
+
+#~ msgctxt "Short month name"
+#~ msgid "Mar"
+#~ msgstr "Мар"
+
+#~ msgctxt "Short month name"
+#~ msgid "Apr"
+#~ msgstr "Апр"
+
+#~ msgctxt "Short month name"
+#~ msgid "May"
+#~ msgstr "Май"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jun"
+#~ msgstr "Июн"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jul"
+#~ msgstr "Июл"
+
+#~ msgctxt "Short month name"
+#~ msgid "Aug"
+#~ msgstr "Авг"
+
+#~ msgctxt "Short month name"
+#~ msgid "Sep"
+#~ msgstr "Сен"
+
+#~ msgctxt "Short month name"
+#~ msgid "Oct"
+#~ msgstr "Окт"
+
+#~ msgctxt "Short month name"
+#~ msgid "Nov"
+#~ msgstr "Ноя"
+
+#~ msgctxt "Short month name"
+#~ msgid "Dec"
+#~ msgstr "Дек"
+
+#~ msgctxt "Short day name"
+#~ msgid "Mon"
+#~ msgstr "ПН"
+
+#~ msgctxt "Short day name"
+#~ msgid "Tue"
+#~ msgstr "Вт"
+
+#~ msgctxt "Short day name"
+#~ msgid "Wed"
+#~ msgstr "Ср"
+
+#~ msgctxt "Short day name"
+#~ msgid "Thu"
+#~ msgstr "Чт"
+
+#~ msgctxt "Short day name"
+#~ msgid "Fri"
+#~ msgstr "Пт"
+
+#~ msgctxt "Short day name"
+#~ msgid "Sat"
+#~ msgstr "Сб"
+
+#~ msgctxt "Short day name"
+#~ msgid "Sun"
+#~ msgstr "Вс"
+
+#~ msgctxt "Long month name"
+#~ msgid "January"
+#~ msgstr "Январь"
+
+#~ msgctxt "Long month name"
+#~ msgid "February"
+#~ msgstr "Февраль"
+
+#~ msgctxt "Long month name"
+#~ msgid "March"
+#~ msgstr "Март"
+
+#~ msgctxt "Long month name"
+#~ msgid "April"
+#~ msgstr "Апрель"
+
+#~ msgctxt "Long month name"
+#~ msgid "May"
+#~ msgstr "Май"
+
+#~ msgctxt "Long month name"
+#~ msgid "June"
+#~ msgstr "Июнь"
+
+#~ msgctxt "Long month name"
+#~ msgid "July"
+#~ msgstr "Июль"
+
+#~ msgctxt "Long month name"
+#~ msgid "August"
+#~ msgstr "Август"
+
+#~ msgctxt "Long month name"
+#~ msgid "September"
+#~ msgstr "Сентябрь"
+
+#~ msgctxt "Long month name"
+#~ msgid "October"
+#~ msgstr "Октябрь"
+
+#~ msgctxt "Long month name"
+#~ msgid "November"
+#~ msgstr "Ноябрь"
+
+#~ msgctxt "Long month name"
+#~ msgid "December"
+#~ msgstr "Декабрь"
+
+#~ msgctxt "Long day name"
+#~ msgid "Monday"
+#~ msgstr "Понедельник"
+
+#~ msgctxt "Long day name"
+#~ msgid "Tuesday"
+#~ msgstr "Вторник"
+
+#~ msgctxt "Long day name"
+#~ msgid "Wednesday"
+#~ msgstr "Среда"
+
+#~ msgctxt "Long day name"
+#~ msgid "Thursday"
+#~ msgstr "Четверг"
+
+#~ msgctxt "Long day name"
+#~ msgid "Friday"
+#~ msgstr "Пятница"
+
+#~ msgctxt "Long day name"
+#~ msgid "Saturday"
+#~ msgstr "Суббота"
+
+#~ msgctxt "Long day name"
+#~ msgid "Sunday"
+#~ msgstr "Воскресенье"
+
+#, fuzzy
+#~ msgctxt "January"
+#~ msgid "Jan"
+#~ msgstr "Янв"
+
+#, fuzzy
+#~ msgctxt "February"
+#~ msgid "Feb"
+#~ msgstr "Фев"
+
+#, fuzzy
+#~ msgctxt "March"
+#~ msgid "Mar"
+#~ msgstr "Мар"
+
+#, fuzzy
+#~ msgctxt "April"
+#~ msgid "Apr"
+#~ msgstr "Апр"
+
+#, fuzzy
+#~ msgctxt "May short"
+#~ msgid "May"
+#~ msgstr "Май"
+
+#, fuzzy
+#~ msgctxt "June"
+#~ msgid "Jun"
+#~ msgstr "Июн"
+
+#, fuzzy
+#~ msgctxt "July"
+#~ msgid "Jul"
+#~ msgstr "Июл"
+
+#, fuzzy
+#~ msgctxt "August"
+#~ msgid "Aug"
+#~ msgstr "Авг"
+
+#, fuzzy
+#~ msgctxt "September"
+#~ msgid "Sep"
+#~ msgstr "Сен"
+
+#, fuzzy
+#~ msgctxt "October"
+#~ msgid "Oct"
+#~ msgstr "Окт"
+
+#, fuzzy
+#~ msgctxt "November"
+#~ msgid "Nov"
+#~ msgstr "Ноя"
+
+#, fuzzy
+#~ msgctxt "December"
+#~ msgid "Dec"
+#~ msgstr "Дек"
+
+#, fuzzy
+#~ msgid "January"
+#~ msgstr "Январь"
+
+#, fuzzy
+#~ msgid "February"
+#~ msgstr "Февраль"
+
+#, fuzzy
+#~ msgid "March"
+#~ msgstr "Март"
+
+#, fuzzy
+#~ msgid "April"
+#~ msgstr "Апрель"
+
+#, fuzzy
+#~ msgctxt "May long"
+#~ msgid "May"
+#~ msgstr "Май"
+
+#, fuzzy
+#~ msgid "June"
+#~ msgstr "Июнь"
+
+#, fuzzy
+#~ msgid "July"
+#~ msgstr "Июль"
+
+#, fuzzy
+#~ msgid "August"
+#~ msgstr "Август"
+
+#, fuzzy
+#~ msgid "September"
+#~ msgstr "Сентябрь"
+
+#, fuzzy
+#~ msgid "October"
+#~ msgstr "Октябрь"
+
+#, fuzzy
+#~ msgid "November"
+#~ msgstr "Ноябрь"
+
+#, fuzzy
+#~ msgid "December"
+#~ msgstr "Декабрь"
+
+#, fuzzy
+#~ msgctxt "of January"
+#~ msgid "of Jan"
+#~ msgstr "Янв"
+
+#, fuzzy
+#~ msgctxt "of February"
+#~ msgid "of Feb"
+#~ msgstr "Фев"
+
+#, fuzzy
+#~ msgctxt "of March"
+#~ msgid "of Mar"
+#~ msgstr "Мар"
+
+#, fuzzy
+#~ msgctxt "of April"
+#~ msgid "of Apr"
+#~ msgstr "Апр"
+
+#, fuzzy
+#~ msgctxt "of May short"
+#~ msgid "of May"
+#~ msgstr "Май"
+
+#, fuzzy
+#~ msgctxt "of June"
+#~ msgid "of Jun"
+#~ msgstr "Июн"
+
+#, fuzzy
+#~ msgctxt "of July"
+#~ msgid "of Jul"
+#~ msgstr "Июл"
+
+#, fuzzy
+#~ msgctxt "of August"
+#~ msgid "of Aug"
+#~ msgstr "Авг"
+
+#, fuzzy
+#~ msgctxt "of September"
+#~ msgid "of Sep"
+#~ msgstr "Сен"
+
+#, fuzzy
+#~ msgctxt "of October"
+#~ msgid "of Oct"
+#~ msgstr "Окт"
+
+#, fuzzy
+#~ msgctxt "of November"
+#~ msgid "of Nov"
+#~ msgstr "Ноя"
+
+#, fuzzy
+#~ msgctxt "of December"
+#~ msgid "of Dec"
+#~ msgstr "Дек"
+
+#, fuzzy
+#~ msgid "of February"
+#~ msgstr "Февраль"
+
+#, fuzzy
+#~ msgid "of March"
+#~ msgstr "Март"
+
+#, fuzzy
+#~ msgid "of April"
+#~ msgstr "Апрель"
+
+#, fuzzy
+#~ msgctxt "of May long"
+#~ msgid "of May"
+#~ msgstr "Май"
+
+#, fuzzy
+#~ msgid "of June"
+#~ msgstr "Июнь"
+
+#, fuzzy
+#~ msgid "of July"
+#~ msgstr "Июль"
+
+#, fuzzy
+#~ msgid "of August"
+#~ msgstr "Август"
+
+#, fuzzy
+#~ msgid "of September"
+#~ msgstr "Сентябрь"
+
+#, fuzzy
+#~ msgid "of October"
+#~ msgstr "Октябрь"
+
+#, fuzzy
+#~ msgid "of November"
+#~ msgstr "Ноябрь"
+
+#, fuzzy
+#~ msgid "of December"
+#~ msgstr "Декабрь"
+
+#~ msgid "Week %1"
+#~ msgstr "Неделя %1"
+
+#~ msgid "Next year"
+#~ msgstr "Следующий год"
+
+#~ msgid "Previous year"
+#~ msgstr "Предыдущий год"
+
+#~ msgid "Next month"
+#~ msgstr "Следующий месяц"
+
+#~ msgid "Previous month"
+#~ msgstr "Предыдущий месяц"
+
+#~ msgid "Select a week"
+#~ msgstr "Выберите неделю"
+
+#~ msgid "Select a month"
+#~ msgstr "Выберите месяц"
+
+#~ msgid "Select a year"
+#~ msgstr "Выберите год"
+
+#~ msgid "Select the current day"
+#~ msgstr "Выбрать текущий день"
+
+#~ msgid "ExtDatePicker test program"
+#~ msgstr "Программа поверки работы ExtDatePicker"
+
+#~ msgid "Compares KDatePicker and ExtDatePicker"
+#~ msgstr "Сравнение KDatePicker и ExtDatePicker"
+
+#~ msgid "Test ExtDatePicker"
+#~ msgstr "Проверка ExtDatePicker"
+
+#~ msgid "(c) 2004, Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"
+
+#, fuzzy
+#~| msgid "(c) 2004, Jason Harris"
+#~ msgid "Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"
+
+#, fuzzy
+#~ msgid "ExtDateTimeEdit test program"
+#~ msgstr "Программа поверки работы ExtDatePicker"
+
+#, fuzzy
+#~ msgid "Test ExtDateTimeEdit"
+#~ msgstr "Проверка ExtDatePicker"
+
+#, fuzzy
+#~ msgid "(c) 2005, Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"
+
+#, fuzzy
+#~ msgid "KPlotWidget test program"
+#~ msgstr "Программа поверки работы ExtDatePicker"
+
+#, fuzzy
+#~ msgid "(c) 2006, Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"

@@ -1,0 +1,1377 @@
+# Translation of libkdeedu to Croatian
+#
+# Oliver Mucafir <oliver.untwist@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2010-06-21 19:39+0200\n"
+"Last-Translator: Oliver Mucafir <oliver.untwist@gmail.com>\n"
+"Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr ""
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, kde-format
+msgid "Cannot lock file %1"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, kde-format
+msgid "Cannot open tempfile %1"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, kde-format
+msgid "Cannot download %1: %2"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, fuzzy, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "Travanj"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS"
+#| msgid "Your emails"
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "renato@translator-shop.org"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, fuzzy, kde-format
+#| msgctxt "EMAIL OF TRANSLATORS"
+#| msgid "Your emails"
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "renato@translator-shop.org"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, fuzzy, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "Travanj"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr ""
+
+#~ msgid "Vocabulary"
+#~ msgstr "Rječnik"
+
+#~ msgid "Glossary"
+#~ msgstr "Pojmovnik"
+
+#~ msgid "&Search:"
+#~ msgstr "Traži:"
+
+#~ msgid "References"
+#~ msgstr "Reference"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "Idi na '%1'"
+
+#~ msgid "Hydrogen"
+#~ msgstr "Vodik"
+
+#~ msgid "Helium"
+#~ msgstr "Helij"
+
+#~ msgid "Lithium"
+#~ msgstr "Litij"
+
+#~ msgid "Beryllium"
+#~ msgstr "Berilij"
+
+#~ msgid "Boron"
+#~ msgstr "Bor"
+
+#~ msgid "Carbon"
+#~ msgstr "Ugljik"
+
+#~ msgid "Nitrogen"
+#~ msgstr "Dušik"
+
+#~ msgid "Oxygen"
+#~ msgstr "Kisik"
+
+#~ msgid "Fluorine"
+#~ msgstr "Fluor"
+
+#~ msgid "Neon"
+#~ msgstr "Neon"
+
+#~ msgid "Sodium"
+#~ msgstr "Natrij"
+
+#~ msgid "Magnesium"
+#~ msgstr "Magnezij"
+
+#~ msgid "Aluminium"
+#~ msgstr "Aluminij"
+
+#~ msgid "Silicon"
+#~ msgstr "Silicij"
+
+#~ msgid "Phosphorus"
+#~ msgstr "Fosfor"
+
+#~ msgid "Sulfur"
+#~ msgstr "Sumpor"
+
+#~ msgid "Chlorine"
+#~ msgstr "Klor"
+
+#~ msgid "Argon"
+#~ msgstr "Argon"
+
+#~ msgid "Potassium"
+#~ msgstr "Kalij"
+
+#~ msgid "Calcium"
+#~ msgstr "Kalcij"
+
+#~ msgid "Scandium"
+#~ msgstr "Skandij"
+
+#~ msgid "Titanium"
+#~ msgstr "Titan"
+
+#~ msgid "Vanadium"
+#~ msgstr "Vanadij"
+
+#~ msgid "Chromium"
+#~ msgstr "Krom"
+
+#~ msgid "Manganese"
+#~ msgstr "Mangan"
+
+#~ msgid "Iron"
+#~ msgstr "Željezo"
+
+#~ msgid "Cobalt"
+#~ msgstr "Kobalt"
+
+#~ msgid "Nickel"
+#~ msgstr "Nikal"
+
+#~ msgid "Copper"
+#~ msgstr "Bakar"
+
+#~ msgid "Zinc"
+#~ msgstr "Cink"
+
+#~ msgid "Gallium"
+#~ msgstr "Galij"
+
+#~ msgid "Germanium"
+#~ msgstr "Germanij"
+
+#~ msgid "Arsenic"
+#~ msgstr "Arsen"
+
+#~ msgid "Selenium"
+#~ msgstr "Selenij"
+
+#~ msgid "Bromine"
+#~ msgstr "Brom"
+
+#~ msgid "Krypton"
+#~ msgstr "Kripton"
+
+#~ msgid "Rubidium"
+#~ msgstr "Rubidij"
+
+#~ msgid "Strontium"
+#~ msgstr "Stroncij"
+
+#~ msgid "Yttrium"
+#~ msgstr "Itrij"
+
+#~ msgid "Zirconium"
+#~ msgstr "Cirkonij"
+
+#~ msgid "Niobium"
+#~ msgstr "Niobij"
+
+#~ msgid "Molybdenum"
+#~ msgstr "Molibden"
+
+#~ msgid "Technetium"
+#~ msgstr "Tehnecij"
+
+#~ msgid "Ruthenium"
+#~ msgstr "Rutenij"
+
+#~ msgid "Rhodium"
+#~ msgstr "Rodij"
+
+#~ msgid "Palladium"
+#~ msgstr "Paladij"
+
+#~ msgid "Silver"
+#~ msgstr "Srebro"
+
+#~ msgid "Cadmium"
+#~ msgstr "Kadmij"
+
+#~ msgid "Indium"
+#~ msgstr "Indij"
+
+#~ msgid "Tin"
+#~ msgstr "Kositar"
+
+#~ msgid "Antimony"
+#~ msgstr "Antimon"
+
+#~ msgid "Tellurium"
+#~ msgstr "Telurij"
+
+#~ msgid "Iodine"
+#~ msgstr "Jod"
+
+#~ msgid "Xenon"
+#~ msgstr "Ksenon"
+
+#~ msgid "Caesium"
+#~ msgstr "Cezij"
+
+#~ msgid "Barium"
+#~ msgstr "Barij"
+
+#~ msgid "Lanthanum"
+#~ msgstr "Lantan"
+
+#~ msgid "Cerium"
+#~ msgstr "Cerij"
+
+#~ msgid "Praseodymium"
+#~ msgstr "Praseodimij"
+
+#~ msgid "Neodymium"
+#~ msgstr "Neodimij"
+
+#~ msgid "Promethium"
+#~ msgstr "Prometij"
+
+#~ msgid "Samarium"
+#~ msgstr "Samarij"
+
+#~ msgid "Europium"
+#~ msgstr "Europij"
+
+#~ msgid "Gadolinium"
+#~ msgstr "Gadolinij"
+
+#~ msgid "Terbium"
+#~ msgstr "Terbij"
+
+#~ msgid "Dysprosium"
+#~ msgstr "Disprozij"
+
+#~ msgid "Holmium"
+#~ msgstr "Holmij"
+
+#~ msgid "Erbium"
+#~ msgstr "Erbij"
+
+#~ msgid "Thulium"
+#~ msgstr "Tulij"
+
+#~ msgid "Ytterbium"
+#~ msgstr "Iterbij"
+
+#~ msgid "Lutetium"
+#~ msgstr "Lutecij"
+
+#~ msgid "Hafnium"
+#~ msgstr "Hafnij"
+
+#~ msgid "Tantalum"
+#~ msgstr "Tantal"
+
+#~ msgid "Tungsten"
+#~ msgstr "Volfram"
+
+#~ msgid "Rhenium"
+#~ msgstr "Renij"
+
+#~ msgid "Osmium"
+#~ msgstr "Osmij"
+
+#~ msgid "Iridium"
+#~ msgstr "Iridij"
+
+#~ msgid "Platinum"
+#~ msgstr "Platina"
+
+#~ msgid "Gold"
+#~ msgstr "Zlato"
+
+#~ msgid "Mercury"
+#~ msgstr "Živa"
+
+#~ msgid "Thallium"
+#~ msgstr "Talij"
+
+#~ msgid "Lead"
+#~ msgstr "Olovo"
+
+#~ msgid "Bismuth"
+#~ msgstr "Bizmut"
+
+#~ msgid "Polonium"
+#~ msgstr "Polonij"
+
+#~ msgid "Astatine"
+#~ msgstr "Astat"
+
+#~ msgid "Radon"
+#~ msgstr "Radon"
+
+#~ msgid "Francium"
+#~ msgstr "Francij"
+
+#~ msgid "Radium"
+#~ msgstr "Radij"
+
+#~ msgid "Actinium"
+#~ msgstr "Aktinij"
+
+#~ msgid "Thorium"
+#~ msgstr "Torij"
+
+#~ msgid "Protactinium"
+#~ msgstr "Protaktinij"
+
+#~ msgid "Uranium"
+#~ msgstr "Uranij"
+
+#~ msgid "Neptunium"
+#~ msgstr "Neptunij"
+
+#~ msgid "Plutonium"
+#~ msgstr "Plutonij"
+
+#~ msgid "Americium"
+#~ msgstr "Americij"
+
+#~ msgid "Curium"
+#~ msgstr "Kurij"
+
+#~ msgid "Berkelium"
+#~ msgstr "Berkelij"
+
+#~ msgid "Californium"
+#~ msgstr "Kalifornij"
+
+#~ msgid "Einsteinium"
+#~ msgstr "Einsteinij"
+
+#~ msgid "Fermium"
+#~ msgstr "Fermij"
+
+#~ msgid "Mendelevium"
+#~ msgstr "Mendelevij"
+
+#~ msgid "Nobelium"
+#~ msgstr "Nobelij"
+
+#~ msgid "Lawrencium"
+#~ msgstr "Lawrencij"
+
+#~ msgid "Rutherfordium"
+#~ msgstr "Rutherfordij"
+
+#~ msgid "Dubnium"
+#~ msgstr "Dubnij"
+
+#~ msgid "Seaborgium"
+#~ msgstr "Seaborgij"
+
+#~ msgid "Bohrium"
+#~ msgstr "Bohrij"
+
+#~ msgid "Hassium"
+#~ msgstr "Hassij"
+
+#~ msgid "Meitnerium"
+#~ msgstr "Meitnerij"
+
+#~ msgid "Darmstadtium"
+#~ msgstr "Darmstadij"
+
+#~ msgid "Roentgenium"
+#~ msgstr "Roentgenij"
+
+#~ msgid "Copernicium"
+#~ msgstr "Kopernicij"
+
+#~ msgid "Ununtrium"
+#~ msgstr "Ununtrij"
+
+#~ msgid "Ununquadium"
+#~ msgstr "Ununkvadij"
+
+#~ msgid "Ununpentium"
+#~ msgstr "Ununpentij"
+
+#~ msgid "Ununhexium"
+#~ msgstr "Ununheksij"
+
+#~ msgid "Ununseptium"
+#~ msgstr "Ununseptij"
+
+#~ msgid "Ununoctium"
+#~ msgstr "Ununoktij"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Oliver Mucafir"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "oliver.untwist@gmail.com"
+
+#, fuzzy
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "literary"
+#~ msgstr "Veljača"
+
+#, fuzzy
+#~| msgctxt "NAME OF TRANSLATORS"
+#~| msgid "Your names"
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "proper name"
+#~ msgstr "Renato Pavičić"
+
+#, fuzzy
+#~ msgctxt "Monday"
+#~ msgid "Mon"
+#~ msgstr "Pon"
+
+#, fuzzy
+#~ msgctxt "Tuesday"
+#~ msgid "Tue"
+#~ msgstr "Uto"
+
+#, fuzzy
+#~ msgctxt "Wednesday"
+#~ msgid "Wed"
+#~ msgstr "Sri"
+
+#, fuzzy
+#~ msgctxt "Thursday"
+#~ msgid "Thu"
+#~ msgstr "Čet"
+
+#, fuzzy
+#~ msgctxt "Friday"
+#~ msgid "Fri"
+#~ msgstr "Pet"
+
+#, fuzzy
+#~ msgctxt "Saturday"
+#~ msgid "Sat"
+#~ msgstr "Sub"
+
+#, fuzzy
+#~ msgctxt "Sunday"
+#~ msgid "Sun"
+#~ msgstr "Ned"
+
+#, fuzzy
+#~ msgid "Monday"
+#~ msgstr "Ponedjeljak"
+
+#, fuzzy
+#~ msgid "Tuesday"
+#~ msgstr "Utorak"
+
+#, fuzzy
+#~ msgid "Wednesday"
+#~ msgstr "Srijeda"
+
+#, fuzzy
+#~ msgid "Thursday"
+#~ msgstr "Četvrtak"
+
+#, fuzzy
+#~ msgid "Friday"
+#~ msgstr "Petak"
+
+#, fuzzy
+#~ msgid "Saturday"
+#~ msgstr "Subota"
+
+#, fuzzy
+#~ msgid "Sunday"
+#~ msgstr "Nedjelja"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jan"
+#~ msgstr "Sij"
+
+#~ msgctxt "Short month name"
+#~ msgid "Feb"
+#~ msgstr "Velj"
+
+#~ msgctxt "Short month name"
+#~ msgid "Mar"
+#~ msgstr "Ožu"
+
+#~ msgctxt "Short month name"
+#~ msgid "Apr"
+#~ msgstr "Tra"
+
+#~ msgctxt "Short month name"
+#~ msgid "May"
+#~ msgstr "Svi"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jun"
+#~ msgstr "Lip"
+
+#~ msgctxt "Short month name"
+#~ msgid "Jul"
+#~ msgstr "Srp"
+
+#~ msgctxt "Short month name"
+#~ msgid "Aug"
+#~ msgstr "Kol"
+
+#~ msgctxt "Short month name"
+#~ msgid "Sep"
+#~ msgstr "Ruj"
+
+#~ msgctxt "Short month name"
+#~ msgid "Oct"
+#~ msgstr "Lis"
+
+#~ msgctxt "Short month name"
+#~ msgid "Nov"
+#~ msgstr "Stu"
+
+#~ msgctxt "Short month name"
+#~ msgid "Dec"
+#~ msgstr "Pro"
+
+#~ msgctxt "Short day name"
+#~ msgid "Mon"
+#~ msgstr "Pon"
+
+#~ msgctxt "Short day name"
+#~ msgid "Tue"
+#~ msgstr "Uto"
+
+#~ msgctxt "Short day name"
+#~ msgid "Wed"
+#~ msgstr "Sri"
+
+#~ msgctxt "Short day name"
+#~ msgid "Thu"
+#~ msgstr "Čet"
+
+#~ msgctxt "Short day name"
+#~ msgid "Fri"
+#~ msgstr "Pet"
+
+#~ msgctxt "Short day name"
+#~ msgid "Sat"
+#~ msgstr "Sub"
+
+#~ msgctxt "Short day name"
+#~ msgid "Sun"
+#~ msgstr "Ned"
+
+#~ msgctxt "Long month name"
+#~ msgid "January"
+#~ msgstr "Siječanj"
+
+#~ msgctxt "Long month name"
+#~ msgid "February"
+#~ msgstr "Veljača"
+
+#~ msgctxt "Long month name"
+#~ msgid "March"
+#~ msgstr "Ožujak"
+
+#~ msgctxt "Long month name"
+#~ msgid "April"
+#~ msgstr "Travanj"
+
+#~ msgctxt "Long month name"
+#~ msgid "May"
+#~ msgstr "Svibanj"
+
+#~ msgctxt "Long month name"
+#~ msgid "June"
+#~ msgstr "Lipanj"
+
+#~ msgctxt "Long month name"
+#~ msgid "July"
+#~ msgstr "Srpanj"
+
+#~ msgctxt "Long month name"
+#~ msgid "August"
+#~ msgstr "Kolovoz"
+
+#~ msgctxt "Long month name"
+#~ msgid "September"
+#~ msgstr "Rujan"
+
+#~ msgctxt "Long month name"
+#~ msgid "October"
+#~ msgstr "Listopad"
+
+#~ msgctxt "Long month name"
+#~ msgid "November"
+#~ msgstr "Studeni"
+
+#~ msgctxt "Long month name"
+#~ msgid "December"
+#~ msgstr "Prosinac"
+
+#~ msgctxt "Long day name"
+#~ msgid "Monday"
+#~ msgstr "Ponedjeljak"
+
+#~ msgctxt "Long day name"
+#~ msgid "Tuesday"
+#~ msgstr "Utorak"
+
+#~ msgctxt "Long day name"
+#~ msgid "Wednesday"
+#~ msgstr "Srijeda"
+
+#~ msgctxt "Long day name"
+#~ msgid "Thursday"
+#~ msgstr "Četvrtak"
+
+#~ msgctxt "Long day name"
+#~ msgid "Friday"
+#~ msgstr "Petak"
+
+#~ msgctxt "Long day name"
+#~ msgid "Saturday"
+#~ msgstr "Subota"
+
+#~ msgctxt "Long day name"
+#~ msgid "Sunday"
+#~ msgstr "Nedjelja"
+
+#, fuzzy
+#~ msgctxt "January"
+#~ msgid "Jan"
+#~ msgstr "Sij"
+
+#, fuzzy
+#~ msgctxt "February"
+#~ msgid "Feb"
+#~ msgstr "Velj"
+
+#, fuzzy
+#~ msgctxt "March"
+#~ msgid "Mar"
+#~ msgstr "Ožu"
+
+#, fuzzy
+#~ msgctxt "April"
+#~ msgid "Apr"
+#~ msgstr "Tra"
+
+#, fuzzy
+#~ msgctxt "May short"
+#~ msgid "May"
+#~ msgstr "Svi"
+
+#, fuzzy
+#~ msgctxt "June"
+#~ msgid "Jun"
+#~ msgstr "Lip"
+
+#, fuzzy
+#~ msgctxt "July"
+#~ msgid "Jul"
+#~ msgstr "Srp"
+
+#, fuzzy
+#~ msgctxt "August"
+#~ msgid "Aug"
+#~ msgstr "Kol"
+
+#, fuzzy
+#~ msgctxt "September"
+#~ msgid "Sep"
+#~ msgstr "Ruj"
+
+#, fuzzy
+#~ msgctxt "October"
+#~ msgid "Oct"
+#~ msgstr "Lis"
+
+#, fuzzy
+#~ msgctxt "November"
+#~ msgid "Nov"
+#~ msgstr "Stu"
+
+#, fuzzy
+#~ msgctxt "December"
+#~ msgid "Dec"
+#~ msgstr "Pro"
+
+#, fuzzy
+#~ msgid "January"
+#~ msgstr "Siječanj"
+
+#, fuzzy
+#~ msgid "February"
+#~ msgstr "Veljača"
+
+#, fuzzy
+#~ msgid "March"
+#~ msgstr "Ožujak"
+
+#, fuzzy
+#~ msgid "April"
+#~ msgstr "Travanj"
+
+#, fuzzy
+#~ msgctxt "May long"
+#~ msgid "May"
+#~ msgstr "Svi"
+
+#, fuzzy
+#~ msgid "June"
+#~ msgstr "Lipanj"
+
+#, fuzzy
+#~ msgid "July"
+#~ msgstr "Srpanj"
+
+#, fuzzy
+#~ msgid "August"
+#~ msgstr "Kolovoz"
+
+#, fuzzy
+#~ msgid "September"
+#~ msgstr "Rujan"
+
+#, fuzzy
+#~ msgid "October"
+#~ msgstr "Listopad"
+
+#, fuzzy
+#~ msgid "November"
+#~ msgstr "Studeni"
+
+#, fuzzy
+#~ msgid "December"
+#~ msgstr "Prosinac"
+
+#, fuzzy
+#~ msgctxt "of January"
+#~ msgid "of Jan"
+#~ msgstr "Sij"
+
+#, fuzzy
+#~ msgctxt "of February"
+#~ msgid "of Feb"
+#~ msgstr "Velj"
+
+#, fuzzy
+#~ msgctxt "of March"
+#~ msgid "of Mar"
+#~ msgstr "Ožu"
+
+#, fuzzy
+#~ msgctxt "of April"
+#~ msgid "of Apr"
+#~ msgstr "Tra"
+
+#, fuzzy
+#~ msgctxt "of May short"
+#~ msgid "of May"
+#~ msgstr "Svi"
+
+#, fuzzy
+#~ msgctxt "of June"
+#~ msgid "of Jun"
+#~ msgstr "Lip"
+
+#, fuzzy
+#~ msgctxt "of July"
+#~ msgid "of Jul"
+#~ msgstr "Srp"
+
+#, fuzzy
+#~ msgctxt "of August"
+#~ msgid "of Aug"
+#~ msgstr "Kol"
+
+#, fuzzy
+#~ msgctxt "of September"
+#~ msgid "of Sep"
+#~ msgstr "Ruj"
+
+#, fuzzy
+#~ msgctxt "of October"
+#~ msgid "of Oct"
+#~ msgstr "Lis"
+
+#, fuzzy
+#~ msgctxt "of November"
+#~ msgid "of Nov"
+#~ msgstr "Stu"
+
+#, fuzzy
+#~ msgctxt "of December"
+#~ msgid "of Dec"
+#~ msgstr "Pro"
+
+#, fuzzy
+#~ msgid "of February"
+#~ msgstr "Veljača"
+
+#, fuzzy
+#~ msgid "of March"
+#~ msgstr "Ožujak"
+
+#, fuzzy
+#~ msgid "of April"
+#~ msgstr "Travanj"
+
+#, fuzzy
+#~ msgctxt "of May long"
+#~ msgid "of May"
+#~ msgstr "Svi"
+
+#, fuzzy
+#~ msgid "of June"
+#~ msgstr "Lipanj"
+
+#, fuzzy
+#~ msgid "of July"
+#~ msgstr "Srpanj"
+
+#, fuzzy
+#~ msgid "of August"
+#~ msgstr "Kolovoz"
+
+#, fuzzy
+#~ msgid "of September"
+#~ msgstr "Rujan"
+
+#, fuzzy
+#~ msgid "of October"
+#~ msgstr "Listopad"
+
+#, fuzzy
+#~ msgid "of November"
+#~ msgstr "Studeni"
+
+#, fuzzy
+#~ msgid "of December"
+#~ msgstr "Prosinac"
+
+#~ msgid "Week %1"
+#~ msgstr "Tjedan %1"
+
+#~ msgid "Next year"
+#~ msgstr "Sljedeća godina"
+
+#~ msgid "Previous year"
+#~ msgstr "Prethodna godina"
+
+#~ msgid "Next month"
+#~ msgstr "Sljedeći mjesec"
+
+#~ msgid "Previous month"
+#~ msgstr "Prethodni mjesec"
+
+#~ msgid "Select a week"
+#~ msgstr "Odaberite tjedan"
+
+#~ msgid "Select a month"
+#~ msgstr "Odaberite mjesec"
+
+#~ msgid "Select a year"
+#~ msgstr "Odaberite godinu"
+
+#~ msgid "Select the current day"
+#~ msgstr "Odaberite trenutni datum"
+
+#~ msgid "ExtDatePicker test program"
+#~ msgstr "ExtDatePicker program za provjeru"
+
+#~ msgid "Compares KDatePicker and ExtDatePicker"
+#~ msgstr "Uspoređuje KDatePicker i ExtDatePicker"
+
+#~ msgid "Test ExtDatePicker"
+#~ msgstr "Provjeri ExtDatePicker"
+
+#~ msgid "(c) 2004, Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"
+
+#, fuzzy
+#~| msgid "(c) 2004, Jason Harris"
+#~ msgid "Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"
+
+#, fuzzy
+#~ msgid "ExtDateTimeEdit test program"
+#~ msgstr "ExtDatePicker program za provjeru"
+
+#, fuzzy
+#~ msgid "Test ExtDateTimeEdit"
+#~ msgstr "Provjeri ExtDatePicker"
+
+#, fuzzy
+#~ msgid "(c) 2005, Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"
+
+#, fuzzy
+#~ msgid "KPlotWidget test program"
+#~ msgstr "ExtDatePicker program za provjeru"
+
+#, fuzzy
+#~ msgid "(c) 2006, Jason Harris"
+#~ msgstr "(c) 2004, Jason Harris"

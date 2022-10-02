@@ -1,0 +1,1573 @@
+#
+# Tamas Szanto <tszanto@interware.hu>, 2005.
+# Kristóf Kiszel <ulysses@kubuntu.org>, 2012, 2020.
+# Balázs Úr <urbalazs@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: KDE 4.0\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2020-11-25 22:04+0100\n"
+"Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.03.70\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "Cím:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "Szerző:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "Dokumentum lecke"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "Szótípusok"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr "Leitner doboz"
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, kde-format
+msgid "Cannot lock file %1"
+msgstr "Nem sikerült zárolni a fájlt: %1"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>Nem nyitható meg a fájl<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, kde-format
+msgid "Cannot open tempfile %1"
+msgstr "Nem lehet megnyitni a(z) %1 ideiglenes fájlt"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, kde-format
+msgid "Cannot download %1: %2"
+msgstr "A(z) %1 nem tölthető le: %2"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"Nem sikerütl megnyitni vagy megfelelően beolvasni: \"%1\".\n"
+"(A jelzett hiba: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "Nem sikerült írni ebbe a fájlba: %1"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "Eredeti"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "Fordítás (%1)"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "KDE szótárdokumentum"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "KWordQuiz-dokumentum"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "Pauker-lecke"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "Szógyakorló"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "XML DEF formátum"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr "Vesszővel tagolt szöveges fájl (CSV)"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "Minden támogatott dokumentum"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "Nincs hiba."
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "Érvénytelen XML-adatok találhatók a fájlban."
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "Ismeretlen fájltípus."
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "A fájl nem írható."
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr "Nem sikerült írni a fájlba."
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "A fájl nem olvasható."
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr "Nem sikerült olvasni a fájlból."
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "Nem létezik ilyen nevű fájl."
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr "A fájlt egy másik folyamat zárolta."
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr "A zárolási fájlt nem sikerült létrehozni."
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "Ismeretlen hiba."
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "Ige"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "Főnév"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "Név"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "Cikk"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "Melléknév"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "Határozószó"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Névelő"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Kifejezés"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "Szám"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Igerag"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "Prepozíció"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "Kérdés"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "Sorszám"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "Tőszám"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "Határozott"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "Határozatlan"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr "Szabályos"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr "Szabálytalan"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "Birtokos"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr "Személyes"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "Hímnem"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "Nőnem"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr "Semleges nem"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "Egyszerű jelen"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "Folyamatos jelen"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "Befejezett jelen"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "Egyszerű múlt"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "Folyamatos múlt"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "Múltidejű melléknévi igenév"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "Jövő"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "Ige"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "Főnév"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "Név"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "Cikk"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "Melléknév"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "Határozószó"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Névelő"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Kifejezés"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "Szám"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Kötőszó"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "Elöljárószó"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "Kérdés"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "Még nem volt gyakorolva"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "1. szint"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "2. szint"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "3. szint"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "4. szint"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "5. szint"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "6. szint"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "7. szint"
+
+#~ msgid "Untitled"
+#~ msgstr "Névtelen"
+
+#~ msgid "Vocabulary"
+#~ msgstr "Szótár"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "Feldolgozási hiba történt: %1.sor, %2. oszlop.\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "Nem sikerült megnyitni a fájlt"
+
+#~ msgid "file must be opened first"
+#~ msgstr "a fájlt először meg kell nyitni"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "Ez nem KDE-s szótárfájl."
+
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "hiányzó azonosítóelem az azonosítók címkéből"
+
+#~ msgid "Default Lesson"
+#~ msgstr "Alapértelmezett lecke"
+
+#~ msgid "identifier missing id"
+#~ msgstr "hiányzó azonosító"
+
+#~ msgid "entry missing id"
+#~ msgstr "hiányzó azonosító a bejegyzésben"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "%1. lecke"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "Hiányzanak az eredeti nyelvű adatok"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "Nem egyértelmű nyelvkód"
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "Ez nem Pauker-dokumentum"
+
+#~ msgid "Lesson %1"
+#~ msgstr "%1. lecke"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "Ez nem (K)WordQuiz-fájl"
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr ""
+#~ "Csak a WordQuiz 5.x vagy későbbi változataival készült fájlokat lehet "
+#~ "beolvasni"
+
+#~ msgid "Error while reading file"
+#~ msgstr "Hiba történt a fájl beolvasása közben"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "Ez nem XDXF-dokumentum"
+
+#~ msgid "Glossary"
+#~ msgstr "Szószedet"
+
+#~ msgid "&Search:"
+#~ msgstr "&Keresés:"
+
+#~ msgid "References"
+#~ msgstr "Hivatkozások"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "Ugrás ide: \"%1\""
+
+#, fuzzy
+#~| msgctxt ""
+#~| "The name of the second, third ... language/column of vocabulary, if we "
+#~| "have to guess it."
+#~| msgid "Translation %1"
+#~ msgid "Transition Elements"
+#~ msgstr "Fordítás (%1)"
+
+#~ msgid "Dummy"
+#~ msgstr "Üres"
+
+#~ msgid "Hydrogen"
+#~ msgstr "Hidrogén"
+
+#~ msgid "Helium"
+#~ msgstr "Hélium"
+
+#~ msgid "Lithium"
+#~ msgstr "Lítium"
+
+#~ msgid "Beryllium"
+#~ msgstr "Berillium"
+
+#~ msgid "Boron"
+#~ msgstr "Bór"
+
+#~ msgid "Carbon"
+#~ msgstr "Szén"
+
+#~ msgid "Nitrogen"
+#~ msgstr "Nitrogén"
+
+#~ msgid "Oxygen"
+#~ msgstr "Oxigén"
+
+#~ msgid "Fluorine"
+#~ msgstr "Fluor"
+
+#~ msgid "Neon"
+#~ msgstr "Neon"
+
+#~ msgid "Sodium"
+#~ msgstr "Nátrium"
+
+#~ msgid "Magnesium"
+#~ msgstr "Magnézium"
+
+#~ msgid "Aluminium"
+#~ msgstr "Alumínium"
+
+#~ msgid "Silicon"
+#~ msgstr "Szilícium"
+
+#~ msgid "Phosphorus"
+#~ msgstr "Foszfor"
+
+#~ msgid "Sulfur"
+#~ msgstr "Kén"
+
+#~ msgid "Chlorine"
+#~ msgstr "Klór"
+
+#~ msgid "Argon"
+#~ msgstr "Argon"
+
+#~ msgid "Potassium"
+#~ msgstr "Kálium"
+
+#~ msgid "Calcium"
+#~ msgstr "Kalcium"
+
+#~ msgid "Scandium"
+#~ msgstr "Szkandium"
+
+#~ msgid "Titanium"
+#~ msgstr "Titánium"
+
+#~ msgid "Vanadium"
+#~ msgstr "Vanádium"
+
+#~ msgid "Chromium"
+#~ msgstr "Króm"
+
+#~ msgid "Manganese"
+#~ msgstr "Mangán"
+
+#~ msgid "Iron"
+#~ msgstr "Vas"
+
+#~ msgid "Cobalt"
+#~ msgstr "Kobalt"
+
+#~ msgid "Nickel"
+#~ msgstr "Nikkel"
+
+#~ msgid "Copper"
+#~ msgstr "Réz"
+
+#~ msgid "Zinc"
+#~ msgstr "Cink"
+
+#~ msgid "Gallium"
+#~ msgstr "Gallium"
+
+#~ msgid "Germanium"
+#~ msgstr "Germánium"
+
+#~ msgid "Arsenic"
+#~ msgstr "Arzén"
+
+#~ msgid "Selenium"
+#~ msgstr "Szelén"
+
+#~ msgid "Bromine"
+#~ msgstr "Bróm"
+
+#~ msgid "Krypton"
+#~ msgstr "Kripton"
+
+#~ msgid "Rubidium"
+#~ msgstr "Rubídium"
+
+#~ msgid "Strontium"
+#~ msgstr "Stroncium"
+
+#~ msgid "Yttrium"
+#~ msgstr "Ittrium"
+
+#~ msgid "Zirconium"
+#~ msgstr "Cirkónium"
+
+#~ msgid "Niobium"
+#~ msgstr "Nióbium"
+
+#~ msgid "Molybdenum"
+#~ msgstr "Molibdén"
+
+#~ msgid "Technetium"
+#~ msgstr "Technécium"
+
+#~ msgid "Ruthenium"
+#~ msgstr "Ruténium"
+
+#~ msgid "Rhodium"
+#~ msgstr "Ródium"
+
+#~ msgid "Palladium"
+#~ msgstr "Palládium"
+
+#~ msgid "Silver"
+#~ msgstr "Ezüst"
+
+#~ msgid "Cadmium"
+#~ msgstr "Kadmium"
+
+#~ msgid "Indium"
+#~ msgstr "Indium"
+
+#~ msgid "Tin"
+#~ msgstr "Ón"
+
+#~ msgid "Antimony"
+#~ msgstr "Antimon"
+
+#~ msgid "Tellurium"
+#~ msgstr "Tellúr"
+
+#~ msgid "Iodine"
+#~ msgstr "Jód"
+
+#~ msgid "Xenon"
+#~ msgstr "Xenon"
+
+#~ msgid "Caesium"
+#~ msgstr "Cézium"
+
+#~ msgid "Barium"
+#~ msgstr "Bárium"
+
+#~ msgid "Lanthanum"
+#~ msgstr "Lantán"
+
+#~ msgid "Cerium"
+#~ msgstr "Cérium"
+
+#~ msgid "Praseodymium"
+#~ msgstr "Prazeodímium"
+
+#~ msgid "Neodymium"
+#~ msgstr "Neodímium"
+
+#~ msgid "Promethium"
+#~ msgstr "Promécium"
+
+#~ msgid "Samarium"
+#~ msgstr "Szamárium"
+
+#~ msgid "Europium"
+#~ msgstr "Európium"
+
+#~ msgid "Gadolinium"
+#~ msgstr "Gadolínium"
+
+#~ msgid "Terbium"
+#~ msgstr "Terbium"
+
+#~ msgid "Dysprosium"
+#~ msgstr "Diszprózium"
+
+#~ msgid "Holmium"
+#~ msgstr "Holmium"
+
+#~ msgid "Erbium"
+#~ msgstr "Erbium"
+
+#~ msgid "Thulium"
+#~ msgstr "Túlium"
+
+#~ msgid "Ytterbium"
+#~ msgstr "Itterbium"
+
+#~ msgid "Lutetium"
+#~ msgstr "Lutécium"
+
+#~ msgid "Hafnium"
+#~ msgstr "Hafnium"
+
+#~ msgid "Tantalum"
+#~ msgstr "Tantál"
+
+#~ msgid "Tungsten"
+#~ msgstr "Volfrám"
+
+#~ msgid "Rhenium"
+#~ msgstr "Rénium"
+
+#~ msgid "Osmium"
+#~ msgstr "Ozmium"
+
+#~ msgid "Iridium"
+#~ msgstr "Irídium"
+
+#~ msgid "Platinum"
+#~ msgstr "Platina"
+
+#~ msgid "Gold"
+#~ msgstr "Arany"
+
+#~ msgid "Mercury"
+#~ msgstr "Higany"
+
+#~ msgid "Thallium"
+#~ msgstr "Tallium"
+
+#~ msgid "Lead"
+#~ msgstr "Ólom"
+
+#~ msgid "Bismuth"
+#~ msgstr "Bizmut"
+
+#~ msgid "Polonium"
+#~ msgstr "Polónium"
+
+#~ msgid "Astatine"
+#~ msgstr "Asztácium"
+
+#~ msgid "Radon"
+#~ msgstr "Radon"
+
+#~ msgid "Francium"
+#~ msgstr "Francium"
+
+#~ msgid "Radium"
+#~ msgstr "Rádium"
+
+#~ msgid "Actinium"
+#~ msgstr "Aktínium"
+
+#~ msgid "Thorium"
+#~ msgstr "Tórium"
+
+#~ msgid "Protactinium"
+#~ msgstr "Protaktínium"
+
+#~ msgid "Uranium"
+#~ msgstr "Uránium"
+
+#~ msgid "Neptunium"
+#~ msgstr "Neptúnium"
+
+#~ msgid "Plutonium"
+#~ msgstr "Plutónium"
+
+#~ msgid "Americium"
+#~ msgstr "Amerícium"
+
+#~ msgid "Curium"
+#~ msgstr "Kűrium"
+
+#~ msgid "Berkelium"
+#~ msgstr "Berkélium"
+
+#~ msgid "Californium"
+#~ msgstr "Kalifornium"
+
+#~ msgid "Einsteinium"
+#~ msgstr "Einsteinium"
+
+#~ msgid "Fermium"
+#~ msgstr "Fermium"
+
+#~ msgid "Mendelevium"
+#~ msgstr "Mendelévium"
+
+#~ msgid "Nobelium"
+#~ msgstr "Nobélium"
+
+#~ msgid "Lawrencium"
+#~ msgstr "Laurencium"
+
+#~ msgid "Rutherfordium"
+#~ msgstr "Rutherfordium"
+
+#~ msgid "Dubnium"
+#~ msgstr "Dubnium"
+
+#~ msgid "Seaborgium"
+#~ msgstr "Seaborgium"
+
+#~ msgid "Bohrium"
+#~ msgstr "Borium"
+
+#~ msgid "Hassium"
+#~ msgstr "Hasszium"
+
+#~ msgid "Meitnerium"
+#~ msgstr "Meitnerium"
+
+#~ msgid "Darmstadtium"
+#~ msgstr "Darmstadtium"
+
+#~ msgid "Roentgenium"
+#~ msgstr "Roentgenium"
+
+#, fuzzy
+#~| msgid "Cerium"
+#~ msgid "Copernicium"
+#~ msgstr "Cérium"
+
+#~ msgid "Ununtrium"
+#~ msgstr "Ununtrium"
+
+#~ msgid "Ununquadium"
+#~ msgstr "Ununquadium"
+
+#~ msgid "Ununpentium"
+#~ msgstr "Ununpentium"
+
+#~ msgid "Ununhexium"
+#~ msgstr "Ununhexium"
+
+#, fuzzy
+#~| msgid "Ununpentium"
+#~ msgid "Ununseptium"
+#~ msgstr "Ununpentium"
+
+#, fuzzy
+#~| msgid "Ununtrium"
+#~ msgid "Ununoctium"
+#~ msgstr "Ununtrium"
+
+#~ msgid "Greek 'hydro' and 'gennao' for 'forms water'"
+#~ msgstr "A görög \"hidro\" és \"gennao\" \"vízképző\" szavakból"
+
+#~ msgid "The Greek word for the sun was 'helios'"
+#~ msgstr "A Nap jelentésű görög \"héliosz\" szóból"
+
+#~ msgid "Greek 'lithos' means 'stone'"
+#~ msgstr "A görög \"litosz\" (kő) szóból"
+
+#~ msgid "Greek 'beryllos' for 'light-green stone'"
+#~ msgstr "A görög \"berillosz\" (zöld drágakő) szóból"
+
+#~ msgid ""
+#~ "Boron means 'Bor(ax) + (carb)on'. It is found in borax and behaves a lot "
+#~ "like carbon"
+#~ msgstr "A bórax nevű vegyület nevéből"
+
+#~ msgid "Latin 'carboneum' for carbon"
+#~ msgstr "A latin \"carboneum\" (szén) szóból"
+
+#~ msgid "Latin 'nitrogenium' ('forms saltpeter')"
+#~ msgstr "A latin \"nitrogenium\" (\"salétromképző\") szóból"
+
+#~ msgid "Latin 'oxygenium' (forms acids)"
+#~ msgstr "A latin \"oxygenium\" (\"savképző\") szóból"
+
+#~ msgid "Latin 'fluere' ('floats')"
+#~ msgstr "A latin \"fluere\" (\"lebegni\") szóból"
+
+#~ msgid "Greek 'neo'. meaning 'new'"
+#~ msgstr "A görög \"neo\" (\"új\") szóból"
+
+#~ msgid "Arabic 'natrun' for 'soda'"
+#~ msgstr "Az arab \"natrun\" (\"szóda\") szóból"
+
+#~ msgid "Named after the city of Magnesia"
+#~ msgstr "Magnészia város neve után"
+
+#~ msgid "Latin 'alumen'"
+#~ msgstr "A latin \"alumen\" szóból."
+
+#~ msgid "Latin 'silex'"
+#~ msgstr "A latin \"silex\" szóból."
+
+#~ msgid "Greek 'phosphoros' for 'carries light'"
+#~ msgstr "A görög \"phosphoros\" (\"fényvivő\") szóból"
+
+#~ msgid "In sanskrit 'sweb' means 'to sleep'"
+#~ msgstr "Szanszkritul \"sweb\" azt jelenti, hogy aludni."
+
+#~ msgid "Greek 'chloros' for 'yellow-green'"
+#~ msgstr "Görögül \"klorosz\" sárgászöldet jelent."
+
+#~ msgid "Greek 'aergon' for 'inactive'"
+#~ msgstr "Görögül \"aergon\" inaktívat jelent."
+
+#~ msgid "Arabic 'al qaliy' for potash"
+#~ msgstr "Arabul \"al qaliy\" káliumot jelent."
+
+#~ msgid "Latin 'calx' for 'lime'"
+#~ msgstr "Latinul \"calx\" meszet jelent."
+
+#~ msgid "Named because it was found in Scandinavia"
+#~ msgstr "Skandináviáról, felfedezésének helyéről nevezték el."
+
+#~ msgid "The Titans were giants in Greek mythology"
+#~ msgstr "A titánok óriások a görög mitológiában."
+
+#~ msgid "'Vanadis' is another name for the Nordic goddess Freyja"
+#~ msgstr "Vanádisz a skandináv mitológia Freyja istennőjének egyik neve."
+
+#~ msgid "Greek 'chroma' means 'color'"
+#~ msgstr "Görögül \"chroma\" színt jelent."
+
+#, fuzzy
+#~| msgid ""
+#~| "It was discovered near a town named Magnesia in a black earth. Thus. it "
+#~| "was named 'magnesia nigra'. short: Manganese"
+#~ msgid ""
+#~ "It was discovered near a town named Magnesia in black earth. Thus, it was "
+#~ "named 'magnesia nigra', or for short, Manganese."
+#~ msgstr ""
+#~ "Magnészia városa mellett fedezték fel feketeföldben. \"Magnészia nigrának"
+#~ "\" nevezték el, röviden: mangán."
+
+#~ msgid "Latin 'ferrum'"
+#~ msgstr "\"Ferrum\" a vas latin neve"
+
+#~ msgid "Named after the German word 'Kobold' for 'goblin'"
+#~ msgstr "A német \"kobold\" szóból származik, ami hegyi manót jelent."
+
+#~ msgid "'Nickel' was the name of a mountain goblin"
+#~ msgstr "\"Nickel\" egy kobold neve volt."
+
+#~ msgid "Greek 'cuprum' for Cypres"
+#~ msgstr "Görögül \"cuprum\" ciprusit jelent"
+
+#, fuzzy
+#~| msgid "German 'zinking' for 'rough'. because zinc ore is very rough"
+#~ msgid "German 'zinking' for 'rough', because zinc ore is very rough"
+#~ msgstr "Németül \"zinking\" durvát jelent. A cink érc nagyon durva."
+
+#~ msgid "'Gallia' is an old name for France"
+#~ msgstr "Gallia Franciaország régi neve."
+
+#~ msgid "Latin 'germania' is an old name for Germany"
+#~ msgstr "Germánia Németország régi neve"
+
+#~ msgid "Greek 'arsenikos' for 'male' or 'bold'"
+#~ msgstr "Görögül \"arzenikosz\" férfit vagy bátrat jelent."
+
+#~ msgid "Greek 'selena' for 'moon'"
+#~ msgstr "Görögül \"szelena\" holdat jelent."
+
+#~ msgid "Greek 'bromos' for 'smells badly'"
+#~ msgstr "Görögül \"bromosz\" erős szagút jelent."
+
+#~ msgid "Greek 'kryptos' for 'hidden'"
+#~ msgstr "Görögül \"kriptosz\" rejtettet jelent."
+
+#~ msgid "Latin 'rubidus' for 'dark red'"
+#~ msgstr "Latinul \"rubidus\" sötétvöröst jelent."
+
+#~ msgid "Named after the mineral Strontianit"
+#~ msgstr "A stroncianit nevű ásványról nevezték el."
+
+#~ msgid ""
+#~ "Named after the small town of Ytterby near Stockholm in Sweden. Terbium. "
+#~ "Ytterbium and Gadolinium are also named after this town."
+#~ msgstr ""
+#~ "A Stockholm melletti svéd Ytterby város nevéből származik, hasonlóan a "
+#~ "terbiumhoz és az itterbiumhoz."
+
+#~ msgid "Named after the mineral zircon"
+#~ msgstr "A cirkon nevű ásvány nevéből."
+
+#, fuzzy
+#~| msgid "Named after Niobe. the daughter of the Greek god Tantalus"
+#~ msgid "Named after Niobe, the daughter of the Greek god Tantalus."
+#~ msgstr "Niobé a görög mitológiai alak, Tantalosz lánya volt."
+
+#~ msgid ""
+#~ "This name has Greek roots. It means 'like Platinum' - it was difficult to "
+#~ "distinguish Molybdenum from Platinum."
+#~ msgstr ""
+#~ "A név görög eredetű. Azt jelenti, hogy \"olyan, mint a platina\". Nehéz "
+#~ "megkülönböztetni a molibdént a platinától."
+
+#~ msgid "Greek 'technetos' for artificial"
+#~ msgstr "Görögül \"technetosz\" mesterségest jelent."
+
+#~ msgid "Ruthenia is the old name of Russia"
+#~ msgstr "Ruténia Oroszország régi neve."
+
+#~ msgid "Greek 'rhodeos' means 'red like a rose'"
+#~ msgstr "Görögül \"rodeosz\" rózsavöröst jelent."
+
+#~ msgid "Named after the asteroid Pallas"
+#~ msgstr "A Pallasz aszteroida nevéből származik."
+
+#~ msgid "Latin 'argentum' for silver"
+#~ msgstr "Az ezüst latin nevéből (\"argentum\")"
+
+#~ msgid "Greek 'kadmia' ('Galmei' = Zinc carbonate)"
+#~ msgstr "A görög \"kadmia\" szóból, ami a cink-karbonát egy régi neve."
+
+#~ msgid "Named after 'Indigo' because of its blue spectrum"
+#~ msgstr "Az indigó szóból származtatták az elem kék színképe miatt."
+
+#~ msgid "Latin 'stannum' for tin"
+#~ msgstr "Az ón latin nevéből (\"stannum\")."
+
+#~ msgid "Arabic 'anthos ammonos' for 'blossom of the god Ammon'"
+#~ msgstr "Arabul \"anthosz ammonosz\" jelentése \"Ammon isten virága\"."
+
+#~ msgid "Latin 'tellus' or 'telluris' for 'Planet Earth'"
+#~ msgstr "Latinul \"tellus\" vagy \"telluris\" Földet jelent."
+
+#, fuzzy
+#~| msgid "Greek 'ioeides' for 'violett'"
+#~ msgid "Greek 'ioeides' for 'violet'."
+#~ msgstr "Görögül \"jodész\" ibolyaszínűt jelent."
+
+#~ msgid "Greek 'xenos' for 'foreigner'"
+#~ msgstr "Görögül \"xenosz\" idegent jelent."
+
+#, fuzzy
+#~| msgid "Latin 'caesius' for 'heavenblue'"
+#~ msgid "Latin 'caesius' for 'heaven blue'."
+#~ msgstr "Latinul \"caesius\" égkéket jelent."
+
+#~ msgid "Greek 'barys' for 'heavy'"
+#~ msgstr "Görögül \"barisz\" súlyosat jelent."
+
+#, fuzzy
+#~| msgid ""
+#~| "Greek 'lanthanein' for 'hidden'. The Lanthanoids are also called the "
+#~| "'rare earth'"
+#~ msgid ""
+#~ "Greek 'lanthanein' for 'hidden'. The Lanthanoids are also called the "
+#~ "'rare earth' elements."
+#~ msgstr ""
+#~ "Görögül \"lantanein\" rejtettet jelent. A lantanoidákat ritkaföldfémeknek "
+#~ "is nevezik."
+
+#~ msgid "Named after the planetoid Ceres"
+#~ msgstr "A Ceresz törpebolygóról nevezték el."
+
+#~ msgid "Greek 'prasinos didymos' for 'green twin'"
+#~ msgstr "Görögül \"praszinosz didimosz\" zöld ikret jelent."
+
+#~ msgid "Greek 'neos didymos' for 'new twin'"
+#~ msgstr "Görögül \"neosz didimosz\" új ikret jelent."
+
+#, fuzzy
+#~| msgid ""
+#~| "Named after the greek Prometheus. Prometheus stole the fire from the "
+#~| "gods and gave it to mankind"
+#~ msgid ""
+#~ "Named after the Greek Prometheus. Prometheus stole the fire from the gods "
+#~ "and gave it to mankind."
+#~ msgstr ""
+#~ "A görög Prométheusz neve alapján. Prométheusz ellopta az istenektől a "
+#~ "tüzet az embereknek."
+
+#~ msgid "Named after the mineral Samarskit"
+#~ msgstr "A szamarszkit nevű ásványról nevezték el."
+
+#~ msgid "Named after Europe"
+#~ msgstr "Európáról nevezték el."
+
+#~ msgid "Named after the Finnish chemist Johan Gadolin"
+#~ msgstr "Johan Gadolin finn kémikusról nevezték el."
+
+#~ msgid "Named after the Swedish town of Ytterby"
+#~ msgstr "A svéd Ytterby város nevéből."
+
+#~ msgid "Greek 'dysprositor' for 'difficult to reach'"
+#~ msgstr "Görögül \"diszproszítor\" nehezen elérhetőt jelent."
+
+#~ msgid "Latin 'holmia' for the old name of Stockholm"
+#~ msgstr "Holmia Stockholm régi neve."
+
+#~ msgid ""
+#~ "Named ofter the Swedish town of Ytterby. Terbium and Ytterbium are also "
+#~ "named after this town."
+#~ msgstr ""
+#~ "A svéd Ytterby város nevéből. A terbium és az itterbium is erről van "
+#~ "elnevezve."
+
+#, fuzzy
+#~| msgid "Named after the old name of Scandinavia. 'Thule'"
+#~ msgid "Named after the old name of Scandinavia, 'Thule'."
+#~ msgstr "Thule Skandinávia régi neve."
+
+#, fuzzy
+#~| msgid ""
+#~| "Like Terbium and Gadolinium. this is named after the Swedish town of "
+#~| "Ytterby"
+#~ msgid ""
+#~ "Like Terbium and Gadolinium, this is named after the Swedish town of "
+#~ "Ytterby."
+#~ msgstr ""
+#~ "Hasonló a terbiumhoz és a gadolíniumhoz. A svéd Ytterby város nevéből."
+
+#~ msgid "Named after the Roman name 'Lutetia' for Paris"
+#~ msgstr "Lutetia Párizs neve latinul."
+
+#~ msgid "'Hafnia' is the old name of Kopenhagen (Denmark)"
+#~ msgstr "Hafnia Koppenhága régi neve."
+
+#~ msgid "Named after the Greek myth of Tantalos"
+#~ msgstr "A görög mitológiai alak, Tantalosz nevéből származik."
+
+#, fuzzy
+#~| msgid ""
+#~| "'tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~| "symbol 'W') was Wolfram. named after a mineral"
+#~ msgid ""
+#~ "'tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~ "symbol 'W') was Wolfram, named after a mineral."
+#~ msgstr ""
+#~ "Svédül \"Tung sten\" nehéz követ jelent. A wolfrám (\"W\") egy ásvány "
+#~ "neve."
+
+#, fuzzy
+#~| msgid "Named after the German river Rhine (latin 'Rhenium')"
+#~ msgid "Named after the German river Rhine (latin 'Rhenium')."
+#~ msgstr "A Rajna folyó latin nevéből (Rhenium) származik."
+
+#, fuzzy
+#~| msgid "Greek for 'smell'. Its oxides smell strongly like radishes"
+#~ msgid "Greek for 'smell'. Its oxides smell strongly like radishes."
+#~ msgstr "A szag görög nevéből. Oxidjainak retekre emlékeztető illata van."
+
+#~ msgid "Greek 'iris' for 'rainbow'"
+#~ msgstr "Görögül \"írisz\" szivárványt jelent."
+
+#~ msgid "Spanish 'platina' means 'small silver'"
+#~ msgstr "Spanyolul \"platina\" kis ezüstöt jelent."
+
+#, fuzzy
+#~| msgid "Latin 'aurum'. named after Aurora. the goddess of sunrise"
+#~ msgid "Latin 'aurum'. Named after Aurora, the goddess of sunrise"
+#~ msgstr ""
+#~ "Az arany latinul \"aurum\". A név Aurórának, a hajnal istennőjének "
+#~ "nevéből származik."
+
+#~ msgid "Graeco-Latin 'hydrargyrum' for 'liquid silver'"
+#~ msgstr "Görögül/latinul \"hydrargyrum\" folyékony ezüstöt jelent."
+
+#~ msgid "Greek 'tallos' for 'young twig'"
+#~ msgstr "Görögül \"tallosz\" fiatal ágat jelent."
+
+#~ msgid "Latin 'plumbum' for Lead"
+#~ msgstr "\"Plumbum\" latinul az ólom neve."
+
+#, fuzzy
+#~| msgid "The old name of Bismuth is 'Wismut'. This stood for 'white mass'"
+#~ msgid "The old name of Bismuth is 'Wismut', which stood for 'white mass'."
+#~ msgstr "A bizmut régi neve \"Wismut\". Ez \"fehér tömeget\" jelent."
+
+#~ msgid "Named after Poland to honor Marie Curie"
+#~ msgstr "Lengyelországról nevezték el Marie Curie tiszteletére."
+
+#~ msgid "Greek 'astator' for 'changing'"
+#~ msgstr "Görögül \"asztátor\" változót jelent."
+
+#, fuzzy
+#~| msgid ""
+#~| "Named after Radium. It ends with 'on' to make it clear that it is a "
+#~| "noble gas"
+#~ msgid ""
+#~ "Named after Radium. It ends with 'on' to make it clear that it is a noble "
+#~ "gas."
+#~ msgstr ""
+#~ "A rádiumból származtatták a nevét. Az -on végződés arra utal, hogy "
+#~ "nemesgáz."
+
+#~ msgid "Named after France to honor Marguerite Perey"
+#~ msgstr "Franciországról nevezték el Marguerite Perey tiszteletére."
+
+#~ msgid "Latin 'radius' for 'beam', as it is radioactive"
+#~ msgstr "Latinul \"radius\" sugarat jelent. A rádium radioaktív elem."
+
+#~ msgid "Greek 'aktis' for 'beam' - actinium is radioactive"
+#~ msgstr "Görögül \"aktisz\" sugarat jelent. Az aktínium radioaktív elem."
+
+#~ msgid "Named after the German god of thunder: Thor"
+#~ msgstr "A mennydörgés germán istenéről, Thorról nevezték el."
+
+#~ msgid ""
+#~ "Greek 'protos' for 'ancester'. Protactinium is before Actinium in the "
+#~ "periodic table."
+#~ msgstr ""
+#~ "Görögül \"protosz\" őst, elődöt jelent. A protaktínium közvetlenül az "
+#~ "aktínium előtt áll a periódusos táblában."
+
+#, fuzzy
+#~| msgid "Greek 'ouranos' for 'heaven'. Named after the planet Uranus"
+#~ msgid "Greek 'ouranos' for 'heaven'. Named after the planet Uranus."
+#~ msgstr ""
+#~ "Görögül \"uránosz\" mennyet jelent. Az Uránusz bolygóról nevezté el."
+
+#~ msgid "Named after the planet Neptune."
+#~ msgstr "A Neptunusz bolygóról nevezték el."
+
+#~ msgid "Named after the planet Pluto."
+#~ msgstr "A Plútó bolygóról nevezték el."
+
+#~ msgid "Named after America."
+#~ msgstr "Amerikáról nevezték el."
+
+#~ msgid "Named after Marie Curie."
+#~ msgstr "Marie Curie fizikusról nevezték el."
+
+#~ msgid "Named after the town Berkeley where it was discovered."
+#~ msgstr "Az amerikai Berkeley városról nevezték el, ahol felfedezték."
+
+#~ msgid "Named after the US-State of California."
+#~ msgstr "Az amerikai Kalifornia államról nevezték el."
+
+#~ msgid "Named after the scientist Albert Einstein."
+#~ msgstr "Albert Einstein fizikusról nevezték el."
+
+#~ msgid "Named after the scientist Enrico Fermi."
+#~ msgstr "Enrico Fermi fizikusról nevezték el."
+
+#~ msgid "Named after the scientist D.I. Mendeleev."
+#~ msgstr "D. I. Mengyelejev fizikusról nevezték el."
+
+#~ msgid "Named after the scientist Alfred Nobel."
+#~ msgstr "Alfred Nobel fizikusról nevezték el."
+
+#~ msgid "Named after the scientist Ernest Orlando Lawrence."
+#~ msgstr "Ernest Orlando Lawrence fizikusról nevezték el."
+
+#~ msgid "Named after the scientist Ernest Rutherford"
+#~ msgstr "Ernest Rutherford fizikusról nevezték el."
+
+#~ msgid "Named after the science-town Dubna in Russia"
+#~ msgstr "Az orosz Dubna kutatóvárosról nevezték el."
+
+#~ msgid "Named after the scientist G. Theodore Seaborg."
+#~ msgstr "G. Theodore Seaborg kémikusról nevezték el."
+
+#~ msgid "Named after the scientist Niels Bohr."
+#~ msgstr "Niels Bohr fizikusról nevezték el."
+
+#~ msgid ""
+#~ "Latin 'hassia' for the German county Hessen. In Hessen a lot elements "
+#~ "have been discovered."
+#~ msgstr ""
+#~ "A latin \"hassia\" szóból, mely a német Hessen tartományra utal. "
+#~ "Hessenben sok elemet fedeztek fel."
+
+#~ msgid "Named after the scientist Lise Meitner."
+#~ msgstr "Lise Meitner tudósról nevezték el."
+
+#~ msgid ""
+#~ "Named after the German city Darmstadt where many elements have been "
+#~ "discovered."
+#~ msgstr ""
+#~ "A német Darmstadt városról nevezték el, ahol sok elemet fedeztek fel."
+
+#~ msgid "Named after Wilhelm Conrad Röntgen."
+#~ msgstr "Wilhelm Conrad Röntgen fizikusról nevezték el."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Szántó Tamás"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "tszanto@interware.hu"
+
+#~ msgid "Ununbium"
+#~ msgstr "Ununbium"
+
+#~ msgid "no translations found"
+#~ msgstr "nem található fordítás"
+
+#~ msgid "User defined word type %1"
+#~ msgstr "Egyedi szótípus: %1"
+
+#~ msgid "each lesson must have a name"
+#~ msgstr "minden leckéhez meg kell adni egy nevet"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "Americanism"
+#~ msgstr "Amerikanizmus"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "abbreviation"
+#~ msgstr "rövidítés"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "anatomy"
+#~ msgstr "anatómia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "astronomy"
+#~ msgstr "csillagászat"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "biology"
+#~ msgstr "biológia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "bad sense"
+#~ msgstr "hibás értelmű"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "contemptuously"
+#~ msgstr "derogatív"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ecclesiastical"
+#~ msgstr "egyházi"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "figuratively"
+#~ msgstr "képletes"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "geology"
+#~ msgstr "földtani"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "historical"
+#~ msgstr "történelmi"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ichthyology"
+#~ msgstr "haltudomány"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "informal"
+#~ msgstr "közvetlen"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ironic"
+#~ msgstr "ironikus"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "irregular"
+#~ msgstr "szabálytalan"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "literary"
+#~ msgstr "irodalmi"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "metallurgy"
+#~ msgstr "metallurgia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "meteorology"
+#~ msgstr "meteorológia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "mineralogy"
+#~ msgstr "ásványtan"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "motoring"
+#~ msgstr "motorgyártás"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "mountaineering"
+#~ msgstr "hegymászás"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "mythology"
+#~ msgstr "mitológia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "proper name"
+#~ msgstr "személynév"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "optics"
+#~ msgstr "optika"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "ornithology"
+#~ msgstr "ornitológia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "oneself"
+#~ msgstr "saját"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "person"
+#~ msgstr "személy"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "parliamentary"
+#~ msgstr "parlamenti"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "pharmacy"
+#~ msgstr "gyógyszerészet"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "philosophy"
+#~ msgstr "filozófia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "photography"
+#~ msgstr "fényképészet"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "physics"
+#~ msgstr "fizika"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "physiology"
+#~ msgstr "fiziológia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "plural"
+#~ msgstr "többes szám"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "poetry"
+#~ msgstr "költészet"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "politics"
+#~ msgstr "politika"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "provincialism"
+#~ msgstr "nyelvjárási"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "psychology"
+#~ msgstr "lélektan"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "rhetoric"
+#~ msgstr "retorika"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "surveying"
+#~ msgstr "földmérés"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "telegraphy"
+#~ msgstr "telegráfia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "telephony"
+#~ msgstr "telefónia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "theater"
+#~ msgstr "színház"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "typography"
+#~ msgstr "tipográfia"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "university"
+#~ msgstr "egyetem"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "veterinary medicine"
+#~ msgstr "állatorvosi tudomány"
+
+#~ msgctxt "usage label - context in which a word is used"
+#~ msgid "zoology"
+#~ msgstr "zoológia"

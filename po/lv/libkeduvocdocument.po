@@ -1,0 +1,1383 @@
+# translation of libkdeedu.po to Latvian
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Maris Nartiss <maris.kde@gmail.com>, 2008, 2009.
+# Viesturs Zarins <viesturs.zarins@mii.lu.lv>, 2008.
+# Einars Sprugis <einars8@gmail.com>, 2009.
+# Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2009-07-07 20:59+0300\n"
+"Last-Translator: Viesturs Zariņš <viesturs.zarins@mii.lu.lv>\n"
+"Language-Team: Latvian <locale@laka.lv>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "Virsraksts:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "Autors:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "Dokumenta nodarbība"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "Vārdu tipi"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr "Leitnera kaste"
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, fuzzy, kde-format
+#| msgid "Cannot write to file %1"
+msgid "Cannot lock file %1"
+msgstr "Neizdevās rakstīt failā %1"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>Nevar atvērt failu<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, fuzzy, kde-format
+#| msgid "Cannot write to file %1"
+msgid "Cannot open tempfile %1"
+msgstr "Neizdevās rakstīt failā %1"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, fuzzy, kde-format
+#| msgid "Cannot write to file %1"
+msgid "Cannot download %1: %2"
+msgstr "Neizdevās rakstīt failā %1"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"Neizdevās atvērt vai pareizi nolasīt \"%1\"\n"
+"(Ziņotā kļūda: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "Neizdevās rakstīt failā %1"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "Oriģināls"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "Tulkojums %1"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "KDE vārdnīcas dokuments"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "KWordQuiz dokuments"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "Pauker nodarbība"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "Vokabeltrainer dokuments"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "XML vārdnīcu apmaiņas formāts"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr "Ar komatu atdalītas vērtības (CSV)"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "Visi atbalstītie dokumenti"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "Kļūdas nav atrastas."
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "XML dokumentā ir nederīgs."
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "Nezināms faila tips."
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "Fails nav rakstāms."
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr "Faila rakstīšana neizdevās."
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "Fails nav lasāms."
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr "Faila nolasīšana neizdevās."
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "Fails neeksistē."
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, fuzzy, kde-format
+#| msgid "The file does not exist."
+msgid "The file is locked by another process."
+msgstr "Fails neeksistē."
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "Nezināma kļūda."
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "Darbības vārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "Lietvārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "Nosaukums"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "Artikuls"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "Īpašības vārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "Apstākļa vārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Vietniekvārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Frāze"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "Skaitļa vārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Saiklis"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "Prievārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "Jautājums"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "Kārtas skaitļa vārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "Pamata skaitļa vārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "Noteiktais"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "Nenoteiktais"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr "Regulārs"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr "Neregulārs"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "Piederības"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr "Personas"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "Vīriešu"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "Sieviešu"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr "Neitrāls"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "Vienkāršā tagadne"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "Ilgstošā tagadne"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "Saliktā tagadne"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "Vienkāršā pagātne"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "Ilgstošā pagātne"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "Saliktā pagātne"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "Nākotne"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "Darbības vārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "Lietvārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "Nosaukums"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "Artikuls"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "Īpašības vārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "Apstākļa vārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Vietniekvārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Frāze"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "Skaitļa vārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Saiklis"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "Prievārds"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "Jautājums"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "Vēl nav mēģināts"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "1. līmenis"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "2. līmenis"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "3. līmenis"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "4. līmenis"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "5. līmenis"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "6. līmenis"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "7. līmenis"
+
+#~ msgid "Untitled"
+#~ msgstr "Nenosaukts"
+
+#~ msgid "Vocabulary"
+#~ msgstr "Vārdnīca"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "Parsēšanas kļūda rindā %1, kolonā %2:\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "Kļūda atverot failu"
+
+#~ msgid "file must be opened first"
+#~ msgstr "vispirms ir jāatver failu"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "Šis nav KDE vārdnīcas dokuments."
+
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "identifikatoru birkā trūkst identifikācijas elementu"
+
+#~ msgid "Default Lesson"
+#~ msgstr "Noklusējuma nodarbība"
+
+#~ msgid "identifier missing id"
+#~ msgstr "identifikatoram trūkst id"
+
+#~ msgid "entry missing id"
+#~ msgstr "ierakstam trūkst id"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "%1. nodarbība"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "Nav datu oriģinālajai valodai"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "Neviennozīmīgi definēts valodas kods"
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "Šis nav Pauker dokuments"
+
+#~ msgid "Lesson %1"
+#~ msgstr "%1. nodarbība"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "Šis neizskatās pēc (K)WordQuiz faila"
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr ""
+#~ "Iespējams atvērt tikai failus, kas izveidoti ar WorkQuiz 5.x vai jaunāku"
+
+#~ msgid "Error while reading file"
+#~ msgstr "Kļūda nolasot failu"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "Šis nav XDXF dokuments"
+
+#~ msgid "Glossary"
+#~ msgstr "Vārdnīca"
+
+#~ msgid "&Search:"
+#~ msgstr "&Meklēt:"
+
+#~ msgid "References"
+#~ msgstr "Atsauces"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "Iet uz '%1'"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "The name of the second, third ... language/column of vocabulary, if we "
+#~| "have to guess it."
+#~| msgid "Translation %1"
+#~ msgid "Transition Elements"
+#~ msgstr "Tulkojums %1"
+
+#~ msgid "Dummy"
+#~ msgstr "Imitācija"
+
+#~ msgid "Hydrogen"
+#~ msgstr "Ūdeņradis"
+
+#~ msgid "Helium"
+#~ msgstr "Hēlijs"
+
+#~ msgid "Lithium"
+#~ msgstr "Litijs"
+
+#~ msgid "Beryllium"
+#~ msgstr "Berilijs"
+
+#~ msgid "Boron"
+#~ msgstr "Bors"
+
+#~ msgid "Carbon"
+#~ msgstr "Ogleklis"
+
+#~ msgid "Nitrogen"
+#~ msgstr "Slāpeklis"
+
+#~ msgid "Oxygen"
+#~ msgstr "Skābeklis"
+
+#~ msgid "Fluorine"
+#~ msgstr "Fluors"
+
+#~ msgid "Neon"
+#~ msgstr "Neons"
+
+#~ msgid "Sodium"
+#~ msgstr "Nātrijs"
+
+#~ msgid "Magnesium"
+#~ msgstr "Magnijs"
+
+#~ msgid "Aluminium"
+#~ msgstr "Alumīnijs"
+
+#~ msgid "Silicon"
+#~ msgstr "Silīcijs"
+
+#~ msgid "Phosphorus"
+#~ msgstr "Fosfors"
+
+#~ msgid "Sulfur"
+#~ msgstr "Sērs"
+
+#~ msgid "Chlorine"
+#~ msgstr "Hlors"
+
+#~ msgid "Argon"
+#~ msgstr "Argons"
+
+#~ msgid "Potassium"
+#~ msgstr "Kālijs"
+
+#~ msgid "Calcium"
+#~ msgstr "Kalcijs"
+
+#~ msgid "Scandium"
+#~ msgstr "Skandijs"
+
+#~ msgid "Titanium"
+#~ msgstr "Titāns"
+
+#~ msgid "Vanadium"
+#~ msgstr "Vanādijs"
+
+#~ msgid "Chromium"
+#~ msgstr "Hroms"
+
+#~ msgid "Manganese"
+#~ msgstr "Mangāns"
+
+#~ msgid "Iron"
+#~ msgstr "Dzelzs"
+
+#~ msgid "Cobalt"
+#~ msgstr "Kobalts"
+
+#~ msgid "Nickel"
+#~ msgstr "Niķelis"
+
+#~ msgid "Copper"
+#~ msgstr "Varš"
+
+#~ msgid "Zinc"
+#~ msgstr "Cinks"
+
+#~ msgid "Gallium"
+#~ msgstr "Gallijs"
+
+#~ msgid "Germanium"
+#~ msgstr "Germānijs"
+
+#~ msgid "Arsenic"
+#~ msgstr "Arsēns"
+
+#~ msgid "Selenium"
+#~ msgstr "Selēns"
+
+#~ msgid "Bromine"
+#~ msgstr "Broms"
+
+#~ msgid "Krypton"
+#~ msgstr "Kriptons"
+
+#~ msgid "Rubidium"
+#~ msgstr "Rubīdijs"
+
+#~ msgid "Strontium"
+#~ msgstr "Stroncijs"
+
+#~ msgid "Yttrium"
+#~ msgstr "Itrijs"
+
+#~ msgid "Zirconium"
+#~ msgstr "Cirkonijs"
+
+#~ msgid "Niobium"
+#~ msgstr "Niobijs"
+
+#~ msgid "Molybdenum"
+#~ msgstr "Molibdēns"
+
+#~ msgid "Technetium"
+#~ msgstr "Tehnēcijs"
+
+#~ msgid "Ruthenium"
+#~ msgstr "Rutēnijs"
+
+#~ msgid "Rhodium"
+#~ msgstr "Rodijs"
+
+#~ msgid "Palladium"
+#~ msgstr "Palādijs"
+
+#~ msgid "Silver"
+#~ msgstr "Sudrabs"
+
+#~ msgid "Cadmium"
+#~ msgstr "Kadmijs"
+
+#~ msgid "Indium"
+#~ msgstr "Indijs"
+
+#~ msgid "Tin"
+#~ msgstr "Alva"
+
+#~ msgid "Antimony"
+#~ msgstr "Antimons"
+
+#~ msgid "Tellurium"
+#~ msgstr "Telūrijs"
+
+#~ msgid "Iodine"
+#~ msgstr "Jods"
+
+#~ msgid "Xenon"
+#~ msgstr "Ksenons"
+
+#~ msgid "Caesium"
+#~ msgstr "Cēzijs"
+
+#~ msgid "Barium"
+#~ msgstr "Bārijs"
+
+#~ msgid "Lanthanum"
+#~ msgstr "Lantāns"
+
+#~ msgid "Cerium"
+#~ msgstr "Cērijs"
+
+#~ msgid "Praseodymium"
+#~ msgstr "Prazeodīms"
+
+#~ msgid "Neodymium"
+#~ msgstr "Neodīms"
+
+#~ msgid "Promethium"
+#~ msgstr "Prometijs"
+
+#~ msgid "Samarium"
+#~ msgstr "Samārijs"
+
+#~ msgid "Europium"
+#~ msgstr "Eiropijs"
+
+#~ msgid "Gadolinium"
+#~ msgstr "Gadolīnijs"
+
+#~ msgid "Terbium"
+#~ msgstr "Terbijs"
+
+#~ msgid "Dysprosium"
+#~ msgstr "Disprozijs"
+
+#~ msgid "Holmium"
+#~ msgstr "Holmijs"
+
+#~ msgid "Erbium"
+#~ msgstr "Erbijs"
+
+#~ msgid "Thulium"
+#~ msgstr "Tūlijs"
+
+#~ msgid "Ytterbium"
+#~ msgstr "Iterbijs"
+
+#~ msgid "Lutetium"
+#~ msgstr "Lutēcijs"
+
+#~ msgid "Hafnium"
+#~ msgstr "Hafnijs"
+
+#~ msgid "Tantalum"
+#~ msgstr "Tantāls"
+
+#~ msgid "Tungsten"
+#~ msgstr "Volframs"
+
+#~ msgid "Rhenium"
+#~ msgstr "Rēnijs"
+
+#~ msgid "Osmium"
+#~ msgstr "Osmijs"
+
+#~ msgid "Iridium"
+#~ msgstr "Irīdijs"
+
+#~ msgid "Platinum"
+#~ msgstr "Platīns"
+
+#~ msgid "Gold"
+#~ msgstr "Zelts"
+
+#~ msgid "Mercury"
+#~ msgstr "Dzīvsudrabs"
+
+#~ msgid "Thallium"
+#~ msgstr "Tallijs"
+
+#~ msgid "Lead"
+#~ msgstr "Svins"
+
+#~ msgid "Bismuth"
+#~ msgstr "Bismuts"
+
+#~ msgid "Polonium"
+#~ msgstr "Polonijs"
+
+#~ msgid "Astatine"
+#~ msgstr "Astats"
+
+#~ msgid "Radon"
+#~ msgstr "Radons"
+
+#~ msgid "Francium"
+#~ msgstr "Francijs"
+
+#~ msgid "Radium"
+#~ msgstr "Rādijs"
+
+#~ msgid "Actinium"
+#~ msgstr "Aktīnijs"
+
+#~ msgid "Thorium"
+#~ msgstr "Torijs"
+
+#~ msgid "Protactinium"
+#~ msgstr "Proaktīnijs"
+
+#~ msgid "Uranium"
+#~ msgstr "Urāns"
+
+#~ msgid "Neptunium"
+#~ msgstr "Neptūnijs"
+
+#~ msgid "Plutonium"
+#~ msgstr "Plutonijs"
+
+#~ msgid "Americium"
+#~ msgstr "Amerīcijs"
+
+#~ msgid "Curium"
+#~ msgstr "Kirijs"
+
+#~ msgid "Berkelium"
+#~ msgstr "Berklijs"
+
+#~ msgid "Californium"
+#~ msgstr "Kalifornijs"
+
+#~ msgid "Einsteinium"
+#~ msgstr "Einšteinijs"
+
+#~ msgid "Fermium"
+#~ msgstr "Fermijs"
+
+#~ msgid "Mendelevium"
+#~ msgstr "Mendeļejevijs"
+
+#~ msgid "Nobelium"
+#~ msgstr "Nobēlijs"
+
+#~ msgid "Lawrencium"
+#~ msgstr "Lourensijs"
+
+#~ msgid "Rutherfordium"
+#~ msgstr "Ruterfordijs"
+
+#~ msgid "Dubnium"
+#~ msgstr "Dubnijs"
+
+#~ msgid "Seaborgium"
+#~ msgstr "Seaborgijs"
+
+#~ msgid "Bohrium"
+#~ msgstr "Borijs"
+
+#~ msgid "Hassium"
+#~ msgstr "Hassijs"
+
+#~ msgid "Meitnerium"
+#~ msgstr "Meitenērijs"
+
+#~ msgid "Darmstadtium"
+#~ msgstr "Darmštatijs"
+
+#~ msgid "Roentgenium"
+#~ msgstr "Rentgenijs"
+
+#, fuzzy
+#~| msgid "Cerium"
+#~ msgid "Copernicium"
+#~ msgstr "Cērijs"
+
+#~ msgid "Ununtrium"
+#~ msgstr "Ununtrijs"
+
+#~ msgid "Ununquadium"
+#~ msgstr "Ununkvadrijs"
+
+#~ msgid "Ununpentium"
+#~ msgstr "Ununpentijs"
+
+#~ msgid "Ununhexium"
+#~ msgstr "Ununheksijs"
+
+#~ msgid "Ununseptium"
+#~ msgstr "Ununseptijs"
+
+#~ msgid "Ununoctium"
+#~ msgstr "Ununoktrijs"
+
+#~ msgid "Greek 'hydro' and 'gennao' for 'forms water'"
+#~ msgstr "Grieķu valodā 'hydro' un 'gennao' nozīmē 'rada ūdeni'"
+
+#~ msgid "The Greek word for the sun was 'helios'"
+#~ msgstr "Grieķu valodā 'helios' ir Saule"
+
+#~ msgid "Greek 'lithos' means 'stone'"
+#~ msgstr "'Lithos' grieķu valodā nozīmē 'akmens'"
+
+#~ msgid "Greek 'beryllos' for 'light-green stone'"
+#~ msgstr "Grieķu valodā 'beryllos' nozīmē 'gaiši zaļš akmens'"
+
+#~ msgid ""
+#~ "Boron means 'Bor(ax) + (carb)on'. It is found in borax and behaves a lot "
+#~ "like carbon"
+#~ msgstr ""
+#~ "Boron nozīmē 'Bor(ax) + (carb)on'. Tas ir atrodams boraksā un ir ļoti "
+#~ "līdzīgs ogleklim."
+
+#~ msgid "Latin 'carboneum' for carbon"
+#~ msgstr "Latīņu valodā 'carboneum' nozīmē 'ogle'"
+
+#~ msgid "Latin 'nitrogenium' ('forms saltpeter')"
+#~ msgstr "Latīņu valodā 'nitrogenium' ('veido salpetri')"
+
+#~ msgid "Latin 'oxygenium' (forms acids)"
+#~ msgstr "Latīņu valodā 'oxygenium' (veido skābes)"
+
+#~ msgid "Latin 'fluere' ('floats')"
+#~ msgstr "Latīņu valodā 'fluere' ('peld')"
+
+#~ msgid "Greek 'neo'. meaning 'new'"
+#~ msgstr "Grieķu valodā 'neo', nozīmē 'jauns'"
+
+#~ msgid "Arabic 'natrun' for 'soda'"
+#~ msgstr "Arābu valodā 'natrun' nozīmē 'soda'"
+
+#~ msgid "Named after the city of Magnesia"
+#~ msgstr "Nosaukts Magnēzijas pilsētas vārdā"
+
+#~ msgid "Latin 'alumen'"
+#~ msgstr "Latīņu 'alumen'"
+
+#~ msgid "Latin 'silex'"
+#~ msgstr "Latīņu 'silex'"
+
+#~ msgid "Greek 'phosphoros' for 'carries light'"
+#~ msgstr "Grieķu valodā 'phosphoros' nozīmē 'nes gaismu'"
+
+#~ msgid "In sanskrit 'sweb' means 'to sleep'"
+#~ msgstr "Sanskritā 'sweb' nozīmē 'gulēt'"
+
+#~ msgid "Greek 'chloros' for 'yellow-green'"
+#~ msgstr "Grieķu valodā 'chloros' nozīmē 'dzelteni-zaļš'"
+
+#~ msgid "Greek 'aergon' for 'inactive'"
+#~ msgstr "Grieķu valodā 'aergon' nozīmē 'neaktīvs'"
+
+#~ msgid "Arabic 'al qaliy' for potash"
+#~ msgstr "Arābu valodā 'al qaliy' nozīmē 'potašs'"
+
+#~ msgid "Latin 'calx' for 'lime'"
+#~ msgstr "Latīņu valodā 'calx' nozīmē 'kaļķis'"
+
+#~ msgid "Named because it was found in Scandinavia"
+#~ msgstr "Nosaukts tā, jo tika atklāts Skandināvijā"
+
+#~ msgid "The Titans were giants in Greek mythology"
+#~ msgstr "Titāni bija milži grieķu mitoloģijā"
+
+#~ msgid "'Vanadis' is another name for the Nordic goddess Freyja"
+#~ msgstr "'Vanadis' ir cits Ziemeļu dievietes Freijas vārds"
+
+#~ msgid "Greek 'chroma' means 'color'"
+#~ msgstr "'Chroma' grieķu valodā nozīmē 'krāsa'"
+
+#~ msgid ""
+#~ "It was discovered near a town named Magnesia in black earth. Thus, it was "
+#~ "named 'magnesia nigra', or for short, Manganese."
+#~ msgstr ""
+#~ "Tika atklāts netālu no pilsētas, ko sauca par Magnēziju, melnā rūdā. "
+#~ "Tāpēc to nosauca par 'magnesia nigra', vai īsāk - Manganese."
+
+#~ msgid "Latin 'ferrum'"
+#~ msgstr "Latīņu valodā 'ferrum'"
+
+#~ msgid "Named after the German word 'Kobold' for 'goblin'"
+#~ msgstr "Nosaukts līdzīgi vācu vārdam 'kobold', kas nozīmē 'goblins'"
+
+#~ msgid "'Nickel' was the name of a mountain goblin"
+#~ msgstr "'Nickel' ir kalnu goblina vārds"
+
+#~ msgid "Greek 'cuprum' for Cypres"
+#~ msgstr "Grieķu valodā 'cuprum' nozīmē ciprese"
+
+#~ msgid "German 'zinking' for 'rough', because zinc ore is very rough"
+#~ msgstr "Vācu valodā 'zinking' nozīmē 'raupjš', jo cinka rūda ir ļoti raupja"
+
+#~ msgid "'Gallia' is an old name for France"
+#~ msgstr "'Gallia' ir vecs Francijas nosaukums"
+
+#~ msgid "Latin 'germania' is an old name for Germany"
+#~ msgstr "Latīņu valodā 'germania' ir vecs Vācijas nosaukums"
+
+#~ msgid "Greek 'arsenikos' for 'male' or 'bold'"
+#~ msgstr "Grieķu valodā 'arsenikos' nozīmē 'vīrietis' vai 'drosmīgs'"
+
+#~ msgid "Greek 'selena' for 'moon'"
+#~ msgstr "Grieķu valodā 'selena' nozīmē 'mēness'"
+
+#~ msgid "Greek 'bromos' for 'smells badly'"
+#~ msgstr "Grieķu valodā 'bromos' nozīmē 'nelabi ož'"
+
+#~ msgid "Greek 'kryptos' for 'hidden'"
+#~ msgstr "Grieķu valodā 'kryptos' nozīmē 'paslēpts'"
+
+#~ msgid "Latin 'rubidus' for 'dark red'"
+#~ msgstr "Latīņu valodā 'rubidus' nozīmē 'tumši sarkans'"
+
+#~ msgid "Named after the mineral Strontianit"
+#~ msgstr "Nosaukts minerāla stroncīta vārdā"
+
+#~ msgid ""
+#~ "Named after the small town of Ytterby near Stockholm in Sweden. Terbium. "
+#~ "Ytterbium and Gadolinium are also named after this town."
+#~ msgstr ""
+#~ "Nosaukts mazas pilsētiņas, kas atrodas netālu no Stokholmas Zviedrijā, "
+#~ "Iterbijas vārdā. Arī Terbijs, Iterbijs un Gadolīnijs ir nosaukti šīs "
+#~ "pilsētiņas vārdā."
+
+#~ msgid "Named after the mineral zircon"
+#~ msgstr "Nosaukts minerāla cirkona vārdā."
+
+#~ msgid "Named after Niobe, the daughter of the Greek god Tantalus."
+#~ msgstr "Nosaukts par godu Niobei - grieķu dieva Tantala meitai."
+
+#~ msgid ""
+#~ "This name has Greek roots. It means 'like Platinum' - it was difficult to "
+#~ "distinguish Molybdenum from Platinum."
+#~ msgstr ""
+#~ "Šim vārdam ir grieķu izcelsme. Tas nozīmē 'līdzīgs Platīnam', jo bija "
+#~ "grūti atšķirt Molibdēnu no Platīna."
+
+#~ msgid "Greek 'technetos' for artificial"
+#~ msgstr "Grieķu valodā 'technetos' nozīmē 'mākslīgs'"
+
+#~ msgid "Ruthenia is the old name of Russia"
+#~ msgstr "Rutēnija ir vecs Krievijas nosaukums"
+
+#~ msgid "Greek 'rhodeos' means 'red like a rose'"
+#~ msgstr "Grieķu 'rhodeos' nozīmē 'sarkans kā roze'"
+
+#~ msgid "Named after the asteroid Pallas"
+#~ msgstr "Nosaukts asteroīda Pallasa vārdā"
+
+#~ msgid "Latin 'argentum' for silver"
+#~ msgstr "Latīņu valodā 'argentum' nozīmē 'sudrabs'"
+
+#~ msgid "Greek 'kadmia' ('Galmei' = Zinc carbonate)"
+#~ msgstr "Grieķu 'kadmia' ('Galmei' = cinka karbonāts)"
+
+#~ msgid "Named after 'Indigo' because of its blue spectrum"
+#~ msgstr "Nosaukts 'Indigo' vārdā tā zilā spektra dēļ"
+
+#~ msgid "Latin 'stannum' for tin"
+#~ msgstr "Latīņu valodā 'stannum' nozīmē 'alva'"
+
+#~ msgid "Arabic 'anthos ammonos' for 'blossom of the god Ammon'"
+#~ msgstr "Arābu valoodā 'anthos ammonos' nozīmē 'dieva Amona zieds'"
+
+#~ msgid "Latin 'tellus' or 'telluris' for 'Planet Earth'"
+#~ msgstr "Latīņu valodā 'tellus' vai 'telluris' nozīmē 'planēta Zeme'"
+
+#~ msgid "Greek 'ioeides' for 'violet'."
+#~ msgstr "Grieķu valodā 'ioeides' nozīmē 'violets'."
+
+#~ msgid "Greek 'xenos' for 'foreigner'"
+#~ msgstr "Grieķu valodā 'xenos' nozīmē 'svešinieks'"
+
+#~ msgid "Latin 'caesius' for 'heaven blue'."
+#~ msgstr "Latīņu valodā 'caesius' nozīmē 'debesu zilais'."
+
+#~ msgid "Greek 'barys' for 'heavy'"
+#~ msgstr "Grieķu valodā 'barys' nozīmē 'smags'"
+
+#~ msgid ""
+#~ "Greek 'lanthanein' for 'hidden'. The Lanthanoids are also called the "
+#~ "'rare earth' elements."
+#~ msgstr "Grieķu valodā 'lanthanein' nozīmē 'apslēpts'."
+
+#~ msgid "Named after the planetoid Ceres"
+#~ msgstr "Nosaukts planetoīda Ceres vārdā."
+
+#~ msgid "Greek 'prasinos didymos' for 'green twin'"
+#~ msgstr "Grieķu valodā 'prasinos didymos' nozīmē 'zaļie dvīņi'"
+
+#~ msgid "Greek 'neos didymos' for 'new twin'"
+#~ msgstr "Grieķu valodā 'neos didymos' nozīmē 'jaunie dvīņi'"
+
+#~ msgid ""
+#~ "Named after the Greek Prometheus. Prometheus stole the fire from the gods "
+#~ "and gave it to mankind."
+#~ msgstr ""
+#~ "Nosaukts grieķu Prometeja vārdā. Prometejs nozaga uguni dieviem un dāvāja "
+#~ "to cilvēkiem."
+
+#~ msgid "Named after the mineral Samarskit"
+#~ msgstr "Nosaukts minerāla samarskita vārdā"
+
+#~ msgid "Named after Europe"
+#~ msgstr "Nosaukts Eiropas vārdā"
+
+#~ msgid "Named after the Finnish chemist Johan Gadolin"
+#~ msgstr "Nosaukts par godu Somu ķīmiķim Johanam Gadolinam"
+
+#~ msgid "Named after the Swedish town of Ytterby"
+#~ msgstr "Nosaukts Zviedrijas pilsētas Iterbijas vārdā"
+
+#~ msgid "Greek 'dysprositor' for 'difficult to reach'"
+#~ msgstr "Grieķu valodā 'dysprositor' nozīmē 'grūti sasniedzams'"
+
+#~ msgid "Latin 'holmia' for the old name of Stockholm"
+#~ msgstr "Latīņu valodā 'holmia' ir vecs Stokholmas nosaukums"
+
+#~ msgid ""
+#~ "Named ofter the Swedish town of Ytterby. Terbium and Ytterbium are also "
+#~ "named after this town."
+#~ msgstr ""
+#~ "Nosaukts pilsētas Zviedrijā - Iterbijas - vārdā. Arī Terbijs un Iterbijs "
+#~ "ir nosaukti šīs pilsētas vārdā."
+
+#~ msgid "Named after the old name of Scandinavia, 'Thule'."
+#~ msgstr "Nosaukts veca Skandināvijas nosaukuma - 'Thule' - vārdā."
+
+#~ msgid ""
+#~ "Like Terbium and Gadolinium, this is named after the Swedish town of "
+#~ "Ytterby."
+#~ msgstr ""
+#~ "Līdzīgi kā Terbijs un Gadolīnijs, nosaukts Zviedrijas pilsētas Iterbijas "
+#~ "vārdā."
+
+#~ msgid "Named after the Roman name 'Lutetia' for Paris"
+#~ msgstr "Nosaukts romiešu Parīzes nosaukuma vārdā - 'Lutetia'"
+
+#~ msgid "'Hafnia' is the old name of Kopenhagen (Denmark)"
+#~ msgstr "'Hafnia' ir vecais Kopenhāgenas (Dānija) nosaukums"
+
+#~ msgid "Named after the Greek myth of Tantalos"
+#~ msgstr "Nosaukts grieķu mīta par Tantalu vārdā"
+
+#~ msgid ""
+#~ "'tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~ "symbol 'W') was Wolfram, named after a mineral."
+#~ msgstr ""
+#~ "'tung sten' zviedru valodā nozīmē 'smags akmens'. Vecais nosaukums (no tā "
+#~ "arī simbols 'W') bija Wolframs, nosaukts minerāla vārdā."
+
+#~ msgid "Named after the German river Rhine (latin 'Rhenium')."
+#~ msgstr "Nosaukts Vācijas upes Reinas vārdā (latīņu 'Rhenium')."
+
+#~ msgid "Greek for 'smell'. Its oxides smell strongly like radishes."
+#~ msgstr "Grieķu 'smarža'. Tā oksīdi smaržo līdzīgi kā redīsi."
+
+#~ msgid "Greek 'iris' for 'rainbow'"
+#~ msgstr "Grieķu valodā 'iris' nozīmē 'varavīksne'"
+
+#~ msgid "Spanish 'platina' means 'small silver'"
+#~ msgstr "Spāņu valodā 'platina' nozīmē 'mazais sudrabs'"
+
+#~ msgid "Latin 'aurum'. Named after Aurora, the goddess of sunrise"
+#~ msgstr "Latīņu 'aurum'. Nosaukts saullēkta dievietes Auroras vārdā."
+
+#~ msgid "Graeco-Latin 'hydrargyrum' for 'liquid silver'"
+#~ msgstr "Grieķu-latīņu valodā 'hydrargyrum' nozīmē 'šķidrais sudrabs'"
+
+#~ msgid "Greek 'tallos' for 'young twig'"
+#~ msgstr "Grieķu valodā 'tallos' nozīmē 'jaunais zariņš'"
+
+#~ msgid "Latin 'plumbum' for Lead"
+#~ msgstr "Latīņu valodā 'plumbum' nozīmē svins"
+
+#~ msgid "The old name of Bismuth is 'Wismut', which stood for 'white mass'."
+#~ msgstr "Bismuta vecais nosaukums ir Vismuts, kas nozīmē 'baltā masa'."
+
+#~ msgid "Named after Poland to honor Marie Curie"
+#~ msgstr "Nosaukts Polijas vārdā par godu Marijai Kirī"
+
+#~ msgid "Greek 'astator' for 'changing'"
+#~ msgstr "Grieķu valodā 'astator' nozīmē 'mainās'"
+
+#~ msgid ""
+#~ "Named after Radium. It ends with 'on' to make it clear that it is a noble "
+#~ "gas."
+#~ msgstr "Nosaukts Rādija vārdā. Izskaņa 'ons' norāda, ka tā ir cēlgāze."
+
+#~ msgid "Named after France to honor Marguerite Perey"
+#~ msgstr "Nosaukts Francijas vārdā par godu Margueritai Perežai"
+
+#~ msgid "Latin 'radius' for 'beam', as it is radioactive"
+#~ msgstr "Latīņu valodā 'radius' nozīmē 'stars', jo tas radioaktīvs"
+
+#~ msgid "Greek 'aktis' for 'beam' - actinium is radioactive"
+#~ msgstr "Grieķu valodā 'aktis' nozīmē 'stars' - aktīnijs ir radioaktīvs"
+
+#~ msgid "Named after the German god of thunder: Thor"
+#~ msgstr "Nosaukts vācu pērkona dieva Tora vārdā"
+
+#~ msgid ""
+#~ "Greek 'protos' for 'ancester'. Protactinium is before Actinium in the "
+#~ "periodic table."
+#~ msgstr ""
+#~ "Grieķu valodā 'protos' ir 'sencis'. Proaktīnijs ir tabulā atrodas pirms "
+#~ "Aktīnija."
+
+#~ msgid "Greek 'ouranos' for 'heaven'. Named after the planet Uranus."
+#~ msgstr ""
+#~ "Grieķu valodā 'ouranos' nozīmē 'debesis'. Nosaukts planētas Urāna vārdā."
+
+#~ msgid "Named after the planet Neptune."
+#~ msgstr "Nosaukts planētas Neptūna vārdā."
+
+#~ msgid "Named after the planet Pluto."
+#~ msgstr "Nosaukts planētas Plutona vārdā."
+
+#~ msgid "Named after America."
+#~ msgstr "Nosaukts Amerikas vārdā."
+
+#~ msgid "Named after Marie Curie."
+#~ msgstr "Nosaukts Marijas Kirī vārdā."
+
+#~ msgid "Named after the town Berkeley where it was discovered."
+#~ msgstr "Nosaukts pilsētas, kurā to atklāja - Berklijas, vārdā."
+
+#~ msgid "Named after the US-State of California."
+#~ msgstr "Nosaukts ASV štata Kalifornijas vārdā."
+
+#~ msgid "Named after the scientist Albert Einstein."
+#~ msgstr "Nosaukts zinātnieka Alberta Einšteina vārdā."
+
+#~ msgid "Named after the scientist Enrico Fermi."
+#~ msgstr "Nosaukts zinātnieka Enriko Fermi vārdā."
+
+#~ msgid "Named after the scientist D.I. Mendeleev."
+#~ msgstr "Nosaukts zinātnieka D.I. Mendeļejeva vārdā."
+
+#~ msgid "Named after the scientist Alfred Nobel."
+#~ msgstr "Nosaukts zinātnieka Alfreda Nobela vārdā."
+
+#~ msgid "Named after the scientist Ernest Orlando Lawrence."
+#~ msgstr "Nosaukts zinātnieka Ernesta Orlando Lorensa vārdā."
+
+#~ msgid "Named after the scientist Ernest Rutherford"
+#~ msgstr "Nosaukts zinātnieka Ernesta Rezerforda vārdā."
+
+#~ msgid "Named after the science-town Dubna in Russia"
+#~ msgstr "Nosaukts zinātnes pilsētiņas Krievijā - Dubnas - vārdā."
+
+#~ msgid "Named after the scientist G. Theodore Seaborg."
+#~ msgstr "Nosaukts zinātnieka G. Teodora Sīborga vārdā."
+
+#~ msgid "Named after the scientist Niels Bohr."
+#~ msgstr "Nosaukts zinātnieka Nīlsa Bora vārdā."
+
+#~ msgid ""
+#~ "Latin 'hassia' for the German county Hessen. In Hessen a lot elements "
+#~ "have been discovered."
+#~ msgstr ""
+#~ "Latīņu 'hassia' nozīmē Hesene - viena no Vācijas federālajām zemēm. "
+#~ "Hesenē ir atklāti daudzi elementi."
+
+#~ msgid "Named after the scientist Lise Meitner."
+#~ msgstr "Nosaukts zinātnieces Līzes Meitneres vārdā."
+
+#~ msgid ""
+#~ "Named after the German city Darmstadt where many elements have been "
+#~ "discovered."
+#~ msgstr ""
+#~ "Nosaukts Vācijas pilsētas Darmštadtes vārdā, kur tika atklāti daudzi "
+#~ "elementi."
+
+#~ msgid "Named after Wilhelm Conrad Röntgen."
+#~ msgstr "Nosaukts Vilhelma Konrāda Rentgena vārdā."
+
+#~ msgid ""
+#~ "Historically known as eka-mercury. Ununbium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Vēsturiski pazīstams kā eka-merkūrijs. Ununbijs ir IUPAC pagaidu "
+#~ "sistemātiskais elementa nosaukums."
+
+#~ msgid ""
+#~ "Historically known as eka-thallium. Ununtrium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Vēsturiski pazīstams kā eka-tallijs. Ununtrijs ir IUPAC pagaidu "
+#~ "sistemātiskais elementa nosaukums."
+
+#~ msgid ""
+#~ "Historically known as eka-lead. Ununquadium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Vēsturiski pazīstams kā eka-svins. Ununkvadrijs ir IUPAC pagaidu "
+#~ "sistemātiskais elementa nosaukums."
+
+#~ msgid ""
+#~ "Historically known as eka-bismuth. Ununpentium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Vēsturiski pazīstams kā eka-bismuts. Ununpentijs ir IUPAC pagaidu "
+#~ "sistemātiskais elementa nosaukums."
+
+#~ msgid ""
+#~ "Historically known as eka-polonium. Ununhexium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Vēsturiski pazīstams kā eka-polonijs. Ununheksijs ir IUPAC pagaidu "
+#~ "sistemātiskais elementa nosaukums."
+
+#~ msgid "Temporary symbol and name. Can also be referred to as eka-astatine."
+#~ msgstr "Pagaidu simbols un nosaukums. Var tikt saukts arī kā eka-astats."
+
+#~ msgid ""
+#~ "Historically known as eka-radon, eka-emanation before 1960. Ununoctium is "
+#~ "a temporary IUPAC systematic element name."
+#~ msgstr ""
+#~ "Vēsturiski pazīstams kā eka-radons, eka-emanācijs pirms 1960. g. "
+#~ "Ununoktijs ir IUPAC pagaidu sistemātiskais elementa nosaukums."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Māris Nartišs"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "maris.kde@gmail.com"
+
+#~ msgid "Ununbium"
+#~ msgstr "Ununbijs"
+
+#~ msgid "no translations found"
+#~ msgstr "nav atrasts neviens tulkojums"

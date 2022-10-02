@@ -1,0 +1,1398 @@
+# translation of libkdeedu.po to greek
+# translation of libkdeedu.po to
+#
+# Spiros Georgaras <sng@hellug.gr>, 2005, 2006, 2007.
+# Toussis Manolis <manolis@koppermind.homelinux.org>, 2007, 2008, 2009.
+# Yannis Kaskamanidis <ttnfy17@sch.gr>, 2007.
+# Yannis Kaskamanidis <ttnfy17@yahoo.gr>, 2007.
+# Dimitrios Glentadakis <dglent@gmail.com>, 2011.
+# Stelios <sstavra@gmail.com>, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkdeedu\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-04 00:40+0000\n"
+"PO-Revision-Date: 2017-10-21 17:56+0200\n"
+"Last-Translator: Stelios <sstavra@gmail.com>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 2.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:38
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr "Τίτλος:"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:39
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr "Συγγραφέας:"
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr "Μάθημα έγγραφο"
+
+#: keduvocdocument/keduvocdocument.cpp:132
+#, kde-format
+msgid "Word types"
+msgstr "Τύποι λέξεων"
+
+#: keduvocdocument/keduvocdocument.cpp:135
+#, kde-format
+msgid "Leitner Box"
+msgstr "Κουτί Leitner"
+
+#: keduvocdocument/keduvocdocument.cpp:170
+#: keduvocdocument/keduvocdocument.cpp:177
+#, kde-format
+msgid "Cannot lock file %1"
+msgstr "Αδυναμία κλειδώματος του αρχείου %1"
+
+#: keduvocdocument/keduvocdocument.cpp:230
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>Αδύνατο το άνοιγμα του αρχείου<br /><b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:238
+#, kde-format
+msgid "Cannot open tempfile %1"
+msgstr "Αδυναμία ανοίγματος προσωρινού αρχείου %1"
+
+#: keduvocdocument/keduvocdocument.cpp:243
+#, kde-format
+msgid "Cannot download %1: %2"
+msgstr "Αδυναμία λήψης %1: %2"
+
+#: keduvocdocument/keduvocdocument.cpp:269
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"Αδυναμία ανοίγματος ή σωστής ανάγνωσης του \"%1\"\n"
+"(Σφάλμα αναφοράς: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:313
+#: keduvocdocument/keduvocdocument.cpp:341
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "Αδυναμία εγγραφής στο αρχείο %1"
+
+#: keduvocdocument/keduvocdocument.cpp:677
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr "Αρχικό"
+
+#: keduvocdocument/keduvocdocument.cpp:679
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr "Μετάφραση %1"
+
+#: keduvocdocument/keduvocdocument.cpp:840
+msgid "KDE Vocabulary Document"
+msgstr "Έγγραφο λεξιλογίου KDE"
+
+#: keduvocdocument/keduvocdocument.cpp:841
+msgid "KWordQuiz Document"
+msgstr "Έγγραφο KWordQuiz"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+msgid "Pauker Lesson"
+msgstr "Μάθημα Pauker"
+
+#: keduvocdocument/keduvocdocument.cpp:843
+msgid "Vokabeltrainer"
+msgstr "Vokabeltrainer"
+
+#: keduvocdocument/keduvocdocument.cpp:844
+msgid "XML Dictionary Exchange Format"
+msgstr "Μορφή ανταλλαγής λεξιλογίων XML"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+msgid "Comma Separated Values (CSV)"
+msgstr "Comma Separated Values (CSV)"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "All supported documents"
+msgstr "Όλα τα υποστηριζόμενα έγγραφα"
+
+#: keduvocdocument/keduvocdocument.cpp:868
+#, kde-format
+msgid "No error found."
+msgstr "Δε βρέθηκε κανένα σφάλμα."
+
+#: keduvocdocument/keduvocdocument.cpp:871
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "Μη έγκυρη XML στο έγγραφο."
+
+#: keduvocdocument/keduvocdocument.cpp:873
+#, kde-format
+msgid "Unknown file type."
+msgstr "Άγνωστος τύπος αρχείου."
+
+#: keduvocdocument/keduvocdocument.cpp:875
+#, kde-format
+msgid "File is not writeable."
+msgstr "Το αρχείο δεν είναι εγγράψιμο."
+
+#: keduvocdocument/keduvocdocument.cpp:877
+#, kde-format
+msgid "File writer failed."
+msgstr "Η εγγραφή του αρχείου απέτυχε."
+
+#: keduvocdocument/keduvocdocument.cpp:879
+#, kde-format
+msgid "File is not readable."
+msgstr "Το αρχείο δεν είναι αναγνώσιμο."
+
+#: keduvocdocument/keduvocdocument.cpp:881
+#, kde-format
+msgid "The file reader failed."
+msgstr "Η ανάγνωση του αρχείου απέτυχε."
+
+#: keduvocdocument/keduvocdocument.cpp:883
+#, kde-format
+msgid "The file does not exist."
+msgstr "Το αρχείο δεν υπάρχει."
+
+#: keduvocdocument/keduvocdocument.cpp:885
+#, kde-format
+msgid "The file is locked by another process."
+msgstr "Το αρχείο είναι κλειδωμένο από άλλη διεργασία."
+
+#: keduvocdocument/keduvocdocument.cpp:887
+#, kde-format
+msgid "The lock file can't be created."
+msgstr "Αδυναμία δημιουργίας του αρχείου κλειδώμματος."
+
+#: keduvocdocument/keduvocdocument.cpp:890
+#, kde-format
+msgid "Unknown error."
+msgstr "Άγνωστο σφάλμα."
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr "Ρήμα"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr "Ουσιαστικό"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr "Όνομα"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr "Άρθρο"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr "Επίθετο"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr "Επίρρημα"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Αντωνυμία"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Φράση"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr "Αριθμητικό"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Σύνδεσμος"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:41
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr "Πρόθεση"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:42
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr "Ερώτηση"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:238
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr "Τακτικό αριθμητικό"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr "Απόλυτο αριθμητικό"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr "Οριστικό"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr "Αόριστο"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:50
+#: keduvocdocument/keduvockvtmlcompability.cpp:257
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr "Ομαλό"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:260
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr "Ανώμαλο"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:52
+#: keduvocdocument/keduvockvtmlcompability.cpp:278
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr "Κτητική"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:281
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr "Προσωπική"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr "Αρσενικό"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:269
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr "Θηλυκό"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:272
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr "Ουδέτερο"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#, kde-format
+msgid "Simple Present"
+msgstr "Απλός ενεστώτας"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:164
+#, kde-format
+msgid "Present Progressive"
+msgstr "Ενεστώτας διαρκείας"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:165
+#, kde-format
+msgid "Present Perfect"
+msgstr "Παρακείμενος"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:166
+#, kde-format
+msgid "Simple Past"
+msgstr "Απλός αόριστος"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:167
+#, kde-format
+msgid "Past Progressive"
+msgstr "Παρατατικός"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:168
+#, kde-format
+msgid "Past Participle"
+msgstr "Παθητική μετοχή"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:169
+#, kde-format
+msgid "Future"
+msgstr "Μέλλοντας"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:215
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr "Ρήμα"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:216
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr "Ουσιαστικό"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:217
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr "Όνομα"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:218
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr "Άρθρο"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:219
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr "Επίθετο"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr "Επίρρημα"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:221
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr "Αντωνυμία"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:222
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr "Φράση"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:223
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr "Αριθμητικό"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr "Σύνδεσμος"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:225
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr "Πρόθεση"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:226
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr "Ερώτηση"
+
+#: keduvocdocument/keduvoctext.h:17
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "Δεν ερωτήθηκε ακόμη"
+
+#: keduvocdocument/keduvoctext.h:20
+#, kde-format
+msgid "Level 1"
+msgstr "Επίπεδο 1"
+
+#: keduvocdocument/keduvoctext.h:23
+#, kde-format
+msgid "Level 2"
+msgstr "Επίπεδο 2"
+
+#: keduvocdocument/keduvoctext.h:26
+#, kde-format
+msgid "Level 3"
+msgstr "Επίπεδο 3"
+
+#: keduvocdocument/keduvoctext.h:29
+#, kde-format
+msgid "Level 4"
+msgstr "Επίπεδο 4"
+
+#: keduvocdocument/keduvoctext.h:32
+#, kde-format
+msgid "Level 5"
+msgstr "Επίπεδο 5"
+
+#: keduvocdocument/keduvoctext.h:35
+#, kde-format
+msgid "Level 6"
+msgstr "Επίπεδο 6"
+
+#: keduvocdocument/keduvoctext.h:38
+#, kde-format
+msgid "Level 7"
+msgstr "Επίπεδο 7"
+
+#~ msgid "Untitled"
+#~ msgstr "Χωρίς τίτλο"
+
+#~ msgid "Vocabulary"
+#~ msgstr "Λεξιλόγιο"
+
+#~ msgid ""
+#~ "Parse error at line %1, column %2:\n"
+#~ "%3"
+#~ msgstr ""
+#~ "Σφάλμα ανάλυσης στη γραμμή %1, στήλη %2:\n"
+#~ "%3"
+
+#~ msgid "Error Opening File"
+#~ msgstr "Σφάλμα κατά το άνοιγμα του αρχείου"
+
+#~ msgid "file must be opened first"
+#~ msgstr "το αρχείο πρέπει πρώτα να ανοιχτεί"
+
+#~ msgid "This is not a KDE Vocabulary document."
+#~ msgstr "Αυτό δεν πρόκειται για ένα έγγραφο λεξιλογίου του KDE."
+
+#~ msgid "missing identifier elements from identifiers tag"
+#~ msgstr "λείπουν αναγνωριστικά από την ετικέτα αναγνωριστικών"
+
+#~ msgid "Default Lesson"
+#~ msgstr "Προκαθορισμένο μάθημα"
+
+#~ msgid "identifier missing id"
+#~ msgstr "λείπει το αναγνωριστικό id"
+
+#~ msgid "entry missing id"
+#~ msgstr "λείπει η καταχώρηση id"
+
+#~ msgctxt "A generic name for a new lesson and its number."
+#~ msgid "Lesson %1"
+#~ msgstr "Μάθημα %1"
+
+#~ msgid "Data for original language missing"
+#~ msgstr "Λείπουν δεδομένα της αρχικής γλώσσας"
+
+#~ msgid "Ambiguous definition of language code"
+#~ msgstr "Διφορούμενος ορισμός του κωδικού γλώσσας"
+
+#~ msgid "This is not a Pauker document"
+#~ msgstr "Αυτό δεν πρόκειται για ένα έγγραφο Pauker"
+
+#~ msgid "Lesson %1"
+#~ msgstr "Μάθημα %1"
+
+#~ msgid "This does not appear to be a (K)WordQuiz file"
+#~ msgstr "Αυτό το αρχείο φαίνεται να είναι ένα αρχείο (K)WordQuiz"
+
+#~ msgid "Only files created by WordQuiz 5.x or later can be opened"
+#~ msgstr ""
+#~ "Μπορούν να ανοιχτούν αρχεία που δημιουργήθηκαν από το WordQuiz 5.x ή "
+#~ "νεότερο"
+
+#~ msgid "Error while reading file"
+#~ msgstr "Σφάλμα κατά την ανάγνωση του αρχείου"
+
+#~ msgid "This is not a XDXF document"
+#~ msgstr "Αυτό δεν πρόκειται για ένα έγγραφο XDXF"
+
+#~ msgid "Glossary"
+#~ msgstr "Γλωσσάρι"
+
+#~ msgid "&Search:"
+#~ msgstr "&Αναζήτηση:"
+
+#~ msgid "References"
+#~ msgstr "Αναφορές"
+
+#~ msgid "Go to '%1'"
+#~ msgstr "Μετάβαση στο '%1'"
+
+#, fuzzy
+#~| msgctxt ""
+#~| "The name of the second, third ... language/column of vocabulary, if we "
+#~| "have to guess it."
+#~| msgid "Translation %1"
+#~ msgid "Transition Elements"
+#~ msgstr "Μετάφραση %1"
+
+#~ msgid "Dummy"
+#~ msgstr "Εικονικό"
+
+#~ msgid "Hydrogen"
+#~ msgstr "Υδρογόνο"
+
+#~ msgid "Helium"
+#~ msgstr "Ήλιο"
+
+#~ msgid "Lithium"
+#~ msgstr "Λίθιο"
+
+#~ msgid "Beryllium"
+#~ msgstr "Βηρύλλιο"
+
+#~ msgid "Boron"
+#~ msgstr "Βόριο"
+
+#~ msgid "Carbon"
+#~ msgstr "Άνθρακας"
+
+#~ msgid "Nitrogen"
+#~ msgstr "Άζωτο"
+
+#~ msgid "Oxygen"
+#~ msgstr "Οξυγόνο"
+
+#~ msgid "Fluorine"
+#~ msgstr "Φθόριο"
+
+#~ msgid "Neon"
+#~ msgstr "Νέον"
+
+#~ msgid "Sodium"
+#~ msgstr "Νάτριο"
+
+#~ msgid "Magnesium"
+#~ msgstr "Μαγνήσιο"
+
+#~ msgid "Aluminium"
+#~ msgstr "Αλουμίνιο"
+
+#~ msgid "Silicon"
+#~ msgstr "Πυρίτιο"
+
+#~ msgid "Phosphorus"
+#~ msgstr "Φώσφορος"
+
+#~ msgid "Sulfur"
+#~ msgstr "Θείο"
+
+#~ msgid "Chlorine"
+#~ msgstr "Χλώριο"
+
+#~ msgid "Argon"
+#~ msgstr "Αργό"
+
+#~ msgid "Potassium"
+#~ msgstr "Κάλιο"
+
+#~ msgid "Calcium"
+#~ msgstr "Ασβέστιο"
+
+#~ msgid "Scandium"
+#~ msgstr "Σκάνδιο"
+
+#~ msgid "Titanium"
+#~ msgstr "Τιτάνιο"
+
+#~ msgid "Vanadium"
+#~ msgstr "Βανάδιο"
+
+#~ msgid "Chromium"
+#~ msgstr "Χρώμιο"
+
+#~ msgid "Manganese"
+#~ msgstr "Μαγγάνιο"
+
+#~ msgid "Iron"
+#~ msgstr "Σίδηρος"
+
+#~ msgid "Cobalt"
+#~ msgstr "Κοβάλτιο"
+
+#~ msgid "Nickel"
+#~ msgstr "Νικέλιο"
+
+#~ msgid "Copper"
+#~ msgstr "Χαλκός"
+
+#~ msgid "Zinc"
+#~ msgstr "Ψευδάργυρος"
+
+#~ msgid "Gallium"
+#~ msgstr "Γάλλιο"
+
+#~ msgid "Germanium"
+#~ msgstr "Γερμάνιο"
+
+#~ msgid "Arsenic"
+#~ msgstr "Αρσενικό"
+
+#~ msgid "Selenium"
+#~ msgstr "Σελήνιο"
+
+#~ msgid "Bromine"
+#~ msgstr "Βρώμιο"
+
+#~ msgid "Krypton"
+#~ msgstr "Κρυπτό"
+
+#~ msgid "Rubidium"
+#~ msgstr "Ρουβίδιο"
+
+#~ msgid "Strontium"
+#~ msgstr "Στρόντιο"
+
+#~ msgid "Yttrium"
+#~ msgstr "Ύττριο"
+
+#~ msgid "Zirconium"
+#~ msgstr "Ζιρκόνιο"
+
+#~ msgid "Niobium"
+#~ msgstr "Νιόβιο"
+
+#~ msgid "Molybdenum"
+#~ msgstr "Μολυβδαίνιο"
+
+#~ msgid "Technetium"
+#~ msgstr "Τεχνήτιο"
+
+#~ msgid "Ruthenium"
+#~ msgstr "Ρουθήνιο"
+
+#~ msgid "Rhodium"
+#~ msgstr "Ρόδιο"
+
+#~ msgid "Palladium"
+#~ msgstr "Παλλάδιο"
+
+#~ msgid "Silver"
+#~ msgstr "Ασήμι"
+
+#~ msgid "Cadmium"
+#~ msgstr "Κάδμιο"
+
+#~ msgid "Indium"
+#~ msgstr "Ίνδιο"
+
+#~ msgid "Tin"
+#~ msgstr "Κασσίτερος"
+
+#~ msgid "Antimony"
+#~ msgstr "Αντιμόνιο"
+
+#~ msgid "Tellurium"
+#~ msgstr "Τελλούριο"
+
+#~ msgid "Iodine"
+#~ msgstr "Ιώδιο"
+
+#~ msgid "Xenon"
+#~ msgstr "Ξένον"
+
+#~ msgid "Caesium"
+#~ msgstr "Καίσιο"
+
+#~ msgid "Barium"
+#~ msgstr "Βάριο"
+
+#~ msgid "Lanthanum"
+#~ msgstr "Λανθάνιο"
+
+#~ msgid "Cerium"
+#~ msgstr "Δημήτριο"
+
+#~ msgid "Praseodymium"
+#~ msgstr "Πρασεοδύμιο"
+
+#~ msgid "Neodymium"
+#~ msgstr "Νεοδύμιο"
+
+#~ msgid "Promethium"
+#~ msgstr "Προμήθειο"
+
+#~ msgid "Samarium"
+#~ msgstr "Σαμάριο"
+
+#~ msgid "Europium"
+#~ msgstr "Ευρώπιο"
+
+#~ msgid "Gadolinium"
+#~ msgstr "Γαδολίνιο"
+
+#~ msgid "Terbium"
+#~ msgstr "Τέρβιο"
+
+#~ msgid "Dysprosium"
+#~ msgstr "Δυσπρόσιο"
+
+#~ msgid "Holmium"
+#~ msgstr "Όλμιο"
+
+#~ msgid "Erbium"
+#~ msgstr "Έρβιο"
+
+#~ msgid "Thulium"
+#~ msgstr "Θούλιο"
+
+#~ msgid "Ytterbium"
+#~ msgstr "Υττέρβιο"
+
+#~ msgid "Lutetium"
+#~ msgstr "Λουτέτσιο"
+
+#~ msgid "Hafnium"
+#~ msgstr "Αίφνιο"
+
+#~ msgid "Tantalum"
+#~ msgstr "Ταντάλιο"
+
+#~ msgid "Tungsten"
+#~ msgstr "Βολφράμιο"
+
+#~ msgid "Rhenium"
+#~ msgstr "Ρήνιο"
+
+#~ msgid "Osmium"
+#~ msgstr "Όσμιο"
+
+#~ msgid "Iridium"
+#~ msgstr "Ιρίδιο"
+
+#~ msgid "Platinum"
+#~ msgstr "Λευκόχρυσος"
+
+#~ msgid "Gold"
+#~ msgstr "Χρυσός"
+
+#~ msgid "Mercury"
+#~ msgstr "Υδράργυρος"
+
+#~ msgid "Thallium"
+#~ msgstr "Θάλλιο"
+
+#~ msgid "Lead"
+#~ msgstr "Μόλυβδος"
+
+#~ msgid "Bismuth"
+#~ msgstr "Βισμούθιο"
+
+#~ msgid "Polonium"
+#~ msgstr "Πολώνιο"
+
+#~ msgid "Astatine"
+#~ msgstr "Άστατο"
+
+#~ msgid "Radon"
+#~ msgstr "Ραδόνιο"
+
+#~ msgid "Francium"
+#~ msgstr "Φράγκιο"
+
+#~ msgid "Radium"
+#~ msgstr "Ράδιο"
+
+#~ msgid "Actinium"
+#~ msgstr "Ακτίνιο"
+
+#~ msgid "Thorium"
+#~ msgstr "Θόριο"
+
+#~ msgid "Protactinium"
+#~ msgstr "Πρωτακτίνιο"
+
+#~ msgid "Uranium"
+#~ msgstr "Ουράνιο"
+
+#~ msgid "Neptunium"
+#~ msgstr "Ποσειδώνιο"
+
+#~ msgid "Plutonium"
+#~ msgstr "Πλουτώνιο"
+
+#~ msgid "Americium"
+#~ msgstr "Αμερίκιο"
+
+#~ msgid "Curium"
+#~ msgstr "Κιούριο"
+
+#~ msgid "Berkelium"
+#~ msgstr "Μπερκέλιο"
+
+#~ msgid "Californium"
+#~ msgstr "Καλιφόρνιο"
+
+#~ msgid "Einsteinium"
+#~ msgstr "Αϊνσταίνιο"
+
+#~ msgid "Fermium"
+#~ msgstr "Φέρμιο"
+
+#~ msgid "Mendelevium"
+#~ msgstr "Μεντελέβιο"
+
+#~ msgid "Nobelium"
+#~ msgstr "Νομπέλιο"
+
+#~ msgid "Lawrencium"
+#~ msgstr "Λωρένσιο"
+
+#~ msgid "Rutherfordium"
+#~ msgstr "Ρουδεφόρδιο"
+
+#~ msgid "Dubnium"
+#~ msgstr "Δούβνιο"
+
+#~ msgid "Seaborgium"
+#~ msgstr "Σιμπόργιο"
+
+#~ msgid "Bohrium"
+#~ msgstr "Βόχριο"
+
+#~ msgid "Hassium"
+#~ msgstr "Χάσιο"
+
+#~ msgid "Meitnerium"
+#~ msgstr "Μαϊτνέριο"
+
+#~ msgid "Darmstadtium"
+#~ msgstr "Νταρμστάντιο"
+
+#~ msgid "Roentgenium"
+#~ msgstr "Ρεντγκένιο"
+
+#, fuzzy
+#~| msgid "Cerium"
+#~ msgid "Copernicium"
+#~ msgstr "Δημήτριο"
+
+#~ msgid "Ununtrium"
+#~ msgstr "Ουνούτριο"
+
+#~ msgid "Ununquadium"
+#~ msgstr "Ουνουνκουάδιο"
+
+#~ msgid "Ununpentium"
+#~ msgstr "Ουνουνπέντιο"
+
+#~ msgid "Ununhexium"
+#~ msgstr "Ουνουνέξιο"
+
+#~ msgid "Ununseptium"
+#~ msgstr "Ουνουνσέπτιο"
+
+#~ msgid "Ununoctium"
+#~ msgstr "Ουνουνόκτιο"
+
+#~ msgid "Greek 'hydro' and 'gennao' for 'forms water'"
+#~ msgstr "Ελληνικό 'ύδωρ' και 'γεννώ' για 'υδρογόνο'"
+
+#~ msgid "The Greek word for the sun was 'helios'"
+#~ msgstr "Η ελληνική λέξη για τον ήλιο"
+
+#~ msgid "Greek 'lithos' means 'stone'"
+#~ msgstr "Από το ελληνικό 'λίθος'"
+
+#~ msgid "Greek 'beryllos' for 'light-green stone'"
+#~ msgstr "Το ελληνικό 'βήρυλλος σημαίνει 'ανοιχτοπράσινη πέτρα'"
+
+#~ msgid ""
+#~ "Boron means 'Bor(ax) + (carb)on'. It is found in borax and behaves a lot "
+#~ "like carbon"
+#~ msgstr ""
+#~ "Το βόριο σημαίνει 'Bor(ax) + (carb)on'. Βόρακας και άνθρακας. Βρίσκεται "
+#~ "μέσα στο βόρακα και έχει αντίστοιχες ιδιότητες με του άνθρακα"
+
+#~ msgid "Latin 'carboneum' for carbon"
+#~ msgstr "Λατινικό 'carboneum' για τον άνθρακα"
+
+#~ msgid "Latin 'nitrogenium' ('forms saltpeter')"
+#~ msgstr "Λατινικό 'nitrogenium' ('σχηματίζει άλας')"
+
+#~ msgid "Latin 'oxygenium' (forms acids)"
+#~ msgstr "Λατινικό 'oxygenium' (σχηματίζει οξέα)"
+
+#~ msgid "Latin 'fluere' ('floats')"
+#~ msgstr "Λατινικό 'fluere' ('επιπλέω')"
+
+#~ msgid "Greek 'neo'. meaning 'new'"
+#~ msgstr "Από το ελληνικό 'νέο'"
+
+#~ msgid "Arabic 'natrun' for 'soda'"
+#~ msgstr "Από το Αραβικό 'natrun' για τη σόδα"
+
+#~ msgid "Named after the city of Magnesia"
+#~ msgstr "Πήρε το όνομά του από την πόλη της Μαγνησίας"
+
+#~ msgid "Latin 'alumen'"
+#~ msgstr "Λατινικό 'alumen'"
+
+#~ msgid "Latin 'silex'"
+#~ msgstr "Λατινικό 'silex'"
+
+#~ msgid "Greek 'phosphoros' for 'carries light'"
+#~ msgstr "Από το ελληνικό 'φως' και 'φέρω' (φέρει το φως)"
+
+#~ msgid "In sanskrit 'sweb' means 'to sleep'"
+#~ msgstr "Στα σανσκριτικά το 'sweb' σημαίνει 'κοιμάμαι'"
+
+#~ msgid "Greek 'chloros' for 'yellow-green'"
+#~ msgstr "Από το ελληνικό 'χλωρός'"
+
+#~ msgid "Greek 'aergon' for 'inactive'"
+#~ msgstr "Από το ελληνικό 'αργό' επειδή είναι αδρανές"
+
+#~ msgid "Arabic 'al qaliy' for potash"
+#~ msgstr "Το αραβικό 'al qaliy' για την ποτάσα"
+
+#~ msgid "Latin 'calx' for 'lime'"
+#~ msgstr "Το λατινικό 'calx' για το 'κίτρο'"
+
+#~ msgid "Named because it was found in Scandinavia"
+#~ msgstr "Ονομάστηκε έτσι διότι βρέθηκε στη Σκανδιναβία"
+
+#~ msgid "The Titans were giants in Greek mythology"
+#~ msgstr "Οι Τιτάνες ήταν γίγαντες της ελληνικής μυθολογίας"
+
+#~ msgid "'Vanadis' is another name for the Nordic goddess Freyja"
+#~ msgstr "Το όνομα 'Vanadis' ήταν ένα όνομα της Νορβηγικής θεάς Freyja (Φρέα)"
+
+#~ msgid "Greek 'chroma' means 'color'"
+#~ msgstr "Από το ελληνικό 'χρώμα'"
+
+#~ msgid ""
+#~ "It was discovered near a town named Magnesia in black earth. Thus, it was "
+#~ "named 'magnesia nigra', or for short, Manganese."
+#~ msgstr ""
+#~ "Ανακαλύφθηκε κοντά σε μια πόλη που ονομαζόταν Μαγνησία σε μαύρο "
+#~ "έδαφος(nigra). Έτσι ονομάστηκε 'magnesia nigra' σε συντομία: Μαγγάνιο."
+
+#~ msgid "Latin 'ferrum'"
+#~ msgstr "Το λατινικό 'ferrum'"
+
+#~ msgid "Named after the German word 'Kobold' for 'goblin'"
+#~ msgstr ""
+#~ "Το όνομα προήλθε από τη γερμανική λέξη 'Kobold' που σημαίνει "
+#~ "'καλικάντζαρος'"
+
+#~ msgid "'Nickel' was the name of a mountain goblin"
+#~ msgstr "Το 'Νικέλιο' ήταν το όνομα ενός καλικάντζαρου στο βουνό"
+
+#~ msgid "Greek 'cuprum' for Cypres"
+#~ msgstr "Από το λατινικό 'cuprum' για το κυπαρίσσι"
+
+#~ msgid "German 'zinking' for 'rough', because zinc ore is very rough"
+#~ msgstr ""
+#~ "Το γερμανικό 'zinking' για το 'τραχύς'. Επειδή ο ψευδάργυρος είναι πολύ "
+#~ "τραχύς"
+
+#~ msgid "'Gallia' is an old name for France"
+#~ msgstr "Το 'Gallia' είναι ένα παλιό όνομα για τη Γαλλία"
+
+#~ msgid "Latin 'germania' is an old name for Germany"
+#~ msgstr "Το λατινικό 'germania' είναι μια παλιά ονομασία της Γερμανίας"
+
+#~ msgid "Greek 'arsenikos' for 'male' or 'bold'"
+#~ msgstr "Από το ελληνικό 'αρσενικός'"
+
+#~ msgid "Greek 'selena' for 'moon'"
+#~ msgstr "Από το ελληνικό 'Σελήνη' για το 'φεγγάρι'"
+
+#~ msgid "Greek 'bromos' for 'smells badly'"
+#~ msgstr "Το ελληνικό 'βρώμα'"
+
+#~ msgid "Greek 'kryptos' for 'hidden'"
+#~ msgstr "Από το ελληνικό 'κρυπτός'"
+
+#~ msgid "Latin 'rubidus' for 'dark red'"
+#~ msgstr "Το λατινικό 'rubidus' για το 'βαθυκόκκινο'"
+
+#~ msgid "Named after the mineral Strontianit"
+#~ msgstr "Ονομάστηκε από το ορυκτό Στροντιανίτης"
+
+#~ msgid ""
+#~ "Named after the small town of Ytterby near Stockholm in Sweden. Terbium. "
+#~ "Ytterbium and Gadolinium are also named after this town."
+#~ msgstr ""
+#~ "Η ονομασία προήλθε από τη μικρή πόλη Ytterby κοντά στη Στοκχόλμη της "
+#~ "Σουηδίας. Τα τέρβιο, υπέρβιο και γαδολίνιο ονομάστηκαν επίσης από την "
+#~ "ίδια πόλη."
+
+#~ msgid "Named after the mineral zircon"
+#~ msgstr "Ονομάστηκε από το ορυκτό ζιρκόνιο"
+
+#~ msgid "Named after Niobe, the daughter of the Greek god Tantalus."
+#~ msgstr "Ονομάστηκε έτσι από τη Νιόβη. Την κόρη του Έλληνα θεού Ταντάλου."
+
+#~ msgid ""
+#~ "This name has Greek roots. It means 'like Platinum' - it was difficult to "
+#~ "distinguish Molybdenum from Platinum."
+#~ msgstr ""
+#~ "Αυτό το όνομα έχει ελληνικές ρίζες. Σημαίνει 'σαν πλατίνα' - ήταν δύσκολο "
+#~ "να ξεχωρίσεις το μολυβδένιο από την πλατίνα."
+
+#~ msgid "Greek 'technetos' for artificial"
+#~ msgstr "Από το ελληνικό 'τεχνητός'"
+
+#~ msgid "Ruthenia is the old name of Russia"
+#~ msgstr "Ruthenia είναι η παλιά ονομασία της Ρωσίας"
+
+#~ msgid "Greek 'rhodeos' means 'red like a rose'"
+#~ msgstr "Το ελληνικό 'ρόδιος' σημαίνει 'κόκκινος όπως ένα τριαντάφυλλο'"
+
+#~ msgid "Named after the asteroid Pallas"
+#~ msgstr "Ονομάστηκε από τον αστεροειδή Παλλάς"
+
+#~ msgid "Latin 'argentum' for silver"
+#~ msgstr "Το λατινικό 'argentum' για το ασήμι"
+
+#~ msgid "Greek 'kadmia' ('Galmei' = Zinc carbonate)"
+#~ msgstr "Ελληνικό 'καδμεία' ('Galmei' = ανθρακικός ψευδάργυρος)"
+
+#~ msgid "Named after 'Indigo' because of its blue spectrum"
+#~ msgstr "Πήρε το όνομά του από το 'Indigo' λόγω του μπλε φάσματός του"
+
+#~ msgid "Latin 'stannum' for tin"
+#~ msgstr "Λατινικό 'stannum' για τον κασσίτερο"
+
+#~ msgid "Arabic 'anthos ammonos' for 'blossom of the god Ammon'"
+#~ msgstr "Το Αραβικό 'anthos ammonos' για το 'άνθος του θεού Άμμωνα'"
+
+#~ msgid "Latin 'tellus' or 'telluris' for 'Planet Earth'"
+#~ msgstr "Το λατινικό 'tellus' ή 'telluris' για τον 'πλανήτη Γη'"
+
+#~ msgid "Greek 'ioeides' for 'violet'."
+#~ msgstr "Το ελληνικό 'Ιώδες' για το 'βιολετί'."
+
+#~ msgid "Greek 'xenos' for 'foreigner'"
+#~ msgstr "Από το ελληνικό 'Ξένος'"
+
+#~ msgid "Latin 'caesius' for 'heaven blue'."
+#~ msgstr "Το λατινικό 'caesius' για το 'μπλε του ουρανού'."
+
+#~ msgid "Greek 'barys' for 'heavy'"
+#~ msgstr "Το ελληνικό 'βαρύς'"
+
+#~ msgid ""
+#~ "Greek 'lanthanein' for 'hidden'. The Lanthanoids are also called the "
+#~ "'rare earth' elements."
+#~ msgstr ""
+#~ "Το ελληνικό 'λανθάνειν' για το 'κρυμμένο'. Τα λανθανοειδή ονομάζονται "
+#~ "επίσης και 'σπάνιες γαίες'."
+
+#~ msgid "Named after the planetoid Ceres"
+#~ msgstr "Ονομασία από το πλανητοειδές της Δήμητρας (Ceres)"
+
+#~ msgid "Greek 'prasinos didymos' for 'green twin'"
+#~ msgstr "Το ελληνικό 'πράσινος δίδυμος'"
+
+#~ msgid "Greek 'neos didymos' for 'new twin'"
+#~ msgstr "Το ελληνικό 'νέος δίδυμος'"
+
+#~ msgid ""
+#~ "Named after the Greek Prometheus. Prometheus stole the fire from the gods "
+#~ "and gave it to mankind."
+#~ msgstr ""
+#~ "Ονομασία από τον Έλληνα Προμηθέα. Ο Προμηθέας έκλεψε τη φωτιά από τους "
+#~ "θεούς και την έδωσε στην ανθρωπότητα."
+
+#~ msgid "Named after the mineral Samarskit"
+#~ msgstr "Ονομασία από το ορυκτό Σαμαρσκίτη"
+
+#~ msgid "Named after Europe"
+#~ msgstr "Πήρε το όνομά του από την Ευρώπη"
+
+#~ msgid "Named after the Finnish chemist Johan Gadolin"
+#~ msgstr "Ονομασία από το Φιλανδό χημικό Johan Gadolin"
+
+#~ msgid "Named after the Swedish town of Ytterby"
+#~ msgstr "Πήρε το όνομά του από τη Σουιδική πόλη Ytterby"
+
+#~ msgid "Greek 'dysprositor' for 'difficult to reach'"
+#~ msgstr "Το ελληνικό 'δυσπρόσιτος'"
+
+#~ msgid "Latin 'holmia' for the old name of Stockholm"
+#~ msgstr "Λατινικό 'holmia', το παλιό όνομα της Στοκχόλμης"
+
+#~ msgid ""
+#~ "Named ofter the Swedish town of Ytterby. Terbium and Ytterbium are also "
+#~ "named after this town."
+#~ msgstr ""
+#~ "Η ονομασία προήλθε από τη μικρή πόλη Ytterby. Το τέρβιο, υπέρβιο και το "
+#~ "γαδολίνιο ονομάστηκαν επίσης από την ίδια πόλη."
+
+#~ msgid "Named after the old name of Scandinavia, 'Thule'."
+#~ msgstr "Πήρε το όνομά του από το παλιό όνομα της Σκανδιναβίας, 'Thule'."
+
+#~ msgid ""
+#~ "Like Terbium and Gadolinium, this is named after the Swedish town of "
+#~ "Ytterby."
+#~ msgstr ""
+#~ "Όπως το τέρβιο και το γαδολίνιο ονομάστηκε επίσης από τη Σουηδική πόλη "
+#~ "Ytterby."
+
+#~ msgid "Named after the Roman name 'Lutetia' for Paris"
+#~ msgstr "Η ονομασία προήλθε από τη ρωμαϊκή ονομασία 'Lutetia' για το Παρίσι"
+
+#~ msgid "'Hafnia' is the old name of Kopenhagen (Denmark)"
+#~ msgstr "'Hafnia' είναι το παλιό όνομα της Κοπεγχάγης (Δανίας)"
+
+#~ msgid "Named after the Greek myth of Tantalos"
+#~ msgstr "Πήρε το όνομά του από τον ελληνικό μύθο του Ταντάλου"
+
+#, fuzzy
+#~| msgid ""
+#~| "'Tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~| "symbol 'W') was Wolfram, named after a mineral."
+#~ msgid ""
+#~ "'tung sten' means 'heavy stone' in Swedish. The old name (and thus the "
+#~ "symbol 'W') was Wolfram, named after a mineral."
+#~ msgstr ""
+#~ "Το 'tung sten' σημαίνει 'βαριά πέτρα' στα Σουηδικά. Η παλιά ονομασία "
+#~ "(έτσι και το σύμβολο 'W') ήταν Βολφράμιο (Wolfram) από το όνομα του "
+#~ "ορυκτού."
+
+#, fuzzy
+#~| msgid "Named after the German river Rhine (Latin 'Rhenium'.)"
+#~ msgid "Named after the German river Rhine (latin 'Rhenium')."
+#~ msgstr "Ονομάστηκε από το γερμανικό ποταμό Ρήνο (λατινικά 'Rhenium')."
+
+#~ msgid "Greek for 'smell'. Its oxides smell strongly like radishes."
+#~ msgstr ""
+#~ "Ελληνική λέξη 'οσμή'. Το οξείδιά του μυρίζουν έντονα όπως τα ραπανάκια."
+
+#~ msgid "Greek 'iris' for 'rainbow'"
+#~ msgstr "Το ελληνικό 'ίριδα' για το 'ουράνιο τόξο'"
+
+#~ msgid "Spanish 'platina' means 'small silver'"
+#~ msgstr "Το ισπανικό 'platina'  σημαίνει 'μικρό ασήμι'"
+
+#, fuzzy
+#~| msgid "Latin 'aurum'.  Named after Aurora, the goddess of sunrise."
+#~ msgid "Latin 'aurum'. Named after Aurora, the goddess of sunrise"
+#~ msgstr "Λατινικό 'aurum'. Ονομάστηκε από την Aurora, τη θεά της αυγής."
+
+#~ msgid "Graeco-Latin 'hydrargyrum' for 'liquid silver'"
+#~ msgstr "Το ελληνολατινικό 'hydrargyrum'  για τον 'υδράργυρο'"
+
+#~ msgid "Greek 'tallos' for 'young twig'"
+#~ msgstr "Το ελληνικό 'τάλος' για το 'νεαρό κλαδί'"
+
+#~ msgid "Latin 'plumbum' for Lead"
+#~ msgstr "Λατινικό 'plumbum' για τον μόλυβδο"
+
+#~ msgid "The old name of Bismuth is 'Wismut', which stood for 'white mass'."
+#~ msgstr ""
+#~ "Το παλιό όνομα του Βισμούθιου είναι 'Wismut'. Αυτό σήμαινε 'λευκή μάζα'."
+
+#~ msgid "Named after Poland to honor Marie Curie"
+#~ msgstr "Πήρε το όνομά του από την Πολωνία, προς τιμήν της Marie Curie"
+
+#~ msgid "Greek 'astator' for 'changing'"
+#~ msgstr "Το ελληνικό 'αστάτωρ' για τον 'ευμετάβλητο'"
+
+#~ msgid ""
+#~ "Named after Radium. It ends with 'on' to make it clear that it is a noble "
+#~ "gas."
+#~ msgstr ""
+#~ "Ονομάστηκε από το λατινικό Radium. Το όνομα τελειώνει σε (-o) για να "
+#~ "γίνει σαφές ότι πρόκειται για ευγενές αέριο."
+
+#~ msgid "Named after France to honor Marguerite Perey"
+#~ msgstr "Πήρε το όνομά του από τη Γαλλία προς τιμήν της Marguerite Perey"
+
+#~ msgid "Latin 'radius' for 'beam', as it is radioactive"
+#~ msgstr "Λατινικό 'radius' για την 'ακτίνα', καθώς είναι ραδιενεργό"
+
+#~ msgid "Greek 'aktis' for 'beam' - actinium is radioactive"
+#~ msgstr "Το ελληνικό 'ακτίνα', καθώς είναι ραδιενεργό"
+
+#~ msgid "Named after the German god of thunder: Thor"
+#~ msgstr "Πήρε το όνομά του από το Γερμανό θεό των κεραυνών, Thor. "
+
+#~ msgid ""
+#~ "Greek 'protos' for 'ancester'. Protactinium is before Actinium in the "
+#~ "periodic table."
+#~ msgstr ""
+#~ "Από την ελληνική πρόθεση 'πρώτος'. Το πρωτοακτίνιο βρίσκεται πριν από το "
+#~ "ακτίνιο στον περιοδικό πίνακα."
+
+#~ msgid "Greek 'ouranos' for 'heaven'. Named after the planet Uranus."
+#~ msgstr "Από το ελληνικό ουρανός. Πήρε το όνομά του από τον ομώνυμο πλανήτη."
+
+#~ msgid "Named after the planet Neptune."
+#~ msgstr "Ονομάστηκε από τον πλανήτη Ποσειδώνα (Neptune)."
+
+#~ msgid "Named after the planet Pluto."
+#~ msgstr "Πήρε το όνομά του από τον πλανήτη Πλούτωνα."
+
+#~ msgid "Named after America."
+#~ msgstr "Πήρε το όνομά του από την Αμερικανική ήπειρο."
+
+#~ msgid "Named after Marie Curie."
+#~ msgstr "Πήρε το όνομά του από τη Μαρία Κιουρί."
+
+#~ msgid "Named after the town Berkeley where it was discovered."
+#~ msgstr "Πήρε το όνομά του από την πόλη Berkeley όπου ανακαλύφθηκε."
+
+#~ msgid "Named after the US-State of California."
+#~ msgstr "Πήρε το όνομά του από την πολιτεία California των Η.Π.Α."
+
+#~ msgid "Named after the scientist Albert Einstein."
+#~ msgstr "Πήρε το όνομά του από τον επιστήμονα Albert Einstein."
+
+#~ msgid "Named after the scientist Enrico Fermi."
+#~ msgstr "Πήρε το όνομά του από τον επιστήμονα Enrico Fermi."
+
+#~ msgid "Named after the scientist D.I. Mendeleev."
+#~ msgstr "Πήρε το όνομά του από τον επιστήμονα D.I. Mendeleev."
+
+#~ msgid "Named after the scientist Alfred Nobel."
+#~ msgstr "Πήρε το όνομά του από τον επιστήμονα Alfred Nobel."
+
+#~ msgid "Named after the scientist Ernest Orlando Lawrence."
+#~ msgstr "Πήρε το όνομά του από τον επιστήμονα Ernest Orlando Lawrence."
+
+#~ msgid "Named after the scientist Ernest Rutherford"
+#~ msgstr "Πήρε το όνομά του από τον επιστήμονα Ernest Rutherford"
+
+#~ msgid "Named after the science-town Dubna in Russia"
+#~ msgstr "Πήρε το όνομά του από την πόλη Dubna της Ρωσίας"
+
+#~ msgid "Named after the scientist G. Theodore Seaborg."
+#~ msgstr "Πήρε το όνομά του από τον επιστήμονα G. Theodore Seaborg."
+
+#~ msgid "Named after the scientist Niels Bohr."
+#~ msgstr "Πήρε το όνομά του από τον επιστήμονα Niels Bohr."
+
+#~ msgid ""
+#~ "Latin 'hassia' for the German county Hessen. In Hessen a lot elements "
+#~ "have been discovered."
+#~ msgstr ""
+#~ "Λατινικό 'hassia' για την γερμανική επικράτεια Hessen. Στο Hessen "
+#~ "ανακαλύφθηκαν διάφορα στοιχεία."
+
+#~ msgid "Named after the scientist Lise Meitner."
+#~ msgstr "Πήρε το όνομά του από την επιστήμονα Lise Meitner."
+
+#~ msgid ""
+#~ "Named after the German city Darmstadt where many elements have been "
+#~ "discovered."
+#~ msgstr ""
+#~ "Πήρε το όνομά του από τη γερμανική πόλη Darmstadt στην οποία έχουν "
+#~ "ανακαλυφθεί αρκετά στοιχεία."
+
+#~ msgid "Named after Wilhelm Conrad Röntgen."
+#~ msgstr "Πήρε το όνομά του από τον Wilhelm Conrad Röntgen."
+
+#~ msgid ""
+#~ "Historically known as eka-mercury. Ununbium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Ιστορικά γνωστό ως εκα-υδράργυρος. Το ουνούμπιο είναι ένα προσωρινό όνομα "
+#~ "στοιχείου κατά IUPAC."
+
+#~ msgid ""
+#~ "Historically known as eka-thallium. Ununtrium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Ιστορικά γνωστό ως εκα-θάλιο. Το ουνούτριο είναι ένα προσωρινό όνομα "
+#~ "στοιχείου κατά IUPAC."
+
+#~ msgid ""
+#~ "Historically known as eka-lead. Ununquadium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Ιστορικά γνωστό ως εκα-μόλυβδος. Το ουνουνκουάδιο είναι ένα προσωρινό "
+#~ "όνομα στοιχείου κατά IUPAC."
+
+#~ msgid ""
+#~ "Historically known as eka-bismuth. Ununpentium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Ιστορικά γνωστό ως εκα-βισμούθιο. Το ουνουνπέντιο είναι ένα προσωρινό "
+#~ "όνομα στοιχείου κατά IUPAC."
+
+#~ msgid ""
+#~ "Historically known as eka-polonium. Ununhexium is a temporary IUPAC "
+#~ "systematic element name."
+#~ msgstr ""
+#~ "Ιστορικά γνωστό ως εκα-πολώνιο. Το ουννουνέξιο είναι ένα προσωρινό όνομα "
+#~ "στοιχείου κατά IUPAC."
+
+#~ msgid "Temporary symbol and name. Can also be referred to as eka-astatine."
+#~ msgstr "Προσωρινό σύμβολο και όνομα. Αναφέρεται επίσης και ως εκα-αστατίνη."
+
+#~ msgid ""
+#~ "Historically known as eka-radon, eka-emanation before 1960. Ununoctium is "
+#~ "a temporary IUPAC systematic element name."
+#~ msgstr ""
+#~ "Ιστορικά γνωστό ως εκα-ραδόνιο, ή έκα-εμανέτιον πριν το 1960. Το "
+#~ "ουνουνόκτιο είναι ένα προσωρινό όνομα στοιχείου κατά IUPAC."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Τούσης Μανώλης"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "manolis@koppermind.homelinux.org"
+
+#~ msgid "Ununbium"
+#~ msgstr "Ουνούμπιο"
+
+#~ msgid "no translations found"
+#~ msgstr "δεν βρέθηκαν μεταφράσεις"
