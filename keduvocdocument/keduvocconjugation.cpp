@@ -175,7 +175,7 @@ KEduVocConjugation* KEduVocConjugation::fromKVTML2(QDomElement & parent)
 {
     // sanity check
     if (parent.isNull()) {
-        return 0;
+        return nullptr;
     }
 
     QMap<int, KEduVocWordFlag::Flags> numbers;

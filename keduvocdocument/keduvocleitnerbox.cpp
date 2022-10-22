@@ -27,7 +27,7 @@ KEduVocLeitnerBox::KEduVocLeitnerBox(const QString& name, KEduVocLeitnerBox *par
 KEduVocLeitnerBox::~KEduVocLeitnerBox()
 {
     foreach(KEduVocTranslation* translation, d->m_translations) {
-        translation->setLeitnerBox(0);
+        translation->setLeitnerBox(nullptr);
     }
     delete d;
 }

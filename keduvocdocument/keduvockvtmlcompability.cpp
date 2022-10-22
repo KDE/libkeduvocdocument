@@ -95,7 +95,7 @@ KEduVocWordType* KEduVocKvtmlCompability::typeFromOldFormat(KEduVocWordType* par
     QString typeName = m_oldMainTypeNames.value( mainType );
     if ( typeName.isEmpty() ) {
         qDebug() << "Unknown old maintype: " << typeSubtypeString;
-        return 0;
+        return nullptr;
     }
 
     QString subTypeName = m_oldSubTypeNames.value( subType );
@@ -114,7 +114,7 @@ KEduVocWordType* KEduVocKvtmlCompability::typeFromOldFormat(KEduVocWordType* par
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 

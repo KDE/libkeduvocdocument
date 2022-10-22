@@ -27,7 +27,7 @@ KEduVocWordType::KEduVocWordType(const QString& name, KEduVocWordType *parent)
 KEduVocWordType::~KEduVocWordType()
 {
     foreach(KEduVocTranslation* translation, d->m_translations) {
-        translation->setWordType(0);
+        translation->setWordType(nullptr);
     }
     delete d;
 }
@@ -128,6 +128,6 @@ KEduVocWordType* KEduVocWordType::childOfType(KEduVocWordFlags flags)
             return result;
         }
     }
-    return 0;
+    return nullptr;
 }
 

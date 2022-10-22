@@ -992,7 +992,7 @@ bool KEduVocKvtmlReader::readExpression( QDomElement &domElementParent )
         return false;
     }
 
-    KEduVocExpression* entry = 0;
+    KEduVocExpression* entry = nullptr;
 
     while ( !currentElement.isNull() ) {
 

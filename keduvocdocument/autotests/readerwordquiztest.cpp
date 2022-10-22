@@ -87,7 +87,7 @@ WQLGenerator::WQLGenerator()
     , lang1loc( QStringLiteral("de") )
     , word0Left( QStringLiteral("dog") )
     , word0Right( QStringLiteral("Hund") )
-    , m_buffer( 0 )
+    , m_buffer( nullptr )
     , m_string( QLatin1String("") )
     , myType( KEduVocDocument::Wql )
 

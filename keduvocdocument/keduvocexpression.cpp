@@ -16,7 +16,7 @@ public:
     KEduVocExpressionPrivate()
     {
         m_active = true;
-        m_lesson = 0;
+        m_lesson = nullptr;
     }
     ~KEduVocExpressionPrivate();
 
@@ -42,13 +42,13 @@ KEduVocExpression::KEduVocExpressionPrivate::~KEduVocExpressionPrivate()
 KEduVocExpression::KEduVocExpressionPrivate::KEduVocExpressionPrivate(const KEduVocExpressionPrivate & other)
 {
     m_active = other.m_active;
-    m_lesson = 0;
+    m_lesson = nullptr;
 }
 
 KEduVocExpression::KEduVocExpressionPrivate & KEduVocExpression::KEduVocExpressionPrivate::operator =(const KEduVocExpressionPrivate & other)
 {
     m_active = other.m_active;
-    m_lesson = 0;
+    m_lesson = nullptr;
 
     return *this;
 }
@@ -101,7 +101,7 @@ KEduVocExpression& KEduVocExpression::operator= ( const KEduVocExpression &other
 
 KEduVocExpression::~KEduVocExpression()
 {
-    setLesson(0);
+    setLesson(nullptr);
     delete d;
 }
 
@@ -182,7 +182,7 @@ KEduVocTranslation* KEduVocExpression::translation( int index )
 KEduVocTranslation * KEduVocExpression::translation(int index) const
 {
     if(d->m_translations.contains(index)) {
-        return 0;
+        return nullptr;
     }
     return d->m_translations[index];
 }

@@ -125,7 +125,7 @@ KEduVocContainer * KEduVocContainer::childContainer(const QString & name)
             return found;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 

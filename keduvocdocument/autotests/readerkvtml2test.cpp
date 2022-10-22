@@ -127,7 +127,7 @@ XMLGenerator::XMLGenerator()
     , lang0loc( QStringLiteral("en") )
     , lang1name( QStringLiteral("German") )
     , lang1loc( QStringLiteral("de") )
-    , m_buffer( 0 )
+    , m_buffer( nullptr )
     , myType( KEduVocDocument::Kvtml )
 
 {
@@ -147,7 +147,7 @@ QIODevice * XMLGenerator::toQIODevice()
 }
 
 XMLGenerator & XMLGenerator::preamble() {
-    this -> setContent( QStringLiteral( "<!DOCTYPE kvtml PUBLIC \"kvtml2.dtd\" \"http://edu.kde.org/kvtml/kvtml2.dtd\">\n" ) , true, 0, 0, 0);
+    this -> setContent( QStringLiteral( "<!DOCTYPE kvtml PUBLIC \"kvtml2.dtd\" \"http://edu.kde.org/kvtml/kvtml2.dtd\">\n" ) , true, nullptr, nullptr, nullptr);
     this->appendChild( this->createProcessingInstruction( QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"") ) );
 
     QDomElement domElementKvtml = this->createElement( KVTML_TAG );

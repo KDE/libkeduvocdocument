@@ -58,7 +58,7 @@ KEduVocDocument::ErrorCode KEduVocWqlReader::read(KEduVocDocument &doc)
     if ( !s.isEmpty() ) {
         s = s.at( 0 );
     }
-    int iFV = s.toInt( 0 );
+    int iFV = s.toInt( nullptr );
     if ( iFV != 5 ) {
         m_errorMessage = i18n( "Only files created by WordQuiz 5.x or later can be opened: Missing Second Line \"5\"" );
         return KEduVocDocument::FileTypeUnknown;

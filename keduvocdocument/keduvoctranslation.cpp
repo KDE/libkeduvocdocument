@@ -70,13 +70,13 @@ public:
 KEduVocTranslation::KEduVocTranslationPrivate::KEduVocTranslationPrivate(KEduVocExpression* parent)
 {
     m_entry = parent;
-    m_wordType = 0;
-    m_leitnerBox = 0;
-    m_declension = 0;
+    m_wordType = nullptr;
+    m_leitnerBox = nullptr;
+    m_declension = nullptr;
 
-    m_comparative = 0;
-    m_superlative = 0;
-    m_articleGrade = 0;
+    m_comparative = nullptr;
+    m_superlative = nullptr;
+    m_articleGrade = nullptr;
 }
 
 
@@ -98,7 +98,7 @@ KEduVocTranslation::KEduVocTranslation(KEduVocExpression* entry, const QString &
 KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
     : KEduVocText(other),
     // set the entry to 0, the translation will be put into a copied entry by the expression copy constructor
-    d( new KEduVocTranslationPrivate(0) )
+    d( new KEduVocTranslationPrivate(nullptr) )
 {
     // better no word type copy as this is pointer copying
     // will not work as this is not added to the word type container!
@@ -125,8 +125,8 @@ KEduVocTranslation::KEduVocTranslation( const KEduVocTranslation &other )
 
 KEduVocTranslation::~KEduVocTranslation()
 {
-    setWordType(0);
-    setLeitnerBox(0);
+    setWordType(nullptr);
+    setLeitnerBox(nullptr);
     foreach (KEduVocTranslation *synonym, d->m_synonyms) {
         synonym->removeSynonym(this);
     }
@@ -366,7 +366,7 @@ KEduVocWordType * KEduVocTranslation::wordType() const
     if (d) {
         return d->m_wordType;
     } else {
-        return 0;
+        return nullptr;
     }
 }
 
