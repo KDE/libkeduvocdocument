@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libkeduvocdocument\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-01-04 00:40+0000\n"
-"PO-Revision-Date: 2022-09-27 06:35+0200\n"
+"PO-Revision-Date: 2022-11-25 12:16+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #: keduvocdocument/keduvoccsvwriter.cpp:38
 #, kde-format
@@ -277,7 +277,7 @@ msgstr "კარდინალი"
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
 msgid "Definite"
-msgstr ""
+msgstr "განსაზღვრული"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:49
 #: keduvocdocument/keduvockvtmlcompability.cpp:251
@@ -311,7 +311,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
 "his, her...)"
 msgid "Possessive"
-msgstr ""
+msgstr "კუთვნილებითი"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:53
 #: keduvocdocument/keduvockvtmlcompability.cpp:281
@@ -346,32 +346,32 @@ msgstr "ნეიტრალური"
 #: keduvocdocument/keduvockvtmlcompability.cpp:163
 #, kde-format
 msgid "Simple Present"
-msgstr ""
+msgstr "აწმყო მარტივი"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:164
 #, kde-format
 msgid "Present Progressive"
-msgstr ""
+msgstr "აწმყო განგრძობითი"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:165
 #, kde-format
 msgid "Present Perfect"
-msgstr ""
+msgstr "აწმყო სრული"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:166
 #, kde-format
 msgid "Simple Past"
-msgstr ""
+msgstr "წარსული დრო"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:167
 #, kde-format
 msgid "Past Progressive"
-msgstr ""
+msgstr "წარსული განგრძობითი"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:168
 #, kde-format
 msgid "Past Participle"
-msgstr ""
+msgstr "წარსულის მიმღეობა"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:169
 #, kde-format
@@ -453,7 +453,7 @@ msgstr "კითხვა"
 #: keduvocdocument/keduvoctext.h:17
 #, kde-format
 msgid "Not Practiced Yet"
-msgstr ""
+msgstr "ჯერ არ გივარჯიშიათ"
 
 #: keduvocdocument/keduvoctext.h:20
 #, kde-format
