@@ -8,7 +8,7 @@ include_directories(
 macro(KEDUVOCDOCUMENT_EXECUTABLE_TESTS)
    foreach(_testname ${ARGN})
       add_executable(${_testname} ${_testname}.cpp) # TODO NOGUI
-      target_link_libraries(${_testname} KEduVocDocument KF5::Archive KF5::CoreAddons KF5::I18n)
+      target_link_libraries(${_testname} KEduVocDocument KF${KF_MAJOR_VERSION}::Archive KF${KF_MAJOR_VERSION}::CoreAddons KF${KF_MAJOR_VERSION}::I18n)
       ecm_mark_as_test(${_testname})
    endforeach(_testname)
 endmacro()

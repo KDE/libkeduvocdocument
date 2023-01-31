@@ -65,7 +65,7 @@ KEduVocWordType* KEduVocKvtmlCompability::typeFromOldFormat(KEduVocWordType* par
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         int selfDefinedTypeIndex = typeSubtypeString.rightRef( typeSubtypeString.count()-1 ).toInt() -1;
 #else
-        int selfDefinedTypeIndex = QStringView(typeSubtypeString).right( typeSubtypeString.count()-1 ).toInt() -1;
+        int selfDefinedTypeIndex = QStringView(typeSubtypeString).right( typeSubtypeString.length()-1 ).toInt() -1;
 #endif
         return static_cast<KEduVocWordType*>(parent->childContainer(selfDefinedTypeIndex));
     }

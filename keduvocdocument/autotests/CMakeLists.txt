@@ -41,7 +41,7 @@ set(kvocdoc_unittests_helpers
 macro(KEDUVOCDOCUMENT_NON_GUI_UNIT_TESTS staticOrAPILib)
    foreach(_testname ${ARGN})
      ecm_add_test( ${_testname} ${kvocdoc_unittests_helpers}
-       LINK_LIBRARIES ${staticOrAPILib} KF5::CoreAddons KF5::KIOCore Qt${QT_MAJOR_VERSION}::Test Qt${QT_MAJOR_VERSION}::Xml
+       LINK_LIBRARIES ${staticOrAPILib} KF${KF_MAJOR_VERSION}::CoreAddons KF${KF_MAJOR_VERSION}::KIOCore Qt${QT_MAJOR_VERSION}::Test Qt${QT_MAJOR_VERSION}::Xml
        TEST_NAME ${_testname}
        )
    endforeach()
@@ -50,7 +50,7 @@ endmacro()
 macro(KEDUVOCDOCUMENT_GUI_UNIT_TESTS staticOrAPILib)
    foreach(_testname ${ARGN})
      ecm_add_test( ${_testname} ${kvocdoc_unittests_helpers}
-       LINK_LIBRARIES ${staticOrAPILib} KF5::CoreAddons KF5::KIOCore Qt${QT_MAJOR_VERSION}::Test Qt${QT_MAJOR_VERSION}::Xml
+       LINK_LIBRARIES ${staticOrAPILib} KF${KF_MAJOR_VERSION}::CoreAddons KF${KF_MAJOR_VERSION}::KIOCore Qt${QT_MAJOR_VERSION}::Test Qt${QT_MAJOR_VERSION}::Xml
        TEST_NAME ${_testname}
        GUI)
    endforeach()
@@ -59,7 +59,7 @@ endmacro()
 macro(KEDUVOCDOCUMENT_GUI_UNIT_TESTS_STATIC staticOrAPILib)
    foreach(_testname ${ARGN})
      ecm_add_test( ${_testname} ${kvocdoc_unittests_helpers}
-       LINK_LIBRARIES ${staticOrAPILib} KF5::CoreAddons KF5::KIOCore Qt${QT_MAJOR_VERSION}::Test Qt${QT_MAJOR_VERSION}::Xml
+       LINK_LIBRARIES ${staticOrAPILib} KF${KF_MAJOR_VERSION}::CoreAddons KF${KF_MAJOR_VERSION}::KIOCore Qt${QT_MAJOR_VERSION}::Test Qt${QT_MAJOR_VERSION}::Xml
        TEST_NAME ${_testname}
        GUI)
        set_target_properties(${_testname} PROPERTIES COMPILE_FLAGS -DKEDUVOCDOCUMENT_STATIC_DEFINE)
