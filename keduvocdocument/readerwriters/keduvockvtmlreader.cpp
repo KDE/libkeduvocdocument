@@ -830,7 +830,7 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes( QDomElement &domElementE
         if (( pos = s.indexOf( ';' ) ) >= 1 ) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             date = QDateTime::fromSecsSinceEpoch( s.leftRef( pos ).toInt() );
-            rev_date.setTime_t( s.midRef( pos + 1, s.length() ).toInt() );
+            rev_date = QDateTime::fromSecsSinceEpoch( s.midRef( pos + 1, s.length() ).toInt() );
 #else
             date = QDateTime::fromSecsSinceEpoch( QStringView(s).left( pos ).toInt() );
             rev_date = QDateTime::fromSecsSinceEpoch( QStringView(s).mid( pos + 1, s.length() ).toInt() );
