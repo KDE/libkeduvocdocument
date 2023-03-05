@@ -102,7 +102,7 @@ msgstr "%1 ترجمة"
 
 #: keduvocdocument/keduvocdocument.cpp:840
 msgid "KDE Vocabulary Document"
-msgstr "مستند مفردات كدي"
+msgstr "مستند مفردات كِيدِي"
 
 #: keduvocdocument/keduvocdocument.cpp:841
 msgid "KWordQuiz Document"
@@ -498,7 +498,7 @@ msgstr "المستوى 7"
 
 #, fuzzy
 #~ msgid "Vocabulary"
-#~ msgstr "كدي المفردات مستند"
+#~ msgstr "كِيدِي المفردات مستند"
 
 #, fuzzy
 #~ msgid ""
@@ -516,7 +516,7 @@ msgstr "المستوى 7"
 
 #, fuzzy
 #~ msgid "This is not a KDE Vocabulary document."
-#~ msgstr "هذا هو ليس a كدي المفردات مستند."
+#~ msgstr "هذا هو ليس a كِيدِي المفردات مستند."
 
 #, fuzzy
 #~ msgid "missing identifier elements from identifiers tag"
