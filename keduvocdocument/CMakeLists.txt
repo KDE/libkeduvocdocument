@@ -7,9 +7,11 @@ endif()
 
 include(ECMSetupVersion)
 
-ecm_setup_version(5.0.0 VARIABLE_PREFIX KDEEDU
-                        VERSION_HEADER "${CMAKE_BINARY_DIR}/keduvocdocument/keduvocdocument_version.h"
-                        PACKAGE_VERSION_FILE "${CMAKE_BINARY_DIR}/KEduVocDocumentVersion.cmake")
+ecm_setup_version(PROJECT
+    VARIABLE_PREFIX KEDUVOCDOCUMENT
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/keduvocdocument_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_BINARY_DIR}/KEduVocDocumentVersion.cmake"
+)
 
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
@@ -104,6 +106,11 @@ ecm_generate_headers( KdeEdu_HEADERS
 )
 
 add_library(KEduVocDocument SHARED ${keduvocdocument_LIB_SRCS})
+set_target_properties(KEduVocDocument PROPERTIES
+    VERSION   ${KEDUVOCDOCUMENT_VERSION}
+    SOVERSION ${KEDUVOCDOCUMENT_SOVERSION}
+)
+
 generate_export_header(KEduVocDocument BASE_NAME KEduVocDocument)
 # vHanda: Add library alias?
 
@@ -117,11 +124,6 @@ target_link_libraries(KEduVocDocument
 )
 
 
-# vHanda: Add Export Name?
-set_target_properties(KEduVocDocument
-    PROPERTIES VERSION   ${KDEEDU_VERSION}
-               SOVERSION ${KDEEDU_SOVERSION}
-)
 target_include_directories(KEduVocDocument INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/libkeduvocdocument>")
 
 
@@ -155,6 +157,7 @@ install(TARGETS KEduVocDocument EXPORT LibKEduVocDocumentTargets ${KDE_INSTALL_T
 
 install(FILES
   ${CMAKE_CURRENT_BINARY_DIR}/keduvocdocument_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/keduvocdocument_version.h
   ${KdeEdu_HEADERS}
   DESTINATION ${KDE_INSTALL_INCLUDEDIR}/libkeduvocdocument COMPONENT Devel
 )
