@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: libkeduvocdocument\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-01-04 00:40+0000\n"
-"PO-Revision-Date: 2007-10-21 10:25-0400\n"
-"Last-Translator: Pierre-Marie Pédrot <pedrotpmx@wanadoo.fr>\n"
+"PO-Revision-Date: 2023-03-25 16:19+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -48,9 +48,9 @@ msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:170
 #: keduvocdocument/keduvocdocument.cpp:177
-#, fuzzy, kde-format
+#, kde-format
 msgid "Cannot lock file %1"
-msgstr "Ne eblas skribi al la dosiero %1"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:230
 #, kde-format
@@ -58,14 +58,14 @@ msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
 msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:238
-#, fuzzy, kde-format
+#, kde-format
 msgid "Cannot open tempfile %1"
-msgstr "Ne eblas skribi al la dosiero %1"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:243
-#, fuzzy, kde-format
+#, kde-format
 msgid "Cannot download %1: %2"
-msgstr "Ne eblas skribi al la dosiero %1"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:269
 #, kde-format
@@ -165,9 +165,9 @@ msgid "The file does not exist."
 msgstr "La dosiero ne ekzistas."
 
 #: keduvocdocument/keduvocdocument.cpp:885
-#, fuzzy, kde-format
+#, kde-format
 msgid "The file is locked by another process."
-msgstr "La dosiero ne ekzistas."
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:887
 #, kde-format
@@ -253,21 +253,21 @@ msgstr "Demando"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:46
 #: keduvocdocument/keduvockvtmlcompability.cpp:238
-#, fuzzy, kde-format
+#, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
 "(first, second, third, ...)"
 msgid "Ordinal"
-msgstr "Ordinala"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:47
 #: keduvocdocument/keduvockvtmlcompability.cpp:242
-#, fuzzy, kde-format
+#, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
 "(one, two, three, ...)"
 msgid "Cardinal"
-msgstr "Kardinala"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:48
 #: keduvocdocument/keduvockvtmlcompability.cpp:248
@@ -376,76 +376,76 @@ msgid "Future"
 msgstr "Futuro"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:215
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Verb"
-msgstr "Verbo"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:216
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Noun"
-msgstr "Nomo"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:217
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Name"
-msgstr "Propra nomo"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:218
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Article"
-msgstr "Artikolo"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:219
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adjective"
-msgstr "Adjektivo"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:220
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adverb"
-msgstr "Adverbo"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:221
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Pronoun"
-msgstr "Pronomo"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:222
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Phrase"
-msgstr "Frazo"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:223
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Numeral"
-msgstr "Numeralo"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:224
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Conjunction"
-msgstr "Konjunkcio"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:225
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Preposition"
-msgstr "Prepozicio"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:226
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Question"
-msgstr "Demando"
+msgstr ""
 
 #: keduvocdocument/keduvoctext.h:17
 #, kde-format
@@ -486,6 +486,3 @@ msgstr "Nivelo 6"
 #, kde-format
 msgid "Level 7"
 msgstr "Nivelo 7"
-
-#~ msgid "Untitled"
-#~ msgstr "Sentitola"
