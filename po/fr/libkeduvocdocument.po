@@ -300,7 +300,7 @@ msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
 msgid "Indefinite"
 msgstr "Indéfini"
 
-# Xavier : type  de verbe pour la conjugaison : régulier ou irrégulier
+# Xavier : type de verbe pour la conjugaison : régulier ou irrégulier
 #: keduvocdocument/keduvockvtmlcompability.cpp:50
 #: keduvocdocument/keduvockvtmlcompability.cpp:257
 #, kde-format
@@ -310,7 +310,7 @@ msgctxt ""
 msgid "Regular"
 msgstr "Régulier"
 
-# Xavier : type  de verbe pour la conjugaison : régulier ou irrégulier
+# Xavier : type de verbe pour la conjugaison : régulier ou irrégulier
 #: keduvocdocument/keduvockvtmlcompability.cpp:51
 #: keduvocdocument/keduvockvtmlcompability.cpp:260
 #, kde-format
