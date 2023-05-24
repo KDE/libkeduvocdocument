@@ -1,7 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2014 Andreas Xavier <andxav at zoho dot com>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #ifndef READERBASE_H
 #define READERBASE_H
@@ -19,7 +19,6 @@ class KEduVocDocument;
 class ReaderBase
 {
 public:
-
     /** destructor */
     virtual ~ReaderBase(){};
 
@@ -39,13 +38,12 @@ public:
     /**  @brief Parse file and write into doc
      @param doc to be written
      @return error status of the read.*/
-    virtual KEduVocDocument::ErrorCode read(KEduVocDocument & doc) = 0;
+    virtual KEduVocDocument::ErrorCode read(KEduVocDocument &doc) = 0;
 
     /** an error message.
         @return the error message
     */
     virtual QString errorMessage() const = 0;
-
 };
 
 #endif // READERBASE_H

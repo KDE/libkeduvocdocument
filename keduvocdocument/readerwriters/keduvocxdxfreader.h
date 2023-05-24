@@ -2,14 +2,14 @@
  * create a KEduVocDocument from a XDXF file
  * SPDX-FileCopyrightText: 2007 Peter Hedlund <peter.hedlund@kdemail.net>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #ifndef KEDUVOCXDXFREADER_H
 #define KEDUVOCXDXFREADER_H
 
-#include <QXmlStreamReader>
 #include "keduvocdocument.h"
 #include "readerbase.h"
+#include <QXmlStreamReader>
 
 class QIODevice;
 class KEduVocDocument;
@@ -21,10 +21,10 @@ public:
     /** constructor
         @param file an device open for read
     */
-    explicit KEduVocXdxfReader(QIODevice & file);
+    explicit KEduVocXdxfReader(QIODevice &file);
 
     /**destructor*/
-    ~KEduVocXdxfReader()override {};
+    ~KEduVocXdxfReader() override{};
 
     /** @brief Can this reader parse this file
      *
@@ -42,7 +42,7 @@ public:
     /** @brief Parse file and write into doc
      @param doc to be written
      @return error status of the read.*/
-    KEduVocDocument::ErrorCode read(KEduVocDocument & doc) Q_DECL_OVERRIDE;
+    KEduVocDocument::ErrorCode read(KEduVocDocument &doc) Q_DECL_OVERRIDE;
 
     /** an error message.
         @return the error message
@@ -58,7 +58,7 @@ private:
     void readEntry();
 
     KEduVocDocument *m_doc; ///< output doc
-    QIODevice & m_dev; ///< input device
+    QIODevice &m_dev; ///< input device
 };
 
 #endif

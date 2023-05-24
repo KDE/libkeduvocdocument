@@ -3,14 +3,14 @@
  * SPDX-FileCopyrightText: 2004, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
  * SPDX-FileCopyrightText: 2005 Eric Pignet
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #ifndef KEDUVOCWQLREADER_H
 #define KEDUVOCWQLREADER_H
 
-#include <QString>
 #include "keduvocdocument.h"
 #include "readerbase.h"
+#include <QString>
 
 class QIODevice;
 class KEduVocDocument;
@@ -22,10 +22,9 @@ public:
     /** constructor
         @param file an open device
     */
-    explicit KEduVocWqlReader( QIODevice & file);
+    explicit KEduVocWqlReader(QIODevice &file);
     /**destructor*/
-    ~KEduVocWqlReader()override {};
-
+    ~KEduVocWqlReader() override{};
 
     /** @brief Can this reader parse this file
      *
@@ -43,7 +42,7 @@ public:
     /**  @brief Parse file and write into doc
      @param doc to be written
      @return error status of the read.*/
-    KEduVocDocument::ErrorCode read(KEduVocDocument & doc ) Q_DECL_OVERRIDE;
+    KEduVocDocument::ErrorCode read(KEduVocDocument &doc) Q_DECL_OVERRIDE;
 
     /** an error message.
         @return the error message
@@ -54,9 +53,9 @@ public:
     }
 
 private:
-    QIODevice *m_inputFile;  ///< input device
-    KEduVocDocument *m_doc;  ///< output doc
-    QString m_errorMessage;  ///< error message
+    QIODevice *m_inputFile; ///< input device
+    KEduVocDocument *m_doc; ///< output doc
+    QString m_errorMessage; ///< error message
 };
 
 #endif

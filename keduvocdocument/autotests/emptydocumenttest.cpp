@@ -1,14 +1,15 @@
 /*
  * SPDX-FileCopyrightText: 2016 Hartmut Riesenbeck <hartmut.riesenbeck@gmx.de>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #include "emptydocumenttest.h"
 
 #include "keduvocdocument.h"
 #include <QTest>
 
-namespace EmptyDocumentTests{
+namespace EmptyDocumentTests
+{
 
 QString EmptyDocumentTest::sm_cappturedMessageOutput = QString();
 
@@ -23,7 +24,7 @@ void EmptyDocumentTest::testConstuctionDestruction()
     QCOMPARE(sm_cappturedMessageOutput, QString());
 }
 
-void EmptyDocumentTest::captureMessageOutput(QtMsgType /*type*/, const QMessageLogContext &/*context*/, const QString &msg)
+void EmptyDocumentTest::captureMessageOutput(QtMsgType /*type*/, const QMessageLogContext & /*context*/, const QString &msg)
 {
     sm_cappturedMessageOutput = msg;
 }
@@ -31,6 +32,3 @@ void EmptyDocumentTest::captureMessageOutput(QtMsgType /*type*/, const QMessageL
 }
 
 QTEST_MAIN(EmptyDocumentTests::EmptyDocumentTest)
-
-
-

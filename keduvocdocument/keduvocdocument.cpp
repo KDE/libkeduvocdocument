@@ -4,46 +4,46 @@
  * SPDX-FileCopyrightText: 2005-2007 Peter Hedlund <peter.hedlund@kdemail.net>
  * SPDX-FileCopyrightText: 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 #include "keduvocdocument.h"
 
 #include <QCoreApplication>
 #include <QFileInfo>
-#include <QTextStream>
-#include <QtAlgorithms>
 #include <QIODevice>
 #include <QTemporaryFile>
+#include <QTextStream>
+#include <QtAlgorithms>
 
+#include <KAutoSaveFile>
+#include <KCompressionDevice>
+#include <KLazyLocalizedString>
+#include <KLocalizedString>
 #include <QDebug>
 #include <kio/filecopyjob.h>
-#include <KCompressionDevice>
-#include <KLocalizedString>
-#include <KAutoSaveFile>
-#include <KLazyLocalizedString>
 
-#include "keduvocexpression.h"
-#include "keduvoclesson.h"
-#include "keduvocleitnerbox.h"
-#include "keduvocwordtype.h"
-#include "keduvockvtml2writer.h"
 #include "keduvoccsvwriter.h"
-#include "readerwriters/readermanager.h"
+#include "keduvocexpression.h"
+#include "keduvockvtml2writer.h"
+#include "keduvocleitnerbox.h"
+#include "keduvoclesson.h"
+#include "keduvocwordtype.h"
 #include "readerwriters/readerbase.h"
+#include "readerwriters/readermanager.h"
 
-#define WQL_IDENT      "WordQuiz"
+#define WQL_IDENT "WordQuiz"
 
-#define KVTML_EXT        "kvtml"
-#define CSV_EXT          "csv"
-#define TXT_EXT          "txt"
-#define WQL_EXT          "wql"
+#define KVTML_EXT "kvtml"
+#define CSV_EXT "csv"
+#define TXT_EXT "txt"
+#define WQL_EXT "wql"
 
 /** @details Private Data class for KEduVocDocument */
 class KEduVocDocument::KEduVocDocumentPrivate
 {
 public:
     /** constructor */
-    KEduVocDocumentPrivate( KEduVocDocument* qq )
-            : q( qq )
+    KEduVocDocumentPrivate(KEduVocDocument *qq)
+        : q(qq)
     {
         m_lessonContainer = nullptr;
         m_wordTypeContainer = nullptr;
@@ -58,49 +58,49 @@ public:
     /** initializer */
     void init();
 
-    KEduVocDocument* q;                               ///< The Front End
+    KEduVocDocument *q; ///< The Front End
 
     /** autosave file used to provide locking access to the underlying file
      * Note: It is a pointer to allow locking a new file, saving results and
      * then transferring the lock to m_autosave without risking loss of lock.
      * See saveAs for clarification*/
-    KAutoSaveFile            *m_autosave;
+    KAutoSaveFile *m_autosave;
 
-    bool                      m_dirty;                ///< dirty bit
-    bool                      m_isReadOnly;	      ///< FileOpenReadOnly was used for opening
+    bool m_dirty; ///< dirty bit
+    bool m_isReadOnly; ///< FileOpenReadOnly was used for opening
 
     // save these to document
-    QList<KEduVocIdentifier>  m_identifiers;          ///< list of identifiers
+    QList<KEduVocIdentifier> m_identifiers; ///< list of identifiers
 
-    QList<int>                m_extraSizeHints;       ///< unused
-    QList<int>                m_sizeHints;            ///< unused
+    QList<int> m_extraSizeHints; ///< unused
+    QList<int> m_sizeHints; ///< unused
 
-    QString                   m_generator;            ///< name of generating application
-    QString                   m_queryorg;             ///< unused
-    QString                   m_querytrans;           ///< unused
+    QString m_generator; ///< name of generating application
+    QString m_queryorg; ///< unused
+    QString m_querytrans; ///< unused
 
-    QStringList               m_tenseDescriptions;    ///< unused. Was used in merge
-    QSet<QString>             m_usages;               ///< unused
+    QStringList m_tenseDescriptions; ///< unused. Was used in merge
+    QSet<QString> m_usages; ///< unused
 
-    QString                   m_title;                ///< Document title
-    QString                   m_author;               ///< Document author
-    QString                   m_authorContact;        ///< Author contact information
-    QString                   m_license;              ///< Document license
-    QString                   m_comment;              ///< Document comment
-    QString                   m_version;              ///< Document version
-    QString                   m_csvDelimiter;         ///< CSV delimiter
+    QString m_title; ///< Document title
+    QString m_author; ///< Document author
+    QString m_authorContact; ///< Author contact information
+    QString m_license; ///< Document license
+    QString m_comment; ///< Document comment
+    QString m_version; ///< Document version
+    QString m_csvDelimiter; ///< CSV delimiter
 
     /** Categories that can later be used to sork kvtml files:
-      * language, music, children, anatomy
-      */
-    QString                   m_category;            ///< Document category
+     * language, music, children, anatomy
+     */
+    QString m_category; ///< Document category
 
-    KEduVocLesson * m_lessonContainer;               ///< Root lesson container
-    KEduVocWordType * m_wordTypeContainer;           ///< Root word types container
+    KEduVocLesson *m_lessonContainer; ///< Root lesson container
+    KEduVocWordType *m_wordTypeContainer; ///< Root word types container
     /** Root Leitner container
      * (probably unused) This is not used in Parley
      * */
-    KEduVocLeitnerBox * m_leitnerContainer;
+    KEduVocLeitnerBox *m_leitnerContainer;
 
     /** Creates an autosave file for fpath in order to lock the file
      *   @param autosave a reference to an allocated KAutosave
@@ -108,9 +108,7 @@ public:
      *   @param flags Describes how to deal with locked file etc.
      *   @return ErrorCode where NoError is success
      *   */
-    KEduVocDocument::ErrorCode initializeKAutoSave(KAutoSaveFile &autosave,
-						   QString const &fpath,
-						   FileHandlingFlags flags) const;
+    KEduVocDocument::ErrorCode initializeKAutoSave(KAutoSaveFile &autosave, QString const &fpath, FileHandlingFlags flags) const;
 };
 
 KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
@@ -124,15 +122,13 @@ KEduVocDocument::KEduVocDocumentPrivate::~KEduVocDocumentPrivate()
 void KEduVocDocument::KEduVocDocumentPrivate::init()
 {
     delete m_lessonContainer;
-    m_lessonContainer = new KEduVocLesson(i18nc("The top level lesson which contains all other lessons of the document.",
-						"Document Lesson"),
-					  q);
+    m_lessonContainer = new KEduVocLesson(i18nc("The top level lesson which contains all other lessons of the document.", "Document Lesson"), q);
     m_lessonContainer->setContainerType(KEduVocLesson::Lesson);
     delete m_wordTypeContainer;
-    m_wordTypeContainer = new KEduVocWordType(i18n( "Word types" ));
+    m_wordTypeContainer = new KEduVocWordType(i18n("Word types"));
 
     delete m_leitnerContainer;
-    m_leitnerContainer = new KEduVocLeitnerBox(i18n( "Leitner Box" ));
+    m_leitnerContainer = new KEduVocLeitnerBox(i18n("Leitner Box"));
 
     m_tenseDescriptions.clear();
     m_identifiers.clear();
@@ -142,65 +138,60 @@ void KEduVocDocument::KEduVocDocumentPrivate::init()
     m_isReadOnly = false;
     m_queryorg = QLatin1String("");
     m_querytrans = QLatin1String("");
-    m_autosave->setManagedFile( QUrl() );
+    m_autosave->setManagedFile(QUrl());
     m_author = QLatin1String("");
     m_title = QLatin1String("");
     m_comment = QLatin1String("");
     m_version = QLatin1String("");
     m_generator = QLatin1String("");
-    m_csvDelimiter = QString( '\t' );
+    m_csvDelimiter = QString('\t');
     m_usages.clear();
     m_license.clear();
     m_category.clear();
 }
 
-
-KEduVocDocument::ErrorCode KEduVocDocument::KEduVocDocumentPrivate::initializeKAutoSave(KAutoSaveFile &autosave,  QString const & fpath,  FileHandlingFlags flags) const {
-
-    QList<KAutoSaveFile *> staleFiles = KAutoSaveFile::staleFiles( QUrl::fromLocalFile(fpath),
-                                                                 QCoreApplication::instance()->applicationName());
-    if ( !staleFiles.isEmpty()) {
-        if ( flags & FileIgnoreLock ) {
-            foreach( KAutoSaveFile *f,  staleFiles ) {
-                f->open( QIODevice::ReadWrite );
+KEduVocDocument::ErrorCode
+KEduVocDocument::KEduVocDocumentPrivate::initializeKAutoSave(KAutoSaveFile &autosave, QString const &fpath, FileHandlingFlags flags) const
+{
+    QList<KAutoSaveFile *> staleFiles = KAutoSaveFile::staleFiles(QUrl::fromLocalFile(fpath), QCoreApplication::instance()->applicationName());
+    if (!staleFiles.isEmpty()) {
+        if (flags & FileIgnoreLock) {
+            foreach (KAutoSaveFile *f, staleFiles) {
+                f->open(QIODevice::ReadWrite);
                 f->remove();
                 delete f;
             }
         } else {
-            qWarning() << i18n( "Cannot lock file %1", fpath );
+            qWarning() << i18n("Cannot lock file %1", fpath);
             return FileLocked;
         }
     }
 
-    autosave.setManagedFile( QUrl::fromLocalFile(fpath) );
-    if ( !autosave.open( QIODevice::ReadWrite ) ) {
-        qWarning() << i18n( "Cannot lock file %1", autosave.fileName() );
+    autosave.setManagedFile(QUrl::fromLocalFile(fpath));
+    if (!autosave.open(QIODevice::ReadWrite)) {
+        qWarning() << i18n("Cannot lock file %1", autosave.fileName());
         return FileCannotLock;
     }
 
     return NoError;
 }
 
-
-KEduVocDocument::KEduVocDocument( QObject *parent )
+KEduVocDocument::KEduVocDocument(QObject *parent)
     : QObject(parent)
     , d(new KEduVocDocumentPrivate(this))
 {
 }
-
 
 KEduVocDocument::~KEduVocDocument()
 {
     delete d;
 }
 
-
-void KEduVocDocument::setModified( bool dirty )
+void KEduVocDocument::setModified(bool dirty)
 {
     d->m_dirty = dirty;
-    Q_EMIT docModified( d->m_dirty );
+    Q_EMIT docModified(d->m_dirty);
 }
-
 
 KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileName)
 {
@@ -213,7 +204,6 @@ KEduVocDocument::FileType KEduVocDocument::detectFileType(const QString &fileNam
 
     return reader->fileTypeHandled();
 }
-
 
 KEduVocDocument::ErrorCode KEduVocDocument::open(const QUrl &url, FileHandlingFlags flags)
 {
@@ -235,12 +225,12 @@ KEduVocDocument::ErrorCode KEduVocDocument::open(const QUrl &url, FileHandlingFl
         temporaryFile = url.toLocalFile();
     } else {
         if (!tempFile.open()) {
-            qWarning() << i18n("Cannot open tempfile %1",  tempFile.fileName());
+            qWarning() << i18n("Cannot open tempfile %1", tempFile.fileName());
             return Unknown;
         }
         KIO::FileCopyJob *job = KIO::file_copy(url, QUrl::fromLocalFile(tempFile.fileName()), -1, KIO::Overwrite);
         if (!job->exec()) {
-            qWarning() << i18n("Cannot download %1: %2",  url.toDisplayString(), job->errorString());
+            qWarning() << i18n("Cannot download %1: %2", url.toDisplayString(), job->errorString());
             return FileDoesNotExist;
         }
         temporaryFile = tempFile.fileName();
@@ -253,7 +243,7 @@ KEduVocDocument::ErrorCode KEduVocDocument::open(const QUrl &url, FileHandlingFl
     ErrorCode autosaveError = NoError;
 
     if (!d->m_isReadOnly) {
-        autosaveError = d->initializeKAutoSave(*d->m_autosave,  temporaryFile, flags);
+        autosaveError = d->initializeKAutoSave(*d->m_autosave, temporaryFile, flags);
         if (autosaveError != NoError) {
             return autosaveError;
         }
@@ -261,13 +251,11 @@ KEduVocDocument::ErrorCode KEduVocDocument::open(const QUrl &url, FileHandlingFl
 
     KCompressionDevice f(temporaryFile);
     if (f.open(QIODevice::ReadOnly)) {
-
         ReaderManager::ReaderPtr reader(ReaderManager::reader(f));
         errStatus = reader->read(*this);
 
         if (errStatus != KEduVocDocument::NoError) {
-            errorMessage = i18n("Could not open or properly read \"%1\"\n(Error reported: %2)"
-                                , url.toDisplayString(), reader->errorMessage());
+            errorMessage = i18n("Could not open or properly read \"%1\"\n(Error reported: %2)", url.toDisplayString(), reader->errorMessage());
         }
     } else {
         errStatus = FileCannotRead;
@@ -287,107 +275,101 @@ KEduVocDocument::ErrorCode KEduVocDocument::open(const QUrl &url, FileHandlingFl
 void KEduVocDocument::close()
 {
     if (!d->m_isReadOnly) {
-	d->m_autosave->releaseLock();
+        d->m_autosave->releaseLock();
     }
 }
 
-KEduVocDocument::ErrorCode KEduVocDocument::saveAs( const QUrl & url, FileType ft,
-						    FileHandlingFlags flags)
+KEduVocDocument::ErrorCode KEduVocDocument::saveAs(const QUrl &url, FileType ft, FileHandlingFlags flags)
 {
     if (d->m_isReadOnly) {
         return FileIsReadOnly;
     }
 
-    QUrl tmp( url );
+    QUrl tmp(url);
 
-    if ( ft == Automatic ) {
-        if ( tmp.path().right( strlen( "." KVTML_EXT ) ) == "." KVTML_EXT )
+    if (ft == Automatic) {
+        if (tmp.path().right(strlen("." KVTML_EXT)) == "." KVTML_EXT)
             ft = Kvtml;
-        else if ( tmp.path().right( strlen( "." CSV_EXT ) ) == "." CSV_EXT )
+        else if (tmp.path().right(strlen("." CSV_EXT)) == "." CSV_EXT)
             ft = Csv;
         else {
             return FileTypeUnknown;
         }
     }
 
-    QString errorMessage = i18n( "Cannot write to file %1", tmp.toDisplayString() );
+    QString errorMessage = i18n("Cannot write to file %1", tmp.toDisplayString());
 
     KAutoSaveFile *autosave;
 
-    //If we don't care about the lock always create a new one
-    //If we are changing files create a new lock
-    if ( ( flags & FileIgnoreLock )
-        || ( d->m_autosave->managedFile() != tmp ) ) {
-
+    // If we don't care about the lock always create a new one
+    // If we are changing files create a new lock
+    if ((flags & FileIgnoreLock) || (d->m_autosave->managedFile() != tmp)) {
         autosave = new KAutoSaveFile;
-        ErrorCode autosaveError = d->initializeKAutoSave( *autosave, tmp.toLocalFile(), flags );
-        if ( autosaveError != NoError) {
+        ErrorCode autosaveError = d->initializeKAutoSave(*autosave, tmp.toLocalFile(), flags);
+        if (autosaveError != NoError) {
             delete autosave;
             return autosaveError;
         }
     }
 
-    //We care about the lock and we think we still have it.
+    // We care about the lock and we think we still have it.
     else {
-         autosave = d->m_autosave;
-        //Is the lock still good?
-        if ( !autosave->exists( ) ) {
+        autosave = d->m_autosave;
+        // Is the lock still good?
+        if (!autosave->exists()) {
             return FileCannotLock;
         }
     }
 
-    QFile f( tmp.toLocalFile() );
-    if ( !f.open( QIODevice::WriteOnly ) ) {
-        qCritical() << i18n( "Cannot write to file %1", f.fileName() );
+    QFile f(tmp.toLocalFile());
+    if (!f.open(QIODevice::WriteOnly)) {
+        qCritical() << i18n("Cannot write to file %1", f.fileName());
         return FileCannotWrite;
     }
 
     bool saved = false;
 
-    switch ( ft ) {
-        case Kvtml: {
-            // write version 2 file
-            KEduVocKvtml2Writer kvtmlWriter( &f );
-            saved = kvtmlWriter.writeDoc( this, d->m_generator );
-        }
-        break;
+    switch (ft) {
+    case Kvtml: {
+        // write version 2 file
+        KEduVocKvtml2Writer kvtmlWriter(&f);
+        saved = kvtmlWriter.writeDoc(this, d->m_generator);
+    } break;
         ///@todo port me
-//         case Kvtml1: {
-//             // write old version 1 file
-//             KEduVocKvtmlWriter kvtmlWriter( &f );
-//             saved = kvtmlWriter.writeDoc( this, d->m_generator );
-//         }
-//         break;
-        case Csv: {
-            KEduVocCsvWriter csvWriter( &f );
-            saved = csvWriter.writeDoc( this, d->m_generator );
-        }
-        break;
-        default: {
-            qCritical() << "kvcotrainDoc::saveAs(): unknown filetype";
-        }
-        break;
+        //         case Kvtml1: {
+        //             // write old version 1 file
+        //             KEduVocKvtmlWriter kvtmlWriter( &f );
+        //             saved = kvtmlWriter.writeDoc( this, d->m_generator );
+        //         }
+        //         break;
+    case Csv: {
+        KEduVocCsvWriter csvWriter(&f);
+        saved = csvWriter.writeDoc(this, d->m_generator);
+    } break;
+    default: {
+        qCritical() << "kvcotrainDoc::saveAs(): unknown filetype";
+    } break;
     } // switch
 
     f.close();
 
-    if ( !saved ) {
+    if (!saved) {
         qCritical() << "Error Saving File" << tmp.toDisplayString();
 
-        if ( autosave != d->m_autosave ) {
+        if (autosave != d->m_autosave) {
             delete autosave;
         }
         return FileWriterFailed;
     }
 
-    if ( autosave != d->m_autosave ) {
-        //The order is important: release old lock, delete old locker and then claim new locker.
+    if (autosave != d->m_autosave) {
+        // The order is important: release old lock, delete old locker and then claim new locker.
         d->m_autosave->releaseLock();
         delete d->m_autosave;
         d->m_autosave = autosave;
     }
 
-    setModified( false );
+    setModified(false);
     return NoError;
 }
 
@@ -395,10 +377,10 @@ QByteArray KEduVocDocument::toByteArray(const QString &generator)
 {
     // no file needed
     KEduVocKvtml2Writer kvtmlWriter(nullptr);
-    return kvtmlWriter.toByteArray( this, generator );
+    return kvtmlWriter.toByteArray(this, generator);
 }
 
-void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers )
+void KEduVocDocument::merge(KEduVocDocument *docToMerge, bool matchIdentifiers)
 {
     Q_UNUSED(docToMerge)
     Q_UNUSED(matchIdentifiers)
@@ -614,32 +596,32 @@ void KEduVocDocument::merge( KEduVocDocument *docToMerge, bool matchIdentifiers 
     */
 }
 
-const KEduVocIdentifier& KEduVocDocument::identifier( int index ) const
+const KEduVocIdentifier &KEduVocDocument::identifier(int index) const
 {
-    if ( index < 0 || index >= d->m_identifiers.size() ) {
+    if (index < 0 || index >= d->m_identifiers.size()) {
         qCritical() << " Error: Invalid identifier index: " << index;
     }
     return d->m_identifiers[index];
 }
 
-KEduVocIdentifier& KEduVocDocument::identifier( int index )
+KEduVocIdentifier &KEduVocDocument::identifier(int index)
 {
-    if ( index < 0 || index >= d->m_identifiers.size() ) {
+    if (index < 0 || index >= d->m_identifiers.size()) {
         qCritical() << " Error: Invalid identifier index: " << index;
     }
     return d->m_identifiers[index];
 }
 
-void KEduVocDocument::setIdentifier( int idx, const KEduVocIdentifier &id )
+void KEduVocDocument::setIdentifier(int idx, const KEduVocIdentifier &id)
 {
-    if ( idx >= 0 && idx < d->m_identifiers.size() ) {
+    if (idx >= 0 && idx < d->m_identifiers.size()) {
         d->m_identifiers[idx] = id;
     }
     setModified(true);
 }
 
 // works if const is removed
-int KEduVocDocument::indexOfIdentifier( const QString &name ) const
+int KEduVocDocument::indexOfIdentifier(const QString &name) const
 {
     for (int i = 0; i < identifierCount(); i++)
         if (identifier(i).locale() == name)
@@ -647,54 +629,51 @@ int KEduVocDocument::indexOfIdentifier( const QString &name ) const
     return -1;
 }
 
-void KEduVocDocument::removeIdentifier( int index )
+void KEduVocDocument::removeIdentifier(int index)
 {
-    if ( index < d->m_identifiers.size() && index >= 0 ) {
-        d->m_identifiers.removeAt( index );
-        d->m_lessonContainer->removeTranslation( index );
+    if (index < d->m_identifiers.size() && index >= 0) {
+        d->m_identifiers.removeAt(index);
+        d->m_lessonContainer->removeTranslation(index);
     }
 }
-
 
 bool KEduVocDocument::isModified() const
 {
     return d->m_dirty;
 }
 
-
 int KEduVocDocument::identifierCount() const
 {
-    return d->m_identifiers.count();  // number of translations
+    return d->m_identifiers.count(); // number of translations
 }
 
-int KEduVocDocument::appendIdentifier( const KEduVocIdentifier& id )
+int KEduVocDocument::appendIdentifier(const KEduVocIdentifier &id)
 {
     int i = d->m_identifiers.size();
-//qDebug() << "appendIdentifier: " << i << id.name() << id.locale();
-    d->m_identifiers.append( id );
-    if ( id.name().isEmpty() ) {
-        if ( i == 0 ) {
+    // qDebug() << "appendIdentifier: " << i << id.name() << id.locale();
+    d->m_identifiers.append(id);
+    if (id.name().isEmpty()) {
+        if (i == 0) {
             identifier(i).setName(i18nc("The name of the first language/column of vocabulary, if we have to guess it.", "Original"));
         } else {
-            identifier(i).setName(i18nc( "The name of the second, third ... language/column of vocabulary, if we have to guess it.", "Translation %1", i ) );
+            identifier(i).setName(i18nc("The name of the second, third ... language/column of vocabulary, if we have to guess it.", "Translation %1", i));
         }
     }
-
 
     return i;
 }
 
-KEduVocLesson * KEduVocDocument::lesson()
+KEduVocLesson *KEduVocDocument::lesson()
 {
     return d->m_lessonContainer;
 }
 
-KEduVocWordType * KEduVocDocument::wordTypeContainer()
+KEduVocWordType *KEduVocDocument::wordTypeContainer()
 {
     return d->m_wordTypeContainer;
 }
 
-KEduVocLeitnerBox * KEduVocDocument::leitnerContainer()
+KEduVocLeitnerBox *KEduVocDocument::leitnerContainer()
 {
     return d->m_leitnerContainer;
 }
@@ -704,20 +683,20 @@ QUrl KEduVocDocument::url() const
     return d->m_autosave->managedFile();
 }
 
-void KEduVocDocument::setUrl( const QUrl& url )
+void KEduVocDocument::setUrl(const QUrl &url)
 {
     d->m_autosave->setManagedFile(url);
 }
 
 QString KEduVocDocument::title() const
 {
-    if ( d->m_title.isEmpty() )
+    if (d->m_title.isEmpty())
         return d->m_autosave->managedFile().fileName();
     else
         return d->m_title;
 }
 
-void KEduVocDocument::setTitle( const QString & title )
+void KEduVocDocument::setTitle(const QString &title)
 {
     d->m_title = title;
     ///@todo decouple document title and root lesson title
@@ -730,7 +709,7 @@ QString KEduVocDocument::author() const
     return d->m_author;
 }
 
-void KEduVocDocument::setAuthor( const QString & s )
+void KEduVocDocument::setAuthor(const QString &s)
 {
     d->m_author = s.simplified();
     setModified(true);
@@ -741,7 +720,7 @@ QString KEduVocDocument::authorContact() const
     return d->m_authorContact;
 }
 
-void KEduVocDocument::setAuthorContact( const QString & s )
+void KEduVocDocument::setAuthorContact(const QString &s)
 {
     d->m_authorContact = s.simplified();
     setModified(true);
@@ -757,7 +736,7 @@ QString KEduVocDocument::documentComment() const
     return d->m_comment;
 }
 
-void KEduVocDocument::setCategory( const QString & category )
+void KEduVocDocument::setCategory(const QString &category)
 {
     d->m_category = category;
     setModified(true);
@@ -769,32 +748,32 @@ QString KEduVocDocument::category() const
     ///@todo make writer/reader use this
 }
 
-void KEduVocDocument::queryIdentifier( QString &org, QString &trans ) const
+void KEduVocDocument::queryIdentifier(QString &org, QString &trans) const
 {
     org = d->m_queryorg;
     trans = d->m_querytrans;
 }
 
-void KEduVocDocument::setQueryIdentifier( const QString &org, const QString &trans )
+void KEduVocDocument::setQueryIdentifier(const QString &org, const QString &trans)
 {
     d->m_queryorg = org;
     d->m_querytrans = trans;
     setModified(true);
 }
 
-void KEduVocDocument::setLicense( const QString & s )
+void KEduVocDocument::setLicense(const QString &s)
 {
     d->m_license = s.simplified();
     setModified(true);
 }
 
-void KEduVocDocument::setDocumentComment( const QString & s )
+void KEduVocDocument::setDocumentComment(const QString &s)
 {
     d->m_comment = s.trimmed();
     setModified(true);
 }
 
-void KEduVocDocument::setGenerator( const QString & generator )
+void KEduVocDocument::setGenerator(const QString &generator)
 {
     d->m_generator = generator;
     setModified(true);
@@ -810,7 +789,7 @@ QString KEduVocDocument::version() const
     return d->m_version;
 }
 
-void KEduVocDocument::setVersion( const QString & vers )
+void KEduVocDocument::setVersion(const QString &vers)
 {
     d->m_version = vers;
     setModified(true);
@@ -821,47 +800,42 @@ QString KEduVocDocument::csvDelimiter() const
     return d->m_csvDelimiter;
 }
 
-void KEduVocDocument::setCsvDelimiter( const QString &delimiter )
+void KEduVocDocument::setCsvDelimiter(const QString &delimiter)
 {
     d->m_csvDelimiter = delimiter;
     setModified(true);
 }
 
-
-QString KEduVocDocument::pattern( FileDialogMode mode )
+QString KEduVocDocument::pattern(FileDialogMode mode)
 {
     static const struct SupportedFilter {
         bool reading;
         bool writing;
-        const char* extensions;
+        const char *extensions;
         const KLazyLocalizedString description;
-    }
-    filters[] = {
-                    { true, true, "*.kvtml", kli18n( "KDE Vocabulary Document" ) },
-                    { true, false, "*.wql", kli18n( "KWordQuiz Document" ) },
-                    { true, false, "*.xml.qz *.pau.gz", kli18n( "Pauker Lesson" ) },
-                    { true, false, "*.voc", kli18n( "Vokabeltrainer" ) },
-                    { true, false, "*.xdxf", kli18n( "XML Dictionary Exchange Format" ) },
-                    { true, true, "*.csv", kli18n( "Comma Separated Values (CSV)" ) },
-                    // last is marker for the end, do not remove it
-                    { false, false, nullptr, KLazyLocalizedString() }
-                };
+    } filters[] = {{true, true, "*.kvtml", kli18n("KDE Vocabulary Document")},
+                   {true, false, "*.wql", kli18n("KWordQuiz Document")},
+                   {true, false, "*.xml.qz *.pau.gz", kli18n("Pauker Lesson")},
+                   {true, false, "*.voc", kli18n("Vokabeltrainer")},
+                   {true, false, "*.xdxf", kli18n("XML Dictionary Exchange Format")},
+                   {true, true, "*.csv", kli18n("Comma Separated Values (CSV)")},
+                   // last is marker for the end, do not remove it
+                   {false, false, nullptr, KLazyLocalizedString()}};
     QStringList newfilters;
     QStringList allext;
-    for ( int i = 0; filters[i].extensions; ++i ) {
-        if (( mode == Reading && filters[i].reading ) ||
-                ( mode == Writing && filters[i].writing ) ) {
-            newfilters.append( KLocalizedString( filters[i].description ).toString() + " (" + QLatin1String( filters[i].extensions ) + ')' );
-            allext.append( QLatin1String( filters[i].extensions ) );
+    for (int i = 0; filters[i].extensions; ++i) {
+        if ((mode == Reading && filters[i].reading) || (mode == Writing && filters[i].writing)) {
+            newfilters.append(KLocalizedString(filters[i].description).toString() + " (" + QLatin1String(filters[i].extensions) + ')');
+            allext.append(QLatin1String(filters[i].extensions));
         }
     }
-    if ( mode == Reading ) {
-        newfilters.prepend( allext.join(QLatin1Char(' ') ) + '|' + i18n( "All supported documents" ) );
+    if (mode == Reading) {
+        newfilters.prepend(allext.join(QLatin1Char(' ')) + '|' + i18n("All supported documents"));
     }
-    return newfilters.join(QLatin1String(";;") );
+    return newfilters.join(QLatin1String(";;"));
 }
 
-QString KEduVocDocument::errorDescription( int errorCode )
+QString KEduVocDocument::errorDescription(int errorCode)
 {
     switch (errorCode) {
     case NoError:

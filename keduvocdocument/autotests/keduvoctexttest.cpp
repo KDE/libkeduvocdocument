@@ -1,14 +1,15 @@
 /*
  * SPDX-FileCopyrightText: 2016 Hartmut Riesenbeck <hartmut.riesenbeck@gmx.de>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #include "keduvoctexttest.h"
 
 #include "keduvoctext.h"
 #include <QTest>
 
-namespace KEduVocTextTests{
+namespace KEduVocTextTests
+{
 
 void KEduVocTextTest::testAssignmentOperator()
 {
@@ -111,17 +112,10 @@ bool KEduVocTextTest::isEqual(const KEduVocText &a, const KEduVocText &b) const
     // KEduVocTextPrivate.  Appropriate getter/setter methods needs to be
     // provided by KEduVocText.
 
-    return a.text() == b.text()
-        &&  a.preGrade() == b.preGrade()
-        &&  a.grade() == b.grade()
-        &&  a.practiceCount() == b.practiceCount()
-        &&  a.badCount() == b.badCount()
-        &&  a.practiceDate() == b.practiceDate()
-        &&  a.interval() == b.interval();
-
+    return a.text() == b.text() && a.preGrade() == b.preGrade() && a.grade() == b.grade() && a.practiceCount() == b.practiceCount()
+        && a.badCount() == b.badCount() && a.practiceDate() == b.practiceDate() && a.interval() == b.interval();
 }
 
 }
 
 QTEST_MAIN(KEduVocTextTests::KEduVocTextTest)
-

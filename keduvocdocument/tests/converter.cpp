@@ -1,7 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2007 Jeremy Whiting <jpwhiting@kde.org>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 /** @file
  * \brief kvtml document reader/writer
@@ -13,23 +13,23 @@
 #include "keduvocdocument.h"
 
 #include <KLocalizedString>
+#include <QCommandLineParser>
 #include <QCoreApplication>
 #include <QDebug>
 #include <QUrl>
-#include <QCommandLineParser>
 
-int main( int argc, char ** argv )
+int main(int argc, char **argv)
 {
     QCoreApplication::setApplicationName(QStringLiteral("kvtml-converter"));
     QCoreApplication::setApplicationVersion(QStringLiteral("0.2"));
     QCoreApplication::setOrganizationDomain(QStringLiteral("kde.org"));
-    QCoreApplication app( argc, argv );
+    QCoreApplication app(argc, argv);
 
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.addVersionOption();
     QCommandLineOption formatOption(QStringList() << QStringLiteral("f") << QStringLiteral("format"),
-            i18nc("main", "file format to write out (kvtml1, kvtml2, or csv)."));
+                                    i18nc("main", "file format to write out (kvtml1, kvtml2, or csv)."));
     parser.addOption(formatOption);
     parser.addPositionalArgument(QStringLiteral("infile"), i18nc("main", "File to read in."));
     parser.addPositionalArgument(QStringLiteral("outfile"), i18nc("main", "File to write to."));
@@ -38,31 +38,24 @@ int main( int argc, char ** argv )
 
     QStringList files = parser.positionalArguments();
 
-    if ( files.count() > 0 ) {
-        QUrl infile = QUrl::fromLocalFile(files.at( 0 ));
-        if ( files.count() > 1 ) {
-            QUrl outfile = QUrl::fromLocalFile(files.at( 1 ));
+    if (files.count() > 0) {
+        QUrl infile = QUrl::fromLocalFile(files.at(0));
+        if (files.count() > 1) {
+            QUrl outfile = QUrl::fromLocalFile(files.at(1));
 
             KEduVocDocument document;
             qDebug() << "Reading " << infile;
-            document.open( infile );
+            document.open(infile);
             qDebug() << "Writing to " << outfile;
-            if (parser.value(QStringLiteral("f")) == QLatin1String("kvtml1"))
-            {
-                document.saveAs( outfile, KEduVocDocument::Kvtml1 );
-            }
-            else if (parser.value(QStringLiteral("f")) == QLatin1String("csv"))
-            {
-                document.saveAs( outfile, KEduVocDocument::Csv );
-            }
-            else
-            {
-                document.saveAs( outfile, KEduVocDocument::Kvtml );
+            if (parser.value(QStringLiteral("f")) == QLatin1String("kvtml1")) {
+                document.saveAs(outfile, KEduVocDocument::Kvtml1);
+            } else if (parser.value(QStringLiteral("f")) == QLatin1String("csv")) {
+                document.saveAs(outfile, KEduVocDocument::Csv);
+            } else {
+                document.saveAs(outfile, KEduVocDocument::Kvtml);
             }
         }
-    }
-    else
-    {
+    } else {
         qDebug() << parser.helpText();
     }
 

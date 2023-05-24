@@ -1,11 +1,11 @@
 /*
  * SPDX-FileCopyrightText: 2014 Andreas Xavier <andxav at zoho dot com>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #include "keduvocdocument.h"
-#include "readermanager.h"
 #include "keduvocxdxfreader.h"
+#include "readermanager.h"
 
 #include "readerTestHelpers.h"
 
@@ -45,42 +45,35 @@ private slots:
     void testParseTwoWord();
     /** InvalidDoc*/
     void testParseInvalid();
-private :
+
+private:
     QString oneGoodDoc;
     KEduVocDocument::FileType myType;
 };
 
-void XdxfReaderTest::init() {
-    oneGoodDoc = \
-                 QStringLiteral( "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" )
-                 + "<!DOCTYPE xdxf SYSTEM \"http://xdxf.sourceforge.net/xdxf_lousy.dtd\">\n"
-                 + "<xdxf lang_from=\"GER\" lang_to=\"SPA\" format=\"visual\">\net"
-                 + "<full_name>German Spanish</full_name>\n"
-                 + "<description>Description of German and Spanish</description>\n"
-                 + ""
-                 + "<ar><k>Hund</k>el perro</ar>\n"
-                 + "<ar><k>Schwein</k>el cerdo</ar>\n"
-                 + "</xdxf>\n";
+void XdxfReaderTest::init()
+{
+    oneGoodDoc = QStringLiteral("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n") + "<!DOCTYPE xdxf SYSTEM \"http://xdxf.sourceforge.net/xdxf_lousy.dtd\">\n"
+        + "<xdxf lang_from=\"GER\" lang_to=\"SPA\" format=\"visual\">\net" + "<full_name>German Spanish</full_name>\n"
+        + "<description>Description of German and Spanish</description>\n" + "" + "<ar><k>Hund</k>el perro</ar>\n" + "<ar><k>Schwein</k>el cerdo</ar>\n"
+        + "</xdxf>\n";
     myType = KEduVocDocument::Xdxf;
 }
 
-
 void XdxfReaderTest::testParseTwoWord()
 {
-    KVOCREADER_EXPECT( oneGoodDoc ,  KEduVocDocument::NoError ,  myType);
+    KVOCREADER_EXPECT(oneGoodDoc, KEduVocDocument::NoError, myType);
 }
 
 void XdxfReaderTest::testParseInvalid()
 {
-    QString invalid = oneGoodDoc +" bad parse";
+    QString invalid = oneGoodDoc + " bad parse";
 
-    KVOCREADER_EXPECT( invalid ,  KEduVocDocument::FileReaderFailed ,  myType );
+    KVOCREADER_EXPECT(invalid, KEduVocDocument::FileReaderFailed, myType);
 }
 
 }
 
-QTEST_MAIN( XdxfReaderUnitTests::XdxfReaderTest )
-
-
+QTEST_MAIN(XdxfReaderUnitTests::XdxfReaderTest)
 
 #include "readerxdxftest.moc"

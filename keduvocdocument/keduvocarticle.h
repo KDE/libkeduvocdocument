@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: 2005, 2007 Peter Hedlund <peter.hedlund@kdemail.net>
  * SPDX-FileCopyrightText: 2007-2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>                                                                    *
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #ifndef KEDUVOCARTICLE_H
 #define KEDUVOCARTICLE_H
@@ -22,9 +22,6 @@
 class KEDUVOCDOCUMENT_EXPORT KEduVocArticle
 {
 public:
-
-
-
     /**
      * The constructor without arguments
      */
@@ -33,7 +30,7 @@ public:
     /** copy constructor for d-pointer safety
      * @param other article object to copy
      */
-    KEduVocArticle( const KEduVocArticle &other );
+    KEduVocArticle(const KEduVocArticle &other);
 
     /**
      * DEPRECATED The constructor with arguments, assumes singular!
@@ -44,7 +41,12 @@ public:
      * @param nat_def reference to a QString with the definite neutral article
      * @param nat_indef reference to a QString with the indefinite neutral article
      */
-    KEDUVOCDOCUMENT_DEPRECATED KEduVocArticle( const QString &fem_def, const QString &fem_indef, const QString &mal_def, const QString &mal_indef, const QString &nat_def, const QString &nat_indef );
+    KEDUVOCDOCUMENT_DEPRECATED KEduVocArticle(const QString &fem_def,
+                                              const QString &fem_indef,
+                                              const QString &mal_def,
+                                              const QString &mal_indef,
+                                              const QString &nat_def,
+                                              const QString &nat_indef);
 
     /**
      * default destructor, deletes the d pointer
@@ -54,20 +56,19 @@ public:
     /**
      * assignment operator for d-pointer copying
      */
-    KEduVocArticle &operator= ( const KEduVocArticle& other );
+    KEduVocArticle &operator=(const KEduVocArticle &other);
 
-    QString article(KEduVocWordFlags );
+    QString article(KEduVocWordFlags);
 
-    void setArticle(const QString& article, KEduVocWordFlags );
+    void setArticle(const QString &article, KEduVocWordFlags);
 
-    bool isArticle(const QString& article) const;
+    bool isArticle(const QString &article) const;
 
     bool isEmpty();
 
 private:
     class Private;
-    Private * const d;
+    Private *const d;
 };
-
 
 #endif

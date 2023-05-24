@@ -1,23 +1,22 @@
 /*
  * SPDX-FileCopyrightText: 2014 Andreas Xavier <andxav at zoho dot com>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #include "failedreader.h"
 
 #include <KLocalizedString>
 #include <QIODevice>
 
-
-FailedReader::FailedReader(KEduVocDocument::ErrorCode inerror, const QString & msg)
-    : m_error( KEduVocDocument::Unknown )
-    , m_errorMessage( msg )
+FailedReader::FailedReader(KEduVocDocument::ErrorCode inerror, const QString &msg)
+    : m_error(KEduVocDocument::Unknown)
+    , m_errorMessage(msg)
 {
-    if ( inerror != KEduVocDocument::NoError ) {
+    if (inerror != KEduVocDocument::NoError) {
         m_error = inerror;
     }
-    if ( msg.isNull() ) {
-        m_errorMessage = i18n( "Error while reading file" );
+    if (msg.isNull()) {
+        m_errorMessage = i18n("Error while reading file");
     }
 }
 
@@ -31,7 +30,8 @@ KEduVocDocument::FileType FailedReader::fileTypeHandled()
     return KEduVocDocument::KvdNone;
 }
 
-KEduVocDocument::ErrorCode FailedReader::read(KEduVocDocument &) {
+KEduVocDocument::ErrorCode FailedReader::read(KEduVocDocument &)
+{
     return m_error;
 }
 

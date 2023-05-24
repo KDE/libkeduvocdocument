@@ -1,11 +1,11 @@
 /*
  * SPDX-FileCopyrightText: 2014 Andreas Xavier <andxav at zoho dot com>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #include "keduvocdocument.h"
-#include "readermanager.h"
 #include "keduvocpaukerreader.h"
+#include "readermanager.h"
 
 #include "readerTestHelpers.h"
 
@@ -62,15 +62,17 @@ private slots:
     void testParseOneWord();
     /** InvalidDoc*/
     void testParseInvalid();
-private :
+
+private:
     QString oneGoodDoc;
     QString oneBadDoc;
     KEduVocDocument::FileType myType;
 };
 
-void PaukerReaderTest::init() {
-    oneGoodDoc =                                    \
-    QStringLiteral("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n \
+void PaukerReaderTest::init()
+{
+    oneGoodDoc = QStringLiteral(
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n \
      <!--This is a lesson file for Pauker (http://pauker.sourceforge.net)-->\n \
      <Lesson LessonFormat=\"1.7\">\n \
        <Description>Some Description</Description>\n \
@@ -84,27 +86,24 @@ void PaukerReaderTest::init() {
            </ReverseSide>\n \
          </Card>\n \
         </Batch>\n \
-      </Lesson>\n") ;
+      </Lesson>\n");
     oneBadDoc = oneGoodDoc + "\ninvalid XML characters ";
 
     myType = KEduVocDocument::Pauker;
 }
 
-
 void PaukerReaderTest::testParseOneWord()
 {
-    KVOCREADER_EXPECT( oneGoodDoc ,  KEduVocDocument::NoError , myType );
+    KVOCREADER_EXPECT(oneGoodDoc, KEduVocDocument::NoError, myType);
 }
 
 void PaukerReaderTest::testParseInvalid()
 {
-    KVOCREADER_EXPECT( oneBadDoc ,  KEduVocDocument::FileReaderFailed , myType );
+    KVOCREADER_EXPECT(oneBadDoc, KEduVocDocument::FileReaderFailed, myType);
 }
 
 }
 
-QTEST_MAIN( PaukerReaderUnitTests::PaukerReaderTest )
-
-
+QTEST_MAIN(PaukerReaderUnitTests::PaukerReaderTest)
 
 #include "readerpaukertest.moc"

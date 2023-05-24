@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2007 Jeremy Whiting <jpwhiting@kde.org>
  * SPDX-FileCopyrightText: 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #include "keduvoccontainer.h"
 
@@ -28,11 +28,11 @@ public:
 
     // other lessons in the tree
     KEduVocContainer *m_parentContainer;
-    QList < KEduVocContainer * > m_childContainers;
+    QList<KEduVocContainer *> m_childContainers;
 
     EnumContainerType m_type;
 
-    QList < KEduVocExpression* > m_childLessonEntries;
+    QList<KEduVocExpression *> m_childLessonEntries;
     bool m_childLessonEntriesValid;
 
     /// Image url
@@ -44,12 +44,10 @@ KEduVocContainer::Private::~Private()
     qDeleteAll(m_childContainers);
 }
 
-
 // This is a private constructor only used by KEduVocDocument when creating
 // the top level lesson.
-KEduVocContainer::KEduVocContainer(const QString& name, EnumContainerType type,
-				   KEduVocDocument *document)
-        : d( new Private )
+KEduVocContainer::KEduVocContainer(const QString &name, EnumContainerType type, KEduVocDocument *document)
+    : d(new Private)
 {
     d->m_parentContainer = nullptr;
     d->m_name = name;
@@ -60,9 +58,8 @@ KEduVocContainer::KEduVocContainer(const QString& name, EnumContainerType type,
     d->m_document = document;
 }
 
-
-KEduVocContainer::KEduVocContainer(const QString& name, EnumContainerType type, KEduVocContainer *parent)
-        : d( new Private )
+KEduVocContainer::KEduVocContainer(const QString &name, EnumContainerType type, KEduVocContainer *parent)
+    : d(new Private)
 {
     d->m_parentContainer = parent;
     d->m_name = name;
@@ -73,8 +70,8 @@ KEduVocContainer::KEduVocContainer(const QString& name, EnumContainerType type, 
     d->m_document = nullptr;
 }
 
-KEduVocContainer::KEduVocContainer( const KEduVocContainer &other )
-        : d( new Private )
+KEduVocContainer::KEduVocContainer(const KEduVocContainer &other)
+    : d(new Private)
 {
     d->m_name = other.d->m_name;
     d->m_inPractice = other.d->m_inPractice;
@@ -92,14 +89,14 @@ KEduVocDocument *KEduVocContainer::document() const
 {
     KEduVocContainer *cont = (KEduVocContainer *)this;
     while (cont->d->m_parentContainer) {
-	cont = cont->d->m_parentContainer;
+        cont = cont->d->m_parentContainer;
     }
 
     Q_ASSERT(cont->d->m_document);
     return cont->d->m_document;
 }
 
-void KEduVocContainer::appendChildContainer(KEduVocContainer * child)
+void KEduVocContainer::appendChildContainer(KEduVocContainer *child)
 {
     d->m_childContainers.append(child);
     child->d->m_parentContainer = this;
@@ -107,13 +104,12 @@ void KEduVocContainer::appendChildContainer(KEduVocContainer * child)
     invalidateChildLessonEntries();
 }
 
-KEduVocContainer * KEduVocContainer::childContainer(int row)
+KEduVocContainer *KEduVocContainer::childContainer(int row)
 {
     return d->m_childContainers.value(row);
 }
 
-
-KEduVocContainer * KEduVocContainer::childContainer(const QString & name)
+KEduVocContainer *KEduVocContainer::childContainer(const QString &name)
 {
     if (d->m_name == name) {
         return this;
@@ -127,7 +123,6 @@ KEduVocContainer * KEduVocContainer::childContainer(const QString & name)
     }
     return nullptr;
 }
-
 
 void KEduVocContainer::deleteChildContainer(int row)
 {
@@ -143,7 +138,6 @@ void KEduVocContainer::removeChildContainer(int row)
     invalidateChildLessonEntries();
 }
 
-
 int KEduVocContainer::childContainerCount() const
 {
     return d->m_childContainers.count();
@@ -152,13 +146,12 @@ int KEduVocContainer::childContainerCount() const
 int KEduVocContainer::row() const
 {
     if (d->m_parentContainer) {
-        return d->m_parentContainer->d->m_childContainers.indexOf(const_cast<KEduVocContainer*>(this));
+        return d->m_parentContainer->d->m_childContainers.indexOf(const_cast<KEduVocContainer *>(this));
     }
     return 0;
 }
 
-
-KEduVocContainer& KEduVocContainer::operator= ( const KEduVocContainer &other )
+KEduVocContainer &KEduVocContainer::operator=(const KEduVocContainer &other)
 {
     d->m_name = other.d->m_name;
     d->m_inPractice = other.d->m_inPractice;
@@ -167,13 +160,12 @@ KEduVocContainer& KEduVocContainer::operator= ( const KEduVocContainer &other )
 
 bool KEduVocContainer::operator==(const KEduVocContainer &other) const
 {
-    return  d->m_name == other.d->m_name &&
-            d->m_inPractice == other.d->m_inPractice
-/// @todo make this return something useful
-            ;
+    return d->m_name == other.d->m_name && d->m_inPractice == other.d->m_inPractice
+        /// @todo make this return something useful
+        ;
 }
 
-void KEduVocContainer::setName( const QString &name )
+void KEduVocContainer::setName(const QString &name)
 {
     d->m_name = name;
 }
@@ -195,16 +187,16 @@ void KEduVocContainer::setInPractice(bool inPractice)
 
 void KEduVocContainer::removeTranslation(int translation)
 {
-    foreach(KEduVocContainer *childContainer, d->m_childContainers) {
+    foreach (KEduVocContainer *childContainer, d->m_childContainers) {
         childContainer->removeTranslation(translation);
     }
 
-    foreach(KEduVocExpression *entry, entries() ) {
-        entry->removeTranslation( translation );
+    foreach (KEduVocExpression *entry, entries()) {
+        entry->removeTranslation(translation);
     }
 }
 
-QList< KEduVocExpression * > KEduVocContainer::entriesRecursive()
+QList<KEduVocExpression *> KEduVocContainer::entriesRecursive()
 {
     if (!d->m_childLessonEntriesValid) {
         updateChildLessonEntries();
@@ -212,12 +204,12 @@ QList< KEduVocExpression * > KEduVocContainer::entriesRecursive()
     return d->m_childLessonEntries;
 }
 
-QList< KEduVocContainer * > KEduVocContainer::childContainers()
+QList<KEduVocContainer *> KEduVocContainer::childContainers()
 {
     return d->m_childContainers;
 }
 
-KEduVocContainer * KEduVocContainer::parent()
+KEduVocContainer *KEduVocContainer::parent()
 {
     return d->m_parentContainer;
 }
@@ -232,7 +224,6 @@ KEduVocContainer::EnumContainerType KEduVocContainer::containerType()
     return d->m_type;
 }
 
-
 QUrl KEduVocContainer::imageUrl()
 {
     return d->m_imageUrl;
@@ -243,7 +234,7 @@ void KEduVocContainer::setImageUrl(const QUrl &url)
     d->m_imageUrl = url;
 }
 
-void KEduVocContainer::insertChildContainer(int row, KEduVocContainer * child)
+void KEduVocContainer::insertChildContainer(int row, KEduVocContainer *child)
 {
     d->m_childContainers.insert(row, child);
     child->d->m_parentContainer = this;
@@ -253,10 +244,10 @@ void KEduVocContainer::insertChildContainer(int row, KEduVocContainer * child)
 
 void KEduVocContainer::updateChildLessonEntries()
 {
-    QList < KEduVocExpression* > entriesRecursive = entries();
+    QList<KEduVocExpression *> entriesRecursive = entries();
 
-    foreach(KEduVocContainer *childContainer, d->m_childContainers)
-        foreach(KEduVocExpression * expr, childContainer->entries(Recursive))
+    foreach (KEduVocContainer *childContainer, d->m_childContainers)
+        foreach (KEduVocExpression *expr, childContainer->entries(Recursive))
             entriesRecursive.append(expr);
 
     d->m_childLessonEntries = entriesRecursive;
@@ -274,10 +265,10 @@ void KEduVocContainer::invalidateChildLessonEntries()
 
 double KEduVocContainer::averageGrade(int translation, EnumEntriesRecursive recursive)
 {
-    int sum = 0,  presum = 0,  count = 0;
+    int sum = 0, presum = 0, count = 0;
     foreach (KEduVocExpression *entry, entries(recursive)) {
-        KEduVocTranslation & trans( *entry->translation(translation) );
-        if ( !trans.isEmpty() ) {
+        KEduVocTranslation &trans(*entry->translation(translation));
+        if (!trans.isEmpty()) {
             ++count;
             sum += trans.grade();
             presum += trans.preGrade();

@@ -1,7 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2007-2008 Frederik Gladhorn <gladhorn@kde.org>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #include "keduvocidentifier.h"
 
@@ -34,7 +34,7 @@ public:
 };
 
 KEduVocIdentifier::KEduVocIdentifier()
-: d( new Private )
+    : d(new Private)
 {
     ///@todo maybe the user locale would be more appropriate
     d->m_locale = QStringLiteral("en");
@@ -45,8 +45,8 @@ KEduVocIdentifier::~KEduVocIdentifier()
     delete d;
 }
 
-KEduVocIdentifier::KEduVocIdentifier( const KEduVocIdentifier &other )
-: d( new Private( *other.d ) )
+KEduVocIdentifier::KEduVocIdentifier(const KEduVocIdentifier &other)
+    : d(new Private(*other.d))
 {
 #if 0
     d->m_locale = other.d->m_locale;
@@ -59,7 +59,7 @@ KEduVocIdentifier::KEduVocIdentifier( const KEduVocIdentifier &other )
 #endif
 }
 
-KEduVocIdentifier& KEduVocIdentifier::operator= ( const KEduVocIdentifier &other )
+KEduVocIdentifier &KEduVocIdentifier::operator=(const KEduVocIdentifier &other)
 {
     d->m_locale = other.d->m_locale;
     d->m_name = other.d->m_name;
@@ -76,7 +76,7 @@ QString KEduVocIdentifier::name() const
     return d->m_name;
 }
 
-void KEduVocIdentifier::setName(const QString & name)
+void KEduVocIdentifier::setName(const QString &name)
 {
     d->m_name = name;
 }
@@ -86,27 +86,27 @@ QString KEduVocIdentifier::locale() const
     return d->m_locale;
 }
 
-void KEduVocIdentifier::setLocale(const QString & locale)
+void KEduVocIdentifier::setLocale(const QString &locale)
 {
     d->m_locale = locale;
 }
 
-void KEduVocIdentifier::setArticle( const KEduVocArticle& articles )
+void KEduVocIdentifier::setArticle(const KEduVocArticle &articles)
 {
     d->m_articles = articles;
 }
 
-KEduVocArticle& KEduVocIdentifier::article() const
+KEduVocArticle &KEduVocIdentifier::article() const
 {
     return d->m_articles;
 }
 
-KEduVocPersonalPronoun& KEduVocIdentifier::personalPronouns() const
+KEduVocPersonalPronoun &KEduVocIdentifier::personalPronouns() const
 {
     return d->m_personalPronouns;
 }
 
-void KEduVocIdentifier::setPersonalPronouns( const KEduVocPersonalPronoun & pronouns )
+void KEduVocIdentifier::setPersonalPronouns(const KEduVocPersonalPronoun &pronouns)
 {
     d->m_personalPronouns = pronouns;
 }
@@ -117,7 +117,7 @@ QString KEduVocIdentifier::tense(int tenseIndex) const
     return d->m_tenses.value(tenseIndex);
 }
 
-void KEduVocIdentifier::setTense(int tenseIndex, const QString& tense)
+void KEduVocIdentifier::setTense(int tenseIndex, const QString &tense)
 {
     Q_ASSERT(d->m_tenses.size() >= tenseIndex);
     if (tenseIndex == d->m_tenses.size()) {
@@ -132,8 +132,7 @@ QStringList KEduVocIdentifier::tenseList() const
     return d->m_tenses;
 }
 
-void KEduVocIdentifier::setTenseList(const QStringList& tenses)
+void KEduVocIdentifier::setTenseList(const QStringList &tenses)
 {
     d->m_tenses = tenses;
 }
-

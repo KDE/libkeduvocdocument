@@ -1,19 +1,20 @@
 /*
  * SPDX-FileCopyrightText: 2014 Andreas Xavier <andxav at zoho dot com>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #include "keduvocdocument.h"
-#include "readermanager.h"
 #include "keduvocwqlreader.h"
+#include "readermanager.h"
 
 #include "readerTestHelpers.h"
 
-#include <QObject>
 #include <QDebug>
+#include <QObject>
 #include <QTest>
 
-namespace WordQuizReaderTests {
+namespace WordQuizReaderTests
+{
 
 /**
  * @file readerwordquiztest.cpp
@@ -43,8 +44,7 @@ private slots:
     /** Missing Font Info*/
     void testParseMissingFontInfo();
 
-private :
-
+private:
 };
 
 /**
@@ -57,76 +57,78 @@ public:
     WQLGenerator();
     ~WQLGenerator();
 
-    //String Data
-    const QString headerText,  fontTag,  gridTag,  vocabTag;
+    // String Data
+    const QString headerText, fontTag, gridTag, vocabTag;
     const QString lang0loc, lang1loc;
-    const QString word0Left,  word0Right;
+    const QString word0Left, word0Right;
 
-    //Generators of parts of the WQL Doc
-    WQLGenerator & preamble();
-    WQLGenerator & minimalFontInfo();
-    WQLGenerator & minimalGridInfo();
-    WQLGenerator & minimalVocab();
+    // Generators of parts of the WQL Doc
+    WQLGenerator &preamble();
+    WQLGenerator &minimalFontInfo();
+    WQLGenerator &minimalGridInfo();
+    WQLGenerator &minimalVocab();
 
     /** Convert to the QIODevice that the reader expects*/
-    QIODevice * toQIODevice();
+    QIODevice *toQIODevice();
     QByteArray m_barray;
-    QBuffer * m_buffer;
+    QBuffer *m_buffer;
     QString m_string;
 
     KEduVocDocument::FileType myType;
-
 };
 
 WQLGenerator::WQLGenerator()
-    : headerText( QStringLiteral("WordQuiz\n5\n"))
-    , fontTag( QStringLiteral("[Font Info]") )
-    , gridTag( QStringLiteral("[Grid Info]") )
-    , vocabTag( QStringLiteral("[Vocabulary]") )
-    , lang0loc( QStringLiteral("en") )
-    , lang1loc( QStringLiteral("de") )
-    , word0Left( QStringLiteral("dog") )
-    , word0Right( QStringLiteral("Hund") )
-    , m_buffer( nullptr )
-    , m_string( QLatin1String("") )
-    , myType( KEduVocDocument::Wql )
+    : headerText(QStringLiteral("WordQuiz\n5\n"))
+    , fontTag(QStringLiteral("[Font Info]"))
+    , gridTag(QStringLiteral("[Grid Info]"))
+    , vocabTag(QStringLiteral("[Vocabulary]"))
+    , lang0loc(QStringLiteral("en"))
+    , lang1loc(QStringLiteral("de"))
+    , word0Left(QStringLiteral("dog"))
+    , word0Right(QStringLiteral("Hund"))
+    , m_buffer(nullptr)
+    , m_string(QLatin1String(""))
+    , myType(KEduVocDocument::Wql)
 
 {
 }
 WQLGenerator::~WQLGenerator()
 {
-    if ( m_buffer ) {
+    if (m_buffer) {
         delete m_buffer;
     }
 }
 
-WQLGenerator & WQLGenerator::preamble() {
+WQLGenerator &WQLGenerator::preamble()
+{
     m_string = headerText;
     return *this;
 }
 
-WQLGenerator & WQLGenerator::minimalFontInfo() {
+WQLGenerator &WQLGenerator::minimalFontInfo()
+{
     m_string += fontTag + "\na=1\nb=1\nc=1\nd=1\n";
     return *this;
 }
 
-WQLGenerator & WQLGenerator::minimalGridInfo() {
+WQLGenerator &WQLGenerator::minimalGridInfo()
+{
     m_string += gridTag + "\na=1\nb=1\nc=1\n";
     return *this;
 }
 
-WQLGenerator & WQLGenerator::minimalVocab() {
-    m_string += vocabTag + '\n' + word0Left + "[\n" + word0Right +'\n';
+WQLGenerator &WQLGenerator::minimalVocab()
+{
+    m_string += vocabTag + '\n' + word0Left + "[\n" + word0Right + '\n';
     return *this;
 }
-
 
 void WqlReaderTest::testParseMinimalWQL()
 {
     WQLGenerator gen;
     gen.preamble().minimalFontInfo().minimalGridInfo().minimalVocab();
 
-    KVOCREADER_EXPECT( gen.m_string , KEduVocDocument::NoError , gen.myType );
+    KVOCREADER_EXPECT(gen.m_string, KEduVocDocument::NoError, gen.myType);
 }
 
 void WqlReaderTest::testParseMissingFontInfo()
@@ -134,12 +136,11 @@ void WqlReaderTest::testParseMissingFontInfo()
     WQLGenerator gen;
     gen.preamble();
 
-    KVOCREADER_EXPECT( gen.m_string , KEduVocDocument::FileReaderFailed , gen.myType );
+    KVOCREADER_EXPECT(gen.m_string, KEduVocDocument::FileReaderFailed, gen.myType);
 }
 
-
 }
 
-QTEST_MAIN( WordQuizReaderTests::WqlReaderTest )
+QTEST_MAIN(WordQuizReaderTests::WqlReaderTest)
 
 #include "readerwordquiztest.moc"

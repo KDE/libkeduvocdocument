@@ -2,14 +2,14 @@
  * create a KEduVocDocument from a text file
  * SPDX-FileCopyrightText: 2007 Peter Hedlund <peter.hedlund@kdemail.net>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #ifndef KEDUVOCCSVREADER_H
 #define KEDUVOCCSVREADER_H
 
-#include <QString>
 #include "keduvocdocument.h"
 #include "readerbase.h"
+#include <QString>
 
 class QIODevice;
 
@@ -21,9 +21,9 @@ class KEduVocCsvReader : public ReaderBase
 public:
     /** constructor
      @param dev to parse*/
-    explicit KEduVocCsvReader(QIODevice & dev);
+    explicit KEduVocCsvReader(QIODevice &dev);
     /** destructor */
-    ~KEduVocCsvReader()override {};
+    ~KEduVocCsvReader() override{};
 
     /** @brief CSV can always parse a file
      @return true if parsable
@@ -41,7 +41,7 @@ public:
     /**  @brief Parse file and write into doc
      @param doc to be written
      @return error status of the read.*/
-    KEduVocDocument::ErrorCode read(KEduVocDocument & doc ) Q_DECL_OVERRIDE;
+    KEduVocDocument::ErrorCode read(KEduVocDocument &doc) Q_DECL_OVERRIDE;
 
     /** an error message.
         @return the error message
@@ -52,9 +52,9 @@ public:
     }
 
 private:
-    QIODevice *m_inputFile;  ///< input device
-    KEduVocDocument *m_doc;  ///< output doc
-    QString m_errorMessage;  ///< error message
+    QIODevice *m_inputFile; ///< input device
+    KEduVocDocument *m_doc; ///< output doc
+    QString m_errorMessage; ///< error message
 };
 
 #endif

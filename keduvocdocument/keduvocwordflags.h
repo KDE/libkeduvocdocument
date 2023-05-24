@@ -1,17 +1,15 @@
 /*
  * SPDX-FileCopyrightText: 2008 David Capel <wot.narg@gmail.com>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #ifndef KEDUVOCWORDFLAGS_H
 #define KEDUVOCWORDFLAGS_H
 
-
 class KEduVocWordFlag
 {
 public:
-    enum Flags
-    {
+    enum Flags {
         // This is used for both empty flags and to denote no flags of the correct type were set.
         NoInformation = 0x0,
 
@@ -56,11 +54,10 @@ public:
     };
 
     static const Flags genders = (Flags)(Masculine | Feminine | Neuter);
-    static const Flags partsOfSpeech =(Flags)(Noun | Verb | Article | Pronoun | Adjective | Adverb | Conjunction);
+    static const Flags partsOfSpeech = (Flags)(Noun | Verb | Article | Pronoun | Adjective | Adverb | Conjunction);
     static const Flags numbers = (Flags)(Singular | Plural | Dual);
-    static const Flags cases = (Flags)(Nominative|Genitive|Dative|Accusative|Ablative|Locative|Vocative);
+    static const Flags cases = (Flags)(Nominative | Genitive | Dative | Accusative | Ablative | Locative | Vocative);
     static const Flags persons = (Flags)(First | Second | Third);
-
 };
 
 Q_DECLARE_FLAGS(KEduVocWordFlags, KEduVocWordFlag::Flags)

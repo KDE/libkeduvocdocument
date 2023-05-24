@@ -1,7 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2016 Hartmut Riesenbeck <hartmut.riesenbeck@gmx.de>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #ifndef KEDUVOCTEXTTEST_H
 #define KEDUVOCTEXTTEST_H
@@ -10,16 +10,17 @@
 
 class KEduVocText;
 
-namespace KEduVocTextTests {
+namespace KEduVocTextTests
+{
 /** @file
-    * \brief KeduVocText test application
-    *        Various tests for KeduVocText class.
-    * @author Hartmut Riesenbeck <hartmut.riesenbeck@gmx.de>
-    */
+ * \brief KeduVocText test application
+ *        Various tests for KeduVocText class.
+ * @author Hartmut Riesenbeck <hartmut.riesenbeck@gmx.de>
+ */
 
 class KEduVocTextTest : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
 
 private slots:
     void testAssignmentOperator();
@@ -31,4 +32,3 @@ private:
 }
 
 #endif // KEDUVOCTEXTTEST_H
-

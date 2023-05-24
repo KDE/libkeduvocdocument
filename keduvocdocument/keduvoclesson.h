@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2007 Jeremy Whiting <jpwhiting@kde.org>
  * SPDX-FileCopyrightText: 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #ifndef KEDUVOCLESSON_H
 #define KEDUVOCLESSON_H
@@ -14,35 +14,35 @@
 class KEduVocExpression;
 
 /** class to store information about a lesson */
-class KEDUVOCDOCUMENT_EXPORT KEduVocLesson :public KEduVocContainer
+class KEDUVOCDOCUMENT_EXPORT KEduVocLesson : public KEduVocContainer
 {
 public:
     /** default constructor */
-    explicit KEduVocLesson(const QString& name, KEduVocContainer *parent = nullptr);
+    explicit KEduVocLesson(const QString &name, KEduVocContainer *parent = nullptr);
 
-//     void appendChildLesson(KEduVocLesson *child);
+    //     void appendChildLesson(KEduVocLesson *child);
 
-//     QList<KEduVocLesson *> childLessons();
-//     KEduVocLesson *childLesson(int row);
+    //     QList<KEduVocLesson *> childLessons();
+    //     KEduVocLesson *childLesson(int row);
 
-//     int childLessonCount() const;
+    //     int childLessonCount() const;
 
-//     int row() const;
-//     KEduVocLesson *parent();
+    //     int row() const;
+    //     KEduVocLesson *parent();
 
     /** copy constructor for d-pointer safe copying */
-    KEduVocLesson( const KEduVocLesson &other );
+    KEduVocLesson(const KEduVocLesson &other);
 
     /** destructor */
     ~KEduVocLesson() override;
 
     /** assignment operator */
-    KEduVocLesson& operator= ( const KEduVocLesson& );
+    KEduVocLesson &operator=(const KEduVocLesson &);
 
-    KEduVocExpression* entry(int row, EnumEntriesRecursive recursive = NotRecursive) Q_DECL_OVERRIDE;
+    KEduVocExpression *entry(int row, EnumEntriesRecursive recursive = NotRecursive) Q_DECL_OVERRIDE;
 
     /** get a list of all entries in the lesson */
-    QList < KEduVocExpression* > entries(EnumEntriesRecursive recursive = NotRecursive) Q_DECL_OVERRIDE;
+    QList<KEduVocExpression *> entries(EnumEntriesRecursive recursive = NotRecursive) Q_DECL_OVERRIDE;
 
     /** get the number of entries in the lesson */
     int entryCount(EnumEntriesRecursive recursive = NotRecursive) Q_DECL_OVERRIDE;
@@ -50,28 +50,28 @@ public:
     /** append an entry to the lesson
      * @param entry the id of the entry to add
      */
-    void appendEntry(KEduVocExpression* entry);
+    void appendEntry(KEduVocExpression *entry);
 
     /**
      * insert an entry at a specific position
-     * @param index 
-     * @param entry 
+     * @param index
+     * @param entry
      */
-    void insertEntry(int index, KEduVocExpression* entry);
+    void insertEntry(int index, KEduVocExpression *entry);
 
     /** remove an entry from the lesson
      * @param entry the id of the entry to remove
      */
-    void removeEntry(KEduVocExpression* entry);
+    void removeEntry(KEduVocExpression *entry);
 
 private:
     friend class KEduVocDocument;
     // This constructor is used by KEduVocDocument when creating the top level lesson.
-    explicit KEduVocLesson(const QString& name, KEduVocDocument *document);
+    explicit KEduVocLesson(const QString &name, KEduVocDocument *document);
 
 private:
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 #endif

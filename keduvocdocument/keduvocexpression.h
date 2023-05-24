@@ -4,7 +4,7 @@
  * SPDX-FileCopyrightText: 2005-2007 Peter Hedlund <peter.hedlund@kdemail.net>
  * SPDX-FileCopyrightText: 2008 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 #ifndef KEDUVOCEXPRESSION_H
 #define KEDUVOCEXPRESSION_H
 
@@ -12,8 +12,8 @@
 
 #include <QDateTime>
 
-#include "keduvoclesson.h"
 #include "keduvocarticle.h"
+#include "keduvoclesson.h"
 #include "keduvocmultiplechoice.h"
 #include "keduvoctranslation.h"
 
@@ -26,7 +26,6 @@ class KEduVocLesson;
 class KEDUVOCDOCUMENT_EXPORT KEduVocExpression
 {
 public:
-
     /** default constructor for an empty vocabulary expression
      */
     explicit KEduVocExpression();
@@ -35,27 +34,26 @@ public:
      *
      * @param expression       translation
      */
-    explicit KEduVocExpression( const QString & expression );
+    explicit KEduVocExpression(const QString &expression);
 
     /** Constructor for a vocabulary expression with an original and one or more translations
      *
      * @param translations      translations
      */
-    explicit KEduVocExpression( const QStringList & translations );
+    explicit KEduVocExpression(const QStringList &translations);
 
-    KEduVocExpression(const KEduVocExpression& other);
+    KEduVocExpression(const KEduVocExpression &other);
 
     ~KEduVocExpression();
 
     /** return the lesson
      */
-    KEduVocLesson * lesson() const;
-
+    KEduVocLesson *lesson() const;
 
     /** reset all grades of the entry
      * @param index     identifier (language)
      */
-    void resetGrades( int index );
+    void resetGrades(int index);
 
     /** returns flag if entry is activated for queries
      */
@@ -63,44 +61,44 @@ public:
 
     /** set entry active (enabled for queries)
      */
-    void setActive( bool flag = true );
+    void setActive(bool flag = true);
 
     int sizeHint() const;
-    void setSizeHint( int sizeHint );
+    void setSizeHint(int sizeHint);
 
     /**
      * Add a translation to this expression
      * @param index            number of translation = the identifier
      * @param expression       the translation
      */
-    void setTranslation( int index, const QString &expression );
+    void setTranslation(int index, const QString &expression);
 
     /** removes a translation
      *
      * @param index            number of translation 1..x
      */
-    void removeTranslation( int index );
+    void removeTranslation(int index);
 
     /**
      * Get a pointer to the translation
      * @param index of the language identifier
      * @return the translation
      */
-    KEduVocTranslation* translation( int index );
-    KEduVocTranslation* translation( int index ) const;
+    KEduVocTranslation *translation(int index);
+    KEduVocTranslation *translation(int index) const;
 
     QList<int> translationIndices() const;
 
-    KEduVocExpression& operator= ( const KEduVocExpression &expression );
-    bool operator== ( const KEduVocExpression &expression ) const;
+    KEduVocExpression &operator=(const KEduVocExpression &expression);
+    bool operator==(const KEduVocExpression &expression) const;
 
 private:
     class KEduVocExpressionPrivate;
-    KEduVocExpressionPrivate* const d;
+    KEduVocExpressionPrivate *const d;
 
     /** only called by lesson to add itself to the lesson list
      */
-    void setLesson( KEduVocLesson * l );
+    void setLesson(KEduVocLesson *l);
 
     friend class KEduVocLesson;
 };

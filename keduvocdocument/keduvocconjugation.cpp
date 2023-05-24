@@ -2,15 +2,15 @@
  * C++ Implementation: keduvocconjugation
  * SPDX-FileCopyrightText: 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #include "keduvocconjugation.h"
 #include "keduvoccommon_p.h"
 #include "kvtml2defs.h"
 
-#include <QMap>
-#include <QDomDocument>
 #include <QDebug>
+#include <QDomDocument>
+#include <QMap>
 
 class KEduVocConjugation::Private
 {
@@ -18,43 +18,39 @@ public:
     QMap<KEduVocWordFlags, KEduVocText> m_conjugations;
 };
 
-
 KEduVocConjugation::KEduVocConjugation()
-        : d( new Private )
-{}
+    : d(new Private)
+{
+}
 
-
-KEduVocConjugation::KEduVocConjugation( const KEduVocConjugation& other )
-        : d( new Private )
+KEduVocConjugation::KEduVocConjugation(const KEduVocConjugation &other)
+    : d(new Private)
 {
     d->m_conjugations = other.d->m_conjugations;
 }
-
 
 KEduVocConjugation::~KEduVocConjugation()
 {
     delete d;
 }
 
-KEduVocConjugation& KEduVocConjugation::operator = ( const KEduVocConjugation& other )
+KEduVocConjugation &KEduVocConjugation::operator=(const KEduVocConjugation &other)
 {
     d->m_conjugations = other.d->m_conjugations;
     return *this;
 }
 
-bool KEduVocConjugation::operator ==(const KEduVocConjugation& other) const
+bool KEduVocConjugation::operator==(const KEduVocConjugation &other) const
 {
     return d->m_conjugations == other.d->m_conjugations;
 }
 
-
-
-KEduVocText& KEduVocConjugation::conjugation(KEduVocWordFlags flags) const
+KEduVocText &KEduVocConjugation::conjugation(KEduVocWordFlags flags) const
 {
-        return d->m_conjugations[flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers | KEduVocWordFlag::genders)];
+    return d->m_conjugations[flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers | KEduVocWordFlag::genders)];
 }
 
-void KEduVocConjugation::setConjugation(const KEduVocText& conjugation, KEduVocWordFlags flags)
+void KEduVocConjugation::setConjugation(const KEduVocText &conjugation, KEduVocWordFlags flags)
 {
     d->m_conjugations[flags & (KEduVocWordFlag::persons | KEduVocWordFlag::numbers | KEduVocWordFlag::genders)] = conjugation;
 }
@@ -64,12 +60,12 @@ bool KEduVocConjugation::isEmpty()
     return d->m_conjugations.isEmpty();
 }
 
-QList< KEduVocWordFlags > KEduVocConjugation::keys()
+QList<KEduVocWordFlags> KEduVocConjugation::keys()
 {
     return d->m_conjugations.keys();
 }
 
-void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
+void KEduVocConjugation::toKVTML2(QDomElement &parent, const QString &tense)
 {
     if (isEmpty()) {
         return;
@@ -90,26 +86,26 @@ void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
 
     // write the tense tag
     if (!tense.isEmpty()) {
-        QDomElement tenseElement = domDoc.createElement( KVTML_TENSE );
-        tenseElement.appendChild( domDoc.createTextNode(tense) );
+        QDomElement tenseElement = domDoc.createElement(KVTML_TENSE);
+        tenseElement.appendChild(domDoc.createTextNode(tense));
         parent.appendChild(tenseElement);
     } else {
         qDebug() << "Saving conjugation with empty tense";
     }
 
-    for ( int num = 0; num <= 2; ++num) {
-        QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
-        for ( int person = 0; person < 5; ++person) {
+    for (int num = 0; num <= 2; ++num) {
+        QDomElement numberElement = domDoc.createElement(KVTML_GRAMMATICAL_NUMBER[num]);
+        for (int person = 0; person < 5; ++person) {
             KEduVocWordFlags curFlags = numbers[num] | persons[person];
 
             if (keys().contains(curFlags) && !conjugation(curFlags).isEmpty()) {
-                QDomElement personElement = domDoc.createElement( KVTML_GRAMMATICAL_PERSON[person] );
+                QDomElement personElement = domDoc.createElement(KVTML_GRAMMATICAL_PERSON[person]);
                 numberElement.appendChild(personElement);
                 conjugation(curFlags).toKVTML2(personElement);
             }
         }
         if (numberElement.hasChildNodes()) {
-            parent.appendChild( numberElement );
+            parent.appendChild(numberElement);
         }
     }
 }
@@ -152,26 +148,25 @@ void KEduVocConjugation::toKVTML2(QDomElement & parent, const QString &tense)
               }
     }*/
 
-    /*
-    for ( KEduVocWordFlag::DeclensionNumber num = KEduVocWordFlag::Singular; num <= KEduVocWordFlag::Plural; num = KEduVocWordFlag::DeclensionNumber(num +1) ) {
-        QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
-        for ( KEduVocWordFlag::DeclensionCase dcase = KEduVocWordFlag::Nominative; dcase < KEduVocWordFlag::DeclensionCaseMAX; dcase = KEduVocWordFlag::DeclensionCase(dcase +1) ) {
-            QDomElement caseElement = domDoc.createElement( KVTML_DECLENSION_CASE[dcase] );
-            declension(num, dcase).toKVTML2(caseElement);
+/*
+for ( KEduVocWordFlag::DeclensionNumber num = KEduVocWordFlag::Singular; num <= KEduVocWordFlag::Plural; num = KEduVocWordFlag::DeclensionNumber(num +1) ) {
+    QDomElement numberElement = domDoc.createElement( KVTML_GRAMMATICAL_NUMBER[num] );
+    for ( KEduVocWordFlag::DeclensionCase dcase = KEduVocWordFlag::Nominative; dcase < KEduVocWordFlag::DeclensionCaseMAX; dcase =
+KEduVocWordFlag::DeclensionCase(dcase +1) ) { QDomElement caseElement = domDoc.createElement( KVTML_DECLENSION_CASE[dcase] ); declension(num,
+dcase).toKVTML2(caseElement);
 
-            if (caseElement.hasChildNodes()) {
-                numberElement.appendChild(caseElement);
-            }
-        }
-        if (numberElement.hasChildNodes()) {
-            declensionElement.appendChild(numberElement);
+        if (caseElement.hasChildNodes()) {
+            numberElement.appendChild(caseElement);
         }
     }
+    if (numberElement.hasChildNodes()) {
+        declensionElement.appendChild(numberElement);
+    }
+}
 
-    */
+*/
 
-
-KEduVocConjugation* KEduVocConjugation::fromKVTML2(QDomElement & parent)
+KEduVocConjugation *KEduVocConjugation::fromKVTML2(QDomElement &parent)
 {
     // sanity check
     if (parent.isNull()) {
@@ -189,15 +184,14 @@ KEduVocConjugation* KEduVocConjugation::fromKVTML2(QDomElement & parent)
     persons[3] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Feminine);
     persons[4] = (KEduVocWordFlag::Flags)((int)KEduVocWordFlag::Third | (int)KEduVocWordFlag::Neuter);
 
+    KEduVocConjugation *conjugation = new KEduVocConjugation;
 
-    KEduVocConjugation* conjugation = new KEduVocConjugation;
-
-    for ( int num = 0; num <= 2; num++ ) {
-        QDomElement numberElement = parent.firstChildElement( KVTML_GRAMMATICAL_NUMBER[num] );
+    for (int num = 0; num <= 2; num++) {
+        QDomElement numberElement = parent.firstChildElement(KVTML_GRAMMATICAL_NUMBER[num]);
 
         if (numberElement.hasChildNodes()) {
             for (int person = 0; person < 5; person++) {
-                QDomElement personElement = numberElement.firstChildElement( KVTML_GRAMMATICAL_PERSON[person] );
+                QDomElement personElement = numberElement.firstChildElement(KVTML_GRAMMATICAL_PERSON[person]);
                 if (!personElement.isNull()) {
                     KEduVocText text;
                     text.fromKVTML2(personElement);
@@ -212,5 +206,3 @@ KEduVocConjugation* KEduVocConjugation::fromKVTML2(QDomElement & parent)
     }
     return conjugation;
 }
-
-

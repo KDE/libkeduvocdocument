@@ -1,15 +1,15 @@
 /*
  * SPDX-FileCopyrightText: 2014 Andreas Xavier <andxav at zoho dot com>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #ifndef READERMANAGER_H
 #define READERMANAGER_H
 
 #include "keduvocdocument.h"
 
-#include <QSharedPointer>
 #include <QIODevice>
+#include <QSharedPointer>
 class ReaderBase;
 
 /**
@@ -28,10 +28,7 @@ public:
         them can parse this file/device it returns a BadReader.
         @param device an open readable, non-sequential device.
         @return a QSharedPointer<ReaderBase> for the device. */
-    static ReaderPtr reader(QIODevice & device);
-
+    static ReaderPtr reader(QIODevice &device);
 };
-
-
 
 #endif // READERMANAGER_H

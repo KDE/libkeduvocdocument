@@ -9,9 +9,9 @@
 #ifndef KEDUVOCVOKABELNREADER_H
 #define KEDUVOCVOKABELNREADER_H
 
-#include <QString>
 #include "keduvocdocument.h"
 #include "readerbase.h"
+#include <QString>
 
 class QIODevice;
 class KEduVocDocument;
@@ -23,10 +23,10 @@ public:
     /** constructor
         @param file an device open for read
     */
-    explicit KEduVocVokabelnReader( QIODevice & file);
+    explicit KEduVocVokabelnReader(QIODevice &file);
 
     /**destructor*/
-    ~KEduVocVokabelnReader()override {};
+    ~KEduVocVokabelnReader() override{};
 
     /** @brief Can this reader parse this file
      *
@@ -44,7 +44,7 @@ public:
     /** @brief Parse file and write into doc
      @param doc to be written
      @return error status of the read.*/
-    KEduVocDocument::ErrorCode read(KEduVocDocument & doc) Q_DECL_OVERRIDE;
+    KEduVocDocument::ErrorCode read(KEduVocDocument &doc) Q_DECL_OVERRIDE;
 
     /** an error message.
         @return the error message
@@ -55,9 +55,9 @@ public:
     }
 
 private:
-    QIODevice *m_inputFile;  ///< input device
-    KEduVocDocument *m_doc;  ///< output doc
-    QString m_errorMessage;  ///< error message
+    QIODevice *m_inputFile; ///< input device
+    KEduVocDocument *m_doc; ///< output doc
+    QString m_errorMessage; ///< error message
 };
 
 #endif

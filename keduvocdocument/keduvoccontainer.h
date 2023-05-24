@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2007 Jeremy Whiting <jpwhiting@kde.org>
  * SPDX-FileCopyrightText: 2007 Frederik Gladhorn <frederik.gladhorn@kdemail.net>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #ifndef KEDUVOCCONTAINER_H
 #define KEDUVOCCONTAINER_H
@@ -23,21 +23,20 @@ class KEDUVOCDOCUMENT_EXPORT KEduVocContainer
     // make this a template?
 
 public:
-    enum EnumContainerType{
+    enum EnumContainerType {
         Container,
         Lesson,
         WordType,
-        Leitner
+        Leitner,
     };
 
-    enum EnumEntriesRecursive{
+    enum EnumEntriesRecursive {
         NotRecursive = 0,
-        Recursive = 1
+        Recursive = 1,
     };
 
     /** default constructor */
-    explicit KEduVocContainer(const QString& name, EnumContainerType type,
-                  KEduVocContainer *parent = nullptr);
+    explicit KEduVocContainer(const QString &name, EnumContainerType type, KEduVocContainer *parent = nullptr);
 
     void appendChildContainer(KEduVocContainer *child);
     void insertChildContainer(int row, KEduVocContainer *child);
@@ -51,7 +50,7 @@ public:
      * @param name container name
      * @return the child container
      */
-    KEduVocContainer *childContainer(const QString& name);
+    KEduVocContainer *childContainer(const QString &name);
 
     QList<KEduVocContainer *> childContainers();
 
@@ -60,7 +59,7 @@ public:
      * @param name
      * @return
      */
-//     KEduVocContainer *childContainer(const QString& name);
+    //     KEduVocContainer *childContainer(const QString& name);
 
     int childContainerCount() const;
 
@@ -68,13 +67,13 @@ public:
     virtual KEduVocContainer *parent();
 
     /** copy constructor for d-pointer safe copying */
-    KEduVocContainer( const KEduVocContainer &other );
+    KEduVocContainer(const KEduVocContainer &other);
 
     /** destructor */
     virtual ~KEduVocContainer();
 
     /** assignment operator */
-    KEduVocContainer& operator= ( const KEduVocContainer& );
+    KEduVocContainer &operator=(const KEduVocContainer &);
 
     /** @return the containing KEduVocDocument */
     KEduVocDocument *document() const;
@@ -82,15 +81,15 @@ public:
     /** set the container name
      * @param name text to set for the name
      */
-    void setName( const QString &name );
+    void setName(const QString &name);
 
     /** get the container name */
     QString name();
 
     /** get a list of all entries in the container */
-    virtual QList < KEduVocExpression* > entries(EnumEntriesRecursive recursive = NotRecursive) =0;
-    virtual int entryCount(EnumEntriesRecursive recursive = NotRecursive) =0;
-    virtual KEduVocExpression* entry(int row, EnumEntriesRecursive recursive = NotRecursive) =0;
+    virtual QList<KEduVocExpression *> entries(EnumEntriesRecursive recursive = NotRecursive) = 0;
+    virtual int entryCount(EnumEntriesRecursive recursive = NotRecursive) = 0;
+    virtual KEduVocExpression *entry(int row, EnumEntriesRecursive recursive = NotRecursive) = 0;
 
     /**
      * Removes a translation. This has to be called when a language is removed from a document.
@@ -99,7 +98,7 @@ public:
     void removeTranslation(int translation);
 
     bool inPractice();
-    void setInPractice( bool inPractice );
+    void setInPractice(bool inPractice);
 
     /** equality operator */
     bool operator==(const KEduVocContainer &other) const;
@@ -116,7 +115,6 @@ public:
      * @param type the new type
      */
     void setContainerType(KEduVocContainer::EnumContainerType type);
-
 
     /** get the image url for this container if it exists */
     QUrl imageUrl();
@@ -138,7 +136,7 @@ public:
     void resetGrades(int translation, EnumEntriesRecursive recursive);
 
 protected:
-    QList< KEduVocExpression * > entriesRecursive();
+    QList<KEduVocExpression *> entriesRecursive();
 
     /**
      * Set the child entry cache to invalid
@@ -151,11 +149,11 @@ protected:
     void updateChildLessonEntries();
 
     // Used by KEduVocLesson when the Document creates the top level lesson.
-    explicit KEduVocContainer(const QString& name, EnumContainerType type,
-			      KEduVocDocument *document);
+    explicit KEduVocContainer(const QString &name, EnumContainerType type, KEduVocDocument *document);
+
 private:
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 #endif

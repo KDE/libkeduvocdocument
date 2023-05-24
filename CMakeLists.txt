@@ -13,6 +13,8 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
 include(ECMGenerateExportHeader)
 include(ECMDeprecationSettings)
+include(KDEGitCommitHooks)
+include(KDEClangFormat)
 if (QT_MAJOR_VERSION STREQUAL "6")
     set(QT_REQUIRED_VERSION "6.4.0")
     set(KF_MIN_VERSION "5.240.0")
@@ -53,4 +55,10 @@ install( EXPORT LibKEduVocDocumentTargets
          DESTINATION "${_LibKEduVocDocument_CONFIG_DEST}"
          NAMESPACE LibKEduVocDocumentImport__
          FILE LibKEduVocDocumentTargets.cmake )
+
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.c)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

@@ -1,18 +1,17 @@
 /*
  * SPDX-FileCopyrightText: 2014-2014 Andreas Xavier <andxav at zoho dot com>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
-#include "keduvocdocument.h"
 #include "dummyreader.h"
+#include "keduvocdocument.h"
 
 #include <KTemporaryFile>
 
 #include <qtest_kde.h>
 
 /** Unit tests to exercise each exit path of the KEdeVocDocment open() API.*/
-class OpenAPITest
-  : public QObject
+class OpenAPITest : public QObject
 {
     Q_OBJECT
 
@@ -30,24 +29,24 @@ private slots:
     /**  Good Read*/
     void goodTest();
 
-private :
-
+private:
     /** Class to manage creation/destruction of a temp doc*/
     class TestDoc : public KTemporaryFile
     {
-    public :
+    public:
         /** Create the file, fix the suffix and instantiate it.*/
-        explicit TestDoc(KEduVocDocument::ErrorCode err = KEduVocDocument::NoError) {
-            this->open(QFile::WriteOnly );
+        explicit TestDoc(KEduVocDocument::ErrorCode err = KEduVocDocument::NoError)
+        {
+            this->open(QFile::WriteOnly);
             QTextStream out(this);
-            out << DummyReader::makeDummyString( err );
+            out << DummyReader::makeDummyString(err);
             this->close();
         }
         /** Destructor*/
-        ~TestDoc() {}
+        ~TestDoc()
+        {
+        }
     };
-
-
 };
 
 void OpenAPITest::fileDoesntExistTest()
@@ -55,21 +54,19 @@ void OpenAPITest::fileDoesntExistTest()
     KTemporaryFile tempfile;
     KEduVocDocument doc;
 
-    KEduVocDocument::ErrorCode errcode( doc.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling) );
-    QCOMPARE( int( errcode ),  int( KEduVocDocument::FileDoesNotExist ) );
+    KEduVocDocument::ErrorCode errcode(doc.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling));
+    QCOMPARE(int(errcode), int(KEduVocDocument::FileDoesNotExist));
 }
 
 void OpenAPITest::unreadableFileTest()
 {
     TestDoc tempfile;
-    QFile::setPermissions(
-        tempfile.fileName()
-        , ~QFile::Permissions( QFile::ReadOwner | QFile::ReadUser | QFile::ReadGroup | QFile::ReadOther) );
+    QFile::setPermissions(tempfile.fileName(), ~QFile::Permissions(QFile::ReadOwner | QFile::ReadUser | QFile::ReadGroup | QFile::ReadOther));
 
     KEduVocDocument doc;
-    KEduVocDocument::ErrorCode errcode( doc.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling) );
+    KEduVocDocument::ErrorCode errcode(doc.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling));
 
-    QCOMPARE( int( errcode ),  int( KEduVocDocument::FileDoesNotExist ) );
+    QCOMPARE(int(errcode), int(KEduVocDocument::FileDoesNotExist));
 }
 
 void OpenAPITest::lockedFileFailureTest()
@@ -87,33 +84,29 @@ void OpenAPITest::lockedFileFailureTest()
 
     doc.close();
     QCOMPARE(doc2.open(tempfile.fileName(), KEduVocDocument::FileDefaultHandling), KEduVocDocument::NoError);
-
-
-
 }
 
 void OpenAPITest::unknownFormatTest()
 {
     TestDoc tempfile(KEduVocDocument::FileTypeUnknown);
     KEduVocDocument doc;
-    QCOMPARE( doc.open(tempfile.fileName() ),  int( KEduVocDocument::FileTypeUnknown ) );
+    QCOMPARE(doc.open(tempfile.fileName()), int(KEduVocDocument::FileTypeUnknown));
 }
 
 void OpenAPITest::fileReaderFailedTest()
 {
     TestDoc tempfile(KEduVocDocument::FileReaderFailed);
     KEduVocDocument doc;
-    QCOMPARE( doc.open(tempfile.fileName() ),  int( KEduVocDocument::FileReaderFailed ) );
+    QCOMPARE(doc.open(tempfile.fileName()), int(KEduVocDocument::FileReaderFailed));
 }
 
 void OpenAPITest::goodTest()
 {
     TestDoc tempfile(KEduVocDocument::NoError);
     KEduVocDocument doc;
-    QCOMPARE( doc.open(tempfile.fileName() ),  int( KEduVocDocument::NoError ) );
+    QCOMPARE(doc.open(tempfile.fileName()), int(KEduVocDocument::NoError));
 }
 
-
-QTEST_MAIN( OpenAPITest, GUI )
+QTEST_MAIN(OpenAPITest, GUI)
 
 #include "openapitest.moc"

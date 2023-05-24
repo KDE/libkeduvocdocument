@@ -1,13 +1,14 @@
 /*
  * SPDX-FileCopyrightText: 2016 Hartmut Riesenbeck <hartmut.riesenbeck@gmx.de>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #include "keduvocdocument.h"
 #include <QTemporaryFile>
 #include <QTest>
 
-namespace KEduVocDocumentTests {
+namespace KEduVocDocumentTests
+{
 /** @file
  * \brief Various KEduVocDocument tests
  * This test class contends various tests for public KEduVocDocument methods.
@@ -84,10 +85,10 @@ void KEduVocDocumentTest::createTmpTestFileOfType(KEduVocDocument::FileType file
     KEduVocDocument::ErrorCode result = m_documentTemplate.saveAs(tmpTestFileUrl(), fileType);
     if (result != KEduVocDocument::NoError) {
         QStringList errorStrings = QStringList() << QStringLiteral("NoError") << QStringLiteral("Unknown") << QStringLiteral("InvalidXml")
-            << QStringLiteral("FileTypeUnknown") << QStringLiteral("FileCannotWrite") << QStringLiteral("FileWriterFailed") << QStringLiteral("FileCannotRead")
-            << QStringLiteral("FileReaderFailed")<< QStringLiteral("FileDoesNotExist") << QStringLiteral("FileLocked") << QStringLiteral("FileCannotLock")
-            << QStringLiteral("FileIsReadOnly");
-        QString failText =QStringLiteral("Temporary test file could not be saved. (Error code = %1)");
+                                                 << QStringLiteral("FileTypeUnknown") << QStringLiteral("FileCannotWrite") << QStringLiteral("FileWriterFailed")
+                                                 << QStringLiteral("FileCannotRead") << QStringLiteral("FileReaderFailed") << QStringLiteral("FileDoesNotExist")
+                                                 << QStringLiteral("FileLocked") << QStringLiteral("FileCannotLock") << QStringLiteral("FileIsReadOnly");
+        QString failText = QStringLiteral("Temporary test file could not be saved. (Error code = %1)");
         failText = failText.arg(errorStrings.value(result));
         QFAIL(failText.toLocal8Bit().constData());
     }
@@ -108,5 +109,3 @@ QUrl KEduVocDocumentTest::tmpTestFileUrl() const
 QTEST_MAIN(KEduVocDocumentTests::KEduVocDocumentTest)
 
 #include "keduvocdocumenttest.moc"
-
-

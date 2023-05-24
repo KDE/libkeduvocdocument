@@ -1,15 +1,14 @@
 /*
  * SPDX-FileCopyrightText: 2014 Andreas Xavier <andxav at zoho dot com>
  * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+ */
 
 #include "dummyreader.h"
 
 #include <KLocalizedString>
 
-#include <QXmlStreamWriter>
 #include <QIODevice>
-
+#include <QXmlStreamWriter>
 
 //@todo These static functions should be defined here.  Find the syntax bug.
 // QString DummyReader::mTag()
@@ -37,25 +36,24 @@
 //     return out;
 // }
 
-
-DummyReader::DummyReader(QIODevice & dev)
-    :m_dev( dev )
+DummyReader::DummyReader(QIODevice &dev)
+    : m_dev(dev)
 {
 }
 
 bool DummyReader::isParsable()
 {
     bool isparsable = false;
-    setDevice( &m_dev );
-    if ( !atEnd() ) {
+    setDevice(&m_dev);
+    if (!atEnd()) {
         readNextStartElement();
-        if ( isStartElement() ) {
-            if ( name() == mTag() ) {
-                isparsable=true;
+        if (isStartElement()) {
+            if (name() == mTag()) {
+                isparsable = true;
             }
         }
     }
-    m_dev.seek( 0 );
+    m_dev.seek(0);
     return isparsable;
 }
 
@@ -64,40 +62,41 @@ KEduVocDocument::FileType DummyReader::fileTypeHandled()
     return KEduVocDocument::KvdNone;
 }
 
-KEduVocDocument::ErrorCode DummyReader::read(KEduVocDocument &) {
-    setDevice( &m_dev );
-    if ( !atEnd() ) {
+KEduVocDocument::ErrorCode DummyReader::read(KEduVocDocument &)
+{
+    setDevice(&m_dev);
+    if (!atEnd()) {
         readNextStartElement();
-        if ( isStartElement() ) {
+        if (isStartElement()) {
             // kDebug() << "Reading Dummy File is start "<< name() <<" text "<<text();
-            if ( name() == mTag() ) {
+            if (name() == mTag()) {
                 readNext();
                 readNext();
-                //kDebug() << "Reading Dummy File"<<name() << "text" << text();
-                if ( isStartElement() ) {
+                // kDebug() << "Reading Dummy File"<<name() << "text" << text();
+                if (isStartElement()) {
                     m_errorMessage = readElementText();
                     // kDebug() << "Reading Dummy File is " <<name() <<" with "<<m_errorMessage;
-                    if ( makeErrorTag( KEduVocDocument::NoError ) == name() )
+                    if (makeErrorTag(KEduVocDocument::NoError) == name())
                         return KEduVocDocument::NoError;
-                    if ( makeErrorTag( KEduVocDocument::Unknown ) == name() )
+                    if (makeErrorTag(KEduVocDocument::Unknown) == name())
                         return KEduVocDocument::Unknown;
-                    if ( makeErrorTag( KEduVocDocument::InvalidXml ) == name() )
+                    if (makeErrorTag(KEduVocDocument::InvalidXml) == name())
                         return KEduVocDocument::InvalidXml;
-                    if ( makeErrorTag( KEduVocDocument::FileTypeUnknown ) == name() )
+                    if (makeErrorTag(KEduVocDocument::FileTypeUnknown) == name())
                         return KEduVocDocument::FileTypeUnknown;
-                    if ( makeErrorTag( KEduVocDocument::FileCannotWrite ) == name() )
+                    if (makeErrorTag(KEduVocDocument::FileCannotWrite) == name())
                         return KEduVocDocument::FileCannotWrite;
-                    if ( makeErrorTag( KEduVocDocument::FileWriterFailed ) == name() )
+                    if (makeErrorTag(KEduVocDocument::FileWriterFailed) == name())
                         return KEduVocDocument::FileWriterFailed;
-                    if ( makeErrorTag( KEduVocDocument::FileCannotRead ) == name() )
+                    if (makeErrorTag(KEduVocDocument::FileCannotRead) == name())
                         return KEduVocDocument::FileCannotRead;
-                    if ( makeErrorTag( KEduVocDocument::FileReaderFailed ) == name() )
+                    if (makeErrorTag(KEduVocDocument::FileReaderFailed) == name())
                         return KEduVocDocument::FileReaderFailed;
-                    if ( makeErrorTag( KEduVocDocument::FileDoesNotExist ) == name() )
+                    if (makeErrorTag(KEduVocDocument::FileDoesNotExist) == name())
                         return KEduVocDocument::FileDoesNotExist;
-                    if ( makeErrorTag( KEduVocDocument::FileLocked ) == name() )
+                    if (makeErrorTag(KEduVocDocument::FileLocked) == name())
                         return KEduVocDocument::FileLocked;
-                    if ( makeErrorTag( KEduVocDocument::FileCannotLock ) == name() )
+                    if (makeErrorTag(KEduVocDocument::FileCannotLock) == name())
                         return KEduVocDocument::FileCannotLock;
                 }
             }
@@ -105,7 +104,6 @@ KEduVocDocument::ErrorCode DummyReader::read(KEduVocDocument &) {
     }
     return KEduVocDocument::Unknown;
 }
-
 
 QString DummyReader::errorMessage() const
 {
