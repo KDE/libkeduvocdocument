@@ -1123,3 +1123,5 @@ bool KEduVocKvtmlReader::addLanguage(int languageId, const QString &locale)
     }
     return true;
 }
+
+#include "moc_keduvockvtmlreader.cpp"

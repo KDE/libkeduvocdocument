@@ -32,3 +32,5 @@ void EmptyDocumentTest::captureMessageOutput(QtMsgType /*type*/, const QMessageL
 }
 
 QTEST_MAIN(EmptyDocumentTests::EmptyDocumentTest)
+
+#include "moc_emptydocumenttest.cpp"

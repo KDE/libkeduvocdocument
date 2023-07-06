@@ -119,3 +119,5 @@ bool KEduVocTextTest::isEqual(const KEduVocText &a, const KEduVocText &b) const
 }
 
 QTEST_MAIN(KEduVocTextTests::KEduVocTextTest)
+
+#include "moc_keduvoctexttest.cpp"
