@@ -46,7 +46,7 @@ msgstr "Document de lliçó"
 msgid "Word types"
 msgstr "Tipus de paraules"
 
-# skip-rule: kct-box
+# skip-rule: kct-box, t-sc-box
 #: keduvocdocument/keduvocdocument.cpp:131
 #, kde-format
 msgid "Leitner Box"
