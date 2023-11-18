@@ -74,7 +74,7 @@ void KEduVocWordType::removeTranslation(KEduVocTranslation *translation)
 
     // no lesson found - this entry is being deleted. remove all its siblings.
     if (!translation->entry()->lesson()) {
-        int index = d->m_expressions.indexOf(translation->entry());
+        const int index = d->m_expressions.indexOf(translation->entry());
         if (index != -1) {
             d->m_expressions.removeAt(index);
         }
@@ -90,7 +90,10 @@ void KEduVocWordType::removeTranslation(KEduVocTranslation *translation)
         }
     }
     if (!found) {
-        d->m_expressions.removeAt(d->m_expressions.indexOf(translation->entry()));
+        const int index = d->m_expressions.indexOf(translation->entry());
+        if (index >= 0) {
+            d->m_expressions.removeAt(index);
+        }
     }
 
     invalidateChildLessonEntries();
