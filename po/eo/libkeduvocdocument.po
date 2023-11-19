@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libkeduvocdocument\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: 2023-03-25 16:19+0100\n"
+"PO-Revision-Date: 2023-11-18 21:07+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -34,38 +34,38 @@ msgstr "Aŭtoro:"
 msgctxt ""
 "The top level lesson which contains all other lessons of the document."
 msgid "Document Lesson"
-msgstr ""
+msgstr "Dokumenta Leciono"
 
 #: keduvocdocument/keduvocdocument.cpp:128
 #, kde-format
 msgid "Word types"
-msgstr ""
+msgstr "Vortspecoj"
 
 #: keduvocdocument/keduvocdocument.cpp:131
 #, kde-format
 msgid "Leitner Box"
-msgstr ""
+msgstr "Leitner-Skatolo"
 
 #: keduvocdocument/keduvocdocument.cpp:165
 #: keduvocdocument/keduvocdocument.cpp:172
 #, kde-format
 msgid "Cannot lock file %1"
-msgstr ""
+msgstr "Ne povas ŝlosi la dosieron %1"
 
 #: keduvocdocument/keduvocdocument.cpp:220
 #, kde-format
 msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
-msgstr ""
+msgstr "<qt>Ne povas malfermi dosieron<br /><b>%1</b></qt>"
 
 #: keduvocdocument/keduvocdocument.cpp:228
 #, kde-format
 msgid "Cannot open tempfile %1"
-msgstr ""
+msgstr "Ne povas malfermi tempdosieron %1"
 
 #: keduvocdocument/keduvocdocument.cpp:233
 #, kde-format
 msgid "Cannot download %1: %2"
-msgstr ""
+msgstr "Ne povas elŝuti %1: %2"
 
 #: keduvocdocument/keduvocdocument.cpp:258
 #, kde-format
@@ -73,6 +73,8 @@ msgid ""
 "Could not open or properly read \"%1\"\n"
 "(Error reported: %2)"
 msgstr ""
+"Ne eblis malfermi aŭ ĝuste legi \"%1\"\n"
+"(Eraro raportita: %2)"
 
 #: keduvocdocument/keduvocdocument.cpp:300
 #: keduvocdocument/keduvocdocument.cpp:326
@@ -97,32 +99,32 @@ msgstr "Traduko %1"
 
 #: keduvocdocument/keduvocdocument.cpp:816
 msgid "KDE Vocabulary Document"
-msgstr ""
+msgstr "KDE Vortprovizo Dokumento"
 
 #: keduvocdocument/keduvocdocument.cpp:817
 msgid "KWordQuiz Document"
-msgstr ""
+msgstr "Dokumento de KWordQuiz"
 
 #: keduvocdocument/keduvocdocument.cpp:818
 msgid "Pauker Lesson"
-msgstr ""
+msgstr "Pauker Leciono"
 
 #: keduvocdocument/keduvocdocument.cpp:819
 msgid "Vokabeltrainer"
-msgstr ""
+msgstr "Vokabeltrenisto"
 
 #: keduvocdocument/keduvocdocument.cpp:820
 msgid "XML Dictionary Exchange Format"
-msgstr ""
+msgstr "XML Vortaro Interŝanĝa Formato"
 
 #: keduvocdocument/keduvocdocument.cpp:821
 msgid "Comma Separated Values (CSV)"
-msgstr ""
+msgstr "Komo Apartigitaj Valoroj (CSV)"
 
 #: keduvocdocument/keduvocdocument.cpp:833
 #, kde-format
 msgid "All supported documents"
-msgstr ""
+msgstr "Ĉiuj subtenataj dokumentoj"
 
 #: keduvocdocument/keduvocdocument.cpp:842
 #, kde-format
@@ -147,17 +149,17 @@ msgstr "Dosiero ne skribeblas."
 #: keduvocdocument/keduvocdocument.cpp:851
 #, kde-format
 msgid "File writer failed."
-msgstr ""
+msgstr "Dosierskribilo malsukcesis."
 
 #: keduvocdocument/keduvocdocument.cpp:853
 #, kde-format
 msgid "File is not readable."
-msgstr ""
+msgstr "Dosiero ne estas legebla."
 
 #: keduvocdocument/keduvocdocument.cpp:855
 #, kde-format
 msgid "The file reader failed."
-msgstr ""
+msgstr "La dosierlegilo malsukcesis."
 
 #: keduvocdocument/keduvocdocument.cpp:857
 #, kde-format
@@ -167,12 +169,12 @@ msgstr "La dosiero ne ekzistas."
 #: keduvocdocument/keduvocdocument.cpp:859
 #, kde-format
 msgid "The file is locked by another process."
-msgstr ""
+msgstr "La dosiero estas ŝlosita per alia procezo."
 
 #: keduvocdocument/keduvocdocument.cpp:861
 #, kde-format
 msgid "The lock file can't be created."
-msgstr ""
+msgstr "La ŝlosdosiero ne povas esti kreita."
 
 #: keduvocdocument/keduvocdocument.cpp:864
 #, kde-format
@@ -258,7 +260,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
 "(first, second, third, ...)"
 msgid "Ordinal"
-msgstr ""
+msgstr "Ordinalo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:46
 #: keduvocdocument/keduvockvtmlcompability.cpp:228
@@ -267,7 +269,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
 "(one, two, three, ...)"
 msgid "Cardinal"
-msgstr ""
+msgstr "Kardinalo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:47
 #: keduvocdocument/keduvockvtmlcompability.cpp:234
@@ -343,32 +345,32 @@ msgstr "Neŭtra"
 #: keduvocdocument/keduvockvtmlcompability.cpp:157
 #, kde-format
 msgid "Simple Present"
-msgstr ""
+msgstr "Simpla Nuntempo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:158
 #, kde-format
 msgid "Present Progressive"
-msgstr ""
+msgstr "Nuntempo Progresema"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:159
 #, kde-format
 msgid "Present Perfect"
-msgstr ""
+msgstr "Nuntempa Perfektivo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:160
 #, kde-format
 msgid "Simple Past"
-msgstr ""
+msgstr "Simpla Pasinteco"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:161
 #, kde-format
 msgid "Past Progressive"
-msgstr ""
+msgstr "Pasinteco Progresiva"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:162
 #, kde-format
 msgid "Past Participle"
-msgstr ""
+msgstr "Pasinta Participo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:163
 #, kde-format
@@ -379,78 +381,78 @@ msgstr "Futuro"
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Verb"
-msgstr ""
+msgstr "Verbo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:205
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Noun"
-msgstr ""
+msgstr "Substantivo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Name"
-msgstr ""
+msgstr "Nomo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Article"
-msgstr ""
+msgstr "Artikolo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adjective"
-msgstr ""
+msgstr "Adjektivo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:208
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adverb"
-msgstr ""
+msgstr "Adverbo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:209
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Pronoun"
-msgstr ""
+msgstr "Pronomo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:210
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Phrase"
-msgstr ""
+msgstr "Frazo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:210
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Numeral"
-msgstr ""
+msgstr "Numeralo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:211
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Conjunction"
-msgstr ""
+msgstr "Konjunkcio"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:211
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Preposition"
-msgstr ""
+msgstr "Prepozicio"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:212
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Question"
-msgstr ""
+msgstr "Demando"
 
 #: keduvocdocument/keduvoctext.h:16
 #, kde-format
 msgid "Not Practiced Yet"
-msgstr ""
+msgstr "Ankoraŭ Ne Praktikita"
 
 #: keduvocdocument/keduvoctext.h:19
 #, kde-format
