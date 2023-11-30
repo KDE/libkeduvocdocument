@@ -90,11 +90,7 @@ msgid "Original"
 msgstr "Original"
 
 #: keduvocdocument/keduvocdocument.cpp:659
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "The name of the second, third ... language/column of vocabulary, if we "
-#| "have ¦to guess it."
-#| msgid "Translation %1"
+#, kde-format
 msgctxt ""
 "The name of the second, third ... language/column of vocabulary, if we have "
 "to guess it."
@@ -259,11 +255,7 @@ msgstr "Demando"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:44
 #: keduvocdocument/keduvockvtmlcompability.cpp:224
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
-#| "¦(first, second, third, ...)"
-#| msgid "Ordinal"
+#, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
 "(first, second, third, ...)"
@@ -272,11 +264,7 @@ msgstr "Ordinalo"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:46
 #: keduvocdocument/keduvockvtmlcompability.cpp:228
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
-#| "¦(one, two, three, ...)"
-#| msgid "Cardinal"
+#, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
 "(one, two, three, ...)"
@@ -299,11 +287,7 @@ msgstr "Nedifinita"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:49
 #: keduvocdocument/keduvockvtmlcompability.cpp:243
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inlistbox A subtype of the grammatical word type: Verb with regular "
-#| "¦conjugation"
-#| msgid "Regular"
+#, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with regular "
 "conjugation"
@@ -312,11 +296,7 @@ msgstr "Regula"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:51
 #: keduvocdocument/keduvockvtmlcompability.cpp:246
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inlistbox A subtype of the grammatical word type: Verb with "
-#| "irregular ¦conjugation"
-#| msgid "Irregular"
+#, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
 "conjugation"
@@ -325,11 +305,7 @@ msgstr "Neregula"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:53
 #: keduvocdocument/keduvockvtmlcompability.cpp:263
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, "
-#| "your, ¦his, her...)"
-#| msgid "Possessive"
+#, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
 "his, her...)"
@@ -338,11 +314,7 @@ msgstr "Posesiva"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:54
 #: keduvocdocument/keduvockvtmlcompability.cpp:266
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
-#| "¦he...)"
-#| msgid "Personal"
+#, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
 "he...)"
