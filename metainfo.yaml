@@ -1,0 +1,10 @@
+description: libKEduVocDocument is a library for reading and writing vocabulary files used by Parley, Kanagram, KHangman and KWordQuiz.
+platforms:
+    - name: Linux
+    - name: FreeBSD
+    - name: Windows
+    - name: macOS
+    - name: Android
+public_lib: true
+public_source_dirs:
+    - keduvocdocument
