@@ -32,7 +32,7 @@ set(kvocdoc_unittests
   readerxdxftest.cpp
 )
 
-#Helper Clases for unit tests
+#Helper Classes for unit tests
 set(kvocdoc_unittests_helpers
   readerTestHelpers.h
 )

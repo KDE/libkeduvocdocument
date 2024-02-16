@@ -174,7 +174,7 @@ void KEduVocKvtmlCompability::addUserdefinedTense(const QString &tense)
 
 QString KEduVocKvtmlCompability::tenseFromKvtml1(const QString &oldTense)
 {
-    // in case the document got chaged, at least make up something as tense
+    // in case the document got changed, at least make up something as tense
     if (!m_oldTenses.keys().contains(oldTense)) {
         m_oldTenses[oldTense] = oldTense;
         qDebug() << "Warning, tense " << oldTense << " not found in document!";

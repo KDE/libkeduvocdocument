@@ -329,11 +329,11 @@ public:
     KEduVocLesson *lesson();
 
     /** @brief Returns the root word type object
-        @return poitner to the internal word type object */
+        @return pointer to the internal word type object */
     KEduVocWordType *wordTypeContainer();
 
     /** @brief Returns the root Leitner container
-        @return poitner to the internal Leitner container object
+        @return pointer to the internal Leitner container object
         @todo in new API determine if this is used */
     KEduVocLeitnerBox *leitnerContainer();
 
