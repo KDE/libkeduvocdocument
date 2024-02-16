@@ -468,7 +468,7 @@ bool KEduVocKvtml2Reader::readSynonymsAntonymsFalseFriends(QDomElement &rootElem
 bool KEduVocKvtml2Reader::readArticle(QDomElement &articleElement, int identifierNum)
 /*
  <article>
-  <singlular>
+  <singular>
     <definite>
         <male>der</male>
         <female>die</female>
