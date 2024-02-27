@@ -734,13 +734,8 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes(QDomElement &domElementEx
     if (!attribute.isNull()) {
         QString s = attribute.value();
         if ((pos = s.indexOf(';')) >= 1) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            grade = s.leftRef(pos).toInt();
-            rev_grade = s.midRef(pos + 1, s.length()).toInt();
-#else
             grade = QStringView(s).left(pos).toInt();
             rev_grade = QStringView(s).mid(pos + 1, s.length()).toInt();
-#endif
         } else
             grade = s.toInt();
     }
@@ -751,13 +746,8 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes(QDomElement &domElementEx
     if (!attribute.isNull()) {
         QString s = attribute.value();
         if ((pos = s.indexOf(';')) >= 1) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            count = s.leftRef(pos).toInt();
-            rev_count = s.midRef(pos + 1, s.length()).toInt();
-#else
             count = QStringView(s).left(pos).toInt();
             rev_count = QStringView(s).mid(pos + 1, s.length()).toInt();
-#endif
         } else
             count = s.toInt();
     }
@@ -768,13 +758,8 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes(QDomElement &domElementEx
     if (!attribute.isNull()) {
         QString s = attribute.value();
         if ((pos = s.indexOf(';')) >= 1) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            bcount = s.leftRef(pos).toInt();
-            rev_bcount = s.midRef(pos + 1, s.length()).toInt();
-#else
             bcount = QStringView(s).left(pos).toInt();
             rev_bcount = QStringView(s).mid(pos + 1, s.length()).toInt();
-#endif
         } else
             bcount = s.toInt();
     }
@@ -785,13 +770,8 @@ bool KEduVocKvtmlReader::readExpressionChildAttributes(QDomElement &domElementEx
     if (!attribute.isNull()) {
         QString s = attribute.value();
         if ((pos = s.indexOf(';')) >= 1) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            date = QDateTime::fromSecsSinceEpoch(s.leftRef(pos).toInt());
-            rev_date.setTime_t(s.midRef(pos + 1, s.length()).toInt());
-#else
             date = QDateTime::fromSecsSinceEpoch(QStringView(s).left(pos).toInt());
             rev_date = QDateTime::fromSecsSinceEpoch(QStringView(s).mid(pos + 1, s.length()).toInt());
-#endif
         } else
             date = QDateTime::fromSecsSinceEpoch(s.toInt());
     }

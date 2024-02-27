@@ -31,9 +31,6 @@ bool KEduVocCsvWriter::writeDoc(KEduVocDocument *doc, const QString &generator)
 
     QTextStream outputStream;
     outputStream.setDevice(m_outputFile);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    outputStream.setCodec("UTF-8");
-#endif
 
     outputStream << i18nc("@item:intable the title of the document will be written here", "Title:") << separator << m_doc->title() << "\n";
     outputStream << i18nc("@item:intable the author will be written here", "Author:") << separator << m_doc->author() << "\n";

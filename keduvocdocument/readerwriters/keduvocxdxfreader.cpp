@@ -74,23 +74,13 @@ void KEduVocXdxfReader::readUnknownElement()
 void KEduVocXdxfReader::readXdxf()
 {
     /// The language attributes are required and should be ISO 639-2 codes, but you never know...
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QStringRef
-#else
-    QStringView
-#endif
-        id1 = attributes().value(QStringLiteral("lang_from"));
+    QStringView id1 = attributes().value(QStringLiteral("lang_from"));
     m_doc->appendIdentifier();
     if (!id1.isNull()) {
         m_doc->identifier(0).setLocale(id1.toString().toLower());
         m_doc->identifier(0).setName(id1.toString().toLower());
     }
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QStringRef
-#else
-    QStringView
-#endif
-        id2 = attributes().value(QStringLiteral("lang_to"));
+    QStringView id2 = attributes().value(QStringLiteral("lang_to"));
     m_doc->appendIdentifier();
     if (!id2.isNull()) {
         m_doc->identifier(1).setLocale(id2.toString().toLower());

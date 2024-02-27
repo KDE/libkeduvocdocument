@@ -112,31 +112,20 @@ set_target_properties(KEduVocDocument PROPERTIES
 )
 
 # vHanda: Add library alias?
-if (QT_MAJOR_VERSION STREQUAL "5")
-    set(_generate_export_header_version_args)
-else()
-    # For Qt6/KF6 world transitively include the version header
-    if(ECM_VERSION VERSION_LESS "5.105")
-        set(include_version_header_code "#include <keduvocdocument_version.h>\n")
-        set(_generate_export_header_version_args CUSTOM_CONTENT_FROM_VARIABLE include_version_header_code)
-    else()
-        set(_generate_export_header_version_args USE_VERSION_HEADER)
-    endif()
-endif()
 ecm_generate_export_header(KEduVocDocument
     BASE_NAME KEduVocDocument
     VERSION ${KEDUVOCDOCUMENT_VERSION}
     DEPRECATED_BASE_VERSION 0
-    ${_generate_export_header_version_args}
+    USE_VERSION_HEADER
 )
 
 target_link_libraries(KEduVocDocument
   PUBLIC
-    Qt${QT_MAJOR_VERSION}::Xml
+    Qt6::Xml
   PRIVATE
-    KF${KF_MAJOR_VERSION}::I18n
-    KF${KF_MAJOR_VERSION}::KIOCore
-    KF${KF_MAJOR_VERSION}::Archive
+    KF6::I18n
+    KF6::KIOCore
+    KF6::Archive
 )
 
 
@@ -149,11 +138,11 @@ set_target_properties(keduvocdocument_static PROPERTIES COMPILE_FLAGS -DKEDUVOCD
 
 target_link_libraries(keduvocdocument_static
   PUBLIC
-    KF${KF_MAJOR_VERSION}::KIOCore
-    Qt${QT_MAJOR_VERSION}::Xml
+    KF6::KIOCore
+    Qt6::Xml
   PRIVATE
-    KF${KF_MAJOR_VERSION}::I18n
-    KF${KF_MAJOR_VERSION}::Archive
+    KF6::I18n
+    KF6::Archive
 )
 
 

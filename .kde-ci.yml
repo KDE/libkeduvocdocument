@@ -9,12 +9,5 @@ Dependencies:
     'frameworks/karchive': '@latest-kf6'
     'frameworks/kio': '@latest-kf6'
 
-- 'on': ['Linux/Qt5', 'FreeBSD/Qt5', 'Windows/Qt5', 'Android/Qt5']
-  'require':
-    'frameworks/extra-cmake-modules': '@stable'
-    'frameworks/ki18n': '@stable'
-    'frameworks/karchive': '@stable'
-    'frameworks/kio': '@stable'
-
 Options:
   require-passing-tests-on: [ '@all' ]
