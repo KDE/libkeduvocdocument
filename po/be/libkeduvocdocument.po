@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdeedu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2024-02-28 00:35+0000\n"
 "PO-Revision-Date: 2007-05-29 12:46+0300\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -22,13 +22,13 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n"
 "%100>=11 && n%100<=14 ? 2 : 3);\n"
 
-#: keduvocdocument/keduvoccsvwriter.cpp:38
+#: keduvocdocument/keduvoccsvwriter.cpp:35
 #, kde-format
 msgctxt "@item:intable the title of the document will be written here"
 msgid "Title:"
 msgstr ""
 
-#: keduvocdocument/keduvoccsvwriter.cpp:39
+#: keduvocdocument/keduvoccsvwriter.cpp:36
 #, kde-format
 msgctxt "@item:intable the author will be written here"
 msgid "Author:"
@@ -265,7 +265,7 @@ msgid "Question"
 msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:44
-#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
 #, fuzzy, kde-format
 #| msgid "Original"
 msgctxt ""
@@ -275,7 +275,7 @@ msgid "Ordinal"
 msgstr "Крыніца"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:46
-#: keduvocdocument/keduvockvtmlcompability.cpp:228
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
 #, fuzzy, kde-format
 #| msgid "Original"
 msgctxt ""
@@ -285,21 +285,21 @@ msgid "Cardinal"
 msgstr "Крыніца"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:47
-#: keduvocdocument/keduvockvtmlcompability.cpp:234
+#: keduvocdocument/keduvockvtmlcompability.cpp:230
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
 msgid "Definite"
 msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:48
-#: keduvocdocument/keduvockvtmlcompability.cpp:237
+#: keduvocdocument/keduvockvtmlcompability.cpp:233
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
 msgid "Indefinite"
 msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:49
-#: keduvocdocument/keduvockvtmlcompability.cpp:243
+#: keduvocdocument/keduvockvtmlcompability.cpp:239
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with regular "
@@ -308,7 +308,7 @@ msgid "Regular"
 msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:51
-#: keduvocdocument/keduvockvtmlcompability.cpp:246
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
@@ -317,7 +317,7 @@ msgid "Irregular"
 msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:53
-#: keduvocdocument/keduvockvtmlcompability.cpp:263
+#: keduvocdocument/keduvockvtmlcompability.cpp:259
 #, fuzzy, kde-format
 #| msgid "Present Progressive"
 msgctxt ""
@@ -327,7 +327,7 @@ msgid "Possessive"
 msgstr "Present Progressive"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:54
-#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#: keduvocdocument/keduvockvtmlcompability.cpp:262
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
@@ -336,7 +336,7 @@ msgid "Personal"
 msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:55
-#: keduvocdocument/keduvockvtmlcompability.cpp:252
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
 #, fuzzy, kde-format
 #| msgctxt "EMAIL OF TRANSLATORS"
 #| msgid "Your emails"
@@ -345,7 +345,7 @@ msgid "Male"
 msgstr "firestorm1983@mail.ru, ihar.hrachyshka@gmail.com, komzpa@licei2.com"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:56
-#: keduvocdocument/keduvockvtmlcompability.cpp:255
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
 #, fuzzy, kde-format
 #| msgctxt "EMAIL OF TRANSLATORS"
 #| msgid "Your emails"
@@ -354,115 +354,115 @@ msgid "Female"
 msgstr "firestorm1983@mail.ru, ihar.hrachyshka@gmail.com, komzpa@licei2.com"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:57
-#: keduvocdocument/keduvockvtmlcompability.cpp:258
+#: keduvocdocument/keduvockvtmlcompability.cpp:254
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Neutral"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:157
+#: keduvocdocument/keduvockvtmlcompability.cpp:153
 #, kde-format
 msgid "Simple Present"
 msgstr "Simple Present"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:158
+#: keduvocdocument/keduvockvtmlcompability.cpp:154
 #, kde-format
 msgid "Present Progressive"
 msgstr "Present Progressive"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:159
+#: keduvocdocument/keduvockvtmlcompability.cpp:155
 #, kde-format
 msgid "Present Perfect"
 msgstr "Present Perfect"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:160
+#: keduvocdocument/keduvockvtmlcompability.cpp:156
 #, kde-format
 msgid "Simple Past"
 msgstr "Simple Past"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:161
+#: keduvocdocument/keduvockvtmlcompability.cpp:157
 #, kde-format
 msgid "Past Progressive"
 msgstr "Past Progressive"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:162
+#: keduvocdocument/keduvockvtmlcompability.cpp:158
 #, kde-format
 msgid "Past Participle"
 msgstr "Past Participle"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#: keduvocdocument/keduvockvtmlcompability.cpp:159
 #, kde-format
 msgid "Future"
 msgstr "Future"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:204
+#: keduvocdocument/keduvockvtmlcompability.cpp:200
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Verb"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:205
+#: keduvocdocument/keduvockvtmlcompability.cpp:201
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Noun"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:206
+#: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Name"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:206
+#: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, fuzzy, kde-format
 #| msgid "April"
 msgctxt "The grammatical type of a word"
 msgid "Article"
 msgstr "Красавік"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:207
+#: keduvocdocument/keduvockvtmlcompability.cpp:203
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adjective"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:208
+#: keduvocdocument/keduvockvtmlcompability.cpp:204
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adverb"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:209
+#: keduvocdocument/keduvockvtmlcompability.cpp:205
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Pronoun"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:210
+#: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Phrase"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:210
+#: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Numeral"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:211
+#: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Conjunction"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:211
+#: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Preposition"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:212
+#: keduvocdocument/keduvockvtmlcompability.cpp:208
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Question"

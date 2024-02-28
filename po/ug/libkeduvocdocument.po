@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkdeedu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2024-02-28 00:35+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: keduvocdocument/keduvoccsvwriter.cpp:38
+#: keduvocdocument/keduvoccsvwriter.cpp:35
 #, kde-format
 msgctxt "@item:intable the title of the document will be written here"
 msgid "Title:"
 msgstr "ماۋزۇ:"
 
-#: keduvocdocument/keduvoccsvwriter.cpp:39
+#: keduvocdocument/keduvoccsvwriter.cpp:36
 #, kde-format
 msgctxt "@item:intable the author will be written here"
 msgid "Author:"
@@ -253,7 +253,7 @@ msgid "Question"
 msgstr "سوئال"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:44
-#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
@@ -262,7 +262,7 @@ msgid "Ordinal"
 msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:46
-#: keduvocdocument/keduvockvtmlcompability.cpp:228
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
@@ -271,21 +271,21 @@ msgid "Cardinal"
 msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:47
-#: keduvocdocument/keduvockvtmlcompability.cpp:234
+#: keduvocdocument/keduvockvtmlcompability.cpp:230
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
 msgid "Definite"
 msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:48
-#: keduvocdocument/keduvockvtmlcompability.cpp:237
+#: keduvocdocument/keduvockvtmlcompability.cpp:233
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
 msgid "Indefinite"
 msgstr "ئېنىقسىز"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:49
-#: keduvocdocument/keduvockvtmlcompability.cpp:243
+#: keduvocdocument/keduvockvtmlcompability.cpp:239
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with regular "
@@ -294,7 +294,7 @@ msgid "Regular"
 msgstr "ئۆلچەملىك"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:51
-#: keduvocdocument/keduvockvtmlcompability.cpp:246
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
@@ -303,7 +303,7 @@ msgid "Irregular"
 msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:53
-#: keduvocdocument/keduvockvtmlcompability.cpp:263
+#: keduvocdocument/keduvockvtmlcompability.cpp:259
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
@@ -312,7 +312,7 @@ msgid "Possessive"
 msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:54
-#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#: keduvocdocument/keduvockvtmlcompability.cpp:262
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
@@ -321,128 +321,128 @@ msgid "Personal"
 msgstr "شەخسىي"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:55
-#: keduvocdocument/keduvockvtmlcompability.cpp:252
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Male"
 msgstr "مالې"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:56
-#: keduvocdocument/keduvockvtmlcompability.cpp:255
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Female"
 msgstr "ئايال"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:57
-#: keduvocdocument/keduvockvtmlcompability.cpp:258
+#: keduvocdocument/keduvockvtmlcompability.cpp:254
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Neutral"
 msgstr "بىتەرەپ"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:157
+#: keduvocdocument/keduvockvtmlcompability.cpp:153
 #, kde-format
 msgid "Simple Present"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:158
+#: keduvocdocument/keduvockvtmlcompability.cpp:154
 #, kde-format
 msgid "Present Progressive"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:159
+#: keduvocdocument/keduvockvtmlcompability.cpp:155
 #, kde-format
 msgid "Present Perfect"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:160
+#: keduvocdocument/keduvockvtmlcompability.cpp:156
 #, kde-format
 msgid "Simple Past"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:161
+#: keduvocdocument/keduvockvtmlcompability.cpp:157
 #, kde-format
 msgid "Past Progressive"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:162
+#: keduvocdocument/keduvockvtmlcompability.cpp:158
 #, kde-format
 msgid "Past Participle"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#: keduvocdocument/keduvockvtmlcompability.cpp:159
 #, kde-format
 msgid "Future"
 msgstr "كەلگۈسى"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:204
+#: keduvocdocument/keduvockvtmlcompability.cpp:200
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Verb"
 msgstr "پېئىل"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:205
+#: keduvocdocument/keduvockvtmlcompability.cpp:201
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Noun"
 msgstr "ئىسىم"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:206
+#: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Name"
 msgstr "ئاتى"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:206
+#: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Article"
 msgstr "ماقالە"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:207
+#: keduvocdocument/keduvockvtmlcompability.cpp:203
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adjective"
 msgstr "سۈپەت"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:208
+#: keduvocdocument/keduvockvtmlcompability.cpp:204
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adverb"
 msgstr "رەۋىش"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:209
+#: keduvocdocument/keduvockvtmlcompability.cpp:205
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Pronoun"
 msgstr "رەۋىش"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:210
+#: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Phrase"
 msgstr "ئىبارە"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:210
+#: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Numeral"
 msgstr "رەقەملىك"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:211
+#: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Conjunction"
 msgstr "باغلىغۇچى"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:211
+#: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Preposition"
 msgstr ""
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:212
+#: keduvocdocument/keduvockvtmlcompability.cpp:208
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Question"

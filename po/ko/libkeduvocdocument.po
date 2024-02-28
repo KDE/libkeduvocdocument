@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkeduvocdocument\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:24+0000\n"
+"POT-Creation-Date: 2024-02-28 00:35+0000\n"
 "PO-Revision-Date: 2021-05-17 01:49+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 20.12.3\n"
 
-#: keduvocdocument/keduvoccsvwriter.cpp:38
+#: keduvocdocument/keduvoccsvwriter.cpp:35
 #, kde-format
 msgctxt "@item:intable the title of the document will be written here"
 msgid "Title:"
 msgstr "제목:"
 
-#: keduvocdocument/keduvoccsvwriter.cpp:39
+#: keduvocdocument/keduvoccsvwriter.cpp:36
 #, kde-format
 msgctxt "@item:intable the author will be written here"
 msgid "Author:"
@@ -254,7 +254,7 @@ msgid "Question"
 msgstr "의문사"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:44
-#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
@@ -263,7 +263,7 @@ msgid "Ordinal"
 msgstr "서수"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:46
-#: keduvocdocument/keduvockvtmlcompability.cpp:228
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
@@ -272,21 +272,21 @@ msgid "Cardinal"
 msgstr "기수"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:47
-#: keduvocdocument/keduvockvtmlcompability.cpp:234
+#: keduvocdocument/keduvockvtmlcompability.cpp:230
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
 msgid "Definite"
 msgstr "정관사"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:48
-#: keduvocdocument/keduvockvtmlcompability.cpp:237
+#: keduvocdocument/keduvockvtmlcompability.cpp:233
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
 msgid "Indefinite"
 msgstr "부정 관사"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:49
-#: keduvocdocument/keduvockvtmlcompability.cpp:243
+#: keduvocdocument/keduvockvtmlcompability.cpp:239
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with regular "
@@ -295,7 +295,7 @@ msgid "Regular"
 msgstr "규칙 활용"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:51
-#: keduvocdocument/keduvockvtmlcompability.cpp:246
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
@@ -304,7 +304,7 @@ msgid "Irregular"
 msgstr "불규칙 활용"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:53
-#: keduvocdocument/keduvockvtmlcompability.cpp:263
+#: keduvocdocument/keduvockvtmlcompability.cpp:259
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
@@ -313,7 +313,7 @@ msgid "Possessive"
 msgstr "소유 대명사"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:54
-#: keduvocdocument/keduvockvtmlcompability.cpp:266
+#: keduvocdocument/keduvockvtmlcompability.cpp:262
 #, kde-format
 msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
@@ -322,128 +322,128 @@ msgid "Personal"
 msgstr "개인"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:55
-#: keduvocdocument/keduvockvtmlcompability.cpp:252
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Male"
 msgstr "남성"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:56
-#: keduvocdocument/keduvockvtmlcompability.cpp:255
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Female"
 msgstr "여성"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:57
-#: keduvocdocument/keduvockvtmlcompability.cpp:258
+#: keduvocdocument/keduvockvtmlcompability.cpp:254
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Neutral"
 msgstr "중성"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:157
+#: keduvocdocument/keduvockvtmlcompability.cpp:153
 #, kde-format
 msgid "Simple Present"
 msgstr "단순 현재형"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:158
+#: keduvocdocument/keduvockvtmlcompability.cpp:154
 #, kde-format
 msgid "Present Progressive"
 msgstr "현재 진행형"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:159
+#: keduvocdocument/keduvockvtmlcompability.cpp:155
 #, kde-format
 msgid "Present Perfect"
 msgstr "현재 과거형"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:160
+#: keduvocdocument/keduvockvtmlcompability.cpp:156
 #, kde-format
 msgid "Simple Past"
 msgstr "단순 과거형"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:161
+#: keduvocdocument/keduvockvtmlcompability.cpp:157
 #, kde-format
 msgid "Past Progressive"
 msgstr "과거 진행형"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:162
+#: keduvocdocument/keduvockvtmlcompability.cpp:158
 #, kde-format
 msgid "Past Participle"
 msgstr "과거 분사형"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:163
+#: keduvocdocument/keduvockvtmlcompability.cpp:159
 #, kde-format
 msgid "Future"
 msgstr "미래"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:204
+#: keduvocdocument/keduvockvtmlcompability.cpp:200
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Verb"
 msgstr "동사"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:205
+#: keduvocdocument/keduvockvtmlcompability.cpp:201
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Noun"
 msgstr "명사"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:206
+#: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Name"
 msgstr "이름"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:206
+#: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Article"
 msgstr "관사"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:207
+#: keduvocdocument/keduvockvtmlcompability.cpp:203
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adjective"
 msgstr "형용사"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:208
+#: keduvocdocument/keduvockvtmlcompability.cpp:204
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adverb"
 msgstr "부사"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:209
+#: keduvocdocument/keduvockvtmlcompability.cpp:205
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Pronoun"
 msgstr "대명사"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:210
+#: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Phrase"
 msgstr "구문"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:210
+#: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Numeral"
 msgstr "수사"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:211
+#: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Conjunction"
 msgstr "접속사"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:211
+#: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Preposition"
 msgstr "전치사"
 
-#: keduvocdocument/keduvockvtmlcompability.cpp:212
+#: keduvocdocument/keduvockvtmlcompability.cpp:208
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Question"
