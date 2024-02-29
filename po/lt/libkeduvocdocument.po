@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: libkdeedu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-05 12:24+0000\n"
-"PO-Revision-Date: 2010-06-02 12:14+0100\n"
+"PO-Revision-Date: 2024-02-28 18:00+0200\n"
 "Last-Translator: Andrius Štikonas <andrius@stikonas.eu>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: keduvocdocument/keduvoccsvwriter.cpp:38
 #, kde-format
@@ -48,10 +49,9 @@ msgstr "Leitnerio dėžutė"
 
 #: keduvocdocument/keduvocdocument.cpp:165
 #: keduvocdocument/keduvocdocument.cpp:172
-#, fuzzy, kde-format
-#| msgid "Cannot write to file %1"
+#, kde-format
 msgid "Cannot lock file %1"
-msgstr "Nepavysta rašyti į failą %1"
+msgstr "Nepavyksta užrakinti failo %1"
 
 #: keduvocdocument/keduvocdocument.cpp:220
 #, kde-format
@@ -59,16 +59,14 @@ msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
 msgstr "<qt>Nepavyksta atverti failo<br /><b>%1</b></qt>"
 
 #: keduvocdocument/keduvocdocument.cpp:228
-#, fuzzy, kde-format
-#| msgid "Cannot write to file %1"
+#, kde-format
 msgid "Cannot open tempfile %1"
-msgstr "Nepavysta rašyti į failą %1"
+msgstr "Nepavyksta atverti laikinojo failo %1"
 
 #: keduvocdocument/keduvocdocument.cpp:233
-#, fuzzy, kde-format
-#| msgid "Cannot write to file %1"
+#, kde-format
 msgid "Cannot download %1: %2"
-msgstr "Nepavysta rašyti į failą %1"
+msgstr "Nepavyksta atsisiųsti %1: %2"
 
 #: keduvocdocument/keduvocdocument.cpp:258
 #, kde-format
@@ -76,14 +74,14 @@ msgid ""
 "Could not open or properly read \"%1\"\n"
 "(Error reported: %2)"
 msgstr ""
-"Failo „%1“ neina atverti arba nepavyksta jį tinkamai skaityti\n"
+"Nepavyko atverti ar tinkamai perskaityti „%1“\n"
 "(Pranešimas apie klaidą: %2)"
 
 #: keduvocdocument/keduvocdocument.cpp:300
 #: keduvocdocument/keduvocdocument.cpp:326
 #, kde-format
 msgid "Cannot write to file %1"
-msgstr "Nepavysta rašyti į failą %1"
+msgstr "Nepavyksta rašyti į failą %1"
 
 #: keduvocdocument/keduvocdocument.cpp:657
 #, kde-format
@@ -122,7 +120,7 @@ msgstr "XML žodyno mainų formatas"
 
 #: keduvocdocument/keduvocdocument.cpp:821
 msgid "Comma Separated Values (CSV)"
-msgstr "Kableliais atskirtos vertės (CSV)"
+msgstr "Kableliais atskirtos reikšmės (CSV)"
 
 #: keduvocdocument/keduvocdocument.cpp:833
 #, kde-format
@@ -137,48 +135,47 @@ msgstr "Klaidų nerasta."
 #: keduvocdocument/keduvocdocument.cpp:845
 #, kde-format
 msgid "Invalid XML in document."
-msgstr "Dokumente esantis XML yra klaidingas."
+msgstr "Dokumente esantis XML yra netinkamas."
 
 #: keduvocdocument/keduvocdocument.cpp:847
 #, kde-format
 msgid "Unknown file type."
-msgstr "Nežinomas failo tipas"
+msgstr "Nežinomas failo tipas."
 
 #: keduvocdocument/keduvocdocument.cpp:849
 #, kde-format
 msgid "File is not writeable."
-msgstr "Failas apsaugotas nuo rašymo."
+msgstr "Failas netinkamas rašymui."
 
 #: keduvocdocument/keduvocdocument.cpp:851
 #, kde-format
 msgid "File writer failed."
-msgstr "Falų rašyklės nesėkmė."
+msgstr "Failų rašyklės nesėkmė."
 
 #: keduvocdocument/keduvocdocument.cpp:853
 #, kde-format
 msgid "File is not readable."
-msgstr "Failas apsaugotas nuo skaitymo."
+msgstr "Failas neperskaitomas."
 
 #: keduvocdocument/keduvocdocument.cpp:855
 #, kde-format
 msgid "The file reader failed."
-msgstr "Failų skaitytuvo nesėkmė."
+msgstr "Failų skaitytuvės nesėkmė."
 
 #: keduvocdocument/keduvocdocument.cpp:857
 #, kde-format
 msgid "The file does not exist."
-msgstr "Failas neegzistuoja."
+msgstr "Failo nėra."
 
 #: keduvocdocument/keduvocdocument.cpp:859
-#, fuzzy, kde-format
-#| msgid "The file does not exist."
+#, kde-format
 msgid "The file is locked by another process."
-msgstr "Failas neegzistuoja."
+msgstr "Failą užrakino kitas procesas."
 
 #: keduvocdocument/keduvocdocument.cpp:861
 #, kde-format
 msgid "The lock file can't be created."
-msgstr ""
+msgstr "Nepavyksta sukurti užrakto failo."
 
 #: keduvocdocument/keduvocdocument.cpp:864
 #, kde-format
@@ -344,7 +341,7 @@ msgstr "Moteriškoji giminė"
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Neutral"
-msgstr "Niekatroji giminė"
+msgstr "Neutrali giminė"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:157
 #, kde-format
@@ -445,7 +442,7 @@ msgstr "Jungtukas"
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Preposition"
-msgstr "Preposition"
+msgstr "Prielinksnis"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:212
 #, kde-format
@@ -456,7 +453,7 @@ msgstr "Klausimas"
 #: keduvocdocument/keduvoctext.h:16
 #, kde-format
 msgid "Not Practiced Yet"
-msgstr "Dar neigudęs"
+msgstr "Dar nesimokytas"
 
 #: keduvocdocument/keduvoctext.h:19
 #, kde-format
