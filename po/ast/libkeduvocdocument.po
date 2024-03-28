@@ -1,72 +1,71 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the libkeduvocdocument package.
+#
+# SPDX-FileCopyrightText: 2024 Enol P. <enolp@softastur.org>
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: libkeduvocdocument\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-28 00:35+0000\n"
-"PO-Revision-Date: 2024-03-27 19:45\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2024-03-27 22:38+0100\n"
+"Last-Translator: Enol P. <enolp@softastur.org>\n"
+"Language-Team: Asturian <alministradores@softastur.org>\n"
+"Language: ast_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/libkeduvocdocument/libkeduvocdocument."
-"pot\n"
-"X-Crowdin-File-ID: 49490\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.02.1\n"
 
 #: keduvocdocument/keduvoccsvwriter.cpp:35
 #, kde-format
 msgctxt "@item:intable the title of the document will be written here"
 msgid "Title:"
-msgstr "标题："
+msgstr ""
 
 #: keduvocdocument/keduvoccsvwriter.cpp:36
 #, kde-format
 msgctxt "@item:intable the author will be written here"
 msgid "Author:"
-msgstr "作者："
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:125
 #, kde-format
 msgctxt ""
 "The top level lesson which contains all other lessons of the document."
 msgid "Document Lesson"
-msgstr "文档课程"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:128
 #, kde-format
 msgid "Word types"
-msgstr "词性"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:131
 #, kde-format
 msgid "Leitner Box"
-msgstr "Leitner 记忆盒"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:165
 #: keduvocdocument/keduvocdocument.cpp:172
 #, kde-format
 msgid "Cannot lock file %1"
-msgstr "无法锁定文件 %1"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:220
 #, kde-format
 msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
-msgstr "<qt>无法打开文件<br /><b>%1</b></qt>"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:228
 #, kde-format
 msgid "Cannot open tempfile %1"
-msgstr "无法打开临时文件 %1"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:233
 #, kde-format
 msgid "Cannot download %1: %2"
-msgstr "无法下载 %1:%2"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:258
 #, kde-format
@@ -74,21 +73,19 @@ msgid ""
 "Could not open or properly read \"%1\"\n"
 "(Error reported: %2)"
 msgstr ""
-"无法打开或正确读取“%1”\n"
-"(报告的错误：%2)"
 
 #: keduvocdocument/keduvocdocument.cpp:300
 #: keduvocdocument/keduvocdocument.cpp:326
 #, kde-format
 msgid "Cannot write to file %1"
-msgstr "无法写入文件 %1"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:657
 #, kde-format
 msgctxt ""
 "The name of the first language/column of vocabulary, if we have to guess it."
 msgid "Original"
-msgstr "原语言"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:659
 #, kde-format
@@ -96,163 +93,163 @@ msgctxt ""
 "The name of the second, third ... language/column of vocabulary, if we have "
 "to guess it."
 msgid "Translation %1"
-msgstr "翻译 %1"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:816
 msgid "KDE Vocabulary Document"
-msgstr "KDE 词汇文档"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:817
 msgid "KWordQuiz Document"
-msgstr "KWordQuiz 文档"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:818
 msgid "Pauker Lesson"
-msgstr "Pauker 课程"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:819
 msgid "Vokabeltrainer"
-msgstr "Vokabeltrainer"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:820
 msgid "XML Dictionary Exchange Format"
-msgstr "XML 词典交换格式"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:821
 msgid "Comma Separated Values (CSV)"
-msgstr "逗号分隔格式 (CSV)"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:833
 #, kde-format
 msgid "All supported documents"
-msgstr "所有支持的文档"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:842
 #, kde-format
 msgid "No error found."
-msgstr "未发现错误。"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:845
 #, kde-format
 msgid "Invalid XML in document."
-msgstr "文档中有无效 XML。"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:847
 #, kde-format
 msgid "Unknown file type."
-msgstr "未知文件格式。"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:849
 #, kde-format
 msgid "File is not writeable."
-msgstr "文件不可写入。"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:851
 #, kde-format
 msgid "File writer failed."
-msgstr "文件写入失败。"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:853
 #, kde-format
 msgid "File is not readable."
-msgstr "文件不可读取。"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:855
 #, kde-format
 msgid "The file reader failed."
-msgstr "文件读取失败。"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:857
 #, kde-format
 msgid "The file does not exist."
-msgstr "文件不存在。"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:859
 #, kde-format
 msgid "The file is locked by another process."
-msgstr "文件已被其他进程锁定。"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:861
 #, kde-format
 msgid "The lock file can't be created."
-msgstr "锁文件无法创建。"
+msgstr ""
 
 #: keduvocdocument/keduvocdocument.cpp:864
 #, kde-format
 msgid "Unknown error."
-msgstr "未知错误。"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:29
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Verb"
-msgstr "动词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:30
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Noun"
-msgstr "名词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:31
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Name"
-msgstr "姓名"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:32
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Article"
-msgstr "冠词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Adjective"
-msgstr "形容词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Adverb"
-msgstr "副词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:35
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Pronoun"
-msgstr "代词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of an entry"
 msgid "Phrase"
-msgstr "短语"
+msgstr "Fras"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:37
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Numeral"
-msgstr "数词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:38
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Conjunction"
-msgstr "连接词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:39
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Preposition"
-msgstr "介词"
+msgstr "Preposición"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:40
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of an entry"
 msgid "Question"
-msgstr "问题"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:44
 #: keduvocdocument/keduvockvtmlcompability.cpp:220
@@ -261,7 +258,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
 "(first, second, third, ...)"
 msgid "Ordinal"
-msgstr "序数的"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:46
 #: keduvocdocument/keduvockvtmlcompability.cpp:224
@@ -270,21 +267,21 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
 "(one, two, three, ...)"
 msgid "Cardinal"
-msgstr "基数的"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:47
 #: keduvocdocument/keduvockvtmlcompability.cpp:230
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
 msgid "Definite"
-msgstr "定的"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:48
 #: keduvocdocument/keduvockvtmlcompability.cpp:233
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
 msgid "Indefinite"
-msgstr "不定的"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:49
 #: keduvocdocument/keduvockvtmlcompability.cpp:239
@@ -293,7 +290,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with regular "
 "conjugation"
 msgid "Regular"
-msgstr "规则的"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:51
 #: keduvocdocument/keduvockvtmlcompability.cpp:242
@@ -302,7 +299,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
 "conjugation"
 msgid "Irregular"
-msgstr "不规则的"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:53
 #: keduvocdocument/keduvockvtmlcompability.cpp:259
@@ -311,7 +308,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
 "his, her...)"
 msgid "Possessive"
-msgstr "所有格"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:54
 #: keduvocdocument/keduvockvtmlcompability.cpp:262
@@ -320,172 +317,172 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
 "he...)"
 msgid "Personal"
-msgstr "人称的"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:55
 #: keduvocdocument/keduvockvtmlcompability.cpp:248
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Male"
-msgstr "男性的"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:56
 #: keduvocdocument/keduvockvtmlcompability.cpp:251
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Female"
-msgstr "女性的"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:57
 #: keduvocdocument/keduvockvtmlcompability.cpp:254
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Neutral"
-msgstr "中性的"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:153
 #, kde-format
 msgid "Simple Present"
-msgstr "一般现在时态"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:154
 #, kde-format
 msgid "Present Progressive"
-msgstr "现在进行时态"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:155
 #, kde-format
 msgid "Present Perfect"
-msgstr "现在完成时态"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:156
 #, kde-format
 msgid "Simple Past"
-msgstr "一般过去时态"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:157
 #, kde-format
 msgid "Past Progressive"
-msgstr "过去进行时态"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:158
 #, kde-format
 msgid "Past Participle"
-msgstr "过去完成时态"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:159
 #, kde-format
 msgid "Future"
-msgstr "将来时态"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:200
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Verb"
-msgstr "动词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:201
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Noun"
-msgstr "名词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Name"
-msgstr "姓名"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Article"
-msgstr "冠词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:203
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adjective"
-msgstr "形容词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:204
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adverb"
-msgstr "副词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:205
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Pronoun"
-msgstr "代词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Phrase"
-msgstr "词组"
+msgstr "Fras"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Numeral"
-msgstr "数词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Conjunction"
-msgstr "连词"
+msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Preposition"
-msgstr "介词"
+msgstr "Preposición"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:208
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Question"
-msgstr "问题"
+msgstr ""
 
 #: keduvocdocument/keduvoctext.h:16
 #, kde-format
 msgid "Not Practiced Yet"
-msgstr "还未练习的"
+msgstr ""
 
 #: keduvocdocument/keduvoctext.h:19
 #, kde-format
 msgid "Level 1"
-msgstr "等级 1"
+msgstr ""
 
 #: keduvocdocument/keduvoctext.h:22
 #, kde-format
 msgid "Level 2"
-msgstr "等级 2"
+msgstr ""
 
 #: keduvocdocument/keduvoctext.h:25
 #, kde-format
 msgid "Level 3"
-msgstr "等级 3"
+msgstr ""
 
 #: keduvocdocument/keduvoctext.h:28
 #, kde-format
 msgid "Level 4"
-msgstr "等级 4"
+msgstr ""
 
 #: keduvocdocument/keduvoctext.h:31
 #, kde-format
 msgid "Level 5"
-msgstr "等级 5"
+msgstr ""
 
 #: keduvocdocument/keduvoctext.h:34
 #, kde-format
 msgid "Level 6"
-msgstr "等级 6"
+msgstr ""
 
 #: keduvocdocument/keduvoctext.h:37
 #, kde-format
 msgid "Level 7"
-msgstr "等级 7"
+msgstr ""
