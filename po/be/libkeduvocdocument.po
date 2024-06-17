@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: fc57ad16a28d02dea100ceb1c60de14e\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-28 00:35+0000\n"
-"PO-Revision-Date: 2024-06-11 08:11\n"
+"PO-Revision-Date: 2024-06-12 20:17\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
 "Language-Team: Belarusian\n"
 "Language: be\n"
@@ -137,27 +137,27 @@ msgstr "Усе дакументы, якія падтрымліваюцца"
 #: keduvocdocument/keduvocdocument.cpp:842
 #, kde-format
 msgid "No error found."
-msgstr ""
+msgstr "Памылкі не знойдзены."
 
 #: keduvocdocument/keduvocdocument.cpp:845
 #, kde-format
 msgid "Invalid XML in document."
-msgstr ""
+msgstr "Хібны XML у дакуменце."
 
 #: keduvocdocument/keduvocdocument.cpp:847
 #, kde-format
 msgid "Unknown file type."
-msgstr ""
+msgstr "Невядомы тып файла."
 
 #: keduvocdocument/keduvocdocument.cpp:849
 #, kde-format
 msgid "File is not writeable."
-msgstr ""
+msgstr "Файл недаступны для запісу."
 
 #: keduvocdocument/keduvocdocument.cpp:851
 #, kde-format
 msgid "File writer failed."
-msgstr ""
+msgstr "Не ўдалося запісаць файл."
 
 #: keduvocdocument/keduvocdocument.cpp:853
 #, kde-format
@@ -167,7 +167,7 @@ msgstr "Файл недаступны для чытання."
 #: keduvocdocument/keduvocdocument.cpp:855
 #, kde-format
 msgid "The file reader failed."
-msgstr ""
+msgstr "Не ўдалося прачытаць файл."
 
 #: keduvocdocument/keduvocdocument.cpp:857
 #, kde-format
@@ -177,12 +177,12 @@ msgstr "Файл не існуе."
 #: keduvocdocument/keduvocdocument.cpp:859
 #, kde-format
 msgid "The file is locked by another process."
-msgstr ""
+msgstr "Файл заблакаваны іншым працэсам."
 
 #: keduvocdocument/keduvocdocument.cpp:861
 #, kde-format
 msgid "The lock file can't be created."
-msgstr ""
+msgstr "Немагчыма стварыць файл блакавання."
 
 #: keduvocdocument/keduvocdocument.cpp:864
 #, kde-format
@@ -193,43 +193,43 @@ msgstr "Невядомая памылка."
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Verb"
-msgstr ""
+msgstr "Дзеяслоў"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:30
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Noun"
-msgstr ""
+msgstr "Назоўнік"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:31
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Name"
-msgstr "Імя"
+msgstr "Назва"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:32
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Article"
-msgstr ""
+msgstr "Артыкль"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Adjective"
-msgstr ""
+msgstr "Прыметнік"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Adverb"
-msgstr ""
+msgstr "Прыслоўе"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:35
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Pronoun"
-msgstr ""
+msgstr "Займеннік"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:36
 #, kde-format
@@ -241,19 +241,19 @@ msgstr "Фраза"
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Numeral"
-msgstr ""
+msgstr "Лічэбнік"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:38
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Conjunction"
-msgstr ""
+msgstr "Злучнік"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:39
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Preposition"
-msgstr ""
+msgstr "Прыназоўнік"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:40
 #, kde-format
@@ -268,7 +268,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
 "(first, second, third, ...)"
 msgid "Ordinal"
-msgstr ""
+msgstr "Парадкавы"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:46
 #: keduvocdocument/keduvockvtmlcompability.cpp:224
@@ -277,21 +277,21 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
 "(one, two, three, ...)"
 msgid "Cardinal"
-msgstr ""
+msgstr "Колькасны"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:47
 #: keduvocdocument/keduvockvtmlcompability.cpp:230
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
 msgid "Definite"
-msgstr ""
+msgstr "Азначальны"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:48
 #: keduvocdocument/keduvockvtmlcompability.cpp:233
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
 msgid "Indefinite"
-msgstr ""
+msgstr "Неазначальны"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:49
 #: keduvocdocument/keduvockvtmlcompability.cpp:239
@@ -300,7 +300,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with regular "
 "conjugation"
 msgid "Regular"
-msgstr "Звычайны"
+msgstr "Правільны"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:51
 #: keduvocdocument/keduvockvtmlcompability.cpp:242
@@ -309,7 +309,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
 "conjugation"
 msgid "Irregular"
-msgstr ""
+msgstr "Няправільны"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:53
 #: keduvocdocument/keduvockvtmlcompability.cpp:259
@@ -318,7 +318,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
 "his, her...)"
 msgid "Possessive"
-msgstr ""
+msgstr "Прыналежны"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:54
 #: keduvocdocument/keduvockvtmlcompability.cpp:262
@@ -327,105 +327,105 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
 "he...)"
 msgid "Personal"
-msgstr "Асабістае"
+msgstr "Асабовы"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:55
 #: keduvocdocument/keduvockvtmlcompability.cpp:248
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Male"
-msgstr "Мужчына"
+msgstr "Мужчынскі"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:56
 #: keduvocdocument/keduvockvtmlcompability.cpp:251
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Female"
-msgstr "Жанчына"
+msgstr "Жаночы"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:57
 #: keduvocdocument/keduvockvtmlcompability.cpp:254
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Neutral"
-msgstr "Нейтральны"
+msgstr "Сярэдні"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:153
 #, kde-format
 msgid "Simple Present"
-msgstr ""
+msgstr "Цяперашні просты"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:154
 #, kde-format
 msgid "Present Progressive"
-msgstr ""
+msgstr "Цяперашні прадоўжаны"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:155
 #, kde-format
 msgid "Present Perfect"
-msgstr ""
+msgstr "Цяперашні завершаны"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:156
 #, kde-format
 msgid "Simple Past"
-msgstr ""
+msgstr "Прошлы просты"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:157
 #, kde-format
 msgid "Past Progressive"
-msgstr ""
+msgstr "Прошлы прадоўжаны"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:158
 #, kde-format
 msgid "Past Participle"
-msgstr ""
+msgstr "Дзеепрыметнік прошлага часу"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:159
 #, kde-format
 msgid "Future"
-msgstr "Будучая"
+msgstr "Будучы"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:200
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Verb"
-msgstr ""
+msgstr "Дзеяслоў"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:201
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Noun"
-msgstr ""
+msgstr "Назоўнік"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Name"
-msgstr "Імя"
+msgstr "Назва"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Article"
-msgstr ""
+msgstr "Артыкль"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:203
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adjective"
-msgstr ""
+msgstr "Прыметнік"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:204
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adverb"
-msgstr ""
+msgstr "Прыслоўе"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:205
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Pronoun"
-msgstr ""
+msgstr "Займеннік"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
