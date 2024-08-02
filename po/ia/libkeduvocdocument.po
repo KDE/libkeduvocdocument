@@ -175,7 +175,7 @@ msgstr "Le file es blocate per un altere processo."
 #: keduvocdocument/keduvocdocument.cpp:861
 #, kde-format
 msgid "The lock file can't be created."
-msgstr "Le file de bloco nonpote esser create."
+msgstr "Le file de bloco non pote esser create."
 
 #: keduvocdocument/keduvocdocument.cpp:864
 #, kde-format
