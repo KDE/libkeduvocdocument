@@ -7,7 +7,7 @@
 # Peter Rüthemann <peter.ruethemann@gmail.com>, 2010, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: libkdeedu\n"
+"Project-Id-Version: libkeduvocdocument\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-28 00:35+0000\n"
 "PO-Revision-Date: 2016-01-17 09:26+0100\n"
