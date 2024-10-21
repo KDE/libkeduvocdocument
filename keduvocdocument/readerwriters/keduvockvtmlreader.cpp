@@ -46,8 +46,12 @@ KEduVocDocument::ErrorCode KEduVocKvtmlReader::read(KEduVocDocument &doc)
 
     QDomDocument domDoc(QStringLiteral("KEduVocDocument"));
 
-    if (!domDoc.setContent(m_inputFile, &m_errorMessage))
+    const QDomDocument::ParseResult parseResult = domDoc.setContent(m_inputFile);
+    if (!parseResult) {
+        qDebug() << "Unable to load document.Parse error in line " << parseResult.errorLine << ", col " << parseResult.errorColumn << ": "
+                 << qPrintable(parseResult.errorMessage);
         return KEduVocDocument::InvalidXml;
+    }
 
     QDomElement domElementKvtml = domDoc.documentElement();
     if (domElementKvtml.tagName() != KV_DOCTYPE) {

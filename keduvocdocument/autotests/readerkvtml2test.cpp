@@ -147,7 +147,12 @@ QIODevice *XMLGenerator::toQIODevice()
 
 XMLGenerator &XMLGenerator::preamble()
 {
-    this->setContent(QStringLiteral("<!DOCTYPE kvtml PUBLIC \"kvtml2.dtd\" \"http://edu.kde.org/kvtml/kvtml2.dtd\">\n"), true, nullptr, nullptr, nullptr);
+    const QDomDocument::ParseResult parseResult = setContent(QStringLiteral("<!DOCTYPE kvtml PUBLIC \"kvtml2.dtd\" \"http://edu.kde.org/kvtml/kvtml2.dtd\">\n"),
+                                                             QDomDocument::ParseOption::UseNamespaceProcessing);
+    if (!parseResult) {
+        qDebug() << "Unable to load document.Parse error in line " << parseResult.errorLine << ", col " << parseResult.errorColumn << ": "
+                 << qPrintable(parseResult.errorMessage);
+    }
     this->appendChild(this->createProcessingInstruction(QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")));
 
     QDomElement domElementKvtml = this->createElement(KVTML_TAG);
