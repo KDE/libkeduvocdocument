@@ -26,7 +26,7 @@ public:
     explicit KEduVocVokabelnReader(QIODevice &file);
 
     /**destructor*/
-    ~KEduVocVokabelnReader() override{};
+    ~KEduVocVokabelnReader() override {};
 
     /** @brief Can this reader parse this file
      *

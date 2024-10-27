@@ -24,7 +24,7 @@ public:
     */
     explicit KEduVocWqlReader(QIODevice &file);
     /**destructor*/
-    ~KEduVocWqlReader() override{};
+    ~KEduVocWqlReader() override {};
 
     /** @brief Can this reader parse this file
      *

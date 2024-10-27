@@ -24,7 +24,7 @@ public:
     explicit KEduVocXdxfReader(QIODevice &file);
 
     /**destructor*/
-    ~KEduVocXdxfReader() override{};
+    ~KEduVocXdxfReader() override {};
 
     /** @brief Can this reader parse this file
      *

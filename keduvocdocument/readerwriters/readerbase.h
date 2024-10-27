@@ -20,7 +20,7 @@ class ReaderBase
 {
 public:
     /** destructor */
-    virtual ~ReaderBase(){};
+    virtual ~ReaderBase() {};
 
     /** @brief Can this reader parse the file
      *

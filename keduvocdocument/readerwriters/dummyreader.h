@@ -46,7 +46,7 @@ public:
      @param dev device to parse*/
     explicit DummyReader(QIODevice &dev);
     /**destructor*/
-    ~DummyReader() override{};
+    ~DummyReader() override {};
 
     /** @brief Can this reader parse this file
      *

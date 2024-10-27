@@ -33,7 +33,7 @@ public:
     /** constructor */
     explicit KEduVocKvtml2Reader(QIODevice &file);
     /**destructor*/
-    ~KEduVocKvtml2Reader() override{};
+    ~KEduVocKvtml2Reader() override {};
 
     /** @brief Can this reader parse this file
      *

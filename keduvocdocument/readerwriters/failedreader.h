@@ -25,7 +25,7 @@ public:
     explicit FailedReader(KEduVocDocument::ErrorCode error = KEduVocDocument::Unknown, const QString &msg = QString());
 
     /**destructor*/
-    ~FailedReader() override{};
+    ~FailedReader() override {};
 
     /** @brief Can this reader parse this file
      *
