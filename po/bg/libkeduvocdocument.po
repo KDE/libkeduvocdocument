@@ -3,19 +3,20 @@
 #
 # Zlatko Popov <zlatkopopov@fsa-bg.org>, 2007.
 # Yasen Pramatarov <yasen@lindeas.com>, 2009, 2011.
+# SPDX-FileCopyrightText: 2024 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkdeedu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-28 00:35+0000\n"
-"PO-Revision-Date: 2011-07-19 20:48+0300\n"
-"Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
-"Language-Team: Bulgarian <dict@fsa-bg.org>\n"
+"PO-Revision-Date: 2024-11-10 14:07+0100\n"
+"Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
+"Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Generator: Lokalize 24.11.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: keduvocdocument/keduvoccsvwriter.cpp:35
@@ -118,7 +119,7 @@ msgstr "Формат за обмен на речници в XML"
 
 #: keduvocdocument/keduvocdocument.cpp:821
 msgid "Comma Separated Values (CSV)"
-msgstr "Разделени със запетаи стойноси (CSV)"
+msgstr "Разделени със запетаи стойности (CSV)"
 
 #: keduvocdocument/keduvocdocument.cpp:833
 #, kde-format
