@@ -1,0 +1,489 @@
+# Sanskrit translations for libkeduvocdocument package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the libkeduvocdocument package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libkeduvocdocument\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-02-28 00:35+0000\n"
+"PO-Revision-Date: 2024-12-13 19:10+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: keduvocdocument/keduvoccsvwriter.cpp:35
+#, kde-format
+msgctxt "@item:intable the title of the document will be written here"
+msgid "Title:"
+msgstr ""
+
+#: keduvocdocument/keduvoccsvwriter.cpp:36
+#, kde-format
+msgctxt "@item:intable the author will be written here"
+msgid "Author:"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:125
+#, kde-format
+msgctxt ""
+"The top level lesson which contains all other lessons of the document."
+msgid "Document Lesson"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:128
+#, kde-format
+msgid "Word types"
+msgstr "शब्दप्रकाराः"
+
+#: keduvocdocument/keduvocdocument.cpp:131
+#, kde-format
+msgid "Leitner Box"
+msgstr "लेटनर पेटी"
+
+#: keduvocdocument/keduvocdocument.cpp:165
+#: keduvocdocument/keduvocdocument.cpp:172
+#, kde-format
+msgid "Cannot lock file %1"
+msgstr "%1 सञ्चिकां ताडयितुं न शक्यते"
+
+#: keduvocdocument/keduvocdocument.cpp:220
+#, kde-format
+msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
+msgstr "<qt>सञ्चिकां उद्घाटयितुं न शक्यते<br /> <b>%1</b></qt>"
+
+#: keduvocdocument/keduvocdocument.cpp:228
+#, kde-format
+msgid "Cannot open tempfile %1"
+msgstr "%1 tempfile उद्घाटयितुं न शक्यते"
+
+#: keduvocdocument/keduvocdocument.cpp:233
+#, kde-format
+msgid "Cannot download %1: %2"
+msgstr "%1: %2 अवतरणं कर्तुं न शक्यते"
+
+#: keduvocdocument/keduvocdocument.cpp:258
+#, kde-format
+msgid ""
+"Could not open or properly read \"%1\"\n"
+"(Error reported: %2)"
+msgstr ""
+"\"%1\" उद्घाटयितुं सम्यक् पठितुं वा न शक्तवान् ।\n"
+"(दोषः निवेदितः: %2)"
+
+#: keduvocdocument/keduvocdocument.cpp:300
+#: keduvocdocument/keduvocdocument.cpp:326
+#, kde-format
+msgid "Cannot write to file %1"
+msgstr "%1 सञ्चिकायां लिखितुं न शक्यते"
+
+#: keduvocdocument/keduvocdocument.cpp:657
+#, kde-format
+msgctxt ""
+"The name of the first language/column of vocabulary, if we have to guess it."
+msgid "Original"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:659
+#, kde-format
+msgctxt ""
+"The name of the second, third ... language/column of vocabulary, if we have "
+"to guess it."
+msgid "Translation %1"
+msgstr ""
+
+#: keduvocdocument/keduvocdocument.cpp:816
+msgid "KDE Vocabulary Document"
+msgstr "केडीई शब्दावली दस्तावेज"
+
+#: keduvocdocument/keduvocdocument.cpp:817
+msgid "KWordQuiz Document"
+msgstr "KWordQuiz दस्तावेज़"
+
+#: keduvocdocument/keduvocdocument.cpp:818
+msgid "Pauker Lesson"
+msgstr "पौकर पाठ"
+
+#: keduvocdocument/keduvocdocument.cpp:819
+msgid "Vokabeltrainer"
+msgstr "शब्दावली प्रशिक्षक"
+
+#: keduvocdocument/keduvocdocument.cpp:820
+msgid "XML Dictionary Exchange Format"
+msgstr "XML शब्दकोश विनिमय प्रारूप"
+
+#: keduvocdocument/keduvocdocument.cpp:821
+msgid "Comma Separated Values (CSV)"
+msgstr "अल्पविराम पृथक्कृतमूल्यानि (CSV) 1.1."
+
+#: keduvocdocument/keduvocdocument.cpp:833
+#, kde-format
+msgid "All supported documents"
+msgstr "सर्वे समर्थितदस्तावेजाः"
+
+#: keduvocdocument/keduvocdocument.cpp:842
+#, kde-format
+msgid "No error found."
+msgstr "कोऽपि दोषः न लब्धः।"
+
+#: keduvocdocument/keduvocdocument.cpp:845
+#, kde-format
+msgid "Invalid XML in document."
+msgstr "दस्तावेजे अमान्यम् XML ।"
+
+#: keduvocdocument/keduvocdocument.cpp:847
+#, kde-format
+msgid "Unknown file type."
+msgstr "अज्ञातः सञ्चिकाप्रकारः ।"
+
+#: keduvocdocument/keduvocdocument.cpp:849
+#, kde-format
+msgid "File is not writeable."
+msgstr "सञ्चिका लेखनीया नास्ति।"
+
+#: keduvocdocument/keduvocdocument.cpp:851
+#, kde-format
+msgid "File writer failed."
+msgstr "सञ्चिकालेखकः असफलः अभवत् ।"
+
+#: keduvocdocument/keduvocdocument.cpp:853
+#, kde-format
+msgid "File is not readable."
+msgstr "सञ्चिका पठनीया नास्ति।"
+
+#: keduvocdocument/keduvocdocument.cpp:855
+#, kde-format
+msgid "The file reader failed."
+msgstr "सञ्चिकापाठकः विफलः अभवत् ।"
+
+#: keduvocdocument/keduvocdocument.cpp:857
+#, kde-format
+msgid "The file does not exist."
+msgstr "सञ्चिका नास्ति ।"
+
+#: keduvocdocument/keduvocdocument.cpp:859
+#, kde-format
+msgid "The file is locked by another process."
+msgstr "सञ्चिका अन्येन प्रक्रियायाः कृते ताडिता भवति ।"
+
+#: keduvocdocument/keduvocdocument.cpp:861
+#, kde-format
+msgid "The lock file can't be created."
+msgstr "लॉक् सञ्चिका निर्मातुं न शक्यते ।"
+
+#: keduvocdocument/keduvocdocument.cpp:864
+#, kde-format
+msgid "Unknown error."
+msgstr "अज्ञातदोषः ।"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:29
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Verb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:30
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Noun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:31
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Name"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:32
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Article"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:33
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adjective"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:34
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Adverb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:35
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Pronoun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:36
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Phrase"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:37
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Numeral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:38
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Conjunction"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:39
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of a word"
+msgid "Preposition"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:40
+#, kde-format
+msgctxt "@item:inlistbox The grammatical type of an entry"
+msgid "Question"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:44
+#: keduvocdocument/keduvockvtmlcompability.cpp:220
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
+"(first, second, third, ...)"
+msgid "Ordinal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:46
+#: keduvocdocument/keduvockvtmlcompability.cpp:224
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
+"(one, two, three, ...)"
+msgid "Cardinal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:47
+#: keduvocdocument/keduvockvtmlcompability.cpp:230
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
+msgid "Definite"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:48
+#: keduvocdocument/keduvockvtmlcompability.cpp:233
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
+msgid "Indefinite"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:49
+#: keduvocdocument/keduvockvtmlcompability.cpp:239
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with regular "
+"conjugation"
+msgid "Regular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:51
+#: keduvocdocument/keduvockvtmlcompability.cpp:242
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
+"conjugation"
+msgid "Irregular"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:53
+#: keduvocdocument/keduvockvtmlcompability.cpp:259
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
+"his, her...)"
+msgid "Possessive"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:54
+#: keduvocdocument/keduvockvtmlcompability.cpp:262
+#, kde-format
+msgctxt ""
+"@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
+"he...)"
+msgid "Personal"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:55
+#: keduvocdocument/keduvockvtmlcompability.cpp:248
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Male"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:56
+#: keduvocdocument/keduvockvtmlcompability.cpp:251
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Female"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:57
+#: keduvocdocument/keduvockvtmlcompability.cpp:254
+#, kde-format
+msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
+msgid "Neutral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:153
+#, kde-format
+msgid "Simple Present"
+msgstr "सरल वर्तमान"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:154
+#, kde-format
+msgid "Present Progressive"
+msgstr "वर्तमान प्रगतिशील"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:155
+#, kde-format
+msgid "Present Perfect"
+msgstr "वर्तमान परिपूर्ण"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:156
+#, kde-format
+msgid "Simple Past"
+msgstr "सरल भूतकाल"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:157
+#, kde-format
+msgid "Past Progressive"
+msgstr "अतीत प्रगतिशील"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:158
+#, kde-format
+msgid "Past Participle"
+msgstr "भूतकालविशेषणम्"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:159
+#, kde-format
+msgid "Future"
+msgstr "भविष्य"
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:200
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Verb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:201
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Noun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:202
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Name"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:202
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Article"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:203
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adjective"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:204
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Adverb"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:205
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Pronoun"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:206
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Phrase"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:206
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Numeral"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:207
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Conjunction"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:207
+#, kde-format
+msgctxt "The grammatical type of a word"
+msgid "Preposition"
+msgstr ""
+
+#: keduvocdocument/keduvockvtmlcompability.cpp:208
+#, kde-format
+msgctxt "The grammatical type of an entry"
+msgid "Question"
+msgstr ""
+
+#: keduvocdocument/keduvoctext.h:16
+#, kde-format
+msgid "Not Practiced Yet"
+msgstr "अद्यापि अभ्यासः न कृतः"
+
+#: keduvocdocument/keduvoctext.h:19
+#, kde-format
+msgid "Level 1"
+msgstr "स्तरः १"
+
+#: keduvocdocument/keduvoctext.h:22
+#, kde-format
+msgid "Level 2"
+msgstr "स्तरः २"
+
+#: keduvocdocument/keduvoctext.h:25
+#, kde-format
+msgid "Level 3"
+msgstr "स्तरः ३"
+
+#: keduvocdocument/keduvoctext.h:28
+#, kde-format
+msgid "Level 4"
+msgstr "स्तरः ४"
+
+#: keduvocdocument/keduvoctext.h:31
+#, kde-format
+msgid "Level 5"
+msgstr "स्तरः ५"
+
+#: keduvocdocument/keduvoctext.h:34
+#, kde-format
+msgid "Level 6"
+msgstr "स्तर 6"
+
+#: keduvocdocument/keduvoctext.h:37
+#, kde-format
+msgid "Level 7"
+msgstr "स्तरः ७"
