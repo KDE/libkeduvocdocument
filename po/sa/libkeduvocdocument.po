@@ -20,20 +20,20 @@ msgstr ""
 #, kde-format
 msgctxt "@item:intable the title of the document will be written here"
 msgid "Title:"
-msgstr ""
+msgstr "शीर्षक:"
 
 #: keduvocdocument/keduvoccsvwriter.cpp:36
 #, kde-format
 msgctxt "@item:intable the author will be written here"
 msgid "Author:"
-msgstr ""
+msgstr "लेखकः:"
 
 #: keduvocdocument/keduvocdocument.cpp:125
 #, kde-format
 msgctxt ""
 "The top level lesson which contains all other lessons of the document."
 msgid "Document Lesson"
-msgstr ""
+msgstr "दस्तावेज पाठ"
 
 #: keduvocdocument/keduvocdocument.cpp:128
 #, kde-format
@@ -86,7 +86,7 @@ msgstr "%1 सञ्चिकायां लिखितुं न शक्य
 msgctxt ""
 "The name of the first language/column of vocabulary, if we have to guess it."
 msgid "Original"
-msgstr ""
+msgstr "मूल"
 
 #: keduvocdocument/keduvocdocument.cpp:659
 #, kde-format
@@ -94,7 +94,7 @@ msgctxt ""
 "The name of the second, third ... language/column of vocabulary, if we have "
 "to guess it."
 msgid "Translation %1"
-msgstr ""
+msgstr "अनुवाद %1"
 
 #: keduvocdocument/keduvocdocument.cpp:816
 msgid "KDE Vocabulary Document"
@@ -184,73 +184,73 @@ msgstr "अज्ञातदोषः ।"
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Verb"
-msgstr ""
+msgstr "क्रियापदम्"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:30
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Noun"
-msgstr ""
+msgstr "संज्ञा"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:31
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Name"
-msgstr ""
+msgstr "नामः"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:32
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Article"
-msgstr ""
+msgstr "आलेख"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Adjective"
-msgstr ""
+msgstr "विशेषणं"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Adverb"
-msgstr ""
+msgstr "क्रियाविशेषण"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:35
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Pronoun"
-msgstr ""
+msgstr "सर्वनाम"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of an entry"
 msgid "Phrase"
-msgstr ""
+msgstr "सम्पुट"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:37
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Numeral"
-msgstr ""
+msgstr "संख्या"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:38
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Conjunction"
-msgstr ""
+msgstr "युति"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:39
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Preposition"
-msgstr ""
+msgstr "उपसर्ग"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:40
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of an entry"
 msgid "Question"
-msgstr ""
+msgstr "प्रश्न"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:44
 #: keduvocdocument/keduvockvtmlcompability.cpp:220
@@ -259,7 +259,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Ordinal  "
 "(first, second, third, ...)"
 msgid "Ordinal"
-msgstr ""
+msgstr "साधारणः"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:46
 #: keduvocdocument/keduvockvtmlcompability.cpp:224
@@ -268,21 +268,21 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Numeral Cardinal "
 "(one, two, three, ...)"
 msgid "Cardinal"
-msgstr ""
+msgstr "कार्डिनल"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:47
 #: keduvocdocument/keduvockvtmlcompability.cpp:230
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
 msgid "Definite"
-msgstr ""
+msgstr "निश्चितम्"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:48
 #: keduvocdocument/keduvockvtmlcompability.cpp:233
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
 msgid "Indefinite"
-msgstr ""
+msgstr "अनिश्चितम्"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:49
 #: keduvocdocument/keduvockvtmlcompability.cpp:239
@@ -291,7 +291,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with regular "
 "conjugation"
 msgid "Regular"
-msgstr ""
+msgstr "नियमित"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:51
 #: keduvocdocument/keduvockvtmlcompability.cpp:242
@@ -300,7 +300,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
 "conjugation"
 msgid "Irregular"
-msgstr ""
+msgstr "अनियमित"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:53
 #: keduvocdocument/keduvockvtmlcompability.cpp:259
@@ -309,7 +309,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (my, your, "
 "his, her...)"
 msgid "Possessive"
-msgstr ""
+msgstr "स्वामिगत"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:54
 #: keduvocdocument/keduvockvtmlcompability.cpp:262
@@ -318,28 +318,28 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Pronoun (I, you, "
 "he...)"
 msgid "Personal"
-msgstr ""
+msgstr "व्यक्तिगत"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:55
 #: keduvocdocument/keduvockvtmlcompability.cpp:248
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Male"
-msgstr ""
+msgstr "पुरुषः"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:56
 #: keduvocdocument/keduvockvtmlcompability.cpp:251
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Female"
-msgstr ""
+msgstr "महिला"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:57
 #: keduvocdocument/keduvockvtmlcompability.cpp:254
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Neutral"
-msgstr ""
+msgstr "तटस्थ"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:153
 #, kde-format
@@ -380,73 +380,73 @@ msgstr "भविष्य"
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Verb"
-msgstr ""
+msgstr "क्रियापदम्"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:201
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Noun"
-msgstr ""
+msgstr "संज्ञा"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Name"
-msgstr ""
+msgstr "नामः"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Article"
-msgstr ""
+msgstr "आलेख"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:203
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adjective"
-msgstr ""
+msgstr "विशेषणं"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:204
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adverb"
-msgstr ""
+msgstr "क्रियाविशेषण"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:205
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Pronoun"
-msgstr ""
+msgstr "सर्वनाम"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Phrase"
-msgstr ""
+msgstr "सम्पुट"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Numeral"
-msgstr ""
+msgstr "संख्या"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Conjunction"
-msgstr ""
+msgstr "युति"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Preposition"
-msgstr ""
+msgstr "उपसर्ग"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:208
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Question"
-msgstr ""
+msgstr "प्रश्न"
 
 #: keduvocdocument/keduvoctext.h:16
 #, kde-format
