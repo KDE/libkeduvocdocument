@@ -76,7 +76,6 @@ public:
     bool readTranslationConjugations(QDomElement &domElementParent, KEduVocTranslation *translation);
     bool readType(QDomElement &domElementParent);
     bool readTense(QDomElement &domElementParent);
-    bool readUsage(QDomElement &domElementParent);
     bool readComparison(QDomElement &domElementParent, KEduVocTranslation *translation);
     bool readMultipleChoice(QDomElement &domElementParent, KEduVocTranslation *translation);
     bool readExpressionChildAttributes(QDomElement &domElementExpressionChild,

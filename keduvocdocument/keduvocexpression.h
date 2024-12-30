@@ -63,9 +63,6 @@ public:
      */
     void setActive(bool flag = true);
 
-    int sizeHint() const;
-    void setSizeHint(int sizeHint);
-
     /**
      * Add a translation to this expression
      * @param index            number of translation = the identifier

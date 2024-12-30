@@ -92,27 +92,10 @@ public:
      */
     QString paraphrase() const;
 
-    /** Sets antonym this expression
-     * @param expression       antonym of this index
-     */
-    void setAntonym(const QString &expression);
-
     /** Returns antonym of this expression
      * @return                 antonym or "" if no string available
      */
     QString antonym() const;
-
-    /**
-     * Sets an irregular plural form.
-     * @param plural plural of the word
-     */
-    void setIrregularPlural(const QString &plural);
-
-    /**
-     * Gets an irregular plural form.
-     * @return plural of the word
-     */
-    QString irregularPlural() const;
 
     /** Returns the word type of this expression, you will get a 0 pointer
      *   if wordtype is not set for the translation
