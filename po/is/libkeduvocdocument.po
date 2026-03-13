@@ -1,19 +1,20 @@
 # translation of libkdeedu.po to Icelandic
 #
 # Björgvin Ragnarsson <nifgraup@gmail.com>, 2005.
+# SPDX-FileCopyrightText: 2026 Sveinn í Felli <sv1@fellsnet.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkdeedu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:48+0000\n"
-"PO-Revision-Date: 2005-12-14 10:57+0000\n"
-"Last-Translator: Björgvin Ragnarsson <nifgraup@gmail.com>\n"
-"Language-Team: Icelandic <kde-isl@molar.is>\n"
+"PO-Revision-Date: 2026-03-12 10:00+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -22,13 +23,13 @@ msgstr ""
 #, kde-format
 msgctxt "@item:intable the title of the document will be written here"
 msgid "Title:"
-msgstr ""
+msgstr "Titill:"
 
 #: keduvocdocument/keduvoccsvwriter.cpp:36
 #, kde-format
 msgctxt "@item:intable the author will be written here"
 msgid "Author:"
-msgstr ""
+msgstr "Höfundur:"
 
 #: keduvocdocument/keduvocdocument.cpp:125
 #, kde-format
@@ -40,7 +41,7 @@ msgstr ""
 #: keduvocdocument/keduvocdocument.cpp:128
 #, kde-format
 msgid "Word types"
-msgstr ""
+msgstr "Tegundir orða"
 
 #: keduvocdocument/keduvocdocument.cpp:131
 #, kde-format
@@ -51,22 +52,22 @@ msgstr ""
 #: keduvocdocument/keduvocdocument.cpp:172
 #, kde-format
 msgid "Cannot lock file %1"
-msgstr ""
+msgstr "Get ekki læst skrá %1"
 
 #: keduvocdocument/keduvocdocument.cpp:220
 #, kde-format
 msgid "<qt>Cannot open file<br /><b>%1</b></qt>"
-msgstr ""
+msgstr "<qt>Get ekki opnað skrá<br /><b>%1</b></qt>"
 
 #: keduvocdocument/keduvocdocument.cpp:228
 #, kde-format
 msgid "Cannot open tempfile %1"
-msgstr ""
+msgstr "Get ekki opnað bráðabirgðaskrá %1"
 
 #: keduvocdocument/keduvocdocument.cpp:233
 #, kde-format
 msgid "Cannot download %1: %2"
-msgstr ""
+msgstr "Get ekki sótt %1: %2"
 
 #: keduvocdocument/keduvocdocument.cpp:258
 #, kde-format
@@ -79,14 +80,14 @@ msgstr ""
 #: keduvocdocument/keduvocdocument.cpp:326
 #, kde-format
 msgid "Cannot write to file %1"
-msgstr ""
+msgstr "Get ekki skrifað í skrá %1"
 
 #: keduvocdocument/keduvocdocument.cpp:657
 #, kde-format
 msgctxt ""
 "The name of the first language/column of vocabulary, if we have to guess it."
 msgid "Original"
-msgstr ""
+msgstr "Upprunalegt"
 
 #: keduvocdocument/keduvocdocument.cpp:659
 #, kde-format
@@ -94,7 +95,7 @@ msgctxt ""
 "The name of the second, third ... language/column of vocabulary, if we have "
 "to guess it."
 msgid "Translation %1"
-msgstr ""
+msgstr "Þýðing %1"
 
 #: keduvocdocument/keduvocdocument.cpp:816
 msgid "KDE Vocabulary Document"
@@ -128,22 +129,22 @@ msgstr ""
 #: keduvocdocument/keduvocdocument.cpp:842
 #, kde-format
 msgid "No error found."
-msgstr ""
+msgstr "Engin villa fannst."
 
 #: keduvocdocument/keduvocdocument.cpp:845
 #, kde-format
 msgid "Invalid XML in document."
-msgstr ""
+msgstr "Ógilt XML í skjali."
 
 #: keduvocdocument/keduvocdocument.cpp:847
 #, kde-format
 msgid "Unknown file type."
-msgstr ""
+msgstr "Óþekkt skrárgerð."
 
 #: keduvocdocument/keduvocdocument.cpp:849
 #, kde-format
 msgid "File is not writeable."
-msgstr ""
+msgstr "Skrá er ekki skrifanleg."
 
 #: keduvocdocument/keduvocdocument.cpp:851
 #, kde-format
@@ -178,79 +179,79 @@ msgstr ""
 #: keduvocdocument/keduvocdocument.cpp:864
 #, kde-format
 msgid "Unknown error."
-msgstr ""
+msgstr "Óþekkt villa."
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:29
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Verb"
-msgstr ""
+msgstr "Sögn"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:30
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Noun"
-msgstr ""
+msgstr "Nafnorð"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:31
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Name"
-msgstr ""
+msgstr "Nafn"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:32
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Article"
-msgstr ""
+msgstr "Greinir"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:33
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Adjective"
-msgstr ""
+msgstr "Lýsingarorð"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:34
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Adverb"
-msgstr ""
+msgstr "Atviksorð"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:35
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Pronoun"
-msgstr ""
+msgstr "Fornafn"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:36
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of an entry"
 msgid "Phrase"
-msgstr ""
+msgstr "Setning"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:37
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Numeral"
-msgstr ""
+msgstr "Töluorð"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:38
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Conjunction"
-msgstr ""
+msgstr "Beyging"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:39
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of a word"
 msgid "Preposition"
-msgstr ""
+msgstr "Forsetning"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:40
 #, kde-format
 msgctxt "@item:inlistbox The grammatical type of an entry"
 msgid "Question"
-msgstr ""
+msgstr "Spurning"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:44
 #: keduvocdocument/keduvockvtmlcompability.cpp:220
@@ -275,14 +276,14 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (the)"
 msgid "Definite"
-msgstr ""
+msgstr "Ákveðin"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:48
 #: keduvocdocument/keduvockvtmlcompability.cpp:233
 #, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Article (a)"
 msgid "Indefinite"
-msgstr ""
+msgstr "Óákveðin"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:49
 #: keduvocdocument/keduvockvtmlcompability.cpp:239
@@ -291,7 +292,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with regular "
 "conjugation"
 msgid "Regular"
-msgstr ""
+msgstr "Regluleg"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:51
 #: keduvocdocument/keduvockvtmlcompability.cpp:242
@@ -300,7 +301,7 @@ msgctxt ""
 "@item:inlistbox A subtype of the grammatical word type: Verb with irregular "
 "conjugation"
 msgid "Irregular"
-msgstr ""
+msgstr "Óregluleg"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:53
 #: keduvocdocument/keduvockvtmlcompability.cpp:259
@@ -322,21 +323,17 @@ msgstr ""
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:55
 #: keduvocdocument/keduvockvtmlcompability.cpp:248
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
+#, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Male"
-msgstr "nifgraup@gmail.com"
+msgstr "Karlkyns"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:56
 #: keduvocdocument/keduvockvtmlcompability.cpp:251
-#, fuzzy, kde-format
-#| msgctxt "EMAIL OF TRANSLATORS"
-#| msgid "Your emails"
+#, kde-format
 msgctxt "@item:inlistbox A subtype of the grammatical word type: Noun"
 msgid "Female"
-msgstr "nifgraup@gmail.com"
+msgstr "Kvenkyns"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:57
 #: keduvocdocument/keduvockvtmlcompability.cpp:254
@@ -378,79 +375,79 @@ msgstr ""
 #: keduvocdocument/keduvockvtmlcompability.cpp:159
 #, kde-format
 msgid "Future"
-msgstr ""
+msgstr "Framtíð"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:200
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Verb"
-msgstr ""
+msgstr "Sögn"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:201
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Noun"
-msgstr ""
+msgstr "Nafnorð"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Name"
-msgstr ""
+msgstr "Nafn"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:202
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Article"
-msgstr ""
+msgstr "Greinir"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:203
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adjective"
-msgstr ""
+msgstr "Lýsingarorð"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:204
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Adverb"
-msgstr ""
+msgstr "Atviksorð"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:205
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Pronoun"
-msgstr ""
+msgstr "Fornafn"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Phrase"
-msgstr ""
+msgstr "Setning"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:206
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Numeral"
-msgstr ""
+msgstr "Töluorð"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Conjunction"
-msgstr ""
+msgstr "Beyging"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:207
 #, kde-format
 msgctxt "The grammatical type of a word"
 msgid "Preposition"
-msgstr ""
+msgstr "Forsetning"
 
 #: keduvocdocument/keduvockvtmlcompability.cpp:208
 #, kde-format
 msgctxt "The grammatical type of an entry"
 msgid "Question"
-msgstr ""
+msgstr "Spurning"
 
 #: keduvocdocument/keduvoctext.h:16
 #, kde-format
@@ -460,37 +457,37 @@ msgstr ""
 #: keduvocdocument/keduvoctext.h:19
 #, kde-format
 msgid "Level 1"
-msgstr ""
+msgstr "Stig 1"
 
 #: keduvocdocument/keduvoctext.h:22
 #, kde-format
 msgid "Level 2"
-msgstr ""
+msgstr "Stig 2"
 
 #: keduvocdocument/keduvoctext.h:25
 #, kde-format
 msgid "Level 3"
-msgstr ""
+msgstr "Stig 3"
 
 #: keduvocdocument/keduvoctext.h:28
 #, kde-format
 msgid "Level 4"
-msgstr ""
+msgstr "Stig 4"
 
 #: keduvocdocument/keduvoctext.h:31
 #, kde-format
 msgid "Level 5"
-msgstr ""
+msgstr "Stig 5"
 
 #: keduvocdocument/keduvoctext.h:34
 #, kde-format
 msgid "Level 6"
-msgstr ""
+msgstr "Stig 6"
 
 #: keduvocdocument/keduvoctext.h:37
 #, kde-format
 msgid "Level 7"
-msgstr ""
+msgstr "Stig 7"
 
 #~ msgid "Glossary"
 #~ msgstr "Orðasafn"
