@@ -19,7 +19,7 @@ if(NOT WIN32)
 # This is needed on non-win32 platforms, as lib-install-dir might be in a
 # totally different prefix than include-install-dir. So instead hardcode the
 # absolute path during buildtime
-set( LIBKEDUVOCDOCUMENT_INCLUDE_DIR "@INCLUDE_INSTALL_DIR@/libkeduvocdocument" )
+set( LIBKEDUVOCDOCUMENT_INCLUDE_DIR "@KDE_INSTALL_INCLUDEDIR@/libkeduvocdocument" )
 
 else(NOT WIN32)
 
